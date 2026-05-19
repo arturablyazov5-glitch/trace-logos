@@ -3033,8 +3033,7 @@ document.addEventListener('keydown', (e) => {
 
 // ── Suggest icon modal ──
 document.addEventListener('DOMContentLoaded', function () {
-  const BOT_TOKEN = '8617772760:AAHzsc4Vuqxo2a1BJgMLgyxvfM6t8j7KET4';
-  const CHAT_ID   = '5843186018';
+  const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/suggest';
 
   const overlay   = document.getElementById('suggest-overlay');
   const form      = document.getElementById('suggest-form');
@@ -3142,22 +3141,15 @@ document.addEventListener('DOMContentLoaded', function () {
     result.textContent = '';
 
     try {
-      let res;
-      if (file) {
-        const fd = new FormData();
-        fd.append('chat_id', CHAT_ID);
-        fd.append('document', file, file.name);
-        fd.append('caption', text);
-        fd.append('parse_mode', 'Markdown');
-        res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, { method: 'POST', body: fd });
-      } else {
-        res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' }),
-        });
-      }
+      const fd = new FormData();
+      fd.append('brand', brand);
+      if (url)     fd.append('url', url);
+      if (comment) fd.append('comment', comment);
+      if (file)    fd.append('file', file, file.name);
+
+      const res  = await fetch(WORKER_URL, { method: 'POST', body: fd });
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Ошибка сервера');
       if (data.ok) {
         form.style.display = 'none';
         document.getElementById('suggest-modal-titles').style.display = 'none';
