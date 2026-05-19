@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Icons</title>
+  <link rel="icon" type="image/png" href="favicon.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+  <script src="/components/site-header.js" defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -97,6 +99,25 @@
       padding-top: 16px;
     }
     .sidebar-label.hidden { display: none; }
+
+    .show-more-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      font-size: 12px;
+      color: #555;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      width: 100%;
+      text-align: left;
+      transition: color .12s;
+    }
+    .show-more-btn:hover { color: #aaa; }
+    .show-more-btn svg { flex-shrink: 0; transition: transform .2s; }
+    .show-more-btn.expanded svg { transform: rotate(180deg); }
 
     .nav-item {
       display: flex;
@@ -986,6 +1007,30 @@
       transition: width .15s linear;
     }
 
+    .btn-help {
+      width: 100%;
+      background: #161e2a;
+      border: 1px solid #1e3a5a;
+      color: #5b9fd6;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .btn-help:hover { background: #1a2840; border-color: #2a5080; color: #7ab8e8; }
+    .detail-help-hint {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.5;
+      margin-top: 10px;
+      padding: 0 2px;
+    }
+
     .detail-divider {
       height: 1px;
       background: #1e1e1e;
@@ -1378,20 +1423,7 @@
 <body>
 
 <header class="mobile-header mobile-only" id="mobile-header">
-  <div class="mobile-header-brand">
-    <div class="sidebar-logo">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.9844 2.13613C12.4512 1.60535 14 2.69196 14 4.25188V4.42892L7.47401 6.79038C5.98917 7.32768 5 8.73756 5 10.3166V15.8704C3.5378 16.3879 2 15.3035 2 13.7491V7.6674C2 6.29888 2.85728 5.07698 4.14414 4.61132L10.9844 2.13613ZM14.9844 5.1362C16.4512 4.60541 18 5.69202 18 7.25194V7.42896L11.1441 9.90979C9.85728 10.3754 9 11.5973 9 12.9659V18.8705C7.5378 19.388 6 18.3035 6 16.7491V10.3167C6 9.15868 6.72539 8.12477 7.81427 7.73075L14.9844 5.1362ZM18.9844 8.13618C20.4512 7.60539 22 8.692 22 10.2519V17.0352C22 17.9826 21.4065 18.8286 20.5156 19.1509L13.0156 21.8649C11.5488 22.3956 10 21.309 10 19.7491V12.9658C10 12.0184 10.5935 11.1725 11.4844 10.8501L18.9844 8.13618Z" fill="#111"/>
-      </svg>
-    </div>
-    <div class="sidebar-header-text">
-      <div class="sidebar-header-row">
-        <span class="sidebar-header-name">Icons</span>
-        <span class="sidebar-header-badge">Beta</span>
-      </div>
-      <span class="sidebar-header-sub sidebar-sub">загрузка...</span>
-    </div>
-  </div>
+  <site-header class="mobile-header-brand" variant="brand"></site-header>
   <button type="button" class="suggest-btn" id="suggest-btn-mobile" style="margin-left:0;padding:0 10px;">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M12 5v14M5 12h14"/>
@@ -1407,33 +1439,9 @@
 <div id="nav-drawer-backdrop" class="nav-drawer-backdrop" aria-hidden="true"></div>
 
 <aside id="sidebar">
-  <div class="sidebar-header desktop-only">
-    <div class="sidebar-logo">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.9844 2.13613C12.4512 1.60535 14 2.69196 14 4.25188V4.42892L7.47401 6.79038C5.98917 7.32768 5 8.73756 5 10.3166V15.8704C3.5378 16.3879 2 15.3035 2 13.7491V7.6674C2 6.29888 2.85728 5.07698 4.14414 4.61132L10.9844 2.13613ZM14.9844 5.1362C16.4512 4.60541 18 5.69202 18 7.25194V7.42896L11.1441 9.90979C9.85728 10.3754 9 11.5973 9 12.9659V18.8705C7.5378 19.388 6 18.3035 6 16.7491V10.3167C6 9.15868 6.72539 8.12477 7.81427 7.73075L14.9844 5.1362ZM18.9844 8.13618C20.4512 7.60539 22 8.692 22 10.2519V17.0352C22 17.9826 21.4065 18.8286 20.5156 19.1509L13.0156 21.8649C11.5488 22.3956 10 21.309 10 19.7491V12.9658C10 12.0184 10.5935 11.1725 11.4844 10.8501L18.9844 8.13618Z" fill="#111"/>
-      </svg>
-    </div>
-    <div class="sidebar-header-text">
-      <div class="sidebar-header-row">
-        <span class="sidebar-header-name">Icons</span>
-        <span class="sidebar-header-badge">Beta</span>
-      </div>
-      <span class="sidebar-header-sub sidebar-sub">загрузка...</span>
-    </div>
-  </div>
+  <site-header class="desktop-only" variant="sidebar"></site-header>
   <div class="sidebar-header mobile-only">
-    <div class="sidebar-logo">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.9844 2.13613C12.4512 1.60535 14 2.69196 14 4.25188V4.42892L7.47401 6.79038C5.98917 7.32768 5 8.73756 5 10.3166V15.8704C3.5378 16.3879 2 15.3035 2 13.7491V7.6674C2 6.29888 2.85728 5.07698 4.14414 4.61132L10.9844 2.13613ZM14.9844 5.1362C16.4512 4.60541 18 5.69202 18 7.25194V7.42896L11.1441 9.90979C9.85728 10.3754 9 11.5973 9 12.9659V18.8705C7.5378 19.388 6 18.3035 6 16.7491V10.3167C6 9.15868 6.72539 8.12477 7.81427 7.73075L14.9844 5.1362ZM18.9844 8.13618C20.4512 7.60539 22 8.692 22 10.2519V17.0352C22 17.9826 21.4065 18.8286 20.5156 19.1509L13.0156 21.8649C11.5488 22.3956 10 21.309 10 19.7491V12.9658C10 12.0184 10.5935 11.1725 11.4844 10.8501L18.9844 8.13618Z" fill="#111"/>
-      </svg>
-    </div>
-    <div class="sidebar-header-text">
-      <div class="sidebar-header-row">
-        <span class="sidebar-header-name">Icons</span>
-        <span class="sidebar-header-badge">Beta</span>
-      </div>
-      <span class="sidebar-header-sub sidebar-sub">загрузка...</span>
-    </div>
+    <site-header variant="brand"></site-header>
   </div>
   <div class="drawer-search-slot mobile-only" id="search-slot-mobile"></div>
   <div class="sidebar-label">Категории</div>
@@ -1498,8 +1506,8 @@
   <div class="detail-name" id="detail-name"></div>
   <div class="detail-figma" id="detail-figma"></div>
 
-  <div class="detail-section-label">Действия</div>
-  <div class="detail-actions">
+  <div class="detail-section-label" id="detail-actions-label">Действия</div>
+  <div class="detail-actions" id="detail-actions">
     <button class="btn btn-primary" id="btn-copy">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
       Скопировать SVG
@@ -1517,6 +1525,14 @@
       <span class="btn-label">Скачать всё (.zip)</span>
       <span class="btn-progress"></span>
     </button>
+  </div>
+
+  <div class="detail-actions detail-actions-help hidden" id="detail-actions-help">
+    <button class="btn btn-help" id="btn-help">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Загрузить иконку
+    </button>
+    <p class="detail-help-hint">Этой иконки пока нет на сайте. Если у вас есть SVG этого логотипа — загрузите его, и автор добавит его на сайт.</p>
   </div>
 
   <div class="detail-divider" id="colors-divider"></div>
@@ -1554,6 +1570,15 @@
     <a id="btn-brand-link" class="btn-brand" href="#" target="_blank" rel="noopener noreferrer">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
       Правила использования лого
+    </a>
+  </div>
+
+  <div class="detail-brand-link hidden" id="detail-page-link">
+    <div class="detail-divider"></div>
+    <div class="detail-section-label">Страница</div>
+    <a id="btn-page-link" class="btn-brand" href="#">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+      Подробнее о логотипе
     </a>
   </div>
 </div><!-- #detail -->
@@ -1676,15 +1701,6 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 1600);
 }
 
-function iconCountText(count) {
-  const mod100 = Math.abs(count) % 100;
-  const mod10 = mod100 % 10;
-  if (mod100 >= 11 && mod100 <= 14) return `${count} иконок`;
-  if (mod10 === 1) return `${count} иконка`;
-  if (mod10 >= 2 && mod10 <= 4) return `${count} иконки`;
-  return `${count} иконок`;
-}
-
 function escapeHtml(s) {
   return s.replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]);
 }
@@ -1726,6 +1742,7 @@ const sectionEls = [];
 const ecosystemEls = [];
 const allItems = [];                  // плоский список всех item для cross-lookup (экосистема)
 const cardByItemFile = new Map();     // file -> карточка в сетке
+const cardByItemFigma = new Map();    // figma -> карточка в сетке (уникальный ключ для placeholder)
 const ecosystemLogoMap = {
   alfa:        'svgs/alfa-bank.svg',
   avito:       'svgs/avito.svg',
@@ -1760,9 +1777,54 @@ const ecosystemLabels = {
   x5:      'X5',
   kontur:  'Контур',
   openai:  'OpenAI',
-  apple:   'Apple'
+  apple:     'Apple',
+  adobe:     'Adobe',
+  microsoft: 'Microsoft',
 };
+
+const seoPageExistsCache = new Map();
+
+function slugifyPathPart(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9а-яё]+/gi, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function seoPageUrlForItem(item) {
+  const parts = (item.figma || '').split('/').map(part => slugifyPathPart(part)).filter(Boolean);
+  if (parts[0] !== 'icon' || parts.length < 3) return '';
+  return `/icons/${parts.slice(1).join('/')}/`;
+}
+
+async function seoPageExists(url) {
+  if (!url) return false;
+  if (!seoPageExistsCache.has(url)) {
+    seoPageExistsCache.set(url, fetch(url, { method: 'HEAD' }).then(r => r.ok).catch(() => false));
+  }
+  return seoPageExistsCache.get(url);
+}
+
+async function updateSeoPageLink(item) {
+  const pageLinkEl = document.getElementById('detail-page-link');
+  const btnPageLink = document.getElementById('btn-page-link');
+  const pageUrl = seoPageUrlForItem(item);
+
+  pageLinkEl.classList.add('hidden');
+  if (!pageUrl) return;
+
+  const exists = await seoPageExists(pageUrl);
+  if (activeCard?._item !== item || !exists) return;
+
+  btnPageLink.href = pageUrl;
+  pageLinkEl.classList.remove('hidden');
+}
+
 let total = 0;
+let openDetail;
+let activeCard = null;
 
 function setSectionHidden(sec, hidden) {
   const isHidden = sec.classList.contains('hidden');
@@ -1778,7 +1840,7 @@ function getGridColumnCount(grid) {
 }
 
 function estimateGridHeight(section) {
-  const count = section.visibleCards.length;
+  const count = section.visibleCards.length || section.group.items.length;
   if (!count) return 0;
   const columns = getGridColumnCount(section.grid);
   const rows = Math.ceil(count / columns);
@@ -1798,6 +1860,7 @@ function loadCardImage(card) {
 
 function mountVirtualSection(section) {
   if (section.mounted) return;
+  ensureSectionCards(section);
   section.grid.style.height = '';
   section.grid.replaceChildren(...section.visibleCards);
   section.visibleCards.forEach(loadCardImage);
@@ -1831,7 +1894,7 @@ function updateVirtualizedSections() {
   const maxY = contentRect.bottom + VIRTUAL_OVERSCAN;
 
   sectionEls.forEach(section => {
-    if (section.sec.classList.contains('hidden') || !section.visibleCards.length) {
+    if (section.sec.classList.contains('hidden') || (!section.visibleCards.length && section.cardsBuilt)) {
       unmountVirtualSection(section);
       section.grid.style.height = '';
       return;
@@ -1871,8 +1934,68 @@ function resetContentScroll() {
   });
 }
 
+function buildCard(item, sectionState) {
+  const card = document.createElement('div');
+  card.className = 'card loading' + (item.comingSoon ? ' coming-soon' : '');
+  card._item = item;
+  card._sectionState = sectionState;
+
+  const figmaLow = item.figma.toLowerCase();
+  const raw = (item.name + ' ' + (item.tags || '') + ' ' + figmaLow).toLowerCase();
+  const extra = raw.split(/\s+/).map(w => w.replace(/-/g, '')).join(' ');
+  card.dataset.search = raw + ' ' + extra;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'icon-wrap';
+  const img = document.createElement('img');
+  img.width = 48; img.height = 48;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  img.alt = item.name;
+  img.title = item.figma;
+  img.addEventListener('load', () => card.classList.remove('loading'), { once: true });
+  img.addEventListener('error', () => card.classList.remove('loading'), { once: true });
+  img.dataset.src = svgUrl(item.file);
+  wrap.appendChild(img);
+  card.appendChild(wrap);
+
+  if (item.comingSoon) {
+    const badge = document.createElement('div');
+    badge.className = 'card-badge';
+    badge.textContent = 'Скоро';
+    card.appendChild(badge);
+  }
+
+  const label = document.createElement('div');
+  label.className = 'label';
+  label.textContent = item.name;
+  card.appendChild(label);
+
+  const pathEl = document.createElement('div');
+  pathEl.className = 'card-path';
+  pathEl.textContent = item.figma;
+  card.appendChild(pathEl);
+
+  card.addEventListener('click', () => openDetail(item, card));
+  return card;
+}
+
+function ensureSectionCards(sectionState) {
+  if (sectionState.cardsBuilt) return;
+  sectionState.cardsBuilt = true;
+  const cards = sectionState.group.items.map(item => {
+    const card = buildCard(item, sectionState);
+    cardByItemFile.set(item.file, card);
+    cardByItemFigma.set(item.figma, card);
+    return card;
+  });
+  sectionState.cards = cards;
+  sectionState.visibleCards = cards;
+}
+
 loadLogos().then(logos => { for (const group of logos) {
   total += group.items.length;
+  group.items.forEach(item => allItems.push(item));
 
   // Nav item
   const nav = document.createElement('div');
@@ -1881,7 +2004,7 @@ loadLogos().then(logos => { for (const group of logos) {
   nav.innerHTML = `<span class="nav-label">${group.section}</span><span class="count">${group.items.length}</span>`;
   navSections.appendChild(nav);
 
-  // Section
+  // Section shell (без карточек — создадим лениво)
   const sec = document.createElement('div');
   sec.className = 'section';
   sec.dataset.section = group.section;
@@ -1893,77 +2016,44 @@ loadLogos().then(logos => { for (const group of logos) {
 
   const grid = document.createElement('div');
   grid.className = 'grid';
-  const cards = [];
-
-  for (const item of group.items) {
-    const card = document.createElement('div');
-    card.className = 'card loading' + (item.comingSoon ? ' coming-soon' : '');
-    card._item = item;
-
-    const figmaLow = item.figma.toLowerCase();
-    const raw = (item.name + ' ' + (item.tags || '') + ' ' + figmaLow).toLowerCase();
-    // Добавляем версию без дефисов для каждого токена отдельно
-    const extra = raw.split(/\s+/).map(w => w.replace(/-/g, '')).join(' ');
-    card.dataset.search = raw + ' ' + extra;
-
-    const wrap = document.createElement('div');
-    wrap.className = 'icon-wrap';
-    const img = document.createElement('img');
-    img.width = 48; img.height = 48;
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.alt = item.name;
-    img.title = item.figma;
-    img.addEventListener('load', () => card.classList.remove('loading'), { once: true });
-    img.addEventListener('error', () => card.classList.remove('loading'), { once: true });
-    img.dataset.src = svgUrl(item.file);
-    wrap.appendChild(img);
-    card.appendChild(wrap);
-
-    if (item.comingSoon) {
-      const badge = document.createElement('div');
-      badge.className = 'card-badge';
-      badge.textContent = 'Скоро';
-      card.appendChild(badge);
-    }
-
-    const label = document.createElement('div');
-    label.className = 'label';
-    label.textContent = item.name;
-    card.appendChild(label);
-
-    const pathEl = document.createElement('div');
-    pathEl.className = 'card-path';
-    pathEl.textContent = item.figma;
-    card.appendChild(pathEl);
-
-    card.addEventListener('click', () => openDetail(item, card));
-
-    cards.push(card);
-    allItems.push(item);
-    cardByItemFile.set(item.file, card);
-  }
 
   sec.appendChild(grid);
   content.appendChild(sec);
+
   const sectionState = {
-    nav,
-    sec,
-    grid,
-    group,
-    cards,
-    visibleCards: cards,
+    nav, sec, grid, group,
+    cards: [],
+    visibleCards: [],
+    cardsBuilt: false,
     mounted: false,
     gridHeight: 0,
     rowHeight: 0
   };
-  cards.forEach(card => { card._sectionState = sectionState; });
   sectionEls.push(sectionState);
 } // end for
 
 totalCards = total;
 totalCount.textContent = total;
-document.querySelectorAll('.sidebar-sub').forEach(el => { el.textContent = iconCountText(total); });
+
+// «Показать ещё» для категорий
+(function () {
+  const VISIBLE = 5;
+  const items = Array.from(navSections.querySelectorAll('.nav-item'));
+  if (items.length <= VISIBLE) return;
+
+  items.slice(VISIBLE).forEach(el => { el.style.display = 'none'; });
+
+  const btn = document.createElement('button');
+  btn.className = 'show-more-btn';
+  btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg><span>Показать ещё ${items.length - VISIBLE}</span>`;
+  navSections.appendChild(btn);
+
+  btn.addEventListener('click', () => {
+    const expanded = btn.classList.toggle('expanded');
+    items.slice(VISIBLE).forEach(el => { el.style.display = expanded ? '' : 'none'; });
+    btn.querySelector('span').textContent = expanded ? 'Скрыть' : `Показать ещё ${items.length - VISIBLE}`;
+  });
+})();
 
 const ecosystemCounts = allItems.reduce((acc, item) => {
   if (item.ecosystem) acc.set(item.ecosystem, (acc.get(item.ecosystem) || 0) + 1);
@@ -1992,7 +2082,9 @@ function setActive(sectionName) {
 
   if (sectionName === 'all') {
     document.querySelector('[data-section="all"]').classList.add('active');
-    sectionEls.forEach(({ sec, grid, cards }, index) => {
+    sectionEls.forEach((s, index) => {
+      ensureSectionCards(s);
+      const { sec, grid, cards } = s;
       cards.forEach(card => card.classList.remove('hidden'));
       sectionEls[index].visibleCards = cards;
       grid.style.height = '';
@@ -2006,7 +2098,9 @@ function setActive(sectionName) {
     const found = sectionEls.find(s => s.group.section === sectionName);
     if (found) {
       found.nav.classList.add('active');
-      sectionEls.forEach(({ sec, grid, group, cards }, index) => {
+      sectionEls.forEach((s, index) => {
+        ensureSectionCards(s);
+        const { sec, grid, group, cards } = s;
         cards.forEach(card => card.classList.remove('hidden'));
         sectionEls[index].visibleCards = cards;
         grid.style.height = '';
@@ -2027,6 +2121,7 @@ function setActiveEcosystem(ecosystem) {
   if (found) found.nav.classList.add('active');
 
   sectionEls.forEach(section => {
+    ensureSectionCards(section);
     let any = false;
     const visibleCards = [];
     section.cards.forEach(card => {
@@ -2089,6 +2184,7 @@ function filterCards(q) {
   let sectionsWithHits = 0;
 
   sectionEls.forEach(section => {
+    ensureSectionCards(section);
     let any = false;
     const matchingCards = [];
     section.cards.forEach(card => {
@@ -2150,8 +2246,6 @@ const detailName = document.getElementById('detail-name');
 const detailFigma = document.getElementById('detail-figma');
 const variantsGrid = document.getElementById('variants-grid');
 const detailVariants = document.getElementById('detail-variants');
-let activeCard = null;
-
 detailBackdrop.addEventListener('click', closeDetail);
 
 // Плавное переключение панели через View Transitions: каждая видимая карточка
@@ -2623,7 +2717,7 @@ async function downloadAllAsZip(item) {
   }
 }
 
-function openDetail(item, card) {
+openDetail = function(item, card) {
   if (layoutMq.matches) closeNavDrawer();
 
   // Повторный клик — закрыть
@@ -2640,11 +2734,26 @@ function openDetail(item, card) {
   detailName.textContent = item.name;
   detailFigma.textContent = item.figma;
 
+  // Переключаем обычные действия / кнопку помощи
+  const detailActionsEl = document.getElementById('detail-actions');
+  const detailActionsHelpEl = document.getElementById('detail-actions-help');
+  const detailActionsLabel = document.getElementById('detail-actions-label');
+  if (item.comingSoon) {
+    detailActionsEl.style.display = 'none';
+    detailActionsHelpEl.style.display = '';
+    detailActionsLabel.style.display = 'none';
+    document.getElementById('btn-help').onclick = () => window.openHelpModal(item.name);
+  } else {
+    detailActionsEl.style.display = '';
+    detailActionsHelpEl.style.display = 'none';
+    detailActionsLabel.style.display = '';
+  }
+
   // Сбрасываем цвета для нового лого
   colorMap = {};
   colorEditorSourceSvg = '';
   colorHistoryNeedsInit = true;
-  const colorEditingDisabled = isFlagItem(item);
+  const colorEditingDisabled = isFlagItem(item) || !!item.comingSoon;
 
   // Сбрасываем состояние блока цветов
   const colorsPanel = document.getElementById('colors-panel');
@@ -2806,6 +2915,7 @@ function openDetail(item, card) {
           const ec = document.createElement('div');
           ec.className = 'ecosystem-card';
           ec.dataset.file = sib.file;
+          ec.dataset.figma = sib.figma;
           ec.title = sib.figma;
           const ei = document.createElement('img');
           ei.src = svgUrl(sib.file);
@@ -2817,7 +2927,7 @@ function openDetail(item, card) {
           el.textContent = sib.name;
           ec.append(ei, el);
           ec.addEventListener('click', () => {
-            const siblingCard = cardByItemFile.get(sib.file);
+            const siblingCard = cardByItemFigma.get(sib.figma) || cardByItemFile.get(sib.file);
             if (!siblingCard) return;
             const hiddenByCard = siblingCard.classList.contains('hidden');
             const hiddenBySection = siblingCard.closest('.section')?.classList.contains('hidden');
@@ -2836,7 +2946,7 @@ function openDetail(item, card) {
         }
       }
       ecosystemGrid.querySelectorAll('.ecosystem-card').forEach(ec => {
-        ec.classList.toggle('active', ec.dataset.file === item.file);
+        ec.classList.toggle('active', ec.dataset.figma === item.figma);
       });
       ecosystemEl.classList.remove('hidden');
     } else {
@@ -2869,6 +2979,8 @@ function openDetail(item, card) {
   } else {
     brandLinkEl.classList.add('hidden');
   }
+
+  updateSeoPageLink(item);
 
   if (!detail.classList.contains('open')) {
     withDetailTransition(() => setDetailOpen(true));
@@ -3060,6 +3172,120 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+// ── Help upload modal ──
+document.addEventListener('DOMContentLoaded', function () {
+  const BOT_TOKEN = '8617772760:AAHzsc4Vuqxo2a1BJgMLgyxvfM6t8j7KET4';
+  const CHAT_ID   = '5843186018';
+
+  const overlay    = document.getElementById('help-overlay');
+  const form       = document.getElementById('help-form');
+  const closeBtn   = document.getElementById('help-close');
+  const iconNameEl = document.getElementById('help-icon-name');
+  const successEl  = document.getElementById('help-success');
+  const titlesEl   = document.getElementById('help-modal-titles');
+  const submitBtn  = form.querySelector('[type=submit]');
+
+  const fields = [
+    { id: 'help-favicon',  labelId: 'help-favicon-label',  nameId: 'help-favicon-name',  required: true,  key: 'Favicon' },
+    { id: 'help-full',     labelId: 'help-full-label',     nameId: 'help-full-name',     required: false, key: 'Full' },
+    { id: 'help-fullen',   labelId: 'help-fullen-label',   nameId: 'help-fullen-name',   required: false, key: 'Full EN' },
+  ];
+
+  fields.forEach(f => {
+    const input = document.getElementById(f.id + '-input');
+    const nameEl = document.getElementById(f.nameId);
+    const labelEl = document.getElementById(f.labelId);
+    input.addEventListener('change', () => {
+      const file = input.files[0];
+      labelEl.classList.toggle('has-file', !!file);
+      labelEl.classList.remove('file-error');
+      nameEl.textContent = file ? file.name : 'Выбрать SVG-файл';
+    });
+  });
+
+  let currentIconName = '';
+
+  window.openHelpModal = function(iconName) {
+    currentIconName = iconName;
+    iconNameEl.textContent = iconName;
+    form.style.display = '';
+    successEl.classList.remove('show');
+    titlesEl.style.display = '';
+    submitBtn.disabled = false;
+    fields.forEach(f => {
+      const input = document.getElementById(f.id + '-input');
+      const nameEl = document.getElementById(f.nameId);
+      const labelEl = document.getElementById(f.labelId);
+      input.value = '';
+      nameEl.textContent = 'Выбрать SVG-файл';
+      labelEl.classList.remove('has-file', 'file-error');
+    });
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const faviconInput = document.getElementById('help-favicon-input');
+    const faviconLabel = document.getElementById('help-favicon-label');
+    if (!faviconInput.files[0]) {
+      faviconLabel.classList.add('file-error');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляем…';
+
+    try {
+      const api = `https://api.telegram.org/bot${BOT_TOKEN}`;
+      const caption = `🎨 Помощь с иконкой: ${currentIconName}`;
+
+      // Отправляем favicon обязательно
+      const toSend = fields.filter(f => {
+        const input = document.getElementById(f.id + '-input');
+        return input.files[0];
+      });
+
+      for (const f of toSend) {
+        const input = document.getElementById(f.id + '-input');
+        const fd = new FormData();
+        fd.append('chat_id', CHAT_ID);
+        fd.append('document', input.files[0], `${currentIconName} — ${f.key}.svg`);
+        fd.append('caption', `${caption}\nТип: ${f.key}`);
+        const res = await fetch(`${api}/sendDocument`, { method: 'POST', body: fd });
+        const data = await res.json();
+        if (!data.ok) throw new Error(data.description);
+      }
+
+      // Показываем успех
+      form.style.display = 'none';
+      titlesEl.style.display = 'none';
+      successEl.classList.add('show');
+      // Сброс анимации галочки
+      const bg = successEl.querySelector('.t-form-success-popup__content-icon-background');
+      const check = successEl.querySelector('.t-form-success-popup__content-icon-check');
+      bg.style.animation = 'none'; check.style.animation = 'none';
+      void bg.offsetWidth;
+      bg.style.animation = 'iconBackgroundOpacity .106s linear forwards, iconBackgroundTransform 1.103s cubic-bezier(.445,.05,.55,.95) forwards';
+      check.style.animation = 'checkIconOpacity 51ms linear .437s forwards, checkIconDraw .666s cubic-bezier(.39,.575,.565,1) .437s forwards, checkIconScale .435s cubic-bezier(.445,.05,.55,.95) .437s forwards';
+
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить';
+      alert('Ошибка отправки. Попробуйте ещё раз.');
+    }
+  });
+})();
 </script>
 
 <div class="suggest-overlay" id="suggest-overlay">
@@ -3109,6 +3335,58 @@ document.addEventListener('DOMContentLoaded', function () {
         <path class="t-form-success-popup__content-icon-check"
           d="M 66.7645 107.258 L 90.6617 129.843 L 143.235 80.157"
           stroke="white" stroke-width="14.7059" stroke-linecap="round" stroke-linejoin="round" fill="none" pathLength="1"></path>
+      </svg>
+      <div class="suggest-success-title">Спасибо!</div>
+    </div>
+  </div>
+</div>
+
+<!-- Help upload modal -->
+<div class="suggest-overlay" id="help-overlay">
+  <div class="suggest-modal" role="dialog" aria-modal="true" aria-labelledby="help-title">
+    <div class="suggest-modal-header">
+      <div id="help-modal-titles">
+        <div class="suggest-modal-title" id="help-title">Помочь с иконкой</div>
+        <div class="suggest-modal-sub">Вы помогаете автору. Загрузите SVG для <strong id="help-icon-name"></strong></div>
+      </div>
+      <button class="suggest-close" id="help-close" aria-label="Закрыть">×</button>
+    </div>
+    <form id="help-form" class="suggest-fields" style="margin-top:4px">
+      <div class="suggest-field">
+        <label class="suggest-label">Favicon <span style="color:#e06060">*</span> <span style="color:#555">— квадратная иконка (обязательно)</span></label>
+        <label class="suggest-file-label" id="help-favicon-label" for="help-favicon-input">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span id="help-favicon-name">Выбрать SVG-файл</span>
+          <input type="file" accept=".svg,image/svg+xml" id="help-favicon-input" class="suggest-file-input">
+        </label>
+      </div>
+      <div class="suggest-field">
+        <label class="suggest-label">Full <span style="color:#555">— горизонтальный логотип (необязательно)</span></label>
+        <label class="suggest-file-label" id="help-full-label" for="help-full-input">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span id="help-full-name">Выбрать SVG-файл</span>
+          <input type="file" accept=".svg,image/svg+xml" id="help-full-input" class="suggest-file-input">
+        </label>
+      </div>
+      <div class="suggest-field">
+        <label class="suggest-label">Full EN <span style="color:#555">— английская версия (необязательно)</span></label>
+        <label class="suggest-file-label" id="help-fullen-label" for="help-fullen-input">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span id="help-fullen-name">Выбрать SVG-файл</span>
+          <input type="file" accept=".svg,image/svg+xml" id="help-fullen-input" class="suggest-file-input">
+        </label>
+      </div>
+      <button type="submit" class="suggest-submit">Отправить</button>
+    </form>
+    <div class="suggest-success" id="help-success">
+      <svg class="t-form-success-popup__content-icon"
+           xmlns="http://www.w3.org/2000/svg" width="41" height="41" fill="none" viewBox="0 0 210 210">
+        <path class="t-form-success-popup__content-icon-background"
+              d="M 86.0696 10.2777 C 97.7443 -0.973851 116.104 -0.973851 127.779 10.2777 C 133.881 16.1585 142.136 19.1954 150.551 18.6547 C 166.65 17.6203 180.714 29.5482 182.502 45.7521 C 183.436 54.2214 187.829 61.9111 194.619 66.9636 C 207.609 76.6302 210.798 94.9049 201.862 108.479 C 197.191 115.574 195.665 124.318 197.653 132.6 C 201.457 148.445 192.277 164.515 176.799 169.108 C 168.709 171.509 161.979 177.216 158.235 184.852 C 151.072 199.461 133.819 205.807 119.041 199.27 C 111.317 195.853 102.532 195.853 94.8075 199.27 C 80.0294 205.807 62.7766 199.461 55.6135 184.852 C 51.8695 177.216 45.1396 171.509 37.0495 169.108 C 21.5714 164.515 12.3913 148.445 16.1948 132.6 C 18.1828 124.318 16.6573 115.574 11.9867 108.479 C 3.05084 94.9049 6.23902 76.6302 19.2295 66.9636 C 26.0194 61.9111 30.4119 54.2214 31.3462 45.7521 C 33.1339 29.5482 47.1984 17.6203 63.2976 18.6547 C 71.7122 19.1954 79.9676 16.1585 86.0696 10.2777 Z"
+              fill="#30C546"></path>
+        <path class="t-form-success-popup__content-icon-check"
+              d="M 66.7645 107.258 L 90.6617 129.843 L 143.235 80.157"
+              stroke="white" stroke-width="14.7059" stroke-linecap="round" stroke-linejoin="round" fill="none" pathLength="1"></path>
       </svg>
       <div class="suggest-success-title">Спасибо!</div>
     </div>
