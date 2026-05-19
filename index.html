@@ -3175,8 +3175,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // ── Help upload modal ──
 document.addEventListener('DOMContentLoaded', function () {
-  const BOT_TOKEN = '8617772760:AAHzsc4Vuqxo2a1BJgMLgyxvfM6t8j7KET4';
-  const CHAT_ID   = '5843186018';
+  const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/upload';
 
   const overlay    = document.getElementById('help-overlay');
   const form       = document.getElementById('help-form');
@@ -3247,25 +3246,16 @@ document.addEventListener('DOMContentLoaded', function () {
     submitBtn.textContent = 'Отправляем…';
 
     try {
-      const api = `https://api.telegram.org/bot${BOT_TOKEN}`;
-      const caption = `🎨 Помощь с иконкой: ${currentIconName}`;
-
-      // Отправляем favicon обязательно
-      const toSend = fields.filter(f => {
+      const fd = new FormData();
+      fd.append('icon_name', currentIconName);
+      fields.forEach(f => {
         const input = document.getElementById(f.id + '-input');
-        return input.files[0];
+        if (input.files[0]) fd.append(f.id.replace('help-', ''), input.files[0]);
       });
 
-      for (const f of toSend) {
-        const input = document.getElementById(f.id + '-input');
-        const fd = new FormData();
-        fd.append('chat_id', CHAT_ID);
-        fd.append('document', input.files[0], `${currentIconName} — ${f.key}.svg`);
-        fd.append('caption', `${caption}\nТип: ${f.key}`);
-        const res = await fetch(`${api}/sendDocument`, { method: 'POST', body: fd });
-        const data = await res.json();
-        if (!data.ok) throw new Error(data.description);
-      }
+      const res  = await fetch(WORKER_URL, { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Ошибка сервера');
 
       // Показываем успех
       form.style.display = 'none';
@@ -3285,7 +3275,7 @@ document.addEventListener('DOMContentLoaded', function () {
       alert('Ошибка отправки. Попробуйте ещё раз.');
     }
   });
-})();
+});
 </script>
 
 <div class="suggest-overlay" id="suggest-overlay">
