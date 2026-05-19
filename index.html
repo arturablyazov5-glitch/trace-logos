@@ -1,0 +1,2455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icons</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #111;
+      color: #e5e5e5;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    aside {
+      width: 200px;
+      min-width: 200px;
+      background: #161616;
+      border-right: 1px solid #222;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 12px;
+      height: 57px;
+      min-height: 57px;
+      border-bottom: 1px solid #222;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .sidebar-logo {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      background: #fff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sidebar-logo svg { display: block; }
+    .sidebar-header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+    .sidebar-header-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .sidebar-header-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      white-space: nowrap;
+    }
+    .sidebar-header-badge {
+      font-size: 10px;
+      font-weight: 600;
+      color: #888;
+      background: #222;
+      border-radius: 5px;
+      padding: 1px 6px;
+      white-space: nowrap;
+    }
+    .sidebar-header-sub {
+      font-size: 11px;
+      color: #555;
+      white-space: nowrap;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #555;
+      padding: 8px 16px 6px;
+    }
+    .sidebar-label.with-gap { margin-top: 12px; }
+    .sidebar-label.hidden { display: none; }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 16px;
+      font-size: 13px;
+      color: #aaa;
+      cursor: pointer;
+      border-radius: 0;
+      transition: background .1s, color .1s;
+      user-select: none;
+    }
+    .nav-item span.nav-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .nav-item:hover { background: #1e1e1e; color: #fff; }
+    .nav-item.active { background: #1e1e1e; color: #fff; }
+    .nav-item .count {
+      font-size: 11px;
+      color: #555;
+      flex-shrink: 0;
+      margin-left: 6px;
+    }
+    .nav-item.active .count { color: #888; }
+
+    .desktop-only { display: block; }
+    .sidebar-header.desktop-only { display: flex; }
+    .mobile-only { display: none; }
+
+    /* ── Mobile app header + nav drawer ── */
+    .mobile-header {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      height: 57px;
+      min-height: 57px;
+      padding: 0 12px 0 14px;
+      background: #161616;
+      border-bottom: 1px solid #222;
+      flex-shrink: 0;
+      width: 100%;
+      z-index: 80;
+    }
+    .mobile-header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      flex: 1;
+    }
+    .burger-btn {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border: none;
+      border-radius: 10px;
+      background: #222;
+      color: #ccc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .12s, color .12s;
+    }
+    .burger-btn:hover { background: #2a2a2a; color: #fff; }
+    .burger-btn[aria-expanded="true"] { background: #2a2a2a; color: #fff; }
+
+    .nav-drawer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .55);
+      z-index: 85;
+      opacity: 0;
+      transition: opacity .28s ease;
+    }
+    .nav-drawer-backdrop.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .drawer-search-slot {
+      display: none;
+      flex-shrink: 0;
+      padding: 12px 12px 10px;
+      border-bottom: 1px solid #222;
+    }
+    .drawer-search-slot .search-bar {
+      width: 100%;
+    }
+    .drawer-search-slot .search-wrap {
+      max-width: none;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+    }
+    #search-slot-desktop,
+    #search-slot-mobile {
+      display: flex;
+      flex: 1;
+      min-width: 0;
+      align-items: center;
+    }
+    #search-slot-mobile { display: none; }
+
+    /* ── Center column (main + detail) ── */
+    .center {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    /* Search bar — теперь поверх main+detail */
+    .topbar {
+      height: 57px;
+      min-height: 57px;
+      padding: 0 24px;
+      border-bottom: 1px solid #1e1e1e;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .center-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-width: 0;
+      position: relative;
+      transition: padding-right .42s cubic-bezier(.22,.61,.36,1);
+      will-change: padding-right;
+    }
+    .center-body:has(#detail.open) main {
+      padding-right: 280px;
+    }
+
+    /* Плавная интерполяция позиций карточек при reflow через View Transitions */
+    ::view-transition-group(*) {
+      animation-duration: .42s;
+      animation-timing-function: cubic-bezier(.22,.61,.36,1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      main { transition: none; }
+      #detail, .detail-backdrop, aside, .nav-drawer-backdrop { transition: none; }
+    }
+
+    .search-wrap {
+      position: relative;
+      flex: 1;
+      max-width: 420px;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #555;
+      pointer-events: none;
+    }
+    #search {
+      width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 8px 12px 8px 34px;
+      font-size: 13px;
+      color: #e5e5e5;
+      outline: none;
+      transition: border-color .15s;
+    }
+    #search::placeholder { color: #555; }
+    #search:focus { border-color: #444; }
+
+    .search-count {
+      font-size: 12px;
+      font-weight: 500;
+      color: #666;
+      white-space: nowrap;
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity .15s;
+      pointer-events: none;
+    }
+    .search-count.visible { opacity: 1; }
+
+    /* Content */
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 24px;
+      /* Иначе при схлопывании секций выше вьюпорта браузер двигает scrollTop и остаётся «дыра» сверху */
+      overflow-anchor: none;
+    }
+
+    .section {
+      margin-bottom: 36px;
+    }
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 16px;
+    }
+
+    .grid { display: flex; flex-wrap: wrap; gap: 4px; }
+
+    .card {
+      width: 80px;
+      padding: 14px 8px 10px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background .12s;
+      user-select: none;
+      position: relative;
+      contain: layout paint style;
+    }
+    .card:hover { background: #1e1e1e; }
+    .card.copied { background: #1a2e22; }
+
+    .icon-wrap {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .icon-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 11px;
+      background: linear-gradient(90deg, #1b1b1b 0%, #242424 45%, #1b1b1b 90%);
+      background-size: 220% 100%;
+      animation: skeleton-shimmer 1.15s linear infinite;
+      opacity: 0;
+      transition: opacity .16s;
+    }
+    .card.loading .icon-wrap::before { opacity: 1; }
+    .icon-wrap img {
+      width: 48px;
+      height: 48px;
+      border-radius: 11px;
+      opacity: 1;
+      transition: opacity .16s;
+    }
+    .card.loading .icon-wrap img { opacity: 0; }
+    @keyframes skeleton-shimmer {
+      from { background-position: 120% 0; }
+      to { background-position: -120% 0; }
+    }
+
+    .label {
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      line-height: 1.3;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .card:hover .label { color: #ccc; }
+
+    .card-path {
+      display: none;
+      font-size: 9px;
+      color: #555;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      text-align: center;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: -4px;
+      line-height: 1.2;
+    }
+    .card.show-path .card-path { display: block; }
+
+    .label mark, .card-path mark {
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      padding: 0;
+    }
+    .card-path mark { color: #bbb; font-weight: 500; }
+
+    .card.copied::after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #4ade80 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%230a1f12' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center / 10px no-repeat;
+      animation: card-copied-pop .22s cubic-bezier(.34,1.56,.64,1);
+      pointer-events: none;
+    }
+    @keyframes card-copied-pop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    /* Toast */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%) translateY(12px);
+      background: #fff;
+      color: #111;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity .18s, transform .18s;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 999;
+    }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* Hidden section — только display:none: надёжно и без артефактов scroll anchoring / max-height */
+    .section.hidden {
+      display: none;
+    }
+    .card.hidden { display: none; }
+    .card.active { background: #1e1e1e; outline: 1.5px solid #333; }
+
+    .scroll-top-btn {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      z-index: 4;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      background: #fff;
+      color: #111;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity .18s, transform .18s, background .12s;
+    }
+    .scroll-top-btn.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .scroll-top-btn:hover { background: #e5e5e5; }
+
+    /* Empty state */
+    #empty {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      color: #444;
+      font-size: 13px;
+      text-align: center;
+    }
+    #empty.show { display: flex; }
+    #empty svg { margin-bottom: 12px; color: #333; }
+
+    /* ── Detail panel ── */
+    #detail {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 280px;
+      background: #161616;
+      border-left: 1px solid #222;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform .42s cubic-bezier(.22,.61,.36,1);
+      overflow-y: auto;
+      z-index: 5;
+      view-transition-name: detail-panel;
+    }
+    #detail.open { transform: translateX(0); }
+    #detail > * { flex-shrink: 0; }
+
+    .detail-backdrop {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, .55);
+      z-index: 4;
+      opacity: 0;
+      transition: opacity .32s ease;
+    }
+    .detail-backdrop.show {
+      display: block;
+      opacity: 1;
+    }
+
+    .detail-sheet-handle {
+      display: none;
+      width: 36px;
+      height: 4px;
+      background: #3a3a3a;
+      border-radius: 2px;
+      margin: 10px auto 0;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .desktop-only { display: none !important; }
+      .mobile-only { display: block; }
+      .content { padding: 16px 8px; }
+      .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+      .card { width: auto; padding: 8px 4px 6px; }
+      .icon-wrap { width: 100%; height: 0; padding-top: 100%; }
+      .icon-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .icon-wrap::before { inset: 0; }
+      .card { align-items: stretch; overflow: hidden; contain: none; }
+      .label { white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; width: 100% !important; max-width: 100% !important; }
+      .sidebar-header.mobile-only { display: flex; }
+      .drawer-search-slot { display: block; }
+      #search-slot-mobile { display: flex; flex: none; }
+
+      .mobile-header {
+        display: flex;
+      }
+
+      aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: min(320px, 100vw);
+        min-width: 0;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform .32s cubic-bezier(.22, .61, .36, 1);
+        box-shadow: none;
+      }
+      aside.nav-open {
+        transform: translateX(0);
+        box-shadow: 8px 0 32px rgba(0, 0, 0, .45);
+      }
+
+      .topbar {
+        display: none;
+      }
+
+      .center-body:has(#detail.open) main { padding-right: 0; }
+      .detail-backdrop { display: block; pointer-events: none; }
+      .detail-backdrop.show { pointer-events: auto; }
+      #detail {
+        top: auto;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-height: min(88vh, 720px);
+        border-left: none;
+        border-top: 1px solid #2a2a2a;
+        border-radius: 16px 16px 0 0;
+        transform: translateY(100%);
+        box-shadow: 0 -12px 40px rgba(0, 0, 0, .5);
+      }
+      #detail.open { transform: translateY(0); }
+      .detail-sheet-handle { display: block; }
+      .detail-header { padding-top: 4px; }
+    }
+
+    /* Во время View Transition отключаем CSS-анимации, чтобы захватить финальное состояние */
+    html.vt-active main,
+    html.vt-active #detail { transition: none !important; }
+
+    .detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 16px 0;
+    }
+    .detail-close {
+      width: 28px; height: 28px;
+      border-radius: 7px;
+      background: #222;
+      border: none;
+      color: #888;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .12s, color .12s;
+      flex-shrink: 0;
+    }
+    .detail-close:hover { background: #2a2a2a; color: #fff; }
+
+    .detail-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px 24px;
+      min-height: 128px;
+      box-sizing: border-box;
+    }
+    .detail-preview img {
+      max-width: 100%;
+      max-height: 112px;
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      object-fit: contain;
+      transition: all .18s;
+    }
+    .detail-preview img.square {
+      width: 96px;
+      height: 96px;
+      max-width: 96px;
+      border-radius: 22px;
+    }
+    .detail-preview img:not(.square) {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      background: #fff;
+      padding: 16px 20px;
+      border-radius: 12px;
+    }
+
+    .detail-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      text-align: center;
+      padding: 0 20px 4px;
+    }
+    .detail-figma {
+      font-size: 11px;
+      color: #555;
+      text-align: center;
+      padding: 0 20px 24px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .detail-section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #444;
+      padding: 0 16px 8px;
+    }
+
+    .detail-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 0 16px 24px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background .12s, color .12s;
+      width: 100%;
+      text-align: left;
+    }
+    .btn-primary {
+      background: #fff;
+      color: #111;
+    }
+    .btn-primary:hover { background: #e5e5e5; }
+    .btn-secondary {
+      background: #222;
+      color: #ccc;
+    }
+    .btn-secondary:hover { background: #2a2a2a; color: #fff; }
+    .btn svg { flex-shrink: 0; }
+    .btn.hidden { display: none; }
+
+    .btn-zip {
+      position: relative;
+      overflow: hidden;
+      margin-top: 6px;
+      background: #1a1a1a;
+      color: #ccc;
+      border: 1px solid #2a2a2a;
+    }
+    .btn-zip:hover:not(:disabled) {
+      background: #222;
+      color: #fff;
+      border-color: #333;
+    }
+    .btn-zip:disabled {
+      cursor: progress;
+      color: #888;
+    }
+    .btn-zip .btn-progress {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 2px;
+      background: #4ade80;
+      width: 0;
+      transition: width .15s linear;
+    }
+
+    .detail-divider {
+      height: 1px;
+      background: #1e1e1e;
+      margin: 4px 16px 20px;
+    }
+
+    .variants-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 16px 24px;
+    }
+    .variant-card {
+      flex: 1;
+      min-width: 80px;
+      min-height: 100px;
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 14px 10px 10px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      justify-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: border-color .12s;
+    }
+    .variant-card img { align-self: center; }
+    .variant-card .variant-label { align-self: end; }
+    .variant-card:hover { border-color: #333; }
+    .variant-card img {
+      max-width: 100%;
+      max-height: 56px;
+      width: auto;
+      height: auto;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+    .variant-card.wide img {
+      border-radius: 4px;
+      background: #fff;
+      padding: 6px 10px;
+      max-height: 44px;
+    }
+    .variant-card.favicon img { width: 40px; height: 40px; border-radius: 9px; }
+    .variant-card .variant-label {
+      font-size: 10px;
+      color: #666;
+      text-align: center;
+    }
+    .variant-card.active {
+      border-color: #444;
+      background: #252525;
+    }
+    .variant-card.coming-soon {
+      opacity: .35;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .detail-variants.hidden { display: none; }
+
+    /* ── Ecosystem ── */
+    .detail-ecosystem.hidden { display: none; }
+    .ecosystem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+      gap: 6px;
+      padding: 0 16px 24px;
+    }
+    .ecosystem-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      padding: 10px 6px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: border-color .12s, background .12s;
+    }
+    .ecosystem-card:hover {
+      border-color: #333;
+      background: #222;
+    }
+    .ecosystem-card.active {
+      border-color: #444;
+      background: #252525;
+    }
+    .ecosystem-card.active .ecosystem-label {
+      color: #ccc;
+    }
+    .ecosystem-card img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+    .ecosystem-card .ecosystem-label {
+      font-size: 10px;
+      color: #888;
+      text-align: center;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 1.3;
+    }
+
+    /* ── Color editor ── */
+    .colors-panel {
+      margin: 0 16px 12px;
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      transition: border-color .12s;
+    }
+    .colors-panel.colors-hidden,
+    #colors-divider.colors-hidden { display: none; }
+    .colors-panel:hover { border-color: #333; }
+    .colors-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 7px 10px 7px 12px;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 7px;
+      transition: background .12s, border-radius .12s;
+    }
+    .colors-panel:has(.colors-section:not(.hidden)) .colors-header {
+      border-radius: 7px 7px 0 0;
+    }
+    .colors-header:hover { background: #222; }
+    .colors-header-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: #888;
+    }
+    .colors-header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .colors-chevron {
+      color: #555;
+      transition: transform .2s;
+      flex-shrink: 0;
+    }
+    .colors-header.open .colors-chevron { transform: rotate(90deg); }
+    .colors-reset-btn {
+      font-size: 10px;
+      color: #555;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      letter-spacing: .03em;
+      display: none;
+    }
+    .colors-reset-btn:hover { color: #ccc; background: #161616; }
+    .colors-reset-btn.visible { display: block; }
+    .colors-section {
+      padding: 8px 12px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-top: 1px solid #2a2a2a;
+      border-radius: 0 0 7px 7px;
+    }
+    .colors-section.hidden { display: none; }
+
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .color-swatch-wrap {
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .color-swatch {
+      display: block;
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    /* ── Custom color picker popup ── */
+    .cp {
+      position: fixed;
+      z-index: 2000;
+      background: #1e1e1e;
+      border: 1px solid #3a3a3a;
+      border-radius: 12px;
+      padding: 12px;
+      width: 244px;
+      box-shadow: 0 16px 48px rgba(0,0,0,.8), 0 2px 8px rgba(0,0,0,.4);
+      display: none;
+      user-select: none;
+    }
+    .cp.open { display: block; }
+    .cp-sv {
+      position: relative;
+      width: 100%;
+      height: 150px;
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: crosshair;
+      margin-bottom: 10px;
+    }
+    .cp-sv-white, .cp-sv-black {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .cp-sv-white { background: linear-gradient(to right, #fff, transparent); }
+    .cp-sv-black { background: linear-gradient(to bottom, transparent, #000); }
+    .cp-sv-thumb {
+      position: absolute;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.5), 0 1px 4px rgba(0,0,0,.5);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .cp-sliders-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .cp-eyedropper-btn {
+      width: 28px; height: 28px;
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 6px;
+      color: #666;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background .12s, color .12s, border-color .12s;
+    }
+    .cp-eyedropper-btn:hover { background: #2a2a2a; color: #ccc; border-color: #3a3a3a; }
+    .cp-eyedropper-btn.no-support { opacity: .3; cursor: default; pointer-events: none; }
+    .cp-tracks { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    /* Обёртка — расширяет зону клика на 8px по бокам (чтобы кружок не обрезался) */
+    .cp-slider-wrap {
+      position: relative;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      padding: 0 8px;
+      margin: 0 -8px;
+    }
+    .cp-hue-track {
+      width: 100%; height: 12px; border-radius: 6px; pointer-events: none;
+      background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
+    }
+    .cp-alpha-bg {
+      position: absolute; left: 8px; right: 8px; top: 50%; transform: translateY(-50%);
+      height: 12px; border-radius: 6px; pointer-events: none;
+      background: repeating-conic-gradient(#555 0% 25%, #333 0% 50%) 0 0 / 8px 8px;
+    }
+    .cp-alpha-track {
+      position: absolute; left: 8px; right: 8px; top: 50%; transform: translateY(-50%);
+      height: 12px; border-radius: 6px; pointer-events: none;
+    }
+    .cp-hue-thumb, .cp-alpha-thumb {
+      position: absolute;
+      top: 50%;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #fff;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .cp-inputs {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+    }
+    .cp-format-label {
+      font-size: 11px; color: #888;
+      background: #2a2a2a; border: 1px solid #333;
+      border-radius: 5px; padding: 5px 7px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .cp-hex-val {
+      flex: 1; min-width: 0;
+      background: #2a2a2a; border: 1px solid #333;
+      border-radius: 5px; padding: 5px 6px;
+      font-family: 'SF Mono','Fira Code',monospace;
+      font-size: 12px; color: #ccc; outline: none;
+    }
+    .cp-hex-val:focus { border-color: #555; color: #fff; }
+    .cp-opacity-val {
+      width: 38px; flex-shrink: 0;
+      background: #2a2a2a; border: 1px solid #333;
+      border-radius: 5px; padding: 5px 4px;
+      font-size: 12px; color: #ccc; outline: none; text-align: center;
+    }
+    .cp-opacity-val:focus { border-color: #555; color: #fff; }
+    .cp-pct-label { font-size: 11px; color: #555; flex-shrink: 0; }
+    .color-hex-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      padding: 2px 6px;
+      cursor: text;
+      transition: background .12s, border-color .12s;
+    }
+    .color-hex-wrap:hover { background: #1e1e1e; border-color: #2a2a2a; }
+    .color-hex-wrap:focus-within { background: #222; border-color: #444; }
+    .color-hex-prefix {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      color: #555;
+      user-select: none;
+      pointer-events: none;
+    }
+    .color-hex-wrap:focus-within .color-hex-prefix { color: #888; }
+    .color-hex {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      color: #888;
+      background: none;
+      border: none;
+      outline: none;
+      width: 58px;
+      cursor: text;
+      transition: color .12s;
+    }
+    .color-hex:focus { color: #fff; }
+
+    /* Note block */
+    .detail-note {
+      margin: 0 16px 20px;
+      padding: 10px 12px;
+      background: #1e1a0e;
+      border: 1px solid #3a2e0a;
+      border-radius: 10px;
+      font-size: 12px;
+      color: #6b5a28;
+      line-height: 1.5;
+    }
+    .detail-note-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #c8a84b;
+    }
+    .detail-note.hidden { display: none; }
+
+    /* Brand link */
+    .detail-brand-link { display: flex; flex-direction: column; }
+    .detail-brand-link.hidden { display: none; }
+    .btn-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      color: #888;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background .12s, color .12s, border-color .12s;
+      margin: 0 16px 24px;
+    }
+    .btn-brand:hover { background: #222; color: #ccc; border-color: #333; }
+    .btn-brand svg { flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<header class="mobile-header mobile-only" id="mobile-header">
+  <div class="mobile-header-brand">
+    <div class="sidebar-logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.9844 2.13613C12.4512 1.60535 14 2.69196 14 4.25188V4.42892L7.47401 6.79038C5.98917 7.32768 5 8.73756 5 10.3166V15.8704C3.5378 16.3879 2 15.3035 2 13.7491V7.6674C2 6.29888 2.85728 5.07698 4.14414 4.61132L10.9844 2.13613ZM14.9844 5.1362C16.4512 4.60541 18 5.69202 18 7.25194V7.42896L11.1441 9.90979C9.85728 10.3754 9 11.5973 9 12.9659V18.8705C7.5378 19.388 6 18.3035 6 16.7491V10.3167C6 9.15868 6.72539 8.12477 7.81427 7.73075L14.9844 5.1362ZM18.9844 8.13618C20.4512 7.60539 22 8.692 22 10.2519V17.0352C22 17.9826 21.4065 18.8286 20.5156 19.1509L13.0156 21.8649C11.5488 22.3956 10 21.309 10 19.7491V12.9658C10 12.0184 10.5935 11.1725 11.4844 10.8501L18.9844 8.13618Z" fill="#111"/>
+      </svg>
+    </div>
+    <div class="sidebar-header-text">
+      <div class="sidebar-header-row">
+        <span class="sidebar-header-name">Icons</span>
+        <span class="sidebar-header-badge">Beta</span>
+      </div>
+      <span class="sidebar-header-sub sidebar-sub">загрузка...</span>
+    </div>
+  </div>
+  <button type="button" class="burger-btn" id="burger-btn" aria-label="Меню" aria-expanded="false" aria-controls="sidebar">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </svg>
+  </button>
+</header>
+
+<div id="nav-drawer-backdrop" class="nav-drawer-backdrop" aria-hidden="true"></div>
+
+<aside id="sidebar">
+  <div class="sidebar-header desktop-only">
+    <div class="sidebar-logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.9844 2.13613C12.4512 1.60535 14 2.69196 14 4.25188V4.42892L7.47401 6.79038C5.98917 7.32768 5 8.73756 5 10.3166V15.8704C3.5378 16.3879 2 15.3035 2 13.7491V7.6674C2 6.29888 2.85728 5.07698 4.14414 4.61132L10.9844 2.13613ZM14.9844 5.1362C16.4512 4.60541 18 5.69202 18 7.25194V7.42896L11.1441 9.90979C9.85728 10.3754 9 11.5973 9 12.9659V18.8705C7.5378 19.388 6 18.3035 6 16.7491V10.3167C6 9.15868 6.72539 8.12477 7.81427 7.73075L14.9844 5.1362ZM18.9844 8.13618C20.4512 7.60539 22 8.692 22 10.2519V17.0352C22 17.9826 21.4065 18.8286 20.5156 19.1509L13.0156 21.8649C11.5488 22.3956 10 21.309 10 19.7491V12.9658C10 12.0184 10.5935 11.1725 11.4844 10.8501L18.9844 8.13618Z" fill="#111"/>
+      </svg>
+    </div>
+    <div class="sidebar-header-text">
+      <div class="sidebar-header-row">
+        <span class="sidebar-header-name">Icons</span>
+        <span class="sidebar-header-badge">Beta</span>
+      </div>
+      <span class="sidebar-header-sub sidebar-sub">загрузка...</span>
+    </div>
+  </div>
+  <div class="sidebar-header mobile-only">
+    <div class="sidebar-logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.9844 2.13613C12.4512 1.60535 14 2.69196 14 4.25188V4.42892L7.47401 6.79038C5.98917 7.32768 5 8.73756 5 10.3166V15.8704C3.5378 16.3879 2 15.3035 2 13.7491V7.6674C2 6.29888 2.85728 5.07698 4.14414 4.61132L10.9844 2.13613ZM14.9844 5.1362C16.4512 4.60541 18 5.69202 18 7.25194V7.42896L11.1441 9.90979C9.85728 10.3754 9 11.5973 9 12.9659V18.8705C7.5378 19.388 6 18.3035 6 16.7491V10.3167C6 9.15868 6.72539 8.12477 7.81427 7.73075L14.9844 5.1362ZM18.9844 8.13618C20.4512 7.60539 22 8.692 22 10.2519V17.0352C22 17.9826 21.4065 18.8286 20.5156 19.1509L13.0156 21.8649C11.5488 22.3956 10 21.309 10 19.7491V12.9658C10 12.0184 10.5935 11.1725 11.4844 10.8501L18.9844 8.13618Z" fill="#111"/>
+      </svg>
+    </div>
+    <div class="sidebar-header-text">
+      <div class="sidebar-header-row">
+        <span class="sidebar-header-name">Icons</span>
+        <span class="sidebar-header-badge">Beta</span>
+      </div>
+      <span class="sidebar-header-sub sidebar-sub">загрузка...</span>
+    </div>
+  </div>
+  <div class="drawer-search-slot mobile-only" id="search-slot-mobile"></div>
+  <div class="sidebar-label">Категории</div>
+  <div class="nav-item active" data-section="all">
+    <span class="nav-label">Все</span><span class="count" id="total-count"></span>
+  </div>
+  <div id="nav-sections"></div>
+  <div class="sidebar-label with-gap" id="ecosystems-label">Экосистемы</div>
+  <div id="nav-ecosystems"></div>
+</aside>
+
+<div id="search-bar" class="search-bar">
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input id="search" type="text" placeholder="Поиск иконок..." autocomplete="off">
+  </div>
+  <span id="search-count" class="search-count" aria-live="polite"></span>
+</div>
+
+<div class="center">
+  <div class="topbar desktop-only">
+    <div id="search-slot-desktop"></div>
+  </div>
+  <div class="center-body">
+    <main>
+      <div class="content" id="content"></div>
+      <div id="empty">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Ничего не найдено
+      </div>
+      <button type="button" class="scroll-top-btn" id="scroll-top-btn" aria-label="Наверх">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+      </button>
+    </main>
+
+    <div id="detail-backdrop" class="detail-backdrop" aria-hidden="true"></div>
+
+<!-- Detail panel -->
+<div id="detail">
+  <div class="detail-sheet-handle" aria-hidden="true"></div>
+  <div class="detail-header">
+    <span></span>
+    <button class="detail-close" id="detail-close">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="detail-preview">
+    <img id="detail-img" src="" alt="">
+  </div>
+
+  <div class="detail-name" id="detail-name"></div>
+  <div class="detail-figma" id="detail-figma"></div>
+
+  <div class="detail-section-label">Действия</div>
+  <div class="detail-actions">
+    <button class="btn btn-primary" id="btn-copy">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Скопировать SVG
+    </button>
+    <button class="btn btn-secondary" id="btn-download">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Скачать SVG
+    </button>
+    <button class="btn btn-secondary" id="btn-download-png">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Скачать PNG
+    </button>
+    <button class="btn btn-zip" id="btn-download-all">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
+      <span class="btn-label">Скачать всё (.zip)</span>
+      <span class="btn-progress"></span>
+    </button>
+  </div>
+
+  <div class="detail-divider" id="colors-divider"></div>
+  <div class="colors-panel" id="colors-panel">
+    <div class="colors-header" id="colors-header">
+      <span class="colors-header-label">Настроить цвета</span>
+      <div class="colors-header-right">
+        <button class="colors-reset-btn" id="colors-reset-btn">Сбросить</button>
+        <svg class="colors-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </div>
+    </div>
+    <div class="colors-section hidden" id="colors-section"></div>
+  </div>
+
+  <div class="detail-note hidden" id="detail-note">
+    <div class="detail-note-title">⚠ Важно для Figma</div>
+    <span id="detail-note-text"></span>
+  </div>
+
+  <div class="detail-variants" id="detail-variants">
+    <div class="detail-divider"></div>
+    <div class="detail-section-label">Варианты</div>
+    <div class="variants-grid" id="variants-grid"></div>
+  </div>
+
+  <div class="detail-ecosystem hidden" id="detail-ecosystem">
+    <div class="detail-divider"></div>
+    <div class="detail-section-label" id="ecosystem-label">Экосистема</div>
+    <div class="ecosystem-grid" id="ecosystem-grid"></div>
+  </div>
+
+  <div class="detail-brand-link hidden" id="detail-brand-link">
+    <div class="detail-divider"></div>
+    <div class="detail-section-label">Бренд</div>
+    <a id="btn-brand-link" class="btn-brand" href="#" target="_blank" rel="noopener noreferrer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Правила использования лого
+    </a>
+  </div>
+</div><!-- #detail -->
+  </div><!-- .center-body -->
+</div><!-- .center -->
+
+<div id="toast"></div>
+
+<script>
+const content = document.getElementById('content');
+const scrollTopBtn = document.getElementById('scroll-top-btn');
+const navSections = document.getElementById('nav-sections');
+const navEcosystems = document.getElementById('nav-ecosystems');
+const toast = document.getElementById('toast');
+const search = document.getElementById('search');
+const searchCount = document.getElementById('search-count');
+const totalCount = document.getElementById('total-count');
+const detailBackdrop = document.getElementById('detail-backdrop');
+const detail = document.getElementById('detail');
+const sidebar = document.getElementById('sidebar');
+const burgerBtn = document.getElementById('burger-btn');
+const navDrawerBackdrop = document.getElementById('nav-drawer-backdrop');
+const searchBar = document.getElementById('search-bar');
+const searchSlotDesktop = document.getElementById('search-slot-desktop');
+const searchSlotMobile = document.getElementById('search-slot-mobile');
+const layoutMq = matchMedia('(max-width: 768px)');
+let toastTimer;
+let totalCards = 0;
+
+function updateScrollTopButton() {
+  const contentVisible = content.style.display !== 'none';
+  scrollTopBtn.classList.toggle('show', contentVisible && content.scrollTop > 360);
+}
+
+content.addEventListener('scroll', updateScrollTopButton, { passive: true });
+scrollTopBtn.addEventListener('click', () => {
+  content.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+function placeSearchBar() {
+  const slot = layoutMq.matches ? searchSlotMobile : searchSlotDesktop;
+  if (slot && searchBar.parentElement !== slot) slot.appendChild(searchBar);
+}
+
+function syncBodyScrollLock() {
+  if (!layoutMq.matches) {
+    document.body.style.overflow = '';
+    return;
+  }
+  const lock = detail.classList.contains('open') || sidebar.classList.contains('nav-open');
+  document.body.style.overflow = lock ? 'hidden' : '';
+}
+
+function openNavDrawer() {
+  sidebar.classList.add('nav-open');
+  navDrawerBackdrop.classList.add('show');
+  navDrawerBackdrop.setAttribute('aria-hidden', 'false');
+  burgerBtn.setAttribute('aria-expanded', 'true');
+  syncBodyScrollLock();
+  setTimeout(() => search.focus({ preventScroll: true }), 320);
+}
+
+function closeNavDrawer() {
+  sidebar.classList.remove('nav-open');
+  navDrawerBackdrop.classList.remove('show');
+  navDrawerBackdrop.setAttribute('aria-hidden', 'true');
+  burgerBtn.setAttribute('aria-expanded', 'false');
+  syncBodyScrollLock();
+}
+
+function syncDetailBackdrop(open) {
+  const mobile = layoutMq.matches;
+  detailBackdrop.classList.toggle('show', open && mobile);
+  detailBackdrop.setAttribute('aria-hidden', open && mobile ? 'false' : 'true');
+  syncBodyScrollLock();
+}
+
+function setDetailOpen(open) {
+  detail.classList.toggle('open', open);
+  syncDetailBackdrop(open);
+}
+
+burgerBtn.addEventListener('click', () => {
+  if (sidebar.classList.contains('nav-open')) closeNavDrawer();
+  else openNavDrawer();
+});
+navDrawerBackdrop.addEventListener('click', closeNavDrawer);
+layoutMq.addEventListener('change', () => {
+  placeSearchBar();
+  if (!layoutMq.matches) closeNavDrawer();
+  syncDetailBackdrop(detail.classList.contains('open'));
+});
+placeSearchBar();
+
+// Wheel вне сайдбара/панели деталей — всегда скроллит сетку лого.
+// Иначе при открытой панели колесо над её областью скроллит её, а не лого.
+window.addEventListener('wheel', (e) => {
+  if (e.target.closest('#detail') || e.target.closest('aside')) return;
+  if (e.ctrlKey || e.metaKey) return;
+  content.scrollTop += e.deltaY;
+  if (e.deltaY !== 0) e.preventDefault();
+}, { passive: false });
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 1600);
+}
+
+function iconCountText(count) {
+  const mod100 = Math.abs(count) % 100;
+  const mod10 = mod100 % 10;
+  if (mod100 >= 11 && mod100 <= 14) return `${count} иконок`;
+  if (mod10 === 1) return `${count} иконка`;
+  if (mod10 >= 2 && mod10 <= 4) return `${count} иконки`;
+  return `${count} иконок`;
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c]);
+}
+function escapeRegExp(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+// Оборачивает все совпадения слов из `words` в <mark>. Возвращает безопасный HTML.
+function highlight(text, words) {
+  if (!words || !words.length) return escapeHtml(text);
+  const sorted = [...new Set(words.filter(Boolean))].sort((a, b) => b.length - a.length);
+  if (!sorted.length) return escapeHtml(text);
+  const re = new RegExp(sorted.map(escapeRegExp).join('|'), 'gi');
+  let result = '';
+  let last = 0;
+  text.replace(re, (m, idx) => {
+    result += escapeHtml(text.slice(last, idx)) + '<mark>' + escapeHtml(m) + '</mark>';
+    last = idx + m.length;
+    return m;
+  });
+  result += escapeHtml(text.slice(last));
+  return result;
+}
+
+async function loadLogos() {
+  const meta = await fetch('logos.json').then(r => r.json());
+  // SVG текст грузим только при открытии панели (для копирования/скачивания)
+  return meta;
+}
+
+// Build UI
+const sectionEls = [];
+const ecosystemEls = [];
+const allItems = [];                  // плоский список всех item для cross-lookup (экосистема)
+const cardByItemFile = new Map();     // file -> карточка в сетке
+const ecosystemLabels = {
+  google:  'Сервисы Google',
+  yandex:  'Сервисы Яндекса',
+  alfa:    'Альфа-Групп',
+  tinkoff: 'Сервисы Т-Банка',
+  mts:     'Сервисы МТС'
+};
+let total = 0;
+
+function setSectionHidden(sec, hidden) {
+  const isHidden = sec.classList.contains('hidden');
+  if (hidden === isHidden) return;
+  sec.style.maxHeight = '';
+  sec.classList.toggle('hidden', hidden);
+}
+
+function resetContentScroll() {
+  content.scrollTop = 0;
+  requestAnimationFrame(() => {
+    content.scrollTop = 0;
+    updateScrollTopButton();
+  });
+}
+
+loadLogos().then(logos => { for (const group of logos) {
+  total += group.items.length;
+
+  // Nav item
+  const nav = document.createElement('div');
+  nav.className = 'nav-item';
+  nav.dataset.section = group.section;
+  nav.innerHTML = `<span class="nav-label">${group.section}</span><span class="count">${group.items.length}</span>`;
+  navSections.appendChild(nav);
+
+  // Section
+  const sec = document.createElement('div');
+  sec.className = 'section';
+  sec.dataset.section = group.section;
+
+  const title = document.createElement('div');
+  title.className = 'section-title';
+  title.textContent = group.section;
+  sec.appendChild(title);
+
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+
+  for (const item of group.items) {
+    const card = document.createElement('div');
+    card.className = 'card loading';
+    card._item = item;
+
+    const figmaLow = item.figma.toLowerCase();
+    const raw = (item.name + ' ' + (item.tags || '') + ' ' + figmaLow).toLowerCase();
+    // Добавляем версию без дефисов для каждого токена отдельно
+    const extra = raw.split(/\s+/).map(w => w.replace(/-/g, '')).join(' ');
+    card.dataset.search = raw + ' ' + extra;
+
+    const wrap = document.createElement('div');
+    wrap.className = 'icon-wrap';
+    const img = document.createElement('img');
+    img.width = 48; img.height = 48;
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.alt = item.name;
+    img.title = item.figma;
+    img.addEventListener('load', () => card.classList.remove('loading'), { once: true });
+    img.addEventListener('error', () => card.classList.remove('loading'), { once: true });
+    img.src = 'svgs/' + item.file;
+    wrap.appendChild(img);
+    card.appendChild(wrap);
+
+    const label = document.createElement('div');
+    label.className = 'label';
+    label.textContent = item.name;
+    card.appendChild(label);
+
+    const pathEl = document.createElement('div');
+    pathEl.className = 'card-path';
+    pathEl.textContent = item.figma;
+    card.appendChild(pathEl);
+
+    card.addEventListener('click', () => openDetail(item, card));
+
+    grid.appendChild(card);
+    allItems.push(item);
+    cardByItemFile.set(item.file, card);
+  }
+
+  sec.appendChild(grid);
+  content.appendChild(sec);
+  sectionEls.push({ nav, sec, group });
+} // end for
+
+totalCards = total;
+totalCount.textContent = total;
+document.querySelectorAll('.sidebar-sub').forEach(el => { el.textContent = iconCountText(total); });
+
+const ecosystemCounts = allItems.reduce((acc, item) => {
+  if (item.ecosystem) acc.set(item.ecosystem, (acc.get(item.ecosystem) || 0) + 1);
+  return acc;
+}, new Map());
+
+[...ecosystemCounts.entries()]
+  .sort(([a], [b]) => (ecosystemLabels[a] || a).localeCompare(ecosystemLabels[b] || b, 'ru'))
+  .forEach(([key, count]) => {
+    const nav = document.createElement('div');
+    nav.className = 'nav-item';
+    nav.dataset.ecosystem = key;
+    nav.innerHTML = `<span class="nav-label">${ecosystemLabels[key] || key}</span><span class="count">${count}</span>`;
+    navEcosystems.appendChild(nav);
+    ecosystemEls.push({ nav, key });
+  });
+document.getElementById('ecosystems-label').classList.toggle('hidden', ecosystemEls.length === 0);
+
+// Sidebar navigation
+function setActive(sectionName) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+  if (sectionName === 'all') {
+    document.querySelector('[data-section="all"]').classList.add('active');
+    sectionEls.forEach(({ sec }) => {
+      sec.querySelectorAll('.card').forEach(card => card.classList.remove('hidden'));
+      setSectionHidden(sec, false);
+    });
+  } else {
+    const found = sectionEls.find(s => s.group.section === sectionName);
+    if (found) {
+      found.nav.classList.add('active');
+      sectionEls.forEach(({ sec, group }) => {
+        sec.querySelectorAll('.card').forEach(card => card.classList.remove('hidden'));
+        setSectionHidden(sec, group.section !== sectionName);
+      });
+    }
+  }
+  resetContentScroll();
+}
+
+function setActiveEcosystem(ecosystem) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  const found = ecosystemEls.find(e => e.key === ecosystem);
+  if (found) found.nav.classList.add('active');
+
+  sectionEls.forEach(({ sec }) => {
+    let any = false;
+    sec.querySelectorAll('.card').forEach(card => {
+      const match = card._item.ecosystem === ecosystem;
+      card.classList.toggle('hidden', !match);
+      if (match) any = true;
+    });
+    setSectionHidden(sec, !any);
+  });
+
+  document.getElementById('empty').classList.remove('show');
+  document.getElementById('content').style.display = '';
+  resetContentScroll();
+}
+
+document.querySelectorAll('.nav-item').forEach(el => {
+  el.addEventListener('click', () => {
+    search.value = '';
+    filterCards('');
+    if (el.dataset.ecosystem) setActiveEcosystem(el.dataset.ecosystem);
+    else setActive(el.dataset.section);
+    if (layoutMq.matches) closeNavDrawer();
+  });
+});
+
+// Проверяет одно слово запроса против haystack с fuzzy-логикой
+function matchWord(word, haystack) {
+  if (haystack.includes(word)) return true;
+  // Префиксное совпадение: "тбанка" совпадает с токеном "тбанк"
+  const tokens = haystack.split(/\s+/);
+  return tokens.some(t => t && (word.startsWith(t) || t.startsWith(word)));
+}
+
+function updateSearchCount(visible, hasQuery) {
+  if (!hasQuery) {
+    searchCount.classList.remove('visible');
+    searchCount.textContent = '';
+    return;
+  }
+  searchCount.textContent = visible + ' из ' + totalCards;
+  searchCount.classList.add('visible');
+}
+
+// Search — каждое слово запроса должно совпасть хотя бы с одним токеном
+function filterCards(q) {
+  const words = q.trim().toLowerCase().replace(/-/g, '').split(/\s+/).filter(Boolean);
+  const rawWords = q.trim().split(/\s+/).filter(Boolean); // для подсветки — сохраняем исходные дефисы/слэши
+  const hasQuery = words.length > 0;
+  let visibleCards = 0;
+  let sectionsWithHits = 0;
+
+  sectionEls.forEach(({ sec }) => {
+    let any = false;
+    sec.querySelectorAll('.card').forEach(card => {
+      const haystack = card.dataset.search;
+      const match = !hasQuery || words.every(w => matchWord(w, haystack));
+      card.classList.toggle('hidden', !match);
+      if (!match) return;
+      any = true;
+      visibleCards++;
+
+      const item = card._item;
+      const labelEl = card.querySelector('.label');
+      const pathEl = card.querySelector('.card-path');
+      if (hasQuery) {
+        labelEl.innerHTML = highlight(item.name, rawWords);
+        pathEl.innerHTML = highlight(item.figma, rawWords);
+        card.classList.add('show-path');
+      } else {
+        labelEl.textContent = item.name;
+        pathEl.textContent = item.figma;
+        card.classList.remove('show-path');
+      }
+    });
+    setSectionHidden(sec, !any);
+    if (any) sectionsWithHits++;
+  });
+
+  updateSearchCount(visibleCards, hasQuery);
+
+  const isEmpty = sectionsWithHits === 0 && hasQuery;
+  document.getElementById('empty').classList.toggle('show', isEmpty);
+  document.getElementById('content').style.display = isEmpty ? 'none' : '';
+  if (hasQuery) resetContentScroll();
+  else requestAnimationFrame(updateScrollTopButton);
+}
+
+search.addEventListener('input', () => {
+  const q = search.value.toLowerCase().trim();
+  filterCards(q);
+  if (q) {
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    document.querySelector('[data-section="all"]').classList.add('active');
+  }
+});
+
+// ── Detail panel ──
+const detailImg = document.getElementById('detail-img');
+const detailName = document.getElementById('detail-name');
+const detailFigma = document.getElementById('detail-figma');
+const variantsGrid = document.getElementById('variants-grid');
+const detailVariants = document.getElementById('detail-variants');
+let activeCard = null;
+
+detailBackdrop.addEventListener('click', closeDetail);
+
+// Плавное переключение панели через View Transitions: каждая видимая карточка
+// получает уникальное view-transition-name, поэтому браузер интерполирует их
+// позиции между старым и новым layout-ом вместо резкого перепрыгивания.
+function withDetailTransition(mutator) {
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!document.startViewTransition || reduced) { mutator(); return; }
+  const root = document.documentElement;
+  const cards = document.querySelectorAll('.card:not(.hidden)');
+  cards.forEach((c, i) => { c.style.viewTransitionName = 'card-vt-' + i; });
+  root.classList.add('vt-active');
+  const cleanup = () => {
+    root.classList.remove('vt-active');
+    cards.forEach(c => { c.style.viewTransitionName = ''; });
+  };
+  const t = document.startViewTransition(mutator);
+  t.finished.then(cleanup, cleanup);
+}
+
+async function getSvg(item) {
+  if (item._svg) return item._svg;
+  item._svg = await fetch('svgs/' + item.file).then(r => r.text());
+  return item._svg;
+}
+
+const EXPORT_FAVICON_SIZE = 32;
+const EXPORT_WIDE_HEIGHT = 24;
+
+function parseSvgViewBox(svg) {
+  const m = svg.match(/viewBox=["']([^"']+)["']/i);
+  if (!m) return null;
+  const p = m[1].trim().split(/[\s,]+/).map(Number);
+  if (p.length !== 4 || p.some(n => !Number.isFinite(n))) return null;
+  return { w: p[2], h: p[3] };
+}
+
+function wideLogoWidthAtHeight(svg, height = EXPORT_WIDE_HEIGHT) {
+  const vb = parseSvgViewBox(svg);
+  if (!vb || vb.h <= 0) return height;
+  return Math.round((height * vb.w / vb.h) * 100) / 100;
+}
+
+function svgForExport(svg, isSquare = true) {
+  const trimmed = svg.trim();
+  if (isSquare) {
+    return trimmed
+      .replace(/^(<svg[^>]*?)\bwidth="[^"]*"/, `$1width="${EXPORT_FAVICON_SIZE}"`)
+      .replace(/^(<svg[^>]*?)\bheight="[^"]*"/, `$1height="${EXPORT_FAVICON_SIZE}"`);
+  }
+  const w = wideLogoWidthAtHeight(trimmed, EXPORT_WIDE_HEIGHT);
+  return trimmed
+    .replace(/^(<svg[^>]*?)\bwidth="[^"]*"/, `$1width="${w}"`)
+    .replace(/^(<svg[^>]*?)\bheight="[^"]*"/, `$1height="${EXPORT_WIDE_HEIGHT}"`);
+}
+
+function svgToPngBlob(svgText, { square = false, size = 512 } = {}) {
+  const sizedSvg = svgForExport(svgText, square);
+  return new Promise((resolve, reject) => {
+    const svgBlob = new Blob([sizedSvg], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+    const imgEl = new Image();
+    imgEl.onload = () => {
+      const canvas = document.createElement('canvas');
+      if (square) {
+        canvas.width = size;
+        canvas.height = size;
+      } else {
+        canvas.width = Math.round(wideLogoWidthAtHeight(sizedSvg, EXPORT_WIDE_HEIGHT));
+        canvas.height = EXPORT_WIDE_HEIGHT;
+      }
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(blob => {
+        if (blob) resolve(blob); else reject(new Error('PNG generation failed'));
+      }, 'image/png');
+    };
+    imgEl.onerror = () => { URL.revokeObjectURL(url); reject(new Error('SVG load failed')); };
+    imgEl.src = url;
+  });
+}
+
+function svgForFigma(svg, item, isSquare = true) {
+  // Figma не понимает width="auto" — та же числовая ширина, что при скачивании
+  return svgForExport(svg, isSquare).replace(/^<svg/, `<svg id="${item.figma}"`);
+}
+
+// ── Color engine ──
+const svgRawCache = {};
+let colorMap = {};          // { '#rrggbb': '#rrggbb' }
+let colorEditorSourceSvg = '';
+let colorHistory = [];
+let colorHistoryIdx = -1;
+let colorUndoRedo = false;
+let colorHistoryNeedsInit = false;
+const COLOR_HISTORY_MAX = 50;
+let currentRawSvg = '';
+let currentIsSquare = true;
+let previewBlobUrl = null;
+let variantImgEls = [];    // [{ file, imgEl }] для обновления миниатюр
+
+function cloneColorMap() {
+  return JSON.parse(JSON.stringify(colorMap));
+}
+
+function updateColorsResetBtn() {
+  const resetBtn = document.getElementById('colors-reset-btn');
+  const anyChanged = Object.entries(colorMap).some(([k, v]) => k !== v);
+  resetBtn.classList.toggle('visible', anyChanged);
+}
+
+function resetColorHistory() {
+  colorHistory = [cloneColorMap()];
+  colorHistoryIdx = 0;
+}
+
+function pushColorHistory() {
+  if (colorUndoRedo) return;
+  const snap = cloneColorMap();
+  if (colorHistoryIdx >= 0 && JSON.stringify(colorHistory[colorHistoryIdx]) === JSON.stringify(snap)) return;
+  colorHistory = colorHistory.slice(0, colorHistoryIdx + 1);
+  colorHistory.push(snap);
+  while (colorHistory.length > COLOR_HISTORY_MAX) colorHistory.shift();
+  colorHistoryIdx = colorHistory.length - 1;
+}
+
+function undoColors() {
+  if (colorHistoryIdx <= 0) return false;
+  colorUndoRedo = true;
+  colorHistoryIdx--;
+  colorMap = JSON.parse(JSON.stringify(colorHistory[colorHistoryIdx]));
+  if (colorEditorSourceSvg) buildColorEditor(colorEditorSourceSvg);
+  if (currentRawSvg) updatePreview(currentRawSvg, currentIsSquare);
+  updateVariantThumbnails();
+  updateColorsResetBtn();
+  colorUndoRedo = false;
+  return true;
+}
+
+async function loadRawSvg(file) {
+  if (!svgRawCache[file]) svgRawCache[file] = await fetch('svgs/' + file).then(r => r.text());
+  return svgRawCache[file];
+}
+
+function normalizeHex(h) {
+  h = h.trim().toLowerCase().replace(/^#?/, '#');
+  if (/^#[0-9a-f]{3}$/.test(h)) h = '#' + h[1]+h[1]+h[2]+h[2]+h[3]+h[3];
+  return /^#[0-9a-f]{6}$/.test(h) ? h : null;
+}
+
+function extractColors(svgText) {
+  const set = new Set();
+  const re = /#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})\b/g;
+  let m;
+  while ((m = re.exec(svgText)) !== null) {
+    const n = normalizeHex(m[0]);
+    if (n) set.add(n);
+  }
+  return [...set];
+}
+
+function applyColorMap(svgText) {
+  let s = svgText;
+  for (const [from, to] of Object.entries(colorMap)) {
+    if (from === to) continue;
+    s = s.replace(new RegExp(from, 'gi'), to);
+  }
+  return s;
+}
+
+function updateVariantThumbnails() {
+  for (const { file, imgEl } of variantImgEls) {
+    const raw = svgRawCache[file];
+    if (!raw) continue;
+    const styled = applyColorMap(raw);
+    if (imgEl._blobUrl) URL.revokeObjectURL(imgEl._blobUrl);
+    imgEl._blobUrl = URL.createObjectURL(new Blob([styled], { type: 'image/svg+xml' }));
+    imgEl.src = imgEl._blobUrl;
+  }
+}
+
+function updatePreview(rawSvg, isSquare) {
+  currentRawSvg = rawSvg;
+  currentIsSquare = isSquare;
+  const styled = applyColorMap(rawSvg);
+  if (previewBlobUrl) URL.revokeObjectURL(previewBlobUrl);
+  previewBlobUrl = URL.createObjectURL(new Blob([styled], { type: 'image/svg+xml' }));
+  detailImg.src = previewBlobUrl;
+  detailImg.classList.toggle('square', isSquare);
+}
+
+// ── Color math ──
+function hsvToRgb(h,s,v){const c=v*s,x=c*(1-Math.abs((h/60)%2-1)),m=v-c;let r=0,g=0,b=0;if(h<60){r=c;g=x;}else if(h<120){r=x;g=c;}else if(h<180){g=c;b=x;}else if(h<240){g=x;b=c;}else if(h<300){r=x;b=c;}else{r=c;b=x;}return[Math.round((r+m)*255),Math.round((g+m)*255),Math.round((b+m)*255)];}
+function rgbToHex(r,g,b){return'#'+[r,g,b].map(n=>n.toString(16).padStart(2,'0')).join('');}
+function hexToHsv(hex){const r=parseInt(hex.slice(1,3),16)/255,g=parseInt(hex.slice(3,5),16)/255,b=parseInt(hex.slice(5,7),16)/255,max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min;let h=0;if(d){if(max===r)h=((g-b)/d+(g<b?6:0))*60;else if(max===g)h=((b-r)/d+2)*60;else h=((r-g)/d+4)*60;}return{h:Math.round(h)%360,s:max?d/max:0,v:max};}
+
+// ── Custom picker ──
+let cpEl=null,cpSvEl,cpHueEl,cpAlphaEl,cpAlphaTrack,cpSvThumb,cpHueThumb,cpAlphaThumb,cpHexVal,cpOpacityVal;
+let cpH=0,cpS=1,cpV=1,cpA=100,cpOnChange=null,cpAnchor=null;
+
+function cpCurrentHex(){const[r,g,b]=hsvToRgb(cpH,cpS,cpV);return rgbToHex(r,g,b);}
+function cpThumbLeft(frac){
+  // frac 0-1; track spans from 8px to (100%-8px) inside .cp-slider-wrap
+  return`calc(8px + ${frac*100}% - ${frac*16}px)`;
+}
+function cpRender(){
+  cpSvEl.style.backgroundColor=`hsl(${cpH},100%,50%)`;
+  cpSvThumb.style.left=(cpS*100)+'%';
+  cpSvThumb.style.top=((1-cpV)*100)+'%';
+  cpHueThumb.style.left=cpThumbLeft(cpH/360);
+  cpAlphaThumb.style.left=cpThumbLeft(cpA/100);
+  const hex=cpCurrentHex();
+  cpAlphaTrack.style.background=`linear-gradient(to right,transparent,${hex})`;
+  cpHexVal.value=hex.slice(1).toUpperCase();
+  cpOpacityVal.value=cpA;
+}
+
+function initPicker(){
+  cpEl=document.createElement('div');
+  cpEl.className='cp';
+  cpEl.innerHTML=
+    '<div class="cp-sv" id="cp-sv">'+
+      '<div class="cp-sv-white"></div><div class="cp-sv-black"></div>'+
+      '<div class="cp-sv-thumb" id="cp-sv-thumb"></div>'+
+    '</div>'+
+    '<div class="cp-sliders-row">'+
+      '<button class="cp-eyedropper-btn'+(window.EyeDropper?'':' no-support')+'" id="cp-drop" title="Пипетка">'+
+        '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8-2.1 2.1-1.4-1.4Z"/></svg>'+
+      '</button>'+
+      '<div class="cp-tracks">'+
+        '<div class="cp-slider-wrap" id="cp-hue"><div class="cp-hue-track"></div><div class="cp-hue-thumb" id="cp-hue-thumb"></div></div>'+
+        '<div class="cp-slider-wrap" id="cp-alpha"><div class="cp-alpha-bg"></div><div class="cp-alpha-track" id="cp-alpha-track"></div><div class="cp-alpha-thumb" id="cp-alpha-thumb"></div></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="cp-inputs">'+
+      '<span class="cp-format-label">Hex</span>'+
+      '<input class="cp-hex-val" id="cp-hex-val" maxlength="6" spellcheck="false">'+
+      '<input class="cp-opacity-val" id="cp-opacity-val" maxlength="3">'+
+      '<span class="cp-pct-label">%</span>'+
+    '</div>';
+  document.body.appendChild(cpEl);
+  cpSvEl=cpEl.querySelector('#cp-sv');
+  cpHueEl=cpEl.querySelector('#cp-hue');
+  cpAlphaEl=cpEl.querySelector('#cp-alpha');
+  cpAlphaTrack=cpEl.querySelector('#cp-alpha-track');
+  cpSvThumb=cpEl.querySelector('#cp-sv-thumb');
+  cpHueThumb=cpEl.querySelector('#cp-hue-thumb');
+  cpAlphaThumb=cpEl.querySelector('#cp-alpha-thumb');
+  cpHexVal=cpEl.querySelector('#cp-hex-val');
+  cpOpacityVal=cpEl.querySelector('#cp-opacity-val');
+
+  let svDown=false,hueDown=false,alphaDown=false;
+  function moveSv(e){const r=cpSvEl.getBoundingClientRect();cpS=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));cpV=Math.max(0,Math.min(1,1-(e.clientY-r.top)/r.height));cpRender();cpOnChange?.(cpCurrentHex());}
+  function moveHue(e){const r=cpHueEl.getBoundingClientRect();const tw=r.width-16;cpH=Math.max(0,Math.min(359,((e.clientX-r.left-8)/tw)*360));cpRender();cpOnChange?.(cpCurrentHex());}
+  function moveAlpha(e){const r=cpAlphaEl.getBoundingClientRect();const tw=r.width-16;cpA=Math.round(Math.max(0,Math.min(1,(e.clientX-r.left-8)/tw))*100);cpRender();}
+  cpSvEl.addEventListener('mousedown',e=>{e.preventDefault();svDown=true;moveSv(e);});
+  cpHueEl.addEventListener('mousedown',e=>{e.preventDefault();hueDown=true;moveHue(e);});
+  cpAlphaEl.addEventListener('mousedown',e=>{e.preventDefault();alphaDown=true;moveAlpha(e);});
+  window.addEventListener('mousemove',e=>{if(svDown)moveSv(e);if(hueDown)moveHue(e);if(alphaDown)moveAlpha(e);});
+  window.addEventListener('mouseup',()=>{svDown=false;hueDown=false;alphaDown=false;});
+
+  // Hex input внутри пикера
+  cpHexVal.addEventListener('keydown',e=>{if(e.key==='Enter')cpHexVal.blur();});
+  cpHexVal.addEventListener('blur',()=>{
+    const n=normalizeHex('#'+cpHexVal.value);
+    if(n){const{h,s,v}=hexToHsv(n);cpH=h;cpS=s;cpV=v;cpRender();cpOnChange?.(n);}
+    else cpHexVal.value=cpCurrentHex().slice(1).toUpperCase();
+  });
+
+  // Пипетка
+  cpEl.querySelector('#cp-drop').addEventListener('click',async()=>{
+    if(!window.EyeDropper)return;
+    try{
+      const res=await new EyeDropper().open();
+      const n=normalizeHex(res.sRGBHex);
+      if(n){const{h,s,v}=hexToHsv(n);cpH=h;cpS=s;cpV=v;cpRender();cpOnChange?.(n);}
+    }catch(e){}
+  });
+
+  document.addEventListener('mousedown',e=>{
+    if(!cpEl.classList.contains('open'))return;
+    if(cpEl.contains(e.target)||cpAnchor?.contains(e.target))return;
+    closePicker();
+  });
+}
+
+function openPicker(anchorEl,hex,onChange){
+  if(!cpEl)initPicker();
+  const toggling=cpEl.classList.contains('open')&&cpAnchor===anchorEl;
+  closePicker();if(toggling)return;
+  cpAnchor=anchorEl;cpOnChange=onChange;
+  const{h,s,v}=hexToHsv(hex);cpH=h;cpS=s;cpV=v;cpA=100;
+  cpRender();
+  cpEl.classList.add('open');
+  const ar=anchorEl.getBoundingClientRect(),pw=cpEl.offsetWidth||244,ph=cpEl.offsetHeight||260;
+  let left=ar.right+10,top=ar.top;
+  if(left+pw>window.innerWidth-8)left=ar.left-pw-10;
+  if(top+ph>window.innerHeight-8)top=window.innerHeight-ph-8;
+  if(top<8)top=8;
+  cpEl.style.left=left+'px';cpEl.style.top=top+'px';
+}
+function closePicker(){cpEl?.classList.remove('open');cpAnchor=null;cpOnChange=null;}
+
+function buildColorEditor(rawSvg) {
+  colorEditorSourceSvg = rawSvg;
+  const section  = document.getElementById('colors-section');
+  const panel    = document.getElementById('colors-panel');
+  const divider  = document.getElementById('colors-divider');
+  const resetBtn = document.getElementById('colors-reset-btn');
+  section.innerHTML = '';
+  resetBtn.classList.remove('visible');
+
+  const colors = extractColors(rawSvg);
+  if (!colors.length) {
+    panel.classList.add('colors-hidden');
+    divider.classList.add('colors-hidden');
+    return;
+  }
+  panel.classList.remove('colors-hidden');
+  divider.classList.remove('colors-hidden');
+
+  // Инициализируем только новые цвета (не сбрасываем уже изменённые)
+  colors.forEach(c => { if (!(c in colorMap)) colorMap[c] = c; });
+
+  colors.forEach(origColor => {
+    const row = document.createElement('div');
+    row.className = 'color-row';
+
+    const swatchWrap = document.createElement('div');
+    swatchWrap.className = 'color-swatch-wrap';
+    const swatch = document.createElement('span');
+    swatch.className = 'color-swatch';
+    swatch.style.background = colorMap[origColor];
+    swatchWrap.appendChild(swatch);
+
+    const hexWrap = document.createElement('div');
+    hexWrap.className = 'color-hex-wrap';
+    const hexPrefix = document.createElement('span');
+    hexPrefix.className = 'color-hex-prefix';
+    hexPrefix.textContent = '#';
+    const hexInput = document.createElement('input');
+    hexInput.type = 'text';
+    hexInput.className = 'color-hex';
+    hexInput.value = colorMap[origColor].slice(1).toUpperCase();
+    hexInput.maxLength = 6;
+    hexInput.spellcheck = false;
+    hexWrap.append(hexPrefix, hexInput);
+    hexWrap.addEventListener('click', () => hexInput.focus());
+
+    const applyNew = (newColor, fromPicker = false) => {
+      if (colorMap[origColor] === newColor) return;
+      if (!colorUndoRedo && !fromPicker) pushColorHistory();
+      colorMap[origColor] = newColor;
+      swatch.style.background = newColor;
+      hexInput.value = newColor.slice(1).toUpperCase();
+      // Синхронизируем пикер только если изменение пришло снаружи (hex-поле),
+      // иначе пересчёт hex→HSV сдвигает ползунок из-за погрешности округления
+      if (!fromPicker && cpEl?.classList.contains('open') && cpAnchor === swatchWrap) {
+        const { h, s, v } = hexToHsv(newColor);
+        cpH = h; cpS = s; cpV = v; cpRender();
+      }
+      if (currentRawSvg) updatePreview(currentRawSvg, currentIsSquare);
+      updateVariantThumbnails();
+      updateColorsResetBtn();
+    };
+
+    swatchWrap.addEventListener('mousedown', e => {
+      e.preventDefault();
+      if (!colorUndoRedo) pushColorHistory();
+      openPicker(swatchWrap, colorMap[origColor], hex => applyNew(hex, true));
+    });
+    hexInput.addEventListener('keydown', e => { if (e.key === 'Enter') hexInput.blur(); });
+    hexInput.addEventListener('blur', () => {
+      const n = normalizeHex('#' + hexInput.value);
+      if (n) applyNew(n); else hexInput.value = colorMap[origColor].slice(1).toUpperCase();
+    });
+
+    row.append(swatchWrap, hexWrap);
+    section.appendChild(row);
+  });
+
+  if (colorHistoryNeedsInit && !colorUndoRedo) {
+    resetColorHistory();
+    colorHistoryNeedsInit = false;
+  }
+}
+
+function closeDetail() {
+  withDetailTransition(() => setDetailOpen(false));
+  if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
+}
+
+function isFlagItem(item) {
+  return item.figma?.startsWith('Icon/Flag/');
+}
+
+async function downloadAllAsZip(item) {
+  if (typeof JSZip === 'undefined') {
+    showToast('Архиватор ещё загружается...');
+    return;
+  }
+
+  const btn = document.getElementById('btn-download-all');
+  const label = btn.querySelector('.btn-label');
+  const progress = btn.querySelector('.btn-progress');
+  const origLabel = label.textContent;
+
+  const baseName = item.figma.split('/').pop().toLowerCase();
+  const variants = [{ key: '_original', file: item.file, square: true }];
+  if (item.variants) {
+    for (const [key, file] of Object.entries(item.variants)) {
+      variants.push({ key, file, square: false });
+    }
+  }
+
+  btn.disabled = true;
+  progress.style.width = '0%';
+
+  try {
+    const zip = new JSZip();
+    const total = variants.length * 2; // svg + png per variant
+    let done = 0;
+    const tick = () => {
+      done++;
+      progress.style.width = Math.round((done / total) * 100) + '%';
+    };
+
+    for (const v of variants) {
+      const suffix = v.key === '_original' ? '' : '-' + v.key.replace(/_/g, '-');
+      const rawSvg = await loadRawSvg(v.file);
+      const svgText = svgForExport(applyColorMap(rawSvg), v.square);
+      zip.file(`svg/${baseName}${suffix}.svg`, svgText);
+      tick();
+
+      const pngBlob = await svgToPngBlob(svgText, { square: v.square, size: 512 });
+      zip.file(`png/${baseName}${suffix}.png`, pngBlob);
+      tick();
+    }
+
+    label.textContent = 'Упаковка...';
+    const zipBlob = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
+    const a = Object.assign(document.createElement('a'), {
+      href: URL.createObjectURL(zipBlob),
+      download: baseName + '.zip'
+    });
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast(`Скачано: ${baseName}.zip`);
+  } catch (err) {
+    console.error(err);
+    showToast('Ошибка при создании архива');
+  } finally {
+    btn.disabled = false;
+    label.textContent = origLabel;
+    setTimeout(() => { progress.style.width = '0%'; }, 400);
+  }
+}
+
+function openDetail(item, card) {
+  if (layoutMq.matches) closeNavDrawer();
+
+  // Повторный клик — закрыть
+  if (activeCard === card) { closeDetail(); return; }
+
+  // Подсветка активной карточки
+  if (activeCard) activeCard.classList.remove('active');
+  activeCard = card;
+  card.classList.add('active');
+
+  // Заполняем панель
+  detailImg.src = 'svgs/' + item.file;
+  detailImg.classList.add('square'); // сброс при открытии
+  detailName.textContent = item.name;
+  detailFigma.textContent = item.figma;
+
+  // Сбрасываем цвета для нового лого
+  colorMap = {};
+  colorEditorSourceSvg = '';
+  colorHistoryNeedsInit = true;
+  const colorEditingDisabled = isFlagItem(item);
+
+  // Сбрасываем состояние блока цветов
+  const colorsPanel = document.getElementById('colors-panel');
+  const colorsDivider = document.getElementById('colors-divider');
+  const colorsHeader = document.getElementById('colors-header');
+  const colorsSection = document.getElementById('colors-section');
+  colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
+  colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
+  colorsHeader.classList.remove('open');
+  colorsSection.classList.add('hidden');
+  colorsHeader.onclick = () => {
+    if (colorEditingDisabled) return;
+    if (!colorsSection.children.length) return;
+    colorsHeader.classList.toggle('open');
+    colorsSection.classList.toggle('hidden');
+  };
+  document.getElementById('colors-reset-btn').onclick = (e) => {
+    e.stopPropagation();
+    if (colorEditingDisabled) return;
+    if (!colorUndoRedo) pushColorHistory();
+    for (const key of Object.keys(colorMap)) colorMap[key] = key;
+    const allSvgForReset = allVariants.map(v => svgRawCache[v.file] || '').join('\n');
+    buildColorEditor(allSvgForReset || currentRawSvg);
+    if (currentRawSvg) updatePreview(currentRawSvg, currentIsSquare);
+    updateVariantThumbnails();
+    updateColorsResetBtn();
+    colorsSection.classList.remove('hidden');
+    colorsHeader.classList.add('open');
+  };
+
+  // Варианты — показываем только если есть хотя бы один
+  variantsGrid.innerHTML = '';
+  const variantDefs = [
+    { label: 'Favicon',  key: 'favicon'  },
+    { label: 'Full',     key: 'full'     },
+    { label: 'Full EN',  key: 'full_en'  },
+    { label: 'Special',  key: 'special'  },
+  ];
+  const available = variantDefs.filter(v => item.variants?.[v.key]);
+  const allVariants = available.length > 0
+    ? [{ label: 'Favicon', key: '_original', file: item.file }, ...available.map(v => ({ ...v, file: item.variants[v.key] }))]
+    : [];
+  detailVariants.classList.toggle('hidden', allVariants.length === 0);
+
+  const downloadAllBtn = document.getElementById('btn-download-all');
+  const downloadableSvgCount = allVariants.length || 1;
+  downloadAllBtn.classList.toggle('hidden', downloadableSvgCount <= 1);
+
+  let activeVariantCard = null;
+
+  async function selectVariant(vDef, vcEl) {
+    if (activeVariantCard) activeVariantCard.classList.remove('active');
+    activeVariantCard = vcEl;
+    vcEl.classList.add('active');
+    detailFigma.textContent = item.figma;
+
+    const isSquare = vDef.key === '_original';
+    const rawSvg = await loadRawSvg(vDef.file);
+
+    // Строим редактор цветов при первой загрузке — собираем цвета из ВСЕХ вариантов,
+    // иначе цвета уникальные для Full/Full EN не попадут в colorMap
+    if (!colorEditingDisabled && !Object.keys(colorMap).length) {
+      const allSvgText = allVariants.map(v => svgRawCache[v.file] || '').join('\n');
+      buildColorEditor(allSvgText);
+    }
+
+    updatePreview(rawSvg, isSquare);
+
+    const baseName = item.figma.split('/').pop().toLowerCase();
+    const suffix   = vDef.key === '_original' ? '' : '-' + vDef.key.replace(/_/g, '-');
+
+    const getExportSvg = () => applyColorMap(rawSvg);
+
+    document.getElementById('btn-copy').onclick = () => {
+      navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
+        .then(() => showToast(`Скопировано: ${item.figma}`));
+    };
+    document.getElementById('btn-download').onclick = () => {
+      const blob = new Blob([svgForExport(getExportSvg(), isSquare)], { type: 'image/svg+xml' });
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.svg' });
+      a.click(); URL.revokeObjectURL(a.href);
+      showToast(`Скачано: ${item.name}${suffix ? ' (' + vDef.label + ')' : ''}`);
+    };
+    document.getElementById('btn-download-png').onclick = async () => {
+      const pngBlob = await svgToPngBlob(getExportSvg(), { square: isSquare, size: 512 });
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + suffix + '.png' });
+      a.click(); URL.revokeObjectURL(a.href);
+      showToast(`Скачано PNG: ${item.name}`);
+    };
+  }
+
+  // Сбрасываем список миниатюр для нового лого
+  variantImgEls = [];
+  const variantCards = [];
+
+  allVariants.forEach((vDef) => {
+    const vc = document.createElement('div');
+    const isWide = vDef.key === 'full' || vDef.key === 'full_en' || vDef.key === 'special';
+    vc.className = 'variant-card' + (isWide ? ' wide' : vDef.key === '_original' ? ' favicon' : '');
+    const vi = document.createElement('img');
+    vi.src = 'svgs/' + vDef.file;
+    variantImgEls.push({ file: vDef.file, imgEl: vi });
+    const vl = document.createElement('div');
+    vl.className = 'variant-label';
+    vl.textContent = vDef.label;
+    vc.append(vi, vl);
+    vc.addEventListener('click', () => selectVariant(vDef, vc));
+    variantsGrid.appendChild(vc);
+    variantCards.push({ vDef, vc });
+  });
+
+  // Предзагружаем все варианты в кеш, затем выбираем первый —
+  // так thumbnails гарантированно обновятся при смене цвета
+  Promise.all(allVariants.map(v => loadRawSvg(v.file))).then(() => {
+    if (variantCards.length > 0) {
+      const { vDef, vc } = variantCards[0];
+      selectVariant(vDef, vc);
+    }
+  });
+
+  // Если вариантов нет — загружаем оригинал напрямую
+  if (!allVariants.length) {
+    loadRawSvg(item.file).then(raw => {
+      if (!colorEditingDisabled) buildColorEditor(raw);
+      updatePreview(raw, true);
+      const baseName = item.figma.split('/').pop().toLowerCase();
+      const getExportSvg = () => applyColorMap(raw);
+      document.getElementById('btn-copy').onclick = () => {
+        navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, true))
+          .then(() => showToast(`Скопировано: ${item.figma}`));
+      };
+      document.getElementById('btn-download').onclick = () => {
+        const blob = new Blob([svgForExport(getExportSvg(), true)], { type: 'image/svg+xml' });
+        const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + '.svg' });
+        a.click(); URL.revokeObjectURL(a.href);
+        showToast(`Скачано: ${item.name}`);
+      };
+      document.getElementById('btn-download-png').onclick = async () => {
+        const pngBlob = await svgToPngBlob(getExportSvg(), { square: true, size: 512 });
+        const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + '.png' });
+        a.click(); URL.revokeObjectURL(a.href);
+        showToast(`Скачано PNG: ${item.name}`);
+      };
+    });
+  }
+
+  // Экосистема — все сервисы бренда; активный подсвечивается, порядок не меняется
+  const ecosystemEl = document.getElementById('detail-ecosystem');
+  const ecosystemGrid = document.getElementById('ecosystem-grid');
+  const ecosystemLabelEl = document.getElementById('ecosystem-label');
+  if (item.ecosystem) {
+    const members = allItems.filter(i => i.ecosystem === item.ecosystem);
+    if (members.length > 1) {
+      ecosystemLabelEl.textContent = ecosystemLabels[item.ecosystem] || 'Экосистема';
+      const sameEcosystem = ecosystemGrid.dataset.ecosystem === item.ecosystem;
+      if (!sameEcosystem) {
+        ecosystemGrid.innerHTML = '';
+        ecosystemGrid.dataset.ecosystem = item.ecosystem;
+        for (const sib of members) {
+          const ec = document.createElement('div');
+          ec.className = 'ecosystem-card';
+          ec.dataset.file = sib.file;
+          ec.title = sib.figma;
+          const ei = document.createElement('img');
+          ei.src = 'svgs/' + sib.file;
+          ei.alt = sib.name;
+          ei.loading = 'lazy';
+          ei.decoding = 'async';
+          const el = document.createElement('div');
+          el.className = 'ecosystem-label';
+          el.textContent = sib.name;
+          ec.append(ei, el);
+          ec.addEventListener('click', () => {
+            const siblingCard = cardByItemFile.get(sib.file);
+            if (!siblingCard) return;
+            const hiddenByCard = siblingCard.classList.contains('hidden');
+            const hiddenBySection = siblingCard.closest('.section')?.classList.contains('hidden');
+            if (hiddenByCard || hiddenBySection) {
+              search.value = '';
+              filterCards('');
+              setActive('all');
+              requestAnimationFrame(() => {
+                siblingCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                openDetail(sib, siblingCard);
+              });
+              return;
+            }
+            siblingCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            openDetail(sib, siblingCard);
+          });
+          ecosystemGrid.appendChild(ec);
+        }
+      }
+      ecosystemGrid.querySelectorAll('.ecosystem-card').forEach(ec => {
+        ec.classList.toggle('active', ec.dataset.file === item.file);
+      });
+      ecosystemEl.classList.remove('hidden');
+    } else {
+      ecosystemGrid.innerHTML = '';
+      delete ecosystemGrid.dataset.ecosystem;
+      ecosystemEl.classList.add('hidden');
+    }
+  } else {
+    ecosystemGrid.innerHTML = '';
+    delete ecosystemGrid.dataset.ecosystem;
+    ecosystemEl.classList.add('hidden');
+  }
+
+  // Заметка
+  const noteEl = document.getElementById('detail-note');
+  const noteText = document.getElementById('detail-note-text');
+  if (item.note) {
+    noteText.textContent = item.note;
+    noteEl.classList.remove('hidden');
+  } else {
+    noteEl.classList.add('hidden');
+  }
+
+  // Ссылка на бренд
+  const brandLinkEl = document.getElementById('detail-brand-link');
+  const btnBrandLink = document.getElementById('btn-brand-link');
+  if (item.brandUrl) {
+    btnBrandLink.href = item.brandUrl;
+    brandLinkEl.classList.remove('hidden');
+  } else {
+    brandLinkEl.classList.add('hidden');
+  }
+
+  if (!detail.classList.contains('open')) {
+    withDetailTransition(() => setDetailOpen(true));
+  } else {
+    syncDetailBackdrop(true);
+  }
+
+  downloadAllBtn.onclick = downloadableSvgCount > 1 ? () => downloadAllAsZip(item) : null;
+}
+
+document.getElementById('detail-close').onclick = closeDetail;
+
+// Cmd+Z — отмена правки цветов; Esc — панель / очистка поиска
+document.addEventListener('keydown', (e) => {
+  const mod = e.metaKey || e.ctrlKey;
+  if (mod && e.key === 'z' && !e.shiftKey) {
+    if (document.activeElement === search) return;
+    const colorsPanel = document.getElementById('colors-panel');
+    if (detail.classList.contains('open') && !colorsPanel.classList.contains('colors-hidden')) {
+      if (undoColors()) {
+        e.preventDefault();
+        showToast('Цвета: отменено');
+      }
+    }
+    return;
+  }
+  if (e.key !== 'Escape') return;
+  if (layoutMq.matches && sidebar.classList.contains('nav-open')) {
+    closeNavDrawer();
+    return;
+  }
+  if (detail.classList.contains('open')) {
+    withDetailTransition(() => setDetailOpen(false));
+    if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
+  } else if (search.value) {
+    search.value = '';
+    filterCards('');
+  }
+});
+
+}); // end loadLogos
+</script>
+</body>
+</html>
