@@ -12,13 +12,24 @@ class SiteHeader extends HTMLElement {
 
   async updateCount() {
     try {
-      const response = await fetch('logos.json');
-      const groups = await response.json();
+      const groups = await this.loadGroups();
       const count = groups.reduce((sum, group) => sum + (group.items?.length || 0), 0);
       this.render(this.iconCountText(count));
     } catch {
       this.render('каталог иконок');
     }
+  }
+
+  async loadGroups() {
+    const manifestResponse = await fetch(`${_siteBase}logos/manifest.json`);
+    if (!manifestResponse.ok) throw new Error('manifest not found');
+    const manifest = await manifestResponse.json();
+    return Promise.all(manifest.categories.map(category => {
+      return fetch(`${_siteBase}logos/${category.file}`).then(response => {
+        if (!response.ok) throw new Error(`${category.file} not found`);
+        return response.json();
+      });
+    }));
   }
 
   iconCountText(count) {

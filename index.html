@@ -1725,9 +1725,16 @@ function highlight(text, words) {
 }
 
 async function loadLogos() {
-  const meta = await fetch('logos.json').then(r => r.json());
-  // SVG текст грузим только при открытии панели (для копирования/скачивания)
-  return meta;
+  const manifest = await fetch('logos/manifest.json').then(r => {
+    if (!r.ok) throw new Error('manifest not found');
+    return r.json();
+  });
+  return Promise.all(manifest.categories.map(category => {
+    return fetch('logos/' + category.file).then(r => {
+      if (!r.ok) throw new Error(category.file + ' not found');
+      return r.json();
+    });
+  }));
 }
 
 // Build UI
