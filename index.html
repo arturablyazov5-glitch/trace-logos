@@ -3097,12 +3097,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const brand   = document.getElementById('suggest-name').value.trim();
     const url     = document.getElementById('suggest-url').value.trim();
     const comment = document.getElementById('suggest-comment').value.trim();
-
-    let text = `📌 *Новая иконка*\n\n*Бренд:* ${brand}`;
-    if (url)     text += `\n*Ссылка:* ${url}`;
-    if (comment) text += `\n*Комментарий:* ${comment}`;
-
-    const file = document.getElementById('suggest-file').files[0];
+    const file    = document.getElementById('suggest-file').files[0];
 
     if (!brand) {
       document.getElementById('suggest-name').classList.add('input-error');
