@@ -25,7 +25,7 @@
       border-right: 1px solid #222;
       display: flex;
       flex-direction: column;
-      padding: 0;
+      padding: 0 0 28px;
       overflow-y: auto;
     }
 
@@ -91,13 +91,17 @@
       color: #555;
       padding: 8px 16px 6px;
     }
-    .sidebar-label.with-gap { margin-top: 12px; }
+    .sidebar-label.with-gap {
+      margin-top: 14px;
+      border-top: 1px solid #242424;
+      padding-top: 16px;
+    }
     .sidebar-label.hidden { display: none; }
 
     .nav-item {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 7px 16px;
       font-size: 13px;
       color: #aaa;
@@ -113,17 +117,238 @@
     }
     .nav-item:hover { background: #1e1e1e; color: #fff; }
     .nav-item.active { background: #1e1e1e; color: #fff; }
+    .nav-logo {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border-radius: 4px;
+      object-fit: contain;
+      flex-shrink: 0;
+      margin-right: 8px;
+    }
+    .nav-logo-initial {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2a2a2a;
+      color: #666;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-radius: 4px;
+    }
+
     .nav-item .count {
       font-size: 11px;
       color: #555;
       flex-shrink: 0;
-      margin-left: 6px;
+      margin-left: auto;
+      padding-left: 6px;
     }
     .nav-item.active .count { color: #888; }
 
     .desktop-only { display: block; }
     .sidebar-header.desktop-only { display: flex; }
     .mobile-only { display: none; }
+
+    /* ── Suggest button ── */
+    .suggest-btn {
+      margin-left: auto;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 14px;
+      height: 34px;
+      border: none;
+      border-radius: 9px;
+      background: #fff;
+      color: #111;
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s, transform .15s, box-shadow .15s;
+      box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    }
+    .suggest-btn:hover {
+      background: #f0f0f0;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255,255,255,.12);
+    }
+    .suggest-btn:active { transform: translateY(0); box-shadow: none; }
+    .suggest-btn svg { flex-shrink: 0; }
+
+    /* ── Suggest modal ── */
+    .suggest-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .suggest-overlay.open { display: flex; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+    .suggest-modal {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .suggest-modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .suggest-modal-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .suggest-modal-sub {
+      font-size: 12px;
+      color: #555;
+      margin-top: 3px;
+    }
+    .suggest-close {
+      margin-left: auto;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: #888;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .12s, color .12s;
+    }
+    .suggest-close:hover { background: #2a2a2a; color: #fff; }
+
+    .suggest-fields { display: flex; flex-direction: column; gap: 12px; }
+    .suggest-field { display: flex; flex-direction: column; gap: 6px; }
+    .suggest-label { font-size: 12px; color: #666; }
+    .suggest-input, .suggest-textarea {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      border-radius: 9px;
+      padding: 10px 12px;
+      color: #e5e5e5;
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .15s;
+      width: 100%;
+    }
+    .suggest-input:focus, .suggest-textarea:focus { border-color: #444; }
+    .suggest-input.input-error { border-color: #7a3030; }
+    .suggest-input.input-error:focus { border-color: #a04040; }
+    .suggest-file-label.file-error { border-color: #7a3030; color: #a04040; }
+    .suggest-input::placeholder, .suggest-textarea::placeholder { color: #3a3a3a; }
+    .suggest-textarea { resize: vertical; min-height: 72px; }
+
+    .suggest-file-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: #111;
+      border: 1px dashed #2a2a2a;
+      border-radius: 9px;
+      color: #555;
+      font-size: 13px;
+      cursor: pointer;
+      transition: border-color .15s, color .15s;
+    }
+    .suggest-file-label:hover { border-color: #444; color: #aaa; }
+    .suggest-file-label.has-file { border-color: #3a3a3a; color: #aaa; }
+    .suggest-file-input { display: none; }
+
+    .suggest-submit {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      background: #fff;
+      color: #111;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .suggest-submit:hover { opacity: .88; }
+    .suggest-submit:disabled { opacity: .45; cursor: default; }
+
+    .suggest-result {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      display: none;
+    }
+    .suggest-result.error { color: #b55; display: block; }
+
+    .suggest-success {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 12px 0 4px;
+      text-align: center;
+    }
+    .suggest-success.show { display: flex; }
+    .suggest-success-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .t-form-success-popup__content-icon {
+      height: 56px;
+      width: auto;
+      display: block;
+    }
+    .t-form-success-popup__content-icon-background {
+      animation: iconBackgroundOpacity .106s linear forwards, iconBackgroundTransform 1.103s cubic-bezier(.445,.05,.55,.95) forwards;
+      opacity: 0;
+      transform: rotate(60deg) scale(.9);
+      transform-origin: center;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
+    @keyframes iconBackgroundOpacity { to { opacity: 1; } }
+    @keyframes iconBackgroundTransform {
+      0%    { transform: rotate(60deg) scale(.9); }
+      46.1% { transform: rotate(-8deg) scale(1.03); }
+      63.46%{ transform: rotate(-10deg) scale(1); }
+      100%  { transform: rotate(0deg) scale(1); }
+    }
+    .t-form-success-popup__content-icon-check {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: checkIconOpacity 51ms linear .437s forwards, checkIconDraw .666s cubic-bezier(.39,.575,.565,1) .437s forwards, checkIconScale .435s cubic-bezier(.445,.05,.55,.95) .437s forwards;
+      opacity: 0;
+      transform: scale(.85);
+      transform-origin: center;
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+    }
+    @keyframes checkIconOpacity { to { opacity: 1; } }
+    @keyframes checkIconDraw { 0% { stroke-dashoffset: 1; } 100% { stroke-dashoffset: 0; } }
+    @keyframes checkIconScale { to { transform: scale(1); } }
 
     /* ── Mobile app header + nav drawer ── */
     .mobile-header {
@@ -339,6 +564,25 @@
     }
     .card:hover { background: #1e1e1e; }
     .card.copied { background: #1a2e22; }
+    .card.coming-soon {
+      opacity: .72;
+    }
+    .card-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: #2b2412;
+      border: 1px solid #4a3810;
+      color: #d8ad38;
+      font-size: 8px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
 
     .icon-wrap {
       width: 48px;
@@ -1148,6 +1392,11 @@
       <span class="sidebar-header-sub sidebar-sub">загрузка...</span>
     </div>
   </div>
+  <button type="button" class="suggest-btn" id="suggest-btn-mobile" style="margin-left:0;padding:0 10px;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12h14"/>
+    </svg>
+  </button>
   <button type="button" class="burger-btn" id="burger-btn" aria-label="Меню" aria-expanded="false" aria-controls="sidebar">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
       <path d="M4 7h16M4 12h16M4 17h16"/>
@@ -1209,6 +1458,12 @@
 <div class="center">
   <div class="topbar desktop-only">
     <div id="search-slot-desktop"></div>
+    <button type="button" class="suggest-btn" id="suggest-btn-desktop">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+      Предложить иконку
+    </button>
   </div>
   <div class="center-body">
     <main>
@@ -1327,13 +1582,18 @@ const searchSlotMobile = document.getElementById('search-slot-mobile');
 const layoutMq = matchMedia('(max-width: 768px)');
 let toastTimer;
 let totalCards = 0;
+let virtualizeRaf = 0;
+const VIRTUAL_OVERSCAN = 900;
 
 function updateScrollTopButton() {
   const contentVisible = content.style.display !== 'none';
   scrollTopBtn.classList.toggle('show', contentVisible && content.scrollTop > 360);
 }
 
-content.addEventListener('scroll', updateScrollTopButton, { passive: true });
+content.addEventListener('scroll', () => {
+  updateScrollTopButton();
+  scheduleVirtualizedSections();
+}, { passive: true });
 scrollTopBtn.addEventListener('click', () => {
   content.scrollTo({ top: 0, behavior: 'smooth' });
 });
@@ -1379,6 +1639,7 @@ function syncDetailBackdrop(open) {
 function setDetailOpen(open) {
   detail.classList.toggle('open', open);
   syncDetailBackdrop(open);
+  requestAnimationFrame(invalidateVirtualizedLayout);
 }
 
 burgerBtn.addEventListener('click', () => {
@@ -1390,6 +1651,12 @@ layoutMq.addEventListener('change', () => {
   placeSearchBar();
   if (!layoutMq.matches) closeNavDrawer();
   syncDetailBackdrop(detail.classList.contains('open'));
+  sectionEls.forEach(section => {
+    section.gridHeight = 0;
+    section.rowHeight = 0;
+    if (section.mounted) section.grid.style.height = '';
+  });
+  scheduleVirtualizedSections();
 });
 placeSearchBar();
 
@@ -1448,18 +1715,52 @@ async function loadLogos() {
 }
 
 // Build UI
+// Один параметр на загрузку страницы: иначе браузер кеширует SVG по URL
+// (python http.server почти не шлёт Cache-Control), и favicon «не меняется».
+const SVG_URL_V = Date.now();
+function svgUrl(file) {
+  return 'svgs/' + file + '?v=' + SVG_URL_V;
+}
+
 const sectionEls = [];
 const ecosystemEls = [];
 const allItems = [];                  // плоский список всех item для cross-lookup (экосистема)
 const cardByItemFile = new Map();     // file -> карточка в сетке
+const ecosystemLogoMap = {
+  alfa:        'svgs/alfa-bank.svg',
+  avito:       'svgs/avito.svg',
+  google:      'svgs/google.svg',
+  meta:        'svgs/instagram.svg',
+  mts:         'svgs/mts-bank.svg',
+  nspk:        'svgs/mir.svg',
+  ozon:        'svgs/ozon.svg',
+  sber:        'svgs/sber.svg',
+  sovcombank:  'svgs/sovcombank.svg',
+  tinkoff:     'svgs/t-bank.svg',
+  vk:          'svgs/vk.svg',
+  wildberries: 'svgs/wildberries.svg',
+  yandex:      'svgs/yandex.svg',
+  apple:       'svgs/apple-pay.svg',
+};
+
 const ecosystemLabels = {
-  google:  'Сервисы Google',
-  meta:    'Сервисы Meta',
-  vk:      'Экосистема ВК',
-  yandex:  'Сервисы Яндекса',
+  google:  'Google',
+  meta:    'Meta',
+  nspk:    'НСПК',
+  sber:    'Сбер',
+  sovcombank: 'Совкомбанк',
+  vk:      'ВК',
+  yandex:  'Яндекс',
   alfa:    'Альфа-Групп',
-  tinkoff: 'Сервисы Т-Банка',
-  mts:     'Сервисы МТС'
+  avito:   'Авито',
+  tinkoff: 'Т-Банк',
+  mts:     'МТС',
+  ozon:    'Ozon',
+  wildberries: 'Wildberries',
+  x5:      'X5',
+  kontur:  'Контур',
+  openai:  'OpenAI',
+  apple:   'Apple'
 };
 let total = 0;
 
@@ -1470,11 +1771,103 @@ function setSectionHidden(sec, hidden) {
   sec.classList.toggle('hidden', hidden);
 }
 
+function getGridColumnCount(grid) {
+  if (layoutMq.matches) return 6;
+  const width = grid.clientWidth || Math.max(1, content.clientWidth - 48);
+  return Math.max(1, Math.floor((width + 4) / 84));
+}
+
+function estimateGridHeight(section) {
+  const count = section.visibleCards.length;
+  if (!count) return 0;
+  const columns = getGridColumnCount(section.grid);
+  const rows = Math.ceil(count / columns);
+  const gap = layoutMq.matches ? 8 : 4;
+  const mobileCellWidth = Math.max(1, (section.grid.clientWidth - gap * 5) / 6);
+  const fallbackRowHeight = layoutMq.matches ? mobileCellWidth + 34 : (search.value.trim() ? 112 : 94);
+  const rowHeight = section.rowHeight || fallbackRowHeight;
+  return rows * rowHeight + Math.max(0, rows - 1) * gap;
+}
+
+function loadCardImage(card) {
+  if (card._imageLoadedStarted) return;
+  card._imageLoadedStarted = true;
+  const img = card.querySelector('img');
+  if (img?.dataset.src) img.src = img.dataset.src;
+}
+
+function mountVirtualSection(section) {
+  if (section.mounted) return;
+  section.grid.style.height = '';
+  section.grid.replaceChildren(...section.visibleCards);
+  section.visibleCards.forEach(loadCardImage);
+  section.mounted = true;
+  requestAnimationFrame(() => {
+    const sample = section.grid.querySelector('.card:not(.hidden)');
+    if (sample) section.rowHeight = sample.getBoundingClientRect().height || section.rowHeight;
+    section.gridHeight = section.grid.getBoundingClientRect().height || section.gridHeight;
+  });
+}
+
+function unmountVirtualSection(section) {
+  if (!section.mounted) return;
+  section.gridHeight = section.grid.getBoundingClientRect().height || estimateGridHeight(section);
+  section.grid.style.height = section.gridHeight + 'px';
+  section.grid.replaceChildren();
+  section.mounted = false;
+}
+
+function ensureCardMounted(card) {
+  const section = card._sectionState;
+  if (!section || section.sec.classList.contains('hidden')) return;
+  mountVirtualSection(section);
+}
+
+function updateVirtualizedSections() {
+  virtualizeRaf = 0;
+  if (content.style.display === 'none') return;
+  const contentRect = content.getBoundingClientRect();
+  const minY = contentRect.top - VIRTUAL_OVERSCAN;
+  const maxY = contentRect.bottom + VIRTUAL_OVERSCAN;
+
+  sectionEls.forEach(section => {
+    if (section.sec.classList.contains('hidden') || !section.visibleCards.length) {
+      unmountVirtualSection(section);
+      section.grid.style.height = '';
+      return;
+    }
+
+    if (!section.mounted && !section.grid.style.height) {
+      section.grid.style.height = estimateGridHeight(section) + 'px';
+    }
+
+    const rect = section.sec.getBoundingClientRect();
+    const shouldMount = rect.bottom >= minY && rect.top <= maxY;
+    if (shouldMount) mountVirtualSection(section);
+    else unmountVirtualSection(section);
+  });
+}
+
+function scheduleVirtualizedSections() {
+  if (virtualizeRaf) return;
+  virtualizeRaf = requestAnimationFrame(updateVirtualizedSections);
+}
+
+function invalidateVirtualizedLayout() {
+  sectionEls.forEach(section => {
+    section.gridHeight = 0;
+    section.rowHeight = 0;
+    if (!section.mounted) section.grid.style.height = '';
+  });
+  scheduleVirtualizedSections();
+}
+
 function resetContentScroll() {
   content.scrollTop = 0;
   requestAnimationFrame(() => {
     content.scrollTop = 0;
     updateScrollTopButton();
+    updateVirtualizedSections();
   });
 }
 
@@ -1500,10 +1893,11 @@ loadLogos().then(logos => { for (const group of logos) {
 
   const grid = document.createElement('div');
   grid.className = 'grid';
+  const cards = [];
 
   for (const item of group.items) {
     const card = document.createElement('div');
-    card.className = 'card loading';
+    card.className = 'card loading' + (item.comingSoon ? ' coming-soon' : '');
     card._item = item;
 
     const figmaLow = item.figma.toLowerCase();
@@ -1522,9 +1916,16 @@ loadLogos().then(logos => { for (const group of logos) {
     img.title = item.figma;
     img.addEventListener('load', () => card.classList.remove('loading'), { once: true });
     img.addEventListener('error', () => card.classList.remove('loading'), { once: true });
-    img.src = 'svgs/' + item.file;
+    img.dataset.src = svgUrl(item.file);
     wrap.appendChild(img);
     card.appendChild(wrap);
+
+    if (item.comingSoon) {
+      const badge = document.createElement('div');
+      badge.className = 'card-badge';
+      badge.textContent = 'Скоро';
+      card.appendChild(badge);
+    }
 
     const label = document.createElement('div');
     label.className = 'label';
@@ -1538,14 +1939,26 @@ loadLogos().then(logos => { for (const group of logos) {
 
     card.addEventListener('click', () => openDetail(item, card));
 
-    grid.appendChild(card);
+    cards.push(card);
     allItems.push(item);
     cardByItemFile.set(item.file, card);
   }
 
   sec.appendChild(grid);
   content.appendChild(sec);
-  sectionEls.push({ nav, sec, group });
+  const sectionState = {
+    nav,
+    sec,
+    grid,
+    group,
+    cards,
+    visibleCards: cards,
+    mounted: false,
+    gridHeight: 0,
+    rowHeight: 0
+  };
+  cards.forEach(card => { card._sectionState = sectionState; });
+  sectionEls.push(sectionState);
 } // end for
 
 totalCards = total;
@@ -1563,7 +1976,11 @@ const ecosystemCounts = allItems.reduce((acc, item) => {
     const nav = document.createElement('div');
     nav.className = 'nav-item';
     nav.dataset.ecosystem = key;
-    nav.innerHTML = `<span class="nav-label">${ecosystemLabels[key] || key}</span><span class="count">${count}</span>`;
+    const logo = ecosystemLogoMap[key];
+    const logoHtml = logo
+      ? `<img class="nav-logo" src="${logo}" width="16" height="16" alt="" aria-hidden="true">`
+      : `<span class="nav-logo nav-logo-initial">${(ecosystemLabels[key] || key).slice(0, 1)}</span>`;
+    nav.innerHTML = `${logoHtml}<span class="nav-label">${ecosystemLabels[key] || key}</span><span class="count">${count}</span>`;
     navEcosystems.appendChild(nav);
     ecosystemEls.push({ nav, key });
   });
@@ -1575,16 +1992,28 @@ function setActive(sectionName) {
 
   if (sectionName === 'all') {
     document.querySelector('[data-section="all"]').classList.add('active');
-    sectionEls.forEach(({ sec }) => {
-      sec.querySelectorAll('.card').forEach(card => card.classList.remove('hidden'));
+    sectionEls.forEach(({ sec, grid, cards }, index) => {
+      cards.forEach(card => card.classList.remove('hidden'));
+      sectionEls[index].visibleCards = cards;
+      grid.style.height = '';
+      if (sectionEls[index].mounted) {
+        grid.replaceChildren(...cards);
+        cards.forEach(loadCardImage);
+      }
       setSectionHidden(sec, false);
     });
   } else {
     const found = sectionEls.find(s => s.group.section === sectionName);
     if (found) {
       found.nav.classList.add('active');
-      sectionEls.forEach(({ sec, group }) => {
-        sec.querySelectorAll('.card').forEach(card => card.classList.remove('hidden'));
+      sectionEls.forEach(({ sec, grid, group, cards }, index) => {
+        cards.forEach(card => card.classList.remove('hidden'));
+        sectionEls[index].visibleCards = cards;
+        grid.style.height = '';
+        if (sectionEls[index].mounted) {
+          grid.replaceChildren(...cards);
+          cards.forEach(loadCardImage);
+        }
         setSectionHidden(sec, group.section !== sectionName);
       });
     }
@@ -1597,14 +2026,24 @@ function setActiveEcosystem(ecosystem) {
   const found = ecosystemEls.find(e => e.key === ecosystem);
   if (found) found.nav.classList.add('active');
 
-  sectionEls.forEach(({ sec }) => {
+  sectionEls.forEach(section => {
     let any = false;
-    sec.querySelectorAll('.card').forEach(card => {
+    const visibleCards = [];
+    section.cards.forEach(card => {
       const match = card._item.ecosystem === ecosystem;
       card.classList.toggle('hidden', !match);
-      if (match) any = true;
+      if (match) {
+        any = true;
+        visibleCards.push(card);
+      }
     });
-    setSectionHidden(sec, !any);
+    section.visibleCards = visibleCards;
+    section.grid.style.height = '';
+    if (section.mounted) {
+      section.grid.replaceChildren(...visibleCards);
+      visibleCards.forEach(loadCardImage);
+    }
+    setSectionHidden(section.sec, !any);
   });
 
   document.getElementById('empty').classList.remove('show');
@@ -1621,6 +2060,7 @@ document.querySelectorAll('.nav-item').forEach(el => {
     if (layoutMq.matches) closeNavDrawer();
   });
 });
+updateVirtualizedSections();
 
 // Проверяет одно слово запроса против haystack с fuzzy-логикой
 function matchWord(word, haystack) {
@@ -1645,18 +2085,20 @@ function filterCards(q) {
   const words = q.trim().toLowerCase().replace(/-/g, '').split(/\s+/).filter(Boolean);
   const rawWords = q.trim().split(/\s+/).filter(Boolean); // для подсветки — сохраняем исходные дефисы/слэши
   const hasQuery = words.length > 0;
-  let visibleCards = 0;
+  let visibleCardCount = 0;
   let sectionsWithHits = 0;
 
-  sectionEls.forEach(({ sec }) => {
+  sectionEls.forEach(section => {
     let any = false;
-    sec.querySelectorAll('.card').forEach(card => {
+    const matchingCards = [];
+    section.cards.forEach(card => {
       const haystack = card.dataset.search;
       const match = !hasQuery || words.every(w => matchWord(w, haystack));
       card.classList.toggle('hidden', !match);
       if (!match) return;
       any = true;
-      visibleCards++;
+      visibleCardCount++;
+      matchingCards.push(card);
 
       const item = card._item;
       const labelEl = card.querySelector('.label');
@@ -1671,17 +2113,26 @@ function filterCards(q) {
         card.classList.remove('show-path');
       }
     });
-    setSectionHidden(sec, !any);
+    section.visibleCards = matchingCards;
+    section.grid.style.height = '';
+    if (section.mounted) {
+      section.grid.replaceChildren(...matchingCards);
+      matchingCards.forEach(loadCardImage);
+    }
+    setSectionHidden(section.sec, !any);
     if (any) sectionsWithHits++;
   });
 
-  updateSearchCount(visibleCards, hasQuery);
+  updateSearchCount(visibleCardCount, hasQuery);
 
   const isEmpty = sectionsWithHits === 0 && hasQuery;
   document.getElementById('empty').classList.toggle('show', isEmpty);
   document.getElementById('content').style.display = isEmpty ? 'none' : '';
   if (hasQuery) resetContentScroll();
-  else requestAnimationFrame(updateScrollTopButton);
+  else requestAnimationFrame(() => {
+    updateScrollTopButton();
+    updateVirtualizedSections();
+  });
 }
 
 search.addEventListener('input', () => {
@@ -1721,9 +2172,19 @@ function withDetailTransition(mutator) {
   t.finished.then(cleanup, cleanup);
 }
 
+function scrollCardIntoView(card, behavior = 'smooth') {
+  ensureCardMounted(card);
+  // Открытие detail-панели меняет ширину сетки, поэтому ждём новый layout.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      card.scrollIntoView({ behavior, block: 'center', inline: 'nearest' });
+    });
+  });
+}
+
 async function getSvg(item) {
   if (item._svg) return item._svg;
-  item._svg = await fetch('svgs/' + item.file).then(r => r.text());
+  item._svg = await fetch(svgUrl(item.file)).then(r => r.text());
   return item._svg;
 }
 
@@ -1844,7 +2305,7 @@ function undoColors() {
 }
 
 async function loadRawSvg(file) {
-  if (!svgRawCache[file]) svgRawCache[file] = await fetch('svgs/' + file).then(r => r.text());
+  if (!svgRawCache[file]) svgRawCache[file] = await fetch(svgUrl(file)).then(r => r.text());
   return svgRawCache[file];
 }
 
@@ -2174,7 +2635,7 @@ function openDetail(item, card) {
   card.classList.add('active');
 
   // Заполняем панель
-  detailImg.src = 'svgs/' + item.file;
+  detailImg.src = svgUrl(item.file);
   detailImg.classList.add('square'); // сброс при открытии
   detailName.textContent = item.name;
   detailFigma.textContent = item.figma;
@@ -2220,7 +2681,6 @@ function openDetail(item, card) {
     { label: 'Favicon',  key: 'favicon'  },
     { label: 'Full',     key: 'full'     },
     { label: 'Full EN',  key: 'full_en'  },
-    { label: 'Special',  key: 'special'  },
   ];
   const available = variantDefs.filter(v => item.variants?.[v.key]);
   const allVariants = available.length > 0
@@ -2281,10 +2741,10 @@ function openDetail(item, card) {
 
   allVariants.forEach((vDef) => {
     const vc = document.createElement('div');
-    const isWide = vDef.key === 'full' || vDef.key === 'full_en' || vDef.key === 'special';
+    const isWide = vDef.key === 'full' || vDef.key === 'full_en';
     vc.className = 'variant-card' + (isWide ? ' wide' : vDef.key === '_original' ? ' favicon' : '');
     const vi = document.createElement('img');
-    vi.src = 'svgs/' + vDef.file;
+    vi.src = svgUrl(vDef.file);
     variantImgEls.push({ file: vDef.file, imgEl: vi });
     const vl = document.createElement('div');
     vl.className = 'variant-label';
@@ -2348,7 +2808,7 @@ function openDetail(item, card) {
           ec.dataset.file = sib.file;
           ec.title = sib.figma;
           const ei = document.createElement('img');
-          ei.src = 'svgs/' + sib.file;
+          ei.src = svgUrl(sib.file);
           ei.alt = sib.name;
           ei.loading = 'lazy';
           ei.decoding = 'async';
@@ -2366,12 +2826,10 @@ function openDetail(item, card) {
               filterCards('');
               setActive('all');
               requestAnimationFrame(() => {
-                siblingCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 openDetail(sib, siblingCard);
               });
               return;
             }
-            siblingCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
             openDetail(sib, siblingCard);
           });
           ecosystemGrid.appendChild(ec);
@@ -2419,6 +2877,7 @@ function openDetail(item, card) {
   }
 
   downloadAllBtn.onclick = downloadableSvgCount > 1 ? () => downloadAllAsZip(item) : null;
+  scrollCardIntoView(card);
 }
 
 document.getElementById('detail-close').onclick = closeDetail;
@@ -2452,6 +2911,209 @@ document.addEventListener('keydown', (e) => {
 });
 
 }); // end loadLogos
+
+// ── Suggest icon modal ──
+document.addEventListener('DOMContentLoaded', function () {
+  const BOT_TOKEN = '8617772760:AAHzsc4Vuqxo2a1BJgMLgyxvfM6t8j7KET4';
+  const CHAT_ID   = '5843186018';
+
+  const overlay   = document.getElementById('suggest-overlay');
+  const form      = document.getElementById('suggest-form');
+  const result    = document.getElementById('suggest-result');
+  const submitBtn = document.getElementById('suggest-submit');
+
+  function openModal() {
+    overlay.classList.add('open');
+    document.getElementById('suggest-name').focus();
+  }
+  function closeModal() {
+    overlay.classList.remove('open');
+    form.reset();
+    form.style.display = '';
+    document.getElementById('suggest-modal-titles').style.display = '';
+    document.getElementById('suggest-success').classList.remove('show');
+    document.getElementById('suggest-file-name').textContent = 'Выбрать файл';
+    document.getElementById('suggest-file-label').classList.remove('has-file');
+    result.className = 'suggest-result';
+    result.textContent = '';
+    submitBtn.disabled = false;
+  }
+
+  document.getElementById('suggest-file').addEventListener('change', function () {
+    const label = document.getElementById('suggest-file-label');
+    const name  = document.getElementById('suggest-file-name');
+    label.classList.remove('file-error');
+    result.className = 'suggest-result';
+    result.textContent = '';
+    if (this.files[0]) {
+      name.textContent = this.files[0].name;
+      label.classList.add('has-file');
+    } else {
+      name.textContent = 'Выбрать файл';
+      label.classList.remove('has-file');
+    }
+  });
+
+  document.getElementById('suggest-name').addEventListener('input', function () {
+    this.classList.remove('input-error');
+    result.className = 'suggest-result';
+    result.textContent = '';
+  });
+  document.getElementById('suggest-url').addEventListener('input', function () {
+    this.classList.remove('input-error');
+    document.getElementById('suggest-file-label').classList.remove('file-error');
+    result.className = 'suggest-result';
+    result.textContent = '';
+  });
+
+  document.getElementById('suggest-btn-desktop').addEventListener('click', openModal);
+  document.getElementById('suggest-btn-mobile').addEventListener('click', openModal);
+  document.getElementById('suggest-close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const brand   = document.getElementById('suggest-name').value.trim();
+    const url     = document.getElementById('suggest-url').value.trim();
+    const comment = document.getElementById('suggest-comment').value.trim();
+
+    let text = `📌 *Новая иконка*\n\n*Бренд:* ${brand}`;
+    if (url)     text += `\n*Ссылка:* ${url}`;
+    if (comment) text += `\n*Комментарий:* ${comment}`;
+
+    const file = document.getElementById('suggest-file').files[0];
+
+    if (!brand) {
+      document.getElementById('suggest-name').classList.add('input-error');
+      document.getElementById('suggest-name').focus();
+      result.className = 'suggest-result error';
+      result.textContent = 'Заполните обязательные поля.';
+      result.style.display = 'block';
+      return;
+    }
+    if (!url && !file) {
+      document.getElementById('suggest-url').classList.add('input-error');
+      document.getElementById('suggest-file-label').classList.add('file-error');
+      result.className = 'suggest-result error';
+      result.textContent = 'Добавьте ссылку или прикрепите файл логотипа.';
+      result.style.display = 'block';
+      return;
+    }
+    if (url && !/^https?:\/\/.+\..+/.test(url)) {
+      document.getElementById('suggest-url').classList.add('input-error');
+      document.getElementById('suggest-url').focus();
+      result.className = 'suggest-result error';
+      result.textContent = 'Введите корректную ссылку (например, https://brand.com).';
+      result.style.display = 'block';
+      return;
+    }
+    if (file && file.size > 1 * 1024 * 1024) {
+      document.getElementById('suggest-file-label').classList.add('file-error');
+      result.className = 'suggest-result error';
+      result.textContent = 'Файл слишком большой. Максимум — 1 МБ.';
+      result.style.display = 'block';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    result.className = 'suggest-result';
+    result.textContent = '';
+
+    try {
+      let res;
+      if (file) {
+        const fd = new FormData();
+        fd.append('chat_id', CHAT_ID);
+        fd.append('document', file, file.name);
+        fd.append('caption', text);
+        fd.append('parse_mode', 'Markdown');
+        res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, { method: 'POST', body: fd });
+      } else {
+        res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: CHAT_ID, text, parse_mode: 'Markdown' }),
+        });
+      }
+      const data = await res.json();
+      if (data.ok) {
+        form.style.display = 'none';
+        document.getElementById('suggest-modal-titles').style.display = 'none';
+        const success = document.getElementById('suggest-success');
+        success.classList.add('show');
+        const bg    = success.querySelector('.t-form-success-popup__content-icon-background');
+        const check = success.querySelector('.t-form-success-popup__content-icon-check');
+        bg.style.animation = 'none'; check.style.animation = 'none';
+        void bg.offsetWidth;
+        bg.style.animation    = 'iconBackgroundOpacity .106s linear forwards, iconBackgroundTransform 1.103s cubic-bezier(.445,.05,.55,.95) forwards';
+        check.style.animation = 'checkIconOpacity 51ms linear .437s forwards, checkIconDraw .666s cubic-bezier(.39,.575,.565,1) .437s forwards, checkIconScale .435s cubic-bezier(.445,.05,.55,.95) .437s forwards';
+      } else {
+        throw new Error(data.description);
+      }
+    } catch (err) {
+      result.className = 'suggest-result error';
+      result.textContent = 'Ошибка отправки. Попробуйте ещё раз.';
+      submitBtn.disabled = false;
+    }
+  });
+});
 </script>
+
+<div class="suggest-overlay" id="suggest-overlay">
+  <div class="suggest-modal" role="dialog" aria-modal="true" aria-labelledby="suggest-title">
+    <div class="suggest-modal-header" id="suggest-modal-header">
+      <div id="suggest-modal-titles">
+        <div class="suggest-modal-title" id="suggest-title">Предложить иконку</div>
+        <div class="suggest-modal-sub">Мы рассмотрим заявку и добавим иконку в библиотеку</div>
+      </div>
+      <button type="button" class="suggest-close" id="suggest-close" aria-label="Закрыть">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <form id="suggest-form" class="suggest-fields" novalidate>
+      <div class="suggest-field">
+        <label class="suggest-label" for="suggest-name">Название бренда *</label>
+        <input class="suggest-input" id="suggest-name" type="text" placeholder="например, Яндекс или Ozon" required>
+      </div>
+      <div class="suggest-field">
+        <label class="suggest-label" for="suggest-url">Ссылка на логотип или сайт</label>
+        <input class="suggest-input" id="suggest-url" type="url" placeholder="https://...">
+      </div>
+      <div class="suggest-field">
+        <label class="suggest-label" for="suggest-file">Файл логотипа</label>
+        <label class="suggest-file-label" id="suggest-file-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <span id="suggest-file-name">Выбрать файл</span>
+          <input class="suggest-file-input" id="suggest-file" type="file" accept="image/*,.svg,.ai,.eps,.pdf">
+        </label>
+      </div>
+      <div class="suggest-field">
+        <label class="suggest-label" for="suggest-comment">Комментарий</label>
+        <textarea class="suggest-textarea" id="suggest-comment" placeholder="Любые пожелания по формату, цветам..."></textarea>
+      </div>
+      <button type="submit" class="suggest-submit" id="suggest-submit">Отправить</button>
+      <div class="suggest-result" id="suggest-result"></div>
+    </form>
+    <div class="suggest-success" id="suggest-success">
+      <svg class="t-form-success-popup__content-icon" xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none" viewBox="0 0 210 210">
+        <path class="t-form-success-popup__content-icon-background"
+          d="M 86.0696 10.2777 C 97.7443 -0.973851 116.104 -0.973851 127.779 10.2777 C 133.881 16.1585 142.136 19.1954 150.551 18.6547 C 166.65 17.6203 180.714 29.5482 182.502 45.7521 C 183.436 54.2214 187.829 61.9111 194.619 66.9636 C 207.609 76.6302 210.798 94.9049 201.862 108.479 C 197.191 115.574 195.665 124.318 197.653 132.6 C 201.457 148.445 192.277 164.515 176.799 169.108 C 168.709 171.509 161.979 177.216 158.235 184.852 C 151.072 199.461 133.819 205.807 119.041 199.27 C 111.317 195.853 102.532 195.853 94.8075 199.27 C 80.0294 205.807 62.7766 199.461 55.6135 184.852 C 51.8695 177.216 45.1396 171.509 37.0495 169.108 C 21.5714 164.515 12.3913 148.445 16.1948 132.6 C 18.1828 124.318 16.6573 115.574 11.9867 108.479 C 3.05084 94.9049 6.23902 76.6302 19.2295 66.9636 C 26.0194 61.9111 30.4119 54.2214 31.3462 45.7521 C 33.1339 29.5482 47.1984 17.6203 63.2976 18.6547 C 71.7122 19.1954 79.9676 16.1585 86.0696 10.2777 Z"
+          fill="#30C546"></path>
+        <path class="t-form-success-popup__content-icon-check"
+          d="M 66.7645 107.258 L 90.6617 129.843 L 143.235 80.157"
+          stroke="white" stroke-width="14.7059" stroke-linecap="round" stroke-linejoin="round" fill="none" pathLength="1"></path>
+      </svg>
+      <div class="suggest-success-title">Спасибо!</div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
