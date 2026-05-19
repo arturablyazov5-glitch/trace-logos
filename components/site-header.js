@@ -7,7 +7,7 @@ class SiteHeader extends HTMLElement {
 
   async updateCount() {
     try {
-      const response = await fetch('/logos.json');
+      const response = await fetch('logos.json');
       const groups = await response.json();
       const count = groups.reduce((sum, group) => sum + (group.items?.length || 0), 0);
       this.render(this.iconCountText(count));
