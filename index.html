@@ -3193,9 +3193,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const submitBtn  = form.querySelector('[type=submit]');
 
   const fields = [
-    { id: 'help-favicon',  labelId: 'help-favicon-label',  nameId: 'help-favicon-name',  required: true,  key: 'Favicon' },
-    { id: 'help-full',     labelId: 'help-full-label',     nameId: 'help-full-name',     required: false, key: 'Full' },
-    { id: 'help-fullen',   labelId: 'help-fullen-label',   nameId: 'help-fullen-name',   required: false, key: 'Full EN' },
+    { id: 'help-favicon',  labelId: 'help-favicon-label',  nameId: 'help-favicon-name',  required: true,  key: 'Favicon',  formKey: 'favicon'  },
+    { id: 'help-full',     labelId: 'help-full-label',     nameId: 'help-full-name',     required: false, key: 'Full',     formKey: 'full'     },
+    { id: 'help-fullen',   labelId: 'help-fullen-label',   nameId: 'help-fullen-name',   required: false, key: 'Full EN',  formKey: 'full_en'  },
   ];
 
   fields.forEach(f => {
@@ -3212,6 +3212,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   let currentIconName = '';
 
+  const errorEl = document.getElementById('help-error');
+
   window.openHelpModal = function(iconName) {
     currentIconName = iconName;
     iconNameEl.textContent = iconName;
@@ -3219,6 +3221,8 @@ document.addEventListener('DOMContentLoaded', function () {
     successEl.classList.remove('show');
     titlesEl.style.display = '';
     submitBtn.disabled = false;
+    errorEl.style.display = 'none';
+    errorEl.textContent = '';
     fields.forEach(f => {
       const input = document.getElementById(f.id + '-input');
       const nameEl = document.getElementById(f.nameId);
@@ -3253,11 +3257,14 @@ document.addEventListener('DOMContentLoaded', function () {
     submitBtn.textContent = 'Отправляем…';
 
     try {
+      errorEl.style.display = 'none';
+      errorEl.textContent = '';
+
       const fd = new FormData();
       fd.append('icon_name', currentIconName);
       fields.forEach(f => {
         const input = document.getElementById(f.id + '-input');
-        if (input.files[0]) fd.append(f.id.replace('help-', ''), input.files[0]);
+        if (input.files[0]) fd.append(f.formKey, input.files[0]);
       });
 
       const res  = await fetch(WORKER_URL, { method: 'POST', body: fd });
@@ -3279,7 +3286,8 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (err) {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Отправить';
-      alert('Ошибка отправки. Попробуйте ещё раз.');
+      errorEl.textContent = err.message || 'Ошибка отправки. Попробуйте ещё раз.';
+      errorEl.style.display = '';
     }
   });
 });
@@ -3373,6 +3381,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <input type="file" accept=".svg,image/svg+xml" id="help-fullen-input" class="suggest-file-input">
         </label>
       </div>
+      <p id="help-error" style="display:none;color:#e06060;font-size:13px;margin:0 0 4px"></p>
       <button type="submit" class="suggest-submit">Отправить</button>
     </form>
     <div class="suggest-success" id="help-success">
