@@ -2261,7 +2261,7 @@ detailBackdrop.addEventListener('click', closeDetail);
 // позиции между старым и новым layout-ом вместо резкого перепрыгивания.
 function withDetailTransition(mutator) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (!document.startViewTransition || reduced) { mutator(); return; }
+  if (!document.startViewTransition || reduced) { mutator(); return Promise.resolve(); }
   const root = document.documentElement;
   const cards = document.querySelectorAll('.card:not(.hidden)');
   cards.forEach((c, i) => { c.style.viewTransitionName = 'card-vt-' + i; });
@@ -2272,14 +2272,17 @@ function withDetailTransition(mutator) {
   };
   const t = document.startViewTransition(mutator);
   t.finished.then(cleanup, cleanup);
+  return t.finished;
 }
 
-function scrollCardIntoView(card, behavior = 'smooth') {
+function scrollCardIntoView(card, afterTransition = Promise.resolve(), behavior = 'smooth') {
   ensureCardMounted(card);
-  // Открытие detail-панели меняет ширину сетки, поэтому ждём новый layout.
-  requestAnimationFrame(() => {
+  // Ждём завершения transition (перестройки сетки), затем ещё два RAF для финального layout.
+  afterTransition.catch(() => {}).finally(() => {
     requestAnimationFrame(() => {
-      card.scrollIntoView({ behavior, block: 'center', inline: 'nearest' });
+      requestAnimationFrame(() => {
+        card.scrollIntoView({ behavior, block: 'center', inline: 'nearest' });
+      });
     });
   });
 }
@@ -2990,14 +2993,15 @@ openDetail = function(item, card) {
 
   updateSeoPageLink(item);
 
+  let transition = Promise.resolve();
   if (!detail.classList.contains('open')) {
-    withDetailTransition(() => setDetailOpen(true));
+    transition = withDetailTransition(() => setDetailOpen(true));
   } else {
     syncDetailBackdrop(true);
   }
 
   downloadAllBtn.onclick = downloadableSvgCount > 1 ? () => downloadAllAsZip(item) : null;
-  scrollCardIntoView(card);
+  scrollCardIntoView(card, transition);
 }
 
 document.getElementById('detail-close').onclick = closeDetail;
