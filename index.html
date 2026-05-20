@@ -2064,7 +2064,7 @@ totalCards = total;
 })();
 
 const ecosystemCounts = allItems.reduce((acc, item) => {
-  if (item.ecosystem && !item.comingSoon) acc.set(item.ecosystem, (acc.get(item.ecosystem) || 0) + 1);
+  if (item.ecosystem) acc.set(item.ecosystem, (acc.get(item.ecosystem) || 0) + (item.comingSoon ? 0 : 1));
   return acc;
 }, new Map());
 
