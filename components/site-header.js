@@ -138,8 +138,8 @@ class SiteHeader extends HTMLElement {
           font-weight: 600;
           color: #888;
           background: #222;
-          border-radius: 5px;
-          padding: 1px 6px;
+          border-radius: 16px;
+          padding: 3px 6px;
           white-space: nowrap;
         }
 
