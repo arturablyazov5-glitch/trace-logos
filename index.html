@@ -2278,10 +2278,15 @@ function withDetailTransition(mutator) {
 function scrollCardIntoView(card, afterTransition = Promise.resolve(), behavior = 'smooth') {
   ensureCardMounted(card);
   // Ждём завершения transition (перестройки сетки), затем ещё два RAF для финального layout.
+  // scrollIntoView плохо работает с кастомным scroll-контейнером — считаем scrollTop вручную.
   afterTransition.catch(() => {}).finally(() => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        card.scrollIntoView({ behavior, block: 'center', inline: 'nearest' });
+        const contentRect = content.getBoundingClientRect();
+        const cardRect    = card.getBoundingClientRect();
+        const target = cardRect.top - contentRect.top + content.scrollTop
+                       - contentRect.height / 2 + cardRect.height / 2;
+        content.scrollTo({ top: Math.max(0, target), behavior });
       });
     });
   });
