@@ -1446,7 +1446,7 @@
   <div class="drawer-search-slot mobile-only" id="search-slot-mobile"></div>
   <div class="sidebar-label">Категории</div>
   <div class="nav-item active" data-section="all">
-    <span class="nav-label">Все</span><span class="count" id="total-count"></span>
+    <span class="nav-label">Все</span>
   </div>
   <div id="nav-sections"></div>
   <div class="sidebar-label with-gap" id="ecosystems-label">Экосистемы</div>
@@ -1595,7 +1595,6 @@ const navEcosystems = document.getElementById('nav-ecosystems');
 const toast = document.getElementById('toast');
 const search = document.getElementById('search');
 const searchCount = document.getElementById('search-count');
-const totalCount = document.getElementById('total-count');
 const detailBackdrop = document.getElementById('detail-backdrop');
 const detail = document.getElementById('detail');
 const sidebar = document.getElementById('sidebar');
@@ -2042,7 +2041,6 @@ loadLogos().then(logos => { for (const group of logos) {
 } // end for
 
 totalCards = total;
-totalCount.textContent = total;
 
 // «Показать ещё» для категорий
 (function () {
