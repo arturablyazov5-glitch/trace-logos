@@ -1,0 +1,115 @@
+/* ── Color editor ── */
+.colors-panel {
+  margin: 0 16px 12px;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  transition: border-color .12s;
+}
+.colors-panel.colors-hidden,
+#colors-divider.colors-hidden { display: none; }
+.colors-panel:hover { border-color: #333; }
+.colors-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 10px 7px 12px;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 7px;
+  transition: background .12s, border-radius .12s;
+}
+.colors-panel:has(.colors-section:not(.hidden)) .colors-header {
+  border-radius: 7px 7px 0 0;
+}
+.colors-header:hover { background: #222; }
+.colors-header-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #888;
+}
+.colors-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.colors-chevron {
+  color: #555;
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.colors-header.open .colors-chevron { transform: rotate(90deg); }
+.colors-reset-btn {
+  font-size: 10px;
+  color: #555;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  letter-spacing: .03em;
+  display: none;
+}
+.colors-reset-btn:hover { color: #ccc; background: #161616; }
+.colors-reset-btn.visible { display: block; }
+.colors-section {
+  padding: 8px 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid #2a2a2a;
+  border-radius: 0 0 7px 7px;
+}
+.colors-section.hidden { display: none; }
+
+.color-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.color-swatch-wrap {
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.color-swatch {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.color-hex-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 2px 6px;
+  cursor: text;
+  transition: background .12s, border-color .12s;
+}
+.color-hex-wrap:hover { background: #1e1e1e; border-color: #2a2a2a; }
+.color-hex-wrap:focus-within { background: #222; border-color: #444; }
+.color-hex-prefix {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  color: #555;
+  user-select: none;
+  pointer-events: none;
+}
+.color-hex-wrap:focus-within .color-hex-prefix { color: #888; }
+.color-hex {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 12px;
+  color: #888;
+  background: none;
+  border: none;
+  outline: none;
+  width: 58px;
+  cursor: text;
+  transition: color .12s;
+}
+.color-hex:focus { color: #fff; }

@@ -1,0 +1,65 @@
+.confetti-ghost {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  --confetti-color: #fff;
+}
+.confetti-ghost:before,
+.confetti-ghost:after {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 200px;
+  height: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+.confetti-ghost:before {
+  bottom: calc(100% - 10px);
+  background-image:
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, transparent 20%, var(--confetti-color) 20%, transparent 30%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, var(--confetti-color) 15%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%);
+  background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
+}
+.confetti-ghost:after {
+  top: calc(100% - 10px);
+  background-image:
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, transparent 10%, var(--confetti-color) 15%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%),
+    radial-gradient(circle, var(--confetti-color) 20%, transparent 20%);
+  background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
+}
+.confetti-ghost.animate:before {
+  animation: topBubbles ease-out .9s forwards;
+}
+.confetti-ghost.animate:after {
+  animation: bottomBubbles ease-out .9s forwards;
+}
+
+@keyframes topBubbles {
+  0%   { background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+         background-position: 37% 100%, 42% 100%, 46% 100%, 48% 100%, 50% 100%, 52% 100%, 56% 100%, 60% 100%, 64% 100%; }
+  15%  { background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%; }
+  100% { background-position: 18% 55%,  26% 30%,  37% 48%,  42% 22%,  50% 38%,  58% 25%,  65% 52%,  74% 33%,  80% 47%;
+         background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+}
+@keyframes bottomBubbles {
+  0%   { background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+         background-position: 36% 0%,  41% 0%,  46% 0%,  50% 0%,  54% 0%,  59% 0%,  64% 0%; }
+  15%  { background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%; }
+  100% { background-position: 24% 42%, 33% 48%, 42% 35%, 50% 55%, 58% 35%, 67% 48%, 74% 40%;
+         background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+}

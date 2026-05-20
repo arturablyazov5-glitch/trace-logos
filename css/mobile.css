@@ -1,0 +1,123 @@
+/* Visibility helpers — грузятся после всех компонентных стилей, чтобы перебить display из других файлов */
+.desktop-only { display: block; }
+.sidebar-header.desktop-only { display: flex; }
+.topbar.desktop-only { display: flex; }
+.mobile-only { display: none; }
+
+/* ── Mobile app header ── */
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 57px;
+  min-height: 57px;
+  padding: 0 12px 0 14px;
+  background: #161616;
+  border-bottom: 1px solid #222;
+  flex-shrink: 0;
+  width: 100%;
+  z-index: 80;
+}
+.mobile-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+.burger-btn {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 10px;
+  background: #222;
+  color: #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .12s, color .12s;
+}
+.burger-btn:hover { background: #2a2a2a; color: #fff; }
+.burger-btn[aria-expanded="true"] { background: #2a2a2a; color: #fff; }
+
+.nav-drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .55);
+  z-index: 85;
+  opacity: 0;
+  transition: opacity .28s ease;
+}
+.nav-drawer-backdrop.show {
+  display: block;
+  opacity: 1;
+}
+
+/* ── Mobile breakpoint ── */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+  .desktop-only { display: none !important; }
+  .mobile-only { display: block; }
+  .content { padding: 16px 8px; }
+  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .card { width: auto; padding: 8px 4px 6px; }
+  .icon-wrap { width: 100%; height: 0; padding-top: 100%; }
+  .icon-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .icon-wrap::before { inset: 0; }
+  .card { align-items: stretch; overflow: hidden; contain: none; }
+  .label { white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; width: 100% !important; max-width: 100% !important; }
+  .sidebar-header.mobile-only { display: flex; }
+  .drawer-search-slot { display: block; }
+  #search-slot-mobile { display: flex; flex: none; }
+
+  .mobile-header {
+    display: flex;
+  }
+
+  aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(320px, 100vw);
+    min-width: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform .32s cubic-bezier(.22, .61, .36, 1);
+    box-shadow: none;
+  }
+  aside.nav-open {
+    transform: translateX(0);
+    box-shadow: 8px 0 32px rgba(0, 0, 0, .45);
+  }
+
+  .topbar {
+    display: none;
+  }
+
+  .center-body:has(#detail.open) main { padding-right: 0; }
+  .detail-backdrop { display: block; pointer-events: none; }
+  .detail-backdrop.show { pointer-events: auto; }
+  #detail {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: min(88vh, 720px);
+    border-left: none;
+    border-top: 1px solid #2a2a2a;
+    border-radius: 16px 16px 0 0;
+    transform: translateY(100%);
+    box-shadow: 0 -12px 40px rgba(0, 0, 0, .5);
+  }
+  #detail.open { transform: translateY(0); }
+  .detail-sheet-handle { display: block; }
+  .detail-header { padding-top: 4px; }
+}

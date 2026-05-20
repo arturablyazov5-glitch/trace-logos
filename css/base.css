@@ -1,0 +1,56 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #111;
+  color: #e5e5e5;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Center column (main + detail) ── */
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.topbar {
+  height: 57px;
+  min-height: 57px;
+  padding: 0 24px;
+  border-bottom: 1px solid #1e1e1e;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.center-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  position: relative;
+  transition: padding-right .42s cubic-bezier(.22,.61,.36,1);
+  will-change: padding-right;
+}
+.center-body:has(#detail.open) main {
+  padding-right: 280px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main { transition: none; }
+  #detail, .detail-backdrop, aside, .nav-drawer-backdrop { transition: none; }
+}
