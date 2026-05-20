@@ -1754,7 +1754,7 @@ const ecosystemLogoMap = {
   alfa:        'svgs/alfa-bank.svg',
   avito:       'svgs/avito.svg',
   google:      'svgs/google.svg',
-  meta:        'svgs/instagram.svg',
+  meta:        'svgs/meta.svg',
   mts:         'svgs/mts-bank.svg',
   nspk:        'svgs/mir.svg',
   ozon:        'svgs/ozon.svg',
@@ -1762,6 +1762,7 @@ const ecosystemLogoMap = {
   sovcombank:  'svgs/sovcombank.svg',
   tinkoff:     'svgs/t-bank.svg',
   vk:          'svgs/vk.svg',
+  openai:      'svgs/chatgpt.svg',
   wildberries: 'svgs/wildberries.svg',
   yandex:      'svgs/yandex.svg',
   apple:       'svgs/apple-pay.svg',
@@ -2001,14 +2002,15 @@ function ensureSectionCards(sectionState) {
 }
 
 loadLogos().then(logos => { for (const group of logos) {
-  total += group.items.length;
+  const readyCount = group.items.filter(item => !item.comingSoon).length;
+  total += readyCount;
   group.items.forEach(item => allItems.push(item));
 
   // Nav item
   const nav = document.createElement('div');
   nav.className = 'nav-item';
   nav.dataset.section = group.section;
-  nav.innerHTML = `<span class="nav-label">${group.section}</span><span class="count">${group.items.length}</span>`;
+  nav.innerHTML = `<span class="nav-label">${group.section}</span><span class="count">${readyCount}</span>`;
   navSections.appendChild(nav);
 
   // Section shell (без карточек — создадим лениво)
@@ -2063,7 +2065,7 @@ totalCount.textContent = total;
 })();
 
 const ecosystemCounts = allItems.reduce((acc, item) => {
-  if (item.ecosystem) acc.set(item.ecosystem, (acc.get(item.ecosystem) || 0) + 1);
+  if (item.ecosystem && !item.comingSoon) acc.set(item.ecosystem, (acc.get(item.ecosystem) || 0) + 1);
   return acc;
 }, new Map());
 
