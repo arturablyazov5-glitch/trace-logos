@@ -13,7 +13,7 @@ class SiteHeader extends HTMLElement {
   async updateCount() {
     try {
       const groups = await this.loadGroups();
-      const count = groups.reduce((sum, group) => sum + (group.items?.length || 0), 0);
+      const count = groups.reduce((sum, group) => sum + (group.items?.filter(i => !i.comingSoon).length || 0), 0);
       this.render(this.iconCountText(count));
     } catch {
       this.render('каталог иконок');
