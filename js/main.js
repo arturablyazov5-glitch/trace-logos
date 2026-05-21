@@ -486,10 +486,11 @@ openDetailFn = function (item, card) {
   // Variant definitions (closure for reset button)
   variantsGrid.innerHTML = '';
   const variantDefs = [
-    { label: 'Favicon',  key: 'favicon'  },
-    { label: 'Full',     key: 'full'     },
-    { label: 'Full EN',  key: 'full_en'  },
-    { label: 'SVG',      key: 'svg'      },
+    { label: 'Favicon',   key: 'favicon'  },
+    { label: 'Full',      key: 'full'     },
+    { label: 'Full EN',   key: 'full_en'  },
+    { label: 'SVG',       key: 'svg'      },
+    { label: 'App Icon',  key: 'png'      },
   ];
   const available = variantDefs.filter(v => item.variants?.[v.key]);
   const originalLabel = item.prerendered ? 'App Icon' : 'Favicon';
@@ -606,7 +607,7 @@ openDetailFn = function (item, card) {
   allVariants.forEach(vDef => {
     const vc = document.createElement('div');
     const isWide = vDef.key === 'full' || vDef.key === 'full_en';
-    const isSquareVariant = vDef.key === '_original' || vDef.key === 'favicon' || vDef.key === 'svg';
+    const isSquareVariant = vDef.key === '_original' || vDef.key === 'favicon' || vDef.key === 'svg' || vDef.key === 'png';
     vc.className = 'variant-card' + (isWide ? ' wide' : isSquareVariant ? ' favicon' : '');
     const vi = document.createElement('img');
     vi.src = svgUrl(vDef.file);
