@@ -469,10 +469,12 @@ openDetailFn = function (item, card) {
   colorState.colorHistoryNeedsInit = true;
   const colorEditingDisabled = isFlagItem(item) || !!item.comingSoon;
 
-  const colorsPanel   = document.getElementById('colors-panel');
-  const colorsDivider = document.getElementById('colors-divider');
-  const colorsHeader  = document.getElementById('colors-header');
-  const colorsSection = document.getElementById('colors-section');
+  const colorsPanel    = document.getElementById('colors-panel');
+  const colorsDivider  = document.getElementById('colors-divider');
+  const colorsWrapper  = document.getElementById('colors-animated-wrapper');
+  const colorsHeader   = document.getElementById('colors-header');
+  const colorsSection  = document.getElementById('colors-section');
+  colorsWrapper.classList.toggle('colors-hidden', colorEditingDisabled);
   colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
   colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
   colorsHeader.classList.remove('open');
@@ -586,6 +588,7 @@ openDetailFn = function (item, card) {
     btnCopyPng.classList.toggle('hidden', !isPng);
 
     if (isPng) {
+      colorsWrapper.classList.add('colors-hidden');
       colorsPanel.classList.add('colors-hidden');
       colorsDivider.classList.add('colors-hidden');
       const detailImg = document.getElementById('detail-img');
@@ -615,8 +618,8 @@ openDetailFn = function (item, card) {
       return;
     }
 
-    document.getElementById('detail-img').classList.remove('prerendered');
     document.getElementById('btn-copy-png').classList.add('hidden');
+    colorsWrapper.classList.toggle('colors-hidden', colorEditingDisabled);
     colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
     colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
     const isSquare = vDef.key === '_original' || vDef.key === 'svg' || vDef.key === 'favicon';
@@ -627,7 +630,10 @@ openDetailFn = function (item, card) {
       buildColorEditor(allSvgText);
     }
 
-    fadePreview(() => updatePreview(rawSvg, isSquare));
+    fadePreview(() => {
+      document.getElementById('detail-img').classList.remove('prerendered');
+      updatePreview(rawSvg, isSquare);
+    });
 
     const getExportSvg = () => applyColorMap(rawSvg);
 
