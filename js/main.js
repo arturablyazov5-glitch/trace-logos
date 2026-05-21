@@ -490,7 +490,7 @@ openDetailFn = function (item, card) {
     { label: 'Full',      key: 'full'     },
     { label: 'Full EN',   key: 'full_en'  },
     { label: 'SVG',       key: 'svg'      },
-    { label: 'App Icon',  key: 'png'      },
+    { label: 'PNG Icon',  key: 'png'      },
   ];
   const available = variantDefs.filter(v => item.variants?.[v.key]);
   const originalLabel = item.prerendered ? 'App Icon' : 'Favicon';
