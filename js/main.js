@@ -443,6 +443,7 @@ openDetailFn = function (item, card) {
   const detailVariants = document.getElementById('detail-variants');
 
   detailImg.src = svgUrl(item.file);
+  detailImg.alt = item.name;
   detailImg.classList.add('square');
   detailName.textContent = item.name;
   detailFigmaEl.textContent = item.figma;
