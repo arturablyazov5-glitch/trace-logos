@@ -35,5 +35,6 @@ export function highlight(text, words) {
 export const SVG_URL_V = Date.now();
 
 export function svgUrl(file) {
-  return 'svgs/' + file + '?v=' + SVG_URL_V;
+  const folder = file.endsWith('.png') ? 'pngs' : 'svgs';
+  return folder + '/' + file + '?v=' + SVG_URL_V;
 }
