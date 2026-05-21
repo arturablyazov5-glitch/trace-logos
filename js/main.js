@@ -519,6 +519,15 @@ openDetailFn = function (item, card) {
 
   let activeVariantCard = null;
 
+  function fadePreview(changeFn) {
+    const img = document.getElementById('detail-img');
+    img.style.opacity = '0';
+    setTimeout(() => {
+      changeFn();
+      requestAnimationFrame(() => { img.style.opacity = ''; });
+    }, 120);
+  }
+
   async function selectVariant(vDef, vcEl) {
     if (activeVariantCard) activeVariantCard.classList.remove('active');
     activeVariantCard = vcEl;
@@ -542,9 +551,11 @@ openDetailFn = function (item, card) {
       colorsPanel.classList.add('colors-hidden');
       colorsDivider.classList.add('colors-hidden');
       const detailImg = document.getElementById('detail-img');
-      detailImg.src = svgUrl(vDef.file);
-      detailImg.classList.remove('square');
-      detailImg.classList.add('prerendered');
+      fadePreview(() => {
+        detailImg.src = svgUrl(vDef.file);
+        detailImg.classList.remove('square');
+        detailImg.classList.add('prerendered');
+      });
       const getPngBlob = async () => {
         const resp = await fetch(svgUrl(vDef.file));
         const buf = await resp.arrayBuffer();
@@ -578,7 +589,7 @@ openDetailFn = function (item, card) {
       buildColorEditor(allSvgText);
     }
 
-    updatePreview(rawSvg, isSquare);
+    fadePreview(() => updatePreview(rawSvg, isSquare));
 
     const getExportSvg = () => applyColorMap(rawSvg);
 
