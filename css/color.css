@@ -6,18 +6,6 @@
   border-radius: 8px;
   transition: border-color .12s;
 }
-/* animated wrapper: grid trick for smooth height in/out */
-#colors-animated-wrapper {
-  display: grid;
-  grid-template-rows: 1fr;
-  transition: grid-template-rows .3s cubic-bezier(.22,.61,.36,1);
-  overflow: hidden;
-}
-#colors-animated-wrapper.colors-hidden {
-  grid-template-rows: 0fr;
-}
-#colors-animated-wrapper > * { min-height: 0; }
-
 .colors-panel.colors-hidden,
 #colors-divider.colors-hidden { display: none; }
 .colors-panel:hover { border-color: #333; }

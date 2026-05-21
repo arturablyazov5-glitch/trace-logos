@@ -38,6 +38,7 @@ const cardByItemFile  = new Map();
 const cardByItemFigma = new Map();
 let activeCard = null;
 let openDetailFn;
+let currentDisplayType = null; // 'square' | 'wide' | 'png' — для умного фейда
 
 let copyBtnResetTimer = null;
 
@@ -471,10 +472,8 @@ openDetailFn = function (item, card) {
 
   const colorsPanel    = document.getElementById('colors-panel');
   const colorsDivider  = document.getElementById('colors-divider');
-  const colorsWrapper  = document.getElementById('colors-animated-wrapper');
   const colorsHeader   = document.getElementById('colors-header');
   const colorsSection  = document.getElementById('colors-section');
-  colorsWrapper.classList.toggle('colors-hidden', colorEditingDisabled);
   colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
   colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
   colorsHeader.classList.remove('open');
@@ -521,51 +520,45 @@ openDetailFn = function (item, card) {
 
   let activeVariantCard = null;
 
-  function fadePreview(changeFn) {
-    const img     = document.getElementById('detail-img');
-    const preview = img.closest('.detail-preview');
+  // Анимирует высоту контейнера: фиксирует → меняет контент → плавно растягивает
+  function animateContainerHeight(el, changeFn, waitForImg) {
+    const oldH = el.offsetHeight;
+    el.style.height = oldH + 'px';
+    el.style.overflow = 'hidden';
 
-    // Lock current height before content changes
-    const oldH = preview.offsetHeight;
-    preview.style.height = oldH + 'px';
-    preview.style.overflow = 'hidden';
+    changeFn();
 
-    img.style.opacity = '0';
-
-    setTimeout(() => {
-      changeFn();
-
-      // Measure new height after content swap, waiting for image if needed
-      const animateHeight = () => {
-        preview.style.height = 'auto';
-        const newH = preview.offsetHeight;
-
-        if (Math.abs(newH - oldH) > 1) {
-          preview.style.height = oldH + 'px';
-          preview.getBoundingClientRect(); // force reflow
-          preview.style.transition = 'height .32s cubic-bezier(.22,.61,.36,1)';
-          preview.style.height = newH + 'px';
-
-          preview.addEventListener('transitionend', (e) => {
-            if (e.propertyName !== 'height') return;
-            preview.style.height = '';
-            preview.style.overflow = '';
-            preview.style.transition = '';
-          }, { once: true });
-        } else {
-          preview.style.height = '';
-          preview.style.overflow = '';
-        }
-
-        img.style.opacity = '';
-      };
-
-      if (img.complete) {
-        requestAnimationFrame(animateHeight);
+    const finish = () => {
+      el.style.height = 'auto';
+      const newH = el.offsetHeight;
+      if (Math.abs(newH - oldH) > 1) {
+        el.style.height = oldH + 'px';
+        el.getBoundingClientRect();
+        el.style.transition = 'height .3s cubic-bezier(.22,.61,.36,1)';
+        el.style.height = newH + 'px';
+        el.addEventListener('transitionend', (e) => {
+          if (e.propertyName !== 'height') return;
+          el.style.height = '';
+          el.style.overflow = '';
+          el.style.transition = '';
+        }, { once: true });
       } else {
-        img.addEventListener('load', () => requestAnimationFrame(animateHeight), { once: true });
+        el.style.height = '';
+        el.style.overflow = '';
       }
-    }, 120);
+    };
+
+    if (waitForImg && !waitForImg.complete) {
+      waitForImg.addEventListener('load', () => requestAnimationFrame(finish), { once: true });
+    } else {
+      requestAnimationFrame(finish);
+    }
+  }
+
+  // Определяет тип отображения варианта
+  function getDisplayType(vDef) {
+    if (vDef.file.endsWith('.png')) return 'png';
+    return (vDef.key === '_original' || vDef.key === 'svg' || vDef.key === 'favicon') ? 'square' : 'wide';
   }
 
   async function selectVariant(vDef, vcEl) {
@@ -582,21 +575,43 @@ openDetailFn = function (item, card) {
     const btnCopyPng     = document.getElementById('btn-copy-png');
     const btnDownloadSvg = document.getElementById('btn-download');
     const btnDownloadPng = document.getElementById('btn-download-png');
+    const detailImg      = document.getElementById('detail-img');
+    const preview        = detailImg.closest('.detail-preview');
+    const controls       = document.getElementById('detail-controls');
+
+    // Фейд только при смене типа отображения (square↔wide, svg↔png и т.д.)
+    const newDisplayType = getDisplayType(vDef);
+    const needsFade = currentDisplayType !== null && currentDisplayType !== newDisplayType;
+    currentDisplayType = newDisplayType;
+
+    if (needsFade) detailImg.style.opacity = '0';
 
     btnCopy.classList.toggle('hidden', isPng);
     btnDownloadSvg.classList.toggle('hidden', isPng);
     btnCopyPng.classList.toggle('hidden', !isPng);
 
     if (isPng) {
-      colorsWrapper.classList.add('colors-hidden');
-      colorsPanel.classList.add('colors-hidden');
-      colorsDivider.classList.add('colors-hidden');
-      const detailImg = document.getElementById('detail-img');
-      fadePreview(() => {
+      // Анимируем controls (кнопки + панель цветов) и preview одновременно
+      animateContainerHeight(controls, () => {
+        colorsPanel.classList.add('colors-hidden');
+        colorsDivider.classList.add('colors-hidden');
+      });
+
+      const applyPng = () => {
         detailImg.src = svgUrl(vDef.file);
         detailImg.classList.remove('square');
         detailImg.classList.add('prerendered');
-      });
+      };
+
+      if (needsFade) {
+        setTimeout(() => {
+          animateContainerHeight(preview, applyPng, detailImg);
+          requestAnimationFrame(() => { detailImg.style.opacity = ''; });
+        }, 120);
+      } else {
+        animateContainerHeight(preview, applyPng, detailImg);
+      }
+
       const getPngBlob = async () => {
         const resp = await fetch(svgUrl(vDef.file));
         const buf = await resp.arrayBuffer();
@@ -618,10 +633,8 @@ openDetailFn = function (item, card) {
       return;
     }
 
-    document.getElementById('btn-copy-png').classList.add('hidden');
-    colorsWrapper.classList.toggle('colors-hidden', colorEditingDisabled);
-    colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
-    colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
+    // SVG-ветка
+    btnCopyPng.classList.add('hidden');
     const isSquare = vDef.key === '_original' || vDef.key === 'svg' || vDef.key === 'favicon';
     const rawSvg = await loadRawSvg(vDef.file);
 
@@ -630,10 +643,25 @@ openDetailFn = function (item, card) {
       buildColorEditor(allSvgText);
     }
 
-    fadePreview(() => {
-      document.getElementById('detail-img').classList.remove('prerendered');
-      updatePreview(rawSvg, isSquare);
+    // Анимируем controls (кнопки + панель цветов) и preview одновременно
+    animateContainerHeight(controls, () => {
+      colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
+      colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
     });
+
+    const applysvg = () => {
+      detailImg.classList.remove('prerendered');
+      updatePreview(rawSvg, isSquare);
+    };
+
+    if (needsFade) {
+      setTimeout(() => {
+        animateContainerHeight(preview, applysvg);
+        requestAnimationFrame(() => { detailImg.style.opacity = ''; });
+      }, 120);
+    } else {
+      animateContainerHeight(preview, applysvg);
+    }
 
     const getExportSvg = () => applyColorMap(rawSvg);
 
