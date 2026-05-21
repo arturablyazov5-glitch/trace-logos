@@ -76,10 +76,11 @@ export async function downloadAllAsZip(item) {
   const origLabel = label.textContent;
 
   const baseName = item.figma.split('/').pop().toLowerCase();
+  const squareVariantKeys = new Set(['svg', 'favicon']);
   const variants = [{ key: '_original', file: item.file, square: true }];
   if (item.variants) {
     for (const [key, file] of Object.entries(item.variants)) {
-      variants.push({ key, file, square: false });
+      variants.push({ key, file, square: squareVariantKeys.has(key) });
     }
   }
 
@@ -96,15 +97,26 @@ export async function downloadAllAsZip(item) {
     };
 
     for (const v of variants) {
-      const suffix = v.key === '_original' ? '' : '-' + v.key.replace(/_/g, '-');
-      const rawSvg = await loadRawSvg(v.file);
-      const svgText = svgForExport(applyColorMap(rawSvg), v.square);
-      zip.file(`svg/${baseName}${suffix}.svg`, svgText);
-      tick();
+      const suffixKey = v.key === 'svg' ? 'icon' : v.key === '_original' ? '' : v.key.replace(/_/g, '-');
+      const suffix = suffixKey ? '-' + suffixKey : '';
 
-      const pngBlob = await svgToPngBlob(svgText, { square: v.square, size: 512 });
-      zip.file(`png/${baseName}${suffix}.png`, pngBlob);
-      tick();
+      if (v.file.endsWith('.png')) {
+        const resp = await fetch(svgUrl(v.file));
+        const buf = await resp.arrayBuffer();
+        const blob = new Blob([buf], { type: 'image/png' });
+        zip.file(`png/${baseName}${suffix}.png`, blob);
+        tick();
+        tick();
+      } else {
+        const rawSvg = await loadRawSvg(v.file);
+        const svgText = svgForExport(applyColorMap(rawSvg), v.square);
+        zip.file(`svg/${baseName}${suffix}.svg`, svgText);
+        tick();
+
+        const pngBlob = await svgToPngBlob(svgText, { square: v.square, size: 512 });
+        zip.file(`png/${baseName}${suffix}.png`, pngBlob);
+        tick();
+      }
     }
 
     label.textContent = 'Упаковка...';

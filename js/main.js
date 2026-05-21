@@ -46,10 +46,9 @@ function resetCopyBtn() {
   clearTimeout(copyBtnResetTimer);
   copyBtnResetTimer = null;
   const btn = document.getElementById('btn-copy');
-  if (!btn) return;
-  const span = btn.querySelector('span');
-  if (span) span.textContent = 'Скопировать SVG';
-  btn.disabled = false;
+  if (btn) { const span = btn.querySelector('span'); if (span) span.textContent = 'Скопировать SVG'; btn.disabled = false; }
+  const btnPng = document.getElementById('btn-copy-png');
+  if (btnPng) { const span = btnPng.querySelector('span'); if (span) span.textContent = 'Скопировать PNG'; btnPng.disabled = false; }
 }
 
 function triggerConfetti(el, labelText) {
@@ -529,19 +528,35 @@ openDetailFn = function (item, card) {
     const suffix   = vDef.key === '_original' ? '' : '-' + vDef.key.replace(/_/g, '-');
 
     const btnCopy        = document.getElementById('btn-copy');
+    const btnCopyPng     = document.getElementById('btn-copy-png');
     const btnDownloadSvg = document.getElementById('btn-download');
     const btnDownloadPng = document.getElementById('btn-download-png');
 
     btnCopy.classList.toggle('hidden', isPng);
     btnDownloadSvg.classList.toggle('hidden', isPng);
+    btnCopyPng.classList.toggle('hidden', !isPng);
 
     if (isPng) {
+      colorsPanel.classList.add('colors-hidden');
+      colorsDivider.classList.add('colors-hidden');
       const detailImg = document.getElementById('detail-img');
       detailImg.src = svgUrl(vDef.file);
       detailImg.classList.remove('square');
-      btnDownloadPng.onclick = async () => {
+      detailImg.classList.add('prerendered');
+      const getPngBlob = async () => {
         const resp = await fetch(svgUrl(vDef.file));
-        const blob = await resp.blob();
+        const buf = await resp.arrayBuffer();
+        return new Blob([buf], { type: 'image/png' });
+      };
+      btnCopyPng.onclick = async () => {
+        const blob = await getPngBlob();
+        const file = new File([blob], `${item.name}.png`, { type: 'image/png' });
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
+        triggerConfetti(btnCopyPng);
+        showToast(`Скопировано PNG: ${item.name}`);
+      };
+      btnDownloadPng.onclick = async () => {
+        const blob = await getPngBlob();
         const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.png' });
         a.click(); URL.revokeObjectURL(a.href);
         showToast(`Скачано PNG: ${item.name}`);
@@ -549,7 +564,11 @@ openDetailFn = function (item, card) {
       return;
     }
 
-    const isSquare = vDef.key === '_original';
+    document.getElementById('detail-img').classList.remove('prerendered');
+    document.getElementById('btn-copy-png').classList.add('hidden');
+    colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
+    colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
+    const isSquare = vDef.key === '_original' || vDef.key === 'svg' || vDef.key === 'favicon';
     const rawSvg = await loadRawSvg(vDef.file);
 
     if (!colorEditingDisabled && !Object.keys(colorState.colorMap).length) {
@@ -586,9 +605,11 @@ openDetailFn = function (item, card) {
   allVariants.forEach(vDef => {
     const vc = document.createElement('div');
     const isWide = vDef.key === 'full' || vDef.key === 'full_en';
-    vc.className = 'variant-card' + (isWide ? ' wide' : vDef.key === '_original' ? ' favicon' : '');
+    const isSquareVariant = vDef.key === '_original' || vDef.key === 'favicon' || vDef.key === 'svg';
+    vc.className = 'variant-card' + (isWide ? ' wide' : isSquareVariant ? ' favicon' : '');
     const vi = document.createElement('img');
     vi.src = svgUrl(vDef.file);
+    if (vDef.file.endsWith('.png')) vi.classList.add('prerendered');
     colorState.variantImgEls.push({ file: vDef.file, imgEl: vi });
     const vl = document.createElement('div');
     vl.className = 'variant-label';
@@ -610,24 +631,39 @@ openDetailFn = function (item, card) {
   if (!allVariants.length) {
     const isPng = item.file.endsWith('.png');
     const btnCopy        = document.getElementById('btn-copy');
+    const btnCopyPng     = document.getElementById('btn-copy-png');
     const btnDownloadSvg = document.getElementById('btn-download');
     const btnDownloadPng = document.getElementById('btn-download-png');
     btnCopy.classList.toggle('hidden', isPng);
     btnDownloadSvg.classList.toggle('hidden', isPng);
+    btnCopyPng.classList.toggle('hidden', !isPng);
 
     if (isPng) {
       const detailImg = document.getElementById('detail-img');
       detailImg.src = svgUrl(item.file);
       detailImg.classList.remove('square');
+      detailImg.classList.add('prerendered');
       const baseName = item.figma.split('/').pop().toLowerCase();
-      btnDownloadPng.onclick = async () => {
+      const getPngBlob = async () => {
         const resp = await fetch(svgUrl(item.file));
-        const blob = await resp.blob();
+        const buf = await resp.arrayBuffer();
+        return new Blob([buf], { type: 'image/png' });
+      };
+      btnCopyPng.onclick = async () => {
+        const blob = await getPngBlob();
+        const file = new File([blob], `${item.name}.png`, { type: 'image/png' });
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
+        triggerConfetti(btnCopyPng);
+        showToast(`Скопировано PNG: ${item.name}`);
+      };
+      btnDownloadPng.onclick = async () => {
+        const blob = await getPngBlob();
         const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + '.png' });
         a.click(); URL.revokeObjectURL(a.href);
         showToast(`Скачано PNG: ${item.name}`);
       };
     } else {
+      btnCopyPng.classList.add('hidden');
       loadRawSvg(item.file).then(raw => {
         if (!colorEditingDisabled) buildColorEditor(raw);
         updatePreview(raw, true);
