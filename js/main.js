@@ -38,7 +38,80 @@ const cardByItemFile  = new Map();
 const cardByItemFigma = new Map();
 let activeCard = null;
 let openDetailFn;
-let currentDisplayType = null; // 'square' | 'wide' | 'png' — для умного фейда
+let currentDisplayType = null;
+
+function animateContainerHeight(el, changeFn, waitForImg) {
+  const wasHidden = getComputedStyle(el).display === 'none';
+  const oldH = wasHidden ? 0 : el.offsetHeight;
+
+  if (!wasHidden) {
+    el.style.height = oldH + 'px';
+    el.style.overflow = 'hidden';
+  }
+
+  changeFn();
+
+  const willBeHidden = getComputedStyle(el).display === 'none';
+
+  // Нет изменений — выходим
+  if (wasHidden && willBeHidden) {
+    el.style.height = '';
+    el.style.overflow = '';
+    return;
+  }
+
+  // Скрываем: display:none не даёт анимировать — временно переопределяем
+  if (willBeHidden) {
+    el.style.display = 'block';
+    el.style.height = oldH + 'px';
+    el.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      el.getBoundingClientRect();
+      el.style.transition = 'height .3s cubic-bezier(.22,.61,.36,1)';
+      el.style.height = '0px';
+      el.addEventListener('transitionend', (e) => {
+        if (e.propertyName !== 'height') return;
+        el.style.display = '';
+        el.style.height = '';
+        el.style.overflow = '';
+        el.style.transition = '';
+      }, { once: true });
+    });
+    return;
+  }
+
+  // Показываем или меняем высоту
+  if (wasHidden) {
+    el.style.height = '0px';
+    el.style.overflow = 'hidden';
+  }
+
+  const finish = () => {
+    el.style.height = 'auto';
+    const newH = el.offsetHeight;
+    if (Math.abs(newH - oldH) > 1) {
+      el.style.height = (wasHidden ? 0 : oldH) + 'px';
+      el.getBoundingClientRect();
+      el.style.transition = 'height .3s cubic-bezier(.22,.61,.36,1)';
+      el.style.height = newH + 'px';
+      el.addEventListener('transitionend', (e) => {
+        if (e.propertyName !== 'height') return;
+        el.style.height = '';
+        el.style.overflow = '';
+        el.style.transition = '';
+      }, { once: true });
+    } else {
+      el.style.height = '';
+      el.style.overflow = '';
+    }
+  };
+
+  if (waitForImg && !waitForImg.complete) {
+    waitForImg.addEventListener('load', () => requestAnimationFrame(finish), { once: true });
+  } else {
+    requestAnimationFrame(finish);
+  }
+}
 
 let copyBtnResetTimer = null;
 
@@ -513,47 +586,15 @@ openDetailFn = function (item, card) {
     colorsHeader.classList.add('open');
   };
 
-  detailVariants.classList.toggle('hidden', allVariants.length === 0);
   const downloadAllBtn = document.getElementById('btn-download-all');
   const downloadableSvgCount = allVariants.length || 1;
-  downloadAllBtn.classList.toggle('hidden', downloadableSvgCount <= 1);
+
+  animateContainerHeight(detailVariants, () => {
+    detailVariants.classList.toggle('hidden', allVariants.length === 0);
+    downloadAllBtn.classList.toggle('hidden', downloadableSvgCount <= 1);
+  });
 
   let activeVariantCard = null;
-
-  // Анимирует высоту контейнера: фиксирует → меняет контент → плавно растягивает
-  function animateContainerHeight(el, changeFn, waitForImg) {
-    const oldH = el.offsetHeight;
-    el.style.height = oldH + 'px';
-    el.style.overflow = 'hidden';
-
-    changeFn();
-
-    const finish = () => {
-      el.style.height = 'auto';
-      const newH = el.offsetHeight;
-      if (Math.abs(newH - oldH) > 1) {
-        el.style.height = oldH + 'px';
-        el.getBoundingClientRect();
-        el.style.transition = 'height .3s cubic-bezier(.22,.61,.36,1)';
-        el.style.height = newH + 'px';
-        el.addEventListener('transitionend', (e) => {
-          if (e.propertyName !== 'height') return;
-          el.style.height = '';
-          el.style.overflow = '';
-          el.style.transition = '';
-        }, { once: true });
-      } else {
-        el.style.height = '';
-        el.style.overflow = '';
-      }
-    };
-
-    if (waitForImg && !waitForImg.complete) {
-      waitForImg.addEventListener('load', () => requestAnimationFrame(finish), { once: true });
-    } else {
-      requestAnimationFrame(finish);
-    }
-  }
 
   // Определяет тип отображения варианта
   function getDisplayType(vDef) {
