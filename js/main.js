@@ -557,7 +557,7 @@ openDetailFn = function (item, card) {
 
   // Определяет тип отображения варианта
   function getDisplayType(vDef) {
-    if (vDef.file.endsWith('.png')) return 'png';
+    if (vDef.file.endsWith('.png')) return 'square';
     return (vDef.key === '_original' || vDef.key === 'svg' || vDef.key === 'favicon') ? 'square' : 'wide';
   }
 
