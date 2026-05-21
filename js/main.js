@@ -445,6 +445,7 @@ openDetailFn = function (item, card) {
   detailImg.src = svgUrl(item.file);
   detailImg.alt = item.name;
   detailImg.classList.add('square');
+  detailImg.classList.remove('prerendered');
   detailName.textContent = item.name;
   detailFigmaEl.textContent = item.figma;
 
