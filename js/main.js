@@ -520,11 +520,49 @@ openDetailFn = function (item, card) {
   let activeVariantCard = null;
 
   function fadePreview(changeFn) {
-    const img = document.getElementById('detail-img');
+    const img     = document.getElementById('detail-img');
+    const preview = img.closest('.detail-preview');
+
+    // Lock current height before content changes
+    const oldH = preview.offsetHeight;
+    preview.style.height = oldH + 'px';
+    preview.style.overflow = 'hidden';
+
     img.style.opacity = '0';
+
     setTimeout(() => {
       changeFn();
-      requestAnimationFrame(() => { img.style.opacity = ''; });
+
+      // Measure new height after content swap, waiting for image if needed
+      const animateHeight = () => {
+        preview.style.height = 'auto';
+        const newH = preview.offsetHeight;
+
+        if (Math.abs(newH - oldH) > 1) {
+          preview.style.height = oldH + 'px';
+          preview.getBoundingClientRect(); // force reflow
+          preview.style.transition = 'height .32s cubic-bezier(.22,.61,.36,1)';
+          preview.style.height = newH + 'px';
+
+          preview.addEventListener('transitionend', (e) => {
+            if (e.propertyName !== 'height') return;
+            preview.style.height = '';
+            preview.style.overflow = '';
+            preview.style.transition = '';
+          }, { once: true });
+        } else {
+          preview.style.height = '';
+          preview.style.overflow = '';
+        }
+
+        img.style.opacity = '';
+      };
+
+      if (img.complete) {
+        requestAnimationFrame(animateHeight);
+      } else {
+        img.addEventListener('load', () => requestAnimationFrame(animateHeight), { once: true });
+      }
     }, 120);
   }
 
