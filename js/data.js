@@ -14,6 +14,7 @@ export const ecosystemLogoMap = {
   wildberries: 'svgs/wildberries.svg',
   yandex:      'svgs/yandex.svg',
   apple:       'svgs/apple-pay.svg',
+  bytedance:   'svgs/tiktok.svg',
 };
 
 export const ecosystemLabels = {
@@ -37,6 +38,8 @@ export const ecosystemLabels = {
   adobe:       'Adobe',
   microsoft:   'Microsoft',
   PlayStation: 'PlayStation',
+  bytedance:   'ByteDance',
+  valve:       'Valve',
 };
 
 export async function loadLogos() {
