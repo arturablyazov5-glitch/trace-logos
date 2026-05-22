@@ -567,7 +567,7 @@ openDetailFn = function (item, card) {
     { label: 'SVG',       key: 'svg'      },
   ];
   const available = variantDefs.filter(v => item.variants?.[v.key]);
-  const originalLabel = item.prerendered ? 'App Icon' : 'Favicon';
+  const originalLabel = item.prerendered ? 'App Icon' : 'SVG Icon';
   const allVariants = available.length > 0
     ? [{ label: originalLabel, key: '_original', file: item.file }, ...available.map(v => ({ ...v, file: item.variants[v.key] }))]
     : [];
