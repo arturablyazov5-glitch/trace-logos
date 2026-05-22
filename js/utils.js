@@ -1,3 +1,73 @@
+export function animateContainerHeight(el, changeFn, waitForImg) {
+  const wasHidden = getComputedStyle(el).display === 'none';
+  const oldH = wasHidden ? 0 : el.offsetHeight;
+
+  if (!wasHidden) {
+    el.style.height = oldH + 'px';
+    el.style.overflow = 'hidden';
+  }
+
+  changeFn();
+
+  const willBeHidden = getComputedStyle(el).display === 'none';
+
+  if (wasHidden && willBeHidden) {
+    el.style.height = '';
+    el.style.overflow = '';
+    return;
+  }
+
+  if (willBeHidden) {
+    el.style.display = 'block';
+    el.style.height = oldH + 'px';
+    el.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      el.getBoundingClientRect();
+      el.style.transition = 'height .3s cubic-bezier(.22,.61,.36,1)';
+      el.style.height = '0px';
+      el.addEventListener('transitionend', (e) => {
+        if (e.propertyName !== 'height') return;
+        el.style.display = '';
+        el.style.height = '';
+        el.style.overflow = '';
+        el.style.transition = '';
+      }, { once: true });
+    });
+    return;
+  }
+
+  if (wasHidden) {
+    el.style.height = '0px';
+    el.style.overflow = 'hidden';
+  }
+
+  const finish = () => {
+    el.style.height = 'auto';
+    const newH = el.offsetHeight;
+    if (Math.abs(newH - oldH) > 1) {
+      el.style.height = (wasHidden ? 0 : oldH) + 'px';
+      el.getBoundingClientRect();
+      el.style.transition = 'height .3s cubic-bezier(.22,.61,.36,1)';
+      el.style.height = newH + 'px';
+      el.addEventListener('transitionend', (e) => {
+        if (e.propertyName !== 'height') return;
+        el.style.height = '';
+        el.style.overflow = '';
+        el.style.transition = '';
+      }, { once: true });
+    } else {
+      el.style.height = '';
+      el.style.overflow = '';
+    }
+  };
+
+  if (waitForImg && !waitForImg.complete) {
+    waitForImg.addEventListener('load', () => requestAnimationFrame(finish), { once: true });
+  } else {
+    requestAnimationFrame(finish);
+  }
+}
+
 let toastTimer;
 
 export function showToast(msg) {
@@ -30,6 +100,16 @@ export function highlight(text, words) {
   });
   result += escapeHtml(text.slice(last));
   return result;
+}
+
+const RU_TO_EN = 'йцукенгшщзхъфывапролджэячсмитьбю'.split('').reduce((m, c, i) => {
+  m[c] = 'qwertyuiop[]asdfghjkl;\'zxcvbnm,.'.split('')[i]; return m; }, {});
+const EN_TO_RU = Object.fromEntries(Object.entries(RU_TO_EN).map(([r, e]) => [e, r]));
+
+export function switchLayout(str) {
+  const hasRu = /[а-яё]/i.test(str);
+  const map = hasRu ? RU_TO_EN : EN_TO_RU;
+  return str.split('').map(c => map[c.toLowerCase()] ?? c).join('');
 }
 
 export const SVG_URL_V = Date.now();

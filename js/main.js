@@ -1,4 +1,4 @@
-import { showToast, highlight, svgUrl } from './utils.js';
+import { showToast, highlight, svgUrl, animateContainerHeight } from './utils.js';
 import {
   colorState, svgRawCache,
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
@@ -7,6 +7,13 @@ import {
 import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip } from './export.js';
 import { updateSeoPageLink } from './seo.js';
 import { ecosystemLogoMap, ecosystemLabels, loadLogos } from './data.js';
+import {
+  initVirtual,
+  setSectionHidden, loadCardImage, ensureCardMounted,
+  updateVirtualizedSections, scheduleVirtualizedSections, invalidateVirtualizedLayout,
+  resetContentScroll,
+} from './virtual.js';
+import { initSearch, filterCards } from './search.js';
 import './suggest.js';
 import './help.js';
 
@@ -29,8 +36,6 @@ const layoutMq = matchMedia('(max-width: 768px)');
 
 // ── Global state ──
 let totalCards = 0;
-let virtualizeRaf = 0;
-const VIRTUAL_OVERSCAN = 900;
 const sectionEls   = [];
 const ecosystemEls = [];
 const allItems     = [];
@@ -39,79 +44,6 @@ const cardByItemFigma = new Map();
 let activeCard = null;
 let openDetailFn;
 let currentDisplayType = null;
-
-function animateContainerHeight(el, changeFn, waitForImg) {
-  const wasHidden = getComputedStyle(el).display === 'none';
-  const oldH = wasHidden ? 0 : el.offsetHeight;
-
-  if (!wasHidden) {
-    el.style.height = oldH + 'px';
-    el.style.overflow = 'hidden';
-  }
-
-  changeFn();
-
-  const willBeHidden = getComputedStyle(el).display === 'none';
-
-  // Нет изменений — выходим
-  if (wasHidden && willBeHidden) {
-    el.style.height = '';
-    el.style.overflow = '';
-    return;
-  }
-
-  // Скрываем: display:none не даёт анимировать — временно переопределяем
-  if (willBeHidden) {
-    el.style.display = 'block';
-    el.style.height = oldH + 'px';
-    el.style.overflow = 'hidden';
-    requestAnimationFrame(() => {
-      el.getBoundingClientRect();
-      el.style.transition = 'height .3s cubic-bezier(.22,.61,.36,1)';
-      el.style.height = '0px';
-      el.addEventListener('transitionend', (e) => {
-        if (e.propertyName !== 'height') return;
-        el.style.display = '';
-        el.style.height = '';
-        el.style.overflow = '';
-        el.style.transition = '';
-      }, { once: true });
-    });
-    return;
-  }
-
-  // Показываем или меняем высоту
-  if (wasHidden) {
-    el.style.height = '0px';
-    el.style.overflow = 'hidden';
-  }
-
-  const finish = () => {
-    el.style.height = 'auto';
-    const newH = el.offsetHeight;
-    if (Math.abs(newH - oldH) > 1) {
-      el.style.height = (wasHidden ? 0 : oldH) + 'px';
-      el.getBoundingClientRect();
-      el.style.transition = 'height .3s cubic-bezier(.22,.61,.36,1)';
-      el.style.height = newH + 'px';
-      el.addEventListener('transitionend', (e) => {
-        if (e.propertyName !== 'height') return;
-        el.style.height = '';
-        el.style.overflow = '';
-        el.style.transition = '';
-      }, { once: true });
-    } else {
-      el.style.height = '';
-      el.style.overflow = '';
-    }
-  };
-
-  if (waitForImg && !waitForImg.complete) {
-    waitForImg.addEventListener('load', () => requestAnimationFrame(finish), { once: true });
-  } else {
-    requestAnimationFrame(finish);
-  }
-}
 
 let copyBtnResetTimer = null;
 
@@ -184,112 +116,6 @@ function setDetailOpen(open) {
   detail.classList.toggle('open', open);
   syncDetailBackdrop(open);
   requestAnimationFrame(invalidateVirtualizedLayout);
-}
-
-// ── Virtualization ──
-function setSectionHidden(sec, hidden) {
-  if (sec.classList.contains('hidden') === hidden) return;
-  sec.style.maxHeight = '';
-  sec.classList.toggle('hidden', hidden);
-}
-
-function getGridColumnCount(grid) {
-  if (layoutMq.matches) return 6;
-  const width = grid.clientWidth || Math.max(1, content.clientWidth - 48);
-  return Math.max(1, Math.floor((width + 4) / 84));
-}
-
-function estimateGridHeight(section) {
-  const count = section.visibleCards.length || section.group.items.length;
-  if (!count) return 0;
-  const columns = getGridColumnCount(section.grid);
-  const rows = Math.ceil(count / columns);
-  const gap = layoutMq.matches ? 8 : 4;
-  const mobileCellWidth = Math.max(1, (section.grid.clientWidth - gap * 5) / 6);
-  const fallbackRowHeight = layoutMq.matches ? mobileCellWidth + 34 : (search.value.trim() ? 112 : 94);
-  const rowHeight = section.rowHeight || fallbackRowHeight;
-  return rows * rowHeight + Math.max(0, rows - 1) * gap;
-}
-
-function loadCardImage(card) {
-  if (card._imageLoadedStarted) return;
-  card._imageLoadedStarted = true;
-  const img = card.querySelector('img');
-  if (img?.dataset.src) img.src = img.dataset.src;
-}
-
-function mountVirtualSection(section) {
-  if (section.mounted) return;
-  ensureSectionCards(section);
-  section.grid.style.height = '';
-  section.grid.replaceChildren(...section.visibleCards);
-  section.visibleCards.forEach(loadCardImage);
-  section.mounted = true;
-  requestAnimationFrame(() => {
-    const sample = section.grid.querySelector('.card:not(.hidden)');
-    if (sample) section.rowHeight = sample.getBoundingClientRect().height || section.rowHeight;
-    section.gridHeight = section.grid.getBoundingClientRect().height || section.gridHeight;
-  });
-}
-
-function unmountVirtualSection(section) {
-  if (!section.mounted) return;
-  section.gridHeight = section.grid.getBoundingClientRect().height || estimateGridHeight(section);
-  section.grid.style.height = section.gridHeight + 'px';
-  section.grid.replaceChildren();
-  section.mounted = false;
-}
-
-function ensureCardMounted(card) {
-  const section = card._sectionState;
-  if (!section || section.sec.classList.contains('hidden')) return;
-  mountVirtualSection(section);
-}
-
-function updateVirtualizedSections() {
-  virtualizeRaf = 0;
-  if (content.style.display === 'none') return;
-  const contentRect = content.getBoundingClientRect();
-  const minY = contentRect.top - VIRTUAL_OVERSCAN;
-  const maxY = contentRect.bottom + VIRTUAL_OVERSCAN;
-
-  sectionEls.forEach(section => {
-    if (section.sec.classList.contains('hidden') || (!section.visibleCards.length && section.cardsBuilt)) {
-      unmountVirtualSection(section);
-      section.grid.style.height = '';
-      return;
-    }
-    if (!section.mounted && !section.grid.style.height) {
-      section.grid.style.height = estimateGridHeight(section) + 'px';
-    }
-    const rect = section.sec.getBoundingClientRect();
-    const shouldMount = rect.bottom >= minY && rect.top <= maxY;
-    if (shouldMount) mountVirtualSection(section);
-    else unmountVirtualSection(section);
-  });
-}
-
-function scheduleVirtualizedSections() {
-  if (virtualizeRaf) return;
-  virtualizeRaf = requestAnimationFrame(updateVirtualizedSections);
-}
-
-function invalidateVirtualizedLayout() {
-  sectionEls.forEach(section => {
-    section.gridHeight = 0;
-    section.rowHeight = 0;
-    if (!section.mounted) section.grid.style.height = '';
-  });
-  scheduleVirtualizedSections();
-}
-
-function resetContentScroll() {
-  content.scrollTop = 0;
-  requestAnimationFrame(() => {
-    content.scrollTop = 0;
-    updateScrollTopButton();
-    updateVirtualizedSections();
-  });
 }
 
 // ── Cards ──
@@ -409,70 +235,6 @@ function setActiveEcosystem(ecosystem) {
   document.getElementById('empty').classList.remove('show');
   document.getElementById('content').style.display = '';
   resetContentScroll();
-}
-
-// ── Search ──
-function matchWord(word, haystack) {
-  if (haystack.includes(word)) return true;
-  const tokens = haystack.split(/\s+/);
-  return tokens.some(t => t && (word.startsWith(t) || t.startsWith(word)));
-}
-
-function updateSearchCount(visible, hasQuery) {
-  if (!hasQuery) {
-    searchCount.classList.remove('visible');
-    searchCount.textContent = '';
-    return;
-  }
-  searchCount.textContent = visible + ' из ' + totalCards;
-  searchCount.classList.add('visible');
-}
-
-function filterCards(q) {
-  const words = q.trim().toLowerCase().replace(/-/g, '').split(/\s+/).filter(Boolean);
-  const rawWords = q.trim().split(/\s+/).filter(Boolean);
-  const hasQuery = words.length > 0;
-  let visibleCardCount = 0;
-  let sectionsWithHits = 0;
-
-  sectionEls.forEach(section => {
-    ensureSectionCards(section);
-    let any = false;
-    const matchingCards = [];
-    section.cards.forEach(card => {
-      const match = !hasQuery || words.every(w => matchWord(w, card.dataset.search));
-      card.classList.toggle('hidden', !match);
-      if (!match) return;
-      any = true;
-      visibleCardCount++;
-      matchingCards.push(card);
-
-      const item = card._item;
-      const labelEl = card.querySelector('.label');
-      const pathEl = card.querySelector('.card-path');
-      if (hasQuery) {
-        labelEl.innerHTML = highlight(item.name, rawWords);
-        pathEl.innerHTML = highlight(item.figma, rawWords);
-        card.classList.add('show-path');
-      } else {
-        labelEl.textContent = item.name;
-        pathEl.textContent = item.figma;
-        card.classList.remove('show-path');
-      }
-    });
-    section.visibleCards = matchingCards;
-    section.grid.style.height = '';
-    if (section.mounted) { section.grid.replaceChildren(...matchingCards); matchingCards.forEach(loadCardImage); }
-    setSectionHidden(section.sec, !any);
-    if (any) sectionsWithHits++;
-  });
-
-  updateSearchCount(visibleCardCount, hasQuery);
-  const isEmpty = sectionsWithHits === 0 && hasQuery;
-  document.getElementById('empty').classList.toggle('show', isEmpty);
-  document.getElementById('content').style.display = isEmpty ? 'none' : '';
-  if (hasQuery) resetContentScroll();
-  else requestAnimationFrame(() => { updateScrollTopButton(); updateVirtualizedSections(); });
 }
 
 // ── Detail panel ──
@@ -963,6 +725,9 @@ document.addEventListener('keydown', (e) => {
 
 // ── Init ──
 placeSearchBar();
+
+initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
+initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton });
 
 loadLogos().then(logos => {
   for (const group of logos) {
