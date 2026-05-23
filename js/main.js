@@ -676,6 +676,15 @@ document.addEventListener('keydown', (e) => {
     }
     return;
   }
+  // Автофокус в поиск при наборе букв вне инпутов
+  if (!mod && !e.altKey && e.key.length === 1 && /\S/.test(e.key)) {
+    const tag = document.activeElement?.tagName;
+    const isInput = tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement?.isContentEditable;
+    if (!isInput) {
+      search.focus();
+      // символ сам попадёт в инпут через нативный ввод
+    }
+  }
   if (e.key !== 'Escape') return;
   if (layoutMq.matches && sidebar.classList.contains('nav-open')) { closeNavDrawer(); return; }
   if (detail.classList.contains('open')) {
