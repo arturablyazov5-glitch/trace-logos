@@ -75,6 +75,11 @@ export function filterCards(q) {
   const isEmpty = sectionsWithHits === 0 && hasQuery;
   document.getElementById('empty').classList.toggle('show', isEmpty);
   document.getElementById('content').style.display = isEmpty ? 'none' : '';
+  if (isEmpty) {
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    const allNav = document.querySelector('[data-section="all"]');
+    if (allNav) allNav.classList.add('active');
+  }
   if (hasQuery) resetContentScroll();
   else requestAnimationFrame(() => { _updateScrollTopButton(); scheduleVirtualizedSections(); });
 }

@@ -15,7 +15,7 @@ import {
 } from './virtual.js';
 import { initSearch, filterCards } from './search.js';
 import './suggest.js';
-import './help.js';
+import { openHelpModal } from './help.js';
 
 // ── DOM refs ──
 const content           = document.getElementById('content');
@@ -46,6 +46,9 @@ let openDetailFn;
 let currentDisplayType = null;
 
 let copyBtnResetTimer = null;
+let detailPushedState = false;
+let isClosingViaButton = false;
+let activeVariantCard = null;
 
 function resetCopyBtn() {
   if (!copyBtnResetTimer) return;
@@ -94,7 +97,6 @@ function openNavDrawer() {
   navDrawerBackdrop.setAttribute('aria-hidden', 'false');
   burgerBtn.setAttribute('aria-expanded', 'true');
   syncBodyScrollLock();
-  setTimeout(() => search.focus({ preventScroll: true }), 320);
 }
 
 function closeNavDrawer() {
@@ -116,6 +118,10 @@ function setDetailOpen(open) {
   detail.classList.toggle('open', open);
   syncDetailBackdrop(open);
   requestAnimationFrame(invalidateVirtualizedLayout);
+  if (open && !detailPushedState) {
+    history.pushState({ detail: true }, '');
+    detailPushedState = true;
+  }
 }
 
 // ── Cards ──
@@ -237,26 +243,172 @@ function setActiveEcosystem(ecosystem) {
   resetContentScroll();
 }
 
-// ── Detail panel ──
-function withDetailTransition(mutator) {
-  mutator();
-  return Promise.resolve();
+// ── Variant selection ──
+const TYPE_LABELS = {
+  svg:     'SVG',
+  full:    'Full',
+  full_en: 'Full EN',
+  png:     'PNG Icon',
+};
+
+function isFullFile(file) {
+  return /-full(\.[^.]+)?$/.test(file);
 }
 
-function scrollCardIntoView(card, afterTransition = Promise.resolve()) {
-  afterTransition.catch(() => {}).finally(() => {
+function getDisplayType(vDef) {
+  if (vDef.type === '_original' || vDef.type === 'svg') return 'square';
+  if (vDef.type === 'full' || vDef.type === 'full_en') return 'wide';
+  return isFullFile(vDef.file) ? 'wide' : 'square';
+}
+
+async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled) {
+  if (activeVariantCard) activeVariantCard.classList.remove('active');
+  activeVariantCard = vcEl;
+  if (vcEl) vcEl.classList.add('active');
+
+  const detailFigmaEl = document.getElementById('detail-figma');
+  detailFigmaEl.textContent = item.figma;
+
+  const isPng = vDef.file.endsWith('.png');
+  const baseName = item.figma.split('/').pop().toLowerCase();
+  const suffix   = (vDef.type === '_original' || vDef.type === 'png') ? '' : '-' + (vDef.type ?? vDef.label ?? '').replace(/_/g, '-').toLowerCase();
+
+  const btnCopy        = document.getElementById('btn-copy');
+  const btnCopyPng     = document.getElementById('btn-copy-png');
+  const btnDownloadSvg = document.getElementById('btn-download');
+  const btnDownloadPng = document.getElementById('btn-download-png');
+  const detailImg      = document.getElementById('detail-img');
+  const preview        = detailImg.closest('.detail-preview');
+  const controls       = document.getElementById('detail-controls');
+  const colorsPanel    = document.getElementById('colors-panel');
+  const colorsDivider  = document.getElementById('colors-divider');
+
+  const newDisplayType = getDisplayType(vDef);
+  const needsFade = currentDisplayType !== null && currentDisplayType !== newDisplayType;
+  currentDisplayType = newDisplayType;
+
+  if (needsFade) detailImg.style.opacity = '0';
+
+  btnCopy.classList.toggle('hidden', isPng);
+  btnDownloadSvg.classList.toggle('hidden', isPng);
+  btnCopyPng.classList.toggle('hidden', !isPng);
+
+  if (isPng) {
+    animateContainerHeight(controls, () => {
+      colorsPanel.classList.add('colors-hidden');
+      colorsDivider.classList.add('colors-hidden');
+    });
+
+    const applyPng = () => {
+      detailImg.src = svgUrl(vDef.file);
+      detailImg.classList.remove('square');
+      if (!vDef.type && isFullFile(vDef.file)) detailImg.classList.remove('prerendered');
+      else detailImg.classList.add('prerendered');
+      const previewEl = detailImg.closest('.detail-preview');
+      if (previewEl?.classList.contains('loading')) {
+        const done = () => previewEl.classList.remove('loading');
+        detailImg.addEventListener('load', done, { once: true });
+        detailImg.addEventListener('error', done, { once: true });
+      }
+    };
+
+    if (needsFade) {
+      setTimeout(() => {
+        animateContainerHeight(preview, applyPng, detailImg);
+        requestAnimationFrame(() => { detailImg.style.opacity = ''; });
+      }, 120);
+    } else {
+      animateContainerHeight(preview, applyPng, detailImg);
+    }
+
+    const getPngBlob = async () => {
+      const resp = await fetch(svgUrl(vDef.file));
+      const buf = await resp.arrayBuffer();
+      return new Blob([buf], { type: 'image/png' });
+    };
+    btnCopyPng.onclick = async () => {
+      const blob = await getPngBlob();
+      const file = new File([blob], `${item.name}.png`, { type: 'image/png' });
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
+      triggerConfetti(btnCopyPng);
+      showToast(`Скопировано PNG: ${item.name}`);
+    };
+    btnDownloadPng.onclick = async () => {
+      const blob = await getPngBlob();
+      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.png' });
+      a.click(); URL.revokeObjectURL(a.href);
+      showToast(`Скачано PNG: ${item.name}`);
+    };
+    return;
+  }
+
+  // SVG-ветка
+  btnCopyPng.classList.add('hidden');
+  const isSquare = vDef.type === '_original' || vDef.type === 'svg' || (!vDef.type && !isFullFile(vDef.file));
+  const rawSvg = await loadRawSvg(vDef.file);
+
+  if (!colorEditingDisabled && !Object.keys(colorState.colorMap).length) {
+    const allSvgText = allVariants.map(v => svgRawCache[v.file] || '').join('\n');
+    buildColorEditor(allSvgText || rawSvg);
+  }
+
+  animateContainerHeight(controls, () => {
+    colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
+    colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
+  });
+
+  const applysvg = () => {
+    detailImg.classList.remove('prerendered');
+    updatePreview(rawSvg, isSquare);
+  };
+
+  if (needsFade) {
+    setTimeout(() => {
+      animateContainerHeight(preview, applysvg);
+      requestAnimationFrame(() => { detailImg.style.opacity = ''; });
+    }, 120);
+  } else {
+    animateContainerHeight(preview, applysvg);
+  }
+
+  const getExportSvg = () => applyColorMap(rawSvg);
+
+  btnCopy.onclick = () => {
+    navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
+      .then(() => triggerConfetti(btnCopy));
+  };
+  btnDownloadSvg.onclick = () => {
+    const blob = new Blob([svgForExport(getExportSvg(), isSquare)], { type: 'image/svg+xml' });
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.svg' });
+    a.click(); URL.revokeObjectURL(a.href);
+    showToast(`Скачано: ${item.name}${suffix ? ' (' + vDef.label + ')' : ''}`);
+  };
+  btnDownloadPng.onclick = async () => {
+    const pngBlob = await svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 });
+    const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + suffix + '.png' });
+    a.click(); URL.revokeObjectURL(a.href);
+    showToast(`Скачано PNG: ${item.name}`);
+  };
+}
+
+// ── Detail panel ──
+function scrollCardIntoView(card) {
+  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        ensureCardMounted(card);
-        card.scrollIntoView({ block: 'center', behavior: 'smooth' });
-      });
+      ensureCardMounted(card);
+      card.scrollIntoView({ block: 'center', behavior: 'smooth' });
     });
   });
 }
 
 function closeDetail() {
-  withDetailTransition(() => setDetailOpen(false));
+  setDetailOpen(false);
   if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
+  if (detailPushedState) {
+    detailPushedState = false;
+    isClosingViaButton = true;
+    history.back();
+  }
 }
 
 function isFlagItem(item) {
@@ -282,6 +434,7 @@ openDetailFn = function (item, card) {
   detailImg.alt = item.name;
   detailImg.classList.add('square');
   detailImg.classList.remove('prerendered');
+  detailImg.closest('.detail-preview').classList.add('loading');
   detailName.textContent = item.name;
   detailFigmaEl.textContent = item.figma;
 
@@ -292,7 +445,7 @@ openDetailFn = function (item, card) {
     detailActionsEl.style.display = 'none';
     detailActionsHelpEl.style.display = '';
     detailActionsLabel.style.display = 'none';
-    document.getElementById('btn-help').onclick = () => window.openHelpModal(item.name);
+    document.getElementById('btn-help').onclick = () => openHelpModal(item.name);
   } else {
     detailActionsEl.style.display = '';
     detailActionsHelpEl.style.display = 'none';
@@ -319,19 +472,15 @@ openDetailFn = function (item, card) {
     colorsSection.classList.toggle('hidden');
   };
 
-  // Variant definitions (closure for reset button)
+  // Variant definitions
   variantsGrid.innerHTML = '';
-  const variantDefs = [
-    { label: 'Favicon',   key: 'favicon'  },
-    { label: 'PNG Icon',  key: 'png'      },
-    { label: 'Full',      key: 'full'     },
-    { label: 'Full EN',   key: 'full_en'  },
-    { label: 'SVG',       key: 'svg'      },
-  ];
-  const available = variantDefs.filter(v => item.variants?.[v.key]);
   const originalLabel = item.prerendered ? 'App Icon' : 'SVG Icon';
-  const allVariants = available.length > 0
-    ? [{ label: originalLabel, key: '_original', file: item.file }, ...available.map(v => ({ ...v, file: item.variants[v.key] }))]
+  const rawVariants = Array.isArray(item.variants) ? item.variants : [];
+  const allVariants = rawVariants.length > 0
+    ? [
+        { label: originalLabel, type: '_original', file: item.file },
+        ...rawVariants.map(v => ({ ...v, label: v.label ?? TYPE_LABELS[v.type] ?? v.type ?? '' })),
+      ]
     : [];
 
   document.getElementById('colors-reset-btn').onclick = (e) => {
@@ -356,135 +505,7 @@ openDetailFn = function (item, card) {
     downloadAllBtn.classList.toggle('hidden', downloadableSvgCount <= 1);
   });
 
-  let activeVariantCard = null;
-
-  // Определяет тип отображения варианта
-  function getDisplayType(vDef) {
-    if (vDef.file.endsWith('.png')) return 'square';
-    return (vDef.key === '_original' || vDef.key === 'svg' || vDef.key === 'favicon') ? 'square' : 'wide';
-  }
-
-  async function selectVariant(vDef, vcEl) {
-    if (activeVariantCard) activeVariantCard.classList.remove('active');
-    activeVariantCard = vcEl;
-    vcEl.classList.add('active');
-    detailFigmaEl.textContent = item.figma;
-
-    const isPng = vDef.file.endsWith('.png');
-    const baseName = item.figma.split('/').pop().toLowerCase();
-    const suffix   = vDef.key === '_original' ? '' : '-' + vDef.key.replace(/_/g, '-');
-
-    const btnCopy        = document.getElementById('btn-copy');
-    const btnCopyPng     = document.getElementById('btn-copy-png');
-    const btnDownloadSvg = document.getElementById('btn-download');
-    const btnDownloadPng = document.getElementById('btn-download-png');
-    const detailImg      = document.getElementById('detail-img');
-    const preview        = detailImg.closest('.detail-preview');
-    const controls       = document.getElementById('detail-controls');
-
-    // Фейд только при смене типа отображения (square↔wide, svg↔png и т.д.)
-    const newDisplayType = getDisplayType(vDef);
-    const needsFade = currentDisplayType !== null && currentDisplayType !== newDisplayType;
-    currentDisplayType = newDisplayType;
-
-    if (needsFade) detailImg.style.opacity = '0';
-
-    btnCopy.classList.toggle('hidden', isPng);
-    btnDownloadSvg.classList.toggle('hidden', isPng);
-    btnCopyPng.classList.toggle('hidden', !isPng);
-
-    if (isPng) {
-      // Анимируем controls (кнопки + панель цветов) и preview одновременно
-      animateContainerHeight(controls, () => {
-        colorsPanel.classList.add('colors-hidden');
-        colorsDivider.classList.add('colors-hidden');
-      });
-
-      const applyPng = () => {
-        detailImg.src = svgUrl(vDef.file);
-        detailImg.classList.remove('square');
-        detailImg.classList.add('prerendered');
-      };
-
-      if (needsFade) {
-        setTimeout(() => {
-          animateContainerHeight(preview, applyPng, detailImg);
-          requestAnimationFrame(() => { detailImg.style.opacity = ''; });
-        }, 120);
-      } else {
-        animateContainerHeight(preview, applyPng, detailImg);
-      }
-
-      const getPngBlob = async () => {
-        const resp = await fetch(svgUrl(vDef.file));
-        const buf = await resp.arrayBuffer();
-        return new Blob([buf], { type: 'image/png' });
-      };
-      btnCopyPng.onclick = async () => {
-        const blob = await getPngBlob();
-        const file = new File([blob], `${item.name}.png`, { type: 'image/png' });
-        await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
-        triggerConfetti(btnCopyPng);
-        showToast(`Скопировано PNG: ${item.name}`);
-      };
-      btnDownloadPng.onclick = async () => {
-        const blob = await getPngBlob();
-        const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.png' });
-        a.click(); URL.revokeObjectURL(a.href);
-        showToast(`Скачано PNG: ${item.name}`);
-      };
-      return;
-    }
-
-    // SVG-ветка
-    btnCopyPng.classList.add('hidden');
-    const isSquare = vDef.key === '_original' || vDef.key === 'svg' || vDef.key === 'favicon';
-    const rawSvg = await loadRawSvg(vDef.file);
-
-    if (!colorEditingDisabled && !Object.keys(colorState.colorMap).length) {
-      const allSvgText = allVariants.map(v => svgRawCache[v.file] || '').join('\n');
-      buildColorEditor(allSvgText);
-    }
-
-    // Анимируем controls (кнопки + панель цветов) и preview одновременно
-    animateContainerHeight(controls, () => {
-      colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
-      colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
-    });
-
-    const applysvg = () => {
-      detailImg.classList.remove('prerendered');
-      updatePreview(rawSvg, isSquare);
-    };
-
-    if (needsFade) {
-      setTimeout(() => {
-        animateContainerHeight(preview, applysvg);
-        requestAnimationFrame(() => { detailImg.style.opacity = ''; });
-      }, 120);
-    } else {
-      animateContainerHeight(preview, applysvg);
-    }
-
-    const getExportSvg = () => applyColorMap(rawSvg);
-
-    btnCopy.onclick = () => {
-      navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
-        .then(() => triggerConfetti(btnCopy));
-    };
-    btnDownloadSvg.onclick = () => {
-      const blob = new Blob([svgForExport(getExportSvg(), isSquare)], { type: 'image/svg+xml' });
-      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.svg' });
-      a.click(); URL.revokeObjectURL(a.href);
-      showToast(`Скачано: ${item.name}${suffix ? ' (' + vDef.label + ')' : ''}`);
-    };
-    btnDownloadPng.onclick = async () => {
-      const pngBlob = await svgToPngBlob(getExportSvg(), { square: isSquare, size: 512 });
-      const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + suffix + '.png' });
-      a.click(); URL.revokeObjectURL(a.href);
-      showToast(`Скачано PNG: ${item.name}`);
-    };
-  }
+  activeVariantCard = null;
 
   // Reset variant thumbnails list
   colorState.variantImgEls = [];
@@ -492,8 +513,9 @@ openDetailFn = function (item, card) {
 
   allVariants.forEach(vDef => {
     const vc = document.createElement('div');
-    const isWide = vDef.key === 'full' || vDef.key === 'full_en';
-    const isSquareVariant = vDef.key === '_original' || vDef.key === 'favicon' || vDef.key === 'svg' || vDef.key === 'png';
+    const isWide = vDef.type === 'full' || vDef.type === 'full_en' || (!vDef.type && isFullFile(vDef.file));
+    const isSquareVariant = vDef.type === '_original' || vDef.type === 'svg' || vDef.type === 'png'
+      || (!vDef.type && !isFullFile(vDef.file));
     vc.className = 'variant-card' + (isWide ? ' wide' : isSquareVariant ? ' favicon' : '');
     const vi = document.createElement('img');
     vi.src = svgUrl(vDef.file);
@@ -503,7 +525,7 @@ openDetailFn = function (item, card) {
     vl.className = 'variant-label';
     vl.textContent = vDef.label;
     vc.append(vi, vl);
-    vc.addEventListener('click', () => selectVariant(vDef, vc));
+    vc.addEventListener('click', () => selectVariant(vDef, vc, item, allVariants, colorEditingDisabled));
     variantsGrid.appendChild(vc);
     variantCards.push({ vDef, vc });
   });
@@ -512,69 +534,12 @@ openDetailFn = function (item, card) {
   Promise.all(svgOnlyVariants.map(v => loadRawSvg(v.file))).then(() => {
     if (variantCards.length > 0) {
       const { vDef, vc } = variantCards[0];
-      selectVariant(vDef, vc);
+      selectVariant(vDef, vc, item, allVariants, colorEditingDisabled);
     }
   });
 
   if (!allVariants.length) {
-    const isPng = item.file.endsWith('.png');
-    const btnCopy        = document.getElementById('btn-copy');
-    const btnCopyPng     = document.getElementById('btn-copy-png');
-    const btnDownloadSvg = document.getElementById('btn-download');
-    const btnDownloadPng = document.getElementById('btn-download-png');
-    btnCopy.classList.toggle('hidden', isPng);
-    btnDownloadSvg.classList.toggle('hidden', isPng);
-    btnCopyPng.classList.toggle('hidden', !isPng);
-
-    if (isPng) {
-      const detailImg = document.getElementById('detail-img');
-      detailImg.src = svgUrl(item.file);
-      detailImg.classList.remove('square');
-      detailImg.classList.add('prerendered');
-      const baseName = item.figma.split('/').pop().toLowerCase();
-      const getPngBlob = async () => {
-        const resp = await fetch(svgUrl(item.file));
-        const buf = await resp.arrayBuffer();
-        return new Blob([buf], { type: 'image/png' });
-      };
-      btnCopyPng.onclick = async () => {
-        const blob = await getPngBlob();
-        const file = new File([blob], `${item.name}.png`, { type: 'image/png' });
-        await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
-        triggerConfetti(btnCopyPng);
-        showToast(`Скопировано PNG: ${item.name}`);
-      };
-      btnDownloadPng.onclick = async () => {
-        const blob = await getPngBlob();
-        const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + '.png' });
-        a.click(); URL.revokeObjectURL(a.href);
-        showToast(`Скачано PNG: ${item.name}`);
-      };
-    } else {
-      btnCopyPng.classList.add('hidden');
-      loadRawSvg(item.file).then(raw => {
-        if (!colorEditingDisabled) buildColorEditor(raw);
-        updatePreview(raw, true);
-        const baseName = item.figma.split('/').pop().toLowerCase();
-        const getExportSvg = () => applyColorMap(raw);
-        btnCopy.onclick = () => {
-          navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, true))
-            .then(() => triggerConfetti(btnCopy));
-        };
-        btnDownloadSvg.onclick = () => {
-          const blob = new Blob([svgForExport(getExportSvg(), true)], { type: 'image/svg+xml' });
-          const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + '.svg' });
-          a.click(); URL.revokeObjectURL(a.href);
-          showToast(`Скачано: ${item.name}`);
-        };
-        btnDownloadPng.onclick = async () => {
-          const pngBlob = await svgToPngBlob(getExportSvg(), { square: true, size: 512 });
-          const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + '.png' });
-          a.click(); URL.revokeObjectURL(a.href);
-          showToast(`Скачано PNG: ${item.name}`);
-        };
-      });
-    }
+    selectVariant({ type: '_original', file: item.file }, null, item, allVariants, colorEditingDisabled);
   }
 
   // Ecosystem block
@@ -648,15 +613,14 @@ openDetailFn = function (item, card) {
 
   updateSeoPageLink(item, () => activeCard?._item);
 
-  let transition = Promise.resolve();
   if (!detail.classList.contains('open')) {
-    transition = withDetailTransition(() => setDetailOpen(true));
+    setDetailOpen(true);
   } else {
     syncDetailBackdrop(true);
   }
 
   downloadAllBtn.onclick = downloadableSvgCount > 1 ? () => downloadAllAsZip(item) : null;
-  scrollCardIntoView(card, transition);
+  scrollCardIntoView(card);
 };
 
 // ── Event listeners ──
@@ -715,12 +679,21 @@ document.addEventListener('keydown', (e) => {
   if (e.key !== 'Escape') return;
   if (layoutMq.matches && sidebar.classList.contains('nav-open')) { closeNavDrawer(); return; }
   if (detail.classList.contains('open')) {
-    withDetailTransition(() => setDetailOpen(false));
-    if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
+    closeDetail();
   } else if (search.value) {
     search.value = '';
     filterCards('');
   }
+});
+
+window.addEventListener('popstate', () => {
+  if (isClosingViaButton) { isClosingViaButton = false; return; }
+  if (!detail.classList.contains('open')) return;
+  detailPushedState = false;
+  detail.classList.remove('open');
+  syncDetailBackdrop(false);
+  requestAnimationFrame(invalidateVirtualizedLayout);
+  if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
 });
 
 // ── Init ──
@@ -730,8 +703,10 @@ initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrol
 initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton });
 
 loadLogos().then(logos => {
+  let readyTotal = 0;
   for (const group of logos) {
     const readyCount = group.items.filter(item => !item.comingSoon).length;
+    readyTotal += readyCount;
     totalCards += group.items.length;
     group.items.forEach(item => allItems.push(item));
 
@@ -839,6 +814,9 @@ loadLogos().then(logos => {
   });
 
   updateVirtualizedSections();
+
+  window.__logosReadyCount = readyTotal;
+  document.dispatchEvent(new CustomEvent('logos-count-ready', { detail: readyTotal }));
 
   requestIdleCallback
     ? requestIdleCallback(() => sectionEls.forEach(s => ensureSectionCards(s)), { timeout: 2000 })

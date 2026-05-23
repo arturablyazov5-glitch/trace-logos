@@ -18,7 +18,10 @@ export function seoPageUrlForItem(item) {
 async function seoPageExists(url) {
   if (!url) return false;
   if (!seoPageExistsCache.has(url)) {
-    seoPageExistsCache.set(url, fetch(url, { method: 'HEAD' }).then(r => r.ok).catch(() => false));
+    const p = fetch(url, { method: 'HEAD' })
+      .then(r => r.ok)
+      .catch(() => { seoPageExistsCache.delete(url); return false; });
+    seoPageExistsCache.set(url, p);
   }
   return seoPageExistsCache.get(url);
 }

@@ -61,6 +61,7 @@
 .detail-close:hover { background: #2a2a2a; color: #fff; }
 
 .detail-preview {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,6 +69,20 @@
   min-height: 128px;
   box-sizing: border-box;
 }
+
+.detail-preview-skeleton {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  border-radius: 22px;
+  background: linear-gradient(90deg, #1b1b1b 0%, #242424 45%, #1b1b1b 90%);
+  background-size: 220% 100%;
+  animation: skeleton-shimmer 1.15s linear infinite;
+  opacity: 0;
+  transition: opacity .16s;
+  pointer-events: none;
+}
+.detail-preview.loading .detail-preview-skeleton { opacity: 1; }
 .detail-preview img {
   max-width: 100%;
   max-height: 112px;

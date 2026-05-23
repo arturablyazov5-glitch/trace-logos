@@ -24,10 +24,11 @@
 
 <header class="mobile-header mobile-only" id="mobile-header">
   <site-header class="mobile-header-brand" variant="brand"></site-header>
-  <button type="button" class="suggest-btn" id="suggest-btn-mobile" style="margin-left:0;padding:0 10px;">
+  <button type="button" class="suggest-btn suggest-btn--mobile" id="suggest-btn-mobile" aria-label="Предложить иконку">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M12 5v14M5 12h14"/>
     </svg>
+    <span>Предложить</span>
   </button>
   <button type="button" class="burger-btn" id="burger-btn" aria-label="Меню" aria-expanded="false" aria-controls="sidebar">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -97,6 +98,7 @@
       </div>
 
       <div class="detail-preview">
+        <div class="detail-preview-skeleton" aria-hidden="true"></div>
         <img id="detail-img" src="" alt="">
       </div>
 
@@ -131,7 +133,7 @@
 
       <div class="detail-actions detail-actions-help hidden" id="detail-actions-help">
         <button class="btn btn-help" id="btn-help">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
           Загрузить иконку
         </button>
         <p class="detail-help-hint">Этой иконки пока нет на сайте. Если у вас есть SVG этого логотипа — загрузите его, и автор добавит его на сайт.</p>
@@ -179,7 +181,7 @@
       <div class="detail-brand-link hidden" id="detail-page-link">
         <div class="detail-divider"></div>
         <div class="detail-section-label">Страница</div>
-        <a id="btn-page-link" class="btn-brand" href="#">
+        <a id="btn-page-link" class="btn-brand" href="#" target="_blank" rel="noopener noreferrer">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
           Подробнее о логотипе
         </a>
@@ -252,7 +254,11 @@
         <div class="suggest-modal-title" id="help-title">Помочь с иконкой</div>
         <div class="suggest-modal-sub">Вы помогаете автору. Загрузите SVG для <strong id="help-icon-name"></strong></div>
       </div>
-      <button class="suggest-close" id="help-close" aria-label="Закрыть">×</button>
+      <button class="suggest-close" id="help-close" aria-label="Закрыть">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12"/>
+          </svg>
+        </button>
     </div>
     <form id="help-form" class="suggest-fields" style="margin-top:4px">
       <div class="suggest-field">

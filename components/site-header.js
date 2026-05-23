@@ -7,29 +7,15 @@ class SiteHeader extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: 'open' });
     this.render('загрузка...');
-    this.updateCount();
-  }
-
-  async updateCount() {
-    try {
-      const groups = await this.loadGroups();
-      const count = groups.reduce((sum, group) => sum + (group.items?.filter(i => !i.comingSoon).length || 0), 0);
-      this.render(this.iconCountText(count));
-    } catch {
-      this.render('каталог иконок');
+    if (typeof window.__logosReadyCount === 'number') {
+      this.render(this.iconCountText(window.__logosReadyCount));
+    } else {
+      const handler = (e) => {
+        this.render(this.iconCountText(e.detail));
+        document.removeEventListener('logos-count-ready', handler);
+      };
+      document.addEventListener('logos-count-ready', handler);
     }
-  }
-
-  async loadGroups() {
-    const manifestResponse = await fetch(`${_siteBase}logos/manifest.json`);
-    if (!manifestResponse.ok) throw new Error('manifest not found');
-    const manifest = await manifestResponse.json();
-    return Promise.all(manifest.categories.map(category => {
-      return fetch(`${_siteBase}logos/${category.file}`).then(response => {
-        if (!response.ok) throw new Error(`${category.file} not found`);
-        return response.json();
-      });
-    }));
   }
 
   iconCountText(count) {

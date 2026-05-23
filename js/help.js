@@ -1,5 +1,10 @@
 const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/upload';
 
+let _openHelpModal = null;
+export function openHelpModal(iconName) {
+  if (_openHelpModal) _openHelpModal(iconName);
+}
+
 const fields = [
   { id: 'help-favicon',  labelId: 'help-favicon-label',  nameId: 'help-favicon-name',  required: true,  key: 'Favicon',  formKey: 'favicon'  },
   { id: 'help-full',     labelId: 'help-full-label',     nameId: 'help-full-name',     required: false, key: 'Full',     formKey: 'full'     },
@@ -30,7 +35,7 @@ function init() {
 
   let currentIconName = '';
 
-  window.openHelpModal = function (iconName) {
+  _openHelpModal = function (iconName) {
     currentIconName = iconName;
     iconNameEl.textContent = iconName;
     form.style.display = '';
@@ -58,6 +63,7 @@ function init() {
 
   closeBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
 
   form.addEventListener('submit', async e => {
     e.preventDefault();

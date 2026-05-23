@@ -31,7 +31,7 @@ export function svgForExport(svg, isSquare = true) {
     .replace(/^(<svg[^>]*?)\bheight="[^"]*"/, `$1height="${EXPORT_WIDE_HEIGHT}"`);
 }
 
-export function svgToPngBlob(svgText, { square = false, size = 512 } = {}) {
+export function svgToPngBlob(svgText, { square = false, size = 1000 } = {}) {
   const sizedSvg = svgForExport(svgText, square);
   return new Promise((resolve, reject) => {
     const svgBlob = new Blob([sizedSvg], { type: 'image/svg+xml;charset=utf-8' });
@@ -43,8 +43,9 @@ export function svgToPngBlob(svgText, { square = false, size = 512 } = {}) {
         canvas.width = size;
         canvas.height = size;
       } else {
-        canvas.width = Math.round(wideLogoWidthAtHeight(sizedSvg, EXPORT_WIDE_HEIGHT));
-        canvas.height = EXPORT_WIDE_HEIGHT;
+        const vb = parseSvgViewBox(sizedSvg);
+        canvas.height = size;
+        canvas.width = vb && vb.h > 0 ? Math.round(size * vb.w / vb.h) : size;
       }
       const ctx = canvas.getContext('2d');
       ctx.imageSmoothingEnabled = true;
@@ -64,9 +65,24 @@ export function svgForFigma(svg, item, isSquare = true) {
   return svgForExport(svg, isSquare).replace(/^<svg/, `<svg id="${item.figma}"`);
 }
 
+function waitForJSZip(timeout = 10000) {
+  if (typeof JSZip !== 'undefined') return Promise.resolve(JSZip);
+  return new Promise((resolve, reject) => {
+    const start = Date.now();
+    const check = () => {
+      if (typeof JSZip !== 'undefined') return resolve(JSZip);
+      if (Date.now() - start > timeout) return reject(new Error('JSZip не загрузился'));
+      setTimeout(check, 100);
+    };
+    check();
+  });
+}
+
 export async function downloadAllAsZip(item) {
-  if (typeof JSZip === 'undefined') {
-    showToast('Архиватор ещё загружается...');
+  try {
+    await waitForJSZip();
+  } catch {
+    showToast('Архиватор не загрузился. Перезагрузите страницу.');
     return;
   }
 
@@ -76,12 +92,12 @@ export async function downloadAllAsZip(item) {
   const origLabel = label.textContent;
 
   const baseName = item.figma.split('/').pop().toLowerCase();
-  const squareVariantKeys = new Set(['svg', 'favicon']);
-  const variants = [{ key: '_original', file: item.file, square: true }];
-  if (item.variants) {
-    for (const [key, file] of Object.entries(item.variants)) {
-      variants.push({ key, file, square: squareVariantKeys.has(key) });
-    }
+  const isFullFile = file => /-full(\.[^.]+)?$/.test(file);
+  const isSquareVariant = v => v.type === '_original' || v.type === 'svg'
+    || (!v.type && !isFullFile(v.file));
+  const variants = [{ type: '_original', file: item.file }];
+  if (Array.isArray(item.variants)) {
+    for (const v of item.variants) variants.push(v);
   }
 
   btn.disabled = true;
@@ -97,8 +113,9 @@ export async function downloadAllAsZip(item) {
     };
 
     for (const v of variants) {
-      const suffixKey = v.key === 'svg' ? 'icon' : v.key === '_original' ? '' : v.key.replace(/_/g, '-');
-      const suffix = suffixKey ? '-' + suffixKey : '';
+      const suffixRaw = (v.type === '_original' || v.type === 'png') ? '' : (v.type === 'svg' ? 'icon' : (v.type ?? v.label ?? '')).replace(/_/g, '-').toLowerCase();
+      const suffix = suffixRaw ? '-' + suffixRaw : '';
+      const square = isSquareVariant(v);
 
       if (v.file.endsWith('.png')) {
         const resp = await fetch(svgUrl(v.file));
@@ -109,11 +126,11 @@ export async function downloadAllAsZip(item) {
         tick();
       } else {
         const rawSvg = await loadRawSvg(v.file);
-        const svgText = svgForExport(applyColorMap(rawSvg), v.square);
+        const svgText = svgForExport(applyColorMap(rawSvg), square);
         zip.file(`svg/${baseName}${suffix}.svg`, svgText);
         tick();
 
-        const pngBlob = await svgToPngBlob(svgText, { square: v.square, size: 512 });
+        const pngBlob = await svgToPngBlob(svgText, { square, size: 512 });
         zip.file(`png/${baseName}${suffix}.png`, pngBlob);
         tick();
       }

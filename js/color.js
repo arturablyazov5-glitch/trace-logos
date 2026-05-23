@@ -57,14 +57,20 @@ export function undoColors() {
   return true;
 }
 
+function normalizeSvgColors(svg) {
+  return svg.replace(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*[\d.]+)?\s*\)/gi, (_, r, g, b) =>
+    '#' + [+r, +g, +b].map(v => Math.min(255, Math.max(0, v)).toString(16).padStart(2, '0')).join('')
+  );
+}
+
 export async function loadRawSvg(file) {
-  if (!svgRawCache[file]) svgRawCache[file] = await fetch(svgUrl(file)).then(r => r.text());
+  if (!svgRawCache[file]) svgRawCache[file] = normalizeSvgColors(await fetch(svgUrl(file)).then(r => r.text()));
   return svgRawCache[file];
 }
 
 export function extractColors(svgText) {
   const set = new Set();
-  const re = /#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})\b/g;
+  const re = /#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})(?![0-9A-Fa-f])/g;
   let m;
   while ((m = re.exec(svgText)) !== null) {
     const n = normalizeHex(m[0]);
@@ -75,9 +81,11 @@ export function extractColors(svgText) {
 
 export function applyColorMap(svgText) {
   let s = svgText;
-  for (const [from, to] of Object.entries(colorState.colorMap)) {
-    if (from === to) continue;
-    s = s.replace(new RegExp(from, 'gi'), to);
+  const entries = Object.entries(colorState.colorMap)
+    .filter(([k, v]) => k !== v)
+    .sort(([a], [b]) => b.length - a.length);
+  for (const [from, to] of entries) {
+    s = s.replace(new RegExp(from + '(?![0-9a-fA-F])', 'gi'), to);
   }
   return s;
 }
@@ -102,6 +110,12 @@ export function updatePreview(rawSvg, isSquare) {
   detailImg._previewBlobUrl = URL.createObjectURL(new Blob([styled], { type: 'image/svg+xml' }));
   detailImg.src = detailImg._previewBlobUrl;
   detailImg.classList.toggle('square', isSquare);
+  const previewEl = detailImg.closest('.detail-preview');
+  if (previewEl?.classList.contains('loading')) {
+    const done = () => previewEl.classList.remove('loading');
+    detailImg.addEventListener('load', done, { once: true });
+    detailImg.addEventListener('error', done, { once: true });
+  }
 }
 
 export function buildColorEditor(rawSvg) {

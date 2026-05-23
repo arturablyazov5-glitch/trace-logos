@@ -15,6 +15,8 @@ export const ecosystemLogoMap = {
   yandex:      'svgs/yandex.svg',
   apple:       'svgs/apple-pay.svg',
   bytedance:   'svgs/tiktok.svg',
+  valve:       'svgs/valve.svg',
+  microsoft:   'svgs/microsoft.svg',
 };
 
 export const ecosystemLabels = {
@@ -47,10 +49,13 @@ export async function loadLogos() {
     if (!r.ok) throw new Error('manifest not found');
     return r.json();
   });
-  return Promise.all(manifest.categories.map(category =>
+  const results = await Promise.allSettled(manifest.categories.map(category =>
     fetch('logos/' + category.file).then(r => {
       if (!r.ok) throw new Error(category.file + ' not found');
       return r.json();
     })
   ));
+  return results
+    .filter(r => { if (r.status === 'rejected') { console.warn('loadLogos:', r.reason); } return r.status === 'fulfilled'; })
+    .map(r => r.value);
 }
