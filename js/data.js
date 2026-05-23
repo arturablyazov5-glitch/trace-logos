@@ -17,6 +17,7 @@ export const ecosystemLogoMap = {
   bytedance:   'svgs/tiktok.svg',
   valve:       'svgs/valve.svg',
   microsoft:   'svgs/microsoft.svg',
+  mvideo:      'svgs/mvideo.svg',
 };
 
 export const ecosystemLabels = {
@@ -42,6 +43,7 @@ export const ecosystemLabels = {
   PlayStation: 'PlayStation',
   bytedance:   'ByteDance',
   valve:       'Valve',
+  mvideo:      'М.Видео',
 };
 
 export async function loadLogos() {
