@@ -118,7 +118,7 @@ let _assetBase = '../assets/logos';
 export function setAssetBase(base) { _assetBase = base; }
 
 export function svgUrl(file) {
-  if (file.startsWith('/')) return `${file}?v=${SVG_URL_V}`;
+  if (file.startsWith('/')) return `..${file}?v=${SVG_URL_V}`;
   const folder = file.endsWith('.png') ? 'pngs' : 'svgs';
   return `${_assetBase}/${folder}/${file}?v=${SVG_URL_V}`;
 }
