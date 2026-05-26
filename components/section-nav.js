@@ -1,11 +1,11 @@
 class SectionNav extends HTMLElement {
   connectedCallback() {
-    const current = location.pathname.split('/').filter(Boolean)[0] ?? 'logos';
+    const current = location.pathname.split('/').filter(Boolean).at(-1) ?? 'logos';
 
     const links = [
-      { key: 'logos', label: 'Лого',   href: '/logos/' },
-      { key: 'icons', label: 'Иконки', href: '/icons/' },
-      { key: 'emoji', label: 'Эмодзи', href: '/emoji/' },
+      { key: 'logos', label: 'Лого',   href: '../logos/' },
+      { key: 'icons', label: 'Иконки', href: '../icons/' },
+      { key: 'emoji', label: 'Эмодзи', href: '../emoji/' },
     ];
 
     this.innerHTML = links.map(({ key, label, href }) =>
