@@ -114,7 +114,7 @@ export function switchLayout(str) {
 
 export const SVG_URL_V = Date.now();
 
-let _assetBase = '/assets/logos';
+let _assetBase = '../assets/logos';
 export function setAssetBase(base) { _assetBase = base; }
 
 export function svgUrl(file) {

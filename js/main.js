@@ -765,9 +765,9 @@ placeSearchBar();
 initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
 initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton });
 
-const _pathSection = location.pathname.split('/').filter(Boolean)[0] ?? 'logos';
-const _manifestBase = '/' + _pathSection + '/';
-setAssetBase('/assets/' + _pathSection);
+const _pathSection = location.pathname.split('/').filter(Boolean).at(-1) ?? 'logos';
+const _manifestBase = './';
+setAssetBase('../assets/' + _pathSection);
 document.body.dataset.section = _pathSection;
 
 loadLogos(_manifestBase).then(logos => {
