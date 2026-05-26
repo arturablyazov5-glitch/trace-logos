@@ -1,4 +1,4 @@
-import { showToast, highlight, svgUrl, setAssetBase, animateContainerHeight } from './utils.js';
+import { showToast, highlight, svgUrl, setAssetBase, animateContainerHeight, formatFileSize } from './utils.js';
 import {
   colorState, svgRawCache,
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
@@ -305,9 +305,6 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     catch { return null; }
   })();
 
-  btnCopy.classList.toggle('hidden', isPng);
-  btnDownloadSvg.classList.toggle('hidden', isPng);
-  btnCopyPng.classList.toggle('hidden', !isPng);
   if (btnCopyEmoji) {
     btnCopyEmoji.classList.toggle('hidden', !emojiChar);
     btnCopyPng.classList.toggle('btn-primary', !emojiChar);
@@ -338,6 +335,9 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
 
   if (isPng) {
     animateContainerHeight(controls, () => {
+      btnCopy.classList.add('hidden');
+      btnDownloadSvg.classList.add('hidden');
+      btnCopyPng.classList.remove('hidden');
       colorsPanel.classList.add('colors-hidden');
       colorsDivider.classList.add('colors-hidden');
     });
@@ -369,6 +369,8 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       const buf = await resp.arrayBuffer();
       return new Blob([buf], { type: 'image/png' });
     };
+    const btnSizePng = btnDownloadPng.querySelector('.btn-size');
+    if (btnSizePng) { btnSizePng.textContent = ''; getPngBlob().then(b => { btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {}); }
     btnCopyPng.onclick = async () => {
       btnCopyPng.disabled = true;
       try {
@@ -392,7 +394,6 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   }
 
   // SVG-ветка
-  btnCopyPng.classList.add('hidden');
   const isSquare = vDef.type === '_original' || vDef.type === 'svg' || (!vDef.type && !isFullFile(vDef.file));
   const rawSvg = await loadRawSvg(vDef.file);
 
@@ -402,6 +403,9 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   }
 
   animateContainerHeight(controls, () => {
+    btnCopy.classList.remove('hidden');
+    btnDownloadSvg.classList.remove('hidden');
+    btnCopyPng.classList.add('hidden');
     colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
     colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
   });
@@ -421,6 +425,11 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   }
 
   const getExportSvg = () => applyColorMap(rawSvg);
+
+  const btnSizeSvg = btnDownloadSvg.querySelector('.btn-size');
+  if (btnSizeSvg) btnSizeSvg.textContent = formatFileSize(new Blob([svgForExport(getExportSvg(), isSquare)]).size);
+  const btnSizePng = btnDownloadPng.querySelector('.btn-size');
+  if (btnSizePng) { btnSizePng.textContent = ''; svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 }).then(b => { btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {}); }
 
   btnCopy.onclick = () => {
     navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
@@ -505,7 +514,7 @@ openDetailFn = function (item, card) {
   colorState.colorMap = {};
   colorState.colorEditorSourceSvg = '';
   colorState.colorHistoryNeedsInit = true;
-  const colorEditingDisabled = isFlagItem(item) || !!item.comingSoon;
+  const colorEditingDisabled = isFlagItem(item) || !!item.comingSoon || _pathSection === 'emoji';
 
   const colorsPanel    = document.getElementById('colors-panel');
   const colorsDivider  = document.getElementById('colors-divider');
@@ -560,6 +569,36 @@ openDetailFn = function (item, card) {
     detailVariants.classList.toggle('hidden', allVariants.length === 0);
     downloadAllBtn.classList.toggle('hidden', downloadableSvgCount <= 1);
   });
+
+  // Estimate ZIP size in background
+  const btnSizeZip = downloadAllBtn.querySelector('.btn-size');
+  if (btnSizeZip && downloadableSvgCount > 1) {
+    btnSizeZip.textContent = '';
+    (async () => {
+      const variants = allVariants.length > 0
+        ? allVariants
+        : [{ type: '_original', file: item.file }];
+      let total = 0;
+      for (const v of variants) {
+        try {
+          if (v.file.endsWith('.png')) {
+            const resp = await fetch(svgUrl(v.file));
+            const buf = await resp.arrayBuffer();
+            total += buf.byteLength * 2; // png once + approx same for zip entry
+          } else {
+            const raw = await loadRawSvg(v.file);
+            const sq = v.type === '_original' || v.type === 'svg' || (!v.type && !isFullFile(v.file));
+            total += new Blob([svgForExport(applyColorMap(raw), sq)]).size;
+            const png = await svgToPngBlob(applyColorMap(raw), { square: sq, size: 512 });
+            total += png.size;
+          }
+        } catch { /* skip */ }
+      }
+      if (total > 0 && !downloadAllBtn.classList.contains('hidden')) {
+        btnSizeZip.textContent = '~' + formatFileSize(total);
+      }
+    })();
+  }
 
   activeVariantCard = null;
 

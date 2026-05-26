@@ -117,6 +117,13 @@ export const SVG_URL_V = Date.now();
 let _assetBase = '../assets/logos';
 export function setAssetBase(base) { _assetBase = base; }
 
+export function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  const kb = bytes / 1024;
+  if (kb < 100) return kb.toFixed(1) + ' KB';
+  return Math.round(kb) + ' KB';
+}
+
 export function svgUrl(file) {
   if (file.startsWith('/')) return `..${file}?v=${SVG_URL_V}`;
   const folder = file.endsWith('.png') ? 'pngs' : 'svgs';
