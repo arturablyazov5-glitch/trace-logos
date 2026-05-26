@@ -1,23 +1,23 @@
 export const ecosystemLogoMap = {
-  alfa:        'svgs/alfa-bank.svg',
-  avito:       'svgs/avito.svg',
-  google:      'svgs/google.svg',
-  meta:        'svgs/meta.svg',
-  mts:         'svgs/mts-bank.svg',
-  nspk:        'svgs/mir.svg',
-  ozon:        'svgs/ozon.svg',
-  sber:        'svgs/sber.svg',
-  sovcombank:  'svgs/sovcombank.svg',
-  tinkoff:     'svgs/t-bank.svg',
-  vk:          'svgs/vk.svg',
-  openai:      'svgs/chatgpt.svg',
-  wildberries: 'svgs/wildberries.svg',
-  yandex:      'svgs/yandex.svg',
-  apple:       'svgs/apple-pay.svg',
-  bytedance:   'svgs/tiktok.svg',
-  valve:       'svgs/valve.svg',
-  microsoft:   'svgs/microsoft.svg',
-  mvideo:      'svgs/mvideo.svg',
+  alfa:        '/assets/logos/svgs/alfa-bank.svg',
+  avito:       '/assets/logos/svgs/avito.svg',
+  google:      '/assets/logos/svgs/google.svg',
+  meta:        '/assets/logos/svgs/meta.svg',
+  mts:         '/assets/logos/svgs/mts-bank.svg',
+  nspk:        '/assets/logos/svgs/mir.svg',
+  ozon:        '/assets/logos/svgs/ozon.svg',
+  sber:        '/assets/logos/svgs/sber.svg',
+  sovcombank:  '/assets/logos/svgs/sovcombank.svg',
+  tinkoff:     '/assets/logos/svgs/t-bank.svg',
+  vk:          '/assets/logos/svgs/vk.svg',
+  openai:      '/assets/logos/svgs/chatgpt.svg',
+  wildberries: '/assets/logos/svgs/wildberries.svg',
+  yandex:      '/assets/logos/svgs/yandex.svg',
+  apple:       '/assets/logos/svgs/apple-pay.svg',
+  bytedance:   '/assets/logos/svgs/tiktok.svg',
+  valve:       '/assets/logos/svgs/valve.svg',
+  microsoft:   '/assets/logos/svgs/microsoft.svg',
+  mvideo:      '/assets/logos/svgs/mvideo.svg',
 };
 
 export const ecosystemLabels = {
@@ -46,13 +46,13 @@ export const ecosystemLabels = {
   mvideo:      'М.Видео',
 };
 
-export async function loadLogos() {
-  const manifest = await fetch('logos/manifest.json').then(r => {
+export async function loadLogos(base = '/logos/') {
+  const manifest = await fetch(base + 'manifest.json').then(r => {
     if (!r.ok) throw new Error('manifest not found');
     return r.json();
   });
   const results = await Promise.allSettled(manifest.categories.map(category =>
-    fetch('logos/' + category.file).then(r => {
+    fetch(base + category.file).then(r => {
       if (!r.ok) throw new Error(category.file + ' not found');
       return r.json();
     })

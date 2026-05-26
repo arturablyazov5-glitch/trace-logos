@@ -19,6 +19,16 @@ class SiteHeader extends HTMLElement {
   }
 
   iconCountText(count) {
+    const section = location.pathname.split('/').filter(Boolean)[0] ?? 'logos';
+    if (section === 'emoji') return `${count} эмодзи`;
+    if (section === 'logos') {
+      const mod100 = Math.abs(count) % 100;
+      const mod10 = mod100 % 10;
+      if (mod100 >= 11 && mod100 <= 14) return `${count} логотипов`;
+      if (mod10 === 1) return `${count} логотип`;
+      if (mod10 >= 2 && mod10 <= 4) return `${count} логотипа`;
+      return `${count} логотипов`;
+    }
     const mod100 = Math.abs(count) % 100;
     const mod10 = mod100 % 10;
     if (mod100 >= 11 && mod100 <= 14) return `${count} иконок`;

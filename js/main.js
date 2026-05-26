@@ -1,4 +1,4 @@
-import { showToast, highlight, svgUrl, animateContainerHeight } from './utils.js';
+import { showToast, highlight, svgUrl, setAssetBase, animateContainerHeight } from './utils.js';
 import {
   colorState, svgRawCache,
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
@@ -46,18 +46,26 @@ let openDetailFn;
 let currentDisplayType = null;
 
 let copyBtnResetTimer = null;
+let copyEmojiBtnResetTimer = null;
 let detailPushedState = false;
 let isClosingViaButton = false;
 let activeVariantCard = null;
 
 function resetCopyBtn() {
-  if (!copyBtnResetTimer) return;
-  clearTimeout(copyBtnResetTimer);
-  copyBtnResetTimer = null;
-  const btn = document.getElementById('btn-copy');
-  if (btn) { const span = btn.querySelector('span'); if (span) span.textContent = 'Скопировать SVG'; btn.disabled = false; }
-  const btnPng = document.getElementById('btn-copy-png');
-  if (btnPng) { const span = btnPng.querySelector('span'); if (span) span.textContent = 'Скопировать PNG'; btnPng.disabled = false; }
+  if (copyBtnResetTimer) {
+    clearTimeout(copyBtnResetTimer);
+    copyBtnResetTimer = null;
+    const btn = document.getElementById('btn-copy');
+    if (btn) { const span = btn.querySelector('span'); if (span) span.textContent = 'Скопировать SVG'; btn.disabled = false; }
+    const btnPng = document.getElementById('btn-copy-png');
+    if (btnPng) { const span = btnPng.querySelector('span'); if (span) span.textContent = 'Скопировать PNG'; btnPng.disabled = false; }
+  }
+  if (copyEmojiBtnResetTimer) {
+    clearTimeout(copyEmojiBtnResetTimer);
+    copyEmojiBtnResetTimer = null;
+    const btnEmoji = document.getElementById('btn-copy-emoji');
+    if (btnEmoji) { const span = btnEmoji.querySelector('span:last-child'); if (span) span.textContent = 'Скопировать символ'; btnEmoji.disabled = false; }
+  }
 }
 
 function triggerConfetti(el, labelText) {
@@ -147,7 +155,7 @@ function buildCard(item, sectionState) {
   img.addEventListener('load', () => card.classList.remove('loading'), { once: true });
   img.addEventListener('error', () => card.classList.remove('loading'), { once: true });
   img.dataset.src = svgUrl(item.file);
-  if (item.prerendered) img.classList.add('prerendered');
+  if (item.prerendered || item.file.endsWith('.png')) img.classList.add('prerendered');
   wrap.appendChild(img);
   card.appendChild(wrap);
 
@@ -277,6 +285,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   const btnCopyPng     = document.getElementById('btn-copy-png');
   const btnDownloadSvg = document.getElementById('btn-download');
   const btnDownloadPng = document.getElementById('btn-download-png');
+  const btnCopyEmoji   = document.getElementById('btn-copy-emoji');
   const detailImg      = document.getElementById('detail-img');
   const preview        = detailImg.closest('.detail-preview');
   const controls       = document.getElementById('detail-controls');
@@ -289,9 +298,41 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
 
   if (needsFade) detailImg.style.opacity = '0';
 
+  const emojiChar = (() => {
+    const m = vDef.file.match(/_([0-9a-f]+(?:-[0-9a-f]+)*)\.png$/i);
+    if (!m) return null;
+    try { return m[1].split('-').map(cp => String.fromCodePoint(parseInt(cp, 16))).join(''); }
+    catch { return null; }
+  })();
+
   btnCopy.classList.toggle('hidden', isPng);
   btnDownloadSvg.classList.toggle('hidden', isPng);
   btnCopyPng.classList.toggle('hidden', !isPng);
+  if (btnCopyEmoji) {
+    btnCopyEmoji.classList.toggle('hidden', !emojiChar);
+    btnCopyPng.classList.toggle('btn-primary', !emojiChar);
+    btnCopyPng.classList.toggle('btn-secondary', !!emojiChar);
+    if (emojiChar) {
+      const charEl = document.getElementById('btn-copy-emoji-char');
+      if (charEl) charEl.textContent = emojiChar;
+      btnCopyEmoji.onclick = () => {
+        navigator.clipboard.writeText(emojiChar).then(() => {
+          const r = btnCopyEmoji.getBoundingClientRect();
+          const ghost = document.createElement('div');
+          ghost.className = 'confetti-ghost animate';
+          ghost.style.cssText = `left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`;
+          document.body.appendChild(ghost);
+          setTimeout(() => ghost.remove(), 1100);
+          const textSpan = btnCopyEmoji.querySelector('span:last-child');
+          textSpan.textContent = 'Скопировано!';
+          btnCopyEmoji.disabled = true;
+          clearTimeout(copyEmojiBtnResetTimer);
+          copyEmojiBtnResetTimer = setTimeout(() => { textSpan.textContent = 'Скопировать символ'; btnCopyEmoji.disabled = false; copyEmojiBtnResetTimer = null; }, 2000);
+          showToast(`Скопировано: ${emojiChar}`);
+        });
+      };
+    }
+  }
 
   if (isPng) {
     animateContainerHeight(controls, () => {
@@ -327,17 +368,23 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       return new Blob([buf], { type: 'image/png' });
     };
     btnCopyPng.onclick = async () => {
-      const blob = await getPngBlob();
-      const file = new File([blob], `${item.name}.png`, { type: 'image/png' });
-      await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
-      triggerConfetti(btnCopyPng);
-      showToast(`Скопировано PNG: ${item.name}`);
+      btnCopyPng.disabled = true;
+      try {
+        const blob = await getPngBlob();
+        const file = new File([blob], `${item.name}.png`, { type: 'image/png' });
+        await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
+        triggerConfetti(btnCopyPng);
+        showToast(`Скопировано PNG: ${emojiChar || item.name}`);
+      } catch (e) {
+        btnCopyPng.disabled = false;
+        showToast('Не удалось скопировать PNG');
+      }
     };
     btnDownloadPng.onclick = async () => {
       const blob = await getPngBlob();
       const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.png' });
       a.click(); URL.revokeObjectURL(a.href);
-      showToast(`Скачано PNG: ${item.name}`);
+      showToast(`Скачано PNG: ${emojiChar || item.name}`);
     };
     return;
   }
@@ -387,7 +434,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     const pngBlob = await svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 });
     const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + suffix + '.png' });
     a.click(); URL.revokeObjectURL(a.href);
-    showToast(`Скачано PNG: ${item.name}`);
+    showToast(`Скачано PNG: ${emojiChar || item.name}`);
   };
 }
 
@@ -474,7 +521,14 @@ openDetailFn = function (item, card) {
 
   // Variant definitions
   variantsGrid.innerHTML = '';
-  const originalLabel = item.prerendered ? 'App Icon' : 'SVG Icon';
+  const originalLabel = (() => {
+    if (item.file.endsWith('.png')) {
+      const vendor = item.file.split('/')[0];
+      if (vendor && vendor !== item.file) return vendor.charAt(0).toUpperCase() + vendor.slice(1);
+      return 'App Icon';
+    }
+    return 'SVG Icon';
+  })();
   const rawVariants = Array.isArray(item.variants) ? item.variants : [];
   const allVariants = rawVariants.length > 0
     ? [
@@ -711,7 +765,12 @@ placeSearchBar();
 initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
 initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton });
 
-loadLogos().then(logos => {
+const _pathSection = location.pathname.split('/').filter(Boolean)[0] ?? 'logos';
+const _manifestBase = '/' + _pathSection + '/';
+setAssetBase('/assets/' + _pathSection);
+document.body.dataset.section = _pathSection;
+
+loadLogos(_manifestBase).then(logos => {
   let readyTotal = 0;
   for (const group of logos) {
     const readyCount = group.items.filter(item => !item.comingSoon).length;
@@ -823,6 +882,10 @@ loadLogos().then(logos => {
   });
 
   updateVirtualizedSections();
+
+  if (totalCards === 0) {
+    document.getElementById('empty-section').classList.add('show');
+  }
 
   window.__logosReadyCount = readyTotal;
   document.dispatchEvent(new CustomEvent('logos-count-ready', { detail: readyTotal }));

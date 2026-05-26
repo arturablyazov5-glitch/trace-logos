@@ -114,7 +114,11 @@ export function switchLayout(str) {
 
 export const SVG_URL_V = Date.now();
 
+let _assetBase = '/assets/logos';
+export function setAssetBase(base) { _assetBase = base; }
+
 export function svgUrl(file) {
+  if (file.startsWith('/')) return `${file}?v=${SVG_URL_V}`;
   const folder = file.endsWith('.png') ? 'pngs' : 'svgs';
-  return folder + '/' + file + '?v=' + SVG_URL_V;
+  return `${_assetBase}/${folder}/${file}?v=${SVG_URL_V}`;
 }
