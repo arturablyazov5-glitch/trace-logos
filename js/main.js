@@ -299,7 +299,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   if (needsFade) detailImg.style.opacity = '0';
 
   const emojiChar = (() => {
-    const m = vDef.file.match(/_([0-9a-f]+(?:-[0-9a-f]+)*)\.png$/i);
+    const m = vDef.file.match(/_([0-9a-f]+(?:-[0-9a-f]+)*)\.(png|svg)$/i);
     if (!m) return null;
     try { return m[1].split('-').map(cp => String.fromCodePoint(parseInt(cp, 16))).join(''); }
     catch { return null; }
@@ -312,6 +312,8 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     btnCopyEmoji.classList.toggle('hidden', !emojiChar);
     btnCopyPng.classList.toggle('btn-primary', !emojiChar);
     btnCopyPng.classList.toggle('btn-secondary', !!emojiChar);
+    btnCopy.classList.toggle('btn-primary', !emojiChar);
+    btnCopy.classList.toggle('btn-secondary', !!emojiChar);
     if (emojiChar) {
       const charEl = document.getElementById('btn-copy-emoji-char');
       if (charEl) charEl.textContent = emojiChar;
