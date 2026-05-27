@@ -1,56 +1,172 @@
 # Trace Logo's
 
-> Бесплатный каталог SVG и PNG логотипов российских и международных брендов. Скачивание, копирование, экспорт в Figma.
+> Бесплатный каталог SVG и PNG логотипов российских и международных брендов.
 
-Сайт содержит 287 логотипов в 35 категориях: банки, социальные сети, маркетплейсы, видеосервисы, мессенджеры, карты, AI-сервисы и другие. Для каждого логотипа доступны: SVG-файл, PNG 1000×1000px, горизонтальные варианты, скачивание ZIP-архивом.
+## Точка входа для AI-агентов
 
-## Данные (машиночитаемые, доступны напрямую)
+Начни отсюда: https://rafael-mansurov.github.io/trace-logos/logos.json
 
-Каталог страницы — JS-приложение, но все данные доступны как статические JSON:
+Это machine-readable индекс всех 287 логотипов. Каждая запись содержит прямые URL на файлы.
 
-- Список категорий: https://rafael-mansurov.github.io/trace-logos/logos/manifest.json
-- Данные категории (пример): https://rafael-mansurov.github.io/trace-logos/logos/categories/banki.json
-- Паттерн для других категорий: `/logos/categories/<slug>.json` где slug — из manifest.json
+---
 
-Каждая страница логотипа статична и полностью читаема без JS:
-- Пример: https://rafael-mansurov.github.io/trace-logos/logos/bank/sber/
-- Паттерн: `/logos/<category>/<logo>/`
+## Структура данных
 
-SVG-файлы доступны напрямую: `/assets/logos/svgs/<filename>.svg`
+### logos.json — полный индекс
 
-## Разделы
+```
+GET https://rafael-mansurov.github.io/trace-logos/logos.json
+```
 
-- [Каталог логотипов](https://rafael-mansurov.github.io/trace-logos/logos/)
-- [Иконки](https://rafael-mansurov.github.io/trace-logos/icons/)
-- [Эмодзи](https://rafael-mansurov.github.io/trace-logos/emoji/)
+Поля каждого объекта в массиве `logos[]`:
 
-## Категории логотипов
+| Поле          | Тип            | Описание                                              |
+|---------------|----------------|-------------------------------------------------------|
+| name          | string         | Русское название бренда ("Сбер", "Т-Банк")           |
+| category      | string         | Категория ("Банки", "Социальные сети")                |
+| categorySlug  | string         | Слаг категории ("bank", "social")                     |
+| url           | string         | URL страницы логотипа (статический HTML)              |
+| svgUrl        | string \| null | Прямой URL SVG-файла (null если только PNG)           |
+| ecosystem     | string \| null | Экосистема ("yandex", "sber", "tinkoff", null)        |
+| formats       | string[]       | Доступные форматы: ["svg", "png"] или ["png"]         |
 
-- [Банки](https://rafael-mansurov.github.io/trace-logos/logos/bank/) — Сбер, Т-Банк, Альфа, ВТБ, Газпромбанк и др.
-- [Платёжные системы](https://rafael-mansurov.github.io/trace-logos/logos/payment/) — Мир, СБП, Visa, Mastercard и др.
-- [Социальные сети](https://rafael-mansurov.github.io/trace-logos/logos/social/) — ВКонтакте, Telegram, Instagram, TikTok и др.
-- [Маркетплейсы](https://rafael-mansurov.github.io/trace-logos/logos/marketplace/) — Ozon, Wildberries, Avito и др.
-- [Видео и стриминг](https://rafael-mansurov.github.io/trace-logos/logos/video/) — Кинопоиск, YouTube, Netflix и др.
-- [Музыка и медиа](https://rafael-mansurov.github.io/trace-logos/logos/music/) — Яндекс Музыка, Spotify, Apple Music и др.
-- [Мессенджеры](https://rafael-mansurov.github.io/trace-logos/logos/messenger/) — Telegram, WhatsApp, Viber и др.
-- [Карты и навигация](https://rafael-mansurov.github.io/trace-logos/logos/map/) — Яндекс Карты, 2ГИС, Google Maps и др.
-- [Поиск](https://rafael-mansurov.github.io/trace-logos/logos/search/) — Яндекс, Google и др.
-- [AI-сервисы](https://rafael-mansurov.github.io/trace-logos/logos/ai/) — YandexGPT, GigaChat, ChatGPT, Gemini и др.
-- [Облачные хранилища](https://rafael-mansurov.github.io/trace-logos/logos/cloud/) — Яндекс Диск, Google Drive, Dropbox и др.
-- [Видеозвонки](https://rafael-mansurov.github.io/trace-logos/logos/videocall/) — Яндекс Телемост, Zoom, Teams и др.
-- [Дизайн](https://rafael-mansurov.github.io/trace-logos/logos/design/) — Figma, Adobe и др.
-- [Флаги](https://rafael-mansurov.github.io/trace-logos/logos/flag/) — флаги России, Европы, США и др.
+Пример записи:
+```json
+{
+  "name": "Сбер",
+  "category": "Банки",
+  "categorySlug": "bank",
+  "url": "https://rafael-mansurov.github.io/trace-logos/logos/bank/sber/",
+  "svgUrl": "https://rafael-mansurov.github.io/trace-logos/assets/logos/svgs/sber.svg",
+  "ecosystem": "sber",
+  "formats": ["svg", "png"]
+}
+```
+
+---
+
+### manifest.json — список категорий
+
+```
+GET https://rafael-mansurov.github.io/trace-logos/logos/manifest.json
+```
+
+```json
+{
+  "categories": [
+    { "section": "Банки", "file": "categories/banki.json", "slug": "bank" },
+    { "section": "Социальные сети", "file": "categories/messendzhery-i-socseti.json", "slug": "social" }
+  ]
+}
+```
+
+### Данные категории
+
+```
+GET https://rafael-mansurov.github.io/trace-logos/logos/categories/{filename}.json
+```
+
+Пример: https://rafael-mansurov.github.io/trace-logos/logos/categories/banki.json
+
+```json
+{
+  "section": "Банки",
+  "items": [
+    {
+      "name": "Сбер",
+      "tags": "сбер сбербанк sber sberbank",
+      "figma": "Icon/Bank/Sber",
+      "file": "sber.svg",
+      "ecosystem": "sber",
+      "variants": [
+        { "type": "full", "file": "sber-full.svg" }
+      ]
+    }
+  ]
+}
+```
+
+Поля item:
+
+| Поле       | Описание                                                    |
+|------------|-------------------------------------------------------------|
+| name       | Название бренда                                             |
+| tags       | Ключевые слова для поиска (RU + EN)                        |
+| figma      | Путь компонента в Figma ("Icon/Bank/Sber")                 |
+| file       | Имя файла в assets/logos/svgs/ или assets/logos/pngs/      |
+| ecosystem  | Группа брендов (опционально)                               |
+| variants   | Дополнительные варианты логотипа (опционально)             |
+| comingSoon | true — логотип в разработке, файла нет                     |
+
+Типы вариантов: `svg`, `png`, `full` (горизонтальный), `full_en` (горизонтальный EN)
+
+---
+
+## Как получить файл логотипа
+
+SVG:
+```
+https://rafael-mansurov.github.io/trace-logos/assets/logos/svgs/{file}
+```
+
+PNG:
+```
+https://rafael-mansurov.github.io/trace-logos/assets/logos/pngs/{file}
+```
+
+---
+
+## URL паттерны страниц
+
+Страница логотипа (статический HTML, без JS):
+```
+/logos/{categorySlug}/{logoSlug}/
+```
+Пример: https://rafael-mansurov.github.io/trace-logos/logos/bank/sber/
+
+Страница категории:
+```
+/logos/{categorySlug}/
+```
+Пример: https://rafael-mansurov.github.io/trace-logos/logos/bank/
+
+---
+
+## Типичные сценарии
+
+**Найти логотип Сбера:**
+1. GET logos.json → найти запись где `name === "Сбер"`
+2. Взять `svgUrl` → скачать SVG
+
+**Получить все логотипы экосистемы Яндекс:**
+1. GET logos.json → фильтровать где `ecosystem === "yandex"`
+
+**Получить все банки:**
+1. GET logos.json → фильтровать где `categorySlug === "bank"`
+   или GET logos/categories/banki.json
+
+**Найти логотип по названию:**
+1. GET logos.json → искать в поле `name` или в `tags` через category JSON
+
+---
+
+## Категории (35 штук)
+
+bank, payment, social, video, music, messenger, map, search, ai, cloud,
+mail, office, system, macos, design, web, dev, videocall, market, food,
+delivery, store, reviews, ads, assistant, telecom, travel, education,
+health, insurance, crm, docs, hr, flag, b2b, bnpl
+
+---
 
 ## Экосистемы
 
-Логотипы сгруппированы по экосистемам: Яндекс, Сбер, ВКонтакте, Tinkoff, Ozon, Meta, Google, Apple, Microsoft, Альфа, МТС, Авито, Wildberries.
+yandex, sber, vk, tinkoff, ozon, meta, google, apple, microsoft,
+alfa, mts, avito, wildberries, x5, nspk, kontur, openai, bytedance,
+adobe, valve, mvideo, sovcombank
 
-## Форматы файлов
+---
 
-- SVG — масштабируемая векторная графика, редактируемая в Figma и любом векторном редакторе
-- PNG — растр 1000×1000px с прозрачным фоном
-- ZIP — архив со всеми вариантами логотипа
+## Авторские права
 
-## Использование
-
-Логотипы предоставляются для удобства дизайнеров и разработчиков. Авторские права принадлежат правообладателям. По вопросам удаления: @mansurov_rafael (Telegram).
+Логотипы принадлежат их правообладателям. По вопросам удаления: @mansurov_rafael (Telegram).
