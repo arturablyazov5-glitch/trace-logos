@@ -806,9 +806,9 @@ placeSearchBar();
 initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
 initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton });
 
-const _pathSection = location.pathname.split('/').filter(Boolean).at(-1) ?? 'logos';
-const _manifestBase = './';
-setAssetBase('../assets/' + _pathSection);
+const _pathSection = window.__ASSET_SECTION__ ?? (location.pathname.split('/').filter(Boolean).at(-1) ?? 'logos');
+const _manifestBase = window.__MANIFEST_BASE__ ?? './';
+setAssetBase(window.__ASSET_BASE__ ?? ('../assets/' + _pathSection));
 document.body.dataset.section = _pathSection;
 
 loadLogos(_manifestBase).then(logos => {
@@ -822,6 +822,7 @@ loadLogos(_manifestBase).then(logos => {
     const nav = document.createElement('div');
     nav.className = 'nav-item';
     nav.dataset.section = group.section;
+    nav.dataset.slug = group.slug;
     nav.innerHTML = `<span class="nav-label">${group.section}</span><span class="count">${readyCount}</span>`;
     navSections.appendChild(nav);
 
@@ -885,9 +886,9 @@ loadLogos(_manifestBase).then(logos => {
       const nav = document.createElement('div');
       nav.className = 'nav-item';
       nav.dataset.ecosystem = key;
-      const logo = ecosystemLogoMap[key];
-      const logoHtml = logo
-        ? `<img class="nav-logo" src="${logo}" width="16" height="16" alt="" aria-hidden="true">`
+      const logoFile = ecosystemLogoMap[key];
+      const logoHtml = logoFile
+        ? `<img class="nav-logo" src="${svgUrl(logoFile)}" width="16" height="16" alt="" aria-hidden="true">`
         : `<span class="nav-logo nav-logo-initial">${(ecosystemLabels[key] || key).slice(0, 1)}</span>`;
       nav.innerHTML = `${logoHtml}<span class="nav-label">${ecosystemLabels[key] || key}</span><span class="count">${count}</span>`;
       navEcosystems.appendChild(nav);
@@ -934,4 +935,11 @@ loadLogos(_manifestBase).then(logos => {
   requestIdleCallback
     ? requestIdleCallback(() => sectionEls.forEach(s => ensureSectionCards(s)), { timeout: 2000 })
     : setTimeout(() => sectionEls.forEach(s => ensureSectionCards(s)), 300);
+
+  // Pre-filter by category: via ?s=<slug> (breadcrumbs) or window.__CAT_SLUG__ (category pages)
+  const sParam = new URLSearchParams(location.search).get('s') || window.__CAT_SLUG__;
+  if (sParam) {
+    const found = sectionEls.find(s => s.group.slug === sParam);
+    if (found) setActive(found.group.section);
+  }
 });

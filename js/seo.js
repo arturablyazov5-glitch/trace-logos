@@ -12,7 +12,7 @@ export function slugifyPathPart(value) {
 export function seoPageUrlForItem(item) {
   const parts = (item.figma || '').split('/').map(part => slugifyPathPart(part)).filter(Boolean);
   if (parts[0] !== 'icon' || parts.length < 3) return '';
-  return `/icons/${parts.slice(1).join('/')}/`;
+  return `/logos/${parts.slice(1).join('/')}/`;
 }
 
 async function seoPageExists(url) {

@@ -93,6 +93,47 @@ export function extractColors(svgText) {
   return [...set];
 }
 
+export function extractBrandColor(svgText) {
+  const colors = extractColors(svgText);
+  // never use: black / near-black (dark + unsaturated)
+  const candidates = colors.filter(hex => {
+    const { s, v } = hexToHsv(hex);
+    return !(v < 0.15 && s < 0.15);
+  });
+
+  // pass 1 — vivid chromatic: high saturation, not too dark
+  // no upper v limit — pure brand blues/reds have v=1.0 but s=1.0, near-white has v≈1.0 but s≈0
+  let best = null, bestScore = -1;
+  for (const hex of candidates) {
+    const { s, v } = hexToHsv(hex);
+    if (s < 0.25 || v < 0.2) continue;
+    const score = s * (1 - Math.abs(v - 0.7));
+    if (score > bestScore) { bestScore = score; best = hex; }
+  }
+  if (best) return best;
+
+  // pass 2 — any chromatic (muted tones), still no near-white (low s excluded by s < 0.08)
+  for (const hex of candidates) {
+    const { s, v } = hexToHsv(hex);
+    if (s < 0.08 || v < 0.1) continue;
+    const score = s * (1 - Math.abs(v - 0.5));
+    if (score > bestScore) { bestScore = score; best = hex; }
+  }
+  if (best) return best;
+
+  // pass 3 — any non-white, non-black (grays)
+  for (const hex of candidates) {
+    const { v } = hexToHsv(hex);
+    if (v > 0.97) continue; // skip near-white
+    best = hex;
+    break;
+  }
+  if (best) return best;
+
+  // pass 4 — white as last resort
+  return '#ffffff';
+}
+
 export function applyColorMap(svgText) {
   let s = svgText;
   const entries = Object.entries(colorState.colorMap)

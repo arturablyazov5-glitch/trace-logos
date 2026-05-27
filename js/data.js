@@ -1,23 +1,23 @@
 export const ecosystemLogoMap = {
-  alfa:        '../assets/logos/svgs/alfa-bank.svg',
-  avito:       '../assets/logos/svgs/avito.svg',
-  google:      '../assets/logos/svgs/google.svg',
-  meta:        '../assets/logos/svgs/meta.svg',
-  mts:         '../assets/logos/svgs/mts-bank.svg',
-  nspk:        '../assets/logos/svgs/mir.svg',
-  ozon:        '../assets/logos/svgs/ozon.svg',
-  sber:        '../assets/logos/svgs/sber.svg',
-  sovcombank:  '../assets/logos/svgs/sovcombank.svg',
-  tinkoff:     '../assets/logos/svgs/t-bank.svg',
-  vk:          '../assets/logos/svgs/vk.svg',
-  openai:      '../assets/logos/svgs/chatgpt.svg',
-  wildberries: '../assets/logos/svgs/wildberries.svg',
-  yandex:      '../assets/logos/svgs/yandex.svg',
-  apple:       '../assets/logos/svgs/apple-pay.svg',
-  bytedance:   '../assets/logos/svgs/tiktok.svg',
-  valve:       '../assets/logos/svgs/valve.svg',
-  microsoft:   '../assets/logos/svgs/microsoft.svg',
-  mvideo:      '../assets/logos/svgs/mvideo.svg',
+  alfa:        'alfa-bank.svg',
+  avito:       'avito.svg',
+  google:      'google.svg',
+  meta:        'meta.svg',
+  mts:         'mts-bank.svg',
+  nspk:        'mir.svg',
+  ozon:        'ozon.svg',
+  sber:        'sber.svg',
+  sovcombank:  'sovcombank.svg',
+  tinkoff:     't-bank.svg',
+  vk:          'vk.svg',
+  openai:      'chatgpt.svg',
+  wildberries: 'wildberries.svg',
+  yandex:      'yandex.svg',
+  apple:       'apple-pay.svg',
+  bytedance:   'tiktok.svg',
+  valve:       'valve.svg',
+  microsoft:   'microsoft.svg',
+  mvideo:      'mvideo.svg',
 };
 
 export const ecosystemLabels = {
@@ -51,13 +51,20 @@ export async function loadLogos(base = '/logos/') {
     if (!r.ok) throw new Error('manifest not found');
     return r.json();
   });
-  const results = await Promise.allSettled(manifest.categories.map(category =>
-    fetch(base + category.file).then(r => {
-      if (!r.ok) throw new Error(category.file + ' not found');
+  const cats = manifest.categories;
+  const results = await Promise.allSettled(cats.map(cat =>
+    fetch(base + cat.file).then(r => {
+      if (!r.ok) throw new Error(cat.file + ' not found');
       return r.json();
     })
   ));
-  return results
-    .filter(r => { if (r.status === 'rejected') { console.warn('loadLogos:', r.reason); } return r.status === 'fulfilled'; })
-    .map(r => r.value);
+  return cats
+    .map((cat, i) => ({ cat, result: results[i] }))
+    .filter(({ result }) => {
+      if (result.status === 'rejected') console.warn('loadLogos:', result.reason);
+      return result.status === 'fulfilled';
+    })
+    .map(({ cat, result }) => {
+      return { ...result.value, slug: cat.slug };
+    });
 }

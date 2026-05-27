@@ -1,16 +1,11 @@
 import { svgRawCache, colorState, applyColorMap, loadRawSvg } from './color.js';
 import { showToast, svgUrl } from './utils.js';
+import { parseSvgViewBox, svgToPngBlob } from './svg-utils.js';
+
+export { parseSvgViewBox, svgToPngBlob };
 
 const EXPORT_FAVICON_SIZE = 32;
 const EXPORT_WIDE_HEIGHT = 24;
-
-export function parseSvgViewBox(svg) {
-  const m = svg.match(/viewBox=["']([^"']+)["']/i);
-  if (!m) return null;
-  const p = m[1].trim().split(/[\s,]+/).map(Number);
-  if (p.length !== 4 || p.some(n => !Number.isFinite(n))) return null;
-  return { w: p[2], h: p[3] };
-}
 
 export function wideLogoWidthAtHeight(svg, height = EXPORT_WIDE_HEIGHT) {
   const vb = parseSvgViewBox(svg);
@@ -29,36 +24,6 @@ export function svgForExport(svg, isSquare = true) {
   return trimmed
     .replace(/^(<svg[^>]*?)\bwidth="[^"]*"/, `$1width="${w}"`)
     .replace(/^(<svg[^>]*?)\bheight="[^"]*"/, `$1height="${EXPORT_WIDE_HEIGHT}"`);
-}
-
-export function svgToPngBlob(svgText, { square = false, size = 1000 } = {}) {
-  const sizedSvg = svgForExport(svgText, square);
-  return new Promise((resolve, reject) => {
-    const svgBlob = new Blob([sizedSvg], { type: 'image/svg+xml;charset=utf-8' });
-    const url = URL.createObjectURL(svgBlob);
-    const imgEl = new Image();
-    imgEl.onload = () => {
-      const canvas = document.createElement('canvas');
-      if (square) {
-        canvas.width = size;
-        canvas.height = size;
-      } else {
-        const vb = parseSvgViewBox(sizedSvg);
-        canvas.height = size;
-        canvas.width = vb && vb.h > 0 ? Math.round(size * vb.w / vb.h) : size;
-      }
-      const ctx = canvas.getContext('2d');
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(imgEl, 0, 0, canvas.width, canvas.height);
-      URL.revokeObjectURL(url);
-      canvas.toBlob(blob => {
-        if (blob) resolve(blob); else reject(new Error('PNG generation failed'));
-      }, 'image/png');
-    };
-    imgEl.onerror = () => { URL.revokeObjectURL(url); reject(new Error('SVG load failed')); };
-    imgEl.src = url;
-  });
 }
 
 export function svgForFigma(svg, item, isSquare = true) {
