@@ -9,10 +9,15 @@ export function slugifyPathPart(value) {
     .replace(/^-+|-+$/g, '');
 }
 
+function repoBase() {
+  const m = location.pathname.match(/^(.*?)\/(?:logos|icons|emoji)\//);
+  return m ? m[1] : '';
+}
+
 export function seoPageUrlForItem(item) {
   const parts = (item.figma || '').split('/').map(part => slugifyPathPart(part)).filter(Boolean);
   if (parts[0] !== 'icon' || parts.length < 3) return '';
-  return `/logos/${parts.slice(1).join('/')}/`;
+  return repoBase() + `/logos/${parts.slice(1).join('/')}/`;
 }
 
 async function seoPageExists(url) {
