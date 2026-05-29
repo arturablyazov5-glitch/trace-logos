@@ -38,19 +38,46 @@ GET https://rafael-mansurov.github.io/trace-logos/logos.json
 | categorySlug  | string         | Слаг категории ("bank", "social")                     |
 | url           | string         | URL страницы логотипа (статический HTML)              |
 | svgUrl        | string \| null | Прямой URL SVG-файла (null если только PNG)           |
+| pngUrl        | string \| null | Прямой URL PNG-файла. null = PNG генерируется динамически из SVG на клиенте (нет статического файла) |
 | ecosystem     | string \| null | Экосистема ("yandex", "sber", "tinkoff", null)        |
 | formats       | string[]       | Доступные форматы: ["svg", "png"] или ["png"]         |
+| comingSoon    | true \| absent | Логотип в разработке, файлы ещё не доступны           |
 
-Пример записи:
+Пример — логотип с готовым PNG:
+```json
+{
+  "name": "Т-Банк",
+  "categorySlug": "bank",
+  "url": "https://rafael-mansurov.github.io/trace-logos/logos/bank/tbank/",
+  "svgUrl": "https://rafael-mansurov.github.io/trace-logos/assets/logos/svgs/t-bank.svg",
+  "pngUrl": "https://rafael-mansurov.github.io/trace-logos/assets/logos/pngs/t-bank.png",
+  "ecosystem": "tinkoff",
+  "formats": ["svg", "png"]
+}
+```
+
+Пример — логотип только с SVG (PNG генерируется динамически, pngUrl = null):
 ```json
 {
   "name": "Сбер",
-  "category": "Банки",
   "categorySlug": "bank",
   "url": "https://rafael-mansurov.github.io/trace-logos/logos/bank/sber/",
   "svgUrl": "https://rafael-mansurov.github.io/trace-logos/assets/logos/svgs/sber.svg",
+  "pngUrl": null,
   "ecosystem": "sber",
   "formats": ["svg", "png"]
+}
+```
+
+Пример — запланированный логотип (comingSoon):
+```json
+{
+  "name": "GigaChat",
+  "categorySlug": "ai",
+  "url": "https://rafael-mansurov.github.io/trace-logos/logos/ai/gigachat/",
+  "svgUrl": null,
+  "pngUrl": null,
+  "comingSoon": true
 }
 ```
 
