@@ -211,10 +211,13 @@
     object-fit: contain;
   }
   .detail-preview img.wide {
-    width: 240px;
-    height: 80px;
-    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    max-height: 80px;
+    border-radius: 12px;
     background: var(--checker-full);
+    padding: 16px 20px;
+    object-fit: contain;
   }
 
   .detail-name {
@@ -248,37 +251,43 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    align-items: stretch;
   }
   .variant-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 8px 6px 6px;
-    gap: 5px;
+    background: #1e1e1e;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    justify-items: center;
+    padding: 14px 10px 10px;
+    gap: 8px;
     cursor: pointer;
-    width: 70px;
+    min-width: 80px;
+    min-height: 100px;
+    flex: 1;
     transition: background .12s, border-color .12s;
   }
-  .variant-card.wide { width: 120px; }
-  .variant-card:hover { background: var(--bg-hover); border-color: var(--border-md); }
-  .variant-card.active { border-color: #fff; background: var(--bg-hover); }
+  .variant-card:hover { border-color: #333; }
+  .variant-card.active { border-color: #444; background: #252525; }
   .variant-card img {
-    width: 44px;
-    height: 44px;
-    object-fit: contain;
+    align-self: center;
+    max-width: 100%;
+    max-height: 52px;
+    width: auto;
+    height: auto;
     border-radius: 10px;
+    object-fit: contain;
   }
   .variant-card.wide img {
-    width: 100px;
-    height: 36px;
+    max-height: 40px;
     border-radius: 4px;
     background: var(--checker-full);
+    padding: 6px 10px;
   }
   .variant-card-label {
-    font-size: 9px;
+    align-self: end;
+    font-size: 10px;
     color: var(--text-muted);
     text-align: center;
     white-space: nowrap;
@@ -286,41 +295,42 @@
     text-overflow: ellipsis;
     max-width: 100%;
   }
-  .variant-card.active .variant-card-label { color: #fff; }
+  .variant-card.active .variant-card-label { color: #aaa; }
 
   /* Ecosystem section */
   .ecosystem-section {
     padding: 0 12px 16px;
   }
   .ecosystem-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
     gap: 6px;
   }
   .eco-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    background: #1e1e1e;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 8px 6px 6px;
-    gap: 5px;
+    padding: 10px 6px 8px;
+    gap: 6px;
     cursor: pointer;
-    width: 70px;
     transition: background .12s, border-color .12s;
   }
-  .eco-card:hover { background: var(--bg-hover); border-color: var(--border-md); }
-  .eco-card.active { border-color: #555; }
-  .eco-card img { width: 44px; height: 44px; object-fit: contain; border-radius: 10px; }
+  .eco-card:hover { border-color: #333; background: #222; }
+  .eco-card.active { border-color: #444; background: #252525; }
+  .eco-card.active .eco-card-label { color: #ccc; }
+  .eco-card img { width: 36px; height: 36px; object-fit: contain; border-radius: 8px; }
   .eco-card-label {
-    font-size: 9px;
-    color: var(--text-muted);
+    font-size: 10px;
+    color: #888;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
+    line-height: 1.3;
   }
 
   /* Insert button */
@@ -461,7 +471,7 @@ function getFiltered() {
   const q = searchQuery.toLowerCase();
   return allLogos.filter(l => {
     const matchCat = activeCategory === 'all' || l.categorySlug === activeCategory;
-    const matchSearch = !q || l.name.toLowerCase().includes(q);
+    const matchSearch = !q || l.name.toLowerCase().includes(q) || (l.tags && l.tags.toLowerCase().includes(q));
     return matchCat && matchSearch;
   });
 }
@@ -508,14 +518,13 @@ function openDetail(logo) {
   document.getElementById('detailCat').textContent = logo.categoryName || '';
 
   // Build full variants list (primary + extras)
-  const isFullUrl = url => url && (/-(full|horizontal|wide)(\.|-)/.test(url) || url.includes('-full.'));
   const allVariants = [
-    { label: 'Иконка', svgUrl: logo.svgUrl, wide: false },
+    { label: 'Иконка', svgUrl: logo.svgUrl, wide: false, isPng: false },
     ...(logo.variants || []).map(v => ({
       label: v.label || 'Вариант',
       svgUrl: v.svgUrl || null,
       pngUrl: v.pngUrl || null,
-      wide: isFullUrl(v.svgUrl || v.pngUrl),
+      wide: !!v.wide,
       isPng: !v.svgUrl && !!v.pngUrl,
     })),
   ];
@@ -530,7 +539,7 @@ function openDetail(logo) {
       card.className = 'variant-card' + (v.wide ? ' wide' : '');
       if (i === 0) card.classList.add('active');
       const img = document.createElement('img');
-      img.src = v.svgUrl;
+      img.src = v.svgUrl || v.pngUrl;
       img.alt = v.label;
       const lbl = document.createElement('div');
       lbl.className = 'variant-card-label';
