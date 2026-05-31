@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow: hidden; }
+
+  :root {
+    --bg:         #111;
+    --bg-card:    #161616;
+    --bg-hover:   #1c1c1c;
+    --bg-active:  #252525;
+    --border:     #222;
+    --border-md:  #2a2a2a;
+    --border-hover: #383838;
+    --text:       #ccc;
+    --text-muted: #666;
+    --text-dim:   #444;
+    --radius:     10px;
+    --font:       -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  body {
+    font-family: var(--font);
+    font-size: 13px;
+    background: var(--bg);
+    color: var(--text);
+    height: 560px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .search-row {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+
+  .search {
+    flex: 1;
+    padding: 7px 10px;
+    border: 1px solid var(--border-md);
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    background: var(--bg-card);
+    color: var(--text);
+  }
+  .search::placeholder { color: var(--text-dim); }
+  .search:focus { border-color: #404040; }
+
+  .filters {
+    display: flex;
+    gap: 5px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 1px;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+
+  .filter-btn {
+    flex-shrink: 0;
+    padding: 4px 12px;
+    border: 1px solid var(--border-md);
+    border-radius: 20px;
+    font-size: 12px;
+    background: transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--text-muted);
+    transition: color .12s, border-color .12s, background .12s;
+  }
+  .filter-btn:hover { border-color: var(--border-hover); color: #aaa; }
+  .filter-btn.active { background: #fff; border-color: #fff; color: #111; }
+
+  /* ── Grid ── */
+  .grid-view {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 8px;
+    overflow-y: auto;
+    flex: 1;
+    align-content: start;
+  }
+  .grid::-webkit-scrollbar { width: 4px; }
+  .grid::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+
+  .card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 6px 10px;
+    cursor: pointer;
+    gap: 8px;
+    border: 1px solid var(--border);
+    transition: background .12s, border-color .12s;
+  }
+  .card:hover { background: var(--bg-hover); border-color: var(--border-md); }
+  .card:active { background: var(--bg-active); }
+
+  .icon-wrap {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .icon-wrap img {
+    width: 48px;
+    height: 48px;
+    border-radius: 11px;
+    object-fit: contain;
+  }
+
+  .card-name {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.2;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    padding: 0 2px;
+  }
+  .card:hover .card-name { color: #aaa; }
+
+  /* ── Detail panel ── */
+  .detail-view {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+  }
+  .detail-view.visible { display: flex; }
+
+  .detail-back {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .detail-back:hover { color: var(--text); }
+  .detail-back svg { flex-shrink: 0; }
+
+  .detail-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 20px 20px;
+    flex-shrink: 0;
+  }
+  .detail-preview img {
+    width: 120px;
+    height: 120px;
+    border-radius: 22px;
+    object-fit: contain;
+  }
+
+  .detail-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+    padding: 0 16px 4px;
+    flex-shrink: 0;
+  }
+
+  .detail-cat {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-align: center;
+    padding: 0 16px 20px;
+    flex-shrink: 0;
+  }
+
+  .detail-variants {
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .detail-variants::-webkit-scrollbar { width: 4px; }
+  .detail-variants::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+
+  .variant-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    padding: 0 2px 2px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 500;
+  }
+
+  .variant-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    color: var(--text);
+    font-size: 13px;
+    transition: background .12s, border-color .12s;
+    width: 100%;
+    text-align: left;
+  }
+  .variant-btn:hover { background: var(--bg-hover); border-color: var(--border-md); }
+  .variant-btn:active { background: var(--bg-active); }
+  .variant-btn.inserting { opacity: 0.5; pointer-events: none; }
+
+  .variant-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 9px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .variant-info { flex: 1; }
+  .variant-title { font-size: 13px; color: var(--text); }
+  .variant-sub { font-size: 10px; color: var(--text-dim); margin-top: 1px; }
+
+  .variant-arrow {
+    color: var(--text-dim);
+    flex-shrink: 0;
+  }
+
+  .detail-footer {
+    padding: 12px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  /* ── States ── */
+  .state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    color: var(--text-dim);
+    font-size: 13px;
+    text-align: center;
+    padding: 20px;
+  }
+  .state.error { color: #c0392b; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="search-row">
+    <input class="search" type="text" placeholder="Поиск..." id="search" autocomplete="off">
+  </div>
+  <div class="filters" id="filters"></div>
+</div>
+
+<!-- Grid view -->
+<div class="grid-view" id="gridView">
+  <div class="state" id="state">Загрузка...</div>
+  <div class="grid" id="grid" style="display:none"></div>
+</div>
+
+<!-- Detail view -->
+<div class="detail-view" id="detailView">
+  <div class="detail-back" id="detailBack">
+    <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Назад
+  </div>
+  <div class="detail-preview">
+    <img id="detailImg" src="" alt="">
+  </div>
+  <div class="detail-name" id="detailName"></div>
+  <div class="detail-cat" id="detailCat"></div>
+  <div class="detail-variants" id="detailVariants"></div>
+</div>
+
+<script>
+const API = 'https://rafael-mansurov.github.io/trace-logos/logos.json';
+
+let allLogos = [];
+let activeCategory = 'all';
+let searchQuery = '';
+let currentLogo = null;
+
+// ── Load ──────────────────────────────────────────────────────────────────────
+
+async function load() {
+  try {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const list = Array.isArray(data) ? data : data.logos;
+    allLogos = list.filter(l => !l.comingSoon && l.svgUrl);
+
+    // Build category list preserving order from data
+    const catMap = new Map([['all', 'Все']]);
+    allLogos.forEach(l => {
+      if (l.categorySlug && !catMap.has(l.categorySlug))
+        catMap.set(l.categorySlug, l.categoryName || l.categorySlug);
+    });
+
+    renderFilters(catMap);
+    renderGrid();
+
+    document.getElementById('state').style.display = 'none';
+    document.getElementById('grid').style.display = 'grid';
+  } catch (e) {
+    document.getElementById('state').className = 'state error';
+    document.getElementById('state').textContent = 'Ошибка: ' + (e.message || e);
+  }
+}
+
+// ── Filters ───────────────────────────────────────────────────────────────────
+
+function renderFilters(catMap) {
+  const el = document.getElementById('filters');
+  el.innerHTML = [...catMap.entries()].map(([slug, name]) => `
+    <button class="filter-btn ${slug === 'all' ? 'active' : ''}" data-cat="${slug}">${escHtml(name)}</button>
+  `).join('');
+
+  el.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    activeCategory = btn.dataset.cat;
+    el.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGrid();
+  });
+}
+
+// ── Grid ──────────────────────────────────────────────────────────────────────
+
+function getFiltered() {
+  const q = searchQuery.toLowerCase();
+  return allLogos.filter(l => {
+    const matchCat = activeCategory === 'all' || l.categorySlug === activeCategory;
+    const matchSearch = !q || l.name.toLowerCase().includes(q);
+    return matchCat && matchSearch;
+  });
+}
+
+function renderGrid() {
+  const logos = getFiltered();
+  const grid = document.getElementById('grid');
+  grid.onclick = null;
+
+  if (logos.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;height:140px;color:#444;font-size:13px">Ничего не найдено</div>';
+    return;
+  }
+
+  // Store data on window to avoid data- attribute serialization issues
+  window._logos = logos;
+
+  grid.innerHTML = logos.map((l, i) => `
+    <div class="card" data-idx="${i}">
+      <div class="icon-wrap">
+        <img src="${l.svgUrl}" alt="${escAttr(l.name)}" loading="lazy">
+      </div>
+      <span class="card-name">${escHtml(l.name)}</span>
+    </div>
+  `).join('');
+
+  grid.onclick = e => {
+    const card = e.target.closest('.card');
+    if (!card) return;
+    openDetail(window._logos[+card.dataset.idx]);
+  };
+}
+
+// ── Detail ────────────────────────────────────────────────────────────────────
+
+function openDetail(logo) {
+  currentLogo = logo;
+
+  document.getElementById('detailImg').src = logo.svgUrl;
+  document.getElementById('detailImg').alt = logo.name;
+  document.getElementById('detailName').textContent = logo.name;
+  document.getElementById('detailCat').textContent = logo.categoryName || '';
+
+  const variants = [
+    { label: 'Иконка', svgUrl: logo.svgUrl, isPrimary: true },
+    ...(logo.variants || []).map(v => ({ label: v.label || 'Вариант', svgUrl: v.svgUrl })),
+  ];
+
+  const el = document.getElementById('detailVariants');
+  el.innerHTML = '<div class="variant-label">Вставить в Figma</div>' + variants.map((v, i) => `
+    <button class="variant-btn" data-svg="${escAttr(v.svgUrl)}" data-name="${escAttr(logo.name + (i > 0 ? ' — ' + v.label : ''))}">
+      <img class="variant-thumb" src="${v.svgUrl}" alt="">
+      <div class="variant-info">
+        <div class="variant-title">${escHtml(v.label)}</div>
+        <div class="variant-sub">SVG</div>
+      </div>
+      <svg class="variant-arrow" width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  `).join('');
+
+  el.onclick = onVariantClick;
+
+  document.getElementById('gridView').style.display = 'none';
+  document.getElementById('detailView').classList.add('visible');
+}
+
+function closeDetail() {
+  document.getElementById('detailView').classList.remove('visible');
+  document.getElementById('gridView').style.display = 'flex';
+}
+
+document.getElementById('detailBack').onclick = closeDetail;
+
+async function onVariantClick(e) {
+  const btn = e.target.closest('.variant-btn');
+  if (!btn) return;
+
+  const svgUrl = btn.dataset.svg;
+  const name = btn.dataset.name;
+
+  btn.classList.add('inserting');
+
+  try {
+    const res = await fetch(svgUrl);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const svg = await res.text();
+    parent.postMessage({ pluginMessage: { type: 'insert-svg', svg, name } }, '*');
+  } catch (err) {
+    btn.classList.remove('inserting');
+    alert('Не удалось загрузить: ' + err.message);
+  }
+}
+
+// ── Search ────────────────────────────────────────────────────────────────────
+
+document.getElementById('search').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  if (document.getElementById('detailView').classList.contains('visible')) closeDetail();
+  renderGrid();
+});
+
+// ── Utils ─────────────────────────────────────────────────────────────────────
+
+function escAttr(s) { return String(s).replace(/"/g, '&quot;'); }
+function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+load();
+</script>
+</body>
+</html>
