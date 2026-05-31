@@ -41,6 +41,29 @@
     flex-direction: column;
   }
 
+  /* ── Tabs ── */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .tab {
+    flex: 1;
+    padding: 10px 0;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: color .12s;
+    margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text); border-bottom-color: #fff; }
+
   /* ── Header ── */
   .header {
     padding: 10px;
@@ -106,18 +129,34 @@
   }
 
   .grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 4px;
-    padding: 8px;
     overflow-y: auto;
     overflow-x: hidden;
     flex: 1;
-    align-content: start;
     min-width: 0;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
   .grid::-webkit-scrollbar { width: 4px; }
   .grid::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+
+  .section-header {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 12px 4px 6px;
+  }
+  .section-header:first-child { padding-top: 4px; }
+
+  .cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+    margin-bottom: 4px;
+  }
 
   .card {
     background: var(--bg-card);
@@ -211,13 +250,13 @@
     object-fit: contain;
   }
   .detail-preview img.wide {
+    display: block;
     width: 100%;
-    height: auto;
-    max-height: 80px;
-    border-radius: 12px;
+    max-width: 100%;
+    box-sizing: border-box;
     background: var(--checker-full);
     padding: 16px 20px;
-    object-fit: contain;
+    border-radius: 12px;
   }
 
   .detail-name {
@@ -372,6 +411,10 @@
 </head>
 <body>
 
+<div class="tabs">
+  <button class="tab active" data-tab="logos">Логотипы</button>
+  <button class="tab" data-tab="emoji">Эмодзи</button>
+</div>
 <div class="header">
   <div class="search-row">
     <input class="search" type="text" placeholder="Поиск..." id="search" autocomplete="off">
@@ -412,24 +455,39 @@
 </div>
 
 <script>
-const API = 'https://rafael-mansurov.github.io/trace-logos/logos.json?v=' + Date.now();
+const APIS = {
+  logos: 'https://rafael-mansurov.github.io/trace-logos/logos.json?v=' + Date.now(),
+  emoji: 'https://rafael-mansurov.github.io/trace-logos/emoji.json?v=' + Date.now(),
+};
 
 let allLogos = [];
 let activeCategory = 'all';
 let searchQuery = '';
 let currentLogo = null;
+let activeTab = 'logos';
 
 // ── Load ──────────────────────────────────────────────────────────────────────
 
-async function load() {
+async function load(tab = 'logos') {
+  activeTab = tab;
+  activeCategory = 'all';
+  searchQuery = '';
+  document.getElementById('search').value = '';
+  document.getElementById('state').style.display = '';
+  document.getElementById('state').className = 'state';
+  document.getElementById('state').textContent = 'Загрузка...';
+  document.getElementById('grid').style.display = 'none';
+
   try {
-    const res = await fetch(API);
+    const res = await fetch(APIS[tab]);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    const list = Array.isArray(data) ? data : data.logos;
-    allLogos = list.filter(l => !l.comingSoon && l.svgUrl);
+    const list = Array.isArray(data) ? data : (data.logos || data.emoji || []);
+    // For logos: filter comingSoon and require svgUrl; for emoji: require pngUrl or svgUrl
+    allLogos = tab === 'logos'
+      ? list.filter(l => !l.comingSoon && l.svgUrl)
+      : list.filter(l => l.pngUrl || l.svgUrl);
 
-    // Build category list preserving order from data
     const catMap = new Map([['all', 'Все']]);
     allLogos.forEach(l => {
       if (l.categorySlug && !catMap.has(l.categorySlug))
@@ -440,12 +498,22 @@ async function load() {
     renderGrid();
 
     document.getElementById('state').style.display = 'none';
-    document.getElementById('grid').style.display = 'grid';
+    document.getElementById('grid').style.display = 'flex';
   } catch (e) {
     document.getElementById('state').className = 'state error';
     document.getElementById('state').textContent = 'Ошибка: ' + (e.message || e);
   }
 }
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+
+document.querySelector('.tabs').addEventListener('click', e => {
+  const tab = e.target.closest('.tab');
+  if (!tab || tab.dataset.tab === activeTab) return;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  load(tab.dataset.tab);
+});
 
 // ── Filters ───────────────────────────────────────────────────────────────────
 
@@ -482,21 +550,44 @@ function renderGrid() {
   grid.onclick = null;
 
   if (logos.length === 0) {
-    grid.innerHTML = '<div style="grid-column:1/-1;display:flex;align-items:center;justify-content:center;height:140px;color:#444;font-size:13px">Ничего не найдено</div>';
+    grid.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:140px;color:#444;font-size:13px">Ничего не найдено</div>';
     return;
   }
 
-  // Store data on window to avoid data- attribute serialization issues
   window._logos = logos;
 
-  grid.innerHTML = logos.map((l, i) => `
-    <div class="card" data-idx="${i}">
-      <div class="icon-wrap">
-        <img src="${l.svgUrl}" alt="${escAttr(l.name)}" loading="lazy">
+  // Group by category when showing all, flat list for single category
+  const showSections = activeCategory === 'all' && !searchQuery;
+
+  if (showSections) {
+    // Group logos preserving order
+    const sections = [];
+    const seen = new Map();
+    logos.forEach((l, i) => {
+      const key = l.categorySlug || '';
+      if (!seen.has(key)) { seen.set(key, []); sections.push({ slug: key, name: l.categoryName || key, items: seen.get(key) }); }
+      seen.get(key).push({ logo: l, idx: i });
+    });
+
+    grid.innerHTML = sections.map(sec => `
+      <div class="section-header">${escHtml(sec.name)}</div>
+      <div class="cards-row">
+        ${sec.items.map(({ logo: l, idx }) => `
+          <div class="card" data-idx="${idx}">
+            <div class="icon-wrap"><img src="${l.svgUrl || l.pngUrl}" alt="${escAttr(l.name)}" loading="lazy"></div>
+            <span class="card-name">${escHtml(l.name)}</span>
+          </div>
+        `).join('')}
       </div>
-      <span class="card-name">${escHtml(l.name)}</span>
-    </div>
-  `).join('');
+    `).join('');
+  } else {
+    grid.innerHTML = `<div class="cards-row">${logos.map((l, i) => `
+      <div class="card" data-idx="${i}">
+        <div class="icon-wrap"><img src="${l.svgUrl || l.pngUrl}" alt="${escAttr(l.name)}" loading="lazy"></div>
+        <span class="card-name">${escHtml(l.name)}</span>
+      </div>
+    `).join('')}</div>`;
+  }
 
   grid.onclick = e => {
     const card = e.target.closest('.card');
@@ -518,8 +609,9 @@ function openDetail(logo) {
   document.getElementById('detailCat').textContent = logo.categoryName || '';
 
   // Build full variants list (primary + extras)
+  const primaryIsPng = !logo.svgUrl && !!logo.pngUrl;
   const allVariants = [
-    { label: 'Иконка', svgUrl: logo.svgUrl, wide: false, isPng: false },
+    { label: primaryIsPng ? 'Apple' : 'Иконка', svgUrl: logo.svgUrl || null, pngUrl: logo.pngUrl || null, wide: false, isPng: primaryIsPng },
     ...(logo.variants || []).map(v => ({
       label: v.label || 'Вариант',
       svgUrl: v.svgUrl || null,
