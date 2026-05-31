@@ -7,13 +7,25 @@ figma.ui.onmessage = async (msg) => {
       node.name = msg.name;
       figma.currentPage.appendChild(node);
       figma.viewport.scrollAndZoomIntoView([node]);
-      figma.notify(`✓ ${msg.name} добавлен`);
+      figma.notify(`✓ ${msg.name}`);
     } catch (e) {
       figma.notify('Ошибка при вставке SVG', { error: true });
     }
   }
 
-  if (msg.type === 'close') {
-    figma.closePlugin();
+  if (msg.type === 'insert-png') {
+    try {
+      const image = figma.createImage(new Uint8Array(msg.bytes));
+      const { width, height } = await image.getSizeAsync();
+      const rect = figma.createRectangle();
+      rect.name = msg.name;
+      rect.resize(width, height);
+      rect.fills = [{ type: 'IMAGE', scaleMode: 'FILL', imageHash: image.hash }];
+      figma.currentPage.appendChild(rect);
+      figma.viewport.scrollAndZoomIntoView([rect]);
+      figma.notify(`✓ ${msg.name}`);
+    } catch (e) {
+      figma.notify('Ошибка при вставке PNG', { error: true });
+    }
   }
 };

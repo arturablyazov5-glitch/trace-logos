@@ -2,9 +2,15 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { overflow: hidden; }
+
+  html {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
 
   :root {
     --bg:         #111;
@@ -19,6 +25,7 @@
     --text-dim:   #444;
     --radius:     10px;
     --font:       -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --checker-full: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAFpJREFUWAntljEKADAIA23p6v//qQ+wfUEcCu1yriEgp0FHRJSJcnehmmWm1Dv/lO4HIg1AAAKjTqm03ea88zMCCEDgO4HV5bS757f+7wRoAAIQ4B9gByAAgQ3pfiDmXmAeEwAAAABJRU5ErkJggg==") 0% 0% / 20px;
   }
 
   body {
@@ -26,7 +33,9 @@
     font-size: 13px;
     background: var(--bg);
     color: var(--text);
+    width: 100%;
     height: 560px;
+    max-width: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -40,6 +49,8 @@
     flex-direction: column;
     gap: 8px;
     flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
   }
 
   .search-row {
@@ -91,16 +102,19 @@
     flex-direction: column;
     flex: 1;
     overflow: hidden;
+    min-width: 0;
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 4px;
     padding: 8px;
     overflow-y: auto;
+    overflow-x: hidden;
     flex: 1;
     align-content: start;
+    min-width: 0;
   }
   .grid::-webkit-scrollbar { width: 4px; }
   .grid::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
@@ -115,6 +129,7 @@
     padding: 12px 6px 10px;
     cursor: pointer;
     gap: 8px;
+    min-width: 0;
     border: 1px solid var(--border);
     transition: background .12s, border-color .12s;
   }
@@ -173,18 +188,33 @@
   .detail-back:hover { color: var(--text); }
   .detail-back svg { flex-shrink: 0; }
 
+  .detail-scroll {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .detail-scroll::-webkit-scrollbar { width: 4px; }
+  .detail-scroll::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+
   .detail-preview {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 28px 20px 20px;
+    padding: 24px 20px 16px;
     flex-shrink: 0;
   }
   .detail-preview img {
-    width: 120px;
-    height: 120px;
-    border-radius: 22px;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
     object-fit: contain;
+  }
+  .detail-preview img.wide {
+    width: 240px;
+    height: 80px;
+    border-radius: 8px;
+    background: var(--checker-full);
   }
 
   .detail-name {
@@ -192,79 +222,129 @@
     font-weight: 600;
     color: var(--text);
     text-align: center;
-    padding: 0 16px 4px;
-    flex-shrink: 0;
+    padding: 0 16px 3px;
   }
 
   .detail-cat {
     font-size: 11px;
     color: var(--text-dim);
     text-align: center;
-    padding: 0 16px 20px;
-    flex-shrink: 0;
+    padding: 0 16px 16px;
   }
 
-  .detail-variants {
-    padding: 0 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    overflow-y: auto;
-    flex: 1;
+  /* Variant cards grid — like on the site */
+  .variants-section {
+    padding: 0 12px 16px;
   }
-  .detail-variants::-webkit-scrollbar { width: 4px; }
-  .detail-variants::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
-
-  .variant-label {
-    font-size: 11px;
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
     color: var(--text-dim);
-    padding: 0 2px 2px;
     text-transform: uppercase;
-    letter-spacing: .04em;
-    font-weight: 500;
+    letter-spacing: .06em;
+    margin-bottom: 8px;
   }
-
-  .variant-btn {
+  .variants-grid {
     display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .variant-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 6px 6px;
+    gap: 5px;
     cursor: pointer;
-    color: var(--text);
-    font-size: 13px;
+    width: 70px;
     transition: background .12s, border-color .12s;
-    width: 100%;
-    text-align: left;
   }
-  .variant-btn:hover { background: var(--bg-hover); border-color: var(--border-md); }
-  .variant-btn:active { background: var(--bg-active); }
-  .variant-btn.inserting { opacity: 0.5; pointer-events: none; }
-
-  .variant-thumb {
-    width: 40px;
-    height: 40px;
-    border-radius: 9px;
+  .variant-card.wide { width: 120px; }
+  .variant-card:hover { background: var(--bg-hover); border-color: var(--border-md); }
+  .variant-card.active { border-color: #fff; background: var(--bg-hover); }
+  .variant-card img {
+    width: 44px;
+    height: 44px;
     object-fit: contain;
-    flex-shrink: 0;
+    border-radius: 10px;
+  }
+  .variant-card.wide img {
+    width: 100px;
+    height: 36px;
+    border-radius: 4px;
+    background: var(--checker-full);
+  }
+  .variant-card-label {
+    font-size: 9px;
+    color: var(--text-muted);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+  .variant-card.active .variant-card-label { color: #fff; }
+
+  /* Ecosystem section */
+  .ecosystem-section {
+    padding: 0 12px 16px;
+  }
+  .ecosystem-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .eco-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 6px 6px;
+    gap: 5px;
+    cursor: pointer;
+    width: 70px;
+    transition: background .12s, border-color .12s;
+  }
+  .eco-card:hover { background: var(--bg-hover); border-color: var(--border-md); }
+  .eco-card.active { border-color: #555; }
+  .eco-card img { width: 44px; height: 44px; object-fit: contain; border-radius: 10px; }
+  .eco-card-label {
+    font-size: 9px;
+    color: var(--text-muted);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
-  .variant-info { flex: 1; }
-  .variant-title { font-size: 13px; color: var(--text); }
-  .variant-sub { font-size: 10px; color: var(--text-dim); margin-top: 1px; }
-
-  .variant-arrow {
-    color: var(--text-dim);
-    flex-shrink: 0;
-  }
-
+  /* Insert button */
   .detail-footer {
-    padding: 12px;
+    padding: 10px 12px;
     border-top: 1px solid var(--border);
     flex-shrink: 0;
   }
+  .insert-btn {
+    width: 100%;
+    padding: 10px;
+    background: #fff;
+    color: #111;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: opacity .12s;
+  }
+  .insert-btn:hover { opacity: 0.88; }
+  .insert-btn:active { opacity: 0.75; }
+  .insert-btn:disabled { opacity: 0.4; cursor: default; }
 
   /* ── States ── */
   .state {
@@ -301,16 +381,28 @@
     <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     Назад
   </div>
-  <div class="detail-preview">
-    <img id="detailImg" src="" alt="">
+  <div class="detail-scroll">
+    <div class="detail-preview">
+      <img id="detailImg" src="" alt="">
+    </div>
+    <div class="detail-name" id="detailName"></div>
+    <div class="detail-cat" id="detailCat"></div>
+    <div class="variants-section" id="variantsSection" style="display:none">
+      <div class="section-label">Варианты</div>
+      <div class="variants-grid" id="variantsGrid"></div>
+    </div>
+    <div class="ecosystem-section" id="ecosystemSection" style="display:none">
+      <div class="section-label" id="ecosystemLabel">Экосистема</div>
+      <div class="ecosystem-grid" id="ecosystemGrid"></div>
+    </div>
   </div>
-  <div class="detail-name" id="detailName"></div>
-  <div class="detail-cat" id="detailCat"></div>
-  <div class="detail-variants" id="detailVariants"></div>
+  <div class="detail-footer">
+    <button class="insert-btn" id="insertBtn">Вставить в Figma</button>
+  </div>
 </div>
 
 <script>
-const API = 'https://rafael-mansurov.github.io/trace-logos/logos.json';
+const API = 'https://rafael-mansurov.github.io/trace-logos/logos.json?v=' + Date.now();
 
 let allLogos = [];
 let activeCategory = 'all';
@@ -405,35 +497,100 @@ function renderGrid() {
 
 // ── Detail ────────────────────────────────────────────────────────────────────
 
+let selectedSvgUrl = null;
+let selectedPngUrl = null;
+let selectedName = null;
+
 function openDetail(logo) {
   currentLogo = logo;
 
-  document.getElementById('detailImg').src = logo.svgUrl;
-  document.getElementById('detailImg').alt = logo.name;
   document.getElementById('detailName').textContent = logo.name;
   document.getElementById('detailCat').textContent = logo.categoryName || '';
 
-  const variants = [
-    { label: 'Иконка', svgUrl: logo.svgUrl, isPrimary: true },
-    ...(logo.variants || []).map(v => ({ label: v.label || 'Вариант', svgUrl: v.svgUrl })),
+  // Build full variants list (primary + extras)
+  const isFullUrl = url => url && (/-(full|horizontal|wide)(\.|-)/.test(url) || url.includes('-full.'));
+  const allVariants = [
+    { label: 'Иконка', svgUrl: logo.svgUrl, wide: false },
+    ...(logo.variants || []).map(v => ({
+      label: v.label || 'Вариант',
+      svgUrl: v.svgUrl || null,
+      pngUrl: v.pngUrl || null,
+      wide: isFullUrl(v.svgUrl || v.pngUrl),
+      isPng: !v.svgUrl && !!v.pngUrl,
+    })),
   ];
 
-  const el = document.getElementById('detailVariants');
-  el.innerHTML = '<div class="variant-label">Вставить в Figma</div>' + variants.map((v, i) => `
-    <button class="variant-btn" data-svg="${escAttr(v.svgUrl)}" data-name="${escAttr(logo.name + (i > 0 ? ' — ' + v.label : ''))}">
-      <img class="variant-thumb" src="${v.svgUrl}" alt="">
-      <div class="variant-info">
-        <div class="variant-title">${escHtml(v.label)}</div>
-        <div class="variant-sub">SVG</div>
-      </div>
-      <svg class="variant-arrow" width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </button>
-  `).join('');
+  // Render variant cards
+  const variantsSection = document.getElementById('variantsSection');
+  const variantsGrid = document.getElementById('variantsGrid');
+  if (allVariants.length > 1) {
+    variantsGrid.innerHTML = '';
+    allVariants.forEach((v, i) => {
+      const card = document.createElement('div');
+      card.className = 'variant-card' + (v.wide ? ' wide' : '');
+      if (i === 0) card.classList.add('active');
+      const img = document.createElement('img');
+      img.src = v.svgUrl;
+      img.alt = v.label;
+      const lbl = document.createElement('div');
+      lbl.className = 'variant-card-label';
+      lbl.textContent = v.label;
+      card.append(img, lbl);
+      card.addEventListener('click', () => selectVariant(v, card, logo.name));
+      variantsGrid.appendChild(card);
+    });
+    variantsSection.style.display = '';
+  } else {
+    variantsSection.style.display = 'none';
+  }
 
-  el.onclick = onVariantClick;
+  // Set initial selection
+  selectVariant(allVariants[0], variantsGrid.firstChild, logo.name);
+
+  // Ecosystem block
+  const ecoSection = document.getElementById('ecosystemSection');
+  const ecoGrid = document.getElementById('ecosystemGrid');
+  if (logo.ecosystem) {
+    const members = allLogos.filter(l => l.ecosystem === logo.ecosystem);
+    if (members.length > 1) {
+      ecoGrid.innerHTML = '';
+      members.forEach(m => {
+        const card = document.createElement('div');
+        card.className = 'eco-card' + (m.svgUrl === logo.svgUrl ? ' active' : '');
+        const img = document.createElement('img');
+        img.src = m.svgUrl;
+        img.alt = m.name;
+        img.loading = 'lazy';
+        const lbl = document.createElement('div');
+        lbl.className = 'eco-card-label';
+        lbl.textContent = m.name;
+        card.append(img, lbl);
+        card.addEventListener('click', () => openDetail(m));
+        ecoGrid.appendChild(card);
+      });
+      ecoSection.style.display = '';
+    } else {
+      ecoSection.style.display = 'none';
+    }
+  } else {
+    ecoSection.style.display = 'none';
+  }
 
   document.getElementById('gridView').style.display = 'none';
   document.getElementById('detailView').classList.add('visible');
+}
+
+function selectVariant(variant, cardEl, logoName) {
+  selectedSvgUrl = variant.svgUrl || null;
+  selectedPngUrl = variant.pngUrl || null;
+  selectedName = logoName + (variant.label !== 'Иконка' ? ' — ' + variant.label : '');
+  const img = document.getElementById('detailImg');
+  img.src = variant.svgUrl || variant.pngUrl;
+  img.classList.toggle('wide', !!variant.wide);
+  document.getElementById('variantsGrid').querySelectorAll('.variant-card').forEach(c => c.classList.remove('active'));
+  if (cardEl) cardEl.classList.add('active');
+  const btn = document.getElementById('insertBtn');
+  btn.textContent = variant.isPng ? 'Вставить PNG в Figma' : 'Вставить SVG в Figma';
 }
 
 function closeDetail() {
@@ -443,25 +600,32 @@ function closeDetail() {
 
 document.getElementById('detailBack').onclick = closeDetail;
 
-async function onVariantClick(e) {
-  const btn = e.target.closest('.variant-btn');
-  if (!btn) return;
-
-  const svgUrl = btn.dataset.svg;
-  const name = btn.dataset.name;
-
-  btn.classList.add('inserting');
-
+document.getElementById('insertBtn').onclick = async () => {
+  if (!selectedSvgUrl && !selectedPngUrl) return;
+  const btn = document.getElementById('insertBtn');
+  const origText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Загрузка...';
   try {
-    const res = await fetch(svgUrl);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const svg = await res.text();
-    parent.postMessage({ pluginMessage: { type: 'insert-svg', svg, name } }, '*');
+    if (selectedSvgUrl) {
+      const res = await fetch(selectedSvgUrl);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const svg = await res.text();
+      parent.postMessage({ pluginMessage: { type: 'insert-svg', svg, name: selectedName } }, '*');
+    } else {
+      const res = await fetch(selectedPngUrl);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const buf = await res.arrayBuffer();
+      parent.postMessage({ pluginMessage: { type: 'insert-png', bytes: buf, name: selectedName } }, '*');
+    }
+    btn.textContent = origText;
+    btn.disabled = false;
   } catch (err) {
-    btn.classList.remove('inserting');
+    btn.textContent = origText;
+    btn.disabled = false;
     alert('Не удалось загрузить: ' + err.message);
   }
-}
+};
 
 // ── Search ────────────────────────────────────────────────────────────────────
 
