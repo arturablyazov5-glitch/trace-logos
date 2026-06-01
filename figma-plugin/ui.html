@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -12,19 +15,37 @@
     height: 100%;
   }
 
+  /* ── Design tokens — mirror of site css/tokens.css ── */
   :root {
-    --bg:         #111;
-    --bg-card:    #161616;
-    --bg-hover:   #1c1c1c;
-    --bg-active:  #252525;
-    --border:     #222;
-    --border-md:  #2a2a2a;
+    --font:         'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono:         'SF Mono', 'Fira Code', ui-monospace, monospace;
+
+    --bg:           #111;
+    --bg-card:      #161616;
+    --bg-muted:     #1a1a1a;
+    --bg-raised:    #1e1e1e;
+    --bg-hover:     #1c1c1c;
+    --bg-active:    #252525;
+
+    --line:         #1e1e1e;
+    --border:       #222;
+    --border-muted: #2a2a2a;
+    --border-base:  #2e2e2e;
     --border-hover: #383838;
-    --text:       #ccc;
-    --text-muted: #666;
-    --text-dim:   #444;
-    --radius:     10px;
-    --font:       -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --border-focus: #404040;
+    --border-bold:  #444;
+    --border-eco:   #333;
+
+    --text-0:       #fff;
+    --text-1:       #e5e5e5;
+    --text-2:       #aaa;
+    --text-3:       #888;
+    --text-5:       #666;
+    --text-6:       #555;
+    --text-dim:     #444;
+
+    --radius:       10px;
+
     --checker-full: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAFpJREFUWAntljEKADAIA23p6v//qQ+wfUEcCu1yriEgp0FHRJSJcnehmmWm1Dv/lO4HIg1AAAKjTqm03ea88zMCCEDgO4HV5bS757f+7wRoAAIQ4B9gByAAgQ3pfiDmXmAeEwAAAABJRU5ErkJggg==") 0% 0% / 20px;
   }
 
@@ -32,13 +53,14 @@
     font-family: var(--font);
     font-size: 13px;
     background: var(--bg);
-    color: var(--text);
+    color: var(--text-1);
     width: 100%;
     height: 560px;
     max-width: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* ── Tabs ── */
@@ -46,7 +68,7 @@
     display: flex;
     padding: 6px 8px;
     gap: 2px;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid var(--border);
     flex-shrink: 0;
   }
   .tab {
@@ -56,7 +78,7 @@
     border-radius: 6px;
     font-size: 12px;
     font-weight: 500;
-    color: #666;
+    color: var(--text-5);
     background: none;
     border: none;
     cursor: pointer;
@@ -64,8 +86,8 @@
     transition: background .15s, color .15s;
     white-space: nowrap;
   }
-  .tab:hover { background: #1e1e1e; color: #bbb; }
-  .tab.active { background: #222; color: #fff; }
+  .tab:hover { background: var(--bg-raised); color: var(--text-2); }
+  .tab.active { background: var(--border); color: var(--text-0); }
 
   /* ── Header ── */
   .header {
@@ -88,15 +110,16 @@
   .search {
     flex: 1;
     padding: 7px 10px;
-    border: 1px solid var(--border-md);
+    border: 1px solid var(--border-muted);
     border-radius: 8px;
     font-size: 13px;
     outline: none;
     background: var(--bg-card);
-    color: var(--text);
+    color: var(--text-1);
+    font-family: var(--font);
   }
-  .search::placeholder { color: var(--text-dim); }
-  .search:focus { border-color: #404040; }
+  .search::placeholder { color: var(--text-6); }
+  .search:focus { border-color: var(--border-focus); }
 
   .filters {
     display: flex;
@@ -110,16 +133,17 @@
   .filter-btn {
     flex-shrink: 0;
     padding: 4px 12px;
-    border: 1px solid var(--border-md);
+    border: 1px solid var(--border-muted);
     border-radius: 20px;
     font-size: 12px;
     background: transparent;
     cursor: pointer;
     white-space: nowrap;
-    color: var(--text-muted);
+    color: var(--text-3);
+    font-family: var(--font);
     transition: color .12s, border-color .12s, background .12s;
   }
-  .filter-btn:hover { border-color: var(--border-hover); color: #aaa; }
+  .filter-btn:hover { border-color: var(--border-hover); color: var(--text-2); }
   .filter-btn.active { background: #fff; border-color: #fff; color: #111; }
 
   /* ── Grid ── */
@@ -142,41 +166,46 @@
     gap: 0;
   }
   .grid::-webkit-scrollbar { width: 4px; }
-  .grid::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+  .grid::-webkit-scrollbar-thumb { background: var(--border-muted); border-radius: 4px; }
 
   .section-header {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 600;
-    color: var(--text-dim);
+    color: var(--text-6);
     text-transform: uppercase;
-    letter-spacing: .06em;
-    padding: 12px 4px 6px;
+    letter-spacing: .1em;
+    padding: 14px 4px 8px;
   }
   .section-header:first-child { padding-top: 4px; }
 
   .cards-row {
+    /* auto-fill columns stretch to fill the width → no ragged gap on the right */
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     gap: 4px;
     margin-bottom: 4px;
+    /* perf: skip rendering rows outside the viewport (no full virtual scroll needed) */
+    content-visibility: auto;
+    contain-intrinsic-size: auto 96px;
   }
 
   .card {
-    background: var(--bg-card);
+    background: transparent;
     border-radius: var(--radius);
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 12px 6px 10px;
+    justify-content: flex-start;
+    padding: 14px 8px 10px;
     cursor: pointer;
     gap: 8px;
     min-width: 0;
-    border: 1px solid var(--border);
+    border: 1px solid transparent;
     transition: background .12s, border-color .12s;
+    user-select: none;
   }
-  .card:hover { background: var(--bg-hover); border-color: var(--border-md); }
-  .card:active { background: var(--bg-active); }
+  .card:hover { background: var(--bg-raised); border-color: var(--border); }
+  .card:active { background: var(--bg-active); cursor: grabbing; }
 
   .icon-wrap {
     width: 48px;
@@ -185,19 +214,42 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    position: relative;
+    border-radius: 11px;
   }
+  .icon-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 11px;
+    background: linear-gradient(90deg, #1b1b1b 0%, #242424 45%, #1b1b1b 90%);
+    background-size: 220% 100%;
+    animation: skeleton-shimmer 1.15s linear infinite;
+    transition: opacity .16s;
+  }
+  .icon-wrap:has(img.loaded)::before,
+  .icon-wrap:has(img.errored)::before { opacity: 0; }
   .icon-wrap img {
     width: 48px;
     height: 48px;
     border-radius: 11px;
     object-fit: contain;
+    opacity: 0;
+    transition: opacity .16s;
+    position: relative;
+    pointer-events: none;
+  }
+  .icon-wrap img.loaded { opacity: 1; }
+  @keyframes skeleton-shimmer {
+    from { background-position: 120% 0; }
+    to   { background-position: -120% 0; }
   }
 
   .card-name {
-    font-size: 10px;
-    color: var(--text-muted);
+    font-size: 11px;
+    color: var(--text-3);
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.3;
     max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -205,7 +257,7 @@
     width: 100%;
     padding: 0 2px;
   }
-  .card:hover .card-name { color: #aaa; }
+  .card:hover .card-name { color: var(--text-2); }
 
   /* ── Detail panel ── */
   .detail-view {
@@ -223,11 +275,11 @@
     padding: 10px 12px;
     border-bottom: 1px solid var(--border);
     cursor: pointer;
-    color: var(--text-muted);
+    color: var(--text-3);
     font-size: 12px;
     flex-shrink: 0;
   }
-  .detail-back:hover { color: var(--text); }
+  .detail-back:hover { color: var(--text-1); }
   .detail-back svg { flex-shrink: 0; }
 
   .detail-scroll {
@@ -237,7 +289,7 @@
     flex-direction: column;
   }
   .detail-scroll::-webkit-scrollbar { width: 4px; }
-  .detail-scroll::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+  .detail-scroll::-webkit-scrollbar-thumb { background: var(--border-muted); border-radius: 4px; }
 
   .detail-preview {
     display: flex;
@@ -245,17 +297,22 @@
     justify-content: center;
     padding: 24px 20px 16px;
     flex-shrink: 0;
+    cursor: grab;
   }
+  .detail-preview:active { cursor: grabbing; }
   .detail-preview img {
     width: 100px;
     height: 100px;
-    border-radius: 20px;
+    border-radius: 22px;
     object-fit: contain;
+    pointer-events: none;
   }
   .detail-preview img.wide {
     display: block;
     width: 100%;
+    height: auto;
     max-width: 100%;
+    max-height: 120px;
     box-sizing: border-box;
     background: var(--checker-full);
     padding: 16px 20px;
@@ -265,30 +322,132 @@
   .detail-name {
     font-size: 16px;
     font-weight: 600;
-    color: var(--text);
+    color: var(--text-0);
     text-align: center;
     padding: 0 16px 3px;
   }
 
   .detail-cat {
     font-size: 11px;
-    color: var(--text-dim);
+    color: var(--text-6);
     text-align: center;
     padding: 0 16px 16px;
   }
 
-  /* Variant cards grid — like on the site */
-  .variants-section {
-    padding: 0 12px 16px;
-  }
   .section-label {
     font-size: 10px;
     font-weight: 600;
     color: var(--text-dim);
     text-transform: uppercase;
-    letter-spacing: .06em;
+    letter-spacing: .1em;
     margin-bottom: 8px;
   }
+
+  /* ── Color editor — collapsible panel, mirrors site css/color.css ── */
+  .colors-panel {
+    margin: 0 12px 16px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border-muted);
+    border-radius: 8px;
+    transition: border-color .12s;
+  }
+  .colors-panel:hover { border-color: var(--border-eco); }
+  .colors-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 10px 8px 12px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 7px;
+    transition: background .12s;
+  }
+  .colors-header:hover { background: var(--bg-active); }
+  .colors-header.open { border-radius: 7px 7px 0 0; }
+  .colors-header-label { font-size: 11px; font-weight: 500; color: var(--text-3); }
+  .colors-header-right { display: flex; align-items: center; gap: 6px; }
+  .colors-chevron { color: var(--text-6); transition: transform .2s; flex-shrink: 0; }
+  .colors-header.open .colors-chevron { transform: rotate(90deg); }
+  .colors-reset-btn {
+    font-size: 10px;
+    color: var(--text-6);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+    letter-spacing: .03em;
+    font-family: var(--font);
+    display: none;
+  }
+  .colors-reset-btn:hover { color: var(--text-2); background: var(--bg-card); }
+  .colors-reset-btn.visible { display: block; }
+  .colors-section {
+    padding: 8px 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-top: 1px solid var(--border-muted);
+    border-radius: 0 0 7px 7px;
+  }
+  .colors-section.hidden { display: none; }
+  .color-row { display: flex; align-items: center; gap: 8px; }
+  .color-swatch-wrap { position: relative; cursor: pointer; flex-shrink: 0; line-height: 0; }
+  .color-swatch {
+    display: block;
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, .12);
+  }
+  .color-swatch-wrap input[type="color"] {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+    cursor: pointer;
+    opacity: 0;
+  }
+  .color-hex-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 2px 6px;
+    cursor: text;
+    transition: background .12s, border-color .12s;
+  }
+  .color-hex-wrap:hover { background: var(--bg-card); border-color: var(--border-muted); }
+  .color-hex-wrap:focus-within { background: var(--bg-active); border-color: var(--border-bold); }
+  .color-hex-prefix {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-6);
+    user-select: none;
+    pointer-events: none;
+  }
+  .color-hex-wrap:focus-within .color-hex-prefix { color: var(--text-3); }
+  .color-hex {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-3);
+    background: none;
+    border: none;
+    outline: none;
+    width: 58px;
+    cursor: text;
+    transition: color .12s;
+  }
+  .color-hex:focus { color: var(--text-0); }
+
+  /* Variant cards grid — like on the site */
+  .variants-section { padding: 0 12px 16px; }
   .variants-grid {
     display: flex;
     flex-wrap: wrap;
@@ -296,7 +455,7 @@
     align-items: stretch;
   }
   .variant-card {
-    background: #1e1e1e;
+    background: var(--bg-raised);
     border: 1.5px solid transparent;
     border-radius: 10px;
     display: grid;
@@ -310,8 +469,8 @@
     flex: 1;
     transition: background .12s, border-color .12s;
   }
-  .variant-card:hover { border-color: #333; }
-  .variant-card.active { border-color: #444; background: #252525; }
+  .variant-card:hover { border-color: var(--border-eco); }
+  .variant-card.active { border-color: var(--border-bold); background: var(--bg-active); }
   .variant-card img {
     align-self: center;
     max-width: 100%;
@@ -335,26 +494,24 @@
   .variant-card-label {
     align-self: end;
     font-size: 10px;
-    color: var(--text-muted);
+    color: var(--text-5);
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
   }
-  .variant-card.active .variant-card-label { color: #aaa; }
+  .variant-card.active .variant-card-label { color: var(--text-2); }
 
   /* Ecosystem section */
-  .ecosystem-section {
-    padding: 0 12px 16px;
-  }
+  .ecosystem-section { padding: 0 12px 16px; }
   .ecosystem-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
     gap: 6px;
   }
   .eco-card {
-    background: #1e1e1e;
+    background: var(--bg-raised);
     border: 1.5px solid transparent;
     border-radius: 10px;
     display: flex;
@@ -365,13 +522,13 @@
     cursor: pointer;
     transition: background .12s, border-color .12s;
   }
-  .eco-card:hover { border-color: #333; background: #222; }
-  .eco-card.active { border-color: #444; background: #252525; }
-  .eco-card.active .eco-card-label { color: #ccc; }
+  .eco-card:hover { border-color: var(--border-eco); background: var(--border); }
+  .eco-card.active { border-color: var(--border-bold); background: var(--bg-active); }
+  .eco-card.active .eco-card-label { color: var(--text-1); }
   .eco-card img { width: 36px; height: 36px; object-fit: contain; border-radius: 8px; }
   .eco-card-label {
     font-size: 10px;
-    color: #888;
+    color: var(--text-3);
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
@@ -402,6 +559,28 @@
   .insert-btn:hover { opacity: 0.88; }
   .insert-btn:active { opacity: 0.75; }
   .insert-btn:disabled { opacity: 0.4; cursor: default; }
+  .copy-symbol-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 7px;
+    background: var(--bg-raised);
+    color: var(--text-1);
+    border: 1px solid var(--border-muted);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font);
+    transition: background .12s, border-color .12s, color .12s;
+  }
+  .copy-symbol-btn:hover { background: var(--bg-active); border-color: var(--border-base); color: var(--text-0); }
+  .copy-symbol-btn.done { color: #4ade80; border-color: #2a4a35; }
+  .drag-hint {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-6);
+    margin-top: 7px;
+  }
 
   /* ── States ── */
   .state {
@@ -443,11 +622,21 @@
     Назад
   </div>
   <div class="detail-scroll">
-    <div class="detail-preview">
-      <img id="detailImg" src="" alt="">
+    <div class="detail-preview" id="detailPreview" draggable="true">
+      <img id="detailImg" src="" alt="" draggable="false">
     </div>
     <div class="detail-name" id="detailName"></div>
     <div class="detail-cat" id="detailCat"></div>
+    <div class="colors-panel" id="colorsPanel" style="display:none">
+      <div class="colors-header" id="colorsHeader">
+        <span class="colors-header-label">Цвета</span>
+        <div class="colors-header-right">
+          <button class="colors-reset-btn" id="colorsReset">Сбросить</button>
+          <svg class="colors-chevron" width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="colors-section hidden" id="colorsList"></div>
+    </div>
     <div class="variants-section" id="variantsSection" style="display:none">
       <div class="section-label">Варианты</div>
       <div class="variants-grid" id="variantsGrid"></div>
@@ -458,14 +647,23 @@
     </div>
   </div>
   <div class="detail-footer">
+    <button class="copy-symbol-btn" id="copySymbolBtn" style="display:none">Копировать символ</button>
     <button class="insert-btn" id="insertBtn">Вставить в Figma</button>
+    <div class="drag-hint">или перетащите превью на холст</div>
   </div>
 </div>
 
 <script>
+// ── Asset base ──────────────────────────────────────────────────────────────
+// logos.json / emoji.json store root-relative paths ("/assets/..."). The plugin
+// UI iframe is NOT served from github.io, so every asset URL must be made
+// absolute against the GitHub Pages base, otherwise images and inserts fail.
+const SITE_BASE = 'https://rafael-mansurov.github.io/trace-logos';
+const abs = u => (!u ? u : (/^https?:\/\//.test(u) ? u : SITE_BASE + (u.startsWith('/') ? u : '/' + u)));
+
 const APIS = {
-  logos: 'https://rafael-mansurov.github.io/trace-logos/logos.json?v=' + Date.now(),
-  emoji: 'https://rafael-mansurov.github.io/trace-logos/emoji.json?v=' + Date.now(),
+  logos: SITE_BASE + '/logos.json?v=' + Date.now(),
+  emoji: SITE_BASE + '/emoji.json?v=' + Date.now(),
 };
 
 let allLogos = [];
@@ -473,6 +671,100 @@ let activeCategory = 'all';
 let searchQuery = '';
 let currentLogo = null;
 let activeTab = 'logos';
+
+// ── Search helpers (RU↔EN layout switch + ё→е, mirror of site utils.js) ──────
+
+const RU_TO_EN = 'йцукенгшщзхъфывапролджэячсмитьбю'.split('').reduce((m, c, i) => {
+  m[c] = "qwertyuiop[]asdfghjkl;'zxcvbnm,.".split('')[i]; return m; }, {});
+const EN_TO_RU = Object.fromEntries(Object.entries(RU_TO_EN).map(([r, e]) => [e, r]));
+
+function switchLayout(str) {
+  const hasRu = /[а-яё]/i.test(str);
+  const map = hasRu ? RU_TO_EN : EN_TO_RU;
+  return str.split('').map(c => map[c.toLowerCase()] ?? c).join('');
+}
+
+const norm = s => (s || '').toLowerCase().replace(/ё/g, 'е');
+
+function matchWord(word, haystack) {
+  if (haystack.includes(word)) return true;
+  const alt = switchLayout(word);
+  return alt !== word && haystack.includes(alt);
+}
+
+// ── Color helpers (mirror of site color.js / color-math.js) ──────────────────
+
+const NAMED_COLORS = {
+  black: '#000000', white: '#ffffff', red: '#ff0000', green: '#008000',
+  blue: '#0000ff', yellow: '#ffff00', orange: '#ffa500', purple: '#800080',
+  pink: '#ffc0cb', gray: '#808080', grey: '#808080', cyan: '#00ffff',
+  magenta: '#ff00ff', lime: '#00ff00', navy: '#000080', teal: '#008080',
+  silver: '#c0c0c0', maroon: '#800000', olive: '#808000', aqua: '#00ffff',
+};
+
+function normalizeHex(h) {
+  h = h.trim().toLowerCase().replace(/^#?/, '#');
+  if (/^#[0-9a-f]{3}$/.test(h)) h = '#' + h[1] + h[1] + h[2] + h[2] + h[3] + h[3];
+  return /^#[0-9a-f]{6}$/.test(h) ? h : null;
+}
+
+function normalizeSvgColors(svg) {
+  return svg
+    .replace(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*[\d.]+)?\s*\)/gi, (_, r, g, b) =>
+      '#' + [+r, +g, +b].map(v => Math.min(255, Math.max(0, v)).toString(16).padStart(2, '0')).join('')
+    )
+    .replace(/\b(fill|stroke|stop-color|flood-color|lighting-color|color)\s*=\s*(["'])([a-zA-Z]+)\2/gi,
+      (match, attr, q, name) => NAMED_COLORS[name.toLowerCase()]
+        ? `${attr}=${q}${NAMED_COLORS[name.toLowerCase()]}${q}`
+        : match
+    );
+}
+
+function extractColors(svgText) {
+  const set = new Set();
+  const re = /#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})(?![0-9A-Fa-f])/g;
+  let m;
+  while ((m = re.exec(svgText)) !== null) {
+    const n = normalizeHex(m[0]);
+    if (n) set.add(n);
+  }
+  return [...set];
+}
+
+function applyColorMap(svgText, map) {
+  let s = svgText;
+  const entries = Object.entries(map)
+    .filter(([k, v]) => k !== v)
+    .sort(([a], [b]) => b.length - a.length);
+  for (const [from, to] of entries) {
+    s = s.replace(new RegExp(from + '(?![0-9a-fA-F])', 'gi'), to);
+  }
+  return s;
+}
+
+// ── Content cache (fetched once, reused for preview / insert / drag) ──────────
+
+const svgTextCache = new Map();  // absUrl → normalized svg string (or Promise)
+const pngBytesCache = new Map(); // absUrl → ArrayBuffer (or Promise)
+const editMaps = new Map();      // absUrl → { origColor: newColor } (persist edits)
+
+function ensureSvg(url) {
+  if (svgTextCache.has(url)) return Promise.resolve(svgTextCache.get(url));
+  const p = fetch(url)
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+    .then(t => { const n = normalizeSvgColors(t); svgTextCache.set(url, n); return n; });
+  svgTextCache.set(url, p);
+  return p;
+}
+
+function ensurePng(url) {
+  if (pngBytesCache.has(url)) return Promise.resolve(pngBytesCache.get(url));
+  const p = fetch(url)
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.arrayBuffer(); })
+    .then(b => { pngBytesCache.set(url, b); return b; });
+  pngBytesCache.set(url, p);
+  return p;
+}
 
 // ── Load ──────────────────────────────────────────────────────────────────────
 
@@ -496,6 +788,8 @@ async function load(tab = 'logos') {
       ? list.filter(l => !l.comingSoon && l.svgUrl)
       : list.filter(l => l.pngUrl || l.svgUrl);
 
+    // Precompute normalized search string once per item
+    allLogos.forEach(l => { l._search = norm(l.name + ' ' + (l.tags || '')); });
 
     const catMap = new Map([['all', 'Все']]);
     allLogos.forEach(l => {
@@ -521,55 +815,61 @@ document.querySelector('.tabs').addEventListener('click', e => {
   if (!tab || tab.dataset.tab === activeTab) return;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   tab.classList.add('active');
+  closeDetail();
   load(tab.dataset.tab);
 });
 
 // ── Filters ───────────────────────────────────────────────────────────────────
 
-function renderFilters(catMap) {
-  const el = document.getElementById('filters');
-  el.innerHTML = [...catMap.entries()].map(([slug, name]) => `
-    <button class="filter-btn ${slug === 'all' ? 'active' : ''}" data-cat="${slug}">${escHtml(name)}</button>
-  `).join('');
+// Delegated handler attached ONCE — renderFilters only swaps the inner buttons.
+document.getElementById('filters').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  activeCategory = btn.dataset.cat;
+  document.querySelectorAll('#filters .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+});
 
-  el.addEventListener('click', e => {
-    const btn = e.target.closest('.filter-btn');
-    if (!btn) return;
-    activeCategory = btn.dataset.cat;
-    el.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderGrid();
-  });
+function renderFilters(catMap) {
+  document.getElementById('filters').innerHTML = [...catMap.entries()].map(([slug, name]) => `
+    <button class="filter-btn ${slug === 'all' ? 'active' : ''}" data-cat="${escAttr(slug)}">${escHtml(name)}</button>
+  `).join('');
 }
 
 // ── Grid ──────────────────────────────────────────────────────────────────────
 
 function getFiltered() {
-  const q = searchQuery.toLowerCase();
+  const words = norm(searchQuery).split(/\s+/).filter(Boolean);
   return allLogos.filter(l => {
     const matchCat = activeCategory === 'all' || l.categorySlug === activeCategory;
-    const matchSearch = !q || l.name.toLowerCase().includes(q) || (l.tags && l.tags.toLowerCase().includes(q));
+    const matchSearch = !words.length || words.every(w => matchWord(w, l._search));
     return matchCat && matchSearch;
   });
+}
+
+function cardHtml(l, idx) {
+  return `<div class="card" data-idx="${idx}" draggable="true">
+    <div class="icon-wrap"><img src="${escAttr(abs(l.svgUrl || l.pngUrl))}" alt="${escAttr(l.name)}" loading="lazy" draggable="false"></div>
+    <span class="card-name">${escHtml(l.name)}</span>
+  </div>`;
 }
 
 function renderGrid() {
   const logos = getFiltered();
   const grid = document.getElementById('grid');
-  grid.onclick = null;
 
   if (logos.length === 0) {
-    grid.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:140px;color:#444;font-size:13px">Ничего не найдено</div>';
+    grid.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:140px;color:var(--text-dim);font-size:13px">Ничего не найдено</div>';
     return;
   }
 
   window._logos = logos;
 
-  // Group by category when showing all, flat list for single category
+  // Group by category when showing all, flat list for single category / search
   const showSections = activeCategory === 'all' && !searchQuery;
 
   if (showSections) {
-    // Group logos preserving order
     const sections = [];
     const seen = new Map();
     logos.forEach((l, i) => {
@@ -580,42 +880,79 @@ function renderGrid() {
 
     grid.innerHTML = sections.map(sec => `
       <div class="section-header">${escHtml(sec.name)}</div>
-      <div class="cards-row">
-        ${sec.items.map(({ logo: l, idx }) => `
-          <div class="card" data-idx="${idx}">
-            <div class="icon-wrap"><img src="${l.svgUrl || l.pngUrl}" alt="${escAttr(l.name)}" loading="lazy"></div>
-            <span class="card-name">${escHtml(l.name)}</span>
-          </div>
-        `).join('')}
-      </div>
+      <div class="cards-row">${sec.items.map(({ logo: l, idx }) => cardHtml(l, idx)).join('')}</div>
     `).join('');
   } else {
-    grid.innerHTML = `<div class="cards-row">${logos.map((l, i) => `
-      <div class="card" data-idx="${i}">
-        <div class="icon-wrap"><img src="${l.svgUrl || l.pngUrl}" alt="${escAttr(l.name)}" loading="lazy"></div>
-        <span class="card-name">${escHtml(l.name)}</span>
-      </div>
-    `).join('')}</div>`;
+    grid.innerHTML = `<div class="cards-row">${logos.map((l, i) => cardHtml(l, i)).join('')}</div>`;
   }
-
-  grid.onclick = e => {
-    const card = e.target.closest('.card');
-    if (!card) return;
-    openDetail(window._logos[+card.dataset.idx]);
-  };
 }
+
+const grid = document.getElementById('grid');
+
+// Fade images in once loaded; hide the skeleton shimmer (load/error don't bubble → capture).
+grid.addEventListener('load', e => {
+  if (e.target.tagName === 'IMG') e.target.classList.add('loaded');
+}, true);
+grid.addEventListener('error', e => {
+  if (e.target.tagName === 'IMG') e.target.classList.add('errored');
+}, true);
+
+grid.addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  openDetail(window._logos[+card.dataset.idx]);
+});
+
+// Drag a grid card straight onto the canvas (originals, no recolor).
+grid.addEventListener('dragstart', e => {
+  const card = e.target.closest('.card');
+  if (!card) return;
+  const l = window._logos[+card.dataset.idx];
+  if (!l) return;
+  const url = abs(l.svgUrl || l.pngUrl);
+  card._drag = { url, isPng: !l.svgUrl, name: l.name };
+  if (e.dataTransfer) {
+    e.dataTransfer.effectAllowed = 'copy';
+    e.dataTransfer.setData('text/plain', l.name);
+    const img = card.querySelector('img');
+    if (img) { try { e.dataTransfer.setDragImage(img, 24, 24); } catch (_) {} }
+  }
+  (l.svgUrl ? ensureSvg(url) : ensurePng(url)).catch(() => {});
+});
+grid.addEventListener('dragend', e => {
+  const card = e.target.closest('.card');
+  if (!card || !card._drag) return;
+  const { url, isPng, name } = card._drag;
+  const clientX = e.clientX, clientY = e.clientY;
+  (isPng ? ensurePng(url).then(bytes => ({ bytes })) : ensureSvg(url).then(svg => ({ svg })))
+    .then(content => postDrop(clientX, clientY, name, content))
+    .catch(() => {});
+});
 
 // ── Detail ────────────────────────────────────────────────────────────────────
 
 let selectedSvgUrl = null;
 let selectedPngUrl = null;
 let selectedName = null;
+let selToken = 0;        // guards async variant selection against races
+let curBlobUrl = null;   // live preview blob (revoked on change)
+let edit = null;         // { url, origSvg, colors:[], map:{} } for the selected SVG
+let currentSymbol = '';  // emoji character for the open item (copy-to-clipboard)
 
 function openDetail(logo) {
   currentLogo = logo;
 
   document.getElementById('detailName').textContent = logo.name;
   document.getElementById('detailCat').textContent = logo.categoryName || '';
+
+  // Emoji items carry the character as the first token of `tags`. Detect it by the
+  // glyph itself (pictographic / flag / keycap) so it's robust regardless of tab.
+  const firstTok = (logo.tags || '').trim().split(/\s+/)[0] || '';
+  currentSymbol = /\p{Extended_Pictographic}|\p{Regional_Indicator}|\u{20E3}/u.test(firstTok) ? firstTok : '';
+  const copyBtn = document.getElementById('copySymbolBtn');
+  copyBtn.classList.remove('done');
+  copyBtn.textContent = 'Копировать символ';
+  copyBtn.style.display = currentSymbol ? '' : 'none';
 
   // Build full variants list (primary + extras)
   const primaryIsPng = !logo.svgUrl && !!logo.pngUrl;
@@ -633,15 +970,19 @@ function openDetail(logo) {
   // Render variant cards
   const variantsSection = document.getElementById('variantsSection');
   const variantsGrid = document.getElementById('variantsGrid');
+  variantsGrid.innerHTML = '';
+  let firstVariantCard = null;
   if (allVariants.length > 1) {
-    variantsGrid.innerHTML = '';
     allVariants.forEach((v, i) => {
       const card = document.createElement('div');
+      // Every non-wide variant is a square icon → render at one consistent size
+      // (SVG primary "Иконка" and PNG variants alike), so cards look balanced.
       card.className = 'variant-card' + (v.wide ? ' wide' : ' favicon');
-      if (i === 0) card.classList.add('active');
+      if (i === 0) { card.classList.add('active'); firstVariantCard = card; }
       const img = document.createElement('img');
-      img.src = v.svgUrl || v.pngUrl;
+      img.src = abs(v.svgUrl || v.pngUrl);
       img.alt = v.label;
+      img.loading = 'lazy';
       const lbl = document.createElement('div');
       lbl.className = 'variant-card-label';
       lbl.textContent = v.label;
@@ -654,8 +995,8 @@ function openDetail(logo) {
     variantsSection.style.display = 'none';
   }
 
-  // Set initial selection
-  selectVariant(allVariants[0], variantsGrid.firstChild, logo.name);
+  // Set initial selection (firstVariantCard is null when there's a single variant — fine)
+  selectVariant(allVariants[0], firstVariantCard, logo.name);
 
   // Ecosystem block
   const ecoSection = document.getElementById('ecosystemSection');
@@ -666,9 +1007,9 @@ function openDetail(logo) {
       ecoGrid.innerHTML = '';
       members.forEach(m => {
         const card = document.createElement('div');
-        card.className = 'eco-card' + (m.svgUrl === logo.svgUrl ? ' active' : '');
+        card.className = 'eco-card' + (m.url === logo.url ? ' active' : '');
         const img = document.createElement('img');
-        img.src = m.svgUrl;
+        img.src = abs(m.svgUrl || m.pngUrl);
         img.alt = m.name;
         img.loading = 'lazy';
         const lbl = document.createElement('div');
@@ -686,31 +1027,206 @@ function openDetail(logo) {
     ecoSection.style.display = 'none';
   }
 
+  document.querySelector('.detail-scroll').scrollTop = 0;
   document.getElementById('gridView').style.display = 'none';
   document.getElementById('detailView').classList.add('visible');
   document.querySelector('.header').style.display = 'none';
+  document.querySelector('.tabs').style.display = 'none';
 }
 
-function selectVariant(variant, cardEl, logoName) {
+function setPreview(url) {
+  const img = document.getElementById('detailImg');
+  if (curBlobUrl) { URL.revokeObjectURL(curBlobUrl); curBlobUrl = null; }
+  img.src = url;
+}
+
+function updatePreview() {
+  if (!edit) return;
+  const img = document.getElementById('detailImg');
+  const styled = applyColorMap(edit.origSvg, edit.map);
+  if (curBlobUrl) URL.revokeObjectURL(curBlobUrl);
+  curBlobUrl = URL.createObjectURL(new Blob([styled], { type: 'image/svg+xml' }));
+  img.src = curBlobUrl;
+}
+
+async function selectVariant(variant, cardEl, logoName) {
+  const myToken = ++selToken;
   selectedSvgUrl = variant.svgUrl || null;
   selectedPngUrl = variant.pngUrl || null;
   selectedName = logoName + (variant.label !== 'Иконка' ? ' — ' + variant.label : '');
-  const img = document.getElementById('detailImg');
-  img.src = variant.svgUrl || variant.pngUrl;
-  img.classList.toggle('wide', !!variant.wide);
+  edit = null;
+
   document.getElementById('variantsGrid').querySelectorAll('.variant-card').forEach(c => c.classList.remove('active'));
   if (cardEl) cardEl.classList.add('active');
+
+  const img = document.getElementById('detailImg');
+  img.classList.toggle('wide', !!variant.wide);
   const btn = document.getElementById('insertBtn');
-  btn.textContent = variant.isPng ? 'Вставить PNG в Figma' : 'Вставить SVG в Figma';
+
+  // Color editor starts collapsed on every variant change (rarely needed).
+  collapseColors();
+
+  if (variant.svgUrl) {
+    const url = abs(variant.svgUrl);
+    btn.textContent = 'Вставить SVG в Figma';
+    setPreview(url); // show original right away while we load text for the editor
+    try {
+      const svg = await ensureSvg(url);
+      if (myToken !== selToken) return; // user switched variant meanwhile
+      const colors = extractColors(svg);
+      const saved = editMaps.get(url) || {};
+      const map = {};
+      colors.forEach(c => { map[c] = saved[c] ?? c; });
+      edit = { url, origSvg: svg, colors, map };
+      renderColors();
+      if (colors.length) { showColorsPanel(); updatePreview(); }
+      else hideColorsPanel();
+    } catch (_) {
+      if (myToken !== selToken) return;
+      hideColorsPanel();
+    }
+  } else {
+    btn.textContent = 'Вставить PNG в Figma';
+    hideColorsPanel();
+    setPreview(abs(variant.pngUrl));
+    ensurePng(abs(variant.pngUrl)).catch(() => {}); // prefetch for drag/insert
+  }
 }
+
+// ── Color editor (collapsible) ────────────────────────────────────────────────
+
+function showColorsPanel() { document.getElementById('colorsPanel').style.display = ''; }
+function hideColorsPanel() { document.getElementById('colorsPanel').style.display = 'none'; collapseColors(); }
+function collapseColors() {
+  document.getElementById('colorsHeader').classList.remove('open');
+  document.getElementById('colorsList').classList.add('hidden');
+}
+
+// Toggle the panel body (attached once). The reset button stops propagation so
+// clicking it doesn't collapse the panel.
+document.getElementById('colorsHeader').addEventListener('click', () => {
+  const list = document.getElementById('colorsList');
+  if (!list.children.length) return;
+  document.getElementById('colorsHeader').classList.toggle('open');
+  list.classList.toggle('hidden');
+});
+
+function updateResetBtn() {
+  const reset = document.getElementById('colorsReset');
+  const changed = edit && Object.keys(edit.map).some(k => edit.map[k] !== k);
+  reset.classList.toggle('visible', !!changed);
+  if (edit) editMaps.set(edit.url, { ...edit.map });
+}
+
+function renderColors() {
+  const list = document.getElementById('colorsList');
+  list.innerHTML = '';
+  if (!edit || !edit.colors.length) { updateResetBtn(); return; }
+
+  edit.colors.forEach(orig => {
+    const cur = edit.map[orig];
+    const row = document.createElement('div');
+    row.className = 'color-row';
+
+    const wrap = document.createElement('label');
+    wrap.className = 'color-swatch-wrap';
+    const sw = document.createElement('span');
+    sw.className = 'color-swatch';
+    sw.style.background = cur;
+    const ci = document.createElement('input');
+    ci.type = 'color';
+    ci.value = cur;
+    wrap.append(sw, ci);
+
+    const hexWrap = document.createElement('div');
+    hexWrap.className = 'color-hex-wrap';
+    const prefix = document.createElement('span');
+    prefix.className = 'color-hex-prefix';
+    prefix.textContent = '#';
+    const hi = document.createElement('input');
+    hi.type = 'text';
+    hi.className = 'color-hex';
+    hi.value = cur.slice(1).toUpperCase();
+    hi.maxLength = 6;
+    hi.spellcheck = false;
+    hexWrap.append(prefix, hi);
+    hexWrap.addEventListener('click', () => hi.focus());
+
+    const apply = value => {
+      const n = normalizeHex(value);
+      if (!n) return;
+      edit.map[orig] = n;
+      sw.style.background = n;
+      ci.value = n;
+      hi.value = n.slice(1).toUpperCase();
+      updatePreview();
+      updateResetBtn();
+    };
+    ci.addEventListener('input', () => apply(ci.value));
+    hi.addEventListener('keydown', e => { if (e.key === 'Enter') hi.blur(); });
+    hi.addEventListener('blur', () => {
+      const n = normalizeHex('#' + hi.value);
+      if (n) apply('#' + hi.value);
+      else hi.value = edit.map[orig].slice(1).toUpperCase();
+    });
+
+    row.append(wrap, hexWrap);
+    list.appendChild(row);
+  });
+  updateResetBtn();
+}
+
+document.getElementById('colorsReset').onclick = (e) => {
+  e.stopPropagation();
+  if (!edit) return;
+  edit.colors.forEach(c => { edit.map[c] = c; });
+  editMaps.delete(edit.url);
+  renderColors();
+  updatePreview();
+};
 
 function closeDetail() {
   document.getElementById('detailView').classList.remove('visible');
   document.getElementById('gridView').style.display = 'flex';
   document.querySelector('.header').style.display = '';
+  document.querySelector('.tabs').style.display = '';
+  if (curBlobUrl) { URL.revokeObjectURL(curBlobUrl); curBlobUrl = null; }
 }
 
 document.getElementById('detailBack').onclick = closeDetail;
+
+// Clipboard write inside the Figma plugin iframe: execCommand is the reliable path.
+function copyText(text) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.top = '0';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch (_) {
+    return false;
+  }
+}
+
+document.getElementById('copySymbolBtn').onclick = () => {
+  if (!currentSymbol) return;
+  const btn = document.getElementById('copySymbolBtn');
+  const ok = copyText(currentSymbol);
+  btn.textContent = ok ? `Скопировано  ${currentSymbol}` : 'Не удалось скопировать';
+  btn.classList.toggle('done', ok);
+  setTimeout(() => { btn.textContent = 'Копировать символ'; btn.classList.remove('done'); }, 1500);
+};
+
+// Currently selected, ready-to-insert SVG (recolored if edited).
+function currentSvg() {
+  return edit ? applyColorMap(edit.origSvg, edit.map) : ensureSvg(abs(selectedSvgUrl));
+}
 
 document.getElementById('insertBtn').onclick = async () => {
   if (!selectedSvgUrl && !selectedPngUrl) return;
@@ -720,24 +1236,58 @@ document.getElementById('insertBtn').onclick = async () => {
   btn.textContent = 'Загрузка...';
   try {
     if (selectedSvgUrl) {
-      const res = await fetch(selectedSvgUrl);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const svg = await res.text();
+      const svg = await currentSvg();
       parent.postMessage({ pluginMessage: { type: 'insert-svg', svg, name: selectedName } }, '*');
     } else {
-      const res = await fetch(selectedPngUrl);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const buf = await res.arrayBuffer();
-      parent.postMessage({ pluginMessage: { type: 'insert-png', bytes: buf, name: selectedName } }, '*');
+      const bytes = await ensurePng(abs(selectedPngUrl));
+      parent.postMessage({ pluginMessage: { type: 'insert-png', bytes, name: selectedName } }, '*');
     }
-    btn.textContent = origText;
-    btn.disabled = false;
   } catch (err) {
+    alert('Не удалось загрузить: ' + err.message);
+  } finally {
     btn.textContent = origText;
     btn.disabled = false;
-    alert('Не удалось загрузить: ' + err.message);
   }
 };
+
+// ── Drag the detail preview onto the canvas (uses the recolored SVG) ───────────
+
+const detailPreview = document.getElementById('detailPreview');
+detailPreview.addEventListener('dragstart', e => {
+  if (e.dataTransfer) {
+    e.dataTransfer.effectAllowed = 'copy';
+    e.dataTransfer.setData('text/plain', selectedName || '');
+    const img = document.getElementById('detailImg');
+    try { e.dataTransfer.setDragImage(img, img.width / 2, img.height / 2); } catch (_) {}
+  }
+});
+detailPreview.addEventListener('dragend', e => {
+  const clientX = e.clientX, clientY = e.clientY, name = selectedName;
+  if (selectedSvgUrl) {
+    Promise.resolve(currentSvg())
+      .then(svg => postDrop(clientX, clientY, name, { svg }))
+      .catch(() => {});
+  } else if (selectedPngUrl) {
+    ensurePng(abs(selectedPngUrl))
+      .then(bytes => postDrop(clientX, clientY, name, { bytes }))
+      .catch(() => {});
+  }
+});
+
+// Forward the drop to the main thread. clientX/clientY let Figma map the release
+// point to canvas coordinates; figma.on('drop') only fires when over the canvas.
+function postDrop(clientX, clientY, name, content) {
+  if (content.svg) {
+    parent.postMessage({ pluginDrop: {
+      clientX, clientY,
+      dropMetadata: { name },
+      items: [{ type: 'image/svg+xml', data: content.svg }],
+    } }, '*');
+  } else {
+    const file = new File([content.bytes], (name || 'image') + '.png', { type: 'image/png' });
+    parent.postMessage({ pluginDrop: { clientX, clientY, dropMetadata: { name }, files: [file] } }, '*');
+  }
+}
 
 // ── Search ────────────────────────────────────────────────────────────────────
 
@@ -749,7 +1299,7 @@ document.getElementById('search').addEventListener('input', e => {
 
 // ── Utils ─────────────────────────────────────────────────────────────────────
 
-function escAttr(s) { return String(s).replace(/"/g, '&quot;'); }
+function escAttr(s) { return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;'); }
 function escHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
 
 load();
