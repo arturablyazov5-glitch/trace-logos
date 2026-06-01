@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Primary meta -->
-  <title>Trace Logo's — библиотека SVG-логотипов, эмодзи и иконок</title>
-  <meta name="description" content="Открытая библиотека SVG-логотипов российских и международных брендов, эмодзи Apple и Google, иконок для интерфейсов. Скачивайте, редактируйте цвета и экспортируйте в Figma.">
+  <title>Trace Logo's — SVG-логотипы брендов и эмодзи: скачать бесплатно</title>
+  <meta name="description" content="Открытая библиотека: 288 SVG/PNG логотипов российских и международных брендов и 1918 эмодзи Apple, Google и Microsoft. Поиск, редактор цвета, экспорт в Figma — бесплатно и без регистрации.">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://rafael-mansurov.github.io/trace-logos/">
@@ -21,8 +21,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trace Logo's">
-  <meta property="og:title" content="Trace Logo's — библиотека SVG-логотипов, эмодзи и иконок">
-  <meta property="og:description" content="Открытая библиотека SVG-логотипов российских и международных брендов, эмодзи Apple и Google, иконок для интерфейсов.">
+  <meta property="og:title" content="Trace Logo's — SVG-логотипы брендов и эмодзи">
+  <meta property="og:description" content="288 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google и Microsoft. Скачивайте, редактируйте цвета, экспортируйте в Figma.">
   <meta property="og:url" content="https://rafael-mansurov.github.io/trace-logos/">
   <meta property="og:image" content="https://rafael-mansurov.github.io/trace-logos/favicon-512.png">
   <meta property="og:image:width" content="512">
@@ -31,8 +31,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Trace Logo's — библиотека SVG-логотипов, эмодзи и иконок">
-  <meta name="twitter:description" content="Открытая библиотека SVG-логотипов, эмодзи Apple/Google и иконок для интерфейсов.">
+  <meta name="twitter:title" content="Trace Logo's — SVG-логотипы брендов и эмодзи">
+  <meta name="twitter:description" content="288 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google и Microsoft. Бесплатно, без регистрации.">
   <meta name="twitter:image" content="https://rafael-mansurov.github.io/trace-logos/favicon-512.png">
 
   <!-- JSON-LD WebSite -->
@@ -59,269 +59,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #0a0a0a;
-      --accent: #f07040;
-      --accent-dim: rgba(240, 112, 64, 0.12);
-      --text: #ffffff;
-      --text-muted: #888888;
-      --text-dim: #404040;
-      --border: rgba(255, 255, 255, 0.07);
-      --border-hover: rgba(255, 255, 255, 0.14);
-      --card-bg: rgba(255, 255, 255, 0.04);
-      --card-bg-hover: rgba(255, 255, 255, 0.07);
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background-color: var(--bg);
-      background-image:
-        radial-gradient(ellipse 80% 55% at 50% 100%, rgba(240,112,64,0.2) 0%, transparent 70%),
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 100% 100%, 52px 52px, 52px 52px;
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── Header ── */
-    .site-header {
-      height: 60px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 28px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(10, 10, 10, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .brand-logo {
-      width: 30px;
-      height: 30px;
-      background: var(--text);
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .brand-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-    .brand-badge {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--accent);
-      background: var(--accent-dim);
-      border: 1px solid rgba(240, 112, 64, 0.2);
-      border-radius: 4px;
-      padding: 1px 6px;
-      margin-left: 7px;
-      letter-spacing: 0.03em;
-      vertical-align: middle;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .btn-github {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text);
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 7px 14px;
-      text-decoration: none;
-      transition: background .15s, border-color .15s;
-    }
-    .btn-github:hover {
-      background: var(--card-bg-hover);
-      border-color: var(--border-hover);
-    }
-    .btn-github svg { opacity: 0.75; }
-
-    /* ── Hero ── */
-    .hero {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 72px 24px 88px;
-      text-align: center;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-muted);
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 5px 13px;
-      margin-bottom: 32px;
-      cursor: default;
-    }
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 6px var(--accent);
-      flex-shrink: 0;
-    }
-
-    h1 {
-      font-size: clamp(36px, 5.5vw, 62px);
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      max-width: 760px;
-      margin-bottom: 20px;
-    }
-    h1 .accent {
-      color: var(--accent);
-    }
-
-    .hero-desc {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--text-muted);
-      line-height: 1.65;
-      max-width: 460px;
-      margin-bottom: 12px;
-    }
-    .hero-tagline {
-      font-size: 13px;
-      color: var(--text-dim);
-      margin-bottom: 48px;
-      letter-spacing: 0.01em;
-    }
-
-    /* ── Section Cards ── */
-    .sections {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: 100%;
-      max-width: 740px;
-    }
-
-    .section-card {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      background: var(--card-bg);
-      color: var(--text);
-      border: 1px solid var(--border);
-      transition: background .15s, border-color .15s, transform .12s;
-      cursor: pointer;
-      white-space: nowrap;
-      user-select: none;
-    }
-    .section-card:hover {
-      background: var(--card-bg-hover);
-      border-color: var(--border-hover);
-      transform: translateY(-1px);
-    }
-    .section-card:hover .card-arrow { opacity: 1; transform: translateX(2px); }
-    .section-card:active { transform: scale(0.97); }
-
-    .section-card.disabled {
-      opacity: 1;
-      pointer-events: none;
-      border-color: rgba(255,255,255,0.04);
-    }
-    .section-card.disabled .card-title { color: rgba(255,255,255,0.35); }
-    .section-card.disabled .card-icon { opacity: 0.3; }
-
-    .card-icon { font-size: 16px; line-height: 1; }
-    .card-meta {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .card-title { font-size: 14px; font-weight: 600; line-height: 1.2; }
-    .card-count { font-size: 11px; font-weight: 400; color: var(--text-muted); margin-top: 2px; }
-    .section-card.disabled .card-count { color: rgba(255,255,255,0.25); }
-    .card-arrow {
-      margin-left: 6px;
-      font-size: 14px;
-      opacity: 0.3;
-      transition: opacity .15s, transform .15s;
-    }
-    .card-wip {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--text-muted);
-      background: rgba(255,255,255,0.06);
-      border-radius: 4px;
-      padding: 2px 6px;
-      margin-left: 6px;
-      vertical-align: middle;
-    }
-
-    /* ── Footer ── */
-    footer {
-      text-align: center;
-      padding: 20px 24px;
-      font-size: 12px;
-      color: var(--text-dim);
-      border-top: 1px solid var(--border);
-    }
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-    footer a:hover { color: var(--text); }
-
-    @media (max-width: 600px) {
-      .site-header { padding: 0 16px; }
-      .btn-github span { display: none; }
-      .sections { gap: 10px; flex-direction: column; align-items: center; }
-      .section-card { width: 100%; max-width: 320px; justify-content: flex-start; }
-      .hero { padding: 56px 20px 72px; }
-    }
-  </style>
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/logo-card.css">
 </head>
 <body>
 
@@ -335,62 +74,519 @@
     <span class="brand-name">Trace Logo's<span class="brand-badge">Beta</span></span>
   </a>
 
-  <div class="header-right">
-    <a class="btn-github" href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-      </svg>
-      <span>GitHub</span>
-    </a>
-  </div>
+  <nav class="header-nav" aria-label="Разделы">
+    <a href="logos/">Логотипы</a>
+    <a href="emoji/">Эмодзи</a>
+    <a href="blog/">Блог</a>
+    <a class="soon" aria-disabled="true">Иконки</a>
+  </nav>
+
+  <a class="btn-github" href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+    <span>GitHub</span>
+  </a>
 </header>
 
-<main class="hero">
-  <div class="pill" role="note">
-    <span class="pill-dot" aria-hidden="true"></span>
-    406+ логотипов · 1918+ эмодзи
+<main>
+  <!-- ── Hero + поиск ── -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="pill" role="note">
+        <span class="pill-dot" aria-hidden="true"></span>
+        288 логотипов · 1918 эмодзи · бесплатно
+      </div>
+
+      <h1>Логотипы брендов и эмодзи<br><span class="accent">для дизайна и разработки</span></h1>
+      <p class="hero-desc">
+        SVG и PNG логотипов российских и международных брендов, эмодзи Apple, Google и Microsoft.
+        Скачивайте, меняйте цвета и экспортируйте в Figma — без регистрации.
+      </p>
+
+      <div class="home-search">
+        <form class="search-form" action="logos/" method="get" role="search">
+          <span class="search-field">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input class="search-input" type="search" name="q" placeholder="Найдите логотип или эмодзи…"
+                   autocomplete="off" aria-label="Поиск по логотипам и эмодзи"
+                   aria-expanded="false" aria-controls="home-search-dropdown">
+          </span>
+          <button class="search-submit" type="submit">Найти</button>
+        </form>
+        <div class="search-dropdown" id="home-search-dropdown" role="listbox" aria-label="Результаты поиска"></div>
+      </div>
+
+      <nav class="chips" aria-label="Популярные разделы">
+        <a class="chip" href="logos/bank/">Банки</a>
+        <a class="chip" href="logos/market/">Маркетплейсы</a>
+        <a class="chip" href="logos/ai/">Нейросети</a>
+        <a class="chip" href="logos/social/">Соцсети</a>
+        <a class="chip" href="logos/pay/">Платежи</a>
+        <a class="chip" href="logos/video/">Видео и стриминг</a>
+        <a class="chip" href="logos/flag/">Флаги</a>
+        <a class="chip" href="emoji/">Эмодзи →</a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <!-- ── Популярные логотипы ── -->
+    <section class="section" aria-labelledby="h-popular">
+      <div class="section-head">
+        <div>
+          <h2 id="h-popular">Популярные логотипы</h2>
+          <div class="sub">Самые востребованные бренды каталога</div>
+        </div>
+        <a class="section-link" href="logos/">Все логотипы →</a>
+      </div>
+      <div class="logo-grid">
+        <a class="logo-card" href="logos/search/yandex/">
+          <img src="assets/logos/svgs/yandex.svg" alt="Логотип Яндекс" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Яндекс</span>
+        </a>
+        <a class="logo-card" href="logos/social/vk/">
+          <img src="assets/logos/svgs/vk.svg" alt="Логотип ВКонтакте" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">ВКонтакте</span>
+        </a>
+        <a class="logo-card" href="logos/social/telegram/">
+          <img src="assets/logos/svgs/telegram.svg" alt="Логотип Telegram" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Telegram</span>
+        </a>
+        <a class="logo-card" href="logos/social/whatsapp/">
+          <img src="assets/logos/svgs/whatsapp.svg" alt="Логотип WhatsApp" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">WhatsApp</span>
+        </a>
+        <a class="logo-card" href="logos/bank/tbank/">
+          <img src="assets/logos/svgs/t-bank.svg" alt="Логотип Т-Банк" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Т-Банк</span>
+        </a>
+        <a class="logo-card" href="logos/bank/alfa/">
+          <img src="assets/logos/svgs/alfa-bank.svg" alt="Логотип Альфа Банк" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Альфа Банк</span>
+        </a>
+        <a class="logo-card" href="logos/bank/vtb/">
+          <img src="assets/logos/pngs/vtb.png" alt="Логотип ВТБ" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">ВТБ</span>
+        </a>
+        <a class="logo-card" href="logos/bank/gazprombank/">
+          <img src="assets/logos/pngs/gazprom-bank.png" alt="Логотип Газпромбанк" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Газпромбанк</span>
+        </a>
+        <a class="logo-card" href="logos/bank/mts/">
+          <img src="assets/logos/svgs/mts-bank.svg" alt="Логотип МТС Банк" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">МТС Банк</span>
+        </a>
+        <a class="logo-card" href="logos/market/ozon/">
+          <img src="assets/logos/svgs/ozon.svg" alt="Логотип Ozon" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Ozon</span>
+        </a>
+        <a class="logo-card" href="logos/market/wildberries/">
+          <img src="assets/logos/svgs/wildberries.svg" alt="Логотип Wildberries" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Wildberries</span>
+        </a>
+        <a class="logo-card" href="logos/market/avito/">
+          <img src="assets/logos/svgs/avito.svg" alt="Логотип Авито" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Авито</span>
+        </a>
+        <a class="logo-card" href="logos/media/youtube/">
+          <img src="assets/logos/svgs/youtube.svg" alt="Логотип YouTube" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">YouTube</span>
+        </a>
+        <a class="logo-card" href="logos/office/gmail/">
+          <img src="assets/logos/pngs/google-mail.png" alt="Логотип Gmail" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Gmail</span>
+        </a>
+        <a class="logo-card" href="logos/ai/chatgpt/">
+          <img src="assets/logos/svgs/chatgpt.svg" alt="Логотип ChatGPT" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">ChatGPT</span>
+        </a>
+        <a class="logo-card" href="logos/ai/claude/">
+          <img src="assets/logos/svgs/claude.svg" alt="Логотип Claude" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Claude</span>
+        </a>
+        <a class="logo-card" href="logos/ai/gemini/">
+          <img src="assets/logos/svgs/gemini.svg" alt="Логотип Gemini" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Gemini</span>
+        </a>
+        <a class="logo-card" href="logos/design/figma/">
+          <img src="assets/logos/svgs/figma.svg" alt="Логотип Figma" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Figma</span>
+        </a>
+        <a class="logo-card" href="logos/design/notion/">
+          <img src="assets/logos/svgs/notion.svg" alt="Логотип Notion" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Notion</span>
+        </a>
+        <a class="logo-card" href="logos/map/2gis/">
+          <img src="assets/logos/svgs/2gis.svg" alt="Логотип 2ГИС" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">2ГИС</span>
+        </a>
+        <a class="logo-card" href="logos/docs/gosuslugi/">
+          <img src="assets/logos/svgs/gosuslugi.svg" alt="Логотип Госуслуги" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Госуслуги</span>
+        </a>
+        <a class="logo-card" href="logos/travel/aviasales/">
+          <img src="assets/logos/svgs/aviasales.svg" alt="Логотип Aviasales" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Aviasales</span>
+        </a>
+        <a class="logo-card" href="logos/media/spotify/">
+          <img src="assets/logos/svgs/spotify.svg" alt="Логотип Spotify" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Spotify</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Все категории ── -->
+    <section class="section" aria-labelledby="h-cats">
+      <div class="section-head">
+        <div>
+          <h2 id="h-cats">Категории логотипов</h2>
+          <div class="sub">35 разделов — от банков до нейросетей</div>
+        </div>
+        <a class="section-link" href="logos/">Открыть каталог →</a>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-tile" href="logos/social/">
+          <span class="cat-ico" aria-hidden="true">💬</span>
+          <span class="cat-name">Мессенджеры и соцсети</span>
+          <span class="cat-count">25</span>
+        </a>
+        <a class="cat-tile" href="logos/videocall/">
+          <span class="cat-ico" aria-hidden="true">📹</span>
+          <span class="cat-name">Видеозвонки</span>
+          <span class="cat-count">5</span>
+        </a>
+        <a class="cat-tile" href="logos/video/">
+          <span class="cat-ico" aria-hidden="true">▶️</span>
+          <span class="cat-name">Видео и стриминг</span>
+          <span class="cat-count">16</span>
+        </a>
+        <a class="cat-tile" href="logos/music/">
+          <span class="cat-ico" aria-hidden="true">🎵</span>
+          <span class="cat-name">Музыка и медиа</span>
+          <span class="cat-count">12</span>
+        </a>
+        <a class="cat-tile" href="logos/market/">
+          <span class="cat-ico" aria-hidden="true">🛒</span>
+          <span class="cat-name">Маркетплейсы и ритейл</span>
+          <span class="cat-count">10</span>
+        </a>
+        <a class="cat-tile" href="logos/food/">
+          <span class="cat-ico" aria-hidden="true">🍔</span>
+          <span class="cat-name">Еда и рестораны</span>
+          <span class="cat-count">2</span>
+        </a>
+        <a class="cat-tile" href="logos/bank/">
+          <span class="cat-ico" aria-hidden="true">🏦</span>
+          <span class="cat-name">Банки</span>
+          <span class="cat-count">19</span>
+        </a>
+        <a class="cat-tile" href="logos/pay/">
+          <span class="cat-ico" aria-hidden="true">💳</span>
+          <span class="cat-name">Платежи и карты</span>
+          <span class="cat-count">11</span>
+        </a>
+        <a class="cat-tile" href="logos/bnpl/">
+          <span class="cat-ico" aria-hidden="true">🧾</span>
+          <span class="cat-name">Рассрочка и BNPL</span>
+          <span class="cat-count">3</span>
+        </a>
+        <a class="cat-tile" href="logos/delivery/">
+          <span class="cat-ico" aria-hidden="true">🚚</span>
+          <span class="cat-name">Доставка и такси</span>
+          <span class="cat-count">2</span>
+        </a>
+        <a class="cat-tile" href="logos/map/">
+          <span class="cat-ico" aria-hidden="true">🗺️</span>
+          <span class="cat-name">Карты и навигация</span>
+          <span class="cat-count">5</span>
+        </a>
+        <a class="cat-tile" href="logos/ads/">
+          <span class="cat-ico" aria-hidden="true">📊</span>
+          <span class="cat-name">Реклама и аналитика</span>
+          <span class="cat-count">4</span>
+        </a>
+        <a class="cat-tile" href="logos/reviews/">
+          <span class="cat-ico" aria-hidden="true">⭐</span>
+          <span class="cat-name">Отзывы и справочники</span>
+          <span class="cat-count">2</span>
+        </a>
+        <a class="cat-tile" href="logos/search/">
+          <span class="cat-ico" aria-hidden="true">🔍</span>
+          <span class="cat-name">Поиск и браузеры</span>
+          <span class="cat-count">7</span>
+        </a>
+        <a class="cat-tile" href="logos/mail/">
+          <span class="cat-ico" aria-hidden="true">✉️</span>
+          <span class="cat-name">Почта</span>
+          <span class="cat-count">6</span>
+        </a>
+        <a class="cat-tile" href="logos/office/">
+          <span class="cat-ico" aria-hidden="true">📄</span>
+          <span class="cat-name">Офис и документы</span>
+          <span class="cat-count">19</span>
+        </a>
+        <a class="cat-tile" href="logos/cloud/">
+          <span class="cat-ico" aria-hidden="true">☁️</span>
+          <span class="cat-name">Облака и хранилища</span>
+          <span class="cat-count">12</span>
+        </a>
+        <a class="cat-tile" href="logos/assistant/">
+          <span class="cat-ico" aria-hidden="true">🤖</span>
+          <span class="cat-name">Ассистенты</span>
+          <span class="cat-count">7</span>
+        </a>
+        <a class="cat-tile" href="logos/store/">
+          <span class="cat-ico" aria-hidden="true">📦</span>
+          <span class="cat-name">Сторы и подписки</span>
+          <span class="cat-count">11</span>
+        </a>
+        <a class="cat-tile" href="logos/system/">
+          <span class="cat-ico" aria-hidden="true">⚙️</span>
+          <span class="cat-name">Системные приложения</span>
+          <span class="cat-count">28</span>
+        </a>
+        <a class="cat-tile" href="logos/ai/">
+          <span class="cat-ico" aria-hidden="true">🧠</span>
+          <span class="cat-name">Нейросети</span>
+          <span class="cat-count">15</span>
+        </a>
+        <a class="cat-tile" href="logos/design/">
+          <span class="cat-ico" aria-hidden="true">🎨</span>
+          <span class="cat-name">Дизайн</span>
+          <span class="cat-count">12</span>
+        </a>
+        <a class="cat-tile" href="logos/web/">
+          <span class="cat-ico" aria-hidden="true">🌐</span>
+          <span class="cat-name">Сайты и CMS</span>
+          <span class="cat-count">5</span>
+        </a>
+        <a class="cat-tile" href="logos/dev/">
+          <span class="cat-ico" aria-hidden="true">💻</span>
+          <span class="cat-name">Разработка</span>
+          <span class="cat-count">7</span>
+        </a>
+        <a class="cat-tile" href="logos/macos/">
+          <span class="cat-ico" aria-hidden="true">🍎</span>
+          <span class="cat-name">macOS утилиты</span>
+          <span class="cat-count">6</span>
+        </a>
+        <a class="cat-tile" href="logos/telecom/">
+          <span class="cat-ico" aria-hidden="true">📡</span>
+          <span class="cat-name">Связь и интернет</span>
+          <span class="cat-count">7</span>
+        </a>
+        <a class="cat-tile" href="logos/travel/">
+          <span class="cat-ico" aria-hidden="true">✈️</span>
+          <span class="cat-name">Путешествия</span>
+          <span class="cat-count">3</span>
+        </a>
+        <a class="cat-tile" href="logos/education/">
+          <span class="cat-ico" aria-hidden="true">🎓</span>
+          <span class="cat-name">Образование</span>
+          <span class="cat-count">2</span>
+        </a>
+        <a class="cat-tile" href="logos/health/">
+          <span class="cat-ico" aria-hidden="true">🩺</span>
+          <span class="cat-name">Здоровье</span>
+          <span class="cat-count">2</span>
+        </a>
+        <a class="cat-tile" href="logos/insurance/">
+          <span class="cat-ico" aria-hidden="true">🛡️</span>
+          <span class="cat-name">Страхование</span>
+          <span class="cat-count">2</span>
+        </a>
+        <a class="cat-tile" href="logos/crm/">
+          <span class="cat-ico" aria-hidden="true">📇</span>
+          <span class="cat-name">Склад, ERP и CRM</span>
+          <span class="cat-count">4</span>
+        </a>
+        <a class="cat-tile" href="logos/docs/">
+          <span class="cat-ico" aria-hidden="true">📑</span>
+          <span class="cat-name">Документы и ЭДО</span>
+          <span class="cat-count">1</span>
+        </a>
+        <a class="cat-tile" href="logos/hr/">
+          <span class="cat-ico" aria-hidden="true">👔</span>
+          <span class="cat-name">Работа и HR</span>
+          <span class="cat-count">1</span>
+        </a>
+        <a class="cat-tile" href="logos/flag/">
+          <span class="cat-ico" aria-hidden="true">🏴</span>
+          <span class="cat-name">Флаги</span>
+          <span class="cat-count">10</span>
+        </a>
+        <a class="cat-tile" href="logos/b2b/">
+          <span class="cat-ico" aria-hidden="true">🏢</span>
+          <span class="cat-name">B2B и корпоративные сервисы</span>
+          <span class="cat-count">4</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Эмодзи ── -->
+    <section class="section" aria-labelledby="h-emoji">
+      <div class="section-head">
+        <div>
+          <h2 id="h-emoji">Эмодзи Apple, Google и Microsoft</h2>
+          <div class="sub">1918 эмодзи в PNG и SVG — поиск на русском и английском</div>
+        </div>
+        <a class="section-link" href="emoji/">Все эмодзи →</a>
+      </div>
+      <div class="emoji-strip">
+        <a class="emoji-cell" href="/emoji/smileys/grinning-face/">😀</a><a class="emoji-cell" href="/emoji/smileys/face-with-tears-of-joy/">😂</a><a class="emoji-cell" href="/emoji/smileys/smiling-face-with-hearts/">🥰</a>
+        <a class="emoji-cell" href="/emoji/smileys/smiling-face-with-heart-eyes/">😍</a><a class="emoji-cell" href="/emoji/smileys/smiling-face-with-sunglasses/">😎</a><a class="emoji-cell" href="/emoji/smileys/thinking-face/">🤔</a>
+        <a class="emoji-cell" href="/emoji/smileys/loudly-crying-face/">😭</a><a class="emoji-cell" href="/emoji/smileys/upside-down-face/">🙃</a><a class="emoji-cell" href="/emoji/people/thumbs-up/">👍</a>
+        <a class="emoji-cell" href="/emoji/people/folded-hands/">🙏</a><a class="emoji-cell" href="/emoji/travel/fire/">🔥</a><a class="emoji-cell" href="/emoji/smileys/red-heart/">❤️</a>
+        <a class="emoji-cell" href="/emoji/activities/sparkles/">✨</a><a class="emoji-cell" href="/emoji/activities/party-popper/">🎉</a><a class="emoji-cell" href="/emoji/travel/rocket/">🚀</a>
+        <a class="emoji-cell" href="/emoji/smileys/hundred-points/">💯</a><a class="emoji-cell" href="/emoji/people/eyes/">👀</a><a class="emoji-cell" href="/emoji/symbols/check-mark-button/">✅</a>
+        <a class="emoji-cell" href="/emoji/travel/star/">⭐</a><a class="emoji-cell" href="/emoji/people/handshake/">🤝</a><a class="emoji-cell" href="/emoji/smileys/partying-face/">🥳</a>
+        <a class="emoji-cell" href="/emoji/animals/dog-face/">🐶</a><a class="emoji-cell" href="/emoji/food/pizza/">🍕</a><a class="emoji-cell" href="/emoji/activities/trophy/">🏆</a>
+      </div>
+    </section>
+
+    <!-- ── Инструменты ── -->
+    <section class="section" aria-labelledby="h-tools">
+      <div class="section-head">
+        <div>
+          <h2 id="h-tools">Инструменты</h2>
+          <div class="sub">Всё для работы с логотипом — прямо в браузере</div>
+        </div>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="logos/">
+          <div class="tool-ico" aria-hidden="true">🎨</div>
+          <div class="tool-title">Редактор цвета</div>
+          <div class="tool-desc">Меняйте цвета логотипа онлайн: HSV-пикер, история изменений, отмена и повтор.</div>
+        </a>
+        <a class="tool-card" href="logos/">
+          <div class="tool-ico" aria-hidden="true">⚡</div>
+          <div class="tool-title">Экспорт в Figma</div>
+          <div class="tool-desc">Копируйте готовый SVG и вставляйте прямо на холст Figma — без чистки кода.</div>
+        </a>
+        <a class="tool-card" href="logos/">
+          <div class="tool-ico" aria-hidden="true">📦</div>
+          <div class="tool-title">SVG, PNG и ZIP</div>
+          <div class="tool-desc">Скачивайте в нужном формате или забирайте все варианты логотипа одним архивом.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Подборки ── -->
+    <section class="section" aria-labelledby="h-collections">
+      <div class="section-head">
+        <div>
+          <h2 id="h-collections">Подборки логотипов</h2>
+          <div class="sub">Готовые наборы под конкретную задачу</div>
+        </div>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-tile" href="collections/russian-banks/">
+          <span class="cat-ico" aria-hidden="true">🏦</span>
+          <span class="cat-name">Логотипы российских банков</span>
+        </a>
+        <a class="cat-tile" href="collections/neural-networks/">
+          <span class="cat-ico" aria-hidden="true">🧠</span>
+          <span class="cat-name">Логотипы нейросетей</span>
+        </a>
+        <a class="cat-tile" href="collections/marketplaces/">
+          <span class="cat-ico" aria-hidden="true">🛒</span>
+          <span class="cat-name">Логотипы маркетплейсов</span>
+        </a>
+        <a class="cat-tile" href="collections/payment-systems/">
+          <span class="cat-ico" aria-hidden="true">💳</span>
+          <span class="cat-name">Логотипы платёжных систем</span>
+        </a>
+        <a class="cat-tile" href="collections/messengers-social/">
+          <span class="cat-ico" aria-hidden="true">💬</span>
+          <span class="cat-name">Логотипы соцсетей и мессенджеров</span>
+        </a>
+        <a class="cat-tile" href="collections/delivery-taxi/">
+          <span class="cat-ico" aria-hidden="true">🚚</span>
+          <span class="cat-name">Логотипы доставки и такси</span>
+        </a>
+      </div>
+    </section>
+
   </div>
-
-  <h1>Открытая библиотека<br><span class="accent">SVG-логотипов и эмодзи</span><br>для дизайнеров.</h1>
-
-  <p class="hero-desc">
-    Готовые SVG и PNG для дизайна, разработки и презентаций.
-    Редактируйте цвета, экспортируйте в Figma, скачивайте одним кликом.
-  </p>
-  <p class="hero-tagline">Бесплатно · Открытый исходный код · Без регистрации</p>
-
-  <nav class="sections" aria-label="Разделы библиотеки">
-    <a href="logos/" class="section-card">
-      <span class="card-icon" aria-hidden="true">🏷</span>
-      <span class="card-meta">
-        <span class="card-title">Логотипы</span>
-        <span class="card-count">406+ брендов</span>
-      </span>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>
-
-    <a href="emoji/" class="section-card">
-      <span class="card-icon" aria-hidden="true">😀</span>
-      <span class="card-meta">
-        <span class="card-title">Эмодзи</span>
-        <span class="card-count">1918+ символов</span>
-      </span>
-      <span class="card-arrow" aria-hidden="true">→</span>
-    </a>
-
-    <span class="section-card disabled" aria-disabled="true">
-      <span class="card-icon" aria-hidden="true">⚡</span>
-      <span class="card-meta">
-        <span class="card-title">Иконки <span class="card-wip">Скоро</span></span>
-        <span class="card-count">SVG для интерфейсов</span>
-      </span>
-    </span>
-  </nav>
 </main>
 
-<footer>
-  <span style="color:#fff">Trace Logo's</span> Beta · <a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">Открытый исходный код</a>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col footer-about">
+        <a class="brand" href="/" aria-label="Trace Logo's" style="margin-bottom:14px">
+          <span class="brand-logo" aria-hidden="true">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M10.9844 2.13613C12.4512 1.60535 14 2.69196 14 4.25188V4.42892L7.47401 6.79038C5.98917 7.32768 5 8.73756 5 10.3166V15.8704C3.5378 16.3879 2 15.3035 2 13.7491V7.6674C2 6.29888 2.85728 5.07698 4.14414 4.61132L10.9844 2.13613ZM14.9844 5.1362C16.4512 4.60541 18 5.69202 18 7.25194V7.42896L11.1441 9.90979C9.85728 10.3754 9 11.5973 9 12.9659V18.8705C7.5378 19.388 6 18.3035 6 16.7491V10.3167C6 9.15868 6.72539 8.12477 7.81427 7.73075L14.9844 5.1362ZM18.9844 8.13618C20.4512 7.60539 22 8.692 22 10.2519V17.0352C22 17.9826 21.4065 18.8286 20.5156 19.1509L13.0156 21.8649C11.5488 22.3956 10 21.309 10 19.7491V12.9658C10 12.0184 10.5935 11.1725 11.4844 10.8501L18.9844 8.13618Z" fill="#0a0a0a"/></svg>
+          </span>
+          <span class="brand-name">Trace Logo's</span>
+        </a>
+        <p>Открытая библиотека логотипов и эмодзи. Бесплатно, без регистрации, с открытым исходным кодом.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Каталог</h3>
+        <ul>
+          <li><a href="logos/">Все логотипы</a></li>
+          <li><a href="emoji/">Эмодзи</a></li>
+          <li><a href="blog/">Блог</a></li>
+          <li><a href="logos/ai/">Нейросети</a></li>
+          <li><a href="logos/bank/">Банки</a></li>
+          <li><a href="logos/market/">Маркетплейсы</a></li>
+          <li><a href="logos/social/">Соцсети</a></li>
+          <li><a href="logos/flag/">Флаги</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Подборки</h3>
+        <ul>
+          <li><a href="collections/russian-banks/">Логотипы банков</a></li>
+          <li><a href="collections/neural-networks/">Логотипы нейросетей</a></li>
+          <li><a href="collections/marketplaces/">Логотипы маркетплейсов</a></li>
+          <li><a href="collections/payment-systems/">Платёжные системы</a></li>
+          <li><a href="collections/messengers-social/">Соцсети и мессенджеры</a></li>
+          <li><a href="collections/delivery-taxi/">Доставка и такси</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Инструменты</h3>
+        <ul>
+          <li><a href="logos/">Редактор цвета</a></li>
+          <li><a href="logos/">Экспорт в Figma</a></li>
+          <li><a href="logos/">Скачать SVG / PNG</a></li>
+          <li><a href="logos/">Предложить логотип</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Разработчикам</h3>
+        <ul>
+          <li><a href="logos.json">API · logos.json</a></li>
+          <li><a href="emoji.json">API · emoji.json</a></li>
+          <li><a href="llms.txt">llms.txt</a></li>
+          <li><a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">Связаться</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Trace Logo's Beta · Изображения могут быть защищены авторским правом их владельцев.</span>
+      <span class="footer-bottom-links">
+        <a href="sitemap/">Карта сайта</a>
+        <a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">Открытый исходный код</a>
+      </span>
+    </div>
+  </div>
 </footer>
+
+<script type="module">
+  import { initHomeSearch } from './js/home-search.js';
+  initHomeSearch();
+</script>
 
 </body>
 </html>

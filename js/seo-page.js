@@ -124,6 +124,18 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 
+// ── Цвета бренда: копирование hex по клику ──
+document.querySelectorAll('.color-swatch').forEach(sw => {
+  sw.addEventListener('click', async () => {
+    const hex = sw.dataset.color;
+    try {
+      await navigator.clipboard.writeText(hex);
+      triggerConfetti(sw);
+      showToast(hex + ' скопирован');
+    } catch { showToast('Не удалось скопировать'); }
+  });
+});
+
 document.getElementById('btn-expand').addEventListener('click', e => { e.stopPropagation(); openLightbox(); });
 document.getElementById('lightbox-close').addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
 previewCard.addEventListener('click', openLightbox);

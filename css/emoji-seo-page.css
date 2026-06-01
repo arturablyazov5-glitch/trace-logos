@@ -1,0 +1,27 @@
+/* emoji-seo-page.css — emoji-specific bits on top of seo-page.css */
+
+.emoji-preview-card { background: var(--bg-card); }
+.emoji-preview-card .preview-icon img { image-rendering: auto; }
+
+.emoji-h1-char { font-size: 1.1em; margin-right: 4px; }
+.cat-emoji { font-size: 14px; margin-right: 2px; }
+.emoji-meta-char { font-size: 18px; }
+
+/* Variant grid (Apple / Google / Microsoft) */
+.evar-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+.evar-card {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 10px; min-width: 84px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 10px; cursor: pointer; user-select: none;
+  transition: border-color .12s, background .12s;
+}
+.evar-card:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.evar-card.active { border-color: var(--border-bold); background: var(--bg-raised); }
+.evar-preview {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+}
+.evar-preview img { width: 48px; height: 48px; object-fit: contain; }
+.evar-label { font-size: 11px; color: var(--text-5); white-space: nowrap; }
+.evar-card.active .evar-label { color: var(--text-2); }

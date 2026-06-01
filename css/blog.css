@@ -1,0 +1,51 @@
+/* blog.css — blog index + article pages */
+
+.category-hero { margin-bottom: 28px; }
+.category-hero h1 {
+  font-size: 30px; font-weight: 700; color: var(--text-0);
+  letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 10px;
+}
+.category-desc { font-size: 15px; color: var(--text-4); line-height: 1.6; max-width: 720px; }
+
+/* ── Index list ── */
+.blog-list { display: flex; flex-direction: column; gap: 10px; max-width: 760px; }
+.blog-card {
+  display: block; padding: 20px 22px; border-radius: 14px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  text-decoration: none; transition: border-color .12s, background .12s, transform .1s;
+}
+.blog-card:hover { border-color: var(--border-hover); background: var(--bg-hover); transform: translateY(-2px); }
+.blog-card-date { font-size: 12px; color: var(--text-6); }
+.blog-card-title { font-size: 18px; font-weight: 600; color: var(--text-1); margin: 6px 0 8px; letter-spacing: -0.01em; }
+.blog-card:hover .blog-card-title { color: var(--text-0); }
+.blog-card-excerpt { font-size: 14px; color: var(--text-4); line-height: 1.6; }
+
+/* ── Article ── */
+.blog-article { max-width: 720px; }
+.blog-article-head { margin-bottom: 28px; }
+.blog-date { font-size: 13px; color: var(--text-6); }
+.blog-article-head h1 {
+  font-size: 32px; font-weight: 700; color: var(--text-0);
+  letter-spacing: -0.02em; line-height: 1.18; margin-top: 8px;
+}
+.blog-body { font-size: 16px; line-height: 1.75; color: var(--text-3); }
+.blog-body h2 {
+  font-size: 22px; font-weight: 700; color: var(--text-0);
+  margin: 36px 0 14px; letter-spacing: -0.01em;
+}
+.blog-body h3 {
+  font-size: 17px; font-weight: 600; color: var(--text-1);
+  margin: 26px 0 10px;
+}
+.blog-body p { margin: 0 0 16px; }
+.blog-body ul, .blog-body ol { margin: 0 0 16px; padding-left: 24px; }
+.blog-body li { margin-bottom: 8px; }
+.blog-body a { color: var(--text-1); text-decoration: underline; text-decoration-color: var(--border-eco); }
+.blog-body a:hover { color: var(--accent); }
+.blog-body strong { color: var(--text-1); font-weight: 600; }
+.blog-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em;
+  background: var(--bg-raised); border: 1px solid var(--border-base);
+  border-radius: 5px; padding: 1px 5px;
+}
+.blog-body hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }

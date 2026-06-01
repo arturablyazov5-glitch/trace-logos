@@ -1,0 +1,28 @@
+/* emoji-category-page.css — grid of emoji links on a category landing page */
+
+.category-hero { margin-bottom: 28px; }
+.category-hero h1 {
+  font-size: 30px; font-weight: 700; color: var(--text-0);
+  letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 10px;
+}
+.category-desc { font-size: 15px; color: var(--text-4); line-height: 1.6; max-width: 720px; }
+
+.emoji-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+}
+.emoji-cat-card {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 14px 10px; border-radius: 11px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  text-decoration: none; text-align: center;
+  transition: border-color .12s, background .12s, transform .1s;
+}
+.emoji-cat-card:hover { border-color: var(--border-hover); background: var(--bg-hover); transform: translateY(-2px); }
+.emoji-cat-glyph { font-size: 34px; line-height: 1; }
+.emoji-cat-name {
+  font-size: 11.5px; color: var(--text-4); line-height: 1.3;
+  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.emoji-cat-card:hover .emoji-cat-name { color: var(--text-2); }

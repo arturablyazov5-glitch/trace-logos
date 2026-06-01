@@ -1,0 +1,28 @@
+/* sitemap-page.css — standalone HTML sitemap page (/sitemap/) */
+
+.category-hero { margin-bottom: 32px; }
+.category-hero h1 {
+  font-size: 32px; font-weight: 700; color: var(--text-0);
+  letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 10px;
+}
+.category-desc { font-size: 15px; color: var(--text-4); line-height: 1.6; max-width: 720px; }
+
+.sitemap-cols {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 36px 32px;
+}
+.sitemap-group-title {
+  font-size: 15px; font-weight: 600; color: var(--text-1); margin-bottom: 14px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--line);
+}
+.sitemap-group-title a { color: inherit; text-decoration: none; }
+.sitemap-group-title a:hover { color: var(--accent); }
+.sitemap-links { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+.sitemap-links a {
+  font-size: 13px; color: var(--text-4); text-decoration: none; line-height: 1.6;
+  transition: color .12s;
+}
+.sitemap-links a:hover { color: var(--accent); }
+
+@media (max-width: 600px) {
+  .sitemap-cols { grid-template-columns: 1fr; gap: 28px; }
+}

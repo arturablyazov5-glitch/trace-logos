@@ -1,5 +1,16 @@
 const seoPageExistsCache = new Map();
 
+let _urlMapPromise = null;
+function loadUrlMap() {
+  if (!_urlMapPromise) {
+    const base = repoBase();
+    _urlMapPromise = fetch(base + '/emoji/_url-map.json')
+      .then(r => r.ok ? r.json() : {})
+      .catch(() => ({}));
+  }
+  return _urlMapPromise;
+}
+
 export function slugifyPathPart(value) {
   return String(value || '')
     .trim()
@@ -34,9 +45,20 @@ async function seoPageExists(url) {
 export async function updateSeoPageLink(item, activeCardRef) {
   const pageLinkEl = document.getElementById('detail-page-link');
   const btnPageLink = document.getElementById('btn-page-link');
-  const pageUrl = seoPageUrlForItem(item);
 
   pageLinkEl.classList.add('hidden');
+
+  const figmaParts = (item.figma || '').split('/').map(slugifyPathPart).filter(Boolean);
+  if (figmaParts[0] === 'emoji') {
+    const map = await loadUrlMap();
+    const relUrl = map[item.file];
+    if (!relUrl || activeCardRef?.() !== item) return;
+    btnPageLink.href = repoBase() + relUrl;
+    pageLinkEl.classList.remove('hidden');
+    return;
+  }
+
+  const pageUrl = seoPageUrlForItem(item);
   if (!pageUrl) return;
 
   const exists = await seoPageExists(pageUrl);
