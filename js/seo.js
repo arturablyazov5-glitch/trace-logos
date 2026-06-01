@@ -46,6 +46,7 @@ export async function updateSeoPageLink(item, activeCardRef) {
   const pageLinkEl = document.getElementById('detail-page-link');
   const btnPageLink = document.getElementById('btn-page-link');
 
+  if (!pageLinkEl || !btnPageLink) return;
   pageLinkEl.classList.add('hidden');
 
   const figmaParts = (item.figma || '').split('/').map(slugifyPathPart).filter(Boolean);
