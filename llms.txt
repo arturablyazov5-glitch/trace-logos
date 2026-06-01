@@ -4,7 +4,7 @@
 
 ## Точка входа для AI-агентов
 
-### Логотипы (287 брендов)
+### Логотипы (288 брендов, ещё 152 запланированы — итого 440+)
 
 **Индекс категорий (6 КБ):**
 https://rafael-mansurov.github.io/trace-logos/logos-index.json
@@ -81,9 +81,9 @@ GET https://rafael-mansurov.github.io/trace-logos/logos.json
 {
   "name": "Т-Банк",
   "categorySlug": "bank",
-  "url": "https://rafael-mansurov.github.io/trace-logos/logos/bank/tbank/",
-  "svgUrl": "https://rafael-mansurov.github.io/trace-logos/assets/logos/svgs/t-bank.svg",
-  "pngUrl": "https://rafael-mansurov.github.io/trace-logos/assets/logos/pngs/t-bank.png",
+  "url": "/logos/bank/tbank/",
+  "svgUrl": "/assets/logos/svgs/t-bank.svg",
+  "pngUrl": "/assets/logos/pngs/t-bank.png",
   "ecosystem": "tinkoff",
   "formats": ["svg", "png"]
 }
@@ -94,8 +94,8 @@ GET https://rafael-mansurov.github.io/trace-logos/logos.json
 {
   "name": "Сбер",
   "categorySlug": "bank",
-  "url": "https://rafael-mansurov.github.io/trace-logos/logos/bank/sber/",
-  "svgUrl": "https://rafael-mansurov.github.io/trace-logos/assets/logos/svgs/sber.svg",
+  "url": "/logos/bank/sber/",
+  "svgUrl": "/assets/logos/svgs/sber.svg",
   "pngUrl": null,
   "ecosystem": "sber",
   "formats": ["svg", "png"]
@@ -107,7 +107,7 @@ GET https://rafael-mansurov.github.io/trace-logos/logos.json
 {
   "name": "GigaChat",
   "categorySlug": "ai",
-  "url": "https://rafael-mansurov.github.io/trace-logos/logos/ai/gigachat/",
+  "url": "/logos/ai/gigachat/",
   "svgUrl": null,
   "pngUrl": null,
   "comingSoon": true
@@ -226,7 +226,7 @@ https://rafael-mansurov.github.io/trace-logos/assets/logos/pngs/{file}
 bank, payment, social, video, music, messenger, map, search, ai, cloud,
 mail, office, system, macos, design, web, dev, videocall, market, food,
 delivery, store, reviews, ads, assistant, telecom, travel, education,
-health, insurance, crm, docs, hr, flag, b2b, bnpl
+health, insurance, crm, docs, hr, flag, b2b, bnpl, car
 
 ---
 
@@ -235,6 +235,35 @@ health, insurance, crm, docs, hr, flag, b2b, bnpl
 yandex, sber, vk, tinkoff, ozon, meta, google, apple, microsoft,
 alfa, mts, avito, wildberries, x5, nspk, kontur, openai, bytedance,
 adobe, valve, mvideo, sovcombank
+
+---
+
+## Дополнительные разделы
+
+### Блог
+`/blog/` — статьи о логотипах, SVG/PNG, эмодзи и брендах. Каждая статья: `/blog/{slug}/`.
+
+### Подборки
+`/collections/{slug}/` — кросс-категорийные наборы логотипов.
+
+Доступные подборки: `russian-banks`, `neural-networks`, `marketplaces`, `payment-systems`, `messengers-social`, `delivery-taxi`.
+
+### Статические страницы эмодзи
+Каждый эмодзи имеет HTML-страницу по паттерну:
+```
+/emoji/{categorySlug}/{emojiSlug}/
+```
+Пример: `/emoji/smileys/grinning-face/`
+
+Содержимое: символ, юникод-кодпоинт, варианты Apple/Google, FAQ.
+
+Поле `url` в `emoji.json` содержит корневой путь к этой странице (`/emoji/smileys/grinning-face/`).
+
+### Карта сайта
+- `/sitemap.xml` — индекс
+- `/sitemap-pages.xml` — статические страницы
+- `/sitemap-logos.xml` — все страницы логотипов
+- `/sitemap-emoji.xml` — все страницы эмодзи
 
 ---
 
