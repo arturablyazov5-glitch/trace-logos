@@ -14,6 +14,9 @@ const fields = [
 function init() {
   const overlay    = document.getElementById('help-overlay');
   const form       = document.getElementById('help-form');
+  // Help-modal markup isn't present on every page that loads main.js
+  // (e.g. generated category pages). Bail quietly instead of throwing.
+  if (!overlay || !form) return;
   const closeBtn   = document.getElementById('help-close');
   const iconNameEl = document.getElementById('help-icon-name');
   const successEl  = document.getElementById('help-success');

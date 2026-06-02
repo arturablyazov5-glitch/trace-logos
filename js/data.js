@@ -65,6 +65,8 @@ export async function loadLogos(base = '/logos/') {
       return result.status === 'fulfilled';
     })
     .map(({ cat, result }) => {
-      return { ...result.value, slug: cat.slug };
+      // Emoji manifest categories have no explicit slug → derive from the filename.
+      const slug = cat.slug || cat.file.split('/').pop().replace(/\.json$/, '');
+      return { ...result.value, slug };
     });
 }

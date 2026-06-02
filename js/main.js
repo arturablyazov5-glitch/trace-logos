@@ -7,6 +7,7 @@ import {
 import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip } from './export.js';
 import { updateSeoPageLink } from './seo.js';
 import { ecosystemLogoMap, ecosystemLabels, loadLogos } from './data.js';
+import { categoryIconSvg } from './category-icons.js';
 import {
   initVirtual,
   setSectionHidden, loadCardImage, ensureCardMounted,
@@ -823,7 +824,7 @@ loadLogos(_manifestBase).then(logos => {
     nav.className = 'nav-item';
     nav.dataset.section = group.section;
     nav.dataset.slug = group.slug;
-    nav.innerHTML = `<span class="nav-label">${group.section}</span><span class="count">${readyCount}</span>`;
+    nav.innerHTML = `${categoryIconSvg(group.slug)}<span class="nav-label">${group.section}</span><span class="count">${readyCount}</span>`;
     navSections.appendChild(nav);
 
     const sec = document.createElement('div');
