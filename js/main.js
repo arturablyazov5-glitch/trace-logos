@@ -871,7 +871,7 @@ loadLogos(_manifestBase).then(logos => {
 
   const ECOSYSTEM_ORDER = [
     'yandex', 'sber', 'vk', 'tinkoff', 'google', 'alfa', 'ozon', 'wildberries',
-    'meta', 'apple', 'mts', 'nspk', 'sovcombank', 'openai', 'microsoft',
+    'meta', 'apple', 'mts', 'nspk', 'sovcombank', 'openai', 'anthropic', 'microsoft',
     'x5', 'avito', 'kontur', 'adobe', 'PlayStation',
   ];
   [...ecosystemCounts.entries()]
