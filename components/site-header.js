@@ -99,8 +99,6 @@ class SiteHeader extends HTMLElement {
           width: 32px;
           height: 32px;
           min-width: 32px;
-          border-radius: 8px;
-          overflow: hidden;
           display: flex;
           align-items: center;
           justify-content: center;
