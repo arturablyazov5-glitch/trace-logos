@@ -1,4 +1,4 @@
-import { svgToPngBlob, triggerConfetti } from './svg-utils.js';
+import { svgToPngBlob, triggerConfetti, parseSvgViewBox } from './svg-utils.js';
 import { animateContainerHeight, showToast } from './utils.js';
 
 // Page data injected by build script via window.__SEO_PAGE__
@@ -77,11 +77,28 @@ function initPngBtn(src, wide, type, pngSrc) {
   }
 }
 
+function svgForFigma(svg) {
+  let out = svg.trim();
+  if (!currentWide) {
+    out = out
+      .replace(/^(<svg[^>]*?)\bwidth="[^"]*"/, '$1width="32"')
+      .replace(/^(<svg[^>]*?)\bheight="[^"]*"/, '$1height="32"');
+  } else {
+    const vb = parseSvgViewBox(out);
+    const w = (vb && vb.h > 0) ? Math.round((24 * vb.w / vb.h) * 100) / 100 : 24;
+    out = out
+      .replace(/^(<svg[^>]*?)\bwidth="[^"]*"/, `$1width="${w}"`)
+      .replace(/^(<svg[^>]*?)\bheight="[^"]*"/, '$1height="24"');
+  }
+  if (PAGE.figma) out = out.replace(/^<svg/, `<svg id="${PAGE.figma}"`);
+  return out;
+}
+
 // ── Копировать SVG ──
 btnCopy.addEventListener('click', function() {
   fetch(currentSrc)
     .then(r => r.text())
-    .then(svg => navigator.clipboard.writeText(svg))
+    .then(svg => navigator.clipboard.writeText(svgForFigma(svg)))
     .then(() => {
       triggerConfetti(btnCopy);
       showToast('Скопировано SVG');
