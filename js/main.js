@@ -1,4 +1,4 @@
-import { showToast, highlight, svgUrl, setAssetBase, animateContainerHeight, formatFileSize } from './utils.js';
+import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize } from './utils.js';
 import {
   colorState, svgRawCache,
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
@@ -153,9 +153,17 @@ function buildCard(item, sectionState) {
   img.decoding = 'async';
   img.alt = item.name;
   img.title = item.figma;
+  // Grid thumbnail uses a lightweight WebP preview when available (PNG logos);
+  // the full asset (svgUrl) stays the source for the detail panel and export.
+  const fullSrc = svgUrl(item.file);
+  const previewSrc = previewUrl(item.file);
   img.addEventListener('load', () => card.classList.remove('loading'), { once: true });
-  img.addEventListener('error', () => card.classList.remove('loading'), { once: true });
-  img.dataset.src = svgUrl(item.file);
+  img.addEventListener('error', () => {
+    // Graceful degradation: a missing preview falls back to the full asset once.
+    if (img.dataset.src !== fullSrc) { img.dataset.src = fullSrc; img.src = fullSrc; return; }
+    card.classList.remove('loading');
+  });
+  img.dataset.src = previewSrc ?? fullSrc;
   if (item.prerendered || item.file.endsWith('.png')) img.classList.add('prerendered');
   wrap.appendChild(img);
   card.appendChild(wrap);
@@ -809,7 +817,10 @@ initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => t
 
 const _pathSection = window.__ASSET_SECTION__ ?? (location.pathname.split('/').filter(Boolean).at(-1) ?? 'logos');
 const _manifestBase = window.__MANIFEST_BASE__ ?? './';
-setAssetBase(window.__ASSET_BASE__ ?? ('../assets/' + _pathSection));
+const _assetBase = window.__ASSET_BASE__ ?? ('../assets/' + _pathSection);
+setAssetBase(_assetBase);
+// Lightweight WebP grid previews exist only for logos (see build-webp-previews.js).
+if (_pathSection === 'logos') setPreviewBase(_assetBase + '/previews');
 document.body.dataset.section = _pathSection;
 
 loadLogos(_manifestBase).then(logos => {

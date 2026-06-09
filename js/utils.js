@@ -117,6 +117,11 @@ export const SVG_URL_V = Date.now();
 let _assetBase = '../assets/logos';
 export function setAssetBase(base) { _assetBase = base; }
 
+// Lightweight WebP grid previews (logos only). When unset, previewUrl()
+// returns null and callers fall back to the real asset via svgUrl().
+let _previewBase = null;
+export function setPreviewBase(base) { _previewBase = base; }
+
 export function formatFileSize(bytes) {
   if (bytes < 1024) return bytes + ' B';
   const kb = bytes / 1024;
@@ -128,4 +133,13 @@ export function svgUrl(file) {
   if (file.startsWith('/')) return `..${file}?v=${SVG_URL_V}`;
   const folder = file.endsWith('.png') ? 'pngs' : 'svgs';
   return `${_assetBase}/${folder}/${file}?v=${SVG_URL_V}`;
+}
+
+// Returns the WebP preview URL for a PNG asset, or null when previews are not
+// enabled for this page / the asset is not a local PNG. Previews are
+// build-generated mirrors of assets/logos/pngs in assets/logos/previews.
+export function previewUrl(file) {
+  if (!_previewBase || file.startsWith('/') || !file.endsWith('.png')) return null;
+  const webp = file.replace(/\.png$/, '.webp');
+  return `${_previewBase}/${webp}?v=${SVG_URL_V}`;
 }
