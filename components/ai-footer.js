@@ -1,4 +1,4 @@
-const BASE = 'https://rafael-mansurov.github.io/trace-logos';
+const BASE = 'https://trace-logos.ru';
 
 class AiFooter extends HTMLElement {
   connectedCallback() {

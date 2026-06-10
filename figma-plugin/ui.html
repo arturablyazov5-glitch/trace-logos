@@ -833,7 +833,7 @@
 // logos.json / emoji.json store root-relative paths ("/assets/..."). The plugin
 // UI iframe is NOT served from github.io, so every asset URL must be made
 // absolute against the GitHub Pages base, otherwise images and inserts fail.
-const SITE_BASE = 'https://rafael-mansurov.github.io/trace-logos';
+const SITE_BASE = 'https://trace-logos.ru';
 const abs = u => (!u ? u : (/^https?:\/\//.test(u) ? u : SITE_BASE + (u.startsWith('/') ? u : '/' + u)));
 // A "-full" file is a wide horizontal logo → render on the checkerboard backing.
 const isFullUrl = u => /-full\.(svg|png)(\?|$)/i.test(u || '');

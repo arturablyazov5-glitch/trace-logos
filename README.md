@@ -2,7 +2,7 @@
 
 Большая коллекция логотипов, иконок и эмодзи для разработчиков и дизайнеров. Простой в использовании веб-интерфейс с быстрым поиском и множеством форматов.
 
-**🌐 [Посмотреть на сайте](https://rafael-mansurov.github.io/trace-logos/)**
+**🌐 [Посмотреть на сайте](https://trace-logos.ru/)**
 
 ---
 
@@ -57,7 +57,7 @@ trace-logos/
 
 ### Использование на сайте
 
-1. Перейдите на [https://rafael-mansurov.github.io/trace-logos/](https://rafael-mansurov.github.io/trace-logos/)
+1. Перейдите на [https://trace-logos.ru/](https://trace-logos.ru/)
 2. Используйте поле поиска для поиска нужного логотипа
 3. Кликните на логотип для скачивания или копирования ссылки
 
@@ -197,7 +197,7 @@ npm start
 ## 📧 Контакты
 
 - GitHub: [@rafael-mansurov](https://github.com/rafael-mansurov)
-- Веб-сайт: [https://rafael-mansurov.github.io/trace-logos/](https://rafael-mansurov.github.io/trace-logos/)
+- Веб-сайт: [https://trace-logos.ru/](https://trace-logos.ru/)
 
 ---
 
