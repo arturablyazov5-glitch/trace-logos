@@ -48,12 +48,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: relative;
 }
 .suggest-modal-header {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 44px;
 }
 .suggest-modal-title {
   font-size: 16px;
@@ -67,10 +68,11 @@
   margin-top: 3px;
 }
 .suggest-close {
-  margin-left: auto;
+  position: absolute;
+  top: 16px;
+  right: 16px;
   width: 32px;
   height: 32px;
-  flex-shrink: 0;
   border: none;
   border-radius: 8px;
   background: #222;
@@ -152,10 +154,13 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 12px 0 4px;
+  padding: 32px 0 20px;
   text-align: center;
 }
 .suggest-success.show { display: flex; }
+.suggest-modal:has(.suggest-success.show) { justify-content: center; }
+.suggest-modal:has(.suggest-success.show) .suggest-modal-header { display: none; }
+.suggest-modal:has(.suggest-success.show) .suggest-success { padding: 24px 0; }
 .suggest-success-title {
   font-size: 18px;
   font-weight: 600;
