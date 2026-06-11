@@ -191,3 +191,93 @@ btnZip.addEventListener('click', async () => {
     }, 1200);
   }
 });
+
+// ── Report outdated ──
+const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/suggest';
+const reportBtn = document.getElementById('btn-report-outdated');
+const reportOverlay = document.getElementById('suggest-overlay');
+if (reportBtn && reportOverlay) {
+  const reportForm = document.getElementById('suggest-form');
+  const reportResult = document.getElementById('suggest-result');
+  const reportSubmit = document.getElementById('suggest-submit');
+
+  document.getElementById('suggest-name').value = PAGE.name;
+
+  document.getElementById('suggest-file').addEventListener('change', function () {
+    const label = document.getElementById('suggest-file-label');
+    const nameEl = document.getElementById('suggest-file-name');
+    label.classList.toggle('has-file', !!this.files[0]);
+    nameEl.textContent = this.files[0] ? this.files[0].name : 'Выбрать файл';
+  });
+
+  reportBtn.addEventListener('click', () => reportOverlay.classList.add('open'));
+  document.getElementById('suggest-close').addEventListener('click', closeReportModal);
+  reportOverlay.addEventListener('click', e => { if (e.target === reportOverlay) closeReportModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && reportOverlay.classList.contains('open')) closeReportModal(); });
+
+  function closeReportModal() {
+    reportOverlay.classList.remove('open');
+    reportForm.reset();
+    document.getElementById('suggest-name').value = PAGE.name;
+    document.getElementById('suggest-comment').value = 'Логотип устарел, прошу обновить';
+    document.getElementById('suggest-file-name').textContent = 'Выбрать файл';
+    document.getElementById('suggest-file-label').classList.remove('has-file');
+    reportResult.className = 'suggest-result';
+    reportResult.textContent = '';
+    reportSubmit.disabled = false;
+  }
+
+  reportForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const url = document.getElementById('suggest-url').value.trim();
+    const comment = document.getElementById('suggest-comment').value.trim();
+    const file = document.getElementById('suggest-file').files[0];
+
+    if (url && !/^https?:\/\/.+\..+/.test(url)) {
+      document.getElementById('suggest-url').classList.add('input-error');
+      reportResult.className = 'suggest-result error';
+      reportResult.textContent = 'Введите корректную ссылку (например, https://brand.com).';
+      return;
+    }
+    if (file && file.size > 1 * 1024 * 1024) {
+      document.getElementById('suggest-file-label').classList.add('file-error');
+      reportResult.className = 'suggest-result error';
+      reportResult.textContent = 'Файл слишком большой. Максимум — 1 МБ.';
+      return;
+    }
+
+    reportSubmit.disabled = true;
+    reportResult.className = 'suggest-result';
+    reportResult.textContent = '';
+
+    try {
+      const fd = new FormData();
+      fd.append('brand', PAGE.name);
+      if (url) fd.append('url', url);
+      if (comment) fd.append('comment', comment);
+      if (file) fd.append('file', file, file.name);
+
+      const res = await fetch(WORKER_URL, { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Ошибка сервера');
+      if (data.ok) {
+        reportForm.style.display = 'none';
+        document.getElementById('suggest-modal-titles').style.display = 'none';
+        const success = document.getElementById('suggest-success');
+        success.classList.add('show');
+        const bg = success.querySelector('.t-form-success-popup__content-icon-background');
+        const check = success.querySelector('.t-form-success-popup__content-icon-check');
+        bg.style.animation = 'none'; check.style.animation = 'none';
+        void bg.offsetWidth;
+        bg.style.animation = 'iconBackgroundOpacity .106s linear forwards, iconBackgroundTransform 1.103s cubic-bezier(.445,.05,.55,.95) forwards';
+        check.style.animation = 'checkIconOpacity 51ms linear .437s forwards, checkIconDraw .666s cubic-bezier(.39,.575,.565,1) .437s forwards, checkIconScale .435s cubic-bezier(.445,.05,.55,.95) .437s forwards';
+      } else {
+        throw new Error(data.description);
+      }
+    } catch (err) {
+      reportResult.className = 'suggest-result error';
+      reportResult.textContent = 'Ошибка отправки. Попробуйте ещё раз.';
+      reportSubmit.disabled = false;
+    }
+  });
+}

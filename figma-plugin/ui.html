@@ -917,7 +917,7 @@ function switchLayout(str) {
   return str.split('').map(c => map[c.toLowerCase()] ?? c).join('');
 }
 
-const norm = s => (s || '').toLowerCase().replace(/ё/g, 'е');
+const norm = s => (s || '').toLowerCase().replace(/ё/g, 'е').replace(/э/g, 'е');
 
 function matchWord(word, haystack) {
   if (haystack.includes(word)) return true;
@@ -1153,10 +1153,8 @@ async function load(tab = 'logos') {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     const list = Array.isArray(data) ? data : (data.logos || data.emoji || []);
-    // For logos: filter comingSoon and require svgUrl; for emoji: require pngUrl or svgUrl
-    allLogos = tab === 'logos'
-      ? list.filter(l => !l.comingSoon && l.svgUrl)
-      : list.filter(l => l.pngUrl || l.svgUrl);
+    // Filter comingSoon; require at least one image URL (svg or png)
+    allLogos = list.filter(l => !l.comingSoon && (l.svgUrl || l.pngUrl));
 
     // Precompute normalized search string once per item
     allLogos.forEach(l => { l._search = norm(l.name + ' ' + (l.tags || '')); });

@@ -1,5 +1,29 @@
 const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/suggest';
 
+let _reportMode = false;
+
+export function openReportModal(iconName) {
+  _reportMode = true;
+  const overlay = document.getElementById('suggest-overlay');
+  document.getElementById('suggest-modal-titles').style.display = '';
+  document.getElementById('suggest-title').textContent = 'Сообщить об устаревшем логотипе';
+  document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = 'Мы обновим логотип в ближайшее время';
+  document.getElementById('suggest-success').classList.remove('show');
+  const form = document.getElementById('suggest-form');
+  form.style.display = '';
+  form.reset();
+  document.getElementById('suggest-file-name').textContent = 'Выбрать файл';
+  document.getElementById('suggest-file-label').classList.remove('has-file');
+  document.getElementById('suggest-result').className = 'suggest-result';
+  document.getElementById('suggest-result').textContent = '';
+  document.getElementById('suggest-submit').disabled = false;
+  const nameInput = document.getElementById('suggest-name');
+  nameInput.value = iconName;
+  nameInput.readOnly = true;
+  document.getElementById('suggest-comment').value = 'Логотип устарел, прошу обновить';
+  overlay.classList.add('open');
+}
+
 function init() {
   const overlay   = document.getElementById('suggest-overlay');
   const form      = document.getElementById('suggest-form');
@@ -7,18 +31,25 @@ function init() {
   const submitBtn = document.getElementById('suggest-submit');
 
   function openModal() {
+    _reportMode = false;
+    document.getElementById('suggest-title').textContent = 'Предложить логотип';
+    document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = 'Мы рассмотрим заявку и добавим логотип в библиотеку';
     overlay.classList.add('open');
     document.getElementById('suggest-name').focus();
   }
 
   function closeModal() {
+    _reportMode = false;
     overlay.classList.remove('open');
     form.reset();
     form.style.display = '';
     document.getElementById('suggest-modal-titles').style.display = '';
+    document.getElementById('suggest-title').textContent = 'Предложить логотип';
+    document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = 'Мы рассмотрим заявку и добавим логотип в библиотеку';
     document.getElementById('suggest-success').classList.remove('show');
     document.getElementById('suggest-file-name').textContent = 'Выбрать файл';
     document.getElementById('suggest-file-label').classList.remove('has-file');
+    document.getElementById('suggest-name').readOnly = false;
     result.className = 'suggest-result';
     result.textContent = '';
     submitBtn.disabled = false;
@@ -74,7 +105,7 @@ function init() {
       result.style.display = 'block';
       return;
     }
-    if (!url && !file) {
+    if (!_reportMode && !url && !file) {
       document.getElementById('suggest-url').classList.add('input-error');
       document.getElementById('suggest-file-label').classList.add('file-error');
       result.className = 'suggest-result error';

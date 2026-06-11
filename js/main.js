@@ -15,7 +15,7 @@ import {
   resetContentScroll,
 } from './virtual.js';
 import { initSearch, filterCards } from './search.js';
-import './suggest.js';
+import { openReportModal } from './suggest.js';
 import { openHelpModal } from './help.js';
 
 // ── DOM refs ──
@@ -508,15 +508,21 @@ openDetailFn = function (item, card) {
   const detailActionsEl     = document.getElementById('detail-actions');
   const detailActionsHelpEl = document.getElementById('detail-actions-help');
   const detailActionsLabel  = document.getElementById('detail-actions-label');
+  const reportBtn = document.getElementById('btn-report-outdated');
   if (item.comingSoon) {
     detailActionsEl.style.display = 'none';
     detailActionsHelpEl.style.display = '';
     detailActionsLabel.style.display = 'none';
     document.getElementById('btn-help').onclick = () => openHelpModal(item.name);
+    if (reportBtn) reportBtn.classList.add('hidden');
   } else {
     detailActionsEl.style.display = '';
     detailActionsHelpEl.style.display = 'none';
     detailActionsLabel.style.display = '';
+    if (reportBtn) {
+      reportBtn.classList.remove('hidden');
+      reportBtn.onclick = () => openReportModal(item.name);
+    }
   }
 
   // Reset color state for new logo
