@@ -41,7 +41,7 @@ if (form && input && dropdown) {
         ? fetch(BASE + 'emoji.json').then(r => r.json()).catch(() => ({ emoji: [] }))
         : Promise.resolve({ emoji: [] }));
       const [lr, er] = await Promise.all(reqs);
-      const logos = (lr.logos || []).map(l => ({
+      const logos = (lr.logos || []).filter(l => !l.comingSoon).map(l => ({
         type: 'logo',
         name: l.name,
         url: l.url,
