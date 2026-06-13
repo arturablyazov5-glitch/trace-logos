@@ -1,4 +1,5 @@
 import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize } from './utils.js';
+import './search-shortcut.js';
 import {
   colorState, svgRawCache,
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
@@ -959,5 +960,13 @@ loadLogos(_manifestBase).then(logos => {
   if (sParam) {
     const found = sectionEls.find(s => s.group.slug === sParam);
     if (found) setActive(found.group.section);
+  }
+
+  // Pre-fill search: via ?q=<query> (from SEO page search redirect)
+  const qParam = new URLSearchParams(location.search).get('q');
+  if (qParam) {
+    search.value = qParam;
+    filterCards(qParam.toLowerCase().trim());
+    search.focus();
   }
 });

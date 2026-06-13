@@ -1,5 +1,6 @@
 import { svgToPngBlob, triggerConfetti, parseSvgViewBox } from './svg-utils.js';
 import { animateContainerHeight, showToast } from './utils.js';
+import './header-search.js';
 
 // Page data injected by build script via window.__SEO_PAGE__
 const PAGE = window.__SEO_PAGE__;
@@ -153,12 +154,85 @@ document.querySelectorAll('.color-swatch').forEach(sw => {
   });
 });
 
-document.getElementById('btn-expand').addEventListener('click', e => { e.stopPropagation(); openLightbox(); });
 document.getElementById('lightbox-close').addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
 previewCard.addEventListener('click', openLightbox);
 lightbox.addEventListener('click', closeLightbox);
-lightboxInner.addEventListener('click', e => e.stopPropagation());
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+document.getElementById('lightbox-body').addEventListener('click', e => e.stopPropagation());
+
+// ── Preview overlay: download + menu ──
+const ICON_COPY = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+const ICON_SVG  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`;
+const ICON_PNG  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`;
+const ICON_ZIP  = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>`;
+
+const btnExpand      = document.getElementById('btn-expand');
+const btnMenu        = document.getElementById('btn-menu');
+const btnPreviewDl   = document.getElementById('btn-preview-dl');
+const previewMenu    = document.getElementById('preview-menu');
+const btnLightboxDl  = document.getElementById('lightbox-dl-btn');
+const btnLightboxMenu = document.getElementById('lightbox-menu-btn');
+const lightboxMenu   = document.getElementById('lightbox-menu');
+
+function buildMenuItems(container, closeMenu) {
+  container.innerHTML = '';
+  const items = [];
+  if (currentType === 'svg') {
+    items.push({ icon: ICON_COPY, label: 'Скопировать SVG', action: () => btnCopy.click() });
+    items.push({ icon: ICON_SVG,  label: 'Скачать SVG',     action: () => { const a = document.createElement('a'); a.href = currentSrc; a.download = currentSrc.split('/').pop(); a.click(); } });
+  }
+  items.push({ icon: ICON_PNG, label: 'Скачать PNG', action: () => btnDlPng.click() });
+  if (PAGE.zipFiles?.length > 1) {
+    items.push({ icon: ICON_ZIP, label: 'Скачать всё (.zip)', action: () => btnZip.click() });
+  }
+  items.forEach(({ icon, label, action }) => {
+    const btn = document.createElement('button');
+    btn.className = 'preview-menu-item';
+    btn.innerHTML = `${icon}<span>${label}</span>`;
+    btn.addEventListener('click', e => { e.stopPropagation(); closeMenu(); action(); });
+    container.appendChild(btn);
+  });
+}
+
+function openPreviewMenu()  { buildMenuItems(previewMenu, closePreviewMenu); previewMenu.classList.remove('hidden'); }
+function closePreviewMenu() { previewMenu.classList.add('hidden'); }
+function openLightboxMenu()  { buildMenuItems(lightboxMenu, closeLightboxMenu); lightboxMenu.classList.remove('hidden'); }
+function closeLightboxMenu() { lightboxMenu.classList.add('hidden'); }
+
+function downloadCurrent() {
+  const a = document.createElement('a');
+  a.href = currentSrc;
+  a.download = currentSrc.split('/').pop();
+  a.click();
+}
+
+btnExpand.addEventListener('click', e => { e.stopPropagation(); openLightbox(); });
+
+btnMenu.addEventListener('click', e => {
+  e.stopPropagation();
+  previewMenu.classList.contains('hidden') ? openPreviewMenu() : closePreviewMenu();
+});
+
+btnPreviewDl.addEventListener('click', e => { e.stopPropagation(); downloadCurrent(); });
+btnLightboxDl.addEventListener('click', e => { e.stopPropagation(); downloadCurrent(); });
+
+btnLightboxMenu.addEventListener('click', e => {
+  e.stopPropagation();
+  lightboxMenu.classList.contains('hidden') ? openLightboxMenu() : closeLightboxMenu();
+});
+
+document.addEventListener('click', e => {
+  if (!previewMenu.contains(e.target) && e.target !== btnMenu) closePreviewMenu();
+  if (!lightboxMenu.contains(e.target) && e.target !== btnLightboxMenu) closeLightboxMenu();
+});
+
+// ── Esc: лайтбокс → меню (живой поиск в шапке — js/header-search.js) ──
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (!lightbox.classList.contains('hidden')) { closeLightbox(); return; }
+    closePreviewMenu();
+    closeLightboxMenu();
+  }
+});
 
 // ── Скачать всё (.zip) ──
 btnZip.addEventListener('click', async () => {

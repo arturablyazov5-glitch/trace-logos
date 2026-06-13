@@ -4,6 +4,7 @@
 // Переиспользует switchLayout / highlight / escapeHtml из utils.js (RU↔EN раскладка).
 // ─────────────────────────────────────────────────────────────────────────────
 import { switchLayout, highlight, escapeHtml } from './utils.js';
+import './search-shortcut.js';
 
 const MAX_PER_GROUP = 6;
 

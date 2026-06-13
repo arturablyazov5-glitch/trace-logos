@@ -138,6 +138,13 @@
     </span>
     <span class="brand-name">Trace Logo's</span>
   </a>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../../logos/" method="get" data-base="../../../" data-scope="logos">
+    <div class="seo-search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов..." autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </div>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
   <a class="back-btn" href="../../../logos/">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     В каталог
@@ -159,9 +166,16 @@
       <div class="preview-icon" id="preview-mount">
         <img id="preview-img" src="../../../assets/logos/svgs/twitch.svg" alt="Логотип Twitch SVG" width="160" height="160">
       </div>
+      <button class="preview-dl-btn" id="btn-preview-dl" type="button" aria-label="Скачать">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+      <button class="preview-menu-btn" id="btn-menu" type="button" aria-label="Действия">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
       <button class="preview-expand-btn" id="btn-expand" type="button" aria-label="Открыть на весь экран">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
       </button>
+      <div class="preview-menu hidden" id="preview-menu"></div>
     </div>
 
     <!-- ── Info ── -->
@@ -354,10 +368,23 @@
 <!-- Lightbox -->
 <div class="lightbox hidden" id="lightbox">
   <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Закрыть">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
   </button>
-  <div class="lightbox-inner" id="lightbox-inner">
-    <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-body" id="lightbox-body">
+    <div class="lightbox-inner" id="lightbox-inner">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <div class="lightbox-actions">
+      <button class="lightbox-dl-btn" id="lightbox-dl-btn" type="button" aria-label="Скачать">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+      <div class="lightbox-menu-wrap">
+        <button class="lightbox-menu-btn" id="lightbox-menu-btn" type="button" aria-label="Действия">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lightbox-menu hidden" id="lightbox-menu"></div>
+      </div>
+    </div>
   </div>
 </div>
 

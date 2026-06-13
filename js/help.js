@@ -1,15 +1,10 @@
 const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/upload';
+const MAX_FILES = 5;
 
 let _openHelpModal = null;
 export function openHelpModal(iconName) {
   if (_openHelpModal) _openHelpModal(iconName);
 }
-
-const fields = [
-  { id: 'help-favicon',  labelId: 'help-favicon-label',  nameId: 'help-favicon-name',  required: true,  key: 'Favicon',  formKey: 'favicon'  },
-  { id: 'help-full',     labelId: 'help-full-label',     nameId: 'help-full-name',     required: false, key: 'Full',     formKey: 'full'     },
-  { id: 'help-fullen',   labelId: 'help-fullen-label',   nameId: 'help-fullen-name',   required: false, key: 'Full EN',  formKey: 'full_en'  },
-];
 
 function init() {
   const overlay    = document.getElementById('help-overlay');
@@ -23,17 +18,54 @@ function init() {
   const titlesEl   = document.getElementById('help-modal-titles');
   const submitBtn  = form.querySelector('[type=submit]');
   const errorEl    = document.getElementById('help-error');
+  const input      = document.getElementById('help-file-input');
+  const labelEl    = document.getElementById('help-file-label');
+  const chipsEl    = document.getElementById('help-file-chips');
 
-  fields.forEach(f => {
-    const input = document.getElementById(f.id + '-input');
-    const nameEl = document.getElementById(f.nameId);
-    const labelEl = document.getElementById(f.labelId);
-    input.addEventListener('change', () => {
-      const file = input.files[0];
-      labelEl.classList.toggle('has-file', !!file);
-      labelEl.classList.remove('file-error');
-      nameEl.textContent = file ? file.name : 'Выбрать SVG-файл';
+  let selected = [];   // выбранные файлы (управляем сами — input.files read-only)
+
+  function showError(msg) {
+    errorEl.textContent = msg || '';
+    errorEl.style.display = msg ? '' : 'none';
+  }
+
+  const fileKey = f => `${f.name}|${f.size}|${f.lastModified}`;
+
+  function syncState() {
+    const over = selected.length > MAX_FILES;
+    labelEl.classList.toggle('has-file', selected.length > 0);
+    labelEl.classList.toggle('file-error', over);
+    showError(over ? `Можно загрузить не больше ${MAX_FILES} файлов — удалите лишние.` : '');
+    submitBtn.disabled = selected.length === 0 || over;
+  }
+
+  function renderChips() {
+    chipsEl.innerHTML = '';
+    selected.forEach((f, i) => {
+      const chip = document.createElement('span');
+      chip.className = 'help-file-chip' + (i >= MAX_FILES ? ' over' : '');
+      const name = document.createElement('span');
+      name.className = 'help-file-chip-name';
+      name.textContent = f.name;
+      const x = document.createElement('button');
+      x.type = 'button';
+      x.className = 'help-file-chip-x';
+      x.setAttribute('aria-label', `Удалить ${f.name}`);
+      x.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+      x.addEventListener('click', () => { selected.splice(i, 1); renderChips(); syncState(); });
+      chip.append(name, x);
+      chipsEl.appendChild(chip);
     });
+  }
+
+  input.addEventListener('change', () => {
+    const seen = new Set(selected.map(fileKey));
+    for (const f of input.files) {
+      if (!seen.has(fileKey(f))) { selected.push(f); seen.add(fileKey(f)); }
+    }
+    input.value = '';   // позволяет выбрать тот же файл снова после удаления
+    renderChips();
+    syncState();
   });
 
   let currentIconName = '';
@@ -44,17 +76,11 @@ function init() {
     form.style.display = '';
     successEl.classList.remove('show');
     titlesEl.style.display = '';
-    submitBtn.disabled = false;
-    errorEl.style.display = 'none';
-    errorEl.textContent = '';
-    fields.forEach(f => {
-      const input = document.getElementById(f.id + '-input');
-      const nameEl = document.getElementById(f.nameId);
-      const labelEl = document.getElementById(f.labelId);
-      input.value = '';
-      nameEl.textContent = 'Выбрать SVG-файл';
-      labelEl.classList.remove('has-file', 'file-error');
-    });
+    submitBtn.textContent = 'Отправить';
+    input.value = '';
+    selected = [];
+    renderChips();
+    syncState();
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -70,27 +96,17 @@ function init() {
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-
-    const faviconInput = document.getElementById('help-favicon-input');
-    const faviconLabel = document.getElementById('help-favicon-label');
-    if (!faviconInput.files[0]) {
-      faviconLabel.classList.add('file-error');
-      return;
-    }
+    if (selected.length === 0 || selected.length > MAX_FILES) { syncState(); return; }
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Отправляем…';
 
     try {
-      errorEl.style.display = 'none';
-      errorEl.textContent = '';
+      showError('');
 
       const fd = new FormData();
       fd.append('icon_name', currentIconName);
-      fields.forEach(f => {
-        const input = document.getElementById(f.id + '-input');
-        if (input.files[0]) fd.append(f.formKey, input.files[0]);
-      });
+      selected.forEach(f => fd.append('file', f, f.name));
 
       const res  = await fetch(WORKER_URL, { method: 'POST', body: fd });
       const data = await res.json();
