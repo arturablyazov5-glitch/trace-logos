@@ -37,15 +37,16 @@ function flipTo(el, nextSrc) {
   };
 }
 
-function cycle(el, pool, delay) {
-  let current = el.getAttribute('src');
+function cycle(el, linkEl, pool, delay) {
+  let current = { src: el.getAttribute('src'), url: linkEl.getAttribute('href') };
   setTimeout(() => {
     setInterval(async () => {
       if (document.hidden) return;
       const next = pickDifferent(pool, current);
       if (!next || next === current) return;
-      await preload(next);
-      flipTo(el, next);
+      await preload(next.src);
+      flipTo(el, next.src);
+      linkEl.setAttribute('href', next.url);
       current = next;
     }, SWAP_MS);
   }, delay);
@@ -55,6 +56,9 @@ export async function initHeroShuffle() {
   const logoEl = document.getElementById('hero-img-logo');
   const emojiEl = document.getElementById('hero-img-emoji');
   if (!logoEl || !emojiEl) return;
+
+  const logoLinkEl = logoEl.closest('a');
+  const emojiLinkEl = emojiEl.closest('a');
 
   // Уважаем «уменьшить движение» — просто покажем один случайный кадр и выйдем.
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -66,20 +70,26 @@ export async function initHeroShuffle() {
       fetch('emoji.json').then((r) => r.json()),
     ]);
     logos = (lr.logos || [])
-      .filter((l) => !l.comingSoon && l.pngUrl)
-      .map((l) => l.pngUrl);
-    emoji = (er.emoji || []).map((e) => e.pngUrl).filter(Boolean);
+      .filter((l) => !l.comingSoon && l.pngUrl && l.url)
+      .map((l) => ({ src: l.pngUrl, url: l.url }));
+    emoji = (er.emoji || [])
+      .filter((e) => e.pngUrl && e.url)
+      .map((e) => ({ src: e.pngUrl, url: e.url }));
   } catch {
     return; // нет данных — оставляем стартовые иконки как есть
   }
   if (!logos.length || !emoji.length) return;
 
   if (reduced) {
-    logoEl.src = pickDifferent(logos, logoEl.getAttribute('src'));
-    emojiEl.src = pickDifferent(emoji, emojiEl.getAttribute('src'));
+    const nextLogo = pickDifferent(logos, { src: logoEl.getAttribute('src') });
+    logoEl.src = nextLogo.src;
+    if (logoLinkEl) logoLinkEl.setAttribute('href', nextLogo.url);
+    const nextEmoji = pickDifferent(emoji, { src: emojiEl.getAttribute('src') });
+    emojiEl.src = nextEmoji.src;
+    if (emojiLinkEl) emojiLinkEl.setAttribute('href', nextEmoji.url);
     return;
   }
 
-  cycle(logoEl, logos, 0);
-  cycle(emojiEl, emoji, STAGGER_MS);
+  cycle(logoEl, logoLinkEl, logos, 0);
+  cycle(emojiEl, emojiLinkEl, emoji, STAGGER_MS);
 }
