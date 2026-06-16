@@ -1,6 +1,6 @@
 /* ── Detail panel ── */
 #detail {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -9,17 +9,37 @@
   border-left: 1px solid #222;
   display: flex;
   flex-direction: column;
-  transform: translateX(100%);
-  transition: transform .42s cubic-bezier(.22,.61,.36,1);
   overflow-y: auto;
+  overscroll-behavior: contain;
   z-index: 5;
 }
-#detail.open { transform: translateX(0); }
 #detail > * { flex-shrink: 0; }
+
+/* Empty state — shown when no logo is selected (desktop only; the panel is
+   always on screen there, so it needs something to say). */
+#detail-placeholder {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px 28px;
+  text-align: center;
+}
+#detail-placeholder svg { color: #333; }
+.detail-placeholder-title { font-size: 14px; font-weight: 600; color: var(--text-3); }
+.detail-placeholder-sub { font-size: 12px; line-height: 1.5; color: var(--text-6); max-width: 220px; margin: 0; }
+
+/* Desktop: keep the panel permanently visible like the sidebar. With no logo
+   selected, hide the per-logo content and show the placeholder instead. */
+@media (min-width: 769px) {
+  #detail:not(.open) > *:not(#detail-placeholder) { display: none; }
+  #detail:not(.open) #detail-placeholder { display: flex; flex: 1; }
+}
 
 .detail-backdrop {
   display: none;
-  position: absolute;
+  position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, .55);
   z-index: 4;
@@ -147,7 +167,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: 0 16px 24px;
+  padding: 0 16px 6px;
 }
 copy-emoji-btn { display: contents; }
 .btn {
@@ -194,13 +214,19 @@ copy-emoji-btn { display: contents; }
 .btn-zip .btn-size { color: #555; }
 .btn-zip:hover:not(:disabled) .btn-size { color: #888; }
 
+.btn-download-group {
+  position: relative;
+  margin-top: 6px;
+}
+.btn-download-group.hidden { display: none; }
 .btn-zip {
   position: relative;
   overflow: hidden;
-  margin-top: 6px;
+  margin-top: 0;
   background: #1a1a1a;
   color: #ccc;
   border: 1px solid #2a2a2a;
+  width: 100%;
 }
 .btn-zip:hover:not(:disabled) {
   background: #222;
@@ -219,6 +245,96 @@ copy-emoji-btn { display: contents; }
   background: #4ade80;
   width: 0;
   transition: width .15s linear;
+}
+.btn-chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: transform .15s;
+}
+.btn-zip.open .btn-chevron { transform: rotate(180deg); }
+.btn-download-group.zip-only .btn-chevron { display: none; }
+.btn-download-group.zip-only .btn-download-menu { display: none !important; }
+
+.btn-download-menu {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(0,0,0,.4);
+}
+.btn-download-menu.open { display: block; }
+
+.btn-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background .1s, color .1s;
+}
+.btn-menu-item svg { flex-shrink: 0; }
+/* Windows/Apple glyphs have internal padding in their 32-viewBox — bump them up to read level with the others */
+#btn-download-ico svg, #btn-download-icns svg { width: 18px; height: 18px; margin: -2px 0; }
+.btn-menu-item:hover:not(:disabled) {
+  background: #252525;
+  color: #fff;
+}
+.btn-menu-item--soon {
+  color: #555;
+  cursor: default;
+}
+.btn-menu-item--zip {
+  position: relative;
+  overflow: hidden;
+}
+.btn-menu-item--zip .btn-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: #4ade80;
+  width: 0;
+  transition: width .15s linear;
+}
+.btn-menu-item--disabled {
+  color: #444;
+  cursor: default;
+}
+.btn-menu-size {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 400;
+  color: #555;
+}
+.btn-menu-item:hover:not(:disabled) .btn-menu-size { color: #888; }
+.btn-menu-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 600;
+  color: #555;
+  background: #2a2a2a;
+  border-radius: 4px;
+  padding: 2px 5px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.btn-menu-divider {
+  height: 1px;
+  background: #2a2a2a;
+  margin: 2px 0;
 }
 
 .btn-help {
@@ -246,11 +362,12 @@ copy-emoji-btn { display: contents; }
 }
 
 .btn-report-outdated {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: auto;
   background: none;
   border: none;
-  padding: 0 16px 16px;
+  padding: 0;
+  margin: 0 16px 16px;
   font-size: 12px;
   color: #555;
   text-align: left;
@@ -412,3 +529,8 @@ copy-emoji-btn { display: contents; }
 }
 .btn-brand:hover { background: #222; color: #ccc; border-color: #333; }
 .btn-brand svg { flex-shrink: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  #detail { scroll-behavior: smooth; }
+}
+

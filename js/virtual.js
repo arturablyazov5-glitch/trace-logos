@@ -73,9 +73,9 @@ export function ensureCardMounted(card) {
 export function updateVirtualizedSections() {
   virtualizeRaf = 0;
   if (_content.style.display === 'none') return;
-  const contentRect = _content.getBoundingClientRect();
-  const minY = contentRect.top - VIRTUAL_OVERSCAN;
-  const maxY = contentRect.bottom + VIRTUAL_OVERSCAN;
+  // The window is the scroll container; section rects are viewport-relative.
+  const minY = -VIRTUAL_OVERSCAN;
+  const maxY = window.innerHeight + VIRTUAL_OVERSCAN;
 
   _sectionEls.forEach(section => {
     if (section.sec.classList.contains('hidden') || (!section.visibleCards.length && section.cardsBuilt)) {
@@ -108,9 +108,9 @@ export function invalidateVirtualizedLayout() {
 }
 
 export function resetContentScroll() {
-  _content.scrollTop = 0;
+  window.scrollTo(0, 0);
   requestAnimationFrame(() => {
-    _content.scrollTop = 0;
+    window.scrollTo(0, 0);
     _onScrollTopUpdate?.();
     updateVirtualizedSections();
   });

@@ -5,19 +5,21 @@ import {
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
   pushColorHistory, undoColors, loadRawSvg, applyColorMap,
 } from './color.js';
-import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip } from './export.js';
-import { updateSeoPageLink } from './seo.js';
+import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, downloadAsIco, estimateIcoSize } from './export.js';
+import { openIcnsModal } from './icns.js';
+import { updateSeoPageLink, slugifyPathPart } from './seo.js';
 import { ecosystemLogoMap, ecosystemLabels, loadLogos } from './data.js';
 import { categoryIconSvg } from './category-icons.js';
 import {
   initVirtual,
-  setSectionHidden, loadCardImage, ensureCardMounted,
-  updateVirtualizedSections, scheduleVirtualizedSections, invalidateVirtualizedLayout,
+  setSectionHidden, loadCardImage, ensureCardMounted, mountVirtualSection,
+  updateVirtualizedSections, scheduleVirtualizedSections,
   resetContentScroll,
 } from './virtual.js';
 import { initSearch, filterCards } from './search.js';
 import { openReportModal } from './suggest.js';
 import { openHelpModal } from './help.js';
+import { LABELS, TOASTS, applyLabels } from './labels.js';
 
 // ── DOM refs ──
 const content           = document.getElementById('content');
@@ -52,21 +54,22 @@ let copyEmojiBtnResetTimer = null;
 let detailPushedState = false;
 let isClosingViaButton = false;
 let activeVariantCard = null;
+let currentVariant = null; // the variant vDef currently shown in the detail panel (for ICO/ICNS export)
 
 function resetCopyBtn() {
   if (copyBtnResetTimer) {
     clearTimeout(copyBtnResetTimer);
     copyBtnResetTimer = null;
     const btn = document.getElementById('btn-copy');
-    if (btn) { const span = btn.querySelector('span'); if (span) span.textContent = 'Скопировать SVG'; btn.disabled = false; }
+    if (btn) { const span = btn.querySelector('span'); if (span) span.textContent = LABELS.copySvg; btn.disabled = false; }
     const btnPng = document.getElementById('btn-copy-png');
-    if (btnPng) { const span = btnPng.querySelector('span'); if (span) span.textContent = 'Скопировать PNG'; btnPng.disabled = false; }
+    if (btnPng) { const span = btnPng.querySelector('span'); if (span) span.textContent = LABELS.copyPng; btnPng.disabled = false; }
   }
   if (copyEmojiBtnResetTimer) {
     clearTimeout(copyEmojiBtnResetTimer);
     copyEmojiBtnResetTimer = null;
     const btnEmoji = document.getElementById('btn-copy-emoji');
-    if (btnEmoji) { const span = btnEmoji.querySelector('span:last-child'); if (span) span.textContent = 'Скопировать символ'; btnEmoji.disabled = false; }
+    if (btnEmoji) { const span = btnEmoji.querySelector('span:last-child'); if (span) span.textContent = LABELS.copyEmoji; btnEmoji.disabled = false; }
   }
 }
 
@@ -79,15 +82,38 @@ function triggerConfetti(el, labelText) {
   setTimeout(() => ghost.remove(), 1100);
 
   const span = el.querySelector('span') || el;
-  span.textContent = labelText || 'Скопировано!';
+  span.textContent = labelText || LABELS.copied;
   el.disabled = true;
   copyBtnResetTimer = setTimeout(() => { resetCopyBtn(); }, 2000);
+}
+
+// Per-variant state for the download dropdown (logos only — emoji/icons use a plain ZIP button).
+// Square variants expose the full menu (ICO/ICNS/ZIP); wide/full variants collapse to a single
+// "Скачать все (ZIP)" trigger since ICO/ICNS are square formats. ICO is built from item.file.
+function applyDownloadVariantState(item, isSquare, file = item.file) {
+  const group   = document.getElementById('btn-download-all');
+  const trigger = document.getElementById('btn-download-trigger');
+  const menu    = document.getElementById('btn-download-menu');
+  if (!group || !trigger || !menu) return; // old plain button — nothing to configure
+
+  group.classList.toggle('zip-only', !isSquare);
+  const label = trigger.querySelector('span');
+  if (label) label.textContent = isSquare ? LABELS.dlMore : LABELS.dlZipAll;
+  trigger.onclick = isSquare
+    ? (e) => { e.stopPropagation(); menu.classList.toggle('open'); trigger.classList.toggle('open'); }
+    : (e) => { e.stopPropagation(); downloadAllAsZip(item); };
+
+  const icoSizeEl = document.getElementById('btn-download-ico')?.querySelector('.btn-menu-size');
+  if (icoSizeEl && isSquare) {
+    icoSizeEl.textContent = '';
+    estimateIcoSize(file).then(sz => { if (sz) icoSizeEl.textContent = formatFileSize(sz); });
+  }
 }
 
 // ── Layout helpers ──
 function updateScrollTopButton() {
   const contentVisible = content.style.display !== 'none';
-  scrollTopBtn.classList.toggle('show', contentVisible && content.scrollTop > 360);
+  scrollTopBtn.classList.toggle('show', contentVisible && window.scrollY > 360);
 }
 
 function placeSearchBar() {
@@ -127,16 +153,32 @@ function syncDetailBackdrop(open) {
 function setDetailOpen(open) {
   detail.classList.toggle('open', open);
   syncDetailBackdrop(open);
-  requestAnimationFrame(invalidateVirtualizedLayout);
+  // No layout recompute here: the panel is always present (fixed), so opening/
+  // closing it never changes the grid width. Recomputing would reset reserved
+  // section heights and yank the scroll position to the top.
   if (open && !detailPushedState) {
-    history.pushState({ detail: true }, '');
+    // Reflect the selected logo in the URL via its anchor id (shareable/deep-link).
+    history.pushState({ detail: true }, '', activeCard ? '#' + activeCard.id : '');
     detailPushedState = true;
   }
 }
 
 // ── Cards ──
+// Stable per-logo anchor id (e.g. "logo-icon-bank-tinkoff"), derived from the
+// figma path with the same slug rules as the SEO pages. Lets the detail panel
+// scroll straight to a card via its anchor instead of guesswork.
+const usedAnchorIds = new Set();
+function logoAnchorId(item) {
+  const base = 'logo-' + (item.figma || item.file).split('/').map(slugifyPathPart).filter(Boolean).join('-');
+  let id = base, n = 2;
+  while (usedAnchorIds.has(id)) id = `${base}-${n++}`;
+  usedAnchorIds.add(id);
+  return id;
+}
+
 function buildCard(item, sectionState) {
   const card = document.createElement('div');
+  card.id = logoAnchorId(item);
   card.className = 'card loading' + (item.comingSoon ? ' coming-soon' : '');
   card._item = item;
   card._sectionState = sectionState;
@@ -282,6 +324,7 @@ function getDisplayType(vDef) {
 async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled) {
   if (activeVariantCard) activeVariantCard.classList.remove('active');
   activeVariantCard = vcEl;
+  currentVariant = vDef;
   if (vcEl) vcEl.classList.add('active');
 
   const detailFigmaEl = document.getElementById('detail-figma');
@@ -333,11 +376,11 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
           document.body.appendChild(ghost);
           setTimeout(() => ghost.remove(), 1100);
           const textSpan = btnCopyEmoji.querySelector('span:last-child');
-          textSpan.textContent = 'Скопировано!';
+          textSpan.textContent = LABELS.copied;
           btnCopyEmoji.disabled = true;
           clearTimeout(copyEmojiBtnResetTimer);
-          copyEmojiBtnResetTimer = setTimeout(() => { textSpan.textContent = 'Скопировать символ'; btnCopyEmoji.disabled = false; copyEmojiBtnResetTimer = null; }, 2000);
-          showToast(`Скопировано: ${emojiChar}`);
+          copyEmojiBtnResetTimer = setTimeout(() => { textSpan.textContent = LABELS.copyEmoji; btnCopyEmoji.disabled = false; copyEmojiBtnResetTimer = null; }, 2000);
+          showToast(TOASTS.copiedEmoji(emojiChar));
         });
       };
     }
@@ -388,18 +431,21 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
         const file = new File([blob], `${item.name}.png`, { type: 'image/png' });
         await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
         triggerConfetti(btnCopyPng);
-        showToast(`Скопировано PNG: ${emojiChar || item.name}`);
+        showToast(TOASTS.copiedPng);
       } catch (e) {
         btnCopyPng.disabled = false;
-        showToast('Не удалось скопировать PNG');
+        showToast(TOASTS.copyPngError);
       }
     };
     btnDownloadPng.onclick = async () => {
       const blob = await getPngBlob();
       const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.png' });
       a.click(); URL.revokeObjectURL(a.href);
-      showToast(`Скачано PNG: ${emojiChar || item.name}`);
+      showToast(TOASTS.downloaded(baseName + suffix + '.png'));
     };
+    const isSquarePng = vDef.type === '_original' || vDef.type === 'png'
+      || (!vDef.type && !isFullFile(vDef.file));
+    applyDownloadVariantState(item, isSquarePng, vDef.file);
     return;
   }
 
@@ -440,6 +486,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   if (btnSizeSvg) btnSizeSvg.textContent = formatFileSize(new Blob([svgForExport(getExportSvg(), isSquare)]).size);
   const btnSizePng = btnDownloadPng.querySelector('.btn-size');
   if (btnSizePng) { btnSizePng.textContent = ''; svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 }).then(b => { btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {}); }
+  applyDownloadVariantState(item, isSquare, vDef.file);
 
   btnCopy.onclick = () => {
     navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
@@ -449,24 +496,36 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     const blob = new Blob([svgForExport(getExportSvg(), isSquare)], { type: 'image/svg+xml' });
     const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.svg' });
     a.click(); URL.revokeObjectURL(a.href);
-    showToast(`Скачано: ${item.name}${suffix ? ' (' + vDef.label + ')' : ''}`);
+    showToast(TOASTS.downloaded(baseName + suffix + '.svg'));
   };
   btnDownloadPng.onclick = async () => {
     const pngBlob = await svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 });
     const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + suffix + '.png' });
     a.click(); URL.revokeObjectURL(a.href);
-    showToast(`Скачано PNG: ${emojiChar || item.name}`);
+    showToast(TOASTS.downloaded(baseName + suffix + '.png'));
   };
 }
 
 // ── Detail panel ──
 function scrollCardIntoView(card) {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      ensureCardMounted(card);
-      card.scrollIntoView({ block: 'center', behavior: 'smooth' });
-    });
-  });
+  ensureCardMounted(card);
+  // A smooth scroll races with virtual sections mounting/resizing along the way
+  // (their reserved heights are only estimates) — the animation would land off
+  // target and blank sections would flash past. So pre-mount every section
+  // between the current viewport and the target: their heights become real up
+  // front, nothing resizes mid-flight, and the smooth scroll lands exactly.
+  const targetIdx = sectionEls.indexOf(card._sectionState);
+  if (targetIdx !== -1) {
+    let currentIdx = 0;
+    for (let i = 0; i < sectionEls.length; i++) {
+      if (sectionEls[i].sec.getBoundingClientRect().bottom > 0) { currentIdx = i; break; }
+    }
+    for (let i = Math.min(currentIdx, targetIdx); i <= Math.max(currentIdx, targetIdx); i++) {
+      mountVirtualSection(sectionEls[i]);
+    }
+  }
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  card.scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });
 }
 
 function closeDetail() {
@@ -491,6 +550,10 @@ openDetailFn = function (item, card) {
   if (activeCard) activeCard.classList.remove('active');
   activeCard = card;
   card.classList.add('active');
+
+  // Selecting a logo (e.g. from the ecosystem block lower in the panel) scrolls
+  // the panel's own scroll back to the top so its info starts from the preview.
+  detail.scrollTop = 0;
 
   const detailImg      = document.getElementById('detail-img');
   const detailName     = document.getElementById('detail-name');
@@ -579,17 +642,20 @@ openDetailFn = function (item, card) {
   };
 
   const downloadAllBtn = document.getElementById('btn-download-all');
+  // New dropdown (logos) exposes ICO/ICNS for any logo → always available.
+  // Old plain button (emoji/icons) is ZIP-only → keep original "show when >1 file" rule.
+  const hasDownloadDropdown = !!document.getElementById('btn-download-trigger');
   const downloadableSvgCount = allVariants.length || 1;
 
   animateContainerHeight(detailVariants, () => {
     detailVariants.classList.toggle('hidden', allVariants.length === 0);
-    downloadAllBtn.classList.toggle('hidden', downloadableSvgCount <= 1);
+    downloadAllBtn.classList.toggle('hidden', !(hasDownloadDropdown || downloadableSvgCount > 1));
   });
 
   // Estimate ZIP size in background
-  const btnSizeZip = downloadAllBtn.querySelector('.btn-size');
+  const btnSizeZip = (document.getElementById('btn-download-zip') || downloadAllBtn)?.querySelector('.btn-size');
+  if (btnSizeZip) btnSizeZip.textContent = ''; // clear stale size from a previously-opened logo
   if (btnSizeZip && downloadableSvgCount > 1) {
-    btnSizeZip.textContent = '';
     (async () => {
       const variants = allVariants.length > 0
         ? allVariants
@@ -617,6 +683,7 @@ openDetailFn = function (item, card) {
   }
 
   activeVariantCard = null;
+  currentVariant = null;
 
   // Reset variant thumbnails list
   colorState.variantImgEls = [];
@@ -636,7 +703,10 @@ openDetailFn = function (item, card) {
     vl.className = 'variant-label';
     vl.textContent = vDef.label;
     vc.append(vi, vl);
-    vc.addEventListener('click', () => selectVariant(vDef, vc, item, allVariants, colorEditingDisabled));
+    vc.addEventListener('click', () => {
+      detail.scrollTop = 0;
+      selectVariant(vDef, vc, item, allVariants, colorEditingDisabled);
+    });
     variantsGrid.appendChild(vc);
     variantCards.push({ vDef, vc });
   });
@@ -728,19 +798,55 @@ openDetailFn = function (item, card) {
     setDetailOpen(true);
   } else {
     syncDetailBackdrop(true);
+    // Panel already open, switching logos — update the hash in place (no new
+    // history entry, so one Back still closes the panel).
+    if (detailPushedState) history.replaceState({ detail: true }, '', '#' + card.id);
   }
 
-  downloadAllBtn.onclick = downloadableSvgCount > 1 ? () => downloadAllAsZip(item) : null;
+  // Dropdown wiring
+  const downloadMenu = document.getElementById('btn-download-menu');
+  const downloadTrigger = document.getElementById('btn-download-trigger');
+  if (downloadTrigger && downloadMenu) {
+    downloadTrigger.onclick = (e) => {
+      e.stopPropagation();
+      downloadMenu.classList.toggle('open');
+      downloadTrigger.classList.toggle('open');
+    };
+  }
+  const btnIco = document.getElementById('btn-download-ico');
+  if (btnIco) btnIco.onclick = () => { downloadMenu?.classList.remove('open'); downloadTrigger?.classList.remove('open'); downloadAsIco(item, currentVariant?.file ?? item.file); };
+  const btnIcns = document.getElementById('btn-download-icns');
+  if (btnIcns) btnIcns.onclick = () => { downloadMenu?.classList.remove('open'); downloadTrigger?.classList.remove('open'); openIcnsModal(item, currentVariant?.file ?? item.file); };
+  const btnZip = document.getElementById('btn-download-zip');
+  if (btnZip) {
+    // New dropdown — ZIP bundles SVG+PNG (+ICO+ICNS for square logos), so it always
+    // has content and stays enabled even for single-file logos.
+    btnZip.onclick = () => { downloadMenu?.classList.remove('open'); downloadTrigger?.classList.remove('open'); downloadAllAsZip(item); };
+    btnZip.classList.remove('btn-menu-item--disabled');
+  } else {
+    // Old plain button (emoji/icons) — the button itself triggers the ZIP.
+    downloadAllBtn.onclick = downloadableSvgCount > 1 ? () => downloadAllAsZip(item) : null;
+  }
+
   scrollCardIntoView(card);
 };
 
 // ── Event listeners ──
-content.addEventListener('scroll', () => {
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('btn-download-menu');
+  const trigger = document.getElementById('btn-download-trigger');
+  if (menu?.classList.contains('open') && !e.target.closest('#btn-download-all')) {
+    menu.classList.remove('open');
+    trigger?.classList.remove('open');
+  }
+});
+
+window.addEventListener('scroll', () => {
   updateScrollTopButton();
   scheduleVirtualizedSections();
 }, { passive: true });
 
-scrollTopBtn.addEventListener('click', () => content.scrollTo({ top: 0, behavior: 'smooth' }));
+scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 detailBackdrop.addEventListener('click', closeDetail);
 document.getElementById('detail-close').onclick = closeDetail;
 
@@ -761,13 +867,6 @@ layoutMq.addEventListener('change', () => {
   scheduleVirtualizedSections();
 });
 
-window.addEventListener('wheel', (e) => {
-  if (e.target.closest('#detail') || e.target.closest('aside')) return;
-  if (e.ctrlKey || e.metaKey) return;
-  content.scrollTop += e.deltaY;
-  if (e.deltaY !== 0) e.preventDefault();
-}, { passive: false });
-
 search.addEventListener('input', () => {
   const q = search.value.toLowerCase().trim();
   filterCards(q);
@@ -783,7 +882,7 @@ document.addEventListener('keydown', (e) => {
     if (document.activeElement === search) return;
     const colorsPanel = document.getElementById('colors-panel');
     if (detail.classList.contains('open') && !colorsPanel.classList.contains('colors-hidden')) {
-      if (undoColors()) { e.preventDefault(); showToast('Цвета: отменено'); }
+      if (undoColors()) { e.preventDefault(); showToast(TOASTS.colorsUndone); }
     }
     return;
   }
@@ -812,11 +911,18 @@ window.addEventListener('popstate', () => {
   detailPushedState = false;
   detail.classList.remove('open');
   syncDetailBackdrop(false);
-  requestAnimationFrame(invalidateVirtualizedLayout);
   if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
 });
 
 // ── Init ──
+// We drive scrolling ourselves (resetContentScroll on category switch,
+// scrollCardIntoView on open). The detail panel's pushState/back is only a
+// back-button hook — let the browser NOT restore scroll on it, or closing the
+// panel would yank the window back to where it was before opening.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+applyLabels(); // single source of button texts → js/labels.js
+
 placeSearchBar();
 
 initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
@@ -968,5 +1074,20 @@ loadLogos(_manifestBase).then(logos => {
     search.value = qParam;
     filterCards(qParam.toLowerCase().trim());
     search.focus();
+  }
+
+  // Deep-link: #logo-... in the URL opens that logo's panel and scrolls to it.
+  const hashId = decodeURIComponent(location.hash.slice(1));
+  if (hashId.startsWith('logo-')) {
+    // Re-base the current entry without the hash so closing returns here in-page
+    // (then openDetailFn re-pushes the hash entry on top).
+    history.replaceState(null, '', location.pathname + location.search);
+    let target = null;
+    for (const s of sectionEls) {
+      ensureSectionCards(s);
+      target = s.cards.find(c => c.id === hashId);
+      if (target) break;
+    }
+    if (target) openDetailFn(target._item, target);
   }
 });

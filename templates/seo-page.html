@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
   <link rel="stylesheet" href="{{REL}}css/modals.css">
   <link rel="stylesheet" href="{{REL}}css/confetti.css">
+  <link rel="stylesheet" href="{{REL}}css/icns.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -61,6 +62,7 @@
       </div>
       <button class="preview-dl-btn" id="btn-preview-dl" type="button" aria-label="Скачать">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="preview-dl-label" id="preview-dl-label"></span>
       </button>
       <button class="preview-menu-btn" id="btn-menu" type="button" aria-label="Действия">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -91,8 +93,9 @@
         <span class="section-label">Скачать</span>
         <div class="btn-row" id="btn-row">
           {{DOWNLOAD_BUTTONS}}
+          {{> download-dropdown}}
         </div>
-        <button class="btn-report-outdated" id="btn-report-outdated">Сообщить об устаревшем логотипе</button>
+        <button class="btn-report-outdated" id="btn-report-outdated" data-label="reportOutdated">Сообщить об устаревшем логотипе</button>
       </div>
 
 {{VARIANTS_SECTION}}
@@ -192,6 +195,7 @@
     <div class="lightbox-actions">
       <button class="lightbox-dl-btn" id="lightbox-dl-btn" type="button" aria-label="Скачать">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span id="lightbox-dl-label"></span>
       </button>
       <div class="lightbox-menu-wrap">
         <button class="lightbox-menu-btn" id="lightbox-menu-btn" type="button" aria-label="Действия">

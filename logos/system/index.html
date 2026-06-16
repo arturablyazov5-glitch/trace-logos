@@ -260,6 +260,7 @@
   <link rel="stylesheet" href="../../css/color.css">
   <link rel="stylesheet" href="../../css/picker.css">
   <link rel="stylesheet" href="../../css/modals.css">
+  <link rel="stylesheet" href="../../css/icns.css">
   <link rel="stylesheet" href="../../css/mobile.css">
   <link rel="stylesheet" href="../../css/confetti.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
@@ -352,6 +353,13 @@
     <div id="detail-backdrop" class="detail-backdrop" aria-hidden="true"></div>
 
     <div id="detail">
+      <div id="detail-placeholder">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 9l5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/>
+        </svg>
+        <p class="detail-placeholder-title">Выберите логотип</p>
+        <p class="detail-placeholder-sub">Нажмите на любой логотип в каталоге — здесь появятся цвета, варианты и форматы для скачивания</p>
+      </div>
       <div class="detail-sheet-handle" aria-hidden="true"></div>
       <div class="detail-header">
         <span></span>
@@ -373,33 +381,46 @@
       <div class="detail-actions" id="detail-actions">
         <button class="btn btn-primary" id="btn-copy">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span>Скопировать SVG</span>
+          <span data-label="copySvg">Скопировать SVG</span>
         </button>
         <button class="btn btn-secondary" id="btn-download">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Скачать SVG</span><span class="btn-size"></span>
+          <span data-label="downloadSvg">Скачать SVG</span><span class="btn-size"></span>
         </button>
         <copy-emoji-btn></copy-emoji-btn>
         <button class="btn btn-primary hidden" id="btn-copy-png">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span>Скопировать PNG</span>
+          <span data-label="copyPng">Скопировать PNG</span>
         </button>
         <button class="btn btn-secondary" id="btn-download-png">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Скачать PNG</span><span class="btn-size"></span>
+          <span data-label="downloadPng">Скачать PNG</span><span class="btn-size"></span>
         </button>
-        <button class="btn btn-zip" id="btn-download-all">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
-          <span class="btn-label">Скачать всё (.zip)</span>
-          <span class="btn-size"></span>
-          <span class="btn-progress"></span>
-        </button>
+        <div class="btn-download-group" id="btn-download-all">
+          <button class="btn btn-zip btn-download-trigger" id="btn-download-trigger" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
+            <span data-label="dlMore">Скачать другие форматы</span>
+            <svg class="btn-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="btn-download-menu" id="btn-download-menu">
+            <button class="btn-menu-item" id="btn-download-ico" type="button"><svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M15.49 6H6V15.492H15.492L15.49 6ZM26 6H16.508V15.492H26V6ZM15.49 16.508H6V26H15.492L15.49 16.508ZM26 16.508H16.508V26H26V16.508Z"/></svg><span data-label="dlIco">Скачать ICO</span><span class="btn-size btn-menu-size"></span></button>
+            <button class="btn-menu-item" id="btn-download-icns" type="button"><svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M23.8457 11.5898C22.4743 12.4367 21.6274 13.8892 21.6274 15.503C21.6274 17.3178 22.7166 18.9715 24.3703 19.6572C24.0484 20.6909 23.5722 21.67 22.9577 22.5612C22.0709 23.8115 21.1429 25.103 19.7714 25.103C18.4 25.103 17.9966 24.2961 16.3829 24.2961C14.8103 24.2961 14.2457 25.143 12.9543 25.143C11.6629 25.143 10.776 23.9738 9.768 22.5212C8.43657 20.5041 7.67086 18.1647 7.63086 15.7041C7.63086 11.711 10.2114 9.57268 12.7931 9.57268C14.1646 9.57268 15.2937 10.4607 16.1417 10.4607C16.9474 10.4607 18.2389 9.53268 19.7714 9.53268C20.5678 9.51148 21.3569 9.68835 22.068 10.0474C22.7791 10.4064 23.39 10.9364 23.8457 11.5898ZM19.0457 7.83896C19.7314 7.03211 20.0937 6.0241 20.1349 4.97496C20.1349 4.85382 20.1349 4.69268 20.0937 4.57153C18.9223 4.69283 17.8409 5.25501 17.0686 6.1441C16.3829 6.91096 15.9794 7.87896 15.9394 8.9281C15.9394 9.04925 15.9394 9.17039 15.9794 9.29039C16.0606 9.29039 16.1817 9.33153 16.2629 9.33153C17.3509 9.25153 18.36 8.68582 19.0457 7.83896Z"/></svg><span data-label="dlIcns">Скачать ICNS</span></button>
+            <div class="btn-menu-divider"></div>
+            <button class="btn-menu-item btn-menu-item--zip" id="btn-download-zip" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
+              <span class="btn-label" data-label="dlZipAll">Скачать все (ZIP)</span><span class="btn-size"></span>
+              <span class="btn-progress"></span>
+            </button>
+          </div>
+        </div>
       </div>
+
+      <button class="btn-report-outdated hidden" id="btn-report-outdated" data-label="reportOutdated">Сообщить об устаревшем логотипе</button>
 
       <div class="detail-actions detail-actions-help hidden" id="detail-actions-help">
         <button class="btn btn-help" id="btn-help">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Загрузить иконку
+          <span data-label="helpUpload">Загрузить иконку</span>
         </button>
         <p class="detail-help-hint">Этой иконки пока нет на сайте. Если у вас есть SVG этого логотипа — загрузите его, и автор добавит его на сайт.</p>
       </div>
@@ -407,15 +428,15 @@
       <div class="detail-divider" id="colors-divider"></div>
       <div class="colors-panel" id="colors-panel">
         <div class="colors-header" id="colors-header">
-          <span class="colors-header-label">Настроить цвета</span>
+          <span class="colors-header-label" data-label="editColors">Настроить цвета</span>
           <div class="colors-header-right">
-            <button class="colors-reset-btn" id="colors-reset-btn">Сбросить</button>
+            <button class="colors-reset-btn" id="colors-reset-btn" data-label="resetColors">Сбросить</button>
             <svg class="colors-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </div>
         </div>
         <div class="colors-section hidden" id="colors-section"></div>
       </div>
-      </div>
+      </div><!-- /detail-controls -->
 
       <div class="detail-note hidden" id="detail-note">
         <div class="detail-note-title">⚠ Важно для Figma</div>
@@ -451,7 +472,8 @@
           Подробнее о логотипе
         </a>
       </div>
-    </div>
+    </div><!-- #detail -->
+
   </div>
 </div>
 

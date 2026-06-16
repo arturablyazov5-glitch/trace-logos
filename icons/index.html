@@ -139,6 +139,13 @@
     <div id="detail-backdrop" class="detail-backdrop" aria-hidden="true"></div>
 
     <div id="detail">
+      <div id="detail-placeholder">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 9l5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/>
+        </svg>
+        <p class="detail-placeholder-title">Выберите иконку</p>
+        <p class="detail-placeholder-sub">Нажмите на любую иконку — здесь появятся цвета, варианты и форматы для скачивания</p>
+      </div>
       <div class="detail-sheet-handle" aria-hidden="true"></div>
       <div class="detail-header">
         <span></span>
@@ -160,24 +167,24 @@
       <div class="detail-actions" id="detail-actions">
         <button class="btn btn-primary" id="btn-copy">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span>Скопировать SVG</span>
+          <span data-label="copySvg">Скопировать SVG</span>
         </button>
         <button class="btn btn-secondary" id="btn-download">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Скачать SVG</span><span class="btn-size"></span>
+          <span data-label="downloadSvg">Скачать SVG</span><span class="btn-size"></span>
         </button>
         <copy-emoji-btn></copy-emoji-btn>
         <button class="btn btn-primary hidden" id="btn-copy-png">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span>Скопировать PNG</span>
+          <span data-label="copyPng">Скопировать PNG</span>
         </button>
         <button class="btn btn-secondary" id="btn-download-png">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Скачать PNG</span><span class="btn-size"></span>
+          <span data-label="downloadPng">Скачать PNG</span><span class="btn-size"></span>
         </button>
         <button class="btn btn-zip" id="btn-download-all">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
-          <span class="btn-label">Скачать всё (.zip)</span>
+          <span class="btn-label" data-label="dlZipAll">Скачать всё (.zip)</span>
           <span class="btn-size"></span>
           <span class="btn-progress"></span>
         </button>
@@ -186,7 +193,7 @@
       <div class="detail-actions detail-actions-help hidden" id="detail-actions-help">
         <button class="btn btn-help" id="btn-help">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Загрузить иконку
+          <span data-label="helpUpload">Загрузить иконку</span>
         </button>
         <p class="detail-help-hint">Этой иконки пока нет на сайте. Если у вас есть SVG этого логотипа — загрузите его, и автор добавит его на сайт.</p>
       </div>
@@ -194,9 +201,9 @@
       <div class="detail-divider" id="colors-divider"></div>
       <div class="colors-panel" id="colors-panel">
         <div class="colors-header" id="colors-header">
-          <span class="colors-header-label">Настроить цвета</span>
+          <span class="colors-header-label" data-label="editColors">Настроить цвета</span>
           <div class="colors-header-right">
-            <button class="colors-reset-btn" id="colors-reset-btn">Сбросить</button>
+            <button class="colors-reset-btn" id="colors-reset-btn" data-label="resetColors">Сбросить</button>
             <svg class="colors-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </div>
         </div>

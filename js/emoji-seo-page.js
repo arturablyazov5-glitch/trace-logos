@@ -1,5 +1,8 @@
 import { showToast, animateContainerHeight } from './utils.js';
 import { triggerConfetti } from './svg-utils.js';
+import { LABELS, TOASTS, applyLabels } from './labels.js';
+
+applyLabels(); // single source of button texts → js/labels.js
 
 const PAGE        = window.__EMOJI_PAGE__;
 const previewImg  = document.getElementById('preview-img');
@@ -52,16 +55,16 @@ if (btnCopyChar) {
     try {
       await navigator.clipboard.writeText(btnCopyChar.dataset.char || '');
       triggerConfetti(btnCopyChar);
-      showToast('Эмодзи скопирован');
-      if (btnCopyLbl) btnCopyLbl.textContent = 'Скопировано!';
+      showToast(TOASTS.copiedEmojiChar);
+      if (btnCopyLbl) btnCopyLbl.textContent = LABELS.copied;
       btnCopyChar.disabled = true;
       if (copyTimer) clearTimeout(copyTimer);
       copyTimer = setTimeout(() => {
         btnCopyChar.disabled = false;
-        if (btnCopyLbl) btnCopyLbl.textContent = 'Скопировать эмодзи';
+        if (btnCopyLbl) btnCopyLbl.textContent = LABELS.copyEmojiPage;
       }, 2000);
     } catch {
-      showToast('Не удалось скопировать');
+      showToast(TOASTS.copyError);
     }
   });
 }
@@ -93,7 +96,7 @@ if (btnZip && PAGE) {
     } finally {
       setTimeout(() => {
         btnZip.disabled = false;
-        btnZipLbl.textContent = 'Скачать всё (.zip)';
+        btnZipLbl.textContent = LABELS.dlZipAll;
         btnZipProg.style.width = '0%';
       }, 1200);
     }

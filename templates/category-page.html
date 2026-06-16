@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="{{REL}}css/color.css">
   <link rel="stylesheet" href="{{REL}}css/picker.css">
   <link rel="stylesheet" href="{{REL}}css/modals.css">
+  <link rel="stylesheet" href="{{REL}}css/icns.css">
   <link rel="stylesheet" href="{{REL}}css/mobile.css">
   <link rel="stylesheet" href="{{REL}}css/confetti.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
@@ -133,107 +134,7 @@
 
     <div id="detail-backdrop" class="detail-backdrop" aria-hidden="true"></div>
 
-    <div id="detail">
-      <div class="detail-sheet-handle" aria-hidden="true"></div>
-      <div class="detail-header">
-        <span></span>
-        <button class="detail-close" id="detail-close">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-      </div>
-
-      <div class="detail-preview">
-        <div class="detail-preview-skeleton" aria-hidden="true"></div>
-        <img id="detail-img" src="" alt="">
-      </div>
-
-      <div class="detail-name" id="detail-name"></div>
-      <div class="detail-figma" id="detail-figma"></div>
-
-      <div id="detail-controls">
-      <div class="detail-section-label" id="detail-actions-label">Действия</div>
-      <div class="detail-actions" id="detail-actions">
-        <button class="btn btn-primary" id="btn-copy">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span>Скопировать SVG</span>
-        </button>
-        <button class="btn btn-secondary" id="btn-download">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Скачать SVG</span><span class="btn-size"></span>
-        </button>
-        <copy-emoji-btn></copy-emoji-btn>
-        <button class="btn btn-primary hidden" id="btn-copy-png">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          <span>Скопировать PNG</span>
-        </button>
-        <button class="btn btn-secondary" id="btn-download-png">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Скачать PNG</span><span class="btn-size"></span>
-        </button>
-        <button class="btn btn-zip" id="btn-download-all">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
-          <span class="btn-label">Скачать всё (.zip)</span>
-          <span class="btn-size"></span>
-          <span class="btn-progress"></span>
-        </button>
-      </div>
-
-      <div class="detail-actions detail-actions-help hidden" id="detail-actions-help">
-        <button class="btn btn-help" id="btn-help">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Загрузить иконку
-        </button>
-        <p class="detail-help-hint">Этой иконки пока нет на сайте. Если у вас есть SVG этого логотипа — загрузите его, и автор добавит его на сайт.</p>
-      </div>
-
-      <div class="detail-divider" id="colors-divider"></div>
-      <div class="colors-panel" id="colors-panel">
-        <div class="colors-header" id="colors-header">
-          <span class="colors-header-label">Настроить цвета</span>
-          <div class="colors-header-right">
-            <button class="colors-reset-btn" id="colors-reset-btn">Сбросить</button>
-            <svg class="colors-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          </div>
-        </div>
-        <div class="colors-section hidden" id="colors-section"></div>
-      </div>
-      </div>
-
-      <div class="detail-note hidden" id="detail-note">
-        <div class="detail-note-title">⚠ Важно для Figma</div>
-        <span id="detail-note-text"></span>
-      </div>
-
-      <div class="detail-variants" id="detail-variants">
-        <div class="detail-divider"></div>
-        <div class="detail-section-label">Варианты</div>
-        <div class="variants-grid" id="variants-grid"></div>
-      </div>
-
-      <div class="detail-ecosystem hidden" id="detail-ecosystem">
-        <div class="detail-divider"></div>
-        <div class="detail-section-label" id="ecosystem-label">Экосистема</div>
-        <div class="ecosystem-grid" id="ecosystem-grid"></div>
-      </div>
-
-      <div class="detail-brand-link hidden" id="detail-brand-link">
-        <div class="detail-divider"></div>
-        <div class="detail-section-label">Бренд</div>
-        <a id="btn-brand-link" class="btn-brand" href="#" target="_blank" rel="noopener noreferrer">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Правила использования лого
-        </a>
-      </div>
-
-      <div class="detail-brand-link hidden" id="detail-page-link">
-        <div class="detail-divider"></div>
-        <div class="detail-section-label">Страница</div>
-        <a id="btn-page-link" class="btn-brand" href="#" target="_blank" rel="noopener noreferrer">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
-          Подробнее о логотипе
-        </a>
-      </div>
-    </div>
+{{> detail-panel}}
   </div>
 </div>
 

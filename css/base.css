@@ -5,23 +5,29 @@ body {
   background: var(--bg);
   color: var(--text-1);
   display: flex;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
 }
 
-/* ── Center column (main + detail) ── */
+/* ── Center column (main + detail) ──
+   The window is the scroll container (so analytics can track scroll depth).
+   The sidebar is fixed, so the center column is offset by its width. */
 .center {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   min-width: 0;
+  margin-left: 200px;
 }
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--bg);
   height: 57px;
   min-height: 57px;
   padding: 0 24px;
+  margin-right: 280px;
   border-bottom: 1px solid var(--line);
   display: flex;
   align-items: center;
@@ -32,21 +38,18 @@ body {
 .center-body {
   flex: 1;
   display: flex;
-  overflow: hidden;
   position: relative;
+  min-height: calc(100vh - 57px);
 }
 
 main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   min-width: 0;
   position: relative;
-  transition: padding-right .42s cubic-bezier(.22,.61,.36,1);
-  will-change: padding-right;
-}
-.center-body:has(#detail.open) main {
+  /* The detail panel is always present (fixed, like the sidebar), so reserve
+     its width permanently — no reflow when selecting/deselecting a logo. */
   padding-right: 280px;
 }
 

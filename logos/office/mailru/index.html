@@ -89,7 +89,15 @@
           "name": "В каком формате можно скачать логотип Mail.ru?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Логотип Mail.ru доступен в SVG. Векторный SVG масштабируется без потери качества и подходит для печати и Figma, а PNG удобен для презентаций и документов."
+            "text": "Логотип Mail.ru доступен в SVG, ICO, ICNS. Векторный SVG масштабируется без потери качества и подходит для печати и Figma, а ICO и ICNS — готовые иконки для приложений Windows и macOS."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Можно ли скачать логотип Mail.ru в формате ICO или ICNS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Да. Кроме SVG и PNG, логотип Mail.ru можно скачать как иконку в форматах ICO (для Windows и ярлыков) и ICNS (для приложений и Dock в macOS) — нажмите «Скачать другие форматы» и выберите нужный."
           }
         },
         {
@@ -125,6 +133,7 @@
   <link rel="stylesheet" href="../../../css/seo-page.css">
   <link rel="stylesheet" href="../../../css/modals.css">
   <link rel="stylesheet" href="../../../css/confetti.css">
+  <link rel="stylesheet" href="../../../css/icns.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,6 +177,7 @@
       </div>
       <button class="preview-dl-btn" id="btn-preview-dl" type="button" aria-label="Скачать">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="preview-dl-label" id="preview-dl-label"></span>
       </button>
       <button class="preview-menu-btn" id="btn-menu" type="button" aria-label="Действия">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -199,24 +209,35 @@
         <div class="btn-row" id="btn-row">
           <button class="btn btn-primary" id="btn-copy" type="button">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <span id="btn-copy-label">Скопировать SVG</span>
+            <span id="btn-copy-label" data-label="copySvg">Скопировать SVG</span>
           </button>
           <a class="btn btn-secondary" id="btn-dl-svg" href="../../../assets/logos/svgs/mail-ru.svg" download="mail-ru.svg">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            SVG <span class="btn-size">853 Б</span>
+            <span data-label="downloadSvg">Скачать SVG</span> <span class="btn-size">853 Б</span>
           </a>
           <a class="btn btn-secondary" id="btn-dl-png" href="#" download="mail-ru.png">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            PNG
+            <span data-label="downloadPng">Скачать PNG</span>
           </a>
-          <button class="btn btn-zip" id="btn-zip" type="button">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
-            <span id="btn-zip-label">Скачать всё (.zip)</span>
-            <span class="btn-size">~2 КБ</span>
-            <span class="btn-progress" id="btn-zip-progress"></span>
+          <div class="btn-download-group" id="btn-download-all">
+          <button class="btn btn-zip btn-download-trigger" id="btn-download-trigger" type="button">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
+            <span data-label="dlMore">Скачать другие форматы</span>
+            <svg class="btn-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
+          <div class="btn-download-menu" id="btn-download-menu">
+            <button class="btn-menu-item" id="btn-download-ico" type="button"><svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M15.49 6H6V15.492H15.492L15.49 6ZM26 6H16.508V15.492H26V6ZM15.49 16.508H6V26H15.492L15.49 16.508ZM26 16.508H16.508V26H26V16.508Z"/></svg><span data-label="dlIco">Скачать ICO</span><span class="btn-size btn-menu-size"></span></button>
+            <button class="btn-menu-item" id="btn-download-icns" type="button"><svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M23.8457 11.5898C22.4743 12.4367 21.6274 13.8892 21.6274 15.503C21.6274 17.3178 22.7166 18.9715 24.3703 19.6572C24.0484 20.6909 23.5722 21.67 22.9577 22.5612C22.0709 23.8115 21.1429 25.103 19.7714 25.103C18.4 25.103 17.9966 24.2961 16.3829 24.2961C14.8103 24.2961 14.2457 25.143 12.9543 25.143C11.6629 25.143 10.776 23.9738 9.768 22.5212C8.43657 20.5041 7.67086 18.1647 7.63086 15.7041C7.63086 11.711 10.2114 9.57268 12.7931 9.57268C14.1646 9.57268 15.2937 10.4607 16.1417 10.4607C16.9474 10.4607 18.2389 9.53268 19.7714 9.53268C20.5678 9.51148 21.3569 9.68835 22.068 10.0474C22.7791 10.4064 23.39 10.9364 23.8457 11.5898ZM19.0457 7.83896C19.7314 7.03211 20.0937 6.0241 20.1349 4.97496C20.1349 4.85382 20.1349 4.69268 20.0937 4.57153C18.9223 4.69283 17.8409 5.25501 17.0686 6.1441C16.3829 6.91096 15.9794 7.87896 15.9394 8.9281C15.9394 9.04925 15.9394 9.17039 15.9794 9.29039C16.0606 9.29039 16.1817 9.33153 16.2629 9.33153C17.3509 9.25153 18.36 8.68582 19.0457 7.83896Z"/></svg><span data-label="dlIcns">Скачать ICNS</span></button>
+            <div class="btn-menu-divider"></div>
+            <button class="btn-menu-item btn-menu-item--zip" id="btn-download-zip" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
+              <span class="btn-label" data-label="dlZipAll">Скачать все (ZIP)</span><span class="btn-size"></span>
+              <span class="btn-progress"></span>
+            </button>
+          </div>
         </div>
-        <button class="btn-report-outdated" id="btn-report-outdated">Сообщить об устаревшем логотипе</button>
+        </div>
+        <button class="btn-report-outdated" id="btn-report-outdated" data-label="reportOutdated">Сообщить об устаревшем логотипе</button>
       </div>
 
 
@@ -374,7 +395,7 @@
       <div class="meta-table">
         <div class="meta-row">
           <span class="meta-key">Формат</span>
-          <span class="meta-val">SVG</span>
+          <span class="meta-val">SVG, ICO, ICNS</span>
         </div>
         <div class="meta-row">
           <span class="meta-key">Figma</span>
@@ -393,7 +414,11 @@
     <div class="faq-list">
         <details class="faq-item">
           <summary class="faq-q">В каком формате можно скачать логотип Mail.ru?</summary>
-          <p class="faq-a">Логотип Mail.ru доступен в SVG. Векторный SVG масштабируется без потери качества и подходит для печати и Figma, а PNG удобен для презентаций и документов.</p>
+          <p class="faq-a">Логотип Mail.ru доступен в SVG, ICO, ICNS. Векторный SVG масштабируется без потери качества и подходит для печати и Figma, а ICO и ICNS — готовые иконки для приложений Windows и macOS.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Можно ли скачать логотип Mail.ru в формате ICO или ICNS?</summary>
+          <p class="faq-a">Да. Кроме SVG и PNG, логотип Mail.ru можно скачать как иконку в форматах ICO (для Windows и ярлыков) и ICNS (для приложений и Dock в macOS) — нажмите «Скачать другие форматы» и выберите нужный.</p>
         </details>
         <details class="faq-item">
           <summary class="faq-q">Логотип Mail.ru можно скачать бесплатно?</summary>
@@ -492,6 +517,7 @@
     <div class="lightbox-actions">
       <button class="lightbox-dl-btn" id="lightbox-dl-btn" type="button" aria-label="Скачать">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span id="lightbox-dl-label"></span>
       </button>
       <div class="lightbox-menu-wrap">
         <button class="lightbox-menu-btn" id="lightbox-menu-btn" type="button" aria-label="Действия">
@@ -512,11 +538,7 @@ window.__SEO_PAGE__ = {
   defaultType: 'svg',
   defaultWide: false,
   figma:       'Icon/Office/MailRu',
-  zipName: 'mail-ru.zip',
-  zipFiles: [
-    { url: '../../../assets/logos/svgs/mail-ru.svg', name: 'mail-ru.svg' },
-    { url: '../../../assets/logos/svgs/mail-ru-full.svg', name: 'mail-ru-full.svg' }
-  ],
+  item:        {"figma":"Icon/Office/MailRu","file":"mail-ru.svg","variants":[{"type":"full","file":"mail-ru-full.svg"}]},
 };
 </script>
 <script type="module" src="../../../js/seo-page.js"></script>

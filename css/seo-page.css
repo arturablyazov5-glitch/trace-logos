@@ -180,7 +180,7 @@ main {
   top: calc(57px + 24px);
   background: var(--checker-sq), var(--bg-card);
   transition: background .2s;
-  overflow: hidden;
+  overflow: visible;
   cursor: zoom-in;
 }
 .preview-card.light-bg { background: var(--checker-full), var(--light); }
@@ -211,16 +211,17 @@ main {
   position: absolute;
   width: 32px; height: 32px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,.45);
-  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.85);
+  border: 1px solid rgba(0,0,0,.08);
   border-radius: 8px;
-  color: var(--text-3);
+  color: #111;
   cursor: pointer;
   opacity: 0;
   transition: opacity .15s, color .15s, background .15s;
   backdrop-filter: blur(4px);
 }
-.preview-dl-btn     { top: 10px; left: 10px; }
+.preview-dl-btn     { top: 10px; left: 10px; width: auto; padding: 0 10px; gap: 5px; }
+.preview-dl-label   { font-size: 12px; font-weight: 500; white-space: nowrap; }
 .preview-menu-btn   { top: 10px; right: 10px; }
 .preview-expand-btn { bottom: 10px; right: 10px; }
 
@@ -230,23 +231,23 @@ main {
 
 .preview-expand-btn:hover,
 .preview-dl-btn:hover,
-.preview-menu-btn:hover { color: var(--text-0); background: rgba(0,0,0,.65); }
+.preview-menu-btn:hover { color: #000; background: rgba(255,255,255,1); }
 
 .preview-card.light-bg .preview-expand-btn,
 .preview-card.light-bg .preview-dl-btn,
 .preview-card.light-bg .preview-menu-btn {
-  background: rgba(255,255,255,.6);
-  border-color: rgba(0,0,0,.1);
-  color: var(--text-5);
+  background: rgba(0,0,0,.55);
+  border-color: rgba(255,255,255,.08);
+  color: #fff;
 }
 .preview-card.light-bg .preview-expand-btn:hover,
 .preview-card.light-bg .preview-dl-btn:hover,
-.preview-card.light-bg .preview-menu-btn:hover { color: var(--bg); background: rgba(255,255,255,.85); }
+.preview-card.light-bg .preview-menu-btn:hover { color: #fff; background: rgba(0,0,0,.75); }
 
 /* Context menu */
 .preview-menu {
   position: absolute;
-  bottom: 48px;
+  top: 48px;
   right: 10px;
   min-width: 180px;
   background: #1e1e1e;
@@ -308,7 +309,7 @@ main {
 .lightbox-close,
 .lightbox-dl-btn,
 .lightbox-menu-btn {
-  width: 36px; height: 36px;
+  width: auto; min-width: 36px; height: 36px; padding: 0 12px; gap: 6px;
   display: flex; align-items: center; justify-content: center;
   background: rgba(255,255,255,.08);
   border: 1px solid rgba(255,255,255,.12);
@@ -323,11 +324,14 @@ main {
   position: absolute;
   top: 16px; right: 16px;
   z-index: 1;
+  padding: 0;
+  width: 36px;
 }
 .lightbox-close:hover,
 .lightbox-dl-btn:hover,
 .lightbox-menu-btn:hover { background: rgba(255,255,255,.15); color: var(--text-0); }
 
+.lightbox-dl-btn span { font-size: 12px; font-weight: 500; white-space: nowrap; }
 .lightbox-menu-wrap { position: relative; }
 
 .lightbox-menu {
@@ -440,6 +444,49 @@ h1 {
   border-radius: 0 0 9px 9px;
   width: 0%; transition: width .1s linear;
 }
+
+/* ── Download dropdown (ICO / ICNS / Скачать всё) ── */
+.btn-download-group { position: relative; }
+.btn-download-trigger { overflow: hidden; }
+.btn-chevron { margin-left: auto; flex-shrink: 0; transition: transform .15s; }
+.btn-download-trigger.open .btn-chevron { transform: rotate(180deg); }
+.btn-download-group.zip-only .btn-chevron { display: none; }
+.btn-download-group.zip-only .btn-download-menu { display: none !important; }
+
+.btn-download-menu {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 0; right: 0;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-base);
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18);
+}
+.btn-download-menu.open { display: block; }
+
+.btn-menu-item {
+  display: flex; align-items: center; gap: 6px;
+  width: 100%;
+  padding: 10px 14px;
+  background: none; border: none;
+  color: var(--text-1);
+  font-size: 13px; font-weight: 500;
+  text-align: left; cursor: pointer;
+  transition: background .1s, color .1s;
+}
+.btn-menu-item svg { flex-shrink: 0; }
+/* Windows/Apple glyphs have internal padding in their 32-viewBox — bump them up to read level with the others */
+#btn-download-ico svg, #btn-download-icns svg { width: 18px; height: 18px; margin: -2px 0; }
+.btn-menu-item:hover:not(:disabled) { background: var(--bg-active); color: var(--text-0); }
+.btn-menu-item:disabled { color: var(--text-6); cursor: default; }
+.btn-menu-item--zip { position: relative; overflow: hidden; }
+.btn-menu-item--zip .btn-progress { border-radius: 0; }
+.btn-menu-size { margin-left: auto; font-size: 11px; font-weight: 400; color: var(--text-6); }
+.btn-menu-item:hover:not(:disabled) .btn-menu-size { color: var(--text-3); }
+.btn-menu-divider { height: 1px; background: var(--border-base); margin: 2px 0; }
 
 /* ── Variants ── */
 .variants-grid { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -650,11 +697,12 @@ footer {
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 .btn-report-outdated {
-  display: block;
-  width: 100%;
+  display: inline-block;
+  width: auto;
   background: none;
   border: none;
-  padding: 10px 0 0;
+  padding: 0;
+  margin: 10px 0 0;
   font-size: 12px;
   color: #555;
   text-align: left;

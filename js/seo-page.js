@@ -1,11 +1,23 @@
 import { svgToPngBlob, triggerConfetti, parseSvgViewBox } from './svg-utils.js';
-import { animateContainerHeight, showToast } from './utils.js';
+import { animateContainerHeight, showToast, setAssetBase, formatFileSize } from './utils.js';
+import { downloadAsIco, downloadAllAsZip, estimateIcoSize } from './export.js';
+import { openIcnsModal } from './icns.js';
+import { LABELS, TOASTS, applyLabels } from './labels.js';
 import './header-search.js';
+
+applyLabels(); // single source of button texts → js/labels.js
 
 // Page data injected by build script via window.__SEO_PAGE__
 const PAGE = window.__SEO_PAGE__;
 
 const BASE = PAGE.assetBase;
+const ITEM = PAGE.item; // { figma, file, variants } — for the reused catalog export modules
+
+// The export/icns/color modules resolve assets through svgUrl(); point it at this
+// page's asset folder, and flag the section so downloadAllAsZip bundles ICO/ICNS.
+setAssetBase(BASE.replace(/\/+$/, ''));
+document.body.dataset.section = 'logos';
+
 const btnRow       = document.getElementById('btn-row');
 const previewCard  = document.getElementById('preview-card');
 const previewMount = document.getElementById('preview-mount');
@@ -14,25 +26,34 @@ const btnCopy      = document.getElementById('btn-copy');
 const btnCopyLbl   = document.getElementById('btn-copy-label');
 const btnDlSvg     = document.getElementById('btn-dl-svg');
 const btnDlPng     = document.getElementById('btn-dl-png');
-const btnZip       = document.getElementById('btn-zip');
-const btnZipLbl    = document.getElementById('btn-zip-label');
-const btnZipProg   = document.getElementById('btn-zip-progress');
+const btnZip       = document.getElementById('btn-download-zip');
 const lightbox     = document.getElementById('lightbox');
 const lightboxInner = document.getElementById('lightbox-inner');
 const lightboxImg  = document.getElementById('lightbox-img');
+const previewDlLabel  = document.getElementById('preview-dl-label');
+const lightboxDlLabel = document.getElementById('lightbox-dl-label');
 
 let currentSrc  = PAGE.defaultSrc;
 let currentWide = PAGE.defaultWide;
 let currentType = PAGE.defaultType;
 let copyTimer   = null;
 
+function updatePreviewDlLabel() {
+  const text = currentType === 'svg' ? LABELS.downloadSvg : LABELS.downloadPng;
+  if (previewDlLabel)  previewDlLabel.textContent  = text;
+  if (lightboxDlLabel) lightboxDlLabel.textContent = text;
+}
+
 // ── Инициализация PNG-кнопки для дефолтного варианта ──
 initPngBtn(currentSrc, currentWide, currentType, document.querySelector('[data-variant].active')?.dataset.png);
+updatePreviewDlLabel();
 
 // ── Переключение вариантов ──
 document.getElementById('variants-grid')?.addEventListener('click', e => {
   const card = e.target.closest('[data-variant]');
   if (!card) return;
+
+  window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
 
   document.querySelectorAll('[data-variant]').forEach(el =>
     el.classList.toggle('active', el === card));
@@ -40,6 +61,11 @@ document.getElementById('variants-grid')?.addEventListener('click', e => {
   currentSrc  = card.dataset.src;
   currentWide = card.dataset.wide === 'true';
   currentType = card.dataset.type;
+  updatePreviewDlLabel();
+
+  // Wide variants → ZIP-only; square → full ICO/ICNS menu. Before the height
+  // animation so its overflow clip isn't reset mid-flight.
+  syncDownloadMode();
 
   previewCard.classList.toggle('light-bg', currentWide);
   previewMount.className = currentWide ? 'preview-wide' : 'preview-icon';
@@ -102,8 +128,8 @@ btnCopy.addEventListener('click', function() {
     .then(svg => navigator.clipboard.writeText(svgForFigma(svg)))
     .then(() => {
       triggerConfetti(btnCopy);
-      showToast('Скопировано SVG');
-      btnCopyLbl.textContent = 'Скопировано!';
+      showToast(TOASTS.copiedSvg);
+      btnCopyLbl.textContent = LABELS.copied;
       btnCopy.disabled = true;
       if (copyTimer) clearTimeout(copyTimer);
       copyTimer = setTimeout(resetCopy, 2000);
@@ -112,7 +138,7 @@ btnCopy.addEventListener('click', function() {
 
 function resetCopy() {
   btnCopy.disabled = false;
-  btnCopyLbl.textContent = 'Скопировать SVG';
+  btnCopyLbl.textContent = LABELS.copySvg;
 }
 
 // ── SVG → PNG ──
@@ -126,6 +152,7 @@ function downloadPngFromSvg(svgUrl, filename, square) {
       a.download = filename;
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 10000);
+      showToast(TOASTS.downloaded(filename));
     });
 }
 
@@ -149,8 +176,8 @@ document.querySelectorAll('.color-swatch').forEach(sw => {
     try {
       await navigator.clipboard.writeText(hex);
       triggerConfetti(sw);
-      showToast(hex + ' скопирован');
-    } catch { showToast('Не удалось скопировать'); }
+      showToast(TOASTS.copiedColor(hex));
+    } catch { showToast(TOASTS.copyError); }
   });
 });
 
@@ -177,12 +204,16 @@ function buildMenuItems(container, closeMenu) {
   container.innerHTML = '';
   const items = [];
   if (currentType === 'svg') {
-    items.push({ icon: ICON_COPY, label: 'Скопировать SVG', action: () => btnCopy.click() });
-    items.push({ icon: ICON_SVG,  label: 'Скачать SVG',     action: () => { const a = document.createElement('a'); a.href = currentSrc; a.download = currentSrc.split('/').pop(); a.click(); } });
+    items.push({ icon: ICON_COPY, label: LABELS.copySvg, action: () => btnCopy.click() });
+    items.push({ icon: ICON_SVG,  label: LABELS.downloadSvg, action: () => { btnDlSvg.click(); } });
   }
-  items.push({ icon: ICON_PNG, label: 'Скачать PNG', action: () => btnDlPng.click() });
-  if (PAGE.zipFiles?.length > 1) {
-    items.push({ icon: ICON_ZIP, label: 'Скачать всё (.zip)', action: () => btnZip.click() });
+  items.push({ icon: ICON_PNG, label: LABELS.downloadPng, action: () => btnDlPng.click() });
+  if (!currentWide) {
+    if (btnIco)  items.push({ icon: ICON_PNG, label: LABELS.dlIco,  action: () => btnIco.click() });
+    if (btnIcns) items.push({ icon: ICON_PNG, label: LABELS.dlIcns, action: () => btnIcns.click() });
+  }
+  if (btnZip) {
+    items.push({ icon: ICON_ZIP, label: LABELS.dlZipAll, action: () => btnZip.click() });
   }
   items.forEach(({ icon, label, action }) => {
     const btn = document.createElement('button');
@@ -207,6 +238,9 @@ function downloadCurrent() {
 
 btnExpand.addEventListener('click', e => { e.stopPropagation(); openLightbox(); });
 
+btnDlSvg.addEventListener('click', () => showToast(TOASTS.downloaded(btnDlSvg.download)));
+btnDlPng.addEventListener('click', () => { if (btnDlPng.href) showToast(TOASTS.downloaded(btnDlPng.download)); });
+
 btnMenu.addEventListener('click', e => {
   e.stopPropagation();
   previewMenu.classList.contains('hidden') ? openPreviewMenu() : closePreviewMenu();
@@ -225,6 +259,8 @@ document.addEventListener('click', e => {
   if (!lightboxMenu.contains(e.target) && e.target !== btnLightboxMenu) closeLightboxMenu();
 });
 
+previewCard.addEventListener('mouseleave', closePreviewMenu);
+
 // ── Esc: лайтбокс → меню (живой поиск в шапке — js/header-search.js) ──
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -234,37 +270,63 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ── Скачать всё (.zip) ──
-btnZip.addEventListener('click', async () => {
-  if (typeof JSZip === 'undefined') return;
-  btnZip.disabled = true;
-  btnZipProg.style.width = '0%';
-  btnZipLbl.textContent = 'Упаковываем...';
-  try {
-    const zip = new JSZip();
-    for (let i = 0; i < PAGE.zipFiles.length; i++) {
-      const { url, name } = PAGE.zipFiles[i];
-      const blob = await fetch(url).then(r => r.blob());
-      zip.file(name, blob);
-      btnZipProg.style.width = Math.round((i + 1) / PAGE.zipFiles.length * 85) + '%';
+// ── Download dropdown: ICO / ICNS / Скачать всё — reuses the catalog modules ──
+const dlGroup   = document.getElementById('btn-download-all');
+const dlTrigger = document.getElementById('btn-download-trigger');
+const dlMenu    = document.getElementById('btn-download-menu');
+const btnIco    = document.getElementById('btn-download-ico');
+const btnIcns   = document.getElementById('btn-download-icns');
+
+function closeDlMenu() {
+  dlMenu?.classList.remove('open');
+  dlTrigger?.classList.remove('open');
+  // Restore btn-row's height-animation clip once the menu is closed.
+  if (btnRow) btnRow.style.overflow = '';
+}
+
+// ICO/ICNS follow the currently-shown variant, not the primary.
+function currentFile() { return currentSrc.split('/').pop().split('?')[0]; }
+
+// ICO/ICNS only make sense for square variants. Wide `-full` variants collapse
+// the dropdown to a single "Скачать всё (ZIP)" button (the catalog does the same
+// in main.js). Re-evaluated per variant — the gate is the SELECTED variant's
+// shape (currentWide), not the primary file.
+function syncDownloadMode() {
+  if (!dlGroup) return;
+  const lbl = dlTrigger.querySelector('span');
+  if (currentWide) {
+    dlGroup.classList.add('zip-only');
+    if (lbl) lbl.textContent = LABELS.dlZipAll;
+    closeDlMenu();
+  } else {
+    dlGroup.classList.remove('zip-only');
+    if (lbl) lbl.textContent = LABELS.dlMore;
+    const icoSizeEl = btnIco?.querySelector('.btn-menu-size');
+    if (icoSizeEl) {
+      icoSizeEl.textContent = '';
+      estimateIcoSize(currentFile()).then(sz => { if (sz) icoSizeEl.textContent = formatFileSize(sz); });
     }
-    const content = await zip.generateAsync({ type: 'blob' });
-    btnZipProg.style.width = '100%';
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(content);
-    a.download = PAGE.zipName;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 10000);
-  } catch (err) {
-    console.error(err);
-  } finally {
-    setTimeout(() => {
-      btnZip.disabled = false;
-      btnZipLbl.textContent = 'Скачать всё (.zip)';
-      btnZipProg.style.width = '0%';
-    }, 1200);
   }
-});
+}
+
+if (dlGroup && ITEM) {
+  dlTrigger.addEventListener('click', e => {
+    e.stopPropagation();
+    if (currentWide) { downloadAllAsZip(ITEM); return; } // wide variant — no menu, straight to ZIP
+    const willOpen = !dlMenu.classList.contains('open');
+    dlMenu.classList.toggle('open');
+    dlTrigger.classList.toggle('open');
+    // The menu pops upward and would otherwise be clipped by btn-row's
+    // overflow:hidden (left from the variant-switch height animation) — lift it.
+    if (btnRow) btnRow.style.overflow = willOpen ? 'visible' : '';
+  });
+  btnIco?.addEventListener('click', () => { closeDlMenu(); downloadAsIco(ITEM, currentFile()); });
+  btnIcns?.addEventListener('click', () => { closeDlMenu(); openIcnsModal(ITEM, currentFile()); });
+  btnZip?.addEventListener('click', () => { closeDlMenu(); downloadAllAsZip(ITEM); });
+  document.addEventListener('click', e => { if (!dlGroup.contains(e.target)) closeDlMenu(); });
+
+  syncDownloadMode(); // initial state for the default variant
+}
 
 // ── Report outdated ──
 const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/suggest';

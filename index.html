@@ -165,15 +165,10 @@
   <!-- ── Hero + поиск ── -->
   <section class="hero">
     <div class="wrap">
-      <div class="pill" role="note">
-        <span class="pill-dot" aria-hidden="true"></span>
-        288 логотипов · 1918 эмодзи · бесплатно
-      </div>
-
-      <h1>Логотипы брендов и эмодзи <span class="accent">для дизайна и разработки</span></h1>
+      <h1><span class="hero-h1-row">Логотипы <img id="hero-img-logo" class="hero-inline-img" src="assets/logos/pngs/Messages.png" alt="" aria-hidden="true"> брендов и <img id="hero-img-emoji" class="hero-inline-img" src="assets/emoji/pngs/apple/grinning-face_1f600.png" alt="" aria-hidden="true"> эмодзи</span><span class="accent">для дизайна и разработки</span></h1>
       <p class="hero-desc">
         SVG и PNG логотипов российских и международных брендов, эмодзи Apple, Google и Microsoft.
-        Скачивайте, меняйте цвета и экспортируйте в Figma — без регистрации.
+        Скачивайте, меняйте цвета и экспортируйте в Figma — <strong>без регистрации</strong>
       </p>
 
       <div class="home-search">
@@ -189,16 +184,10 @@
         <div class="search-dropdown" id="home-search-dropdown" role="listbox" aria-label="Результаты поиска"></div>
       </div>
 
-      <nav class="chips" aria-label="Популярные разделы">
-        <a class="chip" href="logos/bank/">Банки</a>
-        <a class="chip" href="logos/market/">Маркетплейсы</a>
-        <a class="chip" href="logos/ai/">Нейросети</a>
-        <a class="chip" href="logos/social/">Соцсети</a>
-        <a class="chip" href="logos/pay/">Платежи</a>
-        <a class="chip" href="logos/video/">Видео и стриминг</a>
-        <a class="chip" href="logos/flag/">Флаги</a>
-        <a class="chip" href="emoji/">Эмодзи →</a>
-      </nav>
+      <div class="hero-alt-nav">
+        <span class="hero-or">или</span>
+        <a class="hero-library-link" href="logos/">Перейти сразу в библиотеку</a>
+      </div>
     </div>
   </section>
 
@@ -718,7 +707,9 @@
 
 <script type="module">
   import { initHomeSearch } from './js/home-search.js';
+  import { initHeroShuffle } from './js/hero-shuffle.js';
   initHomeSearch();
+  initHeroShuffle();
 </script>
 
 </body>

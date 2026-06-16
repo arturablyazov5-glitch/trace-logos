@@ -1,0 +1,153 @@
+/* ── ICNS export modal ── */
+.icns-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  z-index: 1100;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.icns-overlay.open { display: flex; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+.icns-modal {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+.icns-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .12s, color .12s;
+}
+.icns-close:hover { background: #2a2a2a; color: #fff; }
+
+.icns-header { padding-right: 44px; }
+.icns-title { font-size: 16px; font-weight: 600; color: #fff; line-height: 1.3; }
+.icns-sub { font-size: 12px; color: #555; margin-top: 3px; }
+
+/* checkerboard so transparency reads clearly */
+.icns-preview-box {
+  position: relative;
+  align-self: center;
+  border-radius: 14px;
+  padding: 14px;
+  background:
+    conic-gradient(#2b2b2b 25%, #232323 0 50%, #2b2b2b 0 75%, #232323 0) 0 0 / 18px 18px;
+  border: 1px solid #2a2a2a;
+}
+.icns-reset {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(0,0,0,.45);
+  color: #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: scale(.9);
+  pointer-events: none;
+  transition: background .12s, color .12s, opacity .18s ease, transform .18s ease;
+  z-index: 1;
+}
+.icns-reset.show { opacity: 1; transform: scale(1); pointer-events: auto; }
+.icns-reset:hover { background: rgba(0,0,0,.7); color: #fff; }
+.icns-reset.show:active { transform: scale(.92); }
+.icns-preview { width: 100%; max-width: 320px; height: auto; display: block; }
+
+.icns-controls { display: flex; flex-direction: column; gap: 14px; }
+.icns-row { display: flex; flex-direction: column; gap: 7px; }
+.icns-label { font-size: 12px; color: #888; display: flex; justify-content: space-between; align-items: center; }
+.icns-val { color: #fff; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* range sliders — the default-value notch is baked into the track via --tickx so
+   the thumb sits over it when on the default */
+.icns-range {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 4px; border-radius: 3px; cursor: pointer;
+  background:
+    linear-gradient(#8a8a8a, #8a8a8a) no-repeat,
+    #333;
+  background-size: 2px 100%, 100% 100%;
+  background-position: calc(var(--tickx, -10px) - 1px) center, center;
+}
+.icns-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.icns-range:hover::-webkit-slider-thumb { transform: scale(1.18); }
+.icns-range:active::-webkit-slider-thumb { transform: scale(1.28); box-shadow: 0 0 0 6px rgba(255,255,255,.14); }
+.icns-range::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.icns-range:hover::-moz-range-thumb { transform: scale(1.18); }
+.icns-range:active::-moz-range-thumb { transform: scale(1.28); box-shadow: 0 0 0 6px rgba(255,255,255,.14); }
+
+/* shadow toggle — switch */
+.icns-toggle { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #ccc; cursor: pointer; user-select: none; }
+.icns-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.icns-switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: #3a3a3a;
+  transition: background .18s ease;
+}
+.icns-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35);
+  transition: transform .18s ease;
+}
+.icns-toggle input:checked + .icns-switch { background: #34c759; }
+.icns-toggle input:checked + .icns-switch::after { transform: translateX(18px); }
+.icns-toggle input:focus-visible + .icns-switch { outline: 2px solid #3b66f6; outline-offset: 2px; }
+
+/* the download button reuses the shared .btn / .btn-primary / .btn-size styles */
+
+.icns-overlay .hidden { display: none !important; }
