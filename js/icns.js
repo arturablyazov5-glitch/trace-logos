@@ -39,8 +39,10 @@ const DEFAULTS = { radiusPct: MACOS_PCT, paddingPct: 10, shadow: true, glass: tr
 
 let sessionDefaults = DEFAULTS; // effective defaults for the open logo (reset target)
 
-function defaultsFor(/* file */) {
-  // The glass plate now defines the icon shape, so PNG/SVG share one default.
+function defaultsFor(file) {
+  // PNG variants are already prerendered assets. Keep their default ICNS mask
+  // unrounded; SVGs still use the macOS squircle as their baseline.
+  if (/\.png(\?|$)/i.test(file)) return { ...DEFAULTS, radiusPct: 0 };
   return DEFAULTS;
 }
 
