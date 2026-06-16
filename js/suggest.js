@@ -1,4 +1,6 @@
 const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/suggest';
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const MAX_FILE_SIZE_LABEL = '5 МБ';
 
 let _reportMode = false;
 
@@ -121,10 +123,10 @@ function init() {
       result.style.display = 'block';
       return;
     }
-    if (file && file.size > 1 * 1024 * 1024) {
+    if (file && file.size > MAX_FILE_SIZE) {
       document.getElementById('suggest-file-label').classList.add('file-error');
       result.className = 'suggest-result error';
-      result.textContent = 'Файл слишком большой. Максимум — 1 МБ.';
+      result.textContent = `Файл слишком большой. Максимум — ${MAX_FILE_SIZE_LABEL}.`;
       result.style.display = 'block';
       return;
     }

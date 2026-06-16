@@ -100,7 +100,7 @@ function applyDownloadVariantState(item, isSquare, file = item.file) {
   const label = trigger.querySelector('span');
   if (label) label.textContent = isSquare ? LABELS.dlMore : LABELS.dlZipAll;
   trigger.onclick = isSquare
-    ? (e) => { e.stopPropagation(); menu.classList.toggle('open'); trigger.classList.toggle('open'); }
+    ? (e) => { e.stopPropagation(); toggleDownloadMenu(); }
     : (e) => { e.stopPropagation(); downloadAllAsZip(item); };
 
   const icoSizeEl = document.getElementById('btn-download-ico')?.querySelector('.btn-menu-size');
@@ -108,6 +108,38 @@ function applyDownloadVariantState(item, isSquare, file = item.file) {
     icoSizeEl.textContent = '';
     estimateIcoSize(file).then(sz => { if (sz) icoSizeEl.textContent = formatFileSize(sz); });
   }
+}
+
+// The download dropdown lives inside #detail, which is overflow:auto — an absolute
+// menu would be clipped when the panel is scrolled. Position it fixed to the
+// viewport (relative to the trigger) so it can overflow the panel, and keep it
+// aligned while the panel scrolls/resizes.
+function positionDownloadMenu() {
+  const menu = document.getElementById('btn-download-menu');
+  const trigger = document.getElementById('btn-download-trigger');
+  if (!menu || !trigger || !menu.classList.contains('open')) return;
+  const tr = trigger.getBoundingClientRect();
+  menu.style.position = 'fixed';
+  menu.style.left = tr.left + 'px';
+  menu.style.width = tr.width + 'px';
+  menu.style.right = 'auto';
+  menu.style.top = 'auto';
+  menu.style.bottom = (window.innerHeight - tr.top + 6) + 'px';
+}
+function closeDownloadMenu() {
+  const menu = document.getElementById('btn-download-menu');
+  const trigger = document.getElementById('btn-download-trigger');
+  if (menu) { menu.classList.remove('open'); menu.style.cssText = ''; }
+  trigger?.classList.remove('open');
+}
+function toggleDownloadMenu() {
+  const menu = document.getElementById('btn-download-menu');
+  const trigger = document.getElementById('btn-download-trigger');
+  if (!menu) return;
+  if (menu.classList.contains('open')) { closeDownloadMenu(); return; }
+  menu.classList.add('open');
+  trigger?.classList.add('open');
+  positionDownloadMenu();
 }
 
 // ── Layout helpers ──
@@ -807,21 +839,17 @@ openDetailFn = function (item, card) {
   const downloadMenu = document.getElementById('btn-download-menu');
   const downloadTrigger = document.getElementById('btn-download-trigger');
   if (downloadTrigger && downloadMenu) {
-    downloadTrigger.onclick = (e) => {
-      e.stopPropagation();
-      downloadMenu.classList.toggle('open');
-      downloadTrigger.classList.toggle('open');
-    };
+    downloadTrigger.onclick = (e) => { e.stopPropagation(); toggleDownloadMenu(); };
   }
   const btnIco = document.getElementById('btn-download-ico');
-  if (btnIco) btnIco.onclick = () => { downloadMenu?.classList.remove('open'); downloadTrigger?.classList.remove('open'); downloadAsIco(item, currentVariant?.file ?? item.file); };
+  if (btnIco) btnIco.onclick = () => { closeDownloadMenu(); downloadAsIco(item, currentVariant?.file ?? item.file); };
   const btnIcns = document.getElementById('btn-download-icns');
-  if (btnIcns) btnIcns.onclick = () => { downloadMenu?.classList.remove('open'); downloadTrigger?.classList.remove('open'); openIcnsModal(item, currentVariant?.file ?? item.file); };
+  if (btnIcns) btnIcns.onclick = () => { closeDownloadMenu(); openIcnsModal(item, currentVariant?.file ?? item.file); };
   const btnZip = document.getElementById('btn-download-zip');
   if (btnZip) {
     // New dropdown — ZIP bundles SVG+PNG (+ICO+ICNS for square logos), so it always
     // has content and stays enabled even for single-file logos.
-    btnZip.onclick = () => { downloadMenu?.classList.remove('open'); downloadTrigger?.classList.remove('open'); downloadAllAsZip(item); };
+    btnZip.onclick = () => { closeDownloadMenu(); downloadAllAsZip(item); };
     btnZip.classList.remove('btn-menu-item--disabled');
   } else {
     // Old plain button (emoji/icons) — the button itself triggers the ZIP.
@@ -834,12 +862,14 @@ openDetailFn = function (item, card) {
 // ── Event listeners ──
 document.addEventListener('click', (e) => {
   const menu = document.getElementById('btn-download-menu');
-  const trigger = document.getElementById('btn-download-trigger');
-  if (menu?.classList.contains('open') && !e.target.closest('#btn-download-all')) {
-    menu.classList.remove('open');
-    trigger?.classList.remove('open');
+  if (menu?.classList.contains('open') && !e.target.closest('#btn-download-all') && !e.target.closest('#btn-download-menu')) {
+    closeDownloadMenu();
   }
 });
+
+// Keep the fixed-position menu aligned with its trigger while the detail panel scrolls.
+document.getElementById('detail')?.addEventListener('scroll', positionDownloadMenu, { passive: true });
+window.addEventListener('resize', positionDownloadMenu);
 
 window.addEventListener('scroll', () => {
   updateScrollTopButton();
