@@ -47,6 +47,7 @@ export const LABELS = {
   dlZipAll: 'Скачать все (ZIP)',
   dlIco:    'Скачать ICO',
   dlIcns:   'Скачать ICNS',
+  dlLiquidGlass: 'Liquid Glass PNG',
 
   // Прочие кнопки панели
   reportOutdated: 'Сообщить об устаревшем логотипе',

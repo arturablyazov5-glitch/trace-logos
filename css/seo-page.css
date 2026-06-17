@@ -167,6 +167,15 @@ main {
   align-items: start;
 }
 
+/* Left column: preview + banner stick together while scrolling */
+.logo-side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: sticky;
+  top: calc(57px + 24px);
+}
+
 /* ── Preview card ── */
 .preview-card {
   border: 1px solid var(--border);
@@ -176,8 +185,6 @@ main {
   align-items: center;
   justify-content: center;
   padding: 28px;
-  position: sticky;
-  top: calc(57px + 24px);
   background: var(--checker-sq), var(--bg-card);
   transition: background .2s;
   overflow: visible;
@@ -481,11 +488,13 @@ h1 {
 /* Windows/Apple glyphs have internal padding in their 32-viewBox — bump them up to read level with the others */
 #btn-download-ico svg, #btn-download-icns svg { width: 18px; height: 18px; margin: -2px 0; }
 .btn-menu-item:hover:not(:disabled) { background: var(--bg-active); color: var(--text-0); }
+.btn-menu-item.hidden { display: none; }
 .btn-menu-item:disabled { color: var(--text-6); cursor: default; }
 .btn-menu-item--zip { position: relative; overflow: hidden; }
 .btn-menu-item--zip .btn-progress { border-radius: 0; }
 .btn-menu-size { margin-left: auto; font-size: 11px; font-weight: 400; color: var(--text-6); }
 .btn-menu-item:hover:not(:disabled) .btn-menu-size { color: var(--text-3); }
+.btn-menu-badge { margin-left: auto; font-size: 10px; font-weight: 600; color: var(--text-5); background: var(--bg-active); border-radius: 4px; padding: 2px 5px; }
 .btn-menu-divider { height: 1px; background: var(--border-base); margin: 2px 0; }
 
 /* ── Variants ── */
@@ -659,15 +668,129 @@ footer {
   border-top: 1px solid var(--bg-muted);
 }
 
+/* ── Telegram banner ── */
+.tg-banner { width: 100%; }
+
+.tg-banner-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 18px;
+  text-decoration: none;
+  color: var(--text-1);
+  isolation: isolate;
+  background: linear-gradient(160deg, var(--bg-raised), var(--bg-card));
+  border: 1px solid var(--border-base);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
+  transition: transform .18s ease, border-color .2s ease, box-shadow .25s ease;
+}
+.tg-banner-link:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-focus);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .28);
+}
+
+/* Shine sweep removed — neutral dark card */
+.tg-banner-shine { display: none; }
+
+/* Big translucent paper-plane watermark */
+.tg-banner-watermark {
+  position: absolute;
+  right: -18px; bottom: -22px;
+  width: 116px; height: 116px;
+  color: var(--text-1);
+  opacity: .05;
+  transform: rotate(-8deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tg-banner-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.tg-banner-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px 3px 7px;
+  border-radius: 999px;
+  background: var(--bg-active);
+  border: 1px solid var(--border-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text-4);
+}
+.tg-banner-eyebrow svg { width: 12px; height: 12px; }
+
+.tg-banner-title {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  color: var(--text-0);
+}
+
+.tg-banner-desc {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-4);
+}
+
+.tg-banner-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 56px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  background: var(--text-0);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background .15s ease, transform .18s ease;
+}
+.tg-banner-cta svg { width: 15px; height: 15px; }
+.tg-banner-link:hover .tg-banner-cta {
+  background: var(--light-hover);
+  transform: translateY(-1px);
+}
+
+@keyframes tg-shine {
+  0%, 55% { left: -75%; }
+  100% { left: 160%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tg-banner-shine { display: none; }
+  .tg-banner-link:hover { transform: none; }
+}
+
 /* ── Mobile ── */
 @media (max-width: 640px) {
   .logo-layout { grid-template-columns: 1fr; gap: 24px; }
-  .preview-card { max-width: 200px; margin: 0 auto; position: static; }
+  /* Flatten the sticky wrapper so its children reorder in the single column */
+  .logo-side { display: contents; }
+  .preview-card { order: 1; max-width: 200px; margin: 0 auto; }
+  .logo-info    { order: 2; }
+  .tg-banner    { order: 3; }
   main { padding: 24px 16px 48px; }
   .site-header { padding: 0 16px; }
   .seo-search-form { display: none; }
   .breadcrumbs { padding: 12px 16px 0; }
   h1 { font-size: 26px; }
+  /* Баннер на мобилке — широкий, в самом низу карточки */
+  .tg-banner-link { padding: 20px 22px; }
+  .tg-banner-title { font-size: 19px; }
+  .tg-banner-desc { font-size: 13.5px; max-width: 30ch; }
+  .tg-banner-watermark { width: 140px; height: 140px; right: -10px; }
 }
 
 .info-section    { display: flex; flex-direction: column; gap: 8px; }

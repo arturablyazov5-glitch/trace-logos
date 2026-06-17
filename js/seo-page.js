@@ -2,6 +2,7 @@ import { svgToPngBlob, triggerConfetti, parseSvgViewBox } from './svg-utils.js';
 import { animateContainerHeight, showToast, setAssetBase, formatFileSize } from './utils.js';
 import { downloadAsIco, downloadAllAsZip, estimateIcoSize } from './export.js';
 import { openIcnsModal } from './icns.js';
+import { openLiquidModal } from './liquid-glass-modal.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
 import './header-search.js';
 
@@ -211,6 +212,7 @@ function buildMenuItems(container, closeMenu) {
   if (!currentWide) {
     if (btnIco)  items.push({ icon: ICON_PNG, label: LABELS.dlIco,  action: () => btnIco.click() });
     if (btnIcns) items.push({ icon: ICON_PNG, label: LABELS.dlIcns, action: () => btnIcns.click() });
+    if (btnLg && currentType !== 'png') items.push({ icon: ICON_PNG, label: LABELS.dlLiquidGlass, action: () => btnLg.click() });
   }
   if (btnZip) {
     items.push({ icon: ICON_ZIP, label: LABELS.dlZipAll, action: () => btnZip.click() });
@@ -276,6 +278,7 @@ const dlTrigger = document.getElementById('btn-download-trigger');
 const dlMenu    = document.getElementById('btn-download-menu');
 const btnIco    = document.getElementById('btn-download-ico');
 const btnIcns   = document.getElementById('btn-download-icns');
+const btnLg     = document.getElementById('btn-download-lg');
 
 function closeDlMenu() {
   dlMenu?.classList.remove('open');
@@ -307,6 +310,7 @@ function syncDownloadMode() {
       estimateIcoSize(currentFile()).then(sz => { if (sz) icoSizeEl.textContent = formatFileSize(sz); });
     }
   }
+  if (btnLg) btnLg.classList.toggle('hidden', currentType === 'png');
 }
 
 if (dlGroup && ITEM) {
@@ -322,6 +326,7 @@ if (dlGroup && ITEM) {
   });
   btnIco?.addEventListener('click', () => { closeDlMenu(); downloadAsIco(ITEM, currentFile()); });
   btnIcns?.addEventListener('click', () => { closeDlMenu(); openIcnsModal(ITEM, currentFile()); });
+  btnLg?.addEventListener('click', () => { closeDlMenu(); openLiquidModal(ITEM, currentFile()); });
   btnZip?.addEventListener('click', () => { closeDlMenu(); downloadAllAsZip(ITEM); });
   document.addEventListener('click', e => { if (!dlGroup.contains(e.target)) closeDlMenu(); });
 

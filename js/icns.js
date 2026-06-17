@@ -251,12 +251,14 @@ const HL_PASSES = [
 ];
 
 // Compute the additive white edge-light for a foreground image, once, at HL_REF.
-function foregroundHighlight(fgImg, aspect) {
+function foregroundHighlight(fgImg, aspect, fgRegion) {
   const W = HL_REF;
   const m = document.createElement('canvas'); m.width = m.height = W;
   const mx = m.getContext('2d', { willReadFrequently: true });
   mx.imageSmoothingEnabled = true; mx.imageSmoothingQuality = 'high';
-  const f = fitBox(aspect, W);
+  const f = fgRegion
+    ? { dx: fgRegion.fx * W, dy: fgRegion.fy * W, dw: fgRegion.fw * W, dh: fgRegion.fh * W }
+    : fitBox(aspect, W);
   mx.drawImage(fgImg, f.dx, f.dy, f.dw, f.dh);
   const px = mx.getImageData(0, 0, W, W).data;
   const A = new Uint8Array(W * W);
@@ -316,16 +318,34 @@ function shadowTint(plate) {
 
 // Build the foreground layer: the glyph + glass body (translucent top-bright →
 // tinted-dark bottom) + the bright edge-light. No dark drop shadow.
-function buildFgLayer(source, bw) {
-  if (!source._hl) source._hl = foregroundHighlight(source.fg, source.aspect);
+// The glyph occupies the inset box [pad, size−pad] within the icon. It may spill
+// past that box (e.g. Ozon's wordmark overhangs the viewBox); the layer canvas is
+// sized to the box PLUS that overhang so its own bounds never slice the glyph —
+// only the outer squircle clip trims it. Returns { c, ox, oy }: draw `c` at
+// (ox, oy) in icon space. The canvas stays tight (≈ glyph box, not the full tile)
+// to keep slider drags cheap.
+function buildFgLayer(source, size, pad = 0) {
+  if (!source._hl) source._hl = foregroundHighlight(source.fg, source.aspect, source.fgRegion);
   if (!source._tint) source._tint = shadowTint(plateRGB(source));
   const t = source._tint;
+  const gs = size - 2 * pad;                     // glyph-box side (original viewBox maps here)
+  // Glyph placement in icon space, then the union of the box and the glyph (overhang).
+  const r = source.fgRegion;
+  const g = r
+    ? { x: pad + r.fx * gs, y: pad + r.fy * gs, w: r.fw * gs, h: r.fh * gs }
+    : (b => ({ x: pad + b.dx, y: pad + b.dy, w: b.dw, h: b.dh }))(fitBox(source.aspect, gs));
+  const ox = Math.floor(Math.min(pad, g.x));
+  const oy = Math.floor(Math.min(pad, g.y));
+  const cw = Math.ceil(Math.max(pad + gs, g.x + g.w)) - ox;
+  const ch = Math.ceil(Math.max(pad + gs, g.y + g.h)) - oy;
+
   const c = document.createElement('canvas');
-  c.width = c.height = bw;
+  c.width = cw; c.height = ch;
   const x = c.getContext('2d');
   x.imageSmoothingEnabled = true;
   x.imageSmoothingQuality = 'high';
-  const f = fitBox(source.aspect, bw);
+  // Everything below is in canvas space = icon space shifted by (−ox, −oy).
+  const f = { dx: g.x - ox, dy: g.y - oy, dw: g.w, dh: g.h };
   x.drawImage(source.fg, f.dx, f.dy, f.dw, f.dh);
 
   // Body translucency — multiply by white(top) → plate-tinted shadow(bottom).
@@ -335,7 +355,7 @@ function buildFgLayer(source, bw) {
   bg.addColorStop(0, 'rgb(255,255,255)');
   bg.addColorStop(1, `rgb(${t[0]},${t[1]},${t[2]})`);
   x.fillStyle = bg;
-  x.fillRect(0, 0, bw, bw);
+  x.fillRect(0, 0, cw, ch);
   x.globalCompositeOperation = 'destination-in';
   x.drawImage(source.fg, f.dx, f.dy, f.dw, f.dh);
 
@@ -345,13 +365,13 @@ function buildFgLayer(source, bw) {
   sh.addColorStop(0, 'rgba(255,255,255,0.05)');
   sh.addColorStop(1, 'rgba(255,255,255,0)');
   x.fillStyle = sh;
-  x.fillRect(0, 0, bw, bw);
+  x.fillRect(0, 0, cw, ch);
 
-  // Bright glass edge-light on top (additive).
+  // Bright glass edge-light on top (additive) — aligned to the glyph box.
   x.globalCompositeOperation = 'lighter';
-  x.drawImage(source._hl, 0, 0, bw, bw);
+  x.drawImage(source._hl, pad - ox, pad - oy, gs, gs);
   x.globalCompositeOperation = 'source-over';
-  return c;
+  return { c, ox, oy };
 }
 
 // Resolve the plate colour: 'auto' uses the logo's own background layer (handles
@@ -392,7 +412,9 @@ function renderIcon(source, size, opts) {
     o.shadowColor = 'rgba(0,0,0,0.22)';
     o.shadowBlur = bw * 0.022;
     o.shadowOffsetY = bw * 0.012;
-    o.drawImage(buildFgLayer(source, bw), 0, 0);
+    const innerPad = ((opts.innerPaddingPct || 0) / 100) * bw;
+    const fg = buildFgLayer(source, bw, innerPad);
+    o.drawImage(fg.c, fg.ox, fg.oy);
     o.restore();
     drawGlass(o, bw, prm);
   } else {
@@ -413,6 +435,8 @@ function renderIcon(source, size, opts) {
   ctx.drawImage(off, 0, 0);
   return cvs;
 }
+
+export { svgToImage, splitSvgLayers, renderIcon, MACOS_PCT };
 
 // ── Encoder ───────────────────────────────────────────────────────────────
 function writeAscii(u8, off, s) {
@@ -484,10 +508,15 @@ const opts = { ...DEFAULTS };
 const NEIGHBOR_SRCS = ['/assets/icns/dock-finder.png', '/assets/icns/dock-appstore.png'];
 let neighborImgs = null;
 
-function loadNeighbors() {
+const _neighborCallbacks = [];
+export function onNeighborsLoaded(cb) { _neighborCallbacks.push(cb); }
+export function getNeighborImgs() { return neighborImgs; }
+
+export function loadNeighbors() {
+  if (neighborImgs) return;
   neighborImgs = NEIGHBOR_SRCS.map(src => {
     const im = new Image();
-    im.onload = () => renderPreview();
+    im.onload = () => { renderPreview(); _neighborCallbacks.forEach(cb => cb()); };
     im.src = src;
     return im;
   });
@@ -690,18 +719,100 @@ function splitSvgLayers(svgText) {
     const vb = parseSvgViewBox(svgText);
     const W = vb ? vb.w : svg.getBBox().width;
     const H = vb ? vb.h : svg.getBBox().height;
-    const first = drawables(svg)[0];
+
+    // If the only top-level drawable is a <g> wrapper (e.g. clip-path container),
+    // look inside it — plate + glyph live among its children, not at svg's direct level.
+    const topLevel = drawables(svg);
+    const drawRoot = (topLevel.length === 1 && /^g$/i.test(topLevel[0].tagName))
+      ? topLevel[0] : svg;
+
+    const all = drawables(drawRoot);
+    const first = all[0];
     if (!first) return { full: svgText, fg: svgText, plate: null, bgColor: null };
-    const bb = first.getBBox();
-    const fullBleed = bb.width >= W * 0.9 && bb.height >= H * 0.9 && bb.x <= W * 0.06 && bb.y <= H * 0.06;
-    if (!fullBleed) return { full: svgText, fg: svgText, plate: null, bgColor: null };
+
+    // Geometry of an element relative to the tile. The glyph sits in the centre;
+    // background layers reach the tile's edges and corners.
+    const E = 0.02;                                // edge-touch tolerance (2%)
+    const geom = el => {
+      if (/^g$/i.test(el.tagName)) return null;
+      const b = el.getBBox();
+      const L = b.x <= W * E, T = b.y <= H * E;
+      const R = b.x + b.width >= W * (1 - E), B = b.y + b.height >= H * (1 - E);
+      return {
+        spans: b.width >= W * 0.9 && b.height >= H * 0.9,
+        corner: (L && T) || (L && B) || (R && T) || (R && B),
+        edges: (L ? 1 : 0) + (T ? 1 : 0) + (R ? 1 : 0) + (B ? 1 : 0),
+      };
+    };
+    // Gate: only treat the SVG as layered when its first drawable is a genuine
+    // full-bleed plate anchored at the origin. Standalone glyphs fall through.
+    const g0 = geom(first);
+    const fb = g0 && g0.spans && first.getBBox().x <= W * 0.06 && first.getBBox().y <= H * 0.06;
+    if (!fb) return { full: svgText, fg: svgText, plate: null, bgColor: null };
+
+    // Background palette = solid fills of tile-spanning layers, EXCLUDING the base
+    // plate's own colour. The base is often plain white (a backing rect), and the
+    // glyph is frequently white too — seeding white would swallow the glyph. Other
+    // spanning layers (e.g. Ozon's diagonal stripes) still seed real bg colours so
+    // their stray same-coloured fragments get grouped with the background.
+    const palette = new Set();
+    all.forEach((el, i) => { const gg = geom(el); if (i > 0 && gg && gg.spans) { const f = resolveFill(el); if (f) palette.add(f.toLowerCase()); } });
+
+    // A layer is plate when it: spans the tile, shares a real bg colour, fills a
+    // corner (Apple Maps' map blocks / fold), or hugs an edge with a gradient fill
+    // (continuous bg art, not a glyph). A solid fill that only crosses opposite
+    // edges without filling a corner is a centred wordmark (Ozon) → glyph.
+    const isPlate = el => {
+      const gg = geom(el);
+      if (!gg) return false;
+      if (gg.spans || gg.corner) return true;
+      const f = resolveFill(el);
+      if (f && palette.has(f.toLowerCase())) return true;
+      if (gg.edges >= 1 && !f) return true;       // edge-touching gradient = bg
+      return false;
+    };
+    const plateFlags = all.map(isPlate);
 
     const plateSvg = svg.cloneNode(true);
     const fgSvg = svg.cloneNode(true);
-    drawables(plateSvg).forEach((n, i) => { if (i !== 0) n.remove(); }); // keep only bg
-    const fgFirst = drawables(fgSvg)[0];
-    if (fgFirst) fgFirst.remove();                                       // drop bg
-    return { full: svgText, fg: fgSvg.outerHTML, plate: plateSvg.outerHTML, bgColor: resolveFill(first) };
+    // When content is inside a <g> wrapper, modify the <g>'s children in the clones.
+    const clonedPlateRoot = drawRoot === svg ? plateSvg : drawables(plateSvg)[0];
+    const clonedFgRoot    = drawRoot === svg ? fgSvg    : drawables(fgSvg)[0];
+    drawables(clonedPlateRoot).forEach((n, i) => { if (!plateFlags[i]) n.remove(); });
+    drawables(clonedFgRoot).forEach((n, i) => { if (plateFlags[i]) n.remove(); });
+
+    // Drop clip-paths from the fg layer. Many icons wrap everything in
+    // <g clip-path="url(#…)"> bound to a full-tile rect; that clip slices the
+    // glyph's overhang at the viewBox edge during rasterisation (Ozon's left "O"),
+    // and widening the viewBox alone can't rescue it. The fg is only the glyph, so
+    // clipping it serves no purpose — the plate keeps its clip.
+    fgSvg.querySelectorAll('[clip-path]').forEach(n => n.removeAttribute('clip-path'));
+
+    // The glyph can spill past the viewBox (e.g. Ozon's wordmark reaches x≈33 and
+    // x≈−1.7 on a 32-wide tile). Rasterising the fg at the bare viewBox would clip
+    // those overhangs — invisible at the default inset, but exposed once the slider
+    // shrinks the glyph inward. Widen the fg viewBox to the union of the viewBox and
+    // the glyph's real bbox, and report that region so the renderer keeps the glyph
+    // aligned to the (un-widened) plate. The plate itself stays full-bleed.
+    let fgRegion = { fx: 0, fy: 0, fw: 1, fh: 1 };
+    let gx0 = Infinity, gy0 = Infinity, gx1 = -Infinity, gy1 = -Infinity;
+    all.forEach((el, i) => {
+      if (plateFlags[i]) return;
+      const b = el.getBBox();
+      if (!b.width && !b.height) return;
+      gx0 = Math.min(gx0, b.x); gy0 = Math.min(gy0, b.y);
+      gx1 = Math.max(gx1, b.x + b.width); gy1 = Math.max(gy1, b.y + b.height);
+    });
+    if (gx0 < 0 || gy0 < 0 || gx1 > W || gy1 > H) {
+      const rx = Math.min(0, gx0), ry = Math.min(0, gy0);
+      const rw = Math.max(W, gx1) - rx, rh = Math.max(H, gy1) - ry;
+      fgSvg.setAttribute('viewBox', `${rx} ${ry} ${rw} ${rh}`);
+      fgRegion = { fx: rx / W, fy: ry / H, fw: rw / W, fh: rh / H };
+    }
+    // When every element classified as plate, there is no separate glyph to scale —
+    // the inner-padding slider would be inert. Report it so the UI can hide it.
+    const fgEmpty = plateFlags.every(Boolean);
+    return { full: svgText, fg: fgSvg.outerHTML, plate: plateSvg.outerHTML, bgColor: resolveFill(first), fgRegion, fgEmpty };
   } catch {
     return { full: svgText, fg: svgText, plate: null, bgColor: null };
   } finally {
@@ -711,10 +822,10 @@ function splitSvgLayers(svgText) {
 
 // Load a logo file into a render source: the full image plus, for layered SVGs,
 // a separate foreground image + background plate image + detected plate colour.
-async function prepareSource(file) {
+export async function prepareSource(file) {
   if (/\.png(\?|$)/i.test(file)) {
     const { img, aspect } = await pngToImage(svgUrl(file));
-    return { full: img, fg: img, plate: null, bgColor: null, hasLayers: false, aspect };
+    return { full: img, fg: img, plate: null, bgColor: null, hasLayers: false, aspect, hasGlyph: true };
   }
   const rawSvg = await loadRawSvg(file);
   if (!rawSvg) throw new Error('no svg');
@@ -722,7 +833,9 @@ async function prepareSource(file) {
   const full = await svgToImage(s.full);
   const fg = s.plate ? await svgToImage(s.fg) : full;
   const plate = s.plate ? (await svgToImage(s.plate)).img : null;
-  return { full: full.img, fg: fg.img, plate, bgColor: s.bgColor, hasLayers: !!s.plate, aspect: full.aspect };
+  // hasGlyph drives whether the inner-padding slider is meaningful: a non-layered
+  // logo scales as a whole; a layered one only when a glyph was peeled off the plate.
+  return { full: full.img, fg: fg.img, plate, bgColor: s.bgColor, hasLayers: !!s.plate, aspect: full.aspect, fgRegion: s.plate ? s.fgRegion : null, hasGlyph: !s.fgEmpty };
 }
 
 // Encode the full .icns from a render source at the given settings.
@@ -815,3 +928,4 @@ export async function openIcnsModal(item, file = item.file) {
     close();
   }
 }
+

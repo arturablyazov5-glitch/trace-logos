@@ -3,10 +3,12 @@ import './search-shortcut.js';
 import {
   colorState, svgRawCache,
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
-  pushColorHistory, undoColors, loadRawSvg, applyColorMap,
+  pushColorHistory, undoColors, loadRawSvg, applyColorMap, setPreviewHook,
 } from './color.js';
+import * as glassModule from './liquid-glass.js';
 import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, downloadAsIco, estimateIcoSize } from './export.js';
 import { openIcnsModal } from './icns.js';
+import { openLiquidModal } from './liquid-glass-modal.js';
 import { updateSeoPageLink, slugifyPathPart } from './seo.js';
 import { ecosystemLogoMap, ecosystemLabels, loadLogos } from './data.js';
 import { categoryIconSvg } from './category-icons.js';
@@ -55,6 +57,7 @@ let detailPushedState = false;
 let isClosingViaButton = false;
 let activeVariantCard = null;
 let currentVariant = null; // the variant vDef currently shown in the detail panel (for ICO/ICNS export)
+let updatePngDownloadSize = null; // set per-variant; recomputes the "Скачать PNG" size readout
 
 function resetCopyBtn() {
   if (copyBtnResetTimer) {
@@ -108,6 +111,9 @@ function applyDownloadVariantState(item, isSquare, file = item.file) {
     icoSizeEl.textContent = '';
     estimateIcoSize(file).then(sz => { if (sz) icoSizeEl.textContent = formatFileSize(sz); });
   }
+
+  const btnLg = document.getElementById('btn-download-lg');
+  if (btnLg) btnLg.classList.toggle('hidden', /\.png(\?|$)/i.test(file));
 }
 
 // The download dropdown lives inside #detail, which is overflow:auto — an absolute
@@ -357,6 +363,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   if (activeVariantCard) activeVariantCard.classList.remove('active');
   activeVariantCard = vcEl;
   currentVariant = vDef;
+  updatePngDownloadSize = null; // reset; only the SVG branch wires it up
   if (vcEl) vcEl.classList.add('active');
 
   const detailFigmaEl = document.getElementById('detail-figma');
@@ -419,6 +426,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   }
 
   if (isPng) {
+    glassModule.hide();
     animateContainerHeight(controls, () => {
       btnCopy.classList.add('hidden');
       btnDownloadSvg.classList.add('hidden');
@@ -514,15 +522,34 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
 
   const getExportSvg = () => applyColorMap(rawSvg);
 
+  // Show glass panel for SVG logos only (not emoji)
+  if (_pathSection !== 'emoji') {
+    glassModule.show(getExportSvg());
+  } else {
+    glassModule.hide();
+  }
+
+  // The exported PNG is either the plain raster of the SVG, or — when Liquid Glass
+  // is on — the rendered squircle icon. Shared by the size readout, copy & download.
+  const getPngBlob = () => glassModule.isEnabled()
+    ? glassModule.getBlob(1024)
+    : svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 });
+
   const btnSizeSvg = btnDownloadSvg.querySelector('.btn-size');
   if (btnSizeSvg) btnSizeSvg.textContent = formatFileSize(new Blob([svgForExport(getExportSvg(), isSquare)]).size);
   const btnSizePng = btnDownloadPng.querySelector('.btn-size');
-  if (btnSizePng) { btnSizePng.textContent = ''; svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 }).then(b => { btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {}); }
+  updatePngDownloadSize = () => {
+    if (!btnSizePng) return;
+    btnSizePng.textContent = '';
+    Promise.resolve(getPngBlob()).then(b => { if (b) btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {});
+  };
+  updatePngDownloadSize();
   applyDownloadVariantState(item, isSquare, vDef.file);
 
   btnCopy.onclick = () => {
     navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
-      .then(() => triggerConfetti(btnCopy));
+      .then(() => { triggerConfetti(btnCopy); showToast(TOASTS.copiedSvg); })
+      .catch(() => showToast(TOASTS.copyError));
   };
   btnDownloadSvg.onclick = () => {
     const blob = new Blob([svgForExport(getExportSvg(), isSquare)], { type: 'image/svg+xml' });
@@ -530,8 +557,21 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     a.click(); URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(baseName + suffix + '.svg'));
   };
+  btnCopyPng.onclick = async () => {
+    btnCopyPng.disabled = true;
+    try {
+      const blob = await getPngBlob();
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': new File([blob], `${item.name}.png`, { type: 'image/png' }) })]);
+      triggerConfetti(btnCopyPng);
+      showToast(TOASTS.copiedPng);
+    } catch (e) {
+      showToast(TOASTS.copyPngError);
+    } finally {
+      btnCopyPng.disabled = false;
+    }
+  };
   btnDownloadPng.onclick = async () => {
-    const pngBlob = await svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 });
+    const pngBlob = await getPngBlob();
     const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + suffix + '.png' });
     a.click(); URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(baseName + suffix + '.png'));
@@ -845,6 +885,8 @@ openDetailFn = function (item, card) {
   if (btnIco) btnIco.onclick = () => { closeDownloadMenu(); downloadAsIco(item, currentVariant?.file ?? item.file); };
   const btnIcns = document.getElementById('btn-download-icns');
   if (btnIcns) btnIcns.onclick = () => { closeDownloadMenu(); openIcnsModal(item, currentVariant?.file ?? item.file); };
+  const btnLg = document.getElementById('btn-download-lg');
+  if (btnLg) btnLg.onclick = () => { closeDownloadMenu(); openLiquidModal(item, currentVariant?.file ?? item.file); };
   const btnZip = document.getElementById('btn-download-zip');
   if (btnZip) {
     // New dropdown — ZIP bundles SVG+PNG (+ICO+ICNS for square logos), so it always
@@ -952,6 +994,17 @@ window.addEventListener('popstate', () => {
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 applyLabels(); // single source of button texts → js/labels.js
+glassModule.init({
+  // Glass on → it's a rendered PNG icon: hide the SVG copy/download, show PNG copy.
+  // (Download PNG stays visible; its handler already produces the glass render.)
+  onToggle(on) {
+    document.getElementById('btn-copy').classList.toggle('hidden', on);
+    document.getElementById('btn-download').classList.toggle('hidden', on);
+    document.getElementById('btn-copy-png').classList.toggle('hidden', !on);
+    updatePngDownloadSize?.();
+  },
+});
+setPreviewHook(styledSvg => { if (glassModule.isEnabled()) glassModule.refresh(styledSvg); });
 
 placeSearchBar();
 
