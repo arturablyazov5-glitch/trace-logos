@@ -11,15 +11,46 @@ export function initSearch({ sectionEls, searchCount, ensureSectionCards, getTot
   _updateScrollTopButton = updateScrollTopButton;
 }
 
-export function matchWord(word, haystack) {
-  if (haystack.includes(word)) return true;
+const STOP_WORDS = new Set(['логотип', 'лого', 'logo', 'logotype', 'логотипы']);
+
+export function scoreWord(word, haystack) {
+  if (haystack.includes(word)) return 100;
   const alt = switchLayout(word);
-  if (alt !== word && haystack.includes(alt)) return true;
+  if (alt !== word && haystack.includes(alt)) return 100;
   const tokens = haystack.split(/\s+/);
-  return tokens.some(t => t && (
-    word.startsWith(t) || t.startsWith(word) ||
-    (alt !== word && (alt.startsWith(t) || t.startsWith(alt)))
-  ));
+  let best = 0;
+  for (const t of tokens) {
+    if (!t) continue;
+    if (t === word || (alt !== word && t === alt)) { best = Math.max(best, 90); continue; }
+    if (t.startsWith(word) || (alt !== word && t.startsWith(alt))) { best = Math.max(best, 70); continue; }
+    // Require 3+ chars to prevent single-letter tokens ("т", "в") from matching everything
+    if (t.length >= 3 && (word.startsWith(t) || (alt !== word && alt.startsWith(t)))) { best = Math.max(best, 30); }
+  }
+  return best;
+}
+
+export function matchWord(word, haystack) {
+  return scoreWord(word, haystack) > 0;
+}
+
+function nameBonus(w, nameLow) {
+  if (nameLow === w) return 200;
+  if (nameLow.startsWith(w + ' ')) return 150;
+  if (nameLow.startsWith(w)) return 130;
+  if (nameLow.includes(w)) return 50;
+  return 0;
+}
+
+function scoreCard(words, card) {
+  const haystack = card.dataset.search;
+  const nameLow = card._item.name.toLowerCase().replace(/-/g, '');
+  let total = 0;
+  for (const w of words) {
+    const s = scoreWord(w, haystack);
+    if (s === 0) return 0;
+    total += s + nameBonus(w, nameLow);
+  }
+  return total;
 }
 
 function updateSearchCount(visible, hasQuery) {
@@ -33,21 +64,23 @@ function updateSearchCount(visible, hasQuery) {
 }
 
 export function filterCards(q) {
-  const words = q.trim().toLowerCase().replace(/-/g, '').split(/\s+/).filter(Boolean);
+  const words = q.trim().toLowerCase().replace(/-/g, '').split(/\s+/).filter(w => w && !STOP_WORDS.has(w));
   const rawWords = q.trim().split(/\s+/).filter(Boolean);
   const hasQuery = words.length > 0;
   let visibleCardCount = 0;
-  let sectionsWithHits = 0;
+  const hitSections = [];
 
   _sectionEls.forEach(section => {
     _ensureSectionCards(section);
-    let any = false;
     const matchingCards = [];
+    let sectionBestScore = 0;
+
     section.cards.forEach(card => {
-      const match = !hasQuery || words.every(w => matchWord(w, card.dataset.search));
+      const score = !hasQuery ? 1 : scoreCard(words, card);
+      const match = score > 0;
       card.classList.toggle('hidden', !match);
       if (!match) return;
-      any = true;
+      card._searchScore = score;
       visibleCardCount++;
       matchingCards.push(card);
 
@@ -63,16 +96,39 @@ export function filterCards(q) {
         pathEl.textContent = item.figma;
         card.classList.remove('show-path');
       }
+
+      if (score > sectionBestScore) sectionBestScore = score;
     });
+
+    if (hasQuery && matchingCards.length > 1) {
+      matchingCards.sort((a, b) => b._searchScore - a._searchScore);
+    }
+
     section.visibleCards = matchingCards;
     section.grid.style.height = '';
     if (section.mounted) { section.grid.replaceChildren(...matchingCards); matchingCards.forEach(loadCardImage); }
+    const any = matchingCards.length > 0;
     setSectionHidden(section.sec, !any);
-    if (any) sectionsWithHits++;
+    if (any) hitSections.push({ section, score: sectionBestScore });
   });
 
+  // Reorder sections by relevance score when searching
+  if (hasQuery && hitSections.length > 1) {
+    hitSections.sort((a, b) => b.score - a.score);
+    const container = hitSections[0].section.sec.parentElement;
+    if (container) {
+      for (const { section } of hitSections) container.appendChild(section.sec);
+    }
+  } else if (!hasQuery) {
+    // Restore original manifest order
+    const container = _sectionEls[0]?.sec?.parentElement;
+    if (container) {
+      for (const section of _sectionEls) container.appendChild(section.sec);
+    }
+  }
+
   updateSearchCount(visibleCardCount, hasQuery);
-  const isEmpty = sectionsWithHits === 0 && hasQuery;
+  const isEmpty = hitSections.length === 0 && hasQuery;
   document.getElementById('empty').classList.toggle('show', isEmpty);
   document.getElementById('content').style.display = isEmpty ? 'none' : '';
   if (isEmpty) {
