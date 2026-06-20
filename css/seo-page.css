@@ -668,10 +668,10 @@ footer {
   border-top: 1px solid var(--bg-muted);
 }
 
-/* ── Telegram banner ── */
-.tg-banner { display: none; }
+/* ── Threads banner ── */
+.th-banner { display: block; }
 
-.tg-banner-link {
+.th-banner-link {
   position: relative;
   display: block;
   overflow: hidden;
@@ -685,17 +685,16 @@ footer {
   box-shadow: 0 4px 14px rgba(0, 0, 0, .18);
   transition: transform .18s ease, border-color .2s ease, box-shadow .25s ease;
 }
-.tg-banner-link:hover {
+.th-banner-link:hover {
   transform: translateY(-3px);
   border-color: var(--border-focus);
   box-shadow: 0 8px 20px rgba(0, 0, 0, .28);
 }
 
-/* Shine sweep removed — neutral dark card */
-.tg-banner-shine { display: none; }
+.th-banner-shine { display: none; }
 
-/* Big translucent paper-plane watermark */
-.tg-banner-watermark {
+/* Big translucent watermark */
+.th-banner-watermark {
   position: absolute;
   right: -18px; bottom: -22px;
   width: 116px; height: 116px;
@@ -706,7 +705,7 @@ footer {
   z-index: 0;
 }
 
-.tg-banner-body {
+.th-banner-body {
   position: relative;
   z-index: 1;
   display: flex;
@@ -715,7 +714,7 @@ footer {
   gap: 7px;
 }
 
-.tg-banner-eyebrow {
+.th-banner-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -729,9 +728,9 @@ footer {
   text-transform: uppercase;
   color: var(--text-4);
 }
-.tg-banner-eyebrow svg { width: 12px; height: 12px; }
+.th-banner-eyebrow svg { width: 12px; height: 12px; }
 
-.tg-banner-title {
+.th-banner-title {
   font-size: 17px;
   font-weight: 800;
   line-height: 1.15;
@@ -739,17 +738,17 @@ footer {
   color: var(--text-0);
 }
 
-.tg-banner-desc {
+.th-banner-desc {
   font-size: 12.5px;
   line-height: 1.45;
   color: var(--text-4);
 }
 
-.tg-banner-cta {
+.th-banner-cta {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin-top: 56px;
+  margin-top: 42px;
   padding: 9px 16px;
   border-radius: 10px;
   background: var(--text-0);
@@ -758,19 +757,15 @@ footer {
   font-weight: 500;
   transition: background .15s ease, transform .18s ease;
 }
-.tg-banner-cta svg { width: 15px; height: 15px; }
-.tg-banner-link:hover .tg-banner-cta {
+.th-banner-cta svg { width: 15px; height: 15px; }
+.th-banner-link:hover .th-banner-cta {
   background: var(--light-hover);
   transform: translateY(-1px);
 }
 
-@keyframes tg-shine {
-  0%, 55% { left: -75%; }
-  100% { left: 160%; }
-}
 @media (prefers-reduced-motion: reduce) {
-  .tg-banner-shine { display: none; }
-  .tg-banner-link:hover { transform: none; }
+  .th-banner-shine { display: none; }
+  .th-banner-link:hover { transform: none; }
 }
 
 /* ── Mobile ── */
@@ -780,17 +775,17 @@ footer {
   .logo-side { display: contents; }
   .preview-card { order: 1; max-width: 200px; margin: 0 auto; }
   .logo-info    { order: 2; }
-  .tg-banner    { order: 3; }
+  .th-banner    { order: 3; }
   main { padding: 24px 16px 48px; }
   .site-header { padding: 0 16px; }
   .seo-search-form { display: none; }
   .breadcrumbs { padding: 12px 16px 0; }
   h1 { font-size: 26px; }
   /* Баннер на мобилке — широкий, в самом низу карточки */
-  .tg-banner-link { padding: 20px 22px; }
-  .tg-banner-title { font-size: 19px; }
-  .tg-banner-desc { font-size: 13.5px; max-width: 30ch; }
-  .tg-banner-watermark { width: 140px; height: 140px; right: -10px; }
+  .th-banner-link { padding: 20px 22px; }
+  .th-banner-title { font-size: 19px; }
+  .th-banner-desc { font-size: 13.5px; max-width: 30ch; }
+  .th-banner-watermark { width: 140px; height: 140px; right: -10px; }
 }
 
 .info-section    { display: flex; flex-direction: column; gap: 8px; }
