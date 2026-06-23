@@ -9,29 +9,29 @@ class HelpModal extends HTMLElement {
     this.innerHTML = `
 <div class="suggest-overlay" id="help-overlay">
   <div class="suggest-modal" role="dialog" aria-modal="true" aria-labelledby="help-title">
-    <button class="suggest-close" id="help-close" aria-label="Закрыть">
+    <button class="suggest-close" id="help-close" data-i18n-aria="suggestCloseAria" aria-label="Закрыть">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
         <path d="M18 6 6 18M6 6l12 12"/>
       </svg>
     </button>
     <div class="suggest-modal-header">
       <div id="help-modal-titles">
-        <div class="suggest-modal-title" id="help-title">Помочь с иконкой</div>
-        <div class="suggest-modal-sub">Вы помогаете автору. Загрузите SVG для <strong id="help-icon-name"></strong></div>
+        <div class="suggest-modal-title" id="help-title" data-i18n="helpModalTitle">Помочь с иконкой</div>
+        <div class="suggest-modal-sub"><span data-i18n="helpModalSub">Вы помогаете автору. Загрузите SVG для</span> <strong id="help-icon-name"></strong></div>
       </div>
     </div>
     <form id="help-form" class="suggest-fields" style="margin-top:4px">
       <div class="suggest-field">
-        <label class="suggest-label">SVG-файлы <span style="color:#e06060">*</span> <span style="color:#555">— до 5 штук (favicon, full и др.)</span></label>
+        <label class="suggest-label"><span data-i18n="helpSvgLabel">SVG-файлы</span> <span style="color:#e06060">*</span> <span style="color:#555" data-i18n="helpSvgHint">— до 5 штук (favicon, full и др.)</span></label>
         <label class="suggest-file-label" id="help-file-label" for="help-file-input">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span id="help-file-name">Выбрать SVG-файлы</span>
+          <span id="help-file-name" data-i18n="helpChooseSvg">Выбрать SVG-файлы</span>
           <input type="file" accept=".svg,image/svg+xml" id="help-file-input" class="suggest-file-input" multiple>
         </label>
         <div class="help-file-chips" id="help-file-chips"></div>
       </div>
       <p id="help-error" style="display:none;color:#e06060;font-size:13px;margin:0 0 4px"></p>
-      <button type="submit" class="suggest-submit">Отправить</button>
+      <button type="submit" class="suggest-submit" data-i18n="suggestSubmit">Отправить</button>
     </form>
     <div class="suggest-success" id="help-success">
       <svg class="t-form-success-popup__content-icon"
@@ -43,7 +43,7 @@ class HelpModal extends HTMLElement {
               d="M 66.7645 107.258 L 90.6617 129.843 L 143.235 80.157"
               stroke="white" stroke-width="14.7059" stroke-linecap="round" stroke-linejoin="round" fill="none" pathLength="1"></path>
       </svg>
-      <div class="suggest-success-title">Спасибо!</div>
+      <div class="suggest-success-title" data-i18n="helpSuccessTitle">Спасибо!</div>
     </div>
   </div>
 </div>`;

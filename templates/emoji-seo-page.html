@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{LANG_ATTR}}">
 <head>
-{{> metrika}}
+{{LANG_SCRIPT}}{{> metrika}}
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -42,12 +42,12 @@
 </head>
 <body>
 
-{{> site-header search_action='emoji/' search_scope='all' search_ph='Поиск логотипов и эмодзи...' back_href='emoji/' back_label='Все эмодзи' }}
+{{> site-header search_action='emoji/' search_scope='emoji' search_ph='Поиск эмодзи...' back_href='emoji/' back_label='Все эмодзи' }}
 
-<nav class="breadcrumbs" aria-label="Навигация">
-  <a href="{{REL}}">Trace Logo's</a><span class="sep">/</span>
-  <a href="{{REL}}emoji/">Эмодзи</a><span class="sep">/</span>
-  <a href="{{REL}}emoji/{{BREADCRUMB_CAT_SLUG}}/">{{BREADCRUMB_CAT}}</a><span class="sep">/</span>
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
+  <a href="{{HOME_REL}}">Trace Logo's</a><span class="sep">/</span>
+  <a href="{{HOME_REL}}emoji/">{{LABEL_EMOJI_CRUMB}}</a><span class="sep">/</span>
+  <a href="{{HOME_REL}}emoji/{{BREADCRUMB_CAT_SLUG}}/">{{BREADCRUMB_CAT}}</a><span class="sep">/</span>
   <span class="current" aria-current="page">{{BREADCRUMB_CURRENT}}</span>
 </nav>
 
@@ -75,7 +75,7 @@
       <hr class="divider">
 
       <div class="info-section">
-        <span class="section-label">Скачать и копировать</span>
+        <span class="section-label">{{LABEL_DOWNLOAD}}</span>
         <div class="btn-row" id="btn-row">
           {{DOWNLOAD_BUTTONS}}
         </div>
@@ -84,7 +84,7 @@
       <hr class="divider">
 
       <div class="info-section-lg">
-        <span class="section-label">Варианты</span>
+        <span class="section-label">{{LABEL_VARIANTS}}</span>
         <div class="evar-grid" id="evar-grid">
           {{VARIANT_CARDS}}
         </div>
@@ -94,15 +94,15 @@
 
       <div class="meta-table">
         <div class="meta-row">
-          <span class="meta-key">Символ</span>
+          <span class="meta-key">{{LABEL_SYMBOL}}</span>
           <span class="meta-val emoji-meta-char">{{EMOJI_CHAR}}</span>
         </div>
         <div class="meta-row">
-          <span class="meta-key">Юникод</span>
+          <span class="meta-key">{{LABEL_UNICODE}}</span>
           <span class="meta-val">{{CODEPOINTS}}</span>
         </div>
         <div class="meta-row">
-          <span class="meta-key">Категория</span>
+          <span class="meta-key">{{LABEL_CATEGORY}}</span>
           <span class="meta-val">{{CATEGORY_NAME}}</span>
         </div>{{EN_ROW}}
       </div>
@@ -113,19 +113,19 @@
 
   <div class="catalog-cta">
     <div class="catalog-cta-text">
-      <span class="catalog-cta-title">1918 эмодзи в каталоге</span>
-      <span class="catalog-cta-sub">Apple, Google и Microsoft — поиск на русском</span>
+      <span class="catalog-cta-title">{{CATALOG_CTA_TITLE}}</span>
+      <span class="catalog-cta-sub">{{CATALOG_CTA_SUB}}</span>
     </div>
-    <a class="catalog-cta-link" href="{{REL}}emoji/">
-      Открыть каталог
+    <a class="catalog-cta-link" href="{{HOME_REL}}emoji/">
+      {{LABEL_OPEN_CATALOG}}
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
 </main>
 
 <footer>
-  Trace Logo's Beta · <a href="{{REL}}" class="footer-link">trace-logos</a>
-  <p class="footer-copyright">Эмодзи Apple, Google и Microsoft принадлежат их правообладателям и приведены для ознакомления.</p>
+  Trace Logo's Beta · <a href="{{HOME_REL}}" class="footer-link">trace-logos</a>
+  <p class="footer-copyright" data-i18n="footerEmojiCopyright">Эмодзи Apple, Google и Microsoft принадлежат их правообладателям и приведены для ознакомления.</p>
 </footer>
 
 <div id="toast" class="toast"></div>

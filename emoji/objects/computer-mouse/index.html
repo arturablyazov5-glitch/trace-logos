@@ -129,20 +129,22 @@
     </span>
     <span class="brand-name">Trace Logo's</span>
   </a>
-  <form class="seo-search-form" id="seo-search-form" role="search" action="../../../emoji/" method="get" data-base="../../../" data-scope="all">
-    <div class="seo-search-wrap">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
-    </div>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../../emoji/" method="get" data-base="../../../" data-scope="emoji">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Поиск эмодзи..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
     <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
   </form>
   <a class="back-btn" href="../../../emoji/">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Все эмодзи
+    <span data-i18n="backToCatalog">Все эмодзи</span>
   </a>
+  <lang-switcher></lang-switcher>
 </header>
+<script src="../../../components/lang-switcher.js" defer></script>
+<script src="../../../components/search-box.js" defer></script>
 
-<nav class="breadcrumbs" aria-label="Навигация">
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="../../../">Trace Logo's</a><span class="sep">/</span>
   <a href="../../../emoji/">Эмодзи</a><span class="sep">/</span>
   <a href="../../../emoji/objects/">Предметы</a><span class="sep">/</span>
@@ -209,7 +211,7 @@
           <span class="meta-val emoji-meta-char">🖱️</span>
         </div>
         <div class="meta-row">
-          <span class="meta-key">Юникод</span>
+          <span class="meta-key">Unicode</span>
           <span class="meta-val">U+1F5B1 U+FE0F</span>
         </div>
         <div class="meta-row">
@@ -253,7 +255,7 @@
 
 <footer>
   Trace Logo's Beta · <a href="../../../" class="footer-link">trace-logos</a>
-  <p class="footer-copyright">Эмодзи Apple, Google и Microsoft принадлежат их правообладателям и приведены для ознакомления.</p>
+  <p class="footer-copyright" data-i18n="footerEmojiCopyright">Эмодзи Apple, Google и Microsoft принадлежат их правообладателям и приведены для ознакомления.</p>
 </footer>
 
 <div id="toast" class="toast"></div>

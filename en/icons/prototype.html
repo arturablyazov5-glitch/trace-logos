@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+  ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+<meta charset="UTF-8">
+  <script>window.__LANG__='en';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Иконки — прототип · Trace Logo's</title>
+<link rel="stylesheet" href="/css/tokens.css">
+<style>
+  body { font-family: var(--font); background: var(--bg); color: var(--text-1); display: flex; height: 100vh; overflow: hidden; -webkit-font-smoothing: antialiased; }
+
+  /* ── Sidebar ── */
+  aside { width: 248px; flex-shrink: 0; background: var(--bg-card); border-right: 1px solid var(--line); display: flex; flex-direction: column; overflow-y: auto; padding: 16px 0; }
+  .brand { font-weight: 700; font-size: 15px; color: var(--text-0); padding: 0 18px 14px; letter-spacing: -.2px; }
+  .brand span { color: var(--text-4); font-weight: 500; }
+  .side-label { font-size: 11px; text-transform: uppercase; letter-spacing: .6px; color: var(--text-6); padding: 14px 18px 6px; display: flex; align-items: center; gap: 6px; }
+  .pack-filter { margin: 0 12px 6px; }
+  .pack-filter input { width: 100%; background: var(--bg-muted); border: 1px solid var(--border); border-radius: 8px; color: var(--text-1); font-size: 12.5px; padding: 7px 10px; outline: none; }
+  .pack-filter input:focus { border-color: var(--border-focus); }
+  .pack { display: flex; align-items: center; gap: 9px; padding: 8px 18px; cursor: pointer; font-size: 13.5px; color: var(--text-2); position: relative; }
+  .pack:hover { background: var(--bg-hover); color: var(--text-1); }
+  .pack.active { background: var(--bg-active); color: var(--text-0); }
+  .pack.active::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; border-radius: 0 3px 3px 0; background: var(--text-0); }
+  .pack-thumb { width: 26px; height: 26px; border-radius: 6px; background: var(--bg-raised); display: grid; place-items: center; flex-shrink: 0; color: var(--text-2); }
+  .pack-thumb svg { width: 15px; height: 15px; }
+  .pack-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pack-count { font-size: 11px; color: var(--text-5); font-variant-numeric: tabular-nums; }
+  .pack-star { opacity: 0; color: var(--text-5); flex-shrink: 0; transition: .12s; font-size: 13px; }
+  .pack:hover .pack-star { opacity: 1; }
+  .pack-star.on { opacity: 1; color: #f5c518; }
+  .side-divider { height: 1px; background: var(--line); margin: 8px 14px; }
+  .manage-btn { margin: 10px 14px 0; padding: 8px; text-align: center; font-size: 12.5px; color: var(--text-3); border: 1px dashed var(--border-base); border-radius: 8px; cursor: pointer; }
+  .manage-btn:hover { color: var(--text-1); border-color: var(--border-hover); }
+
+  /* ── Center ── */
+  .center { flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+  .topbar { height: 56px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; padding: 0 20px; flex-shrink: 0; }
+  .search { flex: 1; max-width: 460px; display: flex; align-items: center; gap: 8px; background: var(--bg-muted); border: 1px solid var(--border); border-radius: 9px; padding: 8px 12px; }
+  .search:focus-within { border-color: var(--border-focus); }
+  .search svg { color: var(--text-4); flex-shrink: 0; }
+  .search input { background: none; border: none; outline: none; color: var(--text-1); font-size: 13.5px; width: 100%; }
+  .crumb { font-size: 13px; color: var(--text-3); margin-left: auto; }
+  .crumb b { color: var(--text-1); font-weight: 600; }
+
+  /* ── WYSIWYG customization bar ── */
+  .custom-bar { display: flex; align-items: center; gap: 22px; padding: 11px 20px; border-bottom: 1px solid var(--line); background: var(--bg-card); flex-wrap: wrap; }
+  .cc { display: flex; align-items: center; gap: 9px; font-size: 12.5px; color: var(--text-3); }
+  .cc label { color: var(--text-4); }
+  .swatch { width: 22px; height: 22px; border-radius: 6px; border: 1px solid var(--border-base); cursor: pointer; padding: 0; position: relative; overflow: hidden; }
+  .swatch input { position: absolute; inset: -4px; width: 130%; height: 130%; cursor: pointer; opacity: 0; }
+  input[type=range] { accent-color: #5b8cff; width: 116px; }
+  .cc .val { color: var(--text-1); font-variant-numeric: tabular-nums; min-width: 34px; }
+  .stepper { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 7px; overflow: hidden; }
+  .stepper button { background: var(--bg-raised); border: none; color: var(--text-2); width: 24px; height: 26px; cursor: pointer; font-size: 14px; }
+  .stepper button:hover { background: var(--bg-active); color: var(--text-0); }
+  .stepper .val { padding: 0 8px; font-size: 12.5px; min-width: 30px; text-align: center; }
+  .reset { margin-left: auto; font-size: 12px; color: var(--text-4); cursor: pointer; background: none; border: none; }
+  .reset:hover { color: var(--text-1); }
+
+  /* ── Chips ── */
+  .chips { display: flex; gap: 7px; padding: 11px 20px; border-bottom: 1px solid var(--line); overflow-x: auto; flex-shrink: 0; }
+  .chip { font-size: 12.5px; color: var(--text-2); background: var(--bg-muted); border: 1px solid var(--border); border-radius: 20px; padding: 5px 13px; cursor: pointer; white-space: nowrap; }
+  .chip:hover { border-color: var(--border-hover); color: var(--text-1); }
+  .chip.on { background: var(--text-0); color: #111; border-color: var(--text-0); font-weight: 600; }
+
+  /* ── Grid ── */
+  main { flex: 1; overflow-y: auto; padding: 8px 20px 90px; min-width: 0; transition: padding-right .35s cubic-bezier(.22,.61,.36,1); }
+  body:has(#detail.open) main { padding-right: 312px; }
+  .section { margin-top: 18px; }
+  .section-head { position: sticky; top: 0; background: linear-gradient(var(--bg) 70%, transparent); z-index: 2; display: flex; align-items: baseline; gap: 9px; padding: 8px 2px 10px; }
+  .section-head .pk { font-size: 11px; color: var(--text-5); }
+  .section-head .nm { font-size: 14px; color: var(--text-1); font-weight: 600; }
+  .section-head .ct { font-size: 11px; color: var(--text-6); font-variant-numeric: tabular-nums; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(82px, 1fr)); gap: 8px; }
+  .card { aspect-ratio: 1; background: var(--bg-card); border: 1px solid var(--border); border-radius: 11px; display: grid; place-items: center; cursor: pointer; position: relative; transition: .12s; }
+  .card:hover { background: var(--bg-hover); border-color: var(--border-hover); transform: translateY(-1px); }
+  .card.incart { border-color: #5b8cff; box-shadow: 0 0 0 1px #5b8cff inset; }
+  .card svg { width: 30px; height: 30px; transition: none; }
+  .card .nm { position: absolute; bottom: 6px; left: 6px; right: 6px; text-align: center; font-size: 9.5px; color: var(--text-5); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; transition: .12s; }
+  .card:hover .nm { opacity: 1; }
+  .card .badge { position: absolute; top: 5px; left: 6px; font-size: 8px; color: var(--text-6); background: var(--bg-muted); padding: 1px 5px; border-radius: 5px; opacity: 0; }
+  .card:hover .badge { opacity: 1; }
+  .card .quick { position: absolute; top: 5px; right: 5px; display: flex; gap: 3px; opacity: 0; transition: .12s; }
+  .card:hover .quick { opacity: 1; }
+  .qbtn { width: 21px; height: 21px; border-radius: 6px; background: var(--bg-active); border: 1px solid var(--border-base); color: var(--text-2); display: grid; place-items: center; cursor: pointer; }
+  .qbtn:hover { color: var(--text-0); background: #2b2b2b; }
+  .qbtn svg { width: 12px; height: 12px; }
+
+  /* ── Detail ── */
+  #detail { position: absolute; top: 0; right: 0; width: 312px; height: 100%; background: var(--bg-card); border-left: 1px solid var(--line); transform: translateX(100%); transition: transform .35s cubic-bezier(.22,.61,.36,1); overflow-y: auto; z-index: 10; }
+  #detail.open { transform: none; }
+  .d-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; }
+  .d-id { font-size: 12px; color: var(--text-4); font-family: ui-monospace, monospace; }
+  .d-close { background: var(--bg-raised); border: 1px solid var(--border); color: var(--text-2); width: 26px; height: 26px; border-radius: 7px; cursor: pointer; display: grid; place-items: center; }
+  .d-close:hover { color: var(--text-0); }
+  .d-preview { margin: 0 16px; height: 168px; border-radius: 12px; background: var(--bg-muted); display: grid; place-items: center; border: 1px solid var(--border); }
+  .d-preview svg { width: 76px; height: 76px; }
+  .d-name { padding: 14px 16px 2px; font-size: 16px; font-weight: 600; color: var(--text-0); }
+  .d-sub { padding: 0 16px 6px; font-size: 12px; color: var(--text-4); }
+  .d-block { padding: 12px 16px; border-top: 1px solid var(--line); }
+  .d-block.first { border-top: 1px solid var(--line); margin-top: 8px; }
+  .d-label { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-6); margin-bottom: 10px; display: flex; justify-content: space-between; }
+  .seg { display: flex; background: var(--bg-muted); border: 1px solid var(--border); border-radius: 8px; padding: 3px; gap: 3px; }
+  .seg button { flex: 1; background: none; border: none; color: var(--text-3); font-size: 12px; padding: 5px; border-radius: 6px; cursor: pointer; }
+  .seg button.on { background: var(--bg-active); color: var(--text-0); }
+  .colrow { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .colrow .hex { font-size: 12.5px; color: var(--text-2); font-family: ui-monospace, monospace; }
+  .presets { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .preset { width: 22px; height: 22px; border-radius: 6px; cursor: pointer; border: 1px solid #0004; }
+  .slider-row { display: flex; align-items: center; gap: 12px; }
+  .slider-row input[type=range] { flex: 1; }
+  .disabled-note { font-size: 12px; color: var(--text-5); background: var(--bg-muted); border: 1px solid var(--border); border-radius: 8px; padding: 9px 11px; line-height: 1.4; }
+  .d-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 14px 16px; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 12.5px; padding: 9px; border-radius: 9px; cursor: pointer; border: 1px solid var(--border-muted); background: var(--bg-raised); color: var(--text-1); }
+  .btn:hover { border-color: var(--border-hover); }
+  .btn.primary { background: var(--text-0); color: #111; border-color: var(--text-0); font-weight: 600; grid-column: span 2; }
+  .btn.primary:hover { background: var(--light-hover); }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* ── Cart FAB ── */
+  .fab { position: fixed; right: 22px; bottom: 22px; background: #5b8cff; color: #fff; border: none; border-radius: 14px; padding: 13px 18px; font-size: 13.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 9px; box-shadow: 0 8px 24px #0006; z-index: 30; transform: translateY(80px); transition: .25s; }
+  .fab.show { transform: none; }
+  .fab .n { background: #fff; color: #5b8cff; border-radius: 20px; padding: 1px 8px; font-size: 12px; }
+  #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(40px); background: #1d1d1d; border: 1px solid var(--border-base); color: var(--text-0); font-size: 13px; padding: 10px 16px; border-radius: 10px; opacity: 0; transition: .2s; z-index: 50; pointer-events: none; }
+  #toast.show { opacity: 1; transform: translateX(-50%); }
+  .demo-tag { position: fixed; top: 8px; right: 12px; font-size: 10px; color: var(--text-6); background: var(--bg-muted); border: 1px solid var(--border); padding: 3px 8px; border-radius: 20px; z-index: 40; }
+</style>
+</head>
+<body>
+
+<aside id="sidebar">
+  <div class="brand">Trace Logo's <span>/ Иконки</span></div>
+  <div class="pack-filter"><input id="pack-filter" placeholder="Фильтр паков…"></div>
+  <div id="packs"></div>
+  <div class="side-divider"></div>
+  <div class="manage-btn">⚙ Управление паками</div>
+</aside>
+
+<div class="center">
+  <div class="topbar">
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search" placeholder="Поиск иконок…  (⌘K)">
+    </div>
+    <div class="crumb" id="crumb"></div>
+  </div>
+
+  <div class="custom-bar">
+    <div class="cc"><label>Цвет</label>
+      <button class="swatch" id="g-swatch" style="background:#e5e5e5"><input type="color" id="g-color" value="#e5e5e5"></button>
+    </div>
+    <div class="cc"><label>Толщина</label>
+      <input type="range" id="g-stroke" min="0.5" max="3" step="0.25" value="2">
+      <span class="val" id="g-stroke-v">2.0</span>
+    </div>
+    <div class="cc"><label>Размер</label>
+      <div class="stepper">
+        <button id="sz-minus">−</button><span class="val" id="g-size-v">24</span><button id="sz-plus">+</button>
+      </div>
+    </div>
+    <button class="reset" id="g-reset">Сбросить правки</button>
+  </div>
+
+  <div class="chips" id="chips"></div>
+  <main id="grid"></main>
+</div>
+
+<div id="detail"></div>
+
+<button class="fab" id="fab"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> Корзина <span class="n" id="fab-n">0</span></button>
+<div id="toast"></div>
+<div class="demo-tag">визуальный прототип</div>
+
+<script>
+const state = {
+  manifest: null,
+  packs: [],
+  active: 'all',
+  query: '',
+  activeChips: new Set(),
+  fav: new Set(['outline']),
+  cart: new Set(),
+  global: { color: '#e5e5e5', stroke: 2, size: 24 },
+  raw: new Map(),      // file -> raw svg text
+  perIcon: new Map(),  // file -> {color, stroke, size, multiMap}
+};
+const PRESETS = ['#e5e5e5','#111111','#5b8cff','#22c55e','#ef4444','#f59e0b','#a855f7','#ec4899'];
+
+const $ = (s, r=document) => r.querySelector(s);
+const el = (t, c) => { const e = document.createElement(t); if (c) e.className = c; return e; };
+function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),1600); }
+
+async function rawSvg(file){
+  if (state.raw.has(file)) return state.raw.get(file);
+  const txt = await fetch('../assets/icons/svgs/'+file).then(r=>r.text());
+  state.raw.set(file, txt);
+  return txt;
+}
+function allIcons(){
+  const out=[];
+  for(const p of state.packs) for(const g of p.subgroups) for(const it of g.items)
+    out.push({...it, pack:p.id, packLabel:p.label, group:g.name});
+  return out;
+}
+function iconsFor(packId){
+  if(packId==='all') return allIcons();
+  const p = state.packs.find(x=>x.id===packId); if(!p) return [];
+  const out=[];
+  for(const g of p.subgroups) for(const it of g.items) out.push({...it, pack:p.id, packLabel:p.label, group:g.name});
+  return out;
+}
+
+// apply current edits to a live <svg> element
+function applyEdits(svg, icon){
+  const e = state.perIcon.get(icon.file) || state.global;
+  svg.setAttribute('width', e.size); svg.setAttribute('height', e.size);
+  if(icon.colorType==='mono'){ svg.style.color = e.color; }
+  else if(e.multiMap){ for(const [from,to] of Object.entries(e.multiMap)) recolorMulti(svg, from, to); }
+  if(icon.strokeEditable){ svg.setAttribute('stroke-width', e.stroke); }
+}
+function recolorMulti(svg, from, to){
+  svg.querySelectorAll('[fill]').forEach(n=>{ if(n.getAttribute('fill').toLowerCase()===from.toLowerCase()) n.setAttribute('fill', to); });
+}
+async function makeSvg(icon){
+  const txt = await rawSvg(icon.file);
+  const svg = new DOMParser().parseFromString(txt,'image/svg+xml').documentElement;
+  applyEdits(svg, icon);
+  return svg;
+}
+
+// ── Sidebar ──
+function renderPacks(){
+  const box = $('#packs'); box.innerHTML='';
+  const f = $('#pack-filter').value.toLowerCase();
+  const total = allIcons().length;
+  const mk = (id,label,count,thumb,starable)=>{
+    const d = el('div','pack'+(state.active===id?' active':''));
+    d.innerHTML = `<div class="pack-thumb">${thumb}</div><div class="pack-name">${label}</div><div class="pack-count">${count}</div>`;
+    if(starable){ const s=el('span','pack-star'+(state.fav.has(id)?' on':'')); s.textContent='★';
+      s.onclick=ev=>{ev.stopPropagation(); state.fav.has(id)?state.fav.delete(id):state.fav.add(id); renderPacks();}; d.appendChild(s); }
+    d.onclick=()=>{ state.active=id; state.activeChips.clear(); render(); };
+    return d;
+  };
+  // "Все"
+  if(!f) box.appendChild(mk('all','Все',total,'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>',false));
+  const favs = state.packs.filter(p=>state.fav.has(p.id) && p.label.toLowerCase().includes(f));
+  const rest = state.packs.filter(p=>!state.fav.has(p.id) && p.label.toLowerCase().includes(f));
+  const cnt = p => p.subgroups.reduce((a,g)=>a+g.items.length,0);
+  const thumb = p => `<svg viewBox="0 0 24 24" fill="${p.style==='outline'?'none':'currentColor'}" stroke="${p.style==='outline'?'currentColor':'none'}" stroke-width="2"><circle cx="12" cy="12" r="${p.style==='outline'?8:7}"/></svg>`;
+  if(favs.length){ const l=el('div','side-label'); l.textContent='★ Избранные'; box.appendChild(l);
+    favs.forEach(p=>box.appendChild(mk(p.id,p.label,cnt(p),thumb(p),true))); }
+  const l2=el('div','side-label'); l2.textContent='Все паки'; box.appendChild(l2);
+  rest.forEach(p=>box.appendChild(mk(p.id,p.label,cnt(p),thumb(p),true)));
+}
+
+// ── Chips (subgroups) ──
+function renderChips(){
+  const box=$('#chips'); box.innerHTML='';
+  if(state.active==='all'){ box.style.display='none'; return; }
+  box.style.display='flex';
+  const p=state.packs.find(x=>x.id===state.active);
+  p.subgroups.forEach(g=>{
+    const c=el('div','chip'+(state.activeChips.has(g.name)?' on':''));
+    c.textContent=g.name;
+    c.onclick=()=>{ state.activeChips.has(g.name)?state.activeChips.delete(g.name):state.activeChips.add(g.name); render(); };
+    box.appendChild(c);
+  });
+}
+
+// ── Grid ──
+async function renderGrid(){
+  const grid=$('#grid'); grid.innerHTML='';
+  let icons = iconsFor(state.active);
+  if(state.query){ const q=state.query.toLowerCase(); icons=icons.filter(i=>i.name.toLowerCase().includes(q)); }
+  if(state.activeChips.size) icons=icons.filter(i=>state.activeChips.has(i.group));
+
+  // group by pack+subgroup into sections
+  const sections=new Map();
+  for(const i of icons){ const k=i.pack+'·'+i.group; if(!sections.has(k)) sections.set(k,{pack:i.packLabel,group:i.group,items:[]}); sections.get(k).items.push(i); }
+
+  for(const sec of sections.values()){
+    const s=el('div','section');
+    const h=el('div','section-head');
+    h.innerHTML=`<span class="pk">${sec.pack} ·</span><span class="nm">${sec.group}</span><span class="ct">${sec.items.length}</span>`;
+    s.appendChild(h);
+    const g=el('div','grid');
+    for(const icon of sec.items){
+      const card=el('div','card'+(state.cart.has(icon.file)?' incart':''));
+      card.innerHTML=`<span class="badge">${icon.pack}:</span><span class="nm">${icon.name}</span>
+        <span class="quick">
+          <span class="qbtn" data-act="copy" title="Копировать SVG"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
+          <span class="qbtn" data-act="cart" title="В корзину"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span>
+        </span>`;
+      const svg=await makeSvg(icon); card.insertBefore(svg, card.firstChild);
+      card.onclick=ev=>{
+        const act=ev.target.closest('[data-act]')?.dataset.act;
+        if(act==='copy'){ ev.stopPropagation(); copyIcon(icon); }
+        else if(act==='cart'){ ev.stopPropagation(); toggleCart(icon, card); }
+        else openDetail(icon);
+      };
+      g.appendChild(card);
+    }
+    s.appendChild(g); grid.appendChild(s);
+  }
+  if(!sections.size) grid.innerHTML='<div style="color:var(--text-5);padding:40px;text-align:center">Ничего не найдено</div>';
+}
+
+// ── Detail ──
+let current=null;
+async function openDetail(icon){
+  current=icon;
+  const d=$('#detail'); d.classList.add('open');
+  const e = state.perIcon.get(icon.file) || {...state.global, multiMap:null};
+  const svg=await makeSvg(icon);
+  const pack=state.packs.find(p=>p.id===icon.pack);
+
+  let colorBlock='';
+  if(icon.colorType==='mono'){
+    colorBlock=`<div class="d-block"><div class="d-label">Цвет</div>
+      <div class="colrow"><button class="swatch" style="background:${e.color}"><input type="color" id="d-color" value="${e.color}"></button><span class="hex">${e.color.toUpperCase()}</span></div>
+      <div class="presets">${PRESETS.map(c=>`<span class="preset" data-c="${c}" style="background:${c}"></span>`).join('')}</div></div>`;
+  } else {
+    const raw=await rawSvg(icon.file);
+    const cols=[...new Set([...raw.matchAll(/fill="(#[0-9a-fA-F]{3,6})"/g)].map(m=>m[1]))];
+    const mm=e.multiMap||{};
+    colorBlock=`<div class="d-block"><div class="d-label">Цвета · ${cols.length}</div>`+
+      cols.map(c=>{const cur=mm[c]||c;return `<div class="colrow"><button class="swatch" style="background:${cur}"><input type="color" class="d-multi" data-from="${c}" value="${cur}"></button><span class="hex">${cur.toUpperCase()}</span></div>`;}).join('')+`</div>`;
+  }
+
+  const strokeBlock = icon.strokeEditable
+    ? `<div class="d-block"><div class="d-label">Толщина обводки <span>${(e.stroke).toFixed(2)} px</span></div>
+        <div class="slider-row"><input type="range" id="d-stroke" min="0.5" max="3" step="0.25" value="${e.stroke}"></div></div>`
+    : `<div class="d-block"><div class="d-label">Толщина обводки</div>
+        <div class="disabled-note">⌗ Иконка заливочная (filled) — толщина обводки к ней неприменима.</div></div>`;
+
+  const variantBlock = pack.style!=='color'
+    ? `<div class="d-block first"><div class="d-label">Вариант</div>
+        <div class="seg"><button class="${pack.style==='outline'?'on':''}">Outline</button><button class="${pack.style==='solid'?'on':''}">Solid</button></div></div>` : '';
+
+  d.innerHTML=`
+    <div class="d-head"><span class="d-id">${icon.pack}:${icon.name}</span>
+      <button class="d-close" onclick="document.getElementById('detail').classList.remove('open')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="d-preview" id="d-preview"></div>
+    <div class="d-name">${icon.name}</div>
+    <div class="d-sub">${icon.packLabel} · ${icon.group}</div>
+    ${variantBlock}
+    ${colorBlock}
+    ${strokeBlock}
+    <div class="d-block"><div class="d-label">Размер <span>${e.size} px</span></div>
+      <div class="slider-row"><input type="range" id="d-size" min="14" max="64" step="2" value="${e.size}"></div></div>
+    <div class="d-actions">
+      <button class="btn primary" id="d-copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Скопировать SVG</button>
+      <button class="btn" id="d-dl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> SVG</button>
+      <button class="btn" id="d-cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> В корзину</button>
+    </div>`;
+  $('#d-preview').appendChild(svg);
+
+  function ed(){ const o=state.perIcon.get(icon.file)||{...state.global,multiMap:null}; return o; }
+  function setEd(patch){ const o={...(state.perIcon.get(icon.file)||{...state.global,multiMap:null}),...patch}; state.perIcon.set(icon.file,o); refreshPreview(); renderGrid(); }
+  function refreshPreview(){ makeSvg(icon).then(s=>{ const p=$('#d-preview'); p.innerHTML=''; p.appendChild(s); }); }
+
+  $('#d-color')?.addEventListener('input',ev=>{ openDetailColor(ev.target.value); });
+  function openDetailColor(v){ setEd({color:v}); ev=null; const sw=$('#d-color').closest('.swatch'); sw.style.background=v; sw.nextElementSibling.textContent=v.toUpperCase(); }
+  d.querySelectorAll('.preset').forEach(p=>p.onclick=()=>{ const v=p.dataset.c; const inp=$('#d-color'); if(inp){inp.value=v; openDetailColor(v);} });
+  d.querySelectorAll('.d-multi').forEach(inp=>inp.addEventListener('input',ev=>{
+    const o=ed(); const mm={...(o.multiMap||{})}; mm[ev.target.dataset.from]=ev.target.value; setEd({multiMap:mm});
+    const sw=ev.target.closest('.swatch'); sw.style.background=ev.target.value; sw.nextElementSibling.textContent=ev.target.value.toUpperCase();
+  }));
+  $('#d-stroke')?.addEventListener('input',ev=>{ setEd({stroke:+ev.target.value}); ev.target.closest('.d-block').querySelector('span').textContent=(+ev.target.value).toFixed(2)+' px'; });
+  $('#d-size')?.addEventListener('input',ev=>{ setEd({size:+ev.target.value}); ev.target.closest('.d-block').querySelector('span').textContent=ev.target.value+' px'; });
+  $('#d-copy').onclick=()=>copyIcon(icon);
+  $('#d-dl').onclick=()=>downloadIcon(icon);
+  $('#d-cart').onclick=()=>{ toggleCart(icon); };
+}
+
+// ── Serialize with baked edits ──
+async function bakedSvg(icon){
+  const svg=await makeSvg(icon);
+  if(icon.colorType==='mono'){ // bake currentColor → concrete
+    const c=(state.perIcon.get(icon.file)||state.global).color;
+    svg.removeAttribute('style'); svg.setAttribute(icon.strokeEditable?'stroke':'fill', c);
+  }
+  return new XMLSerializer().serializeToString(svg);
+}
+async function copyIcon(icon){ const s=await bakedSvg(icon); try{ await navigator.clipboard.writeText(s); toast('SVG скопирован — '+icon.name); }catch{ toast('SVG готов (clipboard заблокирован)'); } }
+async function downloadIcon(icon){ const s=await bakedSvg(icon); const b=new Blob([s],{type:'image/svg+xml'}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=icon.name+'.svg'; a.click(); toast('Скачано '+icon.name+'.svg'); }
+
+// ── Cart ──
+function toggleCart(icon, card){
+  if(state.cart.has(icon.file)){ state.cart.delete(icon.file); toast('Убрано из корзины'); }
+  else { state.cart.add(icon.file); toast('В корзине: '+state.cart.size); }
+  if(card) card.classList.toggle('incart', state.cart.has(icon.file)); else renderGrid();
+  const n=state.cart.size; $('#fab-n').textContent=n; $('#fab').classList.toggle('show', n>0);
+}
+
+// ── Global custom bar ──
+function bindGlobal(){
+  $('#g-color').addEventListener('input',e=>{ state.global.color=e.target.value; $('#g-swatch').style.background=e.target.value; reapplyGlobal(); });
+  $('#g-stroke').addEventListener('input',e=>{ state.global.stroke=+e.target.value; $('#g-stroke-v').textContent=(+e.target.value).toFixed(1); reapplyGlobal(); });
+  $('#sz-minus').onclick=()=>{ state.global.size=Math.max(14,state.global.size-2); $('#g-size-v').textContent=state.global.size; reapplyGlobal(); };
+  $('#sz-plus').onclick=()=>{ state.global.size=Math.min(64,state.global.size+2); $('#g-size-v').textContent=state.global.size; reapplyGlobal(); };
+  $('#g-reset').onclick=()=>{ state.perIcon.clear(); state.global={color:'#e5e5e5',stroke:2,size:24};
+    $('#g-color').value='#e5e5e5'; $('#g-swatch').style.background='#e5e5e5'; $('#g-stroke').value=2; $('#g-stroke-v').textContent='2.0'; $('#g-size-v').textContent='24'; renderGrid(); toast('Правки сброшены'); };
+  $('#pack-filter').addEventListener('input',renderPacks);
+  $('#search').addEventListener('input',e=>{ state.query=e.target.value; renderGrid(); updateCrumb(); });
+  $('#fab').onclick=()=>toast('Корзина: '+state.cart.size+' — здесь будет батч-экспорт ZIP / спрайт');
+  document.addEventListener('keydown',e=>{ if((e.metaKey||e.ctrlKey)&&e.key==='k'){e.preventDefault();$('#search').focus();} if(e.key==='Escape')$('#detail').classList.remove('open'); });
+}
+function reapplyGlobal(){ renderGrid(); } // global edits apply to icons without per-icon override
+
+function updateCrumb(){
+  const p=state.active==='all'?'Все паки':state.packs.find(x=>x.id===state.active)?.label;
+  $('#crumb').innerHTML = state.query ? `Поиск: <b>${state.query}</b>` : `<b>${p}</b>`;
+}
+function render(){ renderPacks(); renderChips(); renderGrid(); updateCrumb(); }
+
+// ── Boot ──
+(async()=>{
+  state.manifest = await fetch('../assets/icons/demo-manifest.json').then(r=>r.json());
+  state.packs = state.manifest.packs;
+  state.active = state.packs[0].id; // start in first pack (Outline)
+  bindGlobal(); render();
+})();
+</script>
+</body>
+</html>

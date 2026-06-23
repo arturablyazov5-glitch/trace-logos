@@ -1,3 +1,5 @@
+import { t } from './i18n.js';
+
 const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/upload';
 const MAX_FILES = 5;
 
@@ -35,7 +37,7 @@ function init() {
     const over = selected.length > MAX_FILES;
     labelEl.classList.toggle('has-file', selected.length > 0);
     labelEl.classList.toggle('file-error', over);
-    showError(over ? `Можно загрузить не больше ${MAX_FILES} файлов — удалите лишние.` : '');
+    showError(over ? t('helpTooManyFiles')(MAX_FILES) : '');
     submitBtn.disabled = selected.length === 0 || over;
   }
 
@@ -76,7 +78,7 @@ function init() {
     form.style.display = '';
     successEl.classList.remove('show');
     titlesEl.style.display = '';
-    submitBtn.textContent = 'Отправить';
+    submitBtn.textContent = t('suggestSubmit');
     input.value = '';
     selected = [];
     renderChips();
@@ -124,7 +126,7 @@ function init() {
 
     } catch (err) {
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Отправить';
+      submitBtn.textContent = t('suggestSubmit');
       errorEl.textContent = err.message || 'Ошибка отправки. Попробуйте ещё раз.';
       errorEl.style.display = '';
     }

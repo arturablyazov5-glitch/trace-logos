@@ -1,14 +1,15 @@
 import { switchLayout, highlight } from './utils.js';
 import { setSectionHidden, loadCardImage, resetContentScroll, updateVirtualizedSections, scheduleVirtualizedSections } from './virtual.js';
 
-let _sectionEls, _searchCount, _ensureSectionCards, _getTotalCards, _updateScrollTopButton;
+let _sectionEls, _searchCount, _ensureSectionCards, _getTotalCards, _updateScrollTopButton, _getDisplayName;
 
-export function initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards, updateScrollTopButton }) {
+export function initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards, updateScrollTopButton, getDisplayName }) {
   _sectionEls = sectionEls;
   _searchCount = searchCount;
   _ensureSectionCards = ensureSectionCards;
   _getTotalCards = getTotalCards;
   _updateScrollTopButton = updateScrollTopButton;
+  _getDisplayName = getDisplayName ?? (item => item.name);
 }
 
 const STOP_WORDS = new Set(['логотип', 'лого', 'logo', 'logotype', 'логотипы']);
@@ -88,11 +89,11 @@ export function filterCards(q) {
       const labelEl = card.querySelector('.label');
       const pathEl = card.querySelector('.card-path');
       if (hasQuery) {
-        labelEl.innerHTML = highlight(item.name, rawWords);
+        labelEl.innerHTML = highlight(_getDisplayName(item), rawWords);
         pathEl.innerHTML = highlight(item.figma, rawWords);
         card.classList.add('show-path');
       } else {
-        labelEl.textContent = item.name;
+        labelEl.textContent = _getDisplayName(item);
         pathEl.textContent = item.figma;
         card.classList.remove('show-path');
       }

@@ -33,13 +33,11 @@
   flex: 1;
   max-width: 420px;
 }
-.search-wrap svg {
-  position: absolute;
+.search-wrap .search-icon {
   left: 11px;
   top: 50%;
   transform: translateY(-50%);
   color: #555;
-  pointer-events: none;
 }
 #search {
   width: 100%;
@@ -82,3 +80,23 @@
   white-space: nowrap;
 }
 #search:focus ~ .search-shortcut-kbd { display: none; }
+/* Clear button (.search-clear) chrome lives in components/search-box.js */
+
+/* ── Mobile «Найти» button (shown inside drawer when search has text) ── */
+.mobile-search-go {
+  display: none;
+  margin-top: 8px;
+  width: 100%;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.mobile-search-go.visible { display: block; }
+.mobile-search-go:hover { opacity: .88; }

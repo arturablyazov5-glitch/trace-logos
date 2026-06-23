@@ -48,6 +48,20 @@ export const ecosystemLabels = {
   mvideo:      'М.Видео',
 };
 
+export const ecosystemLabelsEn = {
+  nspk:       'NSPK',
+  sber:       'Sber',
+  sovcombank: 'Sovcombank',
+  vk:         'VK',
+  yandex:     'Yandex',
+  alfa:       'Alfa Group',
+  avito:      'Avito',
+  tinkoff:    'T-Bank',
+  mts:        'MTS',
+  kontur:     'Kontur',
+  mvideo:     'M.Video',
+};
+
 export async function loadLogos(base = '/logos/') {
   const manifest = await fetch(base + 'manifest.json').then(r => {
     if (!r.ok) throw new Error('manifest not found');
@@ -69,6 +83,8 @@ export async function loadLogos(base = '/logos/') {
     .map(({ cat, result }) => {
       // Emoji manifest categories have no explicit slug → derive from the filename.
       const slug = cat.slug || cat.file.split('/').pop().replace(/\.json$/, '');
-      return { ...result.value, slug };
+      // cat.section_en (from manifest) takes priority over the category JSON field.
+      const section_en = cat.section_en ?? result.value.section_en;
+      return { ...result.value, slug, section_en };
     });
 }

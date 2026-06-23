@@ -10,7 +10,7 @@ import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, downloadAsIc
 import { openIcnsModal } from './icns.js';
 import { openLiquidModal } from './liquid-glass-modal.js';
 import { updateSeoPageLink, slugifyPathPart } from './seo.js';
-import { ecosystemLogoMap, ecosystemLabels, loadLogos } from './data.js';
+import { ecosystemLogoMap, ecosystemLabels, ecosystemLabelsEn, loadLogos } from './data.js';
 import { categoryIconSvg } from './category-icons.js';
 import {
   initVirtual,
@@ -22,6 +22,7 @@ import { initSearch, filterCards } from './search.js';
 import { openReportModal } from './suggest.js';
 import { openHelpModal } from './help.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
+import { t, setLang, getLang } from './i18n.js';
 
 // ── DOM refs ──
 const content           = document.getElementById('content');
@@ -58,6 +59,8 @@ let isClosingViaButton = false;
 let activeVariantCard = null;
 let currentVariant = null; // the variant vDef currently shown in the detail panel (for ICO/ICNS export)
 let updatePngDownloadSize = null; // set per-variant; recomputes the "Скачать PNG" size readout
+let currentItemMacosStyles = null; // set in openDetailFn, read in selectVariant
+let activePngFile = null;          // tracks the currently displayed PNG (incl. dark/light tab)
 
 function resetCopyBtn() {
   if (copyBtnResetTimer) {
@@ -222,7 +225,7 @@ function buildCard(item, sectionState) {
   card._sectionState = sectionState;
 
   const figmaLow = item.figma.toLowerCase();
-  const raw = (item.name + ' ' + (item.tags || '') + ' ' + figmaLow).toLowerCase();
+  const raw = (item.name + ' ' + (item.name_en || '') + ' ' + (item.tags || '') + ' ' + figmaLow).toLowerCase();
   const extra = raw.split(/\s+/).map(w => w.replace(/-/g, '')).join(' ');
   card.dataset.search = raw + ' ' + extra;
 
@@ -232,7 +235,7 @@ function buildCard(item, sectionState) {
   img.width = 48; img.height = 48;
   img.loading = 'lazy';
   img.decoding = 'async';
-  img.alt = item.name;
+  img.alt = displayName(item);
   img.title = item.figma;
   // Grid thumbnail uses a lightweight WebP preview when available (PNG logos);
   // the full asset (svgUrl) stays the source for the detail panel and export.
@@ -245,20 +248,21 @@ function buildCard(item, sectionState) {
     card.classList.remove('loading');
   });
   img.dataset.src = previewSrc ?? fullSrc;
-  if (item.prerendered || item.file.endsWith('.png')) img.classList.add('prerendered');
+  if (item.prerendered ?? item.file.endsWith('.png')) img.classList.add('prerendered');
   wrap.appendChild(img);
   card.appendChild(wrap);
 
   if (item.comingSoon) {
     const badge = document.createElement('div');
     badge.className = 'card-badge';
-    badge.textContent = 'Скоро';
+    badge.dataset.i18n = 'comingSoon';
+    badge.textContent = t('comingSoon');
     card.appendChild(badge);
   }
 
   const label = document.createElement('div');
   label.className = 'label';
-  label.textContent = item.name;
+  label.textContent = displayName(item);
   card.appendChild(label);
 
   const pathEl = document.createElement('div');
@@ -437,8 +441,11 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
 
     const applyPng = () => {
       detailImg.src = svgUrl(vDef.file);
-      detailImg.classList.remove('square');
-      if (!vDef.type && isFullFile(vDef.file)) detailImg.classList.remove('prerendered');
+      // prerendered:false square PNGs render as rounded squares (like square SVG logos),
+      // not as a full-width checkerboard wordmark.
+      const roundedSquarePng = item.prerendered === false && !isFullFile(vDef.file);
+      detailImg.classList.toggle('square', roundedSquarePng);
+      if (roundedSquarePng || (!vDef.type && isFullFile(vDef.file))) detailImg.classList.remove('prerendered');
       else detailImg.classList.add('prerendered');
       const previewEl = detailImg.closest('.detail-preview');
       if (previewEl?.classList.contains('loading')) {
@@ -457,8 +464,10 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       animateContainerHeight(preview, applyPng, detailImg);
     }
 
+    activePngFile = vDef.file;
+
     const getPngBlob = async () => {
-      const resp = await fetch(svgUrl(vDef.file));
+      const resp = await fetch(svgUrl(activePngFile));
       const buf = await resp.arrayBuffer();
       return new Blob([buf], { type: 'image/png' });
     };
@@ -483,6 +492,27 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       a.click(); URL.revokeObjectURL(a.href);
       showToast(TOASTS.downloaded(baseName + suffix + '.png'));
     };
+
+    // macOS style tabs: show only for PNG variants
+    const macosStylesTabs = document.getElementById('macos-style-tabs');
+    macosStylesTabs?.classList.toggle('hidden', !currentItemMacosStyles);
+    if (currentItemMacosStyles) {
+      macosStylesTabs.querySelectorAll('.macos-style-tab').forEach(btn => {
+        const s = btn.dataset.style;
+        btn.classList.toggle('active', s === 'color');
+        btn.classList.toggle('hidden', s !== 'color' && !currentItemMacosStyles[s]);
+      });
+      macosStylesTabs.onclick = (e) => {
+        const btn = e.target.closest('.macos-style-tab');
+        if (!btn || btn.classList.contains('hidden')) return;
+        macosStylesTabs.querySelectorAll('.macos-style-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const s = btn.dataset.style;
+        activePngFile = s === 'color' ? vDef.file : currentItemMacosStyles[s];
+        detailImg.src = svgUrl(activePngFile);
+      };
+    }
+
     const isSquarePng = vDef.type === '_original' || vDef.type === 'png'
       || (!vDef.type && !isFullFile(vDef.file));
     applyDownloadVariantState(item, isSquarePng, vDef.file);
@@ -490,6 +520,8 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   }
 
   // SVG-ветка
+  activePngFile = null;
+  document.getElementById('macos-style-tabs')?.classList.add('hidden');
   const isSquare = vDef.type === '_original' || vDef.type === 'svg' || (!vDef.type && !isFullFile(vDef.file));
   const rawSvg = await loadRawSvg(vDef.file);
 
@@ -634,12 +666,18 @@ openDetailFn = function (item, card) {
   const detailVariants = document.getElementById('detail-variants');
 
   detailImg.src = svgUrl(item.file);
-  detailImg.alt = item.name;
+  detailImg.alt = displayName(item);
   detailImg.classList.add('square');
   detailImg.classList.remove('prerendered');
-  detailImg.closest('.detail-preview').classList.add('loading');
-  detailName.textContent = item.name;
+  const detailPreview = detailImg.closest('.detail-preview');
+  detailPreview.classList.add('loading');
+  detailName.textContent = displayName(item);
   detailFigmaEl.textContent = item.figma;
+
+  // macOS style tabs — visibility and onclick are handled per-variant in selectVariant
+  currentItemMacosStyles = item.macos_styles || null;
+  activePngFile = null;
+  document.getElementById('macos-style-tabs')?.classList.add('hidden');
 
   const detailActionsEl     = document.getElementById('detail-actions');
   const detailActionsHelpEl = document.getElementById('detail-actions-help');
@@ -649,7 +687,7 @@ openDetailFn = function (item, card) {
     detailActionsEl.style.display = 'none';
     detailActionsHelpEl.style.display = '';
     detailActionsLabel.style.display = 'none';
-    document.getElementById('btn-help').onclick = () => openHelpModal(item.name);
+    document.getElementById('btn-help').onclick = () => openHelpModal(displayName(item));
     if (reportBtn) reportBtn.classList.add('hidden');
   } else {
     detailActionsEl.style.display = '';
@@ -657,7 +695,7 @@ openDetailFn = function (item, card) {
     detailActionsLabel.style.display = '';
     if (reportBtn) {
       reportBtn.classList.remove('hidden');
-      reportBtn.onclick = () => openReportModal(item.name);
+      reportBtn.onclick = () => openReportModal(displayName(item));
     }
   }
 
@@ -769,7 +807,7 @@ openDetailFn = function (item, card) {
     vc.className = 'variant-card' + (isWide ? ' wide' : isSquareVariant ? ' favicon' : '');
     const vi = document.createElement('img');
     vi.src = svgUrl(vDef.file);
-    if (vDef.file.endsWith('.png')) vi.classList.add('prerendered');
+    if (item.prerendered !== false && vDef.file.endsWith('.png')) vi.classList.add('prerendered');
     colorState.variantImgEls.push({ file: vDef.file, imgEl: vi });
     const vl = document.createElement('div');
     vl.className = 'variant-label';
@@ -802,7 +840,7 @@ openDetailFn = function (item, card) {
   if (item.ecosystem) {
     const members = allItems.filter(i => i.ecosystem === item.ecosystem);
     if (members.length > 1) {
-      ecosystemLabelEl.textContent = ecosystemLabels[item.ecosystem] || 'Экосистема';
+      ecosystemLabelEl.textContent = _ecoLabels[item.ecosystem] || t('detailEcosystem');
       const sameEcosystem = ecosystemGrid.dataset.ecosystem === item.ecosystem;
       if (!sameEcosystem) {
         ecosystemGrid.innerHTML = '';
@@ -815,12 +853,12 @@ openDetailFn = function (item, card) {
           ec.title = sib.figma;
           const ei = document.createElement('img');
           ei.src = svgUrl(sib.file);
-          ei.alt = sib.name;
+          ei.alt = displayName(sib);
           ei.loading = 'lazy';
           ei.decoding = 'async';
           const el = document.createElement('div');
           el.className = 'ecosystem-label';
-          el.textContent = sib.name;
+          el.textContent = displayName(sib);
           ec.append(ei, el);
           ec.addEventListener('click', () => {
             const sibCard = cardByItemFigma.get(sib.figma) || cardByItemFile.get(sib.file);
@@ -882,11 +920,11 @@ openDetailFn = function (item, card) {
     downloadTrigger.onclick = (e) => { e.stopPropagation(); toggleDownloadMenu(); };
   }
   const btnIco = document.getElementById('btn-download-ico');
-  if (btnIco) btnIco.onclick = () => { closeDownloadMenu(); downloadAsIco(item, currentVariant?.file ?? item.file); };
+  if (btnIco) btnIco.onclick = () => { closeDownloadMenu(); downloadAsIco(item, activePngFile || currentVariant?.file || item.file); };
   const btnIcns = document.getElementById('btn-download-icns');
-  if (btnIcns) btnIcns.onclick = () => { closeDownloadMenu(); openIcnsModal(item, currentVariant?.file ?? item.file); };
+  if (btnIcns) btnIcns.onclick = () => { closeDownloadMenu(); openIcnsModal(item, activePngFile || currentVariant?.file || item.file); };
   const btnLg = document.getElementById('btn-download-lg');
-  if (btnLg) btnLg.onclick = () => { closeDownloadMenu(); openLiquidModal(item, currentVariant?.file ?? item.file); };
+  if (btnLg) btnLg.onclick = () => { closeDownloadMenu(); openLiquidModal(item, activePngFile || currentVariant?.file || item.file); };
   const btnZip = document.getElementById('btn-download-zip');
   if (btnZip) {
     // New dropdown — ZIP bundles SVG+PNG (+ICO+ICNS for square logos), so it always
@@ -925,6 +963,7 @@ document.getElementById('detail-close').onclick = closeDetail;
 burgerBtn.addEventListener('click', () => {
   if (sidebar.classList.contains('nav-open')) closeNavDrawer(); else openNavDrawer();
 });
+document.getElementById('drawer-close-btn')?.addEventListener('click', closeNavDrawer);
 navDrawerBackdrop.addEventListener('click', closeNavDrawer);
 
 layoutMq.addEventListener('change', () => {
@@ -939,6 +978,7 @@ layoutMq.addEventListener('change', () => {
   scheduleVirtualizedSections();
 });
 
+const mobileSearchGo = document.getElementById('mobile-search-go');
 search.addEventListener('input', () => {
   const q = search.value.toLowerCase().trim();
   filterCards(q);
@@ -946,7 +986,9 @@ search.addEventListener('input', () => {
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
     document.querySelector('[data-section="all"]').classList.add('active');
   }
+  mobileSearchGo?.classList.toggle('visible', search.value.length > 0);
 });
+mobileSearchGo?.addEventListener('click', closeNavDrawer);
 
 document.addEventListener('keydown', (e) => {
   const mod = e.metaKey || e.ctrlKey;
@@ -994,6 +1036,7 @@ window.addEventListener('popstate', () => {
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 applyLabels(); // single source of button texts → js/labels.js
+
 glassModule.init({
   // Glass on → it's a rendered PNG icon: hide the SVG copy/download, show PNG copy.
   // (Download PNG stays visible; its handler already produces the glass render.)
@@ -1008,12 +1051,27 @@ setPreviewHook(styledSvg => { if (glassModule.isEnabled()) glassModule.refresh(s
 
 placeSearchBar();
 
-initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
-initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton });
+const _isEnUrl = location.pathname.startsWith('/en/');
+// EN catalog: logos use `name_en`; if name is already Latin — return it as-is;
+// emoji extract English words from `tags` ("<emoji_char> english name russian name").
+// RU always uses `name`.
+const displayName = item => {
+  if (!_isEnUrl) return item.name;
+  if (item.name_en) return item.name_en;
+  if (!/[а-яёА-ЯЁ]/.test(item.name)) return item.name;
+  if (item.tags) {
+    const en = item.tags.split(/\s+/).filter(t => /[a-z]/i.test(t) && !/[а-яё]/i.test(t)).join(' ');
+    if (en) return en.charAt(0).toUpperCase() + en.slice(1);
+  }
+  return item.name;
+};
 
-const _pathSection = window.__ASSET_SECTION__ ?? (location.pathname.split('/').filter(Boolean).at(-1) ?? 'logos');
-const _manifestBase = window.__MANIFEST_BASE__ ?? './';
-const _assetBase = window.__ASSET_BASE__ ?? ('../assets/' + _pathSection);
+initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
+initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton, getDisplayName: displayName });
+const _ecoLabels = _isEnUrl ? { ...ecosystemLabels, ...ecosystemLabelsEn } : ecosystemLabels;
+const _pathSection = window.__ASSET_SECTION__ ?? (location.pathname.split('/').filter(Boolean).find(s => s !== 'en') ?? 'logos');
+const _manifestBase = window.__MANIFEST_BASE__ ?? (_isEnUrl ? `/${_pathSection}/` : './');
+const _assetBase = window.__ASSET_BASE__ ?? (_isEnUrl ? `/assets/${_pathSection}` : `../assets/${_pathSection}`);
 setAssetBase(_assetBase);
 // Lightweight WebP grid previews exist only for logos (see build-webp-previews.js).
 if (_pathSection === 'logos') setPreviewBase(_assetBase + '/previews');
@@ -1031,7 +1089,8 @@ loadLogos(_manifestBase).then(logos => {
     nav.className = 'nav-item';
     nav.dataset.section = group.section;
     nav.dataset.slug = group.slug;
-    nav.innerHTML = `${categoryIconSvg(group.slug)}<span class="nav-label">${group.section}</span><span class="count">${readyCount}</span>`;
+    const _sectionLabel = (_isEnUrl && group.section_en) ? group.section_en : group.section;
+    nav.innerHTML = `${categoryIconSvg(group.slug)}<span class="nav-label">${_sectionLabel}</span><span class="count">${readyCount}</span>`;
     navSections.appendChild(nav);
 
     const sec = document.createElement('div');
@@ -1039,7 +1098,7 @@ loadLogos(_manifestBase).then(logos => {
     sec.dataset.section = group.section;
     const title = document.createElement('div');
     title.className = 'section-title';
-    title.textContent = group.section;
+    title.textContent = _sectionLabel;
     sec.appendChild(title);
     const grid = document.createElement('div');
     grid.className = 'grid';
@@ -1062,12 +1121,16 @@ loadLogos(_manifestBase).then(logos => {
     items.slice(VISIBLE).forEach(el => { el.style.display = 'none'; });
     const btn = document.createElement('button');
     btn.className = 'show-more-btn';
-    btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg><span>Показать ещё ${items.length - VISIBLE}</span>`;
+    const showMoreSpan1 = document.createElement('span');
+    showMoreSpan1.dataset.showMoreCount = items.length - VISIBLE;
+    showMoreSpan1.textContent = t('showMore')(items.length - VISIBLE);
+    btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>`;
+    btn.appendChild(showMoreSpan1);
     navSections.appendChild(btn);
     btn.addEventListener('click', () => {
       const expanded = btn.classList.toggle('expanded');
       items.slice(VISIBLE).forEach(el => { el.style.display = expanded ? '' : 'none'; });
-      btn.querySelector('span').textContent = expanded ? 'Скрыть' : `Показать ещё ${items.length - VISIBLE}`;
+      btn.querySelector('span').textContent = expanded ? t('showLess') : t('showMore')(items.length - VISIBLE);
     });
   })();
 
@@ -1085,7 +1148,7 @@ loadLogos(_manifestBase).then(logos => {
     .sort(([a], [b]) => {
       const ai = ECOSYSTEM_ORDER.indexOf(a);
       const bi = ECOSYSTEM_ORDER.indexOf(b);
-      if (ai === -1 && bi === -1) return (ecosystemLabels[a] || a).localeCompare(ecosystemLabels[b] || b, 'ru');
+      if (ai === -1 && bi === -1) return (_ecoLabels[a] || a).localeCompare(_ecoLabels[b] || b, _isEnUrl ? 'en' : 'ru');
       if (ai === -1) return 1;
       if (bi === -1) return -1;
       return ai - bi;
@@ -1097,8 +1160,8 @@ loadLogos(_manifestBase).then(logos => {
       const logoFile = ecosystemLogoMap[key];
       const logoHtml = logoFile
         ? `<img class="nav-logo" src="${svgUrl(logoFile)}" width="16" height="16" alt="" aria-hidden="true">`
-        : `<span class="nav-logo nav-logo-initial">${(ecosystemLabels[key] || key).slice(0, 1)}</span>`;
-      nav.innerHTML = `${logoHtml}<span class="nav-label">${ecosystemLabels[key] || key}</span><span class="count">${count}</span>`;
+        : `<span class="nav-logo nav-logo-initial">${(_ecoLabels[key] || key).slice(0, 1)}</span>`;
+      nav.innerHTML = `${logoHtml}<span class="nav-label">${_ecoLabels[key] || key}</span><span class="count">${count}</span>`;
       navEcosystems.appendChild(nav);
       ecosystemEls.push({ nav, key });
     });
@@ -1110,12 +1173,16 @@ loadLogos(_manifestBase).then(logos => {
     items.slice(VISIBLE).forEach(el => { el.style.display = 'none'; });
     const btn = document.createElement('button');
     btn.className = 'show-more-btn';
-    btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg><span>Показать ещё ${items.length - VISIBLE}</span>`;
+    const showMoreSpan2 = document.createElement('span');
+    showMoreSpan2.dataset.showMoreCount = items.length - VISIBLE;
+    showMoreSpan2.textContent = t('showMore')(items.length - VISIBLE);
+    btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>`;
+    btn.appendChild(showMoreSpan2);
     navEcosystems.appendChild(btn);
     btn.addEventListener('click', () => {
       const expanded = btn.classList.toggle('expanded');
       items.slice(VISIBLE).forEach(el => { el.style.display = expanded ? '' : 'none'; });
-      btn.querySelector('span').textContent = expanded ? 'Скрыть' : `Показать ещё ${items.length - VISIBLE}`;
+      btn.querySelector('span').textContent = expanded ? t('showLess') : t('showMore')(items.length - VISIBLE);
     });
   })();
 

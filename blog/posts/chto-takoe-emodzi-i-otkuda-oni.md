@@ -1,6 +1,8 @@
 ---
 title: Чем отличаются эмодзи Apple, Google и Microsoft
+title_en: Apple, Google and Microsoft Emoji — What's the Difference
 description: Почему один и тот же эмодзи выглядит по-разному на iPhone, Android и Windows, что такое Юникод и как скачать PNG эмодзи нужного вендора.
+description_en: Why the same emoji looks different on iPhone, Android and Windows, what Unicode is, and how to download emoji PNG from any vendor.
 date: 2026-05-30
 slug: chto-takoe-emodzi-i-otkuda-oni
 tags: Emoji, Apple, Google
@@ -39,3 +41,39 @@ tags: Emoji, Apple, Google
 ## Короткий вывод
 
 Один эмодзи — один код Юникода, но **много вариантов отрисовки**. Выбирайте набор под платформу, для которой делаете дизайн, и скачивайте готовый PNG из [каталога](../../emoji/).
+
+---EN---
+
+You send 😀, and the person on another phone sees a slightly different image. It's not a glitch — every platform simply **draws emoji in its own way**. Let's break down how it works.
+
+## Unicode Sets the Meaning, Not the Picture
+
+Emoji are characters in the **Unicode** standard. Each one has a code, for example `U+1F600` for "grinning face." Unicode defines the **meaning** of a character, but not how it looks.
+
+How exactly to draw an emoji is up to the operating system maker. That's why different sets exist:
+
+- **Apple** — on iPhone, iPad and Mac. Three-dimensional, with highlights and gradients.
+- **Google** (Noto) — on Android and in Google services. Flatter and more vivid.
+- **Microsoft** (Fluent) — on Windows. A modern "clay" style, also available in SVG.
+
+## Why This Matters for Design
+
+If you're building a mockup for a specific platform, it makes sense to use that platform's emoji. For example:
+
+- iOS app mockup → **Apple** emoji;
+- Android banner → **Google** emoji;
+- Microsoft brand illustration → **Fluent**.
+
+## Where to Download Emoji PNG
+
+In the [Trace Logo's emoji catalog](../../emoji/), each character has **Apple, Google and Microsoft** versions available. On an emoji page you can:
+
+- copy the character itself in one click;
+- download the PNG for the vendor you need;
+- view the Unicode code and category.
+
+Search works in both English and Russian — find emoji by name or simply by meaning.
+
+## The Short Answer
+
+One emoji — one Unicode code, but **many different renderings**. Choose the set that matches the platform you're designing for, and download the ready PNG from the [catalog](../../emoji/).

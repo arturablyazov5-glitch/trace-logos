@@ -4,9 +4,63 @@ import { downloadAsIco, downloadAllAsZip, estimateIcoSize } from './export.js';
 import { openIcnsModal } from './icns.js';
 import { openLiquidModal } from './liquid-glass-modal.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
+import { applyI18n, t, getLang } from './i18n.js';
+import { ecosystemLabels, ecosystemLabelsEn } from './data.js';
 import './header-search.js';
 
 applyLabels(); // single source of button texts → js/labels.js
+applyI18n();   // translate data-i18n / data-i18n-aria / data-i18n-placeholder attrs
+
+// ── Catalog CTA title with count ──────────────────────────────────────────
+const catalogTitleEl = document.querySelector('[data-catalog-count]');
+if (catalogTitleEl) {
+  const n = catalogTitleEl.dataset.catalogCount;
+  catalogTitleEl.textContent = t('seoCatalogTitle')(n);
+}
+
+// ── EN-only translations (H1, FAQ, section names, ecosystem names) ───────
+if (getLang() === 'en') {
+  // H1
+  const h1 = document.querySelector('h1[data-h1-en]');
+  if (h1) h1.textContent = h1.dataset.h1En;
+
+  // FAQ items
+  document.querySelectorAll('.faq-item[data-q-en]').forEach(item => {
+    const qEl = item.querySelector('.faq-q');
+    const aEl = item.querySelector('.faq-a');
+    if (qEl && item.dataset.qEn) qEl.textContent = item.dataset.qEn;
+    if (aEl && item.dataset.aEn) aEl.textContent = item.dataset.aEn;
+  });
+  // Section name in breadcrumbs and category badge
+  document.querySelectorAll('[data-section-en]').forEach(el => {
+    const enName = el.dataset.sectionEn;
+    if (!enName) return;
+    // category badge has inner .category-name span; breadcrumb link is a plain text node
+    const nameSpan = el.querySelector('.category-name');
+    if (nameSpan) nameSpan.textContent = enName;
+    else el.textContent = enName;
+  });
+  // Ecosystem name
+  const ecoLabel = document.querySelector('[data-eco-id]');
+  if (ecoLabel) {
+    const id = ecoLabel.dataset.ecoId;
+    const enName = ecosystemLabelsEn[id] || ecosystemLabels[id] || id;
+    const nameSpan = ecoLabel.querySelector('.eco-name');
+    if (nameSpan) nameSpan.textContent = enName;
+  }
+}
+
+// ── Threads banner dismiss ──
+const thBanner = document.getElementById('th-banner');
+const thClose  = document.getElementById('th-banner-close');
+if (thBanner && thClose) {
+  thClose.addEventListener('click', e => {
+    e.preventDefault();
+    e.stopPropagation();
+    thBanner.classList.add('hiding');
+    thBanner.addEventListener('transitionend', () => thBanner.classList.add('hidden'), { once: true });
+  });
+}
 
 // Page data injected by build script via window.__SEO_PAGE__
 const PAGE = window.__SEO_PAGE__;
@@ -39,6 +93,26 @@ let currentWide = PAGE.defaultWide;
 let currentType = PAGE.defaultType;
 let copyTimer   = null;
 
+const macosStyles       = PAGE.macosStyles; // { dark, light } or null
+const macosTabsEl       = document.getElementById('macos-style-tabs');
+const macosTabsMobileEl = document.getElementById('macos-style-tabs-mobile');
+let variantColorSrc = currentSrc; // color PNG for the current variant (reset on variant switch)
+let activeFileRel   = null;       // relative path under pngs/ when dark/light tab active
+
+function setMacosTabsStyle(style) {
+  [macosTabsEl, macosTabsMobileEl].forEach(el => {
+    if (!el) return;
+    el.querySelectorAll('.macos-style-tab').forEach(b =>
+      b.classList.toggle('active', b.dataset.style === style));
+  });
+}
+
+function showMacosTabs(show) {
+  if (!macosStyles) return;
+  macosTabsEl?.classList.toggle('hidden', !show);
+  macosTabsMobileEl?.classList.toggle('hidden', !show);
+}
+
 function updatePreviewDlLabel() {
   const text = currentType === 'svg' ? LABELS.downloadSvg : LABELS.downloadPng;
   if (previewDlLabel)  previewDlLabel.textContent  = text;
@@ -48,6 +122,25 @@ function updatePreviewDlLabel() {
 // ── Инициализация PNG-кнопки для дефолтного варианта ──
 initPngBtn(currentSrc, currentWide, currentType, document.querySelector('[data-variant].active')?.dataset.png);
 updatePreviewDlLabel();
+
+// ── macOS style tabs ──
+function onMacosTabClick(e) {
+  const btn = e.target.closest('.macos-style-tab');
+  if (!btn) return;
+  const style = btn.dataset.style;
+  if (style === 'color') {
+    activeFileRel = null;
+    currentSrc = variantColorSrc;
+  } else {
+    activeFileRel = macosStyles[style];
+    currentSrc = BASE + 'pngs/' + activeFileRel;
+  }
+  setMacosTabsStyle(style);
+  previewImg.src = currentSrc;
+  initPngBtn(currentSrc, false, 'png', undefined);
+}
+macosTabsEl?.addEventListener('click', onMacosTabClick);
+macosTabsMobileEl?.addEventListener('click', onMacosTabClick);
 
 // ── Переключение вариантов ──
 document.getElementById('variants-grid')?.addEventListener('click', e => {
@@ -62,7 +155,14 @@ document.getElementById('variants-grid')?.addEventListener('click', e => {
   currentSrc  = card.dataset.src;
   currentWide = card.dataset.wide === 'true';
   currentType = card.dataset.type;
+  variantColorSrc = currentSrc;
+  activeFileRel = null;
   updatePreviewDlLabel();
+
+  // macOS style tabs: show only for square PNG variants
+  const showTabs = currentType === 'png' && !currentWide;
+  showMacosTabs(showTabs);
+  if (showTabs) setMacosTabsStyle('color');
 
   // Wide variants → ZIP-only; square → full ICO/ICNS menu. Before the height
   // animation so its overflow clip isn't reset mid-flight.
@@ -287,8 +387,8 @@ function closeDlMenu() {
   if (btnRow) btnRow.style.overflow = '';
 }
 
-// ICO/ICNS follow the currently-shown variant, not the primary.
-function currentFile() { return currentSrc.split('/').pop().split('?')[0]; }
+// ICO/ICNS follow the currently-shown variant (including dark/light tab).
+function currentFile() { return activeFileRel || currentSrc.split('/').pop().split('?')[0]; }
 
 // ICO/ICNS only make sense for square variants. Wide `-full` variants collapse
 // the dropdown to a single "Скачать всё (ZIP)" button (the catalog does the same

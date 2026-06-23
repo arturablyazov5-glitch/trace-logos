@@ -184,19 +184,21 @@
     <span class="brand-name">Trace Logo's</span>
   </a>
   <form class="seo-search-form" id="seo-search-form" role="search" action="../../logos/" method="get" data-base="../../" data-scope="all">
-    <div class="seo-search-wrap">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
-    </div>
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
     <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
   </form>
   <a class="back-btn" href="../../logos/">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    В каталог
+    <span data-i18n="backToCatalog">В каталог</span>
   </a>
+  <lang-switcher></lang-switcher>
 </header>
+<script src="../../components/lang-switcher.js" defer></script>
+<script src="../../components/search-box.js" defer></script>
 
-<nav class="breadcrumbs" aria-label="Навигация">
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="../../">Trace Logo's</a><span class="sep">/</span>
   <a href="../../logos/">Логотипы</a><span class="sep">/</span>
   <span class="current" aria-current="page">Логотипы платёжных систем</span>
@@ -271,8 +273,8 @@
   </section>
   <div class="catalog-cta">
     <div class="catalog-cta-text">
-      <span class="catalog-cta-title">450+ логотипов в каталоге</span>
-      <span class="catalog-cta-sub">Яндекс, Сбер, ВК, Ozon, Google и другие бренды</span>
+      <span class="catalog-cta-title">310+ логотипов в каталоге</span>
+      <span class="catalog-cta-sub">SVG, PNG, редактор цвета, экспорт в Figma</span>
     </div>
     <a class="catalog-cta-link" href="../../logos/">
       Открыть каталог
@@ -283,7 +285,7 @@
 
 <footer>
   Trace Logo's Beta · <a href="../../" class="footer-link">trace-logos</a>
-  <p class="footer-copyright">Изображения могут быть защищены авторским правом их владельцев.</p>
+  <p class="footer-copyright" data-i18n="footerCopyrightShort">Изображения могут быть защищены авторским правом их владельцев.</p>
 </footer>
 
 <script type="module" src="../../js/header-search.js"></script>

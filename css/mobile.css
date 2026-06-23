@@ -82,6 +82,24 @@
   .mobile-header {
     display: flex;
   }
+  .suggest-btn--mobile { display: none; }
+  .mobile-header-lang { flex-shrink: 0; }
+  .drawer-close-btn {
+    flex-shrink: 0;
+    margin-left: auto;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 10px;
+    background: #222;
+    color: #888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .12s, color .12s;
+  }
+  .drawer-close-btn:hover { background: #2a2a2a; color: #fff; }
 
   aside {
     position: fixed;
@@ -142,4 +160,39 @@
   /* Half-width cells are too narrow for label + byte-size — drop the size so
      the label stays on one line (size is a desktop nicety). */
   .detail-actions .btn-size { display: none; }
+
+  /* ── Spacing between drawer blocks ── */
+  aside .section-switcher { margin-bottom: 14px; }
+  #nav-sections .show-more-btn { padding-bottom: 20px; }
+  #nav-ecosystems { margin-top: 10px; }
+
+  /* ── Ecosystem pills ── */
+  #ecosystems-label { display: none; }
+  #nav-ecosystems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 12px 12px;
+  }
+  #nav-ecosystems .nav-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px 5px 5px;
+    border-radius: 1000px;
+    background: #1e1e1e;
+    border: none;
+    color: #aaa;
+    font-size: 12px;
+    gap: 5px;
+  }
+  #nav-ecosystems .nav-item .nav-logo { margin-right: 0; border-radius: 1000px; }
+  #nav-ecosystems .nav-item .count { display: none; }
+  #nav-ecosystems .nav-item.active {
+    background: #2e2e2e;
+    color: #fff;
+  }
+  #nav-ecosystems .show-more-btn {
+    padding: 0;
+    width: auto;
+  }
 }

@@ -9,6 +9,7 @@ import { loadRawSvg, applyColorMap } from './color.js';
 import { showToast, svgUrl, formatFileSize } from './utils.js';
 import { parseSvgViewBox } from './svg-utils.js';
 import { LABELS, TOASTS } from './labels.js';
+import { t } from './i18n.js';
 
 // ── ICNS container spec ──
 // Each entry: 4-byte OSType + uint32 BE length (incl. 8-byte header) + PNG data.
@@ -570,11 +571,11 @@ function buildDom() {
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
       <div class="icns-header">
-        <div class="icns-title" id="icns-title">Скачать ICNS</div>
-        <div class="icns-sub">Иконка приложения для macOS</div>
+        <div class="icns-title" id="icns-title">${t('dlIcns')}</div>
+        <div class="icns-sub">${t('icnsModalSub')}</div>
       </div>
       <div class="icns-preview-box">
-        <button type="button" class="icns-reset" aria-label="Сбросить настройки" title="Сбросить">
+        <button type="button" class="icns-reset" aria-label="${t('icnsResetAria')}" title="${t('resetColors')}">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
         </button>
         <canvas class="icns-preview" width="${PREVIEW_SIZE}" height="${PREVIEW_SIZE}"></canvas>
@@ -586,15 +587,15 @@ function buildDom() {
           <span class="icns-switch" aria-hidden="true"></span>
         </label>
         <div class="icns-row">
-          <span class="icns-label">Скругление <b class="icns-val" data-for="radius"></b></span>
+          <span class="icns-label">${t('icnsRadius')} <b class="icns-val" data-for="radius"></b></span>
           <input type="range" class="icns-range" data-k="radiusPct" min="0" max="100" step="1" style="--tickx: calc(8px + ${MACOS_PCT / 100} * (100% - 16px))">
         </div>
         <div class="icns-row">
-          <span class="icns-label">Отступ <b class="icns-val" data-for="padding"></b></span>
+          <span class="icns-label">${t('icnsPadding')} <b class="icns-val" data-for="padding"></b></span>
           <input type="range" class="icns-range" data-k="paddingPct" min="0" max="25" step="1" style="--tickx: calc(8px + ${DEFAULTS.paddingPct / 25} * (100% - 16px))">
         </div>
         <label class="icns-toggle">
-          <span>Тень под иконкой</span>
+          <span>${t('icnsShadow')}</span>
           <input type="checkbox" class="icns-shadow">
           <span class="icns-switch" aria-hidden="true"></span>
         </label>

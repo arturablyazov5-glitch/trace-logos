@@ -53,6 +53,7 @@ body {
   flex-shrink: 0;
 }
 .back-btn:hover { border-color: var(--border-bold); color: var(--text-1); }
+lang-switcher { margin-left: 8px; flex-shrink: 0; }
 
 .seo-search-form { flex: 1; min-width: 0; max-width: 360px; margin: 0 16px 0 auto; position: relative; }
 .seo-search-wrap {
@@ -60,11 +61,14 @@ body {
   display: flex;
   align-items: center;
 }
-.seo-search-wrap svg {
-  position: absolute;
+.seo-search-wrap {
+  /* clear-button (.search-clear) theming — chrome lives in components/search-box.js */
+  --search-clear-color: var(--text-4);
+  --search-clear-hover: var(--text-1);
+}
+.seo-search-wrap .search-icon {
   left: 10px;
   color: var(--text-5);
-  pointer-events: none;
 }
 #seo-search {
   width: 100%;
@@ -94,6 +98,7 @@ body {
   white-space: nowrap;
 }
 #seo-search:focus ~ .search-shortcut-kbd { display: none; }
+/* Clear button (.search-clear) chrome lives in components/search-box.js */
 
 /* ── Seo live-search dropdown ── */
 .seo-search-dropdown {
@@ -669,7 +674,27 @@ footer {
 }
 
 /* ── Threads banner ── */
-.th-banner { display: block; }
+.th-banner { display: block; position: relative; opacity: 1; transition: opacity .25s ease; }
+.th-banner.hiding { opacity: 0; pointer-events: none; }
+.th-banner.hidden { display: none; }
+
+.th-banner-close {
+  position: absolute;
+  top: 8px; right: 8px;
+  z-index: 2;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  border: none; border-radius: 8px;
+  background: transparent;
+  color: var(--text-4);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.th-banner-close:hover {
+  background: var(--bg-active);
+  color: var(--text-1);
+}
+.th-banner-close svg { width: 10px; height: 10px; }
 
 .th-banner-link {
   position: relative;
@@ -828,3 +853,59 @@ footer {
   transition: color .15s;
 }
 .btn-report-outdated:hover { color: #888; }
+
+/* macOS style tabs (Цвет / Тёмное / Светлое) */
+.macos-style-tabs {
+  display: flex;
+  margin: 0;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 12px;
+  background: #1a1a1a;
+}
+.macos-style-tabs.hidden { display: none; }
+.macos-style-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  background: none;
+  color: #555;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.macos-style-tab:hover { color: #888; }
+.macos-style-tab.active { background: #2a2a2a; color: #fff; }
+.macos-style-tab.hidden { display: none; }
+.macos-style-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.macos-style-tab[data-style="color"] .macos-style-dot {
+  background: conic-gradient(#ff3b30, #ff9500, #34c759, #007aff, #af52de, #ff3b30);
+}
+.macos-style-tab[data-style="dark"] .macos-style-dot {
+  background: #3a3a3c;
+  border: 1px solid #555;
+}
+.macos-style-tab[data-style="light"] .macos-style-dot {
+  background: #d1d1d6;
+}
+
+/* macOS style tabs: desktop = .logo-side instance, mobile = .logo-info instance */
+.macos-tabs-info { display: none; }
+
+@media (max-width: 640px) {
+  .macos-tabs-side { display: none !important; }
+  .macos-tabs-info { display: flex; }
+  .macos-tabs-info.hidden { display: none; }
+}

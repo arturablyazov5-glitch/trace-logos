@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <meta charset="UTF-8">
+  <script>window.__LANG__='en';</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title data-i18n="notFoundTitle">404 — path not found · Trace Logo's</title>
+  <meta name="description" content="Page not found. Return to the homepage or find logos and emoji via search." data-i18n-content="notFoundMetaDesc">
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:title" content="404 — path not found · Trace Logo's" data-i18n-content="notFoundTitle">
+  <meta property="og:description" content="Page not found. Return to the homepage or find logos via search." data-i18n-content="notFoundOgDesc">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/home.png">
+
+  <!-- Shared chrome: header, search, footer, tokens -->
+  <link rel="stylesheet" href="/css/seo-page.css">
+
+  <script>
+  (function () {
+    var IS_EN = location.pathname.startsWith('/en/');
+    if (!IS_EN) return;
+    window.__LANG__ = 'en';
+    document.documentElement.lang = 'en';
+
+    var EN = {
+      notFoundTitle:   "404 — path not found \xB7 Trace Logo's",
+      notFoundMetaDesc:'Page not found. Return to the homepage or find logos and emoji via search.',
+      notFoundOgDesc:  'Page not found. Return to the homepage or find logos via search.',
+      notFoundH1:      'This path ended nowhere',
+      notFoundLead:    'We traced the vector through the outline, but the page was gone — the node led into the void. The whole catalog is still there: logos and 1918 emoji waiting.',
+      notFoundRandom:  'Random logo',
+      notFoundMaybe:   'Maybe you were looking for:',
+      notFoundNavAria: 'Catalog sections',
+      notFound404Aria: 'Error 404',
+      cursorLabel:     'Designer',
+      backToHome:      'Home',
+      breadcrumbLogos: 'Logos',
+      breadcrumbEmoji: 'Emoji',
+      navIcons:        'Icons',
+      navCollections:  'Collections',
+      blogSection:     'Blog',
+      seoSearchPh:     'Search logos and emoji...',
+    };
+
+    function applyI18n() {
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        var k = el.getAttribute('data-i18n');
+        if (EN[k] != null) el.textContent = EN[k];
+      });
+      document.querySelectorAll('[data-i18n-content]').forEach(function (el) {
+        var k = el.getAttribute('data-i18n-content');
+        if (EN[k] != null) el.setAttribute('content', EN[k]);
+      });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+        var k = el.getAttribute('data-i18n-placeholder');
+        if (EN[k] != null) el.setAttribute('placeholder', EN[k]);
+      });
+      document.querySelectorAll('[data-i18n-aria]').forEach(function (el) {
+        var k = el.getAttribute('data-i18n-aria');
+        if (EN[k] != null) el.setAttribute('aria-label', EN[k]);
+      });
+      document.title = EN.notFoundTitle;
+
+      /* Update internal links to /en/ prefix */
+      var internal = ['/logos/', '/emoji/', '/icons/', '/#h-collections', '/blog/'];
+      document.querySelectorAll('a[href]').forEach(function (a) {
+        var h = a.getAttribute('href');
+        if (h === '/') { a.setAttribute('href', '/en/'); return; }
+        for (var i = 0; i < internal.length; i++) {
+          if (h === internal[i]) { a.setAttribute('href', '/en' + h); return; }
+        }
+      });
+
+      /* Search form action → /en/logos/ */
+      var form = document.getElementById('seo-search-form');
+      if (form) form.setAttribute('action', '/en/logos/');
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', applyI18n);
+    } else {
+      applyI18n();
+    }
+  })();
+  </script>
+
+  <style>
+    /* ─────────────────────────────────────────────────────────────
+       404 — «Trace»: вектор, который увёл не туда.
+       Самодостаточные стили только для героя; шапка/подвал — из seo-page.css
+       ───────────────────────────────────────────────────────────── */
+    :root { --accent: #0d99ff; --purple: #8a6bff; }
+
+    body { overflow-x: hidden; }
+
+    .nf {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 24px 72px;
+      isolation: isolate;
+      overflow: hidden;
+    }
+
+    /* ── Канва: точечная сетка + виньетка ── */
+    .nf-canvas {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background-image: radial-gradient(circle, #2a2a2a 1px, transparent 1.4px);
+      background-size: 26px 26px;
+      background-position: center;
+      -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 45%, #000 35%, transparent 100%);
+              mask-image: radial-gradient(ellipse 70% 70% at 50% 45%, #000 35%, transparent 100%);
+      opacity: .55;
+    }
+
+    /* ── Плавающие логотипы каталога ── */
+    .nf-float-layer { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+    .float {
+      position: absolute;
+      transform: translate3d(calc(var(--mx,0px) * var(--depth)), calc(var(--my,0px) * var(--depth)), 0);
+      transition: transform .5s cubic-bezier(.22,.61,.36,1);
+      will-change: transform;
+    }
+    .float-inner {
+      display: block;
+      animation: drift var(--dur, 14s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+    .float img {
+      display: block;
+      width: var(--size, 48px);
+      height: var(--size, 48px);
+      object-fit: contain;
+      border-radius: 22%;
+      opacity: .16;
+      filter: saturate(.85);
+      transition: opacity .4s;
+    }
+    @keyframes drift {
+      0%,100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+      50%     { transform: translateY(-18px) rotate(calc(var(--rot, 0deg) + 4deg)); }
+    }
+
+    /* ── Курсор коллаборатора «Дизайнер» (как в Figma) ── */
+    .nf-cursor { z-index: 1; opacity: 0; animation: cursorIn .5s ease 1.3s forwards; }
+    .nf-cursor-inner { display: inline-block; animation: cursorBob 6.5s ease-in-out infinite; }
+    .nf-cursor-vis { position: relative; display: inline-block; }
+    .nf-cursor svg { display: block; width: 22px; height: 24px; filter: drop-shadow(0 4px 7px rgba(0,0,0,.45)); }
+    .nf-cursor-tag {
+      position: absolute; left: 15px; top: 17px; white-space: nowrap;
+      background: var(--purple); color: #fff;
+      font-size: 11px; font-weight: 600; line-height: 1;
+      padding: 8px 12px; border-radius: 100px;
+      box-shadow: 0 4px 12px rgba(82,41,205,.35);
+    }
+    @keyframes cursorIn  { to { opacity: 1; } }
+    @keyframes cursorBob { 0%,100% { transform: translate(0,0); } 50% { transform: translate(7px,-6px); } }
+
+    /* ── Центральная векторная сцена «404» ── */
+    .nf-stage { width: min(760px, 92vw); margin-bottom: 22px; }
+    .nf-stage svg { width: 100%; height: auto; display: block; overflow: visible; }
+
+    .d404 {
+      fill: #fff;
+      opacity: 0;
+      filter: drop-shadow(0 0 18px rgba(255,255,255,.08));
+      animation: d404in .7s cubic-bezier(.22,.61,.36,1) .2s forwards;
+    }
+    @keyframes d404in { to { opacity: 1; } }
+
+    /* Селекшн-обвязка как в векторном редакторе */
+    .sel { opacity: 0; animation: selin .55s ease .95s forwards; }
+    @keyframes selin { to { opacity: 1; } }
+    .sel-box { fill: none; stroke: var(--accent); stroke-width: 1; stroke-dasharray: 5 4; opacity: .8; }
+    .sel-rot-line { stroke: var(--accent); stroke-width: 1; opacity: .8; }
+    .anchor {
+      fill: #fff; stroke: var(--accent); stroke-width: 1.5;
+      transform-box: fill-box; transform-origin: center;
+      animation: anchorPulse 2.6s ease-in-out infinite;
+    }
+    .anchor.lit { fill: var(--accent); }
+    @keyframes anchorPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.28); } }
+
+    /* Перо, которое «ведёт» вектор — и обрыв в пустоту */
+    .pen { opacity: 0; animation: penin .5s ease 1.1s forwards; }
+    @keyframes penin { to { opacity: 1; } }
+    .lost-path { stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 2 5; stroke-linecap: round; fill: none; opacity: .7; }
+    .lost-q { fill: var(--accent); font: 600 22px var(--font); opacity: .85; }
+
+    /* ── Текст ── */
+    .nf h1 {
+      font-size: clamp(28px, 5vw, 46px);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+      color: var(--text-0);
+      margin: 0 0 14px;
+    }
+    .nf p.lead {
+      max-width: 540px;
+      font-size: clamp(14px, 1.6vw, 16px);
+      line-height: 1.6;
+      color: var(--text-3);
+      margin: 0 auto 30px;
+    }
+
+    /* ── Кнопки ── */
+    .nf-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 30px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 10px;
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      cursor: pointer; border: 1px solid transparent;
+      transition: transform .14s, background .15s, border-color .15s, color .15s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: #fff; color: #111; }
+    .btn-primary:hover { background: var(--light-hover); }
+    .btn-ghost { background: var(--bg-raised); color: var(--text-1); border-color: var(--border-base); }
+    .btn-ghost:hover { border-color: var(--border-bold); }
+    .btn svg { flex-shrink: 0; }
+    #dice.spin { animation: spin .5s cubic-bezier(.3,1.4,.5,1); }
+    @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+    /* ── Быстрые ссылки-чипы ── */
+    .nf-chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .nf-chips .lbl { width: 100%; font-size: 12px; color: var(--text-6); margin-bottom: 2px; letter-spacing: .04em; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border-radius: 999px;
+      background: var(--bg-muted); border: 1px solid var(--border);
+      color: var(--text-2); font-size: 13px; text-decoration: none;
+      transition: border-color .15s, color .15s, background .15s;
+    }
+    .chip:hover { border-color: var(--border-bold); color: var(--text-0); background: var(--bg-raised); }
+    .chip svg { color: var(--text-5); }
+
+    @media (max-width: 640px) {
+      .nf { padding: 32px 18px 56px; }
+      .nf-stage { margin-bottom: 8px; }
+      .float img { opacity: .1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .d404 { fill: #fff; opacity: 1; animation: none; }
+      .sel, .pen { opacity: 1; animation: none; }
+      .anchor, .float-inner, .nf-cursor-inner { animation: none; }
+      .nf-cursor { opacity: 1; animation: none; }
+      .float { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Trace Logo's">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="/assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="/logos/" method="get" data-base="/" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Search logos and emoji..." autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown" data-i18n-placeholder="seoSearchPh">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+  <a class="back-btn" href="/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span data-i18n="backToHome">Home</span>
+  </a>
+</header>
+
+<main class="nf">
+  <div class="nf-canvas" aria-hidden="true"></div>
+
+  <div class="nf-float-layer" id="floatLayer" aria-hidden="true">
+    <div class="float nf-cursor" style="top:9%;left:8%;--depth:.14">
+      <span class="nf-cursor-inner">
+        <span class="nf-cursor-vis">
+          <svg width="22" height="24" viewBox="-1 -1 13 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.3078 3.50996L1.36136 0.0690367C0.55262 -0.242018 -0.242018 0.552618 0.0690365 1.36136L3.60753 10.5614C3.9485 11.448 5.21732 11.4044 5.49665 10.4965L6.63388 6.80056C6.73686 6.46587 7.00741 6.20943 7.34712 6.1245L10.1913 5.41345C11.1391 5.1765 11.2196 3.86068 10.3078 3.50996Z" fill="var(--purple)" stroke="#fff" stroke-width="0.9" stroke-linejoin="round" stroke-linecap="round"/></svg>
+          <span class="nf-cursor-tag" data-i18n="cursorLabel">Designer</span>
+        </span>
+      </span>
+    </div>
+    <div class="float" style="top:11%;left:8%;--depth:.05"><span class="float-inner" style="--dur:15s;--rot:-6deg"><img src="/assets/logos/svgs/yandex.svg" alt=""    style="--size:58px"></span></div>
+    <div class="float" style="top:18%;left:81%;--depth:.08"><span class="float-inner" style="--dur:13s;--delay:-2s;--rot:5deg"><img src="/assets/logos/svgs/telegram.svg" alt="" style="--size:64px"></span></div>
+    <div class="float" style="top:66%;left:11%;--depth:.06"><span class="float-inner" style="--dur:17s;--delay:-4s;--rot:4deg"><img src="/assets/logos/svgs/sber.svg" alt=""     style="--size:60px"></span></div>
+    <div class="float" style="top:74%;left:83%;--depth:.04"><span class="float-inner" style="--dur:14s;--delay:-1s;--rot:-5deg"><img src="/assets/logos/svgs/ozon.svg" alt=""    style="--size:52px"></span></div>
+    <div class="float" style="top:9%;left:60%;--depth:.09"><span class="float-inner" style="--dur:12s;--delay:-3s;--rot:7deg"><img src="/assets/logos/svgs/vk.svg" alt=""       style="--size:44px"></span></div>
+    <div class="float" style="top:81%;left:45%;--depth:.05"><span class="float-inner" style="--dur:16s;--delay:-5s;--rot:-4deg"><img src="/assets/logos/svgs/figma.svg" alt=""   style="--size:42px"></span></div>
+    <div class="float" style="top:33%;left:90%;--depth:.05"><span class="float-inner" style="--dur:15s;--delay:-2.5s;--rot:6deg"><img src="/assets/logos/svgs/kinopoisk.svg" alt="" style="--size:48px"></span></div>
+    <div class="float" style="top:46%;left:93%;--depth:.07"><span class="float-inner" style="--dur:13s;--delay:-6s;--rot:-7deg"><img src="/assets/logos/svgs/gosuslugi.svg" alt="" style="--size:46px"></span></div>
+    <div class="float" style="top:84%;left:23%;--depth:.06"><span class="float-inner" style="--dur:18s;--delay:-3.5s;--rot:5deg"><img src="/assets/logos/svgs/alfa-bank.svg" alt="" style="--size:50px"></span></div>
+    <div class="float" style="top:15%;left:30%;--depth:.05"><span class="float-inner" style="--dur:14s;--delay:-4.5s;--rot:-5deg"><img src="/assets/logos/svgs/notion.svg" alt="" style="--size:40px"></span></div>
+    <div class="float" style="top:57%;left:71%;--depth:.05"><span class="float-inner" style="--dur:16s;--delay:-1.5s;--rot:6deg"><img src="/assets/logos/svgs/spotify.svg" alt="" style="--size:46px"></span></div>
+    <div class="float" style="top:30%;left:15%;--depth:.08"><span class="float-inner" style="--dur:13s;--delay:-5.5s;--rot:-6deg"><img src="/assets/logos/svgs/avito.svg" alt="" style="--size:44px"></span></div>
+    <div class="float" style="top:88%;left:63%;--depth:.05"><span class="float-inner" style="--dur:15s;--delay:-2s;--rot:4deg"><img src="/assets/logos/svgs/2gis.svg" alt="" style="--size:40px"></span></div>
+    <div class="float" style="top:5%;left:45%;--depth:.04"><span class="float-inner" style="--dur:17s;--delay:-7s;--rot:-4deg"><img src="/assets/logos/svgs/google.svg" alt="" style="--size:40px"></span></div>
+  </div>
+
+  <div class="nf-stage" id="stage">
+    <svg viewBox="0 0 800 300" role="img" aria-label="Error 404" data-i18n-aria="notFound404Aria">
+      <!-- Векторный контур «404», который трассируется на загрузке -->
+      <text class="d404" x="400" y="228" text-anchor="middle"
+            font-family="var(--font)" font-size="250" font-weight="800" letter-spacing="4">404</text>
+
+      <!-- Селекшн-обвязка как в редакторе -->
+      <g class="sel">
+        <rect class="sel-box" x="150" y="44" width="500" height="206" rx="2"/>
+        <line class="sel-rot-line" x1="400" y1="44" x2="400" y2="20"/>
+        <circle class="anchor" cx="400" cy="16" r="5"/>
+        <!-- углы -->
+        <rect class="anchor lit" x="144"  y="38"  width="11" height="11" rx="1.5"/>
+        <rect class="anchor lit" x="645"  y="38"  width="11" height="11" rx="1.5"/>
+        <rect class="anchor lit" x="144"  y="244" width="11" height="11" rx="1.5"/>
+        <rect class="anchor lit" x="645"  y="244" width="11" height="11" rx="1.5"/>
+        <!-- середины рёбер -->
+        <rect class="anchor" x="394.5" y="38"  width="11" height="11" rx="1.5"/>
+        <rect class="anchor" x="394.5" y="244" width="11" height="11" rx="1.5"/>
+        <rect class="anchor" x="144"  y="141" width="11" height="11" rx="1.5"/>
+        <rect class="anchor" x="645"  y="141" width="11" height="11" rx="1.5"/>
+      </g>
+
+      <!-- Перо ведёт контур — и обрывается в пустоту -->
+      <g class="pen">
+        <path class="lost-path" d="M650 250 C 700 270, 730 250, 770 286"/>
+        <text class="lost-q" x="776" y="296">?</text>
+      </g>
+    </svg>
+  </div>
+
+  <h1 data-i18n="notFoundH1">This path ended nowhere</h1>
+  <p class="lead" data-i18n="notFoundLead">We traced the vector through the outline, but the page was gone — the node led into the void. The whole catalog is still there: logos and 1918 emoji waiting.</p>
+
+  <div class="nf-actions">
+    <a class="btn btn-primary" href="/">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 9v11a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9"/></svg>
+      <span data-i18n="backToHome">Home</span>
+    </a>
+    <button class="btn btn-ghost" id="randomBtn" type="button">
+      <svg id="dice" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+      <span data-i18n="notFoundRandom">Random logo</span>
+    </button>
+  </div>
+
+  <nav class="nf-chips" aria-label="Catalog sections" data-i18n-aria="notFoundNavAria">
+    <span class="lbl" data-i18n="notFoundMaybe">Maybe you were looking for:</span>
+    <a class="chip" href="/logos/">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      <span data-i18n="breadcrumbLogos">Logos</span>
+    </a>
+    <a class="chip" href="/emoji/">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      <span data-i18n="breadcrumbEmoji">Emoji</span>
+    </a>
+    <a class="chip" href="/icons/">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      <span data-i18n="navIcons">Icons</span>
+    </a>
+    <a class="chip" href="/#h-collections">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span data-i18n="navCollections">Collections</span>
+    </a>
+    <a class="chip" href="/blog/">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+      <span data-i18n="blogSection">Blog</span>
+    </a>
+  </nav>
+</main>
+
+<footer>
+  Trace Logo's Beta · <a href="/" class="footer-link">trace-logos</a>
+</footer>
+
+<!-- Живой поиск в шапке (единый модуль) -->
+<script src="/components/search-box.js" defer></script>
+<script type="module" src="/js/header-search.js"></script>
+
+<!-- Параллакс плавающих логотипов + случайный логотип -->
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Параллакс: смещаем слой логотипов за курсором */
+  if (!reduce && window.matchMedia('(pointer: fine)').matches) {
+    var layer = document.getElementById('floatLayer');
+    var stage = document.getElementById('stage');
+    var raf = 0, tx = 0, ty = 0;
+    window.addEventListener('mousemove', function (e) {
+      tx = (e.clientX / window.innerWidth  - 0.5) * 40;
+      ty = (e.clientY / window.innerHeight - 0.5) * 40;
+      if (!raf) raf = requestAnimationFrame(apply);
+    }, { passive: true });
+    function apply() {
+      raf = 0;
+      layer.style.setProperty('--mx', tx.toFixed(1) + 'px');
+      layer.style.setProperty('--my', ty.toFixed(1) + 'px');
+      if (stage) stage.style.transform = 'translate3d(' + (tx * -0.12).toFixed(1) + 'px,' + (ty * -0.12).toFixed(1) + 'px,0)';
+    }
+  }
+
+  /* «Случайный логотип» — берём из публичного logos.json, ведём на локальный путь */
+  var btn = document.getElementById('randomBtn');
+  var dice = document.getElementById('dice');
+  var pool = null;
+  var IS_EN = window.__LANG__ === 'en';
+  function toLocal(u) {
+    try {
+      var p = new URL(u).pathname;
+      return IS_EN ? '/en' + p : p;
+    } catch (e) { return u; }
+  }
+  function go() {
+    if (dice) { dice.classList.remove('spin'); void dice.offsetWidth; dice.classList.add('spin'); }
+    if (pool && pool.length) { location.href = pool[Math.floor(Math.random() * pool.length)]; return; }
+    btn.disabled = true;
+    fetch('/logos.json').then(function (r) { return r.json(); }).then(function (d) {
+      var arr = Array.isArray(d) ? d : (d.logos || []);
+      pool = arr.filter(function (l) { return l && l.url && !l.comingSoon; })
+                .map(function (l) { return toLocal(l.url); });
+      btn.disabled = false;
+      if (pool.length) location.href = pool[Math.floor(Math.random() * pool.length)];
+    }).catch(function () { btn.disabled = false; location.href = IS_EN ? '/en/logos/' : '/logos/'; });
+  }
+  if (btn) btn.addEventListener('click', go);
+})();
+</script>
+</body>
+</html>

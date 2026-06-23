@@ -1,19 +1,21 @@
 <header class="site-header">
-  <a class="brand" href="{{REL}}" aria-label="Trace Logo's">
+  <a class="brand" href="{{HOME_REL}}" aria-label="Trace Logo's">
     <span class="brand-logo" aria-hidden="true">
       <img src="{{REL}}assets/brand/logo.svg" alt="" width="28" height="28">
     </span>
     <span class="brand-name">Trace Logo's</span>
   </a>
-  <form class="seo-search-form" id="seo-search-form" role="search" action="{{REL}}{{search_action}}" method="get" data-base="{{REL}}" data-scope="{{search_scope}}">
-    <div class="seo-search-wrap">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="seo-search" name="q" type="text" placeholder="{{search_ph}}" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
-    </div>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="{{HOME_REL}}{{search_action}}" method="get" data-base="{{DATA_BASE}}" data-scope="{{search_scope}}">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="{{search_ph}}" data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
     <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
   </form>
-  <a class="back-btn" href="{{REL}}{{back_href}}">
+  <a class="back-btn" href="{{HOME_REL}}{{back_href}}">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    {{back_label}}
+    <span data-i18n="backToCatalog">{{back_label}}</span>
   </a>
+  <lang-switcher></lang-switcher>
 </header>
+<script src="{{REL}}components/lang-switcher.js" defer></script>
+<script src="{{REL}}components/search-box.js" defer></script>

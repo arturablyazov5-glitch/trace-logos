@@ -15,10 +15,13 @@ const dropdown = document.getElementById('seo-search-dropdown');
 
 if (form && input && dropdown) {
   const BASE = form.dataset.base || '';
-  const SCOPE = form.dataset.scope || 'all';          // "logos" | "all"
+  const SCOPE = form.dataset.scope || 'all';          // "logos" | "emoji" | "all"
+  const WITH_LOGOS = SCOPE !== 'emoji';
   const WITH_EMOJI = SCOPE !== 'logos';
+  const IS_EN = window.__LANG__ === 'en';
   const MAX = 8;
   const norm = s => (s || '').toLowerCase().replace(/ё/g, 'е');
+  const enUrl = url => (IS_EN && url) ? '/en' + url.replace('https://trace-logos.ru', '') : url.replace('https://trace-logos.ru', '') || url;
 
   let data = null;
   let loadPromise = null;
@@ -36,26 +39,30 @@ if (form && input && dropdown) {
     if (data) return data;
     if (loadPromise) return loadPromise;
     loadPromise = (async () => {
-      const reqs = [fetch(BASE + 'logos.json').then(r => r.json()).catch(() => ({ logos: [] }))];
-      reqs.push(WITH_EMOJI
-        ? fetch(BASE + 'emoji.json').then(r => r.json()).catch(() => ({ emoji: [] }))
-        : Promise.resolve({ emoji: [] }));
+      const reqs = [
+        WITH_LOGOS
+          ? fetch(BASE + 'logos.json').then(r => r.json()).catch(() => ({ logos: [] }))
+          : Promise.resolve({ logos: [] }),
+        WITH_EMOJI
+          ? fetch(BASE + 'emoji.json').then(r => r.json()).catch(() => ({ emoji: [] }))
+          : Promise.resolve({ emoji: [] }),
+      ];
       const [lr, er] = await Promise.all(reqs);
       const logos = (lr.logos || []).filter(l => !l.comingSoon).map(l => ({
         type: 'logo',
-        name: l.name,
-        url: l.url,
+        name: IS_EN ? (l.name_en || l.name) : l.name,
+        url: enUrl(l.url),
         img: l.svgUrl || l.pngUrl || '',
-        search: norm(l.name + ' ' + (l.tags || '')),
+        search: norm(l.name + ' ' + (l.name_en || '') + ' ' + (l.tags || '')),
       }));
       const emoji = (er.emoji || []).map(e => {
         const ch = (e.tags || '').trim().split(/\s+/)[0] || '';
         return {
           type: 'emoji',
-          name: e.name,
+          name: IS_EN ? (e.name_en || e.name) : e.name,
           char: ch,
-          url: e.url || (BASE + 'emoji/?q=' + encodeURIComponent(e.name)),
-          search: norm(e.name + ' ' + (e.tags || '')),
+          url: enUrl(e.url) || (BASE + 'emoji/?q=' + encodeURIComponent(e.name)),
+          search: norm(e.name + ' ' + (e.name_en || '') + ' ' + (e.tags || '')),
         };
       });
       data = { logos, emoji };

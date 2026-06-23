@@ -1,6 +1,8 @@
+import { t } from './i18n.js';
+
 const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/suggest';
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
-const MAX_FILE_SIZE_LABEL = '5 МБ';
+const MAX_FILE_SIZE_LABEL = '5 MB';
 
 let _reportMode = false;
 
@@ -8,13 +10,13 @@ export function openReportModal(iconName) {
   _reportMode = true;
   const overlay = document.getElementById('suggest-overlay');
   document.getElementById('suggest-modal-titles').style.display = '';
-  document.getElementById('suggest-title').textContent = 'Сообщить об устаревшем логотипе';
-  document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = 'Мы обновим логотип в ближайшее время';
+  document.getElementById('suggest-title').textContent = t('suggestReportTitle');
+  document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = t('suggestReportSub');
   document.getElementById('suggest-success').classList.remove('show');
   const form = document.getElementById('suggest-form');
   form.style.display = '';
   form.reset();
-  document.getElementById('suggest-file-name').textContent = 'Выбрать файл';
+  document.getElementById('suggest-file-name').textContent = t('suggestFileBtn');
   document.getElementById('suggest-file-label').classList.remove('has-file');
   document.getElementById('suggest-result').className = 'suggest-result';
   document.getElementById('suggest-result').textContent = '';
@@ -22,7 +24,7 @@ export function openReportModal(iconName) {
   const nameInput = document.getElementById('suggest-name');
   nameInput.value = iconName;
   nameInput.readOnly = true;
-  document.getElementById('suggest-comment').value = 'Логотип устарел, прошу обновить';
+  document.getElementById('suggest-comment').value = t('suggestReportComment');
   overlay.classList.add('open');
 }
 
@@ -34,8 +36,8 @@ function init() {
 
   function openModal() {
     _reportMode = false;
-    document.getElementById('suggest-title').textContent = 'Предложить логотип';
-    document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = 'Мы рассмотрим заявку и добавим логотип в библиотеку';
+    document.getElementById('suggest-title').textContent = t('suggestDefaultTitle');
+    document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = t('suggestDefaultSub');
     overlay.classList.add('open');
     document.getElementById('suggest-name').focus();
   }
@@ -46,10 +48,10 @@ function init() {
     form.reset();
     form.style.display = '';
     document.getElementById('suggest-modal-titles').style.display = '';
-    document.getElementById('suggest-title').textContent = 'Предложить логотип';
-    document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = 'Мы рассмотрим заявку и добавим логотип в библиотеку';
+    document.getElementById('suggest-title').textContent = t('suggestDefaultTitle');
+    document.querySelector('#suggest-modal-titles .suggest-modal-sub').textContent = t('suggestDefaultSub');
     document.getElementById('suggest-success').classList.remove('show');
-    document.getElementById('suggest-file-name').textContent = 'Выбрать файл';
+    document.getElementById('suggest-file-name').textContent = t('suggestFileBtn');
     document.getElementById('suggest-file-label').classList.remove('has-file');
     document.getElementById('suggest-name').readOnly = false;
     result.className = 'suggest-result';
@@ -67,7 +69,7 @@ function init() {
       name.textContent = this.files[0].name;
       label.classList.add('has-file');
     } else {
-      name.textContent = 'Выбрать файл';
+      name.textContent = t('suggestFileBtn');
       label.classList.remove('has-file');
     }
   });
@@ -86,6 +88,7 @@ function init() {
 
   document.getElementById('suggest-btn-desktop').addEventListener('click', openModal);
   document.getElementById('suggest-btn-mobile').addEventListener('click', openModal);
+  document.getElementById('suggest-btn-sidebar')?.addEventListener('click', openModal);
   document.getElementById('suggest-close').addEventListener('click', closeModal);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e) => {
@@ -103,7 +106,7 @@ function init() {
       document.getElementById('suggest-name').classList.add('input-error');
       document.getElementById('suggest-name').focus();
       result.className = 'suggest-result error';
-      result.textContent = 'Заполните обязательные поля.';
+      result.textContent = t('suggestErrorRequired');
       result.style.display = 'block';
       return;
     }
@@ -111,7 +114,7 @@ function init() {
       document.getElementById('suggest-url').classList.add('input-error');
       document.getElementById('suggest-file-label').classList.add('file-error');
       result.className = 'suggest-result error';
-      result.textContent = 'Добавьте ссылку или прикрепите файл логотипа.';
+      result.textContent = t('suggestErrorNoFile');
       result.style.display = 'block';
       return;
     }
@@ -119,14 +122,14 @@ function init() {
       document.getElementById('suggest-url').classList.add('input-error');
       document.getElementById('suggest-url').focus();
       result.className = 'suggest-result error';
-      result.textContent = 'Введите корректную ссылку (например, https://brand.com).';
+      result.textContent = t('suggestErrorBadUrl');
       result.style.display = 'block';
       return;
     }
     if (file && file.size > MAX_FILE_SIZE) {
       document.getElementById('suggest-file-label').classList.add('file-error');
       result.className = 'suggest-result error';
-      result.textContent = `Файл слишком большой. Максимум — ${MAX_FILE_SIZE_LABEL}.`;
+      result.textContent = t('suggestErrorFileSize')(MAX_FILE_SIZE_LABEL);
       result.style.display = 'block';
       return;
     }
@@ -144,7 +147,7 @@ function init() {
 
       const res  = await fetch(WORKER_URL, { method: 'POST', body: fd });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Ошибка сервера');
+      if (!res.ok) throw new Error(data.error || t('suggestErrorServer'));
       if (data.ok) {
         form.style.display = 'none';
         document.getElementById('suggest-modal-titles').style.display = 'none';
@@ -152,16 +155,18 @@ function init() {
         success.classList.add('show');
         const bg    = success.querySelector('.t-form-success-popup__content-icon-background');
         const check = success.querySelector('.t-form-success-popup__content-icon-check');
-        bg.style.animation = 'none'; check.style.animation = 'none';
-        void bg.offsetWidth;
-        bg.style.animation    = 'iconBackgroundOpacity .106s linear forwards, iconBackgroundTransform 1.103s cubic-bezier(.445,.05,.55,.95) forwards';
-        check.style.animation = 'checkIconOpacity 51ms linear .437s forwards, checkIconDraw .666s cubic-bezier(.39,.575,.565,1) .437s forwards, checkIconScale .435s cubic-bezier(.445,.05,.55,.95) .437s forwards';
+        if (bg && check) {
+          bg.style.animation = 'none'; check.style.animation = 'none';
+          void bg.offsetWidth;
+          bg.style.animation    = 'iconBackgroundOpacity .106s linear forwards, iconBackgroundTransform 1.103s cubic-bezier(.445,.05,.55,.95) forwards';
+          check.style.animation = 'checkIconOpacity 51ms linear .437s forwards, checkIconDraw .666s cubic-bezier(.39,.575,.565,1) .437s forwards, checkIconScale .435s cubic-bezier(.445,.05,.55,.95) .437s forwards';
+        }
       } else {
         throw new Error(data.description);
       }
     } catch (err) {
       result.className = 'suggest-result error';
-      result.textContent = 'Ошибка отправки. Попробуйте ещё раз.';
+      result.textContent = t('suggestErrorSend');
       submitBtn.disabled = false;
     }
   });

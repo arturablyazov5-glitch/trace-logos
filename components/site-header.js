@@ -1,6 +1,9 @@
 const _siteBase = (() => {
   const src = document.currentScript?.src || '';
-  return src.replace(/components\/[^/]*$/, '') || '/';
+  const base = src.replace(/components\/[^/]*$/, '') || '/';
+  // On /en/* pages the home link should point to /en/ not the RU root.
+  if (location.pathname.startsWith('/en/')) return '/en/';
+  return base;
 })();
 
 class SiteHeader extends HTMLElement {
@@ -19,7 +22,16 @@ class SiteHeader extends HTMLElement {
   }
 
   iconCountText(count) {
-    const section = location.pathname.split('/').filter(Boolean)[0] ?? 'logos';
+    const parts = location.pathname.split('/').filter(Boolean);
+    const section = (parts[0] === 'en' ? parts[1] : parts[0]) ?? 'logos';
+    const isEn = typeof window.__LANG__ === 'string'
+      ? window.__LANG__ === 'en'
+      : location.pathname.startsWith('/en/');
+    if (isEn) {
+      if (section === 'emoji') return `${count} emoji`;
+      if (section === 'logos') return `${count} logos`;
+      return `${count} icons`;
+    }
     if (section === 'emoji') return `${count} эмодзи`;
     if (section === 'logos') {
       const mod100 = Math.abs(count) % 100;

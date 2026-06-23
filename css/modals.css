@@ -1,3 +1,69 @@
+/* ── Lang switcher ── */
+.lang-switcher {
+  position: relative;
+  flex-shrink: 0;
+}
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 12px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(255,255,255,.8);
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, color .15s;
+}
+.lang-btn:hover {
+  background: rgba(255,255,255,.08);
+  color: #fff;
+}
+.lang-chevron {
+  flex-shrink: 0;
+  transition: transform .15s;
+}
+.lang-btn[aria-expanded="true"] .lang-chevron {
+  transform: rotate(180deg);
+}
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 50;
+  background: #1c1c1c;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.55);
+  min-width: 160px;
+  padding: 4px;
+  overflow-y: auto;
+}
+.lang-dropdown.hidden { display: none; }
+.lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: rgba(255,255,255,.75);
+  transition: background .1s, color .1s;
+}
+.lang-option:hover {
+  background: rgba(255,255,255,.07);
+  color: #fff;
+}
+.lang-option.active { color: #fff; }
+.lang-option:not(.active) .lang-check { display: none; }
+.lang-check { flex-shrink: 0; opacity: .7; }
+
 /* ── Suggest button ── */
 .suggest-btn {
   margin-left: auto;
@@ -24,6 +90,21 @@
 .suggest-btn:active { transform: translateY(0); }
 .suggest-btn svg { flex-shrink: 0; }
 .suggest-btn--mobile { margin-left: 0; padding: 0 12px; }
+.suggest-btn--sidebar {
+  display: none;
+  margin: 8px 12px 0;
+  width: calc(100% - 24px);
+  justify-content: center;
+}
+.suggest-text-short { display: none; }
+@media (max-width: 1080px) {
+  .suggest-text-full  { display: none; }
+  .suggest-text-short { display: inline; }
+}
+@media (max-width: 800px) {
+  .suggest-btn.suggest-btn--topbar { display: none; }
+  .suggest-btn--sidebar { display: flex; }
+}
 
 /* ── Suggest / Help modals ── */
 .suggest-overlay {

@@ -80,6 +80,7 @@ a { color: inherit; }
   content: 'скоро'; font-size: 9px; margin-left: 5px; color: var(--text-dim);
   border: 1px solid var(--border); border-radius: 3px; padding: 1px 4px; vertical-align: middle;
 }
+html[lang="en"] .header-nav a.soon::after { content: 'soon'; }
 .btn-github {
   display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500;
   color: var(--text); background: var(--card-bg); border: 1px solid var(--border);
@@ -204,21 +205,21 @@ a { color: inherit; }
 .logo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
 
 /* ── Category grid ── */
-.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; }
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 8px; }
 .cat-tile {
-  display: flex; align-items: center; gap: 11px; padding: 12px 14px; border-radius: 11px;
-  background: var(--card-bg); border: 1px solid var(--border); text-decoration: none;
-  transition: background .15s, border-color .15s;
+  display: flex; align-items: center; gap: 11px; padding: 12px 14px; border-radius: 16px;
+  background: #161616; border: none; text-decoration: none;
+  transition: background .15s;
 }
-.cat-tile:hover { background: var(--card-bg-hover); border-color: var(--border-hover); }
-.cat-ico { font-size: 17px; line-height: 1; flex-shrink: 0; }
+.cat-tile:hover { background: #202020; }
+.cat-ico { width: 17px; height: 17px; flex-shrink: 0; stroke: var(--text-2); stroke-width: 1.75; }
 .cat-name { font-size: 13.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cat-count { margin-left: auto; font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
 
 /* ── Emoji showcase ── */
 .emoji-strip {
   display: grid; grid-template-columns: repeat(auto-fill, minmax(54px, 1fr)); gap: 8px;
-  background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 14px;
+  background: #161616; border: none; border-radius: 16px; padding: 14px;
 }
 .emoji-cell {
   aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 28px;
@@ -230,11 +231,11 @@ a { color: inherit; }
 /* ── Tools ── */
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
 .tool-card {
-  display: block; padding: 22px; border-radius: 14px; background: var(--card-bg);
-  border: 1px solid var(--border); text-decoration: none; transition: background .15s, border-color .15s;
+  display: block; padding: 22px; border-radius: 16px; background: #161616;
+  border: none; text-decoration: none; transition: background .15s;
 }
-.tool-card:hover { background: var(--card-bg-hover); border-color: var(--border-hover); }
-.tool-ico { font-size: 24px; margin-bottom: 12px; }
+.tool-card:hover { background: #202020; }
+.tool-ico { width: 24px; height: 24px; margin-bottom: 12px; flex-shrink: 0; stroke: var(--text-2); stroke-width: 1.75; }
 .tool-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
 .tool-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
 

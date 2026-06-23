@@ -7,6 +7,7 @@ import {
 } from './icns.js';
 import { showToast, formatFileSize } from './utils.js';
 import { TOASTS } from './labels.js';
+import { t } from './i18n.js';
 
 const PREVIEW_SIZE = 256;
 // innerPaddingPct stores the SLIDER POSITION (0–100).
@@ -84,37 +85,37 @@ function buildDom() {
   overlay.className = 'icns-overlay';
   overlay.innerHTML = `
     <div class="icns-modal" role="dialog" aria-modal="true" aria-labelledby="lg-title">
-      <button type="button" class="icns-close" aria-label="Закрыть">
+      <button type="button" class="icns-close" aria-label="${t('suggestCloseAria')}">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
       <div class="icns-header">
         <div class="icns-title" id="lg-title">Liquid Glass PNG</div>
-        <div class="icns-sub">Иконка в стиле macOS 26</div>
+        <div class="icns-sub">${t('lgModalSub')}</div>
       </div>
       <div class="icns-preview-box">
-        <button type="button" class="icns-reset" aria-label="Сбросить настройки" title="Сбросить">
+        <button type="button" class="icns-reset" aria-label="${t('icnsResetAria')}" title="${t('resetColors')}">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
         </button>
         <canvas class="icns-preview" width="${PREVIEW_SIZE}" height="${PREVIEW_SIZE}"></canvas>
       </div>
       <div class="icns-controls">
         <div class="icns-row">
-          <span class="icns-label">Скругление <b class="icns-val" data-for="radius"></b></span>
+          <span class="icns-label">${t('lgRadius')} <b class="icns-val" data-for="radius"></b></span>
           <input type="range" class="icns-range" data-k="radiusPct" min="0" max="100" step="1" style="--tickx: calc(8px + ${MACOS_PCT / 100} * (100% - 16px))">
         </div>
         <div class="icns-row icns-inner-pad-row">
-          <span class="icns-label">Внутренний отступ <b class="icns-val" data-for="innerPad"></b></span>
+          <span class="icns-label">${t('lgInnerPad')} <b class="icns-val" data-for="innerPad"></b></span>
           <input type="range" class="icns-range" data-k="innerPaddingPct" min="0" max="100" step="1" style="--tickx: calc(8px + 0.5 * (100% - 16px))">
         </div>
         <label class="icns-toggle">
-          <span>Тень под иконкой</span>
+          <span>${t('lgShadow')}</span>
           <input type="checkbox" class="icns-shadow">
           <span class="icns-switch" aria-hidden="true"></span>
         </label>
       </div>
       <button type="button" class="btn btn-primary icns-download">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        <span class="icns-dl-label">Скачать PNG</span>
+        <span class="icns-dl-label">${t('lgDownloadPng')}</span>
         <span class="btn-size icns-dl-size"></span>
       </button>
     </div>`;
