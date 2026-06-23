@@ -1,10 +1,7 @@
-const _siteBase = (() => {
-  const src = document.currentScript?.src || '';
-  const base = src.replace(/components\/[^/]*$/, '') || '/';
-  // On /en/* pages the home link should point to /en/ not the RU root.
-  if (location.pathname.startsWith('/en/')) return '/en/';
-  return base;
-})();
+const _isEn = location.pathname.startsWith('/en/');
+// Home link points to /en/ on EN pages; assets always live at the root.
+const _siteBase = _isEn ? '/en/' : '/';
+const _assetsBase = '/';
 
 class SiteHeader extends HTMLElement {
   connectedCallback() {
@@ -58,7 +55,7 @@ class SiteHeader extends HTMLElement {
     const brand = `
       <a class="brand" href="${_siteBase}" aria-label="Trace Logo's, на главную">
         <span class="sidebar-logo">
-          <img src="${_siteBase}assets/brand/logo.svg" alt="" width="32" height="32">
+          <img src="${_assetsBase}assets/brand/logo.svg" alt="" width="32" height="32">
         </span>
         <span class="sidebar-header-text">
           <span class="sidebar-header-row">
