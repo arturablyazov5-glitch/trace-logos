@@ -28,5 +28,7 @@ export function hexToHsv(hex) {
 export function normalizeHex(h) {
   h = h.trim().toLowerCase().replace(/^#?/, '#');
   if (/^#[0-9a-f]{3}$/.test(h)) h = '#' + h[1] + h[1] + h[2] + h[2] + h[3] + h[3];
-  return /^#[0-9a-f]{6}$/.test(h) ? h : null;
+  if (/^#[0-9a-f]{6}$/.test(h)) return h;
+  if (/^#[0-9a-f]{8}$/.test(h)) return h;
+  return null;
 }

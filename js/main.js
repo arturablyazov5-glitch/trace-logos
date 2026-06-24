@@ -3,7 +3,7 @@ import './search-shortcut.js';
 import {
   colorState, svgRawCache,
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
-  pushColorHistory, undoColors, loadRawSvg, applyColorMap, setPreviewHook,
+  pushColorHistory, undoColors, loadRawSvg, applyColorMap, setPreviewHook, extractColors,
 } from './color.js';
 import * as glassModule from './liquid-glass.js';
 import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, downloadAsIco, estimateIcoSize } from './export.js';
@@ -525,9 +525,8 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   const isSquare = vDef.type === '_original' || vDef.type === 'svg' || (!vDef.type && !isFullFile(vDef.file));
   const rawSvg = await loadRawSvg(vDef.file);
 
-  if (!colorEditingDisabled && !Object.keys(colorState.colorMap).length) {
-    const allSvgText = allVariants.map(v => svgRawCache[v.file] || '').join('\n');
-    buildColorEditor(allSvgText || rawSvg);
+  if (!colorEditingDisabled) {
+    buildColorEditor(rawSvg);
   }
 
   animateContainerHeight(controls, () => {
@@ -741,9 +740,8 @@ openDetailFn = function (item, card) {
     e.stopPropagation();
     if (colorEditingDisabled) return;
     if (!colorState.colorUndoRedo) pushColorHistory();
-    for (const key of Object.keys(colorState.colorMap)) colorState.colorMap[key] = key;
-    const allSvgForReset = allVariants.map(v => svgRawCache[v.file] || '').join('\n');
-    buildColorEditor(allSvgForReset || colorState.currentRawSvg);
+    for (const key of extractColors(colorState.currentRawSvg)) colorState.colorMap[key] = key;
+    buildColorEditor(colorState.currentRawSvg);
     if (colorState.currentRawSvg) updatePreview(colorState.currentRawSvg, colorState.currentIsSquare);
     updateVariantThumbnails();
     updateColorsResetBtn();

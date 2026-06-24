@@ -5,7 +5,12 @@ let cpH = 0, cpS = 1, cpV = 1, cpA = 100, cpOnChange = null, cpAnchor = null;
 
 function cpCurrentHex() {
   const [r, g, b] = hsvToRgb(cpH, cpS, cpV);
-  return rgbToHex(r, g, b);
+  const hex = rgbToHex(r, g, b);
+  if (cpA < 100) {
+    const a = Math.round(cpA * 255 / 100).toString(16).padStart(2, '0');
+    return hex + a;
+  }
+  return hex;
 }
 
 function cpThumbLeft(frac) {
@@ -74,7 +79,7 @@ function initPicker() {
   function moveAlpha(e) {
     const r = cpAlphaEl.getBoundingClientRect();
     cpA = Math.round(Math.max(0, Math.min(1, (e.clientX - r.left - 8) / (r.width - 16))) * 100);
-    cpRender();
+    cpRender(); cpOnChange?.(cpCurrentHex());
   }
 
   cpSvEl.addEventListener('mousedown', e => { e.preventDefault(); svDown = true; moveSv(e); });
@@ -112,7 +117,8 @@ export function openPicker(anchorEl, hex, onChange) {
   closePicker();
   if (toggling) return;
   cpAnchor = anchorEl; cpOnChange = onChange;
-  const { h, s, v } = hexToHsv(hex); cpH = h; cpS = s; cpV = v; cpA = 100;
+  const { h, s, v } = hexToHsv(hex.slice(0, 7)); cpH = h; cpS = s; cpV = v;
+  cpA = hex.length === 9 ? Math.round(parseInt(hex.slice(7, 9), 16) / 255 * 100) : 100;
   cpRender();
   cpEl.classList.add('open');
   const ar = anchorEl.getBoundingClientRect(), pw = cpEl.offsetWidth || 244, ph = cpEl.offsetHeight || 260;
@@ -138,9 +144,8 @@ export function isPickerOpen() {
 }
 
 export function syncPickerFromHex(hex) {
-  const { h, s, v } = hexToHsv(hex);
-  Object.assign({ cpH: h, cpS: s, cpV: v }, { cpH: h, cpS: s, cpV: v });
-  // Re-assign module vars via indirect approach since they're module-scoped
+  const { h, s, v } = hexToHsv(hex.slice(0, 7));
   cpH = h; cpS = s; cpV = v;
+  if (hex.length === 9) cpA = Math.round(parseInt(hex.slice(7, 9), 16) / 255 * 100);
   cpRender();
 }

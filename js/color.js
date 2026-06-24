@@ -67,13 +67,21 @@ const NAMED_COLORS = {
 
 function normalizeSvgColors(svg) {
   return svg
-    .replace(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*[\d.]+)?\s*\)/gi, (_, r, g, b) =>
+    .replace(/rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)/gi, (_, r, g, b, a) => {
+      const hex = '#' + [+r, +g, +b].map(v => Math.min(255, Math.max(0, v)).toString(16).padStart(2, '0')).join('');
+      const alpha = Math.round(Math.min(1, Math.max(0, +a)) * 255).toString(16).padStart(2, '0');
+      return +a >= 1 ? hex : hex + alpha;
+    })
+    .replace(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/gi, (_, r, g, b) =>
       '#' + [+r, +g, +b].map(v => Math.min(255, Math.max(0, v)).toString(16).padStart(2, '0')).join('')
     )
     .replace(/\b(fill|stroke|stop-color|flood-color|lighting-color|color)\s*=\s*(["'])([a-zA-Z]+)\2/gi,
       (match, attr, q, name) => NAMED_COLORS[name.toLowerCase()]
         ? `${attr}=${q}${NAMED_COLORS[name.toLowerCase()]}${q}`
         : match
+    )
+    .replace(/#([0-9A-Fa-f]{3})(?![0-9A-Fa-f])/g,
+      (_, h) => '#' + h[0] + h[0] + h[1] + h[1] + h[2] + h[2]
     );
 }
 
@@ -84,7 +92,7 @@ export async function loadRawSvg(file) {
 
 export function extractColors(svgText) {
   const set = new Set();
-  const re = /#([0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})(?![0-9A-Fa-f])/g;
+  const re = /#([0-9A-Fa-f]{8}|[0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})(?![0-9A-Fa-f])/g;
   let m;
   while ((m = re.exec(svgText)) !== null) {
     const n = normalizeHex(m[0]);
@@ -135,14 +143,16 @@ export function extractBrandColor(svgText) {
 }
 
 export function applyColorMap(svgText) {
-  let s = svgText;
-  const entries = Object.entries(colorState.colorMap)
-    .filter(([k, v]) => k !== v)
-    .sort(([a], [b]) => b.length - a.length);
-  for (const [from, to] of entries) {
-    s = s.replace(new RegExp(from + '(?![0-9a-fA-F])', 'gi'), to);
-  }
-  return s;
+  const changed = Object.fromEntries(
+    Object.entries(colorState.colorMap).filter(([k, v]) => k !== v)
+  );
+  const keys = Object.keys(changed);
+  if (!keys.length) return svgText;
+  const pattern = new RegExp(
+    keys.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![0-9a-fA-F])').join('|'),
+    'gi'
+  );
+  return svgText.replace(pattern, match => changed[match.toLowerCase()] ?? match);
 }
 
 export function updateVariantThumbnails() {
@@ -216,9 +226,31 @@ export function buildColorEditor(rawSvg) {
     const hexInput = document.createElement('input');
     hexInput.type = 'text';
     hexInput.className = 'color-hex';
-    hexInput.value = colorState.colorMap[origColor].slice(1).toUpperCase();
     hexInput.maxLength = 6;
     hexInput.spellcheck = false;
+
+    const opacityWrap = document.createElement('div');
+    opacityWrap.className = 'color-opacity-wrap';
+    const opacityInput = document.createElement('input');
+    opacityInput.type = 'text';
+    opacityInput.className = 'color-opacity';
+    opacityInput.maxLength = 3;
+    opacityInput.spellcheck = false;
+    const opacityLabel = document.createElement('span');
+    opacityLabel.className = 'color-opacity-label';
+    opacityLabel.textContent = '%';
+    opacityWrap.append(opacityInput, opacityLabel);
+
+    const getAlphaFromHex = hex => hex.length === 9
+      ? Math.round(parseInt(hex.slice(7, 9), 16) / 255 * 100)
+      : 100;
+    const syncInputs = hex => {
+      hexInput.value = hex.slice(1, 7).toUpperCase();
+      opacityInput.value = getAlphaFromHex(hex);
+      opacityWrap.classList.toggle('color-opacity-hidden', getAlphaFromHex(hex) === 100);
+    };
+    syncInputs(colorState.colorMap[origColor]);
+
     hexWrap.append(hexPrefix, hexInput);
     hexWrap.addEventListener('click', () => hexInput.focus());
 
@@ -227,13 +259,18 @@ export function buildColorEditor(rawSvg) {
       if (!colorState.colorUndoRedo && !fromPicker) pushColorHistory();
       colorState.colorMap[origColor] = newColor;
       swatch.style.background = newColor;
-      hexInput.value = newColor.slice(1).toUpperCase();
+      syncInputs(newColor);
       if (!fromPicker && isPickerOpen() && getPickerAnchor() === swatchWrap) {
         syncPickerFromHex(newColor);
       }
       if (colorState.currentRawSvg) updatePreview(colorState.currentRawSvg, colorState.currentIsSquare);
       updateVariantThumbnails();
       updateColorsResetBtn();
+    };
+
+    const currentAlphaHex = () => {
+      const a = getAlphaFromHex(colorState.colorMap[origColor]);
+      return a < 100 ? Math.round(a * 255 / 100).toString(16).padStart(2, '0') : '';
     };
 
     swatchWrap.addEventListener('mousedown', e => {
@@ -244,10 +281,19 @@ export function buildColorEditor(rawSvg) {
     hexInput.addEventListener('keydown', e => { if (e.key === 'Enter') hexInput.blur(); });
     hexInput.addEventListener('blur', () => {
       const n = normalizeHex('#' + hexInput.value);
-      if (n) applyNew(n); else hexInput.value = colorState.colorMap[origColor].slice(1).toUpperCase();
+      if (n) applyNew(n.slice(0, 7) + currentAlphaHex());
+      else hexInput.value = colorState.colorMap[origColor].slice(1, 7).toUpperCase();
+    });
+    opacityInput.addEventListener('keydown', e => { if (e.key === 'Enter') opacityInput.blur(); });
+    opacityInput.addEventListener('blur', () => {
+      const pct = Math.max(0, Math.min(100, parseInt(opacityInput.value, 10)));
+      if (isNaN(pct)) { opacityInput.value = getAlphaFromHex(colorState.colorMap[origColor]); return; }
+      const rgb = colorState.colorMap[origColor].slice(0, 7);
+      const alphaHex = pct < 100 ? Math.round(pct * 255 / 100).toString(16).padStart(2, '0') : '';
+      applyNew(rgb + alphaHex);
     });
 
-    row.append(swatchWrap, hexWrap);
+    row.append(swatchWrap, hexWrap, opacityWrap);
     section.appendChild(row);
   });
 
