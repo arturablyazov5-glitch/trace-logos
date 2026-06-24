@@ -26,11 +26,11 @@ jobs:
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage" \
             -H "Content-Type: application/json" \
-            -d "{\"chat_id\":\"${{ secrets.CHAT_ID }}\",\"text\":\"✅ Пингнул БД. Успешно\"}"
+            -d "{\"chat_id\":\"${{ secrets.CHAT_ID }}\",\"text\":\"✅ Пинганул БД. Успешно\"}"
 
       - name: Notify Telegram — failure
         if: steps.ping.outputs.status != '200'
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage" \
             -H "Content-Type: application/json" \
-            -d "{\"chat_id\":\"${{ secrets.CHAT_ID }}\",\"text\":\"❌ Пингнул БД. Ошибка: HTTP ${{ steps.ping.outputs.status }}\n${{ steps.ping.outputs.body }}\"}"
+            -d "{\"chat_id\":\"${{ secrets.CHAT_ID }}\",\"text\":\"❌ Пинганул БД. Ошибка: HTTP ${{ steps.ping.outputs.status }}\n${{ steps.ping.outputs.body }}\"}"
