@@ -8,7 +8,7 @@ import './search-shortcut.js';
 
 const MAX_PER_GROUP = 6;
 
-let container, form, input, dropdown;
+let container, form, input, dropdown, combobox;
 let data = null;            // { logos:[], emoji:[] }
 let loadingPromise = null;
 let current = [];           // плоский список отображаемых результатов (для клавиатуры)
@@ -87,7 +87,7 @@ function renderResults(logos, emoji, rawWords) {
   if (!current.length) {
     dropdown.innerHTML = '<div class="sd-empty">Ничего не найдено</div>';
     dropdown.classList.add('open');
-    input.setAttribute('aria-expanded', 'true');
+    combobox.setAttribute('aria-expanded', 'true');
     return;
   }
   let html = '';
@@ -108,7 +108,7 @@ function renderResults(logos, emoji, rawWords) {
 function close() {
   dropdown.classList.remove('open');
   dropdown.innerHTML = '';
-  input.setAttribute('aria-expanded', 'false');
+  combobox.setAttribute('aria-expanded', 'false');
   current = [];
   activeIdx = -1;
 }
@@ -147,6 +147,7 @@ export function initHomeSearch() {
   container = document.querySelector('.home-search');
   if (!container) return;
   form = container.querySelector('.search-form');
+  combobox = container.querySelector('.search-field');
   input = container.querySelector('.search-input');
   dropdown = container.querySelector('.search-dropdown');
   if (!form || !input || !dropdown) return;
