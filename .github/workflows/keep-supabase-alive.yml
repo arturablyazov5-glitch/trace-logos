@@ -1,0 +1,19 @@
+name: Keep Supabase alive
+
+on:
+  schedule:
+    - cron: '0 9 */5 * *'  # каждые 5 дней в 09:00 UTC
+  workflow_dispatch:        # можно запустить вручную
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping suggest function
+        run: |
+          curl -sf -X POST \
+            "https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/suggest" \
+            -H "Origin: https://trace-logos.ru" \
+            -F "brand=keepalive" \
+            -F "comment=automated ping" \
+            || echo "ping failed (non-fatal)"
