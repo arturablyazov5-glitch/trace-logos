@@ -1,6 +1,6 @@
 import { t } from './i18n.js';
 
-const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/upload';
+const WORKER_URL = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/upload';
 const MAX_FILES = 5;
 
 let _openHelpModal = null;

@@ -434,7 +434,7 @@ if (dlGroup && ITEM) {
 }
 
 // ── Report outdated ──
-const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/suggest';
+const WORKER_URL = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/suggest';
 const reportBtn = document.getElementById('btn-report-outdated');
 const reportOverlay = document.getElementById('suggest-overlay');
 if (reportBtn && reportOverlay) {

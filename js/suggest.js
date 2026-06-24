@@ -1,6 +1,6 @@
 import { t } from './i18n.js';
 
-const WORKER_URL = 'https://brand-icons-sanitizer.brand-icons.workers.dev/suggest';
+const WORKER_URL = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/suggest';
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const MAX_FILE_SIZE_LABEL = '5 MB';
 
