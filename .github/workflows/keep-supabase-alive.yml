@@ -9,11 +9,28 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping suggest function
+      - name: Ping Supabase
+        id: ping
         run: |
-          curl -sf -X POST \
+          RESPONSE=$(curl -s -o /tmp/ping_body.txt -w "%{http_code}" -X POST \
             "https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/suggest" \
             -H "Origin: https://trace-logos.ru" \
             -F "brand=keepalive" \
-            -F "comment=automated ping" \
-            || echo "ping failed (non-fatal)"
+            -F "comment=automated ping")
+          BODY=$(cat /tmp/ping_body.txt)
+          echo "status=$RESPONSE" >> $GITHUB_OUTPUT
+          echo "body=$BODY"       >> $GITHUB_OUTPUT
+
+      - name: Notify Telegram — success
+        if: steps.ping.outputs.status == '200'
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "{\"chat_id\":\"${{ secrets.CHAT_ID }}\",\"text\":\"✅ Пингнул БД. Успешно\"}"
+
+      - name: Notify Telegram — failure
+        if: steps.ping.outputs.status != '200'
+        run: |
+          curl -s -X POST "https://api.telegram.org/bot${{ secrets.BOT_TOKEN }}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "{\"chat_id\":\"${{ secrets.CHAT_ID }}\",\"text\":\"❌ Пингнул БД. Ошибка: HTTP ${{ steps.ping.outputs.status }}\n${{ steps.ping.outputs.body }}\"}"
