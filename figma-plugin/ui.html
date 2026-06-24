@@ -338,19 +338,41 @@
   }
   .detail-view.visible { display: flex; }
 
+  .detail-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
   .detail-back {
     display: flex;
     align-items: center;
     gap: 6px;
     padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
     cursor: pointer;
     color: var(--text-3);
     font-size: 12px;
-    flex-shrink: 0;
   }
   .detail-back:hover { color: var(--text-1); }
   .detail-back svg { flex-shrink: 0; }
+  .detail-donate {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 10px;
+    margin-right: 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #fff;
+    background: rgb(42 42 42);
+    transition: background .15s;
+    white-space: nowrap;
+  }
+  .detail-donate:hover { background: rgb(55 55 55); }
+  .detail-donate svg { fill: #fff; flex-shrink: 0; }
 
   .detail-scroll {
     flex: 1;
@@ -790,9 +812,15 @@
 
 <!-- Detail view -->
 <div class="detail-view" id="detailView">
-  <div class="detail-back" id="detailBack">
-    <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Назад
+  <div class="detail-header">
+    <div class="detail-back" id="detailBack">
+      <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Назад
+    </div>
+    <a class="detail-donate" href="https://app.lava.top/products/6f3c8efd-27c3-41a8-acb1-559b83ea3b46/d9261f0e-d716-418c-b91d-764e83f1c01c?currency=RUB" target="_blank" rel="noopener noreferrer">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Поблагодарить
+    </a>
   </div>
   <div class="detail-scroll">
     <div class="detail-preview" id="detailPreview" draggable="true">
