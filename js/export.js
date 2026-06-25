@@ -223,7 +223,7 @@ export async function downloadAllAsZip(item) {
     };
 
     for (const v of variants) {
-      const suffixRaw = (v.type === '_original' || v.type === 'png') ? '' : (v.type === 'svg' ? 'icon' : (v.type ?? v.label ?? '')).replace(/_/g, '-').toLowerCase();
+      const suffixRaw = (v.type === '_original' || v.type === 'png') ? '' : (v.type === 'svg' ? 'icon' : (v.type ?? v.label ?? '')).replace(/[\s_]+/g, '-').toLowerCase();
       const suffix = suffixRaw ? '-' + suffixRaw : '';
       const square = isSquareVariant(v);
 

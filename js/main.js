@@ -59,7 +59,6 @@ let isClosingViaButton = false;
 let activeVariantCard = null;
 let currentVariant = null; // the variant vDef currently shown in the detail panel (for ICO/ICNS export)
 let updatePngDownloadSize = null; // set per-variant; recomputes the "Скачать PNG" size readout
-let currentItemMacosStyles = null; // set in openDetailFn, read in selectVariant
 let activePngFile = null;          // tracks the currently displayed PNG (incl. dark/light tab)
 
 function resetCopyBtn() {
@@ -353,6 +352,13 @@ const TYPE_LABELS = {
   png:     'PNG Icon',
 };
 
+// Apple icon set versions (folder apple/<n>/...). Drives the _original chip label
+// and the "iOS NN …" variant labels in category JSON.
+const APPLE_VERSION_LABELS = {
+  '26': 'iOS 26 Tahoe',
+  '27': 'iOS 27 Golden Gate',
+};
+
 function isFullFile(file) {
   return /-full(\.[^.]+)?$/.test(file);
 }
@@ -375,7 +381,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
 
   const isPng = vDef.file.endsWith('.png');
   const baseName = item.figma.split('/').pop().toLowerCase();
-  const suffix   = (vDef.type === '_original' || vDef.type === 'png') ? '' : '-' + (vDef.type ?? vDef.label ?? '').replace(/_/g, '-').toLowerCase();
+  const suffix   = (vDef.type === '_original' || vDef.type === 'png') ? '' : '-' + (vDef.type ?? vDef.label ?? '').replace(/[\s_]+/g, '-').toLowerCase();
 
   const btnCopy        = document.getElementById('btn-copy');
   const btnCopyPng     = document.getElementById('btn-copy-png');
@@ -493,14 +499,19 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       showToast(TOASTS.downloaded(baseName + suffix + '.png'));
     };
 
-    // macOS style tabs: show only for PNG variants
+    // macOS style tabs: per-variant. The _original (primary) uses item-level
+    // macos_styles; each iOS-version variant carries its own. iOS 26 has dark+light
+    // (3 tabs), iOS 27 has dark only (2 tabs), color-only icons have none (hidden).
+    const variantStyles = vDef.type === '_original'
+      ? (item.macos_styles || null)
+      : (vDef.macos_styles || null);
     const macosStylesTabs = document.getElementById('macos-style-tabs');
-    macosStylesTabs?.classList.toggle('hidden', !currentItemMacosStyles);
-    if (currentItemMacosStyles) {
+    macosStylesTabs?.classList.toggle('hidden', !variantStyles);
+    if (variantStyles) {
       macosStylesTabs.querySelectorAll('.macos-style-tab').forEach(btn => {
         const s = btn.dataset.style;
         btn.classList.toggle('active', s === 'color');
-        btn.classList.toggle('hidden', s !== 'color' && !currentItemMacosStyles[s]);
+        btn.classList.toggle('hidden', s !== 'color' && !variantStyles[s]);
       });
       macosStylesTabs.onclick = (e) => {
         const btn = e.target.closest('.macos-style-tab');
@@ -508,7 +519,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
         macosStylesTabs.querySelectorAll('.macos-style-tab').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const s = btn.dataset.style;
-        activePngFile = s === 'color' ? vDef.file : currentItemMacosStyles[s];
+        activePngFile = s === 'color' ? vDef.file : variantStyles[s];
         detailImg.src = svgUrl(activePngFile);
       };
     }
@@ -674,7 +685,6 @@ openDetailFn = function (item, card) {
   detailFigmaEl.textContent = item.figma;
 
   // macOS style tabs — visibility and onclick are handled per-variant in selectVariant
-  currentItemMacosStyles = item.macos_styles || null;
   activePngFile = null;
   document.getElementById('macos-style-tabs')?.classList.add('hidden');
 
@@ -722,6 +732,9 @@ openDetailFn = function (item, card) {
   variantsGrid.innerHTML = '';
   const originalLabel = (() => {
     if (item.file.endsWith('.png')) {
+      // Apple app icons live under apple/<version>/... — label the primary by its iOS version.
+      const m = item.file.match(/^apple\/(\d+)\//);
+      if (m) return APPLE_VERSION_LABELS[m[1]] ?? `iOS ${m[1]}`;
       const vendor = item.file.split('/')[0];
       if (vendor && vendor !== item.file) return vendor.charAt(0).toUpperCase() + vendor.slice(1);
       return 'App Icon';

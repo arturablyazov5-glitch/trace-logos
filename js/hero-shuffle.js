@@ -15,6 +15,10 @@ const pickDifferent = (arr, current) => {
   return v;
 };
 
+const PROD_ORIGIN = 'https://trace-logos.ru';
+const toRelSrc = (src) =>
+  src.startsWith(PROD_ORIGIN) ? src.slice(PROD_ORIGIN.length) : src;
+
 const preload = (src) => new Promise((res) => {
   const img = new Image();
   img.onload = img.onerror = () => res();
@@ -44,8 +48,9 @@ function cycle(el, linkEl, pool, delay) {
       if (document.hidden) return;
       const next = pickDifferent(pool, current);
       if (!next || next === current) return;
-      await preload(next.src);
-      flipTo(el, next.src);
+      const src = toRelSrc(next.src);
+      await preload(src);
+      flipTo(el, src);
       linkEl.setAttribute('href', next.url);
       current = next;
     }, SWAP_MS);

@@ -93,11 +93,15 @@ let currentWide = PAGE.defaultWide;
 let currentType = PAGE.defaultType;
 let copyTimer   = null;
 
-const macosStyles       = PAGE.macosStyles; // { dark, light } or null
 const macosTabsEl       = document.getElementById('macos-style-tabs');
 const macosTabsMobileEl = document.getElementById('macos-style-tabs-mobile');
-let variantColorSrc = currentSrc; // color PNG for the current variant (reset on variant switch)
-let activeFileRel   = null;       // relative path under pngs/ when dark/light tab active
+let variantColorSrc    = currentSrc; // color PNG for the current variant (reset on variant switch)
+let activeFileRel      = null;       // relative path under pngs/ when dark/light tab active
+let currentMacosStyles = null;       // macos_styles for the currently selected variant
+
+function parseMacosFromCard(card) {
+  try { return card?.dataset.macos ? JSON.parse(card.dataset.macos) : null; } catch { return null; }
+}
 
 function setMacosTabsStyle(style) {
   [macosTabsEl, macosTabsMobileEl].forEach(el => {
@@ -107,10 +111,19 @@ function setMacosTabsStyle(style) {
   });
 }
 
-function showMacosTabs(show) {
-  if (!macosStyles) return;
-  macosTabsEl?.classList.toggle('hidden', !show);
-  macosTabsMobileEl?.classList.toggle('hidden', !show);
+function showMacosTabs(show, styles) {
+  [macosTabsEl, macosTabsMobileEl].forEach(el => {
+    if (!el) return;
+    el.classList.toggle('hidden', !show);
+    el.querySelector('[data-style="dark"]')?.classList.toggle('hidden', !styles?.dark);
+    el.querySelector('[data-style="light"]')?.classList.toggle('hidden', !styles?.light);
+  });
+}
+
+// Initialise from the active variant card
+currentMacosStyles = parseMacosFromCard(document.querySelector('[data-variant].active'));
+if (currentMacosStyles && macosTabsEl && !macosTabsEl.classList.contains('hidden')) {
+  showMacosTabs(true, currentMacosStyles);
 }
 
 function updatePreviewDlLabel() {
@@ -126,13 +139,13 @@ updatePreviewDlLabel();
 // ── macOS style tabs ──
 function onMacosTabClick(e) {
   const btn = e.target.closest('.macos-style-tab');
-  if (!btn) return;
+  if (!btn || btn.classList.contains('hidden')) return;
   const style = btn.dataset.style;
   if (style === 'color') {
     activeFileRel = null;
     currentSrc = variantColorSrc;
   } else {
-    activeFileRel = macosStyles[style];
+    activeFileRel = currentMacosStyles[style];
     currentSrc = BASE + 'pngs/' + activeFileRel;
   }
   setMacosTabsStyle(style);
@@ -159,9 +172,10 @@ document.getElementById('variants-grid')?.addEventListener('click', e => {
   activeFileRel = null;
   updatePreviewDlLabel();
 
-  // macOS style tabs: show only for square PNG variants
-  const showTabs = currentType === 'png' && !currentWide;
-  showMacosTabs(showTabs);
+  // macOS style tabs: show only for square PNG variants that have styles
+  currentMacosStyles = parseMacosFromCard(card);
+  const showTabs = currentType === 'png' && !currentWide && !!currentMacosStyles;
+  showMacosTabs(showTabs, currentMacosStyles);
   if (showTabs) setMacosTabsStyle('color');
 
   // Wide variants → ZIP-only; square → full ICO/ICNS menu. Before the height
@@ -388,7 +402,13 @@ function closeDlMenu() {
 }
 
 // ICO/ICNS follow the currently-shown variant (including dark/light tab).
-function currentFile() { return activeFileRel || currentSrc.split('/').pop().split('?')[0]; }
+function currentFile() {
+  if (activeFileRel) return activeFileRel;
+  // currentSrc = BASE + 'pngs/' + relPath; extract the pngs-relative path.
+  const pngsPrefix = BASE.replace(/\/+$/, '') + '/pngs/';
+  if (currentSrc.startsWith(pngsPrefix)) return currentSrc.slice(pngsPrefix.length).split('?')[0];
+  return currentSrc.split('/').pop().split('?')[0]; // SVG or unexpected fallback
+}
 
 // ICO/ICNS only make sense for square variants. Wide `-full` variants collapse
 // the dropdown to a single "Скачать всё (ZIP)" button (the catalog does the same
