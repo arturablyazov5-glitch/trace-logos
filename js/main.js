@@ -824,7 +824,7 @@ openDetailFn = function (item, card) {
     colorState.variantImgEls.push({ file: vDef.file, imgEl: vi });
     const vl = document.createElement('div');
     vl.className = 'variant-label';
-    vl.textContent = vDef.label;
+    vl.textContent = (_isEnUrl && vDef.label_en) ? vDef.label_en : vDef.label;
     vc.append(vi, vl);
     vc.addEventListener('click', () => {
       detail.scrollTop = 0;
