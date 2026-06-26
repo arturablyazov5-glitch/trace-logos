@@ -817,7 +817,9 @@ openDetailFn = function (item, card) {
       || (!vDef.type && !isFullFile(vDef.file));
     vc.className = 'variant-card' + (isWide ? ' wide' : isSquareVariant ? ' favicon' : '');
     const vi = document.createElement('img');
-    vi.src = svgUrl(vDef.file);
+    const variantPreview = previewUrl(vDef.file);
+    vi.src = variantPreview ?? svgUrl(vDef.file);
+    if (variantPreview) vi.addEventListener('error', () => { vi.src = svgUrl(vDef.file); }, { once: true });
     if (item.prerendered !== false && vDef.file.endsWith('.png')) vi.classList.add('prerendered');
     colorState.variantImgEls.push({ file: vDef.file, imgEl: vi });
     const vl = document.createElement('div');
