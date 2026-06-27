@@ -50,6 +50,6 @@ security definer
 set search_path = public
 as $$
 begin
-  delete from public.logo_stats;
+  truncate public.logo_stats;
 end;
 $$;
