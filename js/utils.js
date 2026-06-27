@@ -143,3 +143,32 @@ export function previewUrl(file) {
   const webp = file.replace(/\.png$/, '.webp');
   return `${_previewBase}/${webp}?v=${SVG_URL_V}`;
 }
+
+// ── Трекинг популярности логотипов ───────────────────────────────────────
+// Открытие detail-панели в каталоге и заход на SEO-страницу логотипа
+// суммируются в один счётчик (ключ — item.figma) в Supabase.
+const TRACK_URL = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/track';
+const SITE_ORIGIN = 'https://trace-logos.ru';
+
+// Абсолютный URL ассета (для превью в админке) из item.file.
+function assetAbsUrl(file) {
+  if (!file) return '';
+  if (/^https?:\/\//.test(file)) return file;
+  if (file.startsWith('/')) return SITE_ORIGIN + file;
+  const folder = file.endsWith('.png') ? 'pngs' : 'svgs';
+  return `${SITE_ORIGIN}/assets/logos/${folder}/${file}`;
+}
+
+export function trackLogoView(figma, name, file) {
+  if (!figma) return;
+  // Локальную разработку не считаем, чтобы не засорять боевую статистику.
+  const host = location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || host === '') return;
+
+  fetch(TRACK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ figma, name: name || '', img: assetAbsUrl(file) }),
+    keepalive: true, // переживает уход со страницы (актуально для SEO-страниц)
+  }).catch(() => {});
+}

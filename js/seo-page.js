@@ -1,5 +1,5 @@
 import { svgToPngBlob, triggerConfetti, parseSvgViewBox } from './svg-utils.js';
-import { animateContainerHeight, showToast, setAssetBase, formatFileSize } from './utils.js';
+import { animateContainerHeight, showToast, setAssetBase, formatFileSize, trackLogoView } from './utils.js';
 import { downloadAsIco, downloadAllAsZip, estimateIcoSize } from './export.js';
 import { openIcnsModal } from './icns.js';
 import { openLiquidModal } from './liquid-glass-modal.js';
@@ -72,6 +72,7 @@ const ITEM = PAGE.item; // { figma, file, variants } — for the reused catalog 
 // page's asset folder, and flag the section so downloadAllAsZip bundles ICO/ICNS.
 setAssetBase(BASE.replace(/\/+$/, ''));
 document.body.dataset.section = 'logos';
+trackLogoView(PAGE.figma, PAGE.name, PAGE.item?.file);
 
 const btnRow       = document.getElementById('btn-row');
 const previewCard  = document.getElementById('preview-card');

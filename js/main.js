@@ -1,4 +1,4 @@
-import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize } from './utils.js';
+import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize, trackLogoView } from './utils.js';
 import './search-shortcut.js';
 import {
   colorState, svgRawCache,
@@ -660,6 +660,7 @@ openDetailFn = function (item, card) {
   if (layoutMq.matches) closeNavDrawer();
 
   if (activeCard === card) { closeDetail(); return; }
+  trackLogoView(item.figma, item.name, item.file);
   resetCopyBtn();
   if (activeCard) activeCard.classList.remove('active');
   activeCard = card;
