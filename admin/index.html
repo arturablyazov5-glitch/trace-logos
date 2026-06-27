@@ -57,6 +57,24 @@ body {
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--line);
 }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+  min-width: 0;
+}
+.brand-logo { width: 32px; height: 32px; display: block; }
+.brand-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.brand-row { display: flex; align-items: center; gap: 6px; }
+.brand-name { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.brand-badge {
+  font-size: 10px; font-weight: 600; color: var(--text-3);
+  background: var(--bg-raised); border-radius: 16px;
+  padding: 3px 6px; white-space: nowrap;
+}
+.brand-sub { font-size: 11px; color: var(--text-6); white-space: nowrap; }
 .topbar .spacer { flex: 1; }
 .icon-btn {
   display: inline-flex; align-items: center; gap: 7px;
@@ -303,10 +321,18 @@ footer .dot { margin: 0 8px; opacity: .5; }
 </div>
 
 <!-- ── Приложение ── -->
-<script src="../components/site-header.js" defer></script>
 <div class="app" id="app">
   <header class="topbar">
-    <site-header variant="brand"></site-header>
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/assets/brand/logo.svg" alt="" width="32" height="32">
+      <span class="brand-text">
+        <span class="brand-row">
+          <span class="brand-name">Trace Logo's</span>
+          <span class="brand-badge">Admin</span>
+        </span>
+        <span class="brand-sub">Популярность логотипов</span>
+      </span>
+    </a>
     <div class="spacer"></div>
     <button class="icon-btn danger" id="btn-reset">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
