@@ -6,7 +6,7 @@
 //   of specular/rim/depth gradients + a soft contact shadow. The reference Dock
 //   icons that flank the live preview are the ground truth we tune against.
 import { loadRawSvg, applyColorMap } from './color.js';
-import { showToast, svgUrl, formatFileSize } from './utils.js';
+import { showToast, svgUrl, formatFileSize, trackExport } from './utils.js';
 import { parseSvgViewBox } from './svg-utils.js';
 import { LABELS, TOASTS } from './labels.js';
 import { t } from './i18n.js';
@@ -895,6 +895,7 @@ async function doDownload() {
     a.click();
     URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(name + '.icns'));
+    trackExport(source.item?.figma, 'icns');
     close();
   } catch (err) {
     showToast(TOASTS.icnsError);

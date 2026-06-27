@@ -1,5 +1,5 @@
 import { svgRawCache, colorState, applyColorMap, loadRawSvg } from './color.js';
-import { showToast, svgUrl } from './utils.js';
+import { showToast, svgUrl, trackExport } from './utils.js';
 import { TOASTS } from './labels.js';
 import { parseSvgViewBox, svgToPngBlob } from './svg-utils.js';
 import { buildIcnsForFile } from './icns.js';
@@ -162,6 +162,7 @@ export async function downloadAsIco(item, file = item.file) {
   a.click();
   URL.revokeObjectURL(a.href);
   showToast(TOASTS.downloaded(baseName + '.ico'));
+  trackExport(item.figma, 'ico');
 }
 
 export async function downloadAllAsZip(item) {
@@ -269,6 +270,7 @@ export async function downloadAllAsZip(item) {
     a.click();
     URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(baseName + '.zip'));
+    trackExport(item.figma, 'zip');
   } catch (err) {
     console.error(err);
     showToast(TOASTS.zipError);

@@ -159,6 +159,18 @@ function assetAbsUrl(file) {
   return `${SITE_ORIGIN}/assets/logos/${folder}/${file}`;
 }
 
+export function trackExport(figma, format) {
+  if (!figma || !format) return;
+  const host = location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || host === '') return;
+  fetch(TRACK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ figma, format }),
+    keepalive: true,
+  }).catch(() => {});
+}
+
 export function trackLogoView(figma, name, file) {
   if (!figma) return;
   // Локальную разработку не считаем, чтобы не засорять боевую статистику.

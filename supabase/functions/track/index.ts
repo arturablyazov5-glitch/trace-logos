@@ -35,9 +35,9 @@ serve(async (req: Request) => {
     return new Response(null, { status: 204, headers: corsHeaders() });
   }
 
-  // ── Запись просмотра (публично) ────────────────────────────────────────
+  // ── Запись (публично) ───────────────────────────────────────────────
   if (req.method === 'POST') {
-    let payload: { figma?: string; name?: string; img?: string };
+    let payload: { figma?: string; name?: string; img?: string; format?: string };
     try {
       payload = await req.json();
     } catch (_) {
@@ -46,9 +46,26 @@ serve(async (req: Request) => {
 
     const figma = clean(payload.figma, 300);
     if (!figma) return json({ error: 'figma is required' }, 400);
+
+    const format = clean(payload.format, 20);
+    if (format) {
+      // Трекинг экспорта (скачивание / копирование)
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_export`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SERVICE_KEY,
+          Authorization: `Bearer ${SERVICE_KEY}`,
+        },
+        body: JSON.stringify({ p_figma: figma, p_format: format }),
+      });
+      if (!res.ok) return json({ error: 'DB error', detail: await res.text() }, 500);
+      return json({ ok: true });
+    }
+
+    // Трекинг просмотра
     const name = clean(payload.name, 200);
     const img  = clean(payload.img, 500);
-
     const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_logo_view`, {
       method: 'POST',
       headers: {
@@ -58,10 +75,7 @@ serve(async (req: Request) => {
       },
       body: JSON.stringify({ p_figma: figma, p_name: name, p_img: img }),
     });
-
-    if (!res.ok) {
-      return json({ error: 'DB error', detail: await res.text() }, 500);
-    }
+    if (!res.ok) return json({ error: 'DB error', detail: await res.text() }, 500);
     return json({ ok: true });
   }
 
@@ -84,7 +98,16 @@ serve(async (req: Request) => {
     if (!res.ok) {
       return json({ error: 'DB error', detail: await res.text() }, 500);
     }
-    return json(await res.json());
+
+    const exports = await fetch(
+      `${SUPABASE_URL}/rest/v1/export_stats?select=figma,format,count&order=count.desc`,
+      { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } },
+    );
+
+    return json({
+      views: await res.json(),
+      exports: exports.ok ? await exports.json() : [],
+    });
   }
 
   // ── Сброс статистики (только админ) ─────────────────────────────────

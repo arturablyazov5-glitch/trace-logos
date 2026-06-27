@@ -1,4 +1,4 @@
-import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize, trackLogoView } from './utils.js';
+import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize, trackLogoView, trackExport } from './utils.js';
 import './search-shortcut.js';
 import {
   colorState, svgRawCache,
@@ -487,6 +487,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
         await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
         triggerConfetti(btnCopyPng);
         showToast(TOASTS.copiedPng);
+        trackExport(item.figma, 'copy-png');
       } catch (e) {
         btnCopyPng.disabled = false;
         showToast(TOASTS.copyPngError);
@@ -497,6 +498,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.png' });
       a.click(); URL.revokeObjectURL(a.href);
       showToast(TOASTS.downloaded(baseName + suffix + '.png'));
+      trackExport(item.figma, 'png');
     };
 
     // macOS style tabs: per-variant. The _original (primary) uses item-level
@@ -590,7 +592,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
 
   btnCopy.onclick = () => {
     navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
-      .then(() => { triggerConfetti(btnCopy); showToast(TOASTS.copiedSvg); })
+      .then(() => { triggerConfetti(btnCopy); showToast(TOASTS.copiedSvg); trackExport(item.figma, 'copy-svg'); })
       .catch(() => showToast(TOASTS.copyError));
   };
   btnDownloadSvg.onclick = () => {
@@ -598,6 +600,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.svg' });
     a.click(); URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(baseName + suffix + '.svg'));
+    trackExport(item.figma, 'svg');
   };
   btnCopyPng.onclick = async () => {
     btnCopyPng.disabled = true;
@@ -606,6 +609,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       await navigator.clipboard.write([new ClipboardItem({ 'image/png': new File([blob], `${item.name}.png`, { type: 'image/png' }) })]);
       triggerConfetti(btnCopyPng);
       showToast(TOASTS.copiedPng);
+      trackExport(item.figma, 'copy-png');
     } catch (e) {
       showToast(TOASTS.copyPngError);
     } finally {
@@ -617,6 +621,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + suffix + '.png' });
     a.click(); URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(baseName + suffix + '.png'));
+    trackExport(item.figma, 'png');
   };
 }
 

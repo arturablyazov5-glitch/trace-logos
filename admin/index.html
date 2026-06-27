@@ -217,6 +217,16 @@ td.bar { width: 220px; }
 .bar-track { background: var(--bg-raised); border-radius: 5px; height: 7px; overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); transition: width .4s cubic-bezier(.22,.61,.36,1); }
 
+td.exports { white-space: nowrap; }
+.ex-pill {
+  display: inline-flex; align-items: center; gap: 0;
+  margin: 1px 4px 1px 0;
+  font-size: 11px; border-radius: 6px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.ex-fmt { padding: 2px 6px; color: var(--text-3); background: var(--bg-raised); }
+.ex-cnt { padding: 2px 6px; color: var(--text-0); font-weight: 600; font-variant-numeric: tabular-nums; }
+
 .empty, .loading-row { text-align: center; padding: 56px 20px; color: var(--text-3); font-size: 14px; }
 .spinner {
   width: 22px; height: 22px; margin: 0 auto 12px;
@@ -298,7 +308,7 @@ footer .dot { margin: 0 8px; opacity: .5; }
 
 @media (max-width: 680px) {
   main { padding: 24px 16px 36px; }
-  td.bar, thead th.col-bar { display: none; }
+  td.bar, thead th.col-bar, td.exports, thead th.col-exports { display: none; }
   td.fg-hide .fg { display: none; }
   .page-head h1 { font-size: 22px; }
 }
@@ -354,7 +364,7 @@ footer .dot { margin: 0 8px; opacity: .5; }
       <div class="stat lead"><div class="k">Всего просмотров</div><div class="v" id="s-total">—</div></div>
       <div class="stat"><div class="k">Логотипов в счёте</div><div class="v" id="s-count">—</div></div>
       <div class="stat"><div class="k">Самый популярный</div><div class="v" id="s-top" style="font-size:18px">—</div></div>
-      <div class="stat"><div class="k">Обновлено</div><div class="v" id="s-upd" style="font-size:15px;color:var(--text-2)">—</div></div>
+      <div class="stat"><div class="k">Всего экспортов</div><div class="v" id="s-exports">—</div></div>
     </div>
 
     <div class="toolbar">
@@ -372,11 +382,12 @@ footer .dot { margin: 0 8px; opacity: .5; }
             <th class="col-rank" data-sort="rank">#</th>
             <th class="col-name" data-sort="name">Логотип</th>
             <th class="col-views sorted" data-sort="views">Просмотры <span class="arr">▼</span></th>
+            <th class="col-exports" data-sort="exports">Экспорт</th>
             <th class="col-bar"></th>
           </tr>
         </thead>
         <tbody id="tbody">
-          <tr><td colspan="4"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          <tr><td colspan="5"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
         </tbody>
       </table>
     </div>
@@ -393,8 +404,11 @@ footer .dot { margin: 0 8px; opacity: .5; }
 const ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/track';
 const KEY_STORE = 'tl_admin_key';
 
+const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG' };
+
 let adminKey = sessionStorage.getItem(KEY_STORE) || '';
 let data = [];
+let exportMap = {};
 let sortKey = 'views';
 let sortDir = -1;
 
@@ -469,20 +483,34 @@ $('btn-reset').addEventListener('click', async () => {
     });
     if (!res.ok) throw new Error('Ошибка сброса');
     data = [];
+    exportMap = {};
     render();
   } catch (e) {
     alert('Не удалось сбросить: ' + (e.message || 'ошибка сети'));
   }
 });
 
-function ingest(rows) {
-  data = (rows || []).map(r => ({
-    figma: r.figma,
-    name: r.name || (r.figma || '').split('/').pop(),
-    img: r.img || '',
-    views: Number(r.views) || 0,
-    updated: r.updated_at || null,
-  }));
+function ingest(raw) {
+  const views = raw.views || raw || [];
+  const exports = raw.exports || [];
+  exportMap = {};
+  for (const e of exports) {
+    if (!exportMap[e.figma]) exportMap[e.figma] = {};
+    exportMap[e.figma][e.format] = Number(e.count) || 0;
+  }
+  data = (Array.isArray(views) ? views : []).map(r => {
+    const ex = exportMap[r.figma] || {};
+    const totalExports = Object.values(ex).reduce((s, v) => s + v, 0);
+    return {
+      figma: r.figma,
+      name: r.name || (r.figma || '').split('/').pop(),
+      img: r.img || '',
+      views: Number(r.views) || 0,
+      exports: totalExports,
+      exportDetail: ex,
+      updated: r.updated_at || null,
+    };
+  });
   render();
 }
 
@@ -506,12 +534,13 @@ function render() {
   $('s-total').innerHTML = total.toLocaleString('ru-RU') + '<span class="unit">просм.</span>';
   $('s-count').textContent = data.length.toLocaleString('ru-RU');
   $('s-top').textContent = top ? top.name : '—';
-  $('s-upd').textContent = lastUpd ? fmtDate(lastUpd) : '—';
+  const totalExports = data.reduce((s, d) => s + d.exports, 0);
+  $('s-exports').innerHTML = totalExports.toLocaleString('ru-RU') + '<span class="unit">скач.</span>';
 
   $('count-pill').textContent = q ? `${rows.length} из ${data.length}` : '';
 
   if (!rows.length) {
-    $('tbody').innerHTML = `<tr><td colspan="4"><div class="empty">${data.length ? 'Ничего не найдено' : 'Пока нет данных. Логотипы появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
+    $('tbody').innerHTML = `<tr><td colspan="5"><div class="empty">${data.length ? 'Ничего не найдено' : 'Пока нет данных. Логотипы появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
     return;
   }
 
@@ -531,6 +560,7 @@ function render() {
         </div>
       </td>
       <td class="views"><b>${d.views.toLocaleString('ru-RU')}</b></td>
+      <td class="exports">${fmtExports(d.exportDetail)}</td>
       <td class="bar"><div class="bar-track"><div class="bar-fill" style="width:${(d.views / max * 100).toFixed(1)}%"></div></div></td>
     </tr>`).join('');
 }
@@ -543,6 +573,13 @@ function ph(name) {
   d.className = 'ph';
   d.textContent = (name || '?').trim().charAt(0).toUpperCase();
   return d;
+}
+function fmtExports(detail) {
+  if (!detail || !Object.keys(detail).length) return '<span style="color:var(--text-6)">—</span>';
+  return Object.entries(detail)
+    .sort((a, b) => b[1] - a[1])
+    .map(([fmt, cnt]) => `<span class="ex-pill"><span class="ex-fmt">${esc(FMT_LABELS[fmt] || fmt)}</span><span class="ex-cnt">${cnt}</span></span>`)
+    .join('');
 }
 function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }
 function fmtDate(iso) {

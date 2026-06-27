@@ -1,5 +1,5 @@
 import { svgToPngBlob, triggerConfetti, parseSvgViewBox } from './svg-utils.js';
-import { animateContainerHeight, showToast, setAssetBase, formatFileSize, trackLogoView } from './utils.js';
+import { animateContainerHeight, showToast, setAssetBase, formatFileSize, trackLogoView, trackExport } from './utils.js';
 import { downloadAsIco, downloadAllAsZip, estimateIcoSize } from './export.js';
 import { openIcnsModal } from './icns.js';
 import { openLiquidModal } from './liquid-glass-modal.js';
@@ -245,6 +245,7 @@ btnCopy.addEventListener('click', function() {
     .then(() => {
       triggerConfetti(btnCopy);
       showToast(TOASTS.copiedSvg);
+      trackExport(PAGE.figma, 'copy-svg');
       btnCopyLbl.textContent = LABELS.copied;
       btnCopy.disabled = true;
       if (copyTimer) clearTimeout(copyTimer);
@@ -269,6 +270,7 @@ function downloadPngFromSvg(svgUrl, filename, square) {
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 10000);
       showToast(TOASTS.downloaded(filename));
+      trackExport(PAGE.figma, filename.endsWith('.png') ? 'png' : 'svg');
     });
 }
 
@@ -355,8 +357,8 @@ function downloadCurrent() {
 
 btnExpand.addEventListener('click', e => { e.stopPropagation(); openLightbox(); });
 
-btnDlSvg.addEventListener('click', () => showToast(TOASTS.downloaded(btnDlSvg.download)));
-btnDlPng.addEventListener('click', () => { if (btnDlPng.href) showToast(TOASTS.downloaded(btnDlPng.download)); });
+btnDlSvg.addEventListener('click', () => { showToast(TOASTS.downloaded(btnDlSvg.download)); trackExport(PAGE.figma, 'svg'); });
+btnDlPng.addEventListener('click', () => { if (btnDlPng.href) { showToast(TOASTS.downloaded(btnDlPng.download)); trackExport(PAGE.figma, 'png'); } });
 
 btnMenu.addEventListener('click', e => {
   e.stopPropagation();
