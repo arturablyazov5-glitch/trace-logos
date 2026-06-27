@@ -41,3 +41,15 @@ begin
         updated_at = now();
 end;
 $$;
+
+-- Полный сброс статистики (вызывается из админки через Edge Function track DELETE).
+create or replace function public.reset_logo_stats()
+returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+begin
+  delete from public.logo_stats;
+end;
+$$;

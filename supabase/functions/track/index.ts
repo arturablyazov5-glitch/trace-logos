@@ -16,7 +16,7 @@ function corsHeaders(): HeadersInit {
   const origin = Deno.env.get('ALLOWED_ORIGIN') || '*';
   return {
     'Access-Control-Allow-Origin': origin,
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, x-admin-key',
     'Content-Type': 'application/json',
   };
@@ -85,6 +85,28 @@ serve(async (req: Request) => {
       return json({ error: 'DB error', detail: await res.text() }, 500);
     }
     return json(await res.json());
+  }
+
+  // ── Сброс статистики (только админ) ─────────────────────────────────
+  if (req.method === 'DELETE') {
+    if (!ADMIN_KEY || req.headers.get('x-admin-key') !== ADMIN_KEY) {
+      return json({ error: 'Unauthorized' }, 401);
+    }
+
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/reset_logo_stats`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: SERVICE_KEY,
+        Authorization: `Bearer ${SERVICE_KEY}`,
+      },
+      body: '{}',
+    });
+
+    if (!res.ok) {
+      return json({ error: 'DB error', detail: await res.text() }, 500);
+    }
+    return json({ ok: true });
   }
 
   return json({ error: 'Method not allowed' }, 405);

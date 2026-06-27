@@ -57,26 +57,6 @@ body {
   backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--line);
 }
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 600;
-  color: var(--text-0);
-  font-size: 15px;
-  letter-spacing: -.01em;
-}
-.brand .mark {
-  width: 26px; height: 26px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #2b2b2b, #161616);
-  border: 1px solid var(--border-muted);
-  display: grid; place-items: center;
-  color: var(--accent);
-}
-.brand .mark svg { width: 15px; height: 15px; }
-.brand .sep { color: var(--text-6); font-weight: 400; }
-.brand .section { color: var(--text-3); font-weight: 500; }
 .topbar .spacer { flex: 1; }
 .icon-btn {
   display: inline-flex; align-items: center; gap: 7px;
@@ -90,7 +70,10 @@ body {
   transition: background .15s, color .15s, border-color .15s;
 }
 .icon-btn:hover { background: var(--bg-hover); color: var(--text-1); border-color: var(--border-hover); }
+.icon-btn.danger { color: #e55; border-color: #522; }
+.icon-btn.danger:hover { background: #311; color: #f77; border-color: #633; }
 .icon-btn svg { width: 15px; height: 15px; }
+a.icon-btn { text-decoration: none; }
 
 /* ── Main ── */
 main {
@@ -320,24 +303,19 @@ footer .dot { margin: 0 8px; opacity: .5; }
 </div>
 
 <!-- ── Приложение ── -->
+<script src="../components/site-header.js" defer></script>
 <div class="app" id="app">
   <header class="topbar">
-    <div class="brand">
-      <span class="mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-      </span>
-      Trace Logo's
-      <span class="sep">/</span>
-      <span class="section">Популярность</span>
-    </div>
+    <site-header variant="brand"></site-header>
     <div class="spacer"></div>
-    <button class="icon-btn" id="btn-refresh">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
-      Обновить
+    <button class="icon-btn danger" id="btn-reset">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+      Сбросить
     </button>
-    <button class="icon-btn" id="btn-logout" title="Выйти">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
-    </button>
+    <a class="icon-btn" href="/" title="Вернуться в каталог">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Каталог
+    </a>
   </header>
 
   <main>
@@ -444,12 +422,6 @@ async function submitKey() {
 $('gate-btn').addEventListener('click', submitKey);
 $('gate-input').addEventListener('keydown', e => { if (e.key === 'Enter') submitKey(); });
 
-$('btn-logout').addEventListener('click', () => {
-  sessionStorage.removeItem(KEY_STORE);
-  adminKey = '';
-  location.reload();
-});
-
 // ── Data ───────────────────────────────────────────────────────────────
 async function refresh() {
   if (!adminKey) return;
@@ -461,7 +433,21 @@ async function refresh() {
     $('tbody').innerHTML = `<tr><td colspan="4"><div class="empty">Ошибка: ${esc(e.message)}</div></td></tr>`;
   }
 }
-$('btn-refresh').addEventListener('click', refresh);
+
+$('btn-reset').addEventListener('click', async () => {
+  if (!confirm('Сбросить всю статистику просмотров? Это действие необратимо.')) return;
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'DELETE',
+      headers: { 'x-admin-key': adminKey },
+    });
+    if (!res.ok) throw new Error('Ошибка сброса');
+    data = [];
+    render();
+  } catch (e) {
+    alert('Не удалось сбросить: ' + (e.message || 'ошибка сети'));
+  }
+});
 
 function ingest(rows) {
   data = (rows || []).map(r => ({
