@@ -8,14 +8,33 @@ class SiteHeader extends HTMLElement {
     this.attachShadow({ mode: 'open' });
     this.render('загрузка...');
     if (typeof window.__logosReadyCount === 'number') {
-      this.render(this.iconCountText(window.__logosReadyCount));
+      this._countUp(window.__logosReadyCount);
     } else {
       const handler = (e) => {
-        this.render(this.iconCountText(e.detail));
+        this._countUp(e.detail);
         document.removeEventListener('logos-count-ready', handler);
       };
       document.addEventListener('logos-count-ready', handler);
     }
+  }
+
+  _countUp(target) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.render(this.iconCountText(target));
+      return;
+    }
+    this.render(this.iconCountText(0));
+    const sub = this.shadowRoot?.querySelector('.sidebar-header-sub');
+    if (!sub) { this.render(this.iconCountText(target)); return; }
+    const dur = 900;
+    const t0 = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - t0) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      sub.textContent = this.iconCountText(Math.round(eased * target));
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   }
 
   iconCountText(count) {

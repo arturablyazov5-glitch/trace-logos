@@ -1,0 +1,66 @@
+/* ── microanim.css ──────────────────────────────────────────────────────────
+   Микроанимации каталога /logos.
+   Откат: удалить <link> на этот файл из logos/index.html.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* ── Sidebar indicator pill ─── скользящий фон активного nav-item ── */
+.nav-indicator-pill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 32px;
+  background: #1e1e1e;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition:
+    top .22s cubic-bezier(.25, .46, .45, .94),
+    height .22s cubic-bezier(.25, .46, .45, .94),
+    opacity .15s;
+}
+.nav-item.active { background: transparent !important; }
+.nav-item { position: relative; z-index: 1; }
+
+/* ── Suggest button: плюс вращается на 90° при hover ── */
+.suggest-btn svg {
+  transition: transform .22s cubic-bezier(.25, .46, .45, .94);
+}
+.suggest-btn:hover svg {
+  transform: rotate(90deg);
+}
+
+/* ── Suggest modal: появляется со scale + backdrop fade ── */
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes modal-content-in {
+  from { transform: scale(.95); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.suggest-overlay.open {
+  animation: modal-backdrop-in .18s ease;
+}
+.suggest-overlay.open .suggest-modal {
+  animation: modal-content-in .22s cubic-bezier(.25, .46, .45, .94);
+}
+
+/* ── Donate button: сердечко пульсирует при hover ── */
+.btn-donate:hover svg {
+  animation: heart-beat .45s cubic-bezier(.34, 1.56, .64, 1);
+}
+@keyframes heart-beat {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+/* ── Accessibility ── */
+@media (prefers-reduced-motion: reduce) {
+  .nav-indicator-pill { transition: none !important; }
+  .suggest-btn svg { transition: none !important; }
+  .suggest-overlay.open,
+  .suggest-overlay.open .suggest-modal { animation: none !important; }
+  .btn-donate:hover svg { animation: none !important; }
+}

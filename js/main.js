@@ -23,6 +23,7 @@ import { openReportModal } from './suggest.js';
 import { openHelpModal } from './help.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
 import { t, setLang, getLang } from './i18n.js';
+import { initSidebarIndicator } from './microanim.js';
 
 // ── DOM refs ──
 const content           = document.getElementById('content');
@@ -1087,6 +1088,7 @@ const displayName = item => {
 
 initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
 initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton, getDisplayName: displayName });
+initSidebarIndicator();
 const _ecoLabels = _isEnUrl ? { ...ecosystemLabels, ...ecosystemLabelsEn } : ecosystemLabels;
 const _pathSection = window.__ASSET_SECTION__ ?? (location.pathname.split('/').filter(Boolean).find(s => s !== 'en') ?? 'logos');
 const _manifestBase = window.__MANIFEST_BASE__ ?? (_isEnUrl ? `/${_pathSection}/` : './');
