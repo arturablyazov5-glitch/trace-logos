@@ -631,27 +631,55 @@ function render() {
     </tr>`;
     
     if (hasVariants) {
-      html += `<tr class="details-row ${isExpanded ? 'show' : ''}"><td colspan="5" class="details-cell"><div class="details-content">${buildVariantDetails(d.exportDetail)}</div></td></tr>`;
+      html += `<tr class="details-row ${isExpanded ? 'show' : ''}"><td colspan="5" class="details-cell"><div class="details-content">${buildVariantDetails(d.exportDetail, d.img)}</div></td></tr>`;
     }
   });
   $('tbody').innerHTML = html;
 }
 
-function buildVariantDetails(exportDetail) {
-  let html = '';
+function buildVariantDetails(exportDetail, logoImg) {
+  const byVariant = {};
   for (const [fmt, variants] of Object.entries(exportDetail)) {
-    if (typeof variants !== 'object' || !Object.keys(variants).length) continue;
-    
-    const total = Object.values(variants).reduce((a, b) => a + b, 0);
-    html += `<div style="margin-bottom: 16px;"><div style="color: var(--text-2); font-weight: 600; margin-bottom: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">${esc(FMT_LABELS[fmt] || fmt)}</div>`;
-    
-    for (const [variant, count] of Object.entries(variants).sort((a, b) => b[1] - a[1])) {
-      const label = variant === '_original' ? 'Original' : variant.replace(/^.*\//, '');
-      html += `<div class="variant-item"><span class="variant-name">${esc(label)}</span><span class="variant-stats"><span class="variant-stat"><span class="variant-stat-value">${count}</span></span></span></div>`;
+    if (typeof variants !== 'object') continue;
+    for (const [v, count] of Object.entries(variants)) {
+      if (!byVariant[v]) byVariant[v] = { total: 0, formats: {} };
+      byVariant[v].formats[fmt] = count;
+      byVariant[v].total += count;
     }
-    html += '</div>';
   }
+  const sorted = Object.entries(byVariant).sort((a, b) => b[1].total - a[1].total);
+  let html = '<div class="variant-grid">';
+  for (const [variant, info] of sorted) {
+    const isOrig = variant === '_original' || variant === '';
+    const fileName = isOrig ? '' : variant.replace(/^.*\//, '');
+    const label = isOrig ? 'Основной' : fileName.replace(/\.[^.]+$/, '').replace(/-/g, ' ');
+    const thumbSrc = isOrig ? logoImg : variantImgUrl(variant);
+    const thumbHtml = thumbSrc
+      ? `<img src="${esc(thumbSrc)}" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'ph\\'>${esc(label.charAt(0).toUpperCase())}</div>'">`
+      : `<div class="ph">${esc(label.charAt(0).toUpperCase())}</div>`;
+    const pills = Object.entries(info.formats)
+      .sort((a, b) => b[1] - a[1])
+      .map(([f, c]) => `<span class="ex-pill"><span class="ex-fmt">${esc(FMT_LABELS[f] || f)}</span><span class="ex-cnt">${c}</span></span>`)
+      .join('');
+    html += `<div class="variant-card">
+      <div class="variant-thumb">${thumbHtml}</div>
+      <div class="variant-info">
+        <div class="variant-label">${esc(label)}</div>
+        ${fileName && !isOrig ? `<div class="variant-file">${esc(fileName)}</div>` : ''}
+        <div class="variant-pills">${pills}</div>
+      </div>
+    </div>`;
+  }
+  html += '</div>';
   return html;
+}
+
+function variantImgUrl(file) {
+  if (!file) return '';
+  const base = 'https://trace-logos.ru/assets/logos/';
+  if (file.endsWith('.svg')) return base + 'svgs/' + file;
+  if (file.endsWith('.png')) return base + 'pngs/' + file;
+  return base + 'svgs/' + file;
 }
 
 function toggleRow(rowId) {
