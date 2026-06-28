@@ -245,7 +245,7 @@ btnCopy.addEventListener('click', function() {
     .then(() => {
       triggerConfetti(btnCopy);
       showToast(TOASTS.copiedSvg);
-      trackExport(PAGE.figma, 'copy-svg');
+      trackExport(PAGE.figma, 'copy-svg', PAGE.item?.file || '');
       btnCopyLbl.textContent = LABELS.copied;
       btnCopy.disabled = true;
       if (copyTimer) clearTimeout(copyTimer);
@@ -270,7 +270,7 @@ function downloadPngFromSvg(svgUrl, filename, square) {
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 10000);
       showToast(TOASTS.downloaded(filename));
-      trackExport(PAGE.figma, filename.endsWith('.png') ? 'png' : 'svg');
+      trackExport(PAGE.figma, filename.endsWith('.png') ? 'png' : 'svg', PAGE.item?.file || '');
     });
 }
 
@@ -357,8 +357,8 @@ function downloadCurrent() {
 
 btnExpand.addEventListener('click', e => { e.stopPropagation(); openLightbox(); });
 
-btnDlSvg.addEventListener('click', () => { showToast(TOASTS.downloaded(btnDlSvg.download)); trackExport(PAGE.figma, 'svg'); });
-btnDlPng.addEventListener('click', () => { if (btnDlPng.href) { showToast(TOASTS.downloaded(btnDlPng.download)); trackExport(PAGE.figma, 'png'); } });
+btnDlSvg.addEventListener('click', () => { showToast(TOASTS.downloaded(btnDlSvg.download)); trackExport(PAGE.figma, 'svg', PAGE.item?.file || ''); });
+btnDlPng.addEventListener('click', () => { if (btnDlPng.href) { showToast(TOASTS.downloaded(btnDlPng.download)); trackExport(PAGE.figma, 'png', PAGE.item?.file || ''); } });
 
 btnMenu.addEventListener('click', e => {
   e.stopPropagation();

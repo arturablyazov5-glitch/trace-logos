@@ -235,7 +235,7 @@ function buildCard(item, sectionState) {
   img.width = 48; img.height = 48;
   img.loading = 'lazy';
   img.decoding = 'async';
-  img.alt = displayName(item);
+  img.alt = logoAlt(item);
   img.title = item.figma;
   // Grid thumbnail uses a lightweight WebP preview when available (PNG logos);
   // the full asset (svgUrl) stays the source for the detail panel and export.
@@ -390,6 +390,8 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   const btnDownloadPng = document.getElementById('btn-download-png');
   const btnCopyEmoji   = document.getElementById('btn-copy-emoji');
   const detailImg      = document.getElementById('detail-img');
+  const variantLabel   = (_isEnUrl && vDef.label_en) ? vDef.label_en : vDef.label;
+  detailImg.alt = vDef.type === '_original' ? logoAlt(item) : logoAlt(item, variantLabel);
   const preview        = detailImg.closest('.detail-preview');
   const controls       = document.getElementById('detail-controls');
   const colorsPanel    = document.getElementById('colors-panel');
@@ -488,7 +490,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
         await navigator.clipboard.write([new ClipboardItem({ 'image/png': file })]);
         triggerConfetti(btnCopyPng);
         showToast(TOASTS.copiedPng);
-        trackExport(item.figma, 'copy-png');
+        trackExport(item.figma, 'copy-png', vDef.file);
       } catch (e) {
         btnCopyPng.disabled = false;
         showToast(TOASTS.copyPngError);
@@ -499,7 +501,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.png' });
       a.click(); URL.revokeObjectURL(a.href);
       showToast(TOASTS.downloaded(baseName + suffix + '.png'));
-      trackExport(item.figma, 'png');
+      trackExport(item.figma, 'png', vDef.file);
     };
 
     // macOS style tabs: per-variant. The _original (primary) uses item-level
@@ -593,7 +595,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
 
   btnCopy.onclick = () => {
     navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
-      .then(() => { triggerConfetti(btnCopy); showToast(TOASTS.copiedSvg); trackExport(item.figma, 'copy-svg'); })
+      .then(() => { triggerConfetti(btnCopy); showToast(TOASTS.copiedSvg); trackExport(item.figma, 'copy-svg', vDef.file); })
       .catch(() => showToast(TOASTS.copyError));
   };
   btnDownloadSvg.onclick = () => {
@@ -601,7 +603,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(blob), download: baseName + suffix + '.svg' });
     a.click(); URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(baseName + suffix + '.svg'));
-    trackExport(item.figma, 'svg');
+    trackExport(item.figma, 'svg', vDef.file);
   };
   btnCopyPng.onclick = async () => {
     btnCopyPng.disabled = true;
@@ -610,7 +612,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       await navigator.clipboard.write([new ClipboardItem({ 'image/png': new File([blob], `${item.name}.png`, { type: 'image/png' }) })]);
       triggerConfetti(btnCopyPng);
       showToast(TOASTS.copiedPng);
-      trackExport(item.figma, 'copy-png');
+      trackExport(item.figma, 'copy-png', activePngFile || item.file);
     } catch (e) {
       showToast(TOASTS.copyPngError);
     } finally {
@@ -622,7 +624,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     const a = Object.assign(document.createElement('a'), { href: URL.createObjectURL(pngBlob), download: baseName + suffix + '.png' });
     a.click(); URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(baseName + suffix + '.png'));
-    trackExport(item.figma, 'png');
+    trackExport(item.figma, 'png', activePngFile || item.file);
   };
 }
 
@@ -683,7 +685,7 @@ openDetailFn = function (item, card) {
   const detailVariants = document.getElementById('detail-variants');
 
   detailImg.src = svgUrl(item.file);
-  detailImg.alt = displayName(item);
+  detailImg.alt = logoAlt(item);
   detailImg.classList.add('square');
   detailImg.classList.remove('prerendered');
   const detailPreview = detailImg.closest('.detail-preview');
@@ -831,7 +833,9 @@ openDetailFn = function (item, card) {
     colorState.variantImgEls.push({ file: vDef.file, imgEl: vi });
     const vl = document.createElement('div');
     vl.className = 'variant-label';
-    vl.textContent = (_isEnUrl && vDef.label_en) ? vDef.label_en : vDef.label;
+    const vlText = (_isEnUrl && vDef.label_en) ? vDef.label_en : vDef.label;
+    vl.textContent = vlText;
+    vi.alt = logoAlt(item, vlText);
     vc.append(vi, vl);
     vc.addEventListener('click', () => {
       detail.scrollTop = 0;
@@ -873,7 +877,7 @@ openDetailFn = function (item, card) {
           ec.title = sib.figma;
           const ei = document.createElement('img');
           ei.src = svgUrl(sib.file);
-          ei.alt = displayName(sib);
+          ei.alt = logoAlt(sib);
           ei.loading = 'lazy';
           ei.decoding = 'async';
           const el = document.createElement('div');
@@ -1084,6 +1088,12 @@ const displayName = item => {
     if (en) return en.charAt(0).toUpperCase() + en.slice(1);
   }
   return item.name;
+};
+const _altPrefix = { logos: ['Логотип', 'Logo'], emoji: ['Эмодзи', 'Emoji'], icons: ['Иконка', 'Icon'] };
+const logoAlt = (item, suffix) => {
+  const [ru, en] = _altPrefix[_pathSection] ?? _altPrefix.logos;
+  const base = `${_isEnUrl ? en : ru} ${displayName(item)}`;
+  return suffix ? `${base} — ${suffix}` : base;
 };
 
 initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });

@@ -37,7 +37,7 @@ serve(async (req: Request) => {
 
   // ── Запись (публично) ───────────────────────────────────────────────
   if (req.method === 'POST') {
-    let payload: { figma?: string; name?: string; img?: string; format?: string };
+    let payload: { figma?: string; name?: string; img?: string; format?: string; variant?: string };
     try {
       payload = await req.json();
     } catch (_) {
@@ -50,6 +50,7 @@ serve(async (req: Request) => {
     const format = clean(payload.format, 20);
     if (format) {
       // Трекинг экспорта (скачивание / копирование)
+      const variant = clean(payload.variant, 500);
       const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_export`, {
         method: 'POST',
         headers: {
@@ -57,7 +58,7 @@ serve(async (req: Request) => {
           apikey: SERVICE_KEY,
           Authorization: `Bearer ${SERVICE_KEY}`,
         },
-        body: JSON.stringify({ p_figma: figma, p_format: format }),
+        body: JSON.stringify({ p_figma: figma, p_format: format, p_variant: variant }),
       });
       if (!res.ok) return json({ error: 'DB error', detail: await res.text() }, 500);
       return json({ ok: true });
@@ -100,7 +101,7 @@ serve(async (req: Request) => {
     }
 
     const exports = await fetch(
-      `${SUPABASE_URL}/rest/v1/export_stats?select=figma,format,count&order=count.desc`,
+      `${SUPABASE_URL}/rest/v1/export_stats?select=figma,format,variant,count&order=count.desc`,
       { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } },
     );
 

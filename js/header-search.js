@@ -88,7 +88,7 @@ if (form && input && dropdown) {
 
   function itemHtml(it, idx, rawWords) {
     const thumb = it.type === 'logo'
-      ? `<span class="sd-thumb"><img src="${escapeHtml(it.img)}" alt="" loading="lazy"></span>`
+      ? `<span class="sd-thumb"><img src="${escapeHtml(it.img)}" alt="${escapeHtml(it.name)}" loading="lazy"></span>`
       : `<span class="sd-thumb emoji">${escapeHtml(it.char)}</span>`;
     return `<a class="sd-item" role="option" data-idx="${idx}" href="${escapeHtml(it.url)}">
       ${thumb}

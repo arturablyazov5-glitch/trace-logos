@@ -159,14 +159,14 @@ function assetAbsUrl(file) {
   return `${SITE_ORIGIN}/assets/logos/${folder}/${file}`;
 }
 
-export function trackExport(figma, format) {
+export function trackExport(figma, format, variant) {
   if (!figma || !format) return;
   const host = location.hostname;
   if (host === 'localhost' || host === '127.0.0.1' || host === '') return;
   fetch(TRACK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ figma, format }),
+    body: JSON.stringify({ figma, format, variant: variant || '' }),
     keepalive: true,
   }).catch(() => {});
 }

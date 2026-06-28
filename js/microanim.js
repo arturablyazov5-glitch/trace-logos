@@ -16,6 +16,7 @@ export function initSidebarIndicator() {
 
   const pill = document.createElement('div');
   pill.className = 'nav-indicator-pill';
+  pill.style.cssText = 'position:absolute;pointer-events:none;opacity:0;left:0;right:0;top:0;height:32px;';
   aside.insertBefore(pill, aside.firstChild);
 
   function moveTo(navItem, instant) {

@@ -188,12 +188,15 @@ thead th.col-bar { text-align: left; }
 tbody tr { border-bottom: 1px solid var(--line); transition: background .1s; }
 tbody tr:last-child { border-bottom: 0; }
 tbody tr:hover { background: var(--bg-muted); }
+tbody tr.expanded { background: var(--bg-muted); }
 td { padding: 11px 18px; vertical-align: middle; }
 
 td.rank { width: 46px; color: var(--text-6); font-variant-numeric: tabular-nums; font-size: 13px; }
 tbody tr:nth-child(1) td.rank { color: var(--accent); font-weight: 700; }
 
-.logo-cell { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.logo-cell { display: flex; align-items: center; gap: 12px; min-width: 0; cursor: pointer; }
+.expand-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: var(--text-3); transition: transform .2s; font-size: 12px; }
+.expand-icon.open { transform: rotate(90deg); }
 .thumb {
   width: 38px; height: 38px; flex-shrink: 0;
   border-radius: 10px;
@@ -226,6 +229,26 @@ td.exports { white-space: nowrap; }
 }
 .ex-fmt { padding: 2px 6px; color: var(--text-3); background: var(--bg-raised); }
 .ex-cnt { padding: 2px 6px; color: var(--text-0); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ── Expandable details ── */
+.details-row { display: none; }
+.details-row.show { display: table-row; }
+.details-cell { padding: 0; }
+.details-content {
+  padding: 12px 18px;
+  background: var(--bg-raised);
+  border-top: 1px solid var(--line);
+}
+.variant-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; font-size: 13px; border-bottom: 1px solid var(--border-muted);
+}
+.variant-item:last-child { border-bottom: 0; }
+.variant-name { color: var(--text-2); font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 12px; }
+.variant-stats { display: flex; gap: 12px; }
+.variant-stat { display: flex; gap: 4px; }
+.variant-stat-label { color: var(--text-5); font-size: 11px; }
+.variant-stat-value { color: var(--text-0); font-weight: 600; font-variant-numeric: tabular-nums; }
 
 .empty, .loading-row { text-align: center; padding: 56px 20px; color: var(--text-3); font-size: 14px; }
 .spinner {
@@ -357,7 +380,7 @@ footer .dot { margin: 0 8px; opacity: .5; }
   <main>
     <div class="page-head">
       <h1>Популярность логотипов</h1>
-      <p>Открытие detail-панели в каталоге и заход на SEO-страницу логотипа суммируются в один счётчик.</p>
+      <p>Открытие detail-панели в каталоге и заход на SEO-страницу логотипа суммируются в один счётчик. Экспорты детализированы по вариантам.</p>
     </div>
 
     <div class="stats">
@@ -396,7 +419,7 @@ footer .dot { margin: 0 8px; opacity: .5; }
   <footer>
     <a href="https://trace-logos.ru" target="_blank" rel="noopener">trace-logos.ru</a>
     <span class="dot">·</span>
-    Локальный инструмент · данные в Supabase
+    Локальный инструмент · данные обновляются в реальном времени
   </footer>
 </div>
 
@@ -411,6 +434,7 @@ let data = [];
 let exportMap = {};
 let sortKey = 'views';
 let sortDir = -1;
+let expandedRows = new Set();
 
 const $ = id => document.getElementById(id);
 
@@ -470,7 +494,7 @@ async function refresh() {
     if (rows === null) { sessionStorage.removeItem(KEY_STORE); location.reload(); return; }
     ingest(rows);
   } catch (e) {
-    $('tbody').innerHTML = `<tr><td colspan="4"><div class="empty">Ошибка: ${esc(e.message)}</div></td></tr>`;
+    $('tbody').innerHTML = `<tr><td colspan="5"><div class="empty">Ошибка: ${esc(e.message)}</div></td></tr>`;
   }
 }
 
@@ -496,11 +520,16 @@ function ingest(raw) {
   exportMap = {};
   for (const e of exports) {
     if (!exportMap[e.figma]) exportMap[e.figma] = {};
-    exportMap[e.figma][e.format] = Number(e.count) || 0;
+    if (!exportMap[e.figma][e.format]) exportMap[e.figma][e.format] = {};
+    const variant = e.variant || '_original';
+    exportMap[e.figma][e.format][variant] = Number(e.count) || 0;
   }
   data = (Array.isArray(views) ? views : []).map(r => {
     const ex = exportMap[r.figma] || {};
-    const totalExports = Object.values(ex).reduce((s, v) => s + v, 0);
+    const totalExports = Object.values(ex).reduce((s, formats) => {
+      if (typeof formats === 'object') return s + Object.values(formats).reduce((a, b) => a + b, 0);
+      return s + formats;
+    }, 0);
     return {
       figma: r.figma,
       name: r.name || (r.figma || '').split('/').pop(),
@@ -545,11 +574,18 @@ function render() {
   }
 
   const max = rows.reduce((m, d) => Math.max(m, d.views), 1);
-  $('tbody').innerHTML = rows.map((d, i) => `
-    <tr>
+  let html = '';
+  rows.forEach((d, i) => {
+    const rowId = `row-${d.figma}`;
+    const isExpanded = expandedRows.has(rowId);
+    const hasVariants = Object.keys(d.exportDetail).length > 0;
+    
+    html += `
+    <tr id="${rowId}" class="${isExpanded ? 'expanded' : ''}">
       <td class="rank">${i + 1}</td>
       <td class="fg-hide">
-        <div class="logo-cell">
+        <div class="logo-cell" onclick="toggleRow('${rowId}')">
+          ${hasVariants ? '<div class="expand-icon ' + (isExpanded ? 'open' : '') + '">›</div>' : '<div style="width:20px"></div>'}
           <div class="thumb">${d.img
             ? `<img src="${esc(d.img)}" alt="" loading="lazy" onerror="this.replaceWith(ph('${esc(d.name)}'))">`
             : phHtml(d.name)}</div>
@@ -562,7 +598,39 @@ function render() {
       <td class="views"><b>${d.views.toLocaleString('ru-RU')}</b></td>
       <td class="exports">${fmtExports(d.exportDetail)}</td>
       <td class="bar"><div class="bar-track"><div class="bar-fill" style="width:${(d.views / max * 100).toFixed(1)}%"></div></div></td>
-    </tr>`).join('');
+    </tr>`;
+    
+    if (hasVariants) {
+      html += `<tr class="details-row ${isExpanded ? 'show' : ''}"><td colspan="5" class="details-cell"><div class="details-content">${buildVariantDetails(d.exportDetail)}</div></td></tr>`;
+    }
+  });
+  $('tbody').innerHTML = html;
+}
+
+function buildVariantDetails(exportDetail) {
+  let html = '';
+  for (const [fmt, variants] of Object.entries(exportDetail)) {
+    if (typeof variants !== 'object' || !Object.keys(variants).length) continue;
+    
+    const total = Object.values(variants).reduce((a, b) => a + b, 0);
+    html += `<div style="margin-bottom: 16px;"><div style="color: var(--text-2); font-weight: 600; margin-bottom: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">${esc(FMT_LABELS[fmt] || fmt)}</div>`;
+    
+    for (const [variant, count] of Object.entries(variants).sort((a, b) => b[1] - a[1])) {
+      const label = variant === '_original' ? 'Original' : variant.replace(/^.*\//, '');
+      html += `<div class="variant-item"><span class="variant-name">${esc(label)}</span><span class="variant-stats"><span class="variant-stat"><span class="variant-stat-value">${count}</span></span></span></div>`;
+    }
+    html += '</div>';
+  }
+  return html;
+}
+
+function toggleRow(rowId) {
+  if (expandedRows.has(rowId)) {
+    expandedRows.delete(rowId);
+  } else {
+    expandedRows.add(rowId);
+  }
+  render();
 }
 
 function phHtml(name) {
@@ -576,9 +644,18 @@ function ph(name) {
 }
 function fmtExports(detail) {
   if (!detail || !Object.keys(detail).length) return '<span style="color:var(--text-6)">—</span>';
-  return Object.entries(detail)
-    .sort((a, b) => b[1] - a[1])
-    .map(([fmt, cnt]) => `<span class="ex-pill"><span class="ex-fmt">${esc(FMT_LABELS[fmt] || fmt)}</span><span class="ex-cnt">${cnt}</span></span>`)
+  const items = [];
+  for (const [fmt, variants] of Object.entries(detail)) {
+    if (typeof variants === 'object') {
+      const total = Object.values(variants).reduce((a, b) => a + b, 0);
+      items.push({ fmt, total });
+    } else {
+      items.push({ fmt, total: variants });
+    }
+  }
+  return items
+    .sort((a, b) => b.total - a.total)
+    .map(({ fmt, total }) => `<span class="ex-pill"><span class="ex-fmt">${esc(FMT_LABELS[fmt] || fmt)}</span><span class="ex-cnt">${total}</span></span>`)
     .join('');
 }
 function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }

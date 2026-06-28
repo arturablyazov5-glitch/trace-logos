@@ -162,7 +162,7 @@ export async function downloadAsIco(item, file = item.file) {
   a.click();
   URL.revokeObjectURL(a.href);
   showToast(TOASTS.downloaded(baseName + '.ico'));
-  trackExport(item.figma, 'ico');
+  trackExport(item.figma, 'ico', file);
 }
 
 export async function downloadAllAsZip(item) {
@@ -270,7 +270,7 @@ export async function downloadAllAsZip(item) {
     a.click();
     URL.revokeObjectURL(a.href);
     showToast(TOASTS.downloaded(baseName + '.zip'));
-    trackExport(item.figma, 'zip');
+    trackExport(item.figma, 'zip', '');
   } catch (err) {
     console.error(err);
     showToast(TOASTS.zipError);
