@@ -257,6 +257,9 @@ td.exports { white-space: nowrap; }
   display: grid; place-items: center;
   background: var(--checker);
 }
+.variant-thumb.wide {
+  width: 72px; height: 36px;
+}
 .variant-thumb img {
   width: 100%; height: 100%; object-fit: contain;
 }
@@ -654,6 +657,7 @@ function buildVariantDetails(exportDetail, logoImg) {
     const fileName = isOrig ? '' : variant.replace(/^.*\//, '');
     const label = isOrig ? 'Основной' : fileName.replace(/\.[^.]+$/, '').replace(/-/g, ' ');
     const thumbSrc = isOrig ? logoImg : variantImgUrl(variant);
+    const isFull = !isOrig && /-full\b/.test(variant);
     const thumbHtml = thumbSrc
       ? `<img src="${esc(thumbSrc)}" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'ph\\'>${esc(label.charAt(0).toUpperCase())}</div>'">`
       : `<div class="ph">${esc(label.charAt(0).toUpperCase())}</div>`;
@@ -662,7 +666,7 @@ function buildVariantDetails(exportDetail, logoImg) {
       .map(([f, c]) => `<span class="ex-pill"><span class="ex-fmt">${esc(FMT_LABELS[f] || f)}</span><span class="ex-cnt">${c}</span></span>`)
       .join('');
     html += `<div class="variant-card">
-      <div class="variant-thumb">${thumbHtml}</div>
+      <div class="variant-thumb${isFull ? ' wide' : ''}">${thumbHtml}</div>
       <div class="variant-info">
         <div class="variant-label">${esc(label)}</div>
         ${fileName && !isOrig ? `<div class="variant-file">${esc(fileName)}</div>` : ''}
