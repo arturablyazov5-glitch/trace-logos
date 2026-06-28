@@ -364,6 +364,14 @@ function isFullFile(file) {
   return /-full(\.[^.]+)?$/.test(file);
 }
 
+function updateTabIndicator(tabs) {
+  if (!tabs) return;
+  const active = tabs.querySelector('.macos-style-tab.active:not(.hidden)');
+  if (!active) return;
+  tabs.style.setProperty('--tab-left', active.offsetLeft + 'px');
+  tabs.style.setProperty('--tab-width', active.offsetWidth + 'px');
+}
+
 function getDisplayType(vDef) {
   if (vDef.type === '_original' || vDef.type === 'svg') return 'square';
   if (vDef.type === 'full' || vDef.type === 'full_en') return 'wide';
@@ -518,11 +526,13 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
         btn.classList.toggle('active', s === 'color');
         btn.classList.toggle('hidden', s !== 'color' && !variantStyles[s]);
       });
+      requestAnimationFrame(() => updateTabIndicator(macosStylesTabs));
       macosStylesTabs.onclick = (e) => {
         const btn = e.target.closest('.macos-style-tab');
         if (!btn || btn.classList.contains('hidden')) return;
         macosStylesTabs.querySelectorAll('.macos-style-tab').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        updateTabIndicator(macosStylesTabs);
         const s = btn.dataset.style;
         activePngFile = s === 'color' ? vDef.file : variantStyles[s];
         detailImg.src = svgUrl(activePngFile);

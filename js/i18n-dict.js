@@ -129,6 +129,8 @@ export const DICT = {
     seoCatalogTitle:  n => `${n}+ логотипов в каталоге`,
     seoCatalogSub:    'Яндекс, Сбер, ВК, Ozon, Google и другие бренды',
     seoCatalogOpen:   'Открыть каталог',
+    seoRelatedLabel:    'Другие логотипы этой категории',
+    seoCategoriesLabel: 'Остальные категории',
     // ── Help modal ───────────────────────────────────────────
     helpModalTitle:       'Помочь с иконкой',
     helpModalSub:         'Вы помогаете автору. Загрузите SVG для',
@@ -417,6 +419,8 @@ export const DICT = {
     seoCatalogTitle:  n => `${n}+ logos in the catalog`,
     seoCatalogSub:    'Yandex, Sber, VK, Ozon, Google and other brands',
     seoCatalogOpen:   'Open catalog',
+    seoRelatedLabel:    'More logos in this category',
+    seoCategoriesLabel: 'Other categories',
     // ── Help modal ───────────────────────────────────────────
     helpModalTitle:       'Help with icon',
     helpModalSub:         "You're helping the author. Upload SVG for",

@@ -104,11 +104,20 @@ function parseMacosFromCard(card) {
   try { return card?.dataset.macos ? JSON.parse(card.dataset.macos) : null; } catch { return null; }
 }
 
+function updateTabIndicator(tabs) {
+  if (!tabs) return;
+  const active = tabs.querySelector('.macos-style-tab.active:not(.hidden)');
+  if (!active) return;
+  tabs.style.setProperty('--tab-left', active.offsetLeft + 'px');
+  tabs.style.setProperty('--tab-width', active.offsetWidth + 'px');
+}
+
 function setMacosTabsStyle(style) {
   [macosTabsEl, macosTabsMobileEl].forEach(el => {
     if (!el) return;
     el.querySelectorAll('.macos-style-tab').forEach(b =>
       b.classList.toggle('active', b.dataset.style === style));
+    updateTabIndicator(el);
   });
 }
 
@@ -118,6 +127,7 @@ function showMacosTabs(show, styles) {
     el.classList.toggle('hidden', !show);
     el.querySelector('[data-style="dark"]')?.classList.toggle('hidden', !styles?.dark);
     el.querySelector('[data-style="light"]')?.classList.toggle('hidden', !styles?.light);
+    if (show) requestAnimationFrame(() => updateTabIndicator(el));
   });
 }
 
