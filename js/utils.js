@@ -190,6 +190,149 @@ export function fuzzyMatchToken(word, token) {
 const TRACK_URL = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/track';
 const SITE_ORIGIN = 'https://trace-logos.ru';
 
+// ── Режим «не считать меня» (для админа / своих тестов) ──────────────────
+// Включается ТОЛЬКО вручную через URL-токен ?notrack — сам по себе никогда.
+// Состояние хранится в localStorage (привязан к origin), поэтому «едет» с
+// тобой по всем страницам сайта и переживает перезагрузки, пока не сбросишь
+// через ?notrack=off. Все track*-вызовы его уважают (один guard на источник).
+const NOTRACK_TOKEN = 'notrack';   // ?notrack — включить, ?notrack=off — выключить
+const NOTRACK_KEY = 'tl_notrack';
+
+function syncNotrackFlag() {
+  try {
+    const params = new URLSearchParams(location.search);
+    if (!params.has(NOTRACK_TOKEN)) return;
+    if (params.get(NOTRACK_TOKEN) === 'off') localStorage.removeItem(NOTRACK_KEY);
+    else localStorage.setItem(NOTRACK_KEY, '1');
+  } catch { /* localStorage недоступен — игнорируем */ }
+}
+
+export function isTrackingDisabled() {
+  try { return localStorage.getItem(NOTRACK_KEY) === '1'; } catch { return false; }
+}
+
+// Бейдж «не записываюсь» — наглядный индикатор режима.
+// Если на странице есть статический слот (#notrack-slot, напр. в детал-панели
+// каталога) — заполняем его. Иначе создаём плавающий бейдж (главная, SEO).
+const NOTRACK_LABEL = 'Режим разработчика';
+// Lucide «code-2» icon paths — инлайн, чтобы не зависеть от CDN на всех страницах
+const NOTRACK_ICON = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>';
+// Попап: тумблер в стиле icns-модалки; ::before-мост закрывает зазор и не даёт hover прерваться
+const NOTRACK_INNER = `${NOTRACK_ICON}<span>${NOTRACK_LABEL}</span><div class="notrack-popup"><span class="notrack-popup-tip">Статистика не записывается</span><label class="notrack-toggle"><span class="notrack-toggle-label">Режим разработчика</span><input type="checkbox" checked onchange="if(!this.checked){localStorage.removeItem('tl_notrack');location.href=location.pathname}"><span class="notrack-switch"></span></label></div>`;
+
+function injectNotrackStyles() {
+  if (document.getElementById('notrack-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'notrack-styles';
+  s.textContent = `
+    #notrack-badge, #notrack-slot { position: relative; }
+
+    .notrack-popup {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 210px;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 12px 14px;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.5);
+      z-index: 100000;
+    }
+    /* Прозрачный мост — закрывает зазор между бейджем и попапом */
+    .notrack-popup::before {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      height: 14px;
+    }
+    /* Стрелка вниз */
+    .notrack-popup::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #333;
+    }
+    #notrack-badge:hover .notrack-popup,
+    #notrack-slot:hover .notrack-popup { display: flex; }
+
+    .notrack-popup-tip {
+      font: 400 11px/1.4 system-ui,sans-serif;
+      color: #666;
+    }
+
+    /* Тумблер — копия .icns-toggle / .icns-switch */
+    .notrack-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .notrack-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .notrack-toggle-label {
+      font: 500 12px/1 system-ui,sans-serif;
+      color: #ccc;
+    }
+    .notrack-switch {
+      position: relative;
+      flex-shrink: 0;
+      width: 32px; height: 18px;
+      border-radius: 999px;
+      background: #3a3a3a;
+      transition: background .18s ease;
+    }
+    .notrack-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,.35);
+      transition: transform .18s ease;
+    }
+    .notrack-toggle input:checked + .notrack-switch { background: #34c759; }
+    .notrack-toggle input:checked + .notrack-switch::after { transform: translateX(14px); }
+  `;
+  document.head.appendChild(s);
+}
+
+function showNotrackBadge() {
+  injectNotrackStyles();
+  const slot = document.getElementById('notrack-slot');
+  if (slot) {
+    if (!slot.innerHTML.trim()) slot.innerHTML = NOTRACK_INNER;
+    slot.hidden = false;
+    return;
+  }
+  if (document.getElementById('notrack-badge')) return;
+  const b = document.createElement('div');
+  b.id = 'notrack-badge';
+  b.innerHTML = NOTRACK_INNER;
+  b.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:99999;' +
+    'display:flex;align-items:center;gap:6px;' +
+    'background:#161616;color:#fff;border:1px solid #333;border-radius:999px;' +
+    'padding:6px 12px;font:500 12px/1 system-ui,sans-serif;opacity:.85;' +
+    'cursor:default;user-select:none';
+  document.body.appendChild(b);
+}
+
+syncNotrackFlag();
+if (isTrackingDisabled()) {
+  if (document.body) showNotrackBadge();
+  else document.addEventListener('DOMContentLoaded', showNotrackBadge);
+}
+
 // Абсолютный URL ассета (для превью в админке) из item.file.
 function assetAbsUrl(file) {
   if (!file) return '';
@@ -201,6 +344,7 @@ function assetAbsUrl(file) {
 
 export function trackExport(figma, format, variant) {
   if (!figma || !format) return;
+  if (isTrackingDisabled()) return;
   const host = location.hostname;
   if (host === 'localhost' || host === '127.0.0.1' || host === '') return;
   fetch(TRACK_URL, {
@@ -213,6 +357,7 @@ export function trackExport(figma, format, variant) {
 
 export function trackLogoView(figma, name, file) {
   if (!figma) return;
+  if (isTrackingDisabled()) return;
   // Локальную разработку не считаем, чтобы не засорять боевую статистику.
   const host = location.hostname;
   if (host === 'localhost' || host === '127.0.0.1' || host === '') return;

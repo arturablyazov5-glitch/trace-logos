@@ -42,8 +42,27 @@
 /* Desktop: keep the panel permanently visible like the sidebar. With no logo
    selected, hide the per-logo content and show the placeholder instead. */
 @media (min-width: 769px) {
-  #detail:not(.open) > *:not(#detail-placeholder) { display: none; }
+  #detail:not(.open) > *:not(#detail-placeholder):not(#notrack-slot) { display: none; }
   #detail:not(.open) #detail-placeholder { display: flex; flex: 1; }
+}
+
+/* Бейдж «не записываюсь» — прилеплен к низу панели, виден всегда (и в открытой,
+   и в закрытой детали), не перекрывает контент каталога. */
+#notrack-slot {
+  position: sticky;
+  bottom: 0;
+  margin-top: auto;
+  padding: 10px 28px;
+  background: #161616;
+  border-top: 1px solid #222;
+  color: var(--text-3);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  user-select: none;
 }
 
 .detail-backdrop {
