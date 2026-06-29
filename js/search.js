@@ -1,4 +1,4 @@
-import { switchLayout, highlight } from './utils.js';
+import { switchLayout, highlight, fuzzyMatchToken } from './utils.js';
 import { setSectionHidden, loadCardImage, resetContentScroll, updateVirtualizedSections, scheduleVirtualizedSections } from './virtual.js';
 
 let _sectionEls, _searchCount, _ensureSectionCards, _getTotalCards, _updateScrollTopButton, _getDisplayName;
@@ -26,6 +26,17 @@ export function scoreWord(word, haystack) {
     if (t.startsWith(word) || (alt !== word && t.startsWith(alt))) { best = Math.max(best, 70); continue; }
     // Require 3+ chars to prevent single-letter tokens ("т", "в") from matching everything
     if (t.length >= 3 && (word.startsWith(t) || (alt !== word && alt.startsWith(t)))) { best = Math.max(best, 30); }
+  }
+  if (best === 0) {
+    for (const t of tokens) {
+      if (!t) continue;
+      const dist = fuzzyMatchToken(word, t);
+      if (dist > 0) best = Math.max(best, dist === 1 ? 20 : 10);
+      if (alt !== word) {
+        const distAlt = fuzzyMatchToken(alt, t);
+        if (distAlt > 0) best = Math.max(best, distAlt === 1 ? 20 : 10);
+      }
+    }
   }
   return best;
 }

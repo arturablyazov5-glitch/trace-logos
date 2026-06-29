@@ -144,6 +144,46 @@ export function previewUrl(file) {
   return `${_previewBase}/${webp}?v=${SVG_URL_V}`;
 }
 
+// ── Fuzzy search (Levenshtein) ───────────────────────────────────────────
+
+export function levenshtein(a, b, threshold) {
+  const la = a.length, lb = b.length;
+  if (Math.abs(la - lb) > threshold) return threshold + 1;
+  if (la > lb) return levenshtein(b, a, threshold);
+  const prev = new Array(la + 1);
+  for (let i = 0; i <= la; i++) prev[i] = i;
+  for (let j = 1; j <= lb; j++) {
+    let corner = prev[0];
+    prev[0] = j;
+    let rowMin = prev[0];
+    for (let i = 1; i <= la; i++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      const val = Math.min(prev[i] + 1, prev[i - 1] + 1, corner + cost);
+      corner = prev[i];
+      prev[i] = val;
+      if (val < rowMin) rowMin = val;
+    }
+    if (rowMin > threshold) return threshold + 1;
+  }
+  return prev[la];
+}
+
+function hasNonTextChars(s) {
+  for (let i = 0; i < s.length; i++) {
+    const c = s.charCodeAt(i);
+    if (c > 0x4FF && !(c >= 0x80 && c <= 0x24F)) return true;
+  }
+  return false;
+}
+
+export function fuzzyMatchToken(word, token) {
+  if (word.length < 3 || token.length < 3) return -1;
+  if (hasNonTextChars(token)) return -1;
+  const threshold = word.length <= 4 ? 1 : 2;
+  const dist = levenshtein(word, token, threshold);
+  return dist <= threshold ? dist : -1;
+}
+
 // ── Трекинг популярности логотипов ───────────────────────────────────────
 // Открытие detail-панели в каталоге и заход на SEO-страницу логотипа
 // суммируются в один счётчик (ключ — item.figma) в Supabase.

@@ -3,7 +3,7 @@
 // Прогрессивное улучшение: без JS форма уходит на /logos/?q=… (см. index.html).
 // Переиспользует switchLayout / highlight / escapeHtml из utils.js (RU↔EN раскладка).
 // ─────────────────────────────────────────────────────────────────────────────
-import { switchLayout, highlight, escapeHtml } from './utils.js';
+import { switchLayout, highlight, escapeHtml, fuzzyMatchToken } from './utils.js';
 import './search-shortcut.js';
 
 const MAX_PER_GROUP = 6;
@@ -17,10 +17,22 @@ let debTimer = 0;
 
 const norm = s => (s || '').toLowerCase().replace(/ё/g, 'е');
 
-function matchWord(word, haystack) {
+function isExactMatch(word, haystack) {
   if (haystack.includes(word)) return true;
   const alt = switchLayout(word);
   return alt !== word && haystack.includes(alt);
+}
+
+function matchWord(word, haystack) {
+  if (isExactMatch(word, haystack)) return true;
+  if (word.length < 3) return false;
+  const alt = switchLayout(word);
+  const tokens = haystack.split(/\s+/);
+  for (const t of tokens) {
+    if (fuzzyMatchToken(word, t) > 0) return true;
+    if (alt !== word && fuzzyMatchToken(alt, t) > 0) return true;
+  }
+  return false;
 }
 
 async function loadData() {
@@ -63,6 +75,8 @@ function rank(items, words, raw) {
     if (nm === raw) score += 120;
     if (nm.startsWith(words[0])) score += 80;
     if (nm.split(/\s+/).some(t => t.startsWith(words[0]))) score += 30;
+    const fuzzyCount = words.filter(w => !isExactMatch(w, it.search)).length;
+    if (fuzzyCount > 0) score -= 40 * fuzzyCount;
     out.push([score, it]);
   }
   out.sort((a, b) => b[0] - a[0]);

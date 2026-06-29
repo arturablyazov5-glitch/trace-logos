@@ -6,7 +6,7 @@
 // Путь к данным берётся из data-base (= {{REL}}, относительный путь до корня).
 // Один источник правды: ту же разметку/стили использует и лого-SEO.
 // ─────────────────────────────────────────────────────────────────────────────
-import { switchLayout, highlight, escapeHtml } from './utils.js';
+import { switchLayout, highlight, escapeHtml, fuzzyMatchToken } from './utils.js';
 import './search-shortcut.js';
 
 const form = document.getElementById('seo-search-form');
@@ -29,10 +29,22 @@ if (form && input && dropdown) {
   let activeIdx = -1;
   let debTimer = 0;
 
-  function matchWord(word, hay) {
+  function isExactMatch(word, hay) {
     if (hay.includes(word)) return true;
     const alt = switchLayout(word);
     return alt !== word && hay.includes(alt);
+  }
+
+  function matchWord(word, hay) {
+    if (isExactMatch(word, hay)) return true;
+    if (word.length < 3) return false;
+    const alt = switchLayout(word);
+    const tokens = hay.split(/\s+/);
+    for (const t of tokens) {
+      if (fuzzyMatchToken(word, t) > 0) return true;
+      if (alt !== word && fuzzyMatchToken(alt, t) > 0) return true;
+    }
+    return false;
   }
 
   async function loadData() {
@@ -80,6 +92,8 @@ if (form && input && dropdown) {
       if (nm === raw) score += 120;
       if (nm.startsWith(words[0])) score += 80;
       if (nm.split(/\s+/).some(t => t.startsWith(words[0]))) score += 30;
+      const fuzzyCount = words.filter(w => !isExactMatch(w, it.search)).length;
+      if (fuzzyCount > 0) score -= 40 * fuzzyCount;
       out.push([score, it]);
     }
     out.sort((a, b) => b[0] - a[0]);
