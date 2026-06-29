@@ -16,8 +16,14 @@ const pickDifferent = (arr, current) => {
 };
 
 const PROD_ORIGIN = 'https://trace-logos.ru';
+const IS_EN = /^\/en\//.test(location.pathname);
 const toRelSrc = (src) =>
   src.startsWith(PROD_ORIGIN) ? src.slice(PROD_ORIGIN.length) : src;
+const toLocalUrl = (url) => {
+  let rel = url.startsWith(PROD_ORIGIN) ? url.slice(PROD_ORIGIN.length) : url;
+  if (IS_EN && !rel.startsWith('/en/')) rel = '/en' + rel;
+  return rel;
+};
 
 const preload = (src) => new Promise((res) => {
   const img = new Image();
@@ -76,10 +82,10 @@ export async function initHeroShuffle() {
     ]);
     logos = (lr.logos || [])
       .filter((l) => !l.comingSoon && l.pngUrl && l.url)
-      .map((l) => ({ src: l.pngUrl, url: l.url }));
+      .map((l) => ({ src: l.pngUrl, url: toLocalUrl(l.url) }));
     emoji = (er.emoji || [])
       .filter((e) => e.pngUrl && e.url)
-      .map((e) => ({ src: e.pngUrl, url: e.url }));
+      .map((e) => ({ src: e.pngUrl, url: toLocalUrl(e.url) }));
   } catch {
     return; // нет данных — оставляем стартовые иконки как есть
   }

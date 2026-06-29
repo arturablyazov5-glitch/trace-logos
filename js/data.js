@@ -14,7 +14,7 @@ export const ecosystemLogoMap = {
   anthropic:   'claude.svg',
   wildberries: 'wildberries.svg',
   yandex:      'yandex.svg',
-  apple:       'apple-pay.svg',
+  apple:       'apple.svg',
   bytedance:   'tiktok.svg',
   valve:       'valve.svg',
   microsoft:   'microsoft.svg',

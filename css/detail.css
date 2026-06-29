@@ -13,6 +13,19 @@
   overscroll-behavior: contain;
   z-index: 5;
 }
+#detail.detail-swap > *:not(#detail-placeholder):not(#notrack-slot) { opacity: 0; transform: translateY(12px); }
+#detail > *:not(#detail-placeholder):not(#notrack-slot) {
+  transition: opacity .32s cubic-bezier(.22,.61,.36,1), transform .32s cubic-bezier(.22,.61,.36,1);
+}
+#detail.detail-enter > *:nth-child(1) { transition-delay: 0s; }
+#detail.detail-enter > *:nth-child(2) { transition-delay: .04s; }
+#detail.detail-enter > *:nth-child(3) { transition-delay: .08s; }
+#detail.detail-enter > *:nth-child(4) { transition-delay: .12s; }
+#detail.detail-enter > *:nth-child(5) { transition-delay: .15s; }
+#detail.detail-enter > *:nth-child(6) { transition-delay: .18s; }
+#detail.detail-enter > *:nth-child(7) { transition-delay: .21s; }
+#detail.detail-enter > *:nth-child(8) { transition-delay: .24s; }
+#detail.detail-enter > *:nth-child(n+9) { transition-delay: .26s; }
 #detail > * { flex-shrink: 0; }
 
 /* Empty state — shown when no logo is selected (desktop only; the panel is
@@ -44,6 +57,7 @@
 @media (min-width: 769px) {
   #detail:not(.open) > *:not(#detail-placeholder):not(#notrack-slot) { display: none; }
   #detail:not(.open) #detail-placeholder { display: flex; flex: 1; }
+  #detail.open #detail-placeholder { display: none; }
 }
 
 /* Бейдж «не записываюсь» — прилеплен к низу панели, виден всегда (и в открытой,
@@ -131,6 +145,7 @@
   pointer-events: none;
 }
 .detail-preview.loading .detail-preview-skeleton { opacity: 1; }
+.detail-preview.loading img { opacity: 0 !important; transition: none !important; }
 .detail-preview img {
   max-width: 100%;
   max-height: 112px;

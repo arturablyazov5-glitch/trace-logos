@@ -176,8 +176,8 @@ export function updatePreview(rawSvg, isSquare) {
   const detailImg = document.getElementById('detail-img');
   if (detailImg._previewBlobUrl) URL.revokeObjectURL(detailImg._previewBlobUrl);
   detailImg._previewBlobUrl = URL.createObjectURL(new Blob([styled], { type: 'image/svg+xml' }));
-  detailImg.src = detailImg._previewBlobUrl;
   detailImg.classList.toggle('square', isSquare);
+  detailImg.src = detailImg._previewBlobUrl;
   const previewEl = detailImg.closest('.detail-preview');
   if (previewEl?.classList.contains('loading')) {
     const done = () => previewEl.classList.remove('loading');

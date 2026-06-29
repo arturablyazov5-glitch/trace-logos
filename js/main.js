@@ -401,6 +401,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   const variantLabel   = (_isEnUrl && vDef.label_en) ? vDef.label_en : vDef.label;
   detailImg.alt = vDef.type === '_original' ? logoAlt(item) : logoAlt(item, variantLabel);
   const preview        = detailImg.closest('.detail-preview');
+  preview.classList.add('loading');
   const controls       = document.getElementById('detail-controls');
   const colorsPanel    = document.getElementById('colors-panel');
   const colorsDivider  = document.getElementById('colors-divider');
@@ -457,13 +458,11 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     });
 
     const applyPng = () => {
-      detailImg.src = svgUrl(vDef.file);
-      // prerendered:false square PNGs render as rounded squares (like square SVG logos),
-      // not as a full-width checkerboard wordmark.
       const roundedSquarePng = item.prerendered === false && !isFullFile(vDef.file);
       detailImg.classList.toggle('square', roundedSquarePng);
       if (roundedSquarePng || (!vDef.type && isFullFile(vDef.file))) detailImg.classList.remove('prerendered');
       else detailImg.classList.add('prerendered');
+      detailImg.src = svgUrl(vDef.file);
       const previewEl = detailImg.closest('.detail-preview');
       if (previewEl?.classList.contains('loading')) {
         const done = () => previewEl.classList.remove('loading');
@@ -661,13 +660,18 @@ function scrollCardIntoView(card) {
 }
 
 function closeDetail() {
-  setDetailOpen(false);
+  detail.classList.add('detail-swap');
   if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
   if (detailPushedState) {
     detailPushedState = false;
     isClosingViaButton = true;
     history.back();
   }
+  const dur = layoutMq.matches ? 0 : 150;
+  setTimeout(() => {
+    setDetailOpen(false);
+    detail.classList.remove('detail-swap');
+  }, dur);
 }
 
 function isFlagItem(item) {
@@ -680,12 +684,11 @@ openDetailFn = function (item, card) {
   if (activeCard === card) { closeDetail(); return; }
   trackLogoView(item.figma, item.name, item.file);
   resetCopyBtn();
+
   if (activeCard) activeCard.classList.remove('active');
   activeCard = card;
   card.classList.add('active');
 
-  // Selecting a logo (e.g. from the ecosystem block lower in the panel) scrolls
-  // the panel's own scroll back to the top so its info starts from the preview.
   detail.scrollTop = 0;
 
   const detailImg      = document.getElementById('detail-img');
@@ -939,11 +942,14 @@ openDetailFn = function (item, card) {
   updateSeoPageLink(item, () => activeCard?._item);
 
   if (!detail.classList.contains('open')) {
+    detail.classList.add('detail-swap', 'detail-enter');
     setDetailOpen(true);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => detail.classList.remove('detail-swap'));
+    });
+    setTimeout(() => detail.classList.remove('detail-enter'), 600);
   } else {
     syncDetailBackdrop(true);
-    // Panel already open, switching logos — update the hash in place (no new
-    // history entry, so one Back still closes the panel).
     if (detailPushedState) history.replaceState({ detail: true }, '', '#' + card.id);
   }
 
@@ -1257,6 +1263,12 @@ loadLogos(_manifestBase).then(logos => {
   if (sParam) {
     const found = sectionEls.find(s => s.group.slug === sParam);
     if (found) setActive(found.group.section);
+  }
+
+  // Pre-filter by ecosystem: via ?eco=<key> or window.__ECO_SLUG__ (ecosystem pages)
+  const ecoParam = new URLSearchParams(location.search).get('eco') || window.__ECO_SLUG__;
+  if (ecoParam && !sParam) {
+    setActiveEcosystem(ecoParam);
   }
 
   // Pre-fill search: via ?q=<query> (from SEO page search redirect)
