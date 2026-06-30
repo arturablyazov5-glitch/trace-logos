@@ -821,6 +821,7 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     MACOS_STYLE_TABS_MOBILE:  buildMacosStyleTabsMobile(item, primaryType),
     VARIANTS_SECTION:         buildVariantsSection(item, rel, lang),
     SPONSOR_SECTION:          buildSponsorSection(item, rel, lang),
+    SPONSOR_CSS:              SPONSORS[sponsorKey(item)]?.title ? `<link rel="stylesheet" href="${rel}css/sponsor-banner.css">` : '',
     TH_BANNER_CLASS:          '',
     ECOSYSTEM_SECTION:        buildEcosystemSection(item, ecosystemLookup, rel, lang),
     COLORS_SECTION:           buildColorsSection(brandColors, lang),
