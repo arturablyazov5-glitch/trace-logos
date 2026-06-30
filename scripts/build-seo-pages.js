@@ -144,6 +144,19 @@ function ecosystemName(id, lang = 'ru') {
   return (ECO_DATA[id] && ECO_DATA[id][lang]) || (ECO_DATA[id] && ECO_DATA[id].ru) || id;
 }
 
+// ── Sponsor banners (optional, per-logo; source of truth: logos/sponsors.json) ──
+
+const SPONSORS = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'sponsors.json'), 'utf8')); }
+  catch { return {}; }
+})();
+
+// Key into sponsors.json = the logo's url path without /logos/ and slashes trimmed,
+// e.g. "/logos/ai/chatgpt/" → "ai/chatgpt".
+function sponsorKey(item) {
+  return seoUrl(item).replace(/^\/logos\/|\/$/g, '');
+}
+
 // ── HTML escaping ─────────────────────────────────────────────────────────────
 
 function esc(str) {
@@ -349,6 +362,59 @@ function buildEcosystemSection(item, ecosystemLookup, rel, lang = 'ru') {
           ${cards}
         </div>
       </div>`;
+}
+
+// ── Sponsor banner ─────────────────────────────────────────────────────────────
+
+const SPONSOR_INFO_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="7" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg>`;
+
+// Renders the sponsor banner for one item, or '' if the logo has no sponsor.
+// Picture left, gradient background, title + text; «Спонсор» + info tooltip top-right.
+function buildSponsorSection(item, rel, lang = 'ru') {
+  const sp = SPONSORS[sponsorKey(item)];
+  if (!sp || !sp.title) return '';
+
+  const en    = lang === 'en';
+  const title = en ? (sp.title_en || sp.title) : sp.title;
+  const text  = en ? (sp.text_en  || sp.text || '') : (sp.text || '');
+  const accent = sp.accent || '';
+  const img    = sp.image ? `${rel}assets/sponsors/${sp.image}` : '';
+  const href   = sp.url || '#';
+
+  const eyebrow = en ? 'Sponsor' : 'Спонсор';
+  const adHint  = en ? 'This is an advertisement' : 'Это реклама';
+  const cta     = en ? (sp.cta_en || sp.cta || '') : (sp.cta || '');
+
+  const eridStrip = sp.erid
+    ? `<span class="sp-banner-erid">${en ? 'Ad' : 'Реклама'} · erid: ${esc(sp.erid)}</span>`
+    : '';
+
+  const ctaEl = cta
+    ? `<span class="sp-banner-cta" data-cta-en="${esc(sp.cta_en || '')}">${esc(cta)}</span>`
+    : '';
+
+  return `
+    <aside class="sp-banner" id="sp-banner">
+      <a class="sp-banner-link${img ? '' : ' sp-banner-link--no-image'}" href="${esc(href)}" target="_blank" rel="noopener sponsored nofollow"${accent ? ` style="--sp-accent:${esc(accent)}"` : ''}>
+        <span class="sp-banner-body">
+          <span class="sp-banner-title" data-title-en="${esc(sp.title_en || '')}">${esc(title)}</span>
+          ${text ? `<span class="sp-banner-desc" data-desc-en="${esc(sp.text_en || '')}">${esc(text)}</span>` : ''}
+          ${ctaEl}
+          <span class="sp-banner-mark">
+            <span class="sp-banner-eyebrow" data-i18n="sponsorEyebrow">${eyebrow}</span>
+            <span class="sp-banner-info" tabindex="0" role="note"
+                  data-i18n-aria="sponsorAdHint" aria-label="${adHint}">
+              ${SPONSOR_INFO_ICON}
+              <span class="sp-banner-tip" data-i18n="sponsorAdHint">${adHint}</span>
+            </span>
+          </span>
+        </span>
+        ${img ? `<span class="sp-banner-figure">
+          <img src="${img}" alt="${esc(title)}" width="72" height="72" loading="lazy">
+        </span>` : ''}
+        ${eridStrip}
+      </a>
+    </aside>`;
 }
 
 // ── Related logos (neighbours from the same category) ──────────────────────────
@@ -754,6 +820,8 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     MACOS_STYLE_TABS:         buildMacosStyleTabs(item, primaryType),
     MACOS_STYLE_TABS_MOBILE:  buildMacosStyleTabsMobile(item, primaryType),
     VARIANTS_SECTION:         buildVariantsSection(item, rel, lang),
+    SPONSOR_SECTION:          buildSponsorSection(item, rel, lang),
+    TH_BANNER_CLASS:          '',
     ECOSYSTEM_SECTION:        buildEcosystemSection(item, ecosystemLookup, rel, lang),
     COLORS_SECTION:           buildColorsSection(brandColors, lang),
     META_TABLE_ROWS:          buildMetaTableRows(item, lang),

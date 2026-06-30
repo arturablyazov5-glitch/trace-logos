@@ -34,6 +34,7 @@
   </script>
 
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/sponsor-banner.css">
   <link rel="stylesheet" href="{{REL}}css/modals.css">
   <link rel="stylesheet" href="{{REL}}css/confetti.css">
   <link rel="stylesheet" href="{{REL}}css/icns.css">
@@ -78,8 +79,11 @@
 
     {{MACOS_STYLE_TABS}}
 
+    <!-- ── Sponsor banner (data-driven, заменяет Threads-баннер если задан) ── -->
+{{SPONSOR_SECTION}}
+
     <!-- ── Threads banner (десктоп: рядом с превью · мобилка: в конце) ── -->
-    <aside class="th-banner" id="th-banner">
+    <aside class="th-banner{{TH_BANNER_CLASS}}" id="th-banner">
       <a class="th-banner-link" href="https://www.threads.net/@mansurov_rafaell" target="_blank" rel="noopener noreferrer" data-i18n-aria="thBannerAriaLabel" aria-label="Рафаэль Мансуров в Threads">
         <button class="th-banner-close" id="th-banner-close" data-i18n-aria="thBannerCloseAria" aria-label="Скрыть баннер" type="button">
           <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/></svg>

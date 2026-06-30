@@ -165,6 +165,8 @@ export const DICT = {
     thBannerCta:      'Подписаться',
     thBannerAriaLabel:'Рафаэль Мансуров в Threads',
     thBannerCloseAria:'Скрыть баннер',
+    sponsorEyebrow:   'Спонсор',
+    sponsorAdHint:    'Это реклама',
     footerCopyright:  'Изображения могут быть защищены авторским правом. Если ваше изображение с авторским правом отображается на этом сайте и вы хотите, чтобы оно было удалено, пожалуйста, свяжитесь с нами:',
 
     footerEmojiCopyright: 'Эмодзи Apple, Google и Microsoft принадлежат их правообладателям и приведены для ознакомления.',
@@ -455,6 +457,8 @@ export const DICT = {
     thBannerCta:      'Follow',
     thBannerAriaLabel:'Rafael Mansurov on Threads',
     thBannerCloseAria:'Hide banner',
+    sponsorEyebrow:   'Sponsor',
+    sponsorAdHint:    'This is an advertisement',
     footerCopyright:  'Images may be protected by copyright. If your copyrighted image is displayed on this site and you want it removed, please contact us:',
 
     footerEmojiCopyright: 'Apple, Google and Microsoft emoji are owned by their respective copyright holders and shown for informational purposes.',

@@ -746,8 +746,15 @@ openDetailFn = function (item, card) {
   colorsSection.classList.add('hidden');
   colorsHeader.onclick = () => {
     if (colorEditingDisabled || !colorsSection.children.length) return;
+    const wasOpen = colorsHeader.classList.contains('open');
     colorsHeader.classList.toggle('open');
     colorsSection.classList.toggle('hidden');
+    if (wasOpen) {
+      // После закрытия подтягиваем scroll так, чтобы colors-panel был виден
+      const detail = document.getElementById('detail');
+      const panelTop = colorsPanel.getBoundingClientRect().top - detail.getBoundingClientRect().top + detail.scrollTop;
+      if (detail.scrollTop > panelTop) detail.scrollTop = Math.max(0, panelTop - 8);
+    }
   };
 
   // Variant definitions

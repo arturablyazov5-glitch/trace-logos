@@ -40,6 +40,14 @@ if (getLang() === 'en') {
     if (nameSpan) nameSpan.textContent = enName;
     else el.textContent = enName;
   });
+  // Sponsor banner title / text (per-sponsor EN copy, baked as data-*-en)
+  const spTitle = document.querySelector('.sp-banner-title[data-title-en]');
+  if (spTitle && spTitle.dataset.titleEn) spTitle.textContent = spTitle.dataset.titleEn;
+  const spDesc = document.querySelector('.sp-banner-desc[data-desc-en]');
+  if (spDesc && spDesc.dataset.descEn) spDesc.textContent = spDesc.dataset.descEn;
+  const spCta = document.querySelector('.sp-banner-cta[data-cta-en]');
+  if (spCta && spCta.dataset.ctaEn) spCta.textContent = spCta.dataset.ctaEn;
+
   // Ecosystem name
   const ecoLabel = document.querySelector('[data-eco-id]');
   if (ecoLabel) {

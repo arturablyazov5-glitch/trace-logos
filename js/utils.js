@@ -225,7 +225,7 @@ function injectNotrackStyles() {
   const s = document.createElement('style');
   s.id = 'notrack-styles';
   s.textContent = `
-    #notrack-badge, #notrack-slot { position: relative; }
+    #notrack-badge { position: relative; }
 
     .notrack-popup {
       display: none;
