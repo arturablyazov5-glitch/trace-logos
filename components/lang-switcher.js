@@ -44,6 +44,7 @@ class LangSwitcher extends HTMLElement {
         .btn:hover { background: rgba(255,255,255,.08); color: #fff; }
         .chevron { flex-shrink: 0; transition: transform .15s; }
         .btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+        @media (max-width: 1200px) { .chevron { display: none; } }
         .dropdown {
           position: absolute; top: calc(100% + 6px); right: 0; z-index: 200;
           background: #1c1c1c; border: 1px solid #2a2a2a;

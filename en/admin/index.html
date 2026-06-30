@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+  <script>window.__LANG__='en';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Админка — Популярность логотипов · Trace Logo's</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --bg:          #111;
+  --bg-card:     #161616;
+  --bg-muted:    #1a1a1a;
+  --bg-raised:   #1e1e1e;
+  --bg-hover:    #1c1c1c;
+  --bg-active:   #252525;
+  --line:        #1e1e1e;
+  --border:      #222;
+  --border-muted:#2a2a2a;
+  --border-hover:#383838;
+  --text-0:      #fff;
+  --text-1:      #e5e5e5;
+  --text-2:      #aaa;
+  --text-3:      #888;
+  --text-5:      #666;
+  --text-6:      #555;
+  --accent:      #4a9eff;
+  --accent-dim:  #2563a8;
+  --radius:      16px;
+  --checker: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACPTkDJAAAAZUlEQVRIDe2VMQoAMAgDa9/g/1/oIzrpZBCh2dLFkkoDF0Fz99OdiOjks+2/7S8fRRmMMIVoRGSoYzvvqF8ZIMKlC1GhQBc6IkPzq32QmdAzkEGihpWOSPsAss8HegYySNSw0hE9WQ4StafZFqkAAAAASUVORK5CYII=") 0 0 / 14px;
+}
+
+html, body { height: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-1);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 24px;
+  background: rgba(17,17,17,.82);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+  min-width: 0;
+}
+.brand-logo { width: 32px; height: 32px; display: block; }
+.brand-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.brand-row { display: flex; align-items: center; gap: 6px; }
+.brand-name { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.brand-badge {
+  font-size: 10px; font-weight: 600; color: var(--text-3);
+  background: var(--bg-raised); border-radius: 16px;
+  padding: 3px 6px; white-space: nowrap;
+}
+.brand-sub { font-size: 11px; color: var(--text-6); white-space: nowrap; }
+.topbar .spacer { flex: 1; }
+.icon-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-muted);
+  color: var(--text-2);
+  height: 34px; padding: 0 13px;
+  border-radius: 9px;
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.icon-btn:hover { background: var(--bg-hover); color: var(--text-1); border-color: var(--border-hover); }
+.icon-btn.danger { color: #e55; border-color: #522; }
+.icon-btn.danger:hover { background: #311; color: #f77; border-color: #633; }
+.icon-btn svg { width: 15px; height: 15px; }
+a.icon-btn { text-decoration: none; }
+
+/* ── Main ── */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 36px 24px 48px;
+}
+.page-head { margin-bottom: 26px; }
+.page-head h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--text-0);
+  margin-bottom: 6px;
+}
+.page-head p { color: var(--text-3); font-size: 14px; line-height: 1.5; }
+
+/* ── Stat cards ── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 26px;
+}
+.stat {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+.stat .k { font-size: 12px; color: var(--text-5); font-weight: 500; letter-spacing: .02em; }
+.stat .v {
+  font-size: 30px; font-weight: 700; color: var(--text-0);
+  margin-top: 4px; letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  display: flex; align-items: baseline; gap: 8px;
+}
+.stat .v .unit { font-size: 13px; font-weight: 500; color: var(--text-5); }
+.stat.lead .v { color: var(--accent); }
+
+/* ── Toolbar ── */
+.toolbar {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 14px; flex-wrap: wrap;
+}
+.search {
+  position: relative; flex: 1; min-width: 220px; max-width: 360px;
+}
+.search svg {
+  position: absolute; left: 13px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; color: var(--text-5); pointer-events: none;
+}
+.search input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-1);
+  height: 40px; padding: 0 14px 0 38px;
+  border-radius: 11px;
+  font-size: 14px; outline: none;
+  transition: border-color .15s;
+}
+.search input:focus { border-color: var(--border-hover); }
+.search input::placeholder { color: var(--text-6); }
+.count-pill {
+  font-size: 12px; color: var(--text-5);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Table ── */
+.table-wrap {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead th {
+  text-align: left;
+  padding: 13px 18px;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-6);
+  border-bottom: 1px solid var(--line);
+  cursor: pointer; user-select: none; white-space: nowrap;
+  transition: color .12s;
+}
+thead th:hover { color: var(--text-3); }
+thead th.sorted { color: var(--text-1); }
+thead th .arr { font-size: 9px; margin-left: 5px; opacity: .8; }
+thead th.col-views, thead th.col-bar { text-align: right; }
+thead th.col-bar { text-align: left; }
+
+tbody tr { border-bottom: 1px solid var(--line); transition: background .1s; }
+tbody tr:last-child { border-bottom: 0; }
+tbody tr:hover { background: var(--bg-muted); }
+tbody tr.expanded { background: var(--bg-muted); }
+td { padding: 11px 18px; vertical-align: middle; }
+
+td.rank { width: 46px; color: var(--text-6); font-variant-numeric: tabular-nums; font-size: 13px; }
+tbody tr:nth-child(1) td.rank { color: var(--accent); font-weight: 700; }
+
+.logo-cell { display: flex; align-items: center; gap: 12px; min-width: 0; cursor: pointer; }
+.expand-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: var(--text-3); transition: transform .2s; font-size: 12px; }
+.expand-icon.open { transform: rotate(90deg); }
+.thumb {
+  width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 10px;
+  display: grid; place-items: center; overflow: hidden;
+}
+.thumb img { width: 100%; height: 100%; object-fit: contain; border-radius: 10px; }
+.thumb .ph {
+  width: 100%; height: 100%;
+  display: grid; place-items: center;
+  background: var(--bg-raised); color: var(--text-3);
+  font-weight: 700; font-size: 15px;
+}
+.logo-meta { min-width: 0; }
+.logo-meta .nm { color: var(--text-0); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.logo-meta .fg { color: var(--text-6); font-size: 11.5px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+td.views { text-align: right; width: 90px; }
+td.views b { color: var(--text-0); font-weight: 700; font-variant-numeric: tabular-nums; font-size: 15px; }
+
+td.bar { width: 220px; }
+.bar-track { background: var(--bg-raised); border-radius: 5px; height: 7px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); transition: width .4s cubic-bezier(.22,.61,.36,1); }
+
+td.exports { white-space: nowrap; }
+.ex-pill {
+  display: inline-flex; align-items: center; gap: 0;
+  margin: 1px 4px 1px 0;
+  font-size: 11px; border-radius: 6px; overflow: hidden;
+  border: 1px solid var(--border);
+}
+.ex-fmt { padding: 2px 6px; color: var(--text-3); background: var(--bg-raised); }
+.ex-cnt { padding: 2px 6px; color: var(--text-0); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* ── Expandable details ── */
+.details-row { display: none; }
+.details-row.show { display: table-row; }
+.details-cell { padding: 0; }
+.details-content {
+  padding: 16px 18px 16px 96px;
+  background: var(--bg-muted);
+}
+.variant-grid {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+.variant-card {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  min-width: 200px;
+  transition: border-color .15s;
+}
+.variant-card:hover { border-color: var(--border-hover); }
+.variant-thumb {
+  width: 36px; height: 36px; flex-shrink: 0;
+  border-radius: 8px; overflow: hidden;
+  display: grid; place-items: center;
+  background: #fff;
+}
+.variant-thumb.wide {
+  width: 72px; height: 36px; padding: 4px;
+}
+.variant-thumb img {
+  width: 100%; height: 100%; object-fit: contain;
+}
+.variant-thumb .ph {
+  width: 100%; height: 100%;
+  display: grid; place-items: center;
+  background: var(--bg-raised); color: var(--text-5);
+  font-weight: 600; font-size: 11px;
+}
+.variant-info { min-width: 0; flex: 1; }
+.variant-label {
+  font-size: 13px; font-weight: 500; color: var(--text-1);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.variant-file {
+  font-size: 11px; color: var(--text-5);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  margin-top: 1px;
+}
+.variant-pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+.variant-pills .ex-pill { margin: 0; }
+
+.empty, .loading-row { text-align: center; padding: 56px 20px; color: var(--text-3); font-size: 14px; }
+.spinner {
+  width: 22px; height: 22px; margin: 0 auto 12px;
+  border: 2.5px solid var(--border-muted); border-top-color: var(--accent);
+  border-radius: 50%; animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid var(--line);
+  padding: 20px 24px;
+  text-align: center;
+  color: var(--text-6);
+  font-size: 12.5px;
+}
+footer a { color: var(--text-3); text-decoration: none; }
+footer a:hover { color: var(--text-1); }
+footer .dot { margin: 0 8px; opacity: .5; }
+
+/* ── Auth gate ── */
+.gate {
+  position: fixed; inset: 0; z-index: 100;
+  background: var(--bg);
+  display: grid; place-items: center;
+  padding: 24px;
+}
+.gate-card {
+  width: 100%; max-width: 360px;
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 34px 30px;
+  text-align: center;
+}
+.gate .lock {
+  width: 52px; height: 52px; margin: 0 auto 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #232323, #161616);
+  border: 1px solid var(--border-muted);
+  display: grid; place-items: center; color: var(--accent);
+}
+.gate .lock svg { width: 24px; height: 24px; }
+.gate h2 { font-size: 19px; font-weight: 700; color: var(--text-0); letter-spacing: -.01em; }
+.gate p { font-size: 13px; color: var(--text-3); margin: 7px 0 22px; line-height: 1.5; }
+.gate input {
+  width: 100%; height: 46px;
+  background: var(--bg-raised); border: 1px solid var(--border-muted);
+  color: var(--text-0); border-radius: 12px;
+  padding: 0 15px; font-size: 15px; outline: none; text-align: center;
+  letter-spacing: .04em;
+  transition: border-color .15s;
+}
+.gate input:focus { border-color: var(--accent-dim); }
+.gate input::placeholder { color: var(--text-6); letter-spacing: normal; }
+.gate button {
+  width: 100%; height: 46px; margin-top: 12px;
+  background: var(--text-0); color: #111;
+  border: 0; border-radius: 12px;
+  font-size: 15px; font-weight: 600; cursor: pointer;
+  transition: opacity .15s;
+}
+.gate button:hover { opacity: .9; }
+.gate button:disabled { opacity: .5; cursor: default; }
+.gate .err {
+  color: #ff6b6b; font-size: 13px; margin-top: 14px; min-height: 18px;
+  opacity: 0; transition: opacity .15s;
+}
+.gate .err.show { opacity: 1; }
+.gate-card.shake { animation: shake .4s; }
+@keyframes shake {
+  10%,90% { transform: translateX(-1px); }
+  20%,80% { transform: translateX(2px); }
+  30%,50%,70% { transform: translateX(-4px); }
+  40%,60% { transform: translateX(4px); }
+}
+
+.app { display: none; flex-direction: column; flex: 1; }
+.app.ready { display: flex; }
+
+@media (max-width: 680px) {
+  main { padding: 24px 16px 36px; }
+  td.bar, thead th.col-bar, td.exports, thead th.col-exports { display: none; }
+  td.fg-hide .fg { display: none; }
+  .page-head h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Парольный вход ── -->
+<div class="gate" id="gate">
+  <div class="gate-card" id="gate-card">
+    <div class="lock">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    </div>
+    <h2>Админка</h2>
+    <p>Введите ключ доступа.<br>Он проверяется на сервере Supabase.</p>
+    <input id="gate-input" type="password" placeholder="Ключ доступа" autocomplete="off" autofocus>
+    <button id="gate-btn">Войти</button>
+    <div class="err" id="gate-err"></div>
+  </div>
+</div>
+
+<!-- ── Приложение ── -->
+<div class="app" id="app">
+  <header class="topbar">
+    <a class="brand" href="/">
+      <img class="brand-logo" src="/assets/brand/logo.svg" alt="" width="32" height="32">
+      <span class="brand-text">
+        <span class="brand-row">
+          <span class="brand-name">Trace Logo's</span>
+          <span class="brand-badge">Admin</span>
+        </span>
+        <span class="brand-sub">Популярность логотипов</span>
+      </span>
+    </a>
+    <div class="spacer"></div>
+    <button class="icon-btn danger" id="btn-reset">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+      Сбросить
+    </button>
+    <a class="icon-btn" href="/" title="Вернуться в каталог">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Каталог
+    </a>
+  </header>
+
+  <main>
+    <div class="page-head">
+      <h1>Популярность логотипов</h1>
+      <p>Открытие detail-панели в каталоге и заход на SEO-страницу логотипа суммируются в один счётчик. Экспорты детализированы по вариантам.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat lead"><div class="k">Всего просмотров</div><div class="v" id="s-total">—</div></div>
+      <div class="stat"><div class="k">Логотипов в счёте</div><div class="v" id="s-count">—</div></div>
+      <div class="stat"><div class="k">Самый популярный</div><div class="v" id="s-top" style="font-size:18px">—</div></div>
+      <div class="stat"><div class="k">Всего экспортов</div><div class="v" id="s-exports">—</div></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="filter" placeholder="Поиск по имени или figma…" autocomplete="off">
+      </div>
+      <span class="count-pill" id="count-pill"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-rank" data-sort="rank">#</th>
+            <th class="col-name" data-sort="name">Логотип</th>
+            <th class="col-views sorted" data-sort="views">Просмотры <span class="arr">▼</span></th>
+            <th class="col-exports" data-sort="exports">Экспорт</th>
+            <th class="col-bar"></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="5"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer>
+    <a href="https://trace-logos.ru" target="_blank" rel="noopener">trace-logos.ru</a>
+    <span class="dot">·</span>
+    Локальный инструмент · данные обновляются в реальном времени
+  </footer>
+</div>
+
+<script>
+const ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/track';
+const KEY_STORE = 'tl_admin_key';
+
+const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG' };
+
+let adminKey = sessionStorage.getItem(KEY_STORE) || '';
+let data = [];
+let exportMap = {};
+let sortKey = 'views';
+let sortDir = -1;
+let expandedRows = new Set();
+
+const $ = id => document.getElementById(id);
+
+// ── Auth gate ──────────────────────────────────────────────────────────
+async function tryKey(key) {
+  const res = await fetch(ENDPOINT, { headers: { 'x-admin-key': key } });
+  if (res.status === 401) return null;
+  if (!res.ok) throw new Error('Сервер недоступен (' + res.status + ')');
+  return res.json();
+}
+
+function showApp(rows) {
+  $('gate').style.display = 'none';
+  $('app').classList.add('ready');
+  ingest(rows);
+}
+
+function showGateError(msg) {
+  const err = $('gate-err');
+  err.textContent = msg;
+  err.classList.add('show');
+  const card = $('gate-card');
+  card.classList.remove('shake');
+  void card.offsetWidth;
+  card.classList.add('shake');
+}
+
+async function submitKey() {
+  const key = $('gate-input').value.trim();
+  if (!key) return;
+  const btn = $('gate-btn');
+  btn.disabled = true; btn.textContent = 'Проверка…';
+  try {
+    const rows = await tryKey(key);
+    if (rows === null) {
+      showGateError('Неверный ключ');
+    } else {
+      adminKey = key;
+      sessionStorage.setItem(KEY_STORE, key);
+      showApp(rows);
+    }
+  } catch (e) {
+    showGateError(e.message || 'Ошибка сети');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Войти';
+  }
+}
+
+$('gate-btn').addEventListener('click', submitKey);
+$('gate-input').addEventListener('keydown', e => { if (e.key === 'Enter') submitKey(); });
+
+// ── Data ───────────────────────────────────────────────────────────────
+async function refresh() {
+  if (!adminKey) return;
+  try {
+    const rows = await tryKey(adminKey);
+    if (rows === null) { sessionStorage.removeItem(KEY_STORE); location.reload(); return; }
+    ingest(rows);
+  } catch (e) {
+    $('tbody').innerHTML = `<tr><td colspan="5"><div class="empty">Ошибка: ${esc(e.message)}</div></td></tr>`;
+  }
+}
+
+$('btn-reset').addEventListener('click', async () => {
+  if (!confirm('Сбросить всю статистику просмотров? Это действие необратимо.')) return;
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'DELETE',
+      headers: { 'x-admin-key': adminKey },
+    });
+    if (!res.ok) throw new Error('Ошибка сброса');
+    data = [];
+    exportMap = {};
+    render();
+  } catch (e) {
+    alert('Не удалось сбросить: ' + (e.message || 'ошибка сети'));
+  }
+});
+
+function ingest(raw) {
+  const views = raw.views || raw || [];
+  const exports = raw.exports || [];
+  exportMap = {};
+  for (const e of exports) {
+    if (!exportMap[e.figma]) exportMap[e.figma] = {};
+    if (!exportMap[e.figma][e.format]) exportMap[e.figma][e.format] = {};
+    const variant = e.variant || '_original';
+    exportMap[e.figma][e.format][variant] = Number(e.count) || 0;
+  }
+  data = (Array.isArray(views) ? views : []).map(r => {
+    const ex = exportMap[r.figma] || {};
+    const totalExports = Object.values(ex).reduce((s, formats) => {
+      if (typeof formats === 'object') return s + Object.values(formats).reduce((a, b) => a + b, 0);
+      return s + formats;
+    }, 0);
+    return {
+      figma: r.figma,
+      name: r.name || (r.figma || '').split('/').pop(),
+      img: r.img || '',
+      views: Number(r.views) || 0,
+      exports: totalExports,
+      exportDetail: ex,
+      updated: r.updated_at || null,
+    };
+  });
+  render();
+}
+
+function render() {
+  const q = $('filter').value.toLowerCase().trim();
+  let rows = q ? data.filter(d => d.name.toLowerCase().includes(q) || d.figma.toLowerCase().includes(q)) : [...data];
+
+  rows.sort((a, b) => {
+    let va = a[sortKey], vb = b[sortKey];
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (va < vb) return -sortDir;
+    if (va > vb) return sortDir;
+    return 0;
+  });
+
+  // Stat cards (по всем данным, не по фильтру)
+  const total = data.reduce((s, d) => s + d.views, 0);
+  const top = data.reduce((m, d) => d.views > (m?.views ?? -1) ? d : m, null);
+  const lastUpd = data.reduce((m, d) => d.updated && d.updated > m ? d.updated : m, '');
+  $('s-total').innerHTML = total.toLocaleString('ru-RU') + '<span class="unit">просм.</span>';
+  $('s-count').textContent = data.length.toLocaleString('ru-RU');
+  $('s-top').textContent = top ? top.name : '—';
+  const totalExports = data.reduce((s, d) => s + d.exports, 0);
+  $('s-exports').innerHTML = totalExports.toLocaleString('ru-RU') + '<span class="unit">скач.</span>';
+
+  $('count-pill').textContent = q ? `${rows.length} из ${data.length}` : '';
+
+  if (!rows.length) {
+    $('tbody').innerHTML = `<tr><td colspan="5"><div class="empty">${data.length ? 'Ничего не найдено' : 'Пока нет данных. Логотипы появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
+    return;
+  }
+
+  const max = rows.reduce((m, d) => Math.max(m, d.views), 1);
+  let html = '';
+  rows.forEach((d, i) => {
+    const rowId = `row-${d.figma}`;
+    const isExpanded = expandedRows.has(rowId);
+    const hasVariants = Object.keys(d.exportDetail).length > 0;
+    
+    html += `
+    <tr id="${rowId}" class="${isExpanded ? 'expanded' : ''}">
+      <td class="rank">${i + 1}</td>
+      <td class="fg-hide">
+        <div class="logo-cell" onclick="toggleRow('${rowId}')">
+          ${hasVariants ? '<div class="expand-icon ' + (isExpanded ? 'open' : '') + '">›</div>' : '<div style="width:20px"></div>'}
+          <div class="thumb">${d.img
+            ? `<img src="${esc(d.img)}" alt="" loading="lazy" onerror="this.replaceWith(ph('${esc(d.name)}'))">`
+            : phHtml(d.name)}</div>
+          <div class="logo-meta">
+            <div class="nm">${esc(d.name)}</div>
+            <div class="fg">${esc(d.figma)}</div>
+          </div>
+        </div>
+      </td>
+      <td class="views"><b>${d.views.toLocaleString('ru-RU')}</b></td>
+      <td class="exports">${fmtExports(d.exportDetail)}</td>
+      <td class="bar"><div class="bar-track"><div class="bar-fill" style="width:${(d.views / max * 100).toFixed(1)}%"></div></div></td>
+    </tr>`;
+    
+    if (hasVariants) {
+      html += `<tr class="details-row ${isExpanded ? 'show' : ''}"><td colspan="5" class="details-cell"><div class="details-content">${buildVariantDetails(d.exportDetail, d.img)}</div></td></tr>`;
+    }
+  });
+  $('tbody').innerHTML = html;
+}
+
+function buildVariantDetails(exportDetail, logoImg) {
+  const byVariant = {};
+  for (const [fmt, variants] of Object.entries(exportDetail)) {
+    if (typeof variants !== 'object') continue;
+    for (const [v, count] of Object.entries(variants)) {
+      if (!byVariant[v]) byVariant[v] = { total: 0, formats: {} };
+      byVariant[v].formats[fmt] = count;
+      byVariant[v].total += count;
+    }
+  }
+  const sorted = Object.entries(byVariant).sort((a, b) => b[1].total - a[1].total);
+  let html = '<div class="variant-grid">';
+  for (const [variant, info] of sorted) {
+    const isOrig = variant === '_original' || variant === '';
+    const fileName = isOrig ? '' : variant.replace(/^.*\//, '');
+    const label = isOrig ? 'Основной' : fileName.replace(/\.[^.]+$/, '').replace(/-/g, ' ');
+    const thumbSrc = isOrig ? logoImg : variantImgUrl(variant);
+    const isFull = !isOrig && /-full\b/.test(variant);
+    const thumbHtml = thumbSrc
+      ? `<img src="${esc(thumbSrc)}" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'ph\\'>${esc(label.charAt(0).toUpperCase())}</div>'">`
+      : `<div class="ph">${esc(label.charAt(0).toUpperCase())}</div>`;
+    const pills = Object.entries(info.formats)
+      .sort((a, b) => b[1] - a[1])
+      .map(([f, c]) => `<span class="ex-pill"><span class="ex-fmt">${esc(FMT_LABELS[f] || f)}</span><span class="ex-cnt">${c}</span></span>`)
+      .join('');
+    html += `<div class="variant-card">
+      <div class="variant-thumb${isFull ? ' wide' : ''}">${thumbHtml}</div>
+      <div class="variant-info">
+        <div class="variant-label">${esc(label)}</div>
+        ${fileName && !isOrig ? `<div class="variant-file">${esc(fileName)}</div>` : ''}
+        <div class="variant-pills">${pills}</div>
+      </div>
+    </div>`;
+  }
+  html += '</div>';
+  return html;
+}
+
+function variantImgUrl(file) {
+  if (!file) return '';
+  const base = 'https://trace-logos.ru/assets/logos/';
+  if (file.endsWith('.svg')) return base + 'svgs/' + file;
+  if (file.endsWith('.png')) return base + 'pngs/' + file;
+  return base + 'svgs/' + file;
+}
+
+function toggleRow(rowId) {
+  if (expandedRows.has(rowId)) {
+    expandedRows.delete(rowId);
+  } else {
+    expandedRows.add(rowId);
+  }
+  render();
+}
+
+function phHtml(name) {
+  return `<div class="ph">${esc((name || '?').trim().charAt(0).toUpperCase())}</div>`;
+}
+function ph(name) {
+  const d = document.createElement('div');
+  d.className = 'ph';
+  d.textContent = (name || '?').trim().charAt(0).toUpperCase();
+  return d;
+}
+function fmtExports(detail) {
+  if (!detail || !Object.keys(detail).length) return '<span style="color:var(--text-6)">—</span>';
+  const items = [];
+  for (const [fmt, variants] of Object.entries(detail)) {
+    if (typeof variants === 'object') {
+      const total = Object.values(variants).reduce((a, b) => a + b, 0);
+      items.push({ fmt, total });
+    } else {
+      items.push({ fmt, total: variants });
+    }
+  }
+  return items
+    .sort((a, b) => b.total - a.total)
+    .map(({ fmt, total }) => `<span class="ex-pill"><span class="ex-fmt">${esc(FMT_LABELS[fmt] || fmt)}</span><span class="ex-cnt">${total}</span></span>`)
+    .join('');
+}
+function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }
+function fmtDate(iso) {
+  try {
+    return new Date(iso).toLocaleString('ru-RU', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+  } catch (_) { return '—'; }
+}
+
+// ── Sorting ──
+document.querySelectorAll('thead th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.sort;
+    if (key === 'rank') { sortKey = 'views'; sortDir = -1; }
+    else if (sortKey === key) { sortDir *= -1; }
+    else { sortKey = key; sortDir = key === 'views' ? -1 : 1; }
+    document.querySelectorAll('thead th').forEach(h => {
+      h.classList.remove('sorted');
+      h.querySelector('.arr')?.remove();
+    });
+    const active = document.querySelector(`thead th[data-sort="${sortKey === 'rank' ? 'views' : sortKey}"]`);
+    if (active) {
+      active.classList.add('sorted');
+      const arr = document.createElement('span');
+      arr.className = 'arr';
+      arr.textContent = sortDir > 0 ? '▲' : '▼';
+      active.appendChild(arr);
+    }
+    render();
+  });
+});
+
+$('filter').addEventListener('input', render);
+
+// ── Boot ──
+(async function init() {
+  if (adminKey) {
+    try {
+      const rows = await tryKey(adminKey);
+      if (rows !== null) { showApp(rows); return; }
+    } catch (_) { /* покажем гейт */ }
+    sessionStorage.removeItem(KEY_STORE);
+  }
+  $('gate-input').focus();
+})();
+</script>
+
+</body>
+</html>

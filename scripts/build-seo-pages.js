@@ -1,0 +1,857 @@
+#!/usr/bin/env node
+/**
+ * Generates SEO pages for all logo items that have a valid figma path.
+ *
+ * Source of truth:
+ *   templates/seo-page.html   — HTML structure and markup
+ *   css/seo-page.css          — visual styles
+ *   logos/categories/*.json   — logo data (names, variants, ecosystem, etc.)
+ *
+ * Output: logos/<category>/<slug>/index.html for each item.
+ * Also regenerates sitemap.xml.
+ *
+ * Usage:
+ *   node scripts/build-seo-pages.js            # build all pages
+ *   node scripts/build-seo-pages.js --dry-run  # print paths without writing
+ */
+
+const fs             = require('fs');
+const path           = require('path');
+const { execSync }   = require('child_process');
+const { loadTemplate } = require('./lib/render');
+const { loadDict, enChrome, bakeI18n } = require('./lib/en-transform');
+
+const BASE_URL   = 'https://trace-logos.ru';
+const ROOT       = path.resolve(__dirname, '..');
+const TEMPLATE   = loadTemplate(path.join(ROOT, 'templates', 'seo-page.html'));
+const DRY_RUN    = process.argv.includes('--dry-run');
+const DICT       = loadDict();
+const BUILD_DATE = new Date().toISOString().split('T')[0];
+
+function buildFileModMap() {
+  try {
+    const out = execSync(
+      'git log --pretty=format:"%ad" --date=short --name-only -- assets/logos/svgs/ assets/logos/pngs/',
+      { cwd: ROOT, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }
+    );
+    const map = {};
+    let date = '';
+    for (const line of out.split('\n')) {
+      const t = line.trim();
+      if (/^\d{4}-\d{2}-\d{2}$/.test(t)) { date = t; }
+      else if (t && date && !map[t]) { map[t] = date; }
+    }
+    return map;
+  } catch { return {}; }
+}
+
+const FILE_MOD_MAP = buildFileModMap();
+
+function itemDate(item) {
+  if (item.dateModified) return item.dateModified;
+  const ext = assetExt(item.file);
+  const dir = ext === 'png' ? 'pngs' : 'svgs';
+  return FILE_MOD_MAP[`assets/logos/${dir}/${item.file}`] || BUILD_DATE;
+}
+
+const RU_MONTHS = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const EN_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function formatDate(iso, lang = 'ru') {
+  const [y, m, d] = iso.split('-').map(Number);
+  if (lang === 'en') return `${EN_MONTHS[m - 1]} ${d}, ${y}`;
+  return `${d} ${RU_MONTHS[m - 1]} ${y}`;
+}
+
+// ── Slug helpers ──────────────────────────────────────────────────────────────
+
+function slugify(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9а-яё]+/gi, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function seoUrl(item) {
+  const parts = (item.figma || '').split('/').map(slugify).filter(Boolean);
+  if (parts[0] !== 'icon' || parts.length < 3) return '';
+  return '/logos/' + parts.slice(1).join('/') + '/';
+}
+
+// ── File size ─────────────────────────────────────────────────────────────────
+
+function fileSize(relPath) {
+  try {
+    const abs = path.join(ROOT, 'assets', 'logos', relPath);
+    const { size } = fs.statSync(abs);
+    // Unit matches the runtime formatFileSize() in utils.js (universal "KB").
+    if (size < 1024) return `${size} B`;
+    const kb = size / 1024;
+    return kb < 100 ? `${kb.toFixed(1)} KB` : `${Math.round(kb)} KB`;
+  } catch { return ''; }
+}
+
+// ── Variant helpers ───────────────────────────────────────────────────────────
+
+const TYPE_LABELS = { svg: 'SVG', full: 'Full', full_en: 'Full EN', png: 'PNG Icon' };
+const FULL_TYPES  = new Set(['full', 'full_en']);
+
+function isFullFile(file)    { return /-full(\.[^.]+)?$/.test(file); }
+function isWideVariant(v)    { return FULL_TYPES.has(v.type) || (!v.type && isFullFile(v.file)); }
+function variantLabel(v, lang = 'ru') {
+  if (lang === 'en' && v.label_en) return v.label_en;
+  return v.label ?? TYPE_LABELS[v.type] ?? v.type ?? '';
+}
+function assetExt(file)      { return file.split('.').pop().toLowerCase(); }
+function variantType(v)      { return assetExt(v.file) === 'png' ? 'png' : 'svg'; }
+function variantKey(v)       {
+  const ext  = assetExt(v.file);
+  const base = v.file.split('/').pop().replace(/\.[^.]+$/, '');
+  return (slugify(base) + '-' + ext) || 'v';
+}
+
+// ── Category icons ─────────────────────────────────────────────────────────────
+
+const CATEGORY_ICONS = {
+  bank:      `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>`,
+  payment:   `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>`,
+  social:    `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+  video:     `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+  media:     `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+  music:     `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>`,
+  cloud:     `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>`,
+  mail:      `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+  map:       `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>`,
+  search:    `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+  ai:        `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>`,
+  flag:      `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
+  videocall: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>`,
+};
+const DEFAULT_ICON = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`;
+
+function categoryIcon(figmaPath) {
+  const seg = slugify((figmaPath || '').split('/')[1] || '');
+  return CATEGORY_ICONS[seg] || DEFAULT_ICON;
+}
+
+// ── Ecosystem names ───────────────────────────────────────────────────────────
+
+const ECO_DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'ecosystems.json'), 'utf8'));
+
+function ecosystemName(id, lang = 'ru') {
+  return (ECO_DATA[id] && ECO_DATA[id][lang]) || (ECO_DATA[id] && ECO_DATA[id].ru) || id;
+}
+
+// ── HTML escaping ─────────────────────────────────────────────────────────────
+
+function esc(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// ── Snippet builders (pure data → HTML strings) ───────────────────────────────
+
+const DL_ICON   = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`;
+const COPY_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>`;
+
+function buildVariantCard(v, isActive, rel, itemName) {
+  const type  = variantType(v);
+  const src   = `${rel}assets/logos/${type === 'png' ? 'pngs' : 'svgs'}/${v.file}`;
+  const wide  = isWideVariant(v);
+  const label = variantLabel(v);
+  const key   = variantKey(v);
+  const altText = itemName ? `${esc(itemName)} — ${esc(label)}` : esc(label);
+  const pngAttr = (type === 'svg' && v.pngFile)
+    ? ` data-png="${rel}assets/logos/pngs/${v.pngFile}"`
+    : '';
+  const macosAttr = (v.macos_styles && !wide)
+    ? ` data-macos='${JSON.stringify(v.macos_styles)}'`
+    : '';
+  const activeClass = isActive ? ' active' : '';
+
+  if (wide) {
+    return `<div class="variant-card variant-wide${activeClass}" data-variant="${key}" data-src="${src}" data-type="${type}" data-wide="true">
+            <span class="variant-preview-wide" aria-hidden="true">
+              <img src="${src}" alt="${altText}" width="100" height="48">
+            </span>
+            <span class="variant-label">${esc(label)}</span>
+          </div>`;
+  }
+  return `<div class="variant-card${activeClass}" data-variant="${key}" data-src="${src}" data-type="${type}" data-wide="false"${pngAttr}${macosAttr}>
+            <span class="variant-preview-icon" aria-hidden="true">
+              <img src="${src}" alt="${altText}" width="48" height="48">
+            </span>
+            <span class="variant-label">${esc(label)}</span>
+          </div>`;
+}
+
+function buildVariantsSection(item, rel, lang = 'ru') {
+  const rawVariants = item.variants || [];
+  if (rawVariants.length === 0) return '';
+
+  const primaryExt  = assetExt(item.file);
+  const primaryType = primaryExt === 'png' ? 'png' : 'svg';
+
+  const pngVariant = primaryType === 'svg'
+    ? rawVariants.find(v => assetExt(v.file) === 'png')
+    : null;
+
+  const primary = {
+    file:        item.file,
+    type:        primaryType,
+    label:       primaryType === 'png' ? 'PNG Icon' : 'SVG',
+    pngFile:     pngVariant?.file ?? null,
+    macos_styles: item.macos_styles || null,
+  };
+
+  const allVariants = [
+    primary,
+    ...rawVariants.map(v => ({ ...v, label: variantLabel(v, lang) })),
+  ];
+
+  const grid = allVariants.map((v, i) => buildVariantCard(v, i === 0, rel, item.name)).join('\n          ');
+
+  return `
+      <hr class="divider">
+
+      <div class="info-section-lg">
+        <span class="section-label" data-i18n="seoVariantsLabel">Варианты</span>
+        <div class="variants-grid" id="variants-grid">
+          ${grid}
+        </div>
+      </div>`;
+}
+
+function buildMacosStyleTabsHtml(id, extraClass, hidden) {
+  const cls = ['macos-style-tabs', extraClass, hidden ? 'hidden' : ''].filter(Boolean).join(' ');
+  return `<div class="${cls}" id="${id}">
+        <button class="macos-style-tab active" data-style="color">
+          <span class="macos-style-dot"></span>
+          <span data-i18n="tabColor">Цвет</span>
+        </button>
+        <button class="macos-style-tab hidden" data-style="dark">
+          <span class="macos-style-dot"></span>
+          <span data-i18n="tabDark">Тёмное</span>
+        </button>
+        <button class="macos-style-tab hidden" data-style="light">
+          <span class="macos-style-dot"></span>
+          <span data-i18n="tabLight">Светлое</span>
+        </button>
+      </div>`;
+}
+
+function itemHasMacosStyles(item) {
+  if (item.macos_styles) return true;
+  return (item.variants || []).some(v => v.macos_styles);
+}
+
+function buildMacosStyleTabs(item, primaryType) {
+  if (!itemHasMacosStyles(item)) return '';
+  const hidden = primaryType !== 'png' || !item.macos_styles;
+  return buildMacosStyleTabsHtml('macos-style-tabs', 'macos-tabs-side', hidden);
+}
+
+function buildMacosStyleTabsMobile(item, primaryType) {
+  if (!itemHasMacosStyles(item)) return '';
+  const hidden = primaryType !== 'png' || !item.macos_styles;
+  return buildMacosStyleTabsHtml('macos-style-tabs-mobile', 'macos-tabs-info', hidden);
+}
+
+function buildDownloadButtons(item, rel) {
+  const primaryExt  = assetExt(item.file);
+  const primaryType = primaryExt === 'png' ? 'png' : 'svg';
+  const primarySrc  = `${rel}assets/logos/${primaryType === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
+
+  const rawVariants = item.variants || [];
+  const pngVariant  = rawVariants.find(v => assetExt(v.file) === 'png');
+  const pngFile     = pngVariant?.file ?? (primaryType === 'png' ? item.file : null);
+  const pngSrc      = pngFile ? `${rel}assets/logos/pngs/${pngFile}` : null;
+
+  const svgFile  = primaryType === 'svg' ? item.file : rawVariants.find(v => assetExt(v.file) === 'svg')?.file;
+  const svgSize  = svgFile ? fileSize('svgs/' + svgFile) : '';
+  const pngSize  = pngFile ? fileSize('pngs/' + pngFile) : '';
+
+  const copyBtn = `<button class="btn btn-primary" id="btn-copy" type="button"${primaryType !== 'svg' ? ' style="display:none"' : ''}>
+            ${COPY_ICON}
+            <span id="btn-copy-label" data-label="copySvg">Скопировать SVG</span>
+          </button>`;
+
+  const svgBtn = `<a class="btn btn-secondary" id="btn-dl-svg"${primaryType !== 'svg' ? ' style="display:none"' : ''} href="${primaryType === 'svg' ? primarySrc : '#'}" download="${primaryType === 'svg' ? item.file : ''}">
+            ${DL_ICON}
+            <span data-label="downloadSvg">Скачать SVG</span>${svgSize ? ` <span class="btn-size">${svgSize}</span>` : ''}
+          </a>`;
+
+  const pngBtn = pngSrc
+    ? `<a class="btn btn-secondary" id="btn-dl-png" href="${pngSrc}" download="${pngFile}">
+            ${DL_ICON}
+            <span data-label="downloadPng">Скачать PNG</span>${pngSize ? ` <span class="btn-size">${pngSize}</span>` : ''}
+          </a>`
+    : `<a class="btn btn-secondary" id="btn-dl-png" href="#" download="${item.file.replace('.svg', '.png')}">
+            ${DL_ICON}
+            <span data-label="downloadPng">Скачать PNG</span>
+          </a>`;
+
+  // The dropdown itself is a build-time partial in seo-page.html ({{> download-dropdown}}) —
+  // single source shared with the catalog. seo-page.js wires it and collapses it to
+  // zip-only at runtime for wide `-full` primaries.
+  return [copyBtn, svgBtn, pngBtn].join('\n          ');
+}
+
+function buildEcosystemSection(item, ecosystemLookup, rel, lang = 'ru') {
+  if (!item.ecosystem) return '';
+  const members = (ecosystemLookup[item.ecosystem] || []);
+  if (members.length <= 1) return '';
+
+  const en      = lang === 'en';
+  const ecoName = ecosystemName(item.ecosystem, lang);
+  const soonAria = en ? '(soon)' : '(скоро)';
+  const curAria  = en ? '(current)' : '(текущий)';
+  const cards = members.map(({ item: m }) => {
+    const isCurrent  = m.figma === item.figma;
+    const isSoon     = !!m.comingSoon;
+    const ext        = assetExt(m.file);
+    const src        = `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${m.file}`;
+    const url        = seoUrl(m);
+    const nm         = esc(en ? (m.name_en || m.name) : m.name);
+    const altText    = en ? `${nm} logo` : `Логотип ${nm}`;
+
+    if (isCurrent) {
+      return `<a class="ecosystem-card current" href="#" aria-label="${nm} ${curAria}">
+            <img src="${src}" alt="${altText}" width="48" height="48">
+            <span class="ecosystem-label">${nm}</span>
+          </a>`;
+    }
+    if (isSoon) {
+      return `<div class="ecosystem-card soon" aria-label="${nm} ${soonAria}">
+            <span class="ecosystem-soon-badge" data-i18n="comingSoon">Скоро</span>
+            <img src="${src}" alt="${altText}" width="48" height="48">
+            <span class="ecosystem-label">${nm}</span>
+          </div>`;
+    }
+    const cardHref = url ? (en ? `/en${url}` : rel + url.slice(1)) : '#';
+    return `<a class="ecosystem-card" href="${cardHref}" aria-label="${nm}">
+            <img src="${src}" alt="${altText}" width="48" height="48">
+            <span class="ecosystem-label">${nm}</span>
+          </a>`;
+  }).join('\n          ');
+
+  return `
+      <hr class="divider">
+
+      <div class="info-section-lg">
+        <span class="section-label" data-eco-id="${esc(item.ecosystem)}"><span data-i18n="detailEcosystem">Экосистема</span> <span class="eco-name">${esc(ecoName)}</span></span>
+        <div class="ecosystem-grid">
+          ${cards}
+        </div>
+      </div>`;
+}
+
+// ── Related logos (neighbours from the same category) ──────────────────────────
+
+function categoryIconBySlug(slug) {
+  return CATEGORY_ICONS[slug] || DEFAULT_ICON;
+}
+
+// Up to 12 ready logos from the same category (current excluded) — internal
+// cross-linking that's relevant to a visitor who landed from search.
+function buildRelatedSection(item, siblings, homeRel, lang = 'ru') {
+  const en   = lang === 'en';
+  const pool = (siblings || []).filter(m => m.figma !== item.figma);
+  if (pool.length < 2) return '';
+
+  const label = (en ? DICT.en : DICT.ru).seoRelatedLabel;
+  const cards = pool.map(m => {
+    const ext     = assetExt(m.file);
+    const src     = `${homeRel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${m.file}`;
+    const url     = seoUrl(m);
+    const nm      = esc(en ? (m.name_en || m.name) : m.name);
+    const altText = en ? `${nm} logo` : `Логотип ${nm}`;
+    return `<a class="related-card" href="${url ? homeRel + url.slice(1) : '#'}" aria-label="${nm}">
+            <img src="${src}" alt="${altText}" width="48" height="48" loading="lazy">
+            <span class="related-label">${nm}</span>
+          </a>`;
+  }).join('\n          ');
+
+  return `
+  <section class="catalog-section" aria-label="${label}">
+    <h2 class="catalog-section-title" data-i18n="seoRelatedLabel">${label}</h2>
+    <div class="related-grid">
+          ${cards}
+    </div>
+  </section>`;
+}
+
+// Full catalog entry: all 37 categories with live counts → /logos/<slug>/.
+// Static & crawlable; the prominent "whole catalog" the user can't find via the CTA.
+// Each card shows 3–4 logo thumbnails from that category instead of an icon.
+function buildCatalogGridSection(categories, homeRel, itemsByCat, lang = 'ru') {
+  if (!categories || !categories.length) return '';
+  const en    = lang === 'en';
+  const label = (en ? DICT.en : DICT.ru).seoCategoriesLabel;
+
+  const cards = categories.map(c => {
+    const nm = esc(en ? (c.section_en || c.section) : c.section);
+    const all = itemsByCat[c.slug] || [];
+    const previews = all.slice(0, 4);
+    const thumbs = previews.map(m => {
+      const ext = assetExt(m.file);
+      const src = `${homeRel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${m.file}`;
+      return `<img src="${src}" alt="" width="20" height="20" loading="lazy">`;
+    }).join('');
+    const more = all.length > 4
+      ? `<span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span>`
+      : '';
+
+    return `<a class="catalog-cat" href="${homeRel}logos/${c.slug}/">
+            <span class="catalog-cat-thumbs" aria-hidden="true">${thumbs}${more}</span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="${esc(c.section_en || c.section)}">${nm}</span>
+              <span class="catalog-cat-count">${c.count}</span>
+            </span>
+          </a>`;
+  }).join('\n          ');
+
+  return `
+  <section class="catalog-section" aria-label="${label}">
+    <h2 class="catalog-section-title" data-i18n="seoCategoriesLabel">${label}</h2>
+    <div class="catalog-cats">
+          ${cards}
+    </div>
+  </section>`;
+}
+
+// Single source of truth for which formats a logo offers. ICO/ICNS are only
+// available for square logos (primary not ending in `-full`) — mirrors the
+// download-dropdown gating in seo-page.js / main.js. Keeps the «Формат» meta,
+// the FAQ text and the FAQPage JSON-LD in sync.
+function isSquareLogo(item) {
+  return !/-full(\.[^.]+)?$/.test(item.file);
+}
+function logoFormats(item) {
+  const primaryExt = assetExt(item.file);
+  const hasSvg = primaryExt !== 'png' || (item.variants || []).some(v => assetExt(v.file) === 'svg');
+  const hasPng = primaryExt === 'png'  || (item.variants || []).some(v => assetExt(v.file) === 'png');
+  const square = isSquareLogo(item);
+  const list = [hasSvg && 'SVG', hasPng && 'PNG', square && 'ICO', square && 'ICNS'].filter(Boolean);
+  const fmtStr   = list.length > 2 ? list.join(', ') : list.join(' и ');
+  const fmtStrEn = list.length > 2 ? list.join(', ') : list.join(' and ');
+  return { hasSvg, hasPng, square, list, fmtStr, fmtStrEn };
+}
+
+function buildMetaTableRows(item, lang = 'ru') {
+  const { fmtStr, fmtStrEn } = logoFormats(item);
+  const fmt = lang === 'en' ? fmtStrEn : fmtStr;
+
+  const figmaDisplay = (item.figma || '').replace(/\//g, ' / ');
+
+  const brandRow = item.brandUrl
+    ? `<div class="meta-row">
+          <span class="meta-key" data-i18n="detailBrand">Бренд</span>
+          <span class="meta-val"><a href="${esc(item.brandUrl)}" target="_blank" rel="noopener noreferrer" data-i18n="seoBrandRulesLink">Правила использования →</a></span>
+        </div>`
+    : '';
+
+  const dateModified = itemDate(item);
+  const dateLabel    = lang === 'en' ? 'Updated' : 'Обновлено';
+  const dateFormatted = formatDate(dateModified, lang);
+  const dateRow = `<div class="meta-row">
+          <span class="meta-key">${dateLabel}</span>
+          <time class="meta-val" datetime="${dateModified}">${dateFormatted}</time>
+        </div>`;
+
+  return `<div class="meta-row">
+          <span class="meta-key" data-i18n="seoMetaFormat">Формат</span>
+          <span class="meta-val">${esc(fmt)}</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Figma</span>
+          <span class="meta-val">${esc(figmaDisplay)}</span>
+        </div>${brandRow}${dateRow}`;
+}
+
+// ── Brand colors (extracted from SVG source — source of truth) ─────────────────
+
+function extractBrandColors(item) {
+  const primaryExt = assetExt(item.file);
+  const svgFile = primaryExt === 'svg'
+    ? item.file
+    : (item.variants || []).find(v => assetExt(v.file) === 'svg')?.file;
+  if (!svgFile) return [];
+
+  let svg;
+  try { svg = fs.readFileSync(path.join(ROOT, 'assets', 'logos', 'svgs', svgFile), 'utf8'); }
+  catch { return []; }
+
+  const counts = new Map();
+  const add = h => { h = h.toLowerCase(); counts.set(h, (counts.get(h) || 0) + 1); };
+
+  for (const m of svg.matchAll(/#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3})(?![0-9a-fA-F])/g)) {
+    let h = m[1];
+    if (h.length === 8) h = h.slice(0, 6);            // strip alpha
+    else if (h.length === 3) h = h.split('').map(c => c + c).join('');
+    if (h.length === 6) add('#' + h);
+  }
+  for (const m of svg.matchAll(/rgb\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/gi)) {
+    add('#' + [m[1], m[2], m[3]].map(n => Math.min(255, +n).toString(16).padStart(2, '0')).join(''));
+  }
+
+  // Most frequent first; drop pure white (usually background / negative space).
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(e => e[0])
+    .filter(c => c !== '#ffffff')
+    .slice(0, 6);
+}
+
+function buildColorsSection(colors, lang = 'ru') {
+  if (!colors.length) return '';
+  const copyLabel = lang === 'en' ? 'Copy' : 'Скопировать';
+  const swatches = colors.map(c => {
+    const hex = c.toUpperCase();
+    return `<button class="color-swatch" type="button" data-color="${hex}" aria-label="${copyLabel} ${hex}">
+            <span class="color-swatch-dot" style="background:${c}"></span>
+            <span class="color-swatch-hex">${hex}</span>
+          </button>`;
+  }).join('\n          ');
+
+  return `
+      <hr class="divider">
+
+      <div class="info-section-lg">
+        <span class="section-label" data-i18n="seoBrandColorsLabel">Цвета бренда</span>
+        <div class="colors-grid" id="colors-grid">
+          ${swatches}
+        </div>
+      </div>`;
+}
+
+// ── FAQ (visible markup + FAQPage JSON-LD share the same data) ─────────────────
+
+function buildFaqItems(item, colors) {
+  const { hasSvg, hasPng, square, fmtStr } = logoFormats(item);
+
+  const bits = [];
+  if (hasSvg) bits.push('векторный SVG масштабируется без потери качества и подходит для печати и Figma');
+  if (hasPng) bits.push('растровый PNG удобен для презентаций и документов');
+  if (square) bits.push('а ICO и ICNS — готовые иконки для приложений Windows и macOS');
+  const fmtTail = bits.join(', ').replace(/^./, c => c.toUpperCase());
+
+  const fmtStrEn = fmtStr.replace('и', 'and');
+  const bitsEn = [];
+  if (hasSvg) bitsEn.push('SVG vector scales without quality loss and works in Figma and print');
+  if (hasPng) bitsEn.push('PNG raster is convenient for presentations and documents');
+  if (square) bitsEn.push('ICO and ICNS are ready-made icons for Windows and macOS apps');
+  const fmtTailEn = bitsEn.join(', ').replace(/^./, c => c.toUpperCase());
+
+  const nm = item.name;                       // RU name
+  const ne = item.name_en || item.name;       // EN name (falls back to RU)
+
+  const faq = [];
+  faq.push({
+    q:  `В каком формате можно скачать логотип ${nm}?`,
+    a:  `Логотип ${nm} доступен в ${fmtStr}. ${fmtTail}.`,
+    qe: `What formats is the ${ne} logo available in?`,
+    ae: `The ${ne} logo is available in ${fmtStrEn}. ${fmtTailEn}.`,
+  });
+  if (square) faq.push({
+    q:  `Можно ли скачать логотип ${nm} в формате ICO или ICNS?`,
+    a:  `Да. Кроме SVG и PNG, логотип ${nm} можно скачать как иконку в форматах ICO (для Windows и ярлыков) и ICNS (для приложений и Dock в macOS) — нажмите «Скачать другие форматы» и выберите нужный.`,
+    qe: `Can I download the ${ne} logo in ICO or ICNS format?`,
+    ae: `Yes. In addition to SVG and PNG, the ${ne} logo is available as an icon in ICO (for Windows and shortcuts) and ICNS (for macOS apps and Dock) — click "Download other formats" and choose the one you need.`,
+  });
+  faq.push({
+    q:  `Логотип ${nm} можно скачать бесплатно?`,
+    a:  `Да. Скачать логотип ${nm} на Trace Logo's можно бесплатно и без регистрации. Логотип принадлежит правообладателю — используйте его в соответствии с фирменными правилами бренда.`,
+    qe: `Is the ${ne} logo free to download?`,
+    ae: `Yes. The ${ne} logo can be downloaded from Trace Logo's for free and without registration. The logo belongs to its rights holder — use it in accordance with the brand guidelines.`,
+  });
+  if (hasSvg) faq.push({
+    q:  `Как изменить цвет логотипа ${nm}?`,
+    a:  `Откройте логотип ${nm} в каталоге Trace Logo's и воспользуйтесь встроенным редактором цвета: выберите элемент, задайте оттенок в HSV-пикере и экспортируйте готовый SVG.`,
+    qe: `How do I change the color of the ${ne} logo?`,
+    ae: `Open the ${ne} logo in the Trace Logo's catalog and use the built-in color editor: select an element, set the hue in the HSV picker, and export the finished SVG.`,
+  });
+  if (colors.length) faq.push({
+    q:  `Какие официальные цвета у логотипа ${nm}?`,
+    a:  `Основные цвета логотипа ${nm}: ${colors.map(c => c.toUpperCase()).join(', ')}. Значения извлечены из исходного SVG-файла.`,
+    qe: `What are the official colors of the ${ne} logo?`,
+    ae: `The main colors of the ${ne} logo are: ${colors.map(c => c.toUpperCase()).join(', ')}. Values extracted from the original SVG file.`,
+  });
+  return faq;
+}
+
+function buildFaqSection(faq, lang = 'ru') {
+  if (!faq.length) return '';
+  const rows = faq.map(f => {
+    const q = lang === 'en' ? (f.qe || f.q) : f.q;
+    const a = lang === 'en' ? (f.ae || f.a) : f.a;
+    return `<details class="faq-item" data-q-en="${esc(f.qe || '')}" data-a-en="${esc(f.ae || '')}">
+          <summary class="faq-q">${esc(q)}</summary>
+          <p class="faq-a">${esc(a)}</p>
+        </details>`;
+  }).join('\n        ');
+
+  return `
+  <section class="faq-section" aria-labelledby="faq-title">
+    <h2 id="faq-title" class="faq-title" data-i18n="faqTitle">Частые вопросы</h2>
+    <div class="faq-list">
+        ${rows}
+    </div>
+  </section>`;
+}
+
+function buildSeoPageData(item, rel, lang = 'ru') {
+  const primaryExt  = assetExt(item.file);
+  const primaryType = primaryExt === 'png' ? 'png' : 'svg';
+  const primarySrc  = `${rel}assets/logos/${primaryType === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
+  const displayName = lang === 'en' ? (item.name_en || item.name) : item.name;
+
+  const translatedVariants = (item.variants || []).map(v =>
+    (lang === 'en' && v.label_en) ? { ...v, label: v.label_en } : v
+  );
+  return `window.__SEO_PAGE__ = {
+  assetBase:   '${rel}assets/logos/',
+  name:        '${(displayName || '').replace(/'/g, "\\'")}',
+  defaultSrc:  '${primarySrc}',
+  defaultType: '${primaryType}',
+  defaultWide: false,
+  figma:       '${item.figma || ''}',
+  macosStyles: ${JSON.stringify(item.macos_styles || null)},
+  item:        ${JSON.stringify({ figma: item.figma || '', file: item.file, variants: translatedVariants })},
+};`;
+}
+
+function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'ru') {
+  const en        = lang === 'en';
+  const nm        = en ? (item.name_en || item.name) : item.name;
+  const urlPrefix = en ? `${BASE_URL}/en` : BASE_URL;
+  const crumb2    = en ? 'Logos' : 'Логотипы';
+  const crumb3    = en ? (section_en || section) : section;
+
+  const breadcrumb = {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Trace Logo's", "item": `${urlPrefix}/` },
+      { "@type": "ListItem", "position": 2, "name": crumb2,         "item": `${urlPrefix}/logos/` },
+      { "@type": "ListItem", "position": 3, "name": crumb3,         "item": `${urlPrefix}/logos/${catSlug}/` },
+      { "@type": "ListItem", "position": 4, "name": nm,             "item": fullUrl },
+    ],
+  };
+
+  const primaryExt = assetExt(item.file);
+  const dateModified = itemDate(item);
+  const imageObj = {
+    "@type": "ImageObject",
+    "name": en ? `${nm} Logo` : `Логотип ${item.name}`,
+    "description": en ? `Official ${nm} logo in SVG` : `Официальный логотип ${item.name} в SVG`,
+    "contentUrl": `${BASE_URL}/assets/logos/svgs/${item.file}`,
+    "encodingFormat": primaryExt === 'png' ? 'image/png' : 'image/svg+xml',
+    "dateModified": dateModified,
+    ...(item.brandUrl ? { "license": item.brandUrl } : {}),
+  };
+
+  const graph = [breadcrumb, imageObj];
+
+  if (faq && faq.length) {
+    graph.push({
+      "@type": "FAQPage",
+      "mainEntity": faq.map(f => ({
+        "@type": "Question",
+        "name": en ? (f.qe || f.q) : f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": en ? (f.ae || f.a) : f.a },
+      })),
+    });
+  }
+
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2);
+}
+
+// ── Page assembler ────────────────────────────────────────────────────────────
+
+// Renders the page for ONE language. RU = baseline. EN substitutes English SEO
+// text into the same placeholders; the chrome (data-i18n UI labels, paths, lang)
+// is baked afterwards by the caller via enChrome + bakeI18n. English meta uses
+// item.desc_en / item.about_en when present, else a templated English fallback.
+function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyTotal, categories, itemsByCat }, lang = 'ru') {
+  const url = seoUrl(item);
+  if (!url) return null;
+
+  const en       = lang === 'en';
+  const nm       = en ? (item.name_en || item.name) : item.name; // display name for this lang
+  // EN pages live at /en/logos/<cat>/<slug>/ — use root-relative asset paths so
+  // every reference (preview, downloads, variant data-src, __SEO_PAGE__.assetBase)
+  // resolves correctly without depending on depth or runtime path rewriting.
+  const rel      = en ? '/' : '../../../';
+  const fullUrl  = BASE_URL + url;
+
+  const primaryExt  = assetExt(item.file);
+  const primaryType = primaryExt === 'png' ? 'png' : 'svg';
+  const hasPng      = primaryType === 'png' || (item.variants || []).some(v => assetExt(v.file) === 'png');
+  const fmtStr      = [primaryType === 'svg' && 'SVG', hasPng && 'PNG'].filter(Boolean).join(' и ');
+  const fmtStrEn    = [primaryType === 'svg' && 'SVG', hasPng && 'PNG'].filter(Boolean).join(' and ');
+
+  const metaDescRu = item.desc || `Скачайте логотип ${item.name} в ${fmtStr} бесплатно. Официальные цвета, готово для Figma.`;
+  const metaDescEn = item.desc_en || `Download the ${nm} logo in ${fmtStrEn} for free. Official colors, ready for Figma.`;
+  const ogDescRu   = item.desc || `Векторный логотип ${item.name} в ${fmtStr}. Официальные цвета.`;
+  const ogDescEn   = item.desc_en || `Vector ${nm} logo in ${fmtStrEn}. Official colors.`;
+
+  const metaDesc = en ? metaDescEn : metaDescRu;
+  const ogDesc   = en ? ogDescEn   : ogDescRu;
+  const logoDesc = en ? (item.about_en || metaDescEn) : (item.about || metaDescRu);
+
+  const title    = en ? `${nm} Logo SVG — download free · Trace Logo's` : `Логотип ${item.name} SVG — скачать бесплатно · Trace Logo's`;
+  const ogTitle  = en ? `${nm} Logo SVG — download free`                : `Логотип ${item.name} SVG — скачать бесплатно`;
+  const twTitle  = en ? `${nm} Logo SVG — Trace Logo's`                 : `Логотип ${item.name} SVG — Trace Logo's`;
+  const h1       = en ? `${nm} Logo` : `Логотип ${item.name}`;
+  const prevAlt  = en ? `${nm} Logo SVG` : `Логотип ${item.name} SVG`;
+  const secLabel = en ? (section_en || section) : section;
+  const ctaTitle = en ? `${readyTotal}+ logos in the catalog` : `${readyTotal}+ логотипов в каталоге`;
+
+  const ogSlug  = seoUrl(item).replace(/^\/logos\/|\/$/g, '').replace(/\//g, '-');
+  const ogImage = `${BASE_URL}/assets/og/${ogSlug}.png`;
+
+  const previewSrc  = `${rel}assets/logos/${primaryType === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
+  const previewMime = primaryType === 'png' ? 'image/png' : 'image/svg+xml';
+
+  const brandColors = extractBrandColors(item);
+  const faqItems    = buildFaqItems(item, brandColors);
+
+  const homeRel  = en ? '/en/' : rel;
+  const siblings = (itemsByCat && itemsByCat[catSlug]) || [];
+
+  const vars = {
+    REL:                      rel,
+    HOME_REL:                 en ? '/en/' : rel,
+    DATA_BASE:                en ? '/' : rel,
+    TITLE:                    title,
+    META_DESC:                esc(metaDesc),
+    CANONICAL_URL:            fullUrl,
+    OG_TITLE:                 esc(ogTitle),
+    OG_DESC:                  esc(ogDesc),
+    OG_IMAGE:                 ogImage,
+    TWITTER_TITLE:            esc(twTitle),
+    JSON_LD:                  buildJsonLd(item, section, section_en, catSlug, fullUrl, faqItems, lang),
+    BREADCRUMB_SECTION:       esc(secLabel),
+    BREADCRUMB_SECTION_EN:    esc(section_en || section),
+    BREADCRUMB_SECTION_SLUG:  catSlug,
+    BREADCRUMB_CURRENT:       esc(nm),
+    PREVIEW_SRC:              previewSrc,
+    PREVIEW_MIME:             previewMime,
+    PREVIEW_ALT:              esc(prevAlt),
+    CATEGORY_ICON:            categoryIcon(item.figma),
+    CATEGORY_NAME:            esc(secLabel),
+    H1:                       esc(h1),
+    H1_EN:                    esc(`${item.name_en || item.name} Logo`),
+    LOGO_DESC:                logoDesc,
+    CATALOG_COUNT:            String(readyTotal),
+    CATALOG_CTA_TITLE:        esc(ctaTitle),
+    DOWNLOAD_BUTTONS:         buildDownloadButtons(item, rel),
+    MACOS_STYLE_TABS:         buildMacosStyleTabs(item, primaryType),
+    MACOS_STYLE_TABS_MOBILE:  buildMacosStyleTabsMobile(item, primaryType),
+    VARIANTS_SECTION:         buildVariantsSection(item, rel, lang),
+    ECOSYSTEM_SECTION:        buildEcosystemSection(item, ecosystemLookup, rel, lang),
+    COLORS_SECTION:           buildColorsSection(brandColors, lang),
+    META_TABLE_ROWS:          buildMetaTableRows(item, lang),
+    FAQ_SECTION:              buildFaqSection(faqItems, lang),
+    RELATED_SECTION:          buildRelatedSection(item, siblings, homeRel, lang),
+    CATALOG_GRID_SECTION:     buildCatalogGridSection(categories, homeRel, itemsByCat, lang),
+    SEO_PAGE_DATA:            buildSeoPageData(item, rel, lang),
+  };
+
+  return TEMPLATE.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+    if (!(key in vars)) { console.warn(`Unknown placeholder: {{${key}}}`); return ''; }
+    return vars[key];
+  });
+}
+
+
+// ── Main ──────────────────────────────────────────────────────────────────────
+
+async function main() {
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'manifest.json'), 'utf8'));
+
+  // English dictionary (single source) — for baking data-i18n chrome on EN pages.
+  const EN = loadDict().en;
+
+  // Load all items with their section names and category slug
+  const allItems = [];
+  for (const cat of manifest.categories) {
+    const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', cat.file), 'utf8'));
+    for (const item of data.items) allItems.push({ item, section: cat.section, section_en: cat.section_en, catSlug: cat.slug });
+  }
+
+  // Total ready logos count (same as header in the catalog)
+  const readyTotal = allItems.filter(({ item }) => !item.comingSoon && item.file && item.file !== 'placeholder.svg').length;
+
+  // Build ecosystem lookup: id → list of items in that ecosystem
+  const ecosystemLookup = {};
+  for (const { item } of allItems) {
+    if (!item.ecosystem) continue;
+    (ecosystemLookup[item.ecosystem] ??= []).push({ item });
+  }
+
+  // Ready items grouped by category slug → neighbours for the "Related" section.
+  const isReady = it => !it.comingSoon && it.file && it.file !== 'placeholder.svg' && seoUrl(it);
+  const itemsByCat = {};
+  for (const { item, catSlug } of allItems) {
+    if (!isReady(item)) continue;
+    (itemsByCat[catSlug] ??= []).push(item);
+  }
+
+  // All categories with live counts → the full-catalog grid (same order as manifest).
+  const categories = manifest.categories.map(cat => ({
+    slug:       cat.slug,
+    section:    cat.section,
+    section_en: cat.section_en,
+    count:      (itemsByCat[cat.slug] || []).length,
+  })).filter(c => c.count > 0);
+
+  const builtUrls = [];
+  let written = 0, unchanged = 0, skipped = 0;
+
+  // Writes html to disk with change-detection; returns true if written.
+  const writeIfChanged = (absPath, html) => {
+    fs.mkdirSync(path.dirname(absPath), { recursive: true });
+    const prev = fs.existsSync(absPath) ? fs.readFileSync(absPath, 'utf8') : '';
+    if (prev === html) return false;
+    fs.writeFileSync(absPath, html, 'utf8');
+    return true;
+  };
+
+  for (const { item, section, section_en, catSlug } of allItems) {
+    if (item.comingSoon || !item.file || item.file === 'placeholder.svg') { skipped++; continue; }
+    const url = seoUrl(item);
+    if (!url) { skipped++; continue; }
+
+    builtUrls.push(url);
+
+    if (DRY_RUN) { console.log(url.slice(1) + 'index.html'); continue; }
+
+    const args    = { item, section, section_en, catSlug, ecosystemLookup, readyTotal, categories, itemsByCat };
+    const relPath = url.slice(1) + 'index.html'; // e.g. logos/ai/chatgpt/index.html
+
+    // RU page
+    const ruHtml = buildPage(args, 'ru');
+    if (writeIfChanged(path.join(ROOT, url.slice(1), 'index.html'), ruHtml)) written++; else unchanged++;
+
+    // EN page — English SEO text baked in, chrome localized, static (no JS dependency)
+    const enHtml = bakeI18n(enChrome(buildPage(args, 'en'), relPath), EN);
+    if (writeIfChanged(path.join(ROOT, 'en', url.slice(1), 'index.html'), enHtml)) written++; else unchanged++;
+  }
+
+  if (!DRY_RUN) {
+    console.log(`✓ Written:   ${written}  (RU + EN)`);
+    console.log(`  Unchanged: ${unchanged}`);
+    console.log(`  Skipped:   ${skipped}`);
+    console.log(`  Sitemap:   run \`node scripts/build-sitemap.js\` to regenerate sitemap.xml`);
+  } else {
+    console.log(`\nDry run: ${builtUrls.length} pages would be generated (RU + EN each).`);
+  }
+}
+
+main();
