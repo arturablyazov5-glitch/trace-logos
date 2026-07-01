@@ -93,6 +93,23 @@ function fileSize(relPath) {
   } catch { return ''; }
 }
 
+// Like fileSize(), but accepts either a name inside assets/logos/<folder>/ or
+// a root-relative path (leading "/") to an asset outside that folder.
+function assetFileSize(file, folder) {
+  if (file.startsWith('/')) {
+    try {
+      const { size } = fs.statSync(path.join(ROOT, file.slice(1)));
+      if (size < 1024) return `${size} B`;
+      const kb = size / 1024;
+      return kb < 100 ? `${kb.toFixed(1)} KB` : `${Math.round(kb)} KB`;
+    } catch { return ''; }
+  }
+  return fileSize(`${folder}/${file}`);
+}
+
+// Suggested download filename: basename only, never a path.
+function downloadName(file) { return file.split('/').pop(); }
+
 // ── Variant helpers ───────────────────────────────────────────────────────────
 
 const TYPE_LABELS = { svg: 'SVG', full: 'Full', full_en: 'Full EN', png: 'PNG Icon' };
@@ -106,6 +123,13 @@ function variantLabel(v, lang = 'ru') {
 }
 function assetExt(file)      { return file.split('.').pop().toLowerCase(); }
 function variantType(v)      { return assetExt(v.file) === 'png' ? 'png' : 'svg'; }
+// Mirrors svgUrl() in js/utils.js: a leading "/" means the file is already a
+// root-relative path (e.g. a cross-folder emoji asset), not a name inside
+// assets/logos/{svgs,pngs}/.
+function assetSrc(file, rel, type) {
+  if (file.startsWith('/')) return rel === '/' ? file : rel + file.slice(1);
+  return `${rel}assets/logos/${type === 'png' ? 'pngs' : 'svgs'}/${file}`;
+}
 function variantKey(v)       {
   const ext  = assetExt(v.file);
   const base = v.file.split('/').pop().replace(/\.[^.]+$/, '');
@@ -174,13 +198,13 @@ const COPY_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" s
 
 function buildVariantCard(v, isActive, rel, itemName) {
   const type  = variantType(v);
-  const src   = `${rel}assets/logos/${type === 'png' ? 'pngs' : 'svgs'}/${v.file}`;
+  const src   = assetSrc(v.file, rel, type);
   const wide  = isWideVariant(v);
   const label = variantLabel(v);
   const key   = variantKey(v);
   const altText = itemName ? `${esc(itemName)} — ${esc(label)}` : esc(label);
   const pngAttr = (type === 'svg' && v.pngFile)
-    ? ` data-png="${rel}assets/logos/pngs/${v.pngFile}"`
+    ? ` data-png="${assetSrc(v.pngFile, rel, 'png')}"`
     : '';
   const macosAttr = (v.macos_styles && !wide)
     ? ` data-macos='${JSON.stringify(v.macos_styles)}'`
@@ -283,11 +307,11 @@ function buildDownloadButtons(item, rel) {
   const rawVariants = item.variants || [];
   const pngVariant  = rawVariants.find(v => assetExt(v.file) === 'png');
   const pngFile     = pngVariant?.file ?? (primaryType === 'png' ? item.file : null);
-  const pngSrc      = pngFile ? `${rel}assets/logos/pngs/${pngFile}` : null;
+  const pngSrc      = pngFile ? assetSrc(pngFile, rel, 'png') : null;
 
   const svgFile  = primaryType === 'svg' ? item.file : rawVariants.find(v => assetExt(v.file) === 'svg')?.file;
-  const svgSize  = svgFile ? fileSize('svgs/' + svgFile) : '';
-  const pngSize  = pngFile ? fileSize('pngs/' + pngFile) : '';
+  const svgSize  = svgFile ? assetFileSize(svgFile, 'svgs') : '';
+  const pngSize  = pngFile ? assetFileSize(pngFile, 'pngs') : '';
 
   const copyBtn = `<button class="btn btn-primary" id="btn-copy" type="button"${primaryType !== 'svg' ? ' style="display:none"' : ''}>
             ${COPY_ICON}
@@ -300,7 +324,7 @@ function buildDownloadButtons(item, rel) {
           </a>`;
 
   const pngBtn = pngSrc
-    ? `<a class="btn btn-secondary" id="btn-dl-png" href="${pngSrc}" download="${pngFile}">
+    ? `<a class="btn btn-secondary" id="btn-dl-png" href="${pngSrc}" download="${downloadName(pngFile)}">
             ${DL_ICON}
             <span data-label="downloadPng">Скачать PNG</span>${pngSize ? ` <span class="btn-size">${pngSize}</span>` : ''}
           </a>`
