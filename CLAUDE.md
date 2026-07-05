@@ -212,12 +212,9 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 
 # Hosting & caching
 
-**Production host is Vercel** (`vercel.json`, project linked via `.vercel/project.json`), not GitHub Pages — `.github/workflows/deploy.yml` targets GitHub Pages but is currently `disabled_manually` (account-level Actions abuse flag, see project memory) and is not what serves `trace-logos.ru`. Don't assume GitHub Pages/Actions state reflects production; check `curl -sI https://trace-logos.ru` (look for `server: vercel`) if in doubt.
+**Production host is GitHub Pages** (as of 2026-07-05), not Vercel. Repo lives on the `sixxset5-star` GitHub account (migrated off `rafael-mansurov` after an Actions abuse flag banned that account's Actions/Pages builds). `.github/workflows/deploy.yml` (`workflow_dispatch` + push-to-`main` trigger) builds and deploys on every push to `main`; `trace-logos.ru` DNS points at GitHub Pages IPs. The user explicitly decided to drop Vercel — don't assume `vercel.json` / `.vercel/project.json` reflect current routing. Verify with `curl -sI https://trace-logos.ru` (look for the GitHub Pages `server` header) or `gh run list --workflow=deploy.yml` if in doubt.
 
-**`vercel.json` `headers` is the sole owner of Cache-Control.** There used to be a Netlify-style `_headers` file — Vercel never reads that format, so it silently did nothing (assets got no browser cache at all despite the file claiming 30 days). It has been deleted; don't recreate it. Cache durations:
-- `/assets/logos/*`, `/assets/emoji/*`, `/assets/og/*`, `/assets/brand/*` → 30 days, `immutable` (relies on `ASSET_VERSION` busting via `build-version.js` above)
-- `/assets/fonts/*` → 1 year, `immutable`
-- `/css/*`, `/js/*`, `/components/*` → `max-age=0, must-revalidate` (no versioning scheme for these paths yet — a blind long cache here would let a deployed HTML page reference stale JS/CSS for up to the TTL; ETag-based revalidation keeps repeat loads cheap without that risk)
+**Cache-Control is now GitHub Pages' default** (`max-age=600`) — GitHub Pages doesn't support custom response headers, so `vercel.json`'s `headers` block (30-day immutable caching for `/assets/logos/*`, `/assets/emoji/*`, etc., cache-busted via `ASSET_VERSION`/`build-version.js`) no longer applies in production. `build-version.js` still runs (harmless, and needed if Vercel/a CDN with custom headers is reintroduced later) but isn't doing cache-control work on the current host.
 
 ---
 
