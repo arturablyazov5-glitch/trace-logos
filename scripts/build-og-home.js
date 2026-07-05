@@ -9,11 +9,14 @@
 
 const fs   = require('fs');
 const path = require('path');
+const { getLogoReadyCount, getEmojiCount } = require('./lib/counts');
 
 const ROOT = path.resolve(__dirname, '..');
 const OUT  = path.join(ROOT, 'assets', 'og', 'home.png');
 const CHROME = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const LOGO_B64 = fs.readFileSync(path.join(ROOT, 'assets', 'brand', 'logo.png')).toString('base64');
+const LOGO_COUNT = getLogoReadyCount();
+const EMOJI_COUNT = getEmojiCount();
 
 const HTML = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -43,7 +46,7 @@ const HTML = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
   .brand-logo img { width:100%; height:100%; display:block; object-fit:cover; }
   .brand-name { font-size:28px; font-weight:600; }
 </style></head><body>
-  <div class="badge"><span class="dot"></span>288 логотипов · 1918 эмодзи · бесплатно</div>
+  <div class="badge"><span class="dot"></span>${LOGO_COUNT} логотипов · ${EMOJI_COUNT} эмодзи · бесплатно</div>
   <h1>SVG-логотипы брендов<br>и <span class="accent">эмодзи</span> для дизайна</h1>
   <p>Скачивайте, меняйте цвета и экспортируйте в Figma — без регистрации.</p>
   <div class="brand">

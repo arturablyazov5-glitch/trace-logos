@@ -1,15 +1,56 @@
 import { switchLayout, highlight, fuzzyMatchToken } from './utils.js';
 import { setSectionHidden, loadCardImage, resetContentScroll, updateVirtualizedSections, scheduleVirtualizedSections } from './virtual.js';
+import { animateSectionReflow } from './reflow.js';
 
-let _sectionEls, _searchCount, _ensureSectionCards, _getTotalCards, _updateScrollTopButton, _getDisplayName;
+let _sectionEls, _searchCount, _ensureSectionCards, _getTotalCards, _updateScrollTopButton, _getDisplayName, _matchesFormat, _onEmptyState;
 
-export function initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards, updateScrollTopButton, getDisplayName }) {
+export function initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards, updateScrollTopButton, getDisplayName, matchesFormat, onEmptyState }) {
   _sectionEls = sectionEls;
   _searchCount = searchCount;
   _ensureSectionCards = ensureSectionCards;
   _getTotalCards = getTotalCards;
   _updateScrollTopButton = updateScrollTopButton;
   _getDisplayName = getDisplayName ?? (item => item.name);
+  _matchesFormat = matchesFormat ?? (() => true);
+  _onEmptyState = onEmptyState ?? (() => {});
+}
+
+// Keyboard result navigation (ArrowUp/Down + Enter) — flattened in the same
+// score order the sections/cards are visually reordered into by filterCards.
+let _flatResults = [];
+let _activeIndex = -1;
+let _activeCardEl = null;
+
+function clearActiveCard() {
+  if (_activeCardEl) _activeCardEl.classList.remove('kbd-active');
+  _activeCardEl = null;
+  _activeIndex = -1;
+}
+
+function setActiveCard(index) {
+  if (_activeCardEl) _activeCardEl.classList.remove('kbd-active');
+  _activeIndex = index;
+  _activeCardEl = _flatResults[index] ?? null;
+  if (_activeCardEl) {
+    _activeCardEl.classList.add('kbd-active');
+    _activeCardEl.scrollIntoView({ block: 'nearest' });
+  }
+}
+
+export function moveSearchSelection(delta) {
+  if (!_flatResults.length) return;
+  const next = _activeIndex < 0
+    ? (delta > 0 ? 0 : _flatResults.length - 1)
+    : Math.min(Math.max(_activeIndex + delta, 0), _flatResults.length - 1);
+  setActiveCard(next);
+}
+
+export function openSearchSelection() {
+  const card = _activeCardEl ?? _flatResults[0];
+  if (!card) return false;
+  card.click();
+  clearActiveCard();
+  return true;
 }
 
 const STOP_WORDS = new Set(['логотип', 'лого', 'logo', 'logotype', 'логотипы']);
@@ -75,7 +116,7 @@ function updateSearchCount(visible, hasQuery) {
   _searchCount.classList.add('visible');
 }
 
-export function filterCards(q) {
+export function filterCards(q, { animate = false } = {}) {
   const words = q.trim().toLowerCase().replace(/-/g, '').split(/\s+/).filter(w => w && !STOP_WORDS.has(w));
   const rawWords = q.trim().split(/\s+/).filter(Boolean);
   const hasQuery = words.length > 0;
@@ -84,42 +125,51 @@ export function filterCards(q) {
 
   _sectionEls.forEach(section => {
     _ensureSectionCards(section);
-    const matchingCards = [];
     let sectionBestScore = 0;
 
-    section.cards.forEach(card => {
-      const score = !hasQuery ? 1 : scoreCard(words, card);
-      const match = score > 0;
-      card.classList.toggle('hidden', !match);
-      if (!match) return;
-      card._searchScore = score;
-      visibleCardCount++;
-      matchingCards.push(card);
+    const doMutate = () => {
+      const matchingCards = [];
+      section.cards.forEach(card => {
+        const score = !_matchesFormat(card._item) ? 0
+          : !hasQuery ? 1
+          : card._item.comingSoon ? 0 // excluded from search matching — not part of the ready-catalog denominator
+          : scoreCard(words, card);
+        const match = score > 0;
+        card.classList.toggle('hidden', !match);
+        if (!match) return;
+        card._searchScore = score;
+        visibleCardCount++;
+        matchingCards.push(card);
 
-      const item = card._item;
-      const labelEl = card.querySelector('.label');
-      const pathEl = card.querySelector('.card-path');
-      if (hasQuery) {
-        labelEl.innerHTML = highlight(_getDisplayName(item), rawWords);
-        pathEl.innerHTML = highlight(item.figma, rawWords);
-        card.classList.add('show-path');
-      } else {
-        labelEl.textContent = _getDisplayName(item);
-        pathEl.textContent = item.figma;
-        card.classList.remove('show-path');
+        const item = card._item;
+        const labelEl = card.querySelector('.label');
+        const pathEl = card.querySelector('.card-path');
+        if (hasQuery) {
+          labelEl.innerHTML = highlight(_getDisplayName(item), rawWords);
+          pathEl.innerHTML = highlight(item.figma, rawWords);
+          card.classList.add('show-path');
+        } else {
+          labelEl.textContent = _getDisplayName(item);
+          pathEl.textContent = item.figma;
+          card.classList.remove('show-path');
+        }
+
+        if (score > sectionBestScore) sectionBestScore = score;
+      });
+
+      if (hasQuery && matchingCards.length > 1) {
+        matchingCards.sort((a, b) => b._searchScore - a._searchScore);
       }
 
-      if (score > sectionBestScore) sectionBestScore = score;
-    });
+      section.visibleCards = matchingCards;
+      section.grid.style.height = '';
+      if (section.mounted) { section.grid.replaceChildren(...matchingCards); matchingCards.forEach(loadCardImage); }
+    };
 
-    if (hasQuery && matchingCards.length > 1) {
-      matchingCards.sort((a, b) => b._searchScore - a._searchScore);
-    }
+    if (animate) animateSectionReflow(section, doMutate);
+    else doMutate();
 
-    section.visibleCards = matchingCards;
-    section.grid.style.height = '';
-    if (section.mounted) { section.grid.replaceChildren(...matchingCards); matchingCards.forEach(loadCardImage); }
-    const any = matchingCards.length > 0;
+    const any = section.visibleCards.length > 0;
     setSectionHidden(section.sec, !any);
     if (any) hitSections.push({ section, score: sectionBestScore });
   });
@@ -144,10 +194,17 @@ export function filterCards(q) {
   document.getElementById('empty').classList.toggle('show', isEmpty);
   document.getElementById('content').style.display = isEmpty ? 'none' : '';
   if (isEmpty) {
+    _onEmptyState();
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
     const allNav = document.querySelector('[data-section="all"]');
     if (allNav) allNav.classList.add('active');
   }
-  if (hasQuery) resetContentScroll();
+
+  // Highlight the top result so Enter has an obvious, visible target without
+  // requiring an arrow-key press first — mirrors a command-palette flow.
+  _flatResults = hasQuery ? hitSections.flatMap(h => h.section.visibleCards) : [];
+  if (_flatResults.length) setActiveCard(0);
+  else clearActiveCard();
+  if (hasQuery && !animate) resetContentScroll();
   else requestAnimationFrame(() => { _updateScrollTopButton(); scheduleVirtualizedSections(); });
 }

@@ -53,6 +53,7 @@
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/sidebar.css">
   <link rel="stylesheet" href="/css/search.css">
+  <link rel="stylesheet" href="/css/filters.css">
   <link rel="stylesheet" href="/css/cards.css">
   <link rel="stylesheet" href="/css/detail.css">
   <link rel="stylesheet" href="/css/color.css">
@@ -116,6 +117,8 @@
     <span class="nav-label" data-i18n="sidebarAll">All</span>
   </div>
   <div id="nav-sections"></div>
+  <div class="sidebar-label with-gap" data-i18n="sidebarFormat">Format</div>
+  <div id="format-filter-sidebar" class="format-filter-slot"></div>
   <div class="sidebar-label with-gap" id="ecosystems-label" data-i18n="sidebarEcosystems">Ecosystems</div>
   <div id="nav-ecosystems"></div>
   <!-- Yandex.RTB R-A-19419656-1 -->
@@ -176,6 +179,8 @@
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         <span data-i18n="emptySearchText">Nothing found</span>
+        <button type="button" id="empty-reset-format" class="empty-action hidden" data-i18n="emptyResetFormat">Show all formats</button>
+        <button type="button" id="empty-suggest-btn" class="empty-action empty-action--primary" data-i18n="suggestLogo">Suggest logo</button>
       </div>
       <button type="button" class="scroll-top-btn" id="scroll-top-btn" data-i18n-aria="scrollTopAriaLabel" aria-label="Back to top">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">

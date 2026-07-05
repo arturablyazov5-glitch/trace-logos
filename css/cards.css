@@ -145,6 +145,7 @@
 .section.hidden { display: none; }
 .card.hidden { display: none; }
 .card.active { background: #1e1e1e; outline: 1.5px solid #333; }
+.card.kbd-active { background: #1e1e1e; outline: 1.5px solid #3b66f6; }
 
 /* Toast */
 #toast {
@@ -207,6 +208,23 @@
 }
 #empty.show { display: flex; }
 #empty svg { margin-bottom: 12px; color: #333; }
+
+.empty-action {
+  margin-top: 14px;
+  padding: 9px 16px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: transparent;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+}
+.empty-action:hover { background: #1a1a1a; color: #fff; }
+.empty-action--primary { background: #fff; color: #111; border-color: #fff; }
+.empty-action--primary:hover { background: #e5e5e5; color: #111; }
+.empty-action.hidden { display: none; }
 
 #empty-section {
   display: none;

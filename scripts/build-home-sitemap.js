@@ -17,11 +17,34 @@
 const fs   = require('fs');
 const path = require('path');
 const { loadTemplate } = require('./lib/render');
+const { getLogoReadyCount, getLogoCategoryCount } = require('./lib/counts');
 
 const ROOT     = path.resolve(__dirname, '..');
 const OUT      = path.join(ROOT, 'sitemap', 'index.html');
 const TEMPLATE = loadTemplate(path.join(ROOT, 'templates', 'sitemap-page.html'));
 const DRY_RUN  = process.argv.includes('--dry-run');
+
+// Homepage (root index.html) has hand-written marketing copy that quotes the
+// logo count / category count ("288 логотипов", "35 разделов") — these drift
+// out of sync as the catalog grows. Patch them from the same manifests used
+// for the rest of this script, the same way build-category-pages.js patches
+// logos/index.html's "N+ SVG-логотипов" counter.
+function patchHomepageCounts() {
+  const indexPath = path.join(ROOT, 'index.html');
+  let html = fs.readFileSync(indexPath, 'utf8');
+  const before = html;
+
+  const logoCount = getLogoReadyCount();
+  const categoryCount = getLogoCategoryCount();
+
+  html = html.replace(/\d+(?=\s+(?:SVG\/PNG\s+)?логотип)/g, String(logoCount));
+  html = html.replace(/\d+(?=\s+раздел)/g, String(categoryCount));
+
+  if (html !== before) {
+    fs.writeFileSync(indexPath, html, 'utf8');
+    console.log(`  ✓ index.html — счётчики обновлены (${logoCount} логотипов, ${categoryCount} разделов)`);
+  }
+}
 
 const EMOJI_CATS = {
   'smileys-emotion': { slug: 'smileys',    name: 'Смайлы' },
@@ -103,6 +126,8 @@ function main() {
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, html, 'utf8');
   console.log(`✓ sitemap/index.html → logos:${logoLinks.length} emoji:${emojiLinks.length} collections:${collLinks.length} sections:${sectionLinks.length}`);
+
+  patchHomepageCounts();
 }
 
 main();

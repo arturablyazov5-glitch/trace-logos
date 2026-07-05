@@ -1,0 +1,70 @@
+/* Format filter — compact segmented control (SVG / PNG) in the sidebar, below Categories */
+.format-filter-slot {
+  padding: 0 16px 2px;
+}
+
+.format-filter {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: 2px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-muted);
+  border-radius: 8px;
+  user-select: none;
+}
+
+/* Sliding highlight — width = one of three equal slots */
+.format-filter__thumb {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 2px;
+  width: calc((100% - 4px) / 3);
+  background: var(--bg-active);
+  border: 1px solid var(--border-base);
+  border-radius: 6px;
+  transition: transform .24s cubic-bezier(.4, .7, .2, 1);
+  pointer-events: none;
+}
+
+.format-filter__opt {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex: 1;
+  padding: 5px 2px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--text-3);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color .15s;
+}
+
+.format-filter__icon {
+  display: flex;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+.format-filter__icon svg { width: 100%; height: 100%; }
+
+.format-filter__opt:hover {
+  color: var(--text-1);
+}
+
+.format-filter__opt.active {
+  color: var(--text-0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .format-filter__thumb { transition: none; }
+}

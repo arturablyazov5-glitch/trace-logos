@@ -89,6 +89,7 @@ function init() {
   document.getElementById('suggest-btn-desktop').addEventListener('click', openModal);
   document.getElementById('suggest-btn-mobile').addEventListener('click', openModal);
   document.getElementById('suggest-btn-sidebar')?.addEventListener('click', openModal);
+  document.getElementById('empty-suggest-btn')?.addEventListener('click', openModal);
   document.getElementById('suggest-close').addEventListener('click', closeModal);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e) => {

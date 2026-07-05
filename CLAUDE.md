@@ -41,14 +41,12 @@ Resolved label: `v.label ?? TYPE_LABELS[v.type] ?? v.type ?? ''` (main.js:482).
 1. Place SVG in `assets/logos/svgs/` (or PNG in `assets/logos/pngs/`)
 2. Add an entry to the appropriate `logos/categories/*.json`
 3. Required fields: `name`, `tags`, `figma`, `file`. Optional: `variants[]`, `ecosystem`
-4. Run `node scripts/build-seo-pages.js` — regenerates all `logos/<cat>/<slug>/index.html` (with FAQ + brand-color swatches)
-5. Run `node scripts/build-api-json.js` — regenerates `logos/<slug>.json` and `logos.json` (public API)
-6. Run `node scripts/build-collections.js` — regenerates `collections/<slug>/index.html` (reads fresh `logos.json`, so run after step 5)
-7. Run `node scripts/build-category-pages.js` — regenerates `logos/<category>/index.html` category overview pages
-8. Run `node scripts/build-sitemap.js` — regenerates `sitemap.xml` (index) + `sitemap-*.xml`. **sitemap.xml is owned by this script** — run it LAST, after all page builders
-9. Run `node scripts/build-og-images.js` — regenerates OG preview images in `assets/og/`. **Required for every new logo.**
-10. **If the new logo is a PNG:** run `node scripts/build-webp-previews.js` — generates the lightweight WebP grid preview in `assets/logos/previews/`. SVG logos don't need this (the grid renders the SVG directly).
-11. **If the new logo sets `ecosystem` to a key not yet in `logos/ecosystems.json`:** add it there, then run `node scripts/build-ecosystem-pages.js` — regenerates `logos/ecosystem/<key>/index.html`. Easy to forget since it's not tied to a specific category file; forgetting it leaves cross-reference links to `/logos/ecosystem/<key>/` 404ing until the next time someone remembers to run it.
+4. **If the new logo sets `ecosystem` to a key not yet in `logos/ecosystems.json`:** add it there first — `build-all.js` doesn't create ecosystem keys, only pages for keys that already exist.
+5. Run `npm run build` (= `node scripts/build-all.js`) — runs the full fast-tier pipeline below in dependency order, including the sitemap (always last) and the EN mirror. **Do not run the individual scripts by hand** for a routine content change — that's how steps get forgotten or run out of order; use `--dry-run` first if you want to preview.
+6. Run `node scripts/build-og-images.js` (or `npm run build -- --with-og`) — regenerates OG preview images in `assets/og/`. **Required for every new logo**, but excluded from the default fast tier because it's slow (Puppeteer/Chrome).
+7. **If the new logo is a PNG:** the fast tier already ran `build-webp-previews.js` for you (step 5) — nothing extra to do. SVG logos never need it (the grid renders the SVG directly).
+
+See "`node scripts/build-all.js`" below for what the fast tier actually runs and when you'd reach for an individual script instead (e.g. `--dry-run`-ing just one step while debugging it).
 
 **Logo suggestion form:**
 Users submit logos via a modal. Data (name, URL or file) is POSTed to Cloudflare Worker at `brand-icons-sanitizer.brand-icons.workers.dev/suggest`.
@@ -120,6 +118,16 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 # Build Scripts
 
 **NEVER manually edit generated files.** All `logos/<cat>/<slug>/index.html` pages are generated — hand edits will be overwritten on the next build.
+
+## `node scripts/build-all.js` (`npm run build`) — run this, not the individual scripts below
+
+**Default entry point for any content change** (new/edited logo, emoji, collection, blog post, or a shared template/partial). Spawns every fast-tier script below as a child process, in dependency order, stopping on first failure. `--dry-run` previews every step without writing.
+
+- **Fast tier (default):** build-seo-pages → build-api-json → build-collections → build-category-pages → build-ecosystem-pages → build-webp-previews → build-emoji-seo-pages → build-emoji-category-pages → build-emoji-json → build-blog → build-blog-rss → build-home-sitemap → build-en-pages → build-sitemap (always last) → build-version.
+- **Opt-in slow tier** (Puppeteer/Chrome, excluded by default — run only when actually needed, see each script's own entry below): `--with-og` (build-og-images), `--og-home` (build-og-home), `--plugin-assets` (build-plugin-assets), or `--full` for all three.
+- **Why it exists:** the old workflow was "remember which of ~14 scripts to run, in what order" — easy to get wrong or skip a step (e.g. forgetting `build-ecosystem-pages.js` after adding an `ecosystem` key leaves cross-reference links 404ing). `build-all.js` removes that memory burden entirely for the common case.
+- **When an individual script below is still the right call:** iterating on ONE script's own logic (fast `--dry-run` loop without re-running everything else), or a slow-tier step you're intentionally running standalone (e.g. `build-og-images.js` alone after adding one new logo, rather than `--with-og` re-rendering nothing new).
+- Each script also still works completely standalone (this doc lists them individually below) — `build-all.js` is a convenience wrapper, not a replacement for understanding what each step does.
 
 ## `node scripts/build-seo-pages.js`
 - **Input:** `logos/manifest.json` → `logos/categories/*.json` + `templates/seo-page.html`
@@ -198,7 +206,7 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 ## `node scripts/build-version.js`
 - **Output:** `js/version.js` (`ASSET_VERSION`, a `YYYYMMDD` string) — imported by `js/utils.js` as `SVG_URL_V`, appended as `?v=` to every logo/emoji SVG/PNG/WebP URL.
 - **Why it exists:** `assets/logos/*` and `assets/emoji/*` get a 30-day immutable browser cache (`vercel.json`). That's only safe if the URL changes when the file's content changes — `ASSET_VERSION` is that cache-buster. It must be a value that stays fixed between deploys, not one computed per page load.
-- **When to run:** run it LAST, after all other build scripts, whenever you've replaced/edited an existing SVG or PNG under the same filename (new files with new names don't need it), or changed anything under `/js` or `/css`. Safe to skip for a routine "add a new logo" pass (new filename ⇒ new URL already busts on its own).
+- **When to run:** run it LAST, after all other build scripts, whenever you've replaced/edited an existing SVG or PNG under the same filename (new files with new names don't need it), or changed anything under `/js` or `/css`. Safe to skip for a routine "add a new logo" pass (new filename ⇒ new URL already busts on its own). It's the final step in `scripts/build-all.js` (`npm run build`), so a full pipeline run always refreshes it — only matters if you're running individual scripts by hand.
 
 ---
 

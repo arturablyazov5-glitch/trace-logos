@@ -18,7 +18,9 @@ import {
   updateVirtualizedSections, scheduleVirtualizedSections,
   resetContentScroll,
 } from './virtual.js';
-import { initSearch, filterCards } from './search.js';
+import { initSearch, filterCards, moveSearchSelection, openSearchSelection } from './search.js';
+import { initFilters, matchesFormat, formatState, setFormat } from './filters.js';
+import { animateSectionReflow } from './reflow.js';
 import { openReportModal } from './suggest.js';
 import { openHelpModal } from './help.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
@@ -61,6 +63,12 @@ let activeVariantCard = null;
 let currentVariant = null; // the variant vDef currently shown in the detail panel (for ICO/ICNS export)
 let updatePngDownloadSize = null; // set per-variant; recomputes the "Скачать PNG" size readout
 let activePngFile = null;          // tracks the currently displayed PNG (incl. dark/light tab)
+let selectVariantGen = 0;          // bumped on every selectVariant call; lets a stale async
+                                    // continuation (e.g. a slow loadRawSvg) detect it's been
+                                    // superseded by a faster later switch and bail out
+let updateZipDownloadSize = null;  // set per card open; deferred to first menu open (see toggleDownloadMenu)
+let zipSizeReqId = 0;
+let icoSizeReqId = 0;
 
 function resetCopyBtn() {
   if (copyBtnResetTimer) {
@@ -109,14 +117,31 @@ function applyDownloadVariantState(item, isSquare, file = item.file) {
     ? (e) => { e.stopPropagation(); toggleDownloadMenu(); }
     : (e) => { e.stopPropagation(); downloadAllAsZip(item); };
 
+  // Building the ICO is a real render (4 canvas frames) just to show a byte count
+  // in a menu item most visitors never open — stash the file and compute lazily
+  // on first menu open instead (see loadIcoSizePreview). If the menu happens to
+  // already be open (variant switched without closing it), refresh right away.
   const icoSizeEl = document.getElementById('btn-download-ico')?.querySelector('.btn-menu-size');
-  if (icoSizeEl && isSquare) {
+  if (icoSizeEl) {
     icoSizeEl.textContent = '';
-    estimateIcoSize(file).then(sz => { if (sz) icoSizeEl.textContent = formatFileSize(sz); });
+    icoSizeEl.dataset.file = isSquare ? file : '';
+    if (menu.classList.contains('open')) loadIcoSizePreview();
   }
 
   const btnLg = document.getElementById('btn-download-lg');
   if (btnLg) btnLg.classList.toggle('hidden', /\.png(\?|$)/i.test(file));
+}
+
+// Computed lazily — see applyDownloadVariantState. reqId guards against a slow
+// estimate for a since-abandoned variant overwriting a fresher one's label.
+function loadIcoSizePreview() {
+  const icoSizeEl = document.getElementById('btn-download-ico')?.querySelector('.btn-menu-size');
+  const file = icoSizeEl?.dataset.file;
+  if (!icoSizeEl || !file || icoSizeEl.textContent) return; // no square variant, or already computed
+  const reqId = ++icoSizeReqId;
+  estimateIcoSize(file).then(sz => {
+    if (sz && reqId === icoSizeReqId) icoSizeEl.textContent = formatFileSize(sz);
+  });
 }
 
 // The download dropdown lives inside #detail, which is overflow:auto — an absolute
@@ -149,6 +174,8 @@ function toggleDownloadMenu() {
   menu.classList.add('open');
   trigger?.classList.add('open');
   positionDownloadMenu();
+  loadIcoSizePreview();
+  if (updateZipDownloadSize) { updateZipDownloadSize(); updateZipDownloadSize = null; }
 }
 
 // ── Layout helpers ──
@@ -288,61 +315,72 @@ function ensureSectionCards(sectionState) {
 }
 
 // ── Navigation ──
-function setActive(sectionName) {
+// Remembers the current non-search view so the format filter can re-apply it.
+let currentView = { kind: 'all', value: null };
+
+// Renders a section's cards through `cardPredicate` AND the active format
+// filter — the single place both the category/ecosystem views resolve card
+// visibility. Returns the number of cards left visible.
+function renderSectionCards(section, cardPredicate, { animate = false } = {}) {
+  ensureSectionCards(section);
+  const doMutate = () => {
+    const visibleCards = [];
+    section.cards.forEach(card => {
+      const match = cardPredicate(card) && matchesFormat(card._item);
+      card.classList.toggle('hidden', !match);
+      if (match) visibleCards.push(card);
+    });
+    section.visibleCards = visibleCards;
+    section.grid.style.height = '';
+    if (section.mounted) { section.grid.replaceChildren(...visibleCards); visibleCards.forEach(loadCardImage); }
+  };
+  if (animate) animateSectionReflow(section, doMutate);
+  else doMutate();
+  return section.visibleCards.length;
+}
+
+function setActive(sectionName, { animate = false } = {}) {
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  currentView = sectionName === 'all' ? { kind: 'all', value: null } : { kind: 'section', value: sectionName };
 
   if (sectionName === 'all') {
     document.querySelector('[data-section="all"]').classList.add('active');
-    sectionEls.forEach((s, i) => {
-      ensureSectionCards(s);
-      const { sec, grid, cards } = s;
-      cards.forEach(c => c.classList.remove('hidden'));
-      sectionEls[i].visibleCards = cards;
-      grid.style.height = '';
-      if (sectionEls[i].mounted) { grid.replaceChildren(...cards); cards.forEach(loadCardImage); }
-      setSectionHidden(sec, false);
+    sectionEls.forEach(s => {
+      const n = renderSectionCards(s, () => true, { animate });
+      setSectionHidden(s.sec, n === 0);
     });
   } else {
     const found = sectionEls.find(s => s.group.section === sectionName);
     if (found) {
       found.nav.classList.add('active');
-      sectionEls.forEach((s, i) => {
-        ensureSectionCards(s);
-        const { sec, grid, group, cards } = s;
-        cards.forEach(c => c.classList.remove('hidden'));
-        sectionEls[i].visibleCards = cards;
-        grid.style.height = '';
-        if (sectionEls[i].mounted) { grid.replaceChildren(...cards); cards.forEach(loadCardImage); }
-        setSectionHidden(sec, group.section !== sectionName);
+      sectionEls.forEach(s => {
+        if (s.group.section !== sectionName) { ensureSectionCards(s); setSectionHidden(s.sec, true); return; }
+        const n = renderSectionCards(s, () => true, { animate });
+        setSectionHidden(s.sec, n === 0);
       });
     }
   }
-  resetContentScroll();
+  if (animate) scheduleVirtualizedSections();
+  else resetContentScroll();
+  syncViewToUrl();
 }
 
-function setActiveEcosystem(ecosystem) {
+function setActiveEcosystem(ecosystem, { animate = false } = {}) {
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  currentView = { kind: 'ecosystem', value: ecosystem };
   const found = ecosystemEls.find(e => e.key === ecosystem);
   if (found) found.nav.classList.add('active');
 
   sectionEls.forEach(section => {
-    ensureSectionCards(section);
-    let any = false;
-    const visibleCards = [];
-    section.cards.forEach(card => {
-      const match = card._item.ecosystem === ecosystem;
-      card.classList.toggle('hidden', !match);
-      if (match) { any = true; visibleCards.push(card); }
-    });
-    section.visibleCards = visibleCards;
-    section.grid.style.height = '';
-    if (section.mounted) { section.grid.replaceChildren(...visibleCards); visibleCards.forEach(loadCardImage); }
-    setSectionHidden(section.sec, !any);
+    const n = renderSectionCards(section, card => card._item.ecosystem === ecosystem, { animate });
+    setSectionHidden(section.sec, n === 0);
   });
 
   document.getElementById('empty').classList.remove('show');
   document.getElementById('content').style.display = '';
-  resetContentScroll();
+  if (animate) scheduleVirtualizedSections();
+  else resetContentScroll();
+  syncViewToUrl();
 }
 
 // ── Variant selection ──
@@ -379,6 +417,7 @@ function getDisplayType(vDef) {
 }
 
 async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled) {
+  const myGen = ++selectVariantGen;
   if (activeVariantCard) activeVariantCard.classList.remove('active');
   activeVariantCard = vcEl;
   currentVariant = vDef;
@@ -488,7 +527,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       return new Blob([buf], { type: 'image/png' });
     };
     const btnSizePng = btnDownloadPng.querySelector('.btn-size');
-    if (btnSizePng) { btnSizePng.textContent = ''; getPngBlob().then(b => { btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {}); }
+    if (btnSizePng) { btnSizePng.textContent = ''; getPngBlob().then(b => { if (myGen === selectVariantGen) btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {}); }
     btnCopyPng.onclick = async () => {
       btnCopyPng.disabled = true;
       try {
@@ -549,6 +588,10 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   document.getElementById('macos-style-tabs')?.classList.add('hidden');
   const isSquare = vDef.type === '_original' || vDef.type === 'svg' || (!vDef.type && !isFullFile(vDef.file));
   const rawSvg = await loadRawSvg(vDef.file);
+  // A faster later switch may have already resumed and rendered while this
+  // fetch was in flight — stop before touching the preview/buttons/color
+  // editor, or a slow variant could overwrite a fresher one once it lands.
+  if (myGen !== selectVariantGen) return;
 
   if (!colorEditingDisabled) {
     buildColorEditor(rawSvg);
@@ -597,7 +640,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   updatePngDownloadSize = () => {
     if (!btnSizePng) return;
     btnSizePng.textContent = '';
-    Promise.resolve(getPngBlob()).then(b => { if (b) btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {});
+    Promise.resolve(getPngBlob()).then(b => { if (b && myGen === selectVariantGen) btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {});
   };
   updatePngDownloadSize();
   applyDownloadVariantState(item, isSquare, vDef.file);
@@ -672,6 +715,17 @@ function closeDetail() {
     setDetailOpen(false);
     detail.classList.remove('detail-swap');
   }, dur);
+}
+
+// A previously-opened logo has nothing to do with an empty search result —
+// leaving its detail panel open shows stale context the visible (empty) grid
+// contradicts. Also keeps the "reset format" hint in sync with the format
+// filter, which can change without a fresh empty→non-empty transition (e.g.
+// switching formats from the sidebar while already viewing an empty result).
+function handleEmptySearch() {
+  if (detail.classList.contains('open')) closeDetail();
+  const resetBtn = document.getElementById('empty-reset-format');
+  if (resetBtn) resetBtn.classList.toggle('hidden', formatState.format === 'all');
 }
 
 function isFlagItem(item) {
@@ -802,11 +856,18 @@ openDetailFn = function (item, card) {
     downloadAllBtn.classList.toggle('hidden', !(hasDownloadDropdown || downloadableSvgCount > 1));
   });
 
-  // Estimate ZIP size in background
+  // Estimate ZIP size — fetches every variant full-size and rasterizes a PNG from
+  // each SVG, which is real network + CPU cost for a label few visitors ever see
+  // (btn-download-zip is buried in a menu). For the dropdown interface (logos),
+  // defer it to first menu open (see toggleDownloadMenu). The old plain button
+  // (emoji/icons) shows the size directly with no menu to defer to, so it still
+  // computes eagerly, unchanged.
   const btnSizeZip = (document.getElementById('btn-download-zip') || downloadAllBtn)?.querySelector('.btn-size');
   if (btnSizeZip) btnSizeZip.textContent = ''; // clear stale size from a previously-opened logo
+  updateZipDownloadSize = null;
   if (btnSizeZip && downloadableSvgCount > 1) {
-    (async () => {
+    const reqId = ++zipSizeReqId;
+    const computeZipSize = async () => {
       const variants = allVariants.length > 0
         ? allVariants
         : [{ type: '_original', file: item.file }];
@@ -826,10 +887,14 @@ openDetailFn = function (item, card) {
           }
         } catch { /* skip */ }
       }
+      // bail if a newer card open superseded this one while we were fetching
+      if (reqId !== zipSizeReqId) return;
       if (total > 0 && !downloadAllBtn.classList.contains('hidden')) {
         btnSizeZip.textContent = '~' + formatFileSize(total);
       }
-    })();
+    };
+    if (hasDownloadDropdown) updateZipDownloadSize = computeZipSize;
+    else computeZipSize();
   }
 
   activeVariantCard = null;
@@ -865,16 +930,20 @@ openDetailFn = function (item, card) {
     variantCards.push({ vDef, vc });
   });
 
-  const svgOnlyVariants = allVariants.filter(v => !v.file.endsWith('.png'));
-  Promise.all(svgOnlyVariants.map(v => loadRawSvg(v.file))).then(() => {
-    if (variantCards.length > 0) {
-      const { vDef, vc } = variantCards[0];
-      selectVariant(vDef, vc, item, allVariants, colorEditingDisabled);
-    }
-  });
-
-  if (!allVariants.length) {
+  if (variantCards.length > 0) {
+    const { vDef, vc } = variantCards[0];
+    selectVariant(vDef, vc, item, allVariants, colorEditingDisabled);
+  } else {
     selectVariant({ type: '_original', file: item.file }, null, item, allVariants, colorEditingDisabled);
+  }
+
+  // Warm the raw-SVG cache for the remaining variants in the background so their
+  // thumbnails re-color instantly once the user edits colors (updateVariantThumbnails
+  // already skips any not-yet-cached ones) — without making the first variant wait
+  // on every other one to finish loading first.
+  const svgOnlyVariants = allVariants.filter(v => !v.file.endsWith('.png'));
+  if (svgOnlyVariants.length > 1) {
+    Promise.all(svgOnlyVariants.map(v => loadRawSvg(v.file))).then(updateVariantThumbnails);
   }
 
   // Ecosystem block
@@ -1035,6 +1104,12 @@ search.addEventListener('input', () => {
   }
   mobileSearchGo?.classList.toggle('visible', search.value.length > 0);
 });
+search.addEventListener('keydown', (e) => {
+  if (!search.value.trim()) return;
+  if (e.key === 'ArrowDown') { e.preventDefault(); moveSearchSelection(1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); moveSearchSelection(-1); }
+  else if (e.key === 'Enter') { e.preventDefault(); openSearchSelection(); }
+});
 mobileSearchGo?.addEventListener('click', closeNavDrawer);
 
 document.addEventListener('keydown', (e) => {
@@ -1120,7 +1195,45 @@ const logoAlt = (item, suffix) => {
 };
 
 initVirtual({ sectionEls, content, layoutMq, search, ensureSectionCards, onScrollTopUpdate: updateScrollTopButton });
-initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton, getDisplayName: displayName });
+initSearch({ sectionEls, searchCount, ensureSectionCards, getTotalCards: () => totalCards, updateScrollTopButton, getDisplayName: displayName, matchesFormat, onEmptyState: handleEmptySearch });
+// Format filter (SVG / PNG). Re-applies the current search or category/ecosystem
+// view whenever the selected format changes. Slots exist only on the logos page.
+function reapplyView() {
+  syncViewToUrl();
+  const q = search.value.toLowerCase().trim();
+  if (q) { filterCards(q, { animate: true }); return; }
+  if (currentView.kind === 'ecosystem') setActiveEcosystem(currentView.value, { animate: true });
+  else setActive(currentView.kind === 'section' ? currentView.value : 'all', { animate: true });
+}
+// Keeps the current category/ecosystem/format view shareable via ?s=<slug>,
+// ?eco=<key> and ?format=svg|png (replaceState, so navigating the catalog
+// doesn't spam back-button history). Called from setActive/setActiveEcosystem
+// on every view change, and from reapplyView so a format change while a
+// search is active still syncs (reapplyView returns before touching
+// currentView in that case, so it's the only path that reaches the format
+// half of this for a searching user).
+function syncViewToUrl() {
+  const url = new URL(location.href);
+
+  if (formatState.format === 'all') url.searchParams.delete('format');
+  else url.searchParams.set('format', formatState.format);
+
+  url.searchParams.delete('s');
+  url.searchParams.delete('eco');
+  if (currentView.kind === 'section') {
+    const found = sectionEls.find(s => s.group.section === currentView.value);
+    if (found) url.searchParams.set('s', found.group.slug);
+  } else if (currentView.kind === 'ecosystem') {
+    url.searchParams.set('eco', currentView.value);
+  }
+
+  history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+}
+initFilters({
+  slots: [document.getElementById('format-filter-sidebar')],
+  onChange: reapplyView,
+  labels: { all: _isEnUrl ? 'All' : 'Все' },
+});
 initSidebarIndicator();
 const _ecoLabels = _isEnUrl ? { ...ecosystemLabels, ...ecosystemLabelsEn } : ecosystemLabels;
 const _pathSection = window.__ASSET_SECTION__ ?? (location.pathname.split('/').filter(Boolean).find(s => s !== 'en') ?? 'logos');
@@ -1131,12 +1244,15 @@ setAssetBase(_assetBase);
 if (_pathSection === 'logos') setPreviewBase(_assetBase + '/previews');
 document.body.dataset.section = _pathSection;
 
+// Empty search state — see handleEmptySearch for the detail-panel/reset-format sync.
+document.getElementById('empty-reset-format')?.addEventListener('click', () => setFormat('all'));
+
 loadLogos(_manifestBase).then(logos => {
   let readyTotal = 0;
   for (const group of logos) {
     const readyCount = group.items.filter(item => !item.comingSoon).length;
     readyTotal += readyCount;
-    totalCards += group.items.length;
+    totalCards += readyCount;
     group.items.forEach(item => allItems.push(item));
 
     const nav = document.createElement('div');
@@ -1265,16 +1381,24 @@ loadLogos(_manifestBase).then(logos => {
     ? requestIdleCallback(() => sectionEls.forEach(s => ensureSectionCards(s)), { timeout: 2000 })
     : setTimeout(() => sectionEls.forEach(s => ensureSectionCards(s)), 300);
 
+  // Read every URL-driven filter param up front, before calling setFormat/
+  // setActive/setActiveEcosystem — those now sync the URL as a side effect
+  // (syncViewToUrl), which would strip a param this code hasn't read yet if
+  // we re-read location.search after an earlier one has already run.
+  const _initParams = new URLSearchParams(location.search);
+  const formatParam = _initParams.get('format');
+  const sParam = _initParams.get('s') || window.__CAT_SLUG__;
+  const ecoParam = _initParams.get('eco') || window.__ECO_SLUG__;
+
+  // Pre-select format filter: via ?format=svg|png (shareable link)
+  if (formatParam === 'svg' || formatParam === 'png') setFormat(formatParam);
+
   // Pre-filter by category: via ?s=<slug> (breadcrumbs) or window.__CAT_SLUG__ (category pages)
-  const sParam = new URLSearchParams(location.search).get('s') || window.__CAT_SLUG__;
   if (sParam) {
     const found = sectionEls.find(s => s.group.slug === sParam);
     if (found) setActive(found.group.section);
-  }
-
-  // Pre-filter by ecosystem: via ?eco=<key> or window.__ECO_SLUG__ (ecosystem pages)
-  const ecoParam = new URLSearchParams(location.search).get('eco') || window.__ECO_SLUG__;
-  if (ecoParam && !sParam) {
+  } else if (ecoParam) {
+    // Pre-filter by ecosystem: via ?eco=<key> or window.__ECO_SLUG__ (ecosystem pages)
     setActiveEcosystem(ecoParam);
   }
 

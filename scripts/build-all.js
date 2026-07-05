@@ -53,6 +53,7 @@ const FAST_STEPS = [
   { file: 'build-home-sitemap.js',         label: 'Блок «Карта сайта» на главной' },
   { file: 'build-en-pages.js',             label: 'EN-зеркало (/en/) — обязательно после всех HTML-билдеров выше' },
   { file: 'build-sitemap.js',              label: 'sitemap.xml + sitemap-*.xml — ВСЕГДА последним' },
+  { file: 'build-version.js',              label: 'js/version.js (ASSET_VERSION) — cache-buster, самый последний шаг' },
 ];
 
 const OPTIONAL_STEPS = [

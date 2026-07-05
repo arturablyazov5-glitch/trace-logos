@@ -101,6 +101,7 @@ let currentSrc  = PAGE.defaultSrc;
 let currentWide = PAGE.defaultWide;
 let currentType = PAGE.defaultType;
 let copyTimer   = null;
+let icoSizeReqId = 0; // guards loadIcoSizePreview against a stale variant's slow estimate
 
 const macosTabsEl       = document.getElementById('macos-style-tabs');
 const macosTabsMobileEl = document.getElementById('macos-style-tabs-mobile');
@@ -435,6 +436,21 @@ function currentFile() {
 // the dropdown to a single "Скачать всё (ZIP)" button (the catalog does the same
 // in main.js). Re-evaluated per variant — the gate is the SELECTED variant's
 // shape (currentWide), not the primary file.
+// Building the ICO is a real render (4 canvas frames) just to show a byte count
+// in a menu item most visitors never open — stash the file and compute lazily
+// on first menu open instead (see the dlTrigger click handler below). reqId
+// guards against a slow estimate for a since-abandoned variant overwriting a
+// fresher one's label.
+function loadIcoSizePreview() {
+  const icoSizeEl = btnIco?.querySelector('.btn-menu-size');
+  const file = icoSizeEl?.dataset.file;
+  if (!icoSizeEl || !file || icoSizeEl.textContent) return; // no square variant, or already computed
+  const reqId = ++icoSizeReqId;
+  estimateIcoSize(file).then(sz => {
+    if (sz && reqId === icoSizeReqId) icoSizeEl.textContent = formatFileSize(sz);
+  });
+}
+
 function syncDownloadMode() {
   if (!dlGroup) return;
   const lbl = dlTrigger.querySelector('span');
@@ -448,7 +464,8 @@ function syncDownloadMode() {
     const icoSizeEl = btnIco?.querySelector('.btn-menu-size');
     if (icoSizeEl) {
       icoSizeEl.textContent = '';
-      estimateIcoSize(currentFile()).then(sz => { if (sz) icoSizeEl.textContent = formatFileSize(sz); });
+      icoSizeEl.dataset.file = currentFile();
+      if (dlMenu.classList.contains('open')) loadIcoSizePreview();
     }
   }
   if (btnLg) btnLg.classList.toggle('hidden', currentType === 'png');
@@ -464,6 +481,7 @@ if (dlGroup && ITEM) {
     // The menu pops upward and would otherwise be clipped by btn-row's
     // overflow:hidden (left from the variant-switch height animation) — lift it.
     if (btnRow) btnRow.style.overflow = willOpen ? 'visible' : '';
+    if (willOpen) loadIcoSizePreview();
   });
   btnIco?.addEventListener('click', () => { closeDlMenu(); downloadAsIco(ITEM, currentFile()); });
   btnIcns?.addEventListener('click', () => { closeDlMenu(); openIcnsModal(ITEM, currentFile()); });
