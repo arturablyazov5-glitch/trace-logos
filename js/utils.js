@@ -1,3 +1,5 @@
+import { ASSET_VERSION } from './version.js';
+
 export function animateContainerHeight(el, changeFn, waitForImg) {
   const wasHidden = getComputedStyle(el).display === 'none';
   const oldH = wasHidden ? 0 : el.offsetHeight;
@@ -112,7 +114,7 @@ export function switchLayout(str) {
   return str.split('').map(c => map[c.toLowerCase()] ?? c).join('');
 }
 
-export const SVG_URL_V = Date.now();
+export const SVG_URL_V = ASSET_VERSION;
 
 let _assetBase = '../assets/logos';
 export function setAssetBase(base) { _assetBase = base; }

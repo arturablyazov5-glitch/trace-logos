@@ -123,7 +123,7 @@ fetch('/emoji.json')
 
 ```bash
 # Клонировать репозиторий
-git clone https://github.com/rafael-mansurov/trace-logos.git
+git clone https://github.com/sixxset5-star/trace-logos.git
 cd trace-logos
 
 # Установить зависимости
