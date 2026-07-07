@@ -172,6 +172,13 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 - `--dry-run` to preview stats without writing
 - Logic: `svgUrl` = primary file if SVG; `pngUrl` = primary if PNG or first `type:"png"` variant; `formats` = `["svg","png"]` for SVG items, `["png"]` for PNG-only
 
+## `node scripts/build-cdn.js` + `node scripts/deploy-cdn.js`
+- **Input:** `logos/manifest.json` → `logos/categories/*.json` + the actual asset files under `assets/logos/svgs/` and `assets/logos/pngs/`
+- **Output (local):** `cdn-dist/` — a flat mirror named by slug: `<slug>.<ext>` for the primary file, `<slug>-<variant>.<ext>` for each entry in `variants[]`. `comingSoon` items are skipped (their `file` is a shared placeholder, not a real asset). Slug collisions (same last figma segment reused across categories, e.g. `Icon/Bank/Alfa` vs `Icon/Insurance/Alfa`) are disambiguated by prefixing the category slug. `cdn-dist/` is gitignored — it is NOT committed to this repo.
+- **Output (remote):** `deploy-cdn.js` re-inits `cdn-dist/` as its own git repo and force-pushes it to **`sixxset5-star/trace-logos-cdn`** (separate repo, same pattern as the `upptime` status-page repo) — GitHub Pages there serves it at **`cdn.trace-logos.ru`**, giving every logo a short embeddable/shareable URL like `cdn.trace-logos.ru/vk.svg`.
+- **When to run:** `build-cdn.js` runs automatically as part of the `npm run build` fast tier (so `cdn-dist/` always reflects the current manifest). `deploy-cdn.js` does **not** run automatically — run `npm run deploy:cdn` explicitly after a build when you want the short links live (adding/renaming a logo, changing variants). This mirrors the "opt-in slow tier" philosophy: cheap/local steps are automatic, anything that pushes to another repo is explicit.
+- `node scripts/build-cdn.js --dry-run` to preview the file list without writing
+
 ## `node scripts/build-collections.js`
 - **Input:** `collections.json` + `logos.json` + `templates/collection-page.html`
 - **Output:** `collections/<slug>/index.html` — cross-category landing pages (CollectionPage + ItemList + FAQPage JSON-LD)
@@ -215,6 +222,8 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 **Production host is GitHub Pages** (as of 2026-07-05), not Vercel. Repo lives on the `sixxset5-star` GitHub account (migrated off `rafael-mansurov` after an Actions abuse flag banned that account's Actions/Pages builds). `.github/workflows/deploy.yml` (`workflow_dispatch` + push-to-`main` trigger) builds and deploys on every push to `main`; `trace-logos.ru` DNS points at GitHub Pages IPs. The user explicitly decided to drop Vercel — don't assume `vercel.json` / `.vercel/project.json` reflect current routing. Verify with `curl -sI https://trace-logos.ru` (look for the GitHub Pages `server` header) or `gh run list --workflow=deploy.yml` if in doubt.
 
 **Cache-Control is now GitHub Pages' default** (`max-age=600`) — GitHub Pages doesn't support custom response headers, so `vercel.json`'s `headers` block (30-day immutable caching for `/assets/logos/*`, `/assets/emoji/*`, etc., cache-busted via `ASSET_VERSION`/`build-version.js`) no longer applies in production. `build-version.js` still runs (harmless, and needed if Vercel/a CDN with custom headers is reintroduced later) but isn't doing cache-control work on the current host.
+
+**`cdn.trace-logos.ru`** (added 2026-07-07) is a separate GitHub Pages site backed by the `sixxset5-star/trace-logos-cdn` repo (same pattern as `status.trace-logos.ru`/`upptime`) — it serves short, flat, embeddable logo URLs like `cdn.trace-logos.ru/vk.svg` for sharing/hotlinking. It is NOT built by this repo's `deploy.yml`; content is pushed by `scripts/deploy-cdn.js` (see that script's entry above under Build Scripts). DNS for `cdn.trace-logos.ru` is 4 A-records at the GitHub Pages IPs, set at reg.ru.
 
 ---
 

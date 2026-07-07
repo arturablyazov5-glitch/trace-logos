@@ -41,6 +41,7 @@ const PLUGIN_ASSETS = argv.includes('--plugin-assets') || argv.includes('--full'
 const FAST_STEPS = [
   { file: 'build-seo-pages.js',            label: 'SEO-страницы логотипов (logos/<cat>/<slug>/)' },
   { file: 'build-api-json.js',             label: 'Публичный API (logos.json, logos/<cat>.json)' },
+  { file: 'build-cdn.js',                  label: 'CDN-зеркало по коротким слагам (cdn-dist/)' },
   { file: 'build-collections.js',          label: 'Подборки (collections/<slug>/)' },
   { file: 'build-category-pages.js',       label: 'Страницы категорий + detail-панель в logos/index.html' },
   { file: 'build-ecosystem-pages.js',      label: 'Страницы экосистем (logos/ecosystem/<key>/)' },
