@@ -34,17 +34,26 @@ const escAttr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 
 // ── chrome: lang / paths / canonical ──────────────────────────────────────────
 
+// Any href/src NOT starting with a URL scheme (http:, mailto:, javascript: …),
+// "//" (protocol-relative), "/" (already absolute) or "#" (in-page anchor) is
+// relative — including bare paths with no leading "./" like the hand-written
+// homepage's href="css/home.css" or href="logos/". Values containing "${" are
+// JS template-literal placeholders from inline <script> source (e.g. the Figma
+// plugin's `cardHtml` building `src="${escAttr(...)}"` as a JS string, not a
+// real HTML attribute) — leave those untouched.
+const isRelativePath = (rel) => rel !== '' && !rel.includes('${') && !/^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|#)/i.test(rel);
+
 function makePathsAbsolute(html, sourceRelPath) {
   const baseUrl = `${BASE_ORIGIN}/${sourceRelPath}`;
   const resolve = (rel) => {
-    if (!rel.startsWith('../') && !rel.startsWith('./')) return null;
-    try { return new URL(rel, baseUrl).pathname; } catch { return null; }
+    if (!isRelativePath(rel)) return null;
+    try { const u = new URL(rel, baseUrl); return u.pathname + u.search + u.hash; } catch { return null; }
   };
   html = html.replace(
-    /(<(?:link|script|img|source)[^>]*?\s(?:href|src))="((?:\.\.\/|\.\/)[^"?#]*)([?#][^"]*)?"([^>]*>)/gi,
-    (m, pre, rel, qs = '', post) => {
+    /(<(?:a|link|script|img|source)\b[^>]*?\s(?:href|src))="([^"]*)"/gi,
+    (m, pre, rel) => {
       const abs = resolve(rel);
-      return abs ? `${pre}="${abs}${qs}"${post}` : m;
+      return abs ? `${pre}="${abs}"` : m;
     }
   );
   html = html.replace(
