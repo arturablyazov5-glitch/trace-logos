@@ -401,6 +401,10 @@ footer .dot { margin: 0 8px; opacity: .5; }
       </span>
     </a>
     <div class="spacer"></div>
+    <button class="icon-btn" id="btn-export-csv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      Экспорт CSV
+    </button>
     <button class="icon-btn danger" id="btn-reset">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
       Сбросить
@@ -530,6 +534,38 @@ async function refresh() {
   } catch (e) {
     $('tbody').innerHTML = `<tr><td colspan="5"><div class="empty">Ошибка: ${esc(e.message)}</div></td></tr>`;
   }
+}
+
+$('btn-export-csv').addEventListener('click', exportCsv);
+
+function exportCsv() {
+  const rows = [['Логотип', 'Figma', 'Вариант', 'Формат', 'Количество']];
+  for (const d of data) {
+    rows.push([d.name, d.figma, '—', 'Просмотры', d.views]);
+    for (const [fmt, variants] of Object.entries(d.exportDetail || {})) {
+      if (typeof variants !== 'object') continue;
+      for (const [variant, count] of Object.entries(variants)) {
+        const isOrig = variant === '_original' || variant === '';
+        rows.push([d.name, d.figma, isOrig ? 'Основной' : variant, FMT_LABELS[fmt] || fmt, count]);
+      }
+    }
+  }
+  const csv = rows.map(r => r.map(csvCell).join(';')).join('\r\n');
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `trace-logos-stats-${stamp}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function csvCell(v) {
+  const s = String(v ?? '');
+  return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
 }
 
 $('btn-reset').addEventListener('click', async () => {
