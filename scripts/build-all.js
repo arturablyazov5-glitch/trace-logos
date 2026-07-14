@@ -51,6 +51,7 @@ const FAST_STEPS = [
   { file: 'build-emoji-json.js',           label: 'emoji.json' },
   { file: 'build-blog.js',                 label: 'Страницы блога' },
   { file: 'build-blog-rss.js',             label: 'blog/rss.xml' },
+  { file: 'build-home-popular.js',         label: 'Блок «Популярные логотипы» на главной (по статистике)' },
   { file: 'build-home-sitemap.js',         label: 'Блок «Карта сайта» на главной' },
   { file: 'build-en-pages.js',             label: 'EN-зеркало (/en/) — обязательно после всех HTML-билдеров выше' },
   { file: 'build-sitemap.js',              label: 'sitemap.xml + sitemap-*.xml — ВСЕГДА последним' },

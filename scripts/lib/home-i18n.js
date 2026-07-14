@@ -185,37 +185,41 @@ const PAIRS = [
    `Trace Logo's Beta · Images may be protected by their owners' copyright.`],
   [`>Карта сайта</a>`, `>Sitemap</a>`],
   [`>Открытый исходный код</a>`, `>Open source</a>`],
-
-  // ── Popular-logo card names (Cyrillic brands) ───────────────────────────
-  [`>2ГИС</span>`, `>2GIS</span>`],
-  [`>ПроДокторов</span>`, `>ProDoctorov</span>`],
-  [`>ВКонтакте</span>`, `>VKontakte</span>`],
-  [`>Т-Банк</span>`, `>T-Bank</span>`],
-  [`>Альфа Банк</span>`, `>Alfa-Bank</span>`],
-  [`>Авито</span>`, `>Avito</span>`],
-  [`>ВТБ</span>`, `>VTB</span>`],
-  [`>Сбер</span>`, `>Sber</span>`],
-  [`>МТС Банк</span>`, `>MTS Bank</span>`],
-  [`>Госуслуги</span>`, `>Gosuslugi</span>`],
-  [`>Яндекс</span>`, `>Yandex</span>`],
 ];
 
-// alt="Логотип X" → alt="X logo" (covers every popular-logo card image)
-const ALT_NAMES = {
-  '2ГИС': '2GIS', 'ПроДокторов': 'ProDoctorov', 'Яндекс': 'Yandex', 'ВКонтакте': 'VKontakte',
-  'Т-Банк': 'T-Bank', 'Альфа Банк': 'Alfa-Bank', 'Авито': 'Avito', 'ВТБ': 'VTB', 'Сбер': 'Sber',
-  'МТС Банк': 'MTS Bank', 'Госуслуги': 'Gosuslugi',
-};
+// Popular-logo card names are DATA-DRIVEN: build-home-popular.js writes the
+// picked list (name + name_en) to logos/_popular.json, and we derive the RU→EN
+// name pairs + alt map from it here. Keeps brand names single-sourced from the
+// category JSON instead of a hardcoded list that drifts as the block changes.
+// Read best-effort — if the file is missing (e.g. first build), popular cards
+// simply stay in Russian on /en/ until the next build regenerates it.
+function loadPopularNames() {
+  try {
+    const list = require('../../logos/_popular.json');
+    const pairs = [];
+    const alt = {};
+    for (const { name, name_en } of list) {
+      if (name_en && name_en !== name) {
+        pairs.push([`>${name}</span>`, `>${name_en}</span>`]);
+        alt[name] = name_en;
+      }
+    }
+    return { pairs, alt };
+  } catch {
+    return { pairs: [], alt: {} };
+  }
+}
 
 function translateHome(html) {
-  for (const [ru, en] of PAIRS) {
+  const popular = loadPopularNames();
+  for (const [ru, en] of [...PAIRS, ...popular.pairs]) {
     // Source text uses typographic non-breaking spaces (U+00A0) in places, so a
     // plain substring match misses them. Match each space against ' ' OR NBSP.
     const pattern = ru.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]');
     html = html.replace(new RegExp(pattern, 'g'), () => en);
   }
-  // alt="Логотип <name>" → "<name-en> logo"
-  html = html.replace(/alt="Логотип ([^"]+)"/g, (m, name) => `alt="${ALT_NAMES[name] || name} logo"`);
+  // alt="Логотип <name>" → "<name-en> logo" (Latin brands fall back to name).
+  html = html.replace(/alt="Логотип ([^"]+)"/g, (m, name) => `alt="${popular.alt[name] || name} logo"`);
   return html;
 }
 
