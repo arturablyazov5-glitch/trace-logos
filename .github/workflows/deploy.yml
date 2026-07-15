@@ -34,3 +34,11 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Ping IndexNow (Bing + Yandex fast recrawl)
+        run: node scripts/indexnow-ping.js

@@ -39,13 +39,16 @@ const PLUGIN_ASSETS = argv.includes('--plugin-assets') || argv.includes('--full'
 //   all HTML builders → en-pages (mirrors whatever HTML exists at the time it runs)
 //   everything → sitemap.js (sole owner of sitemap.xml, must run last)
 const FAST_STEPS = [
-  { file: 'build-seo-pages.js',            label: 'SEO-страницы логотипов (logos/<cat>/<slug>/)' },
+  { file: 'test-data.js', args: ['--pre'],  label: 'Тесты данных: манифесты, ассеты, экосистемы — до сборки' },
+  { file: 'build-seo-pages.js',           label: 'SEO-страницы логотипов (logos/<cat>/<slug>/)' },
+  { file: 'cleanup-orphaned-pages.js',     label: 'Удаление осиротевших страниц' },
   { file: 'build-api-json.js',             label: 'Публичный API (logos.json, logos/<cat>.json)' },
   { file: 'build-cdn.js',                  label: 'CDN-зеркало по коротким слагам (cdn-dist/)' },
   { file: 'build-collections.js',          label: 'Подборки (collections/<slug>/)' },
   { file: 'build-category-pages.js',       label: 'Страницы категорий + detail-панель в logos/index.html' },
   { file: 'build-ecosystem-pages.js',      label: 'Страницы экосистем (logos/ecosystem/<key>/)' },
   { file: 'build-webp-previews.js',        label: 'WebP-превью для PNG-логотипов (инкрементально)' },
+  { file: 'test-data.js', args: ['--post'], label: 'Тесты артефактов: WebP-превью, OG-картинки' },
   { file: 'build-emoji-seo-pages.js',      label: 'SEO-страницы эмодзи (emoji/<cat>/<slug>/)' },
   { file: 'build-emoji-category-pages.js', label: 'Страницы категорий эмодзи' },
   { file: 'build-emoji-json.js',           label: 'emoji.json' },
@@ -54,6 +57,7 @@ const FAST_STEPS = [
   { file: 'build-home-popular.js',         label: 'Блок «Популярные логотипы» на главной (по статистике)' },
   { file: 'build-home-sitemap.js',         label: 'Блок «Карта сайта» на главной' },
   { file: 'build-en-pages.js',             label: 'EN-зеркало (/en/) — обязательно после всех HTML-билдеров выше' },
+  { file: 'test-links.js',                 label: 'Тесты ссылок: битые навигационные href в готовом HTML — после всех страниц' },
   { file: 'build-sitemap.js',              label: 'sitemap.xml + sitemap-*.xml — ВСЕГДА последним' },
   { file: 'build-version.js',              label: 'js/version.js (ASSET_VERSION) — cache-buster, самый последний шаг' },
 ];
@@ -64,9 +68,9 @@ const OPTIONAL_STEPS = [
   { file: 'build-plugin-assets.js', label: 'Ассеты Figma-плагина (иконка, thumbnail)',   enabled: PLUGIN_ASSETS },
 ];
 
-function runStep({ file, label }) {
+function runStep({ file, label, args: stepArgs = [] }) {
   const scriptPath = path.join(__dirname, file);
-  const args = DRY_RUN ? ['--dry-run'] : [];
+  const args = [...stepArgs, ...(DRY_RUN ? ['--dry-run'] : [])];
   process.stdout.write(`\n\x1b[36m▶ ${file}\x1b[0m — ${label}\n`);
   const start = process.hrtime.bigint();
   execFileSync('node', [scriptPath, ...args], { cwd: ROOT, stdio: 'inherit' });

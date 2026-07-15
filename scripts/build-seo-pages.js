@@ -17,42 +17,15 @@
 
 const fs             = require('fs');
 const path           = require('path');
-const { execSync }   = require('child_process');
 const { loadTemplate } = require('./lib/render');
-const { loadDict, enChrome, bakeI18n } = require('./lib/en-transform');
+const { loadDict, enChrome, bakeI18n, hreflangBlock } = require('./lib/en-transform');
+const { itemDate }  = require('./lib/item-date');
 
 const BASE_URL   = 'https://trace-logos.ru';
 const ROOT       = path.resolve(__dirname, '..');
 const TEMPLATE   = loadTemplate(path.join(ROOT, 'templates', 'seo-page.html'));
 const DRY_RUN    = process.argv.includes('--dry-run');
 const DICT       = loadDict();
-const BUILD_DATE = new Date().toISOString().split('T')[0];
-
-function buildFileModMap() {
-  try {
-    const out = execSync(
-      'git log --pretty=format:"%ad" --date=short --name-only -- assets/logos/svgs/ assets/logos/pngs/',
-      { cwd: ROOT, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }
-    );
-    const map = {};
-    let date = '';
-    for (const line of out.split('\n')) {
-      const t = line.trim();
-      if (/^\d{4}-\d{2}-\d{2}$/.test(t)) { date = t; }
-      else if (t && date && !map[t]) { map[t] = date; }
-    }
-    return map;
-  } catch { return {}; }
-}
-
-const FILE_MOD_MAP = buildFileModMap();
-
-function itemDate(item) {
-  if (item.dateModified) return item.dateModified;
-  const ext = assetExt(item.file);
-  const dir = ext === 'png' ? 'pngs' : 'svgs';
-  return FILE_MOD_MAP[`assets/logos/${dir}/${item.file}`] || BUILD_DATE;
-}
 
 const RU_MONTHS = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 const EN_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -166,6 +139,19 @@ const ECO_DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'ecosystems
 
 function ecosystemName(id, lang = 'ru') {
   return (ECO_DATA[id] && ECO_DATA[id][lang]) || (ECO_DATA[id] && ECO_DATA[id].ru) || id;
+}
+
+// Some ecosystems read better with a custom phrase instead of the generic
+// "Экосистема {name}" template (e.g. a design studio isn't itself a "logo
+// ecosystem" the way Yandex or Sber are) — opt in via ecosystems.json.
+function ecosystemSectionLabel(id, lang = 'ru') {
+  const override = ECO_DATA[id] && ECO_DATA[id].sectionLabel;
+  return (override && (override[lang] || override.ru)) || null;
+}
+
+// item.ecosystem may be a single key (string) or several (array) — normalize once.
+function ecosystemIds(item) {
+  return Array.isArray(item.ecosystem) ? item.ecosystem : item.ecosystem ? [item.ecosystem] : [];
 }
 
 // ── Sponsor banners (optional, per-logo; source of truth: logos/sponsors.json) ──
@@ -340,12 +326,20 @@ function buildDownloadButtons(item, rel) {
 }
 
 function buildEcosystemSection(item, ecosystemLookup, rel, lang = 'ru') {
-  if (!item.ecosystem) return '';
-  const members = (ecosystemLookup[item.ecosystem] || []);
+  const ecoIds = ecosystemIds(item);
+  if (!ecoIds.length) return '';
+  return ecoIds
+    .map(ecoId => buildOneEcosystemSection(item, ecoId, ecosystemLookup, rel, lang))
+    .filter(Boolean)
+    .join('\n');
+}
+
+function buildOneEcosystemSection(item, ecoId, ecosystemLookup, rel, lang = 'ru') {
+  const members = (ecosystemLookup[ecoId] || []);
   if (members.length <= 1) return '';
 
   const en      = lang === 'en';
-  const ecoName = ecosystemName(item.ecosystem, lang);
+  const ecoName = ecosystemName(ecoId, lang);
   const soonAria = en ? '(soon)' : '(скоро)';
   const curAria  = en ? '(current)' : '(текущий)';
   const cards = members.map(({ item: m }) => {
@@ -381,7 +375,11 @@ function buildEcosystemSection(item, ecosystemLookup, rel, lang = 'ru') {
       <hr class="divider">
 
       <div class="info-section-lg">
-        <span class="section-label" data-eco-id="${esc(item.ecosystem)}"><span data-i18n="detailEcosystem">Экосистема</span> <span class="eco-name">${esc(ecoName)}</span></span>
+        <span class="section-label" data-eco-id="${esc(ecoId)}">${
+          ecosystemSectionLabel(ecoId, lang)
+            ? esc(ecosystemSectionLabel(ecoId, lang))
+            : `<span data-i18n="detailEcosystem">Экосистема</span> <span class="eco-name">${esc(ecoName)}</span>`
+        }</span>
         <div class="ecosystem-grid">
           ${cards}
         </div>
@@ -452,7 +450,7 @@ function categoryIconBySlug(slug) {
 function buildRelatedSection(item, siblings, homeRel, lang = 'ru') {
   const en   = lang === 'en';
   const pool = (siblings || []).filter(m => m.figma !== item.figma);
-  if (pool.length < 2) return '';
+  if (pool.length < 1) return '';
 
   const label = (en ? DICT.en : DICT.ru).seoRelatedLabel;
   const cards = pool.map(m => {
@@ -479,12 +477,12 @@ function buildRelatedSection(item, siblings, homeRel, lang = 'ru') {
 // Full catalog entry: all 37 categories with live counts → /logos/<slug>/.
 // Static & crawlable; the prominent "whole catalog" the user can't find via the CTA.
 // Each card shows 3–4 logo thumbnails from that category instead of an icon.
-function buildCatalogGridSection(categories, homeRel, itemsByCat, lang = 'ru') {
+function buildCatalogGridSection(categories, homeRel, itemsByCat, lang = 'ru', catSlug = null) {
   if (!categories || !categories.length) return '';
   const en    = lang === 'en';
   const label = (en ? DICT.en : DICT.ru).seoCategoriesLabel;
 
-  const cards = categories.map(c => {
+  const cards = categories.filter(c => c.slug !== catSlug).map(c => {
     const nm = esc(en ? (c.section_en || c.section) : c.section);
     const all = itemsByCat[c.slug] || [];
     const previews = all.slice(0, 4);
@@ -522,14 +520,24 @@ function buildCatalogGridSection(categories, homeRel, itemsByCat, lang = 'ru') {
 function isSquareLogo(item) {
   return !/-full(\.[^.]+)?$/.test(item.file);
 }
+// "SVG, PNG, ICO и ICNS" — comma-join all but the last item, conjunction before it.
+function joinWithConjunction(list, conj) {
+  if (list.length <= 1) return list.join('');
+  return `${list.slice(0, -1).join(', ')} ${conj} ${list[list.length - 1]}`;
+}
+
 function logoFormats(item) {
   const primaryExt = assetExt(item.file);
   const hasSvg = primaryExt !== 'png' || (item.variants || []).some(v => assetExt(v.file) === 'svg');
-  const hasPng = primaryExt === 'png'  || (item.variants || []).some(v => assetExt(v.file) === 'png');
+  // PNG is always downloadable: either a real PNG file exists, or (see
+  // buildDownloadButtons' pngBtn fallback + js/seo-page.js downloadPngFromSvg)
+  // the SVG is rasterized to PNG client-side on click. There is no case where
+  // the "Скачать PNG" button doesn't work.
+  const hasPng = true;
   const square = isSquareLogo(item);
   const list = [hasSvg && 'SVG', hasPng && 'PNG', square && 'ICO', square && 'ICNS'].filter(Boolean);
-  const fmtStr   = list.length > 2 ? list.join(', ') : list.join(' и ');
-  const fmtStrEn = list.length > 2 ? list.join(', ') : list.join(' and ');
+  const fmtStr   = joinWithConjunction(list, 'и');
+  const fmtStrEn = joinWithConjunction(list, 'and');
   return { hasSvg, hasPng, square, list, fmtStr, fmtStrEn };
 }
 
@@ -622,21 +630,87 @@ function buildColorsSection(colors, lang = 'ru') {
 
 // ── FAQ (visible markup + FAQPage JSON-LD share the same data) ─────────────────
 
-function buildFaqItems(item, colors) {
-  const { hasSvg, hasPng, square, fmtStr } = logoFormats(item);
+// Fifth FAQ question — generated from this item's own data instead of a fixed
+// template, so it varies per logo instead of only substituting the name.
+// Priority: ecosystem siblings > variant list > category siblings (always
+// available, guarantees every item gets a non-templated question).
+function buildDataFaqItem(item, ecosystemLookup, siblings, section, section_en) {
+  const nm = item.name;
+  const ne = item.name_en || item.name;
 
-  const bits = [];
-  if (hasSvg) bits.push('векторный SVG масштабируется без потери качества и подходит для печати и Figma');
-  if (hasPng) bits.push('растровый PNG удобен для презентаций и документов');
-  if (square) bits.push('а ICO и ICNS — готовые иконки для приложений Windows и macOS');
-  const fmtTail = bits.join(', ').replace(/^./, c => c.toUpperCase());
+  // An item can belong to more than one ecosystem — use the first one that
+  // actually has other members to talk about.
+  for (const ecoId of ecosystemIds(item)) {
+    // Rotate so each item shows the 5 members *after itself* in the ecosystem
+    // list (wrapping around), not always the same first 5 — otherwise, on a
+    // large ecosystem (e.g. Apple, ~90 members) nearly every page ends up
+    // with the exact same sentence, which is worse than the templating this
+    // question was meant to break up.
+    const raw = ecosystemLookup[ecoId] || [];
+    const idx = raw.findIndex(({ item: m }) => m.figma === item.figma);
+    const rotated = idx >= 0 ? [...raw.slice(idx + 1), ...raw.slice(0, idx)] : raw;
+    const allMembers = rotated
+      .map(({ item: m }) => m)
+      .filter(m => m.figma !== item.figma && !m.comingSoon);
+    if (allMembers.length) {
+      const members = allMembers.slice(0, 5);
+      const rest    = allMembers.length - members.length;
+      const ecoName   = ecosystemName(ecoId, 'ru');
+      const ecoNameEn = ecosystemName(ecoId, 'en');
+      const names   = members.map(m => m.name).join(', ') + (rest > 0 ? ` и ещё ${rest}` : '');
+      const namesEn = members.map(m => m.name_en || m.name).join(', ') + (rest > 0 ? ` and ${rest} more` : '');
+      return {
+        q:  `Какие ещё логотипы есть в экосистеме ${ecoName}?`,
+        a:  `В экосистему ${ecoName} на Trace Logo's также входят: ${names}.`,
+        qe: `What other logos are part of the ${ecoNameEn} ecosystem?`,
+        ae: `The ${ecoNameEn} ecosystem on Trace Logo's also includes: ${namesEn}.`,
+      };
+    }
+  }
 
-  const fmtStrEn = fmtStr.replace('и', 'and');
-  const bitsEn = [];
-  if (hasSvg) bitsEn.push('SVG vector scales without quality loss and works in Figma and print');
-  if (hasPng) bitsEn.push('PNG raster is convenient for presentations and documents');
-  if (square) bitsEn.push('ICO and ICNS are ready-made icons for Windows and macOS apps');
-  const fmtTailEn = bitsEn.join(', ').replace(/^./, c => c.toUpperCase());
+  const variants = item.variants || [];
+  if (variants.length) {
+    const labels   = variants.map(v => variantLabel(v, 'ru'));
+    const labelsEn = variants.map(v => variantLabel(v, 'en'));
+    return {
+      q:  `Сколько вариантов оформления есть у логотипа ${nm}?`,
+      a:  `Помимо основного варианта, у логотипа ${nm} есть ${variants.length} дополнительны${variants.length === 1 ? 'й' : 'х'}: ${labels.join(', ')}.`,
+      qe: `How many design variants does the ${ne} logo have?`,
+      ae: `Besides the primary version, the ${ne} logo has ${variants.length} additional variant${variants.length === 1 ? '' : 's'}: ${labelsEn.join(', ')}.`,
+    };
+  }
+
+  const others = siblings.filter(s => s.figma !== item.figma && !s.comingSoon).slice(0, 5);
+  if (others.length) {
+    const secName   = section;
+    const secNameEn = section_en || section;
+    const names   = others.map(s => s.name).join(', ');
+    const namesEn = others.map(s => s.name_en || s.name).join(', ');
+    return {
+      q:  `Какие ещё логотипы есть в категории «${secName}»?`,
+      a:  `В категории «${secName}» на Trace Logo's также есть: ${names}.`,
+      qe: `What other logos are in the "${secNameEn}" category?`,
+      ae: `The "${secNameEn}" category on Trace Logo's also includes: ${namesEn}.`,
+    };
+  }
+
+  return null;
+}
+
+// "color" isn't a key in item.macos_styles (only the alt styles are listed
+// there — see buildMacosStyleTabsHtml) but it's always the first, always-on
+// tab, so it must be counted alongside dark/light or the total is off by one.
+const MACOS_STYLE_LABELS    = { color: 'цветной', dark: 'тёмный', light: 'светлый', tinted: 'акцентный' };
+const MACOS_STYLE_LABELS_EN = { color: 'color', dark: 'dark', light: 'light', tinted: 'tinted' };
+
+// item.macos_styles lives either on the item itself or on whichever variant
+// carries it (iOS-version variants each have their own set) — see main.js:554-558.
+function macosStylesOf(item) {
+  return item.macos_styles || (item.variants || []).find(v => v.macos_styles)?.macos_styles || null;
+}
+
+function buildFaqItems(item, colors, ecosystemLookup, siblings, section, section_en) {
+  const { fmtStr, fmtStrEn, square } = logoFormats(item);
 
   const nm = item.name;                       // RU name
   const ne = item.name_en || item.name;       // EN name (falls back to RU)
@@ -644,15 +718,20 @@ function buildFaqItems(item, colors) {
   const faq = [];
   faq.push({
     q:  `В каком формате можно скачать логотип ${nm}?`,
-    a:  `Логотип ${nm} доступен в ${fmtStr}. ${fmtTail}.`,
+    a:  `Логотип ${nm} доступен в ${fmtStr}.`,
     qe: `What formats is the ${ne} logo available in?`,
-    ae: `The ${ne} logo is available in ${fmtStrEn}. ${fmtTailEn}.`,
+    ae: `The ${ne} logo is available in ${fmtStrEn}.`,
   });
+  // ICO is the format people most often search for by name ("скачать X ico") —
+  // surface a direct download action inside the FAQ answer itself (see
+  // buildFaqSection) instead of only the collapsed dropdown, without touching
+  // the primary action row that SVG-seeking visitors (the majority) scan first.
   if (square) faq.push({
-    q:  `Можно ли скачать логотип ${nm} в формате ICO или ICNS?`,
-    a:  `Да. Кроме SVG и PNG, логотип ${nm} можно скачать как иконку в форматах ICO (для Windows и ярлыков) и ICNS (для приложений и Dock в macOS) — нажмите «Скачать другие форматы» и выберите нужный.`,
-    qe: `Can I download the ${ne} logo in ICO or ICNS format?`,
-    ae: `Yes. In addition to SVG and PNG, the ${ne} logo is available as an icon in ICO (for Windows and shortcuts) and ICNS (for macOS apps and Dock) — click "Download other formats" and choose the one you need.`,
+    q:  `Как скачать логотип ${nm} в формате ICO?`,
+    a:  `Иконку ${nm} можно скачать в формате ICO (.ico) для использования в Windows-приложениях и на рабочем столе.`,
+    qe: `How do I download the ${ne} logo as an ICO file?`,
+    ae: `The ${ne} icon can be downloaded as an ICO (.ico) file for use in Windows apps and on the desktop.`,
+    action: { label: 'Скачать ICO', labelEn: 'Download ICO', id: 'btn-faq-download-ico' },
   });
   faq.push({
     q:  `Логотип ${nm} можно скачать бесплатно?`,
@@ -660,18 +739,26 @@ function buildFaqItems(item, colors) {
     qe: `Is the ${ne} logo free to download?`,
     ae: `Yes. The ${ne} logo can be downloaded from Trace Logo's for free and without registration. The logo belongs to its rights holder — use it in accordance with the brand guidelines.`,
   });
-  if (hasSvg) faq.push({
-    q:  `Как изменить цвет логотипа ${nm}?`,
-    a:  `Откройте логотип ${nm} в каталоге Trace Logo's и воспользуйтесь встроенным редактором цвета: выберите элемент, задайте оттенок в HSV-пикере и экспортируйте готовый SVG.`,
-    qe: `How do I change the color of the ${ne} logo?`,
-    ae: `Open the ${ne} logo in the Trace Logo's catalog and use the built-in color editor: select an element, set the hue in the HSV picker, and export the finished SVG.`,
-  });
   if (colors.length) faq.push({
     q:  `Какие официальные цвета у логотипа ${nm}?`,
     a:  `Основные цвета логотипа ${nm}: ${colors.map(c => c.toUpperCase()).join(', ')}. Значения извлечены из исходного SVG-файла.`,
     qe: `What are the official colors of the ${ne} logo?`,
     ae: `The main colors of the ${ne} logo are: ${colors.map(c => c.toUpperCase()).join(', ')}. Values extracted from the original SVG file.`,
   });
+  const styles = macosStylesOf(item);
+  if (styles) {
+    const keys  = ['color', ...Object.keys(styles)];
+    const ru    = joinWithConjunction(keys.map(k => MACOS_STYLE_LABELS[k] || k), 'и');
+    const en    = joinWithConjunction(keys.map(k => MACOS_STYLE_LABELS_EN[k] || k), 'and');
+    faq.push({
+      q:  `В каких стилях доступна иконка ${nm} для macOS?`,
+      a:  `Иконка ${nm} доступна в ${keys.length} стилях оформления: ${ru} — переключаются вкладками над превью.`,
+      qe: `What macOS icon styles are available for ${ne}?`,
+      ae: `The ${ne} icon is available in ${keys.length} styles: ${en} — switchable via the tabs above the preview.`,
+    });
+  }
+  const dataFaq = buildDataFaqItem(item, ecosystemLookup, siblings, section, section_en);
+  if (dataFaq) faq.push(dataFaq);
   return faq;
 }
 
@@ -680,9 +767,13 @@ function buildFaqSection(faq, lang = 'ru') {
   const rows = faq.map(f => {
     const q = lang === 'en' ? (f.qe || f.q) : f.q;
     const a = lang === 'en' ? (f.ae || f.a) : f.a;
+    const actionBtn = f.action
+      ? `<button class="btn btn-secondary faq-action-btn" id="${f.action.id}" type="button">${DL_ICON}<span>${esc(lang === 'en' ? (f.action.labelEn || f.action.label) : f.action.label)}</span></button>`
+      : '';
     return `<details class="faq-item" data-q-en="${esc(f.qe || '')}" data-a-en="${esc(f.ae || '')}">
           <summary class="faq-q">${esc(q)}</summary>
           <p class="faq-a">${esc(a)}</p>
+          ${actionBtn}
         </details>`;
   }).join('\n        ');
 
@@ -781,9 +872,18 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
 
   const primaryExt  = assetExt(item.file);
   const primaryType = primaryExt === 'png' ? 'png' : 'svg';
-  const hasPng      = primaryType === 'png' || (item.variants || []).some(v => assetExt(v.file) === 'png');
-  const fmtStr      = [primaryType === 'svg' && 'SVG', hasPng && 'PNG'].filter(Boolean).join(' и ');
-  const fmtStrEn    = [primaryType === 'svg' && 'SVG', hasPng && 'PNG'].filter(Boolean).join(' and ');
+  // PNG is always downloadable (real file or client-side SVG rasterization,
+  // see logoFormats()'s hasPng comment) — don't gate it on a real PNG file existing.
+  const fmtStr      = [primaryType === 'svg' && 'SVG', 'PNG'].filter(Boolean).join(' и ');
+  const fmtStrEn    = [primaryType === 'svg' && 'SVG', 'PNG'].filter(Boolean).join(' and ');
+
+  // <title>/og:title/twitter:title list every downloadable format instead of
+  // a hardcoded "SVG" — "лого X png" and "иконка X ico" both outrank "svg"
+  // in search volume among non-designers, and a PNG-only item's old title
+  // claimed an SVG that didn't exist. ICNS is dropped here (near-zero search
+  // volume of its own, title space is tight) — it still shows in the
+  // on-page "Формат" row via the same logoFormats() call.
+  const titleFmt = logoFormats(item).list.filter(f => f !== 'ICNS').join(', ');
 
   const metaDescRu = item.desc || `Скачайте логотип ${item.name} в ${fmtStr} бесплатно. Официальные цвета, готово для Figma.`;
   const metaDescEn = item.desc_en || `Download the ${nm} logo in ${fmtStrEn} for free. Official colors, ready for Figma.`;
@@ -794,11 +894,11 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   const ogDesc   = en ? ogDescEn   : ogDescRu;
   const logoDesc = en ? (item.about_en || metaDescEn) : (item.about || metaDescRu);
 
-  const title    = en ? `${nm} Logo SVG — download free · Trace Logo's` : `Логотип ${item.name} SVG — скачать бесплатно · Trace Logo's`;
-  const ogTitle  = en ? `${nm} Logo SVG — download free`                : `Логотип ${item.name} SVG — скачать бесплатно`;
-  const twTitle  = en ? `${nm} Logo SVG — Trace Logo's`                 : `Логотип ${item.name} SVG — Trace Logo's`;
+  const title    = en ? `${nm} Logo — download ${titleFmt} free · Trace Logo's` : `Логотип ${item.name} — скачать ${titleFmt} бесплатно · Trace Logo's`;
+  const ogTitle  = en ? `${nm} Logo — download ${titleFmt} free`                : `Логотип ${item.name} — скачать ${titleFmt} бесплатно`;
+  const twTitle  = en ? `${nm} Logo ${titleFmt} — Trace Logo's`                 : `Логотип ${item.name} ${titleFmt} — Trace Logo's`;
   const h1       = en ? `${nm} Logo` : `Логотип ${item.name}`;
-  const prevAlt  = en ? `${nm} Logo SVG` : `Логотип ${item.name} SVG`;
+  const prevAlt  = en ? `${nm} Logo ${primaryType.toUpperCase()}` : `Логотип ${item.name} ${primaryType.toUpperCase()}`;
   const secLabel = en ? (section_en || section) : section;
   const ctaTitle = en ? `${readyTotal}+ logos in the catalog` : `${readyTotal}+ логотипов в каталоге`;
 
@@ -809,10 +909,9 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   const previewMime = primaryType === 'png' ? 'image/png' : 'image/svg+xml';
 
   const brandColors = extractBrandColors(item);
-  const faqItems    = buildFaqItems(item, brandColors);
-
   const homeRel  = en ? '/en/' : rel;
   const siblings = (itemsByCat && itemsByCat[catSlug]) || [];
+  const faqItems = buildFaqItems(item, brandColors, ecosystemLookup, siblings, section, section_en);
 
   const vars = {
     REL:                      rel,
@@ -821,6 +920,7 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     TITLE:                    title,
     META_DESC:                esc(metaDesc),
     CANONICAL_URL:            fullUrl,
+    HREFLANG_TAGS:            hreflangBlock(fullUrl, fullUrl.replace(BASE_URL + '/', BASE_URL + '/en/')),
     OG_TITLE:                 esc(ogTitle),
     OG_DESC:                  esc(ogDesc),
     OG_IMAGE:                 ogImage,
@@ -852,7 +952,7 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     META_TABLE_ROWS:          buildMetaTableRows(item, lang),
     FAQ_SECTION:              buildFaqSection(faqItems, lang),
     RELATED_SECTION:          buildRelatedSection(item, siblings, homeRel, lang),
-    CATALOG_GRID_SECTION:     buildCatalogGridSection(categories, homeRel, itemsByCat, lang),
+    CATALOG_GRID_SECTION:     buildCatalogGridSection(categories, homeRel, itemsByCat, lang, catSlug),
     SEO_PAGE_DATA:            buildSeoPageData(item, rel, lang),
   };
 
@@ -884,8 +984,9 @@ async function main() {
   // Build ecosystem lookup: id → list of items in that ecosystem
   const ecosystemLookup = {};
   for (const { item } of allItems) {
-    if (!item.ecosystem) continue;
-    (ecosystemLookup[item.ecosystem] ??= []).push({ item });
+    for (const ecoId of ecosystemIds(item)) {
+      (ecosystemLookup[ecoId] ??= []).push({ item });
+    }
   }
 
   // Ready items grouped by category slug → neighbours for the "Related" section.

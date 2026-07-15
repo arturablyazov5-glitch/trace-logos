@@ -19,7 +19,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { loadTemplate } = require('./lib/render');
-const { loadDict, transformToEn } = require('./lib/en-transform');
+const { loadDict, transformToEn, hreflangBlock } = require('./lib/en-transform');
 
 const BASE_URL  = 'https://trace-logos.ru';
 const ROOT      = path.resolve(__dirname, '..');
@@ -209,6 +209,7 @@ function main() {
       TITLE: `${p.title} · Trace Logo's`,
       META_DESC: esc(p.description),
       CANONICAL_URL: fullUrl,
+      HREFLANG_TAGS: hreflangBlock(fullUrl, `${BASE_URL}/en/blog/${p.slug}/`),
       OG_TITLE: esc(p.title),
       OG_IMAGE: `${BASE_URL}/assets/og/home.png`,
       DATE_ISO: p.date,

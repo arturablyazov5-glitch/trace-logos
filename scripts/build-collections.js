@@ -23,7 +23,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { loadTemplate } = require('./lib/render');
-const { loadDict, bakeI18n, makePathsAbsolute } = require('./lib/en-transform');
+const { loadDict, bakeI18n, makePathsAbsolute, hreflangBlock } = require('./lib/en-transform');
 
 const BASE_URL = 'https://trace-logos.ru';
 const ROOT     = path.resolve(__dirname, '..');
@@ -201,6 +201,7 @@ function main() {
       TITLE: `${col.title} — скачать SVG и PNG · Trace Logo's`,
       META_DESC: esc(col.lead),
       CANONICAL_URL: fullUrlRu,
+      HREFLANG_TAGS: hreflangBlock(fullUrlRu, fullUrlEn),
       OG_TITLE: esc(col.title),
       OG_DESC: esc(col.lead),
       OG_IMAGE: `${BASE_URL}/assets/og/home.png`,
@@ -231,6 +232,7 @@ function main() {
       TITLE: `${col.title_en || col.title} · Trace Logo's`,
       META_DESC: esc(col.lead_en || col.lead),
       CANONICAL_URL: fullUrlEn,
+      HREFLANG_TAGS: hreflangBlock(fullUrlRu, fullUrlEn),
       OG_TITLE: esc(col.h1_en || col.h1),
       OG_DESC: esc(col.lead_en || col.lead),
       OG_IMAGE: `${BASE_URL}/assets/og/home.png`,

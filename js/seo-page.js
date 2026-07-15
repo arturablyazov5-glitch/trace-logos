@@ -484,6 +484,9 @@ if (dlGroup && ITEM) {
     if (willOpen) loadIcoSizePreview();
   });
   btnIco?.addEventListener('click', () => { closeDlMenu(); downloadAsIco(ITEM, currentFile()); });
+  // FAQ answer for "how do I download as ICO" ships its own button — reuses
+  // the same download path as the (easy-to-miss) dropdown item.
+  document.getElementById('btn-faq-download-ico')?.addEventListener('click', () => downloadAsIco(ITEM, currentFile()));
   btnIcns?.addEventListener('click', () => { closeDlMenu(); openIcnsModal(ITEM, currentFile()); });
   btnLg?.addEventListener('click', () => { closeDlMenu(); openLiquidModal(ITEM, currentFile()); });
   btnZip?.addEventListener('click', () => { closeDlMenu(); downloadAllAsZip(ITEM); });

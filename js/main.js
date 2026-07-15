@@ -10,7 +10,7 @@ import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, downloadAsIc
 import { openIcnsModal } from './icns.js';
 import { openLiquidModal } from './liquid-glass-modal.js';
 import { updateSeoPageLink, slugifyPathPart } from './seo.js';
-import { ecosystemLogoMap, ecosystemLabels, ecosystemLabelsEn, loadLogos } from './data.js';
+import { ecosystemLogoMap, ecosystemLabels, ecosystemLabelsEn, ecosystemSectionLabels, ecosystemSectionLabelsEn, loadLogos } from './data.js';
 import { categoryIconSvg } from './category-icons.js';
 import {
   initVirtual,
@@ -69,6 +69,11 @@ let selectVariantGen = 0;          // bumped on every selectVariant call; lets a
 let updateZipDownloadSize = null;  // set per card open; deferred to first menu open (see toggleDownloadMenu)
 let zipSizeReqId = 0;
 let icoSizeReqId = 0;
+
+// item.ecosystem may be a single key (string) or several (array) — normalize once.
+function itemEcosystems(item) {
+  return Array.isArray(item.ecosystem) ? item.ecosystem : item.ecosystem ? [item.ecosystem] : [];
+}
 
 function resetCopyBtn() {
   if (copyBtnResetTimer) {
@@ -372,7 +377,7 @@ function setActiveEcosystem(ecosystem, { animate = false } = {}) {
   if (found) found.nav.classList.add('active');
 
   sectionEls.forEach(section => {
-    const n = renderSectionCards(section, card => card._item.ecosystem === ecosystem, { animate });
+    const n = renderSectionCards(section, card => itemEcosystems(card._item).includes(ecosystem), { animate });
     setSectionHidden(section.sec, n === 0);
   });
 
@@ -497,7 +502,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     });
 
     const applyPng = () => {
-      const roundedSquarePng = item.prerendered === false && !isFullFile(vDef.file);
+      const roundedSquarePng = (vDef.prerendered ?? item.prerendered) === false && !isFullFile(vDef.file);
       detailImg.classList.toggle('square', roundedSquarePng);
       if (roundedSquarePng || (!vDef.type && isFullFile(vDef.file))) detailImg.classList.remove('prerendered');
       else detailImg.classList.add('prerendered');
@@ -914,7 +919,7 @@ openDetailFn = function (item, card) {
     const variantPreview = previewUrl(vDef.file);
     vi.src = variantPreview ?? svgUrl(vDef.file);
     if (variantPreview) vi.addEventListener('error', () => { vi.src = svgUrl(vDef.file); }, { once: true });
-    if (item.prerendered !== false && vDef.file.endsWith('.png')) vi.classList.add('prerendered');
+    if ((vDef.prerendered ?? item.prerendered) !== false && vDef.file.endsWith('.png')) vi.classList.add('prerendered');
     colorState.variantImgEls.push({ file: vDef.file, imgEl: vi });
     const vl = document.createElement('div');
     vl.className = 'variant-label';
@@ -950,14 +955,18 @@ openDetailFn = function (item, card) {
   const ecosystemEl      = document.getElementById('detail-ecosystem');
   const ecosystemGrid    = document.getElementById('ecosystem-grid');
   const ecosystemLabelEl = document.getElementById('ecosystem-label');
-  if (item.ecosystem) {
-    const members = allItems.filter(i => i.ecosystem === item.ecosystem);
+  // An item can belong to more than one ecosystem — the panel shows one grid
+  // at a time, so use the first ecosystem that actually has other members.
+  const itemEcoIds = itemEcosystems(item);
+  const primaryEcoId = itemEcoIds.find(id => allItems.filter(i => itemEcosystems(i).includes(id)).length > 1);
+  if (primaryEcoId) {
+    const members = allItems.filter(i => itemEcosystems(i).includes(primaryEcoId));
     if (members.length > 1) {
-      ecosystemLabelEl.textContent = _ecoLabels[item.ecosystem] || t('detailEcosystem');
-      const sameEcosystem = ecosystemGrid.dataset.ecosystem === item.ecosystem;
+      ecosystemLabelEl.textContent = _ecoSectionLabels[primaryEcoId] || _ecoLabels[primaryEcoId] || t('detailEcosystem');
+      const sameEcosystem = ecosystemGrid.dataset.ecosystem === primaryEcoId;
       if (!sameEcosystem) {
         ecosystemGrid.innerHTML = '';
-        ecosystemGrid.dataset.ecosystem = item.ecosystem;
+        ecosystemGrid.dataset.ecosystem = primaryEcoId;
         for (const sib of members) {
           const ec = document.createElement('div');
           ec.className = 'ecosystem-card';
@@ -1236,6 +1245,7 @@ initFilters({
 });
 initSidebarIndicator();
 const _ecoLabels = _isEnUrl ? { ...ecosystemLabels, ...ecosystemLabelsEn } : ecosystemLabels;
+const _ecoSectionLabels = _isEnUrl ? ecosystemSectionLabelsEn : ecosystemSectionLabels;
 const _pathSection = window.__ASSET_SECTION__ ?? (location.pathname.split('/').filter(Boolean).find(s => s !== 'en') ?? 'logos');
 const _manifestBase = window.__MANIFEST_BASE__ ?? (_isEnUrl ? `/${_pathSection}/` : './');
 const _assetBase = window.__ASSET_BASE__ ?? (_isEnUrl ? `/assets/${_pathSection}` : `../assets/${_pathSection}`);
@@ -1305,7 +1315,9 @@ loadLogos(_manifestBase).then(logos => {
   })();
 
   const ecosystemCounts = allItems.reduce((acc, item) => {
-    if (item.ecosystem) acc.set(item.ecosystem, (acc.get(item.ecosystem) || 0) + (item.comingSoon ? 0 : 1));
+    for (const ecoId of itemEcosystems(item)) {
+      acc.set(ecoId, (acc.get(ecoId) || 0) + (item.comingSoon ? 0 : 1));
+    }
     return acc;
   }, new Map());
 

@@ -3,6 +3,7 @@ import { showToast, svgUrl, trackExport } from './utils.js';
 import { TOASTS } from './labels.js';
 import { parseSvgViewBox, svgToPngBlob } from './svg-utils.js';
 import { buildIcnsForFile } from './icns.js';
+import { ensureJSZip } from './vendor-loader.js';
 
 const ICO_SIZES = [256, 48, 32, 16];
 const ICO_RADIUS_RATIO = 0.20;
@@ -72,19 +73,6 @@ export function svgForExport(svg, isSquare = true) {
 
 export function svgForFigma(svg, item, isSquare = true) {
   return svgForExport(svg, isSquare).replace(/^<svg/, `<svg id="${item.figma}"`);
-}
-
-function waitForJSZip(timeout = 10000) {
-  if (typeof JSZip !== 'undefined') return Promise.resolve(JSZip);
-  return new Promise((resolve, reject) => {
-    const start = Date.now();
-    const check = () => {
-      if (typeof JSZip !== 'undefined') return resolve(JSZip);
-      if (Date.now() - start > timeout) return reject(new Error('JSZip не загрузился'));
-      setTimeout(check, 100);
-    };
-    check();
-  });
 }
 
 // Builds ICO source descriptor + rounding flag for an item.
@@ -166,8 +154,9 @@ export async function downloadAsIco(item, file = item.file) {
 }
 
 export async function downloadAllAsZip(item) {
+  let JSZip;
   try {
-    await waitForJSZip();
+    JSZip = await ensureJSZip();
   } catch {
     showToast(TOASTS.zipLoadError);
     return;

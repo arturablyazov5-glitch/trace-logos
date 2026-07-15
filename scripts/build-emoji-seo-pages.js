@@ -22,7 +22,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { loadTemplate } = require('./lib/render');
-const { loadDict, bakeI18n } = require('./lib/en-transform');
+const { loadDict, bakeI18n, hreflangBlock } = require('./lib/en-transform');
 
 const BASE_URL = 'https://trace-logos.ru';
 const ROOT     = path.resolve(__dirname, '..');
@@ -246,7 +246,8 @@ function buildPage(item, cat, slug, lang) {
   const homeRel = isEn ? '/en/' : rel;
   const catSlug = cat.slug;
   const ruUrl   = `${BASE_URL}/emoji/${catSlug}/${slug}/`;
-  const fullUrl = isEn ? `${BASE_URL}/en/emoji/${catSlug}/${slug}/` : ruUrl;
+  const enUrl   = `${BASE_URL}/en/emoji/${catSlug}/${slug}/`;
+  const fullUrl = isEn ? enUrl : ruUrl;
   const char    = emojiChar(item);
   const en      = englishName(item);
   const { codes } = parseFile(item.file);
@@ -274,6 +275,7 @@ function buildPage(item, cat, slug, lang) {
       : `Эмодзи ${item.name} ${char} — значение, скачать PNG · Trace Logo's`,
     META_DESC:      esc(metaDesc),
     CANONICAL_URL:  fullUrl,
+    HREFLANG_TAGS:  hreflangBlock(ruUrl, enUrl),
     OG_TITLE:       esc(isEn ? `${enName} ${char} Emoji — Download PNG` : `Эмодзи ${item.name} ${char} — скачать PNG`),
     OG_DESC:        esc(metaDesc),
     OG_IMAGE:       assetUrlAbs(item.file),

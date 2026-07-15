@@ -135,4 +135,16 @@ function transformToEn(html, sourceRelPath, EN) {
   return bakeI18n(enChrome(html, sourceRelPath), EN);
 }
 
-module.exports = { loadDict, enChrome, bakeI18n, transformToEn, makePathsAbsolute, escHtml, escAttr, BASE_ORIGIN };
+// hreflang must be IDENTICAL on both the RU and EN version of a page (Google/Yandex
+// require reciprocity). Callers building RU/EN separately from a template pass the
+// same block into both var sets; pages piped through enChrome/transformToEn carry
+// it through untouched (absolute URLs, no canonical/og:url match).
+function hreflangBlock(ruUrl, enUrl) {
+  return [
+    `<link rel="alternate" hreflang="ru" href="${ruUrl}">`,
+    `<link rel="alternate" hreflang="en" href="${enUrl}">`,
+    `<link rel="alternate" hreflang="x-default" href="${ruUrl}">`,
+  ].join('\n  ');
+}
+
+module.exports = { loadDict, enChrome, bakeI18n, transformToEn, makePathsAbsolute, escHtml, escAttr, hreflangBlock, BASE_ORIGIN };

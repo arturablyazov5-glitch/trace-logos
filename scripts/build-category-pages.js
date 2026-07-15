@@ -16,7 +16,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { loadTemplate } = require('./lib/render');
-const { loadDict, bakeI18n, makePathsAbsolute } = require('./lib/en-transform');
+const { loadDict, bakeI18n, makePathsAbsolute, hreflangBlock } = require('./lib/en-transform');
 
 const BASE_URL = 'https://trace-logos.ru';
 const ROOT     = path.resolve(__dirname, '..');
@@ -141,6 +141,7 @@ function buildPage({ section, slug, count, items }) {
     TITLE:         esc(title),
     META_DESC:     esc(metaDesc),
     CANONICAL_URL: fullUrl,
+    HREFLANG_TAGS: hreflangBlock(fullUrl, `${BASE_URL}/en/logos/${slug}/`),
     OG_TITLE:      esc(`Логотипы — ${section}`),
     OG_DESC:       esc(metaDesc),
     OG_IMAGE:      `${BASE_URL}/favicon-512.png`,
@@ -214,6 +215,7 @@ function main() {
       TITLE:         esc(titleEn),
       META_DESC:     esc(metaDescEn),
       CANONICAL_URL: fullUrlEn,
+      HREFLANG_TAGS: hreflangBlock(`${BASE_URL}/logos/${slug}/`, fullUrlEn),
       OG_TITLE:      esc(`Logos — ${sectionEn}`),
       OG_DESC:       esc(metaDescEn),
       OG_IMAGE:      `${BASE_URL}/favicon-512.png`,

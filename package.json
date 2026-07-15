@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node scripts/test-data.js",
     "start": "node server.js",
     "build": "node scripts/build-all.js",
     "deploy:cdn": "node scripts/deploy-cdn.js"
@@ -21,7 +21,9 @@
     "url": "https://github.com/sixxset5-star/trace-logos/issues"
   },
   "homepage": "https://github.com/sixxset5-star/trace-logos#readme",
-  "dependencies": {},
+  "dependencies": {
+    "jszip": "^3.10.1"
+  },
   "devDependencies": {
     "puppeteer": "^25.1.0",
     "sharp": "^0.34.5"

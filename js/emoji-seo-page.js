@@ -1,6 +1,7 @@
 import { showToast, animateContainerHeight } from './utils.js';
 import { triggerConfetti } from './svg-utils.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
+import { ensureJSZip } from './vendor-loader.js';
 
 applyLabels(); // single source of button texts → js/labels.js
 
@@ -72,7 +73,13 @@ if (btnCopyChar) {
 // Download all (.zip)
 if (btnZip && PAGE) {
   btnZip.addEventListener('click', async () => {
-    if (typeof JSZip === 'undefined') return;
+    let JSZip;
+    try {
+      JSZip = await ensureJSZip();
+    } catch {
+      showToast(TOASTS.zipLoadError);
+      return;
+    }
     btnZip.disabled = true;
     btnZipProg.style.width = '0%';
     btnZipLbl.textContent = 'Упаковываем...';

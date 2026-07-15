@@ -19,6 +19,7 @@ export const ecosystemLogoMap = {
   valve:       'valve.svg',
   microsoft:   'microsoft.svg',
   mvideo:      'mvideo.svg',
+  artlebedev:  'artlebedev.svg',
 };
 
 export const ecosystemLabels = {
@@ -46,6 +47,7 @@ export const ecosystemLabels = {
   bytedance:   'ByteDance',
   valve:       'Valve',
   mvideo:      'М.Видео',
+  artlebedev:  'Студия Лебедева',
 };
 
 export const ecosystemLabelsEn = {
@@ -60,6 +62,18 @@ export const ecosystemLabelsEn = {
   mts:        'MTS',
   kontur:     'Kontur',
   mvideo:     'M.Video',
+  artlebedev: 'Art. Lebedev Studio',
+};
+
+// Custom caption for the detail-panel ecosystem section, when the plain
+// ecosystem name (above) reads oddly without an "Экосистема" prefix —
+// e.g. a design studio isn't itself a "logo ecosystem" like Yandex or Sber.
+export const ecosystemSectionLabels = {
+  artlebedev: 'Логотипы студии Лебедева',
+};
+
+export const ecosystemSectionLabelsEn = {
+  artlebedev: 'Art. Lebedev Studio logos',
 };
 
 export async function loadLogos(base = '/logos/') {

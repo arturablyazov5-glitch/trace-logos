@@ -774,7 +774,10 @@
   }
 
   .plugin-author {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
     font-size: 11px;
     color: var(--text-6);
     padding: 7px 12px;
@@ -872,6 +875,10 @@
       <div class="section-label" id="ecosystemLabel">Экосистема</div>
       <div class="ecosystem-grid" id="ecosystemGrid"></div>
     </div>
+    <div class="ecosystem-section" id="relatedSection" style="display:none">
+      <div class="section-label">Другие логотипы этой категории</div>
+      <div class="ecosystem-grid" id="relatedGrid"></div>
+    </div>
   </div>
   <div class="detail-footer">
     <button class="copy-symbol-btn" id="copySymbolBtn" style="display:none">Копировать символ</button>
@@ -880,7 +887,10 @@
   </div>
 </div>
 
-<div class="plugin-author">Сделал <a onclick="window.open('https://t.me/mansurov_rafael')">@mansurov_rafael</a></div>
+<div class="plugin-author">
+  <span>Сделал <a onclick="window.open('https://t.me/mansurov_rafael')">@mansurov_rafael</a></span>
+  <a onclick="window.open('https://trace-logos.ru')">trace-logos.ru</a>
+</div>
 
 <script>
 // ── Asset base ──────────────────────────────────────────────────────────────
@@ -958,6 +968,42 @@ let activeCategory = 'all';
 let searchQuery = '';
 let currentLogo = null;
 let activeTab = 'logos';
+
+// Ecosystem section caption — mirrors ecosystemSectionLabels/ecosystemLabels in js/data.js.
+// Most ecosystems just show their brand name ("Сбер", "Google"); a few (e.g. a design
+// studio) read oddly without a custom caption, so they get an explicit override.
+const ECOSYSTEM_SECTION_LABELS = {
+  artlebedev: 'Логотипы студии Лебедева',
+};
+const ECOSYSTEM_LABELS = {
+  google: 'Google', meta: 'Meta', nspk: 'НСПК', sber: 'Сбер', sovcombank: 'Совкомбанк',
+  vk: 'ВК', yandex: 'Яндекс', alfa: 'Альфа-Групп', avito: 'Авито', tinkoff: 'Т-Банк',
+  mts: 'МТС', ozon: 'Ozon', wildberries: 'Wildberries', x5: 'X5', kontur: 'Контур',
+  openai: 'OpenAI', anthropic: 'Anthropic', apple: 'Apple', adobe: 'Adobe',
+  microsoft: 'Microsoft', PlayStation: 'PlayStation', bytedance: 'ByteDance',
+  valve: 'Valve', mvideo: 'М.Видео', artlebedev: 'Студия Лебедева',
+};
+
+// Shared card builder for the ecosystem and related-category grids.
+function buildEcoCard(m, currentLogo) {
+  const card = document.createElement('div');
+  card.className = 'eco-card' + (m.url === currentLogo.url ? ' active' : '');
+  const img = document.createElement('img');
+  img.src = abs(m.svgUrl || m.pngUrl);
+  img.alt = m.name;
+  img.loading = 'lazy';
+  const lbl = document.createElement('div');
+  lbl.className = 'eco-card-label';
+  lbl.textContent = m.name;
+  card.append(img, lbl);
+  card.addEventListener('click', () => openDetail(m));
+  return card;
+}
+
+// item.ecosystem may be a single key (string) or several (array) — normalize once (mirror of site main.js).
+function itemEcosystems(item) {
+  return Array.isArray(item.ecosystem) ? item.ecosystem : item.ecosystem ? [item.ecosystem] : [];
+}
 
 // ── Search helpers (RU↔EN layout switch + ё→е, mirror of site utils.js) ──────
 
@@ -1462,33 +1508,38 @@ function openDetail(logo) {
   // Set initial selection (firstVariantCard is null when there's a single variant — fine)
   selectVariant(allVariants[0], firstVariantCard, logo.name);
 
-  // Ecosystem block
+  // Ecosystem block — logo.ecosystem may be a single key (string) or several (array),
+  // same as items in the category JSON; pick the first key shared with other logos.
   const ecoSection = document.getElementById('ecosystemSection');
+  const ecoLabel = document.getElementById('ecosystemLabel');
   const ecoGrid = document.getElementById('ecosystemGrid');
-  if (logo.ecosystem) {
-    const members = allLogos.filter(l => l.ecosystem === logo.ecosystem);
-    if (members.length > 1) {
-      ecoGrid.innerHTML = '';
-      members.forEach(m => {
-        const card = document.createElement('div');
-        card.className = 'eco-card' + (m.url === logo.url ? ' active' : '');
-        const img = document.createElement('img');
-        img.src = abs(m.svgUrl || m.pngUrl);
-        img.alt = m.name;
-        img.loading = 'lazy';
-        const lbl = document.createElement('div');
-        lbl.className = 'eco-card-label';
-        lbl.textContent = m.name;
-        card.append(img, lbl);
-        card.addEventListener('click', () => openDetail(m));
-        ecoGrid.appendChild(card);
-      });
-      ecoSection.style.display = '';
-    } else {
-      ecoSection.style.display = 'none';
-    }
+  const logoEcosystems = itemEcosystems(logo);
+  const primaryEco = logoEcosystems.find(
+    key => allLogos.some(l => l.url !== logo.url && itemEcosystems(l).includes(key))
+  );
+  if (primaryEco) {
+    const members = allLogos.filter(l => itemEcosystems(l).includes(primaryEco));
+    ecoLabel.textContent = ECOSYSTEM_SECTION_LABELS[primaryEco] || ECOSYSTEM_LABELS[primaryEco] || 'Экосистема';
+    ecoGrid.innerHTML = '';
+    members.forEach(m => ecoGrid.appendChild(buildEcoCard(m, logo)));
+    ecoSection.style.display = '';
   } else {
     ecoSection.style.display = 'none';
+  }
+
+  // Related block — other logos in the same category (mirrors the SEO page's
+  // "Другие логотипы этой категории" section).
+  const relatedSection = document.getElementById('relatedSection');
+  const relatedGrid = document.getElementById('relatedGrid');
+  const relatedMembers = logo.categorySlug
+    ? allLogos.filter(l => l.categorySlug === logo.categorySlug && l.url !== logo.url)
+    : [];
+  if (relatedMembers.length) {
+    relatedGrid.innerHTML = '';
+    relatedMembers.forEach(m => relatedGrid.appendChild(buildEcoCard(m, logo)));
+    relatedSection.style.display = '';
+  } else {
+    relatedSection.style.display = 'none';
   }
 
   document.querySelector('.detail-scroll').scrollTop = 0;

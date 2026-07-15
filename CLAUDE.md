@@ -123,11 +123,24 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 
 **Default entry point for any content change** (new/edited logo, emoji, collection, blog post, or a shared template/partial). Spawns every fast-tier script below as a child process, in dependency order, stopping on first failure. `--dry-run` previews every step without writing.
 
-- **Fast tier (default):** build-seo-pages → build-api-json → build-collections → build-category-pages → build-ecosystem-pages → build-webp-previews → build-emoji-seo-pages → build-emoji-category-pages → build-emoji-json → build-blog → build-blog-rss → build-home-sitemap → build-en-pages → build-sitemap (always last) → build-version.
+- **Fast tier (default):** test-data `--pre` → build-seo-pages → build-api-json → build-collections → build-category-pages → build-ecosystem-pages → build-webp-previews → test-data `--post` → build-emoji-seo-pages → build-emoji-category-pages → build-emoji-json → build-blog → build-blog-rss → build-home-sitemap → build-en-pages → test-links → build-sitemap (always last) → build-version.
 - **Opt-in slow tier** (Puppeteer/Chrome, excluded by default — run only when actually needed, see each script's own entry below): `--with-og` (build-og-images), `--og-home` (build-og-home), `--plugin-assets` (build-plugin-assets), or `--full` for all three.
 - **Why it exists:** the old workflow was "remember which of ~14 scripts to run, in what order" — easy to get wrong or skip a step (e.g. forgetting `build-ecosystem-pages.js` after adding an `ecosystem` key leaves cross-reference links 404ing). `build-all.js` removes that memory burden entirely for the common case.
 - **When an individual script below is still the right call:** iterating on ONE script's own logic (fast `--dry-run` loop without re-running everything else), or a slow-tier step you're intentionally running standalone (e.g. `build-og-images.js` alone after adding one new logo, rather than `--with-og` re-rendering nothing new).
 - Each script also still works completely standalone (this doc lists them individually below) — `build-all.js` is a convenience wrapper, not a replacement for understanding what each step does.
+
+## `node scripts/test-data.js` (`npm test`)
+- **Read-only data-integrity tests**, no output files. Runs inside `build-all.js` in two tiers; a failed check (exit 1) stops the pipeline.
+- **`--pre`** (first step): required item fields (`name`/`tags`/`figma`/`file`), duplicate `file`/`figma` in a category, every `file`/`variants[].file`/`macos_styles.*` resolves to a real asset (logo paths starting with `/` resolve from repo root), every `ecosystem` key (string or array) exists in `logos/ecosystems.json`, orphan assets in `assets/logos/svgs|pngs` (warning).
+- **`--post`** (after build-webp-previews): every PNG logo/emoji has an up-to-date WebP preview; every buildable logo has `assets/og/<slug>.png` (warning — OG is the opt-in slow tier).
+- Warnings don't fail the build; `--strict` makes them fatal. No flags = both tiers (`npm test`).
+- Known tolerated warnings: emoji `figma` dups from the scraper (Emoji/Family ×14), missing google flag variants, a few orphan SVGs.
+
+## `node scripts/test-links.js`
+- **Read-only broken-link test on the RENDERED HTML.** Walks every `*.html` on the site (prunes `templates/`, `en/` is checked, plus service dirs like `node_modules`/`cdn-dist`/`upptime`), extracts navigational `href`/`src`/URL-like `content` (canonical, og:image, hreflang), and asserts each **page** link (`…/` or `….html`) resolves to a real file on disk. Asset links (png/svg/css/js/…) are skipped on purpose — those are `test-data.js`'s job.
+- **Why:** catches stale cross-links `test-data.js` can't see — a moved/renamed logo leaving a dead `/logos/<cat>/<slug>/` href in another item's about-text, or an orphaned `/en/` mirror whose canonical points at a deleted RU page. Replaced the old JSON-only about/desc scan that used to live in `cleanup-orphaned-pages.js`.
+- **Fails the build** (exit 1) on any broken link, like `test-data.js`. `--warn-only` to report without failing.
+- **When to run:** last, after all page builders (it needs the final HTML). It's the step before `build-sitemap.js` in `build-all.js`. Relies on `cleanup-orphaned-pages.js` having GC'd orphaned RU **and** `en/` pages first — otherwise a stale `en/` leaf's canonical trips it.
 
 ## `node scripts/build-seo-pages.js`
 - **Input:** `logos/manifest.json` → `logos/categories/*.json` + `templates/seo-page.html`

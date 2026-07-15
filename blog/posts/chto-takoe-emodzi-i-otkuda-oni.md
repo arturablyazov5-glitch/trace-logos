@@ -1,14 +1,14 @@
 ---
 title: Чем отличаются эмодзи Apple, Google и Microsoft
 title_en: Apple, Google and Microsoft Emoji — What's the Difference
-description: Почему один и тот же эмодзи выглядит по-разному на iPhone, Android и Windows, что такое Юникод и как скачать PNG эмодзи нужного вендора.
+description: Почему один и тот же эмодзи выглядит по‑разному на iPhone, Android и Windows, что такое Юникод и как скачать PNG эмодзи нужного вендора.
 description_en: Why the same emoji looks different on iPhone, Android and Windows, what Unicode is, and how to download emoji PNG from any vendor.
 date: 2026-05-30
 slug: chto-takoe-emodzi-i-otkuda-oni
 tags: Emoji, Apple, Google
 ---
 
-Вы отправляете 😀, а собеседник на другом телефоне видит немного другую картинку. Дело не в ошибке — просто **каждая платформа рисует эмодзи по-своему**. Разберёмся, как это устроено.
+Вы отправляете 😀, а собеседник на другом телефоне видит немного другую картинку. Дело не в ошибке — просто **каждая платформа рисует эмодзи по‑своему**. Разберёмся, как это устроено.
 
 ## Юникод задаёт смысл, а не картинку
 
@@ -24,7 +24,7 @@ tags: Emoji, Apple, Google
 
 Если вы делаете макет под конкретную платформу, логично взять эмодзи именно того вендора. Например:
 
-- макет iOS-приложения → эмодзи **Apple**;
+- макет iOS‑приложения → эмодзи **Apple**;
 - баннер для Android → эмодзи **Google**;
 - иллюстрация в фирменном стиле Microsoft → **Fluent**.
 

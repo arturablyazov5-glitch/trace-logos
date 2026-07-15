@@ -25,7 +25,7 @@ const ROOT    = path.join(__dirname, '..');
 const DRY_RUN = process.argv.includes('--dry-run');
 
 const EXCLUDE_DIRS = new Set([
-  'en', 'node_modules', 'scripts', '.git', 'sanitizer',
+  'en', 'node_modules', 'scripts', '.git', '.claude', 'sanitizer',
   'assets', 'css', 'js', 'components', 'templates', 'upptime',
 ]);
 

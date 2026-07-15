@@ -18,10 +18,20 @@
 
 const fs   = require('fs');
 const path = require('path');
+const { itemDate, assetExt } = require('./lib/item-date');
 
 const BASE_URL = 'https://trace-logos.ru';
 const ROOT     = path.resolve(__dirname, '..');
 const TODAY    = new Date().toISOString().slice(0, 10);
+const IMAGE_NS = 'http://www.google.com/schemas/sitemap-image/1.1';
+
+// XML text-node escaping (image:title isn't HTML — no &apos;/&quot; needed
+// outside attribute values, but escaping them too is harmless and safer).
+function escXml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
 
 function slugify(value) {
   return String(value || '').trim().toLowerCase()
@@ -39,11 +49,22 @@ const EMOJI_CAT_SLUGS = {
   'objects': 'objects', 'symbols': 'symbols', 'flags': 'flags',
 };
 
-function urlEntry(loc, freq, priority) {
-  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${TODAY}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+function urlEntry(loc, freq, priority, lastmod = TODAY) {
+  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
 }
-function wrapUrlset(entries) {
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.join('\n')}\n</urlset>\n`;
+
+// Same as urlEntry, plus an <image:image> block — Google/Yandex Images index
+// straight from this without crawling the page itself.
+function logoUrlEntry(item, loc, freq, priority, lastmod) {
+  const ext    = assetExt(item.file);
+  const imgUrl = `${BASE_URL}/assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
+  const title  = escXml(`Логотип ${item.name}`);
+  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n    <image:image>\n      <image:loc>${imgUrl}</image:loc>\n      <image:title>${title}</image:title>\n    </image:image>\n  </url>`;
+}
+
+function wrapUrlset(entries, withImageNs = false) {
+  const imageAttr = withImageNs ? ` xmlns:image="${IMAGE_NS}"` : '';
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"${imageAttr}>\n${entries.join('\n')}\n</urlset>\n`;
 }
 
 function main() {
@@ -97,7 +118,7 @@ function main() {
     for (const item of data.items) {
       if (item.comingSoon || !item.file || item.file === 'placeholder.svg') continue;
       const url = seoUrl(item);
-      if (url) logoEntries.push(urlEntry(BASE_URL + url, 'monthly', '0.6'));
+      if (url) logoEntries.push(logoUrlEntry(item, BASE_URL + url, 'monthly', '0.6', itemDate(item)));
     }
   }
 
@@ -109,7 +130,7 @@ function main() {
 
   // ── Write child sitemaps ──
   fs.writeFileSync(path.join(ROOT, 'sitemap-pages.xml'), wrapUrlset(pageEntries), 'utf8');
-  fs.writeFileSync(path.join(ROOT, 'sitemap-logos.xml'), wrapUrlset(logoEntries), 'utf8');
+  fs.writeFileSync(path.join(ROOT, 'sitemap-logos.xml'), wrapUrlset(logoEntries, true), 'utf8');
   fs.writeFileSync(path.join(ROOT, 'sitemap-emoji.xml'), wrapUrlset(emojiEntries), 'utf8');
 
   // ── Write sitemap index ──

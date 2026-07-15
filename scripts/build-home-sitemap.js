@@ -118,7 +118,7 @@ function main() {
   }
 
   const html = TEMPLATE.replace(/\{\{(\w+)\}\}/g, (_, k) => {
-    if (k === 'REL') return REL;
+    if (k === 'REL' || k === 'HOME_REL' || k === 'DATA_BASE') return REL;
     if (k === 'GROUPS') return cols;
     console.warn(`Unknown placeholder {{${k}}}`); return '';
   });
