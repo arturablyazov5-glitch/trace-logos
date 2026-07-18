@@ -1,0 +1,95 @@
+/* ── Terms page (/terms/, /consent/) ──────────────────────── */
+
+/* Hero and content share one column width (these pages only) */
+.category-hero {
+  max-width: 700px;
+  margin: 0 auto 8px;
+}
+
+.category-hero h1 { margin-bottom: 12px; }
+
+.category-desc {
+  font-size: 15px;
+  color: var(--text-4);
+  line-height: 1.6;
+}
+
+.terms-content {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 24px 0 48px;
+  color: var(--text-1);
+  font-size: 15.5px;
+  line-height: 1.75;
+}
+
+.terms-updated {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-4);
+  font-size: 12px;
+  font-weight: 500;
+  background: var(--bg-muted);
+  border: 1px solid var(--border-muted, var(--line));
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin-bottom: 24px;
+}
+
+/* Lead paragraph — the intro right after the updated-date badge */
+.terms-updated + p {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.8;
+}
+
+.terms-content h2 {
+  color: var(--text-0);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 40px 0 12px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+.terms-content h3 {
+  color: var(--text-0);
+  font-size: 16px;
+  font-weight: 650;
+  margin: 28px 0 10px;
+}
+
+.terms-content p { margin: 0 0 14px; }
+.terms-content p:last-child { margin-bottom: 0; }
+
+.terms-content ul {
+  margin: 0 0 14px;
+  padding-left: 4px;
+  list-style: none;
+}
+
+.terms-content li {
+  position: relative;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+
+.terms-content li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: .7;
+}
+
+.terms-content a { color: var(--text-0); }
+.terms-content a:hover { opacity: .8; }
+
+@media (max-width: 640px) {
+  .terms-content h2 { font-size: 18px; margin-top: 32px; padding-top: 26px; }
+}

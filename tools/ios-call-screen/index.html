@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script src="/components/cookie-consent.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Генератор экрана вызова iOS онлайн | Trace Logo's</title>
+  <meta name="description" content="Сделай скриншот входящего звонка iPhone: имя, подпись, время, фон и язык кнопок. Скачай PNG. Всё локально в браузере, без регистрации.">
+  <meta name="keywords" content="экран вызова iphone, генератор звонка ios, фейковый звонок, скриншот входящего вызова">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://trace-logos.ru/tools/ios-call-screen/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:url" content="https://trace-logos.ru/tools/ios-call-screen/">
+  <meta property="og:title" content="Генератор экрана вызова iOS онлайн">
+  <meta property="og:description" content="Сделай скриншот входящего звонка iPhone: имя, время, фон, язык кнопок. Скачай PNG — всё локально.">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Генератор экрана вызова iOS онлайн">
+  <meta name="twitter:description" content="Скриншот входящего звонка iPhone: имя, время, фон, язык кнопок. Скачай PNG.">
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Генератор экрана вызова iOS",
+    "operatingSystem": "Any",
+    "applicationCategory": "MultimediaApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
+    "description": "Генерирует скриншот входящего звонка iPhone: имя, подпись, время, фон и язык кнопок. Работает локально в браузере.",
+    "url": "https://trace-logos.ru/tools/ios-call-screen/",
+    "author": { "@type": "Person", "name": "Рафаэль Мансуров" }
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── trace-logos palette ── */
+      --bg:      #0a0a0a;
+      --surface: #161616;
+      --surf2:   #1e1e1e;
+      --border:  #242424;
+      --border2: #2e2e2e;
+      --blue:    #8a6bff;
+      --text:    #e5e5e5;
+      --dim:     #666666;
+      --mid:     #888888;
+      --sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+    }
+
+    /* ── Site header (наша шапка каталога) ── */
+    .site-header {
+      height: 60px; display: flex; align-items: center; gap: 16px;
+      padding: 0 28px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.9);
+    }
+    .site-header .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .site-header .brand-logo { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; }
+    .site-header .brand-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .site-header .brand-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: #fff; }
+    .site-header .brand-badge {
+      display: inline-block; font-size: 10px; font-weight: 600; color: var(--blue);
+      background: rgba(138,107,255,0.12); border: 1px solid rgba(138,107,255,0.2);
+      border-radius: 4px; padding: 1px 6px; margin-left: 7px; letter-spacing: 0.03em; vertical-align: middle;
+    }
+    .site-header .header-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+    .site-header .header-nav a {
+      font-size: 13px; font-weight: 500; color: var(--mid); text-decoration: none;
+      padding: 7px 11px; border-radius: 8px; transition: color .15s, background .15s; white-space: nowrap;
+    }
+    .site-header .header-nav a:hover { color: #fff; background: rgba(255,255,255,0.04); }
+    .site-header .header-nav a.current { color: #fff; }
+    .site-header .btn-github {
+      display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500;
+      color: #fff; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 13px; text-decoration: none; transition: background .15s, border-color .15s;
+    }
+    .site-header .btn-github:hover { background: rgba(255,255,255,0.07); border-color: var(--border2); }
+    .site-header .btn-github svg { opacity: 0.75; }
+
+    /* ── Two-column layout ─────────────────── */
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      height: calc(100vh - 60px);
+    }
+
+    /* ── Controls panel ────────────────────── */
+    .controls {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .ctrl-head {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .ctrl-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--dim); text-decoration: none; margin-bottom: 14px;
+      transition: color .15s;
+    }
+    .ctrl-back:hover { color: var(--mid); }
+
+    .ctrl-head h1 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .ctrl-head p {
+      font-size: 12px;
+      color: var(--dim);
+      margin-top: 3px;
+    }
+
+    .ctrl-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .ctrl-body::-webkit-scrollbar { width: 4px; }
+    .ctrl-body::-webkit-scrollbar-track { background: transparent; }
+    .ctrl-body::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+    .sep { height: 1px; background: var(--border); }
+
+    /* Field */
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    .field label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .field input[type="text"] {
+      background: var(--surf2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+      width: 100%;
+    }
+
+    .field input[type="text"]:focus { border-color: var(--blue); }
+
+    /* Presets grid */
+    .presets {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 8px;
+    }
+
+    .preset {
+      aspect-ratio: 1;
+      width: 100%;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1);
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.15s;
+    }
+
+    .preset:hover { transform: scale(1.12); }
+
+    .preset.active {
+      box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--blue);
+      transform: none;
+    }
+
+    /* Color pair */
+    .color-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .color-chip {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--surf2);
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.15s;
+    }
+
+    .color-chip:hover { border-color: var(--border2); }
+    .color-chip:focus-within { border-color: var(--blue); }
+
+    .color-chip input[type="color"] {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      border: none;
+    }
+
+    .chip-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+    }
+
+    .chip-meta { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .chip-meta em { font-style: normal; font-size: 10px; color: var(--dim); }
+    .chip-meta code {
+      font-size: 12px;
+      color: var(--text);
+      font-family: 'SF Mono', ui-monospace, Menlo, monospace;
+      text-transform: uppercase;
+    }
+
+    /* Toggle */
+    .toggle-row {
+      position: relative;
+      display: flex;
+      padding: 3px;
+      border-radius: 11px;
+      background: var(--surf2);
+      border: 1px solid var(--border);
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      left: 3px;
+      border-radius: 8px;
+      background: var(--blue);
+      box-shadow: 0 2px 8px rgba(138,107,255,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .toggle-btn {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      padding: 9px 6px;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--mid);
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      transition: color 0.25s;
+      text-align: center;
+    }
+
+    .toggle-btn.active { color: white; }
+
+    /* Switch */
+    .switch-field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .switch-field label:first-child {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .switch {
+      display: inline-flex;
+      cursor: pointer;
+    }
+
+    .switch input { display: none; }
+
+    .switch-track {
+      display: inline-block;
+      position: relative;
+      width: 40px;
+      height: 24px;
+      border-radius: 12px;
+      background: var(--surf2);
+      border: 1px solid var(--border);
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .switch-thumb {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .switch input:checked ~ .switch-track { background: var(--blue); border-color: var(--blue); }
+    .switch input:checked ~ .switch-track .switch-thumb { transform: translateX(16px); }
+
+    /* Hint */
+    .hint {
+      font-size: 11px;
+      color: var(--dim);
+      line-height: 1.5;
+      padding: 10px 12px;
+      background: var(--surf2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    /* Controls footer */
+    .ctrl-foot {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .btn-dl {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      background: var(--blue);
+      color: white;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .btn-dl:hover { opacity: 0.85; }
+    .btn-dl:active { opacity: 0.7; }
+    .btn-dl:disabled { opacity: 0.5; cursor: default; }
+
+    /* ── Preview ───────────────────────────── */
+    .preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      background-image: radial-gradient(ellipse at 50% 40%, rgba(138,107,255,0.06) 0%, transparent 70%);
+      padding: 32px;
+      overflow: auto;
+    }
+
+    /* ── Phone frame wrap ─────────────────────── */
+    .frame-wrap {
+      position: relative;
+      width: 320px;
+      height: 693px;
+      transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1), height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .frame-mockup {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0;
+      transform: scale(1.03);
+      transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .frame-wrap.framed {
+      width: 359px;
+      height: 733.96px;
+    }
+
+    .frame-wrap.framed .frame-mockup {
+      opacity: 1;
+      transform: scale(1);
+      transition-delay: 0.05s;
+    }
+
+    .frame-wrap.framed .ios {
+      left: 5.407%;
+      top: 2.336%;
+      width: 89.51%;
+      height: 95.49%;
+      border-radius: 6%;
+      box-shadow: none;
+    }
+
+    .frame-wrap.framed #ios-dynamic-island { display: none; }
+
+    .frame-wrap.framed .ios-statusbar { transform: translateY(2px); }
+
+    /* ── iOS Screen ────────────────────────── */
+    .ios {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 20px;
+      /* iOS font stack — on macOS this picks up SF Pro automatically */
+      font-family: -apple-system, 'SF Pro Display', BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.08),
+        0 4px 24px rgba(0,0,0,0.4),
+        0 32px 80px rgba(0,0,0,0.7);
+      transition:
+        left 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        top 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        border-radius 0.4s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .ios-bg {
+      position: absolute;
+      inset: 0;
+      transition: background 0.35s ease;
+    }
+
+    /* Subtle vignette to make it feel more like a real screen */
+    .ios-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.04) 0%, transparent 60%),
+                  radial-gradient(ellipse at 50% 100%, rgba(0,0,0,0.25) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Home indicator (software bar at bottom) */
+    .ios-home {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 108px;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.9);
+      z-index: 3;
+    }
+
+    .ios-ui {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      color: white;
+    }
+
+    /* ── Status bar ────────────────────────── */
+    .ios-status {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px 0;
+      flex-shrink: 0;
+    }
+
+    .ios-clock {
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: -0.3px;
+    }
+
+    .ios-status-icons {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* ── Status bar из макета Apple (node 794:340903) ── */
+    .ios-statusbar { width: 100%; padding: 3px 0 0; flex-shrink: 0; }
+    .ios-statusbar-svg { display: block; width: 100%; height: auto; }
+    .ios-sb-time {
+      font-family: -apple-system, 'SF Pro Text', 'SF Pro Display', BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-weight: 600;
+      font-size: 17px;
+      letter-spacing: -0.2px;
+      fill: #fff;
+    }
+
+    /* ── Caller info ───────────────────────── */
+    .ios-caller {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 28px;
+      padding-bottom: 8px;
+    }
+
+    .ios-caller-sub {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.02em;
+      margin-bottom: 3px;
+    }
+
+    .ios-caller-name {
+      font-size: 52px;
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      line-height: 1.06;
+      letter-spacing: -1px;
+      padding: 0 16px;
+      word-break: break-word;
+      transition: font-size 0.1s;
+    }
+
+    /* ── Bottom actions ────────────────────── */
+    .ios-actions {
+      padding: 0 14px 40px;
+      flex-shrink: 0;
+    }
+
+    .ios-action-row {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 24px;
+    }
+
+    .ios-action-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 90px;
+    }
+
+    .ios-action-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ios-action-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.9);
+      font-weight: 400;
+      text-align: center;
+      line-height: 1.2;
+      white-space: nowrap;
+    }
+
+    .ios-action-label .letter {
+      display: inline-block;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ios-action-label .letter-out {
+      opacity: 0;
+      transform: translateY(-7px);
+    }
+
+    .ios-action-label .letter-in {
+      opacity: 0;
+      transform: translateY(7px);
+    }
+
+    .ios-call-row {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .ios-call-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ios-call-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ios-call-circle.red   { background: #EB5545; }
+    .ios-call-circle.green { background: #67CE67; }
+
+    .ios-call-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.9);
+      font-weight: 400;
+    }
+
+    /* ── Mobile: stack controls above preview ── */
+    @media (max-width: 760px) {
+      .site-header { padding: 0 16px; }
+      .site-header .header-nav { display: none; }
+      .site-header .btn-github span { display: none; }
+      .layout { grid-template-columns: 1fr; height: auto; }
+      .controls { border-right: none; border-bottom: 1px solid var(--border); }
+      .ctrl-body { overflow-y: visible; }
+      .preview { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="../../" aria-label="Trace Logo's — на главную">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="../../assets/brand/logo.svg" alt="" width="30" height="30">
+    </span>
+    <span class="brand-name">Trace Logo's<span class="brand-badge">Beta</span></span>
+  </a>
+  <nav class="header-nav" aria-label="Разделы">
+    <a href="../../logos/">Логотипы</a>
+    <a href="../../emoji/">Эмодзи</a>
+    <a href="../../blog/">Блог</a>
+    <a href="../" class="current">Инструменты</a>
+  </nav>
+  <a class="btn-github" href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+    <span>GitHub</span>
+  </a>
+</header>
+
+<div class="layout">
+
+  <!-- ── Controls ── -->
+  <aside class="controls">
+    <div class="ctrl-head">
+      <a href="../" class="ctrl-back">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        Все инструменты
+      </a>
+      <h1>Экран вызова iOS</h1>
+      <p>Генератор скриншота входящего звонка</p>
+    </div>
+
+    <div class="ctrl-body">
+
+      <div class="field">
+        <label>Имя</label>
+        <input type="text" id="f-name" value="МУСП" placeholder="Имя звонящего">
+      </div>
+
+      <div class="field">
+        <label>Подпись</label>
+        <input type="text" id="f-sub" value="Сотовый" placeholder="Сотовый / WhatsApp / Работа…">
+      </div>
+
+      <div class="field">
+        <label>Время</label>
+        <input type="text" id="f-time" value="13:43" placeholder="13:43" maxlength="5">
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="field">
+        <label>Фон</label>
+        <div class="presets" id="presets"></div>
+      </div>
+
+      <div class="field">
+        <label>Свой градиент</label>
+        <div class="color-pair">
+          <label class="color-chip">
+            <input type="color" id="c-top" value="#6b7280">
+            <span class="chip-dot" id="dot-top"></span>
+            <span class="chip-meta"><em>Верх</em><code id="hex-top">#6B7280</code></span>
+          </label>
+          <label class="color-chip">
+            <input type="color" id="c-bot" value="#4b5563">
+            <span class="chip-dot" id="dot-bot"></span>
+            <span class="chip-meta"><em>Низ</em><code id="hex-bot">#4B5563</code></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="field">
+        <label>Язык кнопок</label>
+        <div class="toggle-row" id="toggle-row">
+          <div class="toggle-thumb" id="toggle-thumb"></div>
+          <button class="toggle-btn active" data-lang="ru">🇷🇺 Русский</button>
+          <button class="toggle-btn" data-lang="en">🇬🇧 English</button>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="field">
+        <div class="switch-field">
+          <label for="f-frame">Засунуть в телефон</label>
+          <label class="switch">
+            <input type="checkbox" id="f-frame">
+            <span class="switch-track"><span class="switch-thumb"></span></span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ctrl-foot">
+      <button class="btn-dl" id="btn-dl">⬇ Скачать PNG</button>
+    </div>
+  </aside>
+
+  <!-- ── Preview ── -->
+  <main class="preview">
+    <div class="frame-wrap" id="frame-wrap">
+    <img class="frame-mockup" src="mocup.png" alt="">
+    <div class="ios" id="ios">
+
+      <div class="ios-bg" id="ios-bg"></div>
+      <div class="ios-vignette"></div>
+      <div class="ios-home"></div>
+
+      <div class="ios-ui">
+
+        <!-- Status bar — из макета Apple (node 794:340903): время + Dynamic Island + сеть/Wi-Fi/батарея -->
+        <div class="ios-statusbar">
+          <svg class="ios-statusbar-svg" viewBox="0 0 430 59" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Время (редактируется через поле «Время», #p-time) -->
+            <text id="p-time" class="ios-sb-time" x="81" y="36" text-anchor="middle">13:43</text>
+            <!-- Dynamic Island -->
+            <rect id="ios-dynamic-island" x="152" y="11" width="126" height="37" rx="18.5" fill="black"/>
+            <!-- Сотовый сигнал -->
+            <g clip-path="url(#clip0_794_340903)">
+              <path opacity="0.2" d="M324.512 35.4102H326.512C327.035 35.4102 327.384 35.0449 327.384 34.5054V32.7783C327.384 32.2388 327.035 31.8818 326.512 31.8818H324.512C323.989 31.8818 323.64 32.2388 323.64 32.7783V34.5054C323.64 35.0449 323.989 35.4102 324.512 35.4102Z" fill="white"/>
+              <path d="M324.515 35.4102H326.532C327.047 35.4102 327.395 35.0449 327.395 34.5054V21.9048C327.395 21.3652 327.047 21 326.532 21H324.515C324 21 323.644 21.3652 323.644 21.9048V34.5054C323.644 35.0449 324 35.4102 324.515 35.4102Z" fill="white"/>
+              <path opacity="0.2" d="M318.302 35.4102H320.302C320.825 35.4102 321.174 35.0449 321.174 34.5054V32.7783C321.174 32.2388 320.825 31.8818 320.302 31.8818H318.302C317.779 31.8818 317.43 32.2388 317.43 32.7783V34.5054C317.43 35.0449 317.779 35.4102 318.302 35.4102Z" fill="white"/>
+              <path d="M318.306 35.4102H320.307C320.821 35.4102 321.178 35.0449 321.178 34.5054V25.1836C321.178 24.644 320.821 24.2788 320.307 24.2788H318.306C317.783 24.2788 317.435 24.644 317.435 25.1836V34.5054C317.435 35.0449 317.783 35.4102 318.306 35.4102Z" fill="white"/>
+              <path opacity="0.2" d="M312.092 35.4102H314.092C314.615 35.4102 314.964 35.0449 314.964 34.5054V32.7783C314.964 32.2388 314.615 31.8818 314.092 31.8818H312.092C311.569 31.8818 311.22 32.2388 311.22 32.7783V34.5054C311.22 35.0449 311.569 35.4102 312.092 35.4102Z" fill="white"/>
+              <path d="M312.089 35.4102H314.089C314.612 35.4102 314.961 35.0449 314.961 34.5054V28.1885C314.961 27.6489 314.612 27.2837 314.089 27.2837H312.089C311.566 27.2837 311.217 27.6489 311.217 28.1885V34.5054C311.217 35.0449 311.566 35.4102 312.089 35.4102Z" fill="white"/>
+              <path opacity="0.2" d="M305.872 35.4102H307.872C308.395 35.4102 308.744 35.0449 308.744 34.5054V32.7783C308.744 32.2388 308.395 31.8818 307.872 31.8818H305.872C305.349 31.8818 305 32.2388 305 32.7783V34.5054C305 35.0449 305.349 35.4102 305.872 35.4102Z" fill="white"/>
+              <path d="M305.872 35.4102H307.872C308.395 35.4102 308.744 35.0449 308.744 34.5054V30.7783C308.744 30.2388 308.395 29.8818 307.872 29.8818H305.872C305.349 29.8818 305 30.2388 305 30.7783V34.5054C305 35.0449 305.349 35.4102 305.872 35.4102Z" fill="white"/>
+            </g>
+            <!-- Wi-Fi -->
+            <g clip-path="url(#clip1_794_340903)">
+              <path d="M344.555 35.8042C344.738 35.8042 344.896 35.7212 345.219 35.4058L347.245 33.4634C347.369 33.3389 347.403 33.1562 347.286 33.0068C346.747 32.3096 345.726 31.7036 344.555 31.7036C343.352 31.7036 342.331 32.3345 341.791 33.0566C341.708 33.1895 341.742 33.3389 341.874 33.4634L343.891 35.4058C344.215 35.7129 344.373 35.8042 344.555 35.8042ZM339.7 31.2886C339.882 31.4629 340.106 31.438 340.272 31.2554C341.268 30.1514 342.895 29.3462 344.555 29.3545C346.232 29.3462 347.859 30.1763 348.872 31.2803C349.021 31.4546 349.229 31.4463 349.411 31.2803L350.698 30.002C350.831 29.8691 350.848 29.6865 350.723 29.5371C349.47 28.0015 347.145 26.8477 344.555 26.8477C341.966 26.8477 339.641 28.0015 338.388 29.5371C338.263 29.6865 338.272 29.8525 338.413 30.002L339.7 31.2886ZM336.255 27.8189C336.421 27.9766 336.653 27.9766 336.811 27.8106C338.853 25.644 341.542 24.4985 344.555 24.4985C347.585 24.4985 350.291 25.6523 352.317 27.8189C352.466 27.9683 352.69 27.96 352.856 27.8022L354.002 26.6567C354.151 26.5073 354.143 26.3247 354.027 26.1836C352.076 23.7764 348.407 22.0083 344.555 22.0083C340.712 22.0083 337.027 23.7764 335.084 26.1836C334.968 26.3247 334.968 26.5073 335.109 26.6567L336.255 27.8189Z" fill="white"/>
+            </g>
+            <!-- Батарея -->
+            <g clip-path="url(#clip2_794_340903)">
+              <path opacity="0.4" d="M367.522 35.9548H384.203C386.149 35.9548 387.54 35.7363 388.532 34.7438C389.528 33.7513 389.733 32.3858 389.733 30.4323V27.5391C389.733 25.5856 389.528 24.2134 388.532 23.2242C387.537 22.2318 386.149 22.0166 384.203 22.0166H367.461C365.59 22.0166 364.196 22.2351 363.204 23.2309C362.208 24.2234 362 25.5997 362 27.4702V30.4323C362 32.3858 362.204 33.7546 363.197 34.7438C364.196 35.7363 365.58 35.9548 367.522 35.9548ZM367.239 34.6249C365.973 34.6249 364.833 34.4245 364.171 33.77C363.519 33.1081 363.33 31.9852 363.33 30.7156V27.3138C363.33 25.9927 363.519 24.8566 364.167 24.1947C364.829 23.5294 365.987 23.3432 367.305 23.3432H384.493C385.76 23.3432 386.9 23.5468 387.551 24.198C388.213 24.86 388.403 25.9753 388.403 27.2449V30.7156C388.403 31.9852 388.21 33.1081 387.551 33.77C386.9 34.4279 385.76 34.6249 384.493 34.6249H367.239ZM390.977 31.601C391.772 31.5506 392.848 30.5256 392.848 28.9819C392.848 27.4424 391.772 26.4174 390.977 26.367V31.601Z" fill="white"/>
+              <path d="M366.863 33.5222H384.88C385.844 33.5222 386.417 33.3715 386.781 33.0074C387.145 32.64 387.303 32.0638 387.303 31.0995V26.869C387.303 25.898 387.145 25.3284 386.784 24.961C386.417 24.6003 385.837 24.4463 384.88 24.4463H366.932C365.903 24.4463 365.309 24.597 364.959 24.9577C364.598 25.3251 364.44 25.9187 364.44 26.9304V31.0995C364.44 32.0738 364.598 32.64 364.959 33.0074C365.326 33.3681 365.906 33.5222 366.863 33.5222Z" fill="white"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_794_340903"><rect width="22.3955" height="14.4185" fill="white" transform="translate(305 21)"/></clipPath>
+              <clipPath id="clip1_794_340903"><rect width="19.1139" height="13.8042" fill="white" transform="translate(335 22)"/></clipPath>
+              <clipPath id="clip2_794_340903"><rect width="30.8478" height="13.9548" fill="white" transform="translate(362 22)"/></clipPath>
+            </defs>
+          </svg>
+        </div>
+
+        <!-- Caller info -->
+        <div class="ios-caller">
+          <div class="ios-caller-sub" id="p-sub">СОТОВЫЙ</div>
+          <div class="ios-caller-name" id="p-name">МУСП</div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="ios-actions">
+
+          <!-- Row 1: small utility buttons -->
+          <div class="ios-action-row">
+
+            <div class="ios-action-item">
+              <div class="ios-action-icon">
+                <!-- Alarm clock — SF Symbols "alarm.fill" -->
+                <svg width="17" height="18" viewBox="48.8 0 16.4 17.6" fill="white">
+                  <path d="M50.3984 3.57031L53.1641 1.49219C53.3047 1.38281 53.3828 1.25781 53.3828 1.125C53.3828 0.9375 53.3047 0.78125 53.1172 0.640625C52.7891 0.382812 52.2891 0.242188 51.7812 0.242188C50.4922 0.242188 49.4609 1.25781 49.4609 2.53125C49.4609 2.85938 49.5234 3.17969 49.6016 3.35938C49.7031 3.55469 49.8672 3.6875 50.0703 3.6875C50.1953 3.6875 50.2812 3.67188 50.3984 3.57031Z"/>
+                  <path d="M63.3359 3.57031C63.4531 3.67188 63.5391 3.6875 63.6641 3.6875C63.8672 3.6875 64.0312 3.55469 64.125 3.35938C64.2031 3.17969 64.2734 2.85938 64.2734 2.53125C64.2734 1.25781 63.2422 0.242188 61.9453 0.242188C61.4375 0.242188 60.9453 0.382812 60.6094 0.640625C60.4297 0.78125 60.3516 0.9375 60.3516 1.125C60.3516 1.25781 60.4297 1.38281 60.5625 1.49219L63.3359 3.57031Z"/>
+                  <path d="M50.2109 17.0938C50.4531 17.3438 50.875 17.3438 51.1172 17.1016L52.3828 15.8359C53.6875 16.7734 55.2891 17.3281 57 17.3281C58.6797 17.3281 60.25 16.7969 61.5469 15.8828L62.7578 17.1016C63 17.3359 63.4141 17.3359 63.6641 17.1016C63.9062 16.8516 63.9062 16.4297 63.6641 16.1953L62.5312 15.0625C64.0312 13.6094 64.9688 11.5781 64.9688 9.35938C64.9688 5.00781 61.3438 1.39062 56.9922 1.39062C52.6328 1.39062 49.0312 5.00781 49.0312 9.35938C49.0312 11.5547 49.9453 13.5547 51.4062 15.0078L50.2188 16.1953C49.9766 16.4297 49.9688 16.8516 50.2109 17.0938ZM52.9062 10.2031C52.6016 10.2031 52.3672 9.96875 52.3672 9.65625C52.3672 9.35156 52.6016 9.11719 52.9062 9.11719H56.4531V4.39062C56.4531 4.08594 56.6875 3.85156 56.9922 3.85156C57.2969 3.85156 57.5391 4.08594 57.5391 4.39062V9.65625C57.5391 9.96875 57.2969 10.2031 56.9922 10.2031H52.9062Z"/>
+                </svg>
+              </div>
+              <span class="ios-action-label" id="l-rmnd">Напомнить</span>
+            </div>
+
+            <div class="ios-action-item">
+              <div class="ios-action-icon">
+                <!-- Message bubble — SF Symbols "message.fill" -->
+                <svg width="18" height="17" viewBox="254 1.5 18 16.7" fill="white">
+                  <path d="M259.023 17.9922C259.336 17.9922 259.555 17.8359 259.922 17.4922L262.75 14.9141L268.023 14.9219C270.352 14.9297 271.602 13.6328 271.602 11.3438V5.35938C271.602 3.07031 270.352 1.78125 268.023 1.78125H257.961C255.641 1.78125 254.383 3.0625 254.383 5.35938V11.3438C254.383 13.6406 255.641 14.9219 257.961 14.9141H258.328V17.1875C258.328 17.6719 258.586 17.9922 259.023 17.9922Z"/>
+                </svg>
+              </div>
+              <span class="ios-action-label" id="l-msg">Сообщение</span>
+            </div>
+
+          </div>
+
+          <!-- Row 2: call buttons -->
+          <div class="ios-call-row">
+
+            <div class="ios-call-item">
+              <div class="ios-call-circle red">
+                <!-- Phone-down handset — SF Symbols "phone.down.fill" -->
+                <svg width="41" height="16" viewBox="35.8 127.5 41.4 16.2" fill="white">
+                  <path d="M56.5 127.855C49.1348 127.873 42.1035 129.455 38.5352 133.023C36.918 134.641 36.0918 136.592 36.1621 138.947C36.2148 140.266 36.584 141.602 37.4277 142.445C38.0078 143.043 38.834 143.377 39.8535 143.201L46.3398 142.094C47.2012 141.936 47.8516 141.654 48.3086 141.215C48.8711 140.688 49.082 139.844 49.082 138.701L49.1172 136.926C49.1172 136.645 49.2227 136.434 49.3984 136.258C49.5566 136.064 49.8027 135.977 49.9961 135.924C51.1211 135.625 53.5293 135.309 56.5 135.309C59.4707 135.309 61.8613 135.555 63.0039 135.941C63.1973 135.994 63.4082 136.1 63.5664 136.258C63.7422 136.416 63.8301 136.609 63.8301 136.873L63.8828 138.701C63.918 139.844 64.1465 140.67 64.6914 141.215C65.1484 141.672 65.7988 141.936 66.6777 142.094L72.9707 143.166C74.043 143.359 74.9219 142.99 75.5898 142.34C76.3633 141.549 76.8203 140.318 76.8379 138.877C76.873 136.521 75.9766 134.588 74.3945 133.023C70.8262 129.455 63.8652 127.838 56.5 127.855Z"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="ios-call-item">
+              <div class="ios-call-circle green">
+                <!-- Phone handset — SF Symbols "phone.fill" -->
+                <svg width="32" height="32" viewBox="246 119.4 32.8 32.7" fill="white">
+                  <path d="M255.117 143.078C260.004 147.965 266.104 151.814 271.131 151.814C273.434 151.814 275.402 151.023 277.02 149.283C277.916 148.334 278.584 147.104 278.584 145.926C278.584 145.082 278.268 144.273 277.406 143.676L272.045 139.896C271.307 139.387 270.656 139.105 270.041 139.105C269.25 139.105 268.512 139.527 267.703 140.318L266.42 141.566C266.227 141.76 265.998 141.83 265.752 141.83C265.506 141.83 265.277 141.742 265.084 141.654C264.047 141.109 262.148 139.615 260.373 137.822C258.58 136.029 257.051 134.166 256.541 133.094C256.453 132.9 256.365 132.672 256.365 132.461C256.365 132.232 256.436 132.021 256.629 131.828L257.877 130.51C258.65 129.666 259.072 128.928 259.072 128.154C259.072 127.521 258.809 126.871 258.281 126.133L254.59 120.912C253.975 120.051 253.113 119.664 252.164 119.664C251.057 119.664 249.861 120.209 248.842 121.211C247.154 122.846 246.416 124.867 246.416 127.1C246.416 132.127 250.213 138.174 255.117 143.078Z"/>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </main>
+
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+<script>
+  /* ── Presets ── */
+  const PRESETS = [
+    { name: 'Серый',     top: '#6b7280', bot: '#4b5563' },
+    { name: 'Ночь',      top: '#1e293b', bot: '#0f172a' },
+    { name: 'Синий',     top: '#1d4ed8', bot: '#1e3a5f' },
+    { name: 'Фиолет',   top: '#7c3aed', bot: '#4c1d95' },
+    { name: 'Зелёный',  top: '#059669', bot: '#064e3b' },
+    { name: 'Розовый',  top: '#be185d', bot: '#831843' },
+    { name: 'Закат',    top: '#ea580c', bot: '#7c2d12' },
+    { name: 'Аквa',     top: '#0891b2', bot: '#164e63' },
+  ];
+
+  const presetsEl = document.getElementById('presets');
+
+  PRESETS.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'preset' + (i === 0 ? ' active' : '');
+    btn.style.background = `linear-gradient(160deg, ${p.top}, ${p.bot})`;
+    btn.title = p.name;
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('c-top').value = p.top;
+      document.getElementById('c-bot').value = p.bot;
+      applyBg();
+    });
+    presetsEl.appendChild(btn);
+  });
+
+  /* ── Background ── */
+  function applyBg() {
+    const t = document.getElementById('c-top').value;
+    const b = document.getElementById('c-bot').value;
+    document.getElementById('dot-top').style.background = t;
+    document.getElementById('dot-bot').style.background = b;
+    document.getElementById('hex-top').textContent = t;
+    document.getElementById('hex-bot').textContent = b;
+    document.getElementById('ios-bg').style.background =
+      `linear-gradient(180deg, ${t} 0%, ${b} 100%)`;
+  }
+  applyBg();
+
+  document.getElementById('c-top').addEventListener('input', () => {
+    document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
+    applyBg();
+  });
+  document.getElementById('c-bot').addEventListener('input', () => {
+    document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
+    applyBg();
+  });
+
+  /* ── Text fields ── */
+  document.getElementById('f-name').addEventListener('input', e => {
+    const name = e.target.value || 'Имя';
+    const el = document.getElementById('p-name');
+    el.textContent = name;
+    const len = name.length;
+    el.style.fontSize =
+      len <= 6  ? '52px' :
+      len <= 12 ? '38px' :
+      len <= 20 ? '28px' : '20px';
+  });
+
+  document.getElementById('f-sub').addEventListener('input', e => {
+    document.getElementById('p-sub').textContent =
+      (e.target.value || 'Сотовый').toUpperCase();
+  });
+
+  document.getElementById('f-time').addEventListener('input', e => {
+    document.getElementById('p-time').textContent = e.target.value || '00:00';
+  });
+
+  /* ── Language toggle ── */
+  const LANGS = {
+    ru: { msg: 'Сообщение', rmnd: 'Напомнить', dec: 'Отклонить', ans: 'Ответить' },
+    en: { msg: 'Message',   rmnd: 'Remind me', dec: 'Decline',    ans: 'Accept'   },
+  };
+
+  function setLetters(el, text, animateIn) {
+    el.innerHTML = '';
+    [...text].forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'letter' + (animateIn ? ' letter-in' : '');
+      span.textContent = ch === ' ' ? ' ' : ch;
+      span.style.transitionDelay = `${i * 18}ms`;
+      el.appendChild(span);
+    });
+    if (animateIn) {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        el.querySelectorAll('.letter-in').forEach(s => s.classList.remove('letter-in'));
+      }));
+    }
+  }
+
+  function animateLabelChange(el, newText) {
+    const oldLetters = [...el.querySelectorAll('.letter')];
+    if (!oldLetters.length) { setLetters(el, newText); return; }
+    oldLetters.forEach((span, i) => {
+      span.style.transitionDelay = `${i * 15}ms`;
+      span.classList.add('letter-out');
+    });
+    setTimeout(() => setLetters(el, newText, true), oldLetters.length * 15 + 220);
+  }
+
+  document.querySelectorAll('.ios-action-label').forEach(el => setLetters(el, el.textContent));
+
+  function moveToggleThumb(btn) {
+    const row   = document.getElementById('toggle-row');
+    const thumb = document.getElementById('toggle-thumb');
+    const rowRect = row.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    thumb.style.width     = btnRect.width + 'px';
+    thumb.style.transform = `translateX(${btnRect.left - rowRect.left - 3}px)`;
+  }
+
+  document.querySelectorAll('.toggle-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      moveToggleThumb(btn);
+      const l = LANGS[btn.dataset.lang];
+      animateLabelChange(document.getElementById('l-msg'), l.msg);
+      animateLabelChange(document.getElementById('l-rmnd'), l.rmnd);
+    });
+  });
+
+  moveToggleThumb(document.querySelector('.toggle-btn.active'));
+  window.addEventListener('resize', () => {
+    moveToggleThumb(document.querySelector('.toggle-btn.active'));
+  });
+
+  /* ── Phone frame toggle ── */
+  document.getElementById('f-frame').addEventListener('change', e => {
+    document.getElementById('frame-wrap').classList.toggle('framed', e.target.checked);
+  });
+
+  /* ── Download PNG ── */
+  document.getElementById('btn-dl').addEventListener('click', async () => {
+    const btn = document.getElementById('btn-dl');
+    btn.textContent = 'Генерирую…';
+    btn.disabled = true;
+
+    const framed = document.getElementById('f-frame').checked;
+    const iosEl = document.getElementById('ios');
+    const target = framed ? document.getElementById('frame-wrap') : iosEl;
+
+    try {
+      let origRadius, origShadow;
+      if (!framed) {
+        origRadius = iosEl.style.borderRadius;
+        origShadow = iosEl.style.boxShadow;
+        iosEl.style.borderRadius = '0';
+        iosEl.style.boxShadow = 'none';
+      }
+
+      const dataUrl = await htmlToImage.toPng(target, {
+        pixelRatio: 4,
+        skipAutoScale: false,
+      });
+
+      if (!framed) {
+        iosEl.style.borderRadius = origRadius;
+        iosEl.style.boxShadow = origShadow;
+      }
+
+      const name = document.getElementById('f-name').value.trim() || 'call';
+      const a = document.createElement('a');
+      a.download = `ios-call-${name}.png`;
+      a.href = dataUrl;
+      a.click();
+    } catch (err) {
+      alert('Ошибка при генерации PNG:\n' + err.message);
+    }
+
+    btn.textContent = '⬇ Скачать PNG';
+    btn.disabled = false;
+  });
+
+  /* ── Init ── */
+  applyBg();
+</script>
+
+</body>
+</html>

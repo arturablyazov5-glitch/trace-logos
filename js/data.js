@@ -17,6 +17,7 @@ export const ecosystemLogoMap = {
   apple:       'apple.svg',
   bytedance:   'tiktok.svg',
   valve:       'valve.svg',
+  supercell:   'supercell.svg',
   microsoft:   'microsoft.svg',
   mvideo:      'mvideo.svg',
   artlebedev:  'artlebedev.svg',
@@ -46,6 +47,7 @@ export const ecosystemLabels = {
   PlayStation: 'PlayStation',
   bytedance:   'ByteDance',
   valve:       'Valve',
+  supercell:   'Supercell',
   mvideo:      'М.Видео',
   artlebedev:  'Студия Лебедева',
 };

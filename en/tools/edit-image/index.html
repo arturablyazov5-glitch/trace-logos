@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  (function(m,e,t,r,i,k,a){
+    m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+    m[i].l=1*new Date();
+    for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+  ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+  <script src="/components/cookie-consent.js" defer></script>
+<meta charset="UTF-8">
+  <script>window.__LANG__='en';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Обрезать и повернуть фото онлайн | Trace Logo's</title>
+<meta name="description" content="Обрезай, поворачивай и отражай фото прямо в браузере. Скачай результат. Обработка локально, без регистрации.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://trace-logos.ru/en/tools/edit-image/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Trace Logo's">
+<meta property="og:url" content="https://trace-logos.ru/en/tools/edit-image/">
+<meta property="og:title" content="Обрезать и повернуть фото онлайн">
+<meta property="og:description" content="Обрезай, поворачивай и отражай фото прямо в браузере. Обработка локально, без регистрации.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Обрезать и повернуть фото онлайн">
+<meta name="twitter:description" content="Обрезай, поворачивай и отражай фото прямо в браузере. Обработка локально, без регистрации.">
+<link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/tools/assets/tools.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Обрезать и повернуть фото",
+  "operatingSystem": "Any",
+  "applicationCategory": "MultimediaApplication",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
+  "description": "Обрезает, поворачивает и отражает фото прямо в браузере. Файлы никуда не отправляются.",
+  "url": "https://trace-logos.ru/tools/edit-image/",
+  "author": { "@type": "Person", "name": "Рафаэль Мансуров" }
+}
+</script>
+<style>
+/* ── Canvas area ── */
+.img-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.canvas-area {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px 12px 0 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.zoom-controls {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.zoom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 26px;
+  background: none;
+  border: none;
+  color: var(--text-mid);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: color 0.15s, background 0.15s;
+}
+.zoom-btn:hover { color: var(--text); background: var(--blue-glow); }
+
+.zoom-level {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  padding: 0 6px;
+  min-width: 36px;
+  text-align: center;
+  border-left: 1px solid var(--border2);
+  border-right: 1px solid var(--border2);
+  line-height: 26px;
+  cursor: default;
+}
+
+/* ── Edge hit areas for crop resize ── */
+.crop-edge {
+  position: absolute;
+  pointer-events: all;
+}
+.crop-edge-n { top: -4px; left: 12px; right: 12px; height: 10px; cursor: n-resize; }
+.crop-edge-s { bottom: -4px; left: 12px; right: 12px; height: 10px; cursor: s-resize; }
+.crop-edge-w { left: -4px; top: 12px; bottom: 12px; width: 10px; cursor: w-resize; }
+.crop-edge-e { right: -4px; top: 12px; bottom: 12px; width: 10px; cursor: e-resize; }
+
+.canvas-wrap {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+  user-select: none;
+}
+
+#previewCanvas {
+  display: block;
+  border-radius: 6px;
+}
+
+.crop-ui {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.crop-shade {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.52);
+  pointer-events: none;
+}
+
+.crop-box {
+  position: absolute;
+  border: 1.5px solid rgba(255, 255, 255, 0.88);
+  box-sizing: border-box;
+  cursor: move;
+  pointer-events: all;
+}
+
+.crop-box::before,
+.crop-box::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+.crop-box::before {
+  top: 33.3%; bottom: 33.3%; left: 0; right: 0;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+.crop-box::after {
+  top: 0; bottom: 0; left: 33.3%; right: 33.3%;
+  border-left: 1px solid rgba(255,255,255,0.2);
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.crop-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 2px;
+}
+.ch-nw { top: -5px; left: -5px; cursor: nw-resize; }
+.ch-n  { top: -5px; left: calc(50% - 5px); cursor: n-resize; }
+.ch-ne { top: -5px; right: -5px; cursor: ne-resize; }
+.ch-e  { top: calc(50% - 5px); right: -5px; cursor: e-resize; }
+.ch-se { bottom: -5px; right: -5px; cursor: se-resize; }
+.ch-s  { bottom: -5px; left: calc(50% - 5px); cursor: s-resize; }
+.ch-sw { bottom: -5px; left: -5px; cursor: sw-resize; }
+.ch-w  { top: calc(50% - 5px); left: -5px; cursor: w-resize; }
+
+/* ── Controls panel ── */
+.controls-panel {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 14px 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.controls-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+}
+
+.img-size-info {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.controls-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  width: 78px;
+  flex-shrink: 0;
+}
+
+.btn-tool {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  color: var(--text-mid);
+  font-family: var(--sans);
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.ratio-select {
+  padding-right: 10px;
+  cursor: pointer;
+  color: var(--text-dim);
+}
+.ratio-select:focus { outline: none; border-color: var(--blue); }
+
+.btn-tool:hover {
+  border-color: var(--blue);
+  background: var(--blue-glow);
+  color: var(--text);
+}
+
+.btn-tool.is-active {
+  border-color: var(--blue);
+  background: rgba(138, 107, 255, 0.15);
+  color: #b9a6ff;
+}
+
+.controls-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  gap: 8px;
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/en/" aria-label="Trace Logo's — на главную">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="/assets/brand/logo.svg" alt="" width="30" height="30">
+    </span>
+    <span class="brand-name">Trace Logo's<span class="brand-badge">Beta</span></span>
+  </a>
+  <nav class="header-nav" aria-label="Разделы">
+    <a href="/en/logos/">Логотипы</a>
+    <a href="/en/emoji/">Эмодзи</a>
+    <a href="/en/blog/">Блог</a>
+    <a href="/en/tools/" class="current">Инструменты</a>
+  </nav>
+  <a class="btn-github" href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+    <span>GitHub</span>
+  </a>
+</header>
+
+<div class="wrap">
+
+  <a href="/en/tools/" class="back-link">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+    Все инструменты
+  </a>
+
+  <header class="header">
+    <div class="badge">
+      <i data-lucide="shield-check" class="badge-icon" aria-hidden="true"></i>
+      В&nbsp;браузере
+    </div>
+    <h1>Обрезать и&nbsp;<span>повернуть фото</span></h1>
+    <p class="subtitle">
+      Загрузи фото. Обрежь, поверни или отрази. Скачай результат
+    </p>
+  </header>
+
+  <section class="section" id="edit-tool">
+    <div class="section-label">Редактор</div>
+    <h2>Кадрирование и&nbsp;трансформации</h2>
+    <p>Обработка локально — фото не покидает твой компьютер.</p>
+
+    <input type="file" id="fileInput" accept="image/*" class="is-hidden">
+
+    <div class="workspace" id="workspace">
+
+      <!-- Upload zone -->
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-pick">
+          <i data-lucide="image" class="upload-icon icon-upload-accent"></i>
+          <p class="upload-title">Перетащи фото или вставь из&nbsp;буфера</p>
+          <p class="upload-or">или</p>
+          <button type="button" class="btn btn-primary" id="uploadPickBtn">Выбрать файл</button>
+          <p class="upload-hint">JPG · PNG · WEBP · HEIC и&nbsp;другие форматы</p>
+        </div>
+        <p class="upload-notice" id="uploadNotice"></p>
+      </div>
+
+      <!-- Editor -->
+      <div class="editor-wrap" id="editorWrap">
+
+        <div class="editor-header">
+          <span id="fileName" class="file-name"></span>
+        </div>
+
+        <div class="img-editor">
+
+          <!-- Canvas + crop overlay -->
+          <div class="canvas-area" id="canvasArea">
+            <div class="zoom-controls">
+              <button class="zoom-btn" id="zoomOutBtn" title="Уменьшить">−</button>
+              <span class="zoom-level" id="zoomLevel">100%</span>
+              <button class="zoom-btn" id="zoomInBtn" title="Увеличить">+</button>
+            </div>
+            <div class="canvas-wrap" id="canvasWrap">
+              <canvas id="previewCanvas"></canvas>
+              <div class="crop-ui" id="cropUi">
+                <div class="crop-shade" id="shadeTop"></div>
+                <div class="crop-shade" id="shadeBottom"></div>
+                <div class="crop-shade" id="shadeLeft"></div>
+                <div class="crop-shade" id="shadeRight"></div>
+                <div class="crop-box" id="cropBox">
+                  <div class="crop-edge crop-edge-n" data-handle="n"></div>
+                  <div class="crop-edge crop-edge-s" data-handle="s"></div>
+                  <div class="crop-edge crop-edge-w" data-handle="w"></div>
+                  <div class="crop-edge crop-edge-e" data-handle="e"></div>
+                  <div class="crop-handle ch-nw" data-handle="nw"></div>
+                  <div class="crop-handle ch-n"  data-handle="n"></div>
+                  <div class="crop-handle ch-ne" data-handle="ne"></div>
+                  <div class="crop-handle ch-e"  data-handle="e"></div>
+                  <div class="crop-handle ch-se" data-handle="se"></div>
+                  <div class="crop-handle ch-s"  data-handle="s"></div>
+                  <div class="crop-handle ch-sw" data-handle="sw"></div>
+                  <div class="crop-handle ch-w"  data-handle="w"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls panel -->
+          <div class="controls-panel">
+
+            <!-- Size info + crop actions -->
+            <div class="controls-top-bar">
+              <span class="img-size-info" id="sizeInfo"></span>
+              <div style="display:flex;gap:6px;flex-shrink:0;align-items:center;">
+                <select id="ratioSelect" class="btn-tool ratio-select" title="Пропорции кадрирования">
+                  <option value="">Свободно</option>
+                  <option value="1">1 : 1</option>
+                  <option value="1.3333">4 : 3</option>
+                  <option value="0.75">3 : 4</option>
+                  <option value="1.7778">16 : 9</option>
+                  <option value="0.5625">9 : 16</option>
+                  <option value="1.5">3 : 2</option>
+                  <option value="0.6667">2 : 3</option>
+                </select>
+                <button type="button" class="btn-tool" id="autoCropBtn">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>
+                  По содержимому
+                </button>
+                <button type="button" class="btn-tool" id="resetCropBtn">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+                  Сбросить
+                </button>
+              </div>
+            </div>
+
+            <!-- Rotate -->
+            <div class="controls-row">
+              <span class="controls-label">Поворот</span>
+              <button type="button" class="btn-tool" id="rotLeftBtn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                −90°
+              </button>
+              <button type="button" class="btn-tool" id="rotRightBtn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+                +90°
+              </button>
+            </div>
+
+            <!-- Flip -->
+            <div class="controls-row">
+              <span class="controls-label">Отражение</span>
+              <button type="button" class="btn-tool" id="flipHBtn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3"/><path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/><path d="M12 20v2"/><path d="M12 14v2"/><path d="M12 8v2"/><path d="M12 2v2"/></svg>
+                По&nbsp;горизонтали
+              </button>
+              <button type="button" class="btn-tool" id="flipVBtn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3"/><path d="M21 16v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3"/><path d="M4 12H2"/><path d="M10 12H8"/><path d="M16 12h-2"/><path d="M22 12h-2"/></svg>
+                По&nbsp;вертикали
+              </button>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="controls-bottom-bar">
+              <button type="button" class="btn btn-ghost" id="resetBtn">Загрузить другое</button>
+              <button type="button" class="btn btn-primary" id="downloadBtn">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Скачать
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="tools-footer">
+    <span>© Trace Logo's — инструменты для файлов</span>
+    <span class="tools-footer-links">
+      <a href="/en/tools/">Все инструменты</a>
+      <a href="/en/">Главная</a>
+      <a href="/en/logos/">Логотипы</a>
+    </span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var fileInput     = document.getElementById('fileInput');
+  var uploadZone    = document.getElementById('uploadZone');
+  var uploadPickBtn = document.getElementById('uploadPickBtn');
+  var uploadNotice  = document.getElementById('uploadNotice');
+  var editorWrap    = document.getElementById('editorWrap');
+  var fileNameEl    = document.getElementById('fileName');
+  var canvasWrap    = document.getElementById('canvasWrap');
+  var previewCanvas = document.getElementById('previewCanvas');
+  var cropUi        = document.getElementById('cropUi');
+  var cropBox       = document.getElementById('cropBox');
+  var shadeTop      = document.getElementById('shadeTop');
+  var shadeBottom   = document.getElementById('shadeBottom');
+  var shadeLeft     = document.getElementById('shadeLeft');
+  var shadeRight    = document.getElementById('shadeRight');
+  var sizeInfo      = document.getElementById('sizeInfo');
+
+  var originalFile  = null;
+  var originalImage = null;
+
+  // Transform state
+  var state = { rotation: 0, flipH: false, flipV: false };
+
+  // Crop as fractions [0..1] of the rendered image
+  var crop = { x: 0, y: 0, w: 1, h: 1 };
+  var aspectRatio = 0; // W/H в пикселях; 0 = свободно
+
+  // Zoom + pan
+  var zoomLevel = 1;
+  var panX = 0, panY = 0;
+  var zoomLevelEl  = document.getElementById('zoomLevel');
+  var canvasAreaEl = document.getElementById('canvasArea');
+  var lockedAreaH  = 0;
+
+  // Zoom from a pivot point (canvas-area-center-relative coords).
+  // Buttons pass (0,0) = current visible center; wheel passes cursor position.
+  function applyZoom(newZoom, pivotX, pivotY) {
+    if (pivotX === undefined) { pivotX = 0; pivotY = 0; }
+
+    var oldZoom = zoomLevel;
+    zoomLevel = Math.max(1, Math.min(100, newZoom));
+
+    if (zoomLevel === 1) {
+      panX = 0;
+      panY = 0;
+    } else {
+      var factor = zoomLevel / oldZoom;
+      // Keep pivot visually fixed: pan_new = pivot - (pivot - pan) * factor
+      panX = pivotX - (pivotX - panX) * factor;
+      panY = pivotY - (pivotY - panY) * factor;
+    }
+
+    zoomLevelEl.textContent = Math.round(zoomLevel * 100) + '%';
+    renderPreview(); // clamps pan after knowing real canvas size
+  }
+
+  function resetZoom() {
+    zoomLevel = 1;
+    panX = 0;
+    panY = 0;
+    zoomLevelEl.textContent = '100%';
+    canvasWrap.style.transform = '';
+    if (originalImage) renderPreview();
+  }
+
+  // Фиксируем пивот на всю сессию прокрутки — мышь чуть двигается между тиками,
+  // без этого пивот "плывёт" и canvas прыгает в стороны.
+  var wheelPivotX = 0, wheelPivotY = 0, wheelTimer = null;
+
+  canvasAreaEl.addEventListener('wheel', function (e) {
+    if (!originalImage) return;
+    e.preventDefault();
+    if (wheelTimer === null) {
+      // Первый тик новой сессии — запоминаем пивот
+      var rect = canvasAreaEl.getBoundingClientRect();
+      wheelPivotX = e.clientX - (rect.left + rect.width  / 2);
+      wheelPivotY = e.clientY - (rect.top  + rect.height / 2);
+    }
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(function () { wheelTimer = null; }, 300);
+    applyZoom(zoomLevel * (e.deltaY < 0 ? 1.15 : 1 / 1.15), wheelPivotX, wheelPivotY);
+  }, { passive: false });
+
+  document.getElementById('zoomInBtn').addEventListener('click', function () {
+    applyZoom(zoomLevel * 1.25); // pivot = (0,0) = current visible center
+  });
+  document.getElementById('zoomOutBtn').addEventListener('click', function () {
+    applyZoom(zoomLevel / 1.25);
+  });
+
+  // ─── Upload ─────────────────────────────────────────────────────────
+
+  uploadPickBtn.addEventListener('click', function () { fileInput.click(); });
+
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files && fileInput.files[0]) loadFile(fileInput.files[0]);
+  });
+
+  uploadZone.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    uploadZone.classList.add('dragover');
+  });
+  uploadZone.addEventListener('dragleave', function () {
+    uploadZone.classList.remove('dragover');
+  });
+  uploadZone.addEventListener('drop', function (e) {
+    e.preventDefault();
+    uploadZone.classList.remove('dragover');
+    var f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (f && f.type.startsWith('image/')) loadFile(f);
+  });
+
+  document.addEventListener('paste', function (e) {
+    var items = e.clipboardData && e.clipboardData.items;
+    if (!items) return;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        var f = items[i].getAsFile();
+        if (f) { loadFile(f); break; }
+      }
+    }
+  });
+
+  function loadFile(file) {
+    originalFile = file;
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      URL.revokeObjectURL(url);
+      originalImage = img;
+      state = { rotation: 0, flipH: false, flipV: false };
+      crop = { x: 0, y: 0, w: 1, h: 1 };
+      aspectRatio = 0;
+      document.getElementById('ratioSelect').value = '';
+      fileNameEl.textContent = file.name;
+      uploadZone.style.display = 'none';
+      editorWrap.style.display = 'block';
+      resetZoom();
+      renderPreview();
+      syncButtonStates();
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      showNotice('Не удалось загрузить изображение. Попробуй другой файл.');
+    };
+    img.src = url;
+  }
+
+  // ─── Dimensions after rotation ──────────────────────────────────────
+
+  function renderedDims() {
+    var w = originalImage.naturalWidth;
+    var h = originalImage.naturalHeight;
+    if (state.rotation === 90 || state.rotation === 270) return { w: h, h: w };
+    return { w: w, h: h };
+  }
+
+  // ─── Render preview canvas ──────────────────────────────────────────
+
+  function renderPreview() {
+    var dims = renderedDims();
+    var availW = (canvasAreaEl.clientWidth || 680) - 40;
+    var baseScale = Math.min(1, availW / dims.w, 520 / dims.h);
+
+    if (zoomLevel === 1) {
+      lockedAreaH = Math.round(dims.h * baseScale) + 40;
+      canvasAreaEl.style.height = lockedAreaH + 'px';
+    }
+
+    var scale = baseScale * zoomLevel;
+    var dw = Math.round(dims.w * scale);
+    var dh = Math.round(dims.h * scale);
+
+    var maxCanvasPx = 8192;
+    var capFactor = Math.min(1, maxCanvasPx / Math.max(dw, dh));
+    var rw = Math.round(dw * capFactor);
+    var rh = Math.round(dh * capFactor);
+
+    previewCanvas.width  = rw;
+    previewCanvas.height = rh;
+    previewCanvas.style.width  = dw + 'px';
+    previewCanvas.style.height = dh + 'px';
+
+    drawTransformed(previewCanvas, rw, rh);
+
+    var areaW = canvasAreaEl.clientWidth  || dw;
+    var areaH = canvasAreaEl.clientHeight || dh;
+    var maxPanX = Math.max(0, (dw - areaW) / 2 + 120);
+    var maxPanY = Math.max(0, (dh - areaH) / 2 + 120);
+    panX = clamp(panX, -maxPanX, maxPanX);
+    panY = clamp(panY, -maxPanY, maxPanY);
+
+    canvasWrap.style.transform = (panX === 0 && panY === 0)
+      ? ''
+      : 'translate(' + panX.toFixed(1) + 'px,' + panY.toFixed(1) + 'px)';
+
+    positionCropBox();
+    updateSizeInfo();
+  }
+
+  function drawTransformed(canvas, dw, dh) {
+    var dims = renderedDims();
+    var s    = dw / dims.w;
+    var ctx  = canvas.getContext('2d');
+    var img  = originalImage;
+    var rad  = state.rotation * Math.PI / 180;
+
+    ctx.clearRect(0, 0, dw, dh);
+    ctx.save();
+    ctx.translate(dw / 2, dh / 2);
+    ctx.rotate(rad);
+    if (state.flipH) ctx.scale(-1, 1);
+    if (state.flipV) ctx.scale(1, -1);
+    ctx.drawImage(
+      img,
+      -img.naturalWidth  / 2 * s,
+      -img.naturalHeight / 2 * s,
+       img.naturalWidth  * s,
+       img.naturalHeight * s
+    );
+    ctx.restore();
+  }
+
+  // ─── Size info ───────────────────────────────────────────────────────
+
+  function updateSizeInfo() {
+    var dims = renderedDims();
+    var cw = Math.round(dims.w * crop.w);
+    var ch = Math.round(dims.h * crop.h);
+    sizeInfo.textContent = cw + ' × ' + ch + ' пкс';
+  }
+
+  // ─── Crop box positioning ────────────────────────────────────────────
+
+  function positionCropBox() {
+    var cw = previewCanvas.offsetWidth;
+    var ch = previewCanvas.offsetHeight;
+    var l = crop.x * cw;
+    var t = crop.y * ch;
+    var w = crop.w * cw;
+    var h = crop.h * ch;
+
+    cropBox.style.left   = l + 'px';
+    cropBox.style.top    = t + 'px';
+    cropBox.style.width  = w + 'px';
+    cropBox.style.height = h + 'px';
+
+    shadeTop.style.cssText    = 'top:0;left:0;right:0;height:' + t + 'px';
+    shadeBottom.style.cssText = 'left:0;right:0;top:' + (t + h) + 'px;bottom:0';
+    shadeLeft.style.cssText   = 'top:' + t + 'px;left:0;width:' + l + 'px;height:' + h + 'px';
+    shadeRight.style.cssText  = 'top:' + t + 'px;left:' + (l + w) + 'px;right:0;height:' + h + 'px';
+  }
+
+  // ─── Crop drag interaction ───────────────────────────────────────────
+
+  var drag = null; // { handle, startX, startY, uw, uh, startCrop }
+
+  function pointerDown(clientX, clientY, target) {
+    var handle = target.dataset && target.dataset.handle;
+    var rect   = cropUi.getBoundingClientRect();
+    drag = {
+      handle:    handle || null,
+      startX:    clientX,
+      startY:    clientY,
+      uw:        rect.width,
+      uh:        rect.height,
+      startCrop: { x: crop.x, y: crop.y, w: crop.w, h: crop.h },
+    };
+  }
+
+  function pointerMove(clientX, clientY) {
+    if (!drag) return;
+    var dx = (clientX - drag.startX) / drag.uw;
+    var dy = (clientY - drag.startY) / drag.uh;
+    var sc = drag.startCrop;
+    var MIN = 0.04;
+    var c   = { x: sc.x, y: sc.y, w: sc.w, h: sc.h };
+    var h   = drag.handle;
+
+    if (!h) {
+      // Move whole box
+      c.x = clamp(sc.x + dx, 0, 1 - sc.w);
+      c.y = clamp(sc.y + dy, 0, 1 - sc.h);
+    } else {
+      if (h === 'nw' || h === 'n' || h === 'ne') {
+        var ny = clamp(sc.y + dy, 0, sc.y + sc.h - MIN);
+        c.h = sc.h + (sc.y - ny);
+        c.y = ny;
+      }
+      if (h === 'sw' || h === 's' || h === 'se') {
+        c.h = clamp(sc.h + dy, MIN, 1 - sc.y);
+      }
+      if (h === 'nw' || h === 'w' || h === 'sw') {
+        var nx = clamp(sc.x + dx, 0, sc.x + sc.w - MIN);
+        c.w = sc.w + (sc.x - nx);
+        c.x = nx;
+      }
+      if (h === 'ne' || h === 'e' || h === 'se') {
+        c.w = clamp(sc.w + dx, MIN, 1 - sc.x);
+      }
+
+      // Соблюдаем пропорции если выбраны
+      if (aspectRatio) {
+        var dims = renderedDims();
+        // fracRatio: c.w / c.h = aspectRatio * dims.h / dims.w
+        var fr = aspectRatio * dims.h / dims.w;
+        if (h === 'n' || h === 's') {
+          // Высота ведёт — ширина центрируется.
+          // Ограничиваем высоту так, чтобы получившаяся ширина не вышла за [0,1].
+          var centerX = sc.x + sc.w / 2;
+          var maxNw = Math.min(1, 2 * centerX, 2 * (1 - centerX));
+          var nh = clamp(c.h, MIN, maxNw / fr);
+          var nw = nh * fr;
+          c.h = nh;
+          c.x = clamp(centerX - nw / 2, 0, 1 - nw);
+          c.w = nw;
+        } else if (h === 'e' || h === 'w') {
+          // Ширина ведёт — высота центрируется.
+          // Ограничиваем ширину так, чтобы получившаяся высота не вышла за [0,1].
+          var centerY = sc.y + sc.h / 2;
+          var maxNh = Math.min(1, 2 * centerY, 2 * (1 - centerY));
+          var nw2 = clamp(c.w, MIN, maxNh * fr);
+          var nh2 = nw2 / fr;
+          c.w = nw2;
+          c.y = clamp(centerY - nh2 / 2, 0, 1 - nh2);
+          c.h = nh2;
+        } else {
+          // Угол — ширина ведёт, высота вычисляется
+          var nh = c.w / fr;
+          if (nh < MIN) { nh = MIN; c.w = clamp(nh * fr, MIN, 1); }
+          if (nh > 1)   { nh = 1;   c.w = clamp(nh * fr, MIN, 1); }
+          c.h = nh;
+          if (h === 'nw' || h === 'n' || h === 'ne') c.y = sc.y + sc.h - c.h;
+          if (h === 'nw' || h === 'w' || h === 'sw') c.x = sc.x + sc.w - c.w;
+          c.x = clamp(c.x, 0, 1 - c.w);
+          c.y = clamp(c.y, 0, 1 - c.h);
+        }
+      }
+    }
+
+    crop = c;
+    positionCropBox();
+    updateSizeInfo();
+  }
+
+  function pointerUp() { drag = null; }
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+
+
+  // ─── Middle-mouse pan ────────────────────────────────────────────────
+
+  var mmPan = null; // { startX, startY, startPanX, startPanY }
+
+  canvasAreaEl.addEventListener('mousedown', function (e) {
+    if (e.button !== 1 || !originalImage) return;
+    e.preventDefault();
+    mmPan = { startX: e.clientX, startY: e.clientY, startPanX: panX, startPanY: panY };
+    canvasAreaEl.style.cursor = 'grabbing';
+  });
+
+  document.addEventListener('mousemove', function (e) {
+    if (!mmPan) return;
+    var dispW = previewCanvas.offsetWidth;
+    var dispH = previewCanvas.offsetHeight;
+    var areaW = canvasAreaEl.clientWidth  || dispW;
+    var areaH = canvasAreaEl.clientHeight || dispH;
+    var maxPanX = Math.max(0, (dispW - areaW) / 2 + 120);
+    var maxPanY = Math.max(0, (dispH - areaH) / 2 + 120);
+    panX = clamp(mmPan.startPanX + (e.clientX - mmPan.startX), -maxPanX, maxPanX);
+    panY = clamp(mmPan.startPanY + (e.clientY - mmPan.startY), -maxPanY, maxPanY);
+    canvasWrap.style.transform = 'translate(' + panX.toFixed(1) + 'px,' + panY.toFixed(1) + 'px)';
+  });
+
+  document.addEventListener('mouseup', function (e) {
+    if (e.button !== 1 || !mmPan) return;
+    mmPan = null;
+    canvasAreaEl.style.cursor = '';
+  });
+
+  // Prevent browser's auto-scroll on middle click
+  canvasAreaEl.addEventListener('auxclick', function (e) { e.preventDefault(); });
+
+  // Mouse events (crop) — left button only
+  cropBox.addEventListener('mousedown', function (e) {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    pointerDown(e.clientX, e.clientY, e.target);
+  });
+  document.addEventListener('mousemove', function (e) { if (!mmPan) pointerMove(e.clientX, e.clientY); });
+  document.addEventListener('mouseup', function (e) { if (e.button === 0) pointerUp(); });
+
+  // Touch events
+  cropBox.addEventListener('touchstart', function (e) {
+    if (e.touches.length !== 1) return;
+    e.preventDefault();
+    pointerDown(e.touches[0].clientX, e.touches[0].clientY, e.target);
+  }, { passive: false });
+  document.addEventListener('touchmove', function (e) {
+    if (!drag || e.touches.length !== 1) return;
+    e.preventDefault();
+    pointerMove(e.touches[0].clientX, e.touches[0].clientY);
+  }, { passive: false });
+  document.addEventListener('touchend', pointerUp);
+
+
+  // ─── Auto-crop (trim transparent pixels) ────────────────────────────
+
+  document.getElementById('autoCropBtn').addEventListener('click', function () {
+    if (!originalImage) return;
+
+    var dims = renderedDims();
+    var tmpCanvas = document.createElement('canvas');
+    tmpCanvas.width  = dims.w;
+    tmpCanvas.height = dims.h;
+    drawTransformed(tmpCanvas, dims.w, dims.h);
+
+    var data = tmpCanvas.getContext('2d').getImageData(0, 0, dims.w, dims.h).data;
+    var minX = dims.w, minY = dims.h, maxX = 0, maxY = 0;
+    var found = false;
+
+    for (var y = 0; y < dims.h; y++) {
+      for (var x = 0; x < dims.w; x++) {
+        var alpha = data[(y * dims.w + x) * 4 + 3];
+        if (alpha > 8) {
+          if (x < minX) minX = x;
+          if (x > maxX) maxX = x;
+          if (y < minY) minY = y;
+          if (y > maxY) maxY = y;
+          found = true;
+        }
+      }
+    }
+
+    if (!found) return;
+
+    crop = {
+      x: minX / dims.w,
+      y: minY / dims.h,
+      w: (maxX - minX + 1) / dims.w,
+      h: (maxY - minY + 1) / dims.h,
+    };
+    positionCropBox();
+    updateSizeInfo();
+  });
+
+  // ─── Controls ────────────────────────────────────────────────────────
+
+  document.getElementById('rotLeftBtn').addEventListener('click', function () {
+    state.rotation = (state.rotation + 270) % 360;
+    crop = { x: 0, y: 0, w: 1, h: 1 };
+    resetZoom();
+    renderPreview();
+  });
+
+  document.getElementById('rotRightBtn').addEventListener('click', function () {
+    state.rotation = (state.rotation + 90) % 360;
+    crop = { x: 0, y: 0, w: 1, h: 1 };
+    resetZoom();
+    renderPreview();
+  });
+
+  document.getElementById('flipHBtn').addEventListener('click', function () {
+    state.flipH = !state.flipH;
+    crop = { x: 0, y: 0, w: 1, h: 1 };
+    resetZoom();
+    renderPreview();
+    syncButtonStates();
+  });
+
+  document.getElementById('flipVBtn').addEventListener('click', function () {
+    state.flipV = !state.flipV;
+    crop = { x: 0, y: 0, w: 1, h: 1 };
+    resetZoom();
+    renderPreview();
+    syncButtonStates();
+  });
+
+  document.getElementById('resetCropBtn').addEventListener('click', function () {
+    crop = { x: 0, y: 0, w: 1, h: 1 };
+    resetZoom();
+  });
+
+  document.getElementById('ratioSelect').addEventListener('change', function () {
+    aspectRatio = parseFloat(this.value) || 0;
+    if (!aspectRatio || !originalImage) return;
+    // Подгоняем текущий кроп под выбранные пропорции
+    var dims = renderedDims();
+    var fr = aspectRatio * dims.h / dims.w; // crop.w / crop.h
+    var newH = clamp(crop.w / fr, 0.04, 1 - crop.y);
+    var centerY = crop.y + crop.h / 2;
+    crop.h = newH;
+    crop.y = clamp(centerY - newH / 2, 0, 1 - newH);
+    positionCropBox();
+    updateSizeInfo();
+  });
+
+  // Двойной клик по канвасу (не по кнопкам) — сбросить вид
+  canvasAreaEl.addEventListener('dblclick', function (e) {
+    if (!originalImage) return;
+    if (e.target.closest('button')) return;
+    resetZoom();
+  });
+
+  function syncButtonStates() {
+    document.getElementById('flipHBtn').classList.toggle('is-active', state.flipH);
+    document.getElementById('flipVBtn').classList.toggle('is-active', state.flipV);
+  }
+
+  // ─── Download ─────────────────────────────────────────────────────────
+
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    if (!originalImage) return;
+
+    // Render full-resolution transformed image
+    var dims = renderedDims();
+    var fullCanvas = document.createElement('canvas');
+    fullCanvas.width  = dims.w;
+    fullCanvas.height = dims.h;
+    drawTransformed(fullCanvas, dims.w, dims.h);
+
+    // Apply crop
+    var cpxX = Math.round(crop.x * dims.w);
+    var cpxY = Math.round(crop.y * dims.h);
+    var cpxW = Math.max(1, Math.round(crop.w * dims.w));
+    var cpxH = Math.max(1, Math.round(crop.h * dims.h));
+
+    var outCanvas = document.createElement('canvas');
+    outCanvas.width  = cpxW;
+    outCanvas.height = cpxH;
+    outCanvas.getContext('2d').drawImage(fullCanvas, cpxX, cpxY, cpxW, cpxH, 0, 0, cpxW, cpxH);
+
+    // Determine output MIME and extension
+    var mime = 'image/png';
+    var ext  = '.png';
+    if (originalFile) {
+      if (originalFile.type === 'image/jpeg') { mime = 'image/jpeg'; ext = '.jpg'; }
+      else if (originalFile.type === 'image/webp') { mime = 'image/webp'; ext = '.webp'; }
+    }
+
+    var baseName = (originalFile && originalFile.name || 'photo').replace(/\.[^.]+$/, '');
+
+    outCanvas.toBlob(function (blob) {
+      if (!blob) { showNotice('Не удалось создать файл. Попробуй снова.'); return; }
+      var a = document.createElement('a');
+      a.href     = URL.createObjectURL(blob);
+      a.download = baseName + '-edited' + ext;
+      a.click();
+      URL.revokeObjectURL(a.href);
+    }, mime, 1.0);
+  });
+
+  // ─── Reset ───────────────────────────────────────────────────────────
+
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    originalImage = null;
+    originalFile  = null;
+    fileInput.value = '';
+    state = { rotation: 0, flipH: false, flipV: false };
+    crop  = { x: 0, y: 0, w: 1, h: 1 };
+    editorWrap.style.display = 'none';
+    uploadZone.style.display = '';
+    syncButtonStates();
+  });
+
+  // ─── Helpers ─────────────────────────────────────────────────────────
+
+  function showNotice(msg) {
+    if (uploadNotice) uploadNotice.textContent = msg;
+  }
+
+  window.addEventListener('resize', function () {
+    if (originalImage) renderPreview();
+  });
+
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js" integrity="sha384-8nT3SpButyvenpAdKYPJzXdSz3zidMGduMoaMvwjKnAWVv238n6P1mhveiJJQWrV" crossorigin="anonymous" defer onload="window.lucide&&window.lucide.createIcons()"></script>
+</body>
+</html>

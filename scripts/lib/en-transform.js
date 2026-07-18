@@ -43,23 +43,47 @@ const escAttr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 // real HTML attribute) — leave those untouched.
 const isRelativePath = (rel) => rel !== '' && !rel.includes('${') && !/^(?:[a-z][a-z0-9+.-]*:|\/\/|\/|#)/i.test(rel);
 
+// Data feeds have no /en/ mirror (logos.json, emoji.json, llms.txt, sitemap.xml…) —
+// <a> links to these must keep pointing at the root, not get an /en/ prefix.
+const isDataFeed = (rel) => /\.(?:json|txt|xml)$/i.test(rel);
+
+// Some hand-authored pages (404.html, admin/index.html) already write internal
+// <a> links as site-root-absolute ("/logos/", "/#h-collections") rather than
+// relative. Those bypass isRelativePath entirely, so without this they'd stay
+// pointing at the RU page even inside the /en/ mirror.
+const isSiteAbsolutePath = (rel) => /^\/(?!\/|en\/)/.test(rel) && !isDataFeed(rel);
+
 function makePathsAbsolute(html, sourceRelPath) {
-  const baseUrl = `${BASE_ORIGIN}/${sourceRelPath}`;
-  const resolve = (rel) => {
+  const baseUrl   = `${BASE_ORIGIN}/${sourceRelPath}`;
+  // <a> tags are page navigation. This function only ever runs while building the
+  // /en/ mirror (see callers), so an internal page link must resolve to a URL
+  // still inside /en/ — otherwise "logos/" on the homepage becomes "/logos/"
+  // (the RU page) instead of "/en/logos/". Resolve those against an /en/-prefixed
+  // base instead of the root one used for shared assets.
+  const enBaseUrl = `${BASE_ORIGIN}/en/${sourceRelPath}`;
+  const resolve = (rel, base) => {
     if (!isRelativePath(rel)) return null;
-    try { const u = new URL(rel, baseUrl); return u.pathname + u.search + u.hash; } catch { return null; }
+    try { const u = new URL(rel, base); return u.pathname + u.search + u.hash; } catch { return null; }
   };
   html = html.replace(
-    /(<(?:a|link|script|img|source)\b[^>]*?\s(?:href|src))="([^"]*)"/gi,
+    /(<(?:link|script|img|source)\b[^>]*?\s(?:href|src))="([^"]*)"/gi,
     (m, pre, rel) => {
-      const abs = resolve(rel);
+      const abs = resolve(rel, baseUrl);
+      return abs ? `${pre}="${abs}"` : m;
+    }
+  );
+  html = html.replace(
+    /(<a\b[^>]*?\shref)="([^"]*)"/gi,
+    (m, pre, rel) => {
+      if (isSiteAbsolutePath(rel)) return `${pre}="/en${rel}"`;
+      const abs = resolve(rel, isDataFeed(rel) ? baseUrl : enBaseUrl);
       return abs ? `${pre}="${abs}"` : m;
     }
   );
   html = html.replace(
     /(window\.__\w+__\s*=\s*['"])((?:\.\.\/|\.\/)[^'"]*)(['"]\s*;)/g,
     (m, pre, rel, post) => {
-      const abs = resolve(rel);
+      const abs = resolve(rel, baseUrl);
       return abs ? `${pre}${abs}${post}` : m;
     }
   );

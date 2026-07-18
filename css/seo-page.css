@@ -390,6 +390,8 @@ main {
 .lightbox-inner.wide svg {
   width: min(900px, 90vw);
   height: auto;
+  max-height: 80vh;
+  object-fit: contain;
   border-radius: 0;
 }
 
@@ -908,6 +910,15 @@ footer {
 }
 #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
+.download-terms {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--text-6);
+  line-height: 1.5;
+}
+.download-terms a { color: var(--text-4); text-decoration: underline; }
+.download-terms a:hover { color: var(--text-2); }
+
 .btn-report-outdated {
   display: inline-block;
   width: auto;
@@ -923,15 +934,15 @@ footer {
 }
 .btn-report-outdated:hover { color: #888; }
 
-.btn-donate {
+.btn-support {
   display: flex; align-items: center; justify-content: center; gap: 6px;
   width: 100%; margin-top: 4px; padding: 12px 20px; border-radius: 12px;
   font-size: 12px; font-weight: 500; text-decoration: none;
   color: #fff; background: rgb(36 36 36);
   transition: background .15s;
 }
-.btn-donate:hover { background: rgb(50 50 50); }
-.btn-donate svg { flex-shrink: 0; fill: #fff; stroke: none; }
+.btn-support:hover { background: rgb(50 50 50); }
+.btn-support svg { flex-shrink: 0; fill: #fff; stroke: none; }
 
 /* macOS style tabs (Цвет / Тёмное / Светлое) */
 .macos-style-tabs {

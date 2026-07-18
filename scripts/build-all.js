@@ -40,6 +40,8 @@ const PLUGIN_ASSETS = argv.includes('--plugin-assets') || argv.includes('--full'
 //   everything → sitemap.js (sole owner of sitemap.xml, must run last)
 const FAST_STEPS = [
   { file: 'test-data.js', args: ['--pre'],  label: 'Тесты данных: манифесты, ассеты, экосистемы — до сборки' },
+  { file: 'build-download-stats.js',       label: 'Статистика скачиваний (для «Скачано: N раз» на SEO-страницах)' },
+  { file: 'build-search-images.js',        label: 'PNG-рендеры SVG-логотипов для Яндекс.Картинок (инкрементально)' },
   { file: 'build-seo-pages.js',           label: 'SEO-страницы логотипов (logos/<cat>/<slug>/)' },
   { file: 'cleanup-orphaned-pages.js',     label: 'Удаление осиротевших страниц' },
   { file: 'build-api-json.js',             label: 'Публичный API (logos.json, logos/<cat>.json)' },

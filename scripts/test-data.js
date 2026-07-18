@@ -208,6 +208,23 @@ function runPost() {
     }
   }
 
+  // Search images: every SVG logo needs an up-to-date PNG render
+  // (build-search-images.js) — it's the image Яндекс.Картинки indexes,
+  // referenced by the page preview <img> and the image sitemap.
+  let searchChecked = 0;
+  for (const rel of listFilesRecursive(path.join(ROOT, 'assets/logos/svgs'))) {
+    if (!/\.svg$/i.test(rel)) continue;
+    searchChecked++;
+    const srcAbs = path.join(ROOT, 'assets/logos/svgs', rel);
+    const outRel = `assets/logos/search/${rel.replace(/\.svg$/i, '.png')}`;
+    const outAbs = path.join(ROOT, outRel);
+    if (!fs.existsSync(outAbs)) {
+      err(`нет PNG-рендера для поиска: ${outRel} (запустить build-search-images.js)`);
+    } else if (fs.statSync(outAbs).mtimeMs < fs.statSync(srcAbs).mtimeMs) {
+      err(`PNG-рендер для поиска устарел: ${outRel} старше исходника`);
+    }
+  }
+
   // OG images: every buildable logo should have assets/og/<slug>.png.
   // Warning, not error: build-og-images.js is the opt-in slow tier.
   let ogChecked = 0;

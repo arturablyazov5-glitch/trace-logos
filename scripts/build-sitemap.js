@@ -53,13 +53,26 @@ function urlEntry(loc, freq, priority, lastmod = TODAY) {
   return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
 }
 
-// Same as urlEntry, plus an <image:image> block — Google/Yandex Images index
-// straight from this without crawling the page itself.
+// Same as urlEntry, plus <image:image> blocks — Google Images indexes straight
+// from this without crawling the page itself. Image search only indexes raster
+// formats, so for SVG logos the PNG render (build-search-images.js) goes
+// first as the primary image; the SVG original is listed second for engines
+// that do handle vectors.
 function logoUrlEntry(item, loc, freq, priority, lastmod) {
-  const ext    = assetExt(item.file);
-  const imgUrl = `${BASE_URL}/assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
-  const title  = escXml(`Логотип ${item.name}`);
-  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n    <image:image>\n      <image:loc>${imgUrl}</image:loc>\n      <image:title>${title}</image:title>\n    </image:image>\n  </url>`;
+  const ext   = assetExt(item.file);
+  const title = escXml(`Логотип ${item.name}`);
+  const imgBlock = (url) => `    <image:image>\n      <image:loc>${url}</image:loc>\n      <image:title>${title}</image:title>\n    </image:image>`;
+
+  const urls = [];
+  if (ext === 'svg') {
+    const searchRel = `assets/logos/search/${item.file.replace(/\.svg$/i, '.png')}`;
+    if (fs.existsSync(path.join(ROOT, searchRel))) urls.push(`${BASE_URL}/${searchRel}`);
+    urls.push(`${BASE_URL}/assets/logos/svgs/${item.file}`);
+  } else {
+    urls.push(`${BASE_URL}/assets/logos/pngs/${item.file}`);
+  }
+
+  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n${urls.map(imgBlock).join('\n')}\n  </url>`;
 }
 
 function wrapUrlset(entries, withImageNs = false) {
@@ -75,6 +88,8 @@ function main() {
   pageEntries.push(urlEntry(`${BASE_URL}/emoji/`,  'weekly',  '0.8'));
   pageEntries.push(urlEntry(`${BASE_URL}/blog/`,   'weekly',  '0.6'));
   pageEntries.push(urlEntry(`${BASE_URL}/sitemap/`, 'monthly', '0.3'));
+  pageEntries.push(urlEntry(`${BASE_URL}/terms/`,  'yearly',  '0.3'));
+  pageEntries.push(urlEntry(`${BASE_URL}/consent/`, 'yearly', '0.3'));
   pageEntries.push(urlEntry(`${BASE_URL}/icons/`,  'monthly', '0.5'));
 
   const logoManifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'manifest.json'), 'utf8'));

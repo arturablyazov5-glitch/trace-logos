@@ -95,6 +95,15 @@ function variantLabel(v, lang = 'ru') {
   return v.label ?? TYPE_LABELS[v.type] ?? v.type ?? '';
 }
 function assetExt(file)      { return file.split('.').pop().toLowerCase(); }
+
+// Raster render of an SVG-primary logo (build-search-images.js) — the image
+// actually indexable by Яндекс.Картинки/Google Images. Returns the repo-root
+// relative path, or null when the item is PNG-primary or the render is missing.
+function searchImageRel(item) {
+  if (assetExt(item.file) !== 'svg') return null;
+  const rel = `assets/logos/search/${item.file.replace(/\.svg$/i, '.png')}`;
+  return fs.existsSync(path.join(ROOT, rel)) ? rel : null;
+}
 function variantType(v)      { return assetExt(v.file) === 'png' ? 'png' : 'svg'; }
 // Mirrors svgUrl() in js/utils.js: a leading "/" means the file is already a
 // root-relative path (e.g. a cross-folder emoji asset), not a name inside
@@ -139,6 +148,20 @@ const ECO_DATA = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'ecosystems
 
 function ecosystemName(id, lang = 'ru') {
   return (ECO_DATA[id] && ECO_DATA[id][lang]) || (ECO_DATA[id] && ECO_DATA[id].ru) || id;
+}
+
+// ── Download counter («Скачано: N раз») ─────────────────────────────────────
+// Snapshot refreshed by build-download-stats.js, which MUST run before this
+// script — see FAST_STEPS order in build-all.js.
+
+const DOWNLOAD_STATS = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'download-stats.json'), 'utf8')).downloads || {};
+
+// "1 раз" / "2 раза" / "5 раз" / "11 раз" (11-14 always genitive plural).
+function pluralRu(n, [one, few, many]) {
+  const mod10 = n % 10, mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return one;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return few;
+  return many;
 }
 
 // Some ecosystems read better with a custom phrase instead of the generic
@@ -562,6 +585,14 @@ function buildMetaTableRows(item, lang = 'ru') {
           <time class="meta-val" datetime="${dateModified}">${dateFormatted}</time>
         </div>`;
 
+  const downloadCount = DOWNLOAD_STATS[item.figma] || 0;
+  const downloadsRow = downloadCount > 0
+    ? `<div class="meta-row">
+          <span class="meta-key">${lang === 'en' ? 'Downloaded' : 'Скачано'}</span>
+          <span class="meta-val">${lang === 'en' ? `${downloadCount} time${downloadCount === 1 ? '' : 's'}` : `${downloadCount} ${pluralRu(downloadCount, ['раз', 'раза', 'раз'])}`}</span>
+        </div>`
+    : '';
+
   return `<div class="meta-row">
           <span class="meta-key" data-i18n="seoMetaFormat">Формат</span>
           <span class="meta-val">${esc(fmt)}</span>
@@ -569,7 +600,7 @@ function buildMetaTableRows(item, lang = 'ru') {
         <div class="meta-row">
           <span class="meta-key">Figma</span>
           <span class="meta-val">${esc(figmaDisplay)}</span>
-        </div>${brandRow}${dateRow}`;
+        </div>${brandRow}${dateRow}${downloadsRow}`;
 }
 
 // ── Brand colors (extracted from SVG source — source of truth) ─────────────────
@@ -826,12 +857,18 @@ function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'r
 
   const primaryExt = assetExt(item.file);
   const dateModified = itemDate(item);
+  // Image search (Яндекс.Картинки) indexes only raster formats — point
+  // contentUrl at the PNG render from build-search-images.js when one exists.
+  // The SVG original is still linked on-page as the download.
+  const searchRel = searchImageRel(item);
   const imageObj = {
     "@type": "ImageObject",
     "name": en ? `${nm} Logo` : `Логотип ${item.name}`,
     "description": en ? `Official ${nm} logo in SVG` : `Официальный логотип ${item.name} в SVG`,
-    "contentUrl": `${BASE_URL}/assets/logos/svgs/${item.file}`,
-    "encodingFormat": primaryExt === 'png' ? 'image/png' : 'image/svg+xml',
+    "contentUrl": searchRel
+      ? `${BASE_URL}/${searchRel}`
+      : `${BASE_URL}/assets/logos/${primaryExt === 'png' ? 'pngs' : 'svgs'}/${item.file}`,
+    "encodingFormat": (searchRel || primaryExt === 'png') ? 'image/png' : 'image/svg+xml',
     "dateModified": dateModified,
     ...(item.brandUrl ? { "license": item.brandUrl } : {}),
   };
@@ -905,8 +942,15 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   const ogSlug  = seoUrl(item).replace(/^\/logos\/|\/$/g, '').replace(/\//g, '-');
   const ogImage = `${BASE_URL}/assets/og/${ogSlug}.png`;
 
-  const previewSrc  = `${rel}assets/logos/${primaryType === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
-  const previewMime = primaryType === 'png' ? 'image/png' : 'image/svg+xml';
+  // Visible preview: raster PNG render when available — Яндекс.Картинки only
+  // indexes raster images found in the page HTML (it ignores the sitemap
+  // image extension), so the <img> the crawler sees must be the PNG. The SVG
+  // stays the download/color-editor source via __SEO_PAGE__.defaultSrc.
+  const previewRel  = searchImageRel(item);
+  const previewSrc  = previewRel
+    ? `${rel}${previewRel}`
+    : `${rel}assets/logos/${primaryType === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
+  const previewMime = (previewRel || primaryType === 'png') ? 'image/png' : 'image/svg+xml';
 
   const brandColors = extractBrandColors(item);
   const homeRel  = en ? '/en/' : rel;
