@@ -838,6 +838,14 @@ function buildSeoPageData(item, rel, lang = 'ru') {
 };`;
 }
 
+// Optional per-item search alias (alt_name / alt_name_en in category JSON) —
+// a second brand name users actually type («Сбербанк» for Сбер, "Tinkoff" for
+// T-Bank). Rendered as «Имя (Алиас)» in title/H1/OG and as alternateName in
+// JSON-LD. No RU→EN fallback: a Cyrillic alias on an EN page is noise.
+function altName(item, lang) {
+  return (lang === 'en' ? item.alt_name_en : item.alt_name) || '';
+}
+
 function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'ru') {
   const en        = lang === 'en';
   const nm        = en ? (item.name_en || item.name) : item.name;
@@ -870,6 +878,7 @@ function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'r
       : `${BASE_URL}/assets/logos/${primaryExt === 'png' ? 'pngs' : 'svgs'}/${item.file}`,
     "encodingFormat": (searchRel || primaryExt === 'png') ? 'image/png' : 'image/svg+xml',
     "dateModified": dateModified,
+    ...(altName(item, lang) ? { "alternateName": en ? `${altName(item, lang)} Logo` : `Логотип ${altName(item, lang)}` } : {}),
     ...(item.brandUrl ? { "license": item.brandUrl } : {}),
   };
 
@@ -931,11 +940,16 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   const ogDesc   = en ? ogDescEn   : ogDescRu;
   const logoDesc = en ? (item.about_en || metaDescEn) : (item.about || metaDescRu);
 
-  const title    = en ? `${nm} Logo — download ${titleFmt} free · Trace Logo's` : `Логотип ${item.name} — скачать ${titleFmt} бесплатно · Trace Logo's`;
-  const ogTitle  = en ? `${nm} Logo — download ${titleFmt} free`                : `Логотип ${item.name} — скачать ${titleFmt} бесплатно`;
-  const twTitle  = en ? `${nm} Logo ${titleFmt} — Trace Logo's`                 : `Логотип ${item.name} ${titleFmt} — Trace Logo's`;
-  const h1       = en ? `${nm} Logo` : `Логотип ${item.name}`;
-  const prevAlt  = en ? `${nm} Logo ${primaryType.toUpperCase()}` : `Логотип ${item.name} ${primaryType.toUpperCase()}`;
+  // Search alias: «Логотип Сбера» и «логотип Сбербанка» — разные запросы;
+  // title/H1 должны покрывать оба (см. alt_name в category JSON).
+  const alt      = altName(item, lang);
+  const nmFull   = alt ? `${nm} (${alt})` : nm;
+
+  const title    = en ? `${nmFull} Logo — download ${titleFmt} free · Trace Logo's` : `Логотип ${nmFull} — скачать ${titleFmt} бесплатно · Trace Logo's`;
+  const ogTitle  = en ? `${nmFull} Logo — download ${titleFmt} free`                : `Логотип ${nmFull} — скачать ${titleFmt} бесплатно`;
+  const twTitle  = en ? `${nmFull} Logo ${titleFmt} — Trace Logo's`                 : `Логотип ${nmFull} ${titleFmt} — Trace Logo's`;
+  const h1       = en ? `${nmFull} Logo` : `Логотип ${nmFull}`;
+  const prevAlt  = en ? `${nmFull} Logo ${primaryType.toUpperCase()}` : `Логотип ${nmFull} ${primaryType.toUpperCase()}`;
   const secLabel = en ? (section_en || section) : section;
   const ctaTitle = en ? `${readyTotal}+ logos in the catalog` : `${readyTotal}+ логотипов в каталоге`;
 
@@ -980,7 +994,7 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     CATEGORY_ICON:            categoryIcon(item.figma),
     CATEGORY_NAME:            esc(secLabel),
     H1:                       esc(h1),
-    H1_EN:                    esc(`${item.name_en || item.name} Logo`),
+    H1_EN:                    esc(`${item.alt_name_en ? `${item.name_en || item.name} (${item.alt_name_en})` : (item.name_en || item.name)} Logo`),
     LOGO_DESC:                logoDesc,
     CATALOG_COUNT:            String(readyTotal),
     CATALOG_CTA_TITLE:        esc(ctaTitle),

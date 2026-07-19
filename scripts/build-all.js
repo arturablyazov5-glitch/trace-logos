@@ -14,6 +14,7 @@
  *   node scripts/build-all.js --dry-run       # preview every step, write nothing
  *   node scripts/build-all.js --with-og       # + regenerate assets/og/<slug>.png (Puppeteer, ~582 renders, slow)
  *   node scripts/build-all.js --og-home       # + regenerate assets/og/home.png
+ *   node scripts/build-all.js --og-blog       # + regenerate assets/og/blog-<slug>.png (one per post)
  *   node scripts/build-all.js --plugin-assets # + regenerate figma-plugin/assets/*
  *   node scripts/build-all.js --full          # everything above
  *
@@ -31,6 +32,7 @@ const argv = process.argv.slice(2);
 const DRY_RUN   = argv.includes('--dry-run');
 const WITH_OG   = argv.includes('--with-og') || argv.includes('--full');
 const OG_HOME   = argv.includes('--og-home') || argv.includes('--full');
+const OG_BLOG   = argv.includes('--og-blog') || argv.includes('--full');
 const PLUGIN_ASSETS = argv.includes('--plugin-assets') || argv.includes('--full');
 
 // Order encodes real data dependencies (see CLAUDE.md "Build Scripts"):
@@ -65,9 +67,10 @@ const FAST_STEPS = [
 ];
 
 const OPTIONAL_STEPS = [
-  { file: 'build-og-images.js',     label: 'OG-превью логотипов (assets/og/<slug>.png)', enabled: WITH_OG },
-  { file: 'build-og-home.js',       label: 'OG-превью главной (assets/og/home.png)',     enabled: OG_HOME },
-  { file: 'build-plugin-assets.js', label: 'Ассеты Figma-плагина (иконка, thumbnail)',   enabled: PLUGIN_ASSETS },
+  { file: 'build-og-images.js',      label: 'OG-превью логотипов (assets/og/<slug>.png)',      enabled: WITH_OG },
+  { file: 'build-og-home.js',        label: 'OG-превью главной (assets/og/home.png)',          enabled: OG_HOME },
+  { file: 'build-blog-og-images.js', label: 'OG-превью постов блога (assets/og/blog-<slug>.png)', enabled: OG_BLOG },
+  { file: 'build-plugin-assets.js',  label: 'Ассеты Figma-плагина (иконка, thumbnail)',        enabled: PLUGIN_ASSETS },
 ];
 
 function runStep({ file, label, args: stepArgs = [] }) {
@@ -87,7 +90,7 @@ function main() {
   console.log(`\x1b[1mbuild-all${DRY_RUN ? ' (dry-run)' : ''}\x1b[0m — ${steps.length} шагов`);
   if (skipped.length) {
     console.log(`Пропущено (медленные Puppeteer-шаги, не входят в fast tier): ${skipped.map(s => s.file).join(', ')}`);
-    console.log('Запустить их тоже: --with-og / --og-home / --plugin-assets / --full\n');
+    console.log('Запустить их тоже: --with-og / --og-home / --og-blog / --plugin-assets / --full\n');
   }
 
   const timings = [];

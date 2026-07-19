@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script src="/components/cookie-consent.js" defer></script>
+  <meta charset="UTF-8">
+  <script>window.__LANG__='en';</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Embed SVG on a Website — img, Inline, Background and Which to Pick · Trace Logo's</title>
+  <meta name="description" content="Four ways to put SVG into HTML and CSS — the img tag, inline code, background-image and use-sprites. Pros, cons, security notes and code examples.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <link rel="canonical" href="https://trace-logos.ru/en/blog/kak-vstavit-svg-na-sajt/">
+  <link rel="alternate" hreflang="ru" href="https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/">
+  <link rel="alternate" hreflang="en" href="https://trace-logos.ru/en/blog/kak-vstavit-svg-na-sajt/">
+  <link rel="alternate" hreflang="x-default" href="https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/">
+  <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://trace-logos.ru/llms.txt">
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:title" content="How to Embed SVG on a Website — img, Inline, Background and Which to Pick">
+  <meta property="og:description" content="Four ways to put SVG into HTML and CSS — the img tag, inline code, background-image and use-sprites. Pros, cons, security notes and code examples.">
+  <meta property="og:url" content="https://trace-logos.ru/en/blog/kak-vstavit-svg-na-sajt/">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/blog-kak-vstavit-svg-na-sajt.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-06-25">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trace Logo's",
+          "item": "https://trace-logos.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://trace-logos.ru/en/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to Embed SVG on a Website — img, Inline, Background and Which to Pick",
+          "item": "https://trace-logos.ru/en/blog/kak-vstavit-svg-na-sajt/"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "How to Embed SVG on a Website — img, Inline, Background and Which to Pick",
+      "description": "Four ways to put SVG into HTML and CSS — the img tag, inline code, background-image and use-sprites. Pros, cons, security notes and code examples.",
+      "datePublished": "2026-06-25",
+      "dateModified": "2026-06-25",
+      "url": "https://trace-logos.ru/en/blog/kak-vstavit-svg-na-sajt/",
+      "inLanguage": "en",
+      "image": "https://trace-logos.ru/assets/og/blog-kak-vstavit-svg-na-sajt.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "mainEntityOfPage": "https://trace-logos.ru/en/blog/kak-vstavit-svg-na-sajt/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="stylesheet" href="/css/seo-page.css">
+  <link rel="stylesheet" href="/css/blog.css">
+  <!-- Yandex.RTB -->
+  <script>window.yaContextCb=window.yaContextCb||[]</script>
+  <script src="https://yandex.ru/ads/system/context.js" async></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/en/" aria-label="Trace Logo's">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="/assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="/en/logos/" method="get" data-base="/" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Search logos..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+  <a class="back-btn" href="/en/blog/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span data-i18n="backToCatalog">Back</span>
+  </a>
+  <lang-switcher></lang-switcher>
+</header>
+<script src="/components/lang-switcher.js" defer></script>
+<script src="/components/search-box.js" defer></script>
+
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
+  <a href="/en/">Trace Logo's</a><span class="sep">/</span>
+  <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a><span class="sep">/</span>
+  <span class="current" aria-current="page">How to Embed SVG on a Website — img, Inline, Background and Which to Pick</span>
+</nav>
+
+<main>
+  <div class="blog-layout">
+    <article class="blog-article">
+      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(145 72% 58%) 0%, hsl(187 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></div>
+      <header class="blog-article-head">
+        <div class="blog-meta">
+          <time class="blog-date" datetime="2026-06-25">June 25, 2026</time>
+          <span class="blog-meta-sep" aria-hidden="true">·</span>
+          <span class="blog-read">6 min read</span>
+        </div>
+        <h1>How to Embed SVG on a Website — img, Inline, Background and Which to Pick</h1>
+      </header>
+      <div class="blog-body">
+        <p>There are four different ways to put an SVG on a website, and they're not interchangeable: one gives you caching, another CSS color control, a third saves requests. The choice affects speed, flexibility and even security. Let's go through each with code and an honest list of trade-offs.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>Logos and images</strong> — <code>&lt;img src=&quot;logo.svg&quot;&gt;</code>: simple, cached, safe. <strong>Icons that change color</strong> (hovers, dark mode) — inline <code>&lt;svg&gt;</code> in the HTML. <strong>Decoration and backgrounds</strong> — CSS <code>background-image</code>. <strong><code>&lt;use&gt;</code> sprites</strong> — when you have lots of repeated icons.</p></div></div>
+      <h2 id="method-1-the-img-tag-the-default">Method 1. The img tag — the default</h2>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;img src=&quot;/images/logo.svg&quot; alt=&quot;Company logo&quot; width=&quot;140&quot; height=&quot;40&quot;&gt;</code></pre>
+      </div>
+      <p>Behaves like any image: cached by the browser, lazy-loads with <code>loading=&quot;lazy&quot;</code>, keeps HTML lean.</p>
+      <p><strong>Pros:</strong> caching, simplicity, safety — scripts inside the SVG don't run in this mode.</p>
+      <p><strong>Cons:</strong> no CSS access to the internals. You can't recolor the logo on hover with <code>fill</code> — page styles don't reach inside <code>&lt;img&gt;</code>.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Always set width and height</span></div><div class="callout-body"><p>Without explicit dimensions some browsers measure the SVG only after it loads — and the layout jumps. <code>width</code>/<code>height</code> reserve the space upfront and kill layout shift (the CLS from Core Web Vitals).</p></div></div>
+      <h2 id="method-2-inline-svg-full-control">Method 2. Inline SVG — full control</h2>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;button class=&quot;btn&quot;&gt;
+  &lt;svg viewBox=&quot;0 0 24 24&quot; width=&quot;24&quot; height=&quot;24&quot; aria-hidden=&quot;true&quot;&gt;
+    &lt;path d=&quot;M12 2L2 22h20L12 2z&quot; fill=&quot;currentColor&quot;/&gt;
+  &lt;/svg&gt;
+  Send
+&lt;/button&gt;</code></pre>
+      </div>
+      <p><strong>Pros:</strong> full CSS/JS control — color, animation, hover transitions. The magic word <code>fill=&quot;currentColor&quot;</code> makes the icon inherit the text color: button color changes — icon follows, dark mode included, automatically. Zero network requests.</p>
+      <p><strong>Cons:</strong> no caching (ships with every page), bloats HTML, and repeated icons get copy-pasted around.</p>
+      <p><strong>Choose for:</strong> UI icons that change color by state, and above-the-fold elements that can't wait for a request.</p>
+      <h2 id="method-3-css-background-image-for-decoration">Method 3. CSS background-image — for decoration</h2>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">.hero {
+  background-image: url('/images/pattern.svg');
+  background-size: cover;
+}</code></pre>
+      </div>
+      <p><strong>Pros:</strong> cached, decoration separated from content, <code>background-repeat</code> and friends work.</p>
+      <p><strong>Cons:</strong> no recoloring (workaround: paint one-color icons via <code>mask-image</code> + <code>background-color</code>); invisible to screen readers — so decoration only, never meaning.</p>
+      <h2 id="method-4-svg-sprite-with-use-for-many-icons">Method 4. SVG sprite with use — for many icons</h2>
+      <p>All icons live in one sprite file, referenced by id:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;svg class=&quot;icon&quot;&gt;&lt;use href=&quot;/sprite.svg#icon-search&quot;/&gt;&lt;/svg&gt;</code></pre>
+      </div>
+      <p><strong>Pros:</strong> one request for all icons, cached, <code>currentColor</code> works.</p>
+      <p><strong>Cons:</strong> requires building the sprite (usually automated), and per-icon lazy loading is awkward.</p>
+      <p><strong>Choose for:</strong> design systems and interfaces with dozens of repeated icons.</p>
+      <h2 id="summary-table">Summary table</h2>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th></th><th>img</th><th>inline</th><th>background</th><th>sprite</th></tr></thead><tbody><tr><td>Caching</td><td>✅</td><td>⛔</td><td>✅</td><td>✅</td></tr><tr><td>CSS recoloring</td><td>⛔</td><td>✅</td><td>⛔</td><td>✅</td></tr><tr><td>Accessibility (alt)</td><td>✅</td><td>✅</td><td>⛔</td><td>✅</td></tr><tr><td>Keeps HTML lean</td><td>✅</td><td>⛔</td><td>✅</td><td>✅</td></tr><tr><td>Typical case</td><td>logo</td><td>UI icons</td><td>decoration</td><td>UI icons (many)</td></tr></tbody></table></div>
+      <h2 id="security-why-you-must-not-inline-third-party-svg">Security: why you must not inline third-party SVG</h2>
+      <p>SVG is XML, and it can carry <code>&lt;script&gt;</code>, event handlers and external references. Via <code>&lt;img&gt;</code> and <code>background</code> the browser ignores all of it — but <strong>inlining executes scripts</strong> with your page's full privileges.</p>
+      <div class="callout callout-danger"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg><span>The rule</span></div><div class="callout-body"><p>Inline only SVGs you control: your own or from a trusted source, run through an optimizer (SVGO strips scripts). User-uploaded SVG — <code>&lt;img&gt;</code> only, served from a separate domain.</p></div></div>
+      <h2 id="faq">FAQ</h2>
+      <p><strong>Do I need a PNG fallback?</strong> No. Every browser you'll meet in 2026 supports SVG. IE fallbacks are archaeology.</p>
+      <p><strong>Why is my inline SVG huge on the page?</strong> It probably lacks a <code>viewBox</code> or carries giant hardcoded <code>width</code>/<code>height</code>. Make sure <code>viewBox</code> exists and sizing is done in CSS.</p>
+      <p><strong>How do I animate SVG?</strong> Inline it and use regular CSS animations on paths and groups. For complex work — GSAP or Lottie (what logo animation is even for — <a href="/en/blog/animirovannyj-logotip/" target="_blank" rel="noopener">covered separately</a>).</p>
+      <p><strong>Does lazy loading work for SVG?</strong> For <code>&lt;img&gt;</code> — yes, plain <code>loading=&quot;lazy&quot;</code>. Inline SVG ships with the HTML and can't be lazy — one more argument against inlining everything.</p>
+      <p><strong>Can SVG be a cursor or favicon?</strong> Favicon — yes, via <code>&lt;link rel=&quot;icon&quot; type=&quot;image/svg+xml&quot;&gt;</code> (<a href="/en/blog/kak-sdelat-favicon/" target="_blank" rel="noopener">the favicon article</a>). Cursor — formally possible (<code>cursor: url(icon.svg)</code>) but flaky; PNG is safer.</p>
+      <h2 id="accessibility-the-three-attributes-everyone-forgets">Accessibility: the three attributes everyone forgets</h2>
+      <p>An SVG should make sense to screen readers, not just eyes:</p>
+      <ul>
+      <li><strong>A meaningful image</strong> (logo, illustration): in <code>&lt;img&gt;</code> — a normal <code>alt</code>; in inline SVG — <code>role=&quot;img&quot;</code> plus a <code>&lt;title&gt;</code> as the first child:</li>
+      </ul>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;svg role=&quot;img&quot; viewBox=&quot;0 0 100 100&quot;&gt;
+  &lt;title&gt;Company logo&lt;/title&gt;
+  ...
+&lt;/svg&gt;</code></pre>
+      </div>
+      <ul>
+      <li><strong>A decorative icon</strong> next to text (the icon inside a &quot;Send&quot; button): the opposite — hide it with <code>aria-hidden=&quot;true&quot;</code>, or the reader announces both the text and the icon.</li>
+      <li><strong>An interactive SVG</strong> (an icon-only button): <code>aria-label</code> on the button itself, <code>aria-hidden</code> on the SVG inside.</li>
+      </ul>
+      <p>Three lines of code separating a tidy site from one where a blind user hears &quot;graphic graphic graphic&quot; instead of navigation.</p>
+      <h2 id="performance-what-each-method-costs-in-numbers">Performance: what each method costs, in numbers</h2>
+      <p>Take a typical page with a logo and 20 icons:</p>
+      <ul>
+      <li><strong>Everything inline:</strong> +30–60 KB on every HTML document; icons never cache across pages. On a 100-page site the user downloads the icons 100 times.</li>
+      <li><strong>Everything via img:</strong> 21 requests on first visit, then cache. But 20 requests upfront is a visible pause on slow networks (HTTP/2 softens, doesn't cancel).</li>
+      <li><strong>Sprite + inline logo:</strong> 1 cached request for all icons, the logo renders instantly with zero requests. Usually the optimum.</li>
+      </ul>
+      <p>Two multipliers for any method: run the SVG through an optimizer (30–70% off — see <a href="/en/blog/kak-optimizirovat-svg/" target="_blank" rel="noopener">SVG optimization</a>) and confirm the server gzips/brotlis SVG — text compresses 3–5×.</p>
+      <h2 id="the-classic-complaint-the-svg-logo-jumps-on-load">The classic complaint: the SVG logo &quot;jumps&quot; on load</h2>
+      <p>The page renders, the logo pops in a beat later, shifting the header. Causes and cures:</p>
+      <ol>
+      <li><strong>No width/height on the img</strong> — the browser doesn't know the size until load. Set the attributes.</li>
+      <li><strong>The SVG loads from a CSS background</strong> after style parsing — for a header logo use <code>&lt;img&gt;</code> or inline.</li>
+      <li><strong>The logo depends on a web font</strong> (SVG text not outlined) — outline the text.</li>
+      </ol>
+      <p>For above-the-fold there's also the &quot;critical inline&quot; pattern: the header logo inline (instant), everything else as cached files.</p>
+      <h2 id="in-short">In short</h2>
+      <p><code>&lt;img&gt;</code> for logos and images, inline for recolorable icons, background for decoration, sprites for icons in bulk. And never inline SVG from untrusted sources.</p>
+      <p>Every SVG in our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a> is clean vector with no scripts or junk: download the file for <code>&lt;img&gt;</code> or copy the markup straight to your clipboard with one button.</p>
+      </div>
+
+      <section class="blog-related">
+        <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
+        <div class="blog-list">
+          <a class="blog-card" href="/en/blog/kak-sdelat-favicon/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">18.06.2026</div>
+          <div class="blog-card-title">Favicons in 2026 — Formats, Sizes and the Right HTML</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-optimizirovat-svg/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">16.06.2026</div>
+          <div class="blog-card-title">How to Optimize SVG — Cut File Size 2–10× with Zero Quality Loss</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/vektor-i-rastr-raznica/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">17.07.2026</div>
+          <div class="blog-card-title">Vector vs Raster Graphics — The Difference in Plain Words</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/v-kakom-formate-nuzhen-logotip/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">16.07.2026</div>
+          <div class="blog-card-title">What File Format Should a Logo Be — SVG, PNG, AI, EPS or PDF</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/pochemu-logotip-razmytyj/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">07.07.2026</div>
+          <div class="blog-card-title">Why Your Logo Looks Blurry and How to Fix It — Every Cause Explained</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-konvertirovat-svg-v-png/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">15.06.2026</div>
+          <div class="blog-card-title">How to Convert SVG to PNG and Back — 5 Lossless Methods</div>
+        </div>
+      </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="blog-sidebar">
+      <nav class="blog-sidebar-nav" aria-label="On this page"><span class="blog-sidebar-label">On this page</span><ol><li><a href="#method-1-the-img-tag-the-default">Method 1. The img tag — the default</a></li><li><a href="#method-2-inline-svg-full-control">Method 2. Inline SVG — full control</a></li><li><a href="#method-3-css-background-image-for-decoration">Method 3. CSS background-image — for decoration</a></li><li><a href="#method-4-svg-sprite-with-use-for-many-icons">Method 4. SVG sprite with use — for many icons</a></li><li><a href="#summary-table">Summary table</a></li><li><a href="#security-why-you-must-not-inline-third-party-svg">Security: why you must not inline third-party SVG</a></li><li><a href="#faq">FAQ</a></li><li><a href="#accessibility-the-three-attributes-everyone-forgets">Accessibility: the three attributes everyone forgets</a></li><li><a href="#performance-what-each-method-costs-in-numbers">Performance: what each method costs, in numbers</a></li><li><a href="#the-classic-complaint-the-svg-logo-jumps-on-load">The classic complaint: the SVG logo &quot;jumps&quot; on load</a></li><li><a href="#in-short">In short</a></li></ol></nav>
+      <div class="blog-progress-wrap">
+      <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+      <span class="blog-progress-pct">0%</span>
+    </div>
+    </aside>
+  </div>
+
+  <div class="catalog-cta">
+    <div class="catalog-cta-text">
+      <span class="catalog-cta-title" data-i18n="blogCtaTitle">Logo and emoji library</span>
+      <span class="catalog-cta-sub" data-i18n="blogCtaSub">Download SVG/PNG free and export to Figma</span>
+    </div>
+    <a class="catalog-cta-link" href="/en/logos/">
+      <span data-i18n="seoCatalogOpen">Open catalog</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</main>
+
+<footer>
+  Trace Logo's Beta · <a href="/en/" class="footer-link">trace-logos</a>
+</footer>
+
+<script type="module" src="/js/header-search.js"></script>
+<script type="module" src="/js/blog-toc.js"></script>
+<script type="module" src="/js/blog-code.js"></script>
+</body>
+</html>

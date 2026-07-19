@@ -159,6 +159,7 @@ export const DICT = {
     blogRssTitle:     "Блог Trace Logo's — RSS",
     blogCtaTitle:     'Библиотека логотипов и эмодзи',
     blogCtaSub:       'Скачивайте SVG/PNG бесплатно и экспортируйте в Figma',
+    blogRelatedTitle: 'Может быть еще интересно',
     iconsTitle:       "SVG-иконки для интерфейсов — Trace Logo's",
     iconsMetaDesc:    'Открытая библиотека SVG-иконок для интерфейсного дизайна. Скачивайте и используйте в проектах бесплатно. Раздел в разработке.',
     iconsOgDesc:      'Открытая библиотека SVG-иконок для интерфейсного дизайна. Скачивайте бесплатно.',
@@ -228,6 +229,7 @@ export const DICT = {
     sitemapNavAria:  'Навигация',
     sitemapGroupCollections: 'Подборки',
     sitemapGroupSections:    'Разделы',
+    catIndexTitle: 'Все категории логотипов',
     // sitemap logo category labels
     'sitemapCat_social':    'Мессенджеры и соцсети',
     'sitemapCat_ai':        'Нейросети',
@@ -266,6 +268,8 @@ export const DICT = {
     'sitemapCat_flag':      'Флаги',
     'sitemapCat_games':     'Игры',
     'sitemapCat_b2b':       'B2B и корпоративные сервисы',
+    'sitemapCat_city':      'Города',
+    'sitemapCat_developers':'Девелоперы и недвижимость',
     // sitemap emoji category labels
     'sitemapEmoji_smileys':    'Смайлы',
     'sitemapEmoji_people':     'Люди',
@@ -457,6 +461,7 @@ export const DICT = {
     blogRssTitle:     "Trace Logo's Blog — RSS",
     blogCtaTitle:     'Logo and emoji library',
     blogCtaSub:       'Download SVG/PNG free and export to Figma',
+    blogRelatedTitle: 'You might also like',
     iconsTitle:       "SVG Icons for Interfaces — Trace Logo's",
     iconsMetaDesc:    'Open SVG icon library for interface design. Download and use in projects for free.',
     iconsOgDesc:      'Open SVG icon library for interface design. Download free.',
@@ -526,6 +531,7 @@ export const DICT = {
     sitemapNavAria:  'Navigation',
     sitemapGroupCollections: 'Collections',
     sitemapGroupSections:    'Sections',
+    catIndexTitle: 'All logo categories',
     // sitemap logo category labels
     'sitemapCat_social':    'Messengers & Social',
     'sitemapCat_ai':        'AI & Neural Networks',
@@ -564,6 +570,8 @@ export const DICT = {
     'sitemapCat_flag':      'Flags',
     'sitemapCat_games':     'Games',
     'sitemapCat_b2b':       'B2B & Enterprise',
+    'sitemapCat_city':      'Cities',
+    'sitemapCat_developers':'Developers & Real Estate',
     // sitemap emoji category labels
     'sitemapEmoji_smileys':    'Smileys',
     'sitemapEmoji_people':     'People',

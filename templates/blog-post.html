@@ -45,15 +45,33 @@
 </nav>
 
 <main>
-  <article class="blog-article">
-    <header class="blog-article-head">
-      <time class="blog-date" datetime="{{DATE_ISO}}">{{DATE_HUMAN}}</time>
-      <h1>{{H1}}</h1>
-    </header>
-    <div class="blog-body">
-      {{BODY}}
-    </div>
-  </article>
+  <div class="blog-layout">
+    <article class="blog-article">
+      <div class="blog-article-cover" style="{{COVER_STYLE}}" aria-hidden="true">{{COVER_ICON}}</div>
+      <header class="blog-article-head">
+        <div class="blog-meta">
+          <time class="blog-date" datetime="{{DATE_ISO}}">{{DATE_HUMAN}}</time>
+          <span class="blog-meta-sep" aria-hidden="true">·</span>
+          <span class="blog-read">{{READ_TIME}}</span>
+        </div>
+        <h1>{{H1}}</h1>
+      </header>
+      <div class="blog-body">
+        {{BODY}}
+      </div>
+
+      <section class="blog-related">
+        <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
+        <div class="blog-list">
+          {{RELATED_POSTS}}
+        </div>
+      </section>
+    </article>
+
+    <aside class="blog-sidebar">
+      {{SIDEBAR}}
+    </aside>
+  </div>
 
   <div class="catalog-cta">
     <div class="catalog-cta-text">
@@ -72,5 +90,7 @@
 </footer>
 
 <script type="module" src="{{REL}}js/header-search.js"></script>
+<script type="module" src="{{REL}}js/blog-toc.js"></script>
+<script type="module" src="{{REL}}js/blog-code.js"></script>
 </body>
 </html>

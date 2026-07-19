@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script src="/components/cookie-consent.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как оптимизировать SVG — уменьшаем вес файла в 2–10 раз без потери качества · Trace Logo's</title>
+  <meta name="description" content="Почему SVG из редакторов весит больше, чем должен: мусор экспорта, лишние точки, растр внутри. SVGO, SVGOMG и ручные приёмы оптимизации с примерами.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <link rel="canonical" href="https://trace-logos.ru/blog/kak-optimizirovat-svg/">
+  <link rel="alternate" hreflang="ru" href="https://trace-logos.ru/blog/kak-optimizirovat-svg/">
+  <link rel="alternate" hreflang="en" href="https://trace-logos.ru/en/blog/kak-optimizirovat-svg/">
+  <link rel="alternate" hreflang="x-default" href="https://trace-logos.ru/blog/kak-optimizirovat-svg/">
+  <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://trace-logos.ru/llms.txt">
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:title" content="Как оптимизировать SVG — уменьшаем вес файла в 2–10 раз без потери качества">
+  <meta property="og:description" content="Почему SVG из редакторов весит больше, чем должен: мусор экспорта, лишние точки, растр внутри. SVGO, SVGOMG и ручные приёмы оптимизации с примерами.">
+  <meta property="og:url" content="https://trace-logos.ru/blog/kak-optimizirovat-svg/">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/blog-kak-optimizirovat-svg.png">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="article:published_time" content="2026-06-16">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trace Logo's",
+          "item": "https://trace-logos.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://trace-logos.ru/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Как оптимизировать SVG — уменьшаем вес файла в 2–10 раз без потери качества",
+          "item": "https://trace-logos.ru/blog/kak-optimizirovat-svg/"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Как оптимизировать SVG — уменьшаем вес файла в 2–10 раз без потери качества",
+      "description": "Почему SVG из редакторов весит больше, чем должен: мусор экспорта, лишние точки, растр внутри. SVGO, SVGOMG и ручные приёмы оптимизации с примерами.",
+      "datePublished": "2026-06-16",
+      "dateModified": "2026-06-16",
+      "url": "https://trace-logos.ru/blog/kak-optimizirovat-svg/",
+      "inLanguage": "ru",
+      "image": "https://trace-logos.ru/assets/og/blog-kak-optimizirovat-svg.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "mainEntityOfPage": "https://trace-logos.ru/blog/kak-optimizirovat-svg/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="stylesheet" href="../../css/seo-page.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <!-- Yandex.RTB -->
+  <script>window.yaContextCb=window.yaContextCb||[]</script>
+  <script src="https://yandex.ru/ads/system/context.js" async></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="../../" aria-label="Trace Logo's">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="../../assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../logos/" method="get" data-base="../../" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+  <a class="back-btn" href="../../blog/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span data-i18n="backToCatalog">Все статьи</span>
+  </a>
+  <lang-switcher></lang-switcher>
+</header>
+<script src="../../components/lang-switcher.js" defer></script>
+<script src="../../components/search-box.js" defer></script>
+
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
+  <a href="../../">Trace Logo's</a><span class="sep">/</span>
+  <a href="../../blog/"><span data-i18n="blogSection">Блог</span></a><span class="sep">/</span>
+  <span class="current" aria-current="page">Как оптимизировать SVG — уменьшаем вес файла в 2–10 раз без потери качества</span>
+</nav>
+
+<main>
+  <div class="blog-layout">
+    <article class="blog-article">
+      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(165 72% 58%) 0%, hsl(207 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
+      <header class="blog-article-head">
+        <div class="blog-meta">
+          <time class="blog-date" datetime="2026-06-16">16 июня 2026</time>
+          <span class="blog-meta-sep" aria-hidden="true">·</span>
+          <span class="blog-read">6 мин чтения</span>
+        </div>
+        <h1>Как оптимизировать SVG — уменьшаем вес файла в 2–10 раз без потери качества</h1>
+      </header>
+      <div class="blog-body">
+        <p>SVG считается лёгким форматом, но откройте файл, экспортированный из <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> или <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>, — и найдёте там метаданные редактора, закомментированный мусор, координаты с восемью знаками после запятой и стили, задублированные на каждой фигуре. Типичный экспортированный SVG можно сжать в 2–10 раз, не изменив ни одного пикселя на экране. Разберём, как.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Прогоните файл через <strong>SVGO</strong> (или его веб-версию <strong>SVGOMG</strong>) — это закроет 90% оптимизации автоматически: уберёт метаданные, округлит координаты, схлопнет группы. Оставшиеся 10% — ручные: проверить, нет ли растра внутри, лишних невидимых фигур и текста, не переведённого в кривые.</p></div></div>
+      <h2 id="откуда-в-svg-мусор">Откуда в SVG мусор</h2>
+      <p>SVG — текстовый формат, и редакторы пишут туда всё, что им удобно:</p>
+      <ul>
+      <li><strong>Метаданные редактора:</strong> <code>&lt;metadata&gt;</code>, комментарии «Generator: Adobe <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>», приватные атрибуты <code>sodipodi:</code>/<code>inkscape:</code> — браузеру они не нужны вообще.</li>
+      <li><strong>Избыточная точность:</strong> координата <code>12.000000381469727</code> вместо <code>12</code> — на глаз разницы ноль, в весе — ощутимо, когда точек тысячи.</li>
+      <li><strong>Пустые группы и defs:</strong> остатки слоёв, неиспользуемые градиенты, обёртки без содержимого.</li>
+      <li><strong>Задублированные стили:</strong> <code>fill=&quot;#21A038&quot;</code> на каждой из 40 фигур вместо одного стиля на группе.</li>
+      <li><strong>Скрытые объекты:</strong> фигуры с <code>display:none</code> или за пределами viewBox — артефакты процесса рисования, которые уехали в экспорт.</li>
+      </ul>
+      <h2 id="автоматика-svgo-и-svgomg">Автоматика: SVGO и SVGOMG</h2>
+      <p><strong>SVGOMG</strong> — веб-интерфейс: перетащили файл, подвигали тумблеры, скачали результат, вес до/после виден сразу. Для разовых задач — идеально.</p>
+      <p><strong>SVGO</strong> — консольная утилита для потока файлов и сборки:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">npx svgo logo.svg              # оптимизировать файл
+npx svgo -f ./icons -o ./dist  # папку целиком</code></pre>
+      </div>
+      <p>Дефолтные настройки безопасны. Два тумблера, с которыми стоит быть аккуратным:</p>
+      <ul>
+      <li><strong>Precision (точность округления).</strong> 2–3 знака — безопасно; 1 — может заметно исказить мелкие детали и плавные кривые.</li>
+      <li><strong>Remove viewBox.</strong> Не включайте: без viewBox SVG перестаёт масштабироваться через CSS — типичная причина «SVG вставил, а он не резинится».</li>
+      </ul>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Проверяйте после оптимизации</span></div><div class="callout-body"><p>Откройте оптимизированный файл рядом с оригиналом и сравните на глаз, особенно мелкие детали и градиенты. Агрессивные настройки изредка ломают сложные файлы: маски, фильтры, узорные заливки. Ломается — откатите точность на шаг назад.</p></div></div>
+      <h2 id="ручные-приёмы-то-что-автоматика-не-сделает">Ручные приёмы — то, что автоматика не сделает</h2>
+      <h3>Найдите растр внутри</h3>
+      <p>Самая частая причина «почему мой SVG весит 800 КБ»: внутри вектора лежит растровая картинка в base64 (<code>&lt;image href=&quot;data:image/png...</code>). Формально это SVG, фактически — PNG в обёртке, со всеми минусами растра. Ищите тег <code>&lt;image&gt;</code> — если он есть, файл нужно не оптимизировать, а перерисовывать в честный вектор.</p>
+      <h3>Переведите текст в кривые — или наоборот</h3>
+      <p>Тег <code>&lt;text&gt;</code> рендерится шрифтом зрителя: нет шрифта — надпись перескочит на другой. Для логотипов текст переводят в кривые (Outline/Flatten в редакторе). Обратная сторона: каждая буква-кривая — это десятки точек, и длинные надписи раздувают файл. Для иконок и логотипов — кривые; для схем с большим количеством подписей — <code>&lt;text&gt;</code> с системными шрифтами.</p>
+      <h3>Упростите пути</h3>
+      <p>В <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>: выделить фигуру → Flatten, затем удалить лишние точки. В Inkscape: Path → Simplify (Ctrl+L) — уменьшает количество узлов кривой с настраиваемой агрессивностью. Особенно помогает после автотрассировки растра, которая любит ставить точку на каждом пикселе.</p>
+      <h3>Объедините одинаковые заливки</h3>
+      <p>Сорок фигур одного цвета? Сгруппируйте и задайте fill один раз на группе. Заодно упростится перекраска — та самая, которой пользуется наш <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">редактор цвета логотипов</a>.</p>
+      <h2 id="что-даёт-оптимизация-на-практике">Что даёт оптимизация на практике</h2>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Файл</th><th>До</th><th>После SVGO</th><th>Ручная доводка</th></tr></thead><tbody><tr><td>Иконка из <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a></td><td>4 КБ</td><td>1,5 КБ</td><td>1 КБ</td></tr><tr><td>Логотип из <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a></td><td>25 КБ</td><td>8 КБ</td><td>5 КБ</td></tr><tr><td>Автотрассировка PNG</td><td>300 КБ</td><td>150 КБ</td><td>перерисовка → 10 КБ</td></tr></tbody></table></div>
+      <p>Килобайты кажутся мелочью, пока иконок не становится тридцать на страницу: там разница между «моментально» и «заметно грузится», особенно на мобильных. Плюс инлайн-SVG входит в HTML — его вес это вес каждой страницы.</p>
+      <h2 id="gzip-и-brotli-последний-множитель">Gzip и Brotli: последний множитель</h2>
+      <p>SVG — текст, а текст отлично сжимается на лету. Правильно настроенный сервер отдаёт SVG со сжатием Brotli или Gzip — это ещё минус 60–80% к передаваемому размеру. Проверить можно в DevTools → Network → колонка Size: если transferred сильно меньше size — сжатие работает.</p>
+      <h2 id="автоматизация-svgo-в-пайплайне-проекта">Автоматизация: SVGO в пайплайне проекта</h2>
+      <p>Ручная оптимизация хороша для разовых файлов; в проекте с десятками иконок её встраивают в процесс:</p>
+      <ul>
+      <li><strong>Конфиг в репозитории.</strong> Файл <code>svgo.config.js</code> фиксирует настройки для всей команды — например, отключённый removeViewBox и точность 3:</li>
+      </ul>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">module.exports = {
+  plugins: [
+    { name: 'preset-default',
+      params: { overrides: { removeViewBox: false } } },
+  ],
+};</code></pre>
+      </div>
+      <ul>
+      <li><strong>Хук или CI-шаг:</strong> прогон svgo по изменённым файлам на pre-commit — и неоптимизированный SVG физически не попадает в репозиторий.</li>
+      <li><strong>Сборщики:</strong> для Vite/Webpack есть плагины, оптимизирующие SVG на лету при импорте; в React-проектах SVGR совмещает оптимизацию с превращением иконок в компоненты.</li>
+      <li><strong><a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>-плагины</strong> (SVGO Compressor и аналоги) оптимизируют прямо при экспорте — полезно дизайнерам, которые отдают файлы разработчикам.</li>
+      </ul>
+      <p>Принцип один: оптимизация должна случаться сама, а не по памяти. «Помнить прогнать через SVGOMG» не работает на дистанции.</p>
+      <h2 id="разбор-реального-файла-что-именно-выкидывается">Разбор реального файла: что именно выкидывается</h2>
+      <p>Возьмём типичный экспорт иконки из редактора и посмотрим на мусор построчно:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;            ← не нужно для веба
+&lt;!-- Generator: Adobe [Illustrator](../../logos/design/illustrator/) 27.0 --&gt;         ← комментарий-визитка
+&lt;svg xmlns:xlink=&quot;...&quot; xml:space=&quot;preserve&quot;        ← неиспользуемые атрибуты
+     width=&quot;24.000000px&quot; height=&quot;24.000000px&quot;&gt;     ← лишние нули
+  &lt;g id=&quot;Layer_1_копия_2&quot;&gt;                         ← имя слоя из редактора
+    &lt;path fill=&quot;#FF0000&quot; d=&quot;M12.000000,2.000000    ← 6 знаков после запятой
+      C12.000000,2.000000 11.999999,2.000001...&quot;/&gt;  ← микродвижения кривой
+  &lt;/g&gt;
+&lt;/svg&gt;</code></pre>
+      </div>
+      <p>После SVGO остаётся суть:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+  &lt;path fill=&quot;red&quot; d=&quot;M12 2C12 2 12 2...&quot;/&gt;
+&lt;/svg&gt;</code></pre>
+      </div>
+      <p>Каждая строка мусора безобидна по отдельности — но их сотни в каждом файле, а файлов десятки. Так 4 КБ превращаются в 1 КБ без единого видимого изменения.</p>
+      <h2 id="когда-оптимизация-не-нужна">Когда оптимизация НЕ нужна</h2>
+      <p>Для честности — случаи, где можно не заморачиваться:</p>
+      <ul>
+      <li><strong>Единственный логотип на статичном лендинге</strong> — разница в 3 КБ не изменит ничего измеримого.</li>
+      <li><strong>SVG для печати или передачи дизайнеру</strong> — там важна структура слоёв, которую агрессивная оптимизация схлопывает. Оптимизируйте копию для веба, исходник храните как есть.</li>
+      <li><strong>Файлы, которые ещё будут редактироваться</strong> — оптимизация необратимо упрощает структуру: имена слоёв, группы и невидимые направляющие исчезают.</li>
+      </ul>
+      <p>Правило: оптимизированный SVG — это <strong>продакшен-артефакт</strong>, как минифицированный JS. Исходник живёт отдельно.</p>
+      <h2 id="коротко">Коротко</h2>
+      <p>SVGO/SVGOMG с дефолтами — обязательный шаг для любого SVG, уходящего на сайт. Дальше по ситуации: выгнать растр из вектора, перевести текст в кривые, упростить пути после трассировки. И не отключайте viewBox.</p>
+      <p>Все SVG в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> уже оптимизированы и нормализованы — скачивайте или копируйте код без мусора, метаданных и сюрпризов внутри.</p>
+      </div>
+
+      <section class="blog-related">
+        <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
+        <div class="blog-list">
+          <a class="blog-card" href="../kak-vstavit-svg-na-sajt/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">25.06.2026</div>
+          <div class="blog-card-title">Как вставить SVG на сайт — img, инлайн, background и что выбрать</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-sdelat-favicon/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">18.06.2026</div>
+          <div class="blog-card-title">Фавикон для сайта в 2026 году — форматы, размеры и правильный HTML</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../vektor-i-rastr-raznica/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">17.07.2026</div>
+          <div class="blog-card-title">Векторная и растровая графика — разница простыми словами</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">16.07.2026</div>
+          <div class="blog-card-title">В каком формате должен быть логотип — SVG, PNG, AI, EPS или PDF</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../pochemu-logotip-razmytyj/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">07.07.2026</div>
+          <div class="blog-card-title">Почему логотип размытый и как сделать его чётким — разбор всех причин</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-konvertirovat-svg-v-png/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">15.06.2026</div>
+          <div class="blog-card-title">Как конвертировать SVG в PNG и обратно — 5 способов без потери качества</div>
+        </div>
+      </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="blog-sidebar">
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#откуда-в-svg-мусор">Откуда в SVG мусор</a></li><li><a href="#автоматика-svgo-и-svgomg">Автоматика: SVGO и SVGOMG</a></li><li><a href="#ручные-приёмы-то-что-автоматика-не-сделает">Ручные приёмы — то, что автоматика не сделает</a></li><li><a href="#что-даёт-оптимизация-на-практике">Что даёт оптимизация на практике</a></li><li><a href="#gzip-и-brotli-последний-множитель">Gzip и Brotli: последний множитель</a></li><li><a href="#автоматизация-svgo-в-пайплайне-проекта">Автоматизация: SVGO в пайплайне проекта</a></li><li><a href="#разбор-реального-файла-что-именно-выкидывается">Разбор реального файла: что именно выкидывается</a></li><li><a href="#когда-оптимизация-не-нужна">Когда оптимизация НЕ нужна</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
+      <div class="blog-progress-wrap">
+      <div class="blog-progress" role="progressbar" aria-label="Прогресс чтения" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+      <span class="blog-progress-pct">0%</span>
+    </div>
+    </aside>
+  </div>
+
+  <div class="catalog-cta">
+    <div class="catalog-cta-text">
+      <span class="catalog-cta-title" data-i18n="blogCtaTitle">Библиотека логотипов и эмодзи</span>
+      <span class="catalog-cta-sub" data-i18n="blogCtaSub">Скачивайте SVG/PNG бесплатно и экспортируйте в Figma</span>
+    </div>
+    <a class="catalog-cta-link" href="../../logos/">
+      <span data-i18n="seoCatalogOpen">Открыть каталог</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</main>
+
+<footer>
+  Trace Logo's Beta · <a href="../../" class="footer-link">trace-logos</a>
+</footer>
+
+<script type="module" src="../../js/header-search.js"></script>
+<script type="module" src="../../js/blog-toc.js"></script>
+<script type="module" src="../../js/blog-code.js"></script>
+</body>
+</html>

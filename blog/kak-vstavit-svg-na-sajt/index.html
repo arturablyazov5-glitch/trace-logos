@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script src="/components/cookie-consent.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как вставить SVG на сайт — img, инлайн, background и что выбрать · Trace Logo's</title>
+  <meta name="description" content="Четыре способа вставить SVG в HTML и CSS: тег img, инлайн-код, background-image и use-спрайты. Плюсы, минусы, безопасность и готовые примеры кода.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <link rel="canonical" href="https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/">
+  <link rel="alternate" hreflang="ru" href="https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/">
+  <link rel="alternate" hreflang="en" href="https://trace-logos.ru/en/blog/kak-vstavit-svg-na-sajt/">
+  <link rel="alternate" hreflang="x-default" href="https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/">
+  <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://trace-logos.ru/llms.txt">
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:title" content="Как вставить SVG на сайт — img, инлайн, background и что выбрать">
+  <meta property="og:description" content="Четыре способа вставить SVG в HTML и CSS: тег img, инлайн-код, background-image и use-спрайты. Плюсы, минусы, безопасность и готовые примеры кода.">
+  <meta property="og:url" content="https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/blog-kak-vstavit-svg-na-sajt.png">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="article:published_time" content="2026-06-25">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trace Logo's",
+          "item": "https://trace-logos.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://trace-logos.ru/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Как вставить SVG на сайт — img, инлайн, background и что выбрать",
+          "item": "https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Как вставить SVG на сайт — img, инлайн, background и что выбрать",
+      "description": "Четыре способа вставить SVG в HTML и CSS: тег img, инлайн-код, background-image и use-спрайты. Плюсы, минусы, безопасность и готовые примеры кода.",
+      "datePublished": "2026-06-25",
+      "dateModified": "2026-06-25",
+      "url": "https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/",
+      "inLanguage": "ru",
+      "image": "https://trace-logos.ru/assets/og/blog-kak-vstavit-svg-na-sajt.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "mainEntityOfPage": "https://trace-logos.ru/blog/kak-vstavit-svg-na-sajt/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="stylesheet" href="../../css/seo-page.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <!-- Yandex.RTB -->
+  <script>window.yaContextCb=window.yaContextCb||[]</script>
+  <script src="https://yandex.ru/ads/system/context.js" async></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="../../" aria-label="Trace Logo's">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="../../assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../logos/" method="get" data-base="../../" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+  <a class="back-btn" href="../../blog/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span data-i18n="backToCatalog">Все статьи</span>
+  </a>
+  <lang-switcher></lang-switcher>
+</header>
+<script src="../../components/lang-switcher.js" defer></script>
+<script src="../../components/search-box.js" defer></script>
+
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
+  <a href="../../">Trace Logo's</a><span class="sep">/</span>
+  <a href="../../blog/"><span data-i18n="blogSection">Блог</span></a><span class="sep">/</span>
+  <span class="current" aria-current="page">Как вставить SVG на сайт — img, инлайн, background и что выбрать</span>
+</nav>
+
+<main>
+  <div class="blog-layout">
+    <article class="blog-article">
+      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(145 72% 58%) 0%, hsl(187 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></div>
+      <header class="blog-article-head">
+        <div class="blog-meta">
+          <time class="blog-date" datetime="2026-06-25">25 июня 2026</time>
+          <span class="blog-meta-sep" aria-hidden="true">·</span>
+          <span class="blog-read">6 мин чтения</span>
+        </div>
+        <h1>Как вставить SVG на сайт — img, инлайн, background и что выбрать</h1>
+      </header>
+      <div class="blog-body">
+        <p>SVG можно вставить на сайт четырьмя разными способами, и они не взаимозаменяемы: один даёт кэширование, другой — управление цветом из CSS, третий — экономию запросов. Выбор влияет на скорость, гибкость и даже безопасность. Разберём каждый способ с кодом и честным списком ограничений.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p><strong>Логотип и картинки</strong> — <code>&lt;img src=&quot;logo.svg&quot;&gt;</code>: просто, кэшируется, безопасно. <strong>Иконки, которые нужно перекрашивать</strong> (ховеры, тёмная тема) — инлайн <code>&lt;svg&gt;</code> в HTML. <strong>Декор и фоны</strong> — <code>background-image</code> в CSS. Спрайты через <code>&lt;use&gt;</code> — когда одинаковых иконок много.</p></div></div>
+      <h2 id="способ-1-тег-img-дефолтный-выбор">Способ 1. Тег img — дефолтный выбор</h2>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;img src=&quot;/images/logo.svg&quot; alt=&quot;Логотип компании&quot; width=&quot;140&quot; height=&quot;40&quot;&gt;</code></pre>
+      </div>
+      <p>Работает как любая картинка: файл кэшируется браузером, лениво грузится с <code>loading=&quot;lazy&quot;</code>, не раздувает HTML.</p>
+      <p><strong>Плюсы:</strong> кэширование, простота, безопасность — скрипты внутри SVG в этом режиме не выполняются.</p>
+      <p><strong>Минусы:</strong> нельзя управлять внутренностями из CSS. Перекрасить логотип по ховеру через <code>fill</code> не получится — стили страницы внутрь <code>&lt;img&gt;</code> не проникают.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Всегда указывайте width и height</span></div><div class="callout-body"><p>Без явных размеров некоторые браузеры считают размер SVG уже после загрузки — и вёрстка прыгает. Атрибуты <code>width</code>/<code>height</code> резервируют место заранее и убирают сдвиг макета (тот самый CLS из Core Web Vitals).</p></div></div>
+      <h2 id="способ-2-инлайн-svg-полный-контроль">Способ 2. Инлайн SVG — полный контроль</h2>
+      <p>Код SVG вставляется прямо в HTML:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;button class=&quot;btn&quot;&gt;
+  &lt;svg viewBox=&quot;0 0 24 24&quot; width=&quot;24&quot; height=&quot;24&quot; aria-hidden=&quot;true&quot;&gt;
+    &lt;path d=&quot;M12 2L2 22h20L12 2z&quot; fill=&quot;currentColor&quot;/&gt;
+  &lt;/svg&gt;
+  Отправить
+&lt;/button&gt;</code></pre>
+      </div>
+      <p><strong>Плюсы:</strong> полное управление из CSS и JS — цвет, анимации, transition по ховеру. Волшебное слово <code>fill=&quot;currentColor&quot;</code> заставляет иконку наследовать цвет текста: сменился цвет кнопки — сменилась и иконка, включая тёмную тему автоматически. Плюс ноль сетевых запросов.</p>
+      <p><strong>Минусы:</strong> код не кэшируется (грузится с каждой страницей), раздувает HTML, а повторяющаяся иконка копипастится по всему шаблону.</p>
+      <p><strong>Когда выбирать:</strong> интерфейсные иконки, которые меняют цвет по состоянию, и критичные элементы первого экрана, которым нельзя ждать сетевой запрос.</p>
+      <h2 id="способ-3-background-image-в-css-для-декора">Способ 3. Background-image в CSS — для декора</h2>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">.hero {
+  background-image: url('/images/pattern.svg');
+  background-size: cover;
+}</code></pre>
+      </div>
+      <p><strong>Плюсы:</strong> кэшируется, декор отделён от контента, работают <code>background-repeat</code> и все фоновые трюки.</p>
+      <p><strong>Минусы:</strong> перекрашивать нельзя (лайфхак: одноцветную иконку можно красить через <code>mask-image</code> + <code>background-color</code>), для скринридеров изображение невидимо — значит, только для декора, не для смысла.</p>
+      <h2 id="способ-4-svg-спрайт-и-use-когда-иконок-много">Способ 4. SVG-спрайт и use — когда иконок много</h2>
+      <p>Все иконки складываются в один файл-спрайт, а на странице вызываются по id:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;svg class=&quot;icon&quot;&gt;&lt;use href=&quot;/sprite.svg#icon-search&quot;/&gt;&lt;/svg&gt;</code></pre>
+      </div>
+      <p><strong>Плюсы:</strong> один запрос на все иконки, кэшируется, <code>currentColor</code> работает.</p>
+      <p><strong>Минусы:</strong> нужно собирать спрайт (обычно автоматикой в сборке), а с ленивой загрузкой отдельных иконок сложнее.</p>
+      <p><strong>Когда выбирать:</strong> дизайн-системы и интерфейсы с десятками повторяющихся иконок.</p>
+      <h2 id="сводная-таблица">Сводная таблица</h2>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th></th><th>img</th><th>инлайн</th><th>background</th><th>спрайт</th></tr></thead><tbody><tr><td>Кэширование</td><td>✅</td><td>⛔</td><td>✅</td><td>✅</td></tr><tr><td>Перекраска из CSS</td><td>⛔</td><td>✅</td><td>⛔</td><td>✅</td></tr><tr><td>Доступность (alt)</td><td>✅</td><td>✅</td><td>⛔</td><td>✅</td></tr><tr><td>Не раздувает HTML</td><td>✅</td><td>⛔</td><td>✅</td><td>✅</td></tr><tr><td>Типичный случай</td><td>логотип</td><td>иконки UI</td><td>декор</td><td>иконки UI (много)</td></tr></tbody></table></div>
+      <h2 id="безопасность-почему-чужой-svg-нельзя-вставлять-инлайном">Безопасность: почему чужой SVG нельзя вставлять инлайном</h2>
+      <p>SVG — это XML, и внутри него могут жить <code>&lt;script&gt;</code>, обработчики событий и внешние ссылки. Через <code>&lt;img&gt;</code> и <code>background</code> браузер это всё игнорирует, а вот <strong>инлайн-вставка выполняет скрипты</strong> с полными правами вашей страницы.</p>
+      <div class="callout callout-danger"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg><span>Правило</span></div><div class="callout-body"><p>Инлайном вставляйте только SVG, которые вы контролируете: свои или из проверенного источника, прогнанные через оптимизатор (SVGO вычищает скрипты). SVG, загруженный пользователями, — только через <code>&lt;img&gt;</code> и с отдельного домена.</p></div></div>
+      <h2 id="частые-вопросы">Частые вопросы</h2>
+      <p><strong>Нужен ли фоллбэк в PNG?</strong> Нет. SVG поддерживают все браузеры, которые вы встретите в 2026 году. Фоллбэки для IE — археология.</p>
+      <p><strong>Почему мой инлайн-SVG огромный на странице?</strong> У него, скорее всего, нет атрибута <code>viewBox</code> или заданы гигантские <code>width</code>/<code>height</code> в самом файле. Проверьте, что <code>viewBox</code> есть, а размеры управляются с уровня CSS.</p>
+      <p><strong>Как анимировать SVG?</strong> Инлайн-вставка + обычные CSS-анимации на <code>path</code> и группы. Для сложного — библиотеки типа GSAP или Lottie (какая анимация логотипу вообще нужна — разбирали <a href="../animirovannyj-logotip/" target="_blank" rel="noopener">отдельно</a>).</p>
+      <p><strong>Работает ли lazy loading для SVG?</strong> Для <code>&lt;img&gt;</code> — да, обычный <code>loading=&quot;lazy&quot;</code>. Инлайн-SVG грузится вместе с HTML и лениво не бывает — ещё один аргумент не инлайнить всё подряд.</p>
+      <p><strong>Как задать SVG в качестве курсора или favicon?</strong> Favicon — да, через <code>&lt;link rel=&quot;icon&quot; type=&quot;image/svg+xml&quot;&gt;</code> (детали — в <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">статье про фавиконы</a>). Курсор — формально можно (<code>cursor: url(icon.svg)</code>), но поддержка капризная, надёжнее PNG.</p>
+      <h2 id="доступность-три-атрибута-о-которых-забывают">Доступность: три атрибута, о которых забывают</h2>
+      <p>SVG на сайте должен быть понятен не только глазам, но и скринридерам:</p>
+      <ul>
+      <li><strong>Смысловая картинка</strong> (логотип, иллюстрация): в <code>&lt;img&gt;</code> — обычный <code>alt</code>; в инлайн-SVG — <code>role=&quot;img&quot;</code> и <code>&lt;title&gt;</code> первым дочерним элементом:</li>
+      </ul>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">код</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Копировать" data-copied-label="Скопировано">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Копировать</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;svg role=&quot;img&quot; viewBox=&quot;0 0 100 100&quot;&gt;
+  &lt;title&gt;Логотип компании&lt;/title&gt;
+  ...
+&lt;/svg&gt;</code></pre>
+      </div>
+      <ul>
+      <li><strong>Декоративная иконка</strong> рядом с текстом (иконка в кнопке «Отправить»): наоборот, спрячьте её от скринридера — <code>aria-hidden=&quot;true&quot;</code>, иначе он прочитает и текст, и описание иконки.</li>
+      <li><strong>Интерактивный SVG</strong> (кнопка-иконка без текста): <code>aria-label</code> на самой кнопке, а SVG внутри — с <code>aria-hidden</code>.</li>
+      </ul>
+      <p>Это три строки кода, которые отделяют аккуратный сайт от сайта, где незрячий пользователь слышит «graphic graphic graphic» вместо навигации.</p>
+      <h2 id="производительность-что-даёт-каждый-способ-в-цифрах">Производительность: что даёт каждый способ в цифрах</h2>
+      <p>Прикинем на типичной странице с логотипом и 20 иконками:</p>
+      <ul>
+      <li><strong>Всё инлайном:</strong> +30–60 КБ к каждому HTML-документу; иконки не кэшируются между страницами. На сайте из 100 страниц пользователь скачает иконки 100 раз.</li>
+      <li><strong>Всё через img:</strong> 21 запрос при первом визите, дальше — из кэша. Но 20 запросов на старте — заметная пауза на медленных сетях (HTTP/2 смягчает, но не отменяет).</li>
+      <li><strong>Спрайт + инлайн-логотип:</strong> 1 запрос на все иконки (кэшируется), логотип виден мгновенно без запроса. Обычно это оптимум.</li>
+      </ul>
+      <p>И два усилителя для любого способа: сожмите SVG оптимизатором (минус 30–70% веса — см. статью <a href="../kak-optimizirovat-svg/" target="_blank" rel="noopener">про оптимизацию SVG</a>) и убедитесь, что сервер отдаёт SVG с gzip/brotli — текстовый формат сжимается в 3–5 раз.</p>
+      <h2 id="частый-вопрос-svg-логотип-прыгает-при-загрузке">Частый вопрос: SVG-логотип «прыгает» при загрузке</h2>
+      <p>Классический симптом: страница отрисовалась, а логотип появился на долю секунды позже, сдвинув шапку. Причины и лечение:</p>
+      <ol>
+      <li><strong>Нет width/height у img</strong> — браузер не знает размер до загрузки. Задайте атрибуты.</li>
+      <li><strong>SVG грузится из CSS-фона</strong> после парсинга стилей — для логотипа в шапке используйте <code>&lt;img&gt;</code> или инлайн.</li>
+      <li><strong>Логотип зависит от веб-шрифта</strong> (текст в SVG не в кривых) — переведите текст в кривые.</li>
+      </ol>
+      <p>Для первого экрана работает и приём «критический инлайн»: логотип шапки — инлайном (мгновенно), всё остальное — файлами с кэшированием.</p>
+      <h2 id="коротко">Коротко</h2>
+      <p><code>&lt;img&gt;</code> — для логотипов и картинок, инлайн — для перекрашиваемых иконок, background — для декора, спрайт — для иконок оптом. И никогда не инлайньте SVG из непроверенных источников.</p>
+      <p>Все SVG в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> — чистый вектор без скриптов и мусора: можно скачать файл для <code>&lt;img&gt;</code> или скопировать код прямо в разметку одной кнопкой.</p>
+      </div>
+
+      <section class="blog-related">
+        <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
+        <div class="blog-list">
+          <a class="blog-card" href="../kak-sdelat-favicon/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">18.06.2026</div>
+          <div class="blog-card-title">Фавикон для сайта в 2026 году — форматы, размеры и правильный HTML</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-optimizirovat-svg/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">16.06.2026</div>
+          <div class="blog-card-title">Как оптимизировать SVG — уменьшаем вес файла в 2–10 раз без потери качества</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../vektor-i-rastr-raznica/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">17.07.2026</div>
+          <div class="blog-card-title">Векторная и растровая графика — разница простыми словами</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">16.07.2026</div>
+          <div class="blog-card-title">В каком формате должен быть логотип — SVG, PNG, AI, EPS или PDF</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../pochemu-logotip-razmytyj/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">07.07.2026</div>
+          <div class="blog-card-title">Почему логотип размытый и как сделать его чётким — разбор всех причин</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-konvertirovat-svg-v-png/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">15.06.2026</div>
+          <div class="blog-card-title">Как конвертировать SVG в PNG и обратно — 5 способов без потери качества</div>
+        </div>
+      </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="blog-sidebar">
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#способ-1-тег-img-дефолтный-выбор">Способ 1. Тег img — дефолтный выбор</a></li><li><a href="#способ-2-инлайн-svg-полный-контроль">Способ 2. Инлайн SVG — полный контроль</a></li><li><a href="#способ-3-background-image-в-css-для-декора">Способ 3. Background-image в CSS — для декора</a></li><li><a href="#способ-4-svg-спрайт-и-use-когда-иконок-много">Способ 4. SVG-спрайт и use — когда иконок много</a></li><li><a href="#сводная-таблица">Сводная таблица</a></li><li><a href="#безопасность-почему-чужой-svg-нельзя-вставлять-инлайном">Безопасность: почему чужой SVG нельзя вставлять инлайном</a></li><li><a href="#частые-вопросы">Частые вопросы</a></li><li><a href="#доступность-три-атрибута-о-которых-забывают">Доступность: три атрибута, о которых забывают</a></li><li><a href="#производительность-что-даёт-каждый-способ-в-цифрах">Производительность: что даёт каждый способ в цифрах</a></li><li><a href="#частый-вопрос-svg-логотип-прыгает-при-загрузке">Частый вопрос: SVG-логотип «прыгает» при загрузке</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
+      <div class="blog-progress-wrap">
+      <div class="blog-progress" role="progressbar" aria-label="Прогресс чтения" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+      <span class="blog-progress-pct">0%</span>
+    </div>
+    </aside>
+  </div>
+
+  <div class="catalog-cta">
+    <div class="catalog-cta-text">
+      <span class="catalog-cta-title" data-i18n="blogCtaTitle">Библиотека логотипов и эмодзи</span>
+      <span class="catalog-cta-sub" data-i18n="blogCtaSub">Скачивайте SVG/PNG бесплатно и экспортируйте в Figma</span>
+    </div>
+    <a class="catalog-cta-link" href="../../logos/">
+      <span data-i18n="seoCatalogOpen">Открыть каталог</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</main>
+
+<footer>
+  Trace Logo's Beta · <a href="../../" class="footer-link">trace-logos</a>
+</footer>
+
+<script type="module" src="../../js/header-search.js"></script>
+<script type="module" src="../../js/blog-toc.js"></script>
+<script type="module" src="../../js/blog-code.js"></script>
+</body>
+</html>

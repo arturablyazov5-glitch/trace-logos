@@ -78,12 +78,28 @@ function getExpectedOgSlugs(manifestPath) {
   return expected;
 }
 
+function getExpectedBlogOgSlugs() {
+  // Mirrors build-blog-og-images.js: assets/og/blog-<slug>.png
+  const postsDir = path.join(ROOT, 'blog', 'posts');
+  const expected = new Set();
+  if (!fs.existsSync(postsDir)) return expected;
+
+  for (const f of fs.readdirSync(postsDir)) {
+    if (!f.endsWith('.md')) continue;
+    const raw = fs.readFileSync(path.join(postsDir, f), 'utf8');
+    const m = raw.match(/^slug:\s*(\S+)/m);
+    const slug = m ? m[1] : path.basename(f, '.md');
+    expected.add(`blog-${slug}`);
+  }
+  return expected;
+}
+
 function cleanupOgImages(expectedSlugs) {
   const ogDir = path.join(ROOT, 'assets', 'og');
   console.log(`\nChecking OG images in ${ogDir}...`);
   if (!fs.existsSync(ogDir)) return;
 
-  const KEEP = new Set(['home']); // build-og-home.js output — not a logo item
+  const KEEP = new Set(['home', ...getExpectedBlogOgSlugs()]); // build-og-home.js / build-blog-og-images.js output — not logo items
   let deletedCount = 0;
 
   for (const file of fs.readdirSync(ogDir)) {

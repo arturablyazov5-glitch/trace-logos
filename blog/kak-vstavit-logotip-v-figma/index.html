@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script src="/components/cookie-consent.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Как вставить логотип в Figma — SVG, компоненты и частые ошибки · Trace Logo's</title>
+  <meta name="description" content="Три способа добавить логотип в Figma: перетащить SVG, вставить из буфера, импортировать PNG. Как сделать из логотипа компонент и почему растр — плохая идея.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <link rel="canonical" href="https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/">
+  <link rel="alternate" hreflang="ru" href="https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/">
+  <link rel="alternate" hreflang="en" href="https://trace-logos.ru/en/blog/kak-vstavit-logotip-v-figma/">
+  <link rel="alternate" hreflang="x-default" href="https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/">
+  <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://trace-logos.ru/llms.txt">
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png">
+  <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:title" content="Как вставить логотип в Figma — SVG, компоненты и частые ошибки">
+  <meta property="og:description" content="Три способа добавить логотип в Figma: перетащить SVG, вставить из буфера, импортировать PNG. Как сделать из логотипа компонент и почему растр — плохая идея.">
+  <meta property="og:url" content="https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/blog-kak-vstavit-logotip-v-figma.png">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="article:published_time" content="2026-06-24">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trace Logo's",
+          "item": "https://trace-logos.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Блог",
+          "item": "https://trace-logos.ru/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Как вставить логотип в Figma — SVG, компоненты и частые ошибки",
+          "item": "https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Как вставить логотип в Figma — SVG, компоненты и частые ошибки",
+      "description": "Три способа добавить логотип в Figma: перетащить SVG, вставить из буфера, импортировать PNG. Как сделать из логотипа компонент и почему растр — плохая идея.",
+      "datePublished": "2026-06-24",
+      "dateModified": "2026-06-24",
+      "url": "https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/",
+      "inLanguage": "ru",
+      "image": "https://trace-logos.ru/assets/og/blog-kak-vstavit-logotip-v-figma.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "mainEntityOfPage": "https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="stylesheet" href="../../css/seo-page.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+  <!-- Yandex.RTB -->
+  <script>window.yaContextCb=window.yaContextCb||[]</script>
+  <script src="https://yandex.ru/ads/system/context.js" async></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="../../" aria-label="Trace Logo's">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="../../assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../logos/" method="get" data-base="../../" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+  <a class="back-btn" href="../../blog/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span data-i18n="backToCatalog">Все статьи</span>
+  </a>
+  <lang-switcher></lang-switcher>
+</header>
+<script src="../../components/lang-switcher.js" defer></script>
+<script src="../../components/search-box.js" defer></script>
+
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
+  <a href="../../">Trace Logo's</a><span class="sep">/</span>
+  <a href="../../blog/"><span data-i18n="blogSection">Блог</span></a><span class="sep">/</span>
+  <span class="current" aria-current="page">Как вставить логотип в Figma — SVG, компоненты и частые ошибки</span>
+</nav>
+
+<main>
+  <div class="blog-layout">
+    <article class="blog-article">
+      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(283 72% 58%) 0%, hsl(325 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="6" y2="6" /><line x1="22" x2="2" y1="18" y2="18" /><line x1="6" x2="6" y1="2" y2="22" /><line x1="18" x2="18" y1="2" y2="22" /></svg></div>
+      <header class="blog-article-head">
+        <div class="blog-meta">
+          <time class="blog-date" datetime="2026-06-24">24 июня 2026</time>
+          <span class="blog-meta-sep" aria-hidden="true">·</span>
+          <span class="blog-read">6 мин чтения</span>
+        </div>
+        <h1>Как вставить логотип в Figma — SVG, компоненты и частые ошибки</h1>
+      </header>
+      <div class="blog-body">
+        <p>Собираете макет — нужен логотип <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера</a> в шапке, иконки банков в способах оплаты, знак клиента в футере. Казалось бы, банальная операция, но именно на ней в макетах появляются растровые огрызки с белым фоном, которые мылятся при первом же увеличении. Разберём, как вставлять логотипы в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> правильно — так, чтобы они оставались векторными, перекрашиваемыми и лёгкими.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Правильный путь — <strong>SVG</strong>: перетащите файл в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> или скопируйте SVG-код и нажмите Ctrl+V — логотип вставится редактируемым вектором. PNG — только когда вектора не существует. Повторяющиеся логотипы оформляйте компонентами.</p></div></div>
+      <h2 id="способ-1-перетащить-svg-файл">Способ 1. Перетащить SVG-файл</h2>
+      <p>Скачали SVG логотипа — просто перетащите его из папки на холст <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>. Файл развернётся в полноценный векторный объект: группа с фигурами, у каждой — свои заливки.</p>
+      <p>Что это даёт:</p>
+      <ul>
+      <li><strong>Масштабирование без потерь</strong> — логотип в макете хоть 16 пикселей, хоть весь экран.</li>
+      <li><strong>Перекраска</strong> — выделяете фигуры и меняете fill: нужна белая версия для тёмного футера — две секунды.</li>
+      <li><strong>Лёгкий файл</strong> — вектор не раздувает макет, в отличие от пачки PNG.</li>
+      </ul>
+      <h2 id="способ-2-вставить-svg-код-из-буфера">Способ 2. Вставить SVG-код из буфера</h2>
+      <p>Ещё быстрее: если источник отдаёт SVG-код (кнопка «копировать SVG» в каталогах, код из DevTools), его можно вставить в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> напрямую — Ctrl+V/Cmd+V на холсте. <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> распознаёт SVG-разметку в буфере и разворачивает её в вектор. Файл на диск сохранять не нужно.</p>
+      <p>Этот способ идеален в связке с каталогами логотипов: в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге</a> у каждого бренда есть кнопка копирования SVG — клик там, Ctrl+V в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>, готово.</p>
+      <h2 id="способ-3-png-когда-выбора-нет">Способ 3. PNG — когда выбора нет</h2>
+      <p>PNG перетаскивается так же, но вставляется картинкой: ни перекрасить, ни увеличить без мыла. Когда это оправдано:</p>
+      <ul>
+      <li>логотип существует только в растре (старый бренд, фотография вывески);</li>
+      <li>нужен именно растровый стиль (скриншот приложения в макете).</li>
+      </ul>
+      <p>Правила гигиены: берите PNG минимум в 2 раза больше размера в макете и обязательно с прозрачным фоном — почему это важно, разбирали в <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">статье про прозрачность</a>.</p>
+      <h2 id="логотип-как-компонент-для-повторяющихся">Логотип как компонент — для повторяющихся</h2>
+      <p>Если логотип встречается в макете больше двух раз (шапка на каждом экране, список банков), сделайте из него компонент:</p>
+      <ol>
+      <li>Вставьте SVG, приведите в порядок (группа, понятное имя вроде <code>logo/sber</code>).</li>
+      <li>Ctrl+Alt+K / Cmd+Option+K — создать компонент.</li>
+      <li>Дальше по макету расставляются инстансы: обновили мастер — обновились все копии.</li>
+      </ol>
+      <p>Продвинутый уровень — варианты компонента: цветная и монохромная версия логотипа как variants одного компонента с переключателем. В дизайн-системах логотипы партнёров и способов оплаты обычно живут именно так.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Выравнивание логотипов разных пропорций</span></div><div class="callout-body"><p>Логотипы в ряд (банки, партнёры, «нам доверяют») никогда не выравнивайте по ширине — вытянутый логотип станет гигантским, квадратный — микроскопическим. Ставьте всем одинаковую <strong>высоту</strong> и выравнивание по центру, а визуально массивные знаки уменьшайте на 10–15% руками. Оптическое выравнивание важнее математического.</p></div></div>
+      <h2 id="частые-ошибки">Частые ошибки</h2>
+      <div class="callout callout-danger"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg><span>Как не надо</span></div><div class="callout-body"><ul>
+      <li><strong>Скриншотить логотип с сайта.</strong> Получается мыльный растр с фоном. Всегда ищите SVG — он существует почти для любого бренда.</li>
+      <li><strong>Разбирать чужой SVG до атомов.</strong> После вставки не применяйте Flatten без нужды: слои и группы в оригинальном SVG — это структура, которая пригодится для перекраски.</li>
+      <li><strong>Растягивать логотип непропорционально.</strong> В <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> легко случайно потянуть за одну сторону. Держите Shift или фиксируйте пропорции замком в панели.</li>
+      <li><strong>Перекрашивать в «почти фирменный» цвет.</strong> У брендов точные HEX-коды — берите их из SVG или гайдлайнов, а не на глаз (как — в статье <a href="../kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">про цвет логотипа</a>).</li>
+      </ul></div></div>
+      <h2 id="экспорт-обратно">Экспорт обратно</h2>
+      <p>Из <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> логотип выгружается в любом виде: выделите объект → Export → SVG для веба, PNG нужного множителя для растров, PDF для печати. Follow-up для разработчиков: отдавайте им SVG, а не PNG — вставка SVG в вёрстку даёт чёткость и гибкость (подробности — в <a href="../kak-vstavit-svg-na-sajt/" target="_blank" rel="noopener">гиде по вставке SVG на сайт</a>).</p>
+      <h2 id="логотипы-в-дизайн-системе-как-хранить-правильно">Логотипы в дизайн-системе: как хранить правильно</h2>
+      <p>Если проект больше одного макета, логотипам место в библиотеке, а не россыпью по страницам:</p>
+      <ol>
+      <li><strong>Отдельная страница «Logos»</strong> в файле дизайн-системы: полный логотип, знак, монохром, инверсия — каждый компонентом с именем по схеме <code>logo/&lt;бренд&gt;/&lt;вариант&gt;</code>.</li>
+      <li><strong>Варианты через properties:</strong> один компонент <code>logo/sber</code> со свойствами color (full/mono/white) и layout (full/mark) удобнее четырёх отдельных компонентов — переключение в один клик прямо в макете.</li>
+      <li><strong>Слоты правильного размера:</strong> оберните логотип во фрейм фиксированной высоты (например, 32 px) с автолейаутом — тогда в шапках и списках все логотипы будут стоять ровно без ручной подгонки.</li>
+      <li><strong>Не отсоединяйте инстансы</strong> ради перекраски: если хочется поменять цвет — это сигнал, что в компоненте не хватает варианта. Добавьте вариант в мастер, и правка разойдётся по всем макетам.</li>
+      </ol>
+      <p>Такая структура окупается в первый же ребрендинг клиента: замена мастер-компонента обновляет логотип в сотне экранов за минуту.</p>
+      <h2 id="тонкости-работы-с-чужими-svg-в-figma">Тонкости работы с чужими SVG в Figma</h2>
+      <ul>
+      <li><strong>SVG вставился «плоским» одним слоем.</strong> Автор файла сделал Flatten перед экспортом. Перекрасить отдельные элементы не выйдет — ищите исходник с послойной структурой (в нашем каталоге SVG сохраняют слои).</li>
+      <li><strong>Цвета не меняются через Selection colors.</strong> Проверьте, не заданы ли цвета в SVG через <code>style</code> с <code>!important</code>-подобными конструкциями — пересохранение через «копировать как SVG → вставить» обычно нормализует структуру.</li>
+      <li><strong>Логотип вставился гигантским или крошечным.</strong> У SVG не было width/height, и <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> взяла размеры из viewBox. Просто задайте нужный размер с зажатым Shift — пропорции сохранятся.</li>
+      <li><strong>Тонкие линии «поплыли» при уменьшении.</strong> Включите у фрейма «Clip content» и проверьте, что strokes заданы внутри фигур (Inside), — внешние обводки при масштабировании ведут себя неожиданно. Для мелких размеров лучше версия знака с чуть более толстыми штрихами — именно поэтому у брендов бывают отдельные small-size версии.</li>
+      </ul>
+      <h2 id="частые-вопросы">Частые вопросы</h2>
+      <p><strong>Как вставить логотип сразу на все макеты?</strong> Никак напрямую — и это правильно: сделайте компонент и расставьте инстансы. Массовая вставка без компонента — техдолг, который выстрелит при первой же правке.</p>
+      <p><strong>Можно ли анимировать логотип в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>?</strong> Прототипирование <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> анимирует переходы между вариантами (Smart Animate) — для простого появления/смены состояния хватит. Полноценный мошн — это After Effects и экспорт в Lottie (подробнее — в статье <a href="../animirovannyj-logotip/" target="_blank" rel="noopener">про анимированные логотипы</a>).</p>
+      <p><strong>Почему PNG-экспорт логотипа мыльный?</strong> Проверьте множитель экспорта: 1x при мелком размере фрейма даст мелкий файл. Ставьте 2x–4x или задавайте точную ширину в поле Export.</p>
+      <h2 id="коротко">Коротко</h2>
+      <p>SVG перетащили или вставили из буфера → при необходимости сделали компонентом → выровняли по высоте → экспортировали обратно в SVG. Растр — только когда вектора не существует в природе.</p>
+      <p>Быстрый источник векторов — наш <a href="../../logos/" target="_blank" rel="noopener">каталог логотипов</a>: сотни брендов в SVG, копирование кода в один клик — и сразу Ctrl+V в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>. Для эмодзи в макетах есть <a href="../../emoji/" target="_blank" rel="noopener">отдельный каталог</a> с PNG высокого разрешения в стилях Apple и Google.</p>
+      </div>
+
+      <section class="blog-related">
+        <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
+        <div class="blog-list">
+          <a class="blog-card" href="../shrift-dlya-logotipa/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16" /><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /><path d="M9 20h6" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">12.07.2026</div>
+          <div class="blog-card-title">Шрифт для логотипа — как выбрать и не попасть на штраф за лицензию</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../logotipy-so-skrytym-smyslom/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /><circle cx="12" cy="12" r="3" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">02.07.2026</div>
+          <div class="blog-card-title">Логотипы со скрытым смыслом — стрелка FedEx, улыбка Amazon и ещё 10 секретов</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-sdelat-logotip-samomu/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" /><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" /><path d="m2.3 2.3 7.286 7.286" /><circle cx="11" cy="11" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">19.06.2026</div>
+          <div class="blog-card-title">Как сделать логотип самому бесплатно — честная пошаговая инструкция</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../animirovannyj-logotip/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">05.06.2026</div>
+          <div class="blog-card-title">Анимированный логотип — когда он нужен, форматы и как не переборщить</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../vodyanoj-znak-na-foto/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">18.07.2026</div>
+          <div class="blog-card-title">Водяной знак на фото — как поставить логотип, чтобы защищал и не портил</div>
+        </div>
+      </a>
+      <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">16.07.2026</div>
+          <div class="blog-card-title">В каком формате должен быть логотип — SVG, PNG, AI, EPS или PDF</div>
+        </div>
+      </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="blog-sidebar">
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#способ-1-перетащить-svg-файл">Способ 1. Перетащить SVG-файл</a></li><li><a href="#способ-2-вставить-svg-код-из-буфера">Способ 2. Вставить SVG-код из буфера</a></li><li><a href="#способ-3-png-когда-выбора-нет">Способ 3. PNG — когда выбора нет</a></li><li><a href="#логотип-как-компонент-для-повторяющихся">Логотип как компонент — для повторяющихся</a></li><li><a href="#частые-ошибки">Частые ошибки</a></li><li><a href="#экспорт-обратно">Экспорт обратно</a></li><li><a href="#логотипы-в-дизайн-системе-как-хранить-правильно">Логотипы в дизайн-системе: как хранить правильно</a></li><li><a href="#тонкости-работы-с-чужими-svg-в-figma">Тонкости работы с чужими SVG в Figma</a></li><li><a href="#частые-вопросы">Частые вопросы</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
+      <div class="blog-progress-wrap">
+      <div class="blog-progress" role="progressbar" aria-label="Прогресс чтения" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+      <span class="blog-progress-pct">0%</span>
+    </div>
+    </aside>
+  </div>
+
+  <div class="catalog-cta">
+    <div class="catalog-cta-text">
+      <span class="catalog-cta-title" data-i18n="blogCtaTitle">Библиотека логотипов и эмодзи</span>
+      <span class="catalog-cta-sub" data-i18n="blogCtaSub">Скачивайте SVG/PNG бесплатно и экспортируйте в Figma</span>
+    </div>
+    <a class="catalog-cta-link" href="../../logos/">
+      <span data-i18n="seoCatalogOpen">Открыть каталог</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</main>
+
+<footer>
+  Trace Logo's Beta · <a href="../../" class="footer-link">trace-logos</a>
+</footer>
+
+<script type="module" src="../../js/header-search.js"></script>
+<script type="module" src="../../js/blog-toc.js"></script>
+<script type="module" src="../../js/blog-code.js"></script>
+</body>
+</html>

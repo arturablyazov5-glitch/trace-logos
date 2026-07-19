@@ -239,7 +239,21 @@ function runPost() {
       }
     }
   }
-  console.log(`[post] проверено WebP: ${checked}, OG: ${ogChecked}`);
+  // Blog OG images: every post should have assets/og/blog-<slug>.png.
+  // Warning, not error: build-blog-og-images.js is the opt-in slow tier.
+  let blogOgChecked = 0;
+  const postsDir = path.join(ROOT, 'blog', 'posts');
+  for (const f of fs.readdirSync(postsDir).filter(f => f.endsWith('.md'))) {
+    const raw = fs.readFileSync(path.join(postsDir, f), 'utf8');
+    const m = raw.match(/^slug:\s*(\S+)/m);
+    const slug = m ? m[1] : path.basename(f, '.md');
+    blogOgChecked++;
+    if (!fs.existsSync(path.join(ROOT, 'assets', 'og', `blog-${slug}.png`))) {
+      warn(`нет OG-картинки: assets/og/blog-${slug}.png — запустить build-blog-og-images.js или npm run build -- --og-blog`);
+    }
+  }
+
+  console.log(`[post] проверено WebP: ${checked}, OG логотипов: ${ogChecked}, OG постов блога: ${blogOgChecked}`);
 }
 
 if (RUN_PRE) runPre();

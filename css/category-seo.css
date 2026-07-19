@@ -1,0 +1,21 @@
+/* Build-time pre-rendered grid (.ssr-grid, see scripts/lib/static-grid.js).
+   Visually identical to the JS grid: the wrapper adds no box of its own, and
+   the <a> cards inherit the .card look from cards.css. main.js removes the
+   wrapper before building the live grid. */
+
+.ssr-grid {
+  display: contents;
+}
+
+/* With JS on, the live grid replaces the static one — hide the static copy
+   from the very first paint (the `js` class is set by an inline <script> in
+   <head>, before render), otherwise the grid visibly flashes twice. Crawlers
+   and no-JS browsers never get the class and see the full grid. */
+.js .ssr-grid {
+  display: none;
+}
+
+.ssr-grid a.card {
+  color: inherit;
+  text-decoration: none;
+}

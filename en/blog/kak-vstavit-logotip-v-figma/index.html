@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script src="/components/cookie-consent.js" defer></script>
+  <meta charset="UTF-8">
+  <script>window.__LANG__='en';</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Insert a Logo into Figma — SVG, Components and Common Mistakes · Trace Logo's</title>
+  <meta name="description" content="Three ways to add a logo to Figma — drag an SVG, paste from clipboard, import a PNG. Turning logos into components, and why raster is a bad idea.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <link rel="canonical" href="https://trace-logos.ru/en/blog/kak-vstavit-logotip-v-figma/">
+  <link rel="alternate" hreflang="ru" href="https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/">
+  <link rel="alternate" hreflang="en" href="https://trace-logos.ru/en/blog/kak-vstavit-logotip-v-figma/">
+  <link rel="alternate" hreflang="x-default" href="https://trace-logos.ru/blog/kak-vstavit-logotip-v-figma/">
+  <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://trace-logos.ru/llms.txt">
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:title" content="How to Insert a Logo into Figma — SVG, Components and Common Mistakes">
+  <meta property="og:description" content="Three ways to add a logo to Figma — drag an SVG, paste from clipboard, import a PNG. Turning logos into components, and why raster is a bad idea.">
+  <meta property="og:url" content="https://trace-logos.ru/en/blog/kak-vstavit-logotip-v-figma/">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/blog-kak-vstavit-logotip-v-figma.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-06-24">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trace Logo's",
+          "item": "https://trace-logos.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://trace-logos.ru/en/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to Insert a Logo into Figma — SVG, Components and Common Mistakes",
+          "item": "https://trace-logos.ru/en/blog/kak-vstavit-logotip-v-figma/"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "How to Insert a Logo into Figma — SVG, Components and Common Mistakes",
+      "description": "Three ways to add a logo to Figma — drag an SVG, paste from clipboard, import a PNG. Turning logos into components, and why raster is a bad idea.",
+      "datePublished": "2026-06-24",
+      "dateModified": "2026-06-24",
+      "url": "https://trace-logos.ru/en/blog/kak-vstavit-logotip-v-figma/",
+      "inLanguage": "en",
+      "image": "https://trace-logos.ru/assets/og/blog-kak-vstavit-logotip-v-figma.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "mainEntityOfPage": "https://trace-logos.ru/en/blog/kak-vstavit-logotip-v-figma/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="stylesheet" href="/css/seo-page.css">
+  <link rel="stylesheet" href="/css/blog.css">
+  <!-- Yandex.RTB -->
+  <script>window.yaContextCb=window.yaContextCb||[]</script>
+  <script src="https://yandex.ru/ads/system/context.js" async></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/en/" aria-label="Trace Logo's">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="/assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="/en/logos/" method="get" data-base="/" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Search logos..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+  <a class="back-btn" href="/en/blog/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span data-i18n="backToCatalog">Back</span>
+  </a>
+  <lang-switcher></lang-switcher>
+</header>
+<script src="/components/lang-switcher.js" defer></script>
+<script src="/components/search-box.js" defer></script>
+
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
+  <a href="/en/">Trace Logo's</a><span class="sep">/</span>
+  <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a><span class="sep">/</span>
+  <span class="current" aria-current="page">How to Insert a Logo into Figma — SVG, Components and Common Mistakes</span>
+</nav>
+
+<main>
+  <div class="blog-layout">
+    <article class="blog-article">
+      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(283 72% 58%) 0%, hsl(325 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" x2="2" y1="6" y2="6" /><line x1="22" x2="2" y1="18" y2="18" /><line x1="6" x2="6" y1="2" y2="22" /><line x1="18" x2="18" y1="2" y2="22" /></svg></div>
+      <header class="blog-article-head">
+        <div class="blog-meta">
+          <time class="blog-date" datetime="2026-06-24">June 24, 2026</time>
+          <span class="blog-meta-sep" aria-hidden="true">·</span>
+          <span class="blog-read">6 min read</span>
+        </div>
+        <h1>How to Insert a Logo into Figma — SVG, Components and Common Mistakes</h1>
+      </header>
+      <div class="blog-body">
+        <p>You're building a mockup — the client's logo in the header, bank icons in the payment methods, a partner mark in the footer. A trivial operation, seemingly — yet this is exactly where blurry raster crops with white backgrounds sneak into files. Here's how to insert logos into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> properly: vector, recolorable and light.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The right way is <strong>SVG</strong>: drag the file into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, or copy SVG code and hit Ctrl+V — the logo lands as an editable vector. PNG is for when no vector exists. Repeated logos should become components.</p></div></div>
+      <h2 id="method-1-drag-an-svg-file">Method 1. Drag an SVG file</h2>
+      <p>Downloaded an SVG? Drag it from the folder onto the canvas. It unfolds into a true vector object: a group of shapes, each with its own fills.</p>
+      <p>What you get:</p>
+      <ul>
+      <li><strong>Lossless scaling</strong> — 16 pixels or full-screen, equally crisp.</li>
+      <li><strong>Recoloring</strong> — select shapes and change the fill: a white version for a dark footer takes two seconds.</li>
+      <li><strong>A light file</strong> — vectors don't bloat the document the way stacks of PNGs do.</li>
+      </ul>
+      <h2 id="method-2-paste-svg-code-from-the-clipboard">Method 2. Paste SVG code from the clipboard</h2>
+      <p>Even faster: if a source offers SVG code (a &quot;copy SVG&quot; button in catalogs, code from DevTools), paste it straight onto the canvas with Ctrl+V/Cmd+V. <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> recognizes SVG markup in the clipboard and expands it into a vector. No file on disk needed.</p>
+      <p>This pairs perfectly with logo catalogs: every brand in <a href="/en/logos/" target="_blank" rel="noopener">ours</a> has a copy-SVG button — click there, Ctrl+V in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, done.</p>
+      <h2 id="method-3-png-when-there-s-no-choice">Method 3. PNG — when there's no choice</h2>
+      <p>A PNG drags in the same way but lands as an image: no recoloring, no clean enlargement. Justified when:</p>
+      <ul>
+      <li>the logo exists only in raster (a legacy brand, a photo of signage);</li>
+      <li>you specifically need the raster look (an app screenshot in a mockup).</li>
+      </ul>
+      <p>Hygiene: take the PNG at 2× its mockup size minimum, and always with a transparent background — see <a href="/en/blog/logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">the transparency article</a> for why.</p>
+      <h2 id="logos-as-components">Logos as components</h2>
+      <p>If a logo appears more than twice (header on every screen, a bank list), componentize it:</p>
+      <ol>
+      <li>Insert the SVG, tidy it up (a group with a sane name like <code>logo/sber</code>).</li>
+      <li>Ctrl+Alt+K / Cmd+Option+K — create component.</li>
+      <li>Place instances across the file: update the master, all copies follow.</li>
+      </ol>
+      <p>Advanced: variants — the color and monochrome versions as switchable variants of one component. That's how partner and payment logos usually live in design systems.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Aligning logos of different proportions</span></div><div class="callout-body"><p>A logo row (banks, partners, &quot;trusted by&quot;) should never be width-aligned — a wide wordmark becomes giant, a square mark microscopic. Give them equal <strong>height</strong>, center-align, and manually shrink visually heavy marks by 10–15%. Optical alignment beats mathematical.</p></div></div>
+      <h2 id="common-mistakes">Common mistakes</h2>
+      <div class="callout callout-danger"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg><span>Don't</span></div><div class="callout-body"><ul>
+      <li><strong>Screenshot a logo off a website.</strong> You get a blurry raster with a background. An SVG exists for almost any brand — find it.</li>
+      <li><strong>Flatten someone's SVG needlessly.</strong> The layers and groups in the original are structure you'll want for recoloring.</li>
+      <li><strong>Stretch disproportionately.</strong> Easy to grab one side by accident. Hold Shift or lock proportions in the panel.</li>
+      <li><strong>Recolor to &quot;almost brand&quot; colors.</strong> Brands have exact HEX codes — take them from the SVG or guidelines, not by eye (<a href="/en/blog/kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">how-to here</a>).</li>
+      </ul></div></div>
+      <h2 id="exporting-back">Exporting back</h2>
+      <p><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> exports the logo any way you need: select → Export → SVG for web, PNG at a multiplier for raster, PDF for print. For developers, hand over SVG, not PNG — embedding SVG gives crispness and flexibility (<a href="/en/blog/kak-vstavit-svg-na-sajt/" target="_blank" rel="noopener">the embedding guide</a>).</p>
+      <h2 id="logos-in-a-design-system-storing-them-right">Logos in a design system: storing them right</h2>
+      <p>If the project is bigger than one mockup, logos belong in a library, not scattered across pages:</p>
+      <ol>
+      <li><strong>A dedicated &quot;Logos&quot; page</strong> in the design-system file: full logo, mark, monochrome, inverse — each a component named <code>logo/&lt;brand&gt;/&lt;variant&gt;</code>.</li>
+      <li><strong>Variants via properties:</strong> one <code>logo/sber</code> component with color (full/mono/white) and layout (full/mark) properties beats four separate components — switching happens in one click inside the mockup.</li>
+      <li><strong>Fixed-size slots:</strong> wrap the logo in a fixed-height auto-layout frame (say, 32 px) — headers and lists align without manual fiddling.</li>
+      <li><strong>Don't detach instances</strong> to recolor: wanting a different color means the component lacks a variant. Add it to the master and the change propagates everywhere.</li>
+      </ol>
+      <p>The structure pays off at the first client rebrand: swapping the master updates a hundred screens in a minute.</p>
+      <h2 id="fine-points-of-handling-third-party-svgs-in-figma">Fine points of handling third-party SVGs in Figma</h2>
+      <ul>
+      <li><strong>The SVG landed as one flat layer.</strong> The author flattened before export. Individual recoloring won't work — find a layered source (our catalog's SVGs keep their layers).</li>
+      <li><strong>Colors won't change via Selection colors.</strong> The SVG may define colors through style constructs <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> doesn't map; re-copying as SVG and pasting back usually normalizes the structure.</li>
+      <li><strong>The logo arrived giant or tiny.</strong> The SVG had no width/height, so <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> used the viewBox. Just set the size with Shift held — proportions stay.</li>
+      <li><strong>Thin strokes drift when scaled down.</strong> Check strokes are Inside the shapes; outside strokes misbehave under scaling. For small sizes, a version with slightly thicker strokes works better — which is exactly why brands keep separate small-size variants.</li>
+      </ul>
+      <h2 id="faq">FAQ</h2>
+      <p><strong>How do I place a logo on all mockups at once?</strong> You don't — and that's correct: make a component and place instances. Mass-pasting without a component is tech debt that fires at the first edit.</p>
+      <p><strong>Can <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> animate a logo?</strong> Prototyping animates transitions between variants (Smart Animate) — enough for simple reveals. Real motion means After Effects and Lottie export (<a href="/en/blog/animirovannyj-logotip/" target="_blank" rel="noopener">the animated logo article</a>).</p>
+      <p><strong>Why is the PNG export blurry?</strong> Check the export multiplier: 1x from a small frame yields a small file. Use 2x–4x or set an exact width in the Export field.</p>
+      <h2 id="in-short">In short</h2>
+      <p>Drag or paste the SVG → componentize if repeated → align by height → export back as SVG. Raster only when a vector doesn't exist in nature.</p>
+      <p>The quick vector source is our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a>: hundreds of brands in SVG with one-click code copy — then Ctrl+V into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>. For emoji in mockups there's a <a href="/en/emoji/" target="_blank" rel="noopener">separate catalog</a> with high-res Apple and Google PNGs.</p>
+      </div>
+
+      <section class="blog-related">
+        <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
+        <div class="blog-list">
+          <a class="blog-card" href="/en/blog/shrift-dlya-logotipa/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16" /><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /><path d="M9 20h6" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">12.07.2026</div>
+          <div class="blog-card-title">Choosing a Logo Typeface — And Not Getting Fined over the License</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/logotipy-so-skrytym-smyslom/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" /><circle cx="12" cy="12" r="3" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">02.07.2026</div>
+          <div class="blog-card-title">Logos with Hidden Meanings — the FedEx Arrow, the Amazon Smile and 10 More Secrets</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-sdelat-logotip-samomu/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" /><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" /><path d="m2.3 2.3 7.286 7.286" /><circle cx="11" cy="11" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">19.06.2026</div>
+          <div class="blog-card-title">How to Make a Logo Yourself for Free — An Honest Step-by-Step Guide</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/animirovannyj-logotip/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">05.06.2026</div>
+          <div class="blog-card-title">Animated Logos — When You Need One, the Formats, and How Not to Overdo It</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/vodyanoj-znak-na-foto/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">18.07.2026</div>
+          <div class="blog-card-title">Watermarking Photos — Placing a Logo So It Protects Without Ruining</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/v-kakom-formate-nuzhen-logotip/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">16.07.2026</div>
+          <div class="blog-card-title">What File Format Should a Logo Be — SVG, PNG, AI, EPS or PDF</div>
+        </div>
+      </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="blog-sidebar">
+      <nav class="blog-sidebar-nav" aria-label="On this page"><span class="blog-sidebar-label">On this page</span><ol><li><a href="#method-1-drag-an-svg-file">Method 1. Drag an SVG file</a></li><li><a href="#method-2-paste-svg-code-from-the-clipboard">Method 2. Paste SVG code from the clipboard</a></li><li><a href="#method-3-png-when-there-s-no-choice">Method 3. PNG — when there's no choice</a></li><li><a href="#logos-as-components">Logos as components</a></li><li><a href="#common-mistakes">Common mistakes</a></li><li><a href="#exporting-back">Exporting back</a></li><li><a href="#logos-in-a-design-system-storing-them-right">Logos in a design system: storing them right</a></li><li><a href="#fine-points-of-handling-third-party-svgs-in-figma">Fine points of handling third-party SVGs in Figma</a></li><li><a href="#faq">FAQ</a></li><li><a href="#in-short">In short</a></li></ol></nav>
+      <div class="blog-progress-wrap">
+      <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+      <span class="blog-progress-pct">0%</span>
+    </div>
+    </aside>
+  </div>
+
+  <div class="catalog-cta">
+    <div class="catalog-cta-text">
+      <span class="catalog-cta-title" data-i18n="blogCtaTitle">Logo and emoji library</span>
+      <span class="catalog-cta-sub" data-i18n="blogCtaSub">Download SVG/PNG free and export to Figma</span>
+    </div>
+    <a class="catalog-cta-link" href="/en/logos/">
+      <span data-i18n="seoCatalogOpen">Open catalog</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</main>
+
+<footer>
+  Trace Logo's Beta · <a href="/en/" class="footer-link">trace-logos</a>
+</footer>
+
+<script type="module" src="/js/header-search.js"></script>
+<script type="module" src="/js/blog-toc.js"></script>
+<script type="module" src="/js/blog-code.js"></script>
+</body>
+</html>

@@ -1258,6 +1258,9 @@ document.body.dataset.section = _pathSection;
 document.getElementById('empty-reset-format')?.addEventListener('click', () => setFormat('all'));
 
 loadLogos(_manifestBase).then(logos => {
+  // Drop the build-time pre-rendered grid (scripts/lib/static-grid.js) — it
+  // exists for crawlers/first paint; the live grid below replaces it.
+  content.querySelector('.ssr-grid')?.remove();
   let readyTotal = 0;
   for (const group of logos) {
     const readyCount = group.items.filter(item => !item.comingSoon).length;

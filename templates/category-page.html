@@ -47,6 +47,9 @@
   <link rel="stylesheet" href="{{REL}}css/filters.css">
   <link rel="stylesheet" href="{{REL}}css/mobile.css">
   <link rel="stylesheet" href="{{REL}}css/confetti.css">
+  <link rel="stylesheet" href="{{REL}}css/category-seo.css">
+  <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
+  <script>document.documentElement.classList.add('js');</script>
   <script src="{{REL}}components/support-btn.js" defer></script>
   <script src="{{REL}}components/lang-switcher.js" defer></script>
   <script src="{{REL}}components/site-header.js" defer></script>
@@ -126,7 +129,7 @@
   </div>
   <div class="center-body">
     <main>
-      <div class="content" id="content"></div>
+      <div class="content" id="content">{{STATIC_GRID}}</div>
       <div id="empty-section" data-i18n="emptySectionText">Пока ничего нет — раздел в разработке</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

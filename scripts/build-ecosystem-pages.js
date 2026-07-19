@@ -177,6 +177,7 @@ function main() {
       JSON_LD:       buildJsonLd(label, ecoKey, fullUrl, items),
       MANIFEST_BASE: '../../',
       CAT_SLUG:      '',
+      STATIC_GRID:   '',
       ECO_SLUG:      ecoKey,
     };
 
@@ -208,6 +209,7 @@ function main() {
       JSON_LD:       buildJsonLdEn(labelEn, ecoKey, fullUrlEn, items),
       MANIFEST_BASE: '../../',
       CAT_SLUG:      '',
+      STATIC_GRID:   '',
       ECO_SLUG:      ecoKey,
     };
     let htmlEn = TEMPLATE.replace(/\{\{(\w+)\}\}/g, (_, key) => enVars[key] ?? '');

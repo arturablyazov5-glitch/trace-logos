@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script src="/components/cookie-consent.js" defer></script>
+  <meta charset="UTF-8">
+  <script>window.__LANG__='en';</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Optimize SVG — Cut File Size 2–10× with Zero Quality Loss · Trace Logo's</title>
+  <meta name="description" content="Why exported SVGs weigh more than they should — editor junk, excess points, embedded raster. SVGO, SVGOMG and manual optimization techniques.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <link rel="canonical" href="https://trace-logos.ru/en/blog/kak-optimizirovat-svg/">
+  <link rel="alternate" hreflang="ru" href="https://trace-logos.ru/blog/kak-optimizirovat-svg/">
+  <link rel="alternate" hreflang="en" href="https://trace-logos.ru/en/blog/kak-optimizirovat-svg/">
+  <link rel="alternate" hreflang="x-default" href="https://trace-logos.ru/blog/kak-optimizirovat-svg/">
+  <link rel="alternate" type="text/plain" title="LLMs.txt" href="https://trace-logos.ru/llms.txt">
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:title" content="How to Optimize SVG — Cut File Size 2–10× with Zero Quality Loss">
+  <meta property="og:description" content="Why exported SVGs weigh more than they should — editor junk, excess points, embedded raster. SVGO, SVGOMG and manual optimization techniques.">
+  <meta property="og:url" content="https://trace-logos.ru/en/blog/kak-optimizirovat-svg/">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/blog-kak-optimizirovat-svg.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:published_time" content="2026-06-16">
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Trace Logo's",
+          "item": "https://trace-logos.ru/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://trace-logos.ru/en/blog/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to Optimize SVG — Cut File Size 2–10× with Zero Quality Loss",
+          "item": "https://trace-logos.ru/en/blog/kak-optimizirovat-svg/"
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "How to Optimize SVG — Cut File Size 2–10× with Zero Quality Loss",
+      "description": "Why exported SVGs weigh more than they should — editor junk, excess points, embedded raster. SVGO, SVGOMG and manual optimization techniques.",
+      "datePublished": "2026-06-16",
+      "dateModified": "2026-06-16",
+      "url": "https://trace-logos.ru/en/blog/kak-optimizirovat-svg/",
+      "inLanguage": "en",
+      "image": "https://trace-logos.ru/assets/og/blog-kak-optimizirovat-svg.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Trace Logo's"
+      },
+      "mainEntityOfPage": "https://trace-logos.ru/en/blog/kak-optimizirovat-svg/"
+    }
+  ]
+}
+  </script>
+
+  <link rel="stylesheet" href="/css/seo-page.css">
+  <link rel="stylesheet" href="/css/blog.css">
+  <!-- Yandex.RTB -->
+  <script>window.yaContextCb=window.yaContextCb||[]</script>
+  <script src="https://yandex.ru/ads/system/context.js" async></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="/en/" aria-label="Trace Logo's">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="/assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+  <form class="seo-search-form" id="seo-search-form" role="search" action="/en/logos/" method="get" data-base="/" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Search logos..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+  <a class="back-btn" href="/en/blog/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    <span data-i18n="backToCatalog">Back</span>
+  </a>
+  <lang-switcher></lang-switcher>
+</header>
+<script src="/components/lang-switcher.js" defer></script>
+<script src="/components/search-box.js" defer></script>
+
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
+  <a href="/en/">Trace Logo's</a><span class="sep">/</span>
+  <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a><span class="sep">/</span>
+  <span class="current" aria-current="page">How to Optimize SVG — Cut File Size 2–10× with Zero Quality Loss</span>
+</nav>
+
+<main>
+  <div class="blog-layout">
+    <article class="blog-article">
+      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(165 72% 58%) 0%, hsl(207 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
+      <header class="blog-article-head">
+        <div class="blog-meta">
+          <time class="blog-date" datetime="2026-06-16">June 16, 2026</time>
+          <span class="blog-meta-sep" aria-hidden="true">·</span>
+          <span class="blog-read">6 min read</span>
+        </div>
+        <h1>How to Optimize SVG — Cut File Size 2–10× with Zero Quality Loss</h1>
+      </header>
+      <div class="blog-body">
+        <p>SVG has a reputation as a lightweight format — but open a file exported from <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> or <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> and you'll find editor metadata, commented-out junk, coordinates with eight decimal places and styles duplicated on every shape. A typical exported SVG can shrink 2–10× without changing a single on-screen pixel. Here's how.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>Run the file through <strong>SVGO</strong> (or its web UI, <strong>SVGOMG</strong>) — that's 90% of the job, automatically: metadata stripped, coordinates rounded, groups collapsed. The remaining 10% is manual: check for embedded raster, invisible leftover shapes, and text not converted to outlines.</p></div></div>
+      <h2 id="where-the-junk-comes-from">Where the junk comes from</h2>
+      <p>SVG is text, and editors write whatever suits them:</p>
+      <ul>
+      <li><strong>Editor metadata:</strong> <code>&lt;metadata&gt;</code>, &quot;Generator: Adobe <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>&quot; comments, private <code>sodipodi:</code>/<code>inkscape:</code> attributes — browsers need none of it.</li>
+      <li><strong>Excess precision:</strong> <code>12.000000381469727</code> instead of <code>12</code> — invisible to the eye, heavy across thousands of points.</li>
+      <li><strong>Empty groups and defs:</strong> layer remnants, unused gradients, contentless wrappers.</li>
+      <li><strong>Duplicated styles:</strong> <code>fill=&quot;#21A038&quot;</code> on each of 40 shapes instead of once on a group.</li>
+      <li><strong>Hidden objects:</strong> shapes with <code>display:none</code> or outside the viewBox — drawing-process artifacts that rode along into the export.</li>
+      </ul>
+      <h2 id="automation-svgo-and-svgomg">Automation: SVGO and SVGOMG</h2>
+      <p><strong>SVGOMG</strong> is the web UI: drop a file, toggle options, download — before/after size shown live. Perfect for one-offs.</p>
+      <p><strong>SVGO</strong> is the CLI for batches and build pipelines:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">npx svgo logo.svg              # one file
+npx svgo -f ./icons -o ./dist  # a whole folder</code></pre>
+      </div>
+      <p>Defaults are safe. Two toggles deserve caution:</p>
+      <ul>
+      <li><strong>Precision.</strong> 2–3 decimals — safe; 1 — can visibly distort fine details and smooth curves.</li>
+      <li><strong>Remove viewBox.</strong> Leave it off: without a viewBox the SVG stops scaling via CSS — the classic &quot;I embedded the SVG and it won't resize&quot;.</li>
+      </ul>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Verify after optimizing</span></div><div class="callout-body"><p>Open the optimized file next to the original and compare — especially small details and gradients. Aggressive settings occasionally break complex files: masks, filters, pattern fills. If something breaks, step the precision back.</p></div></div>
+      <h2 id="manual-techniques-automation-can-t-do">Manual techniques automation can't do</h2>
+      <h3>Find raster hiding inside</h3>
+      <p>The top answer to &quot;why is my SVG 800 KB&quot;: a base64 bitmap inside the vector (<code>&lt;image href=&quot;data:image/png...</code>). Technically SVG, actually a PNG in a wrapper with all raster downsides. Search for the <code>&lt;image&gt;</code> tag — if present, the file needs redrawing, not optimizing.</p>
+      <h3>Convert text to outlines — or the reverse</h3>
+      <p>A <code>&lt;text&gt;</code> tag renders with the viewer's fonts: font missing — the label jumps to a fallback. Logos should have text outlined (Outline/Flatten in your editor). The flip side: each outlined letter is dozens of points, and long labels bloat the file. Icons and logos — outlines; diagrams with many labels — <code>&lt;text&gt;</code> with system fonts.</p>
+      <h3>Simplify paths</h3>
+      <p><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>: select → Flatten, then delete excess points. Inkscape: Path → Simplify (Ctrl+L) — reduces node count with adjustable aggression. Especially useful after auto-tracing, which loves to put a node on every pixel.</p>
+      <h3>Merge identical fills</h3>
+      <p>Forty shapes of one color? Group them and set the fill once on the group. Recoloring gets easier too — the very thing our <a href="/en/blog/kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">logo color editor</a> relies on.</p>
+      <h2 id="real-world-numbers">Real-world numbers</h2>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>File</th><th>Before</th><th>After SVGO</th><th>Manual pass</th></tr></thead><tbody><tr><td><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> icon</td><td>4 KB</td><td>1.5 KB</td><td>1 KB</td></tr><tr><td><a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> logo</td><td>25 KB</td><td>8 KB</td><td>5 KB</td></tr><tr><td>Auto-traced PNG</td><td>300 KB</td><td>150 KB</td><td>redraw → 10 KB</td></tr></tbody></table></div>
+      <p>Kilobytes look petty until a page carries thirty icons: that's the gap between &quot;instant&quot; and &quot;visibly loading&quot;, especially on mobile. And inline SVG ships inside the HTML — its weight is every page's weight.</p>
+      <h2 id="gzip-and-brotli-the-final-multiplier">Gzip and Brotli: the final multiplier</h2>
+      <p>SVG is text, and text compresses beautifully on the fly. A properly configured server serves SVG with Brotli or Gzip — another 60–80% off the transferred size. Check in DevTools → Network → the Size column: transferred far below size means compression is working.</p>
+      <h2 id="automation-svgo-in-the-project-pipeline">Automation: SVGO in the project pipeline</h2>
+      <p>Manual optimization suits one-off files; projects with dozens of icons bake it into the process:</p>
+      <ul>
+      <li><strong>A config in the repo.</strong> <code>svgo.config.js</code> fixes the settings for the whole team — e.g. removeViewBox off, precision 3:</li>
+      </ul>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">module.exports = {
+  plugins: [
+    { name: 'preset-default',
+      params: { overrides: { removeViewBox: false } } },
+  ],
+};</code></pre>
+      </div>
+      <ul>
+      <li><strong>A hook or CI step:</strong> running svgo over changed files on pre-commit means unoptimized SVG physically can't enter the repo.</li>
+      <li><strong>Bundlers:</strong> Vite/Webpack plugins optimize SVG on import; in React projects SVGR combines optimization with turning icons into components.</li>
+      <li><strong><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> plugins</strong> (SVGO Compressor and kin) optimize at export time — handy for designers handing files to developers.</li>
+      </ul>
+      <p>One principle: optimization must happen by itself, not by memory. &quot;Remembering to run SVGOMG&quot; doesn't survive contact with deadlines.</p>
+      <h2 id="dissecting-a-real-file-what-exactly-gets-thrown-out">Dissecting a real file: what exactly gets thrown out</h2>
+      <p>A typical editor export, junk annotated line by line:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;            ← unneeded on the web
+&lt;!-- Generator: Adobe [Illustrator](../../logos/design/illustrator/) 27.0 --&gt;         ← a business-card comment
+&lt;svg xmlns:xlink=&quot;...&quot; xml:space=&quot;preserve&quot;        ← unused attributes
+     width=&quot;24.000000px&quot; height=&quot;24.000000px&quot;&gt;     ← trailing zeros
+  &lt;g id=&quot;Layer_1_copy_2&quot;&gt;                          ← the editor's layer name
+    &lt;path fill=&quot;#FF0000&quot; d=&quot;M12.000000,2.000000    ← 6 decimal places
+      C12.000000,2.000000 11.999999,2.000001...&quot;/&gt;  ← curve micro-jitters
+  &lt;/g&gt;
+&lt;/svg&gt;</code></pre>
+      </div>
+      <p>After SVGO, the essence remains:</p>
+      <div class="blog-code">
+        <div class="blog-code-head">
+          <span class="blog-code-lang">code</span>
+          <button type="button" class="blog-code-copy" data-copy-label="Copy" data-copied-label="Copied">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy</span>
+          </button>
+        </div>
+        <pre><code class="language-">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 24 24&quot;&gt;
+  &lt;path fill=&quot;red&quot; d=&quot;M12 2C12 2 12 2...&quot;/&gt;
+&lt;/svg&gt;</code></pre>
+      </div>
+      <p>Each junk line is harmless alone — but there are hundreds per file and dozens of files. That's how 4 KB becomes 1 KB with zero visible change.</p>
+      <h2 id="when-optimization-is-not-needed">When optimization is NOT needed</h2>
+      <p>For honesty — the cases where you can skip it:</p>
+      <ul>
+      <li><strong>A single logo on a static landing page</strong> — 3 KB changes nothing measurable.</li>
+      <li><strong>SVG for print or designer handoff</strong> — layer structure matters there, and aggressive optimization collapses it. Optimize a web copy; keep the source intact.</li>
+      <li><strong>Files still being edited</strong> — optimization irreversibly simplifies structure: layer names, groups and guides vanish.</li>
+      </ul>
+      <p>The rule: an optimized SVG is a <strong>production artifact</strong>, like minified JS. The source lives separately.</p>
+      <h2 id="in-short">In short</h2>
+      <p>SVGO/SVGOMG with defaults is a mandatory step for any SVG headed to production. Then situationally: evict embedded raster, outline text, simplify traced paths. And never remove the viewBox.</p>
+      <p>Every SVG in our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a> is already optimized and normalized — download or copy code with no junk, metadata or surprises inside.</p>
+      </div>
+
+      <section class="blog-related">
+        <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
+        <div class="blog-list">
+          <a class="blog-card" href="/en/blog/kak-vstavit-svg-na-sajt/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">25.06.2026</div>
+          <div class="blog-card-title">How to Embed SVG on a Website — img, Inline, Background and Which to Pick</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-sdelat-favicon/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">18.06.2026</div>
+          <div class="blog-card-title">Favicons in 2026 — Formats, Sizes and the Right HTML</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/vektor-i-rastr-raznica/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">17.07.2026</div>
+          <div class="blog-card-title">Vector vs Raster Graphics — The Difference in Plain Words</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/v-kakom-formate-nuzhen-logotip/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">16.07.2026</div>
+          <div class="blog-card-title">What File Format Should a Logo Be — SVG, PNG, AI, EPS or PDF</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/pochemu-logotip-razmytyj/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">07.07.2026</div>
+          <div class="blog-card-title">Why Your Logo Looks Blurry and How to Fix It — Every Cause Explained</div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-konvertirovat-svg-v-png/">
+        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-date">15.06.2026</div>
+          <div class="blog-card-title">How to Convert SVG to PNG and Back — 5 Lossless Methods</div>
+        </div>
+      </a>
+        </div>
+      </section>
+    </article>
+
+    <aside class="blog-sidebar">
+      <nav class="blog-sidebar-nav" aria-label="On this page"><span class="blog-sidebar-label">On this page</span><ol><li><a href="#where-the-junk-comes-from">Where the junk comes from</a></li><li><a href="#automation-svgo-and-svgomg">Automation: SVGO and SVGOMG</a></li><li><a href="#manual-techniques-automation-can-t-do">Manual techniques automation can't do</a></li><li><a href="#real-world-numbers">Real-world numbers</a></li><li><a href="#gzip-and-brotli-the-final-multiplier">Gzip and Brotli: the final multiplier</a></li><li><a href="#automation-svgo-in-the-project-pipeline">Automation: SVGO in the project pipeline</a></li><li><a href="#dissecting-a-real-file-what-exactly-gets-thrown-out">Dissecting a real file: what exactly gets thrown out</a></li><li><a href="#when-optimization-is-not-needed">When optimization is NOT needed</a></li><li><a href="#in-short">In short</a></li></ol></nav>
+      <div class="blog-progress-wrap">
+      <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+      <span class="blog-progress-pct">0%</span>
+    </div>
+    </aside>
+  </div>
+
+  <div class="catalog-cta">
+    <div class="catalog-cta-text">
+      <span class="catalog-cta-title" data-i18n="blogCtaTitle">Logo and emoji library</span>
+      <span class="catalog-cta-sub" data-i18n="blogCtaSub">Download SVG/PNG free and export to Figma</span>
+    </div>
+    <a class="catalog-cta-link" href="/en/logos/">
+      <span data-i18n="seoCatalogOpen">Open catalog</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</main>
+
+<footer>
+  Trace Logo's Beta · <a href="/en/" class="footer-link">trace-logos</a>
+</footer>
+
+<script type="module" src="/js/header-search.js"></script>
+<script type="module" src="/js/blog-toc.js"></script>
+<script type="module" src="/js/blog-code.js"></script>
+</body>
+</html>

@@ -7,7 +7,7 @@
 **Data flow:**
 `logos/manifest.json` → `logos/categories/*.json` (35+ categories) → logo items → `svgs/` / `pngs/`
 
-Each item: `name`, `tags`, `figma` (Figma component path), `file`, `variants[]`, `ecosystem`.
+Each item: `name`, `tags`, `figma` (Figma component path), `file`, `variants[]`, `ecosystem`. Optional `alt_name` / `alt_name_en` — a second searched brand name («Сбербанк» for Сбер): `build-seo-pages.js` renders it as «Имя (Алиас)» in title/H1/OG and as `alternateName` in JSON-LD. Add it when a brand is widely searched under a different name than the displayed one.
 
 **Features:**
 - Catalog browsable by category and ecosystem (Yandex, Sber, VK, Google, etc.)
@@ -124,7 +124,7 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 **Default entry point for any content change** (new/edited logo, emoji, collection, blog post, or a shared template/partial). Spawns every fast-tier script below as a child process, in dependency order, stopping on first failure. `--dry-run` previews every step without writing.
 
 - **Fast tier (default):** test-data `--pre` → build-seo-pages → build-api-json → build-collections → build-category-pages → build-ecosystem-pages → build-webp-previews → test-data `--post` → build-emoji-seo-pages → build-emoji-category-pages → build-emoji-json → build-blog → build-blog-rss → build-home-sitemap → build-en-pages → test-links → build-sitemap (always last) → build-version.
-- **Opt-in slow tier** (Puppeteer/Chrome, excluded by default — run only when actually needed, see each script's own entry below): `--with-og` (build-og-images), `--og-home` (build-og-home), `--plugin-assets` (build-plugin-assets), or `--full` for all three.
+- **Opt-in slow tier** (Puppeteer/Chrome, excluded by default — run only when actually needed, see each script's own entry below): `--with-og` (build-og-images), `--og-home` (build-og-home), `--og-blog` (build-blog-og-images), `--plugin-assets` (build-plugin-assets), or `--full` for all four.
 - **Why it exists:** the old workflow was "remember which of ~14 scripts to run, in what order" — easy to get wrong or skip a step (e.g. forgetting `build-ecosystem-pages.js` after adding an `ecosystem` key leaves cross-reference links 404ing). `build-all.js` removes that memory burden entirely for the common case.
 - **When an individual script below is still the right call:** iterating on ONE script's own logic (fast `--dry-run` loop without re-running everything else), or a slow-tier step you're intentionally running standalone (e.g. `build-og-images.js` alone after adding one new logo, rather than `--with-og` re-rendering nothing new).
 - Each script also still works completely standalone (this doc lists them individually below) — `build-all.js` is a convenience wrapper, not a replacement for understanding what each step does.
@@ -157,6 +157,15 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 - Requires Google Chrome at `/Applications/Google Chrome.app`
 - `--dry-run` to preview paths without writing
 
+## `node scripts/build-blog-og-images.js`
+- **Input:** `blog/posts/*.md` frontmatter (`title`, `description`, `tags`)
+- **Output:** `assets/og/blog-<slug>.png` (1200×630 title-card PNG via Puppeteer + Chrome — dark background, accent dot cycled by post index, title + description + brand footer)
+- **Why it exists:** without it, `build-blog.js` still emits a `blog-<slug>.png` URL unconditionally (same convention as `build-og-images.js` for logos) — this script is what actually puts the file there. Until it's run, every post's social-share preview is a broken image; `test-data.js --post` warns (not fails) on missing files.
+- **When to run:** after adding or editing a post's `title`/`description`/`tags` in `blog/posts/*.md`. Opt-in slow tier — `node scripts/build-all.js --og-blog` (or `--full`) runs it as part of the pipeline; standalone is fine too since it doesn't depend on `build-blog.js` having run first (or vice versa — the URL is unconditional either way).
+- `cleanup-orphaned-pages.js` knows to keep `assets/og/blog-<slug>.png` for every slug still in `blog/posts/*.md` — don't hand-delete these, they'll just get regenerated as "orphaned" false positives if you rename a post's slug without rerunning this script.
+- Requires Google Chrome at `/Applications/Google Chrome.app`
+- `--dry-run` to preview paths without writing
+
 ## `node scripts/build-webp-previews.js`
 - **Input:** `assets/logos/pngs/*.png` (via `sharp`)
 - **Output:** `assets/logos/previews/<name>.webp` — lightweight grid thumbnails (fit inside 192×192, quality 80)
@@ -166,10 +175,11 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 - Incremental by default (skips up-to-date previews); `--force` to rebuild all, `--dry-run` to preview
 
 ## `node scripts/build-category-pages.js`
-- **Input:** `logos/manifest.json` + `templates/category-page.html`
+- **Input:** `logos/manifest.json` + `logos/category-seo.json` + `templates/category-page.html`
 - **Output:** `logos/<category>/index.html` (category overview pages)
-- Also **patches `logos/index.html`** (hand-maintained main catalog): updates the logo counter AND re-injects the shared **detail panel** between `<!-- DETAIL:START/END -->` markers. The detail panel is a single source — `templates/partials/detail-panel.html` (which itself nests `{{> download-dropdown}}`); `category-page.html` pulls it via `{{> detail-panel}}`. **Edit the detail panel / download dropdown ONLY in `templates/partials/`, then run this script** — never between the markers.
-- **When to run:** after changes to manifest, the category template, or the detail/dropdown partials
+- **SEO copy lives in `logos/category-seo.json`** (keyed by cat.slug): `gen` — родительный падеж for the title formula «Логотипы {gen} — скачать SVG и PNG бесплатно», `intro` — unique page text, optional `title`/`h1` full overrides (flags), `*_en` variants. The builder renders a static `.cat-seo` block ({{SEO_SECTION}} in the template): H1 + intro + plain-HTML links to EVERY logo page in the category — that block, not the JS grid, is what Yandex crawls. New category ⇒ add its entry here, or the page falls back to the generic «Логотипы — {section}» wording.
+- Also **patches `logos/index.html`** (hand-maintained main catalog): updates the logo counter, re-injects the shared **detail panel** between `<!-- DETAIL:START/END -->` markers, AND re-injects the crawlable category-links block between `<!-- CATLINKS:START/END -->` markers (relative hrefs + `data-i18n="sitemapCat_<slug>"` — a new category also needs that key in `js/i18n-dict.js` RU and EN, or the runtime i18n shows the raw key). The detail panel is a single source — `templates/partials/detail-panel.html` (which itself nests `{{> download-dropdown}}`); `category-page.html` pulls it via `{{> detail-panel}}`. **Edit the detail panel / download dropdown ONLY in `templates/partials/`, then run this script** — never between the markers.
+- **When to run:** after changes to manifest, `category-seo.json`, the category template, or the detail/dropdown partials
 
 ## `node scripts/build-ecosystem-pages.js`
 - **Input:** `logos/ecosystems.json` (key → RU/EN label) + `logos/manifest.json` → `logos/categories/*.json` (items with matching `ecosystem` field) + `templates/category-page.html`
@@ -205,13 +215,20 @@ The emoji catalog lives at `/emoji/` and shares the same `main.js`, CSS, and dat
 - **`node scripts/build-emoji-json.js`** — `emoji.json` (now includes per-emoji `url` from `_url-map.json`, used by homepage live search). Run after `build-emoji-seo-pages.js`.
 
 ## `node scripts/build-blog.js`
-- **Input:** `blog/posts/*.md` (frontmatter: `title`, `description`, `date`, `slug`) + `templates/blog-index.html` / `templates/blog-post.html`
-- **Output:** `blog/index.html` + `blog/<slug>/index.html` (BlogPosting + Breadcrumb; index has Blog schema). Self-contained minimal markdown→HTML, no deps.
+- **Input:** `blog/posts/*.md` (frontmatter: `title`, `description`, `date`, `slug`; optional `title_en`/`description_en`/`tags`/`tags_en`; optional `---EN---` line splits RU body from EN body) + `templates/blog-index.html` / `templates/blog-post.html`
+- **Output:** `blog/index.html` + `blog/<slug>/index.html` (BlogPosting + Breadcrumb; index has Blog schema) + `/en/` mirror. Self-contained markdown→HTML, no deps.
+- **Markdown blocks (the reusable toolkit — use these for readable articles):**
+  - Inline: `**bold**`, `*italic*`, `` `code` ``, `[text](href)` (relative hrefs like `../../logos/` resolve to `/en/…` on the EN mirror).
+  - `##`/`###` headings — every `##` gets an anchor id; **≥3 `##` auto-generates a table of contents** at the top.
+  - `>` blockquote (use for law/spec citations), pipe tables (`| a | b |` + `|---|---|`), `---` hr, `-`/`1.` lists.
+  - **Callouts:** ` :::type Optional title ` … ` ::: ` where type ∈ `note`/`tip`/`warning`/`success`/`danger`. Each has an accent colour + icon + default localized label (RU/EN by build lang); a title on the fence overrides the label. Callout bodies are parsed as markdown (lists/paragraphs allowed). This is the main readability lever — use `success`/`danger` for can/can't, `warning` for caveats, `tip` for how-to, `note` for TL;DR + disclaimer.
+  - Reading time (`{{READ_TIME}}`) and the lead-paragraph style are automatic. Styles live in `css/blog.css`.
 - **When to run:** after adding/editing a post in `blog/posts/`
+- **New post checklist add-on:** also run `node scripts/build-blog-og-images.js` (or `npm run build -- --og-blog`) so the new post gets its own social-share preview instead of falling back to a broken image link — see that script's entry below.
 
 ## `node scripts/build-sitemap.js`
 - **Input:** logos/emoji manifests, `collections.json`, `blog/posts/*.md`, `emoji/_urls.json`
-- **Output:** `sitemap.xml` (**sitemap index**) + `sitemap-pages.xml` / `sitemap-logos.xml` / `sitemap-emoji.xml`
+- **Output:** `sitemap.xml` (**sitemap index**) + `sitemap-pages.xml` / `sitemap-logos.xml` / `sitemap-emoji.xml` / `sitemap-en.xml` (the `/en/` mirror — only URLs whose `en/<path>/index.html` actually exists on disk)
 - **This script is the sole owner of `sitemap.xml`.** Run it LAST, after all page builders.
 
 ## `node scripts/build-home-sitemap.js`

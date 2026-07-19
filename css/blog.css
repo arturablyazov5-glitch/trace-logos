@@ -27,7 +27,9 @@
 .blog-card-cover {
   width: 100%; aspect-ratio: 16 / 9;
   flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
 }
+.blog-card-icon { color: rgba(255,255,255,.85); filter: drop-shadow(0 2px 6px rgba(0,0,0,.15)); }
 .blog-card-body {
   display: flex; flex-direction: column; gap: 8px;
   padding: 14px 16px 16px; flex: 1;
@@ -46,32 +48,212 @@
   border-radius: 20px; padding: 2px 9px; white-space: nowrap;
 }
 
+/* ── Related posts (nested in .blog-article, so it inherits the article's
+   column width — narrower than the index grid, hence its own 2-col cap) ── */
+.blog-related { margin: 96px 0 0; padding-top: 48px; border-top: 1px solid var(--line); }
+.blog-related-title {
+  font-size: 20px; font-weight: 700; color: var(--text-0);
+  letter-spacing: -0.02em; margin-bottom: 16px;
+}
+.blog-related .blog-list { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 560px) { .blog-related .blog-list { grid-template-columns: 1fr; } }
+
+/* ── Article + sidebar layout ── */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 40px;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+@media (max-width: 860px) {
+  .blog-layout { grid-template-columns: 1fr; max-width: 700px; }
+  .blog-sidebar { position: static; }
+}
+
+.blog-sidebar {
+  display: flex; flex-direction: column; gap: 16px;
+  position: sticky; top: calc(57px + 24px);
+}
 /* ── Article ── */
-.blog-article { max-width: 720px; }
-.blog-article-head { margin-bottom: 28px; }
-.blog-date { font-size: 13px; color: var(--text-6); }
+.blog-article { max-width: 700px; margin: 0 auto; }
+.blog-layout .blog-article { max-width: none; margin: 0; }
+.blog-article-cover {
+  width: 100%; aspect-ratio: 21 / 9; max-height: 280px;
+  border-radius: 16px; margin-bottom: 28px;
+  display: flex; align-items: center; justify-content: center;
+}
+.blog-article-icon { color: rgba(255,255,255,.85); filter: drop-shadow(0 3px 10px rgba(0,0,0,.18)); }
+.blog-article-head { margin-bottom: 30px; }
+.blog-meta {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-6);
+}
+.blog-date, .blog-read { color: var(--text-6); }
+.blog-meta-sep { color: var(--text-6); opacity: .6; }
 .blog-article-head h1 {
-  font-size: 32px; font-weight: 700; color: var(--text-0);
-  letter-spacing: -0.02em; line-height: 1.18; margin-top: 8px;
+  font-size: 34px; font-weight: 700; color: var(--text-0);
+  letter-spacing: -0.02em; line-height: 1.15; margin-top: 12px;
 }
-.blog-body { font-size: 16px; line-height: 1.75; color: var(--text-3); }
+
+.blog-body { font-size: 16.5px; line-height: 1.78; color: var(--text-2); }
+/* Lead: the opening paragraph reads a touch bigger and lighter */
+.blog-body > p:first-of-type { font-size: 18px; line-height: 1.65; color: var(--text-1); }
+
 .blog-body h2 {
-  font-size: 22px; font-weight: 700; color: var(--text-0);
-  margin: 36px 0 14px; letter-spacing: -0.01em;
+  font-size: 23px; font-weight: 700; color: var(--text-0);
+  margin: 44px 0 14px; letter-spacing: -0.01em; scroll-margin-top: 80px;
 }
+/* Divider above every section except the first — separates it from the
+   lead paragraph / intro callout without doubling up with a border there. */
+.blog-body h2:not(:first-of-type) {
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+/* Step headings: «Шаг N» in an accent badge, title on its own line */
+.blog-body h2.step-heading { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.blog-body .step-badge {
+  display: inline-block;
+  font-size: 13px; font-weight: 600; line-height: 1;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: #fff;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+.blog-body .step-title { display: block; }
+.blog-body .step-title-dim { opacity: 0.5; }
+
 .blog-body h3 {
-  font-size: 17px; font-weight: 600; color: var(--text-1);
-  margin: 26px 0 10px;
+  font-size: 18px; font-weight: 600; color: var(--text-1);
+  margin: 30px 0 10px;
 }
-.blog-body p { margin: 0 0 16px; }
-.blog-body ul, .blog-body ol { margin: 0 0 16px; padding-left: 24px; }
-.blog-body li { margin-bottom: 8px; }
-.blog-body a { color: var(--text-1); text-decoration: underline; text-decoration-color: var(--border-eco); }
-.blog-body a:hover { color: var(--accent); }
-.blog-body strong { color: var(--text-1); font-weight: 600; }
+.blog-body p { margin: 0 0 18px; }
+.blog-body ul, .blog-body ol { margin: 0 0 18px; padding-left: 22px; }
+.blog-body li { margin-bottom: 10px; padding-left: 4px; }
+.blog-body li::marker { color: var(--text-5); }
+.blog-body a { color: var(--accent); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 2px; text-decoration-thickness: 1px; transition: color 0.2s ease; }
+.blog-body a:hover { color: var(--text-0); text-decoration-color: var(--text-0); }
+.blog-body strong { color: var(--text-0); font-weight: 600; }
 .blog-body code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em;
   background: var(--bg-raised); border: 1px solid var(--border-base);
-  border-radius: 5px; padding: 1px 5px;
+  border-radius: 5px; padding: 1px 5px; color: var(--text-1);
 }
-.blog-body hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+.blog-body hr { border: none; border-top: 1px solid var(--line); margin: 34px 0; }
+
+/* ── Fenced code blocks (```lang ... ```) ── */
+.blog-code {
+  margin: 0 0 18px; border-radius: 12px; overflow: hidden;
+  background: #0d0d10; border: 1px solid var(--border-base);
+}
+.blog-code-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 14px; background: rgba(255,255,255,.03);
+  border-bottom: 1px solid var(--border-base);
+}
+.blog-code-lang {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px;
+  font-weight: 600; letter-spacing: .02em; text-transform: uppercase; color: var(--text-5);
+}
+.blog-code-copy {
+  display: flex; align-items: center; gap: 6px;
+  font-family: inherit; font-size: 12px; font-weight: 500; color: var(--text-5);
+  background: transparent; border: none; cursor: pointer; padding: 3px 6px; border-radius: 6px;
+  transition: color .12s, background .12s;
+}
+.blog-code-copy:hover { color: var(--text-1); background: rgba(255,255,255,.06); }
+.blog-code-copy.is-copied { color: #34d399; }
+.blog-code pre {
+  margin: 0; padding: 16px 18px; overflow-x: auto;
+}
+.blog-code pre code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; line-height: 1.65;
+  background: none; border: none; padding: 0; color: #e4e4e7; white-space: pre;
+}
+
+/* ── Reading-progress bar (js/blog-toc.js fills .blog-progress-bar / .blog-progress-pct) ── */
+.blog-progress-wrap { display: flex; align-items: center; gap: 10px; }
+.blog-progress {
+  flex: 1;
+  height: 4px; border-radius: 2px; overflow: hidden;
+  background: var(--border-base);
+}
+.blog-progress-bar {
+  height: 100%; width: 0%; border-radius: 2px;
+  background: var(--accent);
+}
+.blog-progress-pct {
+  font-size: 12px; font-weight: 600; color: var(--text-6);
+  font-variant-numeric: tabular-nums; flex-shrink: 0;
+}
+
+/* ── Sidebar section nav (auto, ≥2 H2; active item set by js/blog-toc.js) ── */
+.blog-sidebar-nav {
+  padding: 16px 18px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 14px;
+}
+.blog-sidebar-label {
+  display: block; font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--text-6); margin-bottom: 10px;
+}
+.blog-sidebar-nav ol { margin: 0; padding: 0; list-style: none; counter-reset: toc; }
+.blog-sidebar-nav li { margin: 0; padding: 0; counter-increment: toc; }
+.blog-sidebar-nav li + li { margin-top: 8px; }
+.blog-sidebar-nav a {
+  color: var(--text-3); text-decoration: none; font-size: 13.5px; line-height: 1.4;
+  display: flex; gap: 8px; transition: color .12s;
+}
+.blog-sidebar-nav a::before { content: counter(toc) '.'; color: var(--text-6); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+.blog-sidebar-nav a:hover { color: var(--text-0); }
+.blog-sidebar-nav a.is-active { color: var(--text-0); font-weight: 600; }
+.blog-sidebar-nav a.is-active::before { color: var(--accent); }
+
+/* ── Callouts (:::note / :::tip / :::warning / :::success / :::danger) ── */
+.callout {
+  display: flex; flex-direction: column; gap: 8px;
+  margin: 0 0 22px; padding: 16px 18px;
+  border: 1px solid var(--border-base); border-left-width: 3px;
+  border-radius: 12px; background: var(--bg-card);
+}
+.callout-head {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13.5px; font-weight: 600; color: var(--text-1);
+}
+.callout-icon { flex-shrink: 0; }
+.callout-body { color: var(--text-2); }
+.callout-body > :last-child { margin-bottom: 0 !important; }
+.callout-body p { margin: 0 0 12px; }
+.callout-body ul, .callout-body ol { margin: 0 0 12px; }
+
+.callout-note    { border-left-color: #5b8def; }
+.callout-note .callout-head, .callout-note .callout-icon { color: #7aa3f5; }
+.callout-tip     { border-left-color: var(--accent); }
+.callout-tip .callout-head, .callout-tip .callout-icon { color: #a98cff; }
+.callout-warning { border-left-color: #e0a83a; }
+.callout-warning .callout-head, .callout-warning .callout-icon { color: #e6bd5f; }
+.callout-success { border-left-color: #35b06a; }
+.callout-success .callout-head, .callout-success .callout-icon { color: #56c98a; }
+.callout-danger  { border-left-color: #e0574a; }
+.callout-danger .callout-head, .callout-danger .callout-icon { color: #ef7a6f; }
+
+/* ── Blockquote ── */
+.blog-body blockquote {
+  margin: 0 0 22px; padding: 4px 0 4px 18px;
+  border-left: 3px solid var(--border-eco); color: var(--text-3);
+  font-style: italic;
+}
+.blog-body blockquote p { margin: 0 0 8px; }
+.blog-body blockquote > :last-child { margin-bottom: 0; }
+
+/* ── Tables ── */
+.blog-table-wrap { margin: 0 0 22px; overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+.blog-table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.blog-table th, .blog-table td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+.blog-table th { background: var(--bg-muted); color: var(--text-1); font-weight: 600; white-space: nowrap; }
+.blog-table td { color: var(--text-2); }
+.blog-table tr:last-child td { border-bottom: none; }
+.blog-table tbody tr:hover td { background: rgba(255,255,255,.02); }
