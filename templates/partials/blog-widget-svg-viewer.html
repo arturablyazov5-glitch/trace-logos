@@ -1,0 +1,98 @@
+<!-- Встраиваемый просмотрщик SVG. Вставляется в пост директивой `:::widget svg-viewer`
+     (см. scripts/build-blog.js). Поведение — js/blog-svg-viewer.js, стили — css/blog-widget-svg.css;
+     оба подключаются только на тех страницах, где виджет реально используется.
+     Текст — только внутри элементов с data-i18n (bakeI18n заменяет содержимое целиком). -->
+<div class="svgv" data-svg-viewer>
+  <div class="svgv-head">
+    <span class="svgv-title" data-i18n="svgvTitle">Открыть SVG прямо здесь</span>
+    <span class="svgv-privacy">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span data-i18n="svgvPrivacy">Файл не уходит на сервер</span>
+    </span>
+  </div>
+
+  <div class="svgv-drop" data-svgv-drop>
+    <svg class="svgv-drop-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5-5 5 5"/><path d="M12 5v13"/></svg>
+    <span class="svgv-drop-title" data-i18n="svgvDropTitle">Перетащите SVG-файл сюда</span>
+    <button type="button" class="svgv-pick" data-svgv-pick data-i18n="svgvPick">Открыть файл</button>
+    <span class="svgv-drop-hint" data-i18n="svgvDropHint">Или вставьте файл из буфера обмена — Ctrl+V / ⌘V</span>
+    <input type="file" accept=".svg,image/svg+xml" hidden data-svgv-input>
+  </div>
+
+  <div class="svgv-stage" hidden data-svgv-stage>
+    <div class="svgv-bar">
+      <div class="svgv-tabs" role="tablist">
+        <button type="button" class="svgv-tab is-active" role="tab" aria-selected="true" data-svgv-view="image" data-i18n="svgvTabImage">Картинка</button>
+        <button type="button" class="svgv-tab" role="tab" aria-selected="false" data-svgv-view="code" data-i18n="svgvTabCode">Код</button>
+      </div>
+
+      <div class="svgv-bgs" data-svgv-bgs>
+        <button type="button" class="svgv-bg svgv-bg-checker is-active" data-svgv-bg="checker" data-i18n-aria="svgvBgChecker" aria-label="Прозрачный фон"></button>
+        <button type="button" class="svgv-bg svgv-bg-light" data-svgv-bg="light" data-i18n-aria="svgvBgLight" aria-label="Светлый фон"></button>
+        <button type="button" class="svgv-bg svgv-bg-dark" data-svgv-bg="dark" data-i18n-aria="svgvBgDark" aria-label="Тёмный фон"></button>
+      </div>
+
+      <div class="svgv-acts">
+        <button type="button" class="svgv-btn" data-svgv-reset>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5-5 5 5"/><path d="M12 5v13"/></svg>
+          <span data-i18n="svgvReset">Другой файл</span>
+        </button>
+        <button type="button" class="svgv-btn" data-svgv-copy hidden>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span data-i18n="svgvCopyCode">Копировать код</span>
+        </button>
+        <button type="button" class="svgv-btn svgv-btn-primary" data-svgv-download>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          <span data-svgv-dl-label data-i18n="svgvDlPng">Скачать PNG</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="svgv-canvas" data-svgv-canvas data-bg="checker">
+      <img alt="" data-svgv-img>
+      <div class="svgv-broken" hidden data-svgv-broken>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15V6a2 2 0 0 0-2-2H7"/><path d="M3 3l18 18"/><path d="M21 15l-5-5L5 21"/><path d="M3 9v10a2 2 0 0 0 2 2h10"/></svg>
+        <span data-i18n="svgvBrokenPreview">Предпросмотр недоступен — в коде ошибка</span>
+      </div>
+    </div>
+
+    <div class="svgv-code" hidden data-svgv-codewrap>
+      <textarea class="svgv-editor" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" data-svgv-code data-i18n-aria="svgvCodeAria" aria-label="Исходный код SVG"></textarea>
+      <div class="svgv-code-foot">
+        <span class="svgv-code-hint" data-i18n="svgvCodeHint">Код можно править — вкладка «Картинка» сразу покажет результат</span>
+        <button type="button" class="svgv-btn svgv-btn-sm" data-svgv-revert hidden data-i18n="svgvRevert">Вернуть исходный</button>
+      </div>
+    </div>
+
+    <div class="svgv-editerr" hidden data-svgv-editerr></div>
+    <div class="svgv-info" data-svgv-info></div>
+    <div class="svgv-notes" data-svgv-notes></div>
+  </div>
+
+  <div class="svgv-error" hidden data-svgv-error></div>
+
+  <div class="svgv-modal" hidden data-svgv-modal>
+    <div class="svgv-modal-back" data-svgv-close></div>
+    <div class="svgv-modal-card" role="dialog" aria-modal="true" tabindex="-1" data-svgv-card>
+      <div class="svgv-modal-title" data-svgv-modal-title data-i18n="svgvDlFile">Скачать файл</div>
+      <button type="button" class="svgv-modal-x" data-svgv-close data-i18n-aria="svgvClose" aria-label="Закрыть">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="svgv-modal-row" data-svgv-fmt-row hidden>
+        <span class="svgv-modal-label" data-i18n="svgvDlFormat">Формат</span>
+        <div class="svgv-seg" data-svgv-fmts>
+          <button type="button" class="svgv-seg-btn is-active" data-svgv-fmt="svg">SVG</button>
+          <button type="button" class="svgv-seg-btn" data-svgv-fmt="png">PNG</button>
+        </div>
+      </div>
+
+      <div class="svgv-modal-row" data-svgv-size-row>
+        <span class="svgv-modal-label" data-i18n="svgvDlSize">Размер</span>
+        <div class="svgv-sizes" data-svgv-sizes></div>
+      </div>
+
+      <button type="button" class="svgv-modal-go" data-svgv-go data-i18n="svgvDlGo">Скачать</button>
+    </div>
+  </div>
+</div>

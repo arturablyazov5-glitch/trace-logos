@@ -31,14 +31,16 @@
   </script>
 
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-header.css">
   <link rel="stylesheet" href="{{REL}}css/blog.css">
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 
-{{> site-header search_action='logos/' search_scope='all' search_ph='Поиск логотипов и эмодзи...' back_href='' back_label='На главную' }}
+{{> nav-header }}
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="{{REL}}">Trace Logo's</a><span class="sep">/</span>
@@ -46,20 +48,29 @@
 </nav>
 
 <main>
-  <div class="category-hero">
-    <h1 data-i18n="blogSection">Блог</h1>
-    <p class="category-desc" data-i18n="blogIndexDesc">О логотипах, форматах SVG и PNG, эмодзи и фирменных цветах брендов. Гайды для дизайнеров и разработчиков.</p>
+  <div class="blog-header-row">
+    <div class="category-hero">
+      <h1 data-i18n="blogIndexH1">Блог о логотипах, SVG и эмодзи</h1>
+      <p class="category-desc" data-i18n="blogIndexDesc">О логотипах, форматах SVG и PNG, эмодзи и фирменных цветах брендов. Гайды для дизайнеров и разработчиков.</p>
+    </div>
+
+    <div class="blog-toolbar">
+      <label for="blog-sort-select" class="blog-sort-label" data-i18n="blogSortLabel">Сортировка</label>
+      <select id="blog-sort-select" class="blog-sort-select">
+        <option value="new" data-i18n="blogSortNew">Сначала новые</option>
+        <option value="old" data-i18n="blogSortOld">Сначала старые</option>
+        <option value="popular" data-i18n="blogSortPopular">По популярности</option>
+      </select>
+    </div>
   </div>
 
-  <div class="blog-list">
+  <div class="blog-list" id="blog-list">
     {{POST_CARDS}}
   </div>
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="{{REL}}" class="footer-link">trace-logos</a>
-</footer>
+{{> site-footer}}
 
-<script type="module" src="{{REL}}js/header-search.js"></script>
+<script src="{{REL}}js/blog-sort.js"></script>
 </body>
 </html>

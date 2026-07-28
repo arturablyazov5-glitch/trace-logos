@@ -121,6 +121,8 @@ class SiteHeader extends HTMLElement {
           min-width: 0;
           color: #fff;
           text-decoration: none;
+          border-radius: 8px;
+          outline: none;
         }
 
         .sidebar-logo {

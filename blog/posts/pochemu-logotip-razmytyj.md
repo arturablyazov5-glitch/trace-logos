@@ -169,7 +169,7 @@ This sequence covers practically every case and, more importantly, shows **where
 
 ## Can AI upscalers save a blurry logo?
 
-Upscalers (Topaz, Real-ESRGAN, editor built-ins) work miracles on photos, so the temptation is real. The result usually disappoints: on crisp edges and typography, neural networks paint wavy contours, round off letter corners and "invent" details. The correct path for a logo is different — not restoring pixels but **returning to vector**: find the SVG original or redraw ([how to vectorize a logo](../kak-perevesti-logotip-v-vektor/)). An upscaler is acceptable as a stopgap for a secondary image — not for the mark that represents the brand.
+Upscalers (Topaz, Real-ESRGAN, editor built-ins) work miracles on photos, so the temptation is real. The result usually disappoints: on crisp edges and typography, neural networks paint wavy contours, round off letter corners and "invent" details. The correct path for a logo is different — not restoring pixels but **returning to vector**: find the SVG original or redraw — see [how to vectorize a logo](../kak-perevesti-logotip-v-vektor/). An upscaler is acceptable as a stopgap for a secondary image — not for the mark that represents the brand.
 
 ## The special case: blur in video and presentations
 

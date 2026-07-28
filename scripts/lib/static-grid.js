@@ -55,9 +55,13 @@ function card(item, { assetBase, hrefFor, lang }) {
   const en   = lang === 'en';
   const name = en ? (item.name_en || item.name) : item.name;
   const alt  = en ? `Logo ${name}` : `Логотип ${name}`;
-  const png  = item.file.endsWith('.png');
+  // Mirrors buildCard() in js/main.js: `thumb` overrides the grid thumbnail
+  // only, so a brand with no official square mark still gets a square tile
+  // while `file` stays the real (horizontal) primary everywhere else.
+  const thumbFile = item.thumb || item.file;
+  const png  = thumbFile.endsWith('.png');
   return `<a class="card" href="${href}">` +
-    `<div class="icon-wrap"><img src="${imgSrc(item.file, assetBase)}" width="48" height="48" loading="lazy" decoding="async"${png ? ' class="prerendered"' : ''} alt="${esc(alt)}" title="${esc(item.figma)}"></div>` +
+    `<div class="icon-wrap"><img src="${imgSrc(thumbFile, assetBase)}" width="48" height="48" loading="lazy" decoding="async"${png ? ' class="prerendered"' : ''} alt="${esc(alt)}" title="${esc(item.figma)}"></div>` +
     `<div class="label">${esc(name)}</div>` +
     `<div class="card-path">${esc(item.figma)}</div>` +
     `</a>`;

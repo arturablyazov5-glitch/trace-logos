@@ -1,0 +1,401 @@
+/* ── Donate: ticker + modal ──
+   Fundraiser for hosting costs. Two surfaces, one concern:
+   · <donate-ticker>  — marquee bar under the header (components/donate-ticker.js)
+   · .dn-overlay      — modal shown after every 3rd export (js/donate.js)
+   Loaded lazily by both — see ensureStyles() in each. */
+
+/* ═══ Ticker ═══ */
+
+/* Sticks right below the header, same trick the header itself uses
+   (position: sticky + top offset matching the header's own height). */
+donate-ticker {
+  display: block;
+  position: sticky;
+  top: 60px;   /* .site-header height (css/site-header.css) */
+  z-index: 90; /* under the header's z-index: 100, above page content */
+}
+donate-ticker:not(:defined) { display: none; }
+
+/* Catalog layout uses .topbar (57px) / .mobile-header (57px) instead of
+   .site-header, and its own lower z-index scale. */
+.center > donate-ticker { top: 57px; z-index: 20; }
+
+.dn-ticker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 34px;
+  background:
+    linear-gradient(90deg, rgba(138, 107, 255, .14), rgba(138, 107, 255, .06) 55%, rgba(138, 107, 255, .14)),
+    rgba(22, 22, 22, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border, #222);
+  overflow: hidden;
+}
+.dn-ticker.hidden { display: none; }
+
+/* Fade the text out at both edges so it slides in/out instead of getting clipped */
+.dn-ticker-viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+}
+
+/* Track holds N copies of the message (see fillTrack() in donate-ticker.js);
+   translating by exactly one copy's width (--dn-ticker-shift) loops seamlessly. */
+.dn-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: dn-marquee 24s linear infinite;
+}
+.dn-ticker:hover .dn-ticker-track,
+.dn-ticker:focus-within .dn-ticker-track { animation-play-state: paused; }
+
+@keyframes dn-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--dn-ticker-shift, -50%)); }
+}
+
+.dn-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  font-size: 12.5px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--text-1, #e5e5e5);
+}
+.dn-ticker-item svg { flex: none; color: var(--accent, #8a6bff); }
+.dn-ticker-item b { color: #fff; font-weight: 600; }
+
+.dn-ticker-cta {
+  color: var(--accent, #8a6bff);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(138, 107, 255, .45);
+}
+.dn-ticker-cta:hover { color: #a893ff; border-bottom-color: #a893ff; }
+
+.dn-ticker-close {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin-right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--text-5, #666);
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.dn-ticker-close:hover { background: rgba(255, 255, 255, .07); color: #fff; }
+
+/* Catalog layout: align the bar with .topbar, which reserves the detail panel. */
+.center > donate-ticker .dn-ticker { margin-right: 280px; }
+
+@media (max-width: 768px) {
+  .center > donate-ticker .dn-ticker { margin-right: 0; }
+  .dn-ticker { height: 32px; }
+  .dn-ticker-item { font-size: 12px; padding: 0 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dn-ticker-track { animation: none; }
+  /* No scroll ⇒ show one copy, centred, and drop the edge mask. */
+  .dn-ticker-viewport { -webkit-mask-image: none; mask-image: none; }
+  .dn-ticker-track { width: 100%; justify-content: center; }
+  .dn-ticker-item + .dn-ticker-item { display: none; }
+  .dn-ticker-item { white-space: normal; text-align: center; }
+}
+
+/* ═══ Modal ═══ */
+
+.dn-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000; /* above the cookie-consent banner (components/cookie-consent.js, z-index: 9999) */
+  background: rgba(0, 0, 0, .68);
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.dn-overlay.open {
+  display: flex;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: dn-fade .18s ease;
+}
+@keyframes dn-fade { from { opacity: 0; } to { opacity: 1; } }
+
+.dn-modal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 30px 28px 24px;
+  border: 1px solid var(--border-muted, #2a2a2a);
+  border-radius: 16px;
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: dn-pop .22s cubic-bezier(.22, .61, .36, 1);
+}
+
+/* Two columns: illustration (left) + existing copy/CTA (right). */
+.dn-modal--split {
+  flex-direction: row;
+  align-items: stretch;
+  max-width: 620px;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+}
+
+.dn-visual {
+  flex: none;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 28px 16px;
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255, 77, 77, .12), transparent 60%),
+    radial-gradient(120% 90% at 50% 100%, rgba(138, 107, 255, .16), transparent 55%),
+    #161320;
+  border-right: 1px solid var(--border-muted, #2a2a2a);
+}
+
+.dn-gauge { display: block; width: 100%; max-width: 168px; height: auto; }
+
+/* The column fills by scaling from its base; the bright surface line rides up
+   with it on the same curve (a scaled rect would squash the line itself).
+   93 = the fill's own height in SVG user units, see VISUAL_GAUGE in donate.js. */
+.dn-gauge-fill {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: dn-gauge-rise 1s cubic-bezier(.22, .61, .36, 1) both;
+}
+@keyframes dn-gauge-rise {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+.dn-gauge-meniscus {
+  animation: dn-meniscus-rise 1s cubic-bezier(.22, .61, .36, 1) both;
+}
+@keyframes dn-meniscus-rise {
+  from { transform: translateY(93px); }
+  to   { transform: none; }
+}
+
+.dn-gauge-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dn-gauge-pulse 2.2s ease-out infinite;
+}
+@keyframes dn-gauge-pulse {
+  0%   { opacity: .5; transform: scale(1); }
+  70%  { opacity: 0; transform: scale(2.1); }
+  100% { opacity: 0; transform: scale(2.1); }
+}
+
+/* Rack status lights, escalating purple → amber → red, blinking out of phase. */
+.dn-led  { animation: dn-led-blink 2.4s ease-in-out infinite; }
+.dn-led2 { animation-delay: .5s; }
+.dn-led3 { animation-delay: 1s; }
+@keyframes dn-led-blink {
+  0%, 100% { opacity: 1; }
+  45%      { opacity: .25; }
+}
+
+.dn-bub  { animation: dn-bub-rise 3.6s ease-in infinite; opacity: 0; }
+.dn-bub1 { animation-delay: 1s; }
+.dn-bub2 { animation-delay: 2.2s; }
+.dn-bub3 { animation-delay: 3.3s; }
+@keyframes dn-bub-rise {
+  0%   { opacity: 0; transform: translateY(0); }
+  15%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-58px); }
+}
+
+.dn-shimmer { animation: dn-shimmer 5s ease-in-out 1.2s infinite; opacity: 0; }
+@keyframes dn-shimmer {
+  0%       { opacity: 0; transform: translateX(0); }
+  10%      { opacity: 1; }
+  40%      { opacity: 0; transform: translateX(48px); }
+  100%     { opacity: 0; transform: translateX(48px); }
+}
+
+.dn-p  { animation: dn-float 6s ease-in-out infinite; }
+.dn-p2 { animation-delay: -1.6s; animation-duration: 7.5s; }
+.dn-p3 { animation-delay: -3.2s; animation-duration: 5.4s; }
+.dn-p4 { animation-delay: -4.5s; animation-duration: 8s; }
+@keyframes dn-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+.dn-visual-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11.5px;
+  line-height: 1.4;
+  text-align: center;
+  color: #fff;
+}
+.dn-visual-caption span { max-width: 9.5em; margin: 0 auto; }
+.dn-visual-caption b { color: #ff9a3c; font-size: 20px; }
+
+.dn-modal--split .dn-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 30px 28px 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dn-gauge-fill { animation: none; transform: scaleY(1); }
+  .dn-gauge-meniscus { animation: none; transform: none; }
+  .dn-gauge-pulse, .dn-bub, .dn-shimmer { animation: none; opacity: 0; }
+  .dn-led, .dn-p { animation: none; }
+}
+
+@media (max-width: 560px) {
+  .dn-modal--split {
+    flex-direction: column;
+    max-width: 440px;
+  }
+  .dn-visual {
+    width: auto;
+    flex-direction: row;
+    justify-content: center;
+    padding: 18px 16px;
+    border-right: none;
+    border-bottom: 1px solid var(--border-muted, #2a2a2a);
+  }
+  .dn-gauge { width: 78px; }
+  .dn-visual-caption { text-align: left; max-width: 160px; }
+}
+@keyframes dn-pop {
+  from { opacity: 0; transform: translateY(12px) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dn-overlay.open, .dn-modal { animation: none; }
+}
+
+.dn-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: #888;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.dn-close:hover { background: #2a2a2a; color: #fff; }
+
+/* The dialog takes focus on open (see openDonateModal) — don't draw a ring on it. */
+.dn-modal:focus { outline: none; }
+.dn-btn:focus-visible,
+.dn-close:focus-visible,
+.dn-ticker-close:focus-visible,
+.dn-ticker-cta:focus-visible,
+.dn-actions .btn-support:focus-visible {
+  outline: 2px solid var(--accent, #8a6bff);
+  outline-offset: 2px;
+}
+
+.dn-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  padding: 0;
+}
+
+.dn-title {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #fff;
+}
+
+.dn-text {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-4, #777);
+}
+.dn-text b { color: var(--text-1, #e5e5e5); font-weight: 600; }
+
+.dn-actions { display: flex; flex-direction: column; gap: 9px; }
+
+.dn-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 11px;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .14s, transform .14s, color .14s;
+}
+.dn-btn-ghost {
+  padding: 12px 20px;   /* same box model as .btn-support above it, not a fixed height */
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #fff;
+  background: rgb(36 36 36);   /* same grey as the .btn-support pill above it */
+}
+.dn-btn-ghost:hover { background: rgb(50 50 50); }
+
+/* The modal reuses the actual <support-btn> element (js/donate.js buildDom())
+   instead of a lookalike button. Base .btn-support styling comes from
+   css/support-btn.css (donate.js's ensureStyles() injects it) — this only
+   overrides the base grey with the modal's purple accent + adds the hover
+   heart-beat, and cancels the base's margin-top since it's not the first
+   action in this modal's stack. */
+.dn-actions .btn-support {
+  margin-top: 0;
+  background: var(--accent, #8a6bff);
+}
+.dn-actions .btn-support:hover { background: #7a58ff; }
+.dn-actions .btn-support:hover svg { animation: dn-heart-beat .45s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes dn-heart-beat {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dn-actions .btn-support:hover svg { animation: none; }
+}
+
+@media (max-width: 480px) {
+  .dn-modal { padding: 26px 20px 20px; }
+  .dn-head { padding: 0; }
+  .dn-title { font-size: 16px; }
+}

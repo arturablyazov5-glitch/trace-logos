@@ -172,11 +172,10 @@
   <link rel="stylesheet" href="/css/search.css">
   <link rel="stylesheet" href="/css/cards.css">
   <link rel="stylesheet" href="/css/detail.css">
+  <link rel="stylesheet" href="/css/support-btn.css">
   <link rel="stylesheet" href="/css/color.css">
   <link rel="stylesheet" href="/css/picker.css">
-  <link rel="stylesheet" href="/css/modals.css">
-  <link rel="stylesheet" href="/css/icns.css">
-  <link rel="stylesheet" href="/css/filters.css">
+  <link rel="stylesheet" href="/css/modals.css">  <link rel="stylesheet" href="/css/filters.css">
   <link rel="stylesheet" href="/css/mobile.css">
   <link rel="stylesheet" href="/css/confetti.css">
   <link rel="stylesheet" href="/css/category-seo.css">
@@ -189,6 +188,9 @@
   <script src="/components/copy-emoji-btn.js" defer></script>
   <script src="/components/sidebar-contact.js" defer></script>
   <script src="/components/help-modal.js" defer></script>
+  <!-- см. комментарий в templates/partials/nav-header.html -->
+  <link rel="modulepreload" href="/js/i18n-dict-ru.js">
+  <script type="module" src="/components/donate-ticker.js"></script>
   <script>
     window.__MANIFEST_BASE__ = '/logos/';
     window.__ASSET_SECTION__ = 'logos';
@@ -197,6 +199,7 @@
     window.__ECO_SLUG__ = '';
   </script>
   <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/search-placeholder.js"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -259,9 +262,11 @@
     </button>
     <lang-switcher></lang-switcher>
   </div>
+  <donate-ticker></donate-ticker>
   <div class="center-body">
     <main>
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Flags</h1><div class="grid"><a class="card" href="/en/logos/flag/russia/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-russia.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Russia" title="Icon/Flag/Russia"></div><div class="label">Russia</div><div class="card-path">Icon/Flag/Russia</div></a><a class="card" href="/en/logos/flag/belarus/"><div class="icon-wrap"><img src="/assets/logos/svgs/belarus.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Belarus" title="Icon/Flag/Belarus"></div><div class="label">Belarus</div><div class="card-path">Icon/Flag/Belarus</div></a><a class="card" href="/en/logos/flag/japan/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-japan.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Japan" title="Icon/Flag/Japan"></div><div class="label">Japan</div><div class="card-path">Icon/Flag/Japan</div></a><a class="card" href="/en/logos/flag/netherlands/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-netherlands.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Netherlands" title="Icon/Flag/Netherlands"></div><div class="label">Netherlands</div><div class="card-path">Icon/Flag/Netherlands</div></a><a class="card" href="/en/logos/flag/canada/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-canada.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Canada" title="Icon/Flag/Canada"></div><div class="label">Canada</div><div class="card-path">Icon/Flag/Canada</div></a><a class="card" href="/en/logos/flag/israel/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-israel.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Israel" title="Icon/Flag/Israel"></div><div class="label">Israel</div><div class="card-path">Icon/Flag/Israel</div></a><a class="card" href="/en/logos/flag/germany/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-germany.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Germany" title="Icon/Flag/Germany"></div><div class="label">Germany</div><div class="card-path">Icon/Flag/Germany</div></a><a class="card" href="/en/logos/flag/usa/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-usa.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo USA" title="Icon/Flag/USA"></div><div class="label">USA</div><div class="card-path">Icon/Flag/USA</div></a><a class="card" href="/en/logos/flag/finland/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-finland.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Finland" title="Icon/Flag/Finland"></div><div class="label">Finland</div><div class="card-path">Icon/Flag/Finland</div></a><a class="card" href="/en/logos/flag/china/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-china.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo China" title="Icon/Flag/China"></div><div class="label">China</div><div class="card-path">Icon/Flag/China</div></a><a class="card" href="/en/logos/flag/southkorea/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-south-korea.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo South Korea" title="Icon/Flag/SouthKorea"></div><div class="label">South Korea</div><div class="card-path">Icon/Flag/SouthKorea</div></a><a class="card" href="/en/logos/flag/kazakhstan/"><div class="icon-wrap"><img src="/assets/logos/svgs/kazakhstan.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Kazakhstan" title="Icon/Flag/Kazakhstan"></div><div class="label">Kazakhstan</div><div class="card-path">Icon/Flag/Kazakhstan</div></a><a class="card" href="/en/logos/flag/uzbekistan/"><div class="icon-wrap"><img src="/assets/logos/svgs/uzbekistan.svg?v=20260719" width="48" height="48" loading="lazy" decoding="async" alt="Logo Uzbekistan" title="Icon/Flag/Uzbekistan"></div><div class="label">Uzbekistan</div><div class="card-path">Icon/Flag/Uzbekistan</div></a></div></div></div></div>
+
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Flags</h1><div class="grid"><a class="card" href="/en/logos/flag/russia/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-russia.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Russia" title="Icon/Flag/Russia"></div><div class="label">Russia</div><div class="card-path">Icon/Flag/Russia</div></a><a class="card" href="/en/logos/flag/belarus/"><div class="icon-wrap"><img src="/assets/logos/svgs/belarus.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Belarus" title="Icon/Flag/Belarus"></div><div class="label">Belarus</div><div class="card-path">Icon/Flag/Belarus</div></a><a class="card" href="/en/logos/flag/japan/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-japan.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Japan" title="Icon/Flag/Japan"></div><div class="label">Japan</div><div class="card-path">Icon/Flag/Japan</div></a><a class="card" href="/en/logos/flag/netherlands/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-netherlands.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Netherlands" title="Icon/Flag/Netherlands"></div><div class="label">Netherlands</div><div class="card-path">Icon/Flag/Netherlands</div></a><a class="card" href="/en/logos/flag/canada/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-canada.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Canada" title="Icon/Flag/Canada"></div><div class="label">Canada</div><div class="card-path">Icon/Flag/Canada</div></a><a class="card" href="/en/logos/flag/israel/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-israel.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Israel" title="Icon/Flag/Israel"></div><div class="label">Israel</div><div class="card-path">Icon/Flag/Israel</div></a><a class="card" href="/en/logos/flag/germany/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-germany.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Germany" title="Icon/Flag/Germany"></div><div class="label">Germany</div><div class="card-path">Icon/Flag/Germany</div></a><a class="card" href="/en/logos/flag/usa/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-usa.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo USA" title="Icon/Flag/USA"></div><div class="label">USA</div><div class="card-path">Icon/Flag/USA</div></a><a class="card" href="/en/logos/flag/finland/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-finland.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Finland" title="Icon/Flag/Finland"></div><div class="label">Finland</div><div class="card-path">Icon/Flag/Finland</div></a><a class="card" href="/en/logos/flag/china/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-china.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo China" title="Icon/Flag/China"></div><div class="label">China</div><div class="card-path">Icon/Flag/China</div></a><a class="card" href="/en/logos/flag/southkorea/"><div class="icon-wrap"><img src="/assets/logos/svgs/flag-south-korea.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo South Korea" title="Icon/Flag/SouthKorea"></div><div class="label">South Korea</div><div class="card-path">Icon/Flag/SouthKorea</div></a><a class="card" href="/en/logos/flag/kazakhstan/"><div class="icon-wrap"><img src="/assets/logos/svgs/kazakhstan.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Kazakhstan" title="Icon/Flag/Kazakhstan"></div><div class="label">Kazakhstan</div><div class="card-path">Icon/Flag/Kazakhstan</div></a><a class="card" href="/en/logos/flag/uzbekistan/"><div class="icon-wrap"><img src="/assets/logos/svgs/uzbekistan.svg?v=20260728" width="48" height="48" loading="lazy" decoding="async" alt="Logo Uzbekistan" title="Icon/Flag/Uzbekistan"></div><div class="label">Uzbekistan</div><div class="card-path">Icon/Flag/Uzbekistan</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Nothing here yet — section in development</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -301,6 +306,15 @@
       <div class="detail-name" id="detail-name"></div>
       <div class="detail-figma" id="detail-figma"></div>
 
+      <!-- Shown for items with `thumb`: the catalog tile is a square stand-in,
+           the brand itself has no official square mark. Sits above the download
+           buttons on purpose — the visitor clicked a square and must learn why
+           it isn't here BEFORE downloading. -->
+      <div class="detail-noicon hidden" id="detail-noicon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <span data-i18n="noIconNote">This brand has no official square icon. Only a horizontal version exists. The square tile in the catalog was drawn by us to keep the grid uniform and is not a brand mark.</span>
+      </div>
+
       <div id="detail-controls">
       <div class="detail-section-label" id="detail-actions-label" data-i18n="detailActionsLabel">Actions</div>
       <div class="detail-actions" id="detail-actions">
@@ -323,22 +337,11 @@
         </button>
         <div class="btn-download-group" id="btn-download-all">
           <button class="btn btn-zip btn-download-trigger" id="btn-download-trigger" type="button">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
             <span data-label="dlMore">Download other formats</span>
-            <svg class="btn-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="btn-download-menu" id="btn-download-menu">
-            <button class="btn-menu-item" id="btn-download-ico" type="button"><svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M15.49 6H6V15.492H15.492L15.49 6ZM26 6H16.508V15.492H26V6ZM15.49 16.508H6V26H15.492L15.49 16.508ZM26 16.508H16.508V26H26V16.508Z"/></svg><span data-label="dlIco">Download ICO</span><span class="btn-size btn-menu-size"></span></button>
-            <button class="btn-menu-item" id="btn-download-icns" type="button"><svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M23.8457 11.5898C22.4743 12.4367 21.6274 13.8892 21.6274 15.503C21.6274 17.3178 22.7166 18.9715 24.3703 19.6572C24.0484 20.6909 23.5722 21.67 22.9577 22.5612C22.0709 23.8115 21.1429 25.103 19.7714 25.103C18.4 25.103 17.9966 24.2961 16.3829 24.2961C14.8103 24.2961 14.2457 25.143 12.9543 25.143C11.6629 25.143 10.776 23.9738 9.768 22.5212C8.43657 20.5041 7.67086 18.1647 7.63086 15.7041C7.63086 11.711 10.2114 9.57268 12.7931 9.57268C14.1646 9.57268 15.2937 10.4607 16.1417 10.4607C16.9474 10.4607 18.2389 9.53268 19.7714 9.53268C20.5678 9.51148 21.3569 9.68835 22.068 10.0474C22.7791 10.4064 23.39 10.9364 23.8457 11.5898ZM19.0457 7.83896C19.7314 7.03211 20.0937 6.0241 20.1349 4.97496C20.1349 4.85382 20.1349 4.69268 20.0937 4.57153C18.9223 4.69283 17.8409 5.25501 17.0686 6.1441C16.3829 6.91096 15.9794 7.87896 15.9394 8.9281C15.9394 9.04925 15.9394 9.17039 15.9794 9.29039C16.0606 9.29039 16.1817 9.33153 16.2629 9.33153C17.3509 9.25153 18.36 8.68582 19.0457 7.83896Z"/></svg><span data-label="dlIcns">Download ICNS</span></button>
-            <button class="btn-menu-item" id="btn-download-lg" type="button"><svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M22 4H10C6.686 4 4 6.686 4 10v12c0 3.314 2.686 6 6 6h12c3.314 0 6-2.686 6-6V10c0-3.314-2.686-6-6-6Zm-4.5 7a.5.5 0 0 1 0-1C19.985 10 22 12.015 22 14.5a.5.5 0 0 1-1 0C21 12.567 19.433 11 17.5 11Z"/></svg><span data-label="dlLiquidGlass">Liquid Glass PNG</span><span class="btn-menu-badge">Beta</span></button>
-            <div class="btn-menu-divider"></div>
-            <button class="btn-menu-item btn-menu-item--zip" id="btn-download-zip" type="button">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8"/><rect x="1" y="3" width="22" height="5" rx="1"/><path d="M10 12h4"/></svg>
-              <span class="btn-label" data-label="dlZipAll">Download all (ZIP)</span><span class="btn-size"></span>
-              <span class="btn-progress"></span>
-            </button>
-          </div>
         </div>
+
       </div>
       <div class="macos-style-tabs hidden" id="macos-style-tabs">
         <button class="macos-style-tab active" data-style="color">

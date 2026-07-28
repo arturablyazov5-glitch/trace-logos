@@ -1,0 +1,36 @@
+/* ── Site footer (templates/partials/site-footer.html) ──
+   Self-contained: doesn't depend on page-specific vars beyond the shared
+   tokens (--border, --text-dim, --text-2, --text-0) defined by both
+   css/tokens.css (SEO templates) and css/home.css's :root (homepage). */
+.site-footer {
+  margin-top: 72px; border-top: 1px solid var(--border); padding: 44px 0 32px;
+  /* --text-5 (tokens.css) is visible-but-subtle; on home.css (no --text-5)
+     this falls back to --text-dim, home's own original footer-label color. */
+  --footer-label: var(--text-5, var(--text-dim));
+}
+.site-footer .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; width: 100%; }
+.footer-cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 28px; }
+.footer-col h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--footer-label); margin-bottom: 14px; }
+.footer-col ul { list-style: none; columns: 1; }
+.footer-col.wide ul { columns: 2; column-gap: 24px; }
+.footer-col li { margin-bottom: 9px; break-inside: avoid; }
+.footer-col a { font-size: 13px; color: var(--text-2); text-decoration: none; transition: color .15s; }
+.footer-col a:hover { color: var(--text-0); }
+.footer-about p { font-size: 13px; color: var(--text-2); line-height: 1.6; margin-bottom: 14px; }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border);
+  font-size: 12px; color: var(--footer-label);
+}
+.footer-bottom a { color: var(--text-2); text-decoration: none; }
+.footer-bottom a:hover { color: var(--text-0); }
+.footer-bottom-links { display: inline-flex; gap: 18px; }
+
+@media (max-width: 860px) {
+  .footer-cols { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-col.wide { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .footer-cols { grid-template-columns: 1fr; gap: 24px; }
+  .footer-col.wide ul { columns: 1; }
+}

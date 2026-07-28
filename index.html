@@ -19,7 +19,7 @@
 
   <!-- Primary meta -->
   <title>Trace Logo's — SVG-логотипы брендов и эмодзи: скачать бесплатно</title>
-  <meta name="description" content="538 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google, Microsoft. Поиск, редактор цвета, экспорт в Figma — бесплатно.">
+  <meta name="description" content="572 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google, Microsoft. Поиск, редактор цвета, экспорт в Figma — бесплатно.">
 
   <!-- Google Search Console -->
   <meta name="google-site-verification" content="6-LWnDetsXw3u5e1Zc0qcK0aACZr2Cp6E0CGNCN7tdQ" />
@@ -44,7 +44,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trace Logo's">
   <meta property="og:title" content="Trace Logo's — SVG-логотипы брендов и эмодзи">
-  <meta property="og:description" content="538 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google и Microsoft. Скачивайте, редактируйте цвета, экспортируйте в Figma.">
+  <meta property="og:description" content="572 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google и Microsoft. Скачивайте, редактируйте цвета, экспортируйте в Figma.">
   <meta property="og:url" content="https://trace-logos.ru/">
   <meta property="og:image" content="https://trace-logos.ru/assets/og/home.png">
   <meta property="og:image:width" content="1200">
@@ -54,7 +54,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Trace Logo's — SVG-логотипы брендов и эмодзи">
-  <meta name="twitter:description" content="538 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google и Microsoft. Бесплатно, без регистрации.">
+  <meta name="twitter:description" content="572 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google и Microsoft. Бесплатно, без регистрации.">
   <meta name="twitter:image" content="https://trace-logos.ru/assets/og/home.png">
 
   <!-- JSON-LD WebSite + SiteNavigationElement -->
@@ -143,27 +143,36 @@
   <link rel="stylesheet" href="/assets/fonts/inter.css">
 
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/site-header.css">
   <link rel="stylesheet" href="css/logo-card.css">
+  <link rel="stylesheet" href="css/site-footer.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 
+<!-- HEADER:START -->
 <header class="site-header">
   <a class="brand" href="./" aria-label="Trace Logo's — на главную">
     <span class="brand-logo" aria-hidden="true">
-      <img src="assets/brand/logo.svg" alt="" width="30" height="30">
+      <img src="assets/brand/logo.svg" alt="" width="28" height="28">
     </span>
     <span class="brand-name">Trace Logo's<span class="brand-badge">Beta</span></span>
   </a>
 
+  <form class="seo-search-form" id="seo-search-form" role="search" action="logos/" method="get" data-base="" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+
   <nav class="header-nav" aria-label="Разделы">
-    <a href="logos/">Логотипы</a>
-    <a href="emoji/">Эмодзи</a>
-    <a href="blog/">Блог</a>
+    <a href="logos/" data-i18n="breadcrumbLogos">Логотипы</a>
+    <a href="emoji/" data-i18n="breadcrumbEmoji">Эмодзи</a>
+    <a href="blog/" data-i18n="blogSection">Блог</a>
     <a class="nav-figma" href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><svg width="11" height="16" viewBox="0 0 38 57" fill="none" aria-hidden="true"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/></svg>Figma плагин</a>
-    <a class="soon" aria-disabled="true">Иконки</a>
   </nav>
 
   <a class="btn-github" href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener" aria-label="GitHub">
@@ -172,15 +181,54 @@
     </svg>
     <span>GitHub</span>
   </a>
+
+  <button type="button" class="mobile-nav-burger" id="mobile-nav-burger" data-i18n-aria="burgerAriaLabel" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav-drawer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
   <lang-switcher></lang-switcher>
 </header>
+
+<donate-ticker></donate-ticker>
+
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" hidden></div>
+<nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Мобильное меню" data-i18n-aria="burgerAriaLabel" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-brand">Trace Logo's</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" data-i18n-aria="detailCloseAriaLabel" aria-label="Закрыть">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-section" id="mobile-nav-toc" hidden>
+    <div class="mobile-nav-label" data-i18n="mobileNavToc">В этой статье</div>
+    <div class="mobile-nav-list" id="mobile-nav-toc-list"></div>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label" data-i18n="mobileNavPages">Разделы сайта</div>
+    <div class="mobile-nav-list">
+      <a href="./"><span data-i18n="navHome">Главная</span></a>
+      <a href="logos/"><span data-i18n="breadcrumbLogos">Логотипы</span></a>
+      <a href="emoji/"><span data-i18n="breadcrumbEmoji">Эмодзи</span></a>
+      <a href="#h-collections"><span data-i18n="navCollections">Подборки</span></a>
+      <a href="blog/"><span data-i18n="blogSection">Блог</span></a>
+    </div>
+  </div>
+</nav>
 <script src="components/lang-switcher.js" defer></script>
+<script src="components/search-box.js" defer></script>
+<script src="components/mobile-nav.js" defer></script>
+<!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
+     запрос уйдёт только после того, как разрешится весь статический граф модулей
+     (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
+<link rel="modulepreload" href="js/i18n-dict-ru.js">
+<script type="module" src="components/donate-ticker.js"></script>
+<script type="module" src="js/header-search.js"></script>
+<!-- HEADER:END -->
 
 <main>
   <!-- ── Hero + поиск ── -->
   <section class="hero">
     <div class="wrap">
-      <h1><span class="hero-h1-row">Логотипы <a href="logos/social/applemessages/" class="hero-inline-link" aria-label="Apple Messages"><img id="hero-img-logo" class="hero-inline-img" src="assets/logos/pngs/apple/26/color/messages.png" alt="Apple Messages" aria-hidden="true"></a><br class="hero-br-mobile"> брендов и <a href="emoji/smileys/grinning-face/" class="hero-inline-link" aria-label="Широко улыбается"><img id="hero-img-emoji" class="hero-inline-img" src="assets/emoji/pngs/apple/grinning-face_1f600.png" alt="Широко улыбается" aria-hidden="true"></a> эмодзи</span><span class="accent">для дизайна и разработки</span></h1>
+      <h1><span class="hero-h1-row">Логотипы <a href="logos/social/applemessages/" class="hero-inline-link" aria-label="Apple Messages"><img id="hero-img-logo" class="hero-inline-img" src="assets/logos/previews/apple/26/color/messages.webp" alt="Apple Messages" aria-hidden="true"></a><br class="hero-br-mobile"> брендов и <a href="emoji/smileys/grinning-face/" class="hero-inline-link" aria-label="Широко улыбается"><img id="hero-img-emoji" class="hero-inline-img" src="assets/emoji/previews/apple/grinning-face_1f600.webp" alt="Широко улыбается" aria-hidden="true"></a> эмодзи</span><span class="accent">для дизайна и разработки</span></h1>
       <p class="hero-desc">
         SVG и PNG логотипов российских и международных брендов, эмодзи Apple, Google и Microsoft.
         Скачивайте, меняйте цвета и экспортируйте в Figma — <strong>без регистрации</strong>
@@ -230,21 +278,13 @@
           <img src="assets/logos/svgs/wildberries.svg" alt="Логотип Wildberries" width="44" height="44" loading="lazy">
           <span class="logo-card-name">Wildberries</span>
         </a>
-        <a class="logo-card" href="logos/pay/sbp/">
-          <img src="assets/logos/svgs/sbp.svg" alt="Логотип СБП" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">СБП</span>
-        </a>
-        <a class="logo-card" href="logos/media/vkvideo/">
-          <img src="assets/logos/svgs/vk-video.svg" alt="Логотип VK Видео" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">VK Видео</span>
-        </a>
         <a class="logo-card" href="logos/search/yandex/">
           <img src="assets/logos/svgs/yandex.svg" alt="Логотип Яндекс" width="44" height="44" loading="lazy">
           <span class="logo-card-name">Яндекс</span>
         </a>
-        <a class="logo-card" href="logos/market/yandexmarket/">
-          <img src="assets/logos/svgs/yandex-market.svg" alt="Логотип Яндекс Маркет" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">Яндекс Маркет</span>
+        <a class="logo-card" href="logos/pay/sbp/">
+          <img src="assets/logos/svgs/sbp.svg" alt="Логотип СБП" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">СБП</span>
         </a>
         <a class="logo-card" href="logos/social/max/">
           <img src="assets/logos/svgs/max.svg" alt="Логотип Max" width="44" height="44" loading="lazy">
@@ -254,61 +294,69 @@
           <img src="assets/logos/svgs/yandex-maps.svg" alt="Логотип Яндекс Карты" width="44" height="44" loading="lazy">
           <span class="logo-card-name">Яндекс Карты</span>
         </a>
+        <a class="logo-card" href="logos/bank/tbank/">
+          <img src="assets/logos/svgs/t-bank.svg" alt="Логотип Т-Банк" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Т-Банк</span>
+        </a>
         <a class="logo-card" href="logos/social/vk/">
           <img src="assets/logos/svgs/vk.svg" alt="Логотип ВКонтакте" width="44" height="44" loading="lazy">
           <span class="logo-card-name">ВКонтакте</span>
+        </a>
+        <a class="logo-card" href="logos/media/vkvideo/">
+          <img src="assets/logos/svgs/vk-video.svg" alt="Логотип VK Видео" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">VK Видео</span>
+        </a>
+        <a class="logo-card" href="logos/market/yandexmarket/">
+          <img src="assets/logos/svgs/yandex-market.svg" alt="Логотип Яндекс Маркет" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Яндекс Маркет</span>
         </a>
         <a class="logo-card" href="logos/bank/sber/">
           <img src="assets/logos/svgs/sber.svg" alt="Логотип Сбер" width="44" height="44" loading="lazy">
           <span class="logo-card-name">Сбер</span>
         </a>
-        <a class="logo-card" href="logos/bank/tbank/">
-          <img src="assets/logos/svgs/t-bank.svg" alt="Логотип Т-Банк" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">Т-Банк</span>
-        </a>
         <a class="logo-card" href="logos/social/telegram/">
           <img src="assets/logos/svgs/telegram.svg" alt="Логотип Telegram" width="44" height="44" loading="lazy">
           <span class="logo-card-name">Telegram</span>
-        </a>
-        <a class="logo-card" href="logos/reviews/prodoc/">
-          <img src="assets/logos/svgs/prodoctors.svg" alt="Логотип ПроДокторов" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">ПроДокторов</span>
-        </a>
-        <a class="logo-card" href="logos/media/yandexdzen/">
-          <img src="assets/logos/svgs/yandex-dzen.svg" alt="Логотип Яндекс Дзен" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">Яндекс Дзен</span>
-        </a>
-        <a class="logo-card" href="logos/pay/mir/">
-          <img src="assets/logos/svgs/mir.svg" alt="Логотип Мир Pay" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">Мир Pay</span>
-        </a>
-        <a class="logo-card" href="logos/market/goldenapple/">
-          <img src="assets/logos/svgs/golden-apple.svg" alt="Логотип Золотое яблоко" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">Золотое яблоко</span>
         </a>
         <a class="logo-card" href="logos/media/rutube/">
           <img src="assets/logos/svgs/rutube.svg" alt="Логотип Rutube" width="44" height="44" loading="lazy">
           <span class="logo-card-name">Rutube</span>
         </a>
+        <a class="logo-card" href="logos/pay/mir/">
+          <img src="assets/logos/svgs/mir.svg" alt="Логотип Мир Pay" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Мир Pay</span>
+        </a>
+        <a class="logo-card" href="logos/media/yandexdzen/">
+          <img src="assets/logos/svgs/yandex-dzen.svg" alt="Логотип Яндекс Дзен" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Яндекс Дзен</span>
+        </a>
         <a class="logo-card" href="logos/market/avito/">
           <img src="assets/logos/svgs/avito.svg" alt="Логотип Авито" width="44" height="44" loading="lazy">
           <span class="logo-card-name">Авито</span>
         </a>
-        <a class="logo-card" href="logos/bank/mts/">
-          <img src="assets/logos/svgs/mts-bank.svg" alt="Логотип МТС Банк" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">МТС Банк</span>
+        <a class="logo-card" href="logos/reviews/prodoc/">
+          <img src="assets/logos/svgs/prodoctors.svg" alt="Логотип ПроДокторов" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">ПроДокторов</span>
         </a>
-        <a class="logo-card" href="logos/ai/claude/">
-          <img src="assets/logos/svgs/claude.svg" alt="Логотип Claude" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">Claude</span>
+        <a class="logo-card" href="logos/ai/gigachat/">
+          <img src="assets/logos/svgs/giga-chat.svg" alt="Логотип GigaChat" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">GigaChat</span>
         </a>
-        <a class="logo-card" href="logos/social/instagram/">
-          <img src="assets/logos/svgs/instagram.svg" alt="Логотип Instagram" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">Instagram</span>
+        <a class="logo-card" href="logos/ai/chatgpt/">
+          <img src="assets/logos/svgs/chatgpt.svg" alt="Логотип ChatGPT" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">ChatGPT</span>
         </a>
-        <a class="logo-card" href="logos/store/vkid/">
-          <img src="assets/logos/svgs/vk.svg" alt="Логотип VK ID" width="44" height="44" loading="lazy">
-          <span class="logo-card-name">VK ID</span>
+        <a class="logo-card" href="logos/market/goldenapple/">
+          <img src="assets/logos/svgs/golden-apple.svg" alt="Логотип Золотое яблоко" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Золотое яблоко</span>
+        </a>
+        <a class="logo-card" href="logos/market/pyaterochka/">
+          <img src="assets/logos/svgs/pyaterochka.svg" alt="Логотип Пятёрочка" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Пятёрочка</span>
+        </a>
+        <a class="logo-card" href="logos/search/google/">
+          <img src="assets/logos/svgs/google.svg" alt="Логотип Google" width="44" height="44" loading="lazy">
+          <span class="logo-card-name">Google</span>
         </a>
         <a class="logo-card" href="logos/social/whatsapp/">
           <img src="assets/logos/svgs/whatsapp.svg" alt="Логотип WhatsApp" width="44" height="44" loading="lazy">
@@ -545,7 +593,7 @@
             в плагине и вставьте на макет одним кликом — векторными слоями, готовыми к редактированию.
           </p>
           <ul class="ff-list">
-            <li><span class="ff-check" aria-hidden="true">✓</span>Поиск по 538 логотипам и 1918 эмодзи на русском и английском</li>
+            <li><span class="ff-check" aria-hidden="true">✓</span>Поиск по 572 логотипам и 1918 эмодзи на русском и английском</li>
             <li><span class="ff-check" aria-hidden="true">✓</span>Вставка как векторных слоёв — без растра и лишнего кода</li>
             <li><span class="ff-check" aria-hidden="true">✓</span>Редактор цвета и выбор вариантов внутри плагина</li>
           </ul>
@@ -650,6 +698,7 @@
         </div>
       </div>
       <div class="cat-grid">
+        <!-- COLLECTIONS:START -->
         <a class="cat-tile" href="collections/russian-banks/">
           <i data-lucide="landmark" class="cat-ico" aria-hidden="true"></i>
           <span class="cat-name">Логотипы российских банков</span>
@@ -670,13 +719,13 @@
           <i data-lucide="message-circle" class="cat-ico" aria-hidden="true"></i>
           <span class="cat-name">Логотипы соцсетей и мессенджеров</span>
         </a>
-        <a class="cat-tile" href="collections/delivery-taxi/">
-          <i data-lucide="truck" class="cat-ico" aria-hidden="true"></i>
-          <span class="cat-name">Логотипы доставки и такси</span>
-        </a>
         <a class="cat-tile" href="collections/google-2026/">
           <i data-lucide="sparkles" class="cat-ico" aria-hidden="true"></i>
           <span class="cat-name">Новые иконки Google 2026</span>
+        </a>
+        <a class="cat-tile" href="collections/delivery-taxi/">
+          <i data-lucide="truck" class="cat-ico" aria-hidden="true"></i>
+          <span class="cat-name">Логотипы доставки и такси</span>
         </a>
         <a class="cat-tile" href="collections/browsers/">
           <i data-lucide="globe" class="cat-ico" aria-hidden="true"></i>
@@ -690,12 +739,18 @@
           <i data-lucide="music" class="cat-ico" aria-hidden="true"></i>
           <span class="cat-name">Логотипы музыкальных сервисов</span>
         </a>
+        <a class="cat-tile" href="collections/video-streaming/">
+          <i data-lucide="tv" class="cat-ico" aria-hidden="true"></i>
+          <span class="cat-name">Логотипы видеостриминговых сервисов</span>
+        </a>
+        <!-- COLLECTIONS:END -->
       </div>
     </section>
 
   </div>
 </main>
 
+<!-- FOOTER:START -->
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-cols">
@@ -706,74 +761,81 @@
           </span>
           <span class="brand-name">Trace Logo's</span>
         </a>
-        <p>Открытая библиотека логотипов и эмодзи. Бесплатно, без регистрации, с открытым исходным кодом.</p>
+        <p data-i18n="footerAbout">Открытая библиотека логотипов и эмодзи. Бесплатно, без регистрации, с открытым исходным кодом.</p>
       </div>
 
       <div class="footer-col">
-        <h3>Каталог</h3>
+        <h3 data-i18n="footerColCatalog">Каталог</h3>
         <ul>
-          <li><a href="logos/">Все логотипы</a></li>
-          <li><a href="emoji/">Эмодзи</a></li>
-          <li><a href="blog/">Блог</a></li>
-          <li><a href="logos/ai/">Нейросети</a></li>
-          <li><a href="logos/bank/">Банки</a></li>
-          <li><a href="logos/market/">Маркетплейсы</a></li>
-          <li><a href="logos/social/">Соцсети</a></li>
-          <li><a href="logos/flag/">Флаги</a></li>
+          <li><a href="logos/"><span data-i18n="footerAllLogos">Все логотипы</span></a></li>
+          <li><a href="emoji/"><span data-i18n="footerEmoji">Эмодзи</span></a></li>
+          <li><a href="blog/"><span data-i18n="footerBlog">Блог</span></a></li>
+          <li><a href="logos/ai/"><span data-i18n="footerAI">Нейросети</span></a></li>
+          <li><a href="logos/bank/"><span data-i18n="footerBanks">Банки</span></a></li>
+          <li><a href="logos/market/"><span data-i18n="footerMarketplaces">Маркетплейсы</span></a></li>
+          <li><a href="logos/social/"><span data-i18n="footerSocial">Соцсети</span></a></li>
+          <li><a href="logos/flag/"><span data-i18n="footerFlags">Флаги</span></a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h3>Подборки</h3>
+        <h3 data-i18n="footerColCollections">Подборки</h3>
         <ul>
-          <li><a href="collections/russian-banks/">Логотипы банков</a></li>
-          <li><a href="collections/neural-networks/">Логотипы нейросетей</a></li>
-          <li><a href="collections/marketplaces/">Логотипы маркетплейсов</a></li>
-          <li><a href="collections/payment-systems/">Платёжные системы</a></li>
-          <li><a href="collections/messengers-social/">Соцсети и мессенджеры</a></li>
-          <li><a href="collections/delivery-taxi/">Доставка и такси</a></li>
-          <li><a href="collections/google-2026/">Иконки Google 2026</a></li>
-          <li><a href="collections/browsers/">Браузеры</a></li>
-          <li><a href="collections/cloud-storage/">Облачные хранилища</a></li>
-          <li><a href="collections/music-streaming/">Музыкальные сервисы</a></li>
+          <!-- COLLECTIONS:START -->
+          <li><a href="collections/russian-banks/"><span data-i18n="footerColl_russian-banks">Логотипы банков</span></a></li>
+          <li><a href="collections/neural-networks/"><span data-i18n="footerColl_neural-networks">Логотипы нейросетей</span></a></li>
+          <li><a href="collections/marketplaces/"><span data-i18n="footerColl_marketplaces">Логотипы маркетплейсов</span></a></li>
+          <li><a href="collections/payment-systems/"><span data-i18n="footerColl_payment-systems">Платёжные системы</span></a></li>
+          <li><a href="collections/messengers-social/"><span data-i18n="footerColl_messengers-social">Соцсети и мессенджеры</span></a></li>
+          <li><a href="collections/google-2026/"><span data-i18n="footerColl_google-2026">Иконки Google 2026</span></a></li>
+          <li><a href="collections/delivery-taxi/"><span data-i18n="footerColl_delivery-taxi">Доставка и такси</span></a></li>
+          <li><a href="collections/browsers/"><span data-i18n="footerColl_browsers">Браузеры</span></a></li>
+          <li><a href="collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Облачные хранилища</span></a></li>
+          <li><a href="collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Музыкальные сервисы</span></a></li>
+          <li><a href="collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Видеостриминг</span></a></li>
+          <!-- COLLECTIONS:END -->
         </ul>
       </div>
 
       <div class="footer-col">
-        <h3>Инструменты</h3>
+        <h3 data-i18n="footerColTools">Инструменты</h3>
         <ul>
-          <li><a href="logos/">Редактор цвета</a></li>
-          <li><a href="logos/">Экспорт в Figma</a></li>
-          <li><a href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener">Плагин для Figma</a></li>
-          <li><a href="logos/">Скачать SVG / PNG</a></li>
-          <li><a href="logos/">Предложить логотип</a></li>
+          <li><a href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerFigmaPlugin">Плагин для Figma</span></a></li>
+          <!-- TOOLS:START -->
+          <li><a href="tools/compress-webp/"><span data-i18n="footerTool_compress-webp">Сжать изображение</span></a></li>
+          <li><a href="tools/watermark/"><span data-i18n="footerTool_watermark">Убрать водяной знак</span></a></li>
+          <li><a href="tools/merge-pdf/"><span data-i18n="footerTool_merge-pdf">Объединить PDF</span></a></li>
+          <li><a href="tools/edit-image/"><span data-i18n="footerTool_edit-image">Обрезать и повернуть фото</span></a></li>
+          <li><a href="tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">Экран вызова iOS</span></a></li>
+          <!-- TOOLS:END -->
         </ul>
       </div>
 
       <div class="footer-col">
-        <h3>Разработчикам</h3>
+        <h3 data-i18n="footerColDevelopers">Разработчикам</h3>
         <ul>
           <li><a href="logos.json">API · logos.json</a></li>
           <li><a href="emoji.json">API · emoji.json</a></li>
           <li><a href="llms.txt">llms.txt</a></li>
           <li><a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://status.trace-logos.ru" target="_blank" rel="noopener">Статус сервисов</a></li>
+          <li><a href="https://status.trace-logos.ru" target="_blank" rel="noopener"><span data-i18n="footerServiceStatus">Статус сервисов</span></a></li>
           <li><a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">@mansurov_rafael</a></li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <span>Trace Logo's Beta · Изображения могут быть защищены авторским правом их владельцев.</span>
+      <span>Trace Logo's Beta · <span data-i18n="footerCopyrightShort">Изображения могут быть защищены авторским правом их владельцев.</span></span>
       <span class="footer-bottom-links">
-        <a href="sitemap/">Карта сайта</a>
-        <a href="terms/">Правила использования</a>
-        <a href="consent/">Обработка данных</a>
-        <a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">Открытый исходный код</a>
+        <a href="sitemap/"><span data-i18n="footerSitemap">Карта сайта</span></a>
+        <a href="terms/"><span data-i18n="footerTerms">Правила использования</span></a>
+        <a href="consent/"><span data-i18n="footerConsent">Обработка данных</span></a>
+        <a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerOpenSource">Открытый исходный код</span></a>
       </span>
     </div>
   </div>
 </footer>
+<!-- FOOTER:END -->
 
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.469.0/dist/umd/lucide.min.js"></script>
 <script type="module">

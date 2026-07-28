@@ -68,7 +68,22 @@ const HTML = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
   await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
   await page.setContent(HTML, { waitUntil: 'networkidle0' });
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
-  await page.screenshot({ path: OUT });
+  // Скриншот детерминирован при одном и том же HTML, поэтому сравниваем байты и
+  // пишем только при изменении: скрипт обязателен в build-all.js и без этого
+  // каждая сборка дёргала бы 116 КБ бинарника в git на ровном месте.
+  const buf  = await page.screenshot();
+  const prev = fs.existsSync(OUT) ? fs.readFileSync(OUT) : null;
   await browser.close();
+  // build-all.js прокидывает --dry-run в КАЖДЫЙ шаг — скрипт, игнорирующий флаг,
+  // превращает «preview, write nothing» в ложь и пишет файлы на диск.
+  if (process.argv.includes('--dry-run')) {
+    console.log(`(dry-run) ${path.relative(ROOT, OUT)} — ${prev && prev.equals(buf) ? 'без изменений' : 'обновился бы'}`);
+    return;
+  }
+  if (prev && prev.equals(buf)) {
+    console.log('· ' + path.relative(ROOT, OUT) + ' — без изменений');
+    return;
+  }
+  fs.writeFileSync(OUT, buf);
   console.log('✓ ' + path.relative(ROOT, OUT));
 })().catch(e => { console.error(e); process.exit(1); });

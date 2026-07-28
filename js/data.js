@@ -78,19 +78,40 @@ export const ecosystemSectionLabelsEn = {
   artlebedev: 'Art. Lebedev Studio logos',
 };
 
+// variants[].labelKey points into base + 'labels.json' (only logos have one —
+// emoji variants are always inline {label, file}). Resolved once here so every
+// other module keeps reading v.label/v.label_en exactly as before.
+function resolveVariantLabels(cats, labels) {
+  if (!labels) return;
+  for (const cat of cats) {
+    for (const item of cat.items || []) {
+      for (const v of item.variants || []) {
+        if (!v.labelKey) continue;
+        const entry = labels[v.labelKey];
+        if (!entry) { console.warn('loadLogos: unknown labelKey', v.labelKey); continue; }
+        v.label = entry.label;
+        if (entry.label_en) v.label_en = entry.label_en;
+      }
+    }
+  }
+}
+
 export async function loadLogos(base = '/logos/') {
   const manifest = await fetch(base + 'manifest.json').then(r => {
     if (!r.ok) throw new Error('manifest not found');
     return r.json();
   });
   const cats = manifest.categories;
-  const results = await Promise.allSettled(cats.map(cat =>
-    fetch(base + cat.file).then(r => {
-      if (!r.ok) throw new Error(cat.file + ' not found');
-      return r.json();
-    })
-  ));
-  return cats
+  const [results, labels] = await Promise.all([
+    Promise.allSettled(cats.map(cat =>
+      fetch(base + cat.file).then(r => {
+        if (!r.ok) throw new Error(cat.file + ' not found');
+        return r.json();
+      })
+    )),
+    fetch(base + 'labels.json').then(r => (r.ok ? r.json() : null)).catch(() => null),
+  ]);
+  const loaded = cats
     .map((cat, i) => ({ cat, result: results[i] }))
     .filter(({ result }) => {
       if (result.status === 'rejected') console.warn('loadLogos:', result.reason);
@@ -103,4 +124,6 @@ export async function loadLogos(base = '/logos/') {
       const section_en = cat.section_en ?? result.value.section_en;
       return { ...result.value, slug, section_en };
     });
+  resolveVariantLabels(loaded, labels);
+  return loaded;
 }

@@ -94,7 +94,7 @@ tags_en: Logos, How-to, Design
 
 1. **Клипарт-иконка из библиотеки + название.** Иконки из бесплатных наборов узнаваемы профессионалам с одного взгляда и не уникальны юридически. Даже простую форму стройте сами из геометрии.
 2. **Обводка (стровка) вместо заливки везде.** Тонкие контурные знаки — мода, которая плохо живёт в малых размерах и на печати. Начинающим — заливки.
-3. **Эффекты: тень, градиент из трёх цветов, свечение.** Убирайте всё. Плоско — это профессионально (см. [почему все упростились](../pochemu-brendy-uproshchayut-logotipy/)).
+3. **Эффекты: тень, градиент из трёх цветов, свечение.** Убирайте всё. Плоско — это профессионально, [почему все упростились](../pochemu-brendy-uproshchayut-logotipy/), мы объясняли отдельно.
 4. **Текст «на глазок» рядом со знаком.** Расстояние между знаком и текстом должно быть системным: обычно равно высоте буквы или половине знака. Меряйте, не прикидывайте.
 5. **Два шрифта и три цвета.** Формула стартового логотипа железная: один шрифт, один цвет + чёрный/белый.
 
@@ -104,8 +104,8 @@ tags_en: Logos, How-to, Design
 
 - Соберите [комплект файлов](../v-kakom-formate-nuzhen-logotip/) и одну папку в облаке.
 - Сделайте [фавикон](../kak-sdelat-favicon/) и [аватарки](../razmery-logotipa-dlya-sajta-i-socsetej/) из знака.
-- Запишите на одной странице: коды цветов, имя шрифта, «нельзя растягивать и перекрашивать» — это ваш микро-гайдлайн ([зачем он](../chto-takoe-brendbuk/)).
-- Проверьте название и знак по реестрам товарных знаков — до того, как печатать вывеску ([как проверять](../kak-zaregistrirovat-logotip/)).
+- Запишите на одной странице: коды цветов, имя шрифта, «нельзя растягивать и перекрашивать» — это ваш микро-гайдлайн, [зачем он нужен](../chto-takoe-brendbuk/), мы объясняли отдельно.
+- Проверьте название и знак по реестрам товарных знаков — до того, как печатать вывеску: [как проверять](../kak-zaregistrirovat-logotip/), мы разбирали отдельно.
 
 ## Коротко
 
@@ -151,7 +151,7 @@ Mascots, complex illustrations, 3D gradient emblems — not today's difficulty l
 
 ## Step 5. Draw it in vector
 
-**Tools:** [Figma](../../logos/design/figma/) (browser, free) or Inkscape (offline, free). Not [Canva](../../logos/design/canva/) for finals — it exports vector only on paid plans; not [Photoshop](../../logos/design/photoshop/) — it's raster ([why that's bad](../vektor-i-rastr-raznica/)).
+**Tools:** [Figma](../../logos/design/figma/) (browser, free) or Inkscape (offline, free). Not [Canva](../../logos/design/canva/) for finals — it exports vector only on paid plans; not [Photoshop](../../logos/design/photoshop/) — it's raster (why that's bad is explained in [our vector vs raster piece](../vektor-i-rastr-raznica/)).
 
 The drawing rules that separate "DIY" from "DIY but you can't tell":
 
@@ -200,7 +200,7 @@ Look at your result through a designer's eyes. The mark betrays itself if:
 
 1. **A library clipart icon + the name.** Free-set icons are recognizable to professionals at a glance and legally non-unique. Build even simple shapes yourself from geometry.
 2. **Outlines instead of fills everywhere.** Thin line-marks are a fashion that dies at small sizes and in print. Beginners — use fills.
-3. **Effects: shadow, three-stop gradient, glow.** Remove all of it. Flat is professional (see [why everyone simplified](../pochemu-brendy-uproshchayut-logotipy/)).
+3. **Effects: shadow, three-stop gradient, glow.** Remove all of it. Flat is professional — we explain [why everyone simplified](../pochemu-brendy-uproshchayut-logotipy/) separately.
 4. **Text placed "by eye" next to the mark.** The gap should be systematic: usually the letter height or half the mark. Measure, don't guess.
 5. **Two typefaces and three colors.** The starter formula is iron: one typeface, one color plus black/white.
 
@@ -210,8 +210,8 @@ The logo is done — spend one more evening making it work as a system:
 
 - Assemble [the file kit](../v-kakom-formate-nuzhen-logotip/) and one cloud folder.
 - Build the [favicon](../kak-sdelat-favicon/) and [avatars](../razmery-logotipa-dlya-sajta-i-socsetej/) from the mark.
-- Write one page: color codes, the typeface name, "no stretching, no recoloring" — your micro-guideline ([why it matters](../chto-takoe-brendbuk/)).
-- Check the name and mark against trademark registries — before printing the signage ([how](../kak-zaregistrirovat-logotip/)).
+- Write one page: color codes, the typeface name, "no stretching, no recoloring" — your micro-guideline; we explain [why it matters](../chto-takoe-brendbuk/) separately.
+- Check the name and mark against trademark registries — before printing the signage; we cover [how](../kak-zaregistrirovat-logotip/) separately.
 
 ## In short
 

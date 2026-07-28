@@ -90,7 +90,10 @@
   </script>
 
   <link rel="stylesheet" href="/css/seo-page.css">
+  <link rel="stylesheet" href="/css/site-header.css">
   <link rel="stylesheet" href="/css/blog.css">
+  <link rel="stylesheet" href="/css/threads-banner.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -98,54 +101,113 @@
 <body>
 
 <header class="site-header">
-  <a class="brand" href="/en/" aria-label="Trace Logo's">
+  <a class="brand" href="/en/" aria-label="Trace Logo's — на главную">
     <span class="brand-logo" aria-hidden="true">
       <img src="/assets/brand/logo.svg" alt="" width="28" height="28">
     </span>
-    <span class="brand-name">Trace Logo's</span>
+    <span class="brand-name">Trace Logo's<span class="brand-badge">Beta</span></span>
   </a>
-  <form class="seo-search-form" id="seo-search-form" role="search" action="/en/logos/" method="get" data-base="/" data-scope="all">
+
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../logos/" method="get" data-base="../../" data-scope="all">
     <search-box class="seo-search-wrap">
       <input id="seo-search" name="q" type="text" placeholder="Search logos..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
     </search-box>
     <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
   </form>
-  <a class="back-btn" href="/en/blog/">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    <span data-i18n="backToCatalog">Back</span>
+
+  <nav class="header-nav" aria-label="Разделы">
+    <a href="/en/logos/" data-i18n="breadcrumbLogos">Logos</a>
+    <a href="/en/emoji/" data-i18n="breadcrumbEmoji">Emoji</a>
+    <a href="/en/blog/" data-i18n="blogSection">Blog</a>
+    <a class="nav-figma" href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><svg width="11" height="16" viewBox="0 0 38 57" fill="none" aria-hidden="true"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/></svg>Figma плагин</a>
+  </nav>
+
+  <a class="btn-github" href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+    <span>GitHub</span>
   </a>
+
+  <button type="button" class="mobile-nav-burger" id="mobile-nav-burger" data-i18n-aria="burgerAriaLabel" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
   <lang-switcher></lang-switcher>
 </header>
+
+<donate-ticker></donate-ticker>
+
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" hidden></div>
+<nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Menu" data-i18n-aria="burgerAriaLabel" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-brand">Trace Logo's</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" data-i18n-aria="detailCloseAriaLabel" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-section" id="mobile-nav-toc" hidden>
+    <div class="mobile-nav-label" data-i18n="mobileNavToc">On this page</div>
+    <div class="mobile-nav-list" id="mobile-nav-toc-list"></div>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label" data-i18n="mobileNavPages">Site sections</div>
+    <div class="mobile-nav-list">
+      <a href="/en/"><span data-i18n="navHome">Home</span></a>
+      <a href="/en/logos/"><span data-i18n="breadcrumbLogos">Logos</span></a>
+      <a href="/en/emoji/"><span data-i18n="breadcrumbEmoji">Emoji</span></a>
+      <a href="/en/#h-collections"><span data-i18n="navCollections">Collections</span></a>
+      <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a>
+    </div>
+  </div>
+</nav>
 <script src="/components/lang-switcher.js" defer></script>
 <script src="/components/search-box.js" defer></script>
+<script src="/components/mobile-nav.js" defer></script>
+<!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
+     запрос уйдёт только после того, как разрешится весь статический граф модулей
+     (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
+<link rel="modulepreload" href="/js/i18n-dict-en.js">
+<script type="module" src="/components/donate-ticker.js"></script>
+<script type="module" src="/js/header-search.js"></script>
+
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
   <a href="/en/">Trace Logo's</a><span class="sep">/</span>
   <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a><span class="sep">/</span>
-  <span class="current" aria-current="page">What Brand Books and Guidelines Are — and Why You Can't Stretch a Logo</span>
+  <span class="current" aria-current="page">What Brand Books and Guidelines Are — and Why You Can't Stretch a Logo</span>
 </nav>
 
 <main>
   <div class="blog-layout">
     <article class="blog-article">
-      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(185 72% 58%) 0%, hsl(227 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></div>
+      <div class="blog-article-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(108 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(148 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(198 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(258 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(108 70% 38%) 0%, hsl(258 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-07">June 7, 2026</time>
           <span class="blog-meta-sep" aria-hidden="true">·</span>
           <span class="blog-read">6 min read</span>
+	          <span class="blog-meta-sep" aria-hidden="true">·</span>
+	          <span class="blog-views">
+	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+	            2
+	          </span>
         </div>
-        <h1>What Brand Books and Guidelines Are — and Why You Can't Stretch a Logo</h1>
+        <h1>What Brand Books and Guidelines Are — and Why You Can't Stretch a Logo</h1>
       </header>
       <div class="blog-body">
         <p>The marketer stretched the logo horizontally so it would &quot;fit the header&quot;. The contractor printed the mark in purple because &quot;green didn't look right&quot;. The office manager put the logo on the bright red background of a greeting card. Everyone meant well — and the brand now looks like three different companies in three places. This is exactly what today's document protects against.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>Guidelines</strong> are the technical rules of identity use: what you may and may not do with the logo, colors and fonts. A <strong>brand book</strong> is broader — it adds the brand platform (mission, values, tone of voice). A <strong>logobook</strong> is narrower: logo rules only. Colloquially it's all called a &quot;brand book&quot;, which is fine — what matters is that the document exists.</p></div></div>
       <h2 id="three-documents-everyone-confuses">Three documents everyone confuses</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Document</th><th>Contents</th><th>Who needs it</th></tr></thead><tbody><tr><td>Logobook</td><td>logo rules: versions, clear space, don'ts</td><td>micro-business, startups</td></tr><tr><td>Guidelines</td><td>+ colors, fonts, carriers, templates</td><td>most companies</td></tr><tr><td>Brand book</td><td>+ strategy: mission, values, audience, tone</td><td>mid-size and large business</td></tr></tbody></table></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Document</th><th>Contents</th><th>Who needs it</th></tr></thead><tbody><tr><td>Logobook</td><td>logo rules: versions, clear space, don'ts</td><td>micro‑business, startups</td></tr><tr><td>Guidelines</td><td>+ colors, fonts, carriers, templates</td><td>most companies</td></tr><tr><td>Brand book</td><td>+ strategy: mission, values, audience, tone</td><td>mid‑size and large business</td></tr></tbody></table></div>
       <p>In practice the names wander. Arguing terminology is pointless — look at the contents.</p>
       <h2 id="inside-the-guidelines-the-key-sections">Inside the guidelines: the key sections</h2>
       <h3>Logo versions</h3>
-      <p>Primary, compact (mark without text), horizontal and vertical lockups, monochrome, dark-background version — each with rules on when to use it. This is where a designer learns the favicon gets the mark, not the full logo with a tagline.</p>
+      <p>Primary, compact (mark without text), horizontal and vertical lockups, monochrome, dark‑background version — each with rules on when to use it. This is where a designer learns the favicon gets the mark, not the full logo with a tagline.</p>
       <h3>Clear space</h3>
       <p>The minimum margin around the logo where no text, images or edges may intrude. Usually defined by an element of the mark itself: &quot;the margin equals the height of letter X&quot;. Clear space is what separates tidy layouts from &quot;logo glued into the corner&quot;.</p>
       <h3>Minimum size</h3>
@@ -170,32 +232,32 @@
       <p>Application examples: business cards, letterheads, decks, social media, vehicles, signage, packaging. The more ready templates, the less contractors improvise.</p>
       <h2 id="why-small-businesses-need-one">Why small businesses need one</h2>
       <p>Guidelines seem like corporate toys. Practice says the opposite: small businesses need them more, because contractors rotate faster — a new SMM person, a freelance designer, a discount print shop. Without the document each interprets the style their own way, and a year later the brand has five shades of its color and three logo versions in circulation.</p>
-      <p>A 5–10 page mini-guideline suffices: logo versions, clear space, sizes, don'ts, color codes, fonts. Studios usually include one in the logo package — that's part of what the studio price tier buys (<a href="/en/blog/skolko-stoit-logotip/" target="_blank" rel="noopener">how much a logo costs</a>).</p>
+      <p>A 5–10 page mini‑guideline suffices: logo versions, clear space, sizes, don'ts, color codes, fonts. Studios usually include one in the logo package — that's part of what the studio price tier buys; we cover <a href="/en/blog/skolko-stoit-logotip/" target="_blank" rel="noopener">how much a logo costs</a> separately.</p>
       <h2 id="where-to-see-good-examples">Where to see good examples</h2>
-      <p>Many companies publish their guidelines: search &quot;brand guidelines&quot; + the name. Google, Telegram, Spotify and others keep public brand-asset pages with logo versions, color codes and usage rules — the best textbook there is.</p>
-      <h2 id="building-a-mini-guideline-yourself-an-8-page-skeleton">Building a mini-guideline yourself: an 8-page skeleton</h2>
+      <p>Many companies publish their guidelines: search &quot;brand guidelines&quot; + the name. Google, Telegram, Spotify and others keep public brand‑asset pages with logo versions, color codes and usage rules — the best textbook there is.</p>
+      <h2 id="building-a-mini-guideline-yourself-an-8-page-skeleton">Building a mini‑guideline yourself: an 8-page skeleton</h2>
       <p>No studio budget? Assemble the document yourself — in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, Google Docs or PDF. The proven structure:</p>
       <ol>
       <li><strong>Cover</strong> — logo, document title, version and date (versions matter: guidelines live and get updated).</li>
       <li><strong>Logo versions</strong> — full, mark, monochrome, inverse; one sentence each on when to use it.</li>
       <li><strong>Clear space and minimum size</strong> — a diagram measured via an element of the mark.</li>
-      <li><strong>The don'ts</strong> — 6–8 crossed-out &quot;wrong&quot; images. The most-consulted spread: contractors look at exactly this.</li>
-      <li><strong>Colors</strong> — swatches with HEX/RGB/CMYK. If the colors aren't code-fixed yet — now is the time (<a href="/en/blog/kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">how to capture the exact color</a>).</li>
+      <li><strong>The don'ts</strong> — 6–8 crossed‑out &quot;wrong&quot; images. The most‑consulted spread: contractors look at exactly this.</li>
+      <li><strong>Colors</strong> — swatches with HEX/RGB/CMYK. If the colors aren't code‑fixed yet — now is the time; we cover <a href="/en/blog/kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">how to capture the exact color</a> separately.</li>
       <li><strong>Typography</strong> — the brand typeface, weights, and the substitute font for email and decks.</li>
       <li><strong>Application examples</strong> — 3–4 carriers: business card, site header, avatar, deck.</li>
       <li><strong>A contact and a link to the asset folder</strong> — so rules and correct files arrive together.</li>
       </ol>
       <p>One day of work — and the business gets a document that saves years of correspondence.</p>
-      <h2 id="making-the-guideline-actually-work-not-shelf-sit">Making the guideline actually work (not shelf-sit)</h2>
+      <h2 id="making-the-guideline-actually-work-not-shelf-sit">Making the guideline actually work <span class="heading-dim">(not shelf‑sit)</span></h2>
       <p>The chronic disease of brand books is that nobody reads them. The countermeasures:</p>
       <ul>
       <li><strong>A link in every brief.</strong> The line &quot;assets and rules: [link]&quot; in every contractor order is the only reliable delivery channel.</li>
-      <li><strong>Files next to rules.</strong> A guideline without the folder of correct sources provokes &quot;found the logo on Google&quot;. Keep them together (<a href="/en/blog/v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">folder organization</a>).</li>
-      <li><strong>A one-page digest.</strong> The full document is for designers; for the office manager and SMM — one page: the correct logo, the two main don'ts, the color codes.</li>
+      <li><strong>Files next to rules.</strong> A guideline without the folder of correct sources provokes &quot;found the logo on Google&quot;. Keep them together — we cover <a href="/en/blog/v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">folder organization</a> separately.</li>
+      <li><strong>A one‑page digest.</strong> The full document is for designers; for the office manager and SMM — one page: the correct logo, the two main don'ts, the color codes.</li>
       <li><strong>An annual revision.</strong> New carriers appear (dark mode, motion) — the document grows, version and date update.</li>
       </ul>
       <h2 id="faq">FAQ</h2>
-      <p><strong>What does a brand book cost?</strong> A mini-logobook usually ships within a studio's logo price; full guidelines are separate work comparable to the mark itself; a strategic brand book is agency territory (<a href="/en/blog/skolko-stoit-logotip/" target="_blank" rel="noopener">the price tiers</a>).</p>
+      <p><strong>What does a brand book cost?</strong> A mini‑logobook usually ships within a studio's logo price; full guidelines are separate work comparable to the mark itself; a strategic brand book is agency territory; we cover <a href="/en/blog/skolko-stoit-logotip/" target="_blank" rel="noopener">the price tiers</a> separately.</p>
       <p><strong>Is a brand book legally required?</strong> No — it's an internal document. But it helps legally too: it fixes the mark's canon, making deviations easier to qualify as distortion in disputes.</p>
       <p><strong>Which comes first — the brand book or the logo?</strong> The logo. Guidelines describe an existing identity; ordering &quot;a brand book right away&quot; with no mark is a terminology muddle that usually sells a template.</p>
       <h2 id="in-short">In short</h2>
@@ -206,46 +268,130 @@
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/skolko-stoit-logotip/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></svg></div>
+          <a class="blog-card" href="/en/blog/skolko-stoit-logotip/" data-date="2026-07-15" data-views="6">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Pricing</span><span class="blog-card-tag">Branding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">15.07.2026</div>
-          <div class="blog-card-title">How Much a Logo Costs in 2026 — From Zero to Six Figures, and What You Pay For</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            6
+          </div>
+          </div>
+          <div class="blog-card-title">How Much a Logo Costs in 2026 — From Zero to Six Figures, and What You Pay For</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/samye-dorogie-logotipy/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></svg></div>
+      <a class="blog-card" href="/en/blog/samye-dorogie-logotipy/" data-date="2026-07-11" data-views="1">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Stories</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">11.07.2026</div>
-          <div class="blog-card-title">The World's Most Expensive Logos — and Why Price Has Little to Do with the Picture</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            1
+          </div>
+          </div>
+          <div class="blog-card-title">The World's Most Expensive Logos — and Why Price Has Little to Do with the Picture</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotip-nejrosetyu/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg></div>
+      <a class="blog-card" href="/en/blog/logotip-nejrosetyu/" data-date="2026-06-29" data-views="0">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">AI</span><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Branding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">29.06.2026</div>
-          <div class="blog-card-title">AI-Generated Logos — An Honest Look at When It Works and When It Doesn't</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.06.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            0
+          </div>
+          </div>
+          <div class="blog-card-title">AI‑Generated Logos — An Honest Look at When It Works and When It Doesn't</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/vodyanoj-znak-na-foto/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></svg></div>
+      <a class="blog-card" href="/en/blog/ekosistema-yandeksa-logotipy/" data-date="2026-07-26" data-views="1">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Ecosystems</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">18.07.2026</div>
-          <div class="blog-card-title">Watermarking Photos — Placing a Logo So It Protects Without Ruining</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            1
+          </div>
+          </div>
+          <div class="blog-card-title">The Yandex Ecosystem Logos — How the Mark System Works</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/v-kakom-formate-nuzhen-logotip/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+      <a class="blog-card" href="/en/blog/chto-takoe-slogan/" data-date="2026-07-25" data-views="0">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Marketing</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">16.07.2026</div>
-          <div class="blog-card-title">What File Format Should a Logo Be — SVG, PNG, AI, EPS or PDF</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>25.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            0
+          </div>
+          </div>
+          <div class="blog-card-title">What Is a Slogan — vs Tagline, Descriptor and USP</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/shrift-dlya-logotipa/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16" /><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /><path d="M9 20h6" /></svg></div>
+      <a class="blog-card" href="/en/blog/chto-takoe-rebrending/" data-date="2026-07-24" data-views="0">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Business</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">12.07.2026</div>
-          <div class="blog-card-title">Choosing a Logo Typeface — And Not Getting Fined over the License</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>24.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            0
+          </div>
+          </div>
+          <div class="blog-card-title">What Is Rebranding — Why Companies Change Logos and Names</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
         </div>
@@ -255,9 +401,32 @@
     <aside class="blog-sidebar">
       <nav class="blog-sidebar-nav" aria-label="On this page"><span class="blog-sidebar-label">On this page</span><ol><li><a href="#three-documents-everyone-confuses">Three documents everyone confuses</a></li><li><a href="#inside-the-guidelines-the-key-sections">Inside the guidelines: the key sections</a></li><li><a href="#why-small-businesses-need-one">Why small businesses need one</a></li><li><a href="#where-to-see-good-examples">Where to see good examples</a></li><li><a href="#building-a-mini-guideline-yourself-an-8-page-skeleton">Building a mini-guideline yourself: an 8-page skeleton</a></li><li><a href="#making-the-guideline-actually-work-not-shelf-sit">Making the guideline actually work (not shelf-sit)</a></li><li><a href="#faq">FAQ</a></li><li><a href="#in-short">In short</a></li></ol></nav>
       <div class="blog-progress-wrap">
-      <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
-      <span class="blog-progress-pct">0%</span>
+      <span class="blog-progress-label">Reading progress</span>
+      <div class="blog-progress-row">
+        <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+        <span class="blog-progress-pct">0%</span>
+      </div>
     </div>
+      <!-- Threads banner — shared component (SEO logo pages + blog sidebar).
+     Styles: css/threads-banner.css · dismiss behavior: js/threads-banner.js -->
+<aside class="th-banner" id="th-banner">
+  <a class="th-banner-link" href="https://www.threads.net/@mansurov_rafaell" target="_blank" rel="noopener noreferrer" data-i18n-aria="thBannerAriaLabel" aria-label="Rafael Mansurov on Threads">
+    <button class="th-banner-close" id="th-banner-close" data-i18n-aria="thBannerCloseAria" aria-label="Hide banner" type="button">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/></svg>
+    </button>
+    <span class="th-banner-shine" aria-hidden="true"></span>
+    <svg class="th-banner-watermark" viewBox="0 0 28 28" fill="currentColor" aria-hidden="true"><path d="M18.307 13.343a6 6 0 0 0-.236-.107c-.139-2.56-1.538-4.026-3.887-4.041h-.031c-1.405 0-2.574.6-3.293 1.69l1.292.887c.537-.815 1.38-.99 2.001-.99l.022.001c.773.005 1.357.23 1.734.668q.414.48.55 1.317a10 10 0 0 0-2.22-.106c-2.233.128-3.669 1.43-3.572 3.24.049.918.506 1.708 1.287 2.224.661.436 1.512.65 2.396.601 1.168-.064 2.085-.51 2.724-1.324.485-.619.792-1.42.928-2.431.556.336.969.778 1.197 1.31.387.902.41 2.387-.801 3.597-1.062 1.06-2.337 1.519-4.265 1.533-2.138-.016-3.755-.702-4.807-2.038-.985-1.252-1.493-3.06-1.512-5.374.019-2.314.527-4.122 1.512-5.373 1.051-1.337 2.669-2.023 4.807-2.039 2.154.016 3.8.705 4.891 2.048.535.659.939 1.487 1.205 2.453l1.514-.404c-.323-1.189-.83-2.213-1.52-3.062C18.822 5.9 16.775 5.018 14.137 5h-.01c-2.632.018-4.656.904-6.016 2.632-1.21 1.539-1.834 3.679-1.855 6.362v.012c.02 2.683.645 4.823 1.855 6.362 1.36 1.728 3.384 2.614 6.016 2.632h.01c2.34-.016 3.99-.629 5.349-1.986 1.777-1.777 1.724-4.003 1.138-5.37-.42-.98-1.222-1.776-2.318-2.301m-4.04 3.798c-.979.055-1.996-.384-2.046-1.325-.037-.698.497-1.476 2.106-1.569q.276-.016.543-.016c.584 0 1.131.057 1.628.166-.185 2.316-1.273 2.692-2.231 2.744"/></svg>
+    <div class="th-banner-body">
+      <span class="th-banner-title" data-i18n="thBannerTitle">Threads profile</span>
+      <span class="th-banner-desc" data-i18n="thBannerDesc">About design, code, and products that make life simpler. Follow along 🤙</span>
+      <span class="th-banner-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span data-i18n="thBannerCta">Follow</span>
+      </span>
+    </div>
+  </a>
+</aside>
+
     </aside>
   </div>
 
@@ -273,12 +442,95 @@
   </div>
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="/en/" class="footer-link">trace-logos</a>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col footer-about">
+        <a class="brand" href="/en/" aria-label="Trace Logo's" style="margin-bottom:14px">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="/assets/brand/logo.svg" alt="" width="30" height="30">
+          </span>
+          <span class="brand-name">Trace Logo's</span>
+        </a>
+        <p data-i18n="footerAbout">Open library of logos and emoji. Free, no signup, open source.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCatalog">Catalog</h3>
+        <ul>
+          <li><a href="/en/logos/"><span data-i18n="footerAllLogos">All logos</span></a></li>
+          <li><a href="/en/emoji/"><span data-i18n="footerEmoji">Emoji</span></a></li>
+          <li><a href="/en/blog/"><span data-i18n="footerBlog">Blog</span></a></li>
+          <li><a href="/en/logos/ai/"><span data-i18n="footerAI">AI</span></a></li>
+          <li><a href="/en/logos/bank/"><span data-i18n="footerBanks">Banks</span></a></li>
+          <li><a href="/en/logos/market/"><span data-i18n="footerMarketplaces">Marketplaces</span></a></li>
+          <li><a href="/en/logos/social/"><span data-i18n="footerSocial">Social</span></a></li>
+          <li><a href="/en/logos/flag/"><span data-i18n="footerFlags">Flags</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCollections">Collections</h3>
+        <ul>
+          <!-- COLLECTIONS:START -->
+          <li><a href="/en/collections/russian-banks/"><span data-i18n="footerColl_russian-banks">Bank logos</span></a></li>
+          <li><a href="/en/collections/neural-networks/"><span data-i18n="footerColl_neural-networks">AI logos</span></a></li>
+          <li><a href="/en/collections/marketplaces/"><span data-i18n="footerColl_marketplaces">Marketplace logos</span></a></li>
+          <li><a href="/en/collections/payment-systems/"><span data-i18n="footerColl_payment-systems">Payment systems</span></a></li>
+          <li><a href="/en/collections/messengers-social/"><span data-i18n="footerColl_messengers-social">Social &amp; messengers</span></a></li>
+          <li><a href="/en/collections/google-2026/"><span data-i18n="footerColl_google-2026">Google icons 2026</span></a></li>
+          <li><a href="/en/collections/delivery-taxi/"><span data-i18n="footerColl_delivery-taxi">Delivery &amp; taxi</span></a></li>
+          <li><a href="/en/collections/browsers/"><span data-i18n="footerColl_browsers">Browsers</span></a></li>
+          <li><a href="/en/collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Cloud storage</span></a></li>
+          <li><a href="/en/collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Music streaming</span></a></li>
+          <li><a href="/en/collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Video streaming</span></a></li>
+          <!-- COLLECTIONS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColTools">Tools</h3>
+        <ul>
+          <li><a href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerFigmaPlugin">Figma plugin</span></a></li>
+          <!-- TOOLS:START -->
+          <li><a href="/en/tools/compress-webp/"><span data-i18n="footerTool_compress-webp">Compress image</span></a></li>
+          <li><a href="/en/tools/watermark/"><span data-i18n="footerTool_watermark">Remove watermark</span></a></li>
+          <li><a href="/en/tools/merge-pdf/"><span data-i18n="footerTool_merge-pdf">Merge PDF</span></a></li>
+          <li><a href="/en/tools/edit-image/"><span data-i18n="footerTool_edit-image">Crop &amp; rotate photo</span></a></li>
+          <li><a href="/en/tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">iOS call screen</span></a></li>
+          <!-- TOOLS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColDevelopers">For developers</h3>
+        <ul>
+          <li><a href="/logos.json">API · logos.json</a></li>
+          <li><a href="/emoji.json">API · emoji.json</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+          <li><a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://status.trace-logos.ru" target="_blank" rel="noopener"><span data-i18n="footerServiceStatus">Service status</span></a></li>
+          <li><a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">@mansurov_rafael</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Trace Logo's Beta · <span data-i18n="footerCopyrightShort">Images may be protected by their owners' copyright.</span></span>
+      <span class="footer-bottom-links">
+        <a href="/en/sitemap/"><span data-i18n="footerSitemap">Sitemap</span></a>
+        <a href="/en/terms/"><span data-i18n="footerTerms">Terms of use</span></a>
+        <a href="/en/consent/"><span data-i18n="footerConsent">Data processing</span></a>
+        <a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerOpenSource">Open source</span></a>
+      </span>
+    </div>
+  </div>
 </footer>
 
-<script type="module" src="/js/header-search.js"></script>
+
+<script type="module" src="/js/threads-banner.js"></script>
 <script type="module" src="/js/blog-toc.js"></script>
 <script type="module" src="/js/blog-code.js"></script>
+<script src="/js/blog-track.js" async></script>
 </body>
 </html>

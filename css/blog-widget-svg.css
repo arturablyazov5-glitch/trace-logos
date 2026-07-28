@@ -1,0 +1,279 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   blog-widget-svg.css — встраиваемый в статью просмотрщик SVG.
+   Разметка: templates/partials/blog-widget-svg-viewer.html
+   Логика:   js/blog-svg-viewer.js
+   Подключается только на страницах постов, где есть `:::widget svg-viewer`.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Блоки виджета переключаются атрибутом hidden, а display:flex у них сильнее
+   браузерного [hidden]{display:none} — без этой строки скрытое остаётся видимым. */
+.svgv [hidden] { display: none !important; }
+
+.svgv {
+  margin: 0 0 26px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-base);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* ── Шапка ── */
+.svgv-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, .03);
+  border-bottom: 1px solid var(--border-base);
+}
+.svgv-title {
+  font-size: 13px; font-weight: 600; color: var(--text-1);
+}
+.svgv-privacy {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 11.5px; color: var(--text-5);
+}
+
+/* ── Дропзона ── */
+.svgv-drop {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 38px 20px 34px;
+  text-align: center;
+  border: 1px dashed var(--border-base);
+  border-radius: 12px;
+  margin: 14px;
+  transition: border-color .15s, background .15s;
+}
+.svgv-drop.is-over {
+  border-color: var(--accent);
+  background: var(--accent-dim);
+}
+.svgv-drop-icon { color: var(--text-6); }
+.svgv-drop.is-over .svgv-drop-icon { color: var(--accent); }
+.svgv-drop-title { font-size: 14.5px; font-weight: 500; color: var(--text-1); }
+.svgv-drop-hint  { font-size: 12px; color: var(--text-5); }
+
+.svgv-pick {
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  color: #111; background: var(--light);
+  border: none; border-radius: 9px; padding: 9px 18px; cursor: pointer;
+  transition: background .14s, transform .14s, box-shadow .14s;
+}
+.svgv-pick:hover {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
+}
+.svgv-pick:active { transform: translateY(0) scale(.97); box-shadow: none; }
+
+/* ── Панель инструментов ── */
+.svgv-bar {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-base);
+}
+.svgv-tabs {
+  display: inline-flex; padding: 2px; gap: 2px;
+  background: var(--bg-muted); border-radius: 9px;
+}
+.svgv-tab {
+  font-family: inherit; font-size: 12.5px; font-weight: 500; color: var(--text-4);
+  background: transparent; border: none; border-radius: 7px;
+  padding: 6px 13px; cursor: pointer; transition: color .12s, background .12s;
+}
+.svgv-tab:hover { color: var(--text-1); }
+.svgv-tab.is-active { color: var(--text-0); background: var(--bg-active); }
+
+.svgv-bgs { display: inline-flex; gap: 5px; }
+.svgv-bg {
+  width: 24px; height: 24px; padding: 0; cursor: pointer;
+  border: 1px solid var(--border-base); border-radius: 7px;
+  transition: border-color .12s, transform .12s;
+}
+.svgv-bg:hover     { border-color: var(--border-hover); }
+.svgv-bg.is-active { border-color: var(--accent); transform: scale(1.06); }
+.svgv-bg-checker { background: var(--checker-sq); background-size: 12px; }
+.svgv-bg-light   { background: #fff; }
+.svgv-bg-dark    { background: #101014; }
+
+.svgv-acts { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+.svgv-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: inherit; font-size: 12px; font-weight: 500; color: var(--text-2);
+  background: var(--bg-raised); border: 1px solid var(--border-muted); border-radius: 8px;
+  padding: 6px 11px; cursor: pointer;
+  transition: color .12s, border-color .12s, background .12s;
+}
+.svgv-btn:hover { color: var(--text-0); border-color: var(--border-hover); background: var(--bg-active); }
+.svgv-btn.is-copied { color: #34d399; border-color: rgba(52, 211, 153, .4); }
+.svgv-btn-sm { padding: 5px 9px; font-size: 11.5px; }
+/* Главное действие панели — светлая кнопка, как «Открыть файл» в дропзоне. */
+.svgv-btn-primary {
+  color: #111; background: var(--light); border-color: transparent; font-weight: 600;
+}
+.svgv-btn-primary:hover { color: #111; background: #fff; border-color: transparent; }
+
+/* ── Область отрисовки ── */
+.svgv-canvas {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 260px; padding: 26px;
+}
+/* Пока в правленом коде ошибка, картинка не соответствует коду в редакторе —
+   прячем её и показываем заглушку, а не последний успешно собранный рендер. */
+.svgv-canvas.is-broken img { visibility: hidden; }
+.svgv-broken {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 20px; text-align: center;
+  color: var(--text-5);
+}
+.svgv-broken span { max-width: 260px; font-size: 12.5px; line-height: 1.5; }
+.svgv-canvas[data-bg="checker"] { background: var(--checker-full); }
+.svgv-canvas[data-bg="light"]   { background: #fff; }
+.svgv-canvas[data-bg="dark"]    { background: #101014; }
+/* Размер задаёт js/blog-svg-viewer.js: мелкая иконка вписывается в поле с
+   увеличением (для вектора это бесплатно), большая — ужимается. */
+.svgv-canvas img { max-width: 100%; max-height: 340px; object-fit: contain; }
+
+/* ── Исходный код (редактируемый) ── */
+.svgv-code { background: #0d0d10; display: flex; flex-direction: column; }
+.svgv-editor {
+  display: block; width: 100%; height: 300px; resize: vertical;
+  margin: 0; padding: 16px 18px; border: none; outline: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px; line-height: 1.6; color: #e4e4e7; background: transparent;
+  /* Минифицированный SVG — одна длинная строка: переносим, чтобы читать и править
+     без горизонтальной прокрутки внутри статьи. */
+  white-space: pre-wrap; word-break: break-word; tab-size: 2;
+}
+.svgv-editor:focus { box-shadow: inset 0 0 0 1px var(--accent); }
+.svgv-code-foot {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 8px 14px; border-top: 1px solid var(--border-base);
+}
+.svgv-code-hint { font-size: 11.5px; color: var(--text-6); }
+
+/* Ошибка разбора во время правки: картинка остаётся прежней, стадия не сбрасывается. */
+.svgv-editerr {
+  margin: 0; padding: 9px 14px;
+  font-size: 12px; line-height: 1.5; color: #ff8a8d;
+  background: rgba(229, 72, 77, .1);
+  border-bottom: 1px solid rgba(229, 72, 77, .25);
+}
+
+/* ── Характеристики файла ── */
+.svgv-info {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border-base);
+}
+.svgv-chip {
+  display: inline-flex; align-items: baseline; gap: 5px;
+  font-size: 11.5px;
+  background: var(--bg-muted); border-radius: 7px; padding: 5px 9px;
+}
+.svgv-chip-edited {
+  color: #a98cff; background: var(--accent-dim); font-weight: 500;
+}
+.svgv-chip-k { color: var(--text-6); }
+.svgv-chip-v { color: var(--text-1); font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* ── Диагностика: что с файлом не так ── */
+.svgv-notes:empty { display: none; }
+.svgv-notes { padding: 0 14px 14px; display: flex; flex-direction: column; gap: 7px; }
+.svgv-note {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 12.5px; line-height: 1.5; color: var(--text-2);
+  background: var(--bg-muted); border-left: 2px solid var(--border-bold);
+  border-radius: 0 8px 8px 0; padding: 9px 12px;
+}
+.svgv-note svg { flex-shrink: 0; margin-top: 1px; }
+.svgv-note-warn   { border-left-color: #d9a441; }
+.svgv-note-warn   svg { color: #d9a441; }
+.svgv-note-danger { border-left-color: #e5484d; }
+.svgv-note-danger svg { color: #e5484d; }
+.svgv-note-ok     { border-left-color: #34d399; }
+.svgv-note-ok     svg { color: #34d399; }
+.svgv-note b { color: var(--text-1); font-weight: 600; }
+
+/* ── Ошибка чтения файла ── */
+.svgv-error {
+  margin: 0 14px 14px; padding: 12px 14px;
+  font-size: 13px; line-height: 1.55; color: var(--text-2);
+  background: rgba(229, 72, 77, .07);
+  border: 1px solid rgba(229, 72, 77, .25);
+  border-radius: 10px;
+}
+.svgv-error b { color: #ff8a8d; font-weight: 600; }
+.svgv-error code {
+  display: block; margin-top: 8px; padding: 8px 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px;
+  color: var(--text-3); background: #0d0d10; border-radius: 7px;
+  white-space: pre-wrap; word-break: break-word;
+}
+
+/* ── Модалка скачивания (визуально — как .suggest-overlay в css/modals.css) ── */
+.svgv-modal {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center; padding: 16px;
+}
+.svgv-modal-back {
+  position: absolute; inset: 0;
+  background: rgba(0, 0, 0, .65);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.svgv-modal-card {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; gap: 18px;
+  width: 100%; max-width: 380px; padding: 24px;
+  background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .6);
+}
+.svgv-modal-card:focus { outline: none; }
+.svgv-modal-title { font-size: 16px; font-weight: 600; color: var(--text-0); padding-right: 40px; }
+.svgv-modal-x {
+  position: absolute; top: 16px; right: 16px;
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; padding: 0;
+  color: var(--text-3); background: #222; border: none; border-radius: 8px; cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.svgv-modal-x:hover { background: #2a2a2a; color: var(--text-0); }
+.svgv-modal-row { display: flex; flex-direction: column; gap: 8px; }
+.svgv-modal-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--text-6);
+}
+/* Формат и размер — один язык выбора: плитка с рамкой, активная подсвечена акцентом.
+   Segmented control здесь не читался бы: его трек (--bg-muted) совпадает с фоном
+   карточки модалки. */
+.svgv-seg, .svgv-sizes { display: flex; gap: 6px; }
+.svgv-seg-btn, .svgv-size {
+  flex: 1; display: flex; flex-direction: column; gap: 2px; align-items: center;
+  font-family: inherit; padding: 11px 6px; cursor: pointer;
+  color: var(--text-2); background: var(--bg-raised);
+  border: 1px solid var(--border-muted); border-radius: 10px;
+  transition: color .12s, border-color .12s, background .12s;
+}
+.svgv-seg-btn:hover, .svgv-size:hover { color: var(--text-0); border-color: var(--border-hover); }
+.svgv-seg-btn.is-active, .svgv-size.is-active {
+  color: var(--text-0); border-color: var(--accent); background: var(--accent-dim);
+}
+.svgv-seg-btn { font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+.svgv-size    { padding: 9px 6px; }
+.svgv-size-x  { font-size: 13px; font-weight: 600; color: inherit; }
+.svgv-size-px { font-size: 10.5px; color: var(--text-5); font-variant-numeric: tabular-nums; }
+.svgv-size.is-active .svgv-size-px { color: var(--text-3); }
+.svgv-modal-go {
+  font-family: inherit; font-size: 13.5px; font-weight: 600; color: #111;
+  background: var(--light); border: none; border-radius: 10px; padding: 12px; cursor: pointer;
+  transition: background .12s;
+}
+.svgv-modal-go:hover { background: #fff; }
+
+@media (max-width: 560px) {
+  .svgv-bar   { gap: 8px; }
+  .svgv-acts  { margin-left: 0; width: 100%; }
+  .svgv-canvas { min-height: 200px; padding: 18px; }
+  .svgv-canvas img { max-height: 240px; }
+  .svgv-drop  { padding: 28px 14px; }
+}

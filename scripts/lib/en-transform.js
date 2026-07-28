@@ -3,7 +3,7 @@
 //
 // Перевод НЕ должен зависеть от JS в рантайме (поисковики, особенно Яндекс,
 // плохо рендерят JS). Поэтому /en/ страницы получают английский текст прямо
-// в HTML. Источник переводов — js/i18n-dict.js (тот же, что и у рантайма).
+// в HTML. Источник переводов — js/i18n-dict-<lang>.js (те же, что и у рантайма).
 //
 // Две операции:
 //   enChrome(html, relPath) — lang=en, window.__LANG__, абсолютные пути,
@@ -19,14 +19,28 @@ const { URL } = require('url');
 const ROOT        = path.join(__dirname, '..', '..');
 const BASE_ORIGIN = 'https://trace-logos.ru';
 
-// js/i18n-dict.js — браузерный ESM (нет build-step), Node не может его require().
+// Языки, у которых есть словарь js/i18n-dict-<lang>.js. Держать в синхроне с LANGS
+// в js/i18n.js — scripts/test-i18n.js падает, если списки разошлись.
+const LANGS   = ['ru', 'en'];
+const DEFAULT = 'ru';
+
+// js/i18n-dict-*.js — браузерные ESM (нет build-step), Node не может их require().
 // Читаем исходник и исполняем тело модуля в изолированной функции: `export const`
-// → `const`, затем возвращаем DICT/DEFAULT. Файл наш и доверенный (без import-ов
-// и сайд-эффектов), поэтому eval здесь безопасен и даёт ОДИН источник переводов.
+// → `const`, затем возвращаем DICT. Файлы наши и доверенные (без import-ов и
+// сайд-эффектов), поэтому eval здесь безопасен и даёт ОДИН источник переводов.
+//
+// Рантайм грузит ровно один словарь (только язык страницы), билду нужны все сразу —
+// поэтому здесь собираем их обратно в { ru: {...}, en: {...} }: ту же форму, что
+// loadDict() возвращал до разделения файла, чтобы все 8 вызывающих скриптов
+// (`loadDict().en`) продолжали работать без правок.
 function loadDict() {
-  const src  = fs.readFileSync(path.join(ROOT, 'js', 'i18n-dict.js'), 'utf8');
-  const body = src.replace(/export\s+const\s+/g, 'const ') + '\nreturn { DICT, DEFAULT };';
-  return new Function(body)().DICT;
+  const out = {};
+  for (const lang of LANGS) {
+    const src = fs.readFileSync(path.join(ROOT, 'js', `i18n-dict-${lang}.js`), 'utf8')
+      .replace(/export\s+const\s+/g, 'const ');
+    out[lang] = new Function(src + '\nreturn DICT;')();
+  }
+  return out;
 }
 
 const escHtml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -47,11 +61,16 @@ const isRelativePath = (rel) => rel !== '' && !rel.includes('${') && !/^(?:[a-z]
 // <a> links to these must keep pointing at the root, not get an /en/ prefix.
 const isDataFeed = (rel) => /\.(?:json|txt|xml)$/i.test(rel);
 
+// /assets/ has no /en/ mirror either — download links (SVG/PNG/ICNS/ZIP/…) built
+// as site-absolute "/assets/logos/..." must keep pointing at the root, same as
+// isDataFeed above, or they 404 under /en/assets/.
+const isAssetPath = (rel) => /^\/assets\//.test(rel);
+
 // Some hand-authored pages (404.html, admin/index.html) already write internal
 // <a> links as site-root-absolute ("/logos/", "/#h-collections") rather than
 // relative. Those bypass isRelativePath entirely, so without this they'd stay
 // pointing at the RU page even inside the /en/ mirror.
-const isSiteAbsolutePath = (rel) => /^\/(?!\/|en\/)/.test(rel) && !isDataFeed(rel);
+const isSiteAbsolutePath = (rel) => /^\/(?!\/|en\/)/.test(rel) && !isDataFeed(rel) && !isAssetPath(rel);
 
 function makePathsAbsolute(html, sourceRelPath) {
   const baseUrl   = `${BASE_ORIGIN}/${sourceRelPath}`;
@@ -105,6 +124,10 @@ function enChrome(html, sourceRelPath) {
   html = html.replace('<meta charset="UTF-8">',
     '<meta charset="UTF-8">\n  <script>window.__LANG__=\'en\';</script>');
   html = html.replace(/\bcontent="ru_RU"/g, 'content="en_US"');
+  // Подсказка <link rel="modulepreload"> в исходнике всегда указывает на русский
+  // словарь (RU — язык по умолчанию). На /en/ странице js/i18n.js импортирует
+  // английский; без этой замены браузер прогрел бы не тот файл — качал бы оба.
+  html = html.replace(/(<link\b[^>]*\brel="modulepreload"[^>]*\bhref="[^"]*i18n-dict)-ru(\.js")/g, '$1-en$2');
   return html;
 }
 
@@ -171,4 +194,4 @@ function hreflangBlock(ruUrl, enUrl) {
   ].join('\n  ');
 }
 
-module.exports = { loadDict, enChrome, bakeI18n, transformToEn, makePathsAbsolute, escHtml, escAttr, hreflangBlock, BASE_ORIGIN };
+module.exports = { loadDict, LANGS, DEFAULT, enChrome, bakeI18n, transformToEn, makePathsAbsolute, escHtml, escAttr, hreflangBlock, BASE_ORIGIN };

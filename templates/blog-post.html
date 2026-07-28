@@ -29,14 +29,17 @@
   </script>
 
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-header.css">
   <link rel="stylesheet" href="{{REL}}css/blog.css">
+  <link rel="stylesheet" href="{{REL}}css/threads-banner.css">
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css">{{WIDGET_CSS}}
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 
-{{> site-header search_action='logos/' search_scope='all' search_ph='Поиск логотипов и эмодзи...' back_href='blog/' back_label='Все статьи' }}
+{{> nav-header }}
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="{{REL}}">Trace Logo's</a><span class="sep">/</span>
@@ -53,6 +56,11 @@
           <time class="blog-date" datetime="{{DATE_ISO}}">{{DATE_HUMAN}}</time>
           <span class="blog-meta-sep" aria-hidden="true">·</span>
           <span class="blog-read">{{READ_TIME}}</span>
+	          <span class="blog-meta-sep" aria-hidden="true">·</span>
+	          <span class="blog-views">
+	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+	            {{VIEWS}}
+	          </span>
         </div>
         <h1>{{H1}}</h1>
       </header>
@@ -70,6 +78,7 @@
 
     <aside class="blog-sidebar">
       {{SIDEBAR}}
+      {{> threads-banner}}
     </aside>
   </div>
 
@@ -85,12 +94,11 @@
   </div>
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="{{REL}}" class="footer-link">trace-logos</a>
-</footer>
+{{> site-footer}}
 
-<script type="module" src="{{REL}}js/header-search.js"></script>
+<script type="module" src="{{REL}}js/threads-banner.js"></script>
 <script type="module" src="{{REL}}js/blog-toc.js"></script>
 <script type="module" src="{{REL}}js/blog-code.js"></script>
+<script src="{{REL}}js/blog-track.js" async></script>{{WIDGET_JS}}
 </body>
 </html>

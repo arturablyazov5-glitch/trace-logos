@@ -40,11 +40,10 @@
   <link rel="stylesheet" href="{{REL}}css/search.css">
   <link rel="stylesheet" href="{{REL}}css/cards.css">
   <link rel="stylesheet" href="{{REL}}css/detail.css">
+  <link rel="stylesheet" href="{{REL}}css/support-btn.css">
   <link rel="stylesheet" href="{{REL}}css/color.css">
   <link rel="stylesheet" href="{{REL}}css/picker.css">
-  <link rel="stylesheet" href="{{REL}}css/modals.css">
-  <link rel="stylesheet" href="{{REL}}css/icns.css">
-  <link rel="stylesheet" href="{{REL}}css/filters.css">
+  <link rel="stylesheet" href="{{REL}}css/modals.css">  <link rel="stylesheet" href="{{REL}}css/filters.css">
   <link rel="stylesheet" href="{{REL}}css/mobile.css">
   <link rel="stylesheet" href="{{REL}}css/confetti.css">
   <link rel="stylesheet" href="{{REL}}css/category-seo.css">
@@ -57,6 +56,9 @@
   <script src="{{REL}}components/copy-emoji-btn.js" defer></script>
   <script src="{{REL}}components/sidebar-contact.js" defer></script>
   <script src="{{REL}}components/help-modal.js" defer></script>
+  <!-- см. комментарий в templates/partials/nav-header.html -->
+  <link rel="modulepreload" href="{{REL}}js/i18n-dict-ru.js">
+  <script type="module" src="{{REL}}components/donate-ticker.js"></script>
   <script>
     window.__MANIFEST_BASE__ = '{{MANIFEST_BASE}}';
     window.__ASSET_SECTION__ = 'logos';
@@ -65,6 +67,7 @@
     window.__ECO_SLUG__ = '{{ECO_SLUG}}';
   </script>
   <script type="module" src="{{REL}}js/main.js"></script>
+  <script type="module" src="{{REL}}js/search-placeholder.js"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -127,8 +130,10 @@
     </button>
     <lang-switcher></lang-switcher>
   </div>
+  <donate-ticker></donate-ticker>
   <div class="center-body">
     <main>
+{{INTRO_SECTION}}
       <div class="content" id="content">{{STATIC_GRID}}</div>
       <div id="empty-section" data-i18n="emptySectionText">Пока ничего нет — раздел в разработке</div>
       <div id="empty">

@@ -346,6 +346,11 @@ function assetAbsUrl(file) {
 
 export function trackExport(figma, format, variant) {
   if (!figma || !format) return;
+  // Every export path in the app funnels through here, so this is the one place
+  // that can announce "a file just left the site". js/donate.js listens for it.
+  // Fired before the analytics guards below on purpose: the donate prompt is UI,
+  // not tracking — it must not depend on analytics consent or on the host.
+  document.dispatchEvent(new CustomEvent('tl:export', { detail: { figma, format, variant: variant || '' } }));
   if (isTrackingDisabled()) return;
   const host = location.hostname;
   if (host === 'localhost' || host === '127.0.0.1' || host === '') return;
@@ -370,4 +375,27 @@ export function trackLogoView(figma, name, file) {
     body: JSON.stringify({ figma, name: name || '', img: assetAbsUrl(file) }),
     keepalive: true, // переживает уход со страницы (актуально для SEO-страниц)
   }).catch(() => {});
+}
+
+const METRIKA_ID = 109799147;
+let noResultsTimer = null;
+
+// Поисковый запрос без единого совпадения — сигнал спроса на лого, которого
+// нет в каталоге. Дебаунс на 800мс, чтобы не слать событие на каждую букву
+// при наборе, и шлём только финальный «застывший» запрос.
+export function trackSearchNoResults(query) {
+  if (isTrackingDisabled()) return;
+  const host = location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || host === '') return;
+  const q = (query || '').trim();
+  clearTimeout(noResultsTimer);
+  if (q.length < 2) return;
+  noResultsTimer = setTimeout(() => {
+    if (typeof window.ym !== 'function') return;
+    // reachGoal — считает цель (конверсии по дням/периодам);
+    // params — кладёт сам текст запроса в отчёт «Параметры визитов»,
+    // где его можно агрегировать и увидеть частотность.
+    window.ym(METRIKA_ID, 'reachGoal', 'search_no_results');
+    window.ym(METRIKA_ID, 'params', { search_no_results: q });
+  }, 800);
 }

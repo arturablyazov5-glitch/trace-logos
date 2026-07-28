@@ -20,6 +20,8 @@ const path           = require('path');
 const { loadTemplate } = require('./lib/render');
 const { loadDict, enChrome, bakeI18n, hreflangBlock } = require('./lib/en-transform');
 const { itemDate }  = require('./lib/item-date');
+const { extractBrandColors } = require('./lib/brand-colors');
+const { resolveCategoryLabels } = require('./lib/labels');
 
 const BASE_URL   = 'https://trace-logos.ru';
 const ROOT       = path.resolve(__dirname, '..');
@@ -103,6 +105,27 @@ function searchImageRel(item) {
   if (assetExt(item.file) !== 'svg') return null;
   const rel = `assets/logos/search/${item.file.replace(/\.svg$/i, '.png')}`;
   return fs.existsSync(path.join(ROOT, rel)) ? rel : null;
+}
+
+// WebP grid-thumbnail render of a PNG asset (build-webp-previews.js) — the
+// same lightweight preview the catalog card grid uses, ~98% smaller than the
+// raw PNG. Only for on-page display (hero preview + variant thumbnails); the
+// full PNG stays the download/lightbox/color-editor source. Returns null when
+// the file isn't a PNG or the preview hasn't been generated yet.
+function webpPreviewRel(file) {
+  if (assetExt(file) !== 'png') return null;
+  const rel = `assets/logos/previews/${file.replace(/\.png$/i, '.webp')}`;
+  return fs.existsSync(path.join(ROOT, rel)) ? rel : null;
+}
+
+// Thumbnail-only src for a logo file, root-relative to `rel` — the WebP
+// preview for PNGs when one exists, else the real asset (SVGs always; PNGs
+// without a generated preview yet). Used anywhere a logo shows up small
+// on-page purely for browsing/cross-linking (related logos, category grid),
+// never for the primary per-item preview/download/variant paths.
+function thumbSrc(file, rel, ext) {
+  const webpRel = ext === 'png' ? webpPreviewRel(file) : null;
+  return webpRel ? `${rel}${webpRel}` : `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}`;
 }
 function variantType(v)      { return assetExt(v.file) === 'png' ? 'png' : 'svg'; }
 // Mirrors svgUrl() in js/utils.js: a leading "/" means the file is already a
@@ -208,6 +231,11 @@ const COPY_ICON = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" s
 function buildVariantCard(v, isActive, rel, itemName) {
   const type  = variantType(v);
   const src   = assetSrc(v.file, rel, type);
+  // Thumbnail-only WebP preview (falls back to the full asset when one hasn't
+  // been generated for this file) — the full `src` stays data-src for
+  // switch/download/lightbox, this is purely what the small on-page <img> loads.
+  const webpRel = type === 'png' ? webpPreviewRel(v.file) : null;
+  const thumbSrc = webpRel ? `${rel}${webpRel}` : src;
   const wide  = isWideVariant(v);
   const label = variantLabel(v);
   const key   = variantKey(v);
@@ -219,21 +247,37 @@ function buildVariantCard(v, isActive, rel, itemName) {
     ? ` data-macos='${JSON.stringify(v.macos_styles)}'`
     : '';
   const activeClass = isActive ? ' active' : '';
+  const darkBgAttr = v.darkBg ? ` data-dark-bg="true"` : '';
 
   if (wide) {
-    return `<div class="variant-card variant-wide${activeClass}" data-variant="${key}" data-src="${src}" data-type="${type}" data-wide="true">
+    return `<div class="variant-card variant-wide${activeClass}" data-variant="${key}" data-src="${src}" data-preview="${thumbSrc}" data-type="${type}" data-wide="true"${darkBgAttr}>
             <span class="variant-preview-wide" aria-hidden="true">
-              <img src="${src}" alt="${altText}" width="100" height="48">
+              <img src="${thumbSrc}" alt="${altText}" width="100" height="48" loading="lazy">
             </span>
             <span class="variant-label">${esc(label)}</span>
           </div>`;
   }
-  return `<div class="variant-card${activeClass}" data-variant="${key}" data-src="${src}" data-type="${type}" data-wide="false"${pngAttr}${macosAttr}>
+  return `<div class="variant-card${activeClass}" data-variant="${key}" data-src="${src}" data-preview="${thumbSrc}" data-type="${type}" data-wide="false"${pngAttr}${macosAttr}>
             <span class="variant-preview-icon" aria-hidden="true">
-              <img src="${src}" alt="${altText}" width="48" height="48">
+              <img src="${thumbSrc}" alt="${altText}" width="48" height="48" loading="lazy">
             </span>
             <span class="variant-label">${esc(label)}</span>
           </div>`;
+}
+
+// "No official square icon" explainer — mirrors #detail-noicon in the catalog
+// panel. Emitted only for items carrying `thumb`, i.e. where the square tile in
+// the grid is a stand-in we drew and the real primary is the horizontal logo.
+// Placed above the download buttons so it is read before anything is clicked.
+function buildNoIconNote(item, lang = 'ru') {
+  if (!item.thumb) return '';
+  const text = (lang === 'en' ? DICT.en : DICT.ru).noIconNote;
+  return `
+      <div class="noicon-note">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <span data-i18n="noIconNote">${esc(text)}</span>
+      </div>
+`;
 }
 
 function buildVariantsSection(item, rel, lang = 'ru') {
@@ -342,9 +386,9 @@ function buildDownloadButtons(item, rel) {
             <span data-label="downloadPng">Скачать PNG</span>
           </a>`;
 
-  // The dropdown itself is a build-time partial in seo-page.html ({{> download-dropdown}}) —
-  // single source shared with the catalog. seo-page.js wires it and collapses it to
-  // zip-only at runtime for wide `-full` primaries.
+  // The dropdown trigger itself is a build-time partial in seo-page.html
+  // ({{> download-dropdown}}) — single source shared with the catalog. seo-page.js
+  // wires it to open the shared "other formats" modal (js/download-modal.js).
   return [copyBtn, svgBtn, pngBtn].join('\n          ');
 }
 
@@ -368,8 +412,9 @@ function buildOneEcosystemSection(item, ecoId, ecosystemLookup, rel, lang = 'ru'
   const cards = members.map(({ item: m }) => {
     const isCurrent  = m.figma === item.figma;
     const isSoon     = !!m.comingSoon;
-    const ext        = assetExt(m.file);
-    const src        = `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${m.file}`;
+    const thumbFile  = m.thumb || m.file;
+    const ext        = assetExt(thumbFile);
+    const src        = `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${thumbFile}`;
     const url        = seoUrl(m);
     const nm         = esc(en ? (m.name_en || m.name) : m.name);
     const altText    = en ? `${nm} logo` : `Логотип ${nm}`;
@@ -470,15 +515,16 @@ function categoryIconBySlug(slug) {
 
 // Up to 12 ready logos from the same category (current excluded) — internal
 // cross-linking that's relevant to a visitor who landed from search.
-function buildRelatedSection(item, siblings, homeRel, lang = 'ru') {
+function buildRelatedSection(item, siblings, homeRel, assetRel, lang = 'ru') {
   const en   = lang === 'en';
   const pool = (siblings || []).filter(m => m.figma !== item.figma);
   if (pool.length < 1) return '';
 
   const label = (en ? DICT.en : DICT.ru).seoRelatedLabel;
   const cards = pool.map(m => {
-    const ext     = assetExt(m.file);
-    const src     = `${homeRel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${m.file}`;
+    const thumbFile = m.thumb || m.file;
+    const ext     = assetExt(thumbFile);
+    const src     = thumbSrc(thumbFile, assetRel, ext);
     const url     = seoUrl(m);
     const nm      = esc(en ? (m.name_en || m.name) : m.name);
     const altText = en ? `${nm} logo` : `Логотип ${nm}`;
@@ -500,7 +546,7 @@ function buildRelatedSection(item, siblings, homeRel, lang = 'ru') {
 // Full catalog entry: all 37 categories with live counts → /logos/<slug>/.
 // Static & crawlable; the prominent "whole catalog" the user can't find via the CTA.
 // Each card shows 3–4 logo thumbnails from that category instead of an icon.
-function buildCatalogGridSection(categories, homeRel, itemsByCat, lang = 'ru', catSlug = null) {
+function buildCatalogGridSection(categories, homeRel, assetRel, itemsByCat, lang = 'ru', catSlug = null) {
   if (!categories || !categories.length) return '';
   const en    = lang === 'en';
   const label = (en ? DICT.en : DICT.ru).seoCategoriesLabel;
@@ -510,8 +556,8 @@ function buildCatalogGridSection(categories, homeRel, itemsByCat, lang = 'ru', c
     const all = itemsByCat[c.slug] || [];
     const previews = all.slice(0, 4);
     const thumbs = previews.map(m => {
-      const ext = assetExt(m.file);
-      const src = `${homeRel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${m.file}`;
+      const tf  = m.thumb || m.file;
+      const src = thumbSrc(tf, assetRel, assetExt(tf));
       return `<img src="${src}" alt="" width="20" height="20" loading="lazy">`;
     }).join('');
     const more = all.length > 4
@@ -558,7 +604,9 @@ function logoFormats(item) {
   // the "Скачать PNG" button doesn't work.
   const hasPng = true;
   const square = isSquareLogo(item);
-  const list = [hasSvg && 'SVG', hasPng && 'PNG', square && 'ICO', square && 'ICNS'].filter(Boolean);
+  // WebP/PDF/AI/EPS are always downloadable via the "Другие форматы" modal —
+  // raster fallback for PNG-only logos, real vector export when an SVG exists.
+  const list = [hasSvg && 'SVG', hasPng && 'PNG', square && 'ICO', square && 'ICNS', 'WebP', 'PDF', 'AI', 'EPS'].filter(Boolean);
   const fmtStr   = joinWithConjunction(list, 'и');
   const fmtStrEn = joinWithConjunction(list, 'and');
   return { hasSvg, hasPng, square, list, fmtStr, fmtStrEn };
@@ -604,38 +652,9 @@ function buildMetaTableRows(item, lang = 'ru') {
 }
 
 // ── Brand colors (extracted from SVG source — source of truth) ─────────────────
-
-function extractBrandColors(item) {
-  const primaryExt = assetExt(item.file);
-  const svgFile = primaryExt === 'svg'
-    ? item.file
-    : (item.variants || []).find(v => assetExt(v.file) === 'svg')?.file;
-  if (!svgFile) return [];
-
-  let svg;
-  try { svg = fs.readFileSync(path.join(ROOT, 'assets', 'logos', 'svgs', svgFile), 'utf8'); }
-  catch { return []; }
-
-  const counts = new Map();
-  const add = h => { h = h.toLowerCase(); counts.set(h, (counts.get(h) || 0) + 1); };
-
-  for (const m of svg.matchAll(/#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3})(?![0-9a-fA-F])/g)) {
-    let h = m[1];
-    if (h.length === 8) h = h.slice(0, 6);            // strip alpha
-    else if (h.length === 3) h = h.split('').map(c => c + c).join('');
-    if (h.length === 6) add('#' + h);
-  }
-  for (const m of svg.matchAll(/rgb\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/gi)) {
-    add('#' + [m[1], m[2], m[3]].map(n => Math.min(255, +n).toString(16).padStart(2, '0')).join(''));
-  }
-
-  // Most frequent first; drop pure white (usually background / negative space).
-  return [...counts.entries()]
-    .sort((a, b) => b[1] - a[1])
-    .map(e => e[0])
-    .filter(c => c !== '#ffffff')
-    .slice(0, 6);
-}
+// Сама логика извлечения — в scripts/lib/brand-colors.js: её делит с
+// build-blog.js (виджет `:::widget logo-colors`), чтобы палитра в статье не
+// разошлась с палитрой на странице того же логотипа.
 
 function buildColorsSection(colors, lang = 'ru') {
   if (!colors.length) return '';
@@ -755,7 +774,7 @@ function buildFaqItems(item, colors, ecosystemLookup, siblings, section, section
   });
   // ICO is the format people most often search for by name ("скачать X ico") —
   // surface a direct download action inside the FAQ answer itself (see
-  // buildFaqSection) instead of only the collapsed dropdown, without touching
+  // buildFaqSection) instead of only the "other formats" modal, without touching
   // the primary action row that SVG-seeking visitors (the majority) scan first.
   if (square) faq.push({
     q:  `Как скачать логотип ${nm} в формате ICO?`,
@@ -831,7 +850,7 @@ function buildSeoPageData(item, rel, lang = 'ru') {
   name:        '${(displayName || '').replace(/'/g, "\\'")}',
   defaultSrc:  '${primarySrc}',
   defaultType: '${primaryType}',
-  defaultWide: false,
+  defaultWide: ${isFullFile(item.file)},
   figma:       '${item.figma || ''}',
   macosStyles: ${JSON.stringify(item.macos_styles || null)},
   item:        ${JSON.stringify({ figma: item.figma || '', file: item.file, variants: translatedVariants })},
@@ -929,7 +948,7 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   // claimed an SVG that didn't exist. ICNS is dropped here (near-zero search
   // volume of its own, title space is tight) — it still shows in the
   // on-page "Формат" row via the same logoFormats() call.
-  const titleFmt = logoFormats(item).list.filter(f => f !== 'ICNS').join(', ');
+  const titleFmt = logoFormats(item).list.filter(f => !['ICNS', 'WebP', 'PDF', 'AI', 'EPS'].includes(f)).join(', ');
 
   const metaDescRu = item.desc || `Скачайте логотип ${item.name} в ${fmtStr} бесплатно. Официальные цвета, готово для Figma.`;
   const metaDescEn = item.desc_en || `Download the ${nm} logo in ${fmtStrEn} for free. Official colors, ready for Figma.`;
@@ -956,15 +975,21 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   const ogSlug  = seoUrl(item).replace(/^\/logos\/|\/$/g, '').replace(/\//g, '-');
   const ogImage = `${BASE_URL}/assets/og/${ogSlug}.png`;
 
-  // Visible preview: raster PNG render when available — Яндекс.Картинки only
-  // indexes raster images found in the page HTML (it ignores the sitemap
-  // image extension), so the <img> the crawler sees must be the PNG. The SVG
-  // stays the download/color-editor source via __SEO_PAGE__.defaultSrc.
-  const previewRel  = searchImageRel(item);
+  // Visible preview: SVG-primary items get the raster PNG render — Яндекс.Картинки
+  // only indexes raster images found in the page HTML (it ignores the sitemap
+  // image extension), so the <img> the crawler sees must be a PNG. PNG-primary
+  // items get the WebP grid preview instead — same crawler-friendly raster,
+  // but the ~1MB+ full-res original is no longer loaded just to show a 160px
+  // thumbnail. Either way the full asset stays the download/lightbox/
+  // color-editor source via __SEO_PAGE__.defaultSrc / data-src.
+  const searchRel   = searchImageRel(item);
+  const webpRel     = searchRel ? null : webpPreviewRel(item.file);
+  const previewRel  = searchRel || webpRel;
   const previewSrc  = previewRel
     ? `${rel}${previewRel}`
     : `${rel}assets/logos/${primaryType === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
-  const previewMime = (previewRel || primaryType === 'png') ? 'image/png' : 'image/svg+xml';
+  const previewMime = webpRel ? 'image/webp'
+    : (previewRel || primaryType === 'png') ? 'image/png' : 'image/svg+xml';
 
   const brandColors = extractBrandColors(item);
   const homeRel  = en ? '/en/' : rel;
@@ -991,6 +1016,12 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     PREVIEW_SRC:              previewSrc,
     PREVIEW_MIME:             previewMime,
     PREVIEW_ALT:              esc(prevAlt),
+    // Initial preview shape must match what seo-page.js would apply on variant
+    // click (see its selectVariant: light-bg/dark-bg + preview-wide|preview-icon).
+    // Hardcoding "square" here left a wide primary — items with `thumb`, whose
+    // real logo is horizontal — without its checkerboard backing.
+    PREVIEW_CARD_BG:          isFullFile(item.file) ? (item.darkBg ? ' dark-bg' : ' light-bg') : '',
+    PREVIEW_MOUNT_CLASS:      isFullFile(item.file) ? 'preview-wide' : 'preview-icon',
     CATEGORY_ICON:            categoryIcon(item.figma),
     CATEGORY_NAME:            esc(secLabel),
     H1:                       esc(h1),
@@ -1001,16 +1032,16 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     DOWNLOAD_BUTTONS:         buildDownloadButtons(item, rel),
     MACOS_STYLE_TABS:         buildMacosStyleTabs(item, primaryType),
     MACOS_STYLE_TABS_MOBILE:  buildMacosStyleTabsMobile(item, primaryType),
+    NOICON_NOTE:              buildNoIconNote(item, lang),
     VARIANTS_SECTION:         buildVariantsSection(item, rel, lang),
     SPONSOR_SECTION:          buildSponsorSection(item, rel, lang),
     SPONSOR_CSS:              SPONSORS[sponsorKey(item)]?.title ? `<link rel="stylesheet" href="${rel}css/sponsor-banner.css">` : '',
-    TH_BANNER_CLASS:          '',
     ECOSYSTEM_SECTION:        buildEcosystemSection(item, ecosystemLookup, rel, lang),
     COLORS_SECTION:           buildColorsSection(brandColors, lang),
     META_TABLE_ROWS:          buildMetaTableRows(item, lang),
     FAQ_SECTION:              buildFaqSection(faqItems, lang),
-    RELATED_SECTION:          buildRelatedSection(item, siblings, homeRel, lang),
-    CATALOG_GRID_SECTION:     buildCatalogGridSection(categories, homeRel, itemsByCat, lang, catSlug),
+    RELATED_SECTION:          buildRelatedSection(item, siblings, homeRel, rel, lang),
+    CATALOG_GRID_SECTION:     buildCatalogGridSection(categories, homeRel, rel, itemsByCat, lang, catSlug),
     SEO_PAGE_DATA:            buildSeoPageData(item, rel, lang),
   };
 
@@ -1032,7 +1063,7 @@ async function main() {
   // Load all items with their section names and category slug
   const allItems = [];
   for (const cat of manifest.categories) {
-    const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', cat.file), 'utf8'));
+    const data = resolveCategoryLabels(JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', cat.file), 'utf8')), ROOT);
     for (const item of data.items) allItems.push({ item, section: cat.section, section_en: cat.section_en, catSlug: cat.slug });
   }
 

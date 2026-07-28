@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /**
- * Scans the logos/ and emoji/ directories for orphaned HTML pages.
- * If a directory contains an index.html but no corresponding entry exists in the JSON data,
+ * Scans the logos/, emoji/, and blog/ directories (plus their en/ mirrors) for
+ * orphaned HTML pages. If a directory contains an index.html but no corresponding
+ * entry exists in the source data (JSON for logos/emoji, blog/posts/*.md for blog),
  * the directory (and its index.html) is deleted.
  *
  * Usage:
@@ -55,6 +56,41 @@ function getExpectedSlugs(manifestPath) {
   return expected;
 }
 
+function getValidCategorySlugs(manifestPath) {
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  return new Set(manifest.categories.map(cat => cat.slug));
+}
+
+// Catches a category renamed/removed from manifest.json whose logos/<slug>/index.html
+// (build-category-pages.js's own overview page, not an item page) is left behind.
+// cleanup() below only walks INTO existing category directories to check item pages —
+// it never asks whether the category directory itself still belongs, so a category with
+// no more items (or one deleted wholesale) leaves a stale index.html with old copy that
+// nothing ever revisits. Reported 2026-07-27: logos/reading/, logos/photo/, logos/sports/.
+function cleanupOrphanedCategoryDirs(baseDir, validSlugs, label) {
+  console.log(`\nChecking ${label} category dirs in ${baseDir}...`);
+  if (!fs.existsSync(baseDir)) return;
+
+  const SKIP = new Set(['categories', 'ecosystem']);
+  const entries = fs.readdirSync(baseDir).filter(f => fs.statSync(path.join(baseDir, f)).isDirectory());
+  let deletedCount = 0;
+
+  for (const entry of entries) {
+    if (SKIP.has(entry) || validSlugs.has(entry)) continue;
+    const entryPath = path.join(baseDir, entry);
+    const indexPath = path.join(entryPath, 'index.html');
+    if (!fs.existsSync(indexPath)) continue; // empty leftover dir, e.g. from an old rename — nothing to clean
+
+    console.log(`  [ORPHAN CATEGORY] ${entry}`);
+    if (!DRY_RUN) {
+      fs.rmSync(entryPath, { recursive: true, force: true });
+    }
+    deletedCount++;
+  }
+
+  console.log(`${DRY_RUN ? 'Found' : 'Deleted'} ${deletedCount} orphaned ${label} category dirs.`);
+}
+
 function getExpectedOgSlugs(manifestPath) {
   // Mirrors seoSlug() in build-og-images.js: assets/og/<catSlug>-<itemSlug>.png
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
@@ -78,8 +114,8 @@ function getExpectedOgSlugs(manifestPath) {
   return expected;
 }
 
-function getExpectedBlogOgSlugs() {
-  // Mirrors build-blog-og-images.js: assets/og/blog-<slug>.png
+function getExpectedBlogSlugs() {
+  // Mirrors slug resolution in build-blog.js: frontmatter `slug:` if present, else the filename.
   const postsDir = path.join(ROOT, 'blog', 'posts');
   const expected = new Set();
   if (!fs.existsSync(postsDir)) return expected;
@@ -89,8 +125,25 @@ function getExpectedBlogOgSlugs() {
     const raw = fs.readFileSync(path.join(postsDir, f), 'utf8');
     const m = raw.match(/^slug:\s*(\S+)/m);
     const slug = m ? m[1] : path.basename(f, '.md');
-    expected.add(`blog-${slug}`);
+    expected.add(slug);
   }
+  return expected;
+}
+
+function getExpectedBlogOgSlugs() {
+  // Mirrors build-blog-og-images.js: assets/og/blog-<slug>.png
+  const expected = new Set();
+  for (const slug of getExpectedBlogSlugs()) expected.add(`blog-${slug}`);
+  return expected;
+}
+
+function getExpectedCollectionOgSlugs() {
+  // Mirrors build-collection-og-images.js: assets/og/collection-<slug>.png
+  const file = path.join(ROOT, 'collections.json');
+  const expected = new Set();
+  if (!fs.existsSync(file)) return expected;
+  const { collections = [] } = JSON.parse(fs.readFileSync(file, 'utf8'));
+  for (const c of collections) expected.add(`collection-${c.slug}`);
   return expected;
 }
 
@@ -99,7 +152,8 @@ function cleanupOgImages(expectedSlugs) {
   console.log(`\nChecking OG images in ${ogDir}...`);
   if (!fs.existsSync(ogDir)) return;
 
-  const KEEP = new Set(['home', ...getExpectedBlogOgSlugs()]); // build-og-home.js / build-blog-og-images.js output — not logo items
+  // build-og-home.js / build-blog-og-images.js / build-collection-og-images.js output — not logo items
+  const KEEP = new Set(['home', ...getExpectedBlogOgSlugs(), ...getExpectedCollectionOgSlugs()]);
   let deletedCount = 0;
 
   for (const file of fs.readdirSync(ogDir)) {
@@ -198,6 +252,32 @@ function cleanup(baseDir, expectedSlugs, label) {
   console.log(`${DRY_RUN ? 'Found' : 'Deleted'} ${deletedCount} orphaned ${label} pages.`);
 }
 
+function cleanupFlat(baseDir, expectedSlugs, label) {
+  // Same idea as cleanup(), but for a flat <baseDir>/<slug>/index.html layout
+  // (blog/, unlike logos/emoji, has no category level).
+  console.log(`\nChecking ${label} in ${baseDir}...`);
+  if (!fs.existsSync(baseDir)) return;
+
+  const entries = fs.readdirSync(baseDir).filter(f => fs.statSync(path.join(baseDir, f)).isDirectory());
+  let deletedCount = 0;
+
+  for (const item of entries) {
+    if (item === 'posts') continue; // markdown sources, not a rendered page
+    const itemPath = path.join(baseDir, item);
+    const indexPath = path.join(itemPath, 'index.html');
+
+    if (fs.existsSync(indexPath) && !expectedSlugs.has(item)) {
+      console.log(`  [ORPHAN] ${item}`);
+      if (!DRY_RUN) {
+        fs.rmSync(itemPath, { recursive: true, force: true });
+      }
+      deletedCount++;
+    }
+  }
+
+  console.log(`${DRY_RUN ? 'Found' : 'Deleted'} ${deletedCount} orphaned ${label} pages.`);
+}
+
 // --- Main ---
 
 function main() {
@@ -207,6 +287,10 @@ function main() {
   const logoManifest = path.join(ROOT, 'logos', 'manifest.json');
   let expectedLogos = new Set();
   if (fs.existsSync(logoManifest)) {
+    const validCategorySlugs = getValidCategorySlugs(logoManifest);
+    cleanupOrphanedCategoryDirs(path.join(ROOT, 'logos'), validCategorySlugs, 'logo');
+    cleanupOrphanedCategoryDirs(path.join(ROOT, 'en', 'logos'), validCategorySlugs, 'EN logo');
+
     expectedLogos = getExpectedSlugs(logoManifest);
     cleanup(path.join(ROOT, 'logos'), expectedLogos, 'logo');
 
@@ -229,6 +313,15 @@ function main() {
   // so the same expected slug sets apply here.
   cleanup(path.join(ROOT, 'en', 'logos'), expectedLogos, 'EN logo');
   cleanup(path.join(ROOT, 'en', 'emoji'), expectedEmoji, 'EN emoji');
+
+  // 4. Blog. build-blog.js only WRITES pages for posts currently in blog/posts/ —
+  // it never deletes a rendered blog/<slug>/ (or its en/ mirror) whose source .md
+  // was removed or temporarily moved out (e.g. by the daily-blog-publish embargo
+  // workflow). Without this, a stale page — and everything it links to/from —
+  // stays live/deployable even after its source disappears.
+  const expectedBlog = getExpectedBlogSlugs();
+  cleanupFlat(path.join(ROOT, 'blog'), expectedBlog, 'blog');
+  cleanupFlat(path.join(ROOT, 'en', 'blog'), expectedBlog, 'EN blog');
 
   // Broken internal links are now owned by scripts/test-links.js (runs in the
   // build-all --post tier): it validates every navigational href in the RENDERED

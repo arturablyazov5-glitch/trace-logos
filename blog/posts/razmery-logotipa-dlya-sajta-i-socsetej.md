@@ -9,7 +9,7 @@ tags: Логотипы, Размеры, Соцсети
 tags_en: Logos, Sizes, Social Media
 ---
 
-«Пришлите логотип для сайта» — а какого размера? В пикселях ответа нет: в шапке сайта логотип занимает 120–200 пикселей, в аватарке Telegram его сожмут до кружочка, в поисковой выдаче — до 16 пикселей. Один и тот же знак живёт в десятке размеров одновременно. Собрали шпаргалку по всем основным площадкам и правилам подготовки файлов.
+«Пришлите логотип для сайта» — а какого размера? В пикселях ответа нет. В шапке сайта логотип занимает 120–200 пикселей, в аватарке [Telegram](../../logos/social/telegram/) его сожмут до кружочка, а в поисковой выдаче до 16 пикселей. Один и тот же знак живёт в десятке размеров одновременно. Собрали шпаргалку по всем основным площадкам и правилам подготовки файлов.
 
 :::note Коротко
 Для сайта — **SVG, высота 28–40 px в шапке**, размер не важен, вектор чёткий везде. Для соцсетей — **PNG-квадрат от 512×512** с крупным знаком по центру: площадки сами нарежут его в свои размеры. Главная ошибка — грузить в аватарку горизонтальный логотип с текстом: после обрезки в круг от него остаётся нечитаемый огрызок.
@@ -26,9 +26,9 @@ tags_en: Logos, Sizes, Social Media
 
 Три правила:
 
-1. **Формат — SVG.** Один файл закрывает все плотности экранов. Если только PNG — берите вдвое больше отображаемого размера, иначе на ретине будет мыло (почему — разбирали в статье [про размытые логотипы](../pochemu-logotip-razmytyj/)).
-2. **Задавайте высоту, а не ширину.** Логотипы разных пропорций в шапке выравнивают по высоте — так они смотрятся соразмерно навигации.
-3. **Не растягивайте на всю шапку.** Гигантский логотип — признак сайта из 2008-го. Он должен быть заметен, а не доминировать.
+1. **Формат — SVG.** Один файл закрывает все плотности экранов. Если только PNG — берите вдвое больше отображаемого размера, иначе на ретине будет мыло (почему, разбирали в статье [про размытые логотипы](../pochemu-logotip-razmytyj/)).
+2. **Задавайте высоту, а не ширину.** Логотипы разных пропорций в шапке выравнивают по высоте. Так они смотрятся соразмерно навигации.
+3. **Не растягивайте на всю шапку.** Гигантский логотип признак сайта из 2008-го. Он должен быть заметен, но не доминировать.
 
 ## Аватарки соцсетей и мессенджеров
 
@@ -36,34 +36,36 @@ tags_en: Logos, Sizes, Social Media
 
 | Площадка | Загружаемый размер | Показ |
 | --- | --- | --- |
-| Telegram | от 512×512 | круг |
-| VK | от 400×400 | круг |
+| [Telegram](../../logos/social/telegram/) | от 512×512 | круг |
+| [VK](../../logos/social/vk/) | от 400×400 | круг |
 | [YouTube](../../logos/media/youtube/) | 800×800 | круг |
-| WhatsApp Business | 500×500 | круг |
-| X (Twitter) | 400×400 | круг |
-| Дзен | от 300×300 | круг |
+| [WhatsApp](../../logos/social/whatsapp/) | 500×500 | круг |
+| [X (Twitter)](../../logos/social/x/) | 400×400 | круг |
+| [Дзен](../../logos/media/yandexdzen/) | от 300×300 | круг |
 
 :::danger Классическая ошибка
-Загрузить в аватарку полный горизонтальный логотип «знак + название». После вписывания в круг текст обрезается или становится микроскопическим. В аватарку идёт **только знак** — иконка, буква, символ, — занимающий 60–80% площади квадрата.
+Загрузить в аватарку полный горизонтальный логотип «знак + название». После вписывания в круг текст обрезается или становится микроскопическим. В аватарку идёт **только знак**: иконка, буква или символ, занимающий 60–80% площади квадрата.
 :::
+
+Разбор конкретно под Telegram-канал (с обрезкой в круг и читаемостью в 40 пикселях) — в [отдельной статье про аватарку Telegram-канала](../logotip-dlya-telegram-kanala/). Полное оформление YouTube-канала — обложка, водяной знак, безопасные зоны — в гиде по оформлению YouTube-канала.
 
 ## Обложки и превью
 
 | Место | Размер |
 | --- | --- |
 | OG-превью (превью ссылки в соцсетях) | 1200×630 |
-| Обложка сообщества VK | 1920×768 |
+| Обложка сообщества [VK](../../logos/social/vk/) | 1920×768 |
 | Шапка канала [YouTube](../../logos/media/youtube/) | 2560×1440 (безопасная зона 1546×423) |
-| Обложка Telegram-канала | не поддерживается, только аватар |
+| Обложка [Telegram](../../logos/social/telegram/)-канала | не поддерживается, только аватар |
 
-OG-превью — недооценённая точка контакта: именно эту картинку видят, когда вашей ссылкой делятся в Telegram или VK. Логотип на ней должен быть в безопасной зоне по центру: края превью подрезаются на разных устройствах.
+OG-превью — недооценённая точка контакта: именно эту картинку видят, когда вашей ссылкой делятся в [Telegram](../../logos/social/telegram/) или [VK](../../logos/social/vk/). Логотип на ней должен быть в безопасной зоне по центру: края превью подрезаются на разных устройствах.
 
 ## Логотип в письмах
 
 Почтовые клиенты — территория ограничений: SVG поддерживается плохо, поэтому здесь исключение из правила «всегда вектор».
 
 - Формат: **PNG с прозрачным фоном**.
-- Ширина в вёрстке: 120–200 px, файл — вдвое больше (240–400 px) для ретины.
+- Ширина в вёрстке: 120–200 px, файл вдвое больше (240–400 px) для ретины.
 - Обязательно пропишите `width` в атрибутах и alt-текст: у многих получателей картинки по умолчанию скрыты, и вместо логотипа виден именно alt.
 
 ## Печать: другая система координат
@@ -73,7 +75,7 @@ OG-превью — недооценённая точка контакта: им
 ## Как подготовить комплект за 10 минут
 
 1. Возьмите SVG-исходник логотипа и отдельно SVG знака (без текста).
-2. Из знака экспортируйте PNG 512×512 и 1024×1024 — это закроет все аватарки.
+2. Из знака экспортируйте PNG 512×512 и 1024×1024 — это закроет все аватарки. Те же 1024×1024 нужны для иконки мобильного приложения (App Store требует ровно этот размер) — правила и подводные камни разбирали в [гиде по иконке приложения](../ikonka-prilozheniya/).
 3. Из полного логотипа — PNG шириной 400 px для писем и документов.
 4. Проверьте каждую версию на светлом и тёмном фоне: если знак пропадает на тёмном, нужна светлая версия.
 
@@ -86,7 +88,7 @@ OG-превью — недооценённая точка контакта: им
 Ещё два места, где живёт ваш логотип и о которых часто забывают:
 
 - **Фавикон в выдаче** — Яндекс и Google показывают иконку сайта рядом со сниппетом; без неё место занимает серый глобус. Требования и сборка — в [отдельном гиде по фавиконам](../kak-sdelat-favicon/).
-- **Логотип организации для Google/Яндекса** — поисковики берут его из микроразметки `Organization` (поле `logo`) и карточек компаний. Рекомендации: квадратное или близкое к квадрату изображение от 112×112, доступное по постоянному URL. Это тот логотип, который появляется в панели знаний и карточке организации.
+- **Логотип организации для [Google](../../logos/search/google/) или [Яндекса](../../logos/search/yandex/)** — поисковики берут его из микроразметки `Organization` (поле `logo`) и карточек компаний. Рекомендации: квадратное или близкое к квадрату изображение от 112×112, доступное по постоянному URL. Это тот логотип, который появляется в панели знаний и карточке организации.
 - **OG-разметка** — превью ссылок собирается из `og:image` (1200×630). Если специальной OG-картинки нет, соцсети возьмут случайное изображение со страницы — задайте её явно, поместив логотип в безопасную центральную зону.
 
 ## Как отдавать логотип в разных плотностях: srcset
@@ -125,7 +127,7 @@ OG-превью — недооценённая точка контакта: им
 
 ---EN---
 
-"Send us the logo for the website" — at what size? There's no single answer in pixels: a site header shows the logo at 120–200 px, a Telegram avatar squeezes it into a circle, search results shrink it to 16 px. The same mark lives at a dozen sizes at once. Here's the cheat sheet for every major placement, plus the file-prep rules.
+«Send us the logo for the website» — at what size? There's no single answer in pixels: a site header shows the logo at 120–200 px, a Telegram avatar squeezes it into a circle, search results shrink it to 16 px. The same mark lives at a dozen sizes at once. Here's the cheat sheet for every major placement, plus the file-prep rules.
 
 :::note TL;DR
 For websites — **SVG at 28–40 px height in the header**; being vector, it's sharp everywhere. For social — a **square PNG of 512×512 or larger** with a big centered mark: platforms slice it into their own sizes. The #1 mistake is uploading a horizontal text logo as an avatar: after the circular crop, an unreadable stump remains.
@@ -152,25 +154,27 @@ Platforms ask for a square but often display a circle. The mark must live confid
 
 | Platform | Upload size | Display |
 | --- | --- | --- |
-| Telegram | 512×512+ | circle |
-| VK | 400×400+ | circle |
+| [Telegram](../../logos/social/telegram/) | 512×512+ | circle |
+| [VK](../../logos/social/vk/) | 400×400+ | circle |
 | [YouTube](../../logos/media/youtube/) | 800×800 | circle |
-| WhatsApp Business | 500×500 | circle |
-| X (Twitter) | 400×400 | circle |
+| [WhatsApp](../../logos/social/whatsapp/) | 500×500 | circle |
+| [X (Twitter)](../../logos/social/x/) | 400×400 | circle |
 
 :::danger The classic mistake
 Uploading the full horizontal "mark + name" logo as an avatar. After the circular crop the text is cut off or microscopic. An avatar gets the **mark only** — icon, letter, symbol — filling 60–80% of the square.
 :::
+
+For the specifics of a Telegram channel avatar (circular crop, legibility at 40 px) see [the dedicated Telegram channel avatar guide](../logotip-dlya-telegram-kanala/). For full YouTube channel branding — cover, watermark, safe areas — see the YouTube channel branding guide.
 
 ## Covers and previews
 
 | Placement | Size |
 | --- | --- |
 | OG preview (link cards in social/messengers) | 1200×630 |
-| VK community cover | 1920×768 |
+| [VK](../../logos/social/vk/) community cover | 1920×768 |
 | [YouTube](../../logos/media/youtube/) channel banner | 2560×1440 (safe area 1546×423) |
 
-The OG preview is an underrated touchpoint: it's what people see when your link is shared in Telegram or VK. Keep the logo in the central safe zone — edges get cropped on different devices.
+The OG preview is an underrated touchpoint: it's what people see when your link is shared in [Telegram](../../logos/social/telegram/) or [VK](../../logos/social/vk/). Keep the logo in the central safe zone — edges get cropped on different devices.
 
 ## Logos in email
 
@@ -187,7 +191,7 @@ Print sizing uses physical units at 300 dpi, not pixels. Business card, letterhe
 ## A full kit in 10 minutes
 
 1. Take the logo's SVG master and a separate SVG of the mark alone (no text).
-2. From the mark, export 512×512 and 1024×1024 PNGs — covers every avatar.
+2. From the mark, export 512×512 and 1024×1024 PNGs — covers every avatar. The same 1024×1024 is what App Store requires for a mobile app icon — rules and gotchas in [the app icon guide](../ikonka-prilozheniya/).
 3. From the full logo — a 400 px wide PNG for emails and documents.
 4. Check every version on light and dark backgrounds; if the mark vanishes on dark, you need a light variant.
 

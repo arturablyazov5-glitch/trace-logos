@@ -101,6 +101,12 @@ function main() {
   }
 
   const out = JSON.stringify({ total: allEmoji.length, updated: today, emoji: allEmoji });
+  // build-all.js прокидывает --dry-run в КАЖДЫЙ шаг — скрипт, игнорирующий флаг,
+  // превращает «preview, write nothing» в ложь и пишет файлы на диск.
+  if (process.argv.includes('--dry-run')) {
+    console.log(`(dry-run) emoji.json  ${allEmoji.length} items`);
+    return;
+  }
   fs.writeFileSync(path.join(ROOT, 'emoji.json'), out, 'utf8');
   console.log(`✓ emoji.json  ${allEmoji.length} items`);
 }

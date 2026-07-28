@@ -46,6 +46,57 @@ function patchHomepageCounts() {
   }
 }
 
+// Single source of truth for the footer is templates/partials/site-footer.html
+// (same component every SEO template includes via {{> site-footer}}). index.html
+// is hand-maintained and can't use {{> }} directly, so — same pattern as
+// build-category-pages.js's DETAIL markers — we expand it here and splice it
+// between markers instead. Edit the footer ONLY in the partial, never here.
+function patchHomepageFooter() {
+  const indexPath = path.join(ROOT, 'index.html');
+  let html = fs.readFileSync(indexPath, 'utf8');
+  const before = html;
+
+  let footer = loadTemplate(path.join(ROOT, 'templates', 'partials', 'site-footer.html')).trimEnd();
+  footer = footer.replace(/\{\{REL\}\}/g, '').replace(/\{\{HOME_REL\}\}/g, './');
+
+  html = html.replace(
+    /(<!-- FOOTER:START -->)[\s\S]*?(<!-- FOOTER:END -->)/,
+    `$1\n${footer}\n$2`
+  );
+
+  if (html !== before) {
+    fs.writeFileSync(indexPath, html, 'utf8');
+    console.log(`  ✓ index.html — подвал обновлён`);
+  }
+}
+
+// Single source of truth for the header is templates/partials/nav-header.html
+// (same component blog templates include via {{> nav-header}}). Same pattern as
+// patchHomepageFooter() above — index.html can't use {{> }} directly, so we
+// expand the partial here and splice it between HEADER:START/END markers.
+// Edit the header ONLY in the partial, never here. The partial's data-i18n
+// attributes are what let build-en-pages.js's generic transformToEn() pass
+// translate the header on en/index.html — no hardcoded strings needed in
+// home-i18n.js for it.
+function patchHomepageHeader() {
+  const indexPath = path.join(ROOT, 'index.html');
+  let html = fs.readFileSync(indexPath, 'utf8');
+  const before = html;
+
+  let header = loadTemplate(path.join(ROOT, 'templates', 'partials', 'nav-header.html')).trimEnd();
+  header = header.replace(/\{\{REL\}\}/g, '').replace(/\{\{HOME_REL\}\}/g, './');
+
+  html = html.replace(
+    /(<!-- HEADER:START -->)[\s\S]*?(<!-- HEADER:END -->)/,
+    `$1\n${header}\n$2`
+  );
+
+  if (html !== before) {
+    fs.writeFileSync(indexPath, html, 'utf8');
+    console.log(`  ✓ index.html — хедер обновлён`);
+  }
+}
+
 const EMOJI_CATS = {
   'smileys-emotion': { slug: 'smileys',    name: 'Смайлы' },
   'people-body':     { slug: 'people',     name: 'Люди' },
@@ -130,6 +181,8 @@ function main() {
   console.log(`✓ sitemap/index.html → logos:${logoLinks.length} emoji:${emojiLinks.length} collections:${collLinks.length} sections:${sectionLinks.length}`);
 
   patchHomepageCounts();
+  patchHomepageFooter();
+  patchHomepageHeader();
 }
 
 main();

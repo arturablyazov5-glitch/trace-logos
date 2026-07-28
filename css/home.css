@@ -41,53 +41,9 @@ body {
 a { color: inherit; }
 
 /* ── Header ── */
-.site-header {
-  height: 60px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 0 28px;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: rgba(10, 10, 10, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
-.brand-logo {
-  width: 30px; height: 30px;
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.brand-logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
-.brand-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
-.brand-badge {
-  display: inline-block; font-size: 10px; font-weight: 600; color: var(--accent);
-  background: var(--accent-dim); border: 1px solid rgba(138, 107, 255, 0.2);
-  border-radius: 4px; padding: 1px 6px; margin-left: 7px; letter-spacing: 0.03em; vertical-align: middle;
-}
-.header-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
-.header-nav a {
-  font-size: 13px; font-weight: 500; color: var(--text-muted); text-decoration: none;
-  padding: 7px 11px; border-radius: 8px; transition: color .15s, background .15s; white-space: nowrap;
-}
-.header-nav a:hover { color: var(--text); background: var(--card-bg); }
-.header-nav a.nav-figma { display: inline-flex; align-items: center; gap: 6px; }
-.header-nav a.soon { color: var(--text-dim); pointer-events: none; }
-.header-nav a.soon::after {
-  content: 'скоро'; font-size: 9px; margin-left: 5px; color: var(--text-dim);
-  border: 1px solid var(--border); border-radius: 3px; padding: 1px 4px; vertical-align: middle;
-}
-html[lang="en"] .header-nav a.soon::after { content: 'soon'; }
-.btn-github {
-  display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500;
-  color: var(--text); background: var(--card-bg); border: 1px solid var(--border);
-  border-radius: 8px; padding: 7px 13px; text-decoration: none; transition: background .15s, border-color .15s;
-}
-.btn-github:hover { background: var(--card-bg-hover); border-color: var(--border-hover); }
-.btn-github svg { opacity: 0.75; }
+/* .site-header and everything in it (brand, header-nav, btn-github, mobile
+   burger/drawer) live in css/site-header.css — the single shared header
+   component for index.html and the blog. Don't redefine those rules here. */
 
 /* ── Layout ── */
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; width: 100%; }
@@ -110,7 +66,7 @@ html[lang="en"] .header-nav a.soon::after { content: 'soon'; }
 .hero-inline-img {
   display: inline-block; vertical-align: bottom;
   width: clamp(24px, 4.2vw, 52px); height: clamp(24px, 4.2vw, 52px);
-  object-fit: contain; margin-bottom: 0.04em;
+  object-fit: contain; margin-bottom: 0.04em; border-radius: 22%;
   transform-origin: center; will-change: transform, opacity;
 }
 .hero-desc {
@@ -331,40 +287,12 @@ html[lang="en"] .header-nav a.soon::after { content: 'soon'; }
   .ff-preview { order: 2; }
 }
 
-/* ── Footer ── */
-.site-footer { margin-top: 72px; border-top: 1px solid var(--border); padding: 44px 0 32px; }
-.footer-cols { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr; gap: 28px; }
-.footer-col h3 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-dim); margin-bottom: 14px; }
-.footer-col ul { list-style: none; columns: 1; }
-.footer-col.wide ul { columns: 2; column-gap: 24px; }
-.footer-col li { margin-bottom: 9px; break-inside: avoid; }
-.footer-col a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color .15s; }
-.footer-col a:hover { color: var(--text); }
-.footer-about p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
-.footer-bottom {
-  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
-  margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border);
-  font-size: 12px; color: var(--text-dim);
-}
-.footer-bottom a { color: var(--text-muted); text-decoration: none; }
-.footer-bottom a:hover { color: var(--text); }
-.footer-bottom-links { display: inline-flex; gap: 18px; }
-
 /* ── Responsive ── */
-@media (max-width: 860px) {
-  .footer-cols { grid-template-columns: 1fr 1fr; gap: 28px; }
-  .footer-col.wide { grid-column: 1 / -1; }
-}
 @media (max-width: 600px) {
-  .site-header { padding: 0 16px; }
-  .header-nav { display: none; }
-  .btn-github span { display: none; }
   .hero { padding: 52px 0 4px; }
   .hero-h1-row { white-space: normal; }
   .hero-br-mobile { display: block; }
   .search-submit { padding: 0 18px; }
   .section { padding: 44px 0 0; }
   .section-head h2 { font-size: 19px; }
-  .footer-cols { grid-template-columns: 1fr; gap: 24px; }
-  .footer-col.wide ul { columns: 1; }
 }

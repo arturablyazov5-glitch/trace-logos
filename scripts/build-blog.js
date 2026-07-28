@@ -18,9 +18,12 @@
 
 const fs   = require('fs');
 const path = require('path');
-const { loadTemplate } = require('./lib/render');
+const { loadTemplate, expandIncludes } = require('./lib/render');
+const { getBlogViews } = require('./lib/views'); // Actually I named it blog-views.js, let me fix it or rename the file.
 const { loadDict, transformToEn, hreflangBlock } = require('./lib/en-transform');
 const { iconSvg, coverGradient, pickIcon } = require('./lib/blog-cover');
+const { extractBrandColors } = require('./lib/brand-colors');
+const { resolveCategoryLabels } = require('./lib/labels');
 
 const BASE_URL  = 'https://trace-logos.ru';
 const ROOT      = path.resolve(__dirname, '..');
@@ -46,6 +49,255 @@ function ogImageFor(slug) {
   return `${BASE_URL}/assets/og/blog-${slug}.png`;
 }
 
+// ── Logo lookup, for the `icon-row` widget ──────────────────────────────────
+// Same slug rule as build-seo-pages.js's seoUrl(): figma "Icon/Cat/Slug" →
+// "cat/slug" (lowercased, non-alnum collapsed to "-"). Duplicated here rather
+// than shared — every build-*.js script in this repo owns its own slugify.
+function slugify(value) {
+  return String(value || '')
+    .trim().toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9а-яё]+/gi, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+const ASSET_VERSION = (() => {
+  try {
+    return fs.readFileSync(path.join(ROOT, 'js', 'version.js'), 'utf8')
+      .match(/ASSET_VERSION\s*=\s*'([^']+)'/)[1];
+  } catch { return ''; }
+})();
+
+// Lazily builds a "cat/slug" → item map from every logos/categories/*.json,
+// keyed the same way as the catalog URLs already used throughout blog posts
+// (e.g. `../../logos/delivery/yandexgo/` → key "delivery/yandexgo"). Read-only
+// lookup: the widget never writes back to the catalog data.
+let _logoIndex = null;
+function loadLogoIndex() {
+  if (_logoIndex) return _logoIndex;
+  _logoIndex = new Map();
+  const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'manifest.json'), 'utf8'));
+  for (const cat of manifest.categories) {
+    const data = resolveCategoryLabels(JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', cat.file), 'utf8')), ROOT);
+    for (const item of data.items || []) {
+      const parts = (item.figma || '').split('/').map(slugify).filter(Boolean);
+      if (parts[0] !== 'icon' || parts.length < 3) continue;
+      _logoIndex.set(parts.slice(1).join('/'), item);
+    }
+  }
+  return _logoIndex;
+}
+
+// Снапшот скачиваний (figma-путь → число), который пишет build-download-stats.js.
+// Отсутствие файла не должно ронять сборку блога — виджет просто покажет нули.
+let _downloadStats = null;
+let _statsDate = '';
+function loadDownloadStats() {
+  if (_downloadStats) return _downloadStats;
+  try {
+    const raw = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'download-stats.json'), 'utf8'));
+    _downloadStats = raw.downloads || {};
+    _statsDate = raw.updated || '';
+  } catch { _downloadStats = {}; }
+  return _downloadStats;
+}
+
+// Разбор тела виджета: строки вида "cat/slug" → элементы каталога. Это те же
+// пути, которыми статья и так ссылается на каталог ([…](../../logos/cat/slug/)),
+// поэтому автору не нужно знать ни имён файлов, ни названий брендов — всё
+// подтягивается из данных и не может с ними разойтись.
+function resolveWidgetItems(lines, widgetName) {
+  const index = loadLogoIndex();
+  return lines.map(l => l.trim()).filter(Boolean).map(key => {
+    const item = index.get(key);
+    if (!item) throw new Error(`${widgetName}: неизвестный логотип "${key}" (нет в каталоге по этому пути)`);
+    return { key, item };
+  });
+}
+
+function assetUrl(file, rel) {
+  const v = ASSET_VERSION ? `?v=${ASSET_VERSION}` : '';
+  if (file.startsWith('/')) return `${file}${v}`;
+  return `${rel}assets/logos/${file.endsWith('.png') ? 'pngs' : 'svgs'}/${file}${v}`;
+}
+
+function itemName(item, en) { return esc(en ? (item.name_en || item.name) : item.name); }
+
+// ── `:::widget icon-row` ─────────────────────────────────────────────────────
+// Ряд квадратных плиток. Разметка — тот же компонент `.ecosystem-grid`/
+// `.ecosystem-card`, что блок «Экосистема» на страницах логотипов
+// (buildOneEcosystemSection в build-seo-pages.js). Своего CSS у виджета нет и
+// быть не должно: стили живут в css/seo-page.css, который
+// templates/blog-post.html уже подключает, — поэтому ряд выглядит в статье
+// ровно так же, как в каталоге, и остаётся таким после правки компонента.
+function buildIconRowWidget(lines, lang, rel) {
+  const en = lang === 'en';
+  const cards = resolveWidgetItems(lines, 'icon-row').map(({ key, item }) => {
+    // thumb переопределяет только миниатюру — как в buildCard()/static-grid.
+    const thumbFile = item.thumb || item.file;
+    const nm = itemName(item, en);
+    const alt = en ? `${nm} logo` : `Логотип ${nm}`;
+    return `<a class="ecosystem-card" href="${rel}logos/${key}/" aria-label="${nm}">
+            <img src="${assetUrl(thumbFile, rel)}" alt="${alt}" width="48" height="48" loading="lazy" decoding="async">
+            <span class="ecosystem-label">${nm}</span>
+          </a>`;
+  }).join('\n          ');
+  return `<div class="ecosystem-grid blog-ecosystem-grid">\n          ${cards}\n        </div>`;
+}
+
+// ── `:::widget logo-full` ────────────────────────────────────────────────────
+// Витрина ГОРИЗОНТАЛЬНОГО начертания (variant type "full"): у иконки и
+// полного логотипа разная работа, и в статье про систему знаков показать
+// именно full — содержательно. Фон светлый (--light), потому что почти все
+// full-начертания рисуются под светлую подложку; тёмный вариант включается
+// строкой "dark" в теле (у Плюса и Кинопоиска знак белый).
+// Строка тела: `cat/slug`, опционально `cat/slug full_en` (какое именно
+// начертание показать) и `| Подпись` (вместо названия бренда — когда в ряду
+// сравниваются два начертания ОДНОГО логотипа и «Яндекс/Яндекс» ничего не
+// объясняет). Подпись пишется на языке своей версии тела: RU и EN у поста
+// разные, так что переводить её отдельно не нужно.
+const RE_LOGO_FULL_LINE = /^(\S+)(?:\s+(full|full_en))?(?:\s*\|\s*(.+))?$/;
+
+function buildLogoFullWidget(lines, lang, rel) {
+  const en = lang === 'en';
+  const dark = lines.some(l => l.trim() === 'dark');
+  const specs = lines.map(l => l.trim()).filter(Boolean).filter(l => l !== 'dark').map(line => {
+    const m = line.match(RE_LOGO_FULL_LINE);
+    if (!m) throw new Error(`logo-full: не разобрал строку "${line}"`);
+    return { key: m[1], type: m[2] || null, cap: m[3] || null };
+  });
+  const index = loadLogoIndex();
+  const cards = specs.map(({ key, type, cap }) => {
+    const item = index.get(key);
+    if (!item) throw new Error(`logo-full: неизвестный логотип "${key}" (нет в каталоге по этому пути)`);
+    const variants = item.variants || [];
+    // Явно заданный тип — приоритетнее; иначе на EN-зеркале предпочитаем
+    // латинское начертание, если бренд его рисует.
+    const full = (type && variants.find(v => v.type === type))
+      || (!type && en && variants.find(v => v.type === 'full_en'))
+      || variants.find(v => v.type === 'full');
+    if (!full) throw new Error(`logo-full: у "${key}" нет варианта type:"${type || 'full'}" — используйте icon-row`);
+    const nm = itemName(item, en);
+    const label = cap ? esc(cap) : nm;
+    const alt = en ? `${nm} full logo` : `Полный логотип ${nm}`;
+    return `<a class="blog-logo-full" href="${rel}logos/${key}/">
+            <span class="blog-logo-full-canvas${dark ? ' is-dark' : ''}"><img src="${assetUrl(full.file, rel)}" alt="${alt}" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-cap">${label}</span>
+          </a>`;
+  }).join('\n          ');
+  return `<div class="blog-logo-fulls">\n          ${cards}\n        </div>`;
+}
+
+// ── `:::widget logo-colors` ──────────────────────────────────────────────────
+// Палитра бренда: цвета берутся из самого SVG (lib/brand-colors.js — общий
+// модуль со страницами логотипов, чтобы палитра в статье не разошлась с
+// палитрой на странице того же логотипа).
+//
+// Почему не .color-swatch со страницы логотипа: там плашки лежат в ряд под
+// ОДИН бренд, а здесь брендов несколько и у них разное число цветов (у Яндекса
+// один, у Плюса три). В ряд получались рваные строки с пустотой справа. Здесь
+// цвет — главный герой блока, поэтому он растянут на всю карточку сегментами
+// (flex: 1), и ряд всегда выглядит плотным независимо от числа цветов.
+
+// Контрастный текст поверх заливки: относительная яркость по WCAG-формуле
+// (та же логика, что в color-math.js рантайма) — на жёлтом #FFEA00 подпись
+// обязана стать чёрной, иначе hex не прочитать.
+function contrastOn(hex) {
+  const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map(c => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b > 0.4 ? '#000' : '#fff';
+}
+
+function buildLogoColorsWidget(lines, lang, rel) {
+  const en = lang === 'en';
+  const cards = resolveWidgetItems(lines, 'logo-colors').map(({ key, item }) => {
+    const colors = extractBrandColors(item);
+    if (!colors.length) throw new Error(`logo-colors: у "${key}" не нашлось цветов в SVG (монохромный знак?)`);
+    const nm = itemName(item, en);
+    const bar = colors.slice(0, 3).map(c => {
+      const hex = c.toUpperCase();
+      return `<span class="blog-colors-seg" style="background:${c};color:${contrastOn(c)}">${hex}</span>`;
+    }).join('');
+    return `<a class="blog-colors-card" href="${rel}logos/${key}/">
+            <span class="blog-colors-bar">${bar}</span>
+            <span class="blog-colors-foot">
+              <img src="${assetUrl(item.thumb || item.file, rel)}" alt="${en ? `${nm} logo` : `Логотип ${nm}`}" width="22" height="22" loading="lazy" decoding="async">
+              <span class="blog-colors-name">${nm}</span>
+            </span>
+          </a>`;
+  }).join('\n          ');
+  return `<div class="blog-colors">\n          ${cards}\n        </div>`;
+}
+
+// ── `:::widget logo-timeline` ─────────────────────────────────────────────────
+// Эволюция ОДНОГО логотипа по годам: ряд знаков, объединённых линией с точками
+// и годами под ними (как в статьях об истории редизайна). Каждая строка тела —
+// `cat/slug [вариант] | подпись`: вариант — точное совпадение с variants[].label
+// или .type (например "1991", "2009"); без варианта берётся текущий item.file.
+// Подпись обязательна и пишется руками (год редко совпадает с текстом label
+// вроде "2009 Alternative", поэтому подпись не выводится из label автоматически).
+const RE_TIMELINE_LINE = /^(\S+)(?:\s+(.+?))?\s*\|\s*(.+)$/;
+
+function buildLogoTimelineWidget(lines, lang, rel) {
+  const en = lang === 'en';
+  const index = loadLogoIndex();
+  const nodes = lines.map(l => l.trim()).filter(Boolean).map(line => {
+    const m = line.match(RE_TIMELINE_LINE);
+    if (!m) throw new Error(`logo-timeline: не разобрал строку "${line}" (формат: "cat/slug [вариант] | подпись")`);
+    const [, key, variantSel, caption] = m;
+    const item = index.get(key);
+    if (!item) throw new Error(`logo-timeline: неизвестный логотип "${key}" (нет в каталоге по этому пути)`);
+    let file = item.file;
+    if (variantSel) {
+      const v = (item.variants || []).find(v => v.label === variantSel || v.type === variantSel);
+      if (!v) throw new Error(`logo-timeline: у "${key}" нет варианта "${variantSel}"`);
+      file = v.file;
+    }
+    const nm = itemName(item, en);
+    const capEsc = esc(caption.trim());
+    const alt = en ? `${nm} logo, ${caption.trim()}` : `Логотип ${nm}, ${caption.trim()}`;
+    return { key, file, caption: capEsc, alt };
+  });
+  const cards = nodes.map(({ key, file, caption, alt }) => `<a class="blog-timeline-node" href="${rel}logos/${key}/">
+            <span class="blog-timeline-logo"><img src="${assetUrl(file, rel)}" alt="${alt}" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
+            <span class="blog-timeline-year">${caption}</span>
+          </a>`).join('\n          ');
+  return `<div class="blog-timeline">\n          ${cards}\n        </div>`;
+}
+
+// ── `:::widget logo-top` ─────────────────────────────────────────────────────
+// Рейтинг по РЕАЛЬНОЙ статистике скачиваний каталога (logos/download-stats.json,
+// снапшот обновляет build-download-stats.js в начале пайплайна — то есть до
+// build-blog.js, данные всегда свежие). Автор задаёт только состав; порядок,
+// числа и длина полос считаются на сборке, поэтому рейтинг в статье не может
+// устареть или разойтись с сайтом — при следующем билде он пересоберётся сам.
+function buildLogoTopWidget(lines, lang, rel) {
+  const en = lang === 'en';
+  const stats = loadDownloadStats();
+  const items = resolveWidgetItems(lines, 'logo-top')
+    .map(x => ({ ...x, n: stats[x.item.figma] || 0 }))
+    .sort((a, b) => b.n - a.n);
+  const max = Math.max(...items.map(x => x.n), 1);
+  const rows = items.map(({ key, item, n }, i) => {
+    const nm = itemName(item, en);
+    return `<a class="blog-top-row" href="${rel}logos/${key}/">
+            <span class="blog-top-rank">${i + 1}</span>
+            <img class="blog-top-icon" src="${assetUrl(item.thumb || item.file, rel)}" alt="${en ? `${nm} logo` : `Логотип ${nm}`}" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-name">${nm}</span>
+            <span class="blog-top-bar"><span style="width:${Math.round(n / max * 100)}%"></span></span>
+            <span class="blog-top-num">${n}</span>
+          </a>`;
+  }).join('\n          ');
+  return `<div class="blog-top" aria-label="${en ? 'Top downloads' : 'Топ скачиваний'}">
+          ${rows}
+          <div class="blog-top-foot">${en ? 'Downloads from our catalog' : 'Скачивания из нашего каталога'}${
+            // Дата снапшота: рейтинг пересобирается каждым билдом, и читателю
+            // видно, на какой момент цифры, — без неё таблица выглядит вечной.
+            _statsDate ? ` · ${humanDate(_statsDate, lang)}` : ''}</div>
+        </div>`;
+}
+
 // Frontmatter: --- ... --- at top of file
 // Supports optional EN body section after a `---EN---` line
 function parseFrontmatter(raw) {
@@ -67,7 +319,9 @@ function inline(text) {
     .replace(/`([^`]+)`/g, (_, c) => `<code>${c}</code>`)
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
     .replace(/\*([^*]+)\*/g, '<em>$1</em>')   // italic — after bold so ** isn't eaten
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, t, href) => `<a href="${href}" target="_blank" rel="noopener">${t}</a>`);
+    // Negative lookbehind excludes `![...]` (block image syntax, handled separately in
+    // renderBlocks) so a stray inline image reference doesn't turn into a broken `!<a>`.
+    .replace(/(?<!!)\[([^\]]+)\]\(([^)]+)\)/g, (_, t, href) => `<a href="${href}" target="_blank" rel="noopener">${t}</a>`);
 }
 
 // Non-breaking spaces for Russian typography — keeps short prepositions/conjunctions,
@@ -75,24 +329,44 @@ function inline(text) {
 // markdown text before esc()/inline(), with code spans and links protected so nbsp
 // never leaks into `code`, URLs, or link text.
 const NBSP = ' ';
-const SHORT_WORDS = 'в|к|с|у|о|и|а|но|же|ли|бы|из|за|до|по|от|на|для|при|не|что|как|или|там|тут|уже|чем|это|над|под|со|во|ко|та|то|же|ж|б|же';
-const RE_SHORT_WORD = new RegExp(`(^|[\\s(«"'])(${SHORT_WORDS})[ ](?=\\S)`, 'giu');
+const NBHYPHEN = '‑'; // U+2011 — keeps word-internal hyphens (по-прежнему, альфа-каналом) from wrapping
+// Compound prepositions must be listed before the hyphen pass converts their "-" to
+// NBHYPHEN below, so they're matched here as a single non-breaking token.
+const SHORT_WORDS = `из${NBHYPHEN}за|из${NBHYPHEN}под|по${NBHYPHEN}над|в|к|с|у|о|и|а|но|же|ли|бы|из|за|до|по|от|на|для|при|не|что|как|или|без|там|тут|уже|чем|это|над|под|со|во|ко|та|то`;
+// Lookbehind (not a consuming capture group) so consecutive short words (e.g. "а не как")
+// each get their own nbsp — a consuming prefix group would eat the whitespace the next
+// word needs and silently skip every other word in a run.
+const RE_SHORT_WORD = new RegExp(`(?<=^|[\\s(«"'])(${SHORT_WORDS})[ ](?=\\S)`, 'giu');
 const RE_NUMBER_UNIT = /(\d+)[ ](мб|кб|гб|тб|px|см|мм|кг|г|лет|дня|дней|день|года|год|руб|₽|%|мин|ч|км)\b/giu;
 const RE_DASH = /(\S)[ ](—|–)[ ]/g;
+const RE_WORD_HYPHEN = /(?<=[а-яёa-z])-(?=[а-яёa-z])/giu;
 
 function typo(text) {
   const placeholders = [];
   const protect = m => { placeholders.push(m); return `\u0000${placeholders.length - 1}\u0000`; };
   let t = text.replace(/`[^`]+`|\[[^\]]+\]\([^)]+\)/g, protect);
-  t = t.replace(RE_SHORT_WORD, (_, pre, w) => `${pre}${w}${NBSP}`);
+  t = t.replace(RE_WORD_HYPHEN, NBHYPHEN);
+  t = t.replace(RE_SHORT_WORD, (_, w) => `${w}${NBSP}`);
   t = t.replace(RE_NUMBER_UNIT, (_, n, u) => `${n}${NBSP}${u}`);
   t = t.replace(RE_DASH, (_, before, dash) => `${before}${NBSP}${dash} `);
   return t.replace(/\u0000(\d+)\u0000/g, (_, i) => placeholders[Number(i)]);
 }
-
 function slugifyHeading(text) {
   return String(text).toLowerCase().trim()
     .replace(/[^\wа-яё]+/gi, '-').replace(/^-+|-+$/g, '');
+}
+
+// Parenthesized asides in headings ("Текстовый логотип (wordmark)") render
+// at half opacity — de-emphasizes the clarifying term vs. the main word.
+function dimParens(html) {
+  return html.replace(/\(([^)]+)\)/g, '<span class="heading-dim">($1)</span>');
+}
+
+// "N. название" / "Бонус: название" pulls the title out onto its own line
+// (badge + title), so a lowercase continuation from the source sentence
+// ("Бонус: динамический логотип") needs its own capital now that it opens a line.
+function capFirst(s) {
+  return s.replace(/^([^\wа-яё]*)([a-zа-яё])/i, (_, pre, ch) => pre + ch.toUpperCase());
 }
 
 // Callout blocks (`:::type [Заголовок]` … `:::`) — the main readability tool.
@@ -120,9 +394,58 @@ function calloutHead(type, title, lang) {
   return label ? `<div class="callout-head">${svg}<span>${inline(esc(label))}</span></div>` : svg;
 }
 
+// ── Виджеты (`:::widget <name>` … `:::`) ─────────────────────────────────────
+// Интерактивный блок внутри статьи. Разметка запекается из партиала на этапе
+// сборки (поисковик видит обычный HTML), а css/js подключаются ТОЛЬКО на тех
+// страницах, где виджет реально встретился — остальные посты не платят за него
+// лишними запросами. Сырой HTML в markdown намеренно экранируется, поэтому
+// вставить такой блок руками в .md нельзя — только через эту директиву.
+const WIDGETS = {
+  'svg-viewer': {
+    partial: 'blog-widget-svg-viewer',
+    css:     'css/blog-widget-svg.css',
+    js:      'js/blog-svg-viewer.js',
+  },
+  // Body-driven, без своих css/js: разметка запекается из каталога на сборке
+  // (build*Widget выше), гидрировать нечего, а стили опираются на компоненты
+  // css/seo-page.css + css/blog.css, уже подключённые в blog-post.html.
+  'icon-row':      { build: buildIconRowWidget },
+  'logo-full':     { build: buildLogoFullWidget },
+  'logo-colors':   { build: buildLogoColorsWidget },
+  'logo-top':      { build: buildLogoTopWidget },
+  'logo-timeline': { build: buildLogoTimelineWidget },
+};
+const _widgetCache = {};
+function widgetHtml(name, bodyLines, lang) {
+  // Body-driven виджеты собираются из каталога на каждый вызов (у них своё
+  // тело и своя локаль), партиальные — один раз и кэшируются.
+  if (WIDGETS[name].build) return WIDGETS[name].build(bodyLines, lang, '../../');
+  if (!(name in _widgetCache)) {
+    // Комментарии партиала — документация для разработчика, в страницу их не тащим.
+    _widgetCache[name] = expandIncludes(`{{> ${WIDGETS[name].partial}}}`)
+      .replace(/<!--[\s\S]*?-->/g, '').trim();
+  }
+  return _widgetCache[name];
+}
+
+// <link>/<script> для набора использованных виджетов. `rel` — путь до корня
+// (в /en/ его перепишет makePathsAbsolute из lib/en-transform.js). Перевод строки
+// внутри значения, а не в шаблоне: без виджетов подстановка пустая и страница
+// остаётся байт в байт прежней. Ключи css/js необязательны: виджет может не
+// иметь ни того, ни другого (icon-row — чистая разметка на общих стилях),
+// тогда его тег просто не выводится.
+function widgetAssets(used, rel) {
+  const names = [...used];
+  return {
+    head: names.filter(n => WIDGETS[n].css).map(n => `\n  <link rel="stylesheet" href="${rel}${WIDGETS[n].css}">`).join(''),
+    scripts: names.filter(n => WIDGETS[n].js).map(n => `\n<script type="module" src="${rel}${WIDGETS[n].js}"></script>`).join(''),
+  };
+}
+
 // One pass over a block of lines → HTML. Recursive: callouts re-enter this to
-// render their own body. `headings` collects H2s for the auto table of contents.
-function renderBlocks(lines, lang, headings) {
+// render their own body. `headings` collects H2s for the auto table of contents,
+// `widgets` — имена встреченных виджетов (для подключения их css/js на странице).
+function renderBlocks(lines, lang, headings, widgets) {
   const out = [];
   let i = 0, listType = null;
   const closeList = () => { if (listType) { out.push(`</${listType}>`); listType = null; } };
@@ -157,6 +480,24 @@ function renderBlocks(lines, lang, headings) {
       continue;
     }
 
+    // Widget fence: `:::widget <name>` … `:::` — проверяется до коллаутов,
+    // иначе `:::widget` был бы разобран как коллаут неизвестного типа. Тело
+    // обычно пустое (svg-viewer), но body-driven виджеты вроде icon-row
+    // читают его как данные — по одной строке на пункт.
+    const wg = t.match(/^:::widget\s+([\w-]+)\s*$/);
+    if (wg) {
+      closeList();
+      const name = wg[1];
+      const bodyLines = [];
+      i++;
+      while (i < lines.length && lines[i].trim() !== ':::') { bodyLines.push(lines[i]); i++; }
+      i++;
+      if (!WIDGETS[name]) throw new Error(`Неизвестный виджет :::widget ${name} — добавьте его в WIDGETS в scripts/build-blog.js`);
+      widgets.add(name);
+      out.push(widgetHtml(name, bodyLines, lang));
+      continue;
+    }
+
     // Callout fence: `:::type` or `:::type Custom title`
     const co = t.match(/^:::(\w+)(?:\s+(.*))?$/);
     if (co) {
@@ -166,7 +507,7 @@ function renderBlocks(lines, lang, headings) {
       i++;
       while (i < lines.length && lines[i].trim() !== ':::') { inner.push(lines[i]); i++; }
       i++; // skip closing :::
-      out.push(`<div class="callout callout-${esc(type)}">${calloutHead(type, title, lang)}<div class="callout-body">${renderBlocks(inner, lang, [])}</div></div>`);
+      out.push(`<div class="callout callout-${esc(type)}">${calloutHead(type, title, lang)}<div class="callout-body">${renderBlocks(inner, lang, [], widgets)}</div></div>`);
       continue;
     }
 
@@ -175,7 +516,7 @@ function renderBlocks(lines, lang, headings) {
       closeList();
       const quote = [];
       while (i < lines.length && /^>\s?/.test(lines[i].trim())) { quote.push(lines[i].trim().replace(/^>\s?/, '')); i++; }
-      out.push(`<blockquote>${renderBlocks(quote, lang, [])}</blockquote>`);
+      out.push(`<blockquote>${renderBlocks(quote, lang, [], widgets)}</blockquote>`);
       continue;
     }
 
@@ -192,6 +533,18 @@ function renderBlocks(lines, lang, headings) {
       continue;
     }
 
+    // Block image: `![alt](src)` or `![alt](src "caption")` on its own line.
+    // Own-line only (not inline mid-paragraph) — this is for breaking up a wall of
+    // text with a full-width figure, not for inline icons.
+    const img = t.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/);
+    if (img) {
+      closeList();
+      const [, alt, src, caption] = img;
+      const capHtml = caption ? `<figcaption>${inline(esc(typo(caption)))}</figcaption>` : '';
+      out.push(`<figure class="blog-figure"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy">${capHtml}</figure>`);
+      i++; continue;
+    }
+
     // Headings (## / ###). H2s get an anchor id and feed the TOC.
     const h = t.match(/^(#{2,3})\s+(.*)$/);
     if (h) {
@@ -200,16 +553,37 @@ function renderBlocks(lines, lang, headings) {
       if (lvl === 2) {
         const id = slugifyHeading(h[2]);
         headings.push({ id, text: esc(stripMd(h[2])) });
-        // «Шаг N. Название» / "Step N. Title" → badge + title on its own line
-        const step = h[2].match(/^(Шаг|Step)\s+(\d+)\.\s*(.+)$/);
+        // «Шаг/Уровень N. Название» / "Step/Tier N. Title" → badge + title on its own line
+        const step = h[2].match(/^(Шаг|Step|Уровень|Tier)\s+(\d+)\.\s*(.+)$/);
+        // Bare "N. Название" (numbered list of items, e.g. logo types) → same badge, just the digit
+        const numbered = !step && h[2].match(/^(\d+)\.\s*(.+)$/);
+        // "Бонус: Название" / "Bonus: Title" → same badge, word instead of a number
+        const bonus = !step && !numbered && h[2].match(/^(Бонус|Bonus)\s*:\s*(.+)$/);
+        // "Задача первая: Название" / "Task one: Title" → same badge, two-word prefix
+        const task = !step && !numbered && !bonus && h[2].match(/^((?:Задача|Task)\s+\S+)\s*:\s*(.+)$/);
+        // "1976: Название" / "1999–2016: Название" / "2010-е: Название" — a year,
+        // year range, or decade opening a timeline entry → same badge, the year(s)
+        const year = !step && !numbered && !bonus && !task && h[2].match(/^(\d{4}(?:\s*[–—-]\s*\d{4}|-е)?)\s*:\s*(.+)$/);
         if (step) {
-          const titleHtml = inline(esc(typo(step[3]))).replace(/\(([^)]+)\)/g, '<span class="step-title-dim">($1)</span>');
+          const titleHtml = dimParens(inline(esc(typo(step[3]))));
           out.push(`<h2 id="${id}" class="step-heading"><span class="step-badge">${step[1]}&nbsp;${step[2]}</span><span class="step-title">${titleHtml}</span></h2>`);
+        } else if (numbered) {
+          const titleHtml = dimParens(inline(esc(typo(capFirst(numbered[2])))));
+          out.push(`<h2 id="${id}" class="step-heading"><span class="step-badge">${numbered[1]}</span><span class="step-title">${titleHtml}</span></h2>`);
+        } else if (bonus) {
+          const titleHtml = dimParens(inline(esc(typo(capFirst(bonus[2])))));
+          out.push(`<h2 id="${id}" class="step-heading"><span class="step-badge">${bonus[1]}</span><span class="step-title">${titleHtml}</span></h2>`);
+        } else if (task) {
+          const titleHtml = dimParens(inline(esc(typo(capFirst(task[2])))));
+          out.push(`<h2 id="${id}" class="step-heading"><span class="step-badge">${task[1]}</span><span class="step-title">${titleHtml}</span></h2>`);
+        } else if (year) {
+          const titleHtml = dimParens(inline(esc(typo(capFirst(year[2])))));
+          out.push(`<h2 id="${id}" class="step-heading"><span class="step-badge">${year[1]}</span><span class="step-title">${titleHtml}</span></h2>`);
         } else {
-          out.push(`<h2 id="${id}">${inline(esc(typo(h[2])))}</h2>`);
+          out.push(`<h2 id="${id}">${dimParens(inline(esc(typo(h[2]))))}</h2>`);
         }
       } else {
-        out.push(`<h3>${inline(esc(typo(h[2])))}</h3>`);
+        out.push(`<h3>${dimParens(inline(esc(typo(h[2]))))}</h3>`);
       }
       i++; continue;
     }
@@ -229,7 +603,7 @@ function renderBlocks(lines, lang, headings) {
     closeList();
     const para = [];
     while (i < lines.length && lines[i].trim() &&
-           !/^(#{2,3}\s|[-*]\s|\d+\.\s|>\s?|:::|```|\||---$)/.test(lines[i].trim())) {
+           !/^(#{2,3}\s|[-*]\s|\d+\.\s|>\s?|:::|```|\||---$|!\[)/.test(lines[i].trim())) {
       para.push(lines[i].trim()); i++;
     }
     out.push(`<p>${inline(esc(typo(para.join(' '))))}</p>`);
@@ -239,11 +613,29 @@ function renderBlocks(lines, lang, headings) {
 }
 
 // Block-level markdown → HTML. Returns headings (H2s) alongside the body so
-// the caller can build the auto-generated section-nav sidebar.
+// the caller can build the auto-generated section-nav sidebar, и набор
+// использованных виджетов — чтобы подключить их css/js только на этой странице.
+// `{{stat:cat/slug}}` в тексте → число скачиваний этого логотипа на момент сборки.
+//
+// Зачем: виджет `logo-top` пересчитывается из logos/download-stats.json при каждом
+// билде, а числа, вписанные в абзац руками, остаются прежними — через полгода
+// проза начинает противоречить таблице прямо над ней. Плейсхолдер даёт тексту тот
+// же источник, что и виджету, поэтому расходиться им нечем. Неизвестный путь
+// роняет сборку намеренно: молча подставленный ноль читателю не виден.
+function substituteStats(md) {
+  return md.replace(/\{\{stat:([a-z0-9\/._-]+)\}\}/gi, (_, key) => {
+    const item = loadLogoIndex().get(key);
+    if (!item) throw new Error(`{{stat:${key}}}: нет такого логотипа в каталоге`);
+    return String(loadDownloadStats()[item.figma] || 0);
+  });
+}
+
 function mdToHtml(md, lang = 'ru') {
   const headings = [];
-  const body = renderBlocks(md.replace(/\r\n/g, '\n').split('\n'), lang, headings);
-  return { body, headings };
+  const widgets  = new Set();
+  const src = substituteStats(md.replace(/\r\n/g, '\n'));
+  const body = renderBlocks(src.split('\n'), lang, headings, widgets);
+  return { body, headings, widgets };
 }
 
 // Sidebar: reading-progress bar + auto section nav (≥2 H2s, active item
@@ -253,8 +645,11 @@ function buildSidebar(headings, lang) {
   const navLabel = lang === 'en' ? 'On this page' : 'В этой статье';
   const progressLabel = lang === 'en' ? 'Reading progress' : 'Прогресс чтения';
   const progress = `<div class="blog-progress-wrap">
-      <div class="blog-progress" role="progressbar" aria-label="${progressLabel}" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
-      <span class="blog-progress-pct">0%</span>
+      <span class="blog-progress-label">${progressLabel}</span>
+      <div class="blog-progress-row">
+        <div class="blog-progress" role="progressbar" aria-label="${progressLabel}" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+        <span class="blog-progress-pct">0%</span>
+      </div>
     </div>`;
   let nav = '';
   if (headings.length >= 2) {
@@ -295,23 +690,52 @@ function pickRelated(post, allPosts, n = RELATED_COUNT) {
     .map(s => s.p);
 }
 
-function relatedCard(p, i, lang) {
+function blogCardDateHtml(date) {
+  return `<div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>${shortDate(date)}</div>`;
+}
+
+function blogCardViewsHtml(count) {
+  return `
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            ${count}
+          </div>`;
+}
+
+function blogCardCtaHtml(label) {
+  return `
+          <div class="blog-card-cta">${esc(label)}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>`;
+}
+
+function blogCardTagsHtml(tags) {
+  if (!tags || !tags.length) return '';
+  return `<div class="blog-card-tags">${tags.map(t => `<span class="blog-card-tag">${esc(t)}</span>`).join('')}</div>`;
+}
+
+function relatedCard(p, i, lang, views = {}) {
   const coverStyle = p.cover
     ? `background-image: url('${esc(p.cover)}'); background-size: cover; background-position: center;`
     : coverGradient(i);
   const coverInner = p.cover ? '' : iconSvg(pickIcon(p.slug), 40, 'blog-card-icon');
   const title = lang === 'en' ? p.title_en : p.title;
-  return `<a class="blog-card" href="../${p.slug}/">
-        <div class="blog-card-cover" style="${coverStyle}" aria-hidden="true">${coverInner}</div>
+  const tags = lang === 'en' ? p.tags_en : p.tags;
+  const count = views[p.slug] || 0;
+  const ctaLabel = lang === 'en' ? 'Read article' : 'Читать статью';
+  return `<a class="blog-card" href="../${p.slug}/" data-date="${p.date}" data-views="${count}">
+        <div class="blog-card-cover" style="${coverStyle}" aria-hidden="true">${blogCardTagsHtml(tags)}${coverInner}</div>
         <div class="blog-card-body">
-          <div class="blog-card-date">${shortDate(p.date)}</div>
-          <div class="blog-card-title">${esc(title)}</div>
+          <div class="blog-card-meta">
+            ${blogCardDateHtml(p.date)}
+            ${blogCardViewsHtml(count)}
+          </div>
+          <div class="blog-card-title">${esc(typo(title))}</div>
+          ${blogCardCtaHtml(ctaLabel)}
         </div>
       </a>`;
 }
 
-function relatedCardsHtml(list, lang) {
-  return list.map((p, i) => relatedCard(p, i, lang)).join('\n      ');
+function relatedCardsHtml(list, lang, views) {
+  return list.map((p, i) => relatedCard(p, i, lang, views)).join('\n      ');
 }
 
 // Strip inline markdown markers for plain-text excerpts/descriptions.
@@ -330,8 +754,9 @@ function firstParagraph(md) {
   return '';
 }
 
-function main() {
+async function main() {
   if (!fs.existsSync(POSTS_DIR)) { console.error('✗ blog/posts/ not found'); process.exit(1); }
+  const views = await getBlogViews();
 
   const files = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.md'));
   const posts = files.map(f => {
@@ -397,7 +822,12 @@ function main() {
       ],
     }, null, 2);
 
-    const { body: ruBody, headings: ruHeadings } = mdToHtml(p.body, 'ru');
+    const { body: ruBody, headings: ruHeadings, widgets: ruWidgets } = mdToHtml(p.body, 'ru');
+    const { body: enBody, headings: enHeadings, widgets: enWidgets } =
+      p.body_en ? mdToHtml(p.body_en, 'en') : mdToHtml(p.body, 'en');
+    // Один набор css/js на обе версии: RU и EN тела пишутся отдельно и виджет
+    // может стоять только в одном из них.
+    const assets  = widgetAssets(new Set([...ruWidgets, ...enWidgets]), rel);
     const related = pickRelated(p, posts);
     const vars = {
       REL: rel,
@@ -412,13 +842,16 @@ function main() {
       DATE_ISO: p.date,
       DATE_HUMAN: humanDate(p.date),
       READ_TIME: readTime(p.body, 'ru'),
+      VIEWS: views[p.slug] || 0,
       JSON_LD: jsonLd,
-      H1: esc(p.title),
+      H1: esc(typo(p.title)),
       COVER_STYLE: coverStyle,
       COVER_ICON: coverIcon,
       BODY: ruBody,
       SIDEBAR: buildSidebar(ruHeadings, 'ru'),
-      RELATED_POSTS: relatedCardsHtml(related, 'ru'),
+      RELATED_POSTS: relatedCardsHtml(related, 'ru', views),
+      WIDGET_CSS: assets.head,
+      WIDGET_JS: assets.scripts,
     };
     const html = T_POST.replace(/\{\{(\w+)\}\}/g, (_, k) => {
       if (!(k in vars)) { console.warn(`Unknown placeholder {{${k}}}`); return ''; }
@@ -456,7 +889,6 @@ function main() {
         },
       ],
     }, null, 2);
-    const { body: enBody, headings: enHeadings } = p.body_en ? mdToHtml(p.body_en, 'en') : mdToHtml(p.body, 'en');
     const enVars = {
       ...vars,
       HOME_REL: '/en/',
@@ -464,13 +896,14 @@ function main() {
       TITLE: `${p.title_en} · Trace Logo's`,
       META_DESC: esc(p.description_en),
       OG_TITLE: esc(p.title_en),
-      H1: esc(p.title_en),
+      H1: esc(typo(p.title_en)),
       DATE_HUMAN: humanDate(p.date, 'en'),
       READ_TIME: readTime(p.body_en || p.body, 'en'),
+      VIEWS: views[p.slug] || 0,
       JSON_LD: enJsonLd,
       BODY: enBody,
       SIDEBAR: buildSidebar(enHeadings, 'en'),
-      RELATED_POSTS: relatedCardsHtml(related, 'en'),
+      RELATED_POSTS: relatedCardsHtml(related, 'en', views),
     };
     const htmlEn = transformToEn(
       T_POST.replace(/\{\{(\w+)\}\}/g, (_, k) => (k in enVars ? enVars[k] : '')),
@@ -488,15 +921,17 @@ function main() {
       ? `background-image: url('${esc(p.cover)}'); background-size: cover; background-position: center;`
       : coverGradient(i);
     const coverInner = p.cover ? '' : iconSvg(pickIcon(p.slug), 40, 'blog-card-icon');
-    const tagsHtml = p.tags.length
-      ? `<div class="blog-card-tags">${p.tags.map(t => `<span class="blog-card-tag">${esc(t)}</span>`).join('')}</div>`
-      : '';
-    return `<a class="blog-card" href="${p.slug}/">
-        <div class="blog-card-cover" style="${coverStyle}" aria-hidden="true">${coverInner}</div>
+    const tagsHtml = blogCardTagsHtml(p.tags);
+    const count = views[p.slug] || 0;
+    return `<a class="blog-card" href="${p.slug}/" data-date="${p.date}" data-views="${count}">
+        <div class="blog-card-cover" style="${coverStyle}" aria-hidden="true">${tagsHtml}${coverInner}</div>
         <div class="blog-card-body">
-          <div class="blog-card-date">${shortDate(p.date)}</div>
-          <div class="blog-card-title">${esc(p.title)}</div>
-          ${tagsHtml}
+          <div class="blog-card-meta">
+            ${blogCardDateHtml(p.date)}
+            ${blogCardViewsHtml(count)}
+          </div>
+          <div class="blog-card-title">${esc(typo(p.title))}</div>
+          ${blogCardCtaHtml('Читать статью')}
         </div>
       </a>`;
   }).join('\n      ');
@@ -540,15 +975,17 @@ function main() {
       ? `background-image: url('${esc(p.cover)}'); background-size: cover; background-position: center;`
       : coverGradient(i);
     const coverInner = p.cover ? '' : iconSvg(pickIcon(p.slug), 40, 'blog-card-icon');
-    const tagsHtml = p.tags_en.length
-      ? `<div class="blog-card-tags">${p.tags_en.map(t => `<span class="blog-card-tag">${esc(t)}</span>`).join('')}</div>`
-      : '';
-    return `<a class="blog-card" href="${p.slug}/">
-        <div class="blog-card-cover" style="${coverStyle}" aria-hidden="true">${coverInner}</div>
+    const tagsHtml = blogCardTagsHtml(p.tags_en);
+    const count = views[p.slug] || 0;
+    return `<a class="blog-card" href="${p.slug}/" data-date="${p.date}" data-views="${count}">
+        <div class="blog-card-cover" style="${coverStyle}" aria-hidden="true">${tagsHtml}${coverInner}</div>
         <div class="blog-card-body">
-          <div class="blog-card-date">${shortDate(p.date)}</div>
-          <div class="blog-card-title">${esc(p.title_en)}</div>
-          ${tagsHtml}
+          <div class="blog-card-meta">
+            ${blogCardDateHtml(p.date)}
+            ${blogCardViewsHtml(count)}
+          </div>
+          <div class="blog-card-title">${esc(typo(p.title_en))}</div>
+          ${blogCardCtaHtml('Read article')}
         </div>
       </a>`;
   }).join('\n      ');
@@ -592,4 +1029,4 @@ function main() {
   console.log(`✓ Blog: ${posts.length} posts + index (RU + EN)`);
 }
 
-main();
+main().catch(err => { console.error(err); process.exit(1); });

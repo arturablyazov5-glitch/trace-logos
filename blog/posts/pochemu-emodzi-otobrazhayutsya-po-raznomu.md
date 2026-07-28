@@ -44,7 +44,7 @@ tags_en: Emoji, Unicode, Technology
 
 **Смысловые расхождения.** Самые известные случаи: эмодзи «пистолет» Apple в 2016 году превратила в водяной пистолет, остальные платформы годами показывали реалистичное оружие. «Закатанные глаза» на одной платформе читались как лёгкая ирония, на другой — как презрение. Психологи и лингвисты фиксировали реальные недопонимания в переписке.
 
-**Квадратик-тофу.** Если собеседнику пришёл символ, которого его система не знает (старая ОС, а эмодзи из свежей версии стандарта), он увидит пустой квадрат □. Новые эмодзи появляются каждый год, а обновления ОС доходят не до всех.
+**Квадратик-тофу.** Если собеседнику пришёл символ, которого его система не знает (старая ОС, а эмодзи из свежей версии стандарта), он увидит пустой квадрат □. Новые эмодзи появляются каждый год, а обновления ОС доходят не до всех. Если квадратики видите вы сами — это отдельная проблема со своими причинами и лечением, разбор в статье [почему не отображаются эмодзи](../pochemu-ne-otobrazhayutsya-emodzi/).
 
 **Дизайн и маркетинг.** Кнопка с эмодзи в интерфейсе или пуш-уведомление выглядит по-разному у сегментов аудитории. Верстая макет с эмодзи Apple, помните: половина пользователей увидит версию Google или Samsung — с другим цветом и другой геометрией.
 
@@ -129,7 +129,7 @@ Note that messengers may override system emoji with their own: WhatsApp on Andro
 
 **Meaning drift.** The famous cases: Apple turned the pistol into a water gun in 2016 while others kept realistic weapons for years. "Rolling eyes" reads as light irony on one platform and contempt on another. Linguists have documented real misunderstandings.
 
-**The tofu square.** If the recipient's system doesn't know a character (old OS, emoji from a fresh standard release), they see an empty box □. New emoji arrive yearly; OS updates don't reach everyone.
+**The tofu square.** If the recipient's system doesn't know a character (old OS, emoji from a fresh standard release), they see an empty box □. New emoji arrive yearly; OS updates don't reach everyone. Seeing the squares yourself? That's a separate problem with its own causes and fixes — see [why emoji don't display](../pochemu-ne-otobrazhayutsya-emodzi/).
 
 **Design and marketing.** An emoji in a push notification or UI button looks different across audience segments. Mocking up with Apple art? Remember half your users will see Google's or Samsung's version — different color, different geometry.
 

@@ -7,6 +7,7 @@
 // Один источник правды: ту же разметку/стили использует и лого-SEO.
 // ─────────────────────────────────────────────────────────────────────────────
 import { switchLayout, highlight, escapeHtml, fuzzyMatchToken } from './utils.js';
+import { initPlaceholderTypewriter } from './placeholder-typewriter.js';
 import './search-shortcut.js';
 
 const form = document.getElementById('seo-search-form');
@@ -184,4 +185,34 @@ if (form && input && dropdown) {
   });
 
   document.addEventListener('click', e => { if (!form.contains(e.target)) close(); });
+
+  // ── Живой плейсхолдер: печатает и стирает примеры запросов (движок в
+  // placeholder-typewriter.js — общий с search-placeholder.js). Реальные
+  // названия логотипов берутся из уже загруженных данных поиска.
+  const HEADER_TEMPLATES = IS_EN ? [
+    'Logo {name} download SVG',
+    '{name} icon ICO',
+    '{name} SVG and PNG',
+    'Download {name} logo',
+    'Emoji 🔥',
+    'Emoji 😂',
+    'Emoji 😀',
+    'Grinning face emoji',
+    'Download logo {name}',
+    '{name} in vector, free',
+  ] : [
+    'Лого {name} скачать SVG',
+    'Значок {name} ICO',
+    '{name} SVG и PNG',
+    '{name} логотип скачать',
+    'Эмодзи 🔥',
+    'Эмодзи 😂',
+    'Эмодзи 😀',
+    'Улыбается эмодзи',
+    'Скачать логотип {name}',
+    '{name} в векторе бесплатно',
+  ];
+  initPlaceholderTypewriter(input, HEADER_TEMPLATES, () =>
+    loadData().then(d => (d.logos || []).map(l => l.name).filter(Boolean))
+  );
 }

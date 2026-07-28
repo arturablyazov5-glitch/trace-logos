@@ -14,6 +14,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { loadTemplate } = require('./lib/render');
+const { buildStaticGrid } = require('./lib/static-grid');
 const { loadDict, bakeI18n, makePathsAbsolute, hreflangBlock } = require('./lib/en-transform');
 
 const BASE_URL = 'https://trace-logos.ru';
@@ -130,6 +131,29 @@ function applyEnChrome(html, ecoKey) {
   return html;
 }
 
+// Пререндер сетки — тот же lib/static-grid.js, что и у страниц категорий.
+//
+// До 2026-07-28 сюда передавалось STATIC_GRID: '' с пометкой «сетку построит
+// main.js». В результате все 26 страниц экосистем (×2 языка) уезжали в индекс
+// вообще без H1 и без единой ссылки на логотипы: краулер видел пустой шаблон.
+// Для Яндекса, который плохо рендерит JS, это ровно та проблема, ради которой
+// static-grid.js и написан — страницы категорий его используют с самого начала.
+// Ссылки отдаём корне-абсолютными: makePathsAbsolute в /en/ сам добавит /en/
+// к <a href="/logos/…">, а /assets/… оставит на корне (isAssetPath).
+function ecoStaticGrid(label, items, lang) {
+  return buildStaticGrid(
+    [{ label, heading: 'h1', items }],
+    {
+      assetBase: '/',
+      hrefFor: (item) => {
+        const url = itemUrl(item);
+        return url ? url.replace(BASE_URL, '') : null;
+      },
+      lang,
+    }
+  );
+}
+
 function main() {
   const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'manifest.json'), 'utf8'));
 
@@ -177,7 +201,8 @@ function main() {
       JSON_LD:       buildJsonLd(label, ecoKey, fullUrl, items),
       MANIFEST_BASE: '../../',
       CAT_SLUG:      '',
-      STATIC_GRID:   '',
+      STATIC_GRID:   ecoStaticGrid(`Логотипы экосистемы ${label}`, items, 'ru'),
+      INTRO_SECTION: '', // ecosystems have no authored intro copy (shared category-page template)
       ECO_SLUG:      ecoKey,
     };
 
@@ -209,7 +234,8 @@ function main() {
       JSON_LD:       buildJsonLdEn(labelEn, ecoKey, fullUrlEn, items),
       MANIFEST_BASE: '../../',
       CAT_SLUG:      '',
-      STATIC_GRID:   '',
+      STATIC_GRID:   ecoStaticGrid(`${labelEn} Ecosystem Logos`, items, 'en'),
+      INTRO_SECTION: '', // ecosystems have no authored intro copy (shared category-page template)
       ECO_SLUG:      ecoKey,
     };
     let htmlEn = TEMPLATE.replace(/\{\{(\w+)\}\}/g, (_, key) => enVars[key] ?? '');

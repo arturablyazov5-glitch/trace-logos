@@ -562,6 +562,18 @@ function renderPreview() {
   scheduleSize();
 }
 
+// icns.css only styles this modal — load it on first open instead of blocking
+// every logo/category page's initial render for a feature most visitors never use.
+// Also shared by liquid-glass-modal.js, which reuses these same overlay/modal classes.
+export function ensureStyles() {
+  if (document.querySelector('link[data-icns-css]')) return;
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = new URL('../css/icns.css', import.meta.url).href;
+  link.dataset.icnsCss = '1';
+  document.head.appendChild(link);
+}
+
 function buildDom() {
   const overlay = document.createElement('div');
   overlay.className = 'icns-overlay';
@@ -906,6 +918,7 @@ async function doDownload() {
 }
 
 export async function openIcnsModal(item, file = item.file) {
+  ensureStyles();
   if (!dom) buildDom();
   // PNG logos can't be split into glass layers — hide the toggle and force it off.
   const isPng = /\.png(\?|$)/i.test(file);

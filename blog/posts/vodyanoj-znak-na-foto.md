@@ -102,7 +102,7 @@ A fully opaque logo argues with the photograph; at 30–50% the mark is visible 
 
 ### Logo version: monochrome
 
-A color logo almost always clashes with the frame's palette. The right version is **one-color**: white or black, no gradients, no fine detail. That's the monochrome variant every logo kit must include ([the format guide](../v-kakom-formate-nuzhen-logotip/)); missing it — make one in a minute by recoloring the SVG.
+A color logo almost always clashes with the frame's palette. The right version is **one-color**: white or black, no gradients, no fine detail. That's the monochrome variant every logo kit must include, covered in [the format guide](../v-kakom-formate-nuzhen-logotip/); missing it — make one in a minute by recoloring the SVG.
 
 ### Size: 5–10% of the frame
 
@@ -127,7 +127,7 @@ A grid of translucent logos across the frame fits one scenario: **pre-purchase p
 - **Online batch services:** fast, but remember you're uploading photos to someone's server.
 - **Command line:** ImageMagick stamps a thousand photos in one command (`magick photo.jpg logo.png -gravity southeast -compose over -composite out.jpg`).
 
-The overlay source must be a transparent PNG or an SVG: a JPG with a white box turns the watermark into a patch ([why](../logotip-s-prozrachnym-fonom/)).
+The overlay source must be a transparent PNG or an SVG: a JPG with a white box turns the watermark into a patch — [here's why](../logotip-s-prozrachnym-fonom/).
 
 ## Alternatives and additions
 

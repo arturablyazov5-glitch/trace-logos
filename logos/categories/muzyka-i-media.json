@@ -23,7 +23,7 @@
       "variants": [
         {
           "file": "apple/26/color/yandex-music.png",
-          "label": "iOS 26 Tahoe"
+          "labelKey": "ios-26-tahoe"
         },
         {
           "type": "full",
@@ -42,7 +42,7 @@
       "variants": [
         {
           "file": "apple/26/color/spotify.png",
-          "label": "iOS 26 Tahoe"
+          "labelKey": "ios-26-tahoe"
         }
       ]
     },
@@ -57,7 +57,7 @@
       "ecosystem": "apple",
       "variants": [
         {
-          "label": "Old Icon",
+          "labelKey": "old-logo",
           "file": "apple/old/shazam-old.png"
         }
       ]
@@ -72,7 +72,7 @@
       "ecosystem": "apple",
       "variants": [
         {
-          "label": "iOS 26 Tahoe",
+          "labelKey": "ios-26-tahoe",
           "file": "apple/26/color/music.png",
           "macos_styles": {
             "dark": "apple/26/black/music.png",
@@ -80,7 +80,7 @@
           }
         },
         {
-          "label": "iOS 27 Golden Gate",
+          "labelKey": "ios-27-golden-gate",
           "file": "apple/27/color/music.png",
           "macos_styles": {
             "dark": "apple/27/black/music.png"
@@ -98,7 +98,7 @@
       "variants": [
         {
           "file": "apple/26/color/youtube-music.png",
-          "label": "iOS 26 Tahoe"
+          "labelKey": "ios-26-tahoe"
         }
       ],
       "ecosystem": "google"
@@ -113,7 +113,7 @@
       "ecosystem": "apple",
       "variants": [
         {
-          "label": "iOS 26 Tahoe",
+          "labelKey": "ios-26-tahoe",
           "file": "apple/26/color/news.png",
           "macos_styles": {
             "dark": "apple/26/black/news.png",
@@ -121,7 +121,7 @@
           }
         },
         {
-          "label": "iOS 27 Golden Gate",
+          "labelKey": "ios-27-golden-gate",
           "file": "apple/27/color/news.png",
           "macos_styles": {
             "dark": "apple/27/black/news.png"
@@ -195,7 +195,7 @@
       "ecosystem": "apple",
       "variants": [
         {
-          "label": "iOS 26 Tahoe",
+          "labelKey": "ios-26-tahoe",
           "file": "apple/26/color/podcasts.png",
           "macos_styles": {
             "dark": "apple/26/black/podcasts.png",
@@ -203,33 +203,10 @@
           }
         },
         {
-          "label": "iOS 27 Golden Gate",
+          "labelKey": "ios-27-golden-gate",
           "file": "apple/27/color/podcasts.png",
           "macos_styles": {
             "dark": "apple/27/black/podcasts.png"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Apple Books",
-      "tags": "apple books эпл книги чтение ibooks электронные книги ebook читалка books.apple.com",
-      "figma": "Icon/Media/AppleBooks",
-      "desc": "Скачайте логотип Apple Books в PNG бесплатно. Иконки iOS 26/27, тёмная и светлая темы. Читалка EPUB/PDF с чтением вслух через Siri. Готово для Figma.",
-      "about": "Apple Books — электронная читалка и книжный магазин <a href=\"/logos/store/apple/\">Apple</a>. Поддерживает форматы EPUB и PDF, предлагает миллионы книг, аудиокниг и учебников. Интегрирована с функцией чтения вслух через <a href=\"/logos/assistant/siri/\">Siri</a>.",
-      "file": "apple/26/color/books.png",
-      "prerendered": true,
-      "ecosystem": "apple",
-      "macos_styles": {
-        "dark": "apple/26/black/books.png",
-        "light": "apple/26/white/books.png"
-      },
-      "variants": [
-        {
-          "label": "iOS 27 Golden Gate",
-          "file": "apple/27/color/books.png",
-          "macos_styles": {
-            "dark": "apple/27/black/books.png"
           }
         }
       ]
@@ -297,14 +274,24 @@
       "prerendered": true
     },
     {
-      "name": "Disney+",
-      "name_en": "Disney+",
-      "tags": "disney plus дисней плюс стриминг marvel pixar star wars national geographic disneyplus.com",
+      "name": "Disney",
+      "name_en": "Disney",
+      "tags": "disney plus дисней плюс дисней стриминг marvel pixar star wars national geographic disneyplus.com",
       "figma": "Icon/Media/DisneyPlus",
       "about": "Disney+ — стриминговый сервис Walt Disney Company, запущенный в 2019 году с каталогом Disney, Marvel, Pixar, Star Wars и National Geographic. За первые 16 месяцев набрал 100 миллионов подписчиков — быстрее любого конкурента в истории стриминга. Характерный синий логотип с созвездием стал символом цифровой эпохи Disney.",
-      "desc": "Скачайте логотип Disney+ в PNG бесплатно. Иконка iOS 26 Tahoe. Стриминг от Walt Disney Company с Marvel, Pixar и Star Wars, 100 млн подписчиков за 16 месяцев. Готово для Figma.",
+      "desc": "Скачайте логотип Disney в SVG и PNG бесплатно. Иконка iOS 26 Tahoe и горизонтальный вариант. Стриминг от Walt Disney Company с Marvel, Pixar и Star Wars, 100 млн подписчиков за 16 месяцев. Готово для Figma.",
       "file": "apple/26/color/disney-plus.png",
-      "prerendered": true
+      "prerendered": true,
+      "variants": [
+        {
+          "type": "full",
+          "file": "disney-plus-full.svg"
+        },
+        {
+          "labelKey": "klassicheskiy",
+          "file": "disney-full.svg"
+        }
+      ]
     },
     {
       "name": "djay",
@@ -439,7 +426,7 @@
       "name": "Scribd",
       "tags": "скрибд scribd книги аудиокниги подписка чтение документы scribd.com",
       "figma": "Icon/Media/Scribd",
-      "about": "Scribd — сервис неограниченного чтения по подписке: электронные книги, аудиокниги, журналы, научные статьи и документы в едином каталоге. Основан в Сан-Франциско в 2007 году и нередко называется «Netflix для книг». Конкурирует с <a href=\"/logos/education/kindle/\">Kindle</a> Unlimited и <a href=\"/logos/media/applebooks/\">Apple Books</a>, предлагая более широкий каталог при аналогичной цене подписки.",
+      "about": "Scribd — сервис неограниченного чтения по подписке: электронные книги, аудиокниги, журналы, научные статьи и документы в едином каталоге. Основан в Сан-Франциско в 2007 году и нередко называется «Netflix для книг». Конкурирует с <a href=\"/logos/education/kindle/\">Kindle</a> Unlimited и <a href=\"/logos/education/applebooks/\">Apple Books</a>, предлагая более широкий каталог при аналогичной цене подписки.",
       "desc": "Скачайте логотип Scribd в PNG бесплатно. Иконка iOS 26 Tahoe. «Netflix для книг»: электронные книги, аудиокниги и журналы по единой подписке. Готово для Figma.",
       "file": "apple/26/color/scribd.png",
       "prerendered": true
@@ -464,6 +451,50 @@
       "comingSoon": true,
       "brandUrl": "https://www.tbank.ru/about/brand/",
       "name_en": "T-Journal"
+    },
+    {
+      "name": "Т-Бизнес Секреты",
+      "name_en": "T-Business Secrets",
+      "alt_name": "ТБС",
+      "alt_name_en": "TBS",
+      "tags": "т бизнес секреты тбс bs tbs тинькофф бизнес секреты t business secrets telegram канал",
+      "figma": "Icon/Media/TBusinessSecrets",
+      "desc": "Скачайте логотип Т-Бизнес Секреты (ТБС) в SVG бесплатно. Медиа Т-Бизнеса про предпринимательство с сетью Telegram-каналов. Готово для Figma.",
+      "about": "Т-Бизнес Секреты — медиа направления <a href=\"/logos/bank/tbusiness/\">Т-Бизнес</a> про предпринимательство: помимо сайта <a href=\"https://secrets.tbank.ru\" target=\"_blank\" rel=\"noopener noreferrer\">secrets.tbank.ru</a>, ведёт сеть Telegram-каналов под конкретные темы — основной канал, продажи на маркетплейсах, бухгалтерия, идеи для бизнеса, IT и «Т-Бизнес Старт» для начинающих. Логотип «ТБС» один и тот же на всех каналах, меняется только фон под тематику.",
+      "file": "t-business-secrets.svg",
+      "prerendered": false,
+      "variants": [
+        {
+          "type": "full",
+          "file": "t-business-secrets-full.svg"
+        },
+        {
+          "labelKey": "kanal-v-telegram",
+          "file": "t-business-secrets-channel.png"
+        },
+        {
+          "labelKey": "buhgalteriya",
+          "file": "t-business-secrets-accounting.png"
+        },
+        {
+          "labelKey": "dlya-sellerov",
+          "file": "t-business-secrets-sellers.png"
+        },
+        {
+          "labelKey": "idei",
+          "file": "t-business-secrets-ideas.png"
+        },
+        {
+          "labelKey": "ayti",
+          "file": "t-business-secrets-it.png"
+        },
+        {
+          "labelKey": "start",
+          "file": "t-business-start.png"
+        }
+      ],
+      "ecosystem": "tinkoff",
+      "brandUrl": "https://www.tbank.ru/about/brand/"
     }
   ]
 }

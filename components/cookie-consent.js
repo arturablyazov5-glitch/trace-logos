@@ -4,6 +4,7 @@ const STORAGE_KEY = 'cookieConsentAccepted';
 const LABELS = {
   ru: { text: 'Мы используем куки, чтобы делать сайт удобным для вас', btn: 'Хорошо', btnAccepted: 'Кайф!', more: 'Подробнее', moreHref: '/consent/' },
   en: { text: 'We use cookies to make this site convenient for you', btn: 'Got it', btnAccepted: 'Nice!', more: 'Learn more', moreHref: '/en/consent/' },
+  es: { text: 'Usamos cookies para que el sitio sea cómodo para ti', btn: 'Entendido', btnAccepted: 'Listo', more: 'Más información', moreHref: '/es/consent/' },
 };
 
 const NOTRACK_KEY = 'tl_notrack'; // «Режим разработчика» — тумблер из utils.js (isTrackingDisabled)
@@ -13,7 +14,10 @@ function mount() {
   if (!isDevMode && localStorage.getItem(STORAGE_KEY) === '1') return;
 
   const lang = (typeof window.__LANG__ === 'string' ? window.__LANG__ : null)
-    || (location.pathname.startsWith('/en/') ? 'en' : 'ru');
+    || (['en', 'es'].includes(location.pathname.split('/').filter(Boolean)[0])
+      ? location.pathname.split('/').filter(Boolean)[0]
+      : 'ru')
+    || 'ru';
   const { text, btn, btnAccepted, more, moreHref } = LABELS[lang] ?? LABELS.ru;
 
   if (!document.getElementById('cookie-consent-style')) {
@@ -143,9 +147,10 @@ function mount() {
   el.id = 'cookie-consent';
   el.setAttribute('role', 'dialog');
   el.setAttribute('aria-live', 'polite');
+  el.setAttribute('aria-labelledby', 'cookie-consent-text');
   el.innerHTML = `
     <span class="cookie-consent-emoji" aria-hidden="true">🍪</span>
-    <p>${text}. <a class="cookie-consent-more" href="${moreHref}" target="_blank" rel="noopener">${more}</a></p>
+    <p id="cookie-consent-text">${text}. <a class="cookie-consent-more" href="${moreHref}" target="_blank" rel="noopener">${more}</a></p>
     <button type="button" id="cookie-consent-accept"><span class="cookie-consent-btn-text">${btn}</span></button>
   `;
   document.body.appendChild(el);

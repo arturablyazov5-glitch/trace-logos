@@ -25,9 +25,10 @@ const TEMPLATE = loadTemplate(path.join(ROOT, 'templates', 'category-page.html')
 const DRY_RUN  = process.argv.includes('--dry-run');
 const EN       = loadDict().en;
 
-// Per-category SEO copy: genitive for the title («Логотипы банков»), unique
-// intro text, optional full title/h1 override (flags). Missing slug → the page
-// falls back to the old generic «Логотипы — {section}» wording.
+// Per-category SEO copy: genitive for the title («Логотипы банков»), optional
+// full title/h1 override (flags). Missing slug → the page falls back to the
+// old generic «Логотипы — {section}» wording. (No intro text — category pages
+// are logos-only, no body copy above the grid; that's `collections.json`'s job.)
 const CAT_SEO  = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'category-seo.json'), 'utf8'));
 
 function esc(str) {
@@ -160,6 +161,7 @@ function buildPage({ section, sectionEn, slug, count, items }) {
     OG_DESC:       esc(metaDesc),
     OG_IMAGE:      `${BASE_URL}/assets/og/home.png`,
     JSON_LD:       buildJsonLd(section, slug, fullUrl, items, titleBase, metaDesc),
+    INTRO_SECTION: '',
     // Pre-rendered grid: same label as the live grid's section title (no
     // visual flash when JS re-renders), h1 tag for SEO, cards = real links.
     STATIC_GRID:   buildStaticGrid(
@@ -201,9 +203,16 @@ function patchIndex(readyTotal, cats) {
     })),
     { assetBase: '../', hrefFor: it => { const u = itemUrl(it, ''); return u ? u.replace(`${BASE_URL}/logos/`, '') : null; }, lang: 'ru' }
   );
+  // H1 страницы. Живёт ВНУТРИ .ssr-grid, который main.js сносит на init, — значит
+  // виден краулеру и не меняет вёрстку для пользователя с JS. Без него главная
+  // страница каталога уезжала в индекс вообще без заголовка первого уровня.
+  const gridWithH1 = grid.replace(
+    '<div class="ssr-grid">',
+    '<div class="ssr-grid"><h1 class="section-title" data-i18n="logosIndexH1">Логотипы брендов в SVG и PNG</h1>'
+  );
   html = html.replace(
     /(<!-- CATLINKS:START[^>]*-->)[\s\S]*?(<!-- CATLINKS:END -->)/,
-    `$1${grid}$2`
+    `$1${gridWithH1}$2`
   );
 
   // Inject the shared detail panel; loadTemplate expands its nested {{> download-dropdown}}.
@@ -268,6 +277,7 @@ function main() {
       OG_DESC:       esc(metaDescEn),
       OG_IMAGE:      `${BASE_URL}/assets/og/home.png`,
       JSON_LD:       buildJsonLdEn(sectionEn, slug, fullUrlEn, items, titleBaseEn, metaDescEn),
+      INTRO_SECTION: '',
       STATIC_GRID:   buildStaticGrid(
         [{ label: sectionEn, heading: 'h1', items }],
         { assetBase: '/', hrefFor: it => { const u = itemUrl(it, slug); return u ? u.replace(BASE_URL, '/en') : null; }, lang: 'en' }

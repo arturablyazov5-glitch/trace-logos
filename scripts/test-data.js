@@ -7,7 +7,7 @@
  *   --pre   (before any builder) — source data must be valid before building:
  *           • required fields (name, tags, figma, file) in logos/emoji items
  *           • duplicate `file` / `figma` within a category
- *           • every file/variants[].file resolves to a real asset on disk
+ *           • every file/thumb/variants[].file resolves to a real asset on disk
  *           • every `ecosystem` key exists in logos/ecosystems.json
  *           • orphan assets in assets/logos/svgs|pngs unreferenced by any JSON (warning)
  *
@@ -78,7 +78,11 @@ function itemEcosystems(item) {
 function entryFiles(entry) {
   const styles = entry.macos_styles && typeof entry.macos_styles === 'object'
     ? Object.values(entry.macos_styles) : [];
-  return [entry.file, ...styles];
+  // `thumb` (items only — variants never carry it) is the grid-tile override
+  // used by logos with no official square mark. It is a real asset that no
+  // other field points at, so it must be checked for existence and counted as
+  // referenced, or the orphan scan below would report it as unused.
+  return [entry.file, ...(entry.thumb ? [entry.thumb] : []), ...styles];
 }
 
 function loadCategories(manifestRel, baseDir) {
@@ -91,7 +95,7 @@ function loadCategories(manifestRel, baseDir) {
 
 const REQUIRED_FIELDS = ['name', 'tags', 'figma', 'file'];
 
-function checkItems(cats, { label, assetPath, referenced, ecosystems }) {
+function checkItems(cats, { label, assetPath, referenced, ecosystems, labels }) {
   for (const cat of cats) {
     const where = `${label}/${path.basename(cat.file)}`;
     const seenFiles = new Map();
@@ -112,6 +116,13 @@ function checkItems(cats, { label, assetPath, referenced, ecosystems }) {
       const variants = Array.isArray(item.variants) ? item.variants.filter(Boolean) : [];
       const primaryFiles = entryFiles(item);
       const variantFiles = variants.flatMap(v => (v.file ? entryFiles(v) : (err(`${where}: «${id}» — вариант без поля "file"`), [])));
+      if (labels) {
+        for (const v of variants) {
+          if (v.labelKey && !labels[v.labelKey]) {
+            err(`${where}: «${id}» — labelKey "${v.labelKey}" отсутствует в logos/labels.json`);
+          }
+        }
+      }
       for (const [files, isVariant] of [[primaryFiles, false], [variantFiles, true]]) {
         for (const f of files) {
           if (!f || typeof f !== 'string') continue;
@@ -168,9 +179,10 @@ function runPre() {
   const logoCats  = loadCategories('logos/manifest.json', path.join(ROOT, 'logos'));
   const emojiCats = loadCategories('emoji/manifest.json', path.join(ROOT, 'emoji'));
   const ecosystems = new Set(Object.keys(readJson('logos/ecosystems.json')));
+  const labels = readJson('logos/labels.json');
 
   const referencedLogos = new Set();
-  checkItems(logoCats,  { label: 'logos', assetPath: logoAssetPath, referenced: referencedLogos, ecosystems });
+  checkItems(logoCats,  { label: 'logos', assetPath: logoAssetPath, referenced: referencedLogos, ecosystems, labels });
   checkItems(emojiCats, { label: 'emoji', assetPath: emojiAssetPath });
 
   // Orphans: assets present on disk but referenced by no logo item.
@@ -235,12 +247,17 @@ function runPost() {
       if (!slug) continue;
       ogChecked++;
       if (!fs.existsSync(path.join(ROOT, 'assets', 'og', `${slug}.png`))) {
-        warn(`нет OG-картинки: assets/og/${slug}.png («${item.name}») — запустить build-og-images.js или npm run build -- --with-og`);
+        warn(`нет OG-картинки: assets/og/${slug}.png («${item.name}») — запустить build-og-images.js (входит в fast tier, должен был отработать раньше в этом же билде)`);
       }
     }
   }
   // Blog OG images: every post should have assets/og/blog-<slug>.png.
-  // Warning, not error: build-blog-og-images.js is the opt-in slow tier.
+  // Warning, not error: this check runs (test-data --post) BEFORE
+  // build-blog-og-images.js in build-all.js's fast tier, so a brand-new
+  // post always warns here and then gets its image a few steps later in
+  // the same run — that's expected, not a real gap. build-blog-og-images.js
+  // is mandatory in the fast tier (not opt-in) since 2026-07; a warning that
+  // survives a full `npm run build` means that step actually failed.
   let blogOgChecked = 0;
   const postsDir = path.join(ROOT, 'blog', 'posts');
   for (const f of fs.readdirSync(postsDir).filter(f => f.endsWith('.md'))) {
@@ -249,7 +266,7 @@ function runPost() {
     const slug = m ? m[1] : path.basename(f, '.md');
     blogOgChecked++;
     if (!fs.existsSync(path.join(ROOT, 'assets', 'og', `blog-${slug}.png`))) {
-      warn(`нет OG-картинки: assets/og/blog-${slug}.png — запустить build-blog-og-images.js или npm run build -- --og-blog`);
+      warn(`нет OG-картинки: assets/og/blog-${slug}.png — запустить build-blog-og-images.js (входит в fast tier, должен был отработать позже в этом же билде)`);
     }
   }
 

@@ -152,12 +152,12 @@ A logo row (banks, partners, "trusted by") should never be width-aligned — a w
 - **Screenshot a logo off a website.** You get a blurry raster with a background. An SVG exists for almost any brand — find it.
 - **Flatten someone's SVG needlessly.** The layers and groups in the original are structure you'll want for recoloring.
 - **Stretch disproportionately.** Easy to grab one side by accident. Hold Shift or lock proportions in the panel.
-- **Recolor to "almost brand" colors.** Brands have exact HEX codes — take them from the SVG or guidelines, not by eye ([how-to here](../kak-uznat-cvet-logotipa/)).
+- **Recolor to "almost brand" colors.** Brands have exact HEX codes — take them from the SVG or guidelines, not by eye; [here's how](../kak-uznat-cvet-logotipa/) in a separate guide.
 :::
 
 ## Exporting back
 
-[Figma](../../logos/design/figma/) exports the logo any way you need: select → Export → SVG for web, PNG at a multiplier for raster, PDF for print. For developers, hand over SVG, not PNG — embedding SVG gives crispness and flexibility ([the embedding guide](../kak-vstavit-svg-na-sajt/)).
+[Figma](../../logos/design/figma/) exports the logo any way you need: select → Export → SVG for web, PNG at a multiplier for raster, PDF for print. For developers, hand over SVG, not PNG — embedding SVG gives crispness and flexibility; [the embedding guide](../kak-vstavit-svg-na-sajt/) covers the details.
 
 ## Logos in a design system: storing them right
 
@@ -181,7 +181,7 @@ The structure pays off at the first client rebrand: swapping the master updates 
 
 **How do I place a logo on all mockups at once?** You don't — and that's correct: make a component and place instances. Mass-pasting without a component is tech debt that fires at the first edit.
 
-**Can [Figma](../../logos/design/figma/) animate a logo?** Prototyping animates transitions between variants (Smart Animate) — enough for simple reveals. Real motion means After Effects and Lottie export ([the animated logo article](../animirovannyj-logotip/)).
+**Can [Figma](../../logos/design/figma/) animate a logo?** Prototyping animates transitions between variants (Smart Animate) — enough for simple reveals. Real motion means After Effects and Lottie export, covered in [the animated logo article](../animirovannyj-logotip/).
 
 **Why is the PNG export blurry?** Check the export multiplier: 1x from a small frame yields a small file. Use 2x–4x or set an exact width in the Export field.
 

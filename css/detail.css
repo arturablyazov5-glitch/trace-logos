@@ -42,15 +42,7 @@
 #detail-placeholder svg { color: #333; }
 .detail-placeholder-title { font-size: 14px; font-weight: 600; color: var(--text-3); }
 .detail-placeholder-sub { font-size: 12px; line-height: 1.5; color: var(--text-6); max-width: 220px; margin: 0; }
-.btn-support {
-  display: inline-flex; align-items: center; gap: 6px;
-  margin-top: 4px; padding: 12px 20px; border-radius: 12px;
-  font-size: 12px; font-weight: 500; text-decoration: none;
-  color: #fff; background: rgb(42 42 42);
-  transition: background .15s;
-}
-.btn-support:hover { background: rgb(55 55 55); }
-.btn-support svg { flex-shrink: 0; fill: #fff; stroke: none; }
+/* .btn-support lives in css/support-btn.css (single source of truth for <support-btn>) */
 
 /* Desktop: keep the panel permanently visible like the sidebar. With no logo
    selected, hide the per-logo content and show the placeholder instead. */
@@ -174,6 +166,7 @@
   padding: 16px 20px;
   border-radius: 12px;
 }
+.detail-preview.dark-checker img:not(.square) { background: var(--checker-full-dark); }
 .detail-preview img.prerendered {
   background: none;
   padding: 0;
@@ -358,98 +351,6 @@ copy-emoji-btn { display: contents; }
   width: 0;
   transition: width .15s linear;
 }
-.btn-chevron {
-  margin-left: auto;
-  flex-shrink: 0;
-  transition: transform .15s;
-}
-.btn-zip.open .btn-chevron { transform: rotate(180deg); }
-.btn-download-group.zip-only .btn-chevron { display: none; }
-.btn-download-group.zip-only .btn-download-menu { display: none !important; }
-
-.btn-download-menu {
-  display: none;
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 0;
-  right: 0;
-  background: #1e1e1e;
-  border: 1px solid #2a2a2a;
-  border-radius: 10px;
-  overflow: hidden;
-  z-index: 10;
-  box-shadow: 0 4px 16px rgba(0,0,0,.4);
-}
-.btn-download-menu.open { display: block; }
-
-.btn-menu-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-  padding: 10px 14px;
-  background: none;
-  border: none;
-  color: #ccc;
-  font-size: 13px;
-  font-weight: 500;
-  text-align: left;
-  cursor: pointer;
-  transition: background .1s, color .1s;
-}
-.btn-menu-item svg { flex-shrink: 0; }
-/* Windows/Apple glyphs have internal padding in their 32-viewBox — bump them up to read level with the others */
-#btn-download-ico svg, #btn-download-icns svg { width: 18px; height: 18px; margin: -2px 0; }
-.btn-menu-item:hover:not(:disabled) {
-  background: #252525;
-  color: #fff;
-}
-.btn-menu-item--soon {
-  color: #555;
-  cursor: default;
-}
-.btn-menu-item--zip {
-  position: relative;
-  overflow: hidden;
-}
-.btn-menu-item--zip .btn-progress {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  background: #4ade80;
-  width: 0;
-  transition: width .15s linear;
-}
-.btn-menu-item.hidden { display: none; }
-.btn-menu-item--disabled {
-  color: #444;
-  cursor: default;
-}
-.btn-menu-size {
-  margin-left: auto;
-  font-size: 11px;
-  font-weight: 400;
-  color: #555;
-}
-.btn-menu-item:hover:not(:disabled) .btn-menu-size { color: #888; }
-.btn-menu-badge {
-  margin-left: auto;
-  font-size: 10px;
-  font-weight: 600;
-  color: #555;
-  background: #2a2a2a;
-  border-radius: 4px;
-  padding: 2px 5px;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-}
-.btn-menu-divider {
-  height: 1px;
-  background: #2a2a2a;
-  margin: 2px 0;
-}
-
 .btn-help {
   width: 100%;
   background: #161e2a;
@@ -543,6 +444,7 @@ copy-emoji-btn { display: contents; }
   padding: 6px 10px;
   max-height: 44px;
 }
+.variant-card.wide.dark-checker img { background: var(--checker-full-dark); }
 .variant-card.favicon img { width: 40px; height: 40px; border-radius: 9px; }
 .variant-card.favicon img.prerendered { border-radius: 0; }
 .variant-card .variant-label {
@@ -630,6 +532,25 @@ copy-emoji-btn { display: contents; }
   color: #c8a84b;
 }
 .detail-note.hidden { display: none; }
+
+/* "No official square icon" explainer — neutral/informational, deliberately
+   not the amber warning treatment of .detail-note: nothing is wrong here, the
+   visitor is just being told why the square tile has no downloadable twin. */
+.detail-noicon {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin: 0 16px 16px;
+  padding: 10px 12px;
+  background: #16181c;
+  border: 1px solid #262a30;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7d858f;
+}
+.detail-noicon svg { flex: none; margin-top: 1px; color: #5c6470; }
+.detail-noicon.hidden { display: none; }
 
 /* Brand link */
 .detail-brand-link { display: flex; flex-direction: column; }

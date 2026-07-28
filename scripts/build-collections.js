@@ -58,10 +58,20 @@ function pickLogos(logos, matches) {
 
 const REL_TO_ROOT = '../../';
 
+// Thumbnail-only src: for PNG-primary logos, swap in the WebP grid preview
+// (build-webp-previews.js) when one exists — these cards render at 32×32, no
+// reason to ship the full-res original. SVG-primary logos are untouched.
+function thumbAsset(l) {
+  const asset = relPath(l.svgUrl || l.pngUrl);
+  if (l.svgUrl || !l.pngUrl) return asset;
+  const webpRel = asset.replace('/pngs/', '/previews/').replace(/\.png$/i, '.webp');
+  return fs.existsSync(path.join(ROOT, webpRel)) ? webpRel : asset;
+}
+
 function buildCards(items, lang = 'ru') {
   const altPrefix = lang === 'en' ? 'Logo' : 'Логотип';
   return items.map(l => {
-    const asset = relPath(l.svgUrl || l.pngUrl);
+    const asset = thumbAsset(l);
     const href  = lang === 'en'
       ? `/en/${relPath(l.url)}`
       : `${REL_TO_ROOT}${relPath(l.url)}`;
@@ -73,7 +83,26 @@ function buildCards(items, lang = 'ru') {
   }).join('\n      ');
 }
 
+// Unique per-collection copy between hero and grid. `intro`/`intro_en` in
+// collections.json is an array of paragraph strings (inline <a> HTML allowed —
+// authored by us, injected raw like logo `about` text). Links use RU-relative
+// hrefs (../../logos/…); on the EN mirror applyEnChrome→makePathsAbsolute rewrites
+// them to /en/logos/…, so the same relative form is correct for both languages.
+function buildIntroSection(col, lang = 'ru') {
+  const paras = lang === 'en' ? col.intro_en : col.intro;
+  if (!Array.isArray(paras) || !paras.length) return '';
+  const rows = paras.map(p => `    <p>${p}</p>`).join('\n');
+  return `  <section class="collection-intro">\n${rows}\n  </section>\n`;
+}
+
+// Per-collection FAQ when authored (`faq`/`faq_en`: array of {q,a}), else the
+// generic templated fallback below. Authored FAQ kills the near-duplicate FAQPage
+// schema that 3 identical questions across every collection would otherwise create.
 function buildFaqItems(col, count, lang = 'ru') {
+  const authored = lang === 'en' ? col.faq_en : col.faq;
+  if (Array.isArray(authored) && authored.length) {
+    return authored.map(f => ({ q: f.q, a: f.a }));
+  }
   if (lang === 'en') {
     return [
       {
@@ -204,11 +233,12 @@ function main() {
       HREFLANG_TAGS: hreflangBlock(fullUrlRu, fullUrlEn),
       OG_TITLE: esc(col.title),
       OG_DESC: esc(col.lead),
-      OG_IMAGE: `${BASE_URL}/assets/og/home.png`,
+      OG_IMAGE: `${BASE_URL}/assets/og/collection-${col.slug}.png`,
       JSON_LD: buildJsonLd(col, fullUrlRu, items, faqRu, 'ru'),
       ICON: col.icon || '🏷',
       H1: esc(col.h1),
       LEAD: esc(col.lead),
+      INTRO_SECTION: buildIntroSection(col, 'ru'),
       CARDS: buildCards(items, 'ru'),
       CATALOG_CTA_TITLE_FULL: `${catalogCount}+ логотипов в каталоге`,
       CATALOG_CTA_SUB: 'SVG, PNG, редактор цвета, экспорт в Figma',
@@ -235,11 +265,12 @@ function main() {
       HREFLANG_TAGS: hreflangBlock(fullUrlRu, fullUrlEn),
       OG_TITLE: esc(col.h1_en || col.h1),
       OG_DESC: esc(col.lead_en || col.lead),
-      OG_IMAGE: `${BASE_URL}/assets/og/home.png`,
+      OG_IMAGE: `${BASE_URL}/assets/og/collection-${col.slug}.png`,
       JSON_LD: buildJsonLd(col, fullUrlEn, items, faqEn, 'en'),
       ICON: col.icon || '🏷',
       H1: esc(col.h1_en || col.h1),
       LEAD: esc(col.lead_en || col.lead),
+      INTRO_SECTION: buildIntroSection(col, 'en'),
       CARDS: buildCards(items, 'en'),
       CATALOG_CTA_TITLE_FULL: `${catalogCount}+ logos in the catalog`,
       CATALOG_CTA_SUB: 'SVG, PNG, color editor, Figma export',

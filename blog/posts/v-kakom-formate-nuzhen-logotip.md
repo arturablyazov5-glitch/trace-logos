@@ -9,10 +9,10 @@ tags: Форматы, Логотипы, SVG
 tags_en: Formats, Logos, SVG
 ---
 
-Дизайнер прислал логотип одним JPG-файлом — и через месяц выяснилось, что его нельзя ни увеличить для баннера, ни поставить на цветной фон, ни отдать в типографию. Знакомо? Это самая частая ошибка при заказе логотипа. Разберём, какие форматы бывают, зачем нужен каждый и что обязательно должно лежать в вашей папке с фирменным стилем.
+Дизайнер прислал логотип одним JPG-файлом и через месяц выяснилось, что его нельзя ни увеличить для баннера, ни поставить на цветной фон, ни отдать в типографию. Знакомо? Это самая частая ошибка при заказе логотипа. Разберём, какие форматы бывают, зачем нужен каждый и что обязательно должно лежать в вашей папке с фирменным стилем.
 
 :::note Коротко
-Логотип должен существовать минимум в двух видах: **вектор** (SVG, AI или EPS) — исходник, из которого делается всё остальное, и **растр** (PNG с прозрачным фоном) — для быстрых бытовых задач. Если у вас есть только JPG — у вас нет логотипа, у вас есть его фотография.
+Логотип должен существовать минимум в двух видах: **вектор** (SVG, AI или EPS) — исходник, из которого делается всё остальное, и **растр** (PNG с прозрачным фоном) для быстрых бытовых задач. Если у вас есть только JPG — у вас нет логотипа, у вас есть его фотография.
 :::
 
 ## Вектор и растр: в чём разница
@@ -23,7 +23,7 @@ tags_en: Formats, Logos, SVG
 
 **Растровые форматы** (PNG, JPG, WebP) хранят сетку пикселей. У них есть фиксированное разрешение: PNG размером 500×500 при растяжке на билборд превратится в мыло.
 
-Подробное сравнение двух главных веб-форматов мы уже делали в статье [SVG или PNG для логотипа](../svg-ili-png-dlya-logotipa/) — здесь посмотрим на всю линейку целиком.
+Подробное сравнение двух главных веб-форматов мы уже делали в статье [SVG или PNG для логотипа](../svg-ili-png-dlya-logotipa/) — здесь посмотрим на всю линейку целиком. А если разница между вектором и растром в принципе нова — начните с базового объяснения в статье [векторная и растровая графика: разница простыми словами](../vektor-i-rastr-raznica/).
 
 ## Разбор форматов по одному
 
@@ -37,7 +37,7 @@ tags_en: Formats, Logos, SVG
 
 ### JPG — почти никогда
 
-JPG не поддерживает прозрачность: логотип будет жить в белом прямоугольнике. Плюс формат сжимает с потерями — вокруг чётких контуров появляются грязные артефакты. Единственный сценарий, где JPG уместен, — фотография, на которой логотип просто присутствует.
+JPG не поддерживает прозрачность: логотип будет жить в белом прямоугольнике. Плюс формат сжимает с потерями — вокруг чётких контуров появляются грязные артефакты. Единственный сценарий, где JPG уместен, — фотография, на которой логотип просто присутствует. Подробный разбор различий — в статье [PNG или JPG: что выбрать](../png-ili-jpg-chto-luchshe/).
 
 ### AI — исходник из Adobe Illustrator
 
@@ -139,7 +139,7 @@ Everything splits into two groups, and this matters more than the file extension
 
 **Raster formats** (PNG, JPG, WebP) store a grid of pixels with a fixed resolution. A 500×500 PNG stretched onto a billboard turns to mush.
 
-We compared the two main web formats in detail in [SVG or PNG for a logo](../svg-ili-png-dlya-logotipa/) — here we look at the full lineup.
+We compared the two main web formats in detail in [SVG or PNG for a logo](../svg-ili-png-dlya-logotipa/) — here we look at the full lineup. New to vector vs raster in general? Start with the plain-language explainer in [vector vs raster graphics: the difference in simple terms](../vektor-i-rastr-raznica/).
 
 ## Format by format
 
@@ -153,7 +153,7 @@ Raster with transparent-background support. Irreplaceable where vectors can't go
 
 ### JPG — almost never
 
-JPG has no transparency: the logo lives inside a white rectangle forever. It also compresses with loss, leaving dirty artifacts around sharp edges. The only case where JPG is fine is a photo that happens to contain a logo.
+JPG has no transparency: the logo lives inside a white rectangle forever. It also compresses with loss, leaving dirty artifacts around sharp edges. The only case where JPG is fine is a photo that happens to contain a logo. For the full breakdown, see [PNG or JPG: which to choose](../png-ili-jpg-chto-luchshe/).
 
 ### AI — the Adobe Illustrator source
 

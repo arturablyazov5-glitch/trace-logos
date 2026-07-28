@@ -23,6 +23,15 @@
       <div class="detail-name" id="detail-name"></div>
       <div class="detail-figma" id="detail-figma"></div>
 
+      <!-- Shown for items with `thumb`: the catalog tile is a square stand-in,
+           the brand itself has no official square mark. Sits above the download
+           buttons on purpose — the visitor clicked a square and must learn why
+           it isn't here BEFORE downloading. -->
+      <div class="detail-noicon hidden" id="detail-noicon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <span data-i18n="noIconNote">У бренда нет официальной квадратной иконки. Существует только горизонтальный вариант. Квадрат в каталоге нарисован нами для единообразия сетки и не является знаком бренда.</span>
+      </div>
+
       <div id="detail-controls">
       <div class="detail-section-label" id="detail-actions-label" data-i18n="detailActionsLabel">Действия</div>
       <div class="detail-actions" id="detail-actions">

@@ -29,16 +29,18 @@
   </script>
 
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-header.css">
   <link rel="stylesheet" href="{{REL}}css/emoji-category-page.css">
   <link rel="stylesheet" href="{{REL}}css/logo-card.css">
   <link rel="stylesheet" href="{{REL}}css/collection-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 
-{{> site-header search_action='logos/' search_scope='all' search_ph='Поиск логотипов и эмодзи...' back_href='logos/' back_label='В каталог' }}
+{{> nav-header }}
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="{{REL}}">Trace Logo's</a><span class="sep">/</span>
@@ -48,13 +50,14 @@
 
 <main>
   <div class="category-hero">
-    <h1><span aria-hidden="true">{{ICON}}</span> {{H1}}</h1>
+    <h1>{{H1}}</h1>
     <p class="category-desc">{{LEAD}}</p>
   </div>
 
   <div class="collection-grid">
     {{CARDS}}
   </div>
+{{INTRO_SECTION}}
 
 {{FAQ_SECTION}}
   <div class="catalog-cta">
@@ -69,11 +72,7 @@
   </div>
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="{{REL}}" class="footer-link">trace-logos</a>
-  <p class="footer-copyright" data-i18n="footerCopyrightShort">Изображения могут быть защищены авторским правом их владельцев.</p>
-</footer>
+{{> site-footer}}
 
-<script type="module" src="{{REL}}js/header-search.js"></script>
 </body>
 </html>

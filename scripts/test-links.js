@@ -2,25 +2,32 @@
 /**
  * Проверка внутренних ссылок в СГЕНЕРЁННОМ HTML. Read-only, ничего не пишет.
  *
- * test-data.js проверяет ассеты, на которые ссылается JSON. Этот скрипт
- * проверяет другое: ссылки МЕЖДУ готовыми страницами. Проходит по всем
- * *.html сайта, вытаскивает href/src (и URL-подобные content — canonical,
- * og:image) и убеждается, что цель существует на диске.
+ * Проверяет ВСЕ внутренние href/src/content-ссылки в готовом HTML — и на
+ * страницы, и на ассеты (svg/png/webp/css/js/…) — тем, что реально лежит
+ * на диске после сборки. test-data.js проверяет другой слой: что file/
+ * variants[].file в ИСХОДНОМ JSON резолвятся в реальные ассеты. Здесь же
+ * проверяется РЕЗУЛЬТАТ рендеринга — путь, который билд-скрипт фактически
+ * записал в HTML, мог быть искажён (лишний префикс, не тот rel, опечатка
+ * в шаблоне) даже если сам ассет на диске в порядке.
  *
- * Ловит ровно тот класс багов, что раньше отлавливался вручную через `find`:
+ * Ловит, например:
  *   • about-текст ссылается на /logos/ecosystem/<key>/, а страницы нет
  *   • перекрёстная ссылка на /logos/<cat>/<slug>/ с опечаткой в слаге
  *   • canonical / og:image указывает на удалённую страницу или картинку
+ *   • билд-скрипт EN-зеркала подставляет /en/ в путь ассета (assets/ не
+ *     зеркалируется под /en/ — .../en/assets/... всегда 404)
  *
  * Резолв ссылок:
  *   • внешние (http(s):// на чужой домен), //, #, mailto:/tel:/data:/js:  — пропуск
  *   • https://trace-logos.ru/<x>  → <ROOT>/<x>   (внутренний абсолют по домену)
  *   • /<x>                        → <ROOT>/<x>   (корне-абсолютный путь)
  *   • ../<x>, <x>                 → относительно папки самой страницы
- *   • ?query и #hash отбрасываются; путь на "/" → добавляется index.html
+ *   • ?query и #hash отбрасываются; %XX декодируется; путь на "/" → index.html
  *
- * Битая внутренняя ссылка = ошибка (exit 1), как в test-data.js.
- * Флаги: --warn-only (не валить сборку, только предупредить), --dry-run (игнор).
+ * Любая битая внутренняя ссылка = ошибка (exit 1), как в test-data.js.
+ * Исключений нет — см. комментарий у isSoftWarn ниже.
+ *
+ * Флаги: --warn-only (все находки как предупреждения, без exit 1), --dry-run (игнор).
  *
  * Usage:
  *   node scripts/test-links.js
@@ -41,6 +48,18 @@ const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
   'figma-plugin', 'supabase', 'sanitizer', 'upptime',
 ]);
+
+// Исключений НЕТ: любая неразрешимая внутренняя ссылка роняет сборку.
+//
+// Раньше здесь висело послабление на assets/og/*.png — «OG-картинки генерирует
+// опциональный slow-tier шаг, его могли не запустить». Опциональных шагов больше
+// нет: все четыре генератора OG (логотипы, блог, подборки, главная) обязательны
+// в build-all.js и отрабатывают ДО этой проверки. Значит отсутствующий OG — это
+// не «шаг не запускали», а упавший шаг или мусор в данных, и билд обязан встать.
+//
+// Ничего сюда не возвращать. Не резолвится путь — это либо баг шаблона (чинить в
+// билд-скрипте), либо мёртвая ссылка в данных (чинить в JSON).
+const isSoftWarn = () => false;
 
 // Кэш "существует ли цель на диске" — одну и ту же ссылку резолвим сотни раз.
 const existsCache = new Map();
@@ -73,7 +92,8 @@ function walkHtml(dir, out = []) {
 }
 
 // Из значения атрибута получить абсолютный путь на диске, который должен
-// существовать. Возвращает null для ссылок, которые проверять не нужно.
+// существовать, плюс сайт-абсолютный путь (для SOFT_WARN_RE / отчёта).
+// Возвращает null для ссылок, которые проверять не нужно.
 function resolveTarget(rawValue, pageAbsPath) {
   let value = rawValue.trim();
   if (!value) return null;
@@ -93,29 +113,26 @@ function resolveTarget(rawValue, pageAbsPath) {
     value = m[2] || '/';
   }
 
-  // Отбрасываем query и hash.
+  // Отбрасываем query и hash, декодируем %XX (иначе "File%20Name.svg" не
+  // совпадёт с реальным файлом "File Name.svg" на диске).
   value = value.replace(/[?#].*$/, '');
   if (!value) return null;
+  try { value = decodeURIComponent(value); } catch { /* оставляем как есть */ }
 
-  // Этот скрипт проверяет ТОЛЬКО навигационные ссылки между страницами
-  // (…/  или  ….html). Ассеты (png/svg/css/js/json/…) — забота test-data.js;
-  // сюда они попадать не должны, иначе дублируем проверку и ловим
-  // сознательно терпимые промахи (напр. отсутствующие google-флаги эмодзи).
-  const base = value.split('/').pop();
-  const isPageLink = value.endsWith('/') || !base.includes('.') || /\.html$/i.test(base);
-  if (!isPageLink) return null;
-
+  let siteAbs; // путь от корня сайта, для SOFT_WARN_RE
   let abs;
   if (value.startsWith('/')) {
+    siteAbs = value;
     abs = path.join(ROOT, value);
   } else {
     abs = path.resolve(path.dirname(pageAbsPath), value);
+    siteAbs = '/' + path.relative(ROOT, abs).split(path.sep).join('/');
   }
 
   // Ссылка-директория ("…/") означает …/index.html.
   if (value.endsWith('/') || abs === ROOT) abs = path.join(abs, 'index.html');
 
-  return abs;
+  return { abs, siteAbs };
 }
 
 // href="…", src="…", и content="…" только если значение похоже на URL/путь
@@ -132,8 +149,8 @@ function extractTargets(html, pageAbsPath) {
       // content резолвим только когда это URL/путь, а не произвольный текст.
       if (!/^(https?:\/\/|\/)/i.test(value.trim())) continue;
     }
-    const abs = resolveTarget(value, pageAbsPath);
-    if (abs) targets.push({ value: value.trim(), abs });
+    const resolved = resolveTarget(value, pageAbsPath);
+    if (resolved) targets.push({ value: value.trim(), ...resolved });
   }
   return targets;
 }
@@ -143,33 +160,36 @@ function main() {
 
   // Группируем битые ссылки по цели: одна дохлая страница обычно линкуется
   // с десятков карточек — показываем цель + счётчик + пример источника.
-  const broken = new Map(); // value → { count, sample }
+  const broken = new Map();     // value → { count, sample, soft }
   let linksChecked = 0;
 
   for (const page of pages) {
     const html = fs.readFileSync(page, 'utf8');
-    for (const { value, abs } of extractTargets(html, page)) {
+    for (const { value, abs, siteAbs } of extractTargets(html, page)) {
       linksChecked++;
       if (targetExists(abs)) continue;
       const rel = path.relative(ROOT, page);
       const hit = broken.get(value);
       if (hit) hit.count++;
-      else broken.set(value, { count: 1, sample: rel });
+      else broken.set(value, { count: 1, sample: rel, soft: isSoftWarn(siteAbs) });
     }
   }
 
   const entries = [...broken.entries()].sort((a, b) => b[1].count - a[1].count);
-  for (const [value, { count, sample }] of entries) {
-    const mark = WARN_ONLY ? '\x1b[33m⚠' : '\x1b[31m✗';
+  let hardCount = 0;
+  for (const [value, { count, sample, soft }] of entries) {
+    const isHard = !soft && !WARN_ONLY;
+    if (isHard) hardCount++;
+    const mark = isHard ? '\x1b[31m✗' : '\x1b[33m⚠';
     console.error(`${mark} битая ссылка: ${value}\x1b[0m — ${count}× (напр. ${sample})`);
   }
 
   console.log(
     `\n[links] страниц: ${pages.length}, проверено ссылок: ${linksChecked}, ` +
-    `битых целей: ${entries.length}`,
+    `битых целей: ${entries.length} (из них жёстких: ${hardCount})`,
   );
 
-  process.exit(entries.length && !WARN_ONLY ? 1 : 0);
+  process.exit(hardCount ? 1 : 0);
 }
 
 main();

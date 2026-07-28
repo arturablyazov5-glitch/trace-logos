@@ -92,16 +92,18 @@ async function refreshSnapshot() {
 
 // ── Card markup (mirrors the original hand-written homepage cards) ──────────
 function cardHtml(pick) {
-  const isSvg = assetExt(pick.file) === 'svg';
+  // Same rule as buildCard()/static-grid: `thumb` swaps the tile image only.
+  const file  = pick.thumb || pick.file;
+  const isSvg = assetExt(file) === 'svg';
   const alt   = `Логотип ${pick.name}`;
   let media;
   if (isSvg) {
-    media = `<img src="assets/logos/svgs/${esc(pick.file)}" alt="${esc(alt)}" width="44" height="44" loading="lazy">`;
+    media = `<img src="assets/logos/svgs/${esc(file)}" alt="${esc(alt)}" width="44" height="44" loading="lazy">`;
   } else {
-    const webp = path.join(ROOT, 'assets', 'logos', 'previews', `${baseName(pick.file)}.webp`);
-    const img  = `<img src="assets/logos/pngs/${esc(pick.file)}" alt="${esc(alt)}" width="44" height="44" loading="lazy">`;
+    const webp = path.join(ROOT, 'assets', 'logos', 'previews', `${baseName(file)}.webp`);
+    const img  = `<img src="assets/logos/pngs/${esc(file)}" alt="${esc(alt)}" width="44" height="44" loading="lazy">`;
     media = fs.existsSync(webp)
-      ? `<picture><source srcset="assets/logos/previews/${esc(baseName(pick.file))}.webp" type="image/webp">${img}</picture>`
+      ? `<picture><source srcset="assets/logos/previews/${esc(baseName(file))}.webp" type="image/webp">${img}</picture>`
       : img;
   }
   return `        <a class="logo-card" href="${esc(pick.url)}">
@@ -132,7 +134,7 @@ async function main() {
     .filter(x => x.url)
     .sort((a, b) => b.v - a.v || slugify(a.it.name).localeCompare(slugify(b.it.name)))
     .slice(0, COUNT)
-    .map(x => ({ figma: x.figma, views: x.v, name: x.it.name, name_en: x.it.name_en || x.it.name, file: x.it.file, url: x.url }));
+    .map(x => ({ figma: x.figma, views: x.v, name: x.it.name, name_en: x.it.name_en || x.it.name, file: x.it.file, thumb: x.it.thumb, url: x.url }));
 
   if (picks.length < COUNT) {
     console.warn(`  ⚠ найдено только ${picks.length}/${COUNT} логотипов со статистикой — блок будет короче`);

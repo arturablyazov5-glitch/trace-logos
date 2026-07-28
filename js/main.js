@@ -1,14 +1,12 @@
-import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize, trackLogoView, trackExport } from './utils.js';
+import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize, trackLogoView, trackExport, trackSearchNoResults } from './utils.js';
 import './search-shortcut.js';
+import './donate.js';   // hosting fundraiser modal — self-wires to the `tl:export` event
 import {
   colorState, svgRawCache,
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
-  pushColorHistory, undoColors, loadRawSvg, applyColorMap, setPreviewHook, extractColors,
+  pushColorHistory, undoColors, loadRawSvg, applyColorMap, extractColors,
 } from './color.js';
-import * as glassModule from './liquid-glass.js';
-import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, downloadAsIco, estimateIcoSize } from './export.js';
-import { openIcnsModal } from './icns.js';
-import { openLiquidModal } from './liquid-glass-modal.js';
+import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, estimateZipSize } from './export.js';
 import { updateSeoPageLink, slugifyPathPart } from './seo.js';
 import { ecosystemLogoMap, ecosystemLabels, ecosystemLabelsEn, ecosystemSectionLabels, ecosystemSectionLabelsEn, loadLogos } from './data.js';
 import { categoryIconSvg } from './category-icons.js';
@@ -26,6 +24,10 @@ import { openHelpModal } from './help.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
 import { t, setLang, getLang } from './i18n.js';
 import { initSidebarIndicator } from './microanim.js';
+import { trackCardOpen } from './easter-achievements.js';
+import { checkCatalogEnd } from './easter-confetti.js';
+import { playAmongUsEscape } from './easter-amongus.js';
+import { playGoogleAssemble } from './easter-google.js';
 
 // ── DOM refs ──
 const content           = document.getElementById('content');
@@ -66,9 +68,7 @@ let activePngFile = null;          // tracks the currently displayed PNG (incl. 
 let selectVariantGen = 0;          // bumped on every selectVariant call; lets a stale async
                                     // continuation (e.g. a slow loadRawSvg) detect it's been
                                     // superseded by a faster later switch and bail out
-let updateZipDownloadSize = null;  // set per card open; deferred to first menu open (see toggleDownloadMenu)
 let zipSizeReqId = 0;
-let icoSizeReqId = 0;
 
 // item.ecosystem may be a single key (string) or several (array) — normalize once.
 function itemEcosystems(item) {
@@ -106,81 +106,18 @@ function triggerConfetti(el, labelText) {
   copyBtnResetTimer = setTimeout(() => { resetCopyBtn(); }, 2000);
 }
 
-// Per-variant state for the download dropdown (logos only — emoji/icons use a plain ZIP button).
-// Square variants expose the full menu (ICO/ICNS/ZIP); wide/full variants collapse to a single
-// "Скачать все (ZIP)" trigger since ICO/ICNS are square formats. ICO is built from item.file.
-function applyDownloadVariantState(item, isSquare, file = item.file) {
-  const group   = document.getElementById('btn-download-all');
+// Per-variant state for the download trigger (logos only — emoji/icons use a plain ZIP button).
+// The trigger always opens the "other formats" modal; square-only rows (ICO/ICNS/Liquid
+// Glass) are shown/hidden inside the modal itself based on isSquare.
+function applyDownloadVariantState(item, isSquare, file = item.file, darkBg = false) {
   const trigger = document.getElementById('btn-download-trigger');
-  const menu    = document.getElementById('btn-download-menu');
-  if (!group || !trigger || !menu) return; // old plain button — nothing to configure
+  if (!trigger) return; // old plain button — nothing to configure
 
-  group.classList.toggle('zip-only', !isSquare);
-  const label = trigger.querySelector('span');
-  if (label) label.textContent = isSquare ? LABELS.dlMore : LABELS.dlZipAll;
-  trigger.onclick = isSquare
-    ? (e) => { e.stopPropagation(); toggleDownloadMenu(); }
-    : (e) => { e.stopPropagation(); downloadAllAsZip(item); };
-
-  // Building the ICO is a real render (4 canvas frames) just to show a byte count
-  // in a menu item most visitors never open — stash the file and compute lazily
-  // on first menu open instead (see loadIcoSizePreview). If the menu happens to
-  // already be open (variant switched without closing it), refresh right away.
-  const icoSizeEl = document.getElementById('btn-download-ico')?.querySelector('.btn-menu-size');
-  if (icoSizeEl) {
-    icoSizeEl.textContent = '';
-    icoSizeEl.dataset.file = isSquare ? file : '';
-    if (menu.classList.contains('open')) loadIcoSizePreview();
-  }
-
-  const btnLg = document.getElementById('btn-download-lg');
-  if (btnLg) btnLg.classList.toggle('hidden', /\.png(\?|$)/i.test(file));
-}
-
-// Computed lazily — see applyDownloadVariantState. reqId guards against a slow
-// estimate for a since-abandoned variant overwriting a fresher one's label.
-function loadIcoSizePreview() {
-  const icoSizeEl = document.getElementById('btn-download-ico')?.querySelector('.btn-menu-size');
-  const file = icoSizeEl?.dataset.file;
-  if (!icoSizeEl || !file || icoSizeEl.textContent) return; // no square variant, or already computed
-  const reqId = ++icoSizeReqId;
-  estimateIcoSize(file).then(sz => {
-    if (sz && reqId === icoSizeReqId) icoSizeEl.textContent = formatFileSize(sz);
-  });
-}
-
-// The download dropdown lives inside #detail, which is overflow:auto — an absolute
-// menu would be clipped when the panel is scrolled. Position it fixed to the
-// viewport (relative to the trigger) so it can overflow the panel, and keep it
-// aligned while the panel scrolls/resizes.
-function positionDownloadMenu() {
-  const menu = document.getElementById('btn-download-menu');
-  const trigger = document.getElementById('btn-download-trigger');
-  if (!menu || !trigger || !menu.classList.contains('open')) return;
-  const tr = trigger.getBoundingClientRect();
-  menu.style.position = 'fixed';
-  menu.style.left = tr.left + 'px';
-  menu.style.width = tr.width + 'px';
-  menu.style.right = 'auto';
-  menu.style.top = 'auto';
-  menu.style.bottom = (window.innerHeight - tr.top + 6) + 'px';
-}
-function closeDownloadMenu() {
-  const menu = document.getElementById('btn-download-menu');
-  const trigger = document.getElementById('btn-download-trigger');
-  if (menu) { menu.classList.remove('open'); menu.style.cssText = ''; }
-  trigger?.classList.remove('open');
-}
-function toggleDownloadMenu() {
-  const menu = document.getElementById('btn-download-menu');
-  const trigger = document.getElementById('btn-download-trigger');
-  if (!menu) return;
-  if (menu.classList.contains('open')) { closeDownloadMenu(); return; }
-  menu.classList.add('open');
-  trigger?.classList.add('open');
-  positionDownloadMenu();
-  loadIcoSizePreview();
-  if (updateZipDownloadSize) { updateZipDownloadSize(); updateZipDownloadSize = null; }
+  trigger.onclick = async (e) => {
+    e.stopPropagation();
+    const { openDownloadModal } = await import('./download-modal.js');
+    openDownloadModal(item, file, isSquare, darkBg);
+  };
 }
 
 // ── Layout helpers ──
@@ -271,8 +208,12 @@ function buildCard(item, sectionState) {
   img.title = item.figma;
   // Grid thumbnail uses a lightweight WebP preview when available (PNG logos);
   // the full asset (svgUrl) stays the source for the detail panel and export.
-  const fullSrc = svgUrl(item.file);
-  const previewSrc = previewUrl(item.file);
+  // `item.thumb` overrides the thumbnail only: brands with no official square
+  // mark keep a square stand-in here so the grid stays uniform, while `file`
+  // (the downloadable/API/CDN primary) remains the real horizontal logo.
+  const thumbFile = item.thumb ?? item.file;
+  const fullSrc = svgUrl(thumbFile);
+  const previewSrc = previewUrl(thumbFile);
   img.addEventListener('load', () => card.classList.remove('loading'), { once: true });
   img.addEventListener('error', () => {
     // Graceful degradation: a missing preview falls back to the full asset once.
@@ -280,7 +221,7 @@ function buildCard(item, sectionState) {
     card.classList.remove('loading');
   });
   img.dataset.src = previewSrc ?? fullSrc;
-  if (item.prerendered ?? item.file.endsWith('.png')) img.classList.add('prerendered');
+  if (item.prerendered ?? thumbFile.endsWith('.png')) img.classList.add('prerendered');
   wrap.appendChild(img);
   card.appendChild(wrap);
 
@@ -415,8 +356,14 @@ function updateTabIndicator(tabs) {
   tabs.style.setProperty('--tab-width', active.offsetWidth + 'px');
 }
 
+// Single authority for a variant's shape. `_original` (the synthetic chip for
+// item.file) carries no type of its own, so it derives its shape from the
+// filename exactly like an untyped variant does — it must NOT be assumed
+// square: items with `thumb` (no official square mark) have a `-full` primary,
+// and hardcoding square there dropped the checkerboard backing behind wide
+// artwork and offered ICO/ICNS for a horizontal logo.
 function getDisplayType(vDef) {
-  if (vDef.type === '_original' || vDef.type === 'svg') return 'square';
+  if (vDef.type === 'svg') return 'square';
   if (vDef.type === 'full' || vDef.type === 'full_en') return 'wide';
   return isFullFile(vDef.file) ? 'wide' : 'square';
 }
@@ -446,6 +393,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   detailImg.alt = vDef.type === '_original' ? logoAlt(item) : logoAlt(item, variantLabel);
   const preview        = detailImg.closest('.detail-preview');
   preview.classList.add('loading');
+  preview.classList.toggle('dark-checker', !!vDef.darkBg);
   const controls       = document.getElementById('detail-controls');
   const colorsPanel    = document.getElementById('colors-panel');
   const colorsDivider  = document.getElementById('colors-divider');
@@ -492,7 +440,6 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   }
 
   if (isPng) {
-    glassModule.hide();
     animateContainerHeight(controls, () => {
       btnCopy.classList.add('hidden');
       btnDownloadSvg.classList.add('hidden');
@@ -502,11 +449,14 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     });
 
     const applyPng = () => {
-      const roundedSquarePng = (vDef.prerendered ?? item.prerendered) === false && !isFullFile(vDef.file);
+      const isWide = getDisplayType(vDef) === 'wide';
+      const roundedSquarePng = !isWide && (vDef.prerendered ?? item.prerendered) === false;
       detailImg.classList.toggle('square', roundedSquarePng);
-      if (roundedSquarePng || (!vDef.type && isFullFile(vDef.file))) detailImg.classList.remove('prerendered');
+      if (isWide || roundedSquarePng) detailImg.classList.remove('prerendered');
       else detailImg.classList.add('prerendered');
-      detailImg.src = svgUrl(vDef.file);
+      const preview = previewUrl(vDef.file);
+      detailImg.src = preview ?? svgUrl(vDef.file);
+      if (preview) detailImg.addEventListener('error', () => { detailImg.src = svgUrl(vDef.file); }, { once: true });
       const previewEl = detailImg.closest('.detail-preview');
       if (previewEl?.classList.contains('loading')) {
         const done = () => previewEl.classList.remove('loading');
@@ -578,20 +528,22 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
         updateTabIndicator(macosStylesTabs);
         const s = btn.dataset.style;
         activePngFile = s === 'color' ? vDef.file : variantStyles[s];
-        detailImg.src = svgUrl(activePngFile);
+        const preview = previewUrl(activePngFile);
+        detailImg.src = preview ?? svgUrl(activePngFile);
+        if (preview) detailImg.addEventListener('error', () => { detailImg.src = svgUrl(activePngFile); }, { once: true });
       };
     }
 
-    const isSquarePng = vDef.type === '_original' || vDef.type === 'png'
-      || (!vDef.type && !isFullFile(vDef.file));
-    applyDownloadVariantState(item, isSquarePng, vDef.file);
+    // `type:"png"` means "PNG Icon" — square by convention regardless of name.
+    const isSquarePng = vDef.type === 'png' || getDisplayType(vDef) === 'square';
+    applyDownloadVariantState(item, isSquarePng, vDef.file, !!vDef.darkBg);
     return;
   }
 
   // SVG-ветка
   activePngFile = null;
   document.getElementById('macos-style-tabs')?.classList.add('hidden');
-  const isSquare = vDef.type === '_original' || vDef.type === 'svg' || (!vDef.type && !isFullFile(vDef.file));
+  const isSquare = getDisplayType(vDef) === 'square';
   const rawSvg = await loadRawSvg(vDef.file);
   // A faster later switch may have already resumed and rendered while this
   // fetch was in flight — stop before touching the preview/buttons/color
@@ -626,18 +578,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
 
   const getExportSvg = () => applyColorMap(rawSvg);
 
-  // Show glass panel for SVG logos only (not emoji)
-  if (_pathSection !== 'emoji') {
-    glassModule.show(getExportSvg());
-  } else {
-    glassModule.hide();
-  }
-
-  // The exported PNG is either the plain raster of the SVG, or — when Liquid Glass
-  // is on — the rendered squircle icon. Shared by the size readout, copy & download.
-  const getPngBlob = () => glassModule.isEnabled()
-    ? glassModule.getBlob(1024)
-    : svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 });
+  const getPngBlob = () => svgToPngBlob(getExportSvg(), { square: isSquare, size: 1000 });
 
   const btnSizeSvg = btnDownloadSvg.querySelector('.btn-size');
   if (btnSizeSvg) btnSizeSvg.textContent = formatFileSize(new Blob([svgForExport(getExportSvg(), isSquare)]).size);
@@ -648,7 +589,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
     Promise.resolve(getPngBlob()).then(b => { if (b && myGen === selectVariantGen) btnSizePng.textContent = formatFileSize(b.size); }).catch(() => {});
   };
   updatePngDownloadSize();
-  applyDownloadVariantState(item, isSquare, vDef.file);
+  applyDownloadVariantState(item, isSquare, vDef.file, !!vDef.darkBg);
 
   btnCopy.onclick = () => {
     navigator.clipboard.writeText(svgForFigma(getExportSvg(), item, isSquare))
@@ -731,6 +672,7 @@ function handleEmptySearch() {
   if (detail.classList.contains('open')) closeDetail();
   const resetBtn = document.getElementById('empty-reset-format');
   if (resetBtn) resetBtn.classList.toggle('hidden', formatState.format === 'all');
+  trackSearchNoResults(search.value);
 }
 
 function isFlagItem(item) {
@@ -742,6 +684,7 @@ openDetailFn = function (item, card) {
 
   if (activeCard === card) { closeDetail(); return; }
   trackLogoView(item.figma, item.name, item.file);
+  trackCardOpen(item);
   resetCopyBtn();
 
   if (activeCard) activeCard.classList.remove('active');
@@ -756,14 +699,17 @@ openDetailFn = function (item, card) {
   const variantsGrid   = document.getElementById('variants-grid');
   const detailVariants = document.getElementById('detail-variants');
 
-  detailImg.src = svgUrl(item.file);
+  detailImg.src = previewUrl(item.file) ?? svgUrl(item.file);
   detailImg.alt = logoAlt(item);
-  detailImg.classList.add('square');
+  // Provisional shape until selectVariant resolves — same rule it uses, so a
+  // wide primary doesn't flash without its checkerboard backing on open.
+  detailImg.classList.toggle('square', getDisplayType({ file: item.file }) === 'square');
   detailImg.classList.remove('prerendered');
   const detailPreview = detailImg.closest('.detail-preview');
   detailPreview.classList.add('loading');
   detailName.textContent = displayName(item);
   detailFigmaEl.textContent = item.figma;
+  document.body.classList.toggle('has-minicrewmate', item.figma === 'Icon/Game/AmongUs');
 
   // macOS style tabs — visibility and onclick are handled per-variant in selectVariant
   activePngFile = null;
@@ -861,45 +807,19 @@ openDetailFn = function (item, card) {
     downloadAllBtn.classList.toggle('hidden', !(hasDownloadDropdown || downloadableSvgCount > 1));
   });
 
-  // Estimate ZIP size — fetches every variant full-size and rasterizes a PNG from
-  // each SVG, which is real network + CPU cost for a label few visitors ever see
-  // (btn-download-zip is buried in a menu). For the dropdown interface (logos),
-  // defer it to first menu open (see toggleDownloadMenu). The old plain button
-  // (emoji/icons) shows the size directly with no menu to defer to, so it still
-  // computes eagerly, unchanged.
-  const btnSizeZip = (document.getElementById('btn-download-zip') || downloadAllBtn)?.querySelector('.btn-size');
-  if (btnSizeZip) btnSizeZip.textContent = ''; // clear stale size from a previously-opened logo
-  updateZipDownloadSize = null;
-  if (btnSizeZip && downloadableSvgCount > 1) {
+  // Estimate ZIP size for the old plain button (emoji/icons) — the dropdown interface
+  // (logos) shows its ZIP size inside the "other formats" modal instead, computed by
+  // download-modal.js/estimateZipSize() on open (that button doesn't exist in the DOM
+  // yet at this point — it's built lazily by download-modal.js's buildDom()).
+  const btnSizeZipEager = hasDownloadDropdown ? null : downloadAllBtn?.querySelector('.btn-size');
+  if (btnSizeZipEager) btnSizeZipEager.textContent = ''; // clear stale size from a previously-opened logo
+  if (!hasDownloadDropdown && downloadableSvgCount > 1) {
     const reqId = ++zipSizeReqId;
-    const computeZipSize = async () => {
-      const variants = allVariants.length > 0
-        ? allVariants
-        : [{ type: '_original', file: item.file }];
-      let total = 0;
-      for (const v of variants) {
-        try {
-          if (v.file.endsWith('.png')) {
-            const resp = await fetch(svgUrl(v.file));
-            const buf = await resp.arrayBuffer();
-            total += buf.byteLength * 2; // png once + approx same for zip entry
-          } else {
-            const raw = await loadRawSvg(v.file);
-            const sq = v.type === '_original' || v.type === 'svg' || (!v.type && !isFullFile(v.file));
-            total += new Blob([svgForExport(applyColorMap(raw), sq)]).size;
-            const png = await svgToPngBlob(applyColorMap(raw), { square: sq, size: 512 });
-            total += png.size;
-          }
-        } catch { /* skip */ }
-      }
-      // bail if a newer card open superseded this one while we were fetching
-      if (reqId !== zipSizeReqId) return;
-      if (total > 0 && !downloadAllBtn.classList.contains('hidden')) {
-        btnSizeZip.textContent = '~' + formatFileSize(total);
-      }
-    };
-    if (hasDownloadDropdown) updateZipDownloadSize = computeZipSize;
-    else computeZipSize();
+    estimateZipSize(item).then(total => {
+      if (reqId !== zipSizeReqId) return; // superseded by a newer card open
+      if (total <= 0 || downloadAllBtn.classList.contains('hidden')) return;
+      if (btnSizeZipEager) btnSizeZipEager.textContent = '~' + formatFileSize(total);
+    });
   }
 
   activeVariantCard = null;
@@ -911,10 +831,9 @@ openDetailFn = function (item, card) {
 
   allVariants.forEach(vDef => {
     const vc = document.createElement('div');
-    const isWide = vDef.type === 'full' || vDef.type === 'full_en' || (!vDef.type && isFullFile(vDef.file));
-    const isSquareVariant = vDef.type === '_original' || vDef.type === 'svg' || vDef.type === 'png'
-      || (!vDef.type && !isFullFile(vDef.file));
-    vc.className = 'variant-card' + (isWide ? ' wide' : isSquareVariant ? ' favicon' : '');
+    const isWide = getDisplayType(vDef) === 'wide';
+    const isSquareVariant = !isWide;
+    vc.className = 'variant-card' + (isWide ? ' wide' : isSquareVariant ? ' favicon' : '') + (vDef.darkBg ? ' dark-checker' : '');
     const vi = document.createElement('img');
     const variantPreview = previewUrl(vDef.file);
     vi.src = variantPreview ?? svgUrl(vDef.file);
@@ -930,6 +849,8 @@ openDetailFn = function (item, card) {
     vc.addEventListener('click', () => {
       detail.scrollTop = 0;
       selectVariant(vDef, vc, item, allVariants, colorEditingDisabled);
+      if (item.figma === 'Icon/Game/AmongUs' && vDef.labelKey === 'amongus') playAmongUsEscape(vc);
+      if (item.figma === 'Icon/Search/Google' && vDef.type === 'full') playGoogleAssemble(vc, vDef.file);
     });
     variantsGrid.appendChild(vc);
     variantCards.push({ vDef, vc });
@@ -974,7 +895,9 @@ openDetailFn = function (item, card) {
           ec.dataset.figma = sib.figma;
           ec.title = sib.figma;
           const ei = document.createElement('img');
-          ei.src = svgUrl(sib.file);
+          // Tile image only — `dataset.file` above stays the real primary,
+          // it is the lookup key for the sibling's card.
+          ei.src = svgUrl(sib.thumb ?? sib.file);
           ei.alt = logoAlt(sib);
           ei.loading = 'lazy';
           ei.decoding = 'async';
@@ -1018,6 +941,11 @@ openDetailFn = function (item, card) {
   if (item.note) { noteText.textContent = item.note; noteEl.classList.remove('hidden'); }
   else noteEl.classList.add('hidden');
 
+  // "No official square icon" explainer — `thumb` means the grid tile is a
+  // stand-in we drew, so the square the visitor clicked is deliberately absent
+  // from the variants below.
+  document.getElementById('detail-noicon')?.classList.toggle('hidden', !item.thumb);
+
   // Brand link
   const brandLinkEl  = document.getElementById('detail-brand-link');
   const btnBrandLink = document.getElementById('btn-brand-link');
@@ -1038,47 +966,21 @@ openDetailFn = function (item, card) {
     if (detailPushedState) history.replaceState({ detail: true }, '', '#' + card.id);
   }
 
-  // Dropdown wiring
-  const downloadMenu = document.getElementById('btn-download-menu');
-  const downloadTrigger = document.getElementById('btn-download-trigger');
-  if (downloadTrigger && downloadMenu) {
-    downloadTrigger.onclick = (e) => { e.stopPropagation(); toggleDownloadMenu(); };
-  }
-  const btnIco = document.getElementById('btn-download-ico');
-  if (btnIco) btnIco.onclick = () => { closeDownloadMenu(); downloadAsIco(item, activePngFile || currentVariant?.file || item.file); };
-  const btnIcns = document.getElementById('btn-download-icns');
-  if (btnIcns) btnIcns.onclick = () => { closeDownloadMenu(); openIcnsModal(item, activePngFile || currentVariant?.file || item.file); };
-  const btnLg = document.getElementById('btn-download-lg');
-  if (btnLg) btnLg.onclick = () => { closeDownloadMenu(); openLiquidModal(item, activePngFile || currentVariant?.file || item.file); };
-  const btnZip = document.getElementById('btn-download-zip');
-  if (btnZip) {
-    // New dropdown — ZIP bundles SVG+PNG (+ICO+ICNS for square logos), so it always
-    // has content and stays enabled even for single-file logos.
-    btnZip.onclick = () => { closeDownloadMenu(); downloadAllAsZip(item); };
-    btnZip.classList.remove('btn-menu-item--disabled');
-  } else {
-    // Old plain button (emoji/icons) — the button itself triggers the ZIP.
+  // Logos: the trigger's onclick (opens the "other formats" modal) is wired inside
+  // applyDownloadVariantState, already called from selectVariant() above for the
+  // initial variant. Only the old plain button (emoji/icons) needs wiring here —
+  // the button itself triggers the ZIP directly, no modal.
+  if (!hasDownloadDropdown) {
     downloadAllBtn.onclick = downloadableSvgCount > 1 ? () => downloadAllAsZip(item) : null;
   }
 
   scrollCardIntoView(card);
 };
 
-// ── Event listeners ──
-document.addEventListener('click', (e) => {
-  const menu = document.getElementById('btn-download-menu');
-  if (menu?.classList.contains('open') && !e.target.closest('#btn-download-all') && !e.target.closest('#btn-download-menu')) {
-    closeDownloadMenu();
-  }
-});
-
-// Keep the fixed-position menu aligned with its trigger while the detail panel scrolls.
-document.getElementById('detail')?.addEventListener('scroll', positionDownloadMenu, { passive: true });
-window.addEventListener('resize', positionDownloadMenu);
-
 window.addEventListener('scroll', () => {
   updateScrollTopButton();
   scheduleVirtualizedSections();
+  checkCatalogEnd(search.value.trim() !== '');
 }, { passive: true });
 
 scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -1167,18 +1069,6 @@ window.addEventListener('popstate', () => {
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 applyLabels(); // single source of button texts → js/labels.js
-
-glassModule.init({
-  // Glass on → it's a rendered PNG icon: hide the SVG copy/download, show PNG copy.
-  // (Download PNG stays visible; its handler already produces the glass render.)
-  onToggle(on) {
-    document.getElementById('btn-copy').classList.toggle('hidden', on);
-    document.getElementById('btn-download').classList.toggle('hidden', on);
-    document.getElementById('btn-copy-png').classList.toggle('hidden', !on);
-    updatePngDownloadSize?.();
-  },
-});
-setPreviewHook(styledSvg => { if (glassModule.isEnabled()) glassModule.refresh(styledSvg); });
 
 placeSearchBar();
 
@@ -1352,7 +1242,7 @@ loadLogos(_manifestBase).then(logos => {
     });
 
   (function () {
-    const VISIBLE = 10;
+    const VISIBLE = 7;
     const items = Array.from(navEcosystems.querySelectorAll('.nav-item'));
     if (items.length <= VISIBLE) return;
     items.slice(VISIBLE).forEach(el => { el.style.display = 'none'; });

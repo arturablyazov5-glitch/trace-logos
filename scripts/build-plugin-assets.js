@@ -287,24 +287,35 @@ async function generate() {
     args: ['--no-sandbox'],
   });
 
+  // Скриншот детерминирован при одном и том же HTML, поэтому сравниваем байты и
+  // пишем только при изменении: скрипт обязателен в build-all.js, а thumbnail
+  // весит 350 КБ — без этого каждая сборка дёргала бы его в git на ровном месте.
+  // build-all.js прокидывает --dry-run в КАЖДЫЙ шаг — скрипт, игнорирующий флаг,
+  // превращает «preview, write nothing» в ложь и пишет файлы на диск.
+  const DRY_RUN = process.argv.includes('--dry-run');
+  const writeIfChanged = (name, buf) => {
+    const out  = path.join(OUT, name);
+    const prev = fs.existsSync(out) ? fs.readFileSync(out) : null;
+    const same = prev && prev.equals(buf);
+    if (DRY_RUN) { console.log(`(dry-run) ${name} — ${same ? 'без изменений' : 'обновился бы'}`); return; }
+    if (same) { console.log(`· ${name} — без изменений`); return; }
+    fs.writeFileSync(out, buf);
+    console.log(`✓ ${name}`);
+  };
+
   // Icon 128×128
-  console.log('Generating icon...');
   const iconPage = await browser.newPage();
   await iconPage.setViewport({ width: 128, height: 128, deviceScaleFactor: 2 });
   await iconPage.setContent(ICON_HTML, { waitUntil: 'networkidle0' });
-  await iconPage.screenshot({ path: path.join(OUT, 'icon.png'), clip: { x: 0, y: 0, width: 128, height: 128 } });
-  console.log('✓ icon.png');
+  writeIfChanged('icon.png', await iconPage.screenshot({ clip: { x: 0, y: 0, width: 128, height: 128 } }));
 
   // Thumbnail 1920×1080
-  console.log('Generating thumbnail...');
   const thumbPage = await browser.newPage();
   await thumbPage.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
   await thumbPage.setContent(THUMBNAIL_HTML, { waitUntil: 'networkidle0' });
-  await thumbPage.screenshot({ path: path.join(OUT, 'thumbnail.png'), clip: { x: 0, y: 0, width: 1920, height: 1080 } });
-  console.log('✓ thumbnail.png');
+  writeIfChanged('thumbnail.png', await thumbPage.screenshot({ clip: { x: 0, y: 0, width: 1920, height: 1080 } }));
 
   await browser.close();
-  console.log(`\nAssets saved to figma-plugin/assets/`);
 }
 
 generate().catch(e => { console.error(e); process.exit(1); });

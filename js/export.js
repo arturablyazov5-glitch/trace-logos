@@ -2,8 +2,10 @@ import { svgRawCache, colorState, applyColorMap, loadRawSvg } from './color.js';
 import { showToast, svgUrl, trackExport } from './utils.js';
 import { TOASTS } from './labels.js';
 import { parseSvgViewBox, svgToPngBlob } from './svg-utils.js';
-import { buildIcnsForFile } from './icns.js';
 import { ensureJSZip } from './vendor-loader.js';
+import { FORMAT_BUILDERS } from './format-export.js';
+
+const ZIP_EXTRA_FORMATS = ['webp', 'pdf', 'ai', 'eps'];
 
 const ICO_SIZES = [256, 48, 32, 16];
 const ICO_RADIUS_RATIO = 0.20;
@@ -153,6 +155,41 @@ export async function downloadAsIco(item, file = item.file) {
   trackExport(item.figma, 'ico', file);
 }
 
+// Approximates the ZIP's final size without building it: fetches each variant's PNG bytes
+// and rasterizes an extra PNG from SVG sources, same cost centers as downloadAllAsZip's
+// svg/png folders, but skips ICO/ICNS (small, and building them for every variant just to
+// preview a label isn't worth the extra network/CPU). Reused by both the catalog SPA and
+// static SEO pages via download-modal.js, unlike the old main.js-only estimate it replaces.
+export async function estimateZipSize(item) {
+  const isFullFile = file => /-full(\.[^.]+)?$/.test(file);
+  const isSquareVariant = v => v.type === '_original' || v.type === 'svg'
+    || (!v.type && !isFullFile(v.file));
+  const variants = [{ type: '_original', file: item.file }];
+  if (Array.isArray(item.variants)) {
+    for (const v of item.variants) variants.push(v);
+  }
+
+  let total = 0;
+  for (const v of variants) {
+    try {
+      if (v.file.endsWith('.png')) {
+        const resp = await fetch(svgUrl(v.file));
+        const buf = await resp.arrayBuffer();
+        total += buf.byteLength;
+      } else {
+        const raw = await loadRawSvg(v.file);
+        if (!raw) continue;
+        const square = isSquareVariant(v);
+        const svgText = svgForExport(applyColorMap(raw), square);
+        total += new Blob([svgText]).size;
+        const png = await svgToPngBlob(applyColorMap(raw), { square, size: 512 });
+        total += png.size;
+      }
+    } catch { /* skip */ }
+  }
+  return total;
+}
+
 export async function downloadAllAsZip(item) {
   let JSZip;
   try {
@@ -199,13 +236,14 @@ export async function downloadAllAsZip(item) {
     return n;
   };
   const usedSvg = new Set(), usedPng = new Set(), usedIcon = new Set();
+  const usedFmt = new Map(ZIP_EXTRA_FORMATS.map(fmt => [fmt, new Set()]));
 
   btn.disabled = true;
   progress.style.width = '0%';
 
   try {
     const zip = new JSZip();
-    const total = variants.length * 2 + squareCount * 2;
+    const total = variants.length * (2 + ZIP_EXTRA_FORMATS.length) + squareCount * 2;
     let done = 0;
     const tick = () => {
       done++;
@@ -243,9 +281,18 @@ export async function downloadAllAsZip(item) {
         } catch { /* skip ICO */ }
         tick();
         try {
+          const { buildIcnsForFile } = await import('./icns.js');
           const icnsBuf = await buildIcnsForFile(v.file);
           zip.file(`icns/${iconName}.icns`, icnsBuf);
         } catch { /* skip ICNS */ }
+        tick();
+      }
+
+      for (const fmt of ZIP_EXTRA_FORMATS) {
+        try {
+          const blob = await FORMAT_BUILDERS[fmt](v.file, square, 512, 0);
+          if (blob) zip.file(`${fmt}/${uniq(usedFmt.get(fmt), baseName + suffix, v.file)}.${fmt}`, blob);
+        } catch { /* skip this format for this variant */ }
         tick();
       }
     }

@@ -1,30 +1,60 @@
-// i18n runtime. Translations live in i18n-dict.js (single source, shared with
-// Node build scripts that bake English into /en/ static HTML).
-import { DICT, DEFAULT } from './i18n-dict.js';
+// i18n runtime. Translations live in one file per language (js/i18n-dict-<lang>.js);
+// only the current page's language is fetched, so an RU visitor never downloads the
+// English strings and vice versa (~27 KB saved per visit). Node build scripts read
+// every language at once via loadDict() in scripts/lib/en-transform.js to bake the
+// /en/ static HTML.
+//
+// There is NO cross-language fallback: a key missing from a dictionary renders as the
+// raw key, never as another language's string. scripts/test-i18n.js enforces key and
+// value-type parity between the dictionaries and fails the build on any drift — that
+// check is what replaced the old runtime fallback.
+//
+// Pages carry <link rel="modulepreload" href="…/js/i18n-dict-ru.js"> so the browser
+// starts this fetch while the module graph is still loading; without it the dynamic
+// import below would only fire after the whole static graph resolved, costing a round
+// trip. The tag is hand-written in the 5 sources that reach this module (templates/
+// partials/nav-header.html, templates/category-page.html, index.html, logos/index.html,
+// emoji/index.html); enChrome() in scripts/lib/en-transform.js rewrites -ru → -en for
+// the /en/ mirror. Adding a new module entry point? Add the hint there too.
 
-function _detectLang() {
-  if (typeof window.__LANG__ === 'string' && DICT[window.__LANG__]) return window.__LANG__;
-  if (window.location.pathname.startsWith('/en/')) return 'en';
-  return DEFAULT;
+export const LANGS = ['ru', 'en'];
+export const DEFAULT = 'ru';
+
+function _pathLang(pathname = window.location.pathname) {
+  const first = pathname.split('/').filter(Boolean)[0];
+  return LANGS.includes(first) ? first : null;
 }
 
-let _lang = _detectLang();
+function _stripLangPrefix(pathname) {
+  const parts = pathname.split('/').filter(Boolean);
+  if (LANGS.includes(parts[0])) parts.shift();
+  return '/' + parts.join('/') + (pathname.endsWith('/') && parts.length ? '/' : '');
+}
+
+function _detectLang() {
+  if (LANGS.includes(window.__LANG__)) return window.__LANG__;
+  return _pathLang() ?? DEFAULT;
+}
+
+const _lang = _detectLang();
+
+// Static specifier per branch (not a template literal) so the preload hint, the import
+// map-less browser resolver and any future tooling all see a literal, analysable URL.
+const { DICT } = _lang === 'en'
+  ? await import('./i18n-dict-en.js')
+  : await import('./i18n-dict-ru.js');
 
 export function getLang() { return _lang; }
 
 export function t(key) {
-  return DICT[_lang]?.[key] ?? DICT[DEFAULT][key] ?? key;
+  return DICT[key] ?? key;
 }
 
 export function setLang(lang) {
-  if (!DICT[lang] || lang === _lang) return;
-  const p = window.location.pathname;
-  if (lang === 'en') {
-    window.location.href = '/en' + p + window.location.search;
-  } else {
-    const stripped = p.startsWith('/en') ? p.slice(3) || '/' : p;
-    window.location.href = stripped + window.location.search;
-  }
+  if (!LANGS.includes(lang) || lang === _lang) return;
+  const stripped = _stripLangPrefix(window.location.pathname);
+  const nextPath = lang === DEFAULT ? stripped : `/${lang}${stripped}`;
+  window.location.href = nextPath + window.location.search;
 }
 
 export function applyI18n(root = document) {

@@ -1,0 +1,26 @@
+/* Mini crewmate easter egg — a tiny animated (color-cycling) crewmate perched
+   on top of the copy button in the detail panel. Purely decorative: animated
+   WebP plays on its own via CSS background-image, no JS needed. */
+body.has-minicrewmate .btn#btn-copy,
+body.has-minicrewmate .btn#btn-copy-png {
+  position: relative;
+}
+body.has-minicrewmate .btn#btn-copy::after,
+body.has-minicrewmate .btn#btn-copy-png::after {
+  content: '';
+  position: absolute;
+  right: 14px;
+  bottom: 100%;
+  width: 34px;
+  height: 38px;
+  z-index: 10;
+  transform: translateY(6px) scaleX(-1);
+  background: url('/assets/easter-egg/mini-crewmate.webp') no-repeat center / contain;
+  pointer-events: none;
+}
+/* Panel-switch transition briefly shifts/clips content — hide the pet during
+   that transient state so its head doesn't get cut off mid-animation. */
+#detail.detail-swap .btn#btn-copy::after,
+#detail.detail-swap .btn#btn-copy-png::after {
+  opacity: 0;
+}

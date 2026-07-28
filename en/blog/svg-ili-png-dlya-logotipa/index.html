@@ -90,7 +90,10 @@
   </script>
 
   <link rel="stylesheet" href="/css/seo-page.css">
+  <link rel="stylesheet" href="/css/site-header.css">
   <link rel="stylesheet" href="/css/blog.css">
+  <link rel="stylesheet" href="/css/threads-banner.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -98,124 +101,269 @@
 <body>
 
 <header class="site-header">
-  <a class="brand" href="/en/" aria-label="Trace Logo's">
+  <a class="brand" href="/en/" aria-label="Trace Logo's — на главную">
     <span class="brand-logo" aria-hidden="true">
       <img src="/assets/brand/logo.svg" alt="" width="28" height="28">
     </span>
-    <span class="brand-name">Trace Logo's</span>
+    <span class="brand-name">Trace Logo's<span class="brand-badge">Beta</span></span>
   </a>
-  <form class="seo-search-form" id="seo-search-form" role="search" action="/en/logos/" method="get" data-base="/" data-scope="all">
+
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../logos/" method="get" data-base="../../" data-scope="all">
     <search-box class="seo-search-wrap">
       <input id="seo-search" name="q" type="text" placeholder="Search logos..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
     </search-box>
     <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
   </form>
-  <a class="back-btn" href="/en/blog/">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    <span data-i18n="backToCatalog">Back</span>
+
+  <nav class="header-nav" aria-label="Разделы">
+    <a href="/en/logos/" data-i18n="breadcrumbLogos">Logos</a>
+    <a href="/en/emoji/" data-i18n="breadcrumbEmoji">Emoji</a>
+    <a href="/en/blog/" data-i18n="blogSection">Blog</a>
+    <a class="nav-figma" href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><svg width="11" height="16" viewBox="0 0 38 57" fill="none" aria-hidden="true"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/></svg>Figma плагин</a>
+  </nav>
+
+  <a class="btn-github" href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+    <span>GitHub</span>
   </a>
+
+  <button type="button" class="mobile-nav-burger" id="mobile-nav-burger" data-i18n-aria="burgerAriaLabel" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
   <lang-switcher></lang-switcher>
 </header>
+
+<donate-ticker></donate-ticker>
+
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" hidden></div>
+<nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Menu" data-i18n-aria="burgerAriaLabel" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-brand">Trace Logo's</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" data-i18n-aria="detailCloseAriaLabel" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-section" id="mobile-nav-toc" hidden>
+    <div class="mobile-nav-label" data-i18n="mobileNavToc">On this page</div>
+    <div class="mobile-nav-list" id="mobile-nav-toc-list"></div>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label" data-i18n="mobileNavPages">Site sections</div>
+    <div class="mobile-nav-list">
+      <a href="/en/"><span data-i18n="navHome">Home</span></a>
+      <a href="/en/logos/"><span data-i18n="breadcrumbLogos">Logos</span></a>
+      <a href="/en/emoji/"><span data-i18n="breadcrumbEmoji">Emoji</span></a>
+      <a href="/en/#h-collections"><span data-i18n="navCollections">Collections</span></a>
+      <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a>
+    </div>
+  </div>
+</nav>
 <script src="/components/lang-switcher.js" defer></script>
 <script src="/components/search-box.js" defer></script>
+<script src="/components/mobile-nav.js" defer></script>
+<!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
+     запрос уйдёт только после того, как разрешится весь статический граф модулей
+     (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
+<link rel="modulepreload" href="/js/i18n-dict-en.js">
+<script type="module" src="/components/donate-ticker.js"></script>
+<script type="module" src="/js/header-search.js"></script>
+
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
   <a href="/en/">Trace Logo's</a><span class="sep">/</span>
   <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a><span class="sep">/</span>
-  <span class="current" aria-current="page">SVG vs PNG for Logos — Which to Choose</span>
+  <span class="current" aria-current="page">SVG vs PNG for Logos — Which to Choose</span>
 </nav>
 
 <main>
   <div class="blog-layout">
     <article class="blog-article">
-      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(153 72% 58%) 0%, hsl(195 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><circle cx="10" cy="12" r="2" /><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" /></svg></div>
+      <div class="blog-article-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(76 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(116 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(166 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(226 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(76 70% 38%) 0%, hsl(226 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><circle cx="10" cy="12" r="2" /><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-02">June 2, 2026</time>
           <span class="blog-meta-sep" aria-hidden="true">·</span>
-          <span class="blog-read">6 min read</span>
+          <span class="blog-read">9 min read</span>
+	          <span class="blog-meta-sep" aria-hidden="true">·</span>
+	          <span class="blog-views">
+	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+	            2
+	          </span>
         </div>
-        <h1>SVG vs PNG for Logos — Which to Choose</h1>
+        <h1>SVG vs PNG for Logos — Which to Choose</h1>
       </header>
       <div class="blog-body">
-        <p>When you download a brand logo, you almost always face a choice between two formats — <strong>SVG</strong> and <strong>PNG</strong>. On screen they can look identical, but they're built on fundamentally different principles, and picking the wrong one rarely shows up right away: the logo sits nicely in the mockup, then turns blurry on a Retina display or ends up ten times heavier than it needs to be. Let's break down the technical difference and which one fits which job.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>SVG</strong> is vector: the logo is described with math (lines, curves, fills), so it scales without quality loss and recolors easily. <strong>PNG</strong> is raster: a fixed-size pixel grid, but it's understood by literally every program, including old email clients and office software. When in doubt, keep SVG as the source and generate PNG at whatever size you need from it — not the other way around.</p></div></div>
-      <h2 id="the-technical-difference-between-svg-and-png">The technical difference between SVG and PNG</h2>
-      <p><strong>SVG</strong> (Scalable Vector Graphics) isn't a picture in the usual sense — it's a text-based XML file with a mathematical description of shapes: point coordinates, Bézier curves, fills and strokes. When a browser or editor opens an SVG, it <strong>recalculates</strong> the pixels fresh for the target size — so a line stays perfectly crisp whether it's rendered at 16 pixels or 1,600.</p>
-      <p><strong>PNG</strong> (Portable Network Graphics) is a raster format: the image is a fixed grid of pixels, each with its own recorded color. PNG compresses flat-colored areas well and supports transparency (alpha channel), which made it the standard for logos on raster-only sites long before SVG became common. But the grid is fixed once and for all: scale a PNG beyond its original size and you'll see pixelation and blur, because the software has to <strong>invent</strong> pixels that don't exist rather than recalculate them.</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Criterion</th><th>SVG</th><th>PNG</th></tr></thead><tbody><tr><td>Type</td><td>Vector (math)</td><td>Raster (pixels)</td></tr><tr><td>Scaling</td><td>No quality loss, any size</td><td>Fine scaling down; blurs scaling up</td></tr><tr><td>File size</td><td>Usually smaller for simple logos</td><td>Larger, especially at high resolution</td></tr><tr><td>Recoloring</td><td>Easy — change the <code>fill</code> values</td><td>Needs an editor, pixel repainting</td></tr><tr><td>Transparent background</td><td>Yes, natively</td><td>Yes, via alpha channel</td></tr><tr><td>Email/messenger support</td><td>Inconsistent</td><td>Universal</td></tr><tr><td>Editing in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>/<a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a></td><td>Full — shape, nodes, color</td><td>Limited — it's a picture, not an object</td></tr><tr><td>Animation</td><td>Possible (SMIL, CSS)</td><td>No (needs GIF/video)</td></tr><tr><td>Print shop output</td><td>Works without limits</td><td>Doesn't scale past source resolution</td></tr></tbody></table></div>
-      <h2 id="when-to-use-svg">When to use SVG</h2>
-      <ul>
-      <li><strong>Websites and interfaces.</strong> SVG is lighter for most logos, scales to any screen, and stays crisp on Retina displays without needing separate <code>@2x</code> files.</li>
-      <li><strong><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, Sketch and other editors.</strong> Vector can be recolored, broken into parts, edited node by node — essential when working on a layout.</li>
-      <li><strong>Print production.</strong> Print shops need vector — it doesn't lose quality at any size, from a business card to a building-sized banner.</li>
-      <li><strong>Logo animation.</strong> SVG supports CSS and SMIL animation directly in the browser, no video file needed.</li>
-      </ul>
-      <h2 id="when-to-use-png">When to use PNG</h2>
-      <ul>
-      <li><strong>Email and messengers.</strong> Not every email client or chat app renders SVG correctly — sometimes it just doesn't display or gets treated as an attachment. PNG opens reliably everywhere.</li>
-      <li><strong>Presentations.</strong> PowerPoint and Google Slides work far more reliably with PNG — SVG insertion is either unavailable there or loses some effects.</li>
-      <li><strong>Social media.</strong> Uploading avatars and cover images almost everywhere requires a raster format — the platform converts it to its own format on upload regardless.</li>
-      <li><strong>Complex logos with effects</strong> — gradients, shadows, textures, photorealistic detail that's hard or impossible to describe accurately as vector.</li>
-      <li><strong>Screenshots and previews.</strong> If the logo is embedded into a finished image (an OG card for social media, for instance), that image is already raster — inserting SVG there is pointless.</li>
-      </ul>
-      <h2 id="common-mistakes-when-choosing-a-format">Common mistakes when choosing a format</h2>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>PNG instead of SVG on a website</span></div><div class="callout-body"><p>The most common mistake: drop a 512px PNG logo into a site header and stretch it with CSS to fit. Invisible on a regular screen, but on a Retina display the logo &quot;swims&quot; and looks smudged. If an SVG exists for the logo, use it on the web regardless of the layout size.</p></div></div>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>SVG where it isn't supported</span></div><div class="callout-body"><p>The opposite mistake: inserting an SVG logo into a newsletter or a presentation. Many email clients (especially corporate, Outlook-based ones) don't render SVG at all — the recipient sees blank space instead of a logo. Use PNG for emails, slides, and office documents.</p></div></div>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Scaling a PNG past its source size</span></div><div class="callout-body"><p>If the only file you have is a 200×200 PNG and you need a 2,000×2,000 banner, stretching it will ruin the quality — the pixels just multiply instead of being recalculated. In that case, either find the SVG or trace the logo back to vector — see our guide, <a href="/en/blog/kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">how to convert a logo to vector</a>.</p></div></div>
-      <h2 id="how-to-convert-svg-to-png">How to convert SVG to PNG</h2>
-      <p>Every logo page in our catalog already has both buttons — download <strong>SVG</strong> and <strong>PNG</strong> — ready-made, no conversion needed. If you need a PNG at a custom size, open the SVG in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> or a browser and export at the resolution you need: that gives you a crisp image for the specific job, instead of a stretched compromise. For a full rundown of five conversion methods, see <a href="/en/blog/kak-konvertirovat-svg-v-png/" target="_blank" rel="noopener">How to Convert SVG to PNG and Back</a>.</p>
-      <p>The reverse — PNG to SVG — isn't as simple: software can't &quot;guess&quot; the original curves, only auto-trace the outlines or have someone redraw the logo by hand. If all you have is a raster version of a logo, see <a href="/en/blog/kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">How to Convert a Logo to Vector</a>.</p>
-      <h2 id="svg-and-png-aren-t-the-only-options">SVG and PNG aren't the only options</h2>
-      <p>Beyond SVG and PNG, logo formats also include AI, EPS and PDF (vector, for professional printing and print shops) and JPG (raster, no transparency, meant for photos). For a broader overview of every logo format and when each one applies, see <a href="/en/blog/v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">What Format Should a Logo Be In</a>.</p>
-      <h2 id="the-short-answer">The short answer</h2>
-      <p>When in doubt — <strong>take SVG</strong>. It's the &quot;source file&quot; from which you can always get a PNG at any size without quality loss, not the other way around. PNG is for places where SVG isn't supported or doesn't fit the job: email, presentations, some social networks, logos with complex graphical effects.</p>
-      <p>All logos in the <a href="/en/logos/" target="_blank" rel="noopener">Trace Logo's catalog</a> are available in both SVG and PNG — download for free.</p>
+        <p>You downloaded a logo, dropped it into your site header, admired it — and a week later noticed it looks slightly blurry on a good phone screen, as if shot through fogged glass. Or the opposite: the logo is crisp, but the page loads forever because the &quot;image&quot; weighs two megabytes. Neither is an accident or a broken file. Both are the consequence of a single choice made on autopilot: SVG or PNG. On screen the two look identical, but they're built so differently that mixing them up plants a problem that surfaces later.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>SVG</strong> is vector: the logo is described by formulas (lines, curves, fills), so it scales without quality loss and recolors easily. <strong>PNG</strong> is raster: a fixed grid of pixels, but every program understands it, including old email and office suites. The right mental model is simpler: a master and its print. Keep the logo in SVG and generate PNG of the needed size from it.</p></div></div>
+      <h2 id="what-s-inside-the-file">What's inside the file</h2>
+      <p>To choose deliberately, grasp one thing: SVG and PNG store fundamentally different things. One stores <strong>an instruction for how to draw</strong>, the other stores <strong>the already‑finished drawing</strong>. Everything else follows from that.</p>
+      <p><strong>SVG</strong> (Scalable Vector Graphics) is a text XML file with a mathematical description of shapes: point coordinates, Bézier curves, fills, strokes. When a browser or editor opens an SVG, it <strong>computes</strong> the pixels anew, right then, for the exact screen size. So a line stays perfectly crisp at 16 pixels or 1600: the instruction runs at any scale.</p>
+      <p><strong>PNG</strong> (Portable Network Graphics) works the opposite way. It's raster: the image is a fixed grid of pixels, each with its recorded color. The grid is set once, at save time, and never changes. As long as you show the PNG at its native size or smaller, everything's sharp. But enlarge it past the baked‑in size and the software has to <strong>invent</strong> missing pixels, guessing the color between neighbors. Hence the &quot;mush&quot; on a good screen: a 200-pixel logo stretched to 400, with nowhere to get the missing data.</p>
+      <p>From this pair — instruction versus print — grow all the practical differences that make the choice matter.</p>
+      <h2 id="what-this-means-in-practice">What this means in practice</h2>
+      <p>Since SVG is an instruction, it loses nothing when scaled: every size is computed from scratch. Since PNG is a finished grid, it can only lose when enlarged. That's the first and main consequence, and the rest trail behind it.</p>
+      <p>An instruction describes shape compactly: &quot;circle radius 45, fill green&quot; is a few dozen bytes, while an honest pixel grid of the same logo weighs many times more. So a simple <strong>SVG</strong> logo is usually lighter than its own PNG. The instruction is also editable: color is a separate <code>fill</code> value you can change without touching the shape (how that's done in a couple of clicks — see <a href="/en/blog/kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">how to change a logo's color</a>). In <strong>PNG</strong>, color is baked into every pixel — recoloring means repainting.</p>
+      <p>But the print has its own strength the instruction can't match. PNG is understood by literally any program — from an ancient mail client to an office suite — because raster came first and became the common denominator. And PNG honestly stores what a vector can't capture in a formula: photographic gradients, shadows, complex textures. Where SVG would build a heavy contraption, PNG just records finished pixels.</p>
+      <p>The cleanest way to see it all at once is a table — here the properties don't follow from one another, they simply coexist, so comparing them row by row is handy:</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Criterion</th><th>SVG</th><th>PNG</th></tr></thead><tbody><tr><td>Type</td><td>Vector (formulas)</td><td>Raster (pixels)</td></tr><tr><td>Scaling</td><td>Lossless, any size</td><td>Lossless down only; up — blur</td></tr><tr><td>File size</td><td>Usually smaller for simple logos</td><td>Larger, especially at high resolution</td></tr><tr><td>Recoloring</td><td>Easy — change <code>fill</code> values</td><td>Needs an editor, repaint pixels</td></tr><tr><td>Transparent background</td><td>Yes, natively</td><td>Yes, via alpha channel</td></tr><tr><td>Support in email/messengers</td><td>Not always correct</td><td>Everywhere</td></tr><tr><td>Editing in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>/<a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a></td><td>Full — shape, nodes, color</td><td>Limited — one flat picture, no separate objects</td></tr><tr><td>Animation</td><td>Possible (SMIL, CSS)</td><td>No (needs GIF/video)</td></tr><tr><td>Print shop</td><td>No limits</td><td>Fails above native resolution</td></tr></tbody></table></div>
+      <p>The table shows SVG winning almost every row. Which raises the logical question: why keep PNG at all if vector is objectively better? The answer sits in the one row that reads &quot;not always&quot;: support.</p>
+      <h2 id="where-svg-wins">Where SVG wins</h2>
+      <p>Everywhere a browser shows the logo, vector is the obvious pick, for exactly the reason we started with. On a <strong>website</strong> SVG weighs less and stays crisp on any screen, Retina included — no need to wire up separate <code>@2x</code> versions and track which one loads. In <strong>editors</strong> — <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, Sketch, <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> — vector can be split apart, recolored, its nodes nudged: for layout work that's the whole point of the format. In <strong>print</strong> you can't work without vector — printing enlarges the image to banner size, and only SVG survives it losslessly. And logo <strong>animation</strong> — a smooth fade, a rotation, a color shift — lives right inside the SVG via CSS, no separate video.</p>
+      <p>The common denominator is simple: if the image is shown by a program that reads the instruction — hand it the instruction. Trouble starts where no such program exists.</p>
+      <h2 id="where-png-is-needed">Where PNG is needed</h2>
+      <p>And it doesn't exist in the most conservative corners of the digital world. <strong>Email</strong> is the main one: some clients, especially corporate ones on <a href="/en/logos/office/outlook/" target="_blank" rel="noopener">Outlook</a>, don't render SVG at all, and the recipient sees blank space instead of a logo. <strong>Presentations</strong> in PowerPoint and Google Slides handle vector hit‑or‑miss and lose some effects. <strong>Social networks</strong>, when you upload an avatar or cover, still demand raster — the platform re‑compresses the file into its own format. And finally, <strong>complex logos</strong> with photorealistic gradients and textures: their SVG version balloons until raster turns out both lighter and safer.</p>
+      <p>There's also a technical case where PNG remains the only option: if the logo is embedded into a <strong>finished image</strong> — say, an OG preview card for social networks — everything around it is already raster, and inserting a vector makes no sense.</p>
+      <p>Notice: in all these cases we take PNG because the environment can't do vector. That's the key to the whole confusion — and to the typical mistakes.</p>
+      <h2 id="three-mistakes-that-grow-from-one-misunderstanding">Three mistakes that grow from one misunderstanding</h2>
+      <p>Almost every format problem is an attempt to use the print as a master or vice versa. Hence three classic slips.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>PNG instead of SVG on a website</span></div><div class="callout-body"><p>The most common mistake — dropping a 512-pixel PNG logo into the header and stretching it with CSS. Invisible on a regular screen, &quot;floaty&quot; on Retina. If an SVG of the logo exists — always use it on the web, whatever the layout size.</p></div></div>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>SVG where it isn't supported</span></div><div class="callout-body"><p>The reverse slip — putting SVG into a newsletter or presentation. Some mail clients show nothing, and the recipient gets blank space instead of the logo. For emails, slides and office documents use PNG — precisely the case where the print beats the instruction.</p></div></div>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Enlarging PNG past its native size</span></div><div class="callout-body"><p>If the only file is a PNG 200×200 and you need a 2000×2000 banner, stretching kills quality: pixels multiply, they don't recompute. The only way out is to find the logo in SVG or convert it to vector; how that's done and where the pitfalls are — see <a href="/en/blog/kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">how to convert a logo to vector</a>.</p></div></div>
+      <p>All three vanish if you keep the hierarchy in mind: SVG is the master, PNG is derived from it. And if so, conversion should run one way.</p>
+      <h2 id="how-to-get-png-from-svg-and-why-not-the-reverse">How to get PNG from SVG <span class="heading-dim">(and why not the reverse)</span></h2>
+      <p>The right direction is from instruction to print. From an SVG you can render a PNG of any size at any moment and stay crisp. In our catalog both buttons — <strong>SVG</strong> and <strong>PNG</strong> — are ready on every logo page; no manual conversion. And if you need a PNG of an unusual size, open the SVG in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> or right in the browser and export at the needed resolution — you'll get a sharp image made for the task. A full walk‑through of five methods — in <a href="/en/blog/kak-konvertirovat-svg-v-png/" target="_blank" rel="noopener">«How to convert SVG to PNG and back»</a>.</p>
+      <p>The reverse path — making SVG from PNG — is exactly the compromise to avoid. The software doesn't know the original curves and can only auto‑trace the outlines or offer to redraw the logo by hand. The first ruins complex shapes, the second costs money. That's why the rule &quot;keep the master in vector&quot; exists: recovering it from raster is far pricier than generating raster from vector. If all you have is a PNG, the rescue is in <a href="/en/blog/kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">«How to convert a logo to vector»</a>.</p>
+      <h2 id="svg-and-png-aren-t-the-only-formats">SVG and PNG aren't the only formats</h2>
+      <p>Worth keeping in mind that these two don't exhaust the logo world. Nearby live the vector AI, EPS and PDF — used by professional designers and print shops — and the raster JPG, which unlike PNG can't do transparency and so barely suits logos, yet is irreplaceable for photos. When each is appropriate and how they differ from our pair — laid out in <a href="/en/blog/v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">«What format should a logo be in»</a>.</p>
+      <h2 id="what-to-choose-in-the-end">What to choose in the end</h2>
+      <p>Back to that blurry logo from the start. Its trouble wasn't PNG as such but that a print was used as a master — a finished pixel grid stretched where an instruction was needed. Keep this hierarchy in mind and the choice stops being a guess: <strong>SVG is the master</strong>, from which a PNG of any size is born; <strong>PNG is the derivative</strong> for environments where vector won't open — email, presentations, some social networks, and logos with complex effects. In doubt, take SVG: from it you can always get a PNG, while the road back is far costlier.</p>
+      <p>Every logo in the <a href="/en/logos/" target="_blank" rel="noopener">Trace Logo's catalog</a> comes in both SVG and PNG at once — master and print in one place, free to download.</p>
       </div>
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/v-kakom-formate-nuzhen-logotip/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+          <a class="blog-card" href="/en/blog/v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="1">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Formats</span><span class="blog-card-tag">Logos</span><span class="blog-card-tag">SVG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">16.07.2026</div>
-          <div class="blog-card-title">What File Format Should a Logo Be — SVG, PNG, AI, EPS or PDF</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            1
+          </div>
+          </div>
+          <div class="blog-card-title">What File Format Should a Logo Be — SVG, PNG, AI, EPS or PDF</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/vektor-i-rastr-raznica/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
+      <a class="blog-card" href="/en/blog/emodzi-flagi-kak-ustroeny/" data-date="2026-07-27" data-views="0">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Formats</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">17.07.2026</div>
-          <div class="blog-card-title">Vector vs Raster Graphics — The Difference in Plain Words</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            0
+          </div>
+          </div>
+          <div class="blog-card-title">How Flag Emoji Work — and Why Windows Doesn't Show Them</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/pochemu-logotip-razmytyj/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
+      <a class="blog-card" href="/en/blog/chto-takoe-webp/" data-date="2026-07-25" data-views="1">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Formats</span><span class="blog-card-tag">Web</span><span class="blog-card-tag">Optimization</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.659 22H18a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v11.5" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M8 12v-1" /><path d="M8 18v-2" /><path d="M8 7V6" /><circle cx="8" cy="20" r="2" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">07.07.2026</div>
-          <div class="blog-card-title">Why Your Logo Looks Blurry and How to Fix It — Every Cause Explained</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>25.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            1
+          </div>
+          </div>
+          <div class="blog-card-title">What Is WebP — Should Your Site Switch to It</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/png-ili-jpg-chto-luchshe/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /><path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /><circle cx="13" cy="7" r="1" fill="currentColor" /><rect x="8" y="2" width="14" height="14" rx="2" /></svg></div>
+      <a class="blog-card" href="/en/blog/vektor-i-rastr-raznica/" data-date="2026-07-17" data-views="0">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Graphics</span><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Basics</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">04.07.2026</div>
-          <div class="blog-card-title">PNG vs JPG — The Differences and Which to Choose for Every Task</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            0
+          </div>
+          </div>
+          <div class="blog-card-title">Vector vs Raster Graphics — The Difference in Plain Words</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotip-s-prozrachnym-fonom/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></svg></div>
+      <a class="blog-card" href="/en/blog/pochemu-logotip-razmytyj/" data-date="2026-07-07" data-views="0">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Quality</span><span class="blog-card-tag">SVG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">30.06.2026</div>
-          <div class="blog-card-title">Logo with a Transparent Background — How to Make One and Avoid the White Box</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            0
+          </div>
+          </div>
+          <div class="blog-card-title">Why Your Logo Looks Blurry and How to Fix It — Every Cause Explained</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-vstavit-svg-na-sajt/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></div>
+      <a class="blog-card" href="/en/blog/png-ili-jpg-chto-luchshe/" data-date="2026-07-04" data-views="2">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Formats</span><span class="blog-card-tag">Graphics</span><span class="blog-card-tag">Basics</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /><path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /><circle cx="13" cy="7" r="1" fill="currentColor" /><rect x="8" y="2" width="14" height="14" rx="2" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">25.06.2026</div>
-          <div class="blog-card-title">How to Embed SVG on a Website — img, Inline, Background and Which to Pick</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            2
+          </div>
+          </div>
+          <div class="blog-card-title">PNG vs JPG — The Differences and Which to Choose for Every Task</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
         </div>
@@ -223,11 +371,34 @@
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="On this page"><span class="blog-sidebar-label">On this page</span><ol><li><a href="#the-technical-difference-between-svg-and-png">The technical difference between SVG and PNG</a></li><li><a href="#when-to-use-svg">When to use SVG</a></li><li><a href="#when-to-use-png">When to use PNG</a></li><li><a href="#common-mistakes-when-choosing-a-format">Common mistakes when choosing a format</a></li><li><a href="#how-to-convert-svg-to-png">How to convert SVG to PNG</a></li><li><a href="#svg-and-png-aren-t-the-only-options">SVG and PNG aren't the only options</a></li><li><a href="#the-short-answer">The short answer</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="On this page"><span class="blog-sidebar-label">On this page</span><ol><li><a href="#what-s-inside-the-file">What's inside the file</a></li><li><a href="#what-this-means-in-practice">What this means in practice</a></li><li><a href="#where-svg-wins">Where SVG wins</a></li><li><a href="#where-png-is-needed">Where PNG is needed</a></li><li><a href="#three-mistakes-that-grow-from-one-misunderstanding">Three mistakes that grow from one misunderstanding</a></li><li><a href="#how-to-get-png-from-svg-and-why-not-the-reverse">How to get PNG from SVG (and why not the reverse)</a></li><li><a href="#svg-and-png-aren-t-the-only-formats">SVG and PNG aren't the only formats</a></li><li><a href="#what-to-choose-in-the-end">What to choose in the end</a></li></ol></nav>
       <div class="blog-progress-wrap">
-      <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
-      <span class="blog-progress-pct">0%</span>
+      <span class="blog-progress-label">Reading progress</span>
+      <div class="blog-progress-row">
+        <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+        <span class="blog-progress-pct">0%</span>
+      </div>
     </div>
+      <!-- Threads banner — shared component (SEO logo pages + blog sidebar).
+     Styles: css/threads-banner.css · dismiss behavior: js/threads-banner.js -->
+<aside class="th-banner" id="th-banner">
+  <a class="th-banner-link" href="https://www.threads.net/@mansurov_rafaell" target="_blank" rel="noopener noreferrer" data-i18n-aria="thBannerAriaLabel" aria-label="Rafael Mansurov on Threads">
+    <button class="th-banner-close" id="th-banner-close" data-i18n-aria="thBannerCloseAria" aria-label="Hide banner" type="button">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/></svg>
+    </button>
+    <span class="th-banner-shine" aria-hidden="true"></span>
+    <svg class="th-banner-watermark" viewBox="0 0 28 28" fill="currentColor" aria-hidden="true"><path d="M18.307 13.343a6 6 0 0 0-.236-.107c-.139-2.56-1.538-4.026-3.887-4.041h-.031c-1.405 0-2.574.6-3.293 1.69l1.292.887c.537-.815 1.38-.99 2.001-.99l.022.001c.773.005 1.357.23 1.734.668q.414.48.55 1.317a10 10 0 0 0-2.22-.106c-2.233.128-3.669 1.43-3.572 3.24.049.918.506 1.708 1.287 2.224.661.436 1.512.65 2.396.601 1.168-.064 2.085-.51 2.724-1.324.485-.619.792-1.42.928-2.431.556.336.969.778 1.197 1.31.387.902.41 2.387-.801 3.597-1.062 1.06-2.337 1.519-4.265 1.533-2.138-.016-3.755-.702-4.807-2.038-.985-1.252-1.493-3.06-1.512-5.374.019-2.314.527-4.122 1.512-5.373 1.051-1.337 2.669-2.023 4.807-2.039 2.154.016 3.8.705 4.891 2.048.535.659.939 1.487 1.205 2.453l1.514-.404c-.323-1.189-.83-2.213-1.52-3.062C18.822 5.9 16.775 5.018 14.137 5h-.01c-2.632.018-4.656.904-6.016 2.632-1.21 1.539-1.834 3.679-1.855 6.362v.012c.02 2.683.645 4.823 1.855 6.362 1.36 1.728 3.384 2.614 6.016 2.632h.01c2.34-.016 3.99-.629 5.349-1.986 1.777-1.777 1.724-4.003 1.138-5.37-.42-.98-1.222-1.776-2.318-2.301m-4.04 3.798c-.979.055-1.996-.384-2.046-1.325-.037-.698.497-1.476 2.106-1.569q.276-.016.543-.016c.584 0 1.131.057 1.628.166-.185 2.316-1.273 2.692-2.231 2.744"/></svg>
+    <div class="th-banner-body">
+      <span class="th-banner-title" data-i18n="thBannerTitle">Threads profile</span>
+      <span class="th-banner-desc" data-i18n="thBannerDesc">About design, code, and products that make life simpler. Follow along 🤙</span>
+      <span class="th-banner-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span data-i18n="thBannerCta">Follow</span>
+      </span>
+    </div>
+  </a>
+</aside>
+
     </aside>
   </div>
 
@@ -243,12 +414,95 @@
   </div>
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="/en/" class="footer-link">trace-logos</a>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col footer-about">
+        <a class="brand" href="/en/" aria-label="Trace Logo's" style="margin-bottom:14px">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="/assets/brand/logo.svg" alt="" width="30" height="30">
+          </span>
+          <span class="brand-name">Trace Logo's</span>
+        </a>
+        <p data-i18n="footerAbout">Open library of logos and emoji. Free, no signup, open source.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCatalog">Catalog</h3>
+        <ul>
+          <li><a href="/en/logos/"><span data-i18n="footerAllLogos">All logos</span></a></li>
+          <li><a href="/en/emoji/"><span data-i18n="footerEmoji">Emoji</span></a></li>
+          <li><a href="/en/blog/"><span data-i18n="footerBlog">Blog</span></a></li>
+          <li><a href="/en/logos/ai/"><span data-i18n="footerAI">AI</span></a></li>
+          <li><a href="/en/logos/bank/"><span data-i18n="footerBanks">Banks</span></a></li>
+          <li><a href="/en/logos/market/"><span data-i18n="footerMarketplaces">Marketplaces</span></a></li>
+          <li><a href="/en/logos/social/"><span data-i18n="footerSocial">Social</span></a></li>
+          <li><a href="/en/logos/flag/"><span data-i18n="footerFlags">Flags</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCollections">Collections</h3>
+        <ul>
+          <!-- COLLECTIONS:START -->
+          <li><a href="/en/collections/russian-banks/"><span data-i18n="footerColl_russian-banks">Bank logos</span></a></li>
+          <li><a href="/en/collections/neural-networks/"><span data-i18n="footerColl_neural-networks">AI logos</span></a></li>
+          <li><a href="/en/collections/marketplaces/"><span data-i18n="footerColl_marketplaces">Marketplace logos</span></a></li>
+          <li><a href="/en/collections/payment-systems/"><span data-i18n="footerColl_payment-systems">Payment systems</span></a></li>
+          <li><a href="/en/collections/messengers-social/"><span data-i18n="footerColl_messengers-social">Social &amp; messengers</span></a></li>
+          <li><a href="/en/collections/google-2026/"><span data-i18n="footerColl_google-2026">Google icons 2026</span></a></li>
+          <li><a href="/en/collections/delivery-taxi/"><span data-i18n="footerColl_delivery-taxi">Delivery &amp; taxi</span></a></li>
+          <li><a href="/en/collections/browsers/"><span data-i18n="footerColl_browsers">Browsers</span></a></li>
+          <li><a href="/en/collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Cloud storage</span></a></li>
+          <li><a href="/en/collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Music streaming</span></a></li>
+          <li><a href="/en/collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Video streaming</span></a></li>
+          <!-- COLLECTIONS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColTools">Tools</h3>
+        <ul>
+          <li><a href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerFigmaPlugin">Figma plugin</span></a></li>
+          <!-- TOOLS:START -->
+          <li><a href="/en/tools/compress-webp/"><span data-i18n="footerTool_compress-webp">Compress image</span></a></li>
+          <li><a href="/en/tools/watermark/"><span data-i18n="footerTool_watermark">Remove watermark</span></a></li>
+          <li><a href="/en/tools/merge-pdf/"><span data-i18n="footerTool_merge-pdf">Merge PDF</span></a></li>
+          <li><a href="/en/tools/edit-image/"><span data-i18n="footerTool_edit-image">Crop &amp; rotate photo</span></a></li>
+          <li><a href="/en/tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">iOS call screen</span></a></li>
+          <!-- TOOLS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColDevelopers">For developers</h3>
+        <ul>
+          <li><a href="/logos.json">API · logos.json</a></li>
+          <li><a href="/emoji.json">API · emoji.json</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+          <li><a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://status.trace-logos.ru" target="_blank" rel="noopener"><span data-i18n="footerServiceStatus">Service status</span></a></li>
+          <li><a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">@mansurov_rafael</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Trace Logo's Beta · <span data-i18n="footerCopyrightShort">Images may be protected by their owners' copyright.</span></span>
+      <span class="footer-bottom-links">
+        <a href="/en/sitemap/"><span data-i18n="footerSitemap">Sitemap</span></a>
+        <a href="/en/terms/"><span data-i18n="footerTerms">Terms of use</span></a>
+        <a href="/en/consent/"><span data-i18n="footerConsent">Data processing</span></a>
+        <a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerOpenSource">Open source</span></a>
+      </span>
+    </div>
+  </div>
 </footer>
 
-<script type="module" src="/js/header-search.js"></script>
+
+<script type="module" src="/js/threads-banner.js"></script>
 <script type="module" src="/js/blog-toc.js"></script>
 <script type="module" src="/js/blog-code.js"></script>
+<script src="/js/blog-track.js" async></script>
 </body>
 </html>

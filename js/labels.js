@@ -8,6 +8,7 @@ export const LABELS = {
   copySvg: '', copyPng: '', copyEmoji: '', copyEmojiPage: '', copied: '',
   downloadSvg: '', downloadPng: '',
   dlMore: '', dlZipAll: '', dlIco: '', dlIcns: '', dlLiquidGlass: '',
+  dlWebp: '', dlPdf: '', dlAi: '', dlEps: '',
   reportOutdated: '', editColors: '', resetColors: '', helpUpload: '',
 };
 
@@ -16,7 +17,7 @@ export const TOASTS = {
   copiedEmoji: null, copiedColor: null,
   copyError: '', copyPngError: '', zipError: '', zipLoadError: '',
   fileNotLoaded: '', colorsUndone: '', copiedEmojiChar: '',
-  icnsError: '', imageLoadError: '',
+  icnsError: '', imageLoadError: '', catalogEnd: '',
 };
 
 export function refreshLabels() {
@@ -32,6 +33,10 @@ export function refreshLabels() {
   LABELS.dlIco          = t('dlIco');
   LABELS.dlIcns         = t('dlIcns');
   LABELS.dlLiquidGlass  = t('dlLiquidGlass');
+  LABELS.dlWebp         = t('dlWebp');
+  LABELS.dlPdf          = t('dlPdf');
+  LABELS.dlAi           = t('dlAi');
+  LABELS.dlEps          = t('dlEps');
   LABELS.reportOutdated = t('reportOutdated');
   LABELS.editColors     = t('editColors');
   LABELS.resetColors    = t('resetColors');
@@ -51,6 +56,7 @@ export function refreshLabels() {
   TOASTS.copiedEmojiChar= t('toast.copiedEmojiChar');
   TOASTS.icnsError      = t('toast.icnsError');
   TOASTS.imageLoadError = t('toast.imageLoadError');
+  TOASTS.catalogEnd     = t('toast.catalogEnd');
 }
 
 // Populate on load

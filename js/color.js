@@ -166,9 +166,6 @@ export function updateVariantThumbnails() {
   }
 }
 
-let _previewHook = null;
-export function setPreviewHook(fn) { _previewHook = fn; }
-
 export function updatePreview(rawSvg, isSquare) {
   colorState.currentRawSvg = rawSvg;
   colorState.currentIsSquare = isSquare;
@@ -184,7 +181,6 @@ export function updatePreview(rawSvg, isSquare) {
     detailImg.addEventListener('load', done, { once: true });
     detailImg.addEventListener('error', done, { once: true });
   }
-  _previewHook?.(styled);
 }
 
 export function buildColorEditor(rawSvg) {

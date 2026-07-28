@@ -2,7 +2,7 @@
 // Renderer infrastructure (renderIcon, prepareSource, neighbor images) lives in
 // icns.js as the single source of truth — this module only owns the modal UI.
 import {
-  renderIcon, MACOS_PCT, prepareSource,
+  renderIcon, MACOS_PCT, prepareSource, ensureStyles,
   loadNeighbors, getNeighborImgs, onNeighborsLoaded,
 } from './icns.js';
 import { showToast, formatFileSize } from './utils.js';
@@ -219,6 +219,7 @@ async function doDownload() {
 }
 
 export async function openLiquidModal(item, file = item.file) {
+  ensureStyles();
   if (!dom) buildDom();
   Object.assign(opts, DEFAULTS);
   dom.radius.value = opts.radiusPct;

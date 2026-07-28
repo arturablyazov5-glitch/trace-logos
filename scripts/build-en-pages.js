@@ -4,7 +4,7 @@
  *
  * Translation must not depend on runtime JS (crawlers — especially Yandex — render
  * JS poorly). So each /en/ page gets English text directly in the markup:
- *   - data-i18n / data-label inner text → English from js/i18n-dict.js
+ *   - data-i18n / data-label inner text → English from js/i18n-dict-en.js
  *   - data-i18n-placeholder / data-i18n-aria attributes → English
  *   - <html lang="en">, window.__LANG__='en', absolute asset paths, /en/ canonical
  *

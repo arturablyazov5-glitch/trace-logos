@@ -98,6 +98,7 @@ function init() {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (submitBtn.disabled) return;
     const brand   = document.getElementById('suggest-name').value.trim();
     const url     = document.getElementById('suggest-url').value.trim();
     const comment = document.getElementById('suggest-comment').value.trim();

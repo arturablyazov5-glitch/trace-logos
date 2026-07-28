@@ -20,6 +20,7 @@
 
 const fs   = require('fs');
 const path = require('path');
+const { resolveCategoryLabels } = require('./lib/labels');
 
 const ROOT    = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(ROOT, 'cdn-dist');
@@ -68,7 +69,7 @@ function main() {
   const slugCounts = {};
 
   for (const cat of manifest.categories) {
-    const data  = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', cat.file), 'utf8'));
+    const data  = resolveCategoryLabels(JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', cat.file), 'utf8')), ROOT);
     const items = data.items || [];
 
     for (const item of items) {

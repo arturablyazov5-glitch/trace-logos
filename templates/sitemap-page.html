@@ -25,14 +25,16 @@
   <meta property="og:locale" content="ru_RU">
 
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-header.css">
   <link rel="stylesheet" href="{{REL}}css/sitemap-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 
-{{> site-header search_action='logos/' search_scope='all' search_ph='Поиск логотипов и эмодзи...' back_href='' back_label='На главную' }}
+{{> nav-header }}
 
 <nav class="breadcrumbs" aria-label="Навигация">
   <a href="{{REL}}">Trace Logo's</a><span class="sep">/</span>
@@ -50,10 +52,7 @@
   </div>
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="{{REL}}" class="footer-link">trace-logos</a>
-</footer>
+{{> site-footer}}
 
-<script type="module" src="{{REL}}js/header-search.js"></script>
 </body>
 </html>

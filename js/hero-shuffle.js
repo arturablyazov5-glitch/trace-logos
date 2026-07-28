@@ -27,9 +27,17 @@ const toLocalUrl = (url) => {
 
 const preload = (src) => new Promise((res) => {
   const img = new Image();
-  img.onload = img.onerror = () => res();
+  img.onload = () => res(true);
+  img.onerror = () => res(false);
   img.src = src;
 });
+
+// The hero flips a new random logo/emoji every couple seconds — using the
+// full-res PNG (some catalog logos are 500KB–2MB) would mean a steady drip
+// of megabytes for a 24–52px icon. Guess the WebP grid preview path (mirrors
+// .../pngs/<path>.png → .../previews/<path>.webp) and fall back to the real
+// PNG if that guess 404s (e.g. preview not yet generated for a new logo).
+const lightGuess = (url) => url.replace('/pngs/', '/previews/').replace(/\.png(\?|$)/i, '.webp$1');
 
 function flipTo(el, nextSrc) {
   const out = el.animate(
@@ -54,8 +62,9 @@ function cycle(el, linkEl, pool, delay) {
       if (document.hidden) return;
       const next = pickDifferent(pool, current);
       if (!next || next === current) return;
-      const src = toRelSrc(next.src);
-      await preload(src);
+      let src = toRelSrc(next.src);
+      const ok = await preload(src);
+      if (!ok) src = toRelSrc(next.fallback);
       flipTo(el, src);
       linkEl.setAttribute('href', next.url);
       current = next;
@@ -82,10 +91,10 @@ export async function initHeroShuffle() {
     ]);
     logos = (lr.logos || [])
       .filter((l) => !l.comingSoon && l.pngUrl && l.url)
-      .map((l) => ({ src: l.pngUrl, url: toLocalUrl(l.url) }));
+      .map((l) => ({ src: lightGuess(l.pngUrl), fallback: l.pngUrl, url: toLocalUrl(l.url) }));
     emoji = (er.emoji || [])
       .filter((e) => e.pngUrl && e.url)
-      .map((e) => ({ src: e.pngUrl, url: toLocalUrl(e.url) }));
+      .map((e) => ({ src: lightGuess(e.pngUrl), fallback: e.pngUrl, url: toLocalUrl(e.url) }));
   } catch {
     return; // нет данных — оставляем стартовые иконки как есть
   }
@@ -93,9 +102,11 @@ export async function initHeroShuffle() {
 
   if (reduced) {
     const nextLogo = pickDifferent(logos, { src: logoEl.getAttribute('src') });
+    logoEl.onerror = () => { logoEl.onerror = null; logoEl.src = nextLogo.fallback; };
     logoEl.src = nextLogo.src;
     if (logoLinkEl) logoLinkEl.setAttribute('href', nextLogo.url);
     const nextEmoji = pickDifferent(emoji, { src: emojiEl.getAttribute('src') });
+    emojiEl.onerror = () => { emojiEl.onerror = null; emojiEl.src = nextEmoji.fallback; };
     emojiEl.src = nextEmoji.src;
     if (emojiLinkEl) emojiLinkEl.setAttribute('href', nextEmoji.url);
     return;

@@ -13,6 +13,7 @@
 
 const fs   = require('fs');
 const path = require('path');
+const { resolveCategoryLabels } = require('./lib/labels');
 
 const ROOT = path.resolve(__dirname, '..');
 const DRY_RUN  = process.argv.includes('--dry-run');
@@ -139,7 +140,7 @@ function main() {
   let catWritten = 0;
 
   for (const cat of manifest.categories) {
-    const data  = JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', cat.file), 'utf8'));
+    const data  = resolveCategoryLabels(JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', cat.file), 'utf8')), ROOT);
     const items = data.items || [];
 
     const catEntries = [];

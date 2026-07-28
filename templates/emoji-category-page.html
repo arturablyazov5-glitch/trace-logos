@@ -29,15 +29,17 @@
   </script>
 
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-header.css">
   <link rel="stylesheet" href="{{REL}}css/emoji-seo-page.css">
   <link rel="stylesheet" href="{{REL}}css/emoji-category-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 
-{{> site-header search_action='emoji/' search_scope='emoji' search_ph='Поиск эмодзи...' back_href='emoji/' back_label='Все эмодзи' }}
+{{> nav-header }}
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="{{REL}}">Trace Logo's</a><span class="sep">/</span>
@@ -68,10 +70,7 @@
 {{FAQ_SECTION}}
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="{{HOME_REL}}" class="footer-link">trace-logos</a>
-</footer>
+{{> site-footer}}
 
-<script type="module" src="{{REL}}js/header-search.js"></script>
 </body>
 </html>

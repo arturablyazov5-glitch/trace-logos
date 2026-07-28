@@ -91,7 +91,7 @@ tags_en: Graphics, SVG, Basics
 - **Иконочные шрифты** (Font Awesome и др.) — векторные иконки, упакованные в шрифт. Технология постепенно уступает место чистым SVG-спрайтам.
 - **Canvas и WebGL** в браузере — растровые технологии: нарисованное на canvas мылится при зуме, как обычная картинка.
 
-## Почему «логотип в векторе» — не прихоть дизайнера
+## Почему «логотип в векторе» не прихоть дизайнера
 
 Логотип живёт десятилетиями и появляется везде: аватарка 40 пикселей, шапка сайта, баннер, вывеска, борт машины. Единственный способ обеспечить одинаковое качество во всех размерах — хранить логотип как инструкцию, а не как мозаику. Растровые версии из вектора генерируются за секунды; восстановить вектор из растра — это ручная перерисовка за отдельные деньги.
 
@@ -204,7 +204,7 @@ A logo lives for decades and appears everywhere: a 40-pixel avatar, a site heade
 
 - **Curves (paths)** — the lines vectors are made of. "Convert to curves/outlines" = turn text into shapes so fonts stop mattering.
 - **Nodes (anchors)** — the points curves pass through. Fewer nodes for the same shape — a cleaner file.
-- **Tracing** — automatic raster-to-vector conversion. Works on simple marks, ruins complex ones ([the vectorization article](../kak-perevesti-logotip-v-vektor/)).
+- **Tracing** — automatic raster-to-vector conversion. Works on simple marks, ruins complex ones — see [the vectorization article](../kak-perevesti-logotip-v-vektor/) for details.
 - **Rasterization** — the reverse: turning vector into pixels. Happens every time an SVG hits a screen and on every PNG export.
 - **DPI/PPI** — dot density in print/on screen. A raster property; vectors don't have one — they rasterize to the needed density at output time.
 - **Retina (HiDPI)** — screens with 2–3× pixel density, the reason raster images need a 2x size margin.

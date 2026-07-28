@@ -89,7 +89,7 @@ tags_en: Logos, Pricing, Branding
 - **Права на промежуточные варианты** — иначе отвергнутые концепции дизайнер вправе продать вашему конкуренту.
 - **Файлы-исходники** в перечне результатов: AI/[Figma](../../logos/design/figma/)-исходник — часть работы, а не бонус по настроению.
 
-Без этого раздела вы покупаете не логотип, а разрешение им пользоваться, — разница вскроется при регистрации товарного знака ([как она устроена](../kak-zaregistrirovat-logotip/)) или при продаже бизнеса.
+Без этого раздела вы покупаете не логотип, а разрешение им пользоваться, — разница вскроется при регистрации товарного знака — [как она устроена](../kak-zaregistrirovat-logotip/), мы разбирали отдельно — или при продаже бизнеса.
 
 ## Скрытая стоимость владения логотипом
 
@@ -192,7 +192,7 @@ The legal part of the deal outweighs the aesthetic one. The minimum to fix in wr
 - **Rights to intermediate concepts** — otherwise the designer may legally sell rejected options to your competitor.
 - **Source files** in the deliverables list: the AI/[Figma](../../logos/design/figma/) master is part of the work, not a mood-dependent bonus.
 
-Without this section you're buying permission to use a logo, not the logo — the difference surfaces at trademark registration ([how it works](../kak-zaregistrirovat-logotip/)) or when selling the business.
+Without this section you're buying permission to use a logo, not the logo — the difference surfaces at trademark registration — we cover [how it works](../kak-zaregistrirovat-logotip/) separately — or when selling the business.
 
 ## The hidden cost of logo ownership
 

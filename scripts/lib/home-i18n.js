@@ -151,15 +151,12 @@ const PAIRS = [
   [`Экспорт в Figma`, `Export to Figma`],
 
   // ── Section: Collections ────────────────────────────────────────────────
+  // Tile names (cat-name span text) and footer short labels are NOT hardcoded
+  // here — see collectionPairs() below, derived straight from collections.json
+  // (h1/h1_en, home_label/home_label_en) so a new collection never silently
+  // stays untranslated on the EN homepage the way video-streaming did.
   [`>Подборки логотипов</h2>`, `>Logo collections</h2>`],
   [`>Готовые наборы под конкретную задачу</div>`, `>Ready-made sets for a specific task</div>`],
-  [`Логотипы российских банков`, `Russian bank logos`],
-  [`Логотипы нейросетей`, `AI logos`],
-  [`Логотипы маркетплейсов`, `Marketplace logos`],
-  [`Логотипы платёжных систем`, `Payment system logos`],
-  [`Логотипы соцсетей и мессенджеров`, `Social & messenger logos`],
-  [`Логотипы доставки и такси`, `Delivery & taxi logos`],
-  [`Новые иконки Google 2026`, `New Google icons 2026`],
 
   // ── Footer ──────────────────────────────────────────────────────────────
   [`Открытая библиотека логотипов и эмодзи. Бесплатно, без регистрации, с открытым исходным кодом.`,
@@ -172,10 +169,6 @@ const PAIRS = [
   [`>Соцсети</a>`, `>Social</a>`],
   [`>Флаги</a>`, `>Flags</a>`],
   [`<h3>Подборки</h3>`, `<h3>Collections</h3>`],
-  [`>Логотипы банков</a>`, `>Bank logos</a>`],
-  [`>Платёжные системы</a>`, `>Payment systems</a>`],
-  [`>Соцсети и мессенджеры</a>`, `>Social & messengers</a>`],
-  [`>Доставка и такси</a>`, `>Delivery & taxi</a>`],
   [`<h3>Инструменты</h3>`, `<h3>Tools</h3>`],
   [`>Скачать SVG / PNG</a>`, `>Download SVG / PNG</a>`],
   [`>Предложить логотип</a>`, `>Suggest a logo</a>`],
@@ -210,9 +203,26 @@ function loadPopularNames() {
   }
 }
 
+// Collection tile names (.cat-name span text) and footer short labels, derived
+// straight from collections.json instead of hand-maintained pairs — see the
+// note above the "Section: Collections" PAIRS block.
+function loadCollectionPairs() {
+  try {
+    const { collections } = require('../../collections.json');
+    const pairs = [];
+    for (const c of collections) {
+      if (c.h1 && c.h1_en) pairs.push([c.h1, c.h1_en]);
+      if (c.home_label && c.home_label_en) pairs.push([`>${c.home_label}</a>`, `>${c.home_label_en}</a>`]);
+    }
+    return pairs;
+  } catch {
+    return [];
+  }
+}
+
 function translateHome(html) {
   const popular = loadPopularNames();
-  for (const [ru, en] of [...PAIRS, ...popular.pairs]) {
+  for (const [ru, en] of [...PAIRS, ...loadCollectionPairs(), ...popular.pairs]) {
     // Source text uses typographic non-breaking spaces (U+00A0) in places, so a
     // plain substring match misses them. Match each space against ' ' OR NBSP.
     const pattern = ru.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]');

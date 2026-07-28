@@ -112,6 +112,27 @@ main {
 }
 .page-head p { color: var(--text-3); font-size: 14px; line-height: 1.5; }
 
+/* ── Tabs ── */
+.tabs {
+  display: flex; gap: 4px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 22px;
+  width: fit-content;
+}
+.tab {
+  border: 0; background: transparent; cursor: pointer;
+  color: var(--text-3); font-size: 13.5px; font-weight: 600;
+  padding: 9px 18px; border-radius: 9px;
+  transition: background .15s, color .15s;
+  font-family: inherit;
+}
+.tab:hover { color: var(--text-1); }
+.tab.active { background: var(--bg-active); color: var(--text-0); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
 /* ── Stat cards ── */
 .stats {
   display: grid;
@@ -196,6 +217,8 @@ td.rank { width: 46px; color: var(--text-6); font-variant-numeric: tabular-nums;
 tbody tr:nth-child(1) td.rank { color: var(--accent); font-weight: 700; }
 
 .logo-cell { display: flex; align-items: center; gap: 12px; min-width: 0; cursor: pointer; }
+.post-cell { display: flex; min-width: 0; text-decoration: none; color: inherit; cursor: pointer; }
+.post-cell:hover .nm { color: var(--accent); }
 .expand-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; color: var(--text-3); transition: transform .2s; font-size: 12px; }
 .expand-icon.open { transform: rotate(90deg); }
 .thumb {
@@ -212,6 +235,8 @@ tbody tr:nth-child(1) td.rank { color: var(--accent); font-weight: 700; }
 }
 .logo-meta { min-width: 0; }
 .logo-meta .nm { color: var(--text-0); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.demand-brand-link { color: inherit; text-decoration: none; }
+.demand-brand-link:hover { color: var(--accent); text-decoration: underline; }
 .logo-meta .fg { color: var(--text-6); font-size: 11.5px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 td.views { text-align: right; width: 90px; }
@@ -283,6 +308,39 @@ td.exports { white-space: nowrap; }
 }
 .variant-pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
 .variant-pills .ex-pill { margin: 0; }
+
+/* ── Спрос (Wordstat) ── */
+.demand-form {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 22px;
+}
+.demand-form label { display: block; font-size: 12.5px; color: var(--text-3); margin-bottom: 8px; font-weight: 500; }
+.demand-textarea {
+  width: 100%; min-height: 110px; resize: vertical;
+  background: var(--bg-raised); border: 1px solid var(--border-muted);
+  color: var(--text-1); border-radius: 11px; padding: 12px 14px;
+  font-size: 13.5px; font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  outline: none; line-height: 1.6;
+}
+.demand-textarea:focus { border-color: var(--border-hover); }
+.demand-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.demand-row .hint { font-size: 12px; color: var(--text-5); flex: 1; min-width: 200px; }
+.btn-primary {
+  background: var(--accent); color: #fff; border: 0;
+  height: 38px; padding: 0 18px; border-radius: 10px;
+  font-size: 13.5px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: opacity .15s;
+}
+.btn-primary:hover { opacity: .9; }
+.btn-primary:disabled { opacity: .5; cursor: default; }
+.demand-progress { font-size: 12.5px; color: var(--text-3); margin-top: 10px; display: none; }
+.demand-progress.show { display: block; }
+.demand-error { font-size: 12.5px; color: #ff6b6b; margin-top: 10px; display: none; }
+.demand-error.show { display: block; }
+td.assoc { color: var(--text-3); font-size: 12.5px; }
+td.total b.err { color: #ff6b6b; font-size: 12px; font-weight: 500; }
 
 .empty, .loading-row { text-align: center; padding: 56px 20px; color: var(--text-3); font-size: 14px; }
 .spinner {
@@ -416,41 +474,136 @@ footer .dot { margin: 0 8px; opacity: .5; }
   </header>
 
   <main>
-    <div class="page-head">
-      <h1>Популярность логотипов</h1>
-      <p>Открытие detail-панели в каталоге и заход на SEO-страницу логотипа суммируются в один счётчик. Экспорты детализированы по вариантам.</p>
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="logos" type="button">Логотипы</button>
+      <button class="tab" data-tab="posts" type="button">Статьи</button>
+      <button class="tab" data-tab="demand" type="button">Спрос</button>
     </div>
 
-    <div class="stats">
-      <div class="stat lead"><div class="k">Всего просмотров</div><div class="v" id="s-total">—</div></div>
-      <div class="stat"><div class="k">Логотипов в счёте</div><div class="v" id="s-count">—</div></div>
-      <div class="stat"><div class="k">Самый популярный</div><div class="v" id="s-top" style="font-size:18px">—</div></div>
-      <div class="stat"><div class="k">Всего экспортов</div><div class="v" id="s-exports">—</div></div>
-    </div>
-
-    <div class="toolbar">
-      <div class="search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input id="filter" placeholder="Поиск по имени или figma…" autocomplete="off">
+    <!-- ── Логотипы ── -->
+    <div class="tab-panel active" id="panel-logos">
+      <div class="page-head">
+        <h1>Популярность логотипов</h1>
+        <p>Открытие detail-панели в каталоге и заход на SEO-страницу логотипа суммируются в один счётчик. Экспорты детализированы по вариантам.</p>
       </div>
-      <span class="count-pill" id="count-pill"></span>
+
+      <div class="stats">
+        <div class="stat lead"><div class="k">Всего просмотров</div><div class="v" id="s-total">—</div></div>
+        <div class="stat"><div class="k">Логотипов в счёте</div><div class="v" id="s-count">—</div></div>
+        <div class="stat"><div class="k">Самый популярный</div><div class="v" id="s-top" style="font-size:18px">—</div></div>
+        <div class="stat"><div class="k">Всего экспортов</div><div class="v" id="s-exports">—</div></div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="filter" placeholder="Поиск по имени или figma…" autocomplete="off">
+        </div>
+        <span class="count-pill" id="count-pill"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-rank" data-sort="rank">#</th>
+              <th class="col-name" data-sort="name">Логотип</th>
+              <th class="col-views sorted" data-sort="views">Просмотры <span class="arr">▼</span></th>
+              <th class="col-exports" data-sort="exports">Экспорт</th>
+              <th class="col-bar"></th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr><td colspan="5"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th class="col-rank" data-sort="rank">#</th>
-            <th class="col-name" data-sort="name">Логотип</th>
-            <th class="col-views sorted" data-sort="views">Просмотры <span class="arr">▼</span></th>
-            <th class="col-exports" data-sort="exports">Экспорт</th>
-            <th class="col-bar"></th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <tr><td colspan="5"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
-        </tbody>
-      </table>
+    <!-- ── Статьи блога ── -->
+    <div class="tab-panel" id="panel-posts">
+      <div class="page-head">
+        <h1>Просмотры статей</h1>
+        <p>Заход на страницу статьи блога считается в счётчик просмотров (не чаще раза в 30 минут с одного устройства).</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat lead"><div class="k">Всего просмотров</div><div class="v" id="p-total">—</div></div>
+        <div class="stat"><div class="k">Статей в счёте</div><div class="v" id="p-count">—</div></div>
+        <div class="stat"><div class="k">Самая популярная</div><div class="v" id="p-top" style="font-size:18px">—</div></div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="filter-posts" placeholder="Поиск по заголовку или slug…" autocomplete="off">
+        </div>
+        <span class="count-pill" id="count-pill-posts"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-rank" data-sort-posts="rank">#</th>
+              <th class="col-name" data-sort-posts="title">Статья</th>
+              <th class="col-views sorted" data-sort-posts="views">Просмотры <span class="arr">▼</span></th>
+              <th class="col-bar"></th>
+            </tr>
+          </thead>
+          <tbody id="tbody-posts">
+            <tr><td colspan="4"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Спрос на отсутствующие лого (Wordstat) ── -->
+    <div class="tab-panel" id="panel-demand">
+      <div class="page-head">
+        <h1>Спрос на бренды, которых нет в каталоге</h1>
+        <p>Список брендов прогоняется через официальный Yandex Wordstat API (запрос «логотип &lt;бренд&gt;», регион — Россия). Ключ хранится на сервере (Supabase secret), сюда не попадает. Цена — 0.02 ₽/запрос по прайсу AI Studio.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat lead"><div class="k">Остаток в этом часе</div><div class="v" id="d-remaining-hour" style="font-size:22px">—</div></div>
+        <div class="stat"><div class="k">Остаток на сегодня</div><div class="v" id="d-remaining-day" style="font-size:22px">—</div></div>
+        <div class="stat"><div class="k">Потрачено сегодня</div><div class="v" id="d-spent" style="font-size:22px">—</div></div>
+      </div>
+
+      <div class="demand-form">
+        <label for="demand-input">Бренды-кандидаты (по одному на строку или через запятую)</label>
+        <textarea class="demand-textarea" id="demand-input" placeholder="макдоналдс&#10;samsung&#10;xiaomi&#10;adidas"></textarea>
+        <div class="demand-row">
+          <button class="btn-primary" id="demand-run">Проверить спрос</button>
+          <span class="hint">Лимит Wordstat API — ~5-10 запросов/сек, скрипт держит паузу между запросами. Разумный дневной объём — до нескольких тысяч фраз, если не гонять их пачками одновременно с других мест.</span>
+        </div>
+        <div class="demand-progress" id="demand-progress"></div>
+        <div class="demand-error" id="demand-error"></div>
+      </div>
+
+      <div class="toolbar" id="demand-toolbar" style="display:none">
+        <span class="count-pill" id="demand-count-pill"></span>
+        <div class="spacer" style="flex:1"></div>
+        <button class="icon-btn" id="btn-export-demand-csv">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          Экспорт CSV
+        </button>
+      </div>
+
+      <div class="table-wrap" id="demand-table-wrap" style="display:none">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-rank">#</th>
+              <th class="col-name">Бренд</th>
+              <th class="col-views" style="text-align:right">Спрос</th>
+              <th>Топ-ассоциация</th>
+            </tr>
+          </thead>
+          <tbody id="demand-tbody"></tbody>
+        </table>
+      </div>
     </div>
   </main>
 
@@ -463,9 +616,11 @@ footer .dot { margin: 0 8px; opacity: .5; }
 
 <script>
 const ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/track';
+const WORDSTAT_ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/wordstat';
+const WORDSTAT_CHUNK = 150; // должно совпадать с MAX_PHRASES на сервере
 const KEY_STORE = 'tl_admin_key';
 
-const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG' };
+const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', webp: 'WebP', pdf: 'PDF', ai: 'AI', eps: 'EPS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG' };
 
 let adminKey = sessionStorage.getItem(KEY_STORE) || '';
 let data = [];
@@ -473,6 +628,13 @@ let exportMap = {};
 let sortKey = 'views';
 let sortDir = -1;
 let expandedRows = new Set();
+
+let activeTab = 'logos';
+let rawPostViews = [];
+let postData = [];
+let slugTitleMap = {};
+let postSortKey = 'views';
+let postSortDir = -1;
 
 const $ = id => document.getElementById(id);
 
@@ -488,6 +650,186 @@ function showApp(rows) {
   $('gate').style.display = 'none';
   $('app').classList.add('ready');
   ingest(rows);
+  loadPostTitles();
+}
+
+// ── Tabs ───────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeTab = btn.dataset.tab;
+    document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b === btn));
+    $('panel-logos').classList.toggle('active', activeTab === 'logos');
+    $('panel-posts').classList.toggle('active', activeTab === 'posts');
+    $('panel-demand').classList.toggle('active', activeTab === 'demand');
+    if (activeTab === 'demand' && !demandUsageLoaded) loadDemandUsage();
+  });
+});
+
+// ── Спрос на отсутствующие лого (Wordstat) ──────────────────────────────
+let demandRows = [];
+let demandUsageLoaded = false;
+let demandUsage = null; // { usedToday, dailyLimit, remainingToday, spentTodayRub }
+
+function renderDemandUsage() {
+  if (!demandUsage) return;
+  $('d-remaining-hour').innerHTML = `${demandUsage.remainingThisHour.toLocaleString('ru-RU')}<span class="unit">/ ${demandUsage.hourlyLimit.toLocaleString('ru-RU')}</span>`;
+  $('d-remaining-day').innerHTML = `${demandUsage.remainingToday.toLocaleString('ru-RU')}<span class="unit">/ ${demandUsage.dailyLimit.toLocaleString('ru-RU')}</span>`;
+  $('d-spent').innerHTML = demandUsage.spentTodayRub.toFixed(2).replace('.', ',') + '<span class="unit">₽</span>';
+  const btn = $('demand-run');
+  const blocked = demandUsage.remainingThisHour <= 0 || demandUsage.remainingToday <= 0;
+  if (blocked) {
+    btn.disabled = true;
+    btn.textContent = demandUsage.remainingThisHour <= 0 ? 'Часовой лимит исчерпан' : 'Дневной лимит исчерпан';
+  } else if (btn.textContent !== 'Проверяю…') {
+    btn.disabled = false;
+    btn.textContent = 'Проверить спрос';
+  }
+}
+
+async function loadDemandUsage() {
+  demandUsageLoaded = true;
+  try {
+    const res = await fetch(WORDSTAT_ENDPOINT, { headers: { 'x-admin-key': adminKey } });
+    if (res.status === 401) { sessionStorage.removeItem(KEY_STORE); location.reload(); return; }
+    if (!res.ok) return;
+    demandUsage = await res.json();
+    renderDemandUsage();
+  } catch (_) { /* тихо — карточки останутся с «—» */ }
+}
+
+function parseDemandInput(raw) {
+  const list = raw.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
+  return [...new Set(list.map(s => s.toLowerCase()))];
+}
+
+function errBoxNote(msg) {
+  const errBox = $('demand-error');
+  errBox.textContent = msg;
+  errBox.classList.add('show');
+}
+
+async function runDemandCheck(phrases) {
+  const chunks = [];
+  for (let i = 0; i < phrases.length; i += WORDSTAT_CHUNK) chunks.push(phrases.slice(i, i + WORDSTAT_CHUNK));
+
+  const progress = $('demand-progress');
+  const errBox = $('demand-error');
+  progress.classList.add('show');
+  errBox.classList.remove('show');
+  let all = [];
+
+  for (let i = 0; i < chunks.length; i++) {
+    if (demandUsage && (demandUsage.remainingToday <= 0 || demandUsage.remainingThisHour <= 0)) {
+      errBoxNote(demandUsage.remainingThisHour <= 0
+        ? 'Часовой лимит исчерпан — дальше не проверяю. Остаток обнулится в начале следующего часа.'
+        : 'Дневной лимит исчерпан — дальше не проверяю. Остаток обнулится в полночь.');
+      break;
+    }
+    progress.textContent = `Проверяю ${i * WORDSTAT_CHUNK + 1}–${Math.min((i + 1) * WORDSTAT_CHUNK, phrases.length)} из ${phrases.length}…`;
+    const res = await fetch(WORDSTAT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
+      body: JSON.stringify({ phrases: chunks[i] }),
+    });
+    if (res.status === 401) { sessionStorage.removeItem(KEY_STORE); location.reload(); return; }
+    if (res.status === 429) {
+      const body = await res.json().catch(() => ({}));
+      if (body.usage) { demandUsage = body.usage; renderDemandUsage(); }
+      errBoxNote(body.error || 'Дневной лимит исчерпан');
+      break;
+    }
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      throw new Error(body.error || `Сервер ответил ${res.status}`);
+    }
+    const data = await res.json();
+    all = all.concat(data.results || []);
+    if (data.usage) { demandUsage = data.usage; renderDemandUsage(); }
+    if (data.skipped) errBoxNote(`Часть списка (${data.skipped}) пропущена — не хватило дневного лимита.`);
+  }
+
+  progress.classList.remove('show');
+  all.sort((a, b) => b.total - a.total);
+  return all;
+}
+
+$('demand-run').addEventListener('click', async () => {
+  if (!demandUsageLoaded) await loadDemandUsage();
+  if (demandUsage && (demandUsage.remainingToday <= 0 || demandUsage.remainingThisHour <= 0)) return; // кнопка и так задизейблена, но на всякий случай
+
+  const phrases = parseDemandInput($('demand-input').value);
+  const btn = $('demand-run');
+  const errBox = $('demand-error');
+  errBox.classList.remove('show');
+  if (!phrases.length) { errBoxNote('Список пуст'); return; }
+
+  btn.disabled = true; btn.textContent = 'Проверяю…';
+  let failed = false;
+  try {
+    demandRows = await runDemandCheck(phrases);
+    renderDemand();
+  } catch (e) {
+    failed = true;
+    errBoxNote('Ошибка: ' + (e.message || 'сеть недоступна'));
+  } finally {
+    $('demand-progress').classList.remove('show');
+    renderDemandUsage(); // сам решит, дизейблить ли кнопку по остатку лимита
+    if (failed && demandUsage && demandUsage.remainingToday > 0) { btn.disabled = false; btn.textContent = 'Проверить спрос'; }
+  }
+});
+
+function renderDemand() {
+  $('demand-toolbar').style.display = demandRows.length ? 'flex' : 'none';
+  $('demand-table-wrap').style.display = demandRows.length ? '' : 'none';
+  $('demand-count-pill').textContent = demandRows.length ? `${demandRows.length} брендов` : '';
+
+  let html = '';
+  demandRows.forEach((r, i) => {
+    const totalHtml = r.error
+      ? `<b class="err" title="${esc(r.error)}">ошибка</b>`
+      : `<b>${r.total.toLocaleString('ru-RU')}</b>`;
+    html += `<tr>
+      <td class="rank">${i + 1}</td>
+      <td class="fg-hide"><div class="logo-meta"><div class="nm"><a class="demand-brand-link" href="https://yandex.ru/search/?text=${encodeURIComponent('logo ' + r.brand + ' svg')}" target="_blank" rel="noopener">${esc(r.brand)}</a></div><div class="fg">${esc(r.phrase)}</div></div></td>
+      <td class="views">${totalHtml}</td>
+      <td class="assoc">${esc(r.topAssociation || '—')}</td>
+    </tr>`;
+  });
+  $('demand-tbody').innerHTML = html;
+}
+
+$('btn-export-demand-csv').addEventListener('click', () => {
+  const rows = [['Бренд', 'Фраза', 'Спрос', 'Топ-ассоциация', 'Ошибка']];
+  for (const r of demandRows) rows.push([r.brand, r.phrase, r.error ? '' : r.total, r.topAssociation || '', r.error || '']);
+  const csv = rows.map(r => r.map(csvCell).join(';')).join('\r\n');
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `trace-logos-demand-${stamp}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
+
+// ── Blog post titles (via public RSS feed) ────────────────────────────
+async function loadPostTitles() {
+  try {
+    const res = await fetch('/blog/rss.xml');
+    if (!res.ok) return;
+    const xml = await res.text();
+    const doc = new DOMParser().parseFromString(xml, 'text/xml');
+    doc.querySelectorAll('item').forEach(item => {
+      const link = item.querySelector('link')?.textContent || '';
+      const title = item.querySelector('title')?.textContent || '';
+      const slug = link.split('/').filter(Boolean).pop();
+      if (slug) slugTitleMap[slug] = title;
+    });
+  } catch (_) { /* заголовки останутся как slug */ }
+  rebuildPostData();
+  renderPosts();
 }
 
 function showGateError(msg) {
@@ -587,6 +929,8 @@ $('btn-reset').addEventListener('click', async () => {
 function ingest(raw) {
   const views = raw.views || raw || [];
   const exports = raw.exports || [];
+  rawPostViews = raw.post_views || [];
+  rebuildPostData();
   exportMap = {};
   for (const e of exports) {
     if (!exportMap[e.figma]) exportMap[e.figma] = {};
@@ -611,6 +955,7 @@ function ingest(raw) {
     };
   });
   render();
+  renderPosts();
 }
 
 function render() {
@@ -676,6 +1021,87 @@ function render() {
   });
   $('tbody').innerHTML = html;
 }
+
+// ── Blog post views ───────────────────────────────────────────────────
+function rebuildPostData() {
+  postData = rawPostViews.map(r => ({
+    slug: r.slug,
+    title: slugTitleMap[r.slug] || r.slug,
+    views: Number(r.count) || 0,
+  }));
+}
+
+function renderPosts() {
+  const q = $('filter-posts').value.toLowerCase().trim();
+  let rows = q ? postData.filter(d => d.title.toLowerCase().includes(q) || d.slug.toLowerCase().includes(q)) : [...postData];
+
+  rows.sort((a, b) => {
+    let va = a[postSortKey], vb = b[postSortKey];
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (va < vb) return -postSortDir;
+    if (va > vb) return postSortDir;
+    return 0;
+  });
+
+  const total = postData.reduce((s, d) => s + d.views, 0);
+  const top = postData.reduce((m, d) => d.views > (m?.views ?? -1) ? d : m, null);
+  $('p-total').innerHTML = total.toLocaleString('ru-RU') + '<span class="unit">просм.</span>';
+  $('p-count').textContent = postData.length.toLocaleString('ru-RU');
+  $('p-top').textContent = top ? top.title : '—';
+
+  $('count-pill-posts').textContent = q ? `${rows.length} из ${postData.length}` : '';
+
+  if (!rows.length) {
+    $('tbody-posts').innerHTML = `<tr><td colspan="4"><div class="empty">${postData.length ? 'Ничего не найдено' : 'Пока нет данных. Статьи появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
+    return;
+  }
+
+  const max = rows.reduce((m, d) => Math.max(m, d.views), 1);
+  let html = '';
+  rows.forEach((d, i) => {
+    html += `
+    <tr>
+      <td class="rank">${i + 1}</td>
+      <td class="fg-hide">
+        <a class="post-cell" href="/en/blog/${esc(d.slug)}/" target="_blank" rel="noopener">
+          <div class="logo-meta">
+            <div class="nm">${esc(d.title)}</div>
+            <div class="fg">/blog/${esc(d.slug)}/</div>
+          </div>
+        </a>
+      </td>
+      <td class="views"><b>${d.views.toLocaleString('ru-RU')}</b></td>
+      <td class="bar"><div class="bar-track"><div class="bar-fill" style="width:${(d.views / max * 100).toFixed(1)}%"></div></div></td>
+    </tr>`;
+  });
+  $('tbody-posts').innerHTML = html;
+}
+
+document.querySelectorAll('thead th[data-sort-posts]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.sortPosts;
+    if (key === 'rank') { postSortKey = 'views'; postSortDir = -1; }
+    else if (postSortKey === key) { postSortDir *= -1; }
+    else { postSortKey = key; postSortDir = key === 'views' ? -1 : 1; }
+    const theadPosts = th.closest('thead');
+    theadPosts.querySelectorAll('th').forEach(h => {
+      h.classList.remove('sorted');
+      h.querySelector('.arr')?.remove();
+    });
+    const active = theadPosts.querySelector(`th[data-sort-posts="${postSortKey === 'rank' ? 'views' : postSortKey}"]`);
+    if (active) {
+      active.classList.add('sorted');
+      const arr = document.createElement('span');
+      arr.className = 'arr';
+      arr.textContent = postSortDir > 0 ? '▲' : '▼';
+      active.appendChild(arr);
+    }
+    renderPosts();
+  });
+});
+
+$('filter-posts').addEventListener('input', renderPosts);
 
 function buildVariantDetails(exportDetail, logoImg) {
   const byVariant = {};
@@ -771,11 +1197,12 @@ document.querySelectorAll('thead th[data-sort]').forEach(th => {
     if (key === 'rank') { sortKey = 'views'; sortDir = -1; }
     else if (sortKey === key) { sortDir *= -1; }
     else { sortKey = key; sortDir = key === 'views' ? -1 : 1; }
-    document.querySelectorAll('thead th').forEach(h => {
+    const theadLogos = th.closest('thead');
+    theadLogos.querySelectorAll('th').forEach(h => {
       h.classList.remove('sorted');
       h.querySelector('.arr')?.remove();
     });
-    const active = document.querySelector(`thead th[data-sort="${sortKey === 'rank' ? 'views' : sortKey}"]`);
+    const active = theadLogos.querySelector(`th[data-sort="${sortKey === 'rank' ? 'views' : sortKey}"]`);
     if (active) {
       active.classList.add('sorted');
       const arr = document.createElement('span');

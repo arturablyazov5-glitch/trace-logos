@@ -35,15 +35,17 @@
   </script>
 
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-header.css">
   <link rel="stylesheet" href="{{REL}}css/emoji-seo-page.css">
   <link rel="stylesheet" href="{{REL}}css/confetti.css">
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
 </head>
 <body>
 
-{{> site-header search_action='emoji/' search_scope='emoji' search_ph='Поиск эмодзи...' back_href='emoji/' back_label='Все эмодзи' }}
+{{> nav-header }}
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="{{HOME_REL}}">Trace Logo's</a><span class="sep">/</span>
@@ -124,10 +126,8 @@
   </div>
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="{{HOME_REL}}" class="footer-link">trace-logos</a>
-  <p class="footer-copyright" data-i18n="footerEmojiCopyright">Эмодзи Apple, Google и Microsoft принадлежат их правообладателям и приведены для ознакомления.</p>
-</footer>
+<p class="footer-dmca-note"><span data-i18n="footerEmojiCopyright">Эмодзи Apple, Google и Microsoft принадлежат их правообладателям и приведены для ознакомления.</span></p>
+{{> site-footer}}
 
 <div id="toast" class="toast"></div>
 
@@ -135,6 +135,5 @@
 {{EMOJI_PAGE_DATA}}
 </script>
 <script type="module" src="{{REL}}js/emoji-seo-page.js"></script>
-<script type="module" src="{{REL}}js/header-search.js"></script>
 </body>
 </html>

@@ -90,7 +90,11 @@
   </script>
 
   <link rel="stylesheet" href="/css/seo-page.css">
+  <link rel="stylesheet" href="/css/site-header.css">
   <link rel="stylesheet" href="/css/blog.css">
+  <link rel="stylesheet" href="/css/threads-banner.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
+  <link rel="stylesheet" href="/css/blog-widget-svg.css">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -98,145 +102,380 @@
 <body>
 
 <header class="site-header">
-  <a class="brand" href="/en/" aria-label="Trace Logo's">
+  <a class="brand" href="/en/" aria-label="Trace Logo's — на главную">
     <span class="brand-logo" aria-hidden="true">
       <img src="/assets/brand/logo.svg" alt="" width="28" height="28">
     </span>
-    <span class="brand-name">Trace Logo's</span>
+    <span class="brand-name">Trace Logo's<span class="brand-badge">Beta</span></span>
   </a>
-  <form class="seo-search-form" id="seo-search-form" role="search" action="/en/logos/" method="get" data-base="/" data-scope="all">
+
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../logos/" method="get" data-base="../../" data-scope="all">
     <search-box class="seo-search-wrap">
       <input id="seo-search" name="q" type="text" placeholder="Search logos..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
     </search-box>
     <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
   </form>
-  <a class="back-btn" href="/en/blog/">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    <span data-i18n="backToCatalog">Back</span>
+
+  <nav class="header-nav" aria-label="Разделы">
+    <a href="/en/logos/" data-i18n="breadcrumbLogos">Logos</a>
+    <a href="/en/emoji/" data-i18n="breadcrumbEmoji">Emoji</a>
+    <a href="/en/blog/" data-i18n="blogSection">Blog</a>
+    <a class="nav-figma" href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><svg width="11" height="16" viewBox="0 0 38 57" fill="none" aria-hidden="true"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/></svg>Figma плагин</a>
+  </nav>
+
+  <a class="btn-github" href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+    <span>GitHub</span>
   </a>
+
+  <button type="button" class="mobile-nav-burger" id="mobile-nav-burger" data-i18n-aria="burgerAriaLabel" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav-drawer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
   <lang-switcher></lang-switcher>
 </header>
+
+<donate-ticker></donate-ticker>
+
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" hidden></div>
+<nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Menu" data-i18n-aria="burgerAriaLabel" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-brand">Trace Logo's</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" data-i18n-aria="detailCloseAriaLabel" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-section" id="mobile-nav-toc" hidden>
+    <div class="mobile-nav-label" data-i18n="mobileNavToc">On this page</div>
+    <div class="mobile-nav-list" id="mobile-nav-toc-list"></div>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label" data-i18n="mobileNavPages">Site sections</div>
+    <div class="mobile-nav-list">
+      <a href="/en/"><span data-i18n="navHome">Home</span></a>
+      <a href="/en/logos/"><span data-i18n="breadcrumbLogos">Logos</span></a>
+      <a href="/en/emoji/"><span data-i18n="breadcrumbEmoji">Emoji</span></a>
+      <a href="/en/#h-collections"><span data-i18n="navCollections">Collections</span></a>
+      <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a>
+    </div>
+  </div>
+</nav>
 <script src="/components/lang-switcher.js" defer></script>
 <script src="/components/search-box.js" defer></script>
+<script src="/components/mobile-nav.js" defer></script>
+<!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
+     запрос уйдёт только после того, как разрешится весь статический граф модулей
+     (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
+<link rel="modulepreload" href="/js/i18n-dict-en.js">
+<script type="module" src="/components/donate-ticker.js"></script>
+<script type="module" src="/js/header-search.js"></script>
+
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
   <a href="/en/">Trace Logo's</a><span class="sep">/</span>
   <a href="/en/blog/"><span data-i18n="blogSection">Blog</span></a><span class="sep">/</span>
-  <span class="current" aria-current="page">How to Open an SVG File — Viewing and Editing on Any System</span>
+  <span class="current" aria-current="page">How to Open an SVG File — Viewing and Editing on Any System</span>
 </nav>
 
 <main>
   <div class="blog-layout">
     <article class="blog-article">
-      <div class="blog-article-cover" style="background: linear-gradient(135deg, hsl(323 72% 58%) 0%, hsl(5 68% 42%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" /></svg></div>
+      <div class="blog-article-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(245 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(285 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(335 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(35 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(245 70% 38%) 0%, hsl(35 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-06">June 6, 2026</time>
           <span class="blog-meta-sep" aria-hidden="true">·</span>
-          <span class="blog-read">6 min read</span>
+          <span class="blog-read">8 min read</span>
+	          <span class="blog-meta-sep" aria-hidden="true">·</span>
+	          <span class="blog-views">
+	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+	            37
+	          </span>
         </div>
-        <h1>How to Open an SVG File — Viewing and Editing on Any System</h1>
+        <h1>How to Open an SVG File — Viewing and Editing on Any System</h1>
       </header>
       <div class="blog-body">
-        <p>You downloaded a logo, double-clicked the file — and instead of a picture, a text editor opened with a wall of cryptic code. Or the system asks &quot;how do you want to open this file?&quot;. Relax: the file is fine. SVG is an unusual format — it's both an image and text at the same time. Here's how to view and edit it on any platform.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>Just viewing</strong> — drag the SVG into any browser. <strong>Editing</strong> — <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> (free, in the browser), Inkscape (free, offline) or <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>. <strong>Opened as text</strong> — that's normal: SVG <em>is</em> text; your system just associated the extension with a text editor.</p></div></div>
+        <p>You downloaded a logo, clicked the file — and instead of a picture, a text editor opened with a wall of baffling code. Or the system just asks, bewildered: &quot;what should I open this with?&quot; The first thought is that the file is broken. But it's fine, and the whole confusion grows from one property of the format worth understanding once and for all: <strong>an SVG is both a picture and text at the same time</strong>. Once that settles in, the &quot;what do I open it with&quot; question splits into two simple ones, each with an obvious answer.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>Just view it</strong> — drag the SVG into any browser: <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome</a>, <a href="/en/logos/search/safari/" target="_blank" rel="noopener">Safari</a>, <a href="/en/logos/search/yandexbrowser/" target="_blank" rel="noopener">Yandex Browser</a>. <strong>Edit it</strong> — <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> (free, in‑browser), Inkscape (free, offline) or <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>. <strong>Opened as text</strong> — not a breakage: an SVG is text; the system just tied the extension to a text editor.</p></div></div>
       <h2 id="why-svg-opens-as-code">Why SVG opens &quot;as code&quot;</h2>
-      <p>SVG is an XML document: <code>&lt;svg&gt;</code>, <code>&lt;path&gt;</code>, <code>&lt;circle&gt;</code> tags with shape coordinates inside. A browser reads the tags and draws the picture; a text editor shows them literally. If double-clicking sends the file to Notepad, the OS simply picked the wrong default app. Nothing is broken and nothing needs &quot;converting&quot;.</p>
-      <p><strong>Fix the association:</strong> right-click the file → &quot;Open with&quot; → choose a browser → tick &quot;Always use this app&quot;.</p>
-      <h2 id="just-viewing">Just viewing</h2>
-      <h3>The browser — on any OS</h3>
-      <p>Your universal SVG viewer is already installed. Drag the file into <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome</a>, <a href="/en/logos/search/safari/" target="_blank" rel="noopener">Safari</a> or <a href="/en/logos/search/firefox/" target="_blank" rel="noopener">Firefox</a> — it renders instantly, and you can zoom in with no loss of sharpness.</p>
-      <h3>Windows</h3>
-      <p><a href="/en/logos/store/windows/" target="_blank" rel="noopener">Windows</a> Explorer thumbnails for SVG are hit-and-miss. Quick options: the browser, or a Microsoft Store app with SVG thumbnail support. The stock Photos app still handles SVG inconsistently.</p>
-      <h3>macOS</h3>
-      <p>Quick Look (spacebar in <a href="/en/logos/system/finder/" target="_blank" rel="noopener">Finder</a>) shows SVG out of the box. <a href="/en/logos/design/preview/" target="_blank" rel="noopener">Preview</a> opens it too but rasterizes on save — fine for viewing, wrong for editing.</p>
-      <h3>Mobile</h3>
-      <p>Both iOS and Android open SVG in the built-in browser — send the file to yourself in a messenger and tap it. No special app needed.</p>
-      <h2 id="editing">Editing</h2>
-      <h3>Figma — free, no install</h3>
-      <p>For 90% of logo tasks <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> is enough: browser-based, free for personal use. Drag the SVG onto the canvas — it lands as a fully editable vector: recolor, reshape, delete elements, export back to SVG or PNG.</p>
-      <h3>Inkscape — the free offline editor</h3>
-      <p>A full open-source vector editor (<a href="/en/logos/store/windows/" target="_blank" rel="noopener">Windows</a>, macOS, Linux). SVG is its native format with the most complete support anywhere. Less glamorous than <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, but it does everything, including bitmap tracing and node editing.</p>
-      <h3>Adobe Illustrator — the professional standard</h3>
-      <p>If you already have it, done — it opens and saves SVG. One caveat: &quot;Save As&quot; stuffs the file with Adobe metadata; for the web use &quot;Export As&quot; with &quot;Minify&quot; checked.</p>
-      <h3>A text editor — yes, seriously</h3>
-      <p>Small edits are faster in code. Change a color — find <code>fill=&quot;#FF0000&quot;</code> and replace the value. Resize — adjust <code>width</code> and <code>height</code>. VS Code with an SVG preview extension makes it comfortable: code on the left, live image on the right.</p>
-      <h2 id="which-tool-when">Which tool when</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Task</th><th>Tool</th><th>Price</th></tr></thead><tbody><tr><td>View</td><td>any browser</td><td>free</td></tr><tr><td>Recolor, tweak</td><td><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a></td><td>free</td></tr><tr><td>Serious offline editing</td><td>Inkscape</td><td>free</td></tr><tr><td>Professional work</td><td><a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a></td><td>subscription</td></tr><tr><td>One-line edit</td><td>text editor</td><td>free</td></tr></tbody></table></div>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>What NOT to open SVG with</span></div><div class="callout-body"><ul>
-      <li><strong>Paint and stock photo viewers</strong> — either won't open it or will rasterize on save, killing the vector.</li>
-      <li><strong><a href="/en/logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a></strong> — opens it but immediately converts to raster. <a href="/en/logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a> is a raster editor; vectors don't survive there.</li>
-      <li><strong>Word and PowerPoint</strong> — you can insert an SVG into a document, but you can't edit the vector.</li>
-      </ul></div></div>
-      <h2 id="faq">FAQ</h2>
-      <p><strong>Why does my SVG render as a black square?</strong> Most likely the shapes have no fill color and the renderer defaults to black, or the file uses CSS variables only its source website defines. Open it in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> to inspect the layer structure.</p>
-      <p><strong>Does CorelDRAW open SVG?</strong> Yes, import and export both — quality depends on the version.</p>
-      <p><strong>Is SVG safe?</strong> From a trusted source — yes. Technically SVG can contain scripts, so don't inline SVGs from random places into your website — more in <a href="/en/blog/kak-vstavit-svg-na-sajt/" target="_blank" rel="noopener">our article on embedding SVG</a>.</p>
-      <p><strong>How do I open SVG in Word or PowerPoint?</strong> Modern Office inserts SVG directly: Insert → Pictures. Inside the document you get basic operations — resize, rotate, recolor via Graphics Format. Office before 2016 doesn't understand SVG — convert to PNG for those.</p>
-      <p><strong>Why won't an SVG from the internet open at all?</strong> Check that you downloaded the file, not an HTML page around it. Open it in a text editor: <code>&lt;!DOCTYPE html&gt;</code> inside means you saved a page — find the direct .svg link.</p>
-      <p><strong>Is there a viewer for browsing a folder of icons?</strong> macOS <a href="/en/logos/system/finder/" target="_blank" rel="noopener">Finder</a> thumbnails SVG out of the box; on <a href="/en/logos/store/windows/" target="_blank" rel="noopener">Windows</a> install a free SVG-thumbnail shell extension from the Microsoft Store — the icon folder becomes visible without opening each file.</p>
-      <h2 id="editing-svg-in-each-tool-mini-recipes">Editing SVG in each tool: mini-recipes</h2>
-      <p><strong><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> — recolor a logo:</strong> drag the SVG onto the canvas → double-click into the group → select the shape → the Fill field in the right panel → enter a HEX or use the eyedropper. Export: SVG or PNG.</p>
-      <p><strong><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> — remove an element:</strong> double-click into the group, select the extra layer, Delete. If everything is fused into one path, the author flattened it — you'll need the pen tool or a better source.</p>
-      <p><strong>Inkscape — replace a color everywhere:</strong> Edit → Select Same → Fill Color (selects all shapes of that color) → set the new color once.</p>
-      <p><strong>Inkscape — reduce node count:</strong> select the path → Path → Simplify (Ctrl+L). Repeat for stronger simplification. Watch the shape: overdoing it rounds corners.</p>
-      <p><strong>Text editor — change the size:</strong> find <code>width=&quot;...&quot;</code> and <code>height=&quot;...&quot;</code> in the first line and edit the values (or delete both — then CSS controls the size and viewBox preserves proportions).</p>
-      <h2 id="where-broken-svgs-come-from">Where &quot;broken&quot; SVGs come from</h2>
-      <p>Knowing the causes saves diagnostic time:</p>
+      <p>Let's start with that wall of code, since it scares people most. An SVG is an XML document: inside are <code>&lt;svg&gt;</code>, <code>&lt;path&gt;</code>, <code>&lt;circle&gt;</code> tags with shape coordinates. A browser reads these tags and draws a picture; a text editor honestly shows them as text — because to it, that's what they are. Neither is wrong; the system just sent the file to the wrong program on double‑click.</p>
+      <p>Hence the fix, with no &quot;conversion&quot; whatsoever: right‑click the file → &quot;Open with&quot; → pick a browser → check &quot;Always open with this app.&quot; The file doesn't change by a single byte — only the program the system shows it in does. And now that it's clear nothing is broken, let's split the two tasks.</p>
+      <h2 id="task-one-just-view-it" class="step-heading"><span class="step-badge">Task one</span><span class="step-title">Just view it</span></h2>
+      <p>If you only need to see the logo, the most universal viewer is already on your device — the browser.</p>
+      <p>Drag the file into a <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome</a>, <a href="/en/logos/search/safari/" target="_blank" rel="noopener">Safari</a>, <a href="/en/logos/search/firefox/" target="_blank" rel="noopener">Firefox</a> or <a href="/en/logos/search/yandexbrowser/" target="_blank" rel="noopener">Yandex Browser</a> window — the picture appears instantly, and the mouse wheel zooms it in with no loss of sharpness (the whole point of vector). It works the same on any system, so what follows are just per‑platform shortcuts faster than dragging.</p>
       <ul>
-      <li><strong>Exports with CSS classes.</strong> Some editors write colors into a <code>&lt;style&gt;</code> block. The file is valid, but some programs (and old Office) ignore styles — the image turns black. Fix: re-save through <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, which bakes styles into shape attributes.</li>
-      <li><strong>Live text.</strong> If a <code>&lt;text&gt;</code> element remains and you lack the font, the label renders in a substitute or shifts. A properly prepared logo has text outlined.</li>
-      <li><strong>External references.</strong> SVG can link to images and fonts by URL — offline or after moving the file, those pieces vanish.</li>
-      <li><strong>A clipped viewBox.</strong> After manual edits, shapes can end up outside the visible area — the file looks &quot;empty&quot; though the data is there. Open it in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>: it shows everything, including what's off-canvas.</li>
+      <li><strong><a href="/en/logos/store/windows/" target="_blank" rel="noopener">Windows</a> 10/11.</strong> Explorer doesn't always show SVG thumbnails — it depends on installed extensions. If there are none, the browser is safest; or install a free thumbnail extension from the Microsoft Store, and an icon folder becomes visible without opening each file.</li>
+      <li><strong>macOS.</strong> Easiest here: press space on the file in <a href="/en/logos/system/finder/" target="_blank" rel="noopener">Finder</a> — Quick Look shows the SVG out of the box. <a href="/en/logos/design/preview/" target="_blank" rel="noopener">Preview</a> opens it too, but for viewing only: on save it turns vector into raster.</li>
+      <li><strong>Phone.</strong> Both iOS and Android open SVG in the built‑in browser — send the file to yourself in a messenger and tap it. No separate app needed.</li>
       </ul>
-      <h2 id="in-short">In short</h2>
-      <p>View in the browser, edit in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> or Inkscape, and &quot;it opened as text&quot; is the format's nature, not an error. SVG is the friendliest graphics format around: you don't need to buy a single program to work with it.</p>
-      <p>And if all you need is to recolor a logo and download the result — skip the editors entirely: our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a> has a color editor built right into every brand's page.</p>
+      <p>For a single file you don't even have to leave this page — drop it into the box below. Everything runs in your browser: the file is never uploaded, and you immediately see its dimensions, its source code and whatever is wrong with it.</p>
+      <div class="svgv" data-svg-viewer>
+  <div class="svgv-head">
+    <span class="svgv-title" data-i18n="svgvTitle">Open an SVG right here</span>
+    <span class="svgv-privacy">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span data-i18n="svgvPrivacy">The file never leaves your browser</span>
+    </span>
+  </div>
+
+  <div class="svgv-drop" data-svgv-drop>
+    <svg class="svgv-drop-icon" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5-5 5 5"/><path d="M12 5v13"/></svg>
+    <span class="svgv-drop-title" data-i18n="svgvDropTitle">Drop an SVG file here</span>
+    <button type="button" class="svgv-pick" data-svgv-pick data-i18n="svgvPick">Open file</button>
+    <span class="svgv-drop-hint" data-i18n="svgvDropHint">Or paste one from the clipboard — Ctrl+V / ⌘V</span>
+    <input type="file" accept=".svg,image/svg+xml" hidden data-svgv-input>
+  </div>
+
+  <div class="svgv-stage" hidden data-svgv-stage>
+    <div class="svgv-bar">
+      <div class="svgv-tabs" role="tablist">
+        <button type="button" class="svgv-tab is-active" role="tab" aria-selected="true" data-svgv-view="image" data-i18n="svgvTabImage">Image</button>
+        <button type="button" class="svgv-tab" role="tab" aria-selected="false" data-svgv-view="code" data-i18n="svgvTabCode">Code</button>
+      </div>
+
+      <div class="svgv-bgs" data-svgv-bgs>
+        <button type="button" class="svgv-bg svgv-bg-checker is-active" data-svgv-bg="checker" data-i18n-aria="svgvBgChecker" aria-label="Transparent background"></button>
+        <button type="button" class="svgv-bg svgv-bg-light" data-svgv-bg="light" data-i18n-aria="svgvBgLight" aria-label="Light background"></button>
+        <button type="button" class="svgv-bg svgv-bg-dark" data-svgv-bg="dark" data-i18n-aria="svgvBgDark" aria-label="Dark background"></button>
+      </div>
+
+      <div class="svgv-acts">
+        <button type="button" class="svgv-btn" data-svgv-reset>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5-5 5 5"/><path d="M12 5v13"/></svg>
+          <span data-i18n="svgvReset">Another file</span>
+        </button>
+        <button type="button" class="svgv-btn" data-svgv-copy hidden>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span data-i18n="svgvCopyCode">Copy code</span>
+        </button>
+        <button type="button" class="svgv-btn svgv-btn-primary" data-svgv-download>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          <span data-svgv-dl-label data-i18n="svgvDlPng">Download PNG</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="svgv-canvas" data-svgv-canvas data-bg="checker">
+      <img alt="" data-svgv-img>
+      <div class="svgv-broken" hidden data-svgv-broken>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15V6a2 2 0 0 0-2-2H7"/><path d="M3 3l18 18"/><path d="M21 15l-5-5L5 21"/><path d="M3 9v10a2 2 0 0 0 2 2h10"/></svg>
+        <span data-i18n="svgvBrokenPreview">Preview unavailable — the code has an error</span>
+      </div>
+    </div>
+
+    <div class="svgv-code" hidden data-svgv-codewrap>
+      <textarea class="svgv-editor" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" data-svgv-code data-i18n-aria="svgvCodeAria" aria-label="SVG source code"></textarea>
+      <div class="svgv-code-foot">
+        <span class="svgv-code-hint" data-i18n="svgvCodeHint">The code is editable — the Image tab shows the result right away</span>
+        <button type="button" class="svgv-btn svgv-btn-sm" data-svgv-revert hidden data-i18n="svgvRevert">Revert to original</button>
+      </div>
+    </div>
+
+    <div class="svgv-editerr" hidden data-svgv-editerr></div>
+    <div class="svgv-info" data-svgv-info></div>
+    <div class="svgv-notes" data-svgv-notes></div>
+  </div>
+
+  <div class="svgv-error" hidden data-svgv-error></div>
+
+  <div class="svgv-modal" hidden data-svgv-modal>
+    <div class="svgv-modal-back" data-svgv-close></div>
+    <div class="svgv-modal-card" role="dialog" aria-modal="true" tabindex="-1" data-svgv-card>
+      <div class="svgv-modal-title" data-svgv-modal-title data-i18n="svgvDlFile">Download file</div>
+      <button type="button" class="svgv-modal-x" data-svgv-close data-i18n-aria="svgvClose" aria-label="Close">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="svgv-modal-row" data-svgv-fmt-row hidden>
+        <span class="svgv-modal-label" data-i18n="svgvDlFormat">Format</span>
+        <div class="svgv-seg" data-svgv-fmts>
+          <button type="button" class="svgv-seg-btn is-active" data-svgv-fmt="svg">SVG</button>
+          <button type="button" class="svgv-seg-btn" data-svgv-fmt="png">PNG</button>
+        </div>
+      </div>
+
+      <div class="svgv-modal-row" data-svgv-size-row>
+        <span class="svgv-modal-label" data-i18n="svgvDlSize">Size</span>
+        <div class="svgv-sizes" data-svgv-sizes></div>
+      </div>
+
+      <button type="button" class="svgv-modal-go" data-svgv-go data-i18n="svgvDlGo">Download</button>
+    </div>
+  </div>
+</div>
+      <p>The &quot;Image / Code&quot; switch is the most telling part: one press turns the same file from a logo into markup and back. That is the dual nature that makes an SVG open as a picture one moment and as a wall of code the next. And the notes under the preview answer the question this whole article is about: if the file didn't open, or looks off, they say exactly why.</p>
+      <p>Viewing covers a good half of cases. But if the logo needs recoloring, cropping or a shape fix, the browser isn't enough — and here the second half of SVG's dual nature comes in.</p>
+      <h2 id="task-two-edit-it" class="step-heading"><span class="step-badge">Task two</span><span class="step-title">Edit it</span></h2>
+      <p>Since an SVG is also text describing shapes, it can be changed. The tool depends on how deep you go.</p>
+      <h3>Figma — free and no install</h3>
+      <p>For 90% of logo tasks <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> is plenty: it runs in the browser and is free for personal use. Drag the SVG onto the canvas — it lands as a fully editable vector: recolor, reshape, delete elements, export back to SVG or PNG. A sensible entry point for anyone who just needs to fix someone else's logo without design skills.</p>
+      <h3>Inkscape — a free offline editor</h3>
+      <p>When you need a desktop editor without internet, there's Inkscape (<a href="/en/logos/store/windows/" target="_blank" rel="noopener">Windows</a>, macOS, Linux) — an open‑source vector editor. SVG is its native format, with the fullest support of all: raster tracing, fine node work, color replacement across the whole file. The interface is less glamorous than <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>'s, but in capability it rivals paid packages.</p>
+      <h3>Adobe Illustrator — the professional standard</h3>
+      <p>If you already have <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>, install nothing extra — it opens and saves SVG. One nuance to remember: with a plain &quot;Save As,&quot; <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> adds service data and bloats the file. For the web, save via &quot;Export As&quot; with &quot;Minify&quot; checked — you'll get a clean, light SVG.</p>
+      <h3>A text editor — yes, really</h3>
+      <p>And since an SVG is literally text, small edits are fastest right in the code, with no graphics editor at all. Change a color — find <code>fill=&quot;#FF0000&quot;</code> and replace the value. Change the size — tweak <code>width</code> and <code>height</code> (or delete both: then the site's layout controls size via CSS, while <code>viewBox</code> holds the proportions). VS Code with a preview plugin makes it comfortable: code on the left, a live picture updating on the right.</p>
+      <p>So you don't hold all this in your head, here's the whole fork in one table, by task:</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Task</th><th>Tool</th><th>Price</th></tr></thead><tbody><tr><td>View</td><td>any browser</td><td>free</td></tr><tr><td>Recolor, tweak</td><td><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a></td><td>free</td></tr><tr><td>Serious offline editing</td><td>Inkscape</td><td>free</td></tr><tr><td>Professional work</td><td><a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a></td><td>subscription</td></tr><tr><td>One‑line edit</td><td>text editor</td><td>free</td></tr></tbody></table></div>
+      <p>Notice what's missing from the table — and that's no accident.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>What NOT to open SVG with</span></div><div class="callout-body"><ul>
+      <li><strong>Paint and the default &quot;Photos&quot;</strong> — either won't open it or will rasterize on save, killing the vector.</li>
+      <li><strong><a href="/en/logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a></strong> — opens it but immediately turns it to raster: it's a raster editor, vector doesn't survive there.</li>
+      <li><strong>Word and PowerPoint</strong> — you can insert an SVG into a document, but not edit the vector inside.</li>
+      </ul>
+      <p>The logic is one: anything that turns shapes into pixels on save destroys the format's main property.</p></div></div>
+      <h2 id="common-questions">Common questions</h2>
+      <p>SVG's dual nature spawns a couple of recurring questions — let's settle them so you don't guess.</p>
+      <p><strong>Why a black square instead of a picture?</strong> Most likely the shapes have no fill set and the renderer used black by default, or the file uses CSS variables only the source site understands. Open it in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> — it shows the layer structure and the real colors.</p>
+      <p><strong>Is SVG safe?</strong> From a trusted source — yes. But technically an SVG can contain scripts, so someone else's SVG from a random place shouldn't be inlined into your site — more in the article on <a href="/en/blog/kak-vstavit-svg-na-sajt/" target="_blank" rel="noopener">embedding SVG on a website</a>.</p>
+      <p><strong>How to open SVG in Word or PowerPoint?</strong> Modern Office inserts SVG directly: Insert → Pictures → choose the file; basic operations follow (size, rotation, color change). Pre-2016 versions don't understand SVG — convert to PNG for them.</p>
+      <p><strong>An SVG from the internet won't open at all.</strong> Check that the file itself downloaded: an HTML page often saves in its place (&quot;Save link as&quot; sometimes saves the page). Open it in a text editor: if it starts with <code>&lt;!DOCTYPE html&gt;</code>, it's a page — look for the direct <code>.svg</code> link.</p>
+      <h2 id="where-broken-svgs-come-from">Where &quot;broken&quot; SVGs come from</h2>
+      <p>Worth knowing separately why an outwardly correct file suddenly misbehaves — it saves hours of diagnosis. Every cause boils down to the &quot;text describes the picture&quot; link being broken somewhere:</p>
+      <ul>
+      <li><strong>Colors moved into CSS classes.</strong> Some editors write colors into a <code>&lt;style&gt;</code> block with classes. The file is valid, but some programs (and old Office) ignore the styles — the picture goes black. Fix: re‑save through <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, which moves styles into shape attributes.</li>
+      <li><strong>Live text instead of curves.</strong> If a <code>&lt;text&gt;</code> tag stays in the SVG and the needed font isn't on the machine, the caption shifts or renders in a wrong font. A properly prepared logo stores text converted to curves.</li>
+      <li><strong>External links.</strong> SVG can reference images and fonts by URL — moving the file or losing internet makes those pieces vanish.</li>
+      <li><strong>A cropped <code>viewBox</code>.</strong> After manual edits, shapes can end up outside the visible area — the file looks empty though the data is there. <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> shows all content, including what's off‑frame.</li>
+      </ul>
+      <h2 id="the-bottom-line">The bottom line</h2>
+      <p>All of SVG's apparent fussiness is the flip side of its convenience: it's a picture and text at once, so you view it with what draws from tags (a browser) and edit it with what understands vector (<a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, Inkscape, <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>). And &quot;opened as text&quot; is simply the format's nature. Unlike most graphics, working with SVG requires buying no program at all.</p>
+      <p>And the most common reason to open an SVG — just to change a logo's color — is handled with no editor at all: in our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a> the color editor is built right into every brand's page.</p>
       </div>
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/kak-skachat-logotip-s-sajta/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(0 72% 58%) 0%, hsl(42 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></div>
+          <a class="blog-card" href="/en/blog/kak-skachat-logotip-s-sajta/" data-date="2026-06-21" data-views="16">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logos</span><span class="blog-card-tag">How-to</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">21.06.2026</div>
-          <div class="blog-card-title">How to Download a Logo from Any Website — 5 Legitimate Ways</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.06.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            16
+          </div>
+          </div>
+          <div class="blog-card-title">How to Download a Logo from Any Website — 5 Legitimate Ways</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-konvertirovat-svg-v-png/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(138 72% 58%) 0%, hsl(180 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
+      <a class="blog-card" href="/en/blog/kak-konvertirovat-svg-v-png/" data-date="2026-06-15" data-views="3">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Conversion</span><span class="blog-card-tag">How-to</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">15.06.2026</div>
-          <div class="blog-card-title">How to Convert SVG to PNG and Back — 5 Lossless Methods</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.06.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            3
+          </div>
+          </div>
+          <div class="blog-card-title">How to Convert SVG to PNG and Back — 5 Lossless Methods</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/vodyanoj-znak-na-foto/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(275 72% 58%) 0%, hsl(317 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></svg></div>
+      <a class="blog-card" href="/en/blog/cherno-belyj-logotip/" data-date="2026-07-21" data-views="12">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logos</span><span class="blog-card-tag">How-to</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 18a6 6 0 0 0 0-12v12z" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">18.07.2026</div>
-          <div class="blog-card-title">Watermarking Photos — Placing a Logo So It Protects Without Ruining</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            12
+          </div>
+          </div>
+          <div class="blog-card-title">The Black‑and‑White Logo Version — Why You Need One</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/vektor-i-rastr-raznica/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(53 72% 58%) 0%, hsl(95 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
+      <a class="blog-card" href="/en/blog/vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="4">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Watermark</span><span class="blog-card-tag">Logos</span><span class="blog-card-tag">How-to</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z" /><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">17.07.2026</div>
-          <div class="blog-card-title">Vector vs Raster Graphics — The Difference in Plain Words</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>18.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            4
+          </div>
+          </div>
+          <div class="blog-card-title">Watermarking Photos — Placing a Logo So It Protects Without Ruining</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/v-kakom-formate-nuzhen-logotip/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(190 72% 58%) 0%, hsl(232 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
+      <a class="blog-card" href="/en/blog/vektor-i-rastr-raznica/" data-date="2026-07-17" data-views="0">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Graphics</span><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Basics</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">16.07.2026</div>
-          <div class="blog-card-title">What File Format Should a Logo Be — SVG, PNG, AI, EPS or PDF</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            0
+          </div>
+          </div>
+          <div class="blog-card-title">Vector vs Raster Graphics — The Difference in Plain Words</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/pochemu-logotip-razmytyj/">
-        <div class="blog-card-cover" style="background: linear-gradient(135deg, hsl(328 72% 58%) 0%, hsl(10 68% 42%) 100%);" aria-hidden="true"><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
+      <a class="blog-card" href="/en/blog/v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="1">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Formats</span><span class="blog-card-tag">Logos</span><span class="blog-card-tag">SVG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
         <div class="blog-card-body">
-          <div class="blog-card-date">07.07.2026</div>
-          <div class="blog-card-title">Why Your Logo Looks Blurry and How to Fix It — Every Cause Explained</div>
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            1
+          </div>
+          </div>
+          <div class="blog-card-title">What File Format Should a Logo Be — SVG, PNG, AI, EPS or PDF</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
         </div>
@@ -244,11 +483,34 @@
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="On this page"><span class="blog-sidebar-label">On this page</span><ol><li><a href="#why-svg-opens-as-code">Why SVG opens &quot;as code&quot;</a></li><li><a href="#just-viewing">Just viewing</a></li><li><a href="#editing">Editing</a></li><li><a href="#which-tool-when">Which tool when</a></li><li><a href="#faq">FAQ</a></li><li><a href="#editing-svg-in-each-tool-mini-recipes">Editing SVG in each tool: mini-recipes</a></li><li><a href="#where-broken-svgs-come-from">Where &quot;broken&quot; SVGs come from</a></li><li><a href="#in-short">In short</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="On this page"><span class="blog-sidebar-label">On this page</span><ol><li><a href="#why-svg-opens-as-code">Why SVG opens &quot;as code&quot;</a></li><li><a href="#task-one-just-view-it">Task one: just view it</a></li><li><a href="#task-two-edit-it">Task two: edit it</a></li><li><a href="#common-questions">Common questions</a></li><li><a href="#where-broken-svgs-come-from">Where &quot;broken&quot; SVGs come from</a></li><li><a href="#the-bottom-line">The bottom line</a></li></ol></nav>
       <div class="blog-progress-wrap">
-      <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
-      <span class="blog-progress-pct">0%</span>
+      <span class="blog-progress-label">Reading progress</span>
+      <div class="blog-progress-row">
+        <div class="blog-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="100"><div class="blog-progress-bar"></div></div>
+        <span class="blog-progress-pct">0%</span>
+      </div>
     </div>
+      <!-- Threads banner — shared component (SEO logo pages + blog sidebar).
+     Styles: css/threads-banner.css · dismiss behavior: js/threads-banner.js -->
+<aside class="th-banner" id="th-banner">
+  <a class="th-banner-link" href="https://www.threads.net/@mansurov_rafaell" target="_blank" rel="noopener noreferrer" data-i18n-aria="thBannerAriaLabel" aria-label="Rafael Mansurov on Threads">
+    <button class="th-banner-close" id="th-banner-close" data-i18n-aria="thBannerCloseAria" aria-label="Hide banner" type="button">
+      <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="2" y1="2" x2="12" y2="12"/><line x1="12" y1="2" x2="2" y2="12"/></svg>
+    </button>
+    <span class="th-banner-shine" aria-hidden="true"></span>
+    <svg class="th-banner-watermark" viewBox="0 0 28 28" fill="currentColor" aria-hidden="true"><path d="M18.307 13.343a6 6 0 0 0-.236-.107c-.139-2.56-1.538-4.026-3.887-4.041h-.031c-1.405 0-2.574.6-3.293 1.69l1.292.887c.537-.815 1.38-.99 2.001-.99l.022.001c.773.005 1.357.23 1.734.668q.414.48.55 1.317a10 10 0 0 0-2.22-.106c-2.233.128-3.669 1.43-3.572 3.24.049.918.506 1.708 1.287 2.224.661.436 1.512.65 2.396.601 1.168-.064 2.085-.51 2.724-1.324.485-.619.792-1.42.928-2.431.556.336.969.778 1.197 1.31.387.902.41 2.387-.801 3.597-1.062 1.06-2.337 1.519-4.265 1.533-2.138-.016-3.755-.702-4.807-2.038-.985-1.252-1.493-3.06-1.512-5.374.019-2.314.527-4.122 1.512-5.373 1.051-1.337 2.669-2.023 4.807-2.039 2.154.016 3.8.705 4.891 2.048.535.659.939 1.487 1.205 2.453l1.514-.404c-.323-1.189-.83-2.213-1.52-3.062C18.822 5.9 16.775 5.018 14.137 5h-.01c-2.632.018-4.656.904-6.016 2.632-1.21 1.539-1.834 3.679-1.855 6.362v.012c.02 2.683.645 4.823 1.855 6.362 1.36 1.728 3.384 2.614 6.016 2.632h.01c2.34-.016 3.99-.629 5.349-1.986 1.777-1.777 1.724-4.003 1.138-5.37-.42-.98-1.222-1.776-2.318-2.301m-4.04 3.798c-.979.055-1.996-.384-2.046-1.325-.037-.698.497-1.476 2.106-1.569q.276-.016.543-.016c.584 0 1.131.057 1.628.166-.185 2.316-1.273 2.692-2.231 2.744"/></svg>
+    <div class="th-banner-body">
+      <span class="th-banner-title" data-i18n="thBannerTitle">Threads profile</span>
+      <span class="th-banner-desc" data-i18n="thBannerDesc">About design, code, and products that make life simpler. Follow along 🤙</span>
+      <span class="th-banner-cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span data-i18n="thBannerCta">Follow</span>
+      </span>
+    </div>
+  </a>
+</aside>
+
     </aside>
   </div>
 
@@ -264,12 +526,96 @@
   </div>
 </main>
 
-<footer>
-  Trace Logo's Beta · <a href="/en/" class="footer-link">trace-logos</a>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col footer-about">
+        <a class="brand" href="/en/" aria-label="Trace Logo's" style="margin-bottom:14px">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="/assets/brand/logo.svg" alt="" width="30" height="30">
+          </span>
+          <span class="brand-name">Trace Logo's</span>
+        </a>
+        <p data-i18n="footerAbout">Open library of logos and emoji. Free, no signup, open source.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCatalog">Catalog</h3>
+        <ul>
+          <li><a href="/en/logos/"><span data-i18n="footerAllLogos">All logos</span></a></li>
+          <li><a href="/en/emoji/"><span data-i18n="footerEmoji">Emoji</span></a></li>
+          <li><a href="/en/blog/"><span data-i18n="footerBlog">Blog</span></a></li>
+          <li><a href="/en/logos/ai/"><span data-i18n="footerAI">AI</span></a></li>
+          <li><a href="/en/logos/bank/"><span data-i18n="footerBanks">Banks</span></a></li>
+          <li><a href="/en/logos/market/"><span data-i18n="footerMarketplaces">Marketplaces</span></a></li>
+          <li><a href="/en/logos/social/"><span data-i18n="footerSocial">Social</span></a></li>
+          <li><a href="/en/logos/flag/"><span data-i18n="footerFlags">Flags</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCollections">Collections</h3>
+        <ul>
+          <!-- COLLECTIONS:START -->
+          <li><a href="/en/collections/russian-banks/"><span data-i18n="footerColl_russian-banks">Bank logos</span></a></li>
+          <li><a href="/en/collections/neural-networks/"><span data-i18n="footerColl_neural-networks">AI logos</span></a></li>
+          <li><a href="/en/collections/marketplaces/"><span data-i18n="footerColl_marketplaces">Marketplace logos</span></a></li>
+          <li><a href="/en/collections/payment-systems/"><span data-i18n="footerColl_payment-systems">Payment systems</span></a></li>
+          <li><a href="/en/collections/messengers-social/"><span data-i18n="footerColl_messengers-social">Social &amp; messengers</span></a></li>
+          <li><a href="/en/collections/google-2026/"><span data-i18n="footerColl_google-2026">Google icons 2026</span></a></li>
+          <li><a href="/en/collections/delivery-taxi/"><span data-i18n="footerColl_delivery-taxi">Delivery &amp; taxi</span></a></li>
+          <li><a href="/en/collections/browsers/"><span data-i18n="footerColl_browsers">Browsers</span></a></li>
+          <li><a href="/en/collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Cloud storage</span></a></li>
+          <li><a href="/en/collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Music streaming</span></a></li>
+          <li><a href="/en/collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Video streaming</span></a></li>
+          <!-- COLLECTIONS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColTools">Tools</h3>
+        <ul>
+          <li><a href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerFigmaPlugin">Figma plugin</span></a></li>
+          <!-- TOOLS:START -->
+          <li><a href="/en/tools/compress-webp/"><span data-i18n="footerTool_compress-webp">Compress image</span></a></li>
+          <li><a href="/en/tools/watermark/"><span data-i18n="footerTool_watermark">Remove watermark</span></a></li>
+          <li><a href="/en/tools/merge-pdf/"><span data-i18n="footerTool_merge-pdf">Merge PDF</span></a></li>
+          <li><a href="/en/tools/edit-image/"><span data-i18n="footerTool_edit-image">Crop &amp; rotate photo</span></a></li>
+          <li><a href="/en/tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">iOS call screen</span></a></li>
+          <!-- TOOLS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColDevelopers">For developers</h3>
+        <ul>
+          <li><a href="/logos.json">API · logos.json</a></li>
+          <li><a href="/emoji.json">API · emoji.json</a></li>
+          <li><a href="/llms.txt">llms.txt</a></li>
+          <li><a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://status.trace-logos.ru" target="_blank" rel="noopener"><span data-i18n="footerServiceStatus">Service status</span></a></li>
+          <li><a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">@mansurov_rafael</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Trace Logo's Beta · <span data-i18n="footerCopyrightShort">Images may be protected by their owners' copyright.</span></span>
+      <span class="footer-bottom-links">
+        <a href="/en/sitemap/"><span data-i18n="footerSitemap">Sitemap</span></a>
+        <a href="/en/terms/"><span data-i18n="footerTerms">Terms of use</span></a>
+        <a href="/en/consent/"><span data-i18n="footerConsent">Data processing</span></a>
+        <a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerOpenSource">Open source</span></a>
+      </span>
+    </div>
+  </div>
 </footer>
 
-<script type="module" src="/js/header-search.js"></script>
+
+<script type="module" src="/js/threads-banner.js"></script>
 <script type="module" src="/js/blog-toc.js"></script>
 <script type="module" src="/js/blog-code.js"></script>
+<script src="/js/blog-track.js" async></script>
+<script type="module" src="/js/blog-svg-viewer.js"></script>
 </body>
 </html>

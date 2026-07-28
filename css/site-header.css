@@ -1,0 +1,236 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   site-header.css — единственный источник стилей для шапки сайта
+   (templates/partials/nav-header.html), используемой на главной (index.html /
+   en/index.html, через build-home-sitemap.js::patchHomepageHeader) и в блоге
+   (templates/blog-index.html, templates/blog-post.html, через {{> nav-header }}).
+
+   Значения — хардкод (не var() из home.css/tokens.css), т.к. эти два места
+   держат СВОИ, разные наборы токенов — независимость гарантирует, что хедер
+   выглядит одинаково везде, куда подключён этот файл, вне зависимости от
+   того, какие ещё стили загружены на странице.
+
+   Подключать ПОСЛЕ home.css / seo-page.css, чтобы правила здесь выигрывали
+   каскад (та же специфичность, более поздний источник).
+   ────────────────────────────────────────────────────────────────────────── */
+
+.site-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(10, 10, 10, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  /* independent of the host page's body line-height (e.g. tools.css sets 1.7,
+     which would otherwise stretch .btn-github/.header-nav a text vertically) */
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; border-radius: 8px; outline: none; color: #fff; }
+.brand-logo {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.brand-logo img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.brand-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; }
+.brand-badge {
+  display: inline-block; font-size: 10px; font-weight: 600; color: #8a6bff;
+  background: rgba(138, 107, 255, 0.12); border: 1px solid rgba(138, 107, 255, 0.2);
+  border-radius: 4px; padding: 1px 6px; margin-left: 7px; letter-spacing: 0.03em; vertical-align: middle;
+}
+
+.seo-search-form { flex: 1; min-width: 0; max-width: 280px; margin: 0 16px; position: relative; }
+.seo-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  --search-clear-color: #777;
+  --search-clear-hover: #e5e5e5;
+}
+.seo-search-wrap .search-icon { left: 10px; color: #666; }
+#seo-search {
+  width: 100%;
+  background: rgba(128, 128, 128, 0.1);
+  border: 1px solid #2e2e2e;
+  border-radius: 8px;
+  padding: 7px 44px 7px 32px;
+  font-size: 13px;
+  color: #e5e5e5;
+  outline: none;
+  transition: border-color .15s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#seo-search::placeholder { color: #666; }
+#seo-search:focus { border-color: #404040; }
+.search-shortcut-kbd {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: #666;
+  background: rgba(128, 128, 128, 0.1);
+  border: 1px solid #2e2e2e;
+  border-radius: 4px;
+  padding: 1px 5px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#seo-search:focus ~ .search-shortcut-kbd { display: none; }
+
+.seo-search-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: #161616;
+  border: 1px solid #2e2e2e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.45);
+  z-index: 200;
+}
+.seo-search-dropdown.open { display: block; }
+
+.sd-group-label {
+  font-size: 11px; font-weight: 500; color: #555;
+  text-transform: uppercase; letter-spacing: .06em;
+  padding: 8px 12px 4px;
+}
+.sd-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 12px;
+  text-decoration: none; color: #e5e5e5;
+  font-size: 13px;
+  transition: background .1s;
+}
+.sd-item:hover, .sd-item.active { background: #1e1e1e; }
+.sd-thumb {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; border-radius: 6px; overflow: hidden;
+  background: #1a1a1a;
+}
+.sd-thumb img { width: 24px; height: 24px; object-fit: contain; display: block; border-radius: 6px; }
+.sd-thumb.emoji { font-size: 18px; background: none; }
+.sd-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sd-name mark { background: none; color: #fff; font-weight: 600; }
+.sd-empty { padding: 14px 12px; font-size: 13px; color: #666; }
+
+.header-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
+.header-nav a {
+  font-size: 13px; font-weight: 500; color: #888888; text-decoration: none;
+  padding: 7px 11px; border-radius: 8px; transition: color .15s, background .15s; white-space: nowrap;
+}
+.header-nav a:hover { color: #fff; background: rgba(255, 255, 255, 0.04); }
+.header-nav a.nav-figma { display: inline-flex; align-items: center; gap: 6px; }
+.header-nav a.soon { color: #5a5a5a; pointer-events: none; }
+.header-nav a.soon::after {
+  content: 'скоро'; font-size: 9px; margin-left: 5px; color: #5a5a5a;
+  border: 1px solid rgba(255, 255, 255, 0.07); border-radius: 3px; padding: 1px 4px; vertical-align: middle;
+}
+html[lang="en"] .header-nav a.soon::after { content: 'soon'; }
+
+.btn-github {
+  display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 500;
+  color: #fff; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px; padding: 7px 13px; text-decoration: none; transition: background .15s, border-color .15s;
+  flex-shrink: 0;
+}
+.btn-github:hover { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.14); }
+.btn-github svg { opacity: 0.75; }
+
+.mobile-nav-burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #888888;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: border-color .15s, color .15s;
+}
+.mobile-nav-burger:hover { border-color: rgba(255, 255, 255, 0.14); color: #fff; }
+
+.mobile-nav-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, .5);
+  opacity: 0;
+  transition: opacity .2s ease;
+  z-index: 200;
+}
+.mobile-nav-backdrop.open { opacity: 1; }
+
+.mobile-nav-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(300px, 84vw);
+  background: #121212;
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  z-index: 201;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .25s ease;
+  padding: 8px 0 24px;
+  line-height: 1.4;
+}
+.mobile-nav-drawer.open { transform: translateX(0); }
+
+.mobile-nav-head {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  margin-bottom: 8px;
+}
+.mobile-nav-brand { font-size: 13px; font-weight: 600; color: #fff; }
+.mobile-nav-close {
+  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px;
+  border: none; border-radius: 8px;
+  background: transparent;
+  color: #888888;
+  cursor: pointer;
+}
+.mobile-nav-close:hover { color: #fff; background: rgba(255, 255, 255, 0.07); }
+
+.mobile-nav-section { padding: 12px 16px; }
+.mobile-nav-section + .mobile-nav-section { border-top: 1px solid rgba(255, 255, 255, 0.07); }
+.mobile-nav-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em;
+  color: #5a5a5a; margin-bottom: 8px;
+}
+.mobile-nav-list { display: flex; flex-direction: column; }
+.mobile-nav-list a {
+  padding: 9px 4px;
+  color: #888888;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 6px;
+}
+.mobile-nav-list a:hover { color: #fff; background: rgba(255, 255, 255, 0.07); }
+
+body.mobile-nav-open { overflow: hidden; }
+
+@media (max-width: 640px) {
+  .site-header { padding: 0 16px; }
+  .seo-search-form { display: none; }
+  .header-nav { display: none; }
+  .btn-github span { display: none; }
+  .mobile-nav-burger { display: flex; }
+}
+
+@media (max-width: 860px) {
+  .header-nav a.nav-figma { display: none; }
+}

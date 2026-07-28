@@ -1,7 +1,10 @@
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { sanitizeSvg, validateSvgBytes } from '../_shared/svg-sanitizer.ts';
+import { checkRateLimit } from '../_shared/rate-limit.ts';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
+const RATE_LIMIT = 5;
+const RATE_WINDOW_SECONDS = 600; // 5 запросов / 10 минут с одного IP
 
 function sanitizeText(str: string): string {
   return String(str || '').replace(/[<>"'&]/g, '').trim().slice(0, 200);
@@ -40,6 +43,9 @@ serve(async (req: Request) => {
   }
 
   if (req.method !== 'POST') return cors({ error: 'Method not allowed' }, 405);
+
+  const rate = await checkRateLimit(req, 'suggest', RATE_LIMIT, RATE_WINDOW_SECONDS);
+  if (!rate.ok) return cors({ error: 'Слишком много запросов, попробуйте позже' }, 429);
 
   const BOT_TOKEN = Deno.env.get('BOT_TOKEN');
   const CHAT_ID   = Deno.env.get('CHAT_ID');

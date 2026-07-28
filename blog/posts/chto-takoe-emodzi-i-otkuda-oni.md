@@ -1,7 +1,7 @@
 ---
 title: Что такое эмодзи и откуда они появились
 title_en: What Are Emoji and Where Did They Come From
-description: История эмодзи от 176 символов くりた Сигэтаки в 1999 году до 3700+ знаков Unicode — кто их придумал, как они попали в iPhone и почему это не то же самое, что смайлики.
+description: История эмодзи от 176 символов Сигэтаки Куриты в 1999 году до 3700+ знаков Unicode — кто их придумал, как они попали в iPhone и почему это не то же самое, что смайлики.
 description_en: The history of emoji, from Shigetaka Kurita's 176 icons in 1999 to 3700+ Unicode characters — who invented them, how they reached the iPhone, and why they're not the same as emoticons.
 date: 2026-06-04
 slug: chto-takoe-emodzi-i-otkuda-oni
@@ -9,118 +9,116 @@ tags: Эмодзи, История, Unicode
 tags_en: Emoji, History, Unicode
 ---
 
-Слово «эмодзи» звучит по-английски, но это чистая японская калька: 絵 (э) — «картинка», 文字 (модзи) — «символ». Картиночный символ. И это не случайность — эмодзи действительно родились в Японии, у конкретного человека и в конкретном году, а не выросли постепенно из смайликов, как многие думают.
+Слово «эмодзи» звучит по-английски, и почти все уверены, что это родственник «эмоции». Совпадение обмануло целое поколение: на самом деле это чистая японская калька — 絵 (э) значит «картинка», 文字 (модзи) — «символ». Картиночный символ. И этимология здесь работает указателем на правду о происхождении: эмодзи придумали в Японии, у конкретного человека и в конкретном году. Из смайликов они постепенно не вырастали, хотя принято думать именно так.
 
-:::note Коротко
-Эмодзи придумал **Сигэтака Курита** в 1999 году для японского оператора NTT DoCoMo — 176 значков размером 12×12 пикселей. В международный стандарт **Unicode** их включили только в 2010 году, после чего Apple добавила клавиатуру эмодзи в iOS, а Google подхватил тренд на Android. Сейчас в стандарте больше **3700 символов**, и это не «улыбочки», а полноценный алфавит смыслов.
+Раз уж мы начали с развенчания, зафиксируем главное отличие сразу — иначе вся дальнейшая история будет читаться неверно.
+
+:::tip Это не смайлики
+Смайлики (emoticons) — это комбинации обычных символов клавиатуры: `:)`, `;-)`, `<3`. Они существовали задолго до эмодзи, с 1980-х. Эмодзи устроены принципиально иначе: каждый из них — **отдельный графический символ** со своим кодом. `:)` занимает два знака, 😊 — один символ Unicode с собственным номером `U+1F60A`. Всё, что дальше, — история именно этих кодов.
 :::
 
 ## Один человек и 176 картинок
 
-В 1999 году японский дизайнер Сигэтака Курита работал над мобильным интернет-сервисом i-mode для оператора NTT DoCoMo. Проблема была конкретной: экраны первых мобильных телефонов были крошечными и монохромными, а передать эмоцию или контекст в SMS-переписке текстом было неудобно — символов и так не хватало.
+Раз эмодзи придумали, у них есть автор. Им был Сигэтака Курита — в 1999 году японский дизайнер работал над мобильным интернет-сервисом i-mode для оператора NTT DoCoMo. Задача перед ним стояла предельно конкретная: экраны первых мобильников были крошечными и монохромными, а передать эмоцию или контекст в короткой переписке одним текстом было почти невозможно — символов и так не хватало, а тон сообщения терялся.
 
-Курита нарисовал 176 иконок 12×12 пикселей: солнце, зонт, сердце, улыбающееся лицо, знаки зодиака, транспорт. Вдохновлялся он манга-иероглифами (упрощённые пиктограммы для передачи эмоций в комиксах), дорожными знаками и символами погоды из японских газет. Каждая иконка занимала место одного символа — их можно было вставлять прямо в текст сообщения, как букву.
+Курита нашёл решение в картинках. Он нарисовал 176 иконок размером 12×12 пикселей: солнце, зонт, сердце, улыбающееся лицо, знаки зодиака, транспорт. Вдохновлялся он тем, что было под рукой в японской визуальной культуре: упрощёнными пиктограммами из манги, дорожными знаками и значками погоды из газет. Ключевая находка была технической: каждая иконка занимала место ровно одного символа, поэтому её можно было вставлять прямо в текст, как букву. Знак в строке, а вложением ничего пересылать не требовалось.
 
-:::tip Это не смайлики
-Смайлики (emoticons) — это комбинации обычных символов клавиатуры: `:)`, `;-)`, `<3`. Они существовали задолго до эмодзи, с 1980-х. Эмодзи — принципиально другое: не комбинация символов, а **отдельный графический символ** со своим кодом. `:)` — это два символа пунктуации, а 😊 — один символ Unicode с собственным номером `U+1F60A`.
-:::
+Это и определило судьбу формата. Но пока — только в Японии.
 
-## Как эмодзи стали мировым стандартом
+## Почему японские картинки чуть не остались японскими
 
-Долгое время эмодзи оставались чисто японским феноменом — у каждого оператора (DoCoMo, au, SoftBank) был свой несовместимый набор картинок, и сообщение с эмодзи, отправленное с одного оператора на другой, превращалось в кашу из вопросиков.
+Следующие годы эмодзи были локальным феноменом, и была причина, по которой они могли им и остаться. У каждого японского оператора — DoCoMo, au, SoftBank — был свой собственный, несовместимый набор картинок. Сообщение с эмодзи, отправленное с одной сети на другую, превращалось в кашу из вопросительных знаков: вместо сердца получатель видел «мы не знаем, что это за символ». Пока каждый рисовал свой алфавит, общего языка не получалось.
 
-Переломный момент случился в 2007–2010 годах:
+Чтобы картинки заработали для всех, операторам пришлось бы **договориться о едином коде** — таком, который любой телефон в мире понимал бы одинаково. А мировой стандарт текстовых символов только один.
 
-1. **2007.** Google начал добавлять поддержку японских эмодзи в Gmail для японского рынка — и заметил, насколько это популярно.
-2. **2009–2010.** Google и Apple совместно подали предложение в **Консорциум Unicode** — организацию, которая стандартизирует все текстовые символы в мире, — включить эмодзи в стандарт наравне с буквами алфавитов и математическими знаками.
-3. **2010.** Unicode 6.0 официально добавил первые 722 эмодзи-символа. С этого момента эмодзи перестали быть «японской фичей» и стали частью текстовой инфраструктуры интернета — как кириллица или иероглифы.
-4. **2011.** Apple открыла клавиатуру эмодзи для всех пользователей iOS (до этого она была скрытой опцией, известной в основном в Японии). Google добавил поддержку в Android годом позже.
+## Как эмодзи стали частью мирового стандарта
 
-С этого момента начался рост, который не останавливается до сих пор: 2015 — эмодзи признано словом года по версии Oxford Dictionary (им стал сам символ 😂, «лицо со слезами радости»); 2015 — добавлены оттенки кожи; 2016 — расширенное разнообразие профессий и гендеров; ежегодно с тех пор Unicode Consortium утверждает новую партию символов.
+Этот стандарт — Unicode, система, которая присваивает уникальный номер каждому текстовому знаку планеты, от латиницы и кириллицы до иероглифов и математических символов. Включить эмодзи в него означало поставить их в один ряд с буквами. Перелом занял три года:
 
-## Кто решает, каким эмодзи появиться
+1. **2007.** [Google](../../logos/search/google/) начал добавлять поддержку японских эмодзи в [Gmail](../../logos/office/gmail/) для японского рынка — и увидел, насколько это популярно.
+2. **2009–2010.** [Google](../../logos/search/google/) и [Apple](../../logos/store/apple/) совместно подали в Консорциум Unicode предложение включить эмодзи в стандарт наравне с алфавитами.
+3. **2010.** Unicode 6.0 официально добавил первые 722 эмодзи. С этого момента символы перестали быть «фичей японских операторов» и стали частью текстовой инфраструктуры интернета — как кириллица.
 
-Новые эмодзи не рисует один человек — их **предлагают** через формальный процесс в Unicode Consortium. Заявку может подать кто угодно: обычный пользователь, компания, дизайнер. Заявка должна доказать, что символ действительно нужен — обычно через статистику поисковых запросов, частоту использования похожих слов или явный пробел в существующем наборе (так, например, появились эмодзи вока, значка «в разработке» и множества блюд национальных кухонь).
+Дальше сработала простая механика: раз символы теперь стандартные, их можно встроить в клавиатуру любого устройства. В 2011-м [Apple](../../logos/store/apple/) открыла клавиатуру эмодзи всем пользователям iOS (до этого она была скрытой опцией, известной в основном в Японии), а [Google](../../logos/search/google/) добавил поддержку в Android годом позже. Символы получили место на клавиатуре у сотен миллионов людей — и начался рост, который не останавливается до сих пор. В 2015-м «лицо со слезами радости» 😂 стало словом года по версии Oxford Dictionary; тогда же добавили оттенки кожи, следом — разнообразие профессий и гендеров, и с тех пор новая партия символов утверждается каждый год.
 
-После одобрения Unicode фиксирует **код и краткое описание** символа — но не его внешний вид. Как именно нарисовать утверждённый эмодзи, решает уже каждая платформа сама: поэтому один и тот же символ выглядит по-разному на iPhone, Android и [Windows](../../logos/store/windows/). Это отдельная большая тема — мы разбираем её в статье [«Почему эмодзи отображаются по-разному»](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
+Что закономерно рождает вопрос: а кто вообще решает, какому эмодзи появиться?
 
-## Сколько эмодзи существует сейчас
+## Кто решает, каким эмодзи быть
 
-В стандарте Unicode 15 (2023) — больше **3700 эмодзи**, включая составные символы (флаги, семьи, профессии с оттенками кожи), которые технически собираются из нескольких базовых кодов через невидимый символ-соединитель ZWJ. Каждый год добавляется 30–100 новых — от предметов быта до культурных символов, которых не хватало в наборе.
+Новые эмодзи не рисует один человек — их **предлагают** через формальный процесс в Unicode Consortium, и подать заявку может кто угодно: обычный пользователь, компания, дизайнер. Но одного желания мало: заявка должна доказать, что символ действительно нужен, — через статистику поисковых запросов, частоту употребления похожих слов или явный пробел в наборе. Именно так в стандарте появились вок, значок «в разработке» и десятки блюд национальных кухонь: авторы заявок сумели обосновать нехватку.
+
+И здесь прячется тонкость, объясняющая одну из самых частых претензий к эмодзи. После одобрения Unicode фиксирует **код и краткое описание** символа — но не его внешний вид. Как именно нарисовать утверждённое «улыбающееся лицо», решает каждая платформа сама. Поэтому один и тот же код выглядит по-разному на iPhone, Android и [Windows](../../logos/store/windows/), и иногда смысл при этом сдвигается. Это отдельная большая тема — её мы разбираем в статье [«Почему эмодзи отображаются по-разному»](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
+
+## Сколько эмодзи сейчас
+
+Поскольку набор пополняется ежегодно, счёт давно перевалил за тысячи. В стандарте Unicode 15 — больше **3700 эмодзи**, и это с учётом составных символов: флаги, семьи, профессии с оттенками кожи технически собираются из нескольких базовых кодов через невидимый символ-соединитель ZWJ. Каждый год добавляется ещё 30–100 — от предметов быта до культурных символов, которых не хватало.
 
 :::success Зачем вообще это знать
-Эмодзи — не украшение переписки, а полноценная система символов со своей историей, правилами утверждения и стандартизацией на уровне Unicode. Понимание этого помогает: точнее подбирать эмодзи для маркетинга (заявка на новый символ проходит годы отбора не просто так — у него есть чёткий закреплённый смысл), не путать эмодзи со смайликами в текстах про дизайн, и не удивляться, почему один и тот же значок выглядит по-разному у разных получателей.
+Из всей истории следует один практический вывод: эмодзи работают как система символов с закреплённым смыслом. Это помогает точнее подбирать их для маркетинга (символ проходит годы отбора, и у него есть чёткое утверждённое значение), различать эмодзи и смайлики в текстах про дизайн и понимать, почему один значок выглядит по-разному у разных получателей.
 :::
 
 ## Где скачать PNG эмодзи
 
-В [каталоге эмодзи Trace Logo's](../../emoji/) для каждого символа доступны версии **Apple и Google**. На странице эмодзи можно:
+Если после всей теории нужен сам символ в виде файла — в [каталоге эмодзи Trace Logo's](../../emoji/) для каждого доступны версии [Apple](../../logos/store/apple/) и [Google](../../logos/search/google/). На странице эмодзи можно скопировать символ в один клик, скачать PNG нужного вендора и посмотреть код Юникода с категорией. Поиск работает и на русском, и на английском — найдёте эмодзи по названию или просто по смыслу.
 
-- скопировать сам символ в один клик;
-- скачать PNG нужного вендора;
-- посмотреть код Юникода и категорию.
+## Что запомнить
 
-Поиск работает на русском и английском — найдёте эмодзи по названию или просто по смыслу.
-
-## Коротко
-
-Эмодзи придумал один японский дизайнер в 1999 году для крошечных экранов первых мобильников — а не индустрия комиксов или смайлики, как принято думать. В 2010-м символы вошли в международный стандарт Unicode, и с этого момента их количество и популярность растут ежегодно. Сегодня это полноценная система с формальным процессом утверждения новых знаков — скачать готовые PNG всех вендоров можно в [каталоге эмодзи](../../emoji/).
+Эмодзи придумал один японский дизайнер в 1999 году для крошечных экранов первых мобильников — не индустрия комиксов и не смайлики, как принято думать. Локальными они не остались только потому, что в 2010-м вошли в Unicode и получили единый код, понятный любому устройству; дальше [Apple](../../logos/store/apple/) и [Google](../../logos/search/google/) вынесли их на клавиатуру, и рост уже не прекращался. Сегодня это система с формальным процессом утверждения новых знаков, где код общий, а картинка у каждой платформы своя. Готовые PNG всех вендоров — в [каталоге эмодзи](../../emoji/).
 
 ---EN---
 
-The word "emoji" sounds English, but it's a direct transliteration from Japanese: 絵 (e) — "picture", 文字 (moji) — "character". A picture character. That's not a coincidence — emoji really were born in Japan, created by one specific person in one specific year, not gradually evolved from emoticons as many assume.
+The word "emoji" sounds English, and nearly everyone assumes it's a relative of "emotion." The coincidence has fooled a whole generation: it's actually pure Japanese — 絵 (e) means "picture," 文字 (moji) means "character." A picture-character. And the etymology works as a pointer to the truth about their origin: emoji were invented in Japan, by one specific person in one specific year. They never grew gradually out of emoticons, though people assume exactly that.
 
-:::note TL;DR
-Emoji were invented by **Shigetaka Kurita** in 1999 for the Japanese carrier NTT DoCoMo — 176 icons, 12×12 pixels each. They only entered the international **Unicode** standard in 2010, after which Apple added an emoji keyboard to iOS and Google followed on Android. Today the standard has over **3,700 characters** — not just "smileys," but a full alphabet of meaning.
+Since we've started debunking, let's fix the main distinction right away — otherwise the whole history that follows reads wrong.
+
+:::tip These aren't emoticons
+Emoticons are combinations of ordinary keyboard characters: `:)`, `;-)`, `<3`. They existed long before emoji, since the 1980s. Emoji are built in a fundamentally different way: each one is a **separate graphic character** with its own code. `:)` takes two keystrokes, 😊 is one Unicode character with its own number `U+1F60A`. Everything ahead is the history of these codes.
 :::
 
-## One person, 176 pictures
+## One person and 176 pictures
 
-In 1999, Japanese designer Shigetaka Kurita was working on the i-mode mobile internet service for carrier NTT DoCoMo. The problem was concrete: early mobile screens were tiny and monochrome, and conveying emotion or context in text messages was awkward — you were already short on characters.
+Since emoji were invented, they have an author. It was Shigetaka Kurita — in 1999 a Japanese designer working on the i-mode mobile internet service for carrier NTT DoCoMo. His task was utterly concrete: the screens of the first cell phones were tiny and monochrome, and conveying emotion or context in a short message with text alone was nearly impossible — characters were scarce and the tone got lost.
 
-Kurita drew 176 icons at 12×12 pixels: sun, umbrella, heart, smiling face, zodiac signs, transit symbols. His inspirations were manga pictograms (simplified icons used in comics to convey emotion), road signs, and weather symbols from Japanese newspapers. Each icon took up the space of a single character — they could be dropped straight into a message, like a letter.
+Kurita found the answer in pictures. He drew 176 icons at 12×12 pixels: a sun, an umbrella, a heart, a smiling face, zodiac signs, transport. His inspiration wasn't emoticons but what was at hand in Japanese visual culture — simplified pictograms from manga, road signs, weather symbols from newspapers. The key find was technical: each icon took the space of exactly one character, so it could be inserted right into text, like a letter. Not an attached picture but a sign in the line.
 
-:::tip Not the same as emoticons
-Emoticons are combinations of ordinary keyboard characters: `:)`, `;-)`, `<3`. They existed long before emoji, since the 1980s. Emoji are fundamentally different — not a combination of characters but a **single graphical symbol** with its own code. `:)` is two punctuation marks; 😊 is one Unicode character with its own number, `U+1F60A`.
+That sealed the format's fate. But so far — only in Japan.
+
+## Why Japanese pictures nearly stayed Japanese
+
+For the next years emoji were a local phenomenon, and there was a reason they might have stayed that way. Each Japanese carrier — DoCoMo, au, SoftBank — had its own incompatible set of pictures. A message with emoji sent from one network to another turned into a mush of question marks: in place of a heart the recipient saw "we don't know what this symbol is." As long as everyone drew their own alphabet, no common language emerged.
+
+For the pictures to work for everyone, you didn't need to draw them prettier — you needed to **agree on a single code**, one any phone in the world would read the same. And there's only one global standard for text characters.
+
+## How emoji became part of the global standard
+
+That standard is Unicode, the system that assigns a unique number to every text sign on the planet, from Latin and Cyrillic to hieroglyphs and math symbols. Adding emoji to it meant placing them alongside letters. The turning point took three years:
+
+1. **2007.** [Google](../../logos/search/google/) began adding support for Japanese emoji in [Gmail](../../logos/office/gmail/) for the Japanese market — and saw how popular it was.
+2. **2009–2010.** [Google](../../logos/search/google/) and [Apple](../../logos/store/apple/) jointly proposed to the Unicode Consortium that emoji be included in the standard on par with alphabets.
+3. **2010.** Unicode 6.0 officially added the first 722 emoji. From that moment the symbols stopped being "a Japanese carrier feature" and became part of the internet's text infrastructure — like Cyrillic.
+
+Then simple mechanics kicked in: since the symbols were now standard, they could be built into any device's keyboard. In 2011 [Apple](../../logos/store/apple/) opened the emoji keyboard to all iOS users (previously a hidden option known mostly in Japan), and [Google](../../logos/search/google/) added support to Android a year later. The symbols got a keyboard slot for hundreds of millions of people — and a growth began that hasn't stopped since. In 2015 the "face with tears of joy" 😂 became Oxford Dictionary's word of the year; skin tones were added the same year, then professional and gender diversity, and since then a new batch is approved every year.
+
+Which naturally raises the question: who decides which emoji gets to exist?
+
+## Who decides what an emoji will be
+
+New emoji aren't drawn by one person — they're **proposed** through a formal process at the Unicode Consortium, and anyone can submit: an ordinary user, a company, a designer. But wanting isn't enough: a proposal must prove the symbol is genuinely needed — via search-query statistics, the frequency of similar words, or a clear gap in the set. That's how the wok, the "under construction" sign and dozens of national dishes entered the standard: not because someone felt like it, but because the gap could be justified.
+
+And here hides a subtlety that explains one of the most common gripes about emoji. After approval, Unicode fixes the **code and short description** of the symbol — but not its appearance. How exactly to draw the approved "smiling face" each platform decides itself. So the same code looks different on iPhone, Android and [Windows](../../logos/store/windows/), and sometimes the meaning shifts with it. That's a big topic of its own — covered in [«Why emoji display differently»](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
+
+## How many emoji there are now
+
+Since the set grows yearly, the count long ago passed the thousands. Unicode 15 holds more than **3700 emoji**, counting composite symbols: flags, families, professions with skin tones are technically assembled from several base codes via the invisible ZWJ connector. Each year adds another 30–100 — from household objects to cultural symbols that were missing.
+
+:::success Why know any of this
+One practical takeaway follows from the whole history: emoji work as a symbol system with fixed meaning. This helps you pick them more precisely for marketing (a symbol goes through years of selection and carries a defined, approved meaning), tell emoji apart from emoticons in design writing, and understand why the same sign looks different to different recipients.
 :::
 
-## How emoji became a global standard
+## Where to download emoji PNGs
 
-For a long time emoji stayed a purely Japanese phenomenon — each carrier (DoCoMo, au, SoftBank) had its own incompatible set of pictures, and a message with emoji sent from one carrier to another turned into a mess of question marks.
+If after all the theory you need the symbol as a file — the [Trace Logo's emoji catalog](../../emoji/) offers [Apple](../../logos/store/apple/) and [Google](../../logos/search/google/) versions for each. On an emoji page you can copy the symbol in one click, download the PNG of the vendor you want, and see the Unicode code and category. Search works in both Russian and English — find an emoji by name or just by meaning.
 
-The turning point came in 2007–2010:
+## What to remember
 
-1. **2007.** Google began supporting Japanese emoji in Gmail for the Japanese market — and noticed how popular it was.
-2. **2009–2010.** Google and Apple jointly submitted a proposal to the **Unicode Consortium** — the body that standardizes every text character in the world — to include emoji in the standard alongside alphabets and mathematical symbols.
-3. **2010.** Unicode 6.0 officially added the first 722 emoji characters. From that point emoji stopped being a "Japanese feature" and became part of the internet's text infrastructure — like Cyrillic or Chinese characters.
-4. **2011.** Apple opened the emoji keyboard to all iOS users (before that it was a hidden option, known mostly in Japan). Google added Android support a year later.
-
-The growth that followed hasn't stopped since: 2015 — emoji named Oxford Dictionary's Word of the Year (the winner was 😂, "face with tears of joy"); 2015 — skin tone modifiers added; 2016 — expanded profession and gender diversity; every year since, the Unicode Consortium approves a new batch of characters.
-
-## Who decides which emoji gets made
-
-New emoji aren't drawn by one person — they're **proposed** through a formal process at the Unicode Consortium. Anyone can submit a proposal: a regular user, a company, a designer. The proposal has to prove the symbol is genuinely needed — usually via search-volume data, usage frequency of related words, or an obvious gap in the existing set (that's how the wok, the "under construction" sign, and dozens of national dishes made it in).
-
-Once approved, Unicode fixes the **code and a short description** of the character — but not its appearance. How exactly the approved emoji gets drawn is left to each platform; that's why the same character looks different on iPhone, Android and [Windows](../../logos/store/windows/). It's a big topic on its own — we cover it in [Why Emoji Look Different](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
-
-## How many emoji exist today
-
-Unicode 15 (2023) has over **3,700 emoji**, including composite characters — flags, families, professions with skin tones — which are technically assembled from several base codes joined by an invisible connector, ZWJ. Every year 30–100 new ones are added, from everyday objects to cultural symbols that were missing from the set.
-
-:::success Why this matters
-Emoji aren't just decoration for a chat — they're a full character system with its own history, approval rules, and Unicode-level standardization. Knowing this helps you: pick emoji more precisely for marketing (a proposal takes years to clear review for a reason — each one carries a fixed, deliberate meaning), avoid confusing emoji with emoticons in design writing, and not be surprised when the same icon looks different for different recipients.
-:::
-
-## Where to download emoji PNG
-
-In the [Trace Logo's emoji catalog](../../emoji/), each character has **Apple and Google** versions available. On an emoji page you can:
-
-- copy the character itself in one click;
-- download the PNG for the vendor you need;
-- view the Unicode code and category.
-
-Search works in both English and Russian — find emoji by name or simply by meaning.
-
-## In short
-
-Emoji were invented by one Japanese designer in 1999 for the tiny screens of early mobile phones — not by the comics industry or emoticons, as commonly assumed. In 2010 they entered the international Unicode standard, and their number and popularity have grown every year since. Today it's a full system with a formal approval process for new characters — download ready-made PNGs for every vendor in our [emoji catalog](../../emoji/).
+Emoji were invented by one Japanese designer in 1999 for the tiny screens of the first cell phones — not by the comics industry and not from emoticons, as people assume. They didn't stay local only because in 2010 they entered Unicode and got a single code any device understands; then [Apple](../../logos/store/apple/) and [Google](../../logos/search/google/) put them on the keyboard, and the growth never stopped. Today it's a system with a formal approval process where the code is shared but the picture is each platform's own. Ready PNGs from every vendor — in the [emoji catalog](../../emoji/).

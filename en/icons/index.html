@@ -138,7 +138,11 @@
   </div>
   <div class="center-body">
     <main>
-      <div class="content" id="content"></div>
+      <!-- H1 для краулера. Лежит внутри .ssr-grid, который main.js сносит на
+           init, поэтому для пользователя с JS вёрстка не меняется. Каталог
+           рисуется целиком на JS — без этого блока страница уходила в индекс
+           без заголовка первого уровня. Тот же приём, что на /logos/ и /emoji/. -->
+      <div class="content" id="content"><div class="ssr-grid"><h1 class="section-title" data-i18n="iconsIndexH1">SVG Icons for Interfaces</h1></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Nothing here yet — section in development</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

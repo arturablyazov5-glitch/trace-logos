@@ -94,16 +94,24 @@ function nameBonus(w, nameLow) {
   return 0;
 }
 
+// Words don't all have to match (AND) — a query like "скачать вк" or "значок
+// вк" carries filler words no tag will ever contain. Any card with at least
+// one matching word qualifies; cards matching every word are ranked above
+// partial matches via the matched/total fraction, so noise words can't drown
+// out a full match without needing a hand-maintained stop-word list.
 function scoreCard(words, card) {
   const haystack = card.dataset.search;
   const nameLow = card._item.name.toLowerCase().replace(/-/g, '');
   let total = 0;
+  let matched = 0;
   for (const w of words) {
     const s = scoreWord(w, haystack);
-    if (s === 0) return 0;
+    if (s === 0) continue;
+    matched++;
     total += s + nameBonus(w, nameLow);
   }
-  return total;
+  if (matched === 0) return 0;
+  return matched === words.length ? total : total * matched / words.length;
 }
 
 function updateSearchCount(visible, hasQuery) {

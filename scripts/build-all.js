@@ -10,18 +10,27 @@
  * and let one script's process.exit() kill the whole pipeline.
  *
  * Usage:
- *   node scripts/build-all.js                # fast tier (default)
- *   node scripts/build-all.js --dry-run       # preview every step, write nothing
- *   node scripts/build-all.js --with-og       # + regenerate assets/og/<slug>.png (Puppeteer, ~582 renders, slow)
- *   node scripts/build-all.js --og-home       # + regenerate assets/og/home.png
- *   node scripts/build-all.js --og-blog       # + regenerate assets/og/blog-<slug>.png (one per post)
- *   node scripts/build-all.js --plugin-assets # + regenerate figma-plugin/assets/*
- *   node scripts/build-all.js --full          # everything above
+ *   node scripts/build-all.js            # весь пайплайн
+ *   node scripts/build-all.js --dry-run  # preview every step, write nothing
  *
- * The "fast tier" excludes the three Puppeteer/Chrome steps because they are
- * documented as run-rarely / run-when-a-new-logo-needs-an-OG-image, not as
- * part of every content edit — running them by default would turn a few
- * seconds of build into several minutes on every invocation.
+ * НЕТ опциональных шагов и нет флагов «а ещё запусти вот это». Раньше был
+ * «slow tier» из четырёх Puppeteer-скриптов, включаемых флагами — и каждый раз
+ * это кончалось одинаково: шаг забывали, артефакт уезжал в прод битым или
+ * протухшим. Хронология: 125/176 постов блога уехали без OG-картинки
+ * (build-blog-og-images.js был за флагом --og-blog); логотип Ozon Profit — без
+ * OG (build-og-images.js был за --with-og); assets/og/home.png и
+ * figma-plugin/assets/thumbnail.png провисели с июня с устаревшими счётчиками
+ * логотипов, потому что их пересборка была за --og-home / --plugin-assets.
+ *
+ * Аргумент «эти шаги медленные» оказался неверным при замере: build-og-home 2.2s,
+ * build-collection-og-images 1.6s, build-plugin-assets 3.6s — 7 секунд на фоне
+ * ~70-секундной сборки. Все Puppeteer-шаги здесь сравнивают байты скриншота с
+ * тем, что уже лежит на диске, и пишут только изменившееся: неизменная сборка
+ * стоит времени, но не мусорит в git.
+ *
+ * Правило: если скрипт порождает артефакт, на который ссылается свёрстанная
+ * страница, его место здесь. За пределами build-all.js остаются только
+ * одноразовые миграции и ручные утилиты (см. CLAUDE.md).
  */
 
 const path = require('path');
@@ -30,18 +39,16 @@ const { execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 const argv = process.argv.slice(2);
 const DRY_RUN   = argv.includes('--dry-run');
-const WITH_OG   = argv.includes('--with-og') || argv.includes('--full');
-const OG_HOME   = argv.includes('--og-home') || argv.includes('--full');
-const OG_BLOG   = argv.includes('--og-blog') || argv.includes('--full');
-const PLUGIN_ASSETS = argv.includes('--plugin-assets') || argv.includes('--full');
 
 // Order encodes real data dependencies (see CLAUDE.md "Build Scripts"):
 //   api-json → collections (needs logos.json)
 //   emoji-seo-pages → emoji-category-pages / emoji-json (need emoji/_url-map.json)
 //   all HTML builders → en-pages (mirrors whatever HTML exists at the time it runs)
 //   everything → sitemap.js (sole owner of sitemap.xml, must run last)
-const FAST_STEPS = [
+const STEPS = [
   { file: 'test-data.js', args: ['--pre'],  label: 'Тесты данных: манифесты, ассеты, экосистемы — до сборки' },
+  { file: 'test-i18n.js',                  label: 'Паритет словарей i18n (ru/en) + сверка ключей с вёрсткой — до запекания /en/' },
+  { file: 'test-js.js',                    label: 'Синтаксис и граф импортов клиентского JS — до генерации страниц' },
   { file: 'build-download-stats.js',       label: 'Статистика скачиваний (для «Скачано: N раз» на SEO-страницах)' },
   { file: 'build-search-images.js',        label: 'PNG-рендеры SVG-логотипов для Яндекс.Картинок (инкрементально)' },
   { file: 'build-seo-pages.js',           label: 'SEO-страницы логотипов (logos/<cat>/<slug>/)' },
@@ -49,6 +56,7 @@ const FAST_STEPS = [
   { file: 'build-api-json.js',             label: 'Публичный API (logos.json, logos/<cat>.json)' },
   { file: 'build-cdn.js',                  label: 'CDN-зеркало по коротким слагам (cdn-dist/)' },
   { file: 'build-collections.js',          label: 'Подборки (collections/<slug>/)' },
+  { file: 'build-collection-og-images.js', label: 'OG-превью подборок (assets/og/collection-<slug>.png)' },
   { file: 'build-category-pages.js',       label: 'Страницы категорий + detail-панель в logos/index.html' },
   { file: 'build-ecosystem-pages.js',      label: 'Страницы экосистем (logos/ecosystem/<key>/)' },
   { file: 'build-webp-previews.js',        label: 'WebP-превью для PNG-логотипов (инкрементально)' },
@@ -56,21 +64,22 @@ const FAST_STEPS = [
   { file: 'build-emoji-seo-pages.js',      label: 'SEO-страницы эмодзи (emoji/<cat>/<slug>/)' },
   { file: 'build-emoji-category-pages.js', label: 'Страницы категорий эмодзи' },
   { file: 'build-emoji-json.js',           label: 'emoji.json' },
+  { file: 'build-og-images.js',            label: 'OG-превью логотипов (assets/og/<slug>.png)' },
+  { file: 'build-og-home.js',              label: 'OG-превью главной (assets/og/home.png) — со счётчиками логотипов/эмодзи' },
+  { file: 'build-plugin-assets.js',        label: 'Ассеты Figma-плагина (иконка, thumbnail) — тоже со счётчиками' },
   { file: 'build-blog.js',                 label: 'Страницы блога' },
+  { file: 'build-blog-og-images.js',       label: 'OG-превью постов блога (assets/og/blog-<slug>.png)' },
   { file: 'build-blog-rss.js',             label: 'blog/rss.xml' },
   { file: 'build-home-popular.js',         label: 'Блок «Популярные логотипы» на главной (по статистике)' },
+  { file: 'build-home-collections.js',     label: 'Блок «Подборки» на главной и в футере (из collections.json)' },
+  { file: 'build-home-tools.js',           label: 'Список «Инструменты» в футере (из tools.json)' },
   { file: 'build-home-sitemap.js',         label: 'Блок «Карта сайта» на главной' },
+  { file: 'build-tools-headers.js',        label: 'Единый хедер на страницах tools/*' },
   { file: 'build-en-pages.js',             label: 'EN-зеркало (/en/) — обязательно после всех HTML-билдеров выше' },
-  { file: 'test-links.js',                 label: 'Тесты ссылок: битые навигационные href в готовом HTML — после всех страниц' },
+  { file: 'test-html.js',                  label: 'Тесты разметки: плейсхолдеры, JSON-LD, title/description/canonical/h1, hreflang — после всех страниц' },
+  { file: 'test-links.js',                 label: 'Тесты ссылок: битые href/src/content (страницы и ассеты) в готовом HTML — после всех страниц' },
   { file: 'build-sitemap.js',              label: 'sitemap.xml + sitemap-*.xml — ВСЕГДА последним' },
   { file: 'build-version.js',              label: 'js/version.js (ASSET_VERSION) — cache-buster, самый последний шаг' },
-];
-
-const OPTIONAL_STEPS = [
-  { file: 'build-og-images.js',      label: 'OG-превью логотипов (assets/og/<slug>.png)',      enabled: WITH_OG },
-  { file: 'build-og-home.js',        label: 'OG-превью главной (assets/og/home.png)',          enabled: OG_HOME },
-  { file: 'build-blog-og-images.js', label: 'OG-превью постов блога (assets/og/blog-<slug>.png)', enabled: OG_BLOG },
-  { file: 'build-plugin-assets.js',  label: 'Ассеты Figma-плагина (иконка, thumbnail)',        enabled: PLUGIN_ASSETS },
 ];
 
 function runStep({ file, label, args: stepArgs = [] }) {
@@ -84,14 +93,8 @@ function runStep({ file, label, args: stepArgs = [] }) {
 }
 
 function main() {
-  const steps = [...FAST_STEPS, ...OPTIONAL_STEPS.filter(s => s.enabled)];
-  const skipped = OPTIONAL_STEPS.filter(s => !s.enabled);
-
-  console.log(`\x1b[1mbuild-all${DRY_RUN ? ' (dry-run)' : ''}\x1b[0m — ${steps.length} шагов`);
-  if (skipped.length) {
-    console.log(`Пропущено (медленные Puppeteer-шаги, не входят в fast tier): ${skipped.map(s => s.file).join(', ')}`);
-    console.log('Запустить их тоже: --with-og / --og-home / --og-blog / --plugin-assets / --full\n');
-  }
+  const steps = STEPS;
+  console.log(`\x1b[1mbuild-all${DRY_RUN ? ' (dry-run)' : ''}\x1b[0m — ${steps.length} шагов, все обязательные`);
 
   const timings = [];
   const overallStart = process.hrtime.bigint();

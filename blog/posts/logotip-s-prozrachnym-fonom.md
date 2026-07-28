@@ -9,21 +9,21 @@ tags: Логотипы, PNG, Инструкции
 tags_en: Logos, PNG, How-to
 ---
 
-Ставите логотип на цветной баннер — а он приезжает в белом прямоугольнике, как марка на конверте. Белый квадрат вокруг логотипа — вечная боль презентаций, лендингов и соцсетей. Разберём, откуда он берётся, как его убрать за минуту и как скачивать логотипы сразу без фона.
+Ставите логотип на цветной баннер, а он приезжает в белом прямоугольнике, как марка на конверте. Белый квадрат вокруг логотипа — вечная боль презентаций, лендингов и соцсетей. Разберём, откуда он берётся, как его убрать за минуту и как скачивать логотипы сразу без фона.
 
 :::note Коротко
-Белый фон — свойство формата **JPG: он не умеет в прозрачность в принципе**. Прозрачность поддерживают PNG, SVG и WebP. Если у вас JPG — фон придётся удалять инструментом; если есть возможность — просто скачайте логотип сразу в PNG или SVG с прозрачностью, это быстрее и качественнее любой обработки.
+Белый фон — свойство формата **JPG: он не умеет иметь прозрачность в принципе**. Прозрачность поддерживают PNG, SVG и WebP. Если у вас JPG — фон придётся удалять инструментом. Если есть возможность, просто скачайте логотип сразу в PNG или SVG с прозрачностью. Это быстрее и качественнее любой обработки.
 :::
 
 ## Почему у логотипа вообще есть фон
 
-У изображения не бывает «пустоты» — каждый пиксель обязан иметь значение. Форматы решают это по-разному:
+У изображения не бывает «пустоты». Каждый пиксель обязан иметь значение. Форматы решают это по-разному:
 
 - **JPG** хранит только цвет. Прозрачности в формате нет физически, поэтому «пустые» места заливаются белым (или тем, что было под логотипом при сохранении).
-- **PNG** хранит цвет + альфа-канал: степень прозрачности каждого пикселя. Логотип на прозрачном PNG ложится на любой фон.
-- **SVG** — вектор: фон в нём просто отсутствует, если его специально не нарисовали отдельным прямоугольником.
+- **PNG** хранит цвет + альфа-канал (степень прозрачности каждого пикселя). Логотип на прозрачном PNG ложится на любой фон.
+- **SVG** — вектор. Фон в нём просто отсутствует, если его специально не нарисовали отдельным прямоугольником.
 
-Отсюда правило номер один: **ищите исходник, а не чините JPG**. Удаление фона — всегда компромисс; файл, изначально сохранённый с прозрачностью, всегда лучше.
+Отсюда правило номер один: **ищите исходник, а не чините JPG**. Удаление фона — всегда компромисс. Файл, изначально сохранённый с прозрачностью, всегда лучше.
 
 ## Как проверить, прозрачный ли фон
 
@@ -39,16 +39,16 @@ tags_en: Logos, PNG, How-to
 
 Сервисы удаления фона ([remove.bg](https://www.remove.bg/) и десятки аналогов) справляются с логотипами на однотонном фоне почти идеально: загрузили JPG — скачали PNG с прозрачностью. Ограничения: бесплатные версии часто отдают уменьшенный размер, а тонкие детали и полупрозрачные элементы (тени, градиенты в прозрачность) могут пострадать.
 
-### Figma — бесплатно и с контролем
+### Figma с ИИ из коробки (на платных планах)
 
-У [Figma](../../logos/design/figma/) нет магической кнопки удаления фона, но есть плагины (Remove BG и аналоги). А для логотипов из простых фигур на белом фоне часто быстрее пересобрать: вставить картинку, обвести знак пером — получится ещё и вектор.
+У [Figma](../../logos/design/figma/) есть встроенный ИИ-инструмент **Remove background**: выделяете картинку → в панели действий или во всплывающем тулбаре изображения жмёте «Remove background» — фон уходит без плагинов. Рядом там же — **Boost resolution**, апскейл размытой картинки без потери резкости, и обработку можно применить сразу к нескольким изображениям. Нюанс: эти ИИ-функции доступны только на платных планах (Professional/Organization/Enterprise) с полным местом (Full seat) и включённым AI — на бесплатном тарифе их нет, тогда выручают плагины (Remove BG и аналоги). Там же в 2026 году появился **Vectorize** — тем же ИИ-движком картинка одним кликом превращается в редактируемый вектор (цветной, чёрно-белый или ч/б-контур), так что для логотипов из простых фигур пересобирать вручную обычно не нужно: конвертируете через Vectorize и дочищаете форму. Он же ограничен платными планами; на бесплатном — только вставить картинку и обвести знак пером самостоятельно.
 
 ### Photoshop — максимум качества
 
 Выделение → Select Subject (автоматика на нейросети) → инвертировать → удалить фон → сохранить в PNG. Для сложных случаев — ручная доводка маской. Это путь, когда логотип нужен большим и безупречным.
 
 :::warning Ловушка «белых ушей»
-После автоматического удаления фона вокруг контуров часто остаётся тонкая белая кайма — остатки полупрозрачных пикселей JPG. На светлом фоне её не видно, на тёмном — бросается в глаза. В [Photoshop](../../logos/design/photoshop/) лечится командой Layer → Matting → Remove White Matte, в онлайн-сервисах — обычно никак. Ещё одна причина искать исходник.
+После автоматического удаления фона вокруг контуров часто остаётся тонкая белая кайма (остатки полупрозрачных пикселей JPG). На светлом фоне её не видно, на тёмном — бросается в глаза. В [Photoshop](../../logos/design/photoshop/) лечится командой Layer → Matting → Remove White Matte, в онлайн-сервисах — обычно никак. Ещё одна причина искать исходник.
 :::
 
 ## Лучшее решение: скачать сразу без фона
@@ -96,7 +96,7 @@ tags_en: Logos, PNG, How-to
 Автоматика отлично справляется с чисто-белым фоном и спотыкается о два случая:
 
 - **Фон «почти белый»** (оттенок бумаги со скана, лёгкий градиент фотостудии). Волшебная палочка с порогом (tolerance) 10–20 обычно берёт такой фон за 2–3 клика по областям. Если логотип содержит белые элементы — они под угрозой: работайте выделением объекта, а не выделением фона.
-- **Логотип с белыми деталями на белом фоне.** Классический ад: белая буква на белой подложке неотличима для алгоритма. Честные пути: найти версию на тёмном фоне и удалить его; отрисовать логотип в вектор ([инструкция](../kak-perevesti-logotip-v-vektor/)); в крайнем случае — вручную обвести детали пером.
+- **Логотип с белыми деталями на белом фоне.** Классический ад: белая буква на белой подложке неотличима для алгоритма. Честные пути: найти версию на тёмном фоне и удалить его; [перевести логотип в вектор](../kak-perevesti-logotip-v-vektor/) по отдельной инструкции; в крайнем случае — вручную обвести детали пером.
 
 ## Что делать с полученным PNG дальше: мини-чек-лист
 
@@ -143,9 +143,9 @@ A white background on a white page is invisible — easy to be fooled. Quick che
 
 Background-removal services ([remove.bg](https://www.remove.bg/) and dozens of clones) handle logos on solid backgrounds almost perfectly: upload a JPG, download a transparent PNG. Limitations: free tiers often return reduced sizes, and fine details or semi-transparent elements (shadows, fade-outs) may suffer.
 
-### Figma — free with control
+### Figma — built-in AI (on paid plans)
 
-[Figma](../../logos/design/figma/) has no magic remove-background button, but plugins exist. And for logos made of simple shapes it's often faster to rebuild: insert the image, trace the mark with the pen tool — you get a vector as a bonus.
+[Figma](../../logos/design/figma/) now ships a built-in **Remove background** AI tool: select the image, hit "Remove background" from the actions menu or the image's inline toolbar — no plugin needed. Right next to it is **Boost resolution**, an AI upscaler for blurry images, and both can be applied to several images at once. Catch: these AI tools require a paid plan (Professional/Organization/Enterprise) with a Full seat and AI enabled — not available on the free tier, where plugins (Remove BG and clones) still do the job. The same AI engine also powers **Vectorize**, launched in 2026: one click turns the image into an editable vector (full color, grayscale, or black-and-white outline), so for logos made of simple shapes you usually don't need to rebuild by hand — run Vectorize and clean up the result. It's paid-plan-only too; on the free tier it's back to inserting the image and tracing the mark with the pen tool yourself.
 
 ### Photoshop — maximum quality
 
@@ -200,7 +200,7 @@ The same route in free GIMP: Select by Color for a solid background → Grow/Shr
 Automation nails pure white and stumbles on two cases:
 
 - **An "almost white" background** (scanned paper tint, a soft studio gradient). The magic wand with tolerance 10–20 usually takes it in 2–3 clicks. If the logo itself contains white elements, they're at risk: select the subject, not the background.
-- **White details on a white background.** The classic hell: a white letter on white is indistinguishable to any algorithm. The honest paths: find a dark-background version and remove that; vectorize the logo ([the guide](../kak-perevesti-logotip-v-vektor/)); or trace the details manually with the pen tool.
+- **White details on a white background.** The classic hell: a white letter on white is indistinguishable to any algorithm. The honest paths: find a dark-background version and remove that; [vectorize the logo](../kak-perevesti-logotip-v-vektor/) per its own guide; or trace the details manually with the pen tool.
 
 ## After you have the PNG: a mini-checklist
 

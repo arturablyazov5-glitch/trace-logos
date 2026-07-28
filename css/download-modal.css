@@ -1,0 +1,133 @@
+/* ── "Download other formats" modal ──
+   Shell (.icns-overlay/.icns-modal/.icns-close) is shared with css/icns.css —
+   this file only styles the preview column + format-button grid, self-contained
+   (no dependency on detail.css/seo-page.css so the modal renders the same on both). */
+
+.dl-modal--wide { max-width: 560px; }
+
+.dl-modal-body {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (max-width: 520px) {
+  .dl-modal-body { grid-template-columns: 1fr; }
+}
+
+.dl-modal-preview-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.dl-modal-preview-col .icns-preview-box { align-self: stretch; }
+/* Wide/full variants get the site's standard light checker instead of the base
+   dark conic-gradient .icns-preview-box (that base is meant for square app icons). */
+.dl-modal-preview-col .icns-preview-box.wide { background: var(--checker-full); }
+.dl-modal-preview-col .icns-preview-box.wide.dark-bg { background: var(--checker-full-dark); }
+.dl-modal-canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Size tabs reuse the sidebar's segmented control (css/filters.css, .format-filter —
+   the SVG/PNG switcher), loaded via ensureStyles() in download-modal.js instead of
+   re-styling a near-identical control. Only override: that control's thumb assumes
+   3 equal options; here there are 5 (256/512/1000/2000/custom). */
+.dl-size-tabs.format-filter { width: 100%; }
+.dl-size-tabs .format-filter__thumb { width: calc((100% - 4px) / 5); }
+.dl-size-tabs .format-filter__opt { font-variant-numeric: tabular-nums; }
+
+.dl-size-custom-input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 7px 10px;
+  background: #1a1a1a;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.dl-size-custom-input.hidden { display: none; }
+.dl-size-custom-input::-webkit-outer-spin-button,
+.dl-size-custom-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.dl-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  align-content: start;
+}
+.dl-modal-item--square:nth-child(3) { grid-column: 1 / -1; }
+
+.dl-modal-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  background: #242424;
+  border: none;
+  border-radius: 8px;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background .1s, color .1s;
+}
+.dl-modal-item svg { flex-shrink: 0; }
+/* Windows/Apple glyphs have internal padding in their 32-viewBox — bump them up to read level with the file icons */
+#dl-row-ico svg, #dl-row-icns svg, #dl-row-lg svg { width: 18px; height: 18px; margin: -2px 0; }
+.dl-modal-item:hover:not(:disabled) {
+  background: #2e2e2e;
+  color: #fff;
+}
+.dl-modal-item:disabled { opacity: .5; cursor: progress; }
+
+.dl-modal-size {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 400;
+  color: #555;
+  white-space: nowrap;
+}
+.dl-modal-item:hover:not(:disabled) .dl-modal-size { color: #888; }
+
+.dl-modal-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 600;
+  color: #555;
+  background: #2a2a2a;
+  border-radius: 4px;
+  padding: 2px 5px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.dl-modal-item--zip {
+  position: relative;
+  overflow: hidden;
+}
+.dl-modal-item--zip .btn-size {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 400;
+  color: #555;
+  white-space: nowrap;
+}
+.dl-modal-item--zip:hover:not(:disabled) .btn-size { color: #888; }
+.dl-modal-item--zip .btn-progress {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: #4ade80;
+  width: 0;
+  transition: width .15s linear;
+}

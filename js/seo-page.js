@@ -1,12 +1,12 @@
 import { svgToPngBlob, triggerConfetti, parseSvgViewBox } from './svg-utils.js';
-import { animateContainerHeight, showToast, setAssetBase, formatFileSize, trackLogoView, trackExport } from './utils.js';
-import { downloadAsIco, downloadAllAsZip, estimateIcoSize } from './export.js';
-import { openIcnsModal } from './icns.js';
-import { openLiquidModal } from './liquid-glass-modal.js';
+import { animateContainerHeight, showToast, setAssetBase, trackLogoView, trackExport } from './utils.js';
+import { downloadAsIco } from './export.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
 import { applyI18n, t, getLang } from './i18n.js';
 import { ecosystemLabels, ecosystemLabelsEn } from './data.js';
+import './donate.js';   // hosting fundraiser modal — self-wires to the `tl:export` event
 import './header-search.js';
+import './threads-banner.js';
 
 applyLabels(); // single source of button texts → js/labels.js
 applyI18n();   // translate data-i18n / data-i18n-aria / data-i18n-placeholder attrs
@@ -58,26 +58,15 @@ if (getLang() === 'en') {
   }
 }
 
-// ── Threads banner dismiss ──
-const thBanner = document.getElementById('th-banner');
-const thClose  = document.getElementById('th-banner-close');
-if (thBanner && thClose) {
-  thClose.addEventListener('click', e => {
-    e.preventDefault();
-    e.stopPropagation();
-    thBanner.classList.add('hiding');
-    thBanner.addEventListener('transitionend', () => thBanner.classList.add('hidden'), { once: true });
-  });
-}
-
 // Page data injected by build script via window.__SEO_PAGE__
 const PAGE = window.__SEO_PAGE__;
 
 const BASE = PAGE.assetBase;
 const ITEM = PAGE.item; // { figma, file, variants } — for the reused catalog export modules
 
-// The export/icns/color modules resolve assets through svgUrl(); point it at this
-// page's asset folder, and flag the section so downloadAllAsZip bundles ICO/ICNS.
+// The export/icns/color/download-modal modules resolve assets through svgUrl();
+// point it at this page's asset folder, and flag the section so the ZIP/ICO/ICNS
+// rows in the "other formats" modal bundle correctly.
 setAssetBase(BASE.replace(/\/+$/, ''));
 document.body.dataset.section = 'logos';
 trackLogoView(PAGE.figma, PAGE.name, PAGE.item?.file);
@@ -90,18 +79,27 @@ const btnCopy      = document.getElementById('btn-copy');
 const btnCopyLbl   = document.getElementById('btn-copy-label');
 const btnDlSvg     = document.getElementById('btn-dl-svg');
 const btnDlPng     = document.getElementById('btn-dl-png');
-const btnZip       = document.getElementById('btn-download-zip');
 const lightbox     = document.getElementById('lightbox');
 const lightboxInner = document.getElementById('lightbox-inner');
 const lightboxImg  = document.getElementById('lightbox-img');
 const previewDlLabel  = document.getElementById('preview-dl-label');
 const lightboxDlLabel = document.getElementById('lightbox-dl-label');
 
+// Best-effort WebP counterpart of a PNG path — assets/logos/pngs/<path>.png
+// mirrors assets/logos/previews/<path>.webp 1:1. Used only for the visible
+// <img>; downloads/lightbox/color-editor always use the full-res source.
+// Falls back to the full path via the caller's onerror handler if it 404s
+// (e.g. a brand-new PNG whose preview hasn't been generated yet).
+function lightPreview(pngSrc) {
+  if (!/\.png(\?|$)/i.test(pngSrc) || !pngSrc.includes('/pngs/')) return pngSrc;
+  return pngSrc.replace('/pngs/', '/previews/').replace(/\.png(\?|$)/i, '.webp$1');
+}
+
 let currentSrc  = PAGE.defaultSrc;
 let currentWide = PAGE.defaultWide;
 let currentType = PAGE.defaultType;
+let currentDarkBg = false;
 let copyTimer   = null;
-let icoSizeReqId = 0; // guards loadIcoSizePreview against a stale variant's slow estimate
 
 const macosTabsEl       = document.getElementById('macos-style-tabs');
 const macosTabsMobileEl = document.getElementById('macos-style-tabs-mobile');
@@ -169,7 +167,9 @@ function onMacosTabClick(e) {
     currentSrc = BASE + 'pngs/' + activeFileRel;
   }
   setMacosTabsStyle(style);
-  previewImg.src = currentSrc;
+  const preview = lightPreview(currentSrc);
+  previewImg.src = preview;
+  if (preview !== currentSrc) previewImg.addEventListener('error', () => { previewImg.src = currentSrc; }, { once: true });
   initPngBtn(currentSrc, false, 'png', undefined);
 }
 macosTabsEl?.addEventListener('click', onMacosTabClick);
@@ -198,13 +198,11 @@ document.getElementById('variants-grid')?.addEventListener('click', e => {
   showMacosTabs(showTabs, currentMacosStyles);
   if (showTabs) setMacosTabsStyle('color');
 
-  // Wide variants → ZIP-only; square → full ICO/ICNS menu. Before the height
-  // animation so its overflow clip isn't reset mid-flight.
-  syncDownloadMode();
-
-  previewCard.classList.toggle('light-bg', currentWide);
+  currentDarkBg = card.dataset.darkBg === 'true';
+  previewCard.classList.toggle('light-bg', currentWide && !currentDarkBg);
+  previewCard.classList.toggle('dark-bg', currentWide && currentDarkBg);
   previewMount.className = currentWide ? 'preview-wide' : 'preview-icon';
-  previewImg.src = currentSrc;
+  previewImg.src = card.dataset.preview || currentSrc;
   previewImg.alt = card.querySelector('.variant-label').textContent;
 
   animateContainerHeight(btnRow, () => {
@@ -269,7 +267,8 @@ btnCopy.addEventListener('click', function() {
       btnCopy.disabled = true;
       if (copyTimer) clearTimeout(copyTimer);
       copyTimer = setTimeout(resetCopy, 2000);
-    });
+    })
+    .catch(() => showToast(TOASTS.copyError));
 });
 
 function resetCopy() {
@@ -295,7 +294,7 @@ function downloadPngFromSvg(svgUrl, filename, square) {
 
 // ── Fullscreen / Lightbox ──
 function openLightbox() {
-  lightboxInner.className = 'lightbox-inner' + (currentWide ? ' wide' : '');
+  lightboxInner.className = 'lightbox-inner' + (currentWide ? ' wide' : '') + (currentDarkBg ? ' dark-bg' : '');
   lightboxImg.src = currentSrc;
   lightboxImg.alt = previewImg.alt;
   lightbox.classList.remove('hidden');
@@ -345,13 +344,8 @@ function buildMenuItems(container, closeMenu) {
     items.push({ icon: ICON_SVG,  label: LABELS.downloadSvg, action: () => { btnDlSvg.click(); } });
   }
   items.push({ icon: ICON_PNG, label: LABELS.downloadPng, action: () => btnDlPng.click() });
-  if (!currentWide) {
-    if (btnIco)  items.push({ icon: ICON_PNG, label: LABELS.dlIco,  action: () => btnIco.click() });
-    if (btnIcns) items.push({ icon: ICON_PNG, label: LABELS.dlIcns, action: () => btnIcns.click() });
-    if (btnLg && currentType !== 'png') items.push({ icon: ICON_PNG, label: LABELS.dlLiquidGlass, action: () => btnLg.click() });
-  }
-  if (btnZip) {
-    items.push({ icon: ICON_ZIP, label: LABELS.dlZipAll, action: () => btnZip.click() });
+  if (ITEM) {
+    items.push({ icon: ICON_ZIP, label: LABELS.dlMore, action: () => openDownloadModalForCurrent() });
   }
   items.forEach(({ icon, label, action }) => {
     const btn = document.createElement('button');
@@ -408,22 +402,11 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ── Download dropdown: ICO / ICNS / Скачать всё — reuses the catalog modules ──
+// ── Download dropdown: opens the shared "other formats" modal ──
 const dlGroup   = document.getElementById('btn-download-all');
 const dlTrigger = document.getElementById('btn-download-trigger');
-const dlMenu    = document.getElementById('btn-download-menu');
-const btnIco    = document.getElementById('btn-download-ico');
-const btnIcns   = document.getElementById('btn-download-icns');
-const btnLg     = document.getElementById('btn-download-lg');
 
-function closeDlMenu() {
-  dlMenu?.classList.remove('open');
-  dlTrigger?.classList.remove('open');
-  // Restore btn-row's height-animation clip once the menu is closed.
-  if (btnRow) btnRow.style.overflow = '';
-}
-
-// ICO/ICNS follow the currently-shown variant (including dark/light tab).
+// ICO/ICNS/WebP/PDF/AI/EPS follow the currently-shown variant (including dark/light tab).
 function currentFile() {
   if (activeFileRel) return activeFileRel;
   // currentSrc = BASE + 'pngs/' + relPath; extract the pngs-relative path.
@@ -432,67 +415,19 @@ function currentFile() {
   return currentSrc.split('/').pop().split('?')[0]; // SVG or unexpected fallback
 }
 
-// ICO/ICNS only make sense for square variants. Wide `-full` variants collapse
-// the dropdown to a single "Скачать всё (ZIP)" button (the catalog does the same
-// in main.js). Re-evaluated per variant — the gate is the SELECTED variant's
-// shape (currentWide), not the primary file.
-// Building the ICO is a real render (4 canvas frames) just to show a byte count
-// in a menu item most visitors never open — stash the file and compute lazily
-// on first menu open instead (see the dlTrigger click handler below). reqId
-// guards against a slow estimate for a since-abandoned variant overwriting a
-// fresher one's label.
-function loadIcoSizePreview() {
-  const icoSizeEl = btnIco?.querySelector('.btn-menu-size');
-  const file = icoSizeEl?.dataset.file;
-  if (!icoSizeEl || !file || icoSizeEl.textContent) return; // no square variant, or already computed
-  const reqId = ++icoSizeReqId;
-  estimateIcoSize(file).then(sz => {
-    if (sz && reqId === icoSizeReqId) icoSizeEl.textContent = formatFileSize(sz);
-  });
-}
-
-function syncDownloadMode() {
-  if (!dlGroup) return;
-  const lbl = dlTrigger.querySelector('span');
-  if (currentWide) {
-    dlGroup.classList.add('zip-only');
-    if (lbl) lbl.textContent = LABELS.dlZipAll;
-    closeDlMenu();
-  } else {
-    dlGroup.classList.remove('zip-only');
-    if (lbl) lbl.textContent = LABELS.dlMore;
-    const icoSizeEl = btnIco?.querySelector('.btn-menu-size');
-    if (icoSizeEl) {
-      icoSizeEl.textContent = '';
-      icoSizeEl.dataset.file = currentFile();
-      if (dlMenu.classList.contains('open')) loadIcoSizePreview();
-    }
-  }
-  if (btnLg) btnLg.classList.toggle('hidden', currentType === 'png');
+// Square-only rows (ICO/ICNS/Liquid Glass) are shown/hidden inside the modal
+// itself based on isSquare — re-read the SELECTED variant's shape (currentWide)
+// fresh on every open, rather than caching it.
+async function openDownloadModalForCurrent() {
+  const { openDownloadModal } = await import('./download-modal.js');
+  openDownloadModal(ITEM, currentFile(), !currentWide, currentDarkBg);
 }
 
 if (dlGroup && ITEM) {
-  dlTrigger.addEventListener('click', e => {
-    e.stopPropagation();
-    if (currentWide) { downloadAllAsZip(ITEM); return; } // wide variant — no menu, straight to ZIP
-    const willOpen = !dlMenu.classList.contains('open');
-    dlMenu.classList.toggle('open');
-    dlTrigger.classList.toggle('open');
-    // The menu pops upward and would otherwise be clipped by btn-row's
-    // overflow:hidden (left from the variant-switch height animation) — lift it.
-    if (btnRow) btnRow.style.overflow = willOpen ? 'visible' : '';
-    if (willOpen) loadIcoSizePreview();
-  });
-  btnIco?.addEventListener('click', () => { closeDlMenu(); downloadAsIco(ITEM, currentFile()); });
+  dlTrigger.addEventListener('click', e => { e.stopPropagation(); openDownloadModalForCurrent(); });
   // FAQ answer for "how do I download as ICO" ships its own button — reuses
   // the same download path as the (easy-to-miss) dropdown item.
   document.getElementById('btn-faq-download-ico')?.addEventListener('click', () => downloadAsIco(ITEM, currentFile()));
-  btnIcns?.addEventListener('click', () => { closeDlMenu(); openIcnsModal(ITEM, currentFile()); });
-  btnLg?.addEventListener('click', () => { closeDlMenu(); openLiquidModal(ITEM, currentFile()); });
-  btnZip?.addEventListener('click', () => { closeDlMenu(); downloadAllAsZip(ITEM); });
-  document.addEventListener('click', e => { if (!dlGroup.contains(e.target)) closeDlMenu(); });
-
-  syncDownloadMode(); // initial state for the default variant
 }
 
 // ── Report outdated ──
@@ -532,6 +467,7 @@ if (reportBtn && reportOverlay) {
 
   reportForm.addEventListener('submit', async e => {
     e.preventDefault();
+    if (reportSubmit.disabled) return;
     const url = document.getElementById('suggest-url').value.trim();
     const comment = document.getElementById('suggest-comment').value.trim();
     const file = document.getElementById('suggest-file').files[0];

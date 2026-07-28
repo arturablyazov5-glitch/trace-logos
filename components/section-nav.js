@@ -1,18 +1,20 @@
 class SectionNav extends HTMLElement {
   connectedCallback() {
     const base  = this.getAttribute('base') ?? '../';
-    const isEn  = location.pathname.startsWith('/en/');
-    const lang  = (typeof window.__LANG__ === 'string' ? window.__LANG__ : (isEn ? 'en' : 'ru'));
+    const pathLang = location.pathname.split('/').filter(Boolean)[0];
+    const lang  = (typeof window.__LANG__ === 'string' ? window.__LANG__ : null)
+      || (['en', 'es'].includes(pathLang) ? pathLang : 'ru');
+    const prefix = lang === 'ru' ? '' : `/${lang}`;
     const current = ['logos', 'icons', 'emoji'].find(k => location.pathname.includes('/' + k)) ?? 'logos';
 
     const links = [
-      { key: 'logos', ru: 'Лого',   en: 'Logos',  href: isEn ? '/en/logos/' : base + 'logos/' },
-      { key: 'icons', ru: 'Иконки', en: 'Icons',  href: isEn ? '/en/icons/' : base + 'icons/' },
-      { key: 'emoji', ru: 'Эмодзи', en: 'Emoji',  href: isEn ? '/en/emoji/' : base + 'emoji/' },
+      { key: 'logos', ru: 'Лого',   en: 'Logos', es: 'Logos',  href: prefix ? `${prefix}/logos/` : base + 'logos/' },
+      { key: 'icons', ru: 'Иконки', en: 'Icons', es: 'Iconos', href: prefix ? `${prefix}/icons/` : base + 'icons/' },
+      { key: 'emoji', ru: 'Эмодзи', en: 'Emoji', es: 'Emoji',  href: prefix ? `${prefix}/emoji/` : base + 'emoji/' },
     ];
 
-    this.innerHTML = links.map(({ key, ru, en, href }) =>
-      `<a href="${href}"${key === current ? ' class="active"' : ''}>${lang === 'en' ? en : ru}</a>`
+    this.innerHTML = links.map(({ key, ru, en, es, href }) =>
+      `<a href="${href}"${key === current ? ' class="active"' : ''}>${({ en, es })[lang] ?? ru}</a>`
     ).join('');
   }
 }

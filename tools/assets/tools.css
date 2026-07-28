@@ -2398,46 +2398,8 @@ body {
 }
 body::before { opacity: 0.5; }   /* мягче исходная сетка */
 
-/* ── Site header (наша шапка каталога) ── */
-.site-header {
-  position: sticky; top: 0; z-index: 50;
-  height: 60px; display: flex; align-items: center; gap: 16px;
-  padding: 0 28px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(10,10,10,0.82);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-}
-.site-header .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
-.site-header .brand-logo { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; }
-.site-header .brand-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.site-header .brand-name { font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: #fff; }
-.site-header .brand-badge {
-  display: inline-block; font-size: 10px; font-weight: 600; color: var(--blue);
-  background: rgba(138,107,255,0.12); border: 1px solid rgba(138,107,255,0.2);
-  border-radius: 4px; padding: 1px 6px; margin-left: 7px; letter-spacing: 0.03em; vertical-align: middle;
-}
-.site-header .header-nav { display: flex; align-items: center; gap: 4px; margin-left: auto; }
-.site-header .header-nav a {
-  font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none;
-  padding: 7px 11px; border-radius: 8px; transition: color .15s, background .15s; white-space: nowrap;
-  display: inline-flex; align-items: center; gap: 6px;
-}
-.site-header .header-nav a:hover { color: #fff; background: rgba(255,255,255,0.04); }
-.site-header .header-nav a.current { color: #fff; }
-.site-header .btn-github {
-  display: inline-flex; align-items: center; gap: 7px; font-family: var(--sans); font-size: 13px; font-weight: 500;
-  color: #fff; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-  border-radius: 8px; padding: 7px 13px; text-decoration: none; transition: background .15s, border-color .15s;
-}
-.site-header .btn-github:hover { background: rgba(255,255,255,0.07); border-color: var(--border2); }
-.site-header .btn-github svg { opacity: 0.75; }
-
-/* header живёт вне .wrap → тянем на всю ширину, а контент центрируем через .wrap */
-@media (max-width: 600px) {
-  .site-header { padding: 0 16px; }
-  .site-header .header-nav { display: none; }
-  .site-header .btn-github span { display: none; }
-}
+/* ── Site header ── — стили в css/site-header.css (единый источник правды,
+   используемый главной/блогом/каталогом/tools через templates/partials/nav-header.html) */
 
 /* ── Hub: сетка карточек инструментов (свои классы, чтобы не конфликтовать с .tool-card из базы) ── */
 .hub-grid {

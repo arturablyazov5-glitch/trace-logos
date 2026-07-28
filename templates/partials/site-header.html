@@ -15,7 +15,36 @@
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     <span data-i18n="backToCatalog">{{back_label}}</span>
   </a>
+  <button type="button" class="mobile-nav-burger" id="mobile-nav-burger" data-i18n-aria="burgerAriaLabel" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav-drawer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
   <lang-switcher></lang-switcher>
 </header>
+
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" hidden></div>
+<nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Мобильное меню" data-i18n-aria="burgerAriaLabel" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-brand">Trace Logo's</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" data-i18n-aria="detailCloseAriaLabel" aria-label="Закрыть">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-section" id="mobile-nav-toc" hidden>
+    <div class="mobile-nav-label" data-i18n="mobileNavToc">В этой статье</div>
+    <div class="mobile-nav-list" id="mobile-nav-toc-list"></div>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label" data-i18n="mobileNavPages">Разделы сайта</div>
+    <div class="mobile-nav-list">
+      <a href="{{REL}}"><span data-i18n="navHome">Главная</span></a>
+      <a href="{{REL}}logos/"><span data-i18n="breadcrumbLogos">Логотипы</span></a>
+      <a href="{{REL}}emoji/"><span data-i18n="breadcrumbEmoji">Эмодзи</span></a>
+      <a href="{{REL}}icons/"><span data-i18n="navIcons">Иконки</span></a>
+      <a href="{{REL}}#h-collections"><span data-i18n="navCollections">Подборки</span></a>
+      <a href="{{REL}}blog/"><span data-i18n="blogSection">Блог</span></a>
+    </div>
+  </div>
+</nav>
 <script src="{{REL}}components/lang-switcher.js" defer></script>
 <script src="{{REL}}components/search-box.js" defer></script>
+<script src="{{REL}}components/mobile-nav.js" defer></script>

@@ -85,7 +85,7 @@ tags_en: Branding, Guidelines, Logos
 2. **Версии логотипа** — полный, знак, монохром, инверсия; для каждой одно предложение «когда использовать».
 3. **Охранное поле и минимальный размер** — схема с размерами через элемент знака.
 4. **Запреты** — 6–8 картинок «как нельзя» с перечёркиванием. Самый рабочий разворот: подрядчики смотрят именно его.
-5. **Цвета** — свотчи с HEX/RGB/CMYK. Если цвета ещё не зафиксированы кодами — сейчас самое время ([как снять точный цвет](../kak-uznat-cvet-logotipa/)).
+5. **Цвета** — свотчи с HEX/RGB/CMYK. Если цвета ещё не зафиксированы кодами — сейчас самое время; [как снять точный цвет](../kak-uznat-cvet-logotipa/), мы разбирали отдельно.
 6. **Типографика** — фирменный шрифт, начертания, шрифт-замена для писем и презентаций.
 7. **Примеры применения** — 3–4 носителя: визитка, шапка сайта, аватарка, презентация.
 8. **Контакт и ссылка на папку с файлами** — чтобы вместе с правилами подрядчик сразу получал правильные исходники.
@@ -179,7 +179,7 @@ Application examples: business cards, letterheads, decks, social media, vehicles
 
 Guidelines seem like corporate toys. Practice says the opposite: small businesses need them more, because contractors rotate faster — a new SMM person, a freelance designer, a discount print shop. Without the document each interprets the style their own way, and a year later the brand has five shades of its color and three logo versions in circulation.
 
-A 5–10 page mini-guideline suffices: logo versions, clear space, sizes, don'ts, color codes, fonts. Studios usually include one in the logo package — that's part of what the studio price tier buys ([how much a logo costs](../skolko-stoit-logotip/)).
+A 5–10 page mini-guideline suffices: logo versions, clear space, sizes, don'ts, color codes, fonts. Studios usually include one in the logo package — that's part of what the studio price tier buys; we cover [how much a logo costs](../skolko-stoit-logotip/) separately.
 
 ## Where to see good examples
 
@@ -193,7 +193,7 @@ No studio budget? Assemble the document yourself — in [Figma](../../logos/desi
 2. **Logo versions** — full, mark, monochrome, inverse; one sentence each on when to use it.
 3. **Clear space and minimum size** — a diagram measured via an element of the mark.
 4. **The don'ts** — 6–8 crossed-out "wrong" images. The most-consulted spread: contractors look at exactly this.
-5. **Colors** — swatches with HEX/RGB/CMYK. If the colors aren't code-fixed yet — now is the time ([how to capture the exact color](../kak-uznat-cvet-logotipa/)).
+5. **Colors** — swatches with HEX/RGB/CMYK. If the colors aren't code-fixed yet — now is the time; we cover [how to capture the exact color](../kak-uznat-cvet-logotipa/) separately.
 6. **Typography** — the brand typeface, weights, and the substitute font for email and decks.
 7. **Application examples** — 3–4 carriers: business card, site header, avatar, deck.
 8. **A contact and a link to the asset folder** — so rules and correct files arrive together.
@@ -205,13 +205,13 @@ One day of work — and the business gets a document that saves years of corresp
 The chronic disease of brand books is that nobody reads them. The countermeasures:
 
 - **A link in every brief.** The line "assets and rules: [link]" in every contractor order is the only reliable delivery channel.
-- **Files next to rules.** A guideline without the folder of correct sources provokes "found the logo on Google". Keep them together ([folder organization](../v-kakom-formate-nuzhen-logotip/)).
+- **Files next to rules.** A guideline without the folder of correct sources provokes "found the logo on Google". Keep them together — we cover [folder organization](../v-kakom-formate-nuzhen-logotip/) separately.
 - **A one-page digest.** The full document is for designers; for the office manager and SMM — one page: the correct logo, the two main don'ts, the color codes.
 - **An annual revision.** New carriers appear (dark mode, motion) — the document grows, version and date update.
 
 ## FAQ
 
-**What does a brand book cost?** A mini-logobook usually ships within a studio's logo price; full guidelines are separate work comparable to the mark itself; a strategic brand book is agency territory ([the price tiers](../skolko-stoit-logotip/)).
+**What does a brand book cost?** A mini-logobook usually ships within a studio's logo price; full guidelines are separate work comparable to the mark itself; a strategic brand book is agency territory; we cover [the price tiers](../skolko-stoit-logotip/) separately.
 
 **Is a brand book legally required?** No — it's an internal document. But it helps legally too: it fixes the mark's canon, making deviations easier to qualify as distortion in disputes.
 
