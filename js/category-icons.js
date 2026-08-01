@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // category-icons.js — Lucide icons (ISC license) for catalog categories.
 // Maps a category slug → the inner SVG markup of a Lucide line icon.
-// Shared concept with the Figma plugin (figma-plugin/ui.html keeps an inline copy,
+// Shared concept with the Figma plugin ("figna-plagins/Trace Logos/ui.html" keeps an inline copy,
 // since the plugin UI is a standalone document and can't import site modules).
 // Covers all logo + emoji category slugs; '_default' is the fallback.
 // ─────────────────────────────────────────────────────────────────────────────

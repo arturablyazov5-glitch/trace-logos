@@ -51,4 +51,15 @@ function extractBrandColors(item) {
     .slice(0, 6);
 }
 
-module.exports = { extractBrandColors };
+/**
+ * @param {string} hex — "#rrggbb"
+ * @returns {string} "R, G, B" — same components CSS rgb() and print/CMYK
+ * conversion tools expect as input, without the model deciding what a
+ * "printable" color format looks like.
+ */
+function hexToRgb(hex) {
+  const n = parseInt(hex.slice(1), 16);
+  return `${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}`;
+}
+
+module.exports = { extractBrandColors, hexToRgb };

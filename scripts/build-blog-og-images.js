@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Generates per-post OG preview images for the blog: assets/og/blog-<slug>.png (1200×630).
+ * Generates per-post OG preview images for the blog: assets/og/blog/social/<slug>.png (1200×630).
  * Isolated from build-og-images.js (per-logo) / build-og-home.js (homepage) — one concern per file.
  *
  * Without this, every blog post falls back to the generic assets/og/home.png in build-blog.js —
@@ -17,7 +17,7 @@ const path = require('path');
 
 const ROOT      = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'blog', 'posts');
-const OUT_DIR   = path.join(ROOT, 'assets', 'og');
+const OUT_DIR   = path.join(ROOT, 'assets', 'og', 'blog', 'social');
 const DRY_RUN   = process.argv.includes('--dry-run');
 const CHROME    = process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 const LOGO_B64  = fs.readFileSync(path.join(ROOT, 'assets', 'brand', 'logo.png')).toString('base64');
@@ -97,11 +97,12 @@ async function main() {
       slug,
       title: meta.title || slug,
       description: meta.description || '',
+      custom: meta.og_custom === 'true',
     };
   });
 
   if (DRY_RUN) {
-    posts.forEach((p, i) => console.log(`assets/og/blog-${p.slug}.png  (${ACCENTS[i % ACCENTS.length]})`));
+    posts.forEach((p, i) => console.log(`assets/og/blog/social/${p.slug}.png  (${p.custom ? 'custom, skipped if present' : ACCENTS[i % ACCENTS.length]})`));
     console.log(`\nTotal: ${posts.length}`);
     return;
   }
@@ -122,7 +123,10 @@ async function main() {
   for (let i = 0; i < posts.length; i++) {
     const p = posts[i];
     const accent = ACCENTS[i % ACCENTS.length];
-    const outPath = path.join(OUT_DIR, `blog-${p.slug}.png`);
+    const outPath = path.join(OUT_DIR, `${p.slug}.png`);
+
+    if (p.custom && fs.existsSync(outPath)) { unchanged++; continue; }
+
     const html = buildHtml({ title: p.title, description: p.description, accent });
 
     await page.setContent(html, { waitUntil: 'domcontentloaded' });

@@ -21,6 +21,8 @@
   <meta property="og:description" content="{{META_DESC}}">
   <meta property="og:url" content="{{CANONICAL_URL}}">
   <meta property="og:image" content="{{OG_IMAGE}}">
+  <meta property="og:image:width" content="{{OG_IMAGE_WIDTH}}">
+  <meta property="og:image:height" content="{{OG_IMAGE_HEIGHT}}">
   <meta property="og:locale" content="ru_RU">
   <meta property="article:published_time" content="{{DATE_ISO}}">
 
@@ -31,7 +33,6 @@
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
   <link rel="stylesheet" href="{{REL}}css/site-header.css">
   <link rel="stylesheet" href="{{REL}}css/blog.css">
-  <link rel="stylesheet" href="{{REL}}css/threads-banner.css">
   <link rel="stylesheet" href="{{REL}}css/site-footer.css">{{WIDGET_CSS}}
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
@@ -78,7 +79,7 @@
 
     <aside class="blog-sidebar">
       {{SIDEBAR}}
-      {{> threads-banner}}
+      {{> ad-sidebar-banner}}
     </aside>
   </div>
 
@@ -92,13 +93,27 @@
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
+
+  <div class="seo-ad-block seo-ad-block-bottom">
+    <!-- Yandex.RTB R-A-19679616-9 -->
+    <div id="yandex_rtb_R-A-19679616-9"></div>
+    <script>
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-19679616-9",
+            "renderTo": "yandex_rtb_R-A-19679616-9",
+            "type": "feed"
+        })
+    })
+    </script>
+  </div>
 </main>
 
 {{> site-footer}}
 
-<script type="module" src="{{REL}}js/threads-banner.js"></script>
 <script type="module" src="{{REL}}js/blog-toc.js"></script>
 <script type="module" src="{{REL}}js/blog-code.js"></script>
+<script type="module" src="{{REL}}js/blog-ads.js"></script>
 <script src="{{REL}}js/blog-track.js" async></script>{{WIDGET_JS}}
 </body>
 </html>

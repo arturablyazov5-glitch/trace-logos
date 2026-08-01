@@ -13,7 +13,11 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.js" defer></script>
+  <script>window.yaContextCb=window.yaContextCb||[]</script>
+  <script src="https://yandex.ru/ads/system/context.js" async></script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script src="/components/cookie-consent.js?v=20260801" defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Объединить PDF в один онлайн | Trace Logo's</title>
@@ -39,9 +43,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/site-header.css">
-  <link rel="stylesheet" href="../assets/tools.css">
-  <link rel="stylesheet" href="../assets/context-menu-demo.css">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260801">
+  <link rel="stylesheet" href="../assets/tools.css?v=20260731">
+  <link rel="stylesheet" href="../assets/context-menu-demo.css?v=20260731">
 
   <script type="application/ld+json">
   {
@@ -125,15 +129,15 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.js" defer></script>
-<script src="../../components/search-box.js" defer></script>
-<script src="../../components/mobile-nav.js" defer></script>
+<script src="../../components/lang-switcher.js?v=20260801" defer></script>
+<script src="../../components/search-box.js?v=20260801" defer></script>
+<script src="../../components/mobile-nav.js?v=20260801" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.js">
-<script type="module" src="../../components/donate-ticker.js"></script>
-<script type="module" src="../../js/header-search.js"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.js?v=20260801">
+<script type="module" src="../../components/donate-ticker.js?v=20260801"></script>
+<script type="module" src="../../js/header-search.js?v=20260801"></script>
 <!-- HEADER:END -->
 
 <div class="wrap">
@@ -448,14 +452,14 @@
   </footer>
 </div>
 
-<script src="../assets/config.js"></script>
-<script src="../assets/button-labels.js"></script>
-<script src="../assets/paywall-component.js"></script>
-<script src="../assets/utils.js"></script>
-<script src="../assets/loader.js"></script>
-<script src="../assets/instructions.js"></script>
-<script src="../assets/context-menu-demo-data.js"></script>
-<script src="../assets/context-menu-demo.js"></script>
+<script src="../assets/config.js?v=20260731"></script>
+<script src="../assets/button-labels.js?v=20260731"></script>
+<script src="../assets/paywall-component.js?v=20260731"></script>
+<script src="../assets/utils.js?v=20260731"></script>
+<script src="../assets/loader.js?v=20260731"></script>
+<script src="../assets/instructions.js?v=20260731"></script>
+<script src="../assets/context-menu-demo-data.js?v=20260731"></script>
+<script src="../assets/context-menu-demo.js?v=20260731"></script>
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js" integrity="sha384-8nT3SpButyvenpAdKYPJzXdSz3zidMGduMoaMvwjKnAWVv238n6P1mhveiJJQWrV" crossorigin="anonymous" defer onload="window.lucide&&window.lucide.createIcons()"></script>
 
 <script>
@@ -762,18 +766,22 @@
     return (files || []).reduce((sum, f) => sum + (f && Number.isFinite(f.size) ? f.size : 0), 0);
   }
 
-  /** Одна округлённая секунда: грубо по числу PDF и суммарному размеру (без широкого интервала — его трудно угадать). */
+  /**
+   * Одна округлённая секунда, грубо. Оценка веса делает ровно один настоящий рендер (первая
+   * страница первого файла) — для всех остальных страниц читаются только метаданные (число
+   * страниц + размер вьюпорта), без декода картинок, поэтому цена почти не растёт с числом файлов.
+   */
   function guessCompressionPreviewSecondsRounded(files, qualityPct) {
     const n = Math.max(1, (files || []).length);
     const totalMb = sumSelectedFilesBytes(files) / (1024 * 1024);
-    const mb = Math.min(totalMb, 100);
+    const mb = Math.min(totalMb, 2000);
     const light = qualityPct >= 100;
-    const base = light ? 0.8 : 1.2;
-    const perFile = light ? 0.55 : 1.15;
-    const perMb = light ? 0.08 : 0.2;
-    const maxSec = light ? 32 : 65;
+    const base = light ? 0.6 : 1.0;
+    const perFile = light ? 0.02 : 0.04;
+    const perMb = light ? 0.006 : 0.01;
+    const maxSec = light ? 10 : 15;
     let mid = base + n * perFile + mb * perMb;
-    mid = Math.min(maxSec, Math.max(2.2, mid));
+    mid = Math.min(maxSec, Math.max(1.5, mid));
     return Math.max(2, Math.round(mid));
   }
 
@@ -1254,56 +1262,6 @@
     return jsPdfPromise;
   }
 
-  /**
-   * Оценка сжатого итога по файлу: средний вес JPEG выборки страниц (1 / середина / последняя)
-   * × число страниц, масштаб и качество как в mergePdfCompressed. Порядок файлов не влияет.
-   */
-  async function measureFileJpegEstimateBytes(file, qualityPct, scratchCanvas, runSeq, onBenchProgress) {
-    if (!file || runSeq !== previewRunSeq) return null;
-    const scale = mergeMatchRenderScale(qualityPct);
-    const buf = await file.arrayBuffer();
-    if (runSeq !== previewRunSeq) return null;
-    const pdfDoc = await window.pdfjsLib.getDocument({ data: buf }).promise;
-    try {
-      const numPages = pdfDoc.numPages || 0;
-      if (numPages < 1) return { estBytes: 0 };
-      const sampleIdx = numPages === 1
-        ? [1]
-        : (numPages === 2 ? [1, 2] : [1, Math.ceil(numPages / 2), numPages]);
-      if (typeof onBenchProgress === 'function') {
-        onBenchProgress({ type: 'file_plan', sampleCount: sampleIdx.length });
-      }
-      const q = Math.max(0.01, Math.min(1, qualityPct / 100));
-      let sumJ = 0;
-      for (const pi of sampleIdx) {
-        if (runSeq !== previewRunSeq) return null;
-        const page = await pdfDoc.getPage(pi);
-        const viewport = page.getViewport({ scale });
-        const w = Math.max(1, Math.round(viewport.width));
-        const h = Math.max(1, Math.round(viewport.height));
-        scratchCanvas.width = w;
-        scratchCanvas.height = h;
-        const ctx = scratchCanvas.getContext('2d');
-        await page.render({ canvasContext: ctx, viewport }).promise;
-        if (runSeq !== previewRunSeq) return null;
-        const blob = await new Promise((resolve) => {
-          scratchCanvas.toBlob((b) => resolve(b), 'image/jpeg', q);
-        });
-        if (!blob || runSeq !== previewRunSeq) return null;
-        sumJ += blob.size;
-        if (typeof onBenchProgress === 'function') {
-          onBenchProgress({ type: 'sample_done' });
-        }
-      }
-      const avgJ = sumJ / sampleIdx.length;
-      return { estBytes: Math.round(avgJ * numPages), sampleCount: sampleIdx.length };
-    } finally {
-      try {
-        await pdfDoc.destroy();
-      } catch (_) { /* ignore */ }
-    }
-  }
-
   async function renderCompressionPreview(files, qualityPct, runSeq, cachedEstimate = null) {
     if (!leftPreviewCanvas || !rightPreviewCanvas) {
       clearCompressionPreviewSkeletonIfCurrent(runSeq);
@@ -1365,65 +1323,23 @@
     let estBytes = 0;
     let pct = 0;
     let estimateReady = false;
-    if (!useCachedEstimate) {
-      const scratch = document.createElement('canvas');
-      const benchStartedAt = performance.now();
-      let benchDoneSamples = 0;
-      let benchKnownTotalSamples = 0;
-      const assumedSamplesPerUnknownFile = 3;
-      try {
-        for (let i = 0; i < files.length; i++) {
-          const part = await measureFileJpegEstimateBytes(files[i], qualityPct, scratch, runSeq, (evt) => {
-            if (!evt || runSeq !== previewRunSeq) return;
-            if (evt.type === 'file_plan') {
-              benchKnownTotalSamples += Math.max(1, Number(evt.sampleCount) || 1);
-              return;
-            }
-            if (evt.type !== 'sample_done') return;
-            benchDoneSamples += 1;
-            const elapsedMs = Math.max(1, performance.now() - benchStartedAt);
-            const msPerSample = elapsedMs / benchDoneSamples;
-            const unknownFiles = Math.max(0, files.length - (i + 1));
-            const totalSamplesEstimate = Math.max(
-              benchDoneSamples,
-              benchKnownTotalSamples + unknownFiles * assumedSamplesPerUnknownFile
-            );
-            const remainingSamples = Math.max(0, totalSamplesEstimate - benchDoneSamples);
-            const etaSec = Math.max(1, Math.round((msPerSample * remainingSamples) / 1000));
-            setEstimateDotsEta(etaSec);
-          });
-          if (part == null) {
-            clearCompressionPreviewSkeletonIfCurrent(runSeq);
-            return;
-          }
-          estBytes += part.estBytes;
-        }
-      } catch (err) {
-        setCompressionPreviewFailed(runSeq);
-        throw err;
-      }
 
-      estBytes = Math.max(0, estBytes);
-      pct = totalOrigSize > 0 ? Math.round((1 - estBytes / totalOrigSize) * 100) : 0;
-      estimateReady = true;
-    } else if (cachedEstimate && Number.isFinite(cachedEstimate.estBytes) && Number.isFinite(cachedEstimate.totalOrigSize)) {
-      estBytes = Math.max(0, cachedEstimate.estBytes);
-      pct = cachedEstimate.totalOrigSize > 0
-        ? Math.round((1 - estBytes / cachedEstimate.totalOrigSize) * 100)
-        : 0;
-      estimateReady = true;
-    }
-
+    // Рендерим первую страницу первого файла В ЛЮБОМ случае — это визуальное превью «после»,
+    // которое пользователь и так видит. Дальше это НЕ отдельный замер «для оценки», а единственный
+    // реальный рендер во всей функции: его вес (previewBlob.size) при известных пикселях канвы даёт
+    // байт/пиксель при заданном качестве.
     const scale = mergeMatchRenderScale(qualityPct);
     const firstFile = files[0];
     const bytes0 = await firstFile.arrayBuffer();
     if (runSeq !== previewRunSeq) return;
     const pdfVis = await window.pdfjsLib.getDocument({ data: bytes0 }).promise;
+    let firstPagePixels = 0;
     try {
       const firstPage = await pdfVis.getPage(1);
       const viewport = firstPage.getViewport({ scale });
       leftPreviewCanvas.width = Math.max(1, Math.round(viewport.width));
       leftPreviewCanvas.height = Math.max(1, Math.round(viewport.height));
+      firstPagePixels = leftPreviewCanvas.width * leftPreviewCanvas.height;
       rightPreviewCanvas.width = leftPreviewCanvas.width;
       rightPreviewCanvas.height = leftPreviewCanvas.height;
       rightCtx.clearRect(0, 0, rightPreviewCanvas.width, rightPreviewCanvas.height);
@@ -1466,6 +1382,54 @@
     rightCtx.drawImage(previewImg, 0, 0, rightPreviewCanvas.width, rightPreviewCanvas.height);
     updateCanvasLabelContrast(rightPreviewCanvas, rightPreviewLabel);
     stopEstimateDots();
+
+    // Экстраполяция по РЕАЛЬНЫМ пикселям страницы (не по «среднему на файл»/«среднему на страницу»
+    // из выборки): для каждой страницы каждого файла узнаём точные ширину/высоту в целевом
+    // масштабе через getViewport — это метаданные из PDF-структуры, без декода картинки и без
+    // рендера, поэтому одинаково быстро что для 5, что для 500 файлов. Единственный настоящий
+    // рендер во всей оценке — уже сделанный выше превью первого файла, он и калибрует байт/пиксель.
+    if (!useCachedEstimate) {
+      const bytesPerPixel = firstPagePixels > 0 ? (previewBlob.size / firstPagePixels) : 0;
+      try {
+        let sumBytes = previewBlob.size;
+        for (let i = 1; i < files.length; i++) {
+          if (runSeq !== previewRunSeq) {
+            clearCompressionPreviewSkeletonIfCurrent(runSeq);
+            return;
+          }
+          const buf = await files[i].arrayBuffer();
+          if (runSeq !== previewRunSeq) {
+            clearCompressionPreviewSkeletonIfCurrent(runSeq);
+            return;
+          }
+          const pdfDoc = await window.pdfjsLib.getDocument({ data: buf }).promise;
+          try {
+            const numPages = pdfDoc.numPages || 0;
+            for (let p = 1; p <= numPages; p++) {
+              if (runSeq !== previewRunSeq) return;
+              const page = await pdfDoc.getPage(p);
+              const vp = page.getViewport({ scale });
+              const pagePixels = Math.max(1, Math.round(vp.width)) * Math.max(1, Math.round(vp.height));
+              sumBytes += bytesPerPixel * pagePixels;
+            }
+          } finally {
+            try { await pdfDoc.destroy(); } catch (_) { /* ignore */ }
+          }
+        }
+        estBytes = Math.max(0, Math.round(sumBytes));
+        pct = totalOrigSize > 0 ? Math.round((1 - estBytes / totalOrigSize) * 100) : 0;
+        estimateReady = true;
+      } catch (err) {
+        setCompressionPreviewFailed(runSeq);
+        throw err;
+      }
+    } else if (cachedEstimate && Number.isFinite(cachedEstimate.estBytes) && Number.isFinite(cachedEstimate.totalOrigSize)) {
+      estBytes = Math.max(0, cachedEstimate.estBytes);
+      pct = cachedEstimate.totalOrigSize > 0
+        ? Math.round((1 - estBytes / cachedEstimate.totalOrigSize) * 100)
+        : 0;
+      estimateReady = true;
+    }
 
     const optimizeOn = !!(optimizeToggle && optimizeToggle.checked);
     let resultSizeHtml;
@@ -1517,6 +1481,10 @@
     let donePages = 0;
     let estimatedTotalPages = 0;
     const pageCounts = new Array(totalFiles).fill(0);
+    // Реальный бегущий итог по уже обработанным страницам — не выборка, а фактически посчитанные
+    // байты. Точность этой цифры растёт по ходу сжатия и становится точной к концу, в отличие
+    // от любой оценки «на глаз» до старта обработки.
+    let sumRealBytes = 0;
 
     for (let fileIdx = 0; fileIdx < totalFiles; fileIdx++) {
       ensureMergeNotCancelled(runToken);
@@ -1543,18 +1511,31 @@
 
           const ctx = scratch.getContext('2d');
           await page.render({ canvasContext: ctx, viewport }).promise;
+          // Освобождаем декодированные битмапы/маски страницы сразу, не дожидаясь srcPdf.destroy() —
+          // на многослойных сканах (JPEG + smask той же страницы) это заметно снижает пиковую память
+          // при последовательной обработке десятков тяжёлых файлов.
+          try { page.cleanup(); } catch (_) { /* ignore */ }
 
-          const jpgUrl = scratch.toDataURL('image/jpeg', q);
+          // toBlob кодирует JPEG асинхронно (в отличие от toDataURL, который блокирует главный поток
+          // на всё время энкода) — на больших холстах это и держит вкладку отзывчивой между страницами,
+          // и не даёт прогресс-бару казаться зависшим.
+          const jpgBlob = await new Promise((resolve, reject) => {
+            scratch.toBlob((b) => (b ? resolve(b) : reject(new Error('toBlob failed'))), 'image/jpeg', q);
+          });
+          const jpgBytes = new Uint8Array(await jpgBlob.arrayBuffer());
           const orientation = w >= h ? 'landscape' : 'portrait';
           if (!outPdf) {
             outPdf = new jsPDF({ orientation, unit: 'pt', format: [w, h], compress: true });
           } else {
             outPdf.addPage([w, h], orientation);
           }
-          outPdf.addImage(jpgUrl, 'JPEG', 0, 0, w, h, undefined, 'FAST');
+          outPdf.addImage(jpgBytes, 'JPEG', 0, 0, w, h, undefined, 'FAST');
           donePages += 1;
+          sumRealBytes += jpgBytes.byteLength;
           if (typeof onProgress === 'function') {
-            onProgress(donePages, Math.max(estimatedTotalPages, donePages), `${fileIdx + 1}/${totalFiles} · ${file.name} · стр. ${p}/${pageCount}`);
+            const totalNow = Math.max(estimatedTotalPages, donePages);
+            const liveEstBytes = Math.round((sumRealBytes / donePages) * totalNow);
+            onProgress(donePages, totalNow, `${fileIdx + 1}/${totalFiles} · ${file.name} · стр. ${p}/${pageCount}`, liveEstBytes);
           }
         }
       } finally {
@@ -2266,12 +2247,17 @@
       const merged = useCompression
         ? (quality >= 100
           ? await mergePdfWithBatches(chunks, runToken)
-          : await mergePdfCompressed(files, quality, (done, totalUnits, label) => {
+          : await mergePdfCompressed(files, quality, (done, totalUnits, label, liveEstBytes) => {
               const pct = totalUnits > 0 ? Math.round((done / totalUnits) * 100) : 0;
               const title = `Сжимаю страницы (${quality}% качества)`;
               const detail = label || (totalUnits ? `Страница ${done} из ${totalUnits}` : '');
               setProgress(pct, title, detail);
               setMergeMeta(`Сжатие: ${quality}% — обрабатываю по страницам`);
+              // Это не оценка на выборке до старта, а бегущий итог по уже реально сжатым
+              // страницам — точность растёт по ходу обработки и совпадает с фактом к концу.
+              if (Number.isFinite(liveEstBytes) && done > 0) {
+                setMergeEstSizeText(`~${fmtSize(liveEstBytes)} (по факту, ${done}/${totalUnits})`);
+              }
             }, runToken))
         : await mergePdfWithBatches(chunks, runToken);
 
@@ -2665,6 +2651,17 @@
   showUpload();
 
 })();
+</script>
+
+<!-- Yandex.RTB R-A-19679616-11 (floorAd — sticky to bottom of viewport) -->
+<script>
+window.yaContextCb.push(() => {
+    Ya.Context.AdvManager.render({
+        "blockId": "R-A-19679616-11",
+        "type": "floorAd",
+        "platform": "desktop"
+    })
+})
 </script>
 </body>
 </html>

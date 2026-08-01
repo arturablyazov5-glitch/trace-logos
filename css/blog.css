@@ -46,6 +46,19 @@
 @media (max-width: 900px) { .blog-list { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px)  { .blog-list { grid-template-columns: 1fr; } }
 
+/* ── Yandex RTB ad card in the index grid (every 10th post, build-blog.js) ──
+   align-self: stretch matches the row's own height (set by the tallest
+   .blog-card in that row), so the ad card is exactly as tall as its
+   neighbours instead of following its own aspect-ratio. overflow: hidden
+   clips the ad network's native content, which doesn't know this height. */
+.blog-ad-card {
+  display: flex; justify-content: center; align-items: center;
+  width: 100%; height: 100%;
+  align-self: stretch;
+  border-radius: 16px; border: 1px solid var(--border); background: var(--bg-card);
+  overflow: hidden;
+}
+
 .blog-card {
   display: flex; flex-direction: column;
   border-radius: 16px; overflow: hidden;
@@ -82,12 +95,12 @@
 }
 .blog-card:hover .blog-card-title { color: var(--text-0); }
 .blog-card-tags {
-  position: absolute; top: 10px; left: 10px; z-index: 2;
-  display: flex; flex-wrap: wrap; gap: 6px; max-width: calc(100% - 20px);
+  position: absolute; bottom: 10px; right: 10px; z-index: 2;
+  display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; max-width: calc(100% - 20px);
 }
 .blog-card-tag {
-  font-size: 10.5px; font-weight: 400; color: #fff;
-  background: rgba(15, 15, 15, .45);
+  font-size: 10.5px; font-weight: 400; color: #000;
+  background: rgba(255, 255, 255, .85);
   backdrop-filter: blur(10px) saturate(180%);
   -webkit-backdrop-filter: blur(10px) saturate(180%);
   border-radius: 20px; padding: 6px 12px; white-space: nowrap;
@@ -141,7 +154,7 @@
 .blog-article { max-width: 700px; margin: 0 auto; }
 .blog-layout .blog-article { max-width: none; margin: 0; min-width: 0; }
 .blog-article-cover {
-  width: 100%; aspect-ratio: 21 / 9; max-height: 280px;
+  width: 100%; aspect-ratio: 16 / 9; max-height: 400px;
   border-radius: 16px; margin-bottom: 28px;
   display: flex; align-items: center; justify-content: center;
   position: relative; overflow: hidden; isolation: isolate;
@@ -207,6 +220,9 @@
   border-radius: 5px; padding: 1px 5px; color: var(--text-1);
 }
 .blog-body hr { border: none; border-top: 1px solid var(--line); margin: 34px 0; }
+
+/* ── Yandex RTB ad slot (injected before the 2nd H2, build-blog.js) ── */
+.blog-ad-slot { margin: 0 0 34px; min-height: 1px; }
 
 /* ── Block images (`![alt](src "caption")`) ── */
 .blog-figure { margin: 0 0 22px; }

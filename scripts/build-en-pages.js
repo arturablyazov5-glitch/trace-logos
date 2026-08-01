@@ -26,11 +26,11 @@ const DRY_RUN = process.argv.includes('--dry-run');
 
 const EXCLUDE_DIRS = new Set([
   'en', 'node_modules', 'scripts', '.git', '.claude', 'sanitizer',
-  'assets', 'css', 'js', 'components', 'templates', 'upptime',
+  'assets', 'css', 'js', 'components', 'templates', 'upptime', 'figna-plagins',
 ]);
 
 // Skip non-content HTML files at root level (search-engine verification stubs)
-const SKIP_ROOT_FILES = /^(yandex_|bing|google)/i;
+const { isVerificationStub } = require('./lib/verification-stubs');
 
 // Logo SEO leaf pages are generated (with English meta) by build-seo-pages.js.
 const SEO_LEAF = /^logos\/[^/]+\/[^/]+\/index\.html$/;
@@ -53,7 +53,7 @@ function findHtmlFiles(dir, rel = '') {
       if (EXCLUDE_DIRS.has(name)) continue;
       results.push(...findHtmlFiles(path.join(dir, name), rel ? `${rel}/${name}` : name));
     } else if (name.endsWith('.html')) {
-      if (!rel && SKIP_ROOT_FILES.test(name)) continue;
+      if (!rel && isVerificationStub(name)) continue;
       results.push(rel ? `${rel}/${name}` : name);
     }
   }

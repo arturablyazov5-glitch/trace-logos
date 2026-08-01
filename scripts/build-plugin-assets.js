@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
  * Generates Figma plugin store assets:
- *   figma-plugin/assets/icon.png       128×128
- *   figma-plugin/assets/thumbnail.png  1920×1080
+ *   figna-plagins/Trace Logos/assets/icon.png       128×128
+ *   figna-plagins/Trace Logos/assets/thumbnail.png  1920×1080
  */
 
 const puppeteer = require('puppeteer');
@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const { getLogoReadyCount, getLogoCategoryCount, getEmojiCount } = require('./lib/counts');
 
-const OUT = path.resolve(__dirname, '../figma-plugin/assets');
+const OUT = path.resolve(__dirname, '../figna-plagins/Trace Logos/assets');
 if (!fs.existsSync(OUT)) fs.mkdirSync(OUT, { recursive: true });
 
 const LOGO_COUNT = getLogoReadyCount();

@@ -1,0 +1,24 @@
+<!-- RSYA sidebar banner — replaces templates/partials/_archived/threads-banner.html
+     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot, same width.
+     Height is hard-capped (css/seo-page.css .ad-sidebar-slot) so the ad can't
+     push the rest of the sidebar down. -->
+<div class="ad-sidebar-slot" id="ad-sidebar-slot-R-A-19679616-2">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  (() => {
+    const slotEl = document.getElementById('ad-sidebar-slot-R-A-19679616-2');
+    const adEl = document.getElementById('yandex_rtb_R-A-19679616-2');
+    const collapseTimer = setTimeout(() => {
+      if (adEl && !adEl.querySelector('iframe')) slotEl.classList.add('ad-collapsed');
+    }, 3000);
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-19679616-2",
+            "renderTo": "yandex_rtb_R-A-19679616-2",
+            "onRender": () => clearTimeout(collapseTimer)
+        })
+    })
+  })();
+  </script>
+</div>

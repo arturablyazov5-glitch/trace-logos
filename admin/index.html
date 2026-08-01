@@ -245,10 +245,14 @@ td.bar { width: 220px; }
 .bar-track { background: var(--bg-raised); border-radius: 5px; height: 7px; overflow: hidden; }
 .bar-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); transition: width .4s cubic-bezier(.22,.61,.36,1); }
 
-td.exports { white-space: nowrap; }
+/* Fixed column width (matches td.bar's pattern) so table-layout:auto has a
+   real number to work with, instead of the name column grabbing whatever the
+   exports column doesn't explicitly claim. The pills wrap inside via
+   .ex-pills, not by fighting the table's own layout algorithm. */
+td.exports, thead th.col-exports { width: 260px; }
+.ex-pills { display: flex; flex-wrap: wrap; gap: 4px; }
 .ex-pill {
   display: inline-flex; align-items: center; gap: 0;
-  margin: 1px 4px 1px 0;
   font-size: 11px; border-radius: 6px; overflow: hidden;
   border: 1px solid var(--border);
 }
@@ -306,7 +310,6 @@ td.exports { white-space: nowrap; }
   margin-top: 1px;
 }
 .variant-pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
-.variant-pills .ex-pill { margin: 0; }
 
 /* ── Спрос (Wordstat) ── */
 .demand-form {
@@ -619,7 +622,7 @@ const WORDSTAT_ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1
 const WORDSTAT_CHUNK = 150; // должно совпадать с MAX_PHRASES на сервере
 const KEY_STORE = 'tl_admin_key';
 
-const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', webp: 'WebP', pdf: 'PDF', ai: 'AI', eps: 'EPS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG' };
+const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', webp: 'WebP', pdf: 'PDF', ai: 'AI', eps: 'EPS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG', embed: 'Embed-код' };
 
 let adminKey = sessionStorage.getItem(KEY_STORE) || '';
 let data = [];
@@ -1177,10 +1180,11 @@ function fmtExports(detail) {
       items.push({ fmt, total: variants });
     }
   }
-  return items
+  const pills = items
     .sort((a, b) => b.total - a.total)
     .map(({ fmt, total }) => `<span class="ex-pill"><span class="ex-fmt">${esc(FMT_LABELS[fmt] || fmt)}</span><span class="ex-cnt">${total}</span></span>`)
     .join('');
+  return `<div class="ex-pills">${pills}</div>`;
 }
 function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }
 function fmtDate(iso) {

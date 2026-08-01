@@ -35,8 +35,15 @@ const path  = require('path');
 const ROOT = path.resolve(__dirname, '..');
 
 const SECTIONS = {
-  logos: { src: 'assets/logos/pngs',  out: 'assets/logos/previews',  subdirs: null },
-  emoji: { src: 'assets/emoji/pngs',  out: 'assets/emoji/previews',  subdirs: ['apple'] },
+  logos:  { src: 'assets/logos/pngs',   out: 'assets/logos/previews',   subdirs: null },
+  emoji:  { src: 'assets/emoji/pngs',   out: 'assets/emoji/previews',   subdirs: ['apple'] },
+  // build-search-images.js renders SVG logos to 800px PNG for image-search
+  // indexing (assets/logos/search/*.png). The SEO page hero <img> showed that
+  // same 800px/~70KB file at 160px — this generates a matching small WebP so
+  // the on-page preview is as light as the PNG-primary case already is via
+  // `logos` above. The 800px PNG itself is untouched (still the sitemap
+  // <image:loc> source for Google Images/Яндекс.Картинки).
+  search: { src: 'assets/logos/search', out: 'assets/logos/search-previews', subdirs: null },
 };
 
 // Max side in px. Grid shows ~48-60px; at 3× DPR ~180px → 192 covers it.

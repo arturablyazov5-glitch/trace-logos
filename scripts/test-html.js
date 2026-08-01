@@ -22,6 +22,15 @@
 //      не попадёт в индекс.
 //   8. hreflang взаимен: если RU-страница указывает на EN-альтернативу, та
 //      обязана существовать и ссылаться обратно.
+//   9. На каждой странице логотипа (/logos/{cat}/{slug}/, /en/ зеркало) в
+//      JSON-LD @graph есть узел "@type": "Organization". Добавлено 2026-07-30
+//      по тому же паттерну, что поймал 52 страницы экосистем без <h1>:
+//      одна забытая правка в buildJsonLd() (scripts/build-seo-pages.js) —
+//      и 500+ страниц молча теряют Organization/publisher одновременно,
+//      без единого битого <title>/canonical/ссылки, которые ловят проверки
+//      выше. Область — только страницы логотипов (logos/{cat}/{slug}/,
+//      cat !== "ecosystem"): именно туда Organization добавлялась, у
+//      страниц категорий/экосистем/эмодзи своя JSON-LD-схема без него.
 //
 // Запуск: node scripts/test-html.js   (входит в build-all.js перед test-links.js)
 //   --warn-only  — только отчёт, без exit 1
@@ -36,14 +45,16 @@ const BASE_URL  = 'https://trace-logos.ru';
 // templates/ полон {{...}} by design; остальное — служебное и чужие зеркала.
 const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
-  'figma-plugin', 'supabase', 'sanitizer', 'upptime', 'assets',
+  'figna-plagins', 'supabase', 'sanitizer', 'upptime', 'assets',
 ]);
 
-// Единственное исключение: файлы-подтверждения владения доменом для
-// Яндекс.Вебмастера. Их содержимое диктует Яндекс, это не страница сайта.
+// Единственное исключение: файлы-подтверждения владения доменом для сторонних
+// вебмастеров (Яндекс.Вебмастер, Яндекс Дистрибуция, Google Search Console,
+// Дзен для медиа). Их содержимое диктует сам сервис, это не страница сайта.
+// Список общий с build-en-pages.js — см. scripts/lib/verification-stubs.js.
 // Всё остальное, что «не совсем страница», закрывается noindex — тогда
-// проверки 4/6 сами отступают, и причина видна прямо в файле, а не в этом списке.
-const isVerificationStub = rel => /^(yandex_[0-9a-f]+|google[0-9a-f]+)\.html$/.test(rel);
+// проверки 4/6 сами отступают, и причина видна прямо в файле, а не в тесте.
+const { isVerificationStub } = require('./lib/verification-stubs');
 
 let errors = 0, warns = 0;
 const fail = msg => { if (WARN_ONLY) { console.warn(`  ! ${msg}`); warns++; } else { console.error(`  ✗ ${msg}`); errors++; } };
@@ -72,6 +83,15 @@ function urlToFile(url) {
 
 const attr = (html, re) => { const m = html.match(re); return m ? m[1].trim() : null; };
 
+// /logos/{cat}/{slug}/index.html или /en/logos/{cat}/{slug}/index.html, но не
+// логотип категории/экосистемы (logos/{slug}/index.html — один сегмент, или
+// logos/ecosystem/{key}/index.html — своя JSON-LD-схема без Organization).
+const LOGO_PAGE_RE = /^(?:en\/)?logos\/([^/]+)\/([^/]+)\/index\.html$/;
+const isLogoPage = rel => {
+  const m = rel.match(LOGO_PAGE_RE);
+  return !!m && m[1] !== 'ecosystem';
+};
+
 function main() {
   const pages = walkHtml(ROOT);
   const canonicals = new Map(); // canonical → [rel-путь, …]
@@ -89,10 +109,18 @@ function main() {
     if (ph.length) at(`незамещённые плейсхолдеры: ${ph.map(k => `{{${k}}}`).join(', ')}`);
 
     // 2. JSON-LD парсится.
+    let hasOrganization = false;
     for (const m of html.matchAll(/<script[^>]+type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
-      try { JSON.parse(m[1]); }
-      catch (e) { at(`битый JSON-LD: ${e.message}`); }
+      let parsed;
+      try { parsed = JSON.parse(m[1]); }
+      catch (e) { at(`битый JSON-LD: ${e.message}`); continue; }
+      const graph = Array.isArray(parsed['@graph']) ? parsed['@graph'] : [parsed];
+      if (graph.some(node => node && node['@type'] === 'Organization')) hasOrganization = true;
     }
+
+    // 9. Страница логотипа обязана нести Organization в @graph (E-E-A-T/publisher —
+    //    см. комментарий в шапке файла).
+    if (isLogoPage(rel) && !hasOrganization) at('нет "@type": "Organization" в JSON-LD @graph');
 
     // 3. Ровно один непустой <title>.
     const titles = [...html.matchAll(/<title[^>]*>([\s\S]*?)<\/title>/gi)];

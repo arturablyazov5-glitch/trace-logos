@@ -46,11 +46,14 @@ const DRY_RUN   = argv.includes('--dry-run');
 //   all HTML builders → en-pages (mirrors whatever HTML exists at the time it runs)
 //   everything → sitemap.js (sole owner of sitemap.xml, must run last)
 const STEPS = [
+  { file: 'apply-typography.js',            label: 'Русская типографика (НБСП/тире/кавычки/эллипсис) в JSON-текстах и постах блога — до всех остальных шагов, читающих эти данные' },
   { file: 'test-data.js', args: ['--pre'],  label: 'Тесты данных: манифесты, ассеты, экосистемы — до сборки' },
   { file: 'test-i18n.js',                  label: 'Паритет словарей i18n (ru/en) + сверка ключей с вёрсткой — до запекания /en/' },
   { file: 'test-js.js',                    label: 'Синтаксис и граф импортов клиентского JS — до генерации страниц' },
+  { file: 'test-css-parity.js',            label: 'CSS для пасхалок/микроанимаций main.js подключён на всех 4 страницах, что его грузят' },
   { file: 'build-download-stats.js',       label: 'Статистика скачиваний (для «Скачано: N раз» на SEO-страницах)' },
   { file: 'build-search-images.js',        label: 'PNG-рендеры SVG-логотипов для Яндекс.Картинок (инкрементально)' },
+  { file: 'build-css-bundles.js',          label: 'CSS-бандл SEO-страниц (css/seo-page.bundle.css) — один <link> вместо семи' },
   { file: 'build-seo-pages.js',           label: 'SEO-страницы логотипов (logos/<cat>/<slug>/)' },
   { file: 'cleanup-orphaned-pages.js',     label: 'Удаление осиротевших страниц' },
   { file: 'build-api-json.js',             label: 'Публичный API (logos.json, logos/<cat>.json)' },
@@ -68,7 +71,8 @@ const STEPS = [
   { file: 'build-og-home.js',              label: 'OG-превью главной (assets/og/home.png) — со счётчиками логотипов/эмодзи' },
   { file: 'build-plugin-assets.js',        label: 'Ассеты Figma-плагина (иконка, thumbnail) — тоже со счётчиками' },
   { file: 'build-blog.js',                 label: 'Страницы блога' },
-  { file: 'build-blog-og-images.js',       label: 'OG-превью постов блога (assets/og/blog-<slug>.png)' },
+  { file: 'build-blog-covers.js',          label: 'Кастомные обложки постов из assets/og-originals (PNG + WebP)' },
+  { file: 'build-blog-og-images.js',       label: 'OG-превью постов блога (assets/og/blog/social/<slug>.png)' },
   { file: 'build-blog-rss.js',             label: 'blog/rss.xml' },
   { file: 'build-home-popular.js',         label: 'Блок «Популярные логотипы» на главной (по статистике)' },
   { file: 'build-home-collections.js',     label: 'Блок «Подборки» на главной и в футере (из collections.json)' },
@@ -80,6 +84,7 @@ const STEPS = [
   { file: 'test-links.js',                 label: 'Тесты ссылок: битые href/src/content (страницы и ассеты) в готовом HTML — после всех страниц' },
   { file: 'build-sitemap.js',              label: 'sitemap.xml + sitemap-*.xml — ВСЕГДА последним' },
   { file: 'build-version.js',              label: 'js/version.js (ASSET_VERSION) — cache-buster, самый последний шаг' },
+  { file: 'build-cache-bust.js',           label: 'Проштамповать ?v=ASSET_VERSION во все css/js/components ссылки во всех HTML — реально последний шаг' },
 ];
 
 function runStep({ file, label, args: stepArgs = [] }) {

@@ -251,7 +251,7 @@ function runPost() {
       }
     }
   }
-  // Blog OG images: every post should have assets/og/blog-<slug>.png.
+  // Blog OG images: every post should have assets/og/blog/social/<slug>.png.
   // Warning, not error: this check runs (test-data --post) BEFORE
   // build-blog-og-images.js in build-all.js's fast tier, so a brand-new
   // post always warns here and then gets its image a few steps later in
@@ -265,8 +265,8 @@ function runPost() {
     const m = raw.match(/^slug:\s*(\S+)/m);
     const slug = m ? m[1] : path.basename(f, '.md');
     blogOgChecked++;
-    if (!fs.existsSync(path.join(ROOT, 'assets', 'og', `blog-${slug}.png`))) {
-      warn(`нет OG-картинки: assets/og/blog-${slug}.png — запустить build-blog-og-images.js (входит в fast tier, должен был отработать позже в этом же билде)`);
+    if (!fs.existsSync(path.join(ROOT, 'assets', 'og', 'blog', 'social', `${slug}.png`))) {
+      warn(`нет OG-картинки: assets/og/blog/social/${slug}.png — запустить build-blog-og-images.js (входит в fast tier, должен был отработать позже в этом же билде)`);
     }
   }
 

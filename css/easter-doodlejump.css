@@ -1,0 +1,88 @@
+/* Doodle Jump easter egg — triggered from js/easter-doodlejump.js while the
+   Doodle Jump logo's detail panel is open. */
+@keyframes dj-fly-in {
+  from { transform: translateX(-220px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+.dj-widget {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  width: 160px;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  z-index: 500;
+  transition: transform 0.2s ease;
+  /* Hidden until boot.js confirms attract mode actually reached the Game
+     state (see js/easter-doodlejump.js's onWindowMessage) — otherwise this
+     flies in over the loading flash (black frame → menu) instead of onto an
+     already-playing game. */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dj-widget.dj-widget--visible {
+  opacity: 1;
+  pointer-events: auto;
+  animation: dj-fly-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dj-widget:hover {
+  transform: scale(1.06);
+}
+
+.dj-widget iframe {
+  /* Matches the engine's internal Phaser resolution (635x955) so nothing
+     gets letterboxed oddly — see game.html / lib/boot.js. */
+  width: 635px;
+  height: 955px;
+  border: 0;
+  pointer-events: none;
+  transform: scale(0.252);
+  transform-origin: top left;
+}
+
+.dj-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.dj-lightbox-box {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  line-height: 0;
+}
+
+.dj-lightbox-box iframe {
+  width: min(90vw, 500px);
+  aspect-ratio: 635 / 955;
+  max-height: 85vh;
+  border: 0;
+}
+
+.dj-lightbox-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 1;
+}

@@ -1,11 +1,12 @@
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { sanitizeSvg, validateSvgBytes } from '../_shared/svg-sanitizer.ts';
-import { checkRateLimit } from '../_shared/rate-limit.ts';
+import { checkRateLimit, isDuplicateSubmit } from '../_shared/rate-limit.ts';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const MAX_FILES = 5;
 const RATE_LIMIT = 5;
 const RATE_WINDOW_SECONDS = 600; // 5 запросов / 10 минут с одного IP
+const DEDUP_WINDOW_SECONDS = 20; // повторная отправка той же формы в этом окне не шлётся в Telegram повторно
 
 function sanitizeText(str: string): string {
   return String(str || '').replace(/[<>"'&]/g, '').trim().slice(0, 200);
@@ -57,6 +58,11 @@ serve(async (req: Request) => {
   const uploads = (formData.getAll('file') as File[]).filter(f => f && f.size > 0);
   if (uploads.length === 0) return cors({ error: 'At least one file is required' }, 400);
   if (uploads.length > MAX_FILES) return cors({ error: `Too many files (max ${MAX_FILES})` }, 400);
+
+  const signature = [iconName, ...uploads.map(f => `${f.name}:${f.size}`)].join('|').toLowerCase();
+  if (await isDuplicateSubmit(req, 'upload', signature, DEDUP_WINDOW_SECONDS)) {
+    return cors({ ok: true, sent: uploads.length }, 200);
+  }
 
   const filesToSend: { label: string; filename: string; content: string }[] = [];
 

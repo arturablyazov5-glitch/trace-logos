@@ -131,10 +131,9 @@ function getExpectedBlogSlugs() {
 }
 
 function getExpectedBlogOgSlugs() {
-  // Mirrors build-blog-og-images.js: assets/og/blog-<slug>.png
-  const expected = new Set();
-  for (const slug of getExpectedBlogSlugs()) expected.add(`blog-${slug}`);
-  return expected;
+  // Mirrors build-blog-og-images.js / build-blog-covers.js:
+  // assets/og/blog/social/<slug>.png + assets/og/blog/webp/<slug>.webp
+  return getExpectedBlogSlugs();
 }
 
 function getExpectedCollectionOgSlugs() {
@@ -152,8 +151,9 @@ function cleanupOgImages(expectedSlugs) {
   console.log(`\nChecking OG images in ${ogDir}...`);
   if (!fs.existsSync(ogDir)) return;
 
-  // build-og-home.js / build-blog-og-images.js / build-collection-og-images.js output — not logo items
-  const KEEP = new Set(['home', ...getExpectedBlogOgSlugs(), ...getExpectedCollectionOgSlugs()]);
+  // build-og-home.js / build-collection-og-images.js output — not logo items
+  // (blog OG images live under assets/og/blog/ — see cleanupBlogOgImages)
+  const KEEP = new Set(['home', ...getExpectedCollectionOgSlugs()]);
   let deletedCount = 0;
 
   for (const file of fs.readdirSync(ogDir)) {
@@ -169,6 +169,35 @@ function cleanupOgImages(expectedSlugs) {
   }
 
   console.log(`${DRY_RUN ? 'Found' : 'Deleted'} ${deletedCount} orphaned OG images.`);
+}
+
+function cleanupBlogOgImages() {
+  // Mirrors build-blog-og-images.js / build-blog-covers.js output layout.
+  const expected = getExpectedBlogOgSlugs();
+  const dirs = [
+    { dir: path.join(ROOT, 'assets', 'og', 'blog', 'social'), ext: '.png' },
+    { dir: path.join(ROOT, 'assets', 'og', 'blog', 'webp'),   ext: '.webp' },
+  ];
+  let deletedCount = 0;
+
+  for (const { dir, ext } of dirs) {
+    console.log(`\nChecking blog OG images in ${dir}...`);
+    if (!fs.existsSync(dir)) continue;
+
+    for (const file of fs.readdirSync(dir)) {
+      if (!file.endsWith(ext)) continue;
+      const slug = file.slice(0, -ext.length);
+      if (expected.has(slug)) continue;
+
+      console.log(`  [ORPHAN] ${path.relative(ROOT, path.join(dir, file))}`);
+      if (!DRY_RUN) {
+        fs.rmSync(path.join(dir, file), { force: true });
+      }
+      deletedCount++;
+    }
+  }
+
+  console.log(`${DRY_RUN ? 'Found' : 'Deleted'} ${deletedCount} orphaned blog OG images.`);
 }
 
 // Emoji manifest categories only carry `file` (no `slug`) — the folder slug is a
@@ -297,6 +326,8 @@ function main() {
     const expectedOg = getExpectedOgSlugs(logoManifest);
     cleanupOgImages(expectedOg);
   }
+
+  cleanupBlogOgImages();
 
   // 2. Emoji
   const emojiManifest = path.join(ROOT, 'emoji', 'manifest.json');

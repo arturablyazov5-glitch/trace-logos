@@ -28,6 +28,7 @@ import { trackCardOpen } from './easter-achievements.js';
 import { checkCatalogEnd } from './easter-confetti.js';
 import { playAmongUsEscape } from './easter-amongus.js';
 import { playGoogleAssemble } from './easter-google.js';
+import { showDoodleJumpWidget, hideDoodleJumpWidget } from './easter-doodlejump.js';
 
 // ── DOM refs ──
 const content           = document.getElementById('content');
@@ -651,6 +652,7 @@ function scrollCardIntoView(card) {
 function closeDetail() {
   detail.classList.add('detail-swap');
   if (activeCard) { activeCard.classList.remove('active'); activeCard = null; }
+  hideDoodleJumpWidget();
   if (detailPushedState) {
     detailPushedState = false;
     isClosingViaButton = true;
@@ -710,6 +712,7 @@ openDetailFn = function (item, card) {
   detailName.textContent = displayName(item);
   detailFigmaEl.textContent = item.figma;
   document.body.classList.toggle('has-minicrewmate', item.figma === 'Icon/Game/AmongUs');
+  if (item.figma === 'Icon/Game/DoodleJump') showDoodleJumpWidget(); else hideDoodleJumpWidget();
 
   // macOS style tabs — visibility and onclick are handled per-variant in selectVariant
   activePngFile = null;
@@ -872,66 +875,62 @@ openDetailFn = function (item, card) {
     Promise.all(svgOnlyVariants.map(v => loadRawSvg(v.file))).then(updateVariantThumbnails);
   }
 
-  // Ecosystem block
-  const ecosystemEl      = document.getElementById('detail-ecosystem');
-  const ecosystemGrid    = document.getElementById('ecosystem-grid');
-  const ecosystemLabelEl = document.getElementById('ecosystem-label');
-  // An item can belong to more than one ecosystem — the panel shows one grid
-  // at a time, so use the first ecosystem that actually has other members.
+  // Ecosystem block — an item can belong to more than one ecosystem (e.g. a
+  // logo designed by Art. Lebedev that also belongs to its own brand group).
+  // Render one divider+label+grid group per ecosystem that has other members.
+  const ecosystemEl = document.getElementById('detail-ecosystem');
   const itemEcoIds = itemEcosystems(item);
-  const primaryEcoId = itemEcoIds.find(id => allItems.filter(i => itemEcosystems(i).includes(id)).length > 1);
-  if (primaryEcoId) {
-    const members = allItems.filter(i => itemEcosystems(i).includes(primaryEcoId));
-    if (members.length > 1) {
-      ecosystemLabelEl.textContent = _ecoSectionLabels[primaryEcoId] || _ecoLabels[primaryEcoId] || t('detailEcosystem');
-      const sameEcosystem = ecosystemGrid.dataset.ecosystem === primaryEcoId;
-      if (!sameEcosystem) {
-        ecosystemGrid.innerHTML = '';
-        ecosystemGrid.dataset.ecosystem = primaryEcoId;
-        for (const sib of members) {
-          const ec = document.createElement('div');
-          ec.className = 'ecosystem-card';
-          ec.dataset.file = sib.file;
-          ec.dataset.figma = sib.figma;
-          ec.title = sib.figma;
-          const ei = document.createElement('img');
-          // Tile image only — `dataset.file` above stays the real primary,
-          // it is the lookup key for the sibling's card.
-          ei.src = svgUrl(sib.thumb ?? sib.file);
-          ei.alt = logoAlt(sib);
-          ei.loading = 'lazy';
-          ei.decoding = 'async';
-          const el = document.createElement('div');
-          el.className = 'ecosystem-label';
-          el.textContent = displayName(sib);
-          ec.append(ei, el);
-          ec.addEventListener('click', () => {
-            const sibCard = cardByItemFigma.get(sib.figma) || cardByItemFile.get(sib.file);
-            if (!sibCard) return;
-            if (sibCard.classList.contains('hidden') || sibCard.closest('.section')?.classList.contains('hidden')) {
-              search.value = '';
-              filterCards('');
-              setActive('all');
-              requestAnimationFrame(() => openDetailFn(sib, sibCard));
-              return;
-            }
-            openDetailFn(sib, sibCard);
-          });
-          ecosystemGrid.appendChild(ec);
-        }
+  const ecoGroups = itemEcoIds
+    .map(ecoId => ({ ecoId, members: allItems.filter(i => itemEcosystems(i).includes(ecoId)) }))
+    .filter(g => g.members.length > 1);
+
+  ecosystemEl.innerHTML = '';
+  if (ecoGroups.length) {
+    for (const { ecoId, members } of ecoGroups) {
+      const divider = document.createElement('div');
+      divider.className = 'detail-divider';
+      const label = document.createElement('div');
+      label.className = 'detail-section-label';
+      label.textContent = _ecoSectionLabels[ecoId] || _ecoLabels[ecoId] || t('detailEcosystem');
+      const grid = document.createElement('div');
+      grid.className = 'ecosystem-grid';
+      grid.dataset.ecosystem = ecoId;
+      for (const sib of members) {
+        const ec = document.createElement('div');
+        ec.className = 'ecosystem-card';
+        ec.classList.toggle('active', sib.figma === item.figma);
+        ec.dataset.file = sib.file;
+        ec.dataset.figma = sib.figma;
+        ec.title = sib.figma;
+        const ei = document.createElement('img');
+        // Tile image only — `dataset.file` above stays the real primary,
+        // it is the lookup key for the sibling's card.
+        ei.src = svgUrl(sib.thumb ?? sib.file);
+        ei.alt = logoAlt(sib);
+        ei.loading = 'lazy';
+        ei.decoding = 'async';
+        const el = document.createElement('div');
+        el.className = 'ecosystem-label';
+        el.textContent = displayName(sib);
+        ec.append(ei, el);
+        ec.addEventListener('click', () => {
+          const sibCard = cardByItemFigma.get(sib.figma) || cardByItemFile.get(sib.file);
+          if (!sibCard) return;
+          if (sibCard.classList.contains('hidden') || sibCard.closest('.section')?.classList.contains('hidden')) {
+            search.value = '';
+            filterCards('');
+            setActive('all');
+            requestAnimationFrame(() => openDetailFn(sib, sibCard));
+            return;
+          }
+          openDetailFn(sib, sibCard);
+        });
+        grid.appendChild(ec);
       }
-      ecosystemGrid.querySelectorAll('.ecosystem-card').forEach(ec => {
-        ec.classList.toggle('active', ec.dataset.figma === item.figma);
-      });
-      ecosystemEl.classList.remove('hidden');
-    } else {
-      ecosystemGrid.innerHTML = '';
-      delete ecosystemGrid.dataset.ecosystem;
-      ecosystemEl.classList.add('hidden');
+      ecosystemEl.append(divider, label, grid);
     }
+    ecosystemEl.classList.remove('hidden');
   } else {
-    ecosystemGrid.innerHTML = '';
-    delete ecosystemGrid.dataset.ecosystem;
     ecosystemEl.classList.add('hidden');
   }
 

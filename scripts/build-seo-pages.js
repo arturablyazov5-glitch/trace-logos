@@ -19,11 +19,41 @@ const fs             = require('fs');
 const path           = require('path');
 const { loadTemplate } = require('./lib/render');
 const { loadDict, enChrome, bakeI18n, hreflangBlock } = require('./lib/en-transform');
-const { itemDate }  = require('./lib/item-date');
-const { extractBrandColors } = require('./lib/brand-colors');
+const { itemDate, itemPublishedDate }  = require('./lib/item-date');
+const { extractBrandColors, hexToRgb } = require('./lib/brand-colors');
 const { resolveCategoryLabels } = require('./lib/labels');
 
 const BASE_URL   = 'https://trace-logos.ru';
+// Mirrors the Organization block in index.html — every SEO page carries its own
+// copy so an AI crawler/LLM landing directly on a deep page (90% of traffic)
+// still sees a publisher entity, not just an anonymous ImageObject/FAQPage.
+const FIGMA_PLUGIN_URL  = "https://www.figma.com/community/plugin/1643124536537861799/trace-logos";
+const GITHUB_URL        = "https://github.com/rafael-mansurov/trace-logos";
+const GITHUB_PROFILE_URL = "https://github.com/rafael-mansurov";
+const TELEGRAM_URL      = "https://t.me/mansurov_rafael";
+// Shared @id with AUTHOR/AUTHOR_EN in build-blog.js — same real person, same
+// entity node, referenced from both the logo pages and the blog so Google/AI
+// entity resolution treats them as one Person instead of two disconnected stubs.
+const PERSON = {
+  "@type": "Person",
+  "@id": `${BASE_URL}/#person-rafael-mansurov`,
+  "name": "Рафаэль Мансуров",
+  "url": TELEGRAM_URL,
+  "sameAs": [TELEGRAM_URL, GITHUB_PROFILE_URL],
+};
+const ORGANIZATION = {
+  "@type": "Organization",
+  "@id": `${BASE_URL}/#organization`,
+  "name": "Trace Logo's",
+  "url": `${BASE_URL}/`,
+  "logo": `${BASE_URL}/assets/logos/svgs/trace-logos.svg`,
+  // More sameAs = higher confidence for AI/Google entity resolution linking
+  // this Organization node to the real-world brand (entity clarity/GEO).
+  "sameAs": [FIGMA_PLUGIN_URL, GITHUB_URL, TELEGRAM_URL],
+  // E-E-A-T: an anonymous Organization has no accountable author behind it —
+  // founder ties the catalog to the named Person also credited on every blog post.
+  "founder": { "@id": PERSON["@id"] },
+};
 const ROOT       = path.resolve(__dirname, '..');
 const TEMPLATE   = loadTemplate(path.join(ROOT, 'templates', 'seo-page.html'));
 const DRY_RUN    = process.argv.includes('--dry-run');
@@ -104,6 +134,17 @@ function assetExt(file)      { return file.split('.').pop().toLowerCase(); }
 function searchImageRel(item) {
   if (assetExt(item.file) !== 'svg') return null;
   const rel = `assets/logos/search/${item.file.replace(/\.svg$/i, '.png')}`;
+  return fs.existsSync(path.join(ROOT, rel)) ? rel : null;
+}
+
+// Lightweight WebP render of the search/*.png (build-webp-previews.js
+// "search" section) — for on-page display only. searchImageRel's 800px PNG
+// stays the sitemap <image:loc> source untouched; this is just a smaller
+// file for the <img> the browser actually paints.
+function searchWebpPreviewRel(item) {
+  const searchRel = searchImageRel(item);
+  if (!searchRel) return null;
+  const rel = searchRel.replace('assets/logos/search/', 'assets/logos/search-previews/').replace(/\.png$/i, '.webp');
   return fs.existsSync(path.join(ROOT, rel)) ? rel : null;
 }
 
@@ -221,6 +262,14 @@ function esc(str) {
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+}
+
+// Links a "see also" name to its own SEO page for the HTML-rendered FAQ answer
+// (JSON-LD stays plain text — see buildJsonLd, which never reads aHtml/aHtmlEn).
+// Falls back to plain escaped text if the item has no valid seoUrl.
+function linkTo(item, label) {
+  const url = seoUrl(item);
+  return url ? `<a href="${esc(url)}">${esc(label)}</a>` : esc(label);
 }
 
 // ── Snippet builders (pure data → HTML strings) ───────────────────────────────
@@ -513,6 +562,43 @@ function categoryIconBySlug(slug) {
   return CATEGORY_ICONS[slug] || DEFAULT_ICON;
 }
 
+// Full-width RSYA block, placed right before "Другие логотипы этой
+// категории" on every logo SEO page.
+function buildSeoAdSection() {
+  return `
+  <div class="seo-ad-block">
+    <!-- Yandex.RTB R-A-19679616-6 -->
+    <div id="yandex_rtb_R-A-19679616-6"></div>
+    <script>
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-19679616-6",
+            "renderTo": "yandex_rtb_R-A-19679616-6"
+        })
+    })
+    </script>
+  </div>`;
+}
+
+// Full-width RSYA feed block, placed right after the "N+ логотипов в
+// каталоге" CTA at the bottom of every logo SEO page.
+function buildSeoAdSectionBottom() {
+  return `
+  <div class="seo-ad-block seo-ad-block-bottom">
+    <!-- Yandex.RTB R-A-19679616-5 -->
+    <div id="yandex_rtb_R-A-19679616-5"></div>
+    <script>
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-19679616-5",
+            "renderTo": "yandex_rtb_R-A-19679616-5",
+            "type": "feed"
+        })
+    })
+    </script>
+  </div>`;
+}
+
 // Up to 12 ready logos from the same category (current excluded) — internal
 // cross-linking that's relevant to a visitor who landed from search.
 function buildRelatedSection(item, siblings, homeRel, assetRel, lang = 'ru') {
@@ -619,36 +705,50 @@ function buildMetaTableRows(item, lang = 'ru') {
   const figmaDisplay = (item.figma || '').replace(/\//g, ' / ');
 
   const brandRow = item.brandUrl
-    ? `<div class="meta-row">
-          <span class="meta-key" data-i18n="detailBrand">Бренд</span>
-          <span class="meta-val"><a href="${esc(item.brandUrl)}" target="_blank" rel="noopener noreferrer" data-i18n="seoBrandRulesLink">Правила использования →</a></span>
-        </div>`
+    ? `<tr class="meta-row">
+          <th scope="row" class="meta-key" data-i18n="detailBrand">Бренд</th>
+          <td class="meta-val"><a href="${esc(item.brandUrl)}" target="_blank" rel="noopener noreferrer" data-i18n="seoBrandRulesLink">Правила использования →</a></td>
+        </tr>`
     : '';
 
   const dateModified = itemDate(item);
   const dateLabel    = lang === 'en' ? 'Updated' : 'Обновлено';
   const dateFormatted = formatDate(dateModified, lang);
-  const dateRow = `<div class="meta-row">
-          <span class="meta-key">${dateLabel}</span>
-          <time class="meta-val" datetime="${dateModified}">${dateFormatted}</time>
-        </div>`;
+  const dateRow = `<tr class="meta-row">
+          <th scope="row" class="meta-key">${dateLabel}</th>
+          <td class="meta-val"><time datetime="${dateModified}">${dateFormatted}</time></td>
+        </tr>`;
 
   const downloadCount = DOWNLOAD_STATS[item.figma] || 0;
   const downloadsRow = downloadCount > 0
-    ? `<div class="meta-row">
-          <span class="meta-key">${lang === 'en' ? 'Downloaded' : 'Скачано'}</span>
-          <span class="meta-val">${lang === 'en' ? `${downloadCount} time${downloadCount === 1 ? '' : 's'}` : `${downloadCount} ${pluralRu(downloadCount, ['раз', 'раза', 'раз'])}`}</span>
-        </div>`
+    ? `<tr class="meta-row">
+          <th scope="row" class="meta-key">${lang === 'en' ? 'Downloaded' : 'Скачано'}</th>
+          <td class="meta-val">${lang === 'en' ? `${downloadCount} time${downloadCount === 1 ? '' : 's'}` : `${downloadCount} ${pluralRu(downloadCount, ['раз', 'раза', 'раз'])}`}</td>
+        </tr>`
     : '';
 
-  return `<div class="meta-row">
-          <span class="meta-key" data-i18n="seoMetaFormat">Формат</span>
-          <span class="meta-val">${esc(fmt)}</span>
-        </div>
-        <div class="meta-row">
-          <span class="meta-key">Figma</span>
-          <span class="meta-val">${esc(figmaDisplay)}</span>
-        </div>${brandRow}${dateRow}${downloadsRow}`;
+  return `<tr class="meta-row">
+          <th scope="row" class="meta-key" data-i18n="seoMetaFormat">Формат</th>
+          <td class="meta-val">${esc(fmt)}</td>
+        </tr>
+        <tr class="meta-row">
+          <th scope="row" class="meta-key">Figma</th>
+          <td class="meta-val">${esc(figmaDisplay)}</td>
+        </tr>${brandRow}${dateRow}${downloadsRow}`;
+}
+
+// Real <table> so format/size/date data is machine-parseable as tabular data
+// — the format AI answer engines cite most reliably (CLAUDE.md rec #3).
+// Visual layout stays byte-for-byte the same flex grid via CSS display
+// overrides on table/tbody (see .meta-table in css/seo-page.css).
+function buildMetaTableSection(item, nm, lang = 'ru') {
+  const caption = lang === 'en' ? `${nm} logo specs` : `Характеристики логотипа ${nm}`;
+  return `<table class="meta-table">
+        <caption class="sr-only">${esc(caption)}</caption>
+        <tbody>
+        ${buildMetaTableRows(item, lang)}
+        </tbody>
+      </table>`;
 }
 
 // ── Brand colors (extracted from SVG source — source of truth) ─────────────────
@@ -656,26 +756,154 @@ function buildMetaTableRows(item, lang = 'ru') {
 // build-blog.js (виджет `:::widget logo-colors`), чтобы палитра в статье не
 // разошлась с палитрой на странице того же логотипа.
 
-function buildColorsSection(colors, lang = 'ru') {
+function buildColorsSection(colors, lang = 'ru', nm = '') {
   if (!colors.length) return '';
   const copyLabel = lang === 'en' ? 'Copy' : 'Скопировать';
+  const caption = lang === 'en' ? `${nm} brand colors, HEX and RGB codes` : `Фирменные цвета логотипа ${nm}, HEX и RGB коды`;
   const swatches = colors.map(c => {
     const hex = c.toUpperCase();
-    return `<button class="color-swatch" type="button" data-color="${hex}" aria-label="${copyLabel} ${hex}">
+    const rgb = hexToRgb(c);
+    // Single click target per swatch (two adjacent clickable lines caused
+    // mis-clicks in two earlier attempts — user-reported both times). Click
+    // copies whichever value is currently highlighted, then flips the
+    // highlight to the other format for the next click — cycling HEX↔RGB
+    // on one big unambiguous target, à la Coolors-style swatch clicks.
+    const rgbLabel = `RGB ${rgb}`;
+    return `<tr><td><button class="color-swatch" type="button" data-hex="${hex}" data-rgb="${rgb}" data-format="hex" aria-label="${copyLabel} ${hex}">
             <span class="color-swatch-dot" style="background:${c}"></span>
-            <span class="color-swatch-hex">${hex}</span>
-          </button>`;
+            <span class="color-swatch-text">
+              <span class="color-swatch-line is-active" data-role="hex">${hex}</span>
+              <span class="color-swatch-line" data-role="rgb">${rgbLabel}</span>
+            </span>
+          </button></td></tr>`;
   }).join('\n          ');
 
+  // Real <table> — HEX codes are comparison-style data (CLAUDE.md rec #3).
+  // Visual layout stays the original flex-wrap pill row via CSS display
+  // overrides on table/tbody/tr/td (see .colors-grid in css/seo-page.css).
   return `
       <hr class="divider">
 
       <div class="info-section-lg">
         <span class="section-label" data-i18n="seoBrandColorsLabel">Цвета бренда</span>
-        <div class="colors-grid" id="colors-grid">
+        <table class="colors-grid" id="colors-grid">
+          <caption class="sr-only">${esc(caption)}</caption>
+          <tbody>
           ${swatches}
+          </tbody>
+        </table>
+      </div>`;
+}
+
+// ── Embed widget (SVG/PNG <img> snippet linking back to this page) ─────────────
+// Only offers a format when a REAL static asset file exists — SVG-primary logos
+// render PNG client-side on demand (see logoFormats()'s hasPng comment), so a
+// "PNG" embed for them would be a broken <img src> on someone else's site.
+// The <a href> in the generated snippet points at this logo's own canonical
+// page — every site that embeds the snippet is a natural backlink to it.
+function assetUrl(file, ext) {
+  return `${BASE_URL}/assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}`;
+}
+
+// No format/variant picker here — one variant is one file, one embed. The
+// variants grid right above this section (when one exists) is already the
+// control for "which logo image": seo-page.js's #variants-grid click handler
+// calls updateEmbedForVariant(src, type) with whatever the visitor just made
+// the active download, and this widget just mirrors that src verbatim.
+// (An earlier cut paired an SVG primary with any stray .png file elsewhere
+// in variants[] and called that a "format" choice — wrong: on real data that
+// stray file is often a different artwork entirely, e.g. an iOS-Tahoe-style
+// icon variant, not a raster of the same primary. Each such file is already
+// its own selectable card in the variants grid; it doesn't need a second,
+// misleading way to reach it from inside the primary's embed code.)
+function buildEmbedSection(item, nm, fullUrl, lang = 'ru') {
+  const primaryExt = assetExt(item.file);
+  const src = assetUrl(item.file, primaryExt === 'png' ? 'png' : 'svg');
+  const altText = lang === 'en' ? `${nm} logo` : `Логотип ${nm}`;
+
+  // One bordered panel — toolbar (width + copy) over the code — rather than
+  // three separately-bordered boxes floating in a column, which read as
+  // unrelated controls. The "Ширина" label lives inside the toolbar so it
+  // doesn't stack directly under the section label as a second heading.
+  return `
+      <div class="info-section-lg embed-widget">
+        <span class="section-label" data-i18n="seoEmbedLabel">Встроить на сайт</span>
+        <div class="embed-box">
+          <div class="embed-toolbar">
+            <label class="embed-width-field">
+              <span class="embed-width-label" data-i18n="seoEmbedWidth">Ширина</span>
+              <span class="embed-num">
+                <input class="embed-num-input" type="number" id="embed-width" value="200" min="8" max="4000" step="10">
+                <span class="embed-num-unit">px</span>
+              </span>
+            </label>
+            <button type="button" class="embed-copy-btn" id="btn-embed-copy">
+              ${COPY_ICON}
+              <span id="embed-copy-label" data-i18n="seoEmbedCopy">Скопировать код</span>
+            </button>
+          </div>
+          <code class="embed-code" id="embed-code"
+            data-page-url="${esc(fullUrl)}"
+            data-src="${esc(src)}"
+            data-alt="${esc(altText)}"></code>
         </div>
       </div>`;
+}
+
+// ── Figma how-to (visible markup + HowTo JSON-LD share the same data) ──────────
+// GEO rationale: procedural "how do I X" content is the format AI answer
+// engines (ChatGPT/Perplexity/AI Overviews) cite most reliably, and the Figma
+// plugin is the one thing genuinely unique to this catalog vs. every other
+// logo-download site — neither the schema nor the on-page copy used that
+// until now. Steps double as HowToStep text, same pattern as buildFaqItems.
+function buildFigmaHowtoSteps(nm, ne, figmaDisplay, lang = 'ru') {
+  return [
+    {
+      title: `Откройте плагин Trace Logos`,
+      titleEn: `Open the Trace Logos plugin`,
+      desc: `В Figma: меню «Plugins» → «Trace Logos». Если ещё не установлен, поставьте один раз из Figma Community.`,
+      descEn: `In Figma: the Plugins menu → "Trace Logos". Install it once from the Figma Community if you haven't already.`,
+    },
+    {
+      title: `Найдите «${nm}» по названию`,
+      titleEn: `Search for "${ne}"`,
+      desc: `Введите «${nm}» в поиск плагина. Компонент называется «${figmaDisplay}» и содержит все варианты и стили логотипа.`,
+      descEn: `Type "${ne}" into the plugin's search field. The component is named "${figmaDisplay}" and includes every variant and style of the logo.`,
+    },
+    {
+      title: `Вставьте на холст`,
+      titleEn: `Drop it on the canvas`,
+      desc: `Клик по превью — логотип появится на холсте векторным слоем, готовым к перекраске и экспорту в любой формат.`,
+      descEn: `Click the preview and the logo lands on your canvas as an editable vector layer, ready to recolor and export.`,
+    },
+  ];
+}
+
+function buildFigmaHowtoSection(item, nm, ne, lang = 'ru') {
+  if (!item.figma) return '';
+  const figmaDisplay = item.figma.replace(/\//g, ' / ');
+  const steps = buildFigmaHowtoSteps(nm, ne, figmaDisplay, lang);
+  const en = lang === 'en';
+  const title = en ? `How to add the ${ne} logo in Figma` : `Как вставить лого ${nm} в Figma`;
+  const ctaLabel = en ? 'Open the Figma plugin' : 'Открыть плагин Figma';
+
+  const cards = steps.map((s, i) => `
+      <div class="howto-step">
+        <span class="howto-step-badge">${en ? 'Step' : 'Шаг'} ${i + 1}</span>
+        <span class="howto-step-title">${esc(en ? s.titleEn : s.title)}</span>
+        <p class="howto-step-desc">${esc(en ? s.descEn : s.desc)}</p>
+      </div>`).join('');
+
+  return `
+  <section class="howto-section" id="figma-howto" aria-labelledby="howto-title">
+    <h2 id="howto-title" class="catalog-section-title">${esc(title)}</h2>
+    <div class="howto-steps">${cards}
+    </div>
+    <a class="howto-cta" href="${FIGMA_PLUGIN_URL}" target="_blank" rel="noopener">
+      <svg width="14" height="14" viewBox="0 0 38 57" fill="none" aria-hidden="true"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/></svg>
+      <span>${esc(ctaLabel)}</span>
+    </a>
+  </section>`;
 }
 
 // ── FAQ (visible markup + FAQPage JSON-LD share the same data) ─────────────────
@@ -709,11 +937,15 @@ function buildDataFaqItem(item, ecosystemLookup, siblings, section, section_en) 
       const ecoNameEn = ecosystemName(ecoId, 'en');
       const names   = members.map(m => m.name).join(', ') + (rest > 0 ? ` и ещё ${rest}` : '');
       const namesEn = members.map(m => m.name_en || m.name).join(', ') + (rest > 0 ? ` and ${rest} more` : '');
+      const linked   = members.map(m => linkTo(m, m.name)).join(', ') + (rest > 0 ? ` и ещё ${rest}` : '');
+      const linkedEn = members.map(m => linkTo(m, m.name_en || m.name)).join(', ') + (rest > 0 ? ` and ${rest} more` : '');
       return {
         q:  `Какие ещё логотипы есть в экосистеме ${ecoName}?`,
         a:  `В экосистему ${ecoName} на Trace Logo's также входят: ${names}.`,
         qe: `What other logos are part of the ${ecoNameEn} ecosystem?`,
         ae: `The ${ecoNameEn} ecosystem on Trace Logo's also includes: ${namesEn}.`,
+        aHtml:   `В экосистему ${esc(ecoName)} на Trace Logo's также входят: ${linked}.`,
+        aHtmlEn: `The ${esc(ecoNameEn)} ecosystem on Trace Logo's also includes: ${linkedEn}.`,
       };
     }
   }
@@ -736,15 +968,83 @@ function buildDataFaqItem(item, ecosystemLookup, siblings, section, section_en) 
     const secNameEn = section_en || section;
     const names   = others.map(s => s.name).join(', ');
     const namesEn = others.map(s => s.name_en || s.name).join(', ');
+    const linked   = others.map(s => linkTo(s, s.name)).join(', ');
+    const linkedEn = others.map(s => linkTo(s, s.name_en || s.name)).join(', ');
     return {
       q:  `Какие ещё логотипы есть в категории «${secName}»?`,
       a:  `В категории «${secName}» на Trace Logo's также есть: ${names}.`,
       qe: `What other logos are in the "${secNameEn}" category?`,
       ae: `The "${secNameEn}" category on Trace Logo's also includes: ${namesEn}.`,
+      aHtml:   `В категории «${esc(secName)}» на Trace Logo's также есть: ${linked}.`,
+      aHtmlEn: `The "${esc(secNameEn)}" category on Trace Logo's also includes: ${linkedEn}.`,
     };
   }
 
   return null;
+}
+
+// Stable pseudo-random index — same item always picks the same phrasing across
+// rebuilds (no git diff noise), but different items land on different phrasing.
+function hashPick(seed, pool) {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  return pool[h % pool.length];
+}
+
+// Sixth FAQ question — "X vs Y" comparison, the pattern GEO guides flag as the
+// most common AI-answer format. "Competitor" = another item in the same
+// category (siblings) with its own extractable colors — no hand-authored
+// text, no per-brand knowledge, scales to all ~587 logos unattended.
+//
+// Every fixed phrase (lead-in, closer) is picked from a small pool by a hash
+// of item.figma, not a single hardcoded string — 500+ pages sharing one
+// verbatim sentence ("Логотипы не связаны между собой...") reads as templated
+// boilerplate to Yandex; rotating phrasing per item avoids that duplicate-
+// content signal while staying fully deterministic (rebuild-stable).
+const COMPARISON_LEADS = [
+  { ru: (cat) => `Оба бренда — ${cat}, но фирменные цвета разные:`, en: (cat) => `Both brands are ${cat}, but their colors differ:` },
+  { ru: (cat) => `${cat} — общая категория, а вот палитра у брендов разная:`, en: (cat) => `Same category (${cat}), different color palette:` },
+  { ru: (cat) => `Логотипы работают в одной категории (${cat}), но выглядят по-разному:`, en: (cat) => `Both logos live in the same category (${cat}) but look nothing alike:` },
+];
+const COMPARISON_CLOSERS = [
+  { ru: 'Логотипы не связаны между собой и принадлежат разным компаниям.', en: 'The logos are unrelated and belong to different companies.' },
+  { ru: 'Совпадений в фирменном стиле у них нет.', en: 'There is no overlap in brand identity between them.' },
+  { ru: 'Каждый бренд использует собственную палитру.', en: 'Each brand sticks to its own palette.' },
+  { ru: 'Ничего общего в форме и цвете у них нет.', en: 'They share nothing in shape or color.' },
+  { ru: 'Логотипы визуально не пересекаются.', en: "Visually the logos don't overlap." },
+];
+const COMPARISON_Q = [
+  { ru: (a, b) => `Чем логотип ${a} отличается от логотипа ${b}?`, en: (a, b) => `What's the difference between the ${a} and ${b} logos?` },
+  { ru: (a, b) => `В чём разница между логотипами ${a} и ${b}?`, en: (a, b) => `How do the ${a} and ${b} logos differ?` },
+];
+
+const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
+
+function buildComparisonFaqItem(item, colors, siblings, section, section_en) {
+  if (!colors.length) return null;
+  const rival = (siblings || []).find(s => s.figma !== item.figma && !s.comingSoon && extractBrandColors(s).length);
+  if (!rival) return null;
+
+  const nm = item.name, ne = item.name_en || item.name;
+  const rm = rival.name, re = rival.name_en || rival.name;
+  const rivalColors = extractBrandColors(rival);
+
+  const seed      = item.figma || nm;
+  const lead      = hashPick(seed + ':lead', COMPARISON_LEADS);
+  const closer    = hashPick(seed + ':close', COMPARISON_CLOSERS);
+  const qTemplate = hashPick(seed + ':q', COMPARISON_Q);
+
+  const hexA    = colors.slice(0, 3).map(c => c.toUpperCase());
+  const hexB    = rivalColors.slice(0, 3).map(c => c.toUpperCase());
+  const catLc   = (section || 'логотипы этой категории').toLowerCase();
+  const catLcEn = (section_en || section || 'this category').toLowerCase();
+
+  return {
+    q:  qTemplate.ru(nm, rm),
+    a:  cap(`${lead.ru(catLc)} у ${nm} ${hexA.join(', ')}, у ${rm} ${hexB.join(', ')}. ${closer.ru}`),
+    qe: qTemplate.en(ne, re),
+    ae: cap(`${lead.en(catLcEn)} ${ne} uses ${hexA.join(', ')}, ${re} uses ${hexB.join(', ')}. ${closer.en}`),
+  };
 }
 
 // "color" isn't a key in item.macos_styles (only the alt styles are listed
@@ -809,6 +1109,8 @@ function buildFaqItems(item, colors, ecosystemLookup, siblings, section, section
   }
   const dataFaq = buildDataFaqItem(item, ecosystemLookup, siblings, section, section_en);
   if (dataFaq) faq.push(dataFaq);
+  const comparisonFaq = buildComparisonFaqItem(item, colors, siblings, section, section_en);
+  if (comparisonFaq) faq.push(comparisonFaq);
   return faq;
 }
 
@@ -816,13 +1118,20 @@ function buildFaqSection(faq, lang = 'ru') {
   if (!faq.length) return '';
   const rows = faq.map(f => {
     const q = lang === 'en' ? (f.qe || f.q) : f.q;
-    const a = lang === 'en' ? (f.ae || f.a) : f.a;
+    // aHtml/aHtmlEn ("see also" links to other logo pages) render as real <a>
+    // tags; everything else stays plain escaped text. JSON-LD (buildJsonLd)
+    // never reads these fields, so it's unaffected either way.
+    const aRendered   = lang === 'en' ? (f.aHtmlEn || esc(f.ae || f.a)) : (f.aHtml || esc(f.a));
+    // Attribute value carries the same (possibly HTML) content, escaped for the
+    // attribute delimiter — js/seo-page.js decodes it back via .dataset and sets
+    // innerHTML on runtime EN swap, so a link built here doesn't get clobbered.
+    const dataAEn = esc(f.aHtmlEn || f.ae || '');
     const actionBtn = f.action
       ? `<button class="btn btn-secondary faq-action-btn" id="${f.action.id}" type="button">${DL_ICON}<span>${esc(lang === 'en' ? (f.action.labelEn || f.action.label) : f.action.label)}</span></button>`
       : '';
-    return `<details class="faq-item" data-q-en="${esc(f.qe || '')}" data-a-en="${esc(f.ae || '')}">
+    return `<details class="faq-item" data-q-en="${esc(f.qe || '')}" data-a-en="${dataAEn}">
           <summary class="faq-q">${esc(q)}</summary>
-          <p class="faq-a">${esc(a)}</p>
+          <p class="faq-a">${aRendered}</p>
           ${actionBtn}
         </details>`;
   }).join('\n        ');
@@ -865,7 +1174,7 @@ function altName(item, lang) {
   return (lang === 'en' ? item.alt_name_en : item.alt_name) || '';
 }
 
-function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'ru') {
+function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'ru', pageMeta = {}) {
   const en        = lang === 'en';
   const nm        = en ? (item.name_en || item.name) : item.name;
   const urlPrefix = en ? `${BASE_URL}/en` : BASE_URL;
@@ -888,8 +1197,10 @@ function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'r
   // contentUrl at the PNG render from build-search-images.js when one exists.
   // The SVG original is still linked on-page as the download.
   const searchRel = searchImageRel(item);
+  const downloadCount = DOWNLOAD_STATS[item.figma] || 0;
   const imageObj = {
     "@type": "ImageObject",
+    "@id": `${fullUrl}#logo`,
     "name": en ? `${nm} Logo` : `Логотип ${item.name}`,
     "description": en ? `Official ${nm} logo in SVG` : `Официальный логотип ${item.name} в SVG`,
     "contentUrl": searchRel
@@ -897,15 +1208,99 @@ function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'r
       : `${BASE_URL}/assets/logos/${primaryExt === 'png' ? 'pngs' : 'svgs'}/${item.file}`,
     "encodingFormat": (searchRel || primaryExt === 'png') ? 'image/png' : 'image/svg+xml',
     "dateModified": dateModified,
+    "publisher": { "@id": ORGANIZATION["@id"] },
     ...(altName(item, lang) ? { "alternateName": en ? `${altName(item, lang)} Logo` : `Логотип ${altName(item, lang)}` } : {}),
-    ...(item.brandUrl ? { "license": item.brandUrl } : {}),
+    // license/acquireLicensePage must point to a page describing the terms
+    // governing use of THIS image (Google's Image License Metadata docs) —
+    // that's our own /terms/ page, not item.brandUrl (the brand's own site,
+    // which says nothing about how the file may be used and isn't ours to
+    // license). Unconditional — every item now carries at least one of
+    // license/creator/creditText/copyrightNotice, the minimum Google requires
+    // for Licensable-badge eligibility, not just the ~70/700 with a brandUrl set.
+    "license": `${BASE_URL}${en ? '/en' : ''}/terms/`,
+    "acquireLicensePage": `${BASE_URL}${en ? '/en' : ''}/terms/`,
+    "copyrightNotice": en ? 'Trademark of its respective rights holder' : 'Товарный знак принадлежит правообладателю',
+    // Same DOWNLOAD_STATS[item.figma] lookup the meta-table "Скачано" row uses
+    // (line ~648) — gives crawlers/AI engines a structured popularity signal
+    // instead of forcing them to parse the prose row. Omitted at 0 rather than
+    // published as a fake zero-count claim.
+    ...(downloadCount > 0 ? {
+      "interactionStatistic": {
+        "@type": "InteractionCounter",
+        "interactionType": "https://schema.org/DownloadAction",
+        "userInteractionCount": downloadCount,
+      },
+    } : {}),
   };
 
-  const graph = [breadcrumb, imageObj];
+  // ImageObject describes the picture file — it doesn't tell a crawler "this
+  // page is about the company Ozon". Brand is the entity node for that: same
+  // sameAs signal Organization already carries for Trace Logo's itself, but
+  // for the brand the page is actually about. sameAs only when item.brandUrl
+  // is set (brand's own domain — guideline pages count, ~70/700 items today)
+  // — omitted rather than fabricated for the rest, no Wikidata field exists
+  // in the catalog yet to source a fallback from.
+  const brandObj = {
+    "@type": "Brand",
+    "@id": `${fullUrl}#brand`,
+    "name": nm,
+    ...(altName(item, lang) ? { "alternateName": altName(item, lang) } : {}),
+    "logo": { "@id": imageObj["@id"] },
+    ...(item.brandUrl ? { "sameAs": [item.brandUrl] } : {}),
+  };
+
+  // Top-level connective node — without it an AI crawler sees a bag of loose
+  // entities (image, org, faq...) with no single "this page, as a whole" node
+  // to hang datePublished/dateModified/mainEntity off of. dateModified here is
+  // the PAGE's freshness signal; imageObj's own dateModified stays about the
+  // asset file specifically — the two can legitimately differ (e.g. FAQ/about
+  // copy edited without the logo file changing). "about" points at the Brand
+  // (the page's topic), "mainEntity" stays the ImageObject (what the page
+  // actually delivers — the downloadable logo file).
+  const webPage = {
+    "@type": "WebPage",
+    "@id": fullUrl,
+    "url": fullUrl,
+    "name": pageMeta.title || (en ? `${nm} Logo` : `Логотип ${nm}`),
+    "description": pageMeta.description || '',
+    "inLanguage": en ? 'en' : 'ru',
+    "isPartOf": { "@id": `${BASE_URL}/#website` },
+    "about": { "@id": brandObj["@id"] },
+    "mainEntity": { "@id": imageObj["@id"] },
+    "datePublished": itemPublishedDate(item),
+    "dateModified": dateModified,
+  };
+
+  const graph = [webPage, breadcrumb, imageObj, brandObj, ORGANIZATION, PERSON];
+
+  if (item.figma) {
+    const ne = item.name_en || item.name;
+    const figmaDisplay = item.figma.replace(/\//g, ' / ');
+    const steps = buildFigmaHowtoSteps(nm, ne, figmaDisplay, lang);
+    graph.push({
+      "@type": "HowTo",
+      "name": en ? `How to add the ${ne} logo in Figma` : `Как вставить лого ${nm} в Figma`,
+      "description": en
+        ? `Three steps to insert the ${ne} logo as a live Figma component using the Trace Logo's plugin.`
+        : `Три шага, чтобы вставить логотип ${nm} в Figma живым компонентом через плагин Trace Logo's.`,
+      "totalTime": "PT1M",
+      "tool": [{ "@type": "HowToTool", "name": "Figma" }],
+      "step": steps.map((s, i) => ({
+        "@type": "HowToStep",
+        "position": i + 1,
+        "name": en ? s.titleEn : s.title,
+        "text": en ? s.descEn : s.desc,
+      })),
+    });
+  }
 
   if (faq && faq.length) {
     graph.push({
       "@type": "FAQPage",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".faq-q", ".faq-a"],
+      },
       "mainEntity": faq.map(f => ({
         "@type": "Question",
         "name": en ? (f.qe || f.q) : f.q,
@@ -957,7 +1352,27 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
 
   const metaDesc = en ? metaDescEn : metaDescRu;
   const ogDesc   = en ? ogDescEn   : ogDescRu;
-  const logoDesc = en ? (item.about_en || metaDescEn) : (item.about || metaDescRu);
+
+  // Auto-generated one-line fact (format + up to 2 brand colors) prepended
+  // ahead of the hand-written about/desc text — a self-contained, quotable
+  // sentence for AI answer engines (Yandex.Neuro, Perplexity etc.), built
+  // purely from derivable data so it never needs manual upkeep across ~700
+  // items. Rebrand year is intentionally NOT included — nowhere is it
+  // structured data, only sometimes mentioned in hand-written `about` prose.
+  const brandColors = extractBrandColors(item);
+  const factColors   = brandColors.slice(0, 2);
+  // No leading "Логотип {nm}" — the H1 right above already says exactly
+  // that, and echoing it verbatim as the paragraph's first words read as
+  // a stutter/duplicate to a human reader (caught 2026-07-30 on Ozon).
+  const factLineRu = factColors.length
+    ? `${nm} — ${fmtStr}, ${factColors.length === 1 ? 'цвет' : 'цвета'} ${factColors.join(' и ')}. `
+    : '';
+  const factLineEn = factColors.length
+    ? `${nm} — ${fmtStrEn}, ${factColors.length === 1 ? 'color' : 'colors'} ${factColors.join(' and ')}. `
+    : '';
+  const logoDesc = en
+    ? factLineEn + (item.about_en || metaDescEn)
+    : factLineRu + (item.about || metaDescRu);
 
   // Search alias: «Логотип Сбера» и «логотип Сбербанка» — разные запросы;
   // title/H1 должны покрывать оба (см. alt_name в category JSON).
@@ -968,30 +1383,37 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   const ogTitle  = en ? `${nmFull} Logo — download ${titleFmt} free`                : `Логотип ${nmFull} — скачать ${titleFmt} бесплатно`;
   const twTitle  = en ? `${nmFull} Logo ${titleFmt} — Trace Logo's`                 : `Логотип ${nmFull} ${titleFmt} — Trace Logo's`;
   const h1       = en ? `${nmFull} Logo` : `Логотип ${nmFull}`;
-  const prevAlt  = en ? `${nmFull} Logo ${primaryType.toUpperCase()}` : `Логотип ${nmFull} ${primaryType.toUpperCase()}`;
+  // factColors (up to 2 hex, computed above for factLineRu/En) folded into the
+  // hero image's alt — image search / AI image citation reads alt text, not
+  // the on-page color swatches, so the same data needs to reach both places.
+  const prevAlt  = en
+    ? `${nmFull} Logo ${primaryType.toUpperCase()}${factColors.length ? `, ${factColors.join('/')}` : ''}`
+    : `Логотип ${nmFull} ${primaryType.toUpperCase()}${factColors.length ? `, ${factColors.join('/')}` : ''}`;
   const secLabel = en ? (section_en || section) : section;
   const ctaTitle = en ? `${readyTotal}+ logos in the catalog` : `${readyTotal}+ логотипов в каталоге`;
 
   const ogSlug  = seoUrl(item).replace(/^\/logos\/|\/$/g, '').replace(/\//g, '-');
   const ogImage = `${BASE_URL}/assets/og/${ogSlug}.png`;
 
-  // Visible preview: SVG-primary items get the raster PNG render — Яндекс.Картинки
+  // Visible preview: SVG-primary items get a raster render — Яндекс.Картинки
   // only indexes raster images found in the page HTML (it ignores the sitemap
-  // image extension), so the <img> the crawler sees must be a PNG. PNG-primary
-  // items get the WebP grid preview instead — same crawler-friendly raster,
-  // but the ~1MB+ full-res original is no longer loaded just to show a 160px
-  // thumbnail. Either way the full asset stays the download/lightbox/
-  // color-editor source via __SEO_PAGE__.defaultSrc / data-src.
-  const searchRel   = searchImageRel(item);
-  const webpRel     = searchRel ? null : webpPreviewRel(item.file);
-  const previewRel  = searchRel || webpRel;
+  // image extension), so the <img> the crawler sees must stay raster (WebP
+  // qualifies same as PNG). Prefer the small WebP render of the search PNG
+  // over the full 800px/~70KB file — same crawler-friendly raster, much
+  // lighter paint since it's shown at 160px either way. PNG-primary items get
+  // the WebP grid preview instead, for the same reason. The full asset (SVG
+  // or original PNG) stays the sitemap <image:loc> / download / lightbox /
+  // color-editor source via searchImageRel / __SEO_PAGE__.defaultSrc.
+  const searchRel      = searchImageRel(item);
+  const searchWebpRel  = searchWebpPreviewRel(item);
+  const webpRel        = searchRel ? null : webpPreviewRel(item.file);
+  const previewRel  = searchWebpRel || searchRel || webpRel;
   const previewSrc  = previewRel
     ? `${rel}${previewRel}`
     : `${rel}assets/logos/${primaryType === 'png' ? 'pngs' : 'svgs'}/${item.file}`;
-  const previewMime = webpRel ? 'image/webp'
+  const previewMime = (searchWebpRel || webpRel) ? 'image/webp'
     : (previewRel || primaryType === 'png') ? 'image/png' : 'image/svg+xml';
 
-  const brandColors = extractBrandColors(item);
   const homeRel  = en ? '/en/' : rel;
   const siblings = (itemsByCat && itemsByCat[catSlug]) || [];
   const faqItems = buildFaqItems(item, brandColors, ecosystemLookup, siblings, section, section_en);
@@ -1008,7 +1430,7 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     OG_DESC:                  esc(ogDesc),
     OG_IMAGE:                 ogImage,
     TWITTER_TITLE:            esc(twTitle),
-    JSON_LD:                  buildJsonLd(item, section, section_en, catSlug, fullUrl, faqItems, lang),
+    JSON_LD:                  buildJsonLd(item, section, section_en, catSlug, fullUrl, faqItems, lang, { title, description: metaDesc }),
     BREADCRUMB_SECTION:       esc(secLabel),
     BREADCRUMB_SECTION_EN:    esc(section_en || section),
     BREADCRUMB_SECTION_SLUG:  catSlug,
@@ -1036,12 +1458,20 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     VARIANTS_SECTION:         buildVariantsSection(item, rel, lang),
     SPONSOR_SECTION:          buildSponsorSection(item, rel, lang),
     SPONSOR_CSS:              SPONSORS[sponsorKey(item)]?.title ? `<link rel="stylesheet" href="${rel}css/sponsor-banner.css">` : '',
+    EASTER_EGG_CSS:           item.figma === 'Icon/Game/DoodleJump' ? `<link rel="stylesheet" href="${rel}css/easter-doodlejump.css">` : '',
+    EASTER_EGG_SCRIPT:        item.figma === 'Icon/Game/DoodleJump'
+      ? `<script type="module">import { showDoodleJumpWidget } from '/js/easter-doodlejump.js'; showDoodleJumpWidget();</script>`
+      : '',
     ECOSYSTEM_SECTION:        buildEcosystemSection(item, ecosystemLookup, rel, lang),
-    COLORS_SECTION:           buildColorsSection(brandColors, lang),
-    META_TABLE_ROWS:          buildMetaTableRows(item, lang),
+    COLORS_SECTION:           buildColorsSection(brandColors, lang, nm),
+    EMBED_SECTION:            buildEmbedSection(item, nm, fullUrl, lang),
+    META_TABLE_SECTION:       buildMetaTableSection(item, nm, lang),
     FAQ_SECTION:              buildFaqSection(faqItems, lang),
+    SEO_AD_SECTION:           buildSeoAdSection(),
+    SEO_AD_SECTION_BOTTOM:    buildSeoAdSectionBottom(),
     RELATED_SECTION:          buildRelatedSection(item, siblings, homeRel, rel, lang),
     CATALOG_GRID_SECTION:     buildCatalogGridSection(categories, homeRel, rel, itemsByCat, lang, catSlug),
+    HOWTO_SECTION:            buildFigmaHowtoSection(item, nm, item.name_en || item.name, lang),
     SEO_PAGE_DATA:            buildSeoPageData(item, rel, lang),
   };
 

@@ -26,6 +26,24 @@ const { extractBrandColors } = require('./lib/brand-colors');
 const { resolveCategoryLabels } = require('./lib/labels');
 
 const BASE_URL  = 'https://trace-logos.ru';
+// Shared @id with PERSON in build-seo-pages.js — same real person credited on
+// every logo page's Organization.founder, so entity resolution treats the
+// blog author and the catalog's founder as one Person, not two stubs.
+const PERSON_ID = `${BASE_URL}/#person-rafael-mansurov`;
+const AUTHOR = {
+  "@type": "Person",
+  "@id": PERSON_ID,
+  "name": "Рафаэль Мансуров",
+  "url": "https://t.me/mansurov_rafael",
+  "sameAs": ["https://t.me/mansurov_rafael", "https://github.com/rafael-mansurov"],
+};
+const AUTHOR_EN = {
+  "@type": "Person",
+  "@id": PERSON_ID,
+  "name": "Rafael Mansurov",
+  "url": "https://t.me/mansurov_rafael",
+  "sameAs": ["https://t.me/mansurov_rafael", "https://github.com/rafael-mansurov"],
+};
 const ROOT      = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'blog', 'posts');
 const T_INDEX   = loadTemplate(path.join(ROOT, 'templates', 'blog-index.html'));
@@ -35,6 +53,64 @@ const EN        = loadDict().en;
 
 const MONTHS    = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 const MONTHS_EN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// Yandex RTB ad slot, injected verbatim before the second H2 of every post
+// (renderBlocks, h2Count === 2). Same block ID on every language/post — the
+// slot itself is not localized.
+const AD_BANNER = `<div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
+<div id="yandex_rtb_R-A-19679616-3"></div>
+<script>
+window.yaContextCb.push(() => {
+    Ya.Context.AdvManager.render({
+        "blockId": "R-A-19679616-3",
+        "renderTo": "yandex_rtb_R-A-19679616-3"
+    })
+})
+</script></div>`;
+
+// Second in-article Yandex RTB slot, injected before the LAST H2 of every
+// post (renderBlocks, h2Count === totalH2). Same block ID on every
+// language/post — the slot itself is not localized.
+const AD_BANNER_END = `<div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
+<div id="yandex_rtb_R-A-19679616-4"></div>
+<script>
+window.yaContextCb.push(() => {
+    Ya.Context.AdvManager.render({
+        "blockId": "R-A-19679616-4",
+        "renderTo": "yandex_rtb_R-A-19679616-4"
+    })
+})
+</script></div>`;
+
+// Yandex RTB slot for the blog index grid — one card every 10 posts (same
+// blockId reused per Yandex's own multi-placement pattern; each occurrence
+// gets its own container id via `n` so AdvManager.render doesn't collide).
+function adGridCardHtml(n) {
+  const id = `yandex_rtb_R-A-19679616-7-${n}`;
+  return `<div class="blog-ad-card"><!-- Yandex.RTB R-A-19679616-7 -->
+<div id="${id}"></div>
+<script>
+window.yaContextCb.push(() => {
+    Ya.Context.AdvManager.render({
+        "blockId": "R-A-19679616-7",
+        "renderTo": "${id}"
+    })
+})
+</script></div>`;
+}
+
+// Interleave an ad card after every 10th post card (build-time, static order —
+// js/blog-sort.js only re-appends `.blog-card` elements on client-side sort,
+// so ad cards stay put; that's an accepted tradeoff for a static ad slot).
+function interleaveAds(cardsArr) {
+  const out = [];
+  let n = 0;
+  cardsArr.forEach((c, i) => {
+    out.push(c);
+    if ((i + 1) % 10 === 0) out.push(adGridCardHtml(++n));
+  });
+  return out.join('\n      ');
+}
 
 function esc(str) {
   return String(str || '')
@@ -46,7 +122,27 @@ function esc(str) {
 // convention as build-og-images.js for logo pages: the URL is emitted unconditionally,
 // test-data.js --post warns if the file is actually missing on disk.
 function ogImageFor(slug) {
-  return `${BASE_URL}/assets/og/blog-${slug}.png`;
+  return `${BASE_URL}/assets/og/blog/social/${slug}.png`;
+}
+
+// Reads width/height straight from the PNG IHDR chunk (bytes 16-23) — no
+// dependency needed. Most posts get the 1200×630 gradient card
+// (build-blog-og-images.js), but a custom cover (og_custom: true,
+// assets/og/blog/originals/) comes out 1280×720 (16:9, build-blog-covers.js) —
+// og:image:width/height must reflect whichever is actually on disk, not a
+// hardcoded guess that goes stale the day someone adds a custom cover.
+function ogImageDims(slug) {
+  const filePath = path.join(ROOT, 'assets', 'og', 'blog', 'social', `${slug}.png`);
+  try {
+    const fd = fs.openSync(filePath, 'r');
+    const buf = Buffer.alloc(24);
+    fs.readSync(fd, buf, 0, 24, 0);
+    fs.closeSync(fd);
+    if (buf.toString('ascii', 12, 16) === 'IHDR') {
+      return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
+    }
+  } catch { /* file missing on first run — falls back below */ }
+  return { width: 1200, height: 630 };
 }
 
 // ── Logo lookup, for the `icon-row` widget ──────────────────────────────────
@@ -445,9 +541,9 @@ function widgetAssets(used, rel) {
 // One pass over a block of lines → HTML. Recursive: callouts re-enter this to
 // render their own body. `headings` collects H2s for the auto table of contents,
 // `widgets` — имена встреченных виджетов (для подключения их css/js на странице).
-function renderBlocks(lines, lang, headings, widgets) {
+function renderBlocks(lines, lang, headings, widgets, totalH2 = 0) {
   const out = [];
-  let i = 0, listType = null;
+  let i = 0, listType = null, h2Count = 0;
   const closeList = () => { if (listType) { out.push(`</${listType}>`); listType = null; } };
 
   while (i < lines.length) {
@@ -551,6 +647,9 @@ function renderBlocks(lines, lang, headings, widgets) {
       closeList();
       const lvl = h[1].length;
       if (lvl === 2) {
+        h2Count++;
+        if (h2Count === 2) out.push(AD_BANNER);
+        if (totalH2 >= 2 && h2Count === totalH2) out.push(AD_BANNER_END);
         const id = slugifyHeading(h[2]);
         headings.push({ id, text: esc(stripMd(h[2])) });
         // «Шаг/Уровень N. Название» / "Step/Tier N. Title" → badge + title on its own line
@@ -630,11 +729,25 @@ function substituteStats(md) {
   });
 }
 
+// Counts ## H2s a plain regex would miss the mark on: text inside a fenced
+// code block can start with `##` without being a heading. Mirrors the fence
+// tracking in renderBlocks just enough to get an accurate total ahead of time.
+function countH2(lines) {
+  let count = 0, inFence = false;
+  for (const line of lines) {
+    const t = line.trim();
+    if (/^```/.test(t)) { inFence = !inFence; continue; }
+    if (!inFence && /^##\s+/.test(t)) count++;
+  }
+  return count;
+}
+
 function mdToHtml(md, lang = 'ru') {
   const headings = [];
   const widgets  = new Set();
   const src = substituteStats(md.replace(/\r\n/g, '\n'));
-  const body = renderBlocks(src.split('\n'), lang, headings, widgets);
+  const lines = src.split('\n');
+  const body = renderBlocks(lines, lang, headings, widgets, countH2(lines));
   return { body, headings, widgets };
 }
 
@@ -815,8 +928,8 @@ async function main() {
           "url": fullUrl,
           "inLanguage": "ru",
           "image": ogImageFor(p.slug),
-          "author": { "@type": "Organization", "name": "Trace Logo's" },
-          "publisher": { "@type": "Organization", "name": "Trace Logo's" },
+          "author": AUTHOR,
+          "publisher": { "@type": "Organization", "@id": `${BASE_URL}/#organization`, "name": "Trace Logo's" },
           "mainEntityOfPage": fullUrl,
         },
       ],
@@ -829,6 +942,7 @@ async function main() {
     // может стоять только в одном из них.
     const assets  = widgetAssets(new Set([...ruWidgets, ...enWidgets]), rel);
     const related = pickRelated(p, posts);
+    const ogDims  = ogImageDims(p.slug);
     const vars = {
       REL: rel,
       HOME_REL: rel,
@@ -839,6 +953,8 @@ async function main() {
       HREFLANG_TAGS: hreflangBlock(fullUrl, `${BASE_URL}/en/blog/${p.slug}/`),
       OG_TITLE: esc(p.title),
       OG_IMAGE: ogImageFor(p.slug),
+      OG_IMAGE_WIDTH: ogDims.width,
+      OG_IMAGE_HEIGHT: ogDims.height,
       DATE_ISO: p.date,
       DATE_HUMAN: humanDate(p.date),
       READ_TIME: readTime(p.body, 'ru'),
@@ -883,8 +999,8 @@ async function main() {
           "url": enFullUrl,
           "inLanguage": "en",
           "image": ogImageFor(p.slug),
-          "author": { "@type": "Organization", "name": "Trace Logo's" },
-          "publisher": { "@type": "Organization", "name": "Trace Logo's" },
+          "author": AUTHOR_EN,
+          "publisher": { "@type": "Organization", "@id": `${BASE_URL}/#organization`, "name": "Trace Logo's" },
           "mainEntityOfPage": enFullUrl,
         },
       ],
@@ -934,7 +1050,8 @@ async function main() {
           ${blogCardCtaHtml('Читать статью')}
         </div>
       </a>`;
-  }).join('\n      ');
+  });
+  const cardsHtml = interleaveAds(cards);
 
   const indexJsonLd = JSON.stringify({
     "@context": "https://schema.org",
@@ -964,7 +1081,7 @@ async function main() {
   const indexHtml = T_INDEX.replace(/\{\{(\w+)\}\}/g, (_, k) => {
     if (k === 'REL' || k === 'HOME_REL' || k === 'DATA_BASE') return '../';
     if (k === 'JSON_LD') return indexJsonLd;
-    if (k === 'POST_CARDS') return cards;
+    if (k === 'POST_CARDS') return cardsHtml;
     console.warn(`Unknown placeholder {{${k}}}`); return '';
   });
   fs.writeFileSync(path.join(ROOT, 'blog', 'index.html'), indexHtml, 'utf8');
@@ -988,7 +1105,8 @@ async function main() {
           ${blogCardCtaHtml('Read article')}
         </div>
       </a>`;
-  }).join('\n      ');
+  });
+  const enCardsHtml = interleaveAds(enCards);
   const enIndexJsonLd = JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -1017,7 +1135,7 @@ async function main() {
     T_INDEX.replace(/\{\{(\w+)\}\}/g, (_, k) => {
       if (k === 'REL' || k === 'HOME_REL' || k === 'DATA_BASE') return '/';
       if (k === 'JSON_LD') return enIndexJsonLd;
-      if (k === 'POST_CARDS') return enCards;
+      if (k === 'POST_CARDS') return enCardsHtml;
       return '';
     }),
     'blog/index.html',

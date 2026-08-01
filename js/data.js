@@ -21,6 +21,7 @@ export const ecosystemLogoMap = {
   microsoft:   'microsoft.svg',
   mvideo:      'mvideo.svg',
   artlebedev:  'artlebedev.svg',
+  'yandex-ai': 'alisa.svg',
 };
 
 export const ecosystemLabels = {
@@ -50,6 +51,7 @@ export const ecosystemLabels = {
   supercell:   'Supercell',
   mvideo:      'М.Видео',
   artlebedev:  'Студия Лебедева',
+  'yandex-ai': 'ИИ-помощники Яндекса',
 };
 
 export const ecosystemLabelsEn = {
@@ -65,6 +67,7 @@ export const ecosystemLabelsEn = {
   kontur:     'Kontur',
   mvideo:     'M.Video',
   artlebedev: 'Art. Lebedev Studio',
+  'yandex-ai': 'Yandex AI Assistants',
 };
 
 // Custom caption for the detail-panel ecosystem section, when the plain
@@ -72,10 +75,12 @@ export const ecosystemLabelsEn = {
 // e.g. a design studio isn't itself a "logo ecosystem" like Yandex or Sber.
 export const ecosystemSectionLabels = {
   artlebedev: 'Логотипы студии Лебедева',
+  'yandex-ai': 'ИИ-помощники Яндекса',
 };
 
 export const ecosystemSectionLabelsEn = {
   artlebedev: 'Art. Lebedev Studio logos',
+  'yandex-ai': 'Yandex AI Assistants',
 };
 
 // variants[].labelKey points into base + 'labels.json' (only logos have one —

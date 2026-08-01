@@ -138,7 +138,7 @@ function checkDicts() {
 // ключа, на который ссылается вёрстка: data-i18n="copySvgg" отрендерится сырым
 // текстом на ОБОИХ языках. Ловится только сверкой с потребителями ключей.
 const SKIP_DIRS = new Set([
-  'node_modules', '.git', '.claude', 'cdn-dist', 'figma-plugin',
+  'node_modules', '.git', '.claude', 'cdn-dist', 'figna-plagins',
   'supabase', 'sanitizer', 'upptime', 'assets',
 ]);
 

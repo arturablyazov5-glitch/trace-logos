@@ -9,6 +9,12 @@ body {
   flex-direction: column;
 }
 
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
 /* ── Header ── */
 .site-header {
   height: 57px;
@@ -608,8 +614,15 @@ h1 {
 .divider { border: none; border-top: 1px solid var(--line); }
 
 /* ── Meta ── */
-.meta-table { display: flex; flex-direction: column; gap: 8px; }
+/* Real <table> markup (GEO: comparison-style data is the format AI answer
+   engines cite most reliably from) laid out via display overrides so the
+   original flex look is byte-for-byte unchanged — see CLAUDE.md rec #3. */
+.meta-table { display: flex; flex-direction: column; gap: 8px; border-collapse: collapse; }
+.meta-table caption { caption-side: top; }
+.meta-table tbody { display: contents; }
 .meta-row { display: flex; gap: 12px; font-size: 13px; }
+.meta-key,
+.meta-val { padding: 0; border: 0; font-weight: 400; text-align: left; vertical-align: baseline; }
 .meta-key { color: var(--text-6); min-width: 90px; flex-shrink: 0; }
 .meta-val { color: var(--text-2); }
 .meta-val a { color: var(--text-2); text-decoration: underline; text-decoration-color: var(--border-eco); }
@@ -631,7 +644,7 @@ h1 {
 
 /* Current page — highlighted, not dimmed */
 .ecosystem-card.current {
-  border-color: var(--text-2);
+  border-color: var(--border-bold);
   background: var(--bg-raised);
   pointer-events: none;
   position: relative;
@@ -687,6 +700,43 @@ h1 {
   transition: background .15s, transform .1s;
 }
 .catalog-cta-link:hover { background: #6b85ff; transform: translateY(-1px); }
+
+/* ── RSYA feed ad, full width of main, before "Другие логотипы этой категории" ──
+   Height capped the same hard way as .ad-sidebar-slot (the ex-Threads-banner
+   slot) so an oversized ad can't stretch the page. */
+.seo-ad-block {
+  position: relative;
+  width: 100%; margin-top: 64px; max-height: 250px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Bottom feed ad (after the catalog CTA, right before the footer) — no
+   height cap: unlike the block above, this one has nothing below it to
+   protect, so let the ad's own content decide its height. */
+.seo-ad-block-bottom {
+  max-height: none; overflow: visible;
+}
+
+/* Ad + related-logos wrap: on mobile the ad moves to AFTER "Другие логотипы
+   этой категории" instead of before it. `display: contents` on desktop keeps
+   this div invisible to layout (same trick as .logo-side above); the mobile
+   media query below turns it into a column flex just to reorder its two
+   direct children. */
+.seo-ad-related-wrap { display: contents; }
+
+/* RSYA sidebar banner (replaces the old Threads banner) — locked to a 3:2
+   format via aspect-ratio (scales with sidebar width, stays proportional at
+   any breakpoint), plus a hard max-height so it can never push the rest of
+   the sidebar/column down even if the ad content ignores the ratio. */
+.ad-sidebar-slot {
+  position: relative;
+  width: 100%; aspect-ratio: 3 / 2; max-height: 250px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.ad-sidebar-slot.ad-collapsed {
+  display: none;
+}
 
 /* ── Catalog sections (related logos + full category grid) ── */
 .catalog-section { margin-top: 48px; }
@@ -754,23 +804,132 @@ h1 {
 }
 
 /* ── Brand colors ── */
+/* Real <table> markup, same display-override trick as .meta-table above. */
 .colors-grid { display: flex; gap: 8px; flex-wrap: wrap; }
+.colors-grid caption { caption-side: top; }
+.colors-grid tbody,
+.colors-grid tr,
+.colors-grid td { display: contents; }
 .color-swatch {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 7px 11px 7px 8px;
+  padding: 7px 12px 7px 7px;
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 9px; cursor: pointer; font: inherit;
+  border-radius: 10px; cursor: pointer;
   transition: border-color .12s, background .12s;
 }
 .color-swatch:hover { border-color: var(--border-hover); background: var(--bg-hover); }
 .color-swatch-dot {
-  width: 18px; height: 18px; border-radius: 5px;
+  width: 22px; height: 22px; border-radius: 6px;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); flex-shrink: 0;
 }
-.color-swatch-hex {
-  font-size: 12px; font-variant-numeric: tabular-nums;
-  letter-spacing: 0.02em; color: var(--text-2);
+.color-swatch-text {
+  display: flex; flex-direction: column; gap: 2px; line-height: 1.1;
+  text-align: left;
 }
+.color-swatch-line {
+  font-size: 10.5px; font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em; color: var(--text-3);
+  transition: color .15s, font-size .15s, font-weight .15s;
+}
+.color-swatch-line.is-active {
+  font-size: 13px; font-weight: 600; color: var(--text-1);
+}
+
+/* ── Embed widget ── */
+/* One panel: toolbar (width + copy) sitting on top of the code it produces. */
+.embed-box {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  overflow: hidden;
+}
+.embed-toolbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 7px 7px 7px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.embed-width-field { display: inline-flex; align-items: center; gap: 8px; cursor: text; }
+.embed-width-label { font-size: 12px; color: var(--text-5); white-space: nowrap; }
+.embed-num {
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--border-muted);
+  background: var(--bg);
+  border-radius: 8px;
+  transition: border-color .12s;
+}
+.embed-num:focus-within { border-color: var(--border-focus); }
+.embed-num-input {
+  width: 46px;
+  padding: 6px 1px 6px 9px;
+  border: none; background: none; outline: none;
+  color: var(--text-1);
+  font: 500 12.5px/1 var(--font);
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+}
+.embed-num-input::-webkit-outer-spin-button,
+.embed-num-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.embed-num-unit { padding-right: 9px; font-size: 11.5px; color: var(--text-6); }
+
+.embed-copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: none;
+  color: var(--text-2);
+  font: 500 12.5px/1 var(--font);
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+}
+.embed-copy-btn:hover { background: var(--bg-raised); border-color: var(--border-muted); color: var(--text-0); }
+.embed-copy-btn svg { flex: none; }
+.embed-copy-btn:disabled { cursor: default; color: var(--text-5); background: none; border-color: transparent; }
+
+.embed-code {
+  display: block;
+  padding: 11px 12px;
+  color: var(--text-3);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px; line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: normal;
+  overflow-wrap: anywhere; /* breaks mid-token only when a whole word can't fit — unlike break-all it won't split short words for no reason */
+  min-width: 0; /* lets the wrapped block shrink inside the grid track instead of forcing it wide */
+}
+
+@media (max-width: 420px) {
+  .embed-width-label { display: none; }
+}
+
+/* ── Figma how-to ── */
+.howto-section { width: 100%; margin-top: 48px; }
+.howto-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-bottom: 16px;
+}
+.howto-step {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 16px;
+  background: var(--bg-card); border: 1px solid var(--border-base);
+  border-radius: 12px;
+}
+.howto-step-badge {
+  display: inline-block; width: fit-content;
+  font-size: 11px; font-weight: 700; line-height: 1;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: #fff; background: var(--accent);
+  border-radius: 999px; padding: 5px 10px;
+}
+.howto-step-title { font-size: 14px; font-weight: 600; color: var(--text-1); }
+.howto-step-desc { font-size: 13px; line-height: 1.6; color: var(--text-4); margin: 0; }
+.howto-cta {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 13px; font-weight: 600; color: var(--text-3);
+  text-decoration: none; transition: color .12s;
+}
+.howto-cta:hover { color: var(--text-1); }
 
 /* ── FAQ ── */
 .faq-section { width: 100%; margin-top: 48px; }
@@ -795,6 +954,8 @@ h1 {
 }
 .faq-item[open] .faq-q::after { transform: rotate(45deg); }
 .faq-a { padding: 0 16px 14px; font-size: 13px; line-height: 1.65; color: var(--text-4); }
+.faq-a a { color: var(--accent, #2563eb); text-decoration: none; }
+.faq-a a:hover { text-decoration: underline; }
 .faq-action-btn { margin: 0 16px 14px; }
 
 /* ── Footer ── */
@@ -818,7 +979,10 @@ footer:not(.site-footer) {
   .logo-side { display: contents; }
   .preview-card { order: 1; max-width: 200px; margin: 0 auto; }
   .logo-info    { order: 2; }
-  .th-banner    { order: 3; }
+  .ad-sidebar-slot { order: 3; }
+  .seo-ad-related-wrap { display: flex; flex-direction: column; }
+  .seo-ad-related-wrap > .seo-ad-block { order: 2; }
+  .seo-ad-related-wrap > .catalog-section { order: 1; }
   main { padding: 24px 16px 48px; }
   .site-header { padding: 0 16px; }
   .seo-search-form { display: none; }
@@ -826,6 +990,7 @@ footer:not(.site-footer) {
   .mobile-nav-burger { display: flex; }
   .breadcrumbs { padding: 12px 16px 0; }
   h1 { font-size: 26px; }
+  .howto-steps { grid-template-columns: 1fr; }
 }
 
 .info-section    { display: flex; flex-direction: column; gap: 8px; }

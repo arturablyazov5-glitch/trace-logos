@@ -1,10 +1,11 @@
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { sanitizeSvg, validateSvgBytes } from '../_shared/svg-sanitizer.ts';
-import { checkRateLimit } from '../_shared/rate-limit.ts';
+import { checkRateLimit, isDuplicateSubmit } from '../_shared/rate-limit.ts';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const RATE_LIMIT = 5;
 const RATE_WINDOW_SECONDS = 600; // 5 запросов / 10 минут с одного IP
+const DEDUP_WINDOW_SECONDS = 20; // повторная отправка той же формы в этом окне не шлётся в Telegram повторно
 
 function sanitizeText(str: string): string {
   return String(str || '').replace(/[<>"'&]/g, '').trim().slice(0, 200);
@@ -64,12 +65,18 @@ serve(async (req: Request) => {
 
   if (!brand) return cors({ error: 'brand is required' }, 400);
 
+  const file = formData.get('file') as File | null;
+  const hasFile = file && file.size > 0;
+
+  const signature = [brand, url, comment, hasFile ? `${file.name}:${file.size}` : '']
+    .join('|').toLowerCase();
+  if (await isDuplicateSubmit(req, 'suggest', signature, DEDUP_WINDOW_SECONDS)) {
+    return cors({ ok: true }, 200);
+  }
+
   let text = `📌 Новая иконка\n\nБренд: ${brand}`;
   if (url)     text += `\nСсылка: ${url}`;
   if (comment) text += `\nКомментарий: ${comment}`;
-
-  const file = formData.get('file') as File | null;
-  const hasFile = file && file.size > 0;
 
   if (hasFile) {
     if (file.size > MAX_FILE_SIZE) return cors({ error: 'File too large (max 5MB)' }, 413);

@@ -213,7 +213,15 @@ aside > section-nav {
 }
 
 .sidebar-ad {
+  position: relative;
+  flex-shrink: 0;
   margin: 12px 8px 8px;
+  width: calc(100% - 16px); aspect-ratio: 4 / 3; max-height: 280px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.sidebar-ad.ad-collapsed {
+  display: none;
 }
 
 .sidebar-contact {

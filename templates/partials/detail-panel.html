@@ -104,11 +104,25 @@
         <div class="variants-grid" id="variants-grid"></div>
       </div>
 
-      <div class="detail-ecosystem hidden" id="detail-ecosystem">
-        <div class="detail-divider"></div>
-        <div class="detail-section-label" id="ecosystem-label" data-i18n="detailEcosystem">Экосистема</div>
-        <div class="ecosystem-grid" id="ecosystem-grid"></div>
-      </div>
+      <div class="detail-ecosystem hidden" id="detail-ecosystem"></div>
+
+      <!-- Yandex.RTB R-A-19679616-8 -->
+      <div id="yandex_rtb_R-A-19679616-8" class="sidebar-ad"></div>
+      <script>
+      (() => {
+        const adEl = document.getElementById('yandex_rtb_R-A-19679616-8');
+        const collapseTimer = setTimeout(() => {
+          if (adEl && !adEl.querySelector('iframe')) adEl.classList.add('ad-collapsed');
+        }, 3000);
+        window.yaContextCb.push(() => {
+          Ya.Context.AdvManager.render({
+            "blockId": "R-A-19679616-8",
+            "renderTo": "yandex_rtb_R-A-19679616-8",
+            "onRender": () => clearTimeout(collapseTimer)
+          })
+        })
+      })();
+      </script>
 
       <div class="detail-brand-link hidden" id="detail-brand-link">
         <div class="detail-divider"></div>

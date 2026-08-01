@@ -56,7 +56,17 @@ function isFullFile(file) {
   return /-full(\.[^.]+)?$/.test(file || '');
 }
 
-function buildEntry(item, catSlug, catName, includeCategorySlug) {
+// item.about carries hand-written inline <a> links (see CLAUDE.md's example on
+// Ozon) — fine for HTML rendering, noise for an AI agent reading raw JSON.
+// Strip tags, keep the link text, collapse whitespace left behind.
+function stripHtml(str) {
+  return String(str || '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function buildEntry(item, catSlug, catName, includeCategorySlug, includeAbout) {
   const url = itemUrl(item);
   if (!url) return null;
 
@@ -112,6 +122,20 @@ function buildEntry(item, catSlug, catName, includeCategorySlug) {
     formats,
   };
 
+  // Quotable facts for AI agents reading this JSON directly (see CLAUDE.md's
+  // llms.txt entry point) — without these fields the only place brand history
+  // /colors/context lives is the rendered SEO page HTML, which no agent here
+  // is expected to parse. `desc` is always short (~150 chars) so it's cheap
+  // enough for the flat logos.json too; `about` (hand-written history, can run
+  // long with inline links) is opt-in per call site to keep logos.json's size
+  // in check — see the two buildEntry() call sites below.
+  if (item.desc) entry.desc = item.desc;
+  if (item.desc_en) entry.desc_en = item.desc_en;
+  if (includeAbout) {
+    if (item.about) entry.about = stripHtml(item.about);
+    if (item.about_en) entry.about_en = stripHtml(item.about_en);
+  }
+
   if (allVariants.length) entry.variants = allVariants;
   if (item.macos_styles) {
     const ms = {};
@@ -150,13 +174,13 @@ function main() {
       if (!item.file) continue;
       totalAll++;
 
-      const entry = buildEntry(item, cat.slug, cat.section, false);
+      const entry = buildEntry(item, cat.slug, cat.section, false, true);
       if (!entry) continue;
 
       catEntries.push(entry);
       if (!item.comingSoon) { catReady++; totalReady++; }
 
-      allLogos.push(buildEntry(item, cat.slug, cat.section, true));
+      allLogos.push(buildEntry(item, cat.slug, cat.section, true, false));
     }
 
     const catJson = {

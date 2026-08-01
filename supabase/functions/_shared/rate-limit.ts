@@ -36,3 +36,19 @@ export async function checkRateLimit(
   const count = await res.json();
   return { ok: count <= limit, count };
 }
+
+// Дедупликация одинаковой отправки формы за короткое окно (флаки-сеть на мобильном
+// заставляет клиент повторить fetch, хотя первый запрос уже дошёл до Telegram —
+// см. incident 2026-07-29: два независимых POST/200 к /suggest за 2.85с дали
+// два сообщения в бот для одной и той же иконки). Дедуп живёт на сервере, а не
+// на disabled-состоянии кнопки в suggest.js — оно не переживает повторный клик
+// после сетевого таймаута на стороне клиента.
+export async function isDuplicateSubmit(
+  req: Request,
+  endpoint: string,
+  signature: string,
+  windowSeconds: number,
+): Promise<boolean> {
+  const rate = await checkRateLimit(req, `${endpoint}-dedup:${signature}`, 1, windowSeconds);
+  return !rate.ok;
+}

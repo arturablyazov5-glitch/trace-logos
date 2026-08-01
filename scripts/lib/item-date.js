@@ -21,24 +21,30 @@ function assetExt(file) {
   return String(file || '').split('.').pop().toLowerCase();
 }
 
-function buildFileModMap() {
+// `git log` lists commits newest-first, so within one pass over one file's
+// occurrences: the first line seen is the newest (last-modified) date, the
+// last line seen is the oldest (first-added, i.e. "published") date.
+function buildFileDateMaps() {
   try {
     const out = execSync(
       'git log --pretty=format:"%ad" --date=short --name-only -- assets/logos/svgs/ assets/logos/pngs/',
       { cwd: ROOT, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024 }
     );
-    const map = {};
+    const modified = {}, published = {};
     let date = '';
     for (const line of out.split('\n')) {
       const t = line.trim();
       if (/^\d{4}-\d{2}-\d{2}$/.test(t)) { date = t; }
-      else if (t && date && !map[t]) { map[t] = date; }
+      else if (t && date) {
+        if (!modified[t]) modified[t] = date;
+        published[t] = date; // keeps being overwritten — last write wins = oldest commit
+      }
     }
-    return map;
-  } catch { return {}; }
+    return { modified, published };
+  } catch { return { modified: {}, published: {} }; }
 }
 
-const FILE_MOD_MAP = buildFileModMap();
+const { modified: FILE_MOD_MAP, published: FILE_PUBLISH_MAP } = buildFileDateMaps();
 
 function itemDate(item) {
   if (item.dateModified) return item.dateModified;
@@ -47,4 +53,12 @@ function itemDate(item) {
   return FILE_MOD_MAP[`assets/logos/${dir}/${item.file}`] || BUILD_DATE;
 }
 
-module.exports = { itemDate, assetExt, BUILD_DATE };
+// Best-effort "first added" date — falls back to itemDate() (i.e. today) for
+// files git has no history for, same as itemDate()'s own fallback.
+function itemPublishedDate(item) {
+  const ext = assetExt(item.file);
+  const dir = ext === 'png' ? 'pngs' : 'svgs';
+  return FILE_PUBLISH_MAP[`assets/logos/${dir}/${item.file}`] || itemDate(item);
+}
+
+module.exports = { itemDate, itemPublishedDate, assetExt, BUILD_DATE };

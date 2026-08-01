@@ -47,7 +47,7 @@ trace-logos/
 ├── collections/           # Коллекции логотипов
 ├── templates/             # HTML шаблоны
 ├── blog/                  # Блог
-├── figma-plugin/          # Figma плагин
+├── figna-plagins/         # Figma плагины (Trace Logos, Trace Typograf)
 └── sanitizer/             # Утилиты очистки
 ```
 

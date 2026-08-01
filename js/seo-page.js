@@ -6,7 +6,6 @@ import { applyI18n, t, getLang } from './i18n.js';
 import { ecosystemLabels, ecosystemLabelsEn } from './data.js';
 import './donate.js';   // hosting fundraiser modal — self-wires to the `tl:export` event
 import './header-search.js';
-import './threads-banner.js';
 
 applyLabels(); // single source of button texts → js/labels.js
 applyI18n();   // translate data-i18n / data-i18n-aria / data-i18n-placeholder attrs
@@ -29,7 +28,10 @@ if (getLang() === 'en') {
     const qEl = item.querySelector('.faq-q');
     const aEl = item.querySelector('.faq-a');
     if (qEl && item.dataset.qEn) qEl.textContent = item.dataset.qEn;
-    if (aEl && item.dataset.aEn) aEl.textContent = item.dataset.aEn;
+    // innerHTML, not textContent: some answers carry a "see also" list linked
+    // to other catalog pages (build-seo-pages.js's buildFaqSection) — the
+    // dataset value is our own build-time escaped HTML, not user input.
+    if (aEl && item.dataset.aEn) aEl.innerHTML = item.dataset.aEn;
   });
   // Section name in breadcrumbs and category badge
   document.querySelectorAll('[data-section-en]').forEach(el => {
@@ -217,6 +219,7 @@ document.getElementById('variants-grid')?.addEventListener('click', e => {
     }
     initPngBtn(currentSrc, currentWide, currentType, card.dataset.png);
   });
+  updateEmbedForVariant(currentSrc);
   resetCopy();
 });
 
@@ -305,17 +308,75 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 
-// ── Цвета бренда: копирование hex по клику ──
+// ── Цвета бренда: клик копирует выделенный формат и переключает на другой ──
 document.querySelectorAll('.color-swatch').forEach(sw => {
   sw.addEventListener('click', async () => {
-    const hex = sw.dataset.color;
+    const format = sw.dataset.format;
+    const value  = format === 'rgb' ? sw.dataset.rgb : sw.dataset.hex;
+    const copied = format === 'rgb' ? `RGB ${value}` : value;
     try {
-      await navigator.clipboard.writeText(hex);
+      await navigator.clipboard.writeText(value);
       triggerConfetti(sw);
-      showToast(TOASTS.copiedColor(hex));
-    } catch { showToast(TOASTS.copyError); }
+      showToast(TOASTS.copiedColor(copied));
+    } catch { showToast(TOASTS.copyError); return; }
+    const next = format === 'rgb' ? 'hex' : 'rgb';
+    sw.dataset.format = next;
+    sw.querySelectorAll('.color-swatch-line').forEach(line => {
+      line.classList.toggle('is-active', line.dataset.role === next);
+    });
   });
 });
+
+// ── Встроить на сайт: <a href="страница"><img src="файл"></a>-сниппет ──
+// No format/variant picker of its own — one variant is one file. Mirrors
+// whatever the visitor already made the active download in #variants-grid,
+// via updateEmbedForVariant(src) called from that click handler above.
+const embedCode     = document.getElementById('embed-code');
+const embedWidth    = document.getElementById('embed-width');
+const embedCopyBtn  = document.getElementById('btn-embed-copy');
+const embedCopyLbl  = document.getElementById('embed-copy-label');
+let embedCopyTimer  = null;
+
+function absUrl(relPath) {
+  return relPath ? new URL(relPath, location.href).href : '';
+}
+
+function renderEmbedCode() {
+  if (!embedCode) return;
+  const width = Math.min(4000, Math.max(8, parseInt(embedWidth.value, 10) || 200));
+  embedCode.textContent = `<a href="${embedCode.dataset.pageUrl}"><img src="${embedCode.dataset.src}" alt="${embedCode.dataset.alt}" width="${width}"></a>`;
+}
+
+function updateEmbedForVariant(src) {
+  if (!embedCode) return;
+  embedCode.dataset.src = absUrl(src);
+  renderEmbedCode();
+}
+
+if (embedCode) {
+  renderEmbedCode();
+  embedWidth.addEventListener('input', renderEmbedCode);
+
+  // Same confirm-in-place pattern as the "Скопировать SVG" button above
+  // (resetCopy): the label flips to "Скопировано" and the button disables
+  // for 2s, so the click has a visible result at the cursor, not only in
+  // the toast down in the corner.
+  embedCopyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(embedCode.textContent);
+    } catch { showToast(TOASTS.copyError); return; }
+    trackExport(PAGE.figma, 'embed', PAGE.item?.file || '');
+    triggerConfetti(embedCopyBtn);
+    showToast(t('toast.embedCopied'));
+    embedCopyLbl.textContent = LABELS.copied;
+    embedCopyBtn.disabled = true;
+    clearTimeout(embedCopyTimer);
+    embedCopyTimer = setTimeout(() => {
+      embedCopyBtn.disabled = false;
+      embedCopyLbl.textContent = t('seoEmbedCopy');
+    }, 2000);
+  });
+}
 
 document.getElementById('lightbox-close').addEventListener('click', e => { e.stopPropagation(); closeLightbox(); });
 previewCard.addEventListener('click', openLightbox);

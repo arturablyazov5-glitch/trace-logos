@@ -46,7 +46,7 @@ const SITE_ORIGIN = 'trace-logos.ru'; // внутренний прод-доме�
 // Каталоги, куда не заходим: служебное, шаблоны с {{...}}, чужие зеркала.
 const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
-  'figma-plugin', 'supabase', 'sanitizer', 'upptime',
+  'figna-plagins', 'supabase', 'sanitizer', 'upptime',
 ]);
 
 // Исключений НЕТ: любая неразрешимая внутренняя ссылка роняет сборку.
@@ -101,6 +101,9 @@ function resolveTarget(rawValue, pageAbsPath) {
   // Схемы и якоря, которые не резолвятся в файл на диске.
   if (/^(#|mailto:|tel:|data:|javascript:|blob:)/i.test(value)) return null;
   if (value.startsWith('//')) return null; // протокол-относительная — внешняя
+  // Vercel-платформенные роуты (Speed Insights, Web Analytics): обслуживаются
+  // рантаймом хостинга, файла в репо нет и не будет.
+  if (value.startsWith('/_vercel/')) return null;
   // Плейсхолдеры клиентских шаблонов (`${…}` в <script>, `{{…}}` в partial) —
   // интерполируются в рантайме, статической цели на диске у них нет.
   if (value.includes('${') || value.includes('{{')) return null;
