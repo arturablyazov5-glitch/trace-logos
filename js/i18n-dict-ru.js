@@ -146,7 +146,7 @@ export const DICT = {
   seoDownloadLabel:    'Скачать',
   seoVariantsLabel:    'Варианты',
   seoBrandColorsLabel: 'Цвета бренда',
-  seoEmbedLabel:       'Встроить на сайт',
+  seoEmbedLabel:       'Встроить на сайт',
   seoEmbedCopy:        'Скопировать код',
   seoEmbedWidth:       'Ширина',
   seoMetaFormat:       'Формат',
