@@ -9,10 +9,10 @@ tags: Эмодзи, Инструкции, Клавиатура
 tags_en: Emoji, How-to, Keyboard
 ---
 
-На телефоне эмодзи — одна кнопка, а на компьютере люди до сих пор гуглят «смайлик огонь», чтобы скопировать его из выдачи. Между тем и в [Windows](../../logos/store/windows/), и в macOS панель эмодзи открывается одним сочетанием клавиш — просто о нём мало кто знает. Запоминайте, показываем все способы.
+На телефоне эмодзи — одна кнопка, а на компьютере люди до сих пор гуглят «смайлик огонь», чтобы скопировать его из выдачи. Между тем и в [Windows](../../logos/tech/windows/), и в macOS панель эмодзи открывается одним сочетанием клавиш — просто о нём мало кто знает. Запоминайте, показываем все способы.
 
 :::note Коротко
-**[Windows](../../logos/store/windows/):** Win + точка (.) — откроется панель эмодзи. **Mac:** Ctrl + Cmd + пробел (или клавиша 🌐 fn на новых клавиатурах). В обеих панелях работает поиск по названию. Всё, дальше — детали и запасные варианты.
+**[Windows](../../logos/tech/windows/):** Win + точка (.) — откроется панель эмодзи. **Mac:** Ctrl + Cmd + пробел (или клавиша 🌐 fn на новых клавиатурах). В обеих панелях работает поиск по названию. Всё, дальше — детали и запасные варианты.
 :::
 
 ## Windows: Win + точка
@@ -23,7 +23,7 @@ tags_en: Emoji, How-to, Keyboard
 - **Недавние:** первая вкладка запоминает часто используемые.
 - Работает в любом поле ввода: браузер, Word, Telegram Desktop, коммит‑сообщение в терминале.
 
-Если панель не открывается — у вас [Windows](../../logos/store/windows/) старше 10‑й версии, там придётся пользоваться таблицей символов или копированием из каталога.
+Если панель не открывается — у вас [Windows](../../logos/tech/windows/) старше 10‑й версии, там придётся пользоваться таблицей символов или копированием из каталога.
 
 ## Mac: Ctrl + Cmd + пробел
 
@@ -55,7 +55,7 @@ tags_en: Emoji, How-to, Keyboard
 
 | Платформа | Способ | Комментарий |
 | --- | --- | --- |
-| [Windows](../../logos/store/windows/) 10/11 | Win +. | поиск по названию |
+| [Windows](../../logos/tech/windows/) 10/11 | Win +. | поиск по названию |
 | macOS | Ctrl + Cmd + пробел | или клавиша fn/ 🌐 |
 | iPhone | клавиша 🙂 + предиктивный набор | долгий тап — тон кожи |
 | Android | клавиша 🙂 + поиск в Gboard | кухня эмодзи |
@@ -65,15 +65,15 @@ tags_en: Emoji, How-to, Keyboard
 
 **Почему у меня эмодзи выглядят не как у собеседника?** Каждая платформа рисует эмодзи по‑своему: Apple, Google, Samsung — разные наборы картинок. Это норма, а не глюк: подробный разбор — в статье [почему эмодзи отображаются по‑разному](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
 
-**Как набрать эмодзи, которого нет в панели?** Панели показывают стандартный набор Unicode. Новые эмодзи появляются с обновлением ОС — если чего‑то не хватает, обновите систему или скопируйте символ из веб‑каталога.
+**Как набрать эмодзи, которого нет в панели?** Панели показывают стандартный набор Unicode. Новые эмодзи появляются с обновлением ОС — если чего‑то не хватает, обновите систему или скопируйте символ из веб‑каталога. Например, набор Emoji 17.0 (мохнатое существо, косатка, тромбон, сундук с сокровищами, «танцующий балет») утвердили в сентябре 2025 года, но на большинстве устройств он появился только с обновлениями в 2026‑м — так что «свежего» эмодзи в панели может не быть просто из‑за версии ОС.
 
 **Есть ли текстовые коды?** В Telegram, Slack и Discord работают шорткоды вида `:fire:` — двоеточие + название. В обычных полях ввода — нет.
 
-**Почему панель Win+точка пустая или не ищет по‑русски?** Поиск работает на языке активной раскладки: переключитесь на русскую — ищите по‑русски. Пустая панель — известный глюк старых сборок [Windows](../../logos/store/windows/) 10; обычно лечится обновлением системы.
+**Почему панель Win+точка пустая или не ищет по‑русски?** Поиск работает на языке активной раскладки: переключитесь на русскую — ищите по‑русски. Пустая панель — известный глюк старых сборок [Windows](../../logos/tech/windows/) 10; обычно лечится обновлением системы.
 
-**Как вставить эмодзи в имя файла или папки?** Так же — Win+точка или Ctrl+Cmd+пробел работают в диалоге переименования. Файловые системы [Windows](../../logos/store/windows/) и macOS эмодзи в именах поддерживают. Но подумайте дважды: скрипты, архиваторы и старые программы могут споткнуться о такие имена.
+**Как вставить эмодзи в имя файла или папки?** Так же — Win+точка или Ctrl+Cmd+пробел работают в диалоге переименования. Файловые системы [Windows](../../logos/tech/windows/) и macOS эмодзи в именах поддерживают. Но подумайте дважды: скрипты, архиваторы и старые программы могут споткнуться о такие имена.
 
-**Можно ли настроить свои сочетания под конкретные эмодзи?** Да, через автозамену: на iPhone и Mac — «Замена текста» (например, «ффф» → 🔥), на Android — словарь Gboard, на [Windows](../../logos/store/windows/) — PowerToys. Для часто используемых эмодзи это быстрее любой панели.
+**Можно ли настроить свои сочетания под конкретные эмодзи?** Да, через автозамену: на iPhone и Mac — «Замена текста» (например, «ффф» → 🔥), на Android — словарь Gboard, на [Windows](../../logos/tech/windows/) — PowerToys. Для часто используемых эмодзи это быстрее любой панели.
 
 ## Эмодзи в профессиональных инструментах
 
@@ -86,7 +86,7 @@ tags_en: Emoji, How-to, Keyboard
 
 ## История вопроса: почему на компьютерах эмодзи «спрятаны»
 
-Забавный парадокс: эмодзи родились в Японии на кнопочных телефонах, где под них была отдельная кнопка, — а на «взрослых» компьютерах четверть века не было штатного способа их набрать. Панель Win+точка появилась только в 2017 году ([Windows](../../logos/store/windows/) 10 Fall Creators Update), маковская панель символов существовала давно, но пряталась в меню. Причина проста: до смартфонной эры эмодзи считались игрушкой для SMS, а не частью делового текста. Сегодня эмодзи — полноправная часть письменной речи, и сочетания из этой статьи стоят того, чтобы попасть в мышечную память: Win+точка экономит по несколько секунд десятки раз в день.
+Забавный парадокс: эмодзи родились в Японии на кнопочных телефонах, где под них была отдельная кнопка, — а на «взрослых» компьютерах четверть века не было штатного способа их набрать. Панель Win+точка появилась только в 2017 году ([Windows](../../logos/tech/windows/) 10 Fall Creators Update), маковская панель символов существовала давно, но пряталась в меню. Причина проста: до смартфонной эры эмодзи считались игрушкой для SMS, а не частью делового текста. Сегодня эмодзи — полноправная часть письменной речи, и сочетания из этой статьи стоят того, чтобы попасть в мышечную память: Win+точка экономит по несколько секунд десятки раз в день.
 
 ## Коротко
 
@@ -94,10 +94,10 @@ Win+точка и Ctrl+Cmd+пробел — два сочетания, кот�
 
 ---EN---
 
-On a phone, emoji are one key away — yet on a computer people still google "fire emoji" to copy it from search results. Meanwhile both [Windows](../../logos/store/windows/) and macOS open an emoji panel with a single shortcut; it's just barely advertised. Here's every method worth knowing.
+On a phone, emoji are one key away — yet on a computer people still google "fire emoji" to copy it from search results. Meanwhile both [Windows](../../logos/tech/windows/) and macOS open an emoji panel with a single shortcut; it's just barely advertised. Here's every method worth knowing.
 
 :::note TL;DR
-**[Windows](../../logos/store/windows/):** Win + period (.) opens the emoji panel. **Mac:** Ctrl + Cmd + Space (or the 🌐/fn key on recent keyboards). Both panels support search by name. That's the core — details and fallbacks below.
+**[Windows](../../logos/tech/windows/):** Win + period (.) opens the emoji panel. **Mac:** Ctrl + Cmd + Space (or the 🌐/fn key on recent keyboards). Both panels support search by name. That's the core — details and fallbacks below.
 :::
 
 ## Windows: Win + period
@@ -108,7 +108,7 @@ Press Win and the period key. A panel opens with emoji, GIFs, kaomoji and symbol
 - **Recents:** the first tab remembers your frequent picks.
 - Works in any input field: browser, Word, Telegram Desktop, even a terminal commit message.
 
-If the panel doesn't open, you're on something older than [Windows](../../logos/store/windows/) 10 — fall back to the Character Map or copying from a catalog.
+If the panel doesn't open, you're on something older than [Windows](../../logos/tech/windows/) 10 — fall back to the Character Map or copying from a catalog.
 
 ## Mac: Ctrl + Cmd + Space
 
@@ -140,7 +140,7 @@ OS panels render emoji in your system's style, but sometimes you need a specific
 
 | Platform | Method | Note |
 | --- | --- | --- |
-| [Windows](../../logos/store/windows/) 10/11 | Win + . | search by name |
+| [Windows](../../logos/tech/windows/) 10/11 | Win + . | search by name |
 | macOS | Ctrl + Cmd + Space | or the fn/🌐 key |
 | iPhone | 🙂 key + predictive bar | long-press for skin tone |
 | Android | 🙂 key + Gboard search | Emoji Kitchen |
@@ -150,15 +150,15 @@ OS panels render emoji in your system's style, but sometimes you need a specific
 
 **Why do my emoji look different from my friend's?** Every platform draws its own set: Apple, Google, Samsung differ. It's by design, not a bug — full story in [why emoji look different everywhere](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
 
-**How do I type an emoji missing from the panel?** Panels show the Unicode set your OS knows. New emoji arrive with OS updates — update, or copy the character from a web catalog.
+**How do I type an emoji missing from the panel?** Panels show the Unicode set your OS knows. New emoji arrive with OS updates — update, or copy the character from a web catalog. The Emoji 17.0 set (a hairy creature, an orca, a trombone, a treasure chest, a ballet dancer) was approved in September 2025, but most devices only got it with 2026 updates — so a brand-new emoji may simply be missing because your OS hasn't caught up yet.
 
 **Are there text codes?** Telegram, Slack and Discord support `:fire:`-style shortcodes. Plain input fields don't.
 
-**Why is the Win+period panel empty or not searching?** Search follows the active keyboard language. An empty panel is a known glitch of old [Windows](../../logos/store/windows/) 10 builds — usually fixed by updating.
+**Why is the Win+period panel empty or not searching?** Search follows the active keyboard language. An empty panel is a known glitch of old [Windows](../../logos/tech/windows/) 10 builds — usually fixed by updating.
 
-**Can emoji go into file and folder names?** Yes — the OS panels work in the rename dialog, and both [Windows](../../logos/store/windows/) and macOS file systems accept emoji. Think twice though: scripts, archivers and legacy software may trip over such names.
+**Can emoji go into file and folder names?** Yes — the OS panels work in the rename dialog, and both [Windows](../../logos/tech/windows/) and macOS file systems accept emoji. Think twice though: scripts, archivers and legacy software may trip over such names.
 
-**Can I bind my own shortcuts to specific emoji?** Yes, via text replacement: iPhone/Mac — Text Replacement (e.g. "fff" → 🔥), Android — the Gboard dictionary, [Windows](../../logos/store/windows/) — PowerToys. For your frequent emoji this beats any panel.
+**Can I bind my own shortcuts to specific emoji?** Yes, via text replacement: iPhone/Mac — Text Replacement (e.g. "fff" → 🔥), Android — the Gboard dictionary, [Windows](../../logos/tech/windows/) — PowerToys. For your frequent emoji this beats any panel.
 
 ## Emoji in professional tools
 
@@ -171,7 +171,7 @@ A few non-obvious places where emoji entry works differently:
 
 ## A bit of history: why computers "hid" emoji
 
-A funny paradox: emoji were born on Japanese feature phones that had a dedicated key for them — while "grown-up" computers went a quarter century without a standard way to type them. The Win+period panel arrived only in 2017 ([Windows](../../logos/store/windows/) 10 Fall Creators Update); the Mac symbols panel existed long before but hid in menus. The reason is simple: before smartphones, emoji were considered an SMS toy, not part of business writing. Today they're a full citizen of written speech, and this article's shortcuts deserve muscle memory: Win+period saves seconds dozens of times a day.
+A funny paradox: emoji were born on Japanese feature phones that had a dedicated key for them — while "grown-up" computers went a quarter century without a standard way to type them. The Win+period panel arrived only in 2017 ([Windows](../../logos/tech/windows/) 10 Fall Creators Update); the Mac symbols panel existed long before but hid in menus. The reason is simple: before smartphones, emoji were considered an SMS toy, not part of business writing. Today they're a full citizen of written speech, and this article's shortcuts deserve muscle memory: Win+period saves seconds dozens of times a day.
 
 ## In short
 

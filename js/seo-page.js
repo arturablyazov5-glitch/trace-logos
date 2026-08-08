@@ -5,7 +5,15 @@ import { LABELS, TOASTS, applyLabels } from './labels.js';
 import { applyI18n, t, getLang } from './i18n.js';
 import { ecosystemLabels, ecosystemLabelsEn } from './data.js';
 import './donate.js';   // hosting fundraiser modal — self-wires to the `tl:export` event
-import './header-search.js';
+// header-search.js is NOT imported here — templates/partials/nav-header.html
+// already loads it via its own <script type="module"> on every page,
+// including this one. A redundant import here used to be harmless (same
+// resolved URL → the browser deduped it), but build-cache-bust.js now stamps
+// nav-header's <script src> with ?v=... while this bare import specifier
+// stays unversioned — two different module URLs, so header-search.js's
+// top-level code (the placeholder typewriter) ran twice on the same <input>,
+// two timers overwriting each other's text (bug: "search placeholder text
+// doubles/triples and overlaps").
 
 applyLabels(); // single source of button texts → js/labels.js
 applyI18n();   // translate data-i18n / data-i18n-aria / data-i18n-placeholder attrs
@@ -42,6 +50,10 @@ if (getLang() === 'en') {
     if (nameSpan) nameSpan.textContent = enName;
     else el.textContent = enName;
   });
+  // "N logos" label on the "Остальные категории" cards (mobile only, css/seo-page.css)
+  document.querySelectorAll('.catalog-cat-count-label[data-en]').forEach(el => {
+    el.textContent = el.dataset.en;
+  });
   // Sponsor banner title / text (per-sponsor EN copy, baked as data-*-en)
   const spTitle = document.querySelector('.sp-banner-title[data-title-en]');
   if (spTitle && spTitle.dataset.titleEn) spTitle.textContent = spTitle.dataset.titleEn;
@@ -59,6 +71,34 @@ if (getLang() === 'en') {
     if (nameSpan) nameSpan.textContent = enName;
   }
 }
+
+// ── Mobile: "Подробнее" toggle for the about text ─────────────────────────
+// The 2-line clamp is pure CSS (css/seo-page.css, mobile media query) — the
+// full text stays in the HTML at all times, only its rendered height is
+// clamped, so this is not a content-hiding trick that could hurt SEO.
+// The button itself is `hidden` until we confirm the text actually overflows
+// 2 lines — a short about doesn't need a toggle at all.
+function setupLogoDescToggle() {
+  const descEl = document.getElementById('logo-desc');
+  const toggleBtn = document.getElementById('logo-desc-toggle');
+  if (!descEl || !toggleBtn) return;
+
+  const sync = () => {
+    if (descEl.classList.contains('expanded')) return; // don't re-clamp mid-read on resize
+    const overflowing = matchMedia('(max-width: 640px)').matches
+      && descEl.scrollHeight > descEl.clientHeight + 1;
+    toggleBtn.hidden = !overflowing;
+  };
+  sync();
+  window.addEventListener('resize', sync);
+
+  toggleBtn.addEventListener('click', () => {
+    const expanded = descEl.classList.toggle('expanded');
+    toggleBtn.setAttribute('aria-expanded', String(expanded));
+    toggleBtn.textContent = t(expanded ? 'logoDescCollapse' : 'logoDescExpand');
+  });
+}
+setupLogoDescToggle();
 
 // Page data injected by build script via window.__SEO_PAGE__
 const PAGE = window.__SEO_PAGE__;
@@ -81,6 +121,8 @@ const btnCopy      = document.getElementById('btn-copy');
 const btnCopyLbl   = document.getElementById('btn-copy-label');
 const btnDlSvg     = document.getElementById('btn-dl-svg');
 const btnDlPng     = document.getElementById('btn-dl-png');
+const btnDlIco     = document.getElementById('btn-download-ico');
+const btnDlIcns    = document.getElementById('btn-download-icns');
 const lightbox     = document.getElementById('lightbox');
 const lightboxInner = document.getElementById('lightbox-inner');
 const lightboxImg  = document.getElementById('lightbox-img');
@@ -173,6 +215,7 @@ function onMacosTabClick(e) {
   previewImg.src = preview;
   if (preview !== currentSrc) previewImg.addEventListener('error', () => { previewImg.src = currentSrc; }, { once: true });
   initPngBtn(currentSrc, false, 'png', undefined);
+  updateEmbedForVariant(currentSrc);
 }
 macosTabsEl?.addEventListener('click', onMacosTabClick);
 macosTabsMobileEl?.addEventListener('click', onMacosTabClick);
@@ -204,6 +247,13 @@ document.getElementById('variants-grid')?.addEventListener('click', e => {
   previewCard.classList.toggle('light-bg', currentWide && !currentDarkBg);
   previewCard.classList.toggle('dark-bg', currentWide && currentDarkBg);
   previewMount.className = currentWide ? 'preview-wide' : 'preview-icon';
+  // Drop the stale width/height attrs from the initial SSR render (e.g. 160×160
+  // for a square default) — with them still set, the browser's img[width][height]
+  // aspect-ratio hint keeps using the OLD ratio for this box even after src swaps
+  // to a differently-shaped variant, which used to stretch preview-wide images
+  // (no object-fit there) before real ratio could take over.
+  previewImg.removeAttribute('width');
+  previewImg.removeAttribute('height');
   previewImg.src = card.dataset.preview || currentSrc;
   previewImg.alt = card.querySelector('.variant-label').textContent;
 
@@ -237,6 +287,20 @@ function initPngBtn(src, wide, type, pngSrc) {
     btnDlPng.onclick = null;
   } else {
     btnDlPng.style.display = 'none';
+  }
+  // ICO/ICNS — square PNG variants only, same rule as the catalog's detail
+  // panel (main.js's isSquarePng). Not offered for SVG or wide/full lockups.
+  const isSquarePng = type !== 'svg' && !wide;
+  if (btnDlIco) {
+    btnDlIco.classList.toggle('hidden', !isSquarePng);
+    if (isSquarePng) btnDlIco.onclick = () => downloadAsIco(ITEM, currentFile());
+  }
+  if (btnDlIcns) {
+    btnDlIcns.classList.toggle('hidden', !isSquarePng);
+    if (isSquarePng) btnDlIcns.onclick = async () => {
+      const { openIcnsModal } = await import('./icns.js');
+      openIcnsModal(ITEM, currentFile());
+    };
   }
 }
 

@@ -9,45 +9,50 @@ tags: SVG, Конвертация, Инструкции
 tags_en: SVG, Conversion, How-to
 ---
 
-Скачали логотип в SVG, а маркетплейс, CRM или конструктор писем принимает только PNG? Задача на две минуты — если знать, каким инструментом решать. А вот обратная задача, PNG в SVG, устроена совсем иначе, и большинство онлайн‑конвертеров делают её плохо. Разберём оба направления.
+Скачали логотип в SVG, а маркетплейс, CRM или конструктор писем принимает только PNG. Задача выглядит симметричной: есть кнопка «конвертировать» туда, есть и обратно. На деле два направления устроены совершенно по‑разному. SVG в PNG превращается за две минуты в любом инструменте, и ошибиться там можно ровно в одном месте. А PNG в SVG автоматика перевести не может в принципе: кнопка, которая обещает обратное, вас обманывает. Разберём оба направления и причину этой асимметрии.
 
 :::note Коротко
-SVG → PNG — тривиально: браузер, [Figma](../../logos/design/figma/), любой онлайн‑конвертер. Главное — сразу задать нужный размер в пикселях, потому что после конвертации PNG уже нельзя увеличивать без потерь. PNG → SVG — это не конвертация, а **отрисовка заново**; автоматическая трассировка годится только для простых одноцветных знаков.
+SVG → PNG — тривиально: браузер, [Figma](../../logos/design/figma/), любой онлайн‑конвертер. Важно единственное — сразу задать нужный размер в пикселях, потому что готовый PNG увеличивать уже поздно. PNG → SVG работает иначе: программа **отрисовывает файл заново**, угадывая контуры, и результат годится только для простых одноцветных знаков.
 :::
 
-## SVG в PNG: 5 рабочих способов
+## Почему SVG в PNG превращается легко
 
-###1. Прямо в браузере — без программ
+Причина в том, что хранит каждый формат. SVG держит инструкцию: «провести кривую отсюда сюда, залить цветом #21A038». Чтобы получить PNG, программа просто выполняет эту инструкцию и записывает результат в пиксели. Описание полное, гадать не о чем, поэтому справится любой рендер, от браузера до консольной утилиты.
 
-Любой браузер умеет открывать SVG. Дальше два пути:
+Но у операции есть один необратимый момент. Выполняя инструкцию, программа обязана выбрать, в каком размере её выполнять, и записанные пиксели уже не пересчитаешь. Отсюда единственная реальная ошибка конвертации: взять размер по умолчанию, получить картинку 48×48 и потом растягивать её до баннера. Поэтому способы ниже отличаются главным образом тем, насколько удобно в них задавать размер.
 
-1. Откройте SVG‑файл в [Chrome](../../logos/search/chrome/) или [Firefox](../../logos/search/firefox/) (перетащите в окно).
-2. Правый клик → «Сохранить изображение как…» — некоторые браузеры сразу предложат PNG.
+## Пять способов получить PNG
 
-Если пункта нет, сработает скриншот нужной области — но качество будет равно размеру на экране, поэтому для крупных PNG способ не годится.
+### 1. Прямо в браузере — когда PNG нужен на один раз
 
-###2. Figma — лучший контроль над размером
+Любой браузер открывает SVG и умеет его сохранить. Перетащите файл в окно [Chrome](../../logos/search/chrome/) или [Firefox](../../logos/search/firefox/), затем правый клик → «Сохранить изображение как…»: часть браузеров сразу предложит PNG.
 
-Самый предсказуемый способ для дизайнеров и не только:
+Способ выигрывает скоростью, но размером тут управляет масштаб на экране. Для крупных PNG он не подходит: переходите к следующему.
 
-1. Перетащите SVG в любой файл [Figma](../../logos/design/figma/) — он вставится как редактируемый вектор.
+### 2. Figma — самый предсказуемый контроль размера
+
+Здесь размер задаётся явно, поэтому способ подходит и дизайнерам, и всем остальным:
+
+1. Перетащите SVG в любой файл [Figma](../../logos/design/figma/) — он вставится редактируемым вектором.
 2. Выделите объект → справа внизу секция Export.
-3. Выберите PNG и множитель (1x, 2x, 4x) или конкретную ширину.
+3. Выберите PNG и множитель (1x, 2x, 4x) или конкретную ширину в пикселях.
 4. Export — готово.
 
-Бонус: перед экспортом можно перекрасить логотип или подложить фон.
+Бонусом перед экспортом можно перекрасить логотип или подложить фон, о чём ниже будет отдельный сценарий.
 
-###3. Онлайн‑конвертеры
+### 3. Онлайн‑конвертеры — быстро, с двумя оговорками
 
-Convertio, CloudConvert, svgtopng и десятки аналогов: загрузили файл, скачали PNG. Работает, но два момента. Во‑первых, проверьте настройку размера — по умолчанию многие сервисы рендерят SVG в его «номинальном» размере, например 48×48 пикселей, и вы получите крошечную картинку. Во‑вторых, не загружайте в случайные сервисы конфиденциальные макеты — файл уезжает на чужой сервер.
+Convertio, CloudConvert, svgtopng и десятки аналогов работают по схеме «загрузили файл — скачали PNG». Оговорок ровно две, и обе следуют из сказанного выше.
 
-###4. Photoshop и Illustrator
+Первая — размер. Многие сервисы рендерят SVG в его «номинальном» размере (например, 48×48), и вы получаете крошечную картинку; настройку размера ищите до конвертации. Вторая касается приватности: файл уезжает на чужой сервер, поэтому конфиденциальные макеты через случайные сервисы гонять не стоит.
 
-[Photoshop](../../logos/design/photoshop/): File → Open, при открытии SVG задайте размер в пикселях с запасом, потом File → Export → PNG. [Illustrator](../../logos/design/illustrator/): File → Export → Export As → PNG, там же выбирается разрешение. Смысл тот же: размер задаётся **до** растеризации.
+### 4. Photoshop и Illustrator — если они уже открыты
 
-###5. Командная строка — для тех, кто автоматизирует
+[Photoshop](../../logos/design/photoshop/): File → Open, при открытии SVG задайте размер в пикселях с запасом, дальше File → Export → PNG. [Illustrator](../../logos/design/illustrator/): File → Export → Export As → PNG, разрешение выбирается там же. Логика та же самая: размер задают **до** растеризации, потому что после неё менять его поздно.
 
-Если файлов много, быстрее один раз поставить инструмент:
+### 5. Командная строка — когда файлов много
+
+Для пачки файлов быстрее один раз поставить инструмент, чем вручную прогонять каждый через интерфейс:
 
 ```
 # librsvg (macOS: brew install librsvg)
@@ -57,25 +62,31 @@ rsvg-convert -w 1024 logo.svg -o logo.png
 inkscape logo.svg --export-type=png --export-width=1024
 ```
 
-Флаг ширины (`-w 1024`) — ключевой: он определяет итоговое качество.
+Обратите внимание на флаг ширины (`-w 1024`): он и определяет итоговое качество. Тот же самый выбор размера, только записанный явно.
 
 :::tip Главное правило конвертации
-Всегда рендерьте PNG **в том размере, который нужен, или больше**. SVG можно превратить в PNG любого размера бесплатно, а вот увеличить готовый PNG без мыла уже не получится. Сомневаетесь — делайте 1024 px и больше.
+Рендерьте PNG **в нужном размере или крупнее**. Из SVG вы бесплатно получите PNG любого размера, а увеличить готовый PNG без мыла уже не выйдет. Сомневаетесь — берите 1024 px и больше.
 :::
 
-## PNG в SVG: почему «конвертер» вас обманывает
+## Почему обратный путь так не работает
 
-Тут физика другая. В PNG нет никакой информации о фигурах — только пиксели. Конвертер не «переводит формат», а пытается **угадать** контуры по пикселям. Это называется трассировка, и у неё три исхода:
+Теперь понятно, за счёт чего работает прямое направление: у программы есть полное описание фигур. В обратную сторону этого описания просто нет. PNG хранит только сетку цветных точек — ни одного «круга», ни одной «кривой» внутри файла не записано.
+
+Поэтому конвертер PNG → SVG ничего не переводит. Он **угадывает** контуры по границам цветов. Операция называется трассировкой, её результат зависит от того, насколько картинка похожа на набор простых фигур:
 
 - **Простой одноцветный знак** (силуэт, иконка) — трассировка справится прилично. Inkscape (Path → Trace Bitmap) или vectorizer‑сервисы дадут рабочий результат.
-- **Логотип с градиентами, мелкими деталями, текстом** — на выходе будут рваные края, потерянные детали и вес больше исходного PNG.
-- **Фотография** — не имеет смысла вовсе.
+- **Логотип с градиентами, мелкими деталями и текстом** — получите рваные края, потерянные детали и файл тяжелее исходного PNG.
+- **Фотография** — результат бессмыслен при любых настройках.
+
+Оценить результат трассировки можно, не разглядывая края. Откройте полученный SVG в [Figma](../../logos/design/figma/) и посмотрите на число опорных точек: у нарисованного вручную знака их десятки, у трассированного сотни и тысячи, потому что программа обводит отдельной точкой каждую ступеньку пиксельной границы. Отсюда и вес: SVG после трассировки логотипа с градиентом легко перевешивает исходный PNG в несколько раз. Второй признак виден по цвету: плоская заливка распадается на десятки близких оттенков, и перекрасить такой знак одной правкой `fill` уже не выйдет, ради чего вектор обычно и берут.
+
+Из‑за того что честная трассировка трудна, часть сервисов её имитирует.
 
 :::warning Частая ловушка
-Некоторые онлайн-«конвертеры PNG в SVG» просто заворачивают вашу растровую картинку внутрь SVG‑обёртки (`<image href="...">`). Формально файл стал.svg, фактически — остался тем же PNG со всеми его ограничениями. Проверить легко: откройте файл текстовым редактором; настоящий вектор состоит из `<path>`, `<circle>`, `<rect>`, а не из одного тега `<image>`.
+Некоторые онлайн‑«конвертеры PNG в SVG» заворачивают вашу растровую картинку внутрь SVG‑обёртки (`<image href="...">`). Расширение файла меняется на `.svg`, содержимое остаётся тем же PNG со всеми ограничениями растра. Проверить легко: откройте файл текстовым редактором. Настоящий вектор состоит из тегов `<path>`, `<circle>`, `<rect>`; один тег `<image>` внутри выдаёт подделку.
 :::
 
-Честное решение для сложного логотипа — отрисовка в вектор вручную. Либо поищите оригинальный SVG: у большинства известных брендов он существует, и в нашем каталоге лежат именно такие официальные векторы.
+Честных выходов для сложного логотипа два: отрисовать его в векторе вручную или найти оригинальный SVG. Второй быстрее и бесплатнее: у большинства известных брендов вектор существует, и в нашем каталоге лежат именно такие официальные файлы.
 
 ## Сравнение направлений
 
@@ -85,78 +96,96 @@ inkscape logo.svg --export-type=png --export-width=1024
 | PNG → SVG (простой знак) | 10 минут | Inkscape Trace | приемлемо |
 | PNG → SVG (сложный логотип) | часы работы | ручная отрисовка | зависит от исполнителя |
 
+## Типовые сценарии
+
+Правило «сначала размер» на практике почти всегда означает «сначала кадр». Заметнее всего это в четырёх ситуациях.
+
+**Аватарка для соцсети.** Прямая конвертация горизонтального логотипа даст узкую полоску, непригодную для круглой аватарки. Соберите в [Figma](../../logos/design/figma/) квадратный кадр 1024×1024, поместите знак с полями 15‑20% и цветным фоном и экспортируйте уже этот кадр.
+
+**Логотип в презентацию [PowerPoint](../../logos/office/microsoftpowerpoint/).** Современный [PowerPoint](../../logos/office/microsoftpowerpoint/) принимает SVG напрямую (Вставка → Рисунки), и вектор здесь выигрывает: логотип останется чётким на любом проекторе. PNG понадобится только для версий Office старше 2016 года.
+
+**Печать на футболке или кружке.** Типографии просят PNG высокого разрешения и считают размер от физического: принт 30 см при 300 dpi — это около 3550 пикселей. Рендерьте с запасом, 4000 px по длинной стороне.
+
+**Пачка иконок для сайта.** Здесь конвертация вообще лишняя: SVG в вёрстке легче, чётче и перекрашивается из CSS. Способы вставки разбирали в статье [как вставить SVG на сайт](../kak-vstavit-svg-na-sajt/).
+
+## Почему конвертер выдаёт пустой PNG
+
+Отдельная частая жалоба: сервис отработал, а PNG вышел прозрачным или чёрным. Причина всегда одна — рендер не смог полностью выполнить инструкцию из файла. Конкретных поводов три, по убыванию вероятности:
+
+1. **Цвета заданы через CSS‑классы**, а атрибуты `fill` при этом пусты — упрощённый рендер сервиса стили пропустил. Лечится пересохранением SVG из [Figma](../../logos/design/figma/): она запекает стили в атрибуты фигур.
+2. **В файле используются внешние шрифты или картинки** — без доступа к ним конвертер рисует пустоту. Переводите текст в кривые до конвертации.
+3. **Фильтры и маски** — экзотические эффекты поддерживаются не всеми рендерами. Откройте файл в браузере: если пусто и там, проблема в самом файле.
+
+Универсальное решение при капризах онлайн‑сервисов — [Figma](../../logos/design/figma/): её рендер самый предсказуемый из общедоступных.
+
 ## Частые вопросы
 
 **Какой размер PNG выбрать для соцсетей?** Аватарки — минимум 400×400, посты и обложки — по требованиям площадки, но не меньше 1080 по длинной стороне. Проще один раз сделать 2048 px и уменьшать.
 
-**Прозрачность сохранится?** Да: PNG поддерживает альфа‑канал, и все перечисленные способы фон по умолчанию оставляют прозрачным. Белый фон появляется только если экспортировать в JPG.
+**Прозрачность сохранится?** Да: PNG поддерживает альфа‑канал, и все перечисленные способы оставляют фон прозрачным по умолчанию. Белый фон появится только при экспорте в JPG.
 
-**Можно ли конвертировать пачку файлов сразу?** Онлайн‑сервисы обычно ограничивают количество, поэтому для пачек — командная строка (способ 5) или [Figma](../../logos/design/figma/): выделяете все объекты и экспортируете разом.
+**Можно ли конвертировать пачку файлов сразу?** Онлайн‑сервисы обычно ограничивают количество, поэтому для пачек берите командную строку (способ 5) или [Figma](../../logos/design/figma/): выделяете все объекты и экспортируете разом.
 
-**Почему PNG получился с обрезанными краями?** У SVG есть viewBox — «окно», в котором живёт картинка. Если фигуры выходят за его пределы (так бывает после ручных правок), рендер их отрежет. Откройте SVG в [Figma](../../logos/design/figma/) и проверьте, что всё содержимое лежит внутри рамки кадра.
+**Что выбрать для email‑рассылки?** Только PNG: почтовые клиенты вектор почти не поддерживают, [Gmail](../../logos/office/gmail/) и [Outlook](../../logos/office/outlook/) игнорируют SVG молча, оставляя пустое место. Рендерьте в двойном размере от того, сколько картинка занимает на экране.
 
-**Как конвертировать SVG с прозрачностью в PNG с фоном?** Иногда нужен именно фон — например, для JPG‑превью. В [Figma](../../logos/design/figma/) подложите под логотип прямоугольник нужного цвета и экспортируйте вместе. В командной строке у rsvg‑convert есть флаг `-b '#FFFFFF'`.
+**Почему у PNG обрезаны края?** У SVG есть viewBox — рамка, в которой живёт картинка. Фигуры, вышедшие за её пределы после ручных правок, рендер отрежет. Откройте файл в [Figma](../../logos/design/figma/) и проверьте, что всё содержимое лежит внутри кадра.
 
-**Почему из [Illustrator](../../logos/design/illustrator/) PNG выходит с огромными полями?** Экспортируется монтажная область (artboard), а не объект. Либо подгоните область под логотип (Object → Artboards → Fit to Artwork Bounds), либо используйте Export Selection.
+**Как получить PNG с фоном вместо прозрачности?** В [Figma](../../logos/design/figma/) подложите под логотип прямоугольник нужного цвета и экспортируйте вместе. В командной строке у `rsvg-convert` для этого есть флаг `-b '#FFFFFF'`.
 
-## Разбор типовых сценариев
+**Почему из [Illustrator](../../logos/design/illustrator/) PNG выходит с огромными полями?** Экспортируется монтажная область (artboard) целиком. Подгоните её под логотип (Object → Artboards → Fit to Artwork Bounds) или используйте Export Selection.
 
-**Сценарий: аватарка для соцсети из SVG‑логотипа.** Не конвертируйте логотип «как есть»: сначала в [Figma](../../logos/design/figma/) соберите квадратный кадр 1024×1024, поместите в него знак с полями 15‑20% и цветным фоном — и уже этот кадр экспортируйте в PNG. Прямая конвертация горизонтального логотипа даст узкую полоску, непригодную для аватарки.
+## Что в итоге
 
-**Сценарий: логотип в презентацию PowerPoint.** Современный PowerPoint принимает SVG напрямую (Вставка → Рисунки) — и это лучше PNG: логотип останется чётким на любом проекторе. Конвертируйте в PNG только для старых версий Office.
+Асимметрия двух направлений объясняется одним: в векторе записано описание фигур, в растре его нет. Поэтому SVG в PNG превращает любой инструмент, и следить нужно ровно за размером: задавайте его сразу и с запасом. Обратно дороги нет: трассировка вытянет простой одноцветный знак, всё остальное придётся отрисовывать заново вручную или искать оригинальный вектор.
 
-**Сценарий: печать на футболке или кружке.** Типографии сублимационной печати часто просят PNG в высоком разрешении. Считайте от физического размера: принт 30 см при 300 dpi — это ~3550 пикселей. Рендерьте с запасом — 4000 px по длинной стороне.
-
-**Сценарий: пачка иконок для сайта.** Не конвертируйте вовсе — используйте SVG напрямую в вёрстке: легче, чётче и перекрашивается из CSS. Все способы вставки мы разбирали в статье [как вставить SVG на сайт](../kak-vstavit-svg-na-sajt/).
-
-## Почему онлайн‑конвертер иногда выдаёт «пустой» PNG
-
-Частая жалоба: сервис отработал, а PNG прозрачный или чёрный. Причины по убыванию вероятности:
-
-1. **Цвета в SVG заданы через CSS‑классы**, а не атрибуты `fill` — упрощённый рендер сервиса стили не применил. Лечится пересохранением SVG из [Figma](../../logos/design/figma/) (она «запекает» стили в атрибуты).
-2. **В SVG используются внешние шрифты или картинки** — конвертер без доступа к ним рендерит пустоту. Текст переводите в кривые до конвертации.
-3. **Фильтры и маски** — экзотические SVG‑эффекты поддерживаются не всеми рендерами. Проверьте файл в браузере: если и там пусто, проблема в самом файле.
-
-Универсальное решение при капризах онлайн‑сервисов — [Figma](../../logos/design/figma/): её рендер самый предсказуемый из общедоступных.
-
-## Коротко
-
-Из SVG в PNG — задавайте размер и жмите Export где угодно. Из PNG в SVG — не верьте кнопке «конвертировать»: либо простой знак и трассировка, либо честная отрисовка заново, либо поиск оригинального вектора.
-
-Самый быстрый путь — не конвертировать вообще: в нашем [каталоге логотипов](../../logos/) у каждого бренда уже лежат и SVG, и PNG, причём PNG можно скачать сразу в нужном размере.
+Последний вариант почти всегда быстрее: в нашем [каталоге логотипов](../../logos/) у каждого бренда уже лежат и SVG, и PNG, причём PNG скачивается сразу в нужном размере, так что конвертировать не придётся вовсе.
 
 ---EN---
 
-You downloaded a logo as SVG, but a marketplace, CRM or email builder only accepts PNG? That's a two-minute task — if you know which tool to use. The reverse task, PNG to SVG, works completely differently, and most online converters do it badly. Let's cover both directions.
+You downloaded a logo in SVG, and the marketplace, CRM or email builder accepts PNG only. The task looks symmetrical: there's a "convert" button one way, and one the other way too. In reality the two directions work completely differently. SVG becomes PNG in two minutes in any tool, and there's exactly one place to get it wrong. PNG, meanwhile, cannot be turned into SVG automatically at all — the button promising otherwise is lying to you. Let's walk both directions and the reason for this asymmetry.
 
 :::note TL;DR
-SVG → PNG is trivial: browser, [Figma](../../logos/design/figma/), any online converter. The key is to set the pixel size upfront, because a PNG can't be enlarged afterwards. PNG → SVG is not a conversion but a **redraw**; automatic tracing only works for simple one-color marks.
+SVG → PNG is trivial: a browser, [Figma](../../logos/design/figma/), any online converter. One thing matters — setting the pixel size upfront, because enlarging a finished PNG is too late. PNG → SVG works differently: the program **redraws the file from scratch**, guessing at contours, and the result only suits simple single-color marks.
 :::
 
-## SVG to PNG: 5 working methods
+## Why SVG turns into PNG easily
 
-### 1. Right in the browser
+The reason lies in what each format stores. SVG holds an instruction: "draw a curve from here to here, fill with #21A038". To produce a PNG, the program simply executes that instruction and writes the result into pixels. The description is complete and nothing needs guessing, so any renderer handles it, from a browser to a command-line utility.
 
-Open the SVG in [Chrome](../../logos/search/chrome/) or [Firefox](../../logos/search/firefox/) (drag it into a window), right-click → "Save image as…" — some browsers offer PNG directly. If not, a screenshot works, but only at on-screen size.
+But the operation has one irreversible moment. While executing the instruction, the program must choose what size to execute it at, and the written pixels can't be recomputed later. Hence the one real conversion mistake: taking the default size, getting a 48×48 image and then stretching it to banner width. So the methods below differ mainly in how conveniently you can set the size.
 
-### 2. Figma — best size control
+## Five ways to get a PNG
+
+### 1. Straight in the browser — for a one-off PNG
+
+Any browser opens an SVG and can save it. Drag the file into a [Chrome](../../logos/search/chrome/) or [Firefox](../../logos/search/firefox/) window, then right-click → "Save image as…": some browsers offer PNG immediately.
+
+The method wins on speed, but the size here is governed by on-screen scale. For large PNGs, move on to the next one.
+
+### 2. Figma — the most predictable size control
+
+Here the size is set explicitly, which suits designers and everyone else:
 
 1. Drag the SVG into any [Figma](../../logos/design/figma/) file — it lands as an editable vector.
-2. Select it → the Export section at the bottom right.
-3. Pick PNG and a multiplier (1x, 2x, 4x) or an exact width.
+2. Select the object → the Export section at the bottom right.
+3. Choose PNG and a multiplier (1x, 2x, 4x) or a specific pixel width.
 4. Export — done.
 
-Bonus: recolor the logo or add a background before exporting.
+As a bonus you can recolor the logo or place a background before exporting, which gets its own scenario below.
 
-### 3. Online converters
+### 3. Online converters — fast, with two caveats
 
-Convertio, CloudConvert, svgtopng and dozens of clones: upload, download. Two caveats. First, check the size setting — many services render the SVG at its "nominal" size (say, 48×48) and hand you a tiny image. Second, don't upload confidential artwork to random services — the file travels to someone else's server.
+Convertio, CloudConvert, svgtopng and dozens of others run on "upload a file — download a PNG". There are exactly two caveats, and both follow from what's above.
 
-### 4. Photoshop and Illustrator
+The first is size. Many services render an SVG at its "nominal" size (48×48, say), and you get a tiny image; look for the size setting before converting. The second concerns privacy: the file travels to someone else's server, so confidential layouts are better kept out of random services.
 
-[Photoshop](../../logos/design/photoshop/): File → Open, set a generous pixel size at import, then Export → PNG. [Illustrator](../../logos/design/illustrator/): File → Export As → PNG with a resolution picker. Same principle: the size is chosen **before** rasterization.
+### 4. Photoshop and Illustrator — if they're already open
 
-### 5. Command line — for automation
+[Photoshop](../../logos/design/photoshop/): File → Open, set a generous pixel size when opening the SVG, then File → Export → PNG. [Illustrator](../../logos/design/illustrator/): File → Export → Export As → PNG, resolution is chosen right there. The logic is identical: size is set **before** rasterization, because changing it afterwards is too late.
+
+### 5. Command line — when there are many files
+
+For a batch it's faster to install a tool once than to push each file through an interface by hand:
 
 ```
 # librsvg (macOS: brew install librsvg)
@@ -166,62 +195,80 @@ rsvg-convert -w 1024 logo.svg -o logo.png
 inkscape logo.svg --export-type=png --export-width=1024
 ```
 
-The width flag (`-w 1024`) determines the final quality.
+Note the width flag (`-w 1024`): it determines the final quality. The same size choice, just written explicitly.
 
-:::tip The golden rule
-Always render the PNG **at the size you need, or larger**. Making a bigger PNG from SVG is free; enlarging a finished PNG without blur is impossible. When in doubt, go 1024 px or more.
+:::tip The main rule of conversion
+Render the PNG **at the size you need or larger**. From an SVG you get a PNG of any size for free, while enlarging a finished PNG without mush won't work. In doubt, take 1024 px or more.
 :::
 
-## PNG to SVG: why the "converter" lies
+## Why the reverse path fails
 
-A PNG contains no shape information — only pixels. A converter doesn't translate the format; it **guesses** outlines from pixels. That's called tracing, with three outcomes:
+Now it's clear what makes the forward direction work: the program has a full description of the shapes. Going back, that description simply doesn't exist. A PNG holds only a grid of colored dots — no "circle" and no "curve" is recorded inside the file.
 
-- **Simple one-color mark** — tracing does fine. Inkscape (Path → Trace Bitmap) gives a usable result.
-- **Logo with gradients, fine detail, text** — ragged edges, lost detail, and a file heavier than the source PNG.
-- **A photo** — pointless entirely.
+So a PNG → SVG converter translates nothing. It **guesses** contours from color boundaries. The operation is called tracing, and its result depends on how closely the picture resembles a set of simple shapes:
+
+- **A simple single-color mark** (a silhouette, an icon) — tracing does a decent job. Inkscape (Path → Trace Bitmap) or vectorizer services give a workable result.
+- **A logo with gradients, fine detail and text** — you get ragged edges, lost details and a file heavier than the source PNG.
+- **A photo** — the result is meaningless at any setting.
+
+You can judge a trace without squinting at the edges. Open the resulting SVG in [Figma](../../logos/design/figma/) and count the anchor points: a hand-drawn mark has dozens, a traced one has hundreds or thousands, because the program outlines every step of the pixel boundary with its own point. Hence the weight: a traced gradient logo easily outweighs the source PNG several times over. The second sign shows in color: a flat fill breaks into dozens of near-identical shades, and recoloring such a mark with a single `fill` edit stops working, which is usually the reason to want a vector at all.
+
+Because honest tracing is hard, some services fake it.
 
 :::warning A common trap
-Some online "PNG to SVG converters" simply wrap your bitmap inside an SVG shell (`<image href="...">`). The extension changed; the pixels didn't. Check with a text editor: a real vector consists of `<path>`, `<circle>`, `<rect>` — not a single `<image>` tag.
+Some online "PNG to SVG converters" wrap your raster image inside an SVG shell (`<image href="...">`). The file extension changes to `.svg` while the contents stay the same PNG with every raster limitation. Checking is easy: open the file in a text editor. A real vector consists of `<path>`, `<circle>`, `<rect>` tags; a single `<image>` tag inside gives away the fake.
 :::
 
-The honest fix for a complex logo is a manual redraw — or finding the original SVG. For most known brands it exists, and that's exactly what our catalog stores.
+There are two honest ways out for a complex logo: draw it in vector by hand, or find the original SVG. The second is faster and free: most well-known brands have a vector, and our catalog holds exactly those official files.
 
-## FAQ
+## Comparing the directions
 
-**What PNG size for social media?** Avatars — at least 400×400; posts and covers — per platform, but no less than 1080 px on the long side. Easier: render 2048 px once and downscale.
+| Task | Difficulty | Tool | Result quality |
+| --- | --- | --- | --- |
+| SVG → PNG | 2 minutes | [Figma](../../logos/design/figma/), browser, online | identical to the original |
+| PNG → SVG (simple mark) | 10 minutes | Inkscape Trace | acceptable |
+| PNG → SVG (complex logo) | hours of work | manual redraw | depends on the artist |
 
-**Will transparency survive?** Yes — PNG has an alpha channel, and every method above keeps the background transparent by default. A white background only appears if you export to JPG.
+## Typical scenarios
 
-**Batch conversion?** Online tools cap file counts; for batches use the command line (method 5) or [Figma](../../logos/design/figma/) — select everything and export at once.
+The "size first" rule almost always means "frame first" in practice. Four situations show it most clearly.
 
-**Why did the PNG come out with clipped edges?** SVG has a viewBox — the "window" the artwork lives in. Shapes outside it (common after manual edits) get cut by the renderer. Open the SVG in [Figma](../../logos/design/figma/) and check everything sits inside the frame.
+**A social media avatar.** Converting a horizontal logo directly gives a narrow strip, useless for a round avatar. Build a square 1024×1024 frame in [Figma](../../logos/design/figma/), place the mark with 15–20% padding and a colored background and export that frame.
 
-**How do I convert a transparent SVG into a PNG with a background?** Sometimes you need one — say, for a JPG preview. In [Figma](../../logos/design/figma/), put a colored rectangle under the logo and export together. On the command line, rsvg-convert has a `-b '#FFFFFF'` flag.
+**A logo for a [PowerPoint](../../logos/office/microsoftpowerpoint/) deck.** Modern [PowerPoint](../../logos/office/microsoftpowerpoint/) accepts SVG directly (Insert → Pictures), and vector wins here: the logo stays crisp on any projector. PNG is only needed for Office versions older than 2016.
 
-**Why does [Illustrator](../../logos/design/illustrator/) export a PNG with huge margins?** It exports the artboard, not the object. Either fit the artboard to the artwork (Object → Artboards → Fit to Artwork Bounds) or use Export Selection.
+**Printing on a T-shirt or mug.** Print shops ask for high-resolution PNG, and the size is derived from the physical one: a 30 cm print at 300 dpi is about 3550 pixels. Render generously — 4000 px on the long side.
 
-## Typical scenarios walked through
+**A batch of icons for a website.** Conversion is redundant here: SVG in markup is lighter, crisper and recolors from CSS. Embedding methods are covered in [how to embed SVG on a website](../kak-vstavit-svg-na-sajt/).
 
-**Scenario: a social avatar from an SVG logo.** Don't convert the logo as-is: first build a 1024×1024 square frame in [Figma](../../logos/design/figma/), place the mark with 15–20% margins on a colored background — and export that frame. Direct conversion of a horizontal logo yields a narrow stripe useless as an avatar.
+## Why a converter returns an empty PNG
 
-**Scenario: a logo for a PowerPoint deck.** Modern PowerPoint accepts SVG directly (Insert → Pictures) — and it beats PNG: the logo stays crisp on any projector. Convert to PNG only for old Office versions.
+A separate common complaint: the service finished, but the PNG came out transparent or black. The cause is always the same — the renderer couldn't fully execute the file's instruction. There are three specific reasons, by descending likelihood:
 
-**Scenario: printing on a T-shirt or a mug.** Sublimation printers often want high-res PNG. Calculate from physical size: a 30 cm print at 300 dpi is ~3550 pixels. Render with margin — 4000 px on the long side.
+1. **Colors set via CSS classes** while the `fill` attributes sit empty — the service's simplified renderer skipped the styles. Fixed by re-saving the SVG from [Figma](../../logos/design/figma/): it bakes styles into shape attributes.
+2. **The file uses external fonts or images** — without access to them the converter draws emptiness. Convert text to curves before converting.
+3. **Filters and masks** — exotic effects aren't supported by every renderer. Open the file in a browser: if it's empty there too, the problem is in the file itself.
 
-**Scenario: a batch of site icons.** Don't convert at all — use SVG directly in the markup: lighter, sharper, CSS-recolorable. All embedding methods are in [how to embed SVG](../kak-vstavit-svg-na-sajt/).
+The universal answer to fussy online services is [Figma](../../logos/design/figma/): its renderer is the most predictable of the publicly available ones.
 
-## Why an online converter sometimes returns an "empty" PNG
+## Common questions
 
-A common complaint: the service ran, but the PNG is transparent or black. Causes, most likely first:
+**What PNG size for social media?** Avatars — 400×400 minimum, posts and covers — per the platform's spec, but no less than 1080 on the long side. It's easier to make 2048 px once and scale down.
 
-1. **Colors defined via CSS classes** instead of `fill` attributes — the service's simplified renderer skipped the styles. Fix by re-saving the SVG from [Figma](../../logos/design/figma/) (it bakes styles into attributes).
-2. **External fonts or images referenced** — without access, the converter renders nothing. Outline text before converting.
-3. **Filters and masks** — exotic SVG effects aren't supported by every renderer. Check the file in a browser: if it's empty there too, the file itself is the problem.
+**Will transparency survive?** Yes: PNG supports an alpha channel, and every method listed leaves the background transparent by default. A white background appears only when exporting to JPG.
 
-The universal fallback when online tools misbehave is [Figma](../../logos/design/figma/): its renderer is the most predictable of the freely available ones.
+**Can I convert a batch at once?** Online services usually cap the count, so for batches use the command line (method 5) or [Figma](../../logos/design/figma/): select all objects and export them together.
 
-## In short
+**What should I use for an email campaign?** PNG only: mail clients barely support vector, and [Gmail](../../logos/office/gmail/) and [Outlook](../../logos/office/outlook/) drop an SVG silently, leaving a blank space. Render at twice the size the image occupies on screen.
 
-SVG to PNG: set the size and hit Export anywhere. PNG to SVG: don't trust the "convert" button — trace a simple mark, redraw a complex one, or find the original vector.
+**Why is my PNG cropped at the edges?** An SVG has a viewBox — the frame the picture lives in. Shapes that ended up outside it after manual edits get cut off by the renderer. Open the file in [Figma](../../logos/design/figma/) and check that all content sits inside the frame.
 
-The fastest route is not converting at all: every brand in our [logo catalog](../../logos/) already ships both SVG and PNG, and the PNG can be downloaded at the size you need.
+**How do I get a PNG with a background instead of transparency?** In [Figma](../../logos/design/figma/), place a rectangle of the needed color under the logo and export them together. On the command line, `rsvg-convert` has the `-b '#FFFFFF'` flag for this.
+
+**Why does [Illustrator](../../logos/design/illustrator/) export a PNG with huge margins?** It exports the whole artboard. Either fit the artboard to the logo (Object → Artboards → Fit to Artwork Bounds) or use Export Selection.
+
+## The bottom line
+
+The asymmetry of the two directions comes down to one thing: a vector records a description of shapes, a raster doesn't. So any tool turns SVG into PNG, and the only thing to watch is size: set it upfront and generously. There's no road back: tracing will pull through a simple single-color mark, and everything else has to be redrawn by hand or found as an original vector.
+
+That last option is almost always faster: in our [logo catalog](../../logos/) every brand already has both SVG and PNG, and the PNG downloads at the size you need — no conversion required at all.

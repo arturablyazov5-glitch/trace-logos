@@ -9,7 +9,7 @@ tags: Логотипы, Инструкции, Дизайн
 tags_en: Logos, How-to, Design
 ---
 
-Бюджета на дизайнера нет, генераторы выдают шаблонное, а логотип нужен. Хорошая новость: приличный логотип для старта реально сделать самому, бесплатно, за один‑два вечера — если идти по правильному процессу, а не рисовать «что‑то красивое» наугад. Плохая новость: у самодельных логотипов есть типовые провалы, по которым их узнают с первого взгляда. Пройдём процесс так, чтобы в них не наступить.
+Бюджета на дизайнера нет, генераторы выдают шаблонное, а логотип нужен. Хорошая новость: приличный логотип для старта реально сделать самому, бесплатно, за один‑два вечера, если идти по процессу. Рисование «чего‑то красивого» наугад заканчивается предсказуемо. Плохая новость: у самодельных логотипов есть типовые провалы, по которым их узнают с первого взгляда. Пройдём процесс так, чтобы в них не наступить.
 
 :::note Коротко
 Формула стартового логотипа: **простой знак или аккуратная надпись + один цвет + один шрифт**. Инструменты: [Figma](../../logos/design/figma/) (бесплатно) или Inkscape. Процесс: смысл → насмотренность → эскизы → отрисовка в векторе → проверка в малом размере → комплект файлов. Не пытайтесь сделать «дорого и сложно» — сложность как раз и выдаёт самоделку.
@@ -17,7 +17,7 @@ tags_en: Logos, How-to, Design
 
 ## Шаг 0. Поймите, что логотип — не главное
 
-Освобождающая правда: на старте бизнеса логотип решает меньше, чем кажется. Он должен быть аккуратным и не мешать — всё. Узнаваемость придёт от продукта, а не от знака. Поэтому цель — «чисто и профессионально», а не «гениально». Гениально закажете к первому миллиону.
+Освобождающая правда: на старте бизнеса логотип решает меньше, чем кажется. От него требуется аккуратность и умение не мешать. Узнаваемость приносит продукт, знак только сопровождает его на визитке и в шапке сайта. Поэтому цель формулируется как «чисто и профессионально», а гениально закажете к первому миллиону.
 
 ## Шаг 1. Сформулируйте смысл одним предложением
 
@@ -25,9 +25,11 @@ tags_en: Logos, How-to, Design
 
 ## Шаг 2. Наберите насмотренность (30 минут)
 
-Посмотрите 30‑50 логотипов вашей отрасли: что общего, сколько цветов, знак или текст, какие формы. Замечайте не «нравится/не нравится», а закономерности: банки любят геометрию и синий/зелёный, доставка — динамику, косметика — леттеринг. Удобно листать по категориям в нашем [каталоге логотипов](../../logos/) — банки, IT, авто, доставка, все в одном месте.
+Посмотрите 30‑50 логотипов вашей отрасли: что общего, сколько цветов, знак или текст, какие формы. Замечайте закономерности вместо оценок «нравится/не нравится»: банки любят геометрию и синий/зелёный, доставка — динамику, косметика — леттеринг. Удобно листать по категориям в нашем [каталоге логотипов](../../logos/) — банки, IT, авто, доставка, все в одном месте.
 
-Ваша цель — вписаться в категорию, но отличиться одной деталью. Не наоборот.
+Записывайте увиденное в три столбца: форма, цвет, шрифт. Через тридцать логотипов таблица сама покажет норму категории и свободные места в ней — например, что в вашей нише никто не использует зелёный или что все поголовно взяли круг. Эта таблица потом отвечает на вопрос «почему такой цвет» вместо ссылки на вкус.
+
+Ваша цель — вписаться в категорию и отличиться одной деталью, а обратный порядок даёт знак, который в своей отрасли выглядит чужим.
 
 ## Шаг 3. Выберите тип логотипа
 
@@ -45,14 +47,20 @@ tags_en: Logos, How-to, Design
 
 ## Шаг 5. Отрисовка в векторе
 
-**Инструменты:** [Figma](../../logos/design/figma/) (браузер, бесплатно) или Inkscape (оффлайн, бесплатно). Не [Canva](../../logos/design/canva/) для финала — она отдаёт вектор только в платной версии, и не [Photoshop](../../logos/design/photoshop/) — он растровый (чем это плохо — в [статье про вектор и растр](../vektor-i-rastr-raznica/)).
+**Инструменты:** [Figma](../../logos/design/figma/) (браузер, бесплатно) или Inkscape (оффлайн, бесплатно). [Canva](../../logos/design/canva/) для финала не подойдёт: вектор она отдаёт только в платной версии. [Photoshop](../../logos/design/photoshop/) тоже мимо, он растровый (чем это плохо — в [статье про вектор и растр](../vektor-i-rastr-raznica/)).
 
 Правила отрисовки, которые отделяют «сделал сам» от «сделал сам, но не видно»:
 
-1. **Стройте из геометрии.** Круги, прямоугольники, булевы операции (объединение, вычитание) — а не рисование пером на глаз. Геометрия даёт ровность, которую глаз считывает как профессионализм.
+1. **Стройте из геометрии.** Круги, прямоугольники, булевы операции (объединение, вычитание). Перо оставьте для того, что из геометрии не собирается. Геометрия даёт ровность, которую глаз считывает как профессионализм.
 2. **Один шрифт.** Хороший гротеск с бесплатной лицензией (Inter, Manrope, Golos, Onest). Никаких «красивых» декоративных шрифтов из подборок — это маркер самоделки №1.
 3. **Один цвет + чёрный/белый.** Выберите цвет по смыслу из шага 1 и категорийным нормам. Два цвета — максимум. Радужные градиенты — нет.
-4. **Выравнивание и отступы.** Включите сетку, проверьте, что элементы выровнены не «на глаз», а по направляющим. Кривые отступы — маркер самоделки №2.
+4. **Выравнивание и отступы.** Включите сетку и поставьте элементы по направляющим: глазомер ошибается на пару пикселей, и этого хватает. Кривые отступы — маркер самоделки №2.
+
+## Что делать, если ничего не придумывается
+
+Ступор на эскизах — обычная часть процесса, и выходят из него механически. Первый приём: возьмите первую букву названия и вставьте её в простую форму, круг или скруглённый квадрат. Дальше меняйте по одной переменной за раз — наклон буквы, толщину штриха, вырез в форме, смещение от центра. Двадцать вариантов набираются за полчаса, и один рабочий среди них обычно находится.
+
+Второй приём: выпишите десять предметов, связанных с ключевым словом из шага 1, напрямую. Восход даёт полукруг, горизонт, дугу; доставка — стрелку, коробку, маршрут. Рисуйте самый простой предмет из списка: интересный отнимет вечер и всё равно не прочитается в 16 пикселях.
 
 ## Шаг 6. Проверка на прочность
 
@@ -60,11 +68,14 @@ tags_en: Logos, How-to, Design
 - **Тест монохрома:** переведите в один цвет. Работает без цвета — значит, форма сильная.
 - **Тест фонов:** посмотрите на белом, чёрном и фирменном цвете.
 - **Тест чужих глаз:** покажите трём людям на 3 секунды и спросите, что они запомнили.
-- **Тест уникальности:** поиск по картинке ([Яндекс](../../logos/search/yandex/)/[Google](../../logos/search/google/)) — не совпадаете ли вы с существующим брендом. Совпадение — это не только неловко, но и юридически опасно.
+- **Тест памяти:** через день нарисуйте свой знак по памяти карандашом. Получилось за пять линий — форма простая настолько, насколько нужно. Пришлось вспоминать детали — их и надо убрать.
+- **Тест уникальности:** поиск по картинке ([Яндекс](../../logos/search/yandex/)/[Google](../../logos/search/google/)) — не совпадаете ли вы с существующим брендом. Совпадение обойдётся дорого: оно и неловко, и юридически опасно.
 
 ## Шаг 7. Комплект файлов
 
 Соберите стандартный набор: SVG (основной), PNG с прозрачным фоном 1000+ px, монохромные версии, версия для тёмного фона. Что для чего нужно — в [гиде по форматам](../v-kakom-formate-nuzhen-logotip/). Исходник [Figma](../../logos/design/figma/)/Inkscape храните бережно — это ваш «AI‑файл».
+
+Имена файлам дайте сразу и по одной схеме: `brand-logo-full.svg`, `brand-logo-mark.svg`, `brand-logo-white.png`. Через полгода вы будете отправлять их подрядчику по почте, и «логотип итог финал2.png» вернётся к вам растянутым в чужой презентации. Всю папку положите в облако с общей ссылкой, чтобы файл не пришлось искать в переписке.
 
 :::warning Когда самодельный путь — плохая идея
 Франшиза, инвестиционный раунд, выход в ритейл, регистрация товарного знака — ситуации, где знак попадёт под профессиональную и юридическую экспертизу. Здесь экономия на дизайне обходится дороже её самой: см. разбор [сколько стоит логотип и за что платят](../skolko-stoit-logotip/).
@@ -86,15 +97,15 @@ tags_en: Logos, How-to, Design
 
 **Шаг 7, комплект:** SVG, PNG 1024, белая версия, знак отдельно для аватарок. Итого — два вечера и ноль бюджета.
 
-Заметьте главный приём кейса: каждое решение (отказ от лучей, выбор цвета, шрифт) вытекает из теста или карты категории, а не из «мне так нравится». Это и есть процесс, который отличает осмысленную самоделку от случайной.
+Заметьте главный приём кейса: каждое решение (отказ от лучей, выбор цвета, шрифт) вытекает из теста или карты категории. «Мне так нравится» в этом списке не встречается ни разу, и это тот самый процесс, который отличает осмысленную самоделку от случайной.
 
-## Пять маркеров самоделки — и как их избежать
+## Пять маркеров самоделки и как их избежать
 
 Посмотрите на свой результат глазами дизайнера. Знак выдаёт себя, если:
 
 1. **Клипарт‑иконка из библиотеки + название.** Иконки из бесплатных наборов узнаваемы профессионалам с одного взгляда и не уникальны юридически. Даже простую форму стройте сами из геометрии.
 2. **Обводка (стровка) вместо заливки везде.** Тонкие контурные знаки — мода, которая плохо живёт в малых размерах и на печати. Начинающим — заливки.
-3. **Эффекты: тень, градиент из трёх цветов, свечение.** Убирайте всё. Плоско — это профессионально, [почему все упростились](../pochemu-brendy-uproshchayut-logotipy/), мы объясняли отдельно.
+3. **Эффекты: тень, градиент из трёх цветов, свечение.** Убирайте всё. Плоская форма читается профессионально, а [почему упростились даже гиганты](../pochemu-brendy-uproshchayut-logotipy/), разбирали отдельно.
 4. **Текст «на глазок» рядом со знаком.** Расстояние между знаком и текстом должно быть системным: обычно равно высоте буквы или половине знака. Меряйте, не прикидывайте.
 5. **Два шрифта и три цвета.** Формула стартового логотипа железная: один шрифт, один цвет + чёрный/белый.
 
@@ -104,7 +115,7 @@ tags_en: Logos, How-to, Design
 
 - Соберите [комплект файлов](../v-kakom-formate-nuzhen-logotip/) и одну папку в облаке.
 - Сделайте [фавикон](../kak-sdelat-favicon/) и [аватарки](../razmery-logotipa-dlya-sajta-i-socsetej/) из знака.
-- Запишите на одной странице: коды цветов, имя шрифта, «нельзя растягивать и перекрашивать» — это ваш микро‑гайдлайн, [зачем он нужен](../chto-takoe-brendbuk/), мы объясняли отдельно.
+- Запишите на одной странице: коды цветов, имя шрифта, «нельзя растягивать и перекрашивать». Это ваш микро‑гайдлайн, и [зачем он нужен](../chto-takoe-brendbuk/), объясняли отдельно.
 - Проверьте название и знак по реестрам товарных знаков — до того, как печатать вывеску: [как проверять](../kak-zaregistrirovat-logotip/), мы разбирали отдельно.
 
 ## Коротко
@@ -123,7 +134,7 @@ The starter-logo formula: **a simple mark or a clean wordmark + one color + one 
 
 ## Step 0. Accept that the logo isn't the main thing
 
-The liberating truth: at business start, the logo matters less than it seems. It must be neat and not get in the way — that's all. Recognition will come from the product, not the mark. So the goal is "clean and professional", not "genius". Order genius with your first million.
+The liberating truth: at business start, the logo matters less than it seems. It has to be neat and stay out of the way. Recognition comes from the product, while the mark just accompanies it on a business card and in the site header. So the goal reads "clean and professional", and genius gets ordered with your first million.
 
 ## Step 1. State the meaning in one sentence
 
@@ -131,9 +142,11 @@ Before opening any editor, write down: what the company does, for whom, and the 
 
 ## Step 2. Do visual research (30 minutes)
 
-Look at 30–50 logos in your industry: what's common, how many colors, mark or wordmark, which shapes. Note patterns, not likes: banks favor geometry and blue/green, delivery favors motion, beauty favors lettering. Browsing by category is easy in our [logo catalog](../../logos/) — banks, IT, auto, delivery, all in one place.
+Look at 30–50 logos in your industry: what's common, how many colors, mark or wordmark, which shapes. Note patterns instead of likes and dislikes: banks favor geometry and blue/green, delivery favors motion, beauty favors lettering. Browsing by category is easy in our [logo catalog](../../logos/) — banks, IT, auto, delivery, all in one place.
 
-Your goal is to fit the category and differ by one detail. Not the reverse.
+Write down what you see in three columns: shape, color, typeface. After thirty logos the table shows the category norm and the open spots in it by itself — that nobody in your niche uses green, say, or that everyone took a circle. That table later answers the "why this color" question in place of a reference to taste.
+
+Your goal is to fit the category and differ by one detail; the reverse order produces a mark that looks foreign in its own industry.
 
 ## Step 3. Pick the logo type
 
@@ -151,14 +164,20 @@ Mascots, complex illustrations, 3D gradient emblems — not today's difficulty l
 
 ## Step 5. Draw it in vector
 
-**Tools:** [Figma](../../logos/design/figma/) (browser, free) or Inkscape (offline, free). Not [Canva](../../logos/design/canva/) for finals — it exports vector only on paid plans; not [Photoshop](../../logos/design/photoshop/) — it's raster (why that's bad is explained in [our vector vs raster piece](../vektor-i-rastr-raznica/)).
+**Tools:** [Figma](../../logos/design/figma/) (browser, free) or Inkscape (offline, free). [Canva](../../logos/design/canva/) won't do for finals: it exports vector only on paid plans. [Photoshop](../../logos/design/photoshop/) is out too, being raster (why that's bad is explained in [our vector vs raster piece](../vektor-i-rastr-raznica/)).
 
 The drawing rules that separate "DIY" from "DIY but you can't tell":
 
-1. **Build from geometry.** Circles, rectangles, boolean operations — not freehand pen guessing. Geometry gives the evenness the eye reads as professionalism.
+1. **Build from geometry.** Circles, rectangles, boolean operations. Keep the pen for whatever geometry cannot assemble. Geometry gives the evenness the eye reads as professionalism.
 2. **One typeface.** A good sans with a free license (Inter, Manrope). No "beautiful" decorative fonts from listicles — DIY marker #1.
 3. **One color plus black/white.** Chosen for the meaning from step 1 and category norms. Two colors max. Rainbow gradients — no.
-4. **Alignment and spacing.** Turn on the grid; align to guides, not by eye. Crooked spacing — DIY marker #2.
+4. **Alignment and spacing.** Turn on the grid and place elements along the guides: eyeballing misses by a couple of pixels, and that is enough. Crooked spacing — DIY marker #2.
+
+## What to do when nothing comes
+
+A sketching block is an ordinary part of the process, and you get out of it mechanically. First move: take the first letter of the name and drop it into a simple shape, a circle or a rounded square. Then change one variable at a time — the letter slant, the stroke weight, a cut in the shape, an offset from the center. Twenty options take half an hour, and one of them usually works.
+
+Second move: list ten objects directly tied to the keyword from step 1. Sunrise gives a semicircle, a horizon, an arc; delivery gives an arrow, a box, a route. Draw the simplest object on the list: the interesting one eats an evening and still fails to read at 16 pixels.
 
 ## Step 6. Stress-test it
 
@@ -166,11 +185,14 @@ The drawing rules that separate "DIY" from "DIY but you can't tell":
 - **The monochrome test:** one color only. Works without color — the shape is strong.
 - **The background test:** white, black and your brand color.
 - **The stranger test:** show three people for 3 seconds; ask what they remember.
-- **The uniqueness test:** reverse image search — do you collide with an existing brand? A collision is legally dangerous, not just awkward.
+- **The memory test:** a day later, draw your own mark from memory with a pencil. Five lines was enough — the shape is as simple as it needs to be. Had to recall details — those are the details to drop.
+- **The uniqueness test:** reverse image search — do you collide with an existing brand? A collision costs you: it is awkward and legally dangerous at once.
 
 ## Step 7. The file kit
 
 Assemble the standard set: SVG (primary), transparent PNG at 1000+ px, monochrome versions, a dark-background version. What each is for — in [the format guide](../v-kakom-formate-nuzhen-logotip/). Guard the [Figma](../../logos/design/figma/)/Inkscape source file — it's your master.
+
+Name the files right away and by one scheme: `brand-logo-full.svg`, `brand-logo-mark.svg`, `brand-logo-white.png`. In six months you will be emailing them to a contractor, and "logo final final2.png" comes back stretched inside someone else's deck. Put the whole folder in cloud storage with a shared link so the file never has to be dug out of a mail thread.
 
 :::warning When DIY is a bad idea
 Franchising, an investment round, retail entry, trademark registration — situations where the mark faces professional and legal scrutiny. There, saving on design costs more than the saving: see [how much a logo costs and what you pay for](../skolko-stoit-logotip/).
@@ -192,15 +214,15 @@ Let's run the process on a concrete case so the steps stop being abstract.
 
 **Step 7, the kit:** SVG, 1024 PNG, a white version, the standalone mark for avatars. Total: two evenings and zero budget.
 
-Note the case's core trick: every decision (dropping the rays, the color, the typeface) follows from a test or the category map — not from "I like it this way". That process is what separates a deliberate DIY from a random one.
+Note the case's core trick: every decision (dropping the rays, the color, the typeface) follows from a test or the category map. "I like it this way" never appears on that list, and that process is what separates a deliberate DIY from a random one.
 
-## Five DIY giveaways — and how to avoid them
+## Five DIY giveaways and how to avoid them
 
 Look at your result through a designer's eyes. The mark betrays itself if:
 
 1. **A library clipart icon + the name.** Free-set icons are recognizable to professionals at a glance and legally non-unique. Build even simple shapes yourself from geometry.
 2. **Outlines instead of fills everywhere.** Thin line-marks are a fashion that dies at small sizes and in print. Beginners — use fills.
-3. **Effects: shadow, three-stop gradient, glow.** Remove all of it. Flat is professional — we explain [why everyone simplified](../pochemu-brendy-uproshchayut-logotipy/) separately.
+3. **Effects: shadow, three-stop gradient, glow.** Remove all of it. A flat shape reads as professional, and [why even the giants simplified](../pochemu-brendy-uproshchayut-logotipy/) is covered separately.
 4. **Text placed "by eye" next to the mark.** The gap should be systematic: usually the letter height or half the mark. Measure, don't guess.
 5. **Two typefaces and three colors.** The starter formula is iron: one typeface, one color plus black/white.
 
@@ -215,6 +237,6 @@ The logo is done — spend one more evening making it work as a system:
 
 ## In short
 
-Meaning → research → paper sketches → geometric drawing in [Figma](../../logos/design/figma/) → tests (16 px, monochrome, backgrounds) → file kit. Stay simple: one typeface, one color, clean geometry. Such a logo won't win awards — but it will honestly do its job until the business grows into a studio budget.
+Meaning → research → paper sketches → geometric drawing in [Figma](../../logos/design/figma/) → tests (16 px, monochrome, backgrounds) → file kit. Stay simple: one typeface, one color, clean geometry. Such a logo won't win awards, but it will honestly do its job until the business grows into a studio budget.
 
 Visual research is half the result: browse your industry's solutions in our [logo catalog](../../logos/) before opening [Figma](../../logos/design/figma/).

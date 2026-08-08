@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Reviews Exporter",
+  "version": "1.2.0",
+  "description": "Собирает все отзывы организации на Яндекс.Картах/Бизнесе, продавца на Avito или комментарии к посту в Telegram Web и выгружает их в .md файл.",
+  "host_permissions": [
+    "https://yandex.ru/maps/*",
+    "https://yandex.com/maps/*",
+    "https://*.yandex.ru/*",
+    "https://*.yandex.com/*",
+    "https://www.avito.ru/*",
+    "https://web.telegram.org/*",
+    "https://trace-logos.ru/tools/extensions/reviews-exporter/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://yandex.ru/maps/*", "https://yandex.com/maps/*", "https://www.avito.ru/*"],
+      "js": ["collector.js", "button-injector.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://web.telegram.org/k/*", "https://web.telegram.org/a/*"],
+      "js": ["collector.js", "button-injector.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["promo-assets/*"],
+      "matches": ["https://yandex.ru/*", "https://yandex.com/*", "https://www.avito.ru/*", "https://web.telegram.org/*"]
+    }
+  ]
+}

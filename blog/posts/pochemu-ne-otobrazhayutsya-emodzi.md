@@ -12,7 +12,7 @@ tags_en: Emoji, Troubleshooting, Technology
 Вам прислали сообщение, а в нём — квадратик □. Или ромбик с вопросом �. Или вместо флага страны — просто буквы RU. Собеседник уверен, что отправил симпатичный эмодзи, вы видите мусор, и оба не понимаете, кто сломался. Спокойно: не сломался никто — так устроена система эмодзи. Разбираем каждый вид «кракозябры», её причину и способы лечения.
 
 :::note Коротко
-Квадратик □ означает: **ваше устройство не знает этот символ** — обычно эмодзи новее, чем ваша система. Лечение — обновить ОС или приложение. Флаги стран буквами (RU, US) — особый случай: **[Windows](../../logos/store/windows/) принципиально не рисует флаги‑эмодзи**, и это не чинится настройками. � — символ побился при передаче из‑за кодировки.
+Квадратик □ означает: **ваше устройство не знает этот символ** — обычно эмодзи новее, чем ваша система. Лечение — обновить ОС или приложение. Флаги стран буквами (RU, US) — особый случай: **[Windows](../../logos/tech/windows/) принципиально не рисует флаги‑эмодзи**, и это не чинится настройками. � — символ побился при передаче из‑за кодировки.
 :::
 
 ## Как вообще эмодзи попадает на экран
@@ -25,7 +25,7 @@ tags_en: Emoji, Troubleshooting, Technology
 
 **Лечение:**
 
-1. **Обновите систему** — новые наборы эмодзи приезжают с обновлениями iOS, Android, [Windows](../../logos/store/windows/) и macOS. Это единственное настоящее лечение.
+1. **Обновите систему** — новые наборы эмодзи приезжают с обновлениями iOS, Android, [Windows](../../logos/tech/windows/) и macOS. Это единственное настоящее лечение.
 2. **Обновите приложение.** Некоторые мессенджеры (Telegram, WhatsApp) рисуют эмодзи собственным набором и показывают новинки даже на старой ОС.
 3. Устройство больше не обновляется? Тогда честный ответ — никак: без картинки в шрифте символ не отрисовать. Посмотреть, как выглядит загадочный эмодзи, можно в веб‑каталоге — например, [нашем](../../emoji/).
 
@@ -39,7 +39,7 @@ tags_en: Emoji, Troubleshooting, Technology
 
 ## Флаги буквами: RU вместо флага
 
-Самый любопытный случай. Флаг страны в Unicode — это **не отдельный символ, а пара букв‑индикаторов**: RU = R + U, и шрифт сам склеивает пару в картинку флага. Так вот: **[Windows](../../logos/store/windows/) — единственная крупная платформа, которая флаги стран не рисует принципиально**: Microsoft никогда не добавляла их в Segoe UI Emoji, и вместо флага вы видите буквы. Это осознанное решение компании (геополитика флагов — минное поле: чей Крым, чей Тайвань — Microsoft предпочла не отвечать на такие вопросы шрифтом), а не поломка.
+Самый любопытный случай. Флаг страны в Unicode — это **не отдельный символ, а пара букв‑индикаторов**: RU = R + U, и шрифт сам склеивает пару в картинку флага. Так вот: **[Windows](../../logos/tech/windows/) — единственная крупная платформа, которая флаги стран не рисует принципиально**: Microsoft никогда не добавляла их в Segoe UI Emoji, и вместо флага вы видите буквы. Это осознанное решение компании (геополитика флагов — минное поле: чей Крым, чей Тайвань — Microsoft предпочла не отвечать на такие вопросы шрифтом), а не поломка.
 
 **Лечение:**
 
@@ -59,7 +59,7 @@ tags_en: Emoji, Troubleshooting, Technology
 | --- | --- | --- |
 | □ квадратик | эмодзи новее вашей ОС | обновить ОС/приложение |
 | � ромб с вопросом | битая кодировка при передаче | переслать заново; чинить UTF‑8 |
-| RU, US буквами | [Windows](../../logos/store/windows/) не рисует флаги | расширение браузера / смириться |
+| RU, US буквами | [Windows](../../logos/tech/windows/) не рисует флаги | расширение браузера / смириться |
 | ☺ чёрно‑белый контур | текстовый вариант символа | обычно не требуется |
 | пустое место | символ‑невидимка (ZWJ и пр.) | это служебный символ, всё в порядке |
 
@@ -71,7 +71,7 @@ tags_en: Emoji, Troubleshooting, Technology
 
 ## Коротко
 
-Квадратик — обновляйтесь; ромб с вопросом — символ погиб в кодировках, просите переслать; флаги на [Windows](../../logos/store/windows/) — не баг, а принципиальная позиция Microsoft. Эмодзи — это код, который каждая система рисует своим шрифтом: когда картинки для кода нет, вы видите заглушку.
+Квадратик — обновляйтесь; ромб с вопросом — символ погиб в кодировках, просите переслать; флаги на [Windows](../../logos/tech/windows/) — не баг, а принципиальная позиция Microsoft. Эмодзи — это код, который каждая система рисует своим шрифтом: когда картинки для кода нет, вы видите заглушку.
 
 Проверить любой эмодзи — как он выглядит, как называется и у кого отобразится — можно в нашем [каталоге эмодзи](../../emoji/): картинки Apple и Google рядом, копирование одним кликом.
 
@@ -80,7 +80,7 @@ tags_en: Emoji, Troubleshooting, Technology
 Someone sends you a message and it contains a box □. Or a diamond with a question mark �. Or plain letters RU where a country flag should be. The sender is sure they sent a nice emoji, you see junk, and neither of you knows what broke. Relax: nothing broke — that's how the emoji system works. Let's diagnose every kind of garbage character, its cause and its cure.
 
 :::note TL;DR
-A box □ means **your device doesn't know that character** — usually the emoji is newer than your system. The cure is updating the OS or the app. Country flags shown as letters (RU, US) are a special case: **[Windows](../../logos/store/windows/) deliberately doesn't draw flag emoji**, and no setting fixes it. � means the character got corrupted in transit by an encoding error.
+A box □ means **your device doesn't know that character** — usually the emoji is newer than your system. The cure is updating the OS or the app. Country flags shown as letters (RU, US) are a special case: **[Windows](../../logos/tech/windows/) deliberately doesn't draw flag emoji**, and no setting fixes it. � means the character got corrupted in transit by an encoding error.
 :::
 
 ## How an emoji reaches your screen
@@ -93,7 +93,7 @@ The quick mechanics (full story in [why emoji look different everywhere](../poch
 
 **Treatment:**
 
-1. **Update the system** — new emoji sets arrive with iOS, Android, [Windows](../../logos/store/windows/) and macOS updates. The only real cure.
+1. **Update the system** — new emoji sets arrive with iOS, Android, [Windows](../../logos/tech/windows/) and macOS updates. The only real cure.
 2. **Update the app.** Some messengers (Telegram, WhatsApp) draw emoji with their own sets and show new ones even on old systems.
 3. Device no longer updates? Then honestly — no fix: without artwork in the font, the character can't render. You can at least see what the mystery emoji looks like in a web catalog — for example, [ours](../../emoji/).
 
@@ -107,7 +107,7 @@ The quick mechanics (full story in [why emoji look different everywhere](../poch
 
 ## Flags as letters: RU instead of a flag
 
-The most curious case. A country flag in Unicode is **not a single character but a pair of indicator letters**: RU = R + U, and the font itself fuses the pair into flag artwork. And here's the thing: **[Windows](../../logos/store/windows/) is the only major platform that deliberately doesn't draw country flags** — Microsoft never added them to Segoe UI Emoji, so you see the letters. It's a conscious decision (flag geopolitics is a minefield, and Microsoft chose not to answer such questions with a font), not a malfunction.
+The most curious case. A country flag in Unicode is **not a single character but a pair of indicator letters**: RU = R + U, and the font itself fuses the pair into flag artwork. And here's the thing: **[Windows](../../logos/tech/windows/) is the only major platform that deliberately doesn't draw country flags** — Microsoft never added them to Segoe UI Emoji, so you see the letters. It's a conscious decision (flag geopolitics is a minefield, and Microsoft chose not to answer such questions with a font), not a malfunction.
 
 **Treatment:**
 
@@ -127,7 +127,7 @@ The most curious case. A country flag in Unicode is **not a single character but
 | --- | --- | --- |
 | □ box | emoji newer than your OS | update OS/app |
 | � replacement diamond | encoding corrupted in transit | resend; fix UTF-8 |
-| RU, US as letters | [Windows](../../logos/store/windows/) doesn't draw flags | browser extension / acceptance |
+| RU, US as letters | [Windows](../../logos/tech/windows/) doesn't draw flags | browser extension / acceptance |
 | ☺ monochrome outline | text presentation of the symbol | usually none needed |
 | empty gap | an invisible control character (ZWJ etc.) | it's a service character, all is well |
 
@@ -139,6 +139,6 @@ The most curious case. A country flag in Unicode is **not a single character but
 
 ## In short
 
-A box — update; the question diamond — the character died in encoding, ask for a resend; flags on [Windows](../../logos/store/windows/) — not a bug but Microsoft's standing policy. An emoji is a code each system draws with its own font: when the artwork is missing, you get a placeholder.
+A box — update; the question diamond — the character died in encoding, ask for a resend; flags on [Windows](../../logos/tech/windows/) — not a bug but Microsoft's standing policy. An emoji is a code each system draws with its own font: when the artwork is missing, you get a placeholder.
 
 Check any emoji — its look, name and who will see it — in our [emoji catalog](../../emoji/): Apple and Google artwork side by side, one-click copy.

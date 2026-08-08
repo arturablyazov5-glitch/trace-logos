@@ -500,7 +500,7 @@ const WIDGETS = {
   'svg-viewer': {
     partial: 'blog-widget-svg-viewer',
     css:     'css/blog-widget-svg.css',
-    js:      'js/blog-svg-viewer.js',
+    js:      'js/blog-svg-viewer.min.js',
   },
   // Body-driven, без своих css/js: разметка запекается из каталога на сборке
   // (build*Widget выше), гидрировать нечего, а стили опираются на компоненты
@@ -661,8 +661,11 @@ function renderBlocks(lines, lang, headings, widgets, totalH2 = 0) {
         // "Задача первая: Название" / "Task one: Title" → same badge, two-word prefix
         const task = !step && !numbered && !bonus && h[2].match(/^((?:Задача|Task)\s+\S+)\s*:\s*(.+)$/);
         // "1976: Название" / "1999–2016: Название" / "2010-е: Название" — a year,
-        // year range, or decade opening a timeline entry → same badge, the year(s)
-        const year = !step && !numbered && !bonus && !task && h[2].match(/^(\d{4}(?:\s*[–—-]\s*\d{4}|-е)?)\s*:\s*(.+)$/);
+        // year range, or decade opening a timeline entry → same badge, the year(s).
+        // Character class includes U+2011 (non-breaking hyphen) — apply-typography.js
+        // rewrites a plain "-" between two digits (or digit+letter, as in "2010-е")
+        // into that character, which a bare ASCII "-" in this class would miss.
+        const year = !step && !numbered && !bonus && !task && h[2].match(/^(\d{4}(?:\s*[–—‑-]\s*\d{4}|[–—‑-]е)?)\s*:\s*(.+)$/);
         if (step) {
           const titleHtml = dimParens(inline(esc(typo(step[3]))));
           out.push(`<h2 id="${id}" class="step-heading"><span class="step-badge">${step[1]}&nbsp;${step[2]}</span><span class="step-title">${titleHtml}</span></h2>`);
@@ -790,17 +793,52 @@ function shortDate(iso) {
   return `${d}.${m}.${y}`;
 }
 
-// Related posts widget (bottom of article) — ranked by shared tags, ties
-// broken by recency. Falls back to the most recent other posts when a post
-// has too few tag matches to fill the widget.
-const RELATED_COUNT = 6;
+// Related posts widget (bottom of article) — RELATED_TAG_COUNT ranked by
+// shared tags (ties broken by recency), plus RELATED_RANDOM_COUNT picked at
+// random from the rest. Pure tag-ranking clusters posts into "islands" —
+// tightly tag-linked groups that only ever point at each other, leaving
+// posts outside the cluster unreachable via this widget. The random slots
+// are a deliberate escape hatch out of that cluster.
+// The "random" pick is seeded by the post's own slug (not Math.random()) so
+// a rebuild with unchanged data reproduces the same picks — otherwise every
+// full site rebuild would rewrite every single post's HTML for no reason.
+const RELATED_TAG_COUNT = 4;
+const RELATED_RANDOM_COUNT = 2;
+const RELATED_COUNT = RELATED_TAG_COUNT + RELATED_RANDOM_COUNT;
+
+function seededRandom(seed) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return function next() {
+    h ^= h << 13; h >>>= 0;
+    h ^= h >>> 17;
+    h ^= h << 5; h >>>= 0;
+    return h / 4294967296;
+  };
+}
+
 function pickRelated(post, allPosts, n = RELATED_COUNT) {
-  return allPosts
-    .filter(p => p.slug !== post.slug)
+  const others = allPosts.filter(p => p.slug !== post.slug);
+
+  const tagPicks = others
     .map(p => ({ p, shared: p.tags.filter(t => post.tags.includes(t)).length }))
     .sort((a, b) => b.shared - a.shared || b.p.date.localeCompare(a.p.date))
-    .slice(0, n)
+    .slice(0, Math.max(0, n - RELATED_RANDOM_COUNT))
     .map(s => s.p);
+
+  const pickedSlugs = new Set(tagPicks.map(p => p.slug));
+  const pool = others.filter(p => !pickedSlugs.has(p.slug));
+  const rand = seededRandom(post.slug);
+  const randomPicks = [];
+  while (randomPicks.length < RELATED_RANDOM_COUNT && pool.length) {
+    const idx = Math.floor(rand() * pool.length);
+    randomPicks.push(pool.splice(idx, 1)[0]);
+  }
+
+  return [...tagPicks, ...randomPicks].slice(0, n);
 }
 
 function blogCardDateHtml(date) {

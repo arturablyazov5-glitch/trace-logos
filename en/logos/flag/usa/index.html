@@ -13,8 +13,7 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script src="/components/cookie-consent.js?v=20260801" defer></script>
+  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,7 +116,7 @@
       "interactionStatistic": {
         "@type": "InteractionCounter",
         "interactionType": "https://schema.org/DownloadAction",
-        "userInteractionCount": 2
+        "userInteractionCount": 4
       }
     },
     {
@@ -126,7 +125,10 @@
       "name": "USA",
       "logo": {
         "@id": "https://trace-logos.ru/logos/flag/usa/#logo"
-      }
+      },
+      "sameAs": [
+        "https://www.usa.gov"
+      ]
     },
     {
       "@type": "Organization",
@@ -249,7 +251,7 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.bundle.css?v=20260801">
+  <link rel="stylesheet" href="/css/seo-page.bundle.css?v=20260808">
   
   
   <!-- Yandex.RTB -->
@@ -318,15 +320,15 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.js?v=20260801" defer></script>
-<script src="/components/search-box.js?v=20260801" defer></script>
-<script src="/components/mobile-nav.js?v=20260801" defer></script>
+<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
+<script src="/components/search-box.min.js?v=20260808" defer></script>
+<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-en.js?v=20260801">
-<script type="module" src="/components/donate-ticker.js?v=20260801"></script>
-<script type="module" src="/js/header-search.js?v=20260801"></script>
+<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
+<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
+<script type="module" src="/js/header-search.min.js?v=20260808"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -362,34 +364,30 @@
 
     
 
-    <!-- ── Sponsor banner (data-driven, заменяет Threads-баннер если задан) ── -->
-
-
     <!-- ── Sidebar ad (десктоп: рядом с превью · мобилка: в конце) ── -->
-    <!-- RSYA sidebar banner — replaces templates/partials/_archived/threads-banner.html
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot, same width.
-     Height is hard-capped (css/seo-page.css .ad-sidebar-slot) so the ad can't
-     push the rest of the sidebar down. -->
-<div class="ad-sidebar-slot" id="ad-sidebar-slot-R-A-19679616-2">
-  <!-- Yandex.RTB R-A-19679616-2 -->
-  <div id="yandex_rtb_R-A-19679616-2"></div>
-  <script>
-  (() => {
-    const slotEl = document.getElementById('ad-sidebar-slot-R-A-19679616-2');
-    const adEl = document.getElementById('yandex_rtb_R-A-19679616-2');
-    const collapseTimer = setTimeout(() => {
-      if (adEl && !adEl.querySelector('iframe')) slotEl.classList.add('ad-collapsed');
-    }, 3000);
-    window.yaContextCb.push(() => {
-        Ya.Context.AdvManager.render({
-            "blockId": "R-A-19679616-2",
-            "renderTo": "yandex_rtb_R-A-19679616-2",
-            "onRender": () => clearTimeout(collapseTimer)
-        })
-    })
-  })();
-  </script>
+    <!-- Sidebar promo banner — house ad for landologovo.ru.
+     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
+     same width. Previously an RSYA ad unit, before that the Threads banner
+     (see templates/partials/_archived/threads-banner.html).
+     Styles: css/seo-page.css → «Sidebar promo banner».
+     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
+<div class="ad-sidebar-slot">
+  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
+    <span class="promo-banner-src">
+      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
+    </span>
+    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
+    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
+    <span class="promo-banner-cta">
+      Читать статью
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
+    </span>
+    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
+  </a>
 </div>
+
+
+    <!-- ── Sponsor banner (data-driven, заменяет Threads-баннер если задан) ── -->
 
     <support-btn></support-btn>
 
@@ -399,7 +397,18 @@
     <div class="logo-info">
 
       <h1 data-h1-en="USA Logo">USA Logo</h1>
-      <p class="logo-desc">USA — SVG and PNG, colors #b31942 and #000000. Download the USA logo in SVG and PNG for free. Official colors, ready for Figma.</p>
+      <p class="logo-desc" id="logo-desc">USA — SVG and PNG, colors #b31942 and #000000. Download the USA logo in SVG and PNG for free. Official colors, ready for Figma.</p>
+      <!-- Мобилка: текст клэмпится до 2 строк CSS-ом (полный текст остаётся в HTML —
+           краулеры индексируют DOM, не видимую высоту, поэтому для SEO это безопасно),
+           кнопка раскрывает/сворачивает. Скрыта по умолчанию — js/seo-page.js сам решает,
+           нужна ли она (короткий about на 1-2 строки не клэмпится, кнопка не нужна). -->
+      <button type="button" class="logo-desc-toggle" id="logo-desc-toggle" data-i18n="logoDescExpand" aria-expanded="false" aria-controls="logo-desc" hidden>Read more</button>
+      <!-- Мобильная копия — на мобилке .logo-side схлопывается (display:contents) и
+           её дети реордерятся через order, из-за чего эта кнопка без order всплывала
+           в самое начало, ещё выше превью. Вместо order — отдельный инстанс сразу под
+           about-текстом, показывается только на мобилке; десктопная версия внутри
+           .logo-side ниже по файлу скрывается на этом брейкпоинте (см. seo-page.css). -->
+      <support-btn class="logo-desc-support"></support-btn>
 
       <hr class="divider">
 
@@ -419,6 +428,14 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span data-label="downloadPng">Download PNG</span> <span class="btn-size">22.1 KB</span>
           </a>
+          <button class="btn btn-secondary hidden" id="btn-download-ico" type="button">
+            <svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M15.49 6H6V15.492H15.492L15.49 6ZM26 6H16.508V15.492H26V6ZM15.49 16.508H6V26H15.492L15.49 16.508ZM26 16.508H16.508V26H26V16.508Z"/></svg>
+            <span data-label="downloadIco">Download ICO</span>
+          </button>
+          <button class="btn btn-secondary hidden" id="btn-download-icns" type="button">
+            <svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M23.8457 11.5898C22.4743 12.4367 21.6274 13.8892 21.6274 15.503C21.6274 17.3178 22.7166 18.9715 24.3703 19.6572C24.0484 20.6909 23.5722 21.67 22.9577 22.5612C22.0709 23.8115 21.1429 25.103 19.7714 25.103C18.4 25.103 17.9966 24.2961 16.3829 24.2961C14.8103 24.2961 14.2457 25.143 12.9543 25.143C11.6629 25.143 10.776 23.9738 9.768 22.5212C8.43657 20.5041 7.67086 18.1647 7.63086 15.7041C7.63086 11.711 10.2114 9.57268 12.7931 9.57268C14.1646 9.57268 15.2937 10.4607 16.1417 10.4607C16.9474 10.4607 18.2389 9.53268 19.7714 9.53268C20.5678 9.51148 21.3569 9.68835 22.068 10.0474C22.7791 10.4064 23.39 10.9364 23.8457 11.5898ZM19.0457 7.83896C19.7314 7.03211 20.0937 6.0241 20.1349 4.97496C20.1349 4.85382 20.1349 4.69268 20.0937 4.57153C18.9223 4.69283 17.8409 5.25501 17.0686 6.1441C16.3829 6.91096 15.9794 7.87896 15.9394 8.9281C15.9394 9.04925 15.9394 9.17039 15.9794 9.29039C16.0606 9.29039 16.1817 9.33153 16.2629 9.33153C17.3509 9.25153 18.36 8.68582 19.0457 7.83896Z"/></svg>
+            <span data-label="downloadIcns">Download ICNS</span>
+          </button>
           <div class="btn-download-group" id="btn-download-all">
           <button class="btn btn-zip btn-download-trigger" id="btn-download-trigger" type="button">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
@@ -437,9 +454,9 @@
       <div class="info-section-lg">
         <span class="section-label" data-i18n="seoVariantsLabel">Variants</span>
         <div class="variants-grid" id="variants-grid">
-          <div class="variant-card active" data-variant="flag-usa-svg" data-src="/assets/logos/svgs/flag-usa.svg" data-preview="/assets/logos/svgs/flag-usa.svg" data-type="svg" data-wide="false" data-png="/assets/emoji/pngs/apple/flag-united-states_1f1fa-1f1f8.png">
+          <div class="variant-card active" data-variant="flag-usa-svg" data-src="/assets/logos/svgs/flag-usa.svg" data-preview="/assets/logos/previews/flag-usa.webp" data-type="svg" data-wide="false" data-png="/assets/emoji/pngs/apple/flag-united-states_1f1fa-1f1f8.png">
             <span class="variant-preview-icon" aria-hidden="true">
-              <img src="/assets/logos/svgs/flag-usa.svg" alt="США — SVG" width="48" height="48" loading="lazy">
+              <img src="/assets/logos/previews/flag-usa.webp" alt="США — SVG" width="48" height="48" loading="lazy">
             </span>
             <span class="variant-label">SVG</span>
           </div>
@@ -525,11 +542,14 @@
           <th scope="row" class="meta-key">Figma</th>
           <td class="meta-val">Icon / Flag / USA</td>
         </tr><tr class="meta-row">
+          <th scope="row" class="meta-key" data-i18n="detailBrand">Brand</th>
+          <td class="meta-val"><a href="https://www.usa.gov" target="_blank" rel="noopener noreferrer" data-i18n="seoBrandRulesLink">Usage guidelines →</a></td>
+        </tr><tr class="meta-row">
           <th scope="row" class="meta-key">Updated</th>
           <td class="meta-val"><time datetime="2026-06-09">June 9, 2026</time></td>
         </tr><tr class="meta-row">
           <th scope="row" class="meta-key">Downloaded</th>
-          <td class="meta-val">2 times</td>
+          <td class="meta-val">4 times</td>
         </tr>
         </tbody>
       </table>
@@ -558,51 +578,51 @@
     <h2 class="catalog-section-title" data-i18n="seoRelatedLabel">More logos in this category</h2>
     <div class="related-grid">
           <a class="related-card" href="/en/logos/flag/russia/" aria-label="Russia">
-            <img src="/assets/logos/svgs/flag-russia.svg" alt="Russia logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-russia.webp" alt="Russia logo" width="48" height="48" loading="lazy">
             <span class="related-label">Russia</span>
           </a>
           <a class="related-card" href="/en/logos/flag/belarus/" aria-label="Belarus">
-            <img src="/assets/logos/svgs/belarus.svg" alt="Belarus logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/belarus.webp" alt="Belarus logo" width="48" height="48" loading="lazy">
             <span class="related-label">Belarus</span>
           </a>
           <a class="related-card" href="/en/logos/flag/japan/" aria-label="Japan">
-            <img src="/assets/logos/svgs/flag-japan.svg" alt="Japan logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-japan.webp" alt="Japan logo" width="48" height="48" loading="lazy">
             <span class="related-label">Japan</span>
           </a>
           <a class="related-card" href="/en/logos/flag/netherlands/" aria-label="Netherlands">
-            <img src="/assets/logos/svgs/flag-netherlands.svg" alt="Netherlands logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-netherlands.webp" alt="Netherlands logo" width="48" height="48" loading="lazy">
             <span class="related-label">Netherlands</span>
           </a>
           <a class="related-card" href="/en/logos/flag/canada/" aria-label="Canada">
-            <img src="/assets/logos/svgs/flag-canada.svg" alt="Canada logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-canada.webp" alt="Canada logo" width="48" height="48" loading="lazy">
             <span class="related-label">Canada</span>
           </a>
           <a class="related-card" href="/en/logos/flag/israel/" aria-label="Israel">
-            <img src="/assets/logos/svgs/flag-israel.svg" alt="Israel logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-israel.webp" alt="Israel logo" width="48" height="48" loading="lazy">
             <span class="related-label">Israel</span>
           </a>
           <a class="related-card" href="/en/logos/flag/germany/" aria-label="Germany">
-            <img src="/assets/logos/svgs/flag-germany.svg" alt="Germany logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-germany.webp" alt="Germany logo" width="48" height="48" loading="lazy">
             <span class="related-label">Germany</span>
           </a>
           <a class="related-card" href="/en/logos/flag/finland/" aria-label="Finland">
-            <img src="/assets/logos/svgs/flag-finland.svg" alt="Finland logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-finland.webp" alt="Finland logo" width="48" height="48" loading="lazy">
             <span class="related-label">Finland</span>
           </a>
           <a class="related-card" href="/en/logos/flag/china/" aria-label="China">
-            <img src="/assets/logos/svgs/flag-china.svg" alt="China logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-china.webp" alt="China logo" width="48" height="48" loading="lazy">
             <span class="related-label">China</span>
           </a>
           <a class="related-card" href="/en/logos/flag/southkorea/" aria-label="South Korea">
-            <img src="/assets/logos/svgs/flag-south-korea.svg" alt="South Korea logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/flag-south-korea.webp" alt="South Korea logo" width="48" height="48" loading="lazy">
             <span class="related-label">South Korea</span>
           </a>
           <a class="related-card" href="/en/logos/flag/kazakhstan/" aria-label="Kazakhstan">
-            <img src="/assets/logos/svgs/kazakhstan.svg" alt="Kazakhstan logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/kazakhstan.webp" alt="Kazakhstan logo" width="48" height="48" loading="lazy">
             <span class="related-label">Kazakhstan</span>
           </a>
           <a class="related-card" href="/en/logos/flag/uzbekistan/" aria-label="Uzbekistan">
-            <img src="/assets/logos/svgs/uzbekistan.svg" alt="Uzbekistan logo" width="48" height="48" loading="lazy">
+            <img src="/assets/logos/previews-related/uzbekistan.webp" alt="Uzbekistan logo" width="48" height="48" loading="lazy">
             <span class="related-label">Uzbekistan</span>
           </a>
     </div>
@@ -613,276 +633,297 @@
     <h2 class="catalog-section-title" data-i18n="seoCategoriesLabel">Other categories</h2>
     <div class="catalog-cats">
           <a class="catalog-cat" href="/en/logos/market/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/ozon.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/wildberries.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-market.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/avito.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/ozon.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/krasnoeibeloe.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/wildberries.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-market.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Marketplaces &amp; Retail">Marketplaces &amp; Retail</span>
-              <span class="catalog-cat-count">23</span>
+              <span class="catalog-cat-count">41<span class="catalog-cat-count-label" data-en=" logos"> логотип</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/social/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/telegram.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/max.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/vk.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/whatsapp.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/telegram.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/max.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/vk.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/whatsapp.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Messengers &amp; Social">Messengers &amp; Social</span>
-              <span class="catalog-cat-count">34</span>
+              <span class="catalog-cat-count">34<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/bank/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/sber.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/t-bank.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/mts-bank.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/gazprom-bank.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/dom-rf-bank.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/sber.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/t-bank.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/mts-bank.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Banks">Banks</span>
-              <span class="catalog-cat-count">23</span>
+              <span class="catalog-cat-count">26<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/ai/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/chatgpt.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/codex.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/chatgpt-atlas.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/sora.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/chatgpt.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/codex.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/chatgpt-atlas.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/sora.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="AI &amp; Neural Networks">AI &amp; Neural Networks</span>
-              <span class="catalog-cat-count">32</span>
+              <span class="catalog-cat-count">34<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/food/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/yandex-eda.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-lavka.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-delivery-club.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/nyt-cooking.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex-eda.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-lavka.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-delivery-club.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/nyt-cooking.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Food &amp; Restaurants">Food &amp; Restaurants</span>
-              <span class="catalog-cat-count">11</span>
+              <span class="catalog-cat-count">21<span class="catalog-cat-count-label" data-en=" logos"> логотип</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/store/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/vk-id.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-id.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/t-id.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/t-bank-premium.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/vk-id.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-id.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/t-id.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/t-bank-premium.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Stores &amp; Subscriptions">Stores &amp; Subscriptions</span>
-              <span class="catalog-cat-count">20</span>
+              <span class="catalog-cat-count">16<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/pay/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/apple-pay.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/sbp.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/mir.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/mts-money.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/apple-pay.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/sbp.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/mir.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/mts-money.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Payments &amp; Cards">Payments &amp; Cards</span>
-              <span class="catalog-cat-count">23</span>
+              <span class="catalog-cat-count">25<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/bnpl/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/podeli.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-split.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/dolyami.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/afterpay.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/podeli.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-split.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/dolyami.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/afterpay.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Installments &amp; BNPL">Installments &amp; BNPL</span>
-              <span class="catalog-cat-count">5</span>
+              <span class="catalog-cat-count">5<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/delivery/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/yandex-delivery.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-go.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-pro.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/lyft.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex-delivery.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-routing.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-go.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-pro.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Delivery &amp; Taxi">Delivery &amp; Taxi</span>
-              <span class="catalog-cat-count">7</span>
+              <span class="catalog-cat-count">12<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/map/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/2gis.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-maps.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/google-maps.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-Maps.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/2gis.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-maps.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/google-maps.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-Maps.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Maps &amp; Navigation">Maps &amp; Navigation</span>
-              <span class="catalog-cat-count">6</span>
+              <span class="catalog-cat-count">6<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/video/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/vk-video.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/rutube.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/youtube.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-tv.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/vk-video.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/rutube.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/youtube.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-tv.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Video &amp; Streaming">Video &amp; Streaming</span>
-              <span class="catalog-cat-count">26</span>
+              <span class="catalog-cat-count">31<span class="catalog-cat-count-label" data-en=" logos"> логотип</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/music/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/yandex-dzen.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-music.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/spotify.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/musicrecognitionmac.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex-dzen.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/mos-ru.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-music.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-book.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Music &amp; Media">Music &amp; Media</span>
-              <span class="catalog-cat-count">39</span>
+              <span class="catalog-cat-count">40<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/videocall/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/yandex-telemost.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/discord.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/microsoft-teams.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-FaceTime.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex-telemost.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/discord.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/microsoft-teams.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-FaceTime.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Video Calls">Video Calls</span>
-              <span class="catalog-cat-count">7</span>
+              <span class="catalog-cat-count">7<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/ads/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/yandex-business.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-direct.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-direct-pro.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-ai-helper.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex-business.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-direct.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-promo-page.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-direct-pro.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Ads &amp; Analytics">Ads &amp; Analytics</span>
-              <span class="catalog-cat-count">8</span>
+              <span class="catalog-cat-count">11<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/reviews/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/prodoctors.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-weather.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/prodoctors.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-weather.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yell.webp" alt="" width="20" height="20" loading="lazy"></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Reviews &amp; Directories">Reviews &amp; Directories</span>
-              <span class="catalog-cat-count">2</span>
+              <span class="catalog-cat-count">3<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/search/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/yandex.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-browser.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-neuroprotect.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-neiro-search.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-browser.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-browser-corp.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-camera.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Search &amp; Browsers">Search &amp; Browsers</span>
-              <span class="catalog-cat-count">11</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/mail/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/yandex-360.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-wiki.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/mail-ru.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-mail.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex-360.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-wiki.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/mail-ru.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-mail.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Email">Email</span>
-              <span class="catalog-cat-count">9</span>
+              <span class="catalog-cat-count">9<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/office/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews/apple/26/color/numbers.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-Calendar.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/google-docs.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/google-keep.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/apple/26/color/numbers.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-Calendar.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/google-docs.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/google-keep.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Office &amp; Documents">Office &amp; Documents</span>
-              <span class="catalog-cat-count">36</span>
+              <span class="catalog-cat-count">34<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/cloud/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/google-drive.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/icloud.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-Photos.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/files.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/google-drive.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/icloud.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-Photos.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/files.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Cloud &amp; Storage">Cloud &amp; Storage</span>
-              <span class="catalog-cat-count">12</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/assistant/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews/apple/26/color/siri.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-interpreter.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/translate.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/home.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex-interpreter.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/deepl.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/translate.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/home.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Assistants">Assistants</span>
-              <span class="catalog-cat-count">10</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="/en/logos/system/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/apple-Calculator.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/automator.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-Settings.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-Camera.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="System Apps">System Apps</span>
-              <span class="catalog-cat-count">26</span>
+              <span class="catalog-cat-count">10<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/design/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/figma.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/miro.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/photoshop.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/adobe-scan.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/figma.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/pixso.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/miro.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/photoshop.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Design">Design</span>
-              <span class="catalog-cat-count">30</span>
+              <span class="catalog-cat-count">34<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/web/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/tilda.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/taptop.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-kit.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/webflow.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/tilda.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/taptop.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-kit.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/webflow.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Websites &amp; CMS">Websites &amp; CMS</span>
-              <span class="catalog-cat-count">11</span>
+              <span class="catalog-cat-count">12<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/dev/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/github.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/xcode.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/activity-monitor.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/terminal.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/github.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/xcode.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/activity-monitor.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/terminal.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Development">Development</span>
-              <span class="catalog-cat-count">11</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="/en/logos/macos/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews/apple/26/color/Dropover.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/BuhoLaunchpad.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/3uTools.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/1blocker.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="macOS Utilities">macOS Utilities</span>
-              <span class="catalog-cat-count">13</span>
+              <span class="catalog-cat-count">12<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/telecom/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/apple-Phone.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/bluetooth-file-exchange.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/LuLu.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/Blacktemple.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/apple-Phone.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/bluetooth-file-exchange.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/LuLu.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/Blacktemple.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Telecom &amp; Internet">Telecom &amp; Internet</span>
-              <span class="catalog-cat-count">8</span>
+              <span class="catalog-cat-count">10<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/travel/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/aviasales.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/yandex-travel.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-Weather.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/expedia.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/aviasales.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-travel.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-Weather.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/expedia.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Travel">Travel</span>
-              <span class="catalog-cat-count">10</span>
+              <span class="catalog-cat-count">12<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/education/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/yandex-praktikum.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/t-education.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/photomath.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/duolingo.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/yandex-praktikum.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/t-education.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/photomath.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/duolingo.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Education">Education</span>
-              <span class="catalog-cat-count">25</span>
+              <span class="catalog-cat-count">26<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/health/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews/period-tracker-period-calendar.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/clue.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/fitbit.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/apple-Health.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/period-tracker-period-calendar.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/clue.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/fitbit.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-Health.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Health">Health</span>
-              <span class="catalog-cat-count">15</span>
+              <span class="catalog-cat-count">16<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/insurance/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/alfa-insurance.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/sogaz.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/sravni.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/t-bank-insurance.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/alfa-insurance.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/sogaz.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/sravni.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/t-bank-insurance.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Insurance">Insurance</span>
-              <span class="catalog-cat-count">5</span>
+              <span class="catalog-cat-count">5<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/crm/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/amocrm.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/1c.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/moysklad.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/bitrix24.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/amocrm.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/1c.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/moysklad.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/bitrix24.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Warehouse, ERP &amp; CRM">Warehouse, ERP &amp; CRM</span>
-              <span class="catalog-cat-count">4</span>
+              <span class="catalog-cat-count">5<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/docs/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/made-in-russia.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/gosuslugi.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/fns.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/made-in-russia.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/gosuslugi.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/fns.webp" alt="" width="20" height="20" loading="lazy"></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Documents &amp; EDI">Documents &amp; EDI</span>
-              <span class="catalog-cat-count">3</span>
+              <span class="catalog-cat-count">3<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/hr/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews/wb-delivery.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/headhunter.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/ozon-profit.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/wb-delivery.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/headhunter.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/ozon-profit.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-team.webp" alt="" width="20" height="20" loading="lazy"></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Work &amp; HR">Work &amp; HR</span>
-              <span class="catalog-cat-count">3</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="/en/logos/car/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/mercedes-bens.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/haval.svg" alt="" width="20" height="20" loading="lazy"></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="Automotive">Automotive</span>
-              <span class="catalog-cat-count">2</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="/en/logos/city/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/krasnodar.svg" alt="" width="20" height="20" loading="lazy"></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="Cities">Cities</span>
-              <span class="catalog-cat-count">1</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="/en/logos/games/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews/apple/26/color/Counter-Strike 2.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/minecraft.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews/apple/26/color/doodle-jump.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/monopoly-game.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="Games">Games</span>
-              <span class="catalog-cat-count">45</span>
+              <span class="catalog-cat-count">4<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/b2b/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/sber-tech.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/open-ai.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/anthropic.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/mojang-studio.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/sber-tech.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/open-ai.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/anthropic.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/intra.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="B2B &amp; Enterprise">B2B &amp; Enterprise</span>
-              <span class="catalog-cat-count">16</span>
+              <span class="catalog-cat-count">24<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="/en/logos/game-platforms/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/mojang-studio.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/valve.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/steam.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/supercell.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Game Platforms">Game Platforms</span>
+              <span class="catalog-cat-count">7<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="/en/logos/tech/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/xiaomi.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/lg(2023).webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/microsoft.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Tech &amp; Gadgets">Tech &amp; Gadgets</span>
+              <span class="catalog-cat-count">5<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/developers/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/hitech.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/brusnika.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/glora-x.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/samolet.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/dom-rf.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/hitech.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/brusnika.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/glora-x.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Developers &amp; Real Estate">Developers &amp; Real Estate</span>
-              <span class="catalog-cat-count">8</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="/en/logos/gas-stations/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/svgs/rosneft.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/gazprom.svg" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/svgs/lukoil.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/rosneft.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/gazprom.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/lukoil.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/yandex-azs.webp" alt="" width="20" height="20" loading="lazy"></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Gas Stations">Gas Stations</span>
-              <span class="catalog-cat-count">3</span>
+              <span class="catalog-cat-count">4<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="/en/logos/bookmakers/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/winline.webp" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Bookmakers &amp; Lotteries">Bookmakers &amp; Lotteries</span>
+              <span class="catalog-cat-count">1<span class="catalog-cat-count-label" data-en=" logo"> логотип</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="/en/logos/macos/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/apple/26/color/Dropover.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/BuhoLaunchpad.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/3uTools.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/1blocker.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="macOS Utilities">macOS Utilities</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="/en/logos/system/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/apple-Calculator.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/automator.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-Settings.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple-Camera.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="System Apps">System Apps</span>
+              <span class="catalog-cat-count">25<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="/en/logos/car/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/mercedes-bens.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/haval.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/gwm.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/lada.webp" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Automotive">Automotive</span>
+              <span class="catalog-cat-count">4<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="/en/logos/city/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/krasnodar.webp" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Cities">Cities</span>
+              <span class="catalog-cat-count">1<span class="catalog-cat-count-label" data-en=" logo"> логотип</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="/en/logos/games/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="/assets/logos/previews-mini/apple/26/color/Counter-Strike 2.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/minecraft.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/apple/26/color/doodle-jump.webp" alt="" width="20" height="20" loading="lazy"><img src="/assets/logos/previews-mini/monopoly-game.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Games">Games</span>
+              <span class="catalog-cat-count">47<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
     </div>
@@ -951,7 +992,7 @@
 
   <div class="catalog-cta">
     <div class="catalog-cta-text">
-      <span class="catalog-cta-title" data-catalog-count="596">596+ logos in the catalog</span>
+      <span class="catalog-cta-title" data-catalog-count="687">687+ logos in the catalog</span>
       <span class="catalog-cta-sub" data-i18n="seoCatalogSub">Yandex, Sber, VK, Ozon, Google and other brands</span>
     </div>
     <a class="catalog-cta-link" href="/en/logos/">
@@ -1017,6 +1058,9 @@
           <li><a href="/en/collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Cloud storage</span></a></li>
           <li><a href="/en/collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Music streaming</span></a></li>
           <li><a href="/en/collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Video streaming</span></a></li>
+          <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
+          <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
+          <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -1032,6 +1076,7 @@
           <li><a href="/en/tools/edit-image/"><span data-i18n="footerTool_edit-image">Crop &amp; rotate photo</span></a></li>
           <li><a href="/en/tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">iOS call screen</span></a></li>
           <!-- TOOLS:END -->
+          <li><a href="/en/tools/extensions/reviews-exporter/"><span data-i18n="footerToolReviewsExporter">Reviews Exporter</span></a></li>
         </ul>
       </div>
 
@@ -1137,7 +1182,7 @@
   </div>
 </div>
 
-<script src="/components/support-btn.js?v=20260801" defer></script>
+<script src="/components/support-btn.min.js?v=20260808" defer></script>
 <script>
 window.__SEO_PAGE__ = {
   assetBase:   '/assets/logos/',
@@ -1150,7 +1195,8 @@ window.__SEO_PAGE__ = {
   item:        {"figma":"Icon/Flag/USA","file":"flag-usa.svg","variants":[{"labelKey":"emoji","file":"/assets/emoji/pngs/apple/flag-united-states_1f1fa-1f1f8.png","label":"Emoji","label_en":"Emoji"}]},
 };
 </script>
-<script type="module" src="/js/seo-page.js?v=20260801"></script>
+<script type="module" src="/js/seo-page.min.js?v=20260808"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
 
 </body>
 </html>

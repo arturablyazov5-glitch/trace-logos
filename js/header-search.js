@@ -6,7 +6,7 @@
 // Путь к данным берётся из data-base (= {{REL}}, относительный путь до корня).
 // Один источник правды: ту же разметку/стили использует и лого-SEO.
 // ─────────────────────────────────────────────────────────────────────────────
-import { switchLayout, highlight, escapeHtml, fuzzyMatchToken } from './utils.js';
+import { switchLayout, highlight, escapeHtml, fuzzyMatchToken, trackSearchQuery, flushSearchQuery } from './utils.js';
 import { initPlaceholderTypewriter } from './placeholder-typewriter.js';
 import './search-shortcut.js';
 
@@ -146,13 +146,16 @@ if (form && input && dropdown) {
     const raw = input.value.trim();
     const n = norm(raw);
     const words = n.replace(/-/g, ' ').split(/\s+/).filter(Boolean);
-    if (!words.length) { close(); return; }
+    if (!words.length) { trackSearchQuery('', 0); close(); return; }
     const d = await loadData();
     if (input.value.trim() !== raw) return;
     const rawWords = raw.split(/\s+/).filter(Boolean);
-    const logos = rank(d.logos, words, n).slice(0, MAX);
-    const emoji = WITH_EMOJI ? rank(d.emoji, words, n).slice(0, MAX) : [];
-    renderResults(logos, emoji, rawWords);
+    const logosAll = rank(d.logos, words, n);
+    const emojiAll = WITH_EMOJI ? rank(d.emoji, words, n) : [];
+    // Считаем до среза MAX: в статистику должно уходить реальное число
+    // совпадений, а не размер выпадашки.
+    trackSearchQuery(raw, logosAll.length + emojiAll.length);
+    renderResults(logosAll.slice(0, MAX), emojiAll.slice(0, MAX), rawWords);
   }
 
   function setActive(i) {
@@ -173,6 +176,12 @@ if (form && input && dropdown) {
       if (activeIdx >= 0 && current[activeIdx]) { e.preventDefault(); location.href = current[activeIdx].url; }
     } else if (e.key === 'Escape') { close(); }
   });
+
+  // В отличие от каталога, отсюда уходят со страницы: клик по подсказке ведёт
+  // на страницу логотипа. Таймер отстоя (1.2 с) может не успеть — дописываем
+  // запрос принудительно, fetch в trackSearchQuery идёт с keepalive.
+  input.addEventListener('blur', flushSearchQuery);
+  window.addEventListener('pagehide', flushSearchQuery);
 
   form.addEventListener('submit', e => {
     if (!input.value.trim()) { e.preventDefault(); return; }

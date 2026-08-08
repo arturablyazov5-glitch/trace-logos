@@ -1,4 +1,5 @@
 @import './tokens.css';
+@import './catalog-grid.css';
 
 body {
   font-family: var(--font);
@@ -238,7 +239,7 @@ body.mobile-nav-open { overflow: hidden; }
   font-size: 12px; color: var(--text-6); text-decoration: none; white-space: nowrap;
 }
 .breadcrumbs a:hover { color: var(--text-2); }
-.breadcrumbs .sep { color: var(--border); }
+.breadcrumbs .sep { color: var(--text-6); }
 .breadcrumbs .current { color: var(--text-3); }
 
 /* ── Main ── */
@@ -304,6 +305,7 @@ main {
   width: 100%; height: auto;
   max-height: 120px;
   display: block;
+  object-fit: contain;
 }
 
 /* Preview overlay buttons */
@@ -547,6 +549,15 @@ h1 {
   white-space: nowrap;
 }
 .btn:disabled { cursor: default; }
+/* Mirrors css/detail.css:316 (the catalog's copy of the same button component).
+   There is no global `.hidden` rule on this page — every other `.hidden` here is
+   scoped to its own component (.lightbox.hidden, .macos-style-tabs.hidden, …) —
+   so without this pair a `.btn` carrying `hidden` kept `display: inline-flex`
+   and stayed visible. That is exactly how the ICO/ICNS buttons survived a switch
+   to a wide/full variant: js/seo-page.js toggled the class correctly, nothing
+   acted on it. Also makes the server-rendered `class="btn … hidden"` initial
+   state real, so the buttons never flash before seo-page.js runs. */
+.btn.hidden { display: none; }
 
 .btn-primary { background: var(--text-0); color: var(--bg); }
 .btn-primary:hover:not(:disabled) { background: var(--light-hover); }
@@ -594,7 +605,7 @@ h1 {
   overflow: hidden; border-radius: 11px;
 }
 .variant-preview-icon img,
-.variant-preview-icon svg { width: 48px; height: 48px; display: block; border-radius: 11px; }
+.variant-preview-icon svg { width: 48px; height: 48px; display: block; border-radius: 11px; object-fit: contain; }
 
 .variant-card.variant-wide { width: 120px; }
 .variant-preview-wide {
@@ -605,7 +616,7 @@ h1 {
 }
 .variant-card[data-dark-bg="true"] .variant-preview-wide { background: var(--checker-full-dark); }
 .variant-preview-wide img,
-.variant-preview-wide svg { width: 100%; height: 100%; display: block; }
+.variant-preview-wide svg { width: 100%; height: 100%; display: block; object-fit: contain; }
 
 .variant-label { font-size: 11px; color: var(--text-5); white-space: nowrap; }
 .variant-card.active .variant-label { color: var(--text-2); }
@@ -724,18 +735,181 @@ h1 {
    direct children. */
 .seo-ad-related-wrap { display: contents; }
 
-/* RSYA sidebar banner (replaces the old Threads banner) — locked to a 3:2
-   format via aspect-ratio (scales with sidebar width, stays proportional at
-   any breakpoint), plus a hard max-height so it can never push the rest of
-   the sidebar/column down even if the ad content ignores the ratio. */
-.ad-sidebar-slot {
+/* ── Sidebar promo banner — house ad (landologovo.ru) ──
+   Replaced the RSYA ad unit, which replaced the original Threads banner.
+   Markup: templates/partials/ad-sidebar-banner.html
+   Lives in .logo-side (SEO pages) and .blog-sidebar (blog posts) — both are
+   ~280px columns, so everything below is tuned for a narrow card.
+   Sizes match .sp-banner (css/sponsor-banner.css) so the two read as one
+   family when both are on screen. */
+.ad-sidebar-slot { display: block; position: relative; }
+.ad-sidebar-slot.ad-collapsed { display: none; }
+
+.promo-banner-link {
+  /* Purple is the brand accent (--accent), not an ad-hoc violet. The two
+     stops below are the same hue at different lightness — the glow core and
+     its falloff — so the corner reads as one light source, not a gradient. */
+  --promo-glow: 138, 107, 255;
+
   position: relative;
-  width: 100%; aspect-ratio: 3 / 2; max-height: 250px; overflow: hidden;
-  display: flex; align-items: center; justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  /* overflow stays visible so the hover lift isn't clipped by .ad-sidebar-slot */
+  overflow: visible;
+  isolation: isolate;
+  border-radius: 14px;
+  padding: 15px 16px 13px;
+  text-decoration: none;
+  color: var(--text-1);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-base);
+  transition:
+    transform .22s cubic-bezier(.2, .7, .3, 1),
+    border-color .22s ease;
 }
 
-.ad-sidebar-slot.ad-collapsed {
-  display: none;
+/* Corner glow. Two radial stops from the top-right: a tight bright core and a
+   wide soft falloff, kept off the text column so it never fights legibility. */
+.promo-banner-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse 62% 48% at 104% -6%, rgba(var(--promo-glow), .55) 0%, transparent 70%),
+    radial-gradient(ellipse 130% 100% at 100% 0%, rgba(var(--promo-glow), .22) 0%, transparent 62%);
+  opacity: .85;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity .28s ease;
+}
+
+.promo-banner-link:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-focus);
+}
+.promo-banner-link:hover::before { opacity: 1; }
+
+.promo-banner-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Every child sits above the glow layer. */
+.promo-banner-src,
+.promo-banner-title,
+.promo-banner-desc,
+.promo-banner-cta { position: relative; z-index: 1; }
+
+/* Source line — naming the destination is what separates an honest promo from
+   a blind ad, and it doubles as the card's small-caps eyebrow. */
+.promo-banner-src {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 9px;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: .04em;
+  color: var(--text-5);
+  transition: color .22s ease;
+}
+.promo-banner-link:hover .promo-banner-src { color: var(--text-3); }
+
+.promo-banner-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--accent);
+  box-shadow: 0 0 7px rgba(var(--promo-glow), .9);
+}
+
+/* Reaction emoji, pinned to the corner like a sticker — sits outside the
+   card edge so it reads as an add-on, not a fourth line of copy. */
+.promo-banner-emoji {
+  position: absolute;
+  right: -6px;
+  bottom: -9px;
+  z-index: 1;
+  font-size: 30px;
+  line-height: 1;
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+
+.promo-banner-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -.015em;
+  color: var(--text-0);
+  /* Evens out the three wrapped lines instead of leaving one orphan word. */
+  text-wrap: balance;
+}
+
+/* The number is the whole pitch — the eye should land there first. Lightened
+   off --accent (#8a6bff) to #a78bff: on --bg-raised the token itself sits at
+   4.46:1, just under the 4.5:1 floor for 14px text. */
+.promo-banner-hl {
+  color: #a78bff;
+  white-space: nowrap;
+}
+
+.promo-banner-desc {
+  margin-top: 5px;
+  font-size: 11px;
+  line-height: 1.45;
+  /* --text-3, not --text-4: 4.70:1 vs 3.72:1 on this background. */
+  color: var(--text-3);
+  text-wrap: pretty;
+}
+
+/* CTA row. The hairline above it fades out to the right instead of running
+   edge to edge — a full-width rule in a 280px card reads as a table border. */
+.promo-banner-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 13px;
+  padding-top: 11px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-2);
+  transition: color .22s ease, gap .22s cubic-bezier(.2, .7, .3, 1);
+}
+.promo-banner-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: -16px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, 0) 78%);
+}
+.promo-banner-cta svg {
+  width: 13px; height: 13px;
+  flex-shrink: 0;
+  transition: transform .22s cubic-bezier(.2, .7, .3, 1);
+}
+.promo-banner-link:hover .promo-banner-cta { color: var(--text-0); gap: 9px; }
+.promo-banner-link:hover .promo-banner-cta svg { transform: translateX(2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .promo-banner-link,
+  .promo-banner-cta,
+  .promo-banner-cta svg { transition: none; }
+  .promo-banner-link:hover { transform: none; }
+  .promo-banner-link:hover .promo-banner-cta { gap: 6px; }
+  .promo-banner-link:hover .promo-banner-cta svg { transform: none; }
+}
+
+/* Mobile: the sidebar unwraps into the page flow, so the card gets full width
+   and can afford a step up in type. */
+@media (max-width: 640px) {
+  .promo-banner-link { padding: 17px 18px 15px; }
+  .promo-banner-title { font-size: 16px; }
+  .promo-banner-desc { font-size: 12px; }
+  .promo-banner-cta::before { right: -18px; }
 }
 
 /* ── Catalog sections (related logos + full category grid) ── */
@@ -765,43 +939,9 @@ h1 {
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 64px;
 }
 
-/* Full catalog by category — matches home page cat-tile style */
-.catalog-cats {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 8px;
-}
-.catalog-cat {
-  display: flex; flex-direction: column; gap: 8px;
-  padding: 12px 14px;
-  background: #161616; border: none; border-radius: 16px;
-  text-decoration: none;
-  transition: background .15s;
-}
-.catalog-cat:hover { background: #202020; }
-.catalog-cat-thumbs {
-  display: flex; gap: 5px;
-}
-.catalog-cat-thumbs img {
-  width: 26px; height: 26px; object-fit: contain; border-radius: 6px;
-}
-.catalog-cat-more {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 26px; height: 26px; border-radius: 6px;
-  background: rgba(255,255,255,0.06); color: var(--text-5);
-}
-.catalog-cat-bottom {
-  display: flex; align-items: center; justify-content: space-between; gap: 6px;
-}
-.catalog-cat-name {
-  min-width: 0;
-  font-size: 13.5px; font-weight: 500; color: #fff;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.catalog-cat-count {
-  flex-shrink: 0;
-  font-size: 12px; color: var(--text-dim, var(--text-5));
-}
+/* Full catalog by category — .catalog-cats/.catalog-cat* rules live in the
+   shared css/catalog-grid.css (imported above), also used by the homepage's
+   "Категории логотипов" block (scripts/build-home-categories.js). */
 
 /* ── Brand colors ── */
 /* Real <table> markup, same display-override trick as .meta-table above. */
@@ -972,14 +1112,59 @@ footer:not(.site-footer) {
 }
 .footer-dmca-note a { color: var(--text-3); text-decoration: underline; text-underline-offset: 2px; }
 
+/* Мобильная копия «Поблагодарить автора» под about-текстом (templates/seo-page.html) —
+   скрыта на десктопе по умолчанию. ВАЖНО: это правило должно стоять ДО @media ниже —
+   иначе на мобильном брейкпоинте это unconditional-правило (позже в источнике) перебивает
+   .logo-desc-support{display:block} внутри @media при равной специфичности, и копия
+   никогда не показывается вообще (были обе строки после @media — баг, поймали 2026-08-05). */
+.logo-desc-support { display: none; }
+
 /* ── Mobile ── */
 @media (max-width: 640px) {
   .logo-layout { grid-template-columns: 1fr; gap: 24px; }
   /* Flatten the sticky wrapper so its children reorder in the single column */
   .logo-side { display: contents; }
-  .preview-card { order: 1; max-width: 200px; margin: 0 auto; }
+  .preview-card { order: 1; max-width: none; width: 100%; margin: 0; aspect-ratio: auto; }
   .logo-info    { order: 2; }
   .ad-sidebar-slot { order: 3; }
+  .logo-side > support-btn { display: none; }
+  .logo-desc-support { display: block; }
+  /* Клэмп до 2 строк — полный текст остаётся в DOM, скрыт только визуально
+     (безопасно для SEO: краулеры читают DOM, а не computed-высоту блока).
+     .expanded (JS-класс на клик) снимает клэмп. */
+  .logo-desc {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+  .logo-desc.expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+  }
+  .logo-desc-toggle {
+    display: inline-flex;
+    align-self: flex-start;
+    /* .logo-info — flex-колонка с gap:20px между всеми детьми; без этого
+       кнопка отъезжает от клэмпленного текста на тот же отступ, что и между
+       обычными секциями страницы. */
+    margin-top: -12px;
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--text-3);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  /* Тот же баг, что чинили у #notrack-slot (detail.css): авторский display
+     всегда бьёт UA-стиль [hidden]{display:none} независимо от специфичности —
+     без этой строки кнопка была бы видна даже когда JS решил её не показывать. */
+  .logo-desc-toggle[hidden] { display: none; }
   .seo-ad-related-wrap { display: flex; flex-direction: column; }
   .seo-ad-related-wrap > .seo-ad-block { order: 2; }
   .seo-ad-related-wrap > .catalog-section { order: 1; }
@@ -991,6 +1176,8 @@ footer:not(.site-footer) {
   .breadcrumbs { padding: 12px 16px 0; }
   h1 { font-size: 26px; }
   .howto-steps { grid-template-columns: 1fr; }
+  /* .catalog-cats/.catalog-cat* mobile overrides live in css/catalog-grid.css's
+     own @media (max-width: 640px) block (imported above). */
 }
 
 .info-section    { display: flex; flex-direction: column; gap: 8px; }

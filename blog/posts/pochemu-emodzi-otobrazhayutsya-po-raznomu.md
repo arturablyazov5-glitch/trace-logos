@@ -23,7 +23,7 @@ tags_en: Emoji, Unicode, Technology
 
 1. Ваша система показывает символ **своим** набором эмодзи — например, Apple Color Emoji.
 2. По сети уходит только код.
-3. Система получателя рисует этот код **своим** набором — Google Noto на Android, Segoe UI Emoji на [Windows](../../logos/store/windows/).
+3. Система получателя рисует этот код **своим** набором — Google Noto на Android, Segoe UI Emoji на [Windows](../../logos/tech/windows/).
 
 Поэтому «одинаковых эмодзи» между платформами не существует в принципе — существует одинаковый смысл, записанный в стандарте.
 
@@ -33,7 +33,7 @@ tags_en: Emoji, Unicode, Technology
 | --- | --- |
 | Apple Color Emoji | iPhone, iPad, Mac |
 | Google Noto Emoji | Android, [Chrome](../../logos/search/chrome/) OS, многие приложения |
-| Segoe UI Emoji | [Windows](../../logos/store/windows/) |
+| Segoe UI Emoji | [Windows](../../logos/tech/windows/) |
 | Samsung One UI | телефоны Samsung |
 | Twemoji | X/Twitter, часть веб‑сервисов |
 | Свои наборы | Telegram (анимированные), WhatsApp, Facebook |
@@ -108,7 +108,7 @@ The chain:
 
 1. Your system displays the character with **its** emoji set — say, Apple Color Emoji.
 2. Only the code travels over the network.
-3. The recipient's system renders that code with **its** set — Google Noto on Android, Segoe UI Emoji on [Windows](../../logos/store/windows/).
+3. The recipient's system renders that code with **its** set — Google Noto on Android, Segoe UI Emoji on [Windows](../../logos/tech/windows/).
 
 So "identical emoji" across platforms don't exist in principle — only identical meaning, as written in the standard.
 
@@ -118,7 +118,7 @@ So "identical emoji" across platforms don't exist in principle — only identica
 | --- | --- |
 | Apple Color Emoji | iPhone, iPad, Mac |
 | Google Noto Emoji | Android, [Chrome](../../logos/search/chrome/) OS, many apps |
-| Segoe UI Emoji | [Windows](../../logos/store/windows/) |
+| Segoe UI Emoji | [Windows](../../logos/tech/windows/) |
 | Samsung One UI | Samsung phones |
 | Twemoji | X/Twitter, various web services |
 | Custom sets | Telegram (animated), WhatsApp, Facebook |

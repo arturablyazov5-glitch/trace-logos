@@ -15,7 +15,7 @@ tags_en: Logo Histories, Branding, Social Media
 Знак создан в 2016 году для китайского **Douyin** (материнская компания ByteDance): нота, вдохновлённая атмосферой тёмного концертного зала, где светится только сцена. Сине‑красное «раздвоение» имитирует хроматическую аберрацию — эффект расслоения света. **2018** — после покупки Musical.ly знак становится глобальным лицом TikTok; дальше — только полировка деталей. Файлы — на [странице бренда](../../logos/social/tiktok/).
 :::
 
-##2016: тёмный зал и светящаяся сцена
+## 2016: тёмный зал и светящаяся сцена
 
 По официальной легенде, дизайнер Douyin искал образ, передающий ощущение музыки в темноте, — и отталкивался от картинки рок‑концерта: чёрный зал, светящаяся сцена, вибрирующий звук. Так появилась нота на чёрном фоне со «сдвоенным» контуром — бирюзовым и красным, как расслоение света в дыму. Чёрный фон — принципиален: TikTok, как и [Netflix](../istoriya-logotipa-netflix/), проектировался для тёмного экрана видео, где яркая иконка на чёрном горит сильнее любой белой плитки — те же [законы иконок](../ikonka-prilozheniya/) приложений.
 
@@ -23,7 +23,7 @@ tags_en: Logo Histories, Branding, Social Media
 
 «Раздвоение» контура — имитация **хроматической аберрации**: расслоения цветов на границах, знакомого по старым экранам и 3D‑очкам. Приём попал в нерв эпохи: глитч ассоциируется с видео, цифровой культурой и «сломанной» эстетикой интернета. Важно, что эффект несёт смысл — движение и вибрацию звука, — а не просто украшает: статичный знак выглядит «дрожащим», как кадр клипа — наглядный пример того, [когда эффект оправдан](../trendy-logotipov-2026/) в логотипе.
 
-##2018: слияние с Musical.ly
+## 2018: слияние с Musical.ly
 
 Глобальная история знака началась, когда ByteDance купил Musical.ly — популярное у подростков приложение с розово‑оранжевой иконкой‑нотой — и слил его с TikTok. Из двух брендов выжил один: аудитория Musical.ly проснулась с новой иконкой на экране. Кейс поучителен: поглощённый бренд с многомиллионной аудиторией растворился без долгого переходного периода — ByteDance посчитал, что единый глобальный знак дороже локальной привычки — [подробнее о том, как проходят такие слияния](../chto-takoe-rebrending/), мы писали отдельно.
 
@@ -62,7 +62,7 @@ The [TikTok](../../logos/social/tiktok/) logo — a note with a neon blue-red "s
 The mark was created in 2016 for China's **Douyin** (parent company ByteDance): a note inspired by a dark concert hall where only the stage glows. The blue-red "split" imitates chromatic aberration — light separating at the edges. **2018** — after the Musical.ly acquisition the mark becomes TikTok's global face; everything since is polish. Files are on the [brand page](../../logos/social/tiktok/).
 :::
 
-##2016: the dark hall and the glowing stage
+## 2016: the dark hall and the glowing stage
 
 By the official legend, Douyin's designer hunted for an image conveying music in darkness — and started from a rock concert picture: a black hall, a glowing stage, vibrating sound. Thus the note on black with a "doubled" contour — teal and red, like light splitting in smoke. The black background is fundamental: like [Netflix](../istoriya-logotipa-netflix/), TikTok was designed for the dark video screen, where a bright icon on black burns stronger than any white tile — the same [laws of app icons](../ikonka-prilozheniya/).
 
@@ -70,7 +70,7 @@ By the official legend, Douyin's designer hunted for an image conveying music in
 
 The split contour imitates **chromatic aberration** — the color fringing familiar from old screens and 3D glasses. The device hit the era's nerve: glitch reads as video, digital culture, the internet's "broken" aesthetic. Crucially, the effect carries meaning — motion and the vibration of sound — rather than decorating: the static mark looks like a "trembling" video frame — a clear case of [when an effect is justified](../trendy-logotipov-2026/) in a logo.
 
-##2018: the Musical.ly merger
+## 2018: the Musical.ly merger
 
 The mark's global story began when ByteDance bought Musical.ly — the teen-favorite app with a pink-orange note icon — and merged it into TikTok. Of two brands one survived: Musical.ly's audience woke up to a new icon on their screens. An instructive case: an acquired brand with tens of millions of users dissolved with no long transition — ByteDance judged a single global mark worth more than local habit — we cover [how such mergers go](../chto-takoe-rebrending/) separately.
 

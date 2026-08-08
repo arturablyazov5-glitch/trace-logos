@@ -27,27 +27,27 @@ tags_en: Branding, Basics, Design
 
 ## Из чего состоит фирменный стиль
 
-###1. Логотип и его версии
+### 1. Логотип и его версии
 
 Не один файл, а комплект: основная версия, компактный знак для аватарок, монохромные и инверсные варианты — полный список мы приводили в статье виды логотипов. Все исходники — в векторе (почему это критично, объясняет [разница с растром](../vektor-i-rastr-raznica/)), плюс экспорты под конкретные площадки, [размеры для сайта и соцсетей](../razmery-logotipa-dlya-sajta-i-socsetej/) мы разбирали отдельно.
 
-###2. Цветовая палитра
+### 2. Цветовая палитра
 
 Обычно 1‑2 основных цвета и 2‑4 дополнительных, каждый — с точными кодами (HEX для экрана, CMYK для печати, иногда Pantone). Красный [Т‑Банка](../../logos/bank/tbank/) — жёлтый, зелёный [Сбера](../../logos/bank/sber/) — градиентный, и оба бренда узнаются по цвету раньше, чем по знаку. Как цвет влияет на восприятие — в статье [психология цвета в логотипе](../psihologiya-cveta-v-logotipe/), а подсмотреть точные коды больших брендов можно в статье [фирменные цвета известных брендов](../firmennye-cveta-izvestnyh-brendov/) или на страницах нашего каталога — блок «Цвета бренда» показывает HEX прямо из SVG.
 
-###3. Типографика
+### 3. Типографика
 
 Два‑три шрифта с закреплёнными ролями: заголовочный, текстовый, акцидентный. Крупные бренды заказывают собственные гарнитуры (Product Sans у [Google](../../logos/search/google/), YS Text у [Яндекса](../../logos/search/yandex/)) — малому бизнесу достаточно пары бесплатных шрифтов с открытой лицензией. Как выбирать — в статье [шрифт для логотипа](../shrift-dlya-logotipa/).
 
-###4. Графические приёмы
+### 4. Графические приёмы
 
 То, что делает макет узнаваемым даже без логотипа: фирменный паттерн, форма плашек, стиль иллюстраций и иконок, характерная сетка. У [Сбера](../../logos/bank/sber/) это градиент и скругления, у [Яндекса](../../logos/search/yandex/) — жёлтая стрелка‑плашка и строгая типографика.
 
-###5. Фотостиль и иллюстрации
+### 5. Фотостиль и иллюстрации
 
 Правила для изображений: живые фото или иллюстрации, тёплая или холодная тональность, есть ли люди в кадре, как обрабатываются снимки. Без этого пункта соцсети бренда быстро превращаются в стоковый винегрет.
 
-###6. Тон коммуникации (tone of voice)
+### 6. Тон коммуникации (tone of voice)
 
 Формально это вербальная часть айдентики, но отделить её от визуальной невозможно: шутливый текст на строгом макете разваливает образ так же, как чужой шрифт. На «вы» или на «ты», можно ли эмодзи (и какие — см. [эмодзи в маркетинге](../emodzi-v-marketinge/)), как называем продукт.
 
@@ -76,7 +76,7 @@ tags_en: Branding, Basics, Design
 - **Стиль без системы.** Красивый логотип + случайные цвета в каждом макете. Лечится одним файлом с зафиксированными HEX‑кодами.
 - **Слишком много всего.** Пять шрифтов и восемь цветов — это не богатая айдентика, а её отсутствие. Сильные системы экономны.
 - **Правила есть, но их никто не знает.** Гайдлайн лежит у дизайнера, а SMM‑щик делает сторис «на глаз». Правила работают, только если они доступны каждому, кто производит контент.
-- **Копирование чужого стиля.** Айдентика «как у [Apple](../../logos/store/apple/)» делает бренд не премиальным, а безликим — и рискует нарушить чужие права, о том, [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/), мы писали отдельно.
+- **Копирование чужого стиля.** Айдентика «как у [Apple](../../logos/tech/apple/)» делает бренд не премиальным, а безликим — и рискует нарушить чужие права, о том, [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/), мы писали отдельно.
 
 Посмотреть, как устроены визуальные системы сотен реальных брендов — от цветов до всех вариантов знака, — можно в нашем [каталоге логотипов](../../logos/).
 
@@ -149,6 +149,6 @@ A full identity with strategy and a brand book costs as much as a decent car —
 - **Style without a system.** A pretty logo + random colors in every layout. Cured by one file with fixed HEX codes.
 - **Too much of everything.** Five fonts and eight colors isn't a rich identity — it's the absence of one. Strong systems are frugal.
 - **Rules exist but nobody knows them.** The guideline sits with the designer while the SMM manager eyeballs stories. Rules only work if everyone producing content can reach them.
-- **Copying someone else's style.** An identity "like [Apple](../../logos/store/apple/)" makes a brand not premium but faceless — and risks infringing on rights; we cover [can you use someone else's logo](../mozhno-li-ispolzovat-chuzhoy-logotip/) separately.
+- **Copying someone else's style.** An identity "like [Apple](../../logos/tech/apple/)" makes a brand not premium but faceless — and risks infringing on rights; we cover [can you use someone else's logo](../mozhno-li-ispolzovat-chuzhoy-logotip/) separately.
 
 To see how the visual systems of hundreds of real brands are built — from colors to every mark variant — browse our [logo catalog](../../logos/).

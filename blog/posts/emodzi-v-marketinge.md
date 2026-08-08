@@ -12,12 +12,12 @@ tags_en: Emoji, Marketing, Copywriting
 Одни маркетологи ставят эмодзи в каждую строку и клянутся, что открываемость растёт. Другие вычищают их подчистую: «мы серьёзная компания». Спорить бесполезно, потому что правы обе стороны — просто говорят о разных ситуациях. Эмодзи работают как специи: та же щепотка, что спасает одно блюдо, портит другое. Весь вопрос сводится к тому, где именно их ставить и в какой дозе. Чтобы ответить, начнём с механизма: почему эмодзи вообще что‑то меняют.
 
 :::note Коротко
-Эмодзи повышают заметность сообщения в переполненных каналах — теме письма, пушах, ленте соцсетей. Но работают только при трёх условиях: **уместность в нише** (косметика — да, коллекторское агентство — нет), **умеренность** (1‑2 на сообщение) и **смысловая связь с текстом**. Эмодзи ради эмодзи снижают доверие — и это тоже показывают исследования.
+Эмодзи повышают заметность сообщения в переполненных каналах — теме письма, пушах, ленте соцсетей. Но работают только при трёх условиях: **уместность в нише** (косметика — да, коллекторское агентство — нет), **умеренность** (1‑2 на сообщение) и **смысловая связь с текстом**. Эмодзи ради эмодзи снижают доверие, что тоже показывают исследования.
 :::
 
 ## Почему эмодзи вообще работают
 
-Причина физиологическая: мозг обрабатывает картинку быстрее текста. В однородной ленте — списке писем, стопке пушей, потоке постов — цветной символ выхватывается периферийным зрением ещё до того, как вы начали читать. К этому добавляется эмоция: 🔥 передаёт «горячо» мгновенно, без слова, — и экономия места: в пуше на 40 знаков один символ заменяет целое слово.
+Причина физиологическая: мозг обрабатывает картинку быстрее текста. В однородной ленте — списке писем, стопке пушей, потоке постов — цветной символ выхватывается периферийным зрением ещё до того, как вы начали читать. К этому добавляется эмоция: 🔥 передаёт «горячо» мгновенно, без слова. Добавьте экономию места: в пуше на 40 знаков один символ заменяет целое слово.
 
 Но здесь же спрятана и обратная сторона, из которой вырастает всё остальное. Тот самый механизм заметности работает только на контрасте. Когда эмодзи стоят у одного из десяти — он выделяется. Когда у всех десяти — они превращаются в шум, а выделяться начинает как раз сообщение без них. Поэтому универсального «ставить/не ставить» не существует в принципе: эффект зависит от того, насколько канал уже забит символами. А забиты каналы по‑разному — с этого и построим разбор, от самых переполненных к самым чистым.
 
@@ -104,9 +104,9 @@ tags_en: Emoji, Marketing, Copywriting
 
 ## Что в итоге
 
-Эмодзи работают усилителем внимания, и это одна и та же сила, направленная в разные стороны. В переполненных каналах — письмах, пушах, лентах — они честно отрабатывают заметность за счёт контраста. На серьёзных страницах, где решается доверие, тот же контраст читается как несерьёзность и вредит. Отсюда и вся дозировка: один‑два символа на сообщение, привязанные к смыслу, в одной стилистике — и обязательная проверка, как они выглядят на чужих устройствах.
+Эмодзи работают усилителем внимания, и это одна и та же сила, направленная в разные стороны. В переполненных каналах — письмах, пушах, лентах — они честно отрабатывают заметность за счёт контраста. На серьёзных страницах, где решается доверие, тот же контраст читается как несерьёзность и вредит. Отсюда и вся дозировка: один‑два символа на сообщение, привязанные к смыслу, в одной стилистике. И обязательная проверка, как они выглядят на чужих устройствах.
 
-Подобрать точный символ под задачу — с русским поиском, значениями и картинками [Apple](../../logos/store/apple/) и [Google](../../logos/search/google/) — можно в нашем [каталоге эмодзи](../../emoji/): тысячи эмодзи с описаниями и копированием в один клик.
+Подобрать точный символ под задачу — с русским поиском, значениями и картинками [Apple](../../logos/tech/apple/) и [Google](../../logos/search/google/) — можно в нашем [каталоге эмодзи](../../emoji/): тысячи эмодзи с описаниями и копированием в один клик.
 
 ---EN---
 
@@ -146,7 +146,7 @@ While the channel is crowded, emoji help. But there's territory where the logic 
 
 ## Website and interface: where the mechanism turns against you
 
-A landing page and an interface aren't a crowded channel but a space where the reader makes a decision and judges whether you can be trusted. And here the visibility that helped in the feed starts to hurt: in sales copy, emoji lower the sense of professionalism, especially in B2B, finance, medicine and law. On interface buttons there's an added technical woe — the symbol looks different on different devices and can break the layout.
+A landing page and an interface work differently: here the reader makes a decision and judges whether you can be trusted. And here the visibility that helped in the feed starts to hurt: in sales copy, emoji lower the sense of professionalism, especially in B2B, finance, medicine and law. On interface buttons there's an added technical woe — the symbol looks different on different devices and can break the layout.
 
 There are exceptions, and they're logical: youth products, game mechanics, light-toned onboarding, blogs — there informality is part of the brand promise. But even there, insert emoji as images of a specific platform so the design looks the same for everyone: a system symbol renders its own way on every device.
 
@@ -207,4 +207,4 @@ The previous sections answered "where to put them." What remains is "how to stop
 
 Emoji work as an attention amplifier — and it's one and the same force pointed in different directions. In crowded channels — emails, pushes, feeds — they honestly earn visibility through contrast. On serious pages, where trust is decided, that same contrast reads as unseriousness and hurts. Hence the whole dosage: one or two symbols per message, tied to meaning, in one style — plus a mandatory check of how they look on other devices.
 
-You can pick the exact symbol for the job — with Russian search, meanings and [Apple](../../logos/store/apple/) and [Google](../../logos/search/google/) images — in our [emoji catalog](../../emoji/): thousands of emoji with descriptions and one-click copy.
+You can pick the exact symbol for the job — with Russian search, meanings and [Apple](../../logos/tech/apple/) and [Google](../../logos/search/google/) images — in our [emoji catalog](../../emoji/): thousands of emoji with descriptions and one-click copy.

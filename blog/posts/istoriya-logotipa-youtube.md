@@ -15,15 +15,15 @@ tags_en: Logo Histories, Branding, Media
 **2005** — слово YouTube с красной скруглённой плашкой на «Tube» — отсылка к кинескопному телевизору (tube = «трубка»); **2013‑2015** — мелкие чистки и появление отдельной иконки‑кнопки; **2017** — большой редизайн: **кнопка плей выносится перед словом**, плашка исчезает, появляется шрифт YouTube Sans; дальше — только полировка. Файлы — на [странице бренда](../../logos/media/youtube/).
 :::
 
-##2005: «трубка», которой скоро не стало
+## 2005: «трубка», которой скоро не стало
 
 Имя YouTube строится на «you» (контент делаешь ты) и «tube» — сленговом названии телевизора эпохи кинескопов. Первый логотип честно это иллюстрировал: слог «Tube» сидел на красной скруглённой плашке-«экране». Ирония истории: уже через несколько лет кинескопы исчезли, и метафора умерла — молодые пользователи видели просто красный прямоугольник, не считывая отсылку. Классический риск «слишком современной» метафоры — о том, [как вообще выбирают идею знака](../vidy-logotipov/), мы писали отдельно.
 
-##2013‑2016: кнопка рвётся наружу
+## 2013‑2016: кнопка рвётся наружу
 
 Пока полный логотип жил в шапке сайта, сервис стремительно переезжал в приложения — и там нужен был квадратный знак. Иконкой стала красная кнопка плей: сначала как «служебный» элемент, затем как полноценный носитель бренда. К 2016 году сложилась шизофрения: в шапке — слово с плашкой на «Tube», в телефоне — кнопка; два знака конкурировали друг с другом — наглядный случай того, [почему иконка диктует бренду форму](../ikonka-prilozheniya/).
 
-##2017: очевидное решение
+## 2017: очевидное решение
 
 29 августа 2017 года YouTube показал первый большой редизайн: кнопка плей вынесена **перед** словом и стала главным знаком; слово очищено от плашки и набрано собственным шрифтом **YouTube Sans**. Официальная логика редизайна — хрестоматия:
 
@@ -61,15 +61,15 @@ The [YouTube](../../logos/media/youtube/) logo lived for twelve years with a fla
 **2005** — the YouTube word with a rounded red badge on "Tube", a nod to the CRT television (the "tube"); **2013-2015** — small cleanups and a separate play-button icon; **2017** — the big redesign: **the play button moves in front of the word**, the badge disappears, YouTube Sans arrives; everything since is polish. Files are on the [brand page](../../logos/media/youtube/).
 :::
 
-##2005: the "tube" that soon vanished
+## 2005: the "tube" that soon vanished
 
 The name YouTube is built from "you" (you make the content) and "tube" — the slang word for a CRT television. The first logo illustrated it literally: the "Tube" syllable sat on a rounded red "screen" badge. History's irony: within a few years CRTs disappeared and the metaphor died — younger users saw just a red rectangle, reading no reference at all. The classic risk of a too-contemporary metaphor — we cover [how mark ideas are chosen](../vidy-logotipov/) separately.
 
-##2013-2016: the button breaks out
+## 2013-2016: the button breaks out
 
 While the full logo lived in the site header, the service was racing into apps — which needed a square mark. The icon became the red play button: first as a "utility" element, then as a full brand carrier. By 2016 the brand was schizophrenic: the word-with-badge in the header, the button on phones — two marks competing with each other — a clear case of [why the icon dictates the brand's shape](../ikonka-prilozheniya/).
 
-##2017: the obvious solution
+## 2017: the obvious solution
 
 On August 29, 2017 YouTube unveiled its first major redesign: the play button moved **in front of** the word and became the primary mark; the word lost its badge and was set in the custom **YouTube Sans**. The official logic reads like a textbook:
 

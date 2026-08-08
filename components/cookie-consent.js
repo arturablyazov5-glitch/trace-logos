@@ -7,11 +7,8 @@ const LABELS = {
   es: { text: 'Usamos cookies para que el sitio sea cómodo para ti', btn: 'Entendido', btnAccepted: 'Listo', more: 'Más información', moreHref: '/es/consent/' },
 };
 
-const NOTRACK_KEY = 'tl_notrack'; // «Режим разработчика» — тумблер из utils.js (isTrackingDisabled)
-
 function mount() {
-  const isDevMode = localStorage.getItem(NOTRACK_KEY) === '1';
-  if (!isDevMode && localStorage.getItem(STORAGE_KEY) === '1') return;
+  if (localStorage.getItem(STORAGE_KEY) === '1') return;
 
   const lang = (typeof window.__LANG__ === 'string' ? window.__LANG__ : null)
     || (['en', 'es'].includes(location.pathname.split('/').filter(Boolean)[0])

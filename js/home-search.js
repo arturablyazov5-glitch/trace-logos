@@ -3,7 +3,7 @@
 // Прогрессивное улучшение: без JS форма уходит на /logos/?q=… (см. index.html).
 // Переиспользует switchLayout / highlight / escapeHtml из utils.js (RU↔EN раскладка).
 // ─────────────────────────────────────────────────────────────────────────────
-import { switchLayout, highlight, escapeHtml, fuzzyMatchToken } from './utils.js';
+import { switchLayout, highlight, escapeHtml, fuzzyMatchToken, trackSearchQuery, flushSearchQuery } from './utils.js';
 import './search-shortcut.js';
 
 const MAX_PER_GROUP = 6;
@@ -131,13 +131,16 @@ async function runSearch() {
   const raw = input.value.trim();
   const n = norm(raw);
   const words = n.replace(/-/g, ' ').split(/\s+/).filter(Boolean);
-  if (!words.length) { close(); return; }
+  if (!words.length) { trackSearchQuery('', 0); close(); return; }
   const d = await loadData();
   if (input.value.trim() !== raw) return; // устарело
   const rawWords = raw.split(/\s+/).filter(Boolean);
-  const logos = rank(d.logos, words, n).slice(0, MAX_PER_GROUP);
-  const emoji = rank(d.emoji, words, n).slice(0, MAX_PER_GROUP);
-  renderResults(logos, emoji, rawWords);
+  const logosAll = rank(d.logos, words, n);
+  const emojiAll = rank(d.emoji, words, n);
+  // Считаем до среза MAX_PER_GROUP: в статистику должно уходить реальное число
+  // совпадений, а не размер выпадашки.
+  trackSearchQuery(raw, logosAll.length + emojiAll.length);
+  renderResults(logosAll.slice(0, MAX_PER_GROUP), emojiAll.slice(0, MAX_PER_GROUP), rawWords);
 }
 
 function setActive(i) {
@@ -169,6 +172,11 @@ export function initHomeSearch() {
   input.addEventListener('focus', () => { loadData(); if (input.value.trim()) runSearch(); }, { once: false });
   input.addEventListener('input', () => { clearTimeout(debTimer); debTimer = setTimeout(runSearch, 110); });
   input.addEventListener('keydown', onKeydown);
+  // Отсюда уходят со страницы: клик по подсказке ведёт на страницу логотипа.
+  // Таймер отстоя (1.2 с) может не успеть — дописываем принудительно,
+  // fetch в trackSearchQuery идёт с keepalive.
+  input.addEventListener('blur', flushSearchQuery);
+  window.addEventListener('pagehide', flushSearchQuery);
   form.addEventListener('submit', e => { if (!input.value.trim()) e.preventDefault(); });
   document.addEventListener('click', e => { if (!container.contains(e.target)) close(); });
 }

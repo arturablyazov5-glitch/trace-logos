@@ -27,6 +27,10 @@ tags_en: Branding, Localization, Design
 
 **Название и шрифт.** Слово может звучать неудачно или совпасть с чем‑то нежелательным; а на рынке с другой письменностью логотип нужно бережно адаптировать под местный алфавит, сохранив характер. Это уже тонкая работа с [шрифтом](../shrift-dlya-logotipa/), а не механический перевод.
 
+:::note Локализация названий в России — теперь не выбор, а требование закона
+С 1 марта 2026 года действует федеральный закон №168‑ФЗ: вывески, витрины и публичная информация для потребителя должны быть на русском языке, а иностранный текст может остаться только как дублирующий, второстепенный по размеру. Для брендов, которые раньше выходили на российский рынок с латиницей «как есть», это переводит локализацию названия из маркетингового решения в юридическую обязанность.
+:::
+
 :::warning Проверяйте смыслы до запуска, а не после
 Большинство провалов локализации можно было предотвратить одной проверкой: показать логотип, название и цвета носителям культуры до выхода на рынок. Спросить, какие ассоциации это вызывает, нет ли неудачных совпадений, читается ли смысл так, как задумано. Это дешевле любого ребрендинга задним числом — та же логика, что в [проверке логотипа на уникальность](../proverit-logotip-na-unikalnost/), только про культурный смысл, а не про юридический.
 :::
@@ -71,6 +75,10 @@ A logo is a concentrate of these meanings. So a mark that works perfectly at hom
 **Symbol and shape.** A gesture, animal, or geometric mark can have a local meaning you don't suspect. It's especially easy to accidentally step on someone else's meaning here — as with [negative space](../negativnoe-prostranstvo-v-logotipe/), where a hidden image isn't read the same by everyone.
 
 **Name and font.** A word may sound unfortunate or coincide with something undesirable; and in a market with a different writing system the logo must be carefully adapted to the local alphabet while keeping its character. That's subtle work with a [font](../shrift-dlya-logotipa/), not a mechanical translation.
+
+:::note Localizing names in Russia is now a legal requirement, not a choice
+As of March 1, 2026, Federal Law No. 168-FZ requires signage, storefronts and public consumer information in Russia to be in Russian, with foreign text allowed only as a smaller, secondary duplicate. For brands that used to enter the Russian market with a Latin-script name "as is", this turns name localization from a marketing decision into a legal obligation.
+:::
 
 :::warning Check meanings before launch, not after
 Most localization failures could have been prevented by one check: showing the logo, name, and colors to native members of the culture before entering the market. Ask what associations it evokes, whether there are unfortunate coincidences, whether the meaning reads as intended. This is cheaper than any after-the-fact rebrand — the same logic as in [checking a logo for uniqueness](../proverit-logotip-na-unikalnost/), only about cultural meaning, not legal.

@@ -1,4 +1,4 @@
-import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize, trackLogoView, trackExport, trackSearchNoResults } from './utils.js';
+import { showToast, highlight, svgUrl, previewUrl, setAssetBase, setPreviewBase, animateContainerHeight, formatFileSize, trackLogoView, trackExport, trackSearchQuery, flushSearchQuery } from './utils.js';
 import './search-shortcut.js';
 import './donate.js';   // hosting fundraiser modal — self-wires to the `tl:export` event
 import {
@@ -6,7 +6,7 @@ import {
   buildColorEditor, updatePreview, updateVariantThumbnails, updateColorsResetBtn,
   pushColorHistory, undoColors, loadRawSvg, applyColorMap, extractColors,
 } from './color.js';
-import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, estimateZipSize } from './export.js';
+import { svgForExport, svgForFigma, svgToPngBlob, downloadAllAsZip, estimateZipSize, downloadAsIco } from './export.js';
 import { updateSeoPageLink, slugifyPathPart } from './seo.js';
 import { ecosystemLogoMap, ecosystemLabels, ecosystemLabelsEn, ecosystemSectionLabels, ecosystemSectionLabelsEn, loadLogos } from './data.js';
 import { categoryIconSvg } from './category-icons.js';
@@ -23,8 +23,7 @@ import { openReportModal } from './suggest.js';
 import { openHelpModal } from './help.js';
 import { LABELS, TOASTS, applyLabels } from './labels.js';
 import { t, setLang, getLang } from './i18n.js';
-import { initSidebarIndicator } from './microanim.js';
-import { trackCardOpen } from './easter-achievements.js';
+import { initSidebarIndicator, syncSidebarIndicator } from './microanim.js';
 import { checkCatalogEnd } from './easter-confetti.js';
 import { playAmongUsEscape } from './easter-amongus.js';
 import { playGoogleAssemble } from './easter-google.js';
@@ -51,6 +50,16 @@ const layoutMq = matchMedia('(max-width: 768px)');
 let totalCards = 0;
 const sectionEls   = [];
 const ecosystemEls = [];
+// Set by the "Показать ещё" builders below once the sidebar is populated.
+// expand* — setActive/setActiveEcosystem call these to reveal a collapsed
+// nav item that a programmatic activation (URL param, cross-link) landed on,
+// since only a direct click on the button itself expands the list otherwise.
+// collapse* — the search input handler calls these so starting a search
+// doesn't leave a stale expanded list sitting open behind the results.
+let expandCategoriesMore = null;
+let expandEcosystemsMore = null;
+let collapseCategoriesMore = null;
+let collapseEcosystemsMore = null;
 const allItems     = [];
 const cardByItemFile  = new Map();
 const cardByItemFigma = new Map();
@@ -286,48 +295,77 @@ function renderSectionCards(section, cardPredicate, { animate = false } = {}) {
   return section.visibleCards.length;
 }
 
+// Category/ecosystem views hide sections with zero matches (setSectionHidden)
+// but that leaves blank space when EVERY section ends up empty — e.g. an
+// ecosystem that has no SVG members while the SVG format filter is active.
+// Reuses the same #empty panel + "Показать все форматы" button the search
+// empty-state already renders (handleEmptySearch), so a filtered dead-end
+// looks and behaves the same everywhere instead of just going blank here.
+function updateEmptyState(visibleTotal) {
+  const isEmpty = visibleTotal === 0;
+  document.getElementById('empty').classList.toggle('show', isEmpty);
+  content.style.display = isEmpty ? 'none' : '';
+  if (isEmpty) handleEmptySearch();
+}
+
 function setActive(sectionName, { animate = false } = {}) {
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   currentView = sectionName === 'all' ? { kind: 'all', value: null } : { kind: 'section', value: sectionName };
 
+  let visibleTotal = 0;
   if (sectionName === 'all') {
     document.querySelector('[data-section="all"]').classList.add('active');
     sectionEls.forEach(s => {
       const n = renderSectionCards(s, () => true, { animate });
       setSectionHidden(s.sec, n === 0);
+      visibleTotal += n;
     });
   } else {
     const found = sectionEls.find(s => s.group.section === sectionName);
     if (found) {
       found.nav.classList.add('active');
+      // A programmatic activation (?s= on load, breadcrumb link) can land on
+      // a category collapsed under "Показать ещё" — a click only expands via
+      // the button itself, so reveal it here or the highlight sits unseen.
+      if (found.nav.style.display === 'none') expandCategoriesMore?.();
       sectionEls.forEach(s => {
         if (s.group.section !== sectionName) { ensureSectionCards(s); setSectionHidden(s.sec, true); return; }
         const n = renderSectionCards(s, () => true, { animate });
         setSectionHidden(s.sec, n === 0);
+        visibleTotal += n;
       });
     }
   }
+  updateEmptyState(visibleTotal);
   if (animate) scheduleVirtualizedSections();
   else resetContentScroll();
   syncViewToUrl();
+  syncSidebarIndicator();
 }
 
 function setActiveEcosystem(ecosystem, { animate = false } = {}) {
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   currentView = { kind: 'ecosystem', value: ecosystem };
   const found = ecosystemEls.find(e => e.key === ecosystem);
-  if (found) found.nav.classList.add('active');
+  if (found) {
+    found.nav.classList.add('active');
+    // Same "Показать ещё" reveal as setActive — a URL-driven ?eco= or an
+    // ecosystem cross-link can land on an entry collapsed past VISIBLE.
+    if (found.nav.style.display === 'none') expandEcosystemsMore?.();
+  }
 
+  let visibleTotal = 0;
   sectionEls.forEach(section => {
     const n = renderSectionCards(section, card => itemEcosystems(card._item).includes(ecosystem), { animate });
     setSectionHidden(section.sec, n === 0);
+    visibleTotal += n;
   });
 
-  document.getElementById('empty').classList.remove('show');
-  document.getElementById('content').style.display = '';
+  updateEmptyState(visibleTotal);
   if (animate) scheduleVirtualizedSections();
   else resetContentScroll();
   syncViewToUrl();
+  syncSidebarIndicator();
 }
 
 // ── Variant selection ──
@@ -388,6 +426,8 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   const btnCopyPng     = document.getElementById('btn-copy-png');
   const btnDownloadSvg = document.getElementById('btn-download');
   const btnDownloadPng = document.getElementById('btn-download-png');
+  const btnDownloadIco = document.getElementById('btn-download-ico');
+  const btnDownloadIcns= document.getElementById('btn-download-icns');
   const btnCopyEmoji   = document.getElementById('btn-copy-emoji');
   const detailImg      = document.getElementById('detail-img');
   const variantLabel   = (_isEnUrl && vDef.label_en) ? vDef.label_en : vDef.label;
@@ -441,10 +481,17 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   }
 
   if (isPng) {
+    // `type:"png"` means "PNG Icon" — square by convention regardless of name.
+    const isSquarePng = vDef.type === 'png' || getDisplayType(vDef) === 'square';
     animateContainerHeight(controls, () => {
       btnCopy.classList.add('hidden');
       btnDownloadSvg.classList.add('hidden');
       btnCopyPng.classList.remove('hidden');
+      // ICO/ICNS are square app-icon formats — only offered for square PNGs, and
+      // only on pages that have the buttons at all (emoji/icons keep the old
+      // plain download flow, see applyDownloadVariantState).
+      btnDownloadIco?.classList.toggle('hidden', !isSquarePng);
+      btnDownloadIcns?.classList.toggle('hidden', !isSquarePng);
       colorsPanel.classList.add('colors-hidden');
       colorsDivider.classList.add('colors-hidden');
     });
@@ -505,6 +552,11 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       showToast(TOASTS.downloaded(baseName + suffix + '.png'));
       trackExport(item.figma, 'png', vDef.file);
     };
+    if (btnDownloadIco) btnDownloadIco.onclick = () => downloadAsIco(item, vDef.file);
+    if (btnDownloadIcns) btnDownloadIcns.onclick = async () => {
+      const { openIcnsModal } = await import('./icns.js');
+      openIcnsModal(item, vDef.file);
+    };
 
     // macOS style tabs: per-variant. The _original (primary) uses item-level
     // macos_styles; each iOS-version variant carries its own. iOS 26 has dark+light
@@ -535,8 +587,6 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
       };
     }
 
-    // `type:"png"` means "PNG Icon" — square by convention regardless of name.
-    const isSquarePng = vDef.type === 'png' || getDisplayType(vDef) === 'square';
     applyDownloadVariantState(item, isSquarePng, vDef.file, !!vDef.darkBg);
     return;
   }
@@ -545,23 +595,31 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
   activePngFile = null;
   document.getElementById('macos-style-tabs')?.classList.add('hidden');
   const isSquare = getDisplayType(vDef) === 'square';
+  // ICO/ICNS are square-PNG-only formats — a full/wide SVG variant never
+  // qualifies, full stop. Hidden synchronously, before the SVG even starts
+  // loading: the old order hid them only after `await loadRawSvg()` resolved,
+  // so on a cold cache (first click on this variant) the previous PNG
+  // variant's ICO/ICNS buttons stayed visible for the whole fetch — a
+  // reproducible flash of the wrong buttons on every logo, not a one-off.
+  animateContainerHeight(controls, () => {
+    btnCopy.classList.remove('hidden');
+    btnDownloadSvg.classList.remove('hidden');
+    btnCopyPng.classList.add('hidden');
+    btnDownloadIco?.classList.add('hidden');
+    btnDownloadIcns?.classList.add('hidden');
+    colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
+    colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
+  });
+
   const rawSvg = await loadRawSvg(vDef.file);
   // A faster later switch may have already resumed and rendered while this
-  // fetch was in flight — stop before touching the preview/buttons/color
-  // editor, or a slow variant could overwrite a fresher one once it lands.
+  // fetch was in flight — stop before touching the preview/color editor, or
+  // a slow variant could overwrite a fresher one once it lands.
   if (myGen !== selectVariantGen) return;
 
   if (!colorEditingDisabled) {
     buildColorEditor(rawSvg);
   }
-
-  animateContainerHeight(controls, () => {
-    btnCopy.classList.remove('hidden');
-    btnDownloadSvg.classList.remove('hidden');
-    btnCopyPng.classList.add('hidden');
-    colorsPanel.classList.toggle('colors-hidden', colorEditingDisabled);
-    colorsDivider.classList.toggle('colors-hidden', colorEditingDisabled);
-  });
 
   const applysvg = () => {
     detailImg.classList.remove('prerendered');
@@ -674,7 +732,6 @@ function handleEmptySearch() {
   if (detail.classList.contains('open')) closeDetail();
   const resetBtn = document.getElementById('empty-reset-format');
   if (resetBtn) resetBtn.classList.toggle('hidden', formatState.format === 'all');
-  trackSearchNoResults(search.value);
 }
 
 function isFlagItem(item) {
@@ -686,7 +743,6 @@ openDetailFn = function (item, card) {
 
   if (activeCard === card) { closeDetail(); return; }
   trackLogoView(item.figma, item.name, item.file);
-  trackCardOpen(item);
   resetCopyBtn();
 
   if (activeCard) activeCard.classList.remove('active');
@@ -986,6 +1042,56 @@ scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior:
 detailBackdrop.addEventListener('click', closeDetail);
 document.getElementById('detail-close').onclick = closeDetail;
 
+// Mobile bottom sheet: drag the handle down to dismiss, mirroring the
+// backdrop-click / close-button paths above (same closeDetail()).
+(() => {
+  const handle = document.querySelector('.detail-sheet-handle');
+  if (!handle) return;
+  let startY = 0;
+  let dragY = 0;
+  let dragging = false;
+
+  handle.addEventListener('touchstart', (e) => {
+    if (!layoutMq.matches) return;
+    dragging = true;
+    startY = e.touches[0].clientY;
+    dragY = 0;
+    detail.style.transition = 'none';
+  }, { passive: true });
+
+  handle.addEventListener('touchmove', (e) => {
+    if (!dragging) return;
+    // Non-passive + preventDefault: without this, iOS/Android treat the
+    // downward drag as a native scroll gesture on #detail's own
+    // overflow-y:auto and consume it before this handler moves the sheet.
+    e.preventDefault();
+    dragY = e.touches[0].clientY - startY;
+    // Drag down moves the sheet 1:1 (about to close). Drag up is rubber-banded
+    // (about to jump to another page, not to reposition the sheet) — a small
+    // heavily-damped nudge is enough to signal the gesture is registering.
+    const visual = dragY > 0 ? dragY : Math.max(dragY * 0.3, -40);
+    detail.style.transform = `translateY(${visual}px)`;
+  }, { passive: false });
+
+  handle.addEventListener('touchend', () => {
+    if (!dragging) return;
+    dragging = false;
+    detail.style.transition = '';
+    detail.style.transform = '';
+    const height = detail.getBoundingClientRect().height;
+    if (dragY > Math.min(height * 0.25, 120)) { closeDetail(); return; }
+    if (dragY < -Math.min(height * 0.15, 80)) {
+      // Same destination/target as the "Открыть страницу логотипа" button
+      // (js/seo.js's updateSeoPageLink) — swipe-up is a shortcut for it.
+      const wrap = document.getElementById('detail-page-link');
+      const link = document.getElementById('btn-page-link');
+      if (link?.href && wrap && !wrap.classList.contains('hidden')) {
+        window.open(link.href, '_blank', 'noopener');
+      }
+    }
+  });
+})();
+
 burgerBtn.addEventListener('click', () => {
   if (sidebar.classList.contains('nav-open')) closeNavDrawer(); else openNavDrawer();
 });
@@ -1007,11 +1113,23 @@ layoutMq.addEventListener('change', () => {
 const mobileSearchGo = document.getElementById('mobile-search-go');
 search.addEventListener('input', () => {
   const q = search.value.toLowerCase().trim();
-  filterCards(q);
   if (q) {
+    // Search looks across the whole catalog — a lingering category/
+    // ecosystem/format filter from before the search started would silently
+    // narrow results without any visible explanation, so drop all three for
+    // real (not just the nav highlight) the moment a query is typed.
+    currentView = { kind: 'all', value: null };
     document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
     document.querySelector('[data-section="all"]').classList.add('active');
+    syncSidebarIndicator();
+    if (formatState.format !== 'all') setFormat('all');
+    // Collapse a left-open "Показать ещё" — a search doesn't need it, and
+    // leaving it expanded behind the results looks like a leftover filter.
+    collapseCategoriesMore?.();
+    collapseEcosystemsMore?.();
   }
+  const resultsCount = filterCards(q);
+  trackSearchQuery(q, resultsCount);
   mobileSearchGo?.classList.toggle('visible', search.value.length > 0);
 });
 search.addEventListener('keydown', (e) => {
@@ -1020,6 +1138,10 @@ search.addEventListener('keydown', (e) => {
   else if (e.key === 'ArrowUp') { e.preventDefault(); moveSearchSelection(-1); }
   else if (e.key === 'Enter') { e.preventDefault(); openSearchSelection(); }
 });
+// Досылаем незалогированный поисковый запрос, если ушли со страницы или
+// увели фокус раньше, чем сработал settle-таймер в trackSearchQuery.
+search.addEventListener('blur', flushSearchQuery);
+window.addEventListener('beforeunload', flushSearchQuery);
 mobileSearchGo?.addEventListener('click', closeNavDrawer);
 
 document.addEventListener('keydown', (e) => {
@@ -1170,7 +1292,7 @@ loadLogos(_manifestBase).then(logos => {
     sec.dataset.section = group.section;
     const title = document.createElement('div');
     title.className = 'section-title';
-    title.textContent = _sectionLabel;
+    title.innerHTML = `<span class="section-title-label">${_sectionLabel}</span><span class="section-title-count">${readyCount}</span>`;
     sec.appendChild(title);
     const grid = document.createElement('div');
     grid.className = 'grid';
@@ -1199,11 +1321,14 @@ loadLogos(_manifestBase).then(logos => {
     btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>`;
     btn.appendChild(showMoreSpan1);
     navSections.appendChild(btn);
-    btn.addEventListener('click', () => {
-      const expanded = btn.classList.toggle('expanded');
+    function setExpanded(expanded) {
+      btn.classList.toggle('expanded', expanded);
       items.slice(VISIBLE).forEach(el => { el.style.display = expanded ? '' : 'none'; });
       btn.querySelector('span').textContent = expanded ? t('showLess') : t('showMore')(items.length - VISIBLE);
-    });
+    }
+    btn.addEventListener('click', () => setExpanded(!btn.classList.contains('expanded')));
+    expandCategoriesMore = () => setExpanded(true);
+    collapseCategoriesMore = () => setExpanded(false);
   })();
 
   const ecosystemCounts = allItems.reduce((acc, item) => {
@@ -1253,11 +1378,14 @@ loadLogos(_manifestBase).then(logos => {
     btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>`;
     btn.appendChild(showMoreSpan2);
     navEcosystems.appendChild(btn);
-    btn.addEventListener('click', () => {
-      const expanded = btn.classList.toggle('expanded');
+    function setExpanded(expanded) {
+      btn.classList.toggle('expanded', expanded);
       items.slice(VISIBLE).forEach(el => { el.style.display = expanded ? '' : 'none'; });
       btn.querySelector('span').textContent = expanded ? t('showLess') : t('showMore')(items.length - VISIBLE);
-    });
+    }
+    btn.addEventListener('click', () => setExpanded(!btn.classList.contains('expanded')));
+    expandEcosystemsMore = () => setExpanded(true);
+    collapseEcosystemsMore = () => setExpanded(false);
   })();
 
   document.getElementById('ecosystems-label').classList.toggle('hidden', ecosystemEls.length === 0);

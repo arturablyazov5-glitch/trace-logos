@@ -59,7 +59,7 @@ JPG‑алгоритм устроен блоками 8×8 пикселей и 
 
 - **JPG → PNG:** можно всегда, но бессмысленно для качества — потери JPG уже случились и не вернутся. Конвертируют обычно ради прозрачности после удаления фона.
 - **PNG → JPG:** уместно для фотографий, случайно сохранённых в PNG. Прозрачные области зальются белым — проверьте, что их нет.
-- Инструменты: любой графический редактор, [Preview](../../logos/design/preview/) на Mac, «Фотографии» на [Windows](../../logos/store/windows/), онлайн‑конвертеры. Для пакетной обработки — командная строка или Squoosh.
+- Инструменты: любой графический редактор, [Preview](../../logos/design/preview/) на Mac, «Фотографии» на [Windows](../../logos/tech/windows/), онлайн‑конвертеры. Для пакетной обработки — командная строка или Squoosh.
 
 :::tip Проверка перед загрузкой на сайт
 Откройте картинку в масштабе 100% и посмотрите на границы объектов и текста. Грязные разводы — пересжатый JPG, ищите исходник получше. Файл фотографии больше 1‑2 МБ — конвертируйте в JPG/WebP с качеством 80‑85%: разницу не увидит никто, кроме счётчика скорости загрузки.
@@ -147,7 +147,7 @@ Why are JPG and PNG still alive? Compatibility beyond the browser: legacy softwa
 
 - **JPG → PNG:** always possible, pointless for quality — JPG's losses already happened and won't return. Usually done for transparency after background removal.
 - **PNG → JPG:** right for photos accidentally saved as PNG. Transparent areas flood white — check there are none.
-- Tools: any editor, [Preview](../../logos/design/preview/) on Mac, Photos on [Windows](../../logos/store/windows/), online converters, Squoosh for batches.
+- Tools: any editor, [Preview](../../logos/design/preview/) on Mac, Photos on [Windows](../../logos/tech/windows/), online converters, Squoosh for batches.
 
 :::tip The pre-upload check
 View the image at 100% and look at object and text boundaries. Dirty smudges — an over-compressed JPG; find a better source. A photo over 1–2 MB — convert to JPG/WebP at 80–85% quality: nobody will see the difference except the page-speed meter.

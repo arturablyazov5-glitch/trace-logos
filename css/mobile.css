@@ -70,9 +70,10 @@
   .content { padding: 16px 8px; }
   .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
   .card { width: auto; padding: 8px 4px 6px; }
-  .icon-wrap { width: 100%; height: 0; padding-top: 100%; }
-  .icon-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .icon-wrap::before { inset: 0; }
+  .icon-wrap { width: 100%; height: 0; padding-top: 100%; border-radius: 16px; }
+  .icon-wrap img { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 16px; }
+  .icon-wrap img.prerendered { border-radius: 0; }
+  .icon-wrap::before { inset: 0; border-radius: 16px; }
   .card { align-items: stretch; overflow: hidden; contain: none; }
   .label { white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; width: 100% !important; max-width: 100% !important; }
   .sidebar-header.mobile-only { display: flex; }
@@ -131,7 +132,11 @@
     right: 0;
     bottom: 0;
     width: 100%;
-    max-height: min(88vh, 720px);
+    /* Отступ до шапки (57px) + донат-тикер под ней не должен опускаться ниже 40px —
+       иначе .mobile-header (z-index: 80, выше #detail) перекрывает полоску и крестик
+       на маленьких экранах. --tl-ticker-h — тот же паттерн, что в seo-page.css/blog.css:
+       выставляется/убирается components/donate-ticker.js, 0px когда тикер не показан. */
+    max-height: min(88vh, 720px, calc(100vh - 57px - 40px - var(--tl-ticker-h, 0px)));
     border-left: none;
     border-top: 1px solid #2a2a2a;
     border-radius: 16px 16px 0 0;
@@ -140,8 +145,54 @@
     box-shadow: 0 -12px 40px rgba(0, 0, 0, .5);
   }
   #detail.open { transform: translateY(0); }
-  .detail-sheet-handle { display: block; }
-  .detail-header { padding-top: 4px; }
+  .detail-sheet-handle {
+    /* Раньше это был узкий 36px-блок по центру без сплошного фона — при скролле
+       контент .detail-preview проглядывал слева/справа от полоски и в зазоре
+       над ней (никакой непрозрачной подложки на всю ширину строки не было).
+       Теперь сам .detail-sheet-handle — сплошная строка на всю ширину со своим
+       фоном; видимая полоска-пилюля нарисована поверх через ::before. */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 24px;
+    margin: 0;
+    background: #161616;
+    position: sticky;
+    top: 0; /* натуральная позиция строки — с самого начала контейнера, без «съезжания» */
+    z-index: 1;
+    /* Без этого палец, ведущий вниз по хэндлу, распознаётся браузером как нативный
+       скролл #detail (overflow-y: auto) — жест "съедается" системой раньше, чем
+       успевает сработать наш touchmove-обработчик перетаскивания в main.js. */
+    touch-action: none;
+  }
+  .detail-sheet-handle::before {
+    content: '';
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: #3a3a3a;
+  }
+  /* Видимая полоска сама по себе всё ещё узкая — расширяем зону захвата пальцем
+     невидимым псевдоэлементом поверх всей строки. События всё равно всплывают
+     на .detail-sheet-handle, JS не меняется. Вниз не растягиваем — там сразу
+     начинается кнопка-крестик. */
+  .detail-sheet-handle::after {
+    content: '';
+    position: absolute;
+    inset: -6px -40px 0 -40px;
+  }
+  .detail-header {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    position: sticky;
+    /* На 1px меньше высоты .detail-sheet-handle (24px), а не вплотную —
+       сабпиксельное округление при нецелом масштабе экрана иначе оставляет
+       щель в 1px между двумя sticky-строками, сквозь которую видно скролл. */
+    top: 23px;
+    z-index: 1;
+    background: #161616;
+  }
 
   /* Sheet is wider than the desktop panel — lay action buttons in 2 columns.
      The long "Скачать другие форматы" / ZIP button (id="btn-download-all" in
@@ -195,9 +246,4 @@
     padding: 0;
     width: auto;
   }
-}
-
-/* Narrow phones: 5 columns leaves too little width per label — drop to 4. */
-@media (max-width: 480px) {
-  .grid { grid-template-columns: repeat(4, 1fr); }
 }

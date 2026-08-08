@@ -43,7 +43,7 @@ tags_en: Fonts, Logos, Design
 
 Шрифт — это программа, объект авторского права. «Скачал с сайта шрифтов бесплатно» означает лишь, что файл достался бесплатно — право использования определяет **лицензия**, и у неё есть градации: personal use only (только личные проекты), desktop, web, а для логотипа — коммерческое использование, иногда с отдельным условием про logo use.
 
-Претензии от шрифтовых студий — не страшилка, а обычная практика: мониторинг использования, письмо с требованием купить лицензию задним числом или выплатить компенсацию. Для логотипа риск особый: знак тиражируется на всех носителях, и «переехать» с нелицензионного шрифта — значит менять весь фирменный стиль.
+Претензии от шрифтовых студий — не страшилка, а обычная практика: мониторинг использования, письмо с требованием купить лицензию задним числом или выплатить компенсацию. Для логотипа риск особый: знак тиражируется на всех носителях, и «переехать» с нелицензионного шрифта — значит менять весь фирменный стиль. По статье 1301 ГК РФ правообладатель вправе требовать компенсацию по своему выбору: от 10 000 до 10 млн рублей на усмотрение суда (с января 2026 года верхняя планка выросла с 5 до 10 млн) либо в двукратном размере стоимости лицензии.
 
 :::success Безопасные варианты
 - **Open Font License (OFL):** Google Fonts — тысячи шрифтов, разрешено коммерческое использование и логотипы. Из кириллических: Inter, Manrope, Golos Text, PT‑семейство, Onest, Unbounded.
@@ -132,7 +132,7 @@ One typeface per logo, at most a weight game (bold + light). A descriptor ("stud
 
 A font is software, an object of copyright. "Downloaded free from a font site" only means the file cost nothing — the **license** defines usage rights, with tiers: personal use only, desktop, web, and for logos — commercial use, sometimes with a separate logo-use clause.
 
-Claims from type foundries aren't a scare story but routine practice: usage monitoring, then a letter demanding a retroactive license or compensation. For logos the risk is special: the mark propagates across all media, and migrating off an unlicensed font means changing the whole identity.
+Claims from type foundries aren't a scare story but routine practice: usage monitoring, then a letter demanding a retroactive license or compensation. For logos the risk is special: the mark propagates across all media, and migrating off an unlicensed font means changing the whole identity. Under Russian law (Art. 1301 of the Civil Code), a rightsholder can claim compensation of 10,000 to 10 million rubles at the court's discretion (the ceiling rose from 5 to 10 million in January 2026), or twice the license's value.
 
 :::success The safe options
 - **Open Font License (OFL):** Google Fonts — thousands of faces, commercial and logo use permitted. Strong Cyrillic options: Inter, Manrope, Golos Text, the PT family, Onest, Unbounded.

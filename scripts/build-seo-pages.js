@@ -17,6 +17,7 @@
 
 const fs             = require('fs');
 const path           = require('path');
+const sharp          = require('sharp');
 const { loadTemplate } = require('./lib/render');
 const { loadDict, enChrome, bakeI18n, hreflangBlock } = require('./lib/en-transform');
 const { itemDate, itemPublishedDate }  = require('./lib/item-date');
@@ -87,15 +88,55 @@ function seoUrl(item) {
 
 // ── File size ─────────────────────────────────────────────────────────────────
 
+function formatSize(size) {
+  // Unit matches the runtime formatFileSize() in utils.js (universal "KB").
+  if (size < 1024) return `${size} B`;
+  const kb = size / 1024;
+  return kb < 100 ? `${kb.toFixed(1)} KB` : `${Math.round(kb)} KB`;
+}
+
 function fileSize(relPath) {
   try {
-    const abs = path.join(ROOT, 'assets', 'logos', relPath);
-    const { size } = fs.statSync(abs);
-    // Unit matches the runtime formatFileSize() in utils.js (universal "KB").
-    if (size < 1024) return `${size} B`;
-    const kb = size / 1024;
-    return kb < 100 ? `${kb.toFixed(1)} KB` : `${Math.round(kb)} KB`;
+    const { size } = fs.statSync(path.join(ROOT, 'assets', 'logos', relPath));
+    return formatSize(size);
   } catch { return ''; }
+}
+
+// ── Approx PNG size for SVG-only logos ──────────────────────────────────────
+// SVG-only items have no real PNG file — the "Скачать PNG" button rasterizes
+// the SVG client-side on click (js/seo-page.js, svgToPngBlob at size:1000), so
+// there's nothing on disk to stat. We rasterize the same 1000×1000 export
+// server-side at build time (once per SVG, cached by mtime) purely to show a
+// realistic "~NN KB" figure next to the button — not written to disk, not the
+// file the visitor actually downloads (that's still generated live, and can
+// vary slightly by export settings), just an honest estimate instead of a
+// blank space.
+const PNG_SIZE_CACHE_PATH = path.join(ROOT, 'logos', 'png-size-cache.json');
+let pngSizeCache = {};
+try { pngSizeCache = JSON.parse(fs.readFileSync(PNG_SIZE_CACHE_PATH, 'utf8')); } catch { /* first run */ }
+
+async function computeApproxPngSizes(svgFiles) {
+  let changed = false;
+  for (const svgFile of svgFiles) {
+    const abs = path.join(ROOT, 'assets', 'logos', 'svgs', svgFile);
+    let mtimeMs;
+    try { mtimeMs = fs.statSync(abs).mtimeMs; } catch { continue; }
+    if (pngSizeCache[svgFile]?.mtimeMs === mtimeMs) continue;
+    try {
+      const buf = await sharp(abs)
+        .resize(1000, 1000, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+        .png()
+        .toBuffer();
+      pngSizeCache[svgFile] = { mtimeMs, size: buf.length };
+      changed = true;
+    } catch { /* malformed/unsupported SVG — button just omits the size */ }
+  }
+  if (changed) fs.writeFileSync(PNG_SIZE_CACHE_PATH, JSON.stringify(pngSizeCache, null, 2) + '\n', 'utf8');
+}
+
+function approxPngSize(svgFile) {
+  const cached = pngSizeCache[svgFile];
+  return cached ? `~${formatSize(cached.size)}` : '';
 }
 
 // Like fileSize(), but accepts either a name inside assets/logos/<folder>/ or
@@ -148,25 +189,47 @@ function searchWebpPreviewRel(item) {
   return fs.existsSync(path.join(ROOT, rel)) ? rel : null;
 }
 
-// WebP grid-thumbnail render of a PNG asset (build-webp-previews.js) — the
-// same lightweight preview the catalog card grid uses, ~98% smaller than the
-// raw PNG. Only for on-page display (hero preview + variant thumbnails); the
-// full PNG stays the download/lightbox/color-editor source. Returns null when
-// the file isn't a PNG or the preview hasn't been generated yet.
+// WebP grid-thumbnail render of a PNG or SVG asset (build-webp-previews.js)
+// — the same lightweight preview the catalog card grid uses, ~80-98% smaller
+// than the raw file. Only for on-page display (hero preview + variant
+// thumbnails); the full asset stays the download/lightbox/color-editor
+// source. Returns null when the preview hasn't been generated yet.
 function webpPreviewRel(file) {
-  if (assetExt(file) !== 'png') return null;
-  const rel = `assets/logos/previews/${file.replace(/\.png$/i, '.webp')}`;
+  const ext = assetExt(file);
+  if (ext !== 'png' && ext !== 'svg') return null;
+  const rel = `assets/logos/previews/${file.replace(new RegExp(`\\.${ext}$`, 'i'), '.webp')}`;
   return fs.existsSync(path.join(ROOT, rel)) ? rel : null;
 }
 
 // Thumbnail-only src for a logo file, root-relative to `rel` — the WebP
-// preview for PNGs when one exists, else the real asset (SVGs always; PNGs
-// without a generated preview yet). Used anywhere a logo shows up small
-// on-page purely for browsing/cross-linking (related logos, category grid),
+// preview when one exists (both PNG and SVG, see webpPreviewRel), else the
+// real asset. Used anywhere a logo shows up small on-page purely for
+// browsing/cross-linking (related logos, category grid),
 // never for the primary per-item preview/download/variant paths.
 function thumbSrc(file, rel, ext) {
-  const webpRel = ext === 'png' ? webpPreviewRel(file) : null;
+  const webpRel = webpPreviewRel(file);
   return webpRel ? `${rel}${webpRel}` : `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}`;
+}
+
+// 48×48 WebP tier (build-webp-previews.js's `logosMini` section) — ONLY for
+// buildCatalogGridSection()'s "Остальные категории" tiles, which render at
+// 26px CSS, smaller than every other spot thumbSrc()/webpPreviewRel() serve
+// (~48px). Separate output dir (assets/logos/previews-mini/) so it never
+// competes with the shared 192px previews other blocks rely on.
+function miniThumbSrc(file, rel, ext) {
+  if (ext !== 'png' && ext !== 'svg') return `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}`;
+  const webpRel = `assets/logos/previews-mini/${file.replace(new RegExp(`\\.${ext}$`, 'i'), '.webp')}`;
+  return fs.existsSync(path.join(ROOT, webpRel)) ? `${rel}${webpRel}` : `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}`;
+}
+
+// 100×100 WebP tier (build-webp-previews.js's `logosRelated` section) — ONLY
+// for buildRelatedSection()'s "Другие логотипы этой категории" tiles
+// (`.related-card img`, 48px CSS). Kept separate from the 192px tier the
+// "Экосистема" block uses at the same display size, per explicit request.
+function relatedThumbSrc(file, rel, ext) {
+  if (ext !== 'png' && ext !== 'svg') return `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}`;
+  const webpRel = `assets/logos/previews-related/${file.replace(new RegExp(`\\.${ext}$`, 'i'), '.webp')}`;
+  return fs.existsSync(path.join(ROOT, webpRel)) ? `${rel}${webpRel}` : `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}`;
 }
 function variantType(v)      { return assetExt(v.file) === 'png' ? 'png' : 'svg'; }
 // Mirrors svgUrl() in js/utils.js: a leading "/" means the file is already a
@@ -243,7 +306,15 @@ function ecosystemIds(item) {
 
 // ── Sponsor banners (optional, per-logo; source of truth: logos/sponsors.json) ──
 
+// Kill switch — flip back to `true` to bring the sponsor banners back. Gates
+// both the markup (buildSponsorSection) and the <link> to css/sponsor-banner.css,
+// so a hidden banner ships zero bytes instead of display:none'd markup.
+// Temporarily off 2026-08-05 at the user's request; logos/sponsors.json is
+// untouched, so re-enabling needs no data work.
+const SPONSORS_ENABLED = false;
+
 const SPONSORS = (() => {
+  if (!SPONSORS_ENABLED) return {};
   try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'logos', 'sponsors.json'), 'utf8')); }
   catch { return {}; }
 })();
@@ -283,7 +354,7 @@ function buildVariantCard(v, isActive, rel, itemName) {
   // Thumbnail-only WebP preview (falls back to the full asset when one hasn't
   // been generated for this file) — the full `src` stays data-src for
   // switch/download/lightbox, this is purely what the small on-page <img> loads.
-  const webpRel = type === 'png' ? webpPreviewRel(v.file) : null;
+  const webpRel = webpPreviewRel(v.file);
   const thumbSrc = webpRel ? `${rel}${webpRel}` : src;
   const wide  = isWideVariant(v);
   const label = variantLabel(v);
@@ -432,13 +503,30 @@ function buildDownloadButtons(item, rel) {
           </a>`
     : `<a class="btn btn-secondary" id="btn-dl-png" href="#" download="${item.file.replace('.svg', '.png')}">
             ${DL_ICON}
-            <span data-label="downloadPng">Скачать PNG</span>
+            <span data-label="downloadPng">Скачать PNG</span>${svgFile && approxPngSize(svgFile) ? ` <span class="btn-size btn-size-approx" title="Примерный размер — файл рендерится в браузере при скачивании, байт в байт может немного отличаться">${approxPngSize(svgFile)}</span>` : ''}
           </a>`;
+
+  // PNG-only, square variants only (ICO/ICNS are app-icon formats — meaningless
+  // for a wide/full PNG lockup). Same one-click shortcut as the catalog's
+  // detail panel (templates/partials/detail-panel.html) — that already offered
+  // ICO/ICNS via the "Другие форматы" modal (shared js/download-modal.js), this
+  // is just a faster path for the common square-icon case. Hidden by default;
+  // js/seo-page.js's initPngBtn() reveals them for the active variant, same as
+  // it already gates btn-dl-png.
+  const icoBtn = `<button class="btn btn-secondary hidden" id="btn-download-ico" type="button">
+            <svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M15.49 6H6V15.492H15.492L15.49 6ZM26 6H16.508V15.492H26V6ZM15.49 16.508H6V26H15.492L15.49 16.508ZM26 16.508H16.508V26H26V16.508Z"/></svg>
+            <span data-label="downloadIco">Скачать ICO</span>
+          </button>`;
+
+  const icnsBtn = `<button class="btn btn-secondary hidden" id="btn-download-icns" type="button">
+            <svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M23.8457 11.5898C22.4743 12.4367 21.6274 13.8892 21.6274 15.503C21.6274 17.3178 22.7166 18.9715 24.3703 19.6572C24.0484 20.6909 23.5722 21.67 22.9577 22.5612C22.0709 23.8115 21.1429 25.103 19.7714 25.103C18.4 25.103 17.9966 24.2961 16.3829 24.2961C14.8103 24.2961 14.2457 25.143 12.9543 25.143C11.6629 25.143 10.776 23.9738 9.768 22.5212C8.43657 20.5041 7.67086 18.1647 7.63086 15.7041C7.63086 11.711 10.2114 9.57268 12.7931 9.57268C14.1646 9.57268 15.2937 10.4607 16.1417 10.4607C16.9474 10.4607 18.2389 9.53268 19.7714 9.53268C20.5678 9.51148 21.3569 9.68835 22.068 10.0474C22.7791 10.4064 23.39 10.9364 23.8457 11.5898ZM19.0457 7.83896C19.7314 7.03211 20.0937 6.0241 20.1349 4.97496C20.1349 4.85382 20.1349 4.69268 20.0937 4.57153C18.9223 4.69283 17.8409 5.25501 17.0686 6.1441C16.3829 6.91096 15.9794 7.87896 15.9394 8.9281C15.9394 9.04925 15.9394 9.17039 15.9794 9.29039C16.0606 9.29039 16.1817 9.33153 16.2629 9.33153C17.3509 9.25153 18.36 8.68582 19.0457 7.83896Z"/></svg>
+            <span data-label="downloadIcns">Скачать ICNS</span>
+          </button>`;
 
   // The dropdown trigger itself is a build-time partial in seo-page.html
   // ({{> download-dropdown}}) — single source shared with the catalog. seo-page.js
   // wires it to open the shared "other formats" modal (js/download-modal.js).
-  return [copyBtn, svgBtn, pngBtn].join('\n          ');
+  return [copyBtn, svgBtn, pngBtn, icoBtn, icnsBtn].join('\n          ');
 }
 
 function buildEcosystemSection(item, ecosystemLookup, rel, lang = 'ru') {
@@ -463,7 +551,7 @@ function buildOneEcosystemSection(item, ecoId, ecosystemLookup, rel, lang = 'ru'
     const isSoon     = !!m.comingSoon;
     const thumbFile  = m.thumb || m.file;
     const ext        = assetExt(thumbFile);
-    const src        = `${rel}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${thumbFile}`;
+    const src        = thumbSrc(thumbFile, rel, ext);
     const url        = seoUrl(m);
     const nm         = esc(en ? (m.name_en || m.name) : m.name);
     const altText    = en ? `${nm} logo` : `Логотип ${nm}`;
@@ -610,7 +698,7 @@ function buildRelatedSection(item, siblings, homeRel, assetRel, lang = 'ru') {
   const cards = pool.map(m => {
     const thumbFile = m.thumb || m.file;
     const ext     = assetExt(thumbFile);
-    const src     = thumbSrc(thumbFile, assetRel, ext);
+    const src     = relatedThumbSrc(thumbFile, assetRel, ext);
     const url     = seoUrl(m);
     const nm      = esc(en ? (m.name_en || m.name) : m.name);
     const altText = en ? `${nm} logo` : `Логотип ${nm}`;
@@ -643,18 +731,22 @@ function buildCatalogGridSection(categories, homeRel, assetRel, itemsByCat, lang
     const previews = all.slice(0, 4);
     const thumbs = previews.map(m => {
       const tf  = m.thumb || m.file;
-      const src = thumbSrc(tf, assetRel, assetExt(tf));
+      const src = miniThumbSrc(tf, assetRel, assetExt(tf));
       return `<img src="${src}" alt="" width="20" height="20" loading="lazy">`;
     }).join('');
     const more = all.length > 4
       ? `<span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span>`
       : '';
 
+    // Мобилка (css/seo-page.css) показывает полное "N логотипов" — .catalog-cat-count-label
+    // скрыт на десктопе, там остаётся голое число, как было.
+    const countWordRu = pluralRu(c.count, ['логотип', 'логотипа', 'логотипов']);
+    const countWordEn = c.count === 1 ? 'logo' : 'logos';
     return `<a class="catalog-cat" href="${homeRel}logos/${c.slug}/">
             <span class="catalog-cat-thumbs" aria-hidden="true">${thumbs}${more}</span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="${esc(c.section_en || c.section)}">${nm}</span>
-              <span class="catalog-cat-count">${c.count}</span>
+              <span class="catalog-cat-count">${c.count}<span class="catalog-cat-count-label" data-en=" ${countWordEn}"> ${countWordRu}</span></span>
             </span>
           </a>`;
   }).join('\n          ');
@@ -1460,7 +1552,7 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     SPONSOR_CSS:              SPONSORS[sponsorKey(item)]?.title ? `<link rel="stylesheet" href="${rel}css/sponsor-banner.css">` : '',
     EASTER_EGG_CSS:           item.figma === 'Icon/Game/DoodleJump' ? `<link rel="stylesheet" href="${rel}css/easter-doodlejump.css">` : '',
     EASTER_EGG_SCRIPT:        item.figma === 'Icon/Game/DoodleJump'
-      ? `<script type="module">import { showDoodleJumpWidget } from '/js/easter-doodlejump.js'; showDoodleJumpWidget();</script>`
+      ? `<script type="module">import { showDoodleJumpWidget } from '/js/easter-doodlejump.min.js'; showDoodleJumpWidget();</script>`
       : '',
     ECOSYSTEM_SECTION:        buildEcosystemSection(item, ecosystemLookup, rel, lang),
     COLORS_SECTION:           buildColorsSection(brandColors, lang, nm),
@@ -1523,6 +1615,23 @@ async function main() {
     section_en: cat.section_en,
     count:      (itemsByCat[cat.slug] || []).length,
   })).filter(c => c.count > 0);
+
+  // Approx PNG size for SVG-only items (see computeApproxPngSizes above) — one
+  // rasterize pass per unique SVG, cached by mtime, before buildDownloadButtons
+  // (sync, called per item below) looks the results up.
+  if (!DRY_RUN) {
+    const svgOnlyFiles = new Set();
+    for (const { item } of allItems) {
+      if (item.comingSoon || !item.file || item.file === 'placeholder.svg') continue;
+      const primaryType = assetExt(item.file) === 'png' ? 'png' : 'svg';
+      const rawVariants = item.variants || [];
+      const pngFile = rawVariants.find(v => assetExt(v.file) === 'png')?.file ?? (primaryType === 'png' ? item.file : null);
+      if (pngFile) continue; // real PNG on disk — exact size, no estimate needed
+      const svgFile = primaryType === 'svg' ? item.file : rawVariants.find(v => assetExt(v.file) === 'svg')?.file;
+      if (svgFile) svgOnlyFiles.add(svgFile);
+    }
+    await computeApproxPngSizes(svgOnlyFiles);
+  }
 
   const builtUrls = [];
   let written = 0, unchanged = 0, skipped = 0;

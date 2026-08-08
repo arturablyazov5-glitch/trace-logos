@@ -15,19 +15,19 @@ tags_en: Logo Histories, Branding, Social Media
 Логотип ВКонтакте эволюционировал в четыре больших шага: **2006** — синяя плашка с полным названием «ВКонтакте»; **2012** — упрощение и переход к короткому «ВК» в иконке; **2016** — плоский редизайн и фирменный синий; **2021** — ребрендинг компании в **VK**: латинская монограмма стала знаком всей экосистемы, а не только соцсети. Актуальные файлы всех версий — в [каталоге](../../logos/social/vk/).
 :::
 
-##2006: рождение «ВКонтакте»
+## 2006: рождение «ВКонтакте»
 
 Сайт vkontakte.ru запустился осенью 2006 года. Первый логотип был предельно функциональным: слово «ВКонтакте» белым шрифтом на синей плашке. Никакой легенды, никакого скрытого смысла — просто название, читаемое в шапке сайта. Синий цвет выбрали по той же логике, что и [Facebook](../../logos/social/facebook/), на который ранний ВКонтакте откровенно ориентировался: синий ассоциируется с надёжностью и одинаково хорошо выглядит на любых экранах (подробнее о том, как цвета влияют на восприятие, — в статье [психология цвета в логотипе](../psihologiya-cveta-v-logotipe/)).
 
 Характерная деталь ранних версий — буква «В» с засечкой‑хвостиком и плотная, слегка «книжная» типографика. По меркам 2006 года это выглядело солидно; по сегодняшним — безнадёжно перегружено.
 
-##2012: эпоха «ВК» — название сжимается до двух букв
+## 2012: эпоха «ВК» — название сжимается до двух букв
 
 К началу 2010‑х аудитория переросла десятки миллионов, и полное «ВКонтакте» перестало помещаться туда, где живут современные логотипы: в квадратную иконку приложения и крошечную фавиконку. Ответ классический (мы разбирали его в статье [виды логотипов](../vidy-logotipov/)): длинному текстовому логотипу заводят монограмму. Так появился знак «ВК» на синем квадрате со скруглёнными углами — сначала как иконка мобильного приложения, затем как полноценный самостоятельный знак.
 
 В этот же период домен сократился до vk.com (2012) — интернационализация подталкивала и к латинскому написанию VK, которое до поры жило параллельно с кириллическим «ВК».
 
-##2016: плоский редизайн
+## 2016: плоский редизайн
 
 В 2016 году соцсеть провела большой редизайн интерфейса и вместе с ним «выгладила» логотип: исчезли градиенты и объём, знак стал плоским, шрифт — геометричнее, а синий — светлее и чище. Это часть глобального тренда, о котором мы писали в статье [почему бренды упрощают логотипы](../pochemu-brendy-uproshchayut-logotipy/): плоский знак лучше масштабируется, быстрее грузится и одинаково выглядит на любой плотности пикселей.
 
@@ -35,7 +35,7 @@ tags_en: Logo Histories, Branding, Social Media
 Быстрый способ датировать старый скриншот ВКонтакте: градиентная плашка — до 2016 года, плоская светло‑синяя — 2016‑2021, монограмма VK с новым оттенком — после ребрендинга 2021 года.
 :::
 
-##2021: ребрендинг в VK — знак экосистемы
+## 2021: ребрендинг в VK — знак экосистемы
 
 Осенью 2021 года произошло самое крупное изменение: холдинг Mail.ru Group переименовался в VK и забрал себе имя и знак соцсети. Латинская монограмма **VK** стала зонтичным брендом для десятков сервисов — [VK ID](../../logos/store/vkid/), [VK Клипов](../../logos/social/vkclips/), [VK Мессенджера](../../logos/social/vkmessenger/) и многих других. Сама соцсеть при этом сохранила отдельную иконку, а знак VK начал жить в двух ролях: логотип продукта и логотип компании.
 
@@ -76,19 +76,19 @@ tags_en: Logo Histories, Branding, Social Media
 The VKontakte logo evolved in four big steps: **2006** — a blue badge with the full "VKontakte" name; **2012** — simplification and the short "VK" icon; **2016** — a flat redesign and a cleaner blue; **2021** — the corporate rebrand into **VK**: the Latin monogram became the mark of the whole ecosystem, not just the social network. Current files of the logo live in our [catalog](../../logos/social/vk/).
 :::
 
-##2006: the birth of VKontakte
+## 2006: the birth of VKontakte
 
 The site vkontakte.ru launched in the fall of 2006. The first logo was purely functional: the word "ВКонтакте" in white on a blue badge. No legend, no hidden meaning — just a readable name in the site header. The blue was chosen with the same logic as [Facebook](../../logos/social/facebook/), which early VKontakte openly took cues from: blue reads as trustworthy and looks equally good on any screen (more on how colors shape perception in [color psychology in logo design](../psihologiya-cveta-v-logotipe/)).
 
 A telling detail of the early versions: a serif-tailed "В" and dense, slightly bookish typography. Solid by 2006 standards; hopelessly overloaded by today's.
 
-##2012: the "VK" era — the name shrinks to two letters
+## 2012: the "VK" era — the name shrinks to two letters
 
 By the early 2010s the audience had grown past tens of millions, and the full name no longer fit where modern logos live: the square app icon and the tiny favicon. The classic answer (covered in [types of logos](../vidy-logotipov/)): a long wordmark gets a lettermark companion. Thus the "ВК" mark on a rounded blue square — first as the mobile app icon, then as a full standalone mark.
 
 The domain shortened to vk.com in the same period (2012) — internationalization also pushed toward the Latin "VK" spelling, which for a while lived alongside the Cyrillic one.
 
-##2016: the flat redesign
+## 2016: the flat redesign
 
 In 2016 the network shipped a major interface redesign and "ironed" the logo along with it: gradients and volume disappeared, the mark went flat, the type became more geometric, the blue lighter and cleaner. It was part of the global trend we described in [why brands simplify their logos](../pochemu-brendy-uproshchayut-logotipy/): a flat mark scales better, loads faster and looks identical at any pixel density.
 
@@ -96,7 +96,7 @@ In 2016 the network shipped a major interface redesign and "ironed" the logo alo
 A quick way to date a VKontakte screenshot: gradient badge — before 2016; flat light blue — 2016-2021; the VK monogram in the new shade — after the 2021 rebrand.
 :::
 
-##2021: the VK rebrand — an ecosystem mark
+## 2021: the VK rebrand — an ecosystem mark
 
 The biggest change came in the fall of 2021: the Mail.ru Group holding renamed itself VK and took the network's name and mark for the whole company. The Latin **VK** monogram became an umbrella brand for dozens of services — [VK ID](../../logos/store/vkid/), [VK Clips](../../logos/social/vkclips/), [VK Messenger](../../logos/social/vkmessenger/) and many more. The network itself kept a separate icon, and the VK mark began living in two roles: product logo and company logo.
 

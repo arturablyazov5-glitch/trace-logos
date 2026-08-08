@@ -183,6 +183,33 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
+/* ── Toggle switch (тот же паттерн, что .icns-toggle/.icns-switch в css/icns.css) ── */
+.admin-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--text-3);
+  cursor: pointer; user-select: none;
+}
+.admin-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.admin-switch {
+  position: relative; flex-shrink: 0;
+  width: 36px; height: 20px;
+  border-radius: 999px;
+  background: var(--bg-active);
+  transition: background .18s ease;
+}
+.admin-switch::after {
+  content: '';
+  position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.35);
+  transition: transform .18s ease;
+}
+.admin-toggle input:checked + .admin-switch { background: var(--accent); }
+.admin-toggle input:checked + .admin-switch::after { transform: translateX(16px); }
+.admin-toggle input:focus-visible + .admin-switch { outline: 2px solid var(--accent); outline-offset: 2px; }
+
 /* ── Table ── */
 .table-wrap {
   background: var(--bg-card);
@@ -205,10 +232,23 @@ thead th.sorted { color: var(--text-1); }
 thead th .arr { font-size: 9px; margin-left: 5px; opacity: .8; }
 thead th.col-views, thead th.col-bar { text-align: right; }
 thead th.col-bar { text-align: left; }
+thead th.col-actions { cursor: default; width: 40px; }
+
+.row-del-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; margin-left: auto;
+  border-radius: 8px; border: none; background: transparent;
+  color: var(--text-6); cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.row-del-btn:hover { background: rgba(255,107,107,.14); color: #ff6b6b; }
+.row-del-btn svg { width: 15px; height: 15px; }
 
 tbody tr { border-bottom: 1px solid var(--line); transition: background .1s; }
 tbody tr:last-child { border-bottom: 0; }
 tbody tr:hover { background: var(--bg-muted); }
+#tbody-search tr { cursor: pointer; }
+#tbody-search tr:hover .nm { color: var(--accent); }
 tbody tr.expanded { background: var(--bg-muted); }
 td { padding: 11px 18px; vertical-align: middle; }
 
@@ -479,6 +519,8 @@ footer .dot { margin: 0 8px; opacity: .5; }
     <div class="tabs" id="tabs">
       <button class="tab active" data-tab="logos" type="button">Логотипы</button>
       <button class="tab" data-tab="posts" type="button">Статьи</button>
+      <button class="tab" data-tab="search" type="button">Поиск</button>
+      <button class="tab" data-tab="banners" type="button">Баннеры</button>
       <button class="tab" data-tab="demand" type="button">Спрос</button>
     </div>
 
@@ -554,6 +596,80 @@ footer .dot { margin: 0 8px; opacity: .5; }
             </tr>
           </thead>
           <tbody id="tbody-posts">
+            <tr><td colspan="4"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Поисковые запросы в шапке каталога ── -->
+    <div class="tab-panel" id="panel-search">
+      <div class="page-head">
+        <h1>Поисковые запросы</h1>
+        <p>Все запросы в поиске шапки — не только пустые. Строки с «Найдено 0» — сигнал спроса на лого, которого нет в каталоге; остальные показывают, что чаще всего ищут вообще.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat lead"><div class="k">Всего запросов</div><div class="v" id="sq-total">—</div></div>
+        <div class="stat"><div class="k">Уникальных</div><div class="v" id="sq-count">—</div></div>
+        <div class="stat"><div class="k">Без результатов</div><div class="v" id="sq-zero">—</div></div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="filter-search" placeholder="Фильтр по тексту запроса…" autocomplete="off">
+        </div>
+        <label class="admin-toggle">
+          <input type="checkbox" id="filter-search-zero">
+          <span class="admin-switch" aria-hidden="true"></span>
+          Только без результатов
+        </label>
+        <span class="count-pill" id="count-pill-search"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-rank" data-sort-search="rank">#</th>
+              <th class="col-name" data-sort-search="query">Запрос</th>
+              <th class="col-views sorted" data-sort-search="count">Раз</th>
+              <th class="col-views" data-sort-search="results_count">Найдено</th>
+              <th class="col-name" data-sort-search="last_seen">Последний раз</th>
+              <th class="col-actions"></th>
+            </tr>
+          </thead>
+          <tbody id="tbody-search">
+            <tr><td colspan="6"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Клики по промо-баннерам ── -->
+    <div class="tab-panel" id="panel-banners">
+      <div class="page-head">
+        <h1>Клики по промо-баннерам</h1>
+        <p>Клик по ссылке в баннере в сайдбаре (SEO-страницы логотипов и статьи блога). Один баннер — один счётчик, растёт при каждом переходе.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat lead"><div class="k">Всего кликов</div><div class="v" id="bn-total">—</div></div>
+        <div class="stat"><div class="k">Баннеров в счёте</div><div class="v" id="bn-count">—</div></div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-rank">#</th>
+              <th class="col-name">Баннер</th>
+              <th class="col-views sorted">Клики</th>
+              <th class="col-name">Последний клик</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-banners">
             <tr><td colspan="4"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
           </tbody>
         </table>
@@ -638,6 +754,12 @@ let slugTitleMap = {};
 let postSortKey = 'views';
 let postSortDir = -1;
 
+let searchData = [];
+let searchSortKey = 'count';
+let searchSortDir = -1;
+
+let bannerData = [];
+
 const $ = id => document.getElementById(id);
 
 // ── Auth gate ──────────────────────────────────────────────────────────
@@ -662,6 +784,8 @@ document.querySelectorAll('.tab').forEach(btn => {
     document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b === btn));
     $('panel-logos').classList.toggle('active', activeTab === 'logos');
     $('panel-posts').classList.toggle('active', activeTab === 'posts');
+    $('panel-search').classList.toggle('active', activeTab === 'search');
+    $('panel-banners').classList.toggle('active', activeTab === 'banners');
     $('panel-demand').classList.toggle('active', activeTab === 'demand');
     if (activeTab === 'demand' && !demandUsageLoaded) loadDemandUsage();
   });
@@ -800,21 +924,7 @@ function renderDemand() {
   $('demand-tbody').innerHTML = html;
 }
 
-$('btn-export-demand-csv').addEventListener('click', () => {
-  const rows = [['Бренд', 'Фраза', 'Спрос', 'Топ-ассоциация', 'Ошибка']];
-  for (const r of demandRows) rows.push([r.brand, r.phrase, r.error ? '' : r.total, r.topAssociation || '', r.error || '']);
-  const csv = rows.map(r => r.map(csvCell).join(';')).join('\r\n');
-  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  const stamp = new Date().toISOString().slice(0, 10);
-  a.href = url;
-  a.download = `trace-logos-demand-${stamp}.csv`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-});
+$('btn-export-demand-csv').addEventListener('click', () => downloadCsv('demand', buildDemandCsvRows()));
 
 // ── Blog post titles (via public RSS feed) ────────────────────────────
 async function loadPostTitles() {
@@ -883,6 +993,32 @@ async function refresh() {
 $('btn-export-csv').addEventListener('click', exportCsv);
 
 function exportCsv() {
+  const byTab = {
+    logos: { rows: buildLogosCsvRows, name: 'stats' },
+    posts: { rows: buildPostsCsvRows, name: 'posts' },
+    search: { rows: buildSearchCsvRows, name: 'search' },
+    banners: { rows: buildBannersCsvRows, name: 'banners' },
+    demand: { rows: buildDemandCsvRows, name: 'demand' },
+  };
+  const cfg = byTab[activeTab] || byTab.logos;
+  downloadCsv(cfg.name, cfg.rows());
+}
+
+function downloadCsv(namePart, rows) {
+  const csv = rows.map(r => r.map(csvCell).join(';')).join('\r\n');
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `trace-logos-${namePart}-${stamp}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function buildLogosCsvRows() {
   const rows = [['Логотип', 'Figma', 'Вариант', 'Формат', 'Количество']];
   for (const d of data) {
     rows.push([d.name, d.figma, '—', 'Просмотры', d.views]);
@@ -894,17 +1030,31 @@ function exportCsv() {
       }
     }
   }
-  const csv = rows.map(r => r.map(csvCell).join(';')).join('\r\n');
-  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  const stamp = new Date().toISOString().slice(0, 10);
-  a.href = url;
-  a.download = `trace-logos-stats-${stamp}.csv`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+  return rows;
+}
+
+function buildPostsCsvRows() {
+  const rows = [['Статья', 'Slug', 'Просмотры']];
+  for (const d of postData) rows.push([d.title, d.slug, d.views]);
+  return rows;
+}
+
+function buildSearchCsvRows() {
+  const rows = [['Запрос', 'Раз', 'Найдено', 'Последний раз']];
+  for (const d of searchData) rows.push([d.query, d.count, d.results_count, d.last_seen || '']);
+  return rows;
+}
+
+function buildBannersCsvRows() {
+  const rows = [['Баннер', 'Клики', 'Последний клик']];
+  for (const d of bannerData) rows.push([d.bannerId, d.count, d.updated || '']);
+  return rows;
+}
+
+function buildDemandCsvRows() {
+  const rows = [['Бренд', 'Фраза', 'Спрос', 'Топ-ассоциация', 'Ошибка']];
+  for (const r of demandRows) rows.push([r.brand, r.phrase, r.error ? '' : r.total, r.topAssociation || '', r.error || '']);
+  return rows;
 }
 
 function csvCell(v) {
@@ -933,6 +1083,19 @@ function ingest(raw) {
   const exports = raw.exports || [];
   rawPostViews = raw.post_views || [];
   rebuildPostData();
+  searchData = (raw.search_queries || []).map(r => ({
+    query: r.query,
+    count: Number(r.count) || 0,
+    results_count: Number(r.results_count) || 0,
+    last_seen: r.last_seen || null,
+  }));
+  renderSearch();
+  bannerData = (raw.banner_clicks || []).map(r => ({
+    bannerId: r.banner_id,
+    count: Number(r.count) || 0,
+    updated: r.updated_at || null,
+  }));
+  renderBanners();
   exportMap = {};
   for (const e of exports) {
     if (!exportMap[e.figma]) exportMap[e.figma] = {};
@@ -1080,6 +1243,131 @@ function renderPosts() {
   $('tbody-posts').innerHTML = html;
 }
 
+// ── Поисковые запросы ──────────────────────────────────────────────────
+function renderSearch() {
+  const q = $('filter-search').value.toLowerCase().trim();
+  const zeroOnly = $('filter-search-zero').checked;
+  let rows = searchData.filter(d => (!q || d.query.includes(q)) && (!zeroOnly || d.results_count === 0));
+
+  rows.sort((a, b) => {
+    let va = a[searchSortKey], vb = b[searchSortKey];
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (va < vb) return -searchSortDir;
+    if (va > vb) return searchSortDir;
+    return 0;
+  });
+
+  const totalQueries = searchData.reduce((s, d) => s + d.count, 0);
+  const zeroCount = searchData.filter(d => d.results_count === 0).length;
+  $('sq-total').textContent = totalQueries.toLocaleString('ru-RU');
+  $('sq-count').textContent = searchData.length.toLocaleString('ru-RU');
+  $('sq-zero').textContent = zeroCount.toLocaleString('ru-RU');
+
+  $('count-pill-search').textContent = (q || zeroOnly) ? `${rows.length} из ${searchData.length}` : '';
+
+  if (!rows.length) {
+    $('tbody-search').innerHTML = `<tr><td colspan="6"><div class="empty">${searchData.length ? 'Ничего не найдено' : 'Пока нет данных. Запросы появятся, когда ими начнут пользоваться на сайте.'}</div></td></tr>`;
+    return;
+  }
+
+  let html = '';
+  rows.forEach((d, i) => {
+    const zero = d.results_count === 0;
+    const searchUrl = 'https://yandex.ru/search/?text=' + encodeURIComponent(d.query + ' logo svg');
+    html += `
+    <tr data-search-url="${escAttr(searchUrl)}" title="Найти этот запрос в Яндексе">
+      <td class="rank">${i + 1}</td>
+      <td class="fg-hide"><div class="logo-meta"><div class="nm">${esc(d.query)}</div></div></td>
+      <td class="views"><b>${d.count.toLocaleString('ru-RU')}</b></td>
+      <td class="views"><b${zero ? ' style="color:#ff6b6b"' : ''}>${d.results_count.toLocaleString('ru-RU')}</b></td>
+      <td class="fg-hide"><span class="fg">${d.last_seen ? fmtDate(d.last_seen) : '—'}</span></td>
+      <td class="col-actions">
+        <button type="button" class="row-del-btn" data-del-query="${escAttr(d.query)}" title="Удалить эту запись">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+        </button>
+      </td>
+    </tr>`;
+  });
+  $('tbody-search').innerHTML = html;
+}
+
+$('tbody-search').addEventListener('click', async (e) => {
+  const btn = e.target.closest('.row-del-btn');
+  if (!btn) {
+    const row = e.target.closest('tr[data-search-url]');
+    if (row) window.open(row.dataset.searchUrl, '_blank', 'noopener');
+    return;
+  }
+  const query = btn.dataset.delQuery;
+  if (!confirm(`Удалить запись «${query}» из статистики поиска?`)) return;
+  btn.disabled = true;
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'DELETE',
+      headers: { 'x-admin-key': adminKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ searchQuery: query }),
+    });
+    if (!res.ok) throw new Error('Ошибка удаления');
+    searchData = searchData.filter(d => d.query !== query);
+    renderSearch();
+  } catch (err) {
+    alert('Не удалось удалить: ' + (err.message || 'ошибка сети'));
+    btn.disabled = false;
+  }
+});
+
+// ── Клики по промо-баннерам ────────────────────────────────────────────
+function renderBanners() {
+  const total = bannerData.reduce((s, d) => s + d.count, 0);
+  $('bn-total').textContent = total.toLocaleString('ru-RU');
+  $('bn-count').textContent = bannerData.length.toLocaleString('ru-RU');
+
+  if (!bannerData.length) {
+    $('tbody-banners').innerHTML = `<tr><td colspan="4"><div class="empty">Пока нет данных. Счётчик появится после первого клика по баннеру.</div></td></tr>`;
+    return;
+  }
+
+  const rows = [...bannerData].sort((a, b) => b.count - a.count);
+  let html = '';
+  rows.forEach((d, i) => {
+    html += `
+    <tr>
+      <td class="rank">${i + 1}</td>
+      <td class="fg-hide"><div class="logo-meta"><div class="nm">${esc(d.bannerId)}</div></div></td>
+      <td class="views"><b>${d.count.toLocaleString('ru-RU')}</b></td>
+      <td class="fg-hide"><span class="fg">${d.updated ? fmtDate(d.updated) : '—'}</span></td>
+    </tr>`;
+  });
+  $('tbody-banners').innerHTML = html;
+}
+
+document.querySelectorAll('thead th[data-sort-search]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.sortSearch;
+    if (key === 'rank') { searchSortKey = 'count'; searchSortDir = -1; }
+    else if (searchSortKey === key) { searchSortDir *= -1; }
+    else { searchSortKey = key; searchSortDir = key === 'query' ? 1 : -1; }
+    const theadSearch = th.closest('thead');
+    theadSearch.querySelectorAll('th').forEach(h => {
+      h.classList.remove('sorted');
+      h.querySelector('.arr')?.remove();
+    });
+    const active = theadSearch.querySelector(`th[data-sort-search="${searchSortKey === 'rank' ? 'count' : searchSortKey}"]`);
+    if (active) {
+      active.classList.add('sorted');
+      const arr = document.createElement('span');
+      arr.className = 'arr';
+      arr.textContent = searchSortDir > 0 ? '▲' : '▼';
+      active.appendChild(arr);
+    }
+    renderSearch();
+  });
+});
+
+$('filter-search').addEventListener('input', renderSearch);
+$('filter-search-zero').addEventListener('change', renderSearch);
+
 document.querySelectorAll('thead th[data-sort-posts]').forEach(th => {
   th.addEventListener('click', () => {
     const key = th.dataset.sortPosts;
@@ -1187,6 +1475,7 @@ function fmtExports(detail) {
   return `<div class="ex-pills">${pills}</div>`;
 }
 function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }
+function escAttr(s) { return esc(s).replace(/"/g, '&quot;'); }
 function fmtDate(iso) {
   try {
     return new Date(iso).toLocaleString('ru-RU', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });

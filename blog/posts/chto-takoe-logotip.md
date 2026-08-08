@@ -9,13 +9,13 @@ tags: Логотип, Основы, Брендинг
 tags_en: Logo, Basics, Branding
 ---
 
-Надкушенное яблоко [Apple](../../logos/store/apple/) работает без единого слова: вы видите силуэт — и в голове мгновенно всплывает всё, что связано с брендом. Причём знак не объясняет, чем занимается компания, и не пытается быть красивым сам по себе. Он делает одну‑единственную вещь — служит якорем узнавания. И если понять, что именно эта работа, а не «красота», и есть суть логотипа, всё остальное встаёт на свои места.
+Надкушенное яблоко [Apple](../../logos/tech/apple/) работает без единого слова: вы видите силуэт — и в голове мгновенно всплывает всё, что связано с брендом. Причём знак не объясняет, чем занимается компания, и не пытается быть красивым сам по себе. Он делает одну‑единственную вещь — служит якорем узнавания. И если понять, что именно эта работа, а не «красота», и есть суть логотипа, всё остальное встаёт на свои места.
 
 ## Что на самом деле делает логотип
 
 Слово «логотип» происходит от греческих *logos* («слово») и *typos* («отпечаток»), и изначально означало именно текстовое начертание названия. Но со временем логотипом стали называть любой опознавательный знак бренда — и надпись, и символ. Что не изменилось, так это его задача: чтобы человек, увидев знак, за долю секунды достал из памяти всё, что связано с компанией.
 
-Из этого вытекает и то, из чего логотип собран. Раз его работа — узнавание, значит, он должен быть **системой из нескольких опорных признаков**, а не одной случайной картинкой. Обычно таких признаков три: форма (символ, значок или [монограмма](../chto-takoe-monogramma/)), начертание названия ([шрифт](../shrift-dlya-logotipa/), которым написано имя) и [цвет](../psihologiya-cveta-v-logotipe/) — часто именно он опознаётся первым, ещё до формы. Не в каждом знаке есть все три: у [Google](../../logos/search/google/) основа — цветное текстовое начертание, а у [Apple](../../logos/store/apple/) вообще только символ без слова. Но принцип общий — знак держится на устойчивом сочетании формы, шрифта и цвета, и именно поэтому его узнают.
+Из этого вытекает и то, из чего логотип собран. Раз его работа — узнавание, значит, он должен быть **системой из нескольких опорных признаков**, а не одной случайной картинкой. Обычно таких признаков три: форма (символ, значок или [монограмма](../chto-takoe-monogramma/)), начертание названия ([шрифт](../shrift-dlya-logotipa/), которым написано имя) и [цвет](../psihologiya-cveta-v-logotipe/) — часто именно он опознаётся первым, ещё до формы. Не в каждом знаке есть все три: у [Google](../../logos/search/google/) основа — цветное текстовое начертание, а у [Apple](../../logos/tech/apple/) вообще только символ без слова. Но принцип общий — знак держится на устойчивом сочетании формы, шрифта и цвета, и именно поэтому его узнают.
 
 ## Почему его путают с товарным знаком и фирменным стилем
 
@@ -25,7 +25,7 @@ tags_en: Logo, Basics, Branding
 
 ## Какими бывают логотипы
 
-Понимание разницы между типами знаков помогает выбрать свой. Текстовый логотип (логотайп) — это название фирменным шрифтом, как у [Google](../../logos/search/google/). Знак‑символ живёт без слов, как у [Apple](../../logos/store/apple/). [Монограмма](../chto-takoe-monogramma/) строится из инициалов, как у [VK](../../logos/social/vk/). Комбинированный ставит символ и текст рядом, как у [Spotify](../../logos/media/spotify/). Эмблема заключает название внутрь замкнутой формы, как у [Starbucks](../../logos/food/starbucks/). А отдельный класс — [маскот](../chto-takoe-maskot/), фирменный персонаж. Подробный разбор всех типов с примерами — в статье виды логотипов.
+Понимание разницы между типами знаков помогает выбрать свой. Текстовый логотип (логотайп) — это название фирменным шрифтом, как у [Google](../../logos/search/google/). Знак‑символ живёт без слов, как у [Apple](../../logos/tech/apple/). [Монограмма](../chto-takoe-monogramma/) строится из инициалов, как у [VK](../../logos/social/vk/). Комбинированный ставит символ и текст рядом, как у [Spotify](../../logos/media/spotify/). Эмблема заключает название внутрь замкнутой формы, как у [Starbucks](../../logos/food/starbucks/). А отдельный класс — [маскот](../chto-takoe-maskot/), фирменный персонаж. Подробный разбор всех типов с примерами — в статье виды логотипов.
 
 ## Зачем логотип бизнесу
 
@@ -55,13 +55,13 @@ tags_en: Logo, Basics, Branding
 
 ---EN---
 
-The bitten apple of [Apple](../../logos/store/apple/) works without a single word: you see the silhouette — and everything tied to the brand instantly surfaces in your head. And the mark doesn't explain what the company does, nor does it try to be beautiful in itself. It does one single thing — serves as an anchor for recognition. And once you understand that this job, not "beauty," is the essence of a logo, everything else falls into place.
+The bitten apple of [Apple](../../logos/tech/apple/) works without a single word: you see the silhouette — and everything tied to the brand instantly surfaces in your head. And the mark doesn't explain what the company does, nor does it try to be beautiful in itself. It does one single thing — serves as an anchor for recognition. And once you understand that this job, not "beauty," is the essence of a logo, everything else falls into place.
 
 ## What a logo actually does
 
 The word "logo" comes from the Greek *logos* ("word") and *typos* ("imprint"), and originally meant the styled lettering of a name. But over time "logo" came to mean any identifying mark of a brand — both a wordmark and a symbol. What hasn't changed is its task: for a person, on seeing the mark, to pull from memory in a fraction of a second everything tied to the company.
 
-From this follows what a logo is assembled from. Since its job is recognition, it must be a **system of several anchor traits**, not one random picture. Usually there are three such traits: shape (a symbol, mark, or [monogram](../chto-takoe-monogramma/)), the lettering of the name (the [font](../shrift-dlya-logotipa/) the name is written in), and [color](../psihologiya-cveta-v-logotipe/) — often it's recognized first, before the shape. Not every mark has all three: [Google](../../logos/search/google/) is built on a colored wordmark, while [Apple](../../logos/store/apple/) is only a symbol with no word. But the principle is common — a mark rests on a stable combination of shape, font, and color, and that's exactly why it's recognized.
+From this follows what a logo is assembled from. Since its job is recognition, it must be a **system of several anchor traits**, not one random picture. Usually there are three such traits: shape (a symbol, mark, or [monogram](../chto-takoe-monogramma/)), the lettering of the name (the [font](../shrift-dlya-logotipa/) the name is written in), and [color](../psihologiya-cveta-v-logotipe/) — often it's recognized first, before the shape. Not every mark has all three: [Google](../../logos/search/google/) is built on a colored wordmark, while [Apple](../../logos/tech/apple/) is only a symbol with no word. But the principle is common — a mark rests on a stable combination of shape, font, and color, and that's exactly why it's recognized.
 
 ## Why it's confused with a trademark and a brand identity
 
@@ -71,7 +71,7 @@ A logo is what you **see**: the graphics, the mark. A trademark isn't about appe
 
 ## What kinds of logos there are
 
-Understanding the difference between mark types helps you choose yours. A wordmark is the name in a brand font, like [Google](../../logos/search/google/). A symbol mark lives without words, like [Apple](../../logos/store/apple/). A [monogram](../chto-takoe-monogramma/) is built from initials, like [VK](../../logos/social/vk/). A combination mark sets symbol and text side by side, like [Spotify](../../logos/media/spotify/). An emblem encloses the name inside a closed form, like [Starbucks](../../logos/food/starbucks/). And a separate class is the [mascot](../chto-takoe-maskot/), a signature character. A detailed breakdown of all types with examples — in types of logos.
+Understanding the difference between mark types helps you choose yours. A wordmark is the name in a brand font, like [Google](../../logos/search/google/). A symbol mark lives without words, like [Apple](../../logos/tech/apple/). A [monogram](../chto-takoe-monogramma/) is built from initials, like [VK](../../logos/social/vk/). A combination mark sets symbol and text side by side, like [Spotify](../../logos/media/spotify/). An emblem encloses the name inside a closed form, like [Starbucks](../../logos/food/starbucks/). And a separate class is the [mascot](../chto-takoe-maskot/), a signature character. A detailed breakdown of all types with examples — in types of logos.
 
 ## Why a business needs a logo
 

@@ -33,7 +33,8 @@
   <link rel="stylesheet" href="{{REL}}css/seo-page.css">
   <link rel="stylesheet" href="{{REL}}css/site-header.css">
   <link rel="stylesheet" href="{{REL}}css/blog.css">
-  <link rel="stylesheet" href="{{REL}}css/site-footer.css">{{WIDGET_CSS}}
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{REL}}css/site-footer.css"></noscript>{{WIDGET_CSS}}
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -111,9 +112,10 @@
 
 {{> site-footer}}
 
-<script type="module" src="{{REL}}js/blog-toc.js"></script>
-<script type="module" src="{{REL}}js/blog-code.js"></script>
-<script type="module" src="{{REL}}js/blog-ads.js"></script>
-<script src="{{REL}}js/blog-track.js" async></script>{{WIDGET_JS}}
+<script type="module" src="{{REL}}js/blog-toc.min.js"></script>
+<script type="module" src="{{REL}}js/blog-code.min.js"></script>
+<script type="module" src="{{REL}}js/blog-ads.min.js"></script>
+<script type="module" src="{{REL}}js/promo-banner-track.min.js"></script>
+<script src="{{REL}}js/blog-track.min.js" async></script>{{WIDGET_JS}}
 </body>
 </html>

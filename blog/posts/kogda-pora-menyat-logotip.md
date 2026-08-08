@@ -28,7 +28,7 @@ tags_en: Branding, Redesign, Business
 
 Чем правее по шкале, тем дороже и рискованнее — это уже не редизайн, а полноценный [ребрендинг](../chto-takoe-rebrending/). Большинство задач решается первыми двумя ступенями — и это хорошая новость: эволюция сохраняет накопленную узнаваемость.
 
-##7 признаков, что пора
+## 7 признаков, что пора
 
 **1. Знак разваливается на современных носителях.** Логотип рисовали для визитки и вывески, а теперь он должен жить в [фавиконе](../kak-sdelat-favicon/), аватарке и [иконке приложения](../ikonka-prilozheniya/). Если в 32 пикселях знак превращается в кашу — это не вопрос вкуса, это технический дефект. Именно он запустил массовое [упрощение логотипов в 2010‑х](../pochemu-brendy-uproshchayut-logotipy/).
 
@@ -44,7 +44,7 @@ tags_en: Branding, Redesign, Business
 
 **7. Знак нельзя воспроизвести.** Пять градиентов, тени и 12 цветов — а вам нужна [печать на одном цвете](../logotip-dlya-pechati/), гравировка и вышивка. Если для половины носителей приходится «изобретать» упрощённую версию на ходу — системы нет, и это признак: у любого знака обязана существовать [чёрно‑белая версия](../cherno-belyj-logotip/).
 
-##3 ситуации, когда менять НЕ надо
+## 3 ситуации, когда менять НЕ надо
 
 :::danger Плохие причины для редизайна
 **«Надоел».** Команда видит логотип каждый день и устаёт от него за год; аудитория видит его секунды и привыкает годами. Усталость команды — худший советчик.
@@ -94,7 +94,7 @@ Between "leave as is" and "draw from scratch" lies a whole scale:
 
 The further right, the more expensive and risky — past this point you're no longer redesigning, you're [rebranding](../chto-takoe-rebrending/). Most problems are solved by the first two steps — good news, because evolution preserves accumulated recognition.
 
-##7 signs it's time
+## 7 signs it's time
 
 **1. The mark falls apart on modern surfaces.** The logo was drawn for a business card and a signboard, but now it must live in a [favicon](../kak-sdelat-favicon/), an avatar and an [app icon](../ikonka-prilozheniya/). If it turns to mush at 32 pixels, that's not a matter of taste — it's a technical defect. This exact defect triggered the mass [logo simplification of the 2010s](../pochemu-brendy-uproshchayut-logotipy/).
 
@@ -110,7 +110,7 @@ The further right, the more expensive and risky — past this point you're no lo
 
 **7. The mark can't be reproduced.** Five gradients, shadows and 12 colors — and you need [one-color print](../logotip-dlya-pechati/), engraving and embroidery. If half your surfaces require inventing a simplified version on the fly, there is no system — and that's a sign: every mark must have a working [black-and-white version](../cherno-belyj-logotip/).
 
-##3 cases when you should NOT change it
+## 3 cases when you should NOT change it
 
 :::danger Bad reasons for a redesign
 **"We're tired of it"** The team sees the logo daily and burns out on it in a year; the audience sees it for seconds and bonds over years. Team fatigue is the worst advisor.

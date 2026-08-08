@@ -13,7 +13,7 @@ tags_en: Emoji, Unicode, 2026 Trends
 
 ## Что войдёт в Emoji 18.0
 
-Начнём с того, что вообще добавляют. Рабочая группа Unicode предложила к выпуску в сентябре 2026 года около девяти новых концептов. Среди кандидатов — прищуренное лицо, которого не хватало в наборе выражений эмоций, два новых жеста большим пальцем, расширяющих «язык рук», огурец в пополнение категории еды и маяк для категории «путешествия и места».
+Начнём с того, что вообще добавляют. Рабочая группа Unicode предложила к выпуску в сентябре 2026 года около девяти новых концептов. Среди кандидатов — треснувшее лицо (в январе 2026 года сменило раннюю заявку «прищуренное лицо»), два новых жеста большим пальцем, расширяющих «язык рук», солёный огурец — отдельный от уже существующего эмодзи обычного огурца, бабочка‑монарх, метеор — отдельный от кометы, ластик, сачок и маяк для категории «путешествия и места».
 
 Точный финальный список и внешний вид зависят от вендоров, но даже по этому набору видно направление: акцент сместился на выражения лица и повседневные предметы, а не на экзотику. И это не случайность, а прямое следствие того, почему новых значков стало меньше.
 
@@ -33,7 +33,7 @@ tags_en: Emoji, Unicode, 2026 Trends
 
 ## Как эмодзи попадает на клавиатуру
 
-Понять, почему даже эти девять значков появятся на телефоне не сразу, проще всего, проследив весь путь эмодзи — он многоступенчатый. Всё начинается с **предложения**: любой может подать заявку на новый эмодзи с обоснованием — частотностью, потребностью, отсутствием дубля (как это делается, в статье [как предложить свой эмодзи](../kak-predlozhit-svoj-emodzi/)). Дальше идёт **отбор Unicode**: рабочая группа оценивает кандидатов и утверждает шорт‑лист — это и есть «драфт». Затем — **стандартизация**: значок получает кодовую точку (codepoint) в стандарте Unicode. После этого наступает **дизайн вендоров**: [Apple](../../logos/store/apple/), Google, Samsung и другие рисуют собственные версии, и поэтому один и тот же эмодзи выглядит по‑разному на разных устройствах (почему так — в статье [почему эмодзи отображаются по‑разному](../pochemu-emodzi-otobrazhayutsya-po-raznomu/)). И только потом значок **выходит в обновлении ОС** — доезжает до пользователя вместе с апдейтом системы, иногда спустя год после утверждения.
+Понять, почему даже эти девять значков появятся на телефоне не сразу, проще всего, проследив весь путь эмодзи — он многоступенчатый. Всё начинается с **предложения**: любой может подать заявку на новый эмодзи с обоснованием — частотностью, потребностью, отсутствием дубля (как это делается, в статье [как предложить свой эмодзи](../kak-predlozhit-svoj-emodzi/)). Дальше идёт **отбор Unicode**: рабочая группа оценивает кандидатов и утверждает шорт‑лист — это и есть «драфт». Затем — **стандартизация**: значок получает кодовую точку (codepoint) в стандарте Unicode. После этого наступает **дизайн вендоров**: [Apple](../../logos/tech/apple/), Google, Samsung и другие рисуют собственные версии, и поэтому один и тот же эмодзи выглядит по‑разному на разных устройствах (почему так — в статье [почему эмодзи отображаются по‑разному](../pochemu-emodzi-otobrazhayutsya-po-raznomu/)). И только потом значок **выходит в обновлении ОС** — доезжает до пользователя вместе с апдейтом системы, иногда спустя год после утверждения.
 
 :::warning Почему новый эмодзи «не отображается»
 Именно из‑за этой задержки между утверждением Unicode и появлением значка на устройствах и возникает знакомый эффект: пока ваша ОС не обновилась, новый эмодзи показывается пустым квадратом или крестиком. Это не ошибка — просто система ещё не знает такого символа, а стандарт и его картинка приходят на устройство в разное время. Подробный разбор — в статье [почему не отображаются эмодзи](../pochemu-ne-otobrazhayutsya-emodzi/).
@@ -45,7 +45,7 @@ tags_en: Emoji, Unicode, 2026 Trends
 
 ## Короткий вывод
 
-В 2026 году выходит компактный набор Emoji 18.0 — около девяти новых концептов, включая прищуренное лицо, жесты, огурец и маяк. Малое число новинок — не спад, а взросление стандарта: базовые понятия уже покрыты, поэтому Unicode делает ставку на качество отбора и на кастомизацию существующих значков, а не на количество новых. При этом даже утверждённый значок появится на телефоне не сразу: каждый вендор рисует свою версию, и новинки доезжают лишь с обновлением ОС, — поэтому свежий эмодзи какое‑то время может показываться пустым квадратом, и это нормально.
+В 2026 году выходит компактный набор Emoji 18.0 — около девяти новых концептов, включая треснувшее лицо, жесты, солёный огурец, бабочку‑монарха, метеор и маяк. Малое число новинок — не спад, а взросление стандарта: базовые понятия уже покрыты, поэтому Unicode делает ставку на качество отбора и на кастомизацию существующих значков, а не на количество новых. При этом даже утверждённый значок появится на телефоне не сразу: каждый вендор рисует свою версию, и новинки доезжают лишь с обновлением ОС, — поэтому свежий эмодзи какое‑то время может показываться пустым квадратом, и это нормально.
 
 Посмотреть и скопировать тысячи готовых эмодзи в разных стилях можно в [каталоге эмодзи Trace Logo's](../../emoji/).
 
@@ -55,7 +55,7 @@ Every year the Unicode Consortium approves a new batch of emoji, and each time i
 
 ## What's in Emoji 18.0
 
-Let's start with what's actually being added. The Unicode working group proposed about nine new concepts for release in September 2026. Among the candidates — a squinting face the expression set was missing, two new thumb gestures expanding the "hand language," a pickle to fill out the food category, and a lighthouse for the "travel and places" category.
+Let's start with what's actually being added. The Unicode working group proposed about nine new concepts for release in September 2026. Among the candidates — a cracking face (which replaced an earlier "squinting face" proposal in January 2026), two new thumb gestures expanding the "hand language," a pickle (distinct from the existing plain cucumber emoji), a monarch butterfly, a meteor (distinct from a comet), an eraser, a bug net, and a lighthouse for the "travel and places" category.
 
 The exact final list and appearance depend on vendors, but even from this set the direction is visible: the emphasis shifted to facial expressions and everyday objects rather than exotica. And that's not an accident but a direct consequence of why there are fewer new glyphs.
 
@@ -75,7 +75,7 @@ This shift to customization is worth seeing in numbers, because it's exactly wha
 
 ## How an emoji reaches the keyboard
 
-Understanding why even these nine glyphs won't appear on a phone right away is easiest by tracing an emoji's whole path — it's multi-stage. It all starts with a **proposal**: anyone can submit an application for a new emoji with justification — frequency, need, no duplicate (how it's done, in [how to propose your own emoji](../kak-predlozhit-svoj-emodzi/)). Then comes **Unicode selection**: the working group evaluates candidates and approves a shortlist — that's the "draft" Then — **standardization**: the glyph gets a codepoint in the Unicode standard. After that comes **vendor design**: [Apple](../../logos/store/apple/), Google, Samsung, and others draw their own versions, which is why the same emoji looks different on different devices (why — in [why emoji display differently](../pochemu-emodzi-otobrazhayutsya-po-raznomu/)). And only then does the glyph **release in an OS update** — reaching the user with a system update, sometimes a year after approval.
+Understanding why even these nine glyphs won't appear on a phone right away is easiest by tracing an emoji's whole path — it's multi-stage. It all starts with a **proposal**: anyone can submit an application for a new emoji with justification — frequency, need, no duplicate (how it's done, in [how to propose your own emoji](../kak-predlozhit-svoj-emodzi/)). Then comes **Unicode selection**: the working group evaluates candidates and approves a shortlist — that's the "draft" Then — **standardization**: the glyph gets a codepoint in the Unicode standard. After that comes **vendor design**: [Apple](../../logos/tech/apple/), Google, Samsung, and others draw their own versions, which is why the same emoji looks different on different devices (why — in [why emoji display differently](../pochemu-emodzi-otobrazhayutsya-po-raznomu/)). And only then does the glyph **release in an OS update** — reaching the user with a system update, sometimes a year after approval.
 
 :::warning Why a new emoji "doesn't display"
 It's precisely because of this delay between Unicode approval and a glyph appearing on devices that the familiar effect arises: until your OS updates, a new emoji shows as an empty box or a cross. This isn't an error — the system just doesn't know the symbol yet, and the standard and its picture reach the device at different times. A detailed breakdown — in [why emoji don't display](../pochemu-ne-otobrazhayutsya-emodzi/).
@@ -87,6 +87,6 @@ The slowdown of newcomers didn't make emoji less important — on the contrary, 
 
 ## The short takeaway
 
-In 2026 the compact Emoji 18.0 set arrives — about nine new concepts, including a squinting face, gestures, a pickle, and a lighthouse. The small number of newcomers isn't a decline but the standard's maturing: basic concepts are already covered, so Unicode bets on selection quality and on customization of existing glyphs rather than on the quantity of new ones. And even an approved glyph won't appear on a phone right away: each vendor draws its own version, and newcomers arrive only with an OS update — so a fresh emoji may show as an empty box for a while, and that's normal.
+In 2026 the compact Emoji 18.0 set arrives — about nine new concepts, including a cracking face, gestures, a pickle, a monarch butterfly, a meteor, and a lighthouse. The small number of newcomers isn't a decline but the standard's maturing: basic concepts are already covered, so Unicode bets on selection quality and on customization of existing glyphs rather than on the quantity of new ones. And even an approved glyph won't appear on a phone right away: each vendor draws its own version, and newcomers arrive only with an OS update — so a fresh emoji may show as an empty box for a while, and that's normal.
 
 You can view and copy thousands of ready emoji in different styles in the [Trace Logo's emoji catalog](../../emoji/).

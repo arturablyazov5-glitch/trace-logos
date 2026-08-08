@@ -15,25 +15,25 @@ tags_en: Emoji, Histories, Basics
 **1963** — художник Харви Болл за 10 минут и 45 долларов рисует жёлтую рожицу для страховой компании; **1970‑е** — братья Спейны добавляют слоган «Have a Happy Day» и продают миллионы товаров; француз Франклин Лоуфрани регистрирует «Smiley» как товарный знак и строит на нём империю лицензий; **1982** — Скотт Фалман предлагает текстовый смайлик `:-)`; **1999** — Сигэтака Курита рисует первые эмодзи. Вся линия — от рожицы к [эмодзи‑каталогу](../../emoji/) — заняла 36 лет.
 :::
 
-##1963: десять минут и 45 долларов
+## 1963: десять минут и 45 долларов
 
 Страховая компания State Mutual Life Assurance из Массачусетса пережила тяжёлое слияние, и сотрудникам требовалось поднять боевой дух. Художника Харви Болла попросили нарисовать что‑нибудь ободряющее для внутренней кампании. Болл потратил, по его словам, десять минут: жёлтый круг, два овальных глаза, улыбка. Гонорар — 45 долларов; ни он, ни компания не зарегистрировали права — [что бывает, когда права не оформлены](../logotip-i-tovarnyj-znak-raznica/), эта история показывает лучше любого учебника.
 
 Дизайн Болла легко узнать среди подражаний: глаза — узкие овалы разного наклона, улыбка — не идеальная дуга, а слегка кривоватая линия с «ямочками» на концах. Живая неправильность — та же причина, по которой [сирене Starbucks добавили асимметрию](../istoriya-logotipa-starbucks/): идеальная геометрия читается как мёртвая.
 
-##1970‑е: коммерциализация без автора
+## 1970‑е: коммерциализация без автора
 
 Дальше произошло то, что сегодня назвали бы вирусным взрывом. Братья Бернард и Мюррей Спейны из Филадельфии в 1970 году добавили к рожице слоган «Have a Happy Day» и начали штамповать значки, кружки и наклейки — за пару лет продались десятки миллионов единиц. Одновременно во Франции журналист Франклин Лоуфрани начал печатать рожицу в газете как маркер хороших новостей — и, в отличие от всех остальных, **зарегистрировал** знак «Smiley» (1972). Его семейная компания Smiley Company по сей день зарабатывает сотни миллионов на лицензиях — эталонная иллюстрация того, что [права решают больше, чем авторство](../kak-zaregistrirovat-logotip/).
 
 Харви Болл наблюдал за всем этим философски. В 1999‑м он учредил Всемирный день улыбки (первая пятница октября) — «чтобы хоть один день в году смайл работал на добрые дела, а не на коммерцию».
 
-##1982: двоеточие, дефис, скобка
+## 1982: двоеточие, дефис, скобка
 
 Вторая ветка истории выросла в компьютерных сетях. 19 сентября 1982 года профессор Университета Карнеги — Меллона Скотт Фалман предложил в университетской электронной доске объявлений помечать шутки последовательностью `:-)`, а серьёзные сообщения — `:-(`. Проблема была реальной: в плоском тексте иронию не видно, и шутки регулярно взрывались скандалами — [зачем тексту эмоциональная разметка](../emodzi-v-marketinge/), мы объясняли отдельно.
 
 Текстовые смайлики мгновенно разошлись по сетям и породили целый язык — от западной «лежачей» традиции `;-)` до японских вертикальных каомодзи `(^_^)`, о которых у нас есть [отдельная статья](../kaomodzi-i-tekstovye-smajliki/). Пост Фалмана, кстати, был археологически восстановлен с бэкап‑ленты в 2002 году — теперь это музейный экспонат цифровой эпохи.
 
-##1999: рожица становится эмодзи
+## 1999: рожица становится эмодзи
 
 Третий акт — Япония. Сигэтака Курита, дизайнер оператора NTT DoCoMo, нарисовал набор из 176 пиктограмм 12×12 пикселей для мобильного интернета — среди них были и лица. Как эмодзи попали из японских телефонов в Юникод и на все клавиатуры мира, мы подробно рассказывали в статье [что такое эмодзи и откуда они взялись](../chto-takoe-emodzi-i-otkuda-oni/); здесь важна преемственность: жёлтый круг с глазами и улыбкой 😊 — прямой потомок рожицы Болла, вплоть до канонического жёлтого цвета.
 
@@ -69,7 +69,7 @@ The yellow smiley face is the most reproduced drawing in human history: older th
 **1963** — artist Harvey Ball spends 10 minutes and earns $45 drawing a yellow face for an insurance company; **1970s** — the Spain brothers add "Have a Happy Day" and sell millions of items, while France's Franklin Loufrani registers "Smiley" as a trademark and builds a licensing empire; **1982** — Scott Fahlman proposes the text smiley `:-)`; **1999** — Shigetaka Kurita draws the first emoji. The whole line — from the face to the [emoji catalog](../../emoji/) — took 36 years.
 :::
 
-##1963: ten minutes and forty-five dollars
+## 1963: ten minutes and forty-five dollars
 
 State Mutual Life Assurance of Massachusetts had been through a rough merger and needed to lift employee morale. Artist Harvey Ball was asked to draw something encouraging for the internal campaign. By his own account he spent ten minutes: a yellow circle, two oval eyes, a smile. The fee was $45; neither he nor the company registered any rights — [what happens when rights go unregistered](../logotip-i-tovarnyj-znak-raznica/), this story illustrates better than any textbook.
 
@@ -81,13 +81,13 @@ What followed would today be called going viral. In 1970 Bernard and Murray Spai
 
 Harvey Ball watched it all philosophically. In 1999 he founded World Smile Day (the first Friday of October) — "so that at least one day a year the smile works for good deeds, not commerce"
 
-##1982: colon, hyphen, bracket
+## 1982: colon, hyphen, bracket
 
 The story's second branch grew in computer networks. On September 19, 1982, Carnegie Mellon professor Scott Fahlman proposed on the university bulletin board that jokes be marked with the sequence `:-)` and serious posts with `:-(`. The problem was real: flat text hides irony, and jokes kept detonating into arguments — we explain [why text needs emotional markup](../emodzi-v-marketinge/) separately.
 
 Text smileys spread instantly and spawned an entire language — from the Western "sideways" tradition of `;-)` to Japan's upright kaomoji `(^_^)`, covered in [a separate article](../kaomodzi-i-tekstovye-smajliki/). Fahlman's post, incidentally, was archaeologically recovered from a backup tape in 2002 — now a museum piece of the digital age.
 
-##1999: the face becomes an emoji
+## 1999: the face becomes an emoji
 
 Act three — Japan. Shigetaka Kurita, a designer at carrier NTT DoCoMo, drew a set of 176 pictograms at 12×12 pixels for mobile internet — faces among them. How emoji traveled from Japanese phones into Unicode and onto every keyboard is told in [what emoji are and where they came from](../chto-takoe-emodzi-i-otkuda-oni/); what matters here is the lineage: the yellow circle with eyes and a smile 😊 is Ball's face's direct descendant, down to the canonical yellow.
 

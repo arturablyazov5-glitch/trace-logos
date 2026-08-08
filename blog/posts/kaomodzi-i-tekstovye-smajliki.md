@@ -47,8 +47,8 @@ tags_en: Emoji, Kaomoji, Communication
 Западные смайлики набираются с клавиатуры за секунду. С каомодзи так не выйдет: символы ツ или ʖ не живут ни на одной обычной раскладке. Рабочие способы:
 
 1. **Копировать из каталога или шпаргалки.** Основной способ для всех. Заведите заметку с любимыми — или откройте наш [каталог эмодзи](../../emoji/), где рядом с эмодзи удобно искать и копировать символы.
-2. **Замена текста.** Самый элегантный путь для частых: настройте автозамену — печатаете «шраг», система подставляет ¯\\_(ツ)_/¯. На iPhone: Настройки → Основные → Клавиатура → Замена текста; на Mac: Настройки → Клавиатура → Замена текста; на Android — в настройках Gboard; в [Windows](../../logos/store/windows/) — через PowerToys.
-3. **Панели эмодзи ОС.** Win+точка и Ctrl+Cmd+пробел содержат вкладку каомодзи (в [Windows](../../logos/store/windows/) — прямо отдельным разделом). Все горячие клавиши — в статье [как вставить эмодзи с клавиатуры](../kak-vstavit-emodzi-s-klaviatury/).
+2. **Замена текста.** Самый элегантный путь для частых: настройте автозамену — печатаете «шраг», система подставляет ¯\\_(ツ)_/¯. На iPhone: Настройки → Основные → Клавиатура → Замена текста; на Mac: Настройки → Клавиатура → Замена текста; на Android — в настройках Gboard; в [Windows](../../logos/tech/windows/) — через PowerToys.
+3. **Панели эмодзи ОС.** Win+точка и Ctrl+Cmd+пробел содержат вкладку каомодзи (в [Windows](../../logos/tech/windows/) — прямо отдельным разделом). Все горячие клавиши — в статье [как вставить эмодзи с клавиатуры](../kak-vstavit-emodzi-s-klaviatury/).
 
 :::warning Про шраг и обратный слеш
 В ¯\\_(ツ)_/¯ есть символ \\ — во многих чатах и редакторах он служит экранирующим символом, и рука шрага «отваливается» при отправке. Если ваш шраг приходит без руки — вставляйте вариант с удвоенным слешем или храните в автозамене уже проверенную версию.
@@ -58,7 +58,7 @@ tags_en: Emoji, Kaomoji, Communication
 
 У текстовых рожиц три суперсилы, которых нет у эмодзи:
 
-- **Одинаковость.** Каомодзи — текст: он выглядит идентично на iPhone, Android и [Windows](../../logos/store/windows/) 95. Никаких сюрпризов отрисовки, из‑за которых эмодзи [читаются по‑разному](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
+- **Одинаковость.** Каомодзи — текст: он выглядит идентично на iPhone, Android и [Windows](../../logos/tech/windows/) 95. Никаких сюрпризов отрисовки, из‑за которых эмодзи [читаются по‑разному](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
 - **Тон.** В рабочей переписке ¯\\_(ツ)_/¯ звучит иронично‑нейтрально там, где эмодзи может показаться фамильярным. Отдельная ниша — айтишная и гиковская культура, где текстовые рожицы — свой язык.
 - **Выразительность.** Переворачиваемый стол (╯°□°)╯︵ ┻━┻ передаёт градус драмы, которого нет ни у одного стандартного эмодзи.
 
@@ -110,8 +110,8 @@ Note the building materials: ツ and ノ are Japanese katakana, ° is the degree
 Western emoticons take a second on any keyboard. Kaomoji don't: ツ and ʖ live on no ordinary layout. The working methods:
 
 1. **Copy from a catalog or a cheat sheet.** The main method for everyone. Keep a note with favorites — or open our [emoji catalog](../../emoji/) for quick search-and-copy.
-2. **Text replacement.** The elegant path for frequent ones: set up an auto-replacement — type "shrug", get ¯\\_(ツ)_/¯. iPhone: Settings → General → Keyboard → Text Replacement; Mac: Settings → Keyboard → Text Replacements; Android — Gboard settings; [Windows](../../logos/store/windows/) — PowerToys.
-3. **OS emoji panels.** Win+period and Ctrl+Cmd+Space include kaomoji tabs ([Windows](../../logos/store/windows/) has a dedicated section). All the hotkeys: [how to type emoji from the keyboard](../kak-vstavit-emodzi-s-klaviatury/).
+2. **Text replacement.** The elegant path for frequent ones: set up an auto-replacement — type "shrug", get ¯\\_(ツ)_/¯. iPhone: Settings → General → Keyboard → Text Replacement; Mac: Settings → Keyboard → Text Replacements; Android — Gboard settings; [Windows](../../logos/tech/windows/) — PowerToys.
+3. **OS emoji panels.** Win+period and Ctrl+Cmd+Space include kaomoji tabs ([Windows](../../logos/tech/windows/) has a dedicated section). All the hotkeys: [how to type emoji from the keyboard](../kak-vstavit-emodzi-s-klaviatury/).
 
 :::warning About the shrug and the backslash
 The shrug contains \\ — an escape character in many chats and editors, so the shrug's arm "falls off" when sent. If yours arrives one-armed, use a double-backslash version or store a verified one in text replacement.
@@ -121,7 +121,7 @@ The shrug contains \\ — an escape character in many chats and editors, so the 
 
 Text faces have three superpowers emoji lack:
 
-- **Consistency.** Kaomoji are text: identical on iPhone, Android and [Windows](../../logos/store/windows/) 95. None of the rendering surprises that make emoji [look different everywhere](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
+- **Consistency.** Kaomoji are text: identical on iPhone, Android and [Windows](../../logos/tech/windows/) 95. None of the rendering surprises that make emoji [look different everywhere](../pochemu-emodzi-otobrazhayutsya-po-raznomu/).
 - **Tone.** In work chats ¯\\_(ツ)_/¯ reads ironic-neutral where an emoji might feel too familiar. And in IT and geek culture, text faces are a native language.
 - **Expressiveness.** The flipped table (╯°□°)╯︵ ┻━┻ delivers a level of drama no standard emoji can match.
 

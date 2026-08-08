@@ -6,7 +6,7 @@ import { t, applyI18n } from './i18n.js';
 
 export const LABELS = {
   copySvg: '', copyPng: '', copyEmoji: '', copyEmojiPage: '', copied: '',
-  downloadSvg: '', downloadPng: '',
+  downloadSvg: '', downloadPng: '', downloadIco: '', downloadIcns: '',
   dlMore: '', dlZipAll: '', dlIco: '', dlIcns: '', dlLiquidGlass: '',
   dlWebp: '', dlPdf: '', dlAi: '', dlEps: '',
   reportOutdated: '', editColors: '', resetColors: '', helpUpload: '',
@@ -28,6 +28,8 @@ export function refreshLabels() {
   LABELS.copied         = t('copied');
   LABELS.downloadSvg    = t('downloadSvg');
   LABELS.downloadPng    = t('downloadPng');
+  LABELS.downloadIco    = t('downloadIco');
+  LABELS.downloadIcns   = t('downloadIcns');
   LABELS.dlMore         = t('dlMore');
   LABELS.dlZipAll       = t('dlZipAll');
   LABELS.dlIco          = t('dlIco');

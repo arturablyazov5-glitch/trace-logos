@@ -23,6 +23,8 @@ export const DICT = {
   copied:         'Скопировано!',
   downloadSvg:    'Скачать SVG',
   downloadPng:    'Скачать PNG',
+  downloadIco:    'Скачать ICO',
+  downloadIcns:   'Скачать ICNS',
   dlMore:         'Другие форматы',
   dlZipAll:       'Скачать все (ZIP)',
   dlIco:          'ICO',
@@ -58,11 +60,6 @@ export const DICT = {
   'toast.imageLoadError': 'Не удалось загрузить изображение',
   'toast.catalogEnd':     'Это конец каталога!',
 
-  // ── Achievements ─────────────────────────────────────────
-  achievementKicker:      'Ачивка разблокирована',
-  achievementHunterTitle: 'Охотник за логотипами',
-  achievementHunterDesc:  'Открыто 20 карточек за сессию',
-
   // ── Static UI (data-i18n) ────────────────────────────────
   searchPlaceholder:      'Поиск логотипов…',
   searchGo:               'Найти',
@@ -92,11 +89,13 @@ export const DICT = {
   detailPage:             'Страница',
   detailBrandRules:       'Правила использования лого',
   detailPageLink:         'Подробнее о логотипе',
+  logoDescExpand:         'Подробнее',
+  logoDescCollapse:       'Свернуть',
   tabColor:               'Цвет',
   tabDark:                'Тёмное',
   tabLight:               'Светлое',
   figmaNote:              '⚠ Важно для Figma',
-  noIconNote:             'У бренда нет официальной квадратной иконки. Существует только горизонтальный вариант. Квадрат в каталоге нарисован нами для единообразия сетки и не является знаком бренда.',
+  noIconNote:             'У бренда нет официальной квадратной иконки. Квадрат в каталоге нарисован нами для единообразия сетки и не является знаком бренда.',
   helpHint:               'Этой иконки пока нет на сайте. Если у вас есть SVG этого логотипа — загрузите его, и автор добавит его на сайт.',
   // Suggest modal
   suggestModalTitle:         'Предложить логотип',
@@ -286,6 +285,9 @@ export const DICT = {
   'footerColl_cloud-storage':     'Облачные хранилища',
   'footerColl_music-streaming':   'Музыкальные сервисы',
   'footerColl_video-streaming':   'Видеостриминг',
+  'footerColl_design-tools':      'Дизайн-инструменты',
+  'footerColl_education':         'Образовательные платформы',
+  'footerColl_health-fitness':    'Здоровье и фитнес',
   // COLLECTIONS:END
   // Per-tool footer link labels — auto-synced from tools.json's
   // label/label_en by scripts/build-home-tools.js. Never hand-edit
@@ -297,6 +299,11 @@ export const DICT = {
   'footerTool_edit-image':      'Обрезать и повернуть фото',
   'footerTool_ios-call-screen': 'Экран вызова iOS',
   // TOOLS:END
+
+  // Расширение для Chrome (tools/extensions/reviews-exporter/), не страница
+  // tools/<slug>/ — вне tools.json/build-home-tools.js, правится руками,
+  // как footerFigmaPlugin.
+  footerToolReviewsExporter: 'Reviews Exporter',
 
   // H1 внутри .ssr-grid на /logos/ и /emoji/ — блок для краулера, main.js
   // сносит его на init. Каталог рисуется на JS, без этого страницы уходили
@@ -394,9 +401,12 @@ export const DICT = {
   'sitemapCat_flag':      'Флаги',
   'sitemapCat_games':     'Игры',
   'sitemapCat_b2b':       'B2B и корпоративные сервисы',
+  'sitemapCat_game-platforms': 'Игровые платформы',
+  'sitemapCat_tech':      'Техника и гаджеты',
   'sitemapCat_city':      'Города',
   'sitemapCat_developers':'Девелоперы и недвижимость',
   'sitemapCat_gas-stations': 'АЗС',
+  'sitemapCat_bookmakers': 'Букмекеры и лотереи',
   // sitemap emoji category labels
   'sitemapEmoji_smileys':    'Смайлы',
   'sitemapEmoji_people':     'Люди',

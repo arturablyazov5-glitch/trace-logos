@@ -34,7 +34,7 @@ tags_en: Logo, Responsive, Design
 
 Что эта логика не теория, видно на крупных брендах. У [Google](../../logos/search/google/) полное текстовое начертание сокращается до цветной буквы «G» — именно её вы видите на [фавиконе](../kak-sdelat-favicon/) и в мобильных приложениях. [Spotify](../../logos/media/spotify/) в интерфейсе почти всегда представлен только круглым символом, а [VK](../../logos/social/vk/) использует то полное начертание, то компактную [монограмму](../chto-takoe-monogramma/) в зависимости от места.
 
-А символ [Apple](../../logos/store/apple/) вообще самодостаточен — он работает от билборда до фавикона без изменений, потому что изначально предельно прост. И это подсказывает вывод, который важнее любых ступеней: чем проще исходный знак, тем меньше версий ему нужно. Не случайно бренды годами [упрощают свои логотипы](../pochemu-brendy-uproshchayut-logotipy/) — упрощение напрямую улучшает адаптивность, а значит, начинается она ещё до нарезки версий, с самой формы знака.
+А символ [Apple](../../logos/tech/apple/) вообще самодостаточен — он работает от билборда до фавикона без изменений, потому что изначально предельно прост. И это подсказывает вывод, который важнее любых ступеней: чем проще исходный знак, тем меньше версий ему нужно. Не случайно бренды годами [упрощают свои логотипы](../pochemu-brendy-uproshchayut-logotipy/) — упрощение напрямую улучшает адаптивность, а значит, начинается она ещё до нарезки версий, с самой формы знака.
 
 ## Как собрать адаптивный логотип
 
@@ -98,7 +98,7 @@ Not every brand needs all four steps — a small project gets by with two, the f
 
 That this logic isn't theory is visible in large brands. [Google](../../logos/search/google/) shrinks its full wordmark to the colored "G" — exactly what you see on the [favicon](../kak-sdelat-favicon/) and in mobile apps. [Spotify](../../logos/media/spotify/) is almost always represented in its interface by the round symbol alone, and [VK](../../logos/social/vk/) uses either the full wordmark or a compact [monogram](../chto-takoe-monogramma/) depending on the placement.
 
-And the [Apple](../../logos/store/apple/) symbol is self-sufficient altogether — it works from billboard to favicon unchanged, because it's extremely simple to begin with. And this suggests a conclusion more important than any steps: the simpler the source mark, the fewer versions it needs. It's no accident that brands spend years [simplifying their logos](../pochemu-brendy-uproshchayut-logotipy/) — simplification directly improves adaptability, which means it starts before slicing versions, with the mark's shape itself.
+And the [Apple](../../logos/tech/apple/) symbol is self-sufficient altogether — it works from billboard to favicon unchanged, because it's extremely simple to begin with. And this suggests a conclusion more important than any steps: the simpler the source mark, the fewer versions it needs. It's no accident that brands spend years [simplifying their logos](../pochemu-brendy-uproshchayut-logotipy/) — simplification directly improves adaptability, which means it starts before slicing versions, with the mark's shape itself.
 
 ## How to build an adaptive logo
 

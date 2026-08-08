@@ -41,7 +41,7 @@ function walk(dir, out = []) {
     if (entry.name.startsWith('.')) continue;
     const abs = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(abs, out);
-    else if (entry.name.endsWith('.js')) out.push(abs);
+    else if (entry.name.endsWith('.js') && !entry.name.endsWith('.min.js')) out.push(abs);
   }
   return out;
 }

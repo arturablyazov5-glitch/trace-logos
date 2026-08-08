@@ -9,74 +9,87 @@ tags: Логотипы, Инструкции, Инструменты
 tags_en: Logos, How-to, Tools
 ---
 
-Нужен логотип банка для презентации, иконка сервиса для схемы интеграций, знак партнёра для слайда «нам доверяют». Первое движение — скриншот с сайта. И это худший из возможных вариантов: мыльный растр с куском фона, который стыдно ставить в макет. Между тем на любом сайте логотип уже лежит в отличном качестве — надо только знать, как его забрать.
+Нужен логотип банка для презентации, иконка сервиса для схемы интеграций, знак партнёра для слайда «нам доверяют». Рука тянется сделать скриншот, и в макет уезжает мыльный растр с куском чужого фона. Между тем логотип, который вы только что сфотографировали с экрана, лежит на том же сайте в векторе: сайт обязан был его откуда‑то загрузить, чтобы показать вам. Скриншот означает лишь то, что файл искали не там. Разберём, где он лежит на самом деле, — от самых быстрых источников к самым трудоёмким.
 
 :::note Коротко
-Порядок действий от лучшего к худшему: **каталог логотипов** (SVG в один клик) → **пресс‑кит бренда** (официальные файлы) → **вытащить SVG через DevTools** (30 секунд) → **правый клик → сохранить картинку** → и только если всё провалилось — скриншот. Про право использовать чужой логотип — в конце, спойлер: для большинства бытовых задач можно.
+Порядок от лучшего к худшему: **каталог логотипов** (SVG в один клик) → **пресс‑кит бренда** (официальные файлы с правилами) → **DevTools** (достанет логотип с любого сайта за 30 секунд) → **правый клик → сохранить картинку** → скриншот, если провалилось всё остальное. Про право использовать чужой знак — в конце: для большинства бытовых задач можно.
 :::
 
-## Способ 1. Правый клик — иногда этого достаточно
+## Способ 1. Правый клик — когда повезло
 
-Правый клик по логотипу → «Сохранить изображение как…» или «Открыть изображение в новой вкладке». Если логотип вставлен обычным тегом `<img>`, вы получите исходный файл — часто это SVG, и тогда задача решена идеально.
+Правый клик по логотипу → «Сохранить изображение как…» или «Открыть изображение в новой вкладке». Если логотип вставлен обычным тегом `<img>`, вы получите исходный файл, и нередко это сразу SVG.
 
-Когда не работает: логотип вставлен инлайн‑кодом, фоном через CSS или прикрыт другим элементом. Пункта «сохранить изображение» в меню просто не будет. Тогда — способ 2.
+Везёт так примерно в половине случаев. Пункт «сохранить изображение» исчезает из меню, когда логотип вставлен инлайн‑кодом, нарисован фоном через CSS или прикрыт прозрачным элементом. Тогда файл всё равно существует — просто до него нужно добраться через панель разработчика.
 
-## Способ 2. DevTools — достаём что угодно за 30 секунд
+## Способ 2. DevTools — достаёт что угодно за 30 секунд
 
-Работает в [Chrome](../../logos/search/chrome/), Яндекс Браузере, [Firefox](../../logos/search/firefox/) — везде одинаково:
+Панель работает одинаково в [Chrome](../../logos/search/chrome/), [Яндекс Браузере](../../logos/search/yandexbrowser/) и [Firefox](../../logos/search/firefox/):
 
 1. Правый клик по логотипу → **«Просмотреть код»** (Inspect).
-2. В открывшейся панели вы окажетесь рядом с элементом логотипа. Варианты:
+2. Панель откроется на элементе логотипа. Дальше три варианта:
    - **`<img src="...">`** — откройте ссылку из src в новой вкладке и сохраните файл.
-   - **`<svg>...</svg>`** — логотип вставлен инлайн. Правый клик по тегу в панели → Copy → Copy element — SVG‑код у вас в буфере. Вставьте его в файл с расширением.svg или прямо в [Figma](../../logos/design/figma/) (Ctrl+V — [Figma](../../logos/design/figma/) понимает SVG‑код из буфера).
+   - **`<svg>...</svg>`** — логотип вставлен инлайн. Правый клик по тегу → Copy → Copy element, и SVG‑код у вас в буфере. Вставьте его в файл с расширением `.svg` или прямо в [Figma](../../logos/design/figma/): она понимает SVG‑код из буфера по Ctrl+V.
    - **`background-image: url(...)`** в стилях — откройте URL из CSS и сохраните.
-3. Проверьте добычу: настоящий SVG состоит из `<path>` и фигур, а не одного тега `<image>` с растром внутри.
+3. Проверьте добычу: настоящий вектор состоит из `<path>` и фигур, а один тег `<image>` внутри означает растр в векторной обёртке.
+
+Отдельный случай — спрайт. Когда внутри `<svg>` стоит только `<use href="#logo">`, скопированный код в файле окажется пустым: сама фигура лежит в другом месте страницы, в блоке `<symbol>` или в подключённом файле спрайта. Найдите этот `id` поиском по документу (Ctrl+F в панели Elements) и копируйте фигуру оттуда либо откройте файл спрайта целиком по ссылке из `href` — заодно получите все иконки сайта разом.
 
 :::tip Ищите логотип в футере и на странице «О компании»
-В шапке сайта часто лежит упрощённая или анимированная версия. В футере, пресс‑разделе и на внутренних страницах нередко находится более полная версия логотипа — а то и ссылка на официальный архив со всеми файлами.
+В шапке сайта часто стоит упрощённая или анимированная версия знака. В футере, пресс‑разделе и на внутренних страницах нередко лежит полный вариант, а иногда и прямая ссылка на официальный архив со всеми файлами.
 :::
 
-## Способ 3. Пресс‑кит бренда — официальный путь
+## Способ 3. Пресс‑кит бренда — источник, который отвечает за файлы
 
-У большинства средних и крупных компаний есть раздел «Пресс‑центр», «Медиа», «Brand assets» — с логотипами в SVG/PNG, фирменными цветами и правилами использования. Это самый правильный источник: файлы гарантированно актуальные и официальные, а правила использования написаны прямо рядом. Ищите ссылку в футере сайта или запросом «название бренда логотип пресс‑кит» / «brand assets».
+DevTools достанет любой файл, но не скажет, актуален ли он. Пресс‑кит решает и это: у большинства средних и крупных компаний есть раздел «Пресс‑центр», «Медиа» или «Brand assets» с логотипами в SVG и PNG, фирменными цветами и правилами использования.
 
-## Способ 4. Каталоги логотипов — когда нужно быстро и много
+Отсюда два преимущества, которых нет у добычи из вёрстки: файлы гарантированно свежие, а правила применения написаны прямо рядом с ними. Ищите ссылку в футере сайта или по запросу «название бренда логотип пресс‑кит» либо «brand assets».
 
-Когда логотипов нужно несколько (список банков, сетка партнёров, схема сервисов), ходить по пяти сайтам с DevTools утомительно. Каталоги решают это одним местом: официальные версии, единое качество, сразу в SVG и PNG.
+В хорошем пресс‑ките рядом с файлами лежат минимальные отступы вокруг знака, список запрещённых искажений и версии для тёмного фона. Эти правила экономят время на согласовании: если партнёр попросит переделать слайд, ссылка на его же гайдлайн закрывает вопрос за минуту.
 
-Наш [каталог логотипов](../../logos/) заточен ровно под это: сотни российских и мировых брендов, у каждого — SVG, PNG нужного размера, копирование кода в один клик и даже перекраска прямо на странице. Для сеток «способы оплаты» и «нам доверяют» — самый короткий путь.
+## Способ 4. Каталоги логотипов — когда знаков нужно много
+
+Пресс‑кит хорош для одного бренда. Но когда собираешь сетку из десяти логотипов — список банков, схему сервисов, блок «нам доверяют», — обход десяти пресс‑разделов превращается в отдельную задачу, и файлы придут в разном качестве и разных пропорциях.
+
+Каталог снимает обе проблемы разом: официальные версии собраны в одном месте и приведены к единому виду. Наш [каталог логотипов](../../logos/) сделан ровно под это: сотни российских и мировых брендов, у каждого — SVG, PNG нужного размера, копирование кода в один клик и перекраска прямо на странице.
 
 ## Способ 5. Скриншот — крайняя мера
 
-Если логотип запечён в растровую картинку вместе с фоном (например, в обложке видео), остаётся скриншот с последующей обработкой: кадрирование, удаление фона. Качество будет равно размеру на экране — то есть посредственное. Прежде чем смириться, проверьте способы 3 и 4: почти для любого бренда где‑то лежит нормальный файл.
+Остаётся случай, когда файла действительно нет: логотип запечён в растровую картинку вместе с фоном — например, в обложке видео или на фотографии вывески. Тогда скриншот с последующим кадрированием и удалением фона остаётся единственным вариантом, и качество будет равно размеру на экране.
 
-## А это вообще законно?
+Прежде чем смириться, проверьте способы 3 и 4: почти для любого заметного бренда нормальный файл где‑то лежит.
 
-Скачивание логотипа — не нарушение: нарушением может быть **способ использования**. Общий принцип: показывать логотип, чтобы указать на сам бренд (в статье, презентации, списке интеграций, способах оплаты), — можно; выдавать за свой, намекать на несуществующее партнёрство или лепить на продаваемый товар — нельзя. Подробный разбор с судебной практикой и таблицей ситуаций — в нашей статье [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
+## Что делать, когда Inspect ничего не нашёл
 
-:::warning Один нюанс качества использования
-Куда бы вы ни поставили чужой логотип — не искажайте его: не растягивайте, не перекрашивайте в свои цвета, не обрезайте. Это и юридически чище, и профессиональнее выглядит. Правила искажений мы разбирали в статье [про брендбуки](../chto-takoe-brendbuk/).
-:::
+Отдельная категория сайтов прячет логотип так, что простой Inspect его не показывает. Здесь помогают три приёма поглубже:
 
-## Продвинутый уровень DevTools: три приёма для сложных случаев
+- **Вкладка Network.** DevTools → Network → фильтр Img, затем обновите страницу. В списке окажутся все картинки, которые сайт скачал, включая спрятанные в CSS и скриптах. Отсортируйте по имени: логотип обычно называется logo‑что‑нибудь, двойной клик открывает файл для сохранения.
+- **Поиск по исходникам.** DevTools → Ctrl+Shift+F → запрос «logo» или «.svg». Находит пути, зашитые в JS‑бандлы и JSON‑конфиги, куда Inspect не заглядывает.
+- **Псевдоэлементы и иконочные шрифты.** Если знак нарисован через `::before` иконочным шрифтом, файла‑картинки не существует вовсе. Смотрите Computed → content и font‑family: скачивать придётся шрифт или искать альтернативу в пресс‑ките.
 
-Когда простой Inspect не находит логотип, помогают приёмы поглубже:
+И общий совет: мобильная версия сайта иногда отдаёт другой, более простой файл логотипа — включите эмуляцию устройства в DevTools и проверьте.
 
-- **Вкладка Network.** Откройте DevTools → Network → фильтр Img, обновите страницу. В списке — все картинки, которые скачал сайт, включая те, что спрятаны в CSS и скриптах. Отсортируйте по имени — логотип обычно называется logo‑что‑нибудь. Двойной клик открывает файл для сохранения.
-- **Поиск по исходнику.** DevTools → Ctrl+Shift+F (поиск по всем файлам) → введите «logo» или «.svg». Находит пути к логотипам, зашитые в JS‑бандлы и JSON‑конфиги, куда Inspect не заглядывает.
-- **Псевдоэлементы и шрифты‑иконки.** Если логотип нарисован через::before с иконочным шрифтом, картинки‑файла не существует вовсе. Смотрите Computed → content и font‑family: скачивать нужно будет шрифт или искать растровую/векторную альтернативу в пресс‑ките.
+## Где ещё лежит вектор, кроме сайта
 
-И общий совет: мобильная версия сайта иногда отдаёт другой, более простой файл логотипа — переключите эмуляцию устройства в DevTools и проверьте.
+Сайт — не единственное место, куда файл уже попал в векторе.
 
-## Как проверить качество скачанного файла
+**PDF.** Презентация, коммерческое предложение или годовой отчёт хранят логотип кривыми. Откройте PDF в [Illustrator](../../logos/design/illustrator/) или Inkscape, выделите знак и скопируйте его обычной группой фигур. Растровым он окажется только тогда, когда в макет его вставили картинкой.
 
-Добыча в руках — теперь три быстрых теста перед использованием:
+**Презентации и документы.** Файлы PPTX и DOCX устроены как zip‑архивы. Смените расширение на `.zip`, распакуйте и загляните в папку `ppt/media` или `word/media`: вставленные картинки лежат там в исходном виде, включая SVG.
 
-1. **Вектор или обёртка?** Откройте SVG текстовым редактором: настоящий вектор состоит из `<path>` и фигур; один тег `<image>` — это растр, замаскированный под SVG.
-2. **Актуальная ли версия?** У брендов случаются редизайны, а на сайтах — в футерах, старых лендингах, поддоменах — годами живут прошлые версии знака. Сверьте добычу с главной страницей бренда или его свежими соцсетями.
-3. **Полная ли версия?** В шапке сайта часто урезанный вариант (только знак без текста, или упрощённая версия для малых размеров). Для презентаций обычно нужен полный логотип — ищите его в пресс‑ките.
+**Мобильное приложение.** APK распаковывается тем же способом, а иконки внутри лежат в `res/drawable` — набором PNG под разные плотности экрана и векторным XML, который переводится в SVG конвертером.
 
-## Типовые задачи и лучший путь для каждой
+**Расширения браузера.** Плагины вроде SVG Export и SVG Grabber собирают все векторы страницы в один список: это быстрее ручного обхода DevTools, когда со страницы нужно снять сразу десяток иконок. Проверять добычу всё равно придётся, потому что расширение вытащит и служебные значки интерфейса.
+
+## Четыре проверки скачанного файла
+
+Добыча в руках, но перед вставкой в макет её стоит проверить по четырём пунктам:
+
+1. **Вектор или обёртка.** Откройте SVG текстовым редактором: настоящий вектор состоит из `<path>` и фигур; один тег `<image>` выдаёт растр, замаскированный под SVG.
+2. **Актуальность.** У брендов случаются редизайны, а в футерах, на старых лендингах и поддоменах годами живут прошлые версии знака. Сверьте файл с главной страницей бренда или его свежими соцсетями.
+3. **Полнота.** В шапке часто стоит урезанный вариант — только знак без текста. Для презентации обычно нужен полный логотип, и его ищут в пресс‑ките.
+4. **Поля и холст.** Вытащенный из вёрстки SVG нередко несёт viewBox с запасом: знак сидит в углу большого прозрачного прямоугольника и в макете выравнивается криво. Откройте файл в [Figma](../../logos/design/figma/) — если рамка выделения заметно больше самой фигуры, обрежьте холст по содержимому.
+
+## Какой путь выбрать под задачу
 
 | Задача | Оптимальный путь |
 | --- | --- |
@@ -87,98 +100,127 @@ tags_en: Logos, How-to, Tools
 | Логотип из PDF‑презентации | открыть PDF в [Illustrator](../../logos/design/illustrator/)/Inkscape и извлечь вектор |
 | Старый логотип, которого нет на сайте | веб‑архив (web.archive.org) + DevTools |
 
-Последняя строка — недооценённый приём: Wayback Machine хранит старые версии сайтов вместе с файлами логотипов, и это спасение, когда нужен именно исторический вариант знака.
+Последняя строка выручает чаще, чем кажется: Wayback Machine хранит старые версии сайтов вместе с файлами логотипов, и это единственный способ достать исторический вариант знака после ребрендинга. Проверяйте в архиве и внутренние страницы: снимки пресс‑разделов сохраняются вместе с файлами, и старая версия логотипа чаще находится именно там.
 
-## Коротко
+## А это вообще законно
 
-Скриншот — последнее средство, а не первое. Сначала каталог или пресс‑кит (официальный SVG за секунды), затем DevTools (вытащит логотип с любого сайта), и только потом растровые компромиссы. Добытый вектор ставьте в макет неискажённым — и всё будет и красиво, и законно.
+Само скачивание закон не нарушает — вопросы возникают к способу использования. Общий принцип такой: показывать логотип, чтобы указать на сам бренд (в статье, презентации, списке интеграций, способах оплаты), можно; выдавать за свой, намекать на несуществующее партнёрство или печатать на продаваемом товаре нельзя. Подробный разбор с судебной практикой и таблицей ситуаций — в статье [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 
-Сэкономьте себе DevTools: в нашем [каталоге логотипов](../../logos/) логотип любого крупного бренда скачивается в SVG и PNG за один клик — или копируется кодом сразу в [Figma](../../logos/design/figma/).
+:::warning Не искажайте знак
+Куда бы вы ни поставили чужой логотип, оставьте его пропорции, цвета и границы нетронутыми: растянутый или перекрашенный знак нарушает гайдлайн бренда и выглядит непрофессионально. Правила искажений разбирали в статье [про брендбуки](../chto-takoe-brendbuk/).
+:::
+
+## Если коротко
+
+Скриншот стоит последним в списке, потому что вектор почти всегда уже существует: сайт загрузил его, чтобы показать вам, а бренд нередко выложил официальную копию отдельно. Поэтому и порядок действий обратный привычному — сначала каталог или пресс‑кит, затем DevTools, и лишь потом растровые компромиссы. Добытый файл проверьте на подлинность, актуальность и полноту, а в макет ставьте неискажённым.
+
+Сэкономьте себе DevTools: в нашем [каталоге логотипов](../../logos/) знак любого крупного бренда скачивается в SVG и PNG за один клик — или копируется кодом сразу в [Figma](../../logos/design/figma/).
 
 ---EN---
 
-You need a bank's logo for a deck, a service icon for an integration diagram, a partner's mark for the "trusted by" slide. The first instinct is a screenshot. It's the worst possible option: a blurry raster with a chunk of background you'll be embarrassed to place in a mockup. Meanwhile, the logo already exists on that site in excellent quality — you just need to know how to take it.
+You need a bank's logo for a deck, a service icon for an integrations diagram, a partner's mark for a "trusted by" slide. The hand reaches for a screenshot, and a mushy raster with a chunk of someone else's background lands in your layout. Meanwhile the logo you just photographed off the screen sits on that same site as a vector: the site had to load it from somewhere to show it to you. A screenshot only means you looked in the wrong place. Let's go through where the file actually lives, from the fastest sources to the most laborious.
 
 :::note TL;DR
-From best to worst: **a logo catalog** (SVG in one click) → **the brand's press kit** (official files) → **extracting the SVG via DevTools** (30 seconds) → **right click → save image** → and only if everything failed, a screenshot. The legal side is at the end; spoiler: for most everyday uses, you're fine.
+Best to worst: a **logo catalog** (SVG in one click) → the **brand's press kit** (official files with usage rules) → **DevTools** (pulls a logo off any site in 30 seconds) → **right-click → save image** → a screenshot, if everything else failed. On the right to use someone else's mark — at the end: for most everyday tasks, you can.
 :::
 
-## Method 1. Right click — sometimes enough
+## Method 1. Right-click — when you're lucky
 
-Right click the logo → "Save image as…" or "Open image in new tab". If the logo is a plain `<img>`, you get the source file — often an SVG, which solves the task perfectly.
+Right-click the logo → "Save image as…" or "Open image in new tab". If the logo is placed with a plain `<img>` tag, you get the source file, and often that's already an SVG.
 
-When it fails: the logo is inlined as code, set as a CSS background, or covered by another element. The menu simply won't offer saving. Then — method 2.
+Luck holds about half the time. The "save image" entry disappears when the logo is inlined in code, painted as a CSS background or covered by a transparent element. The file still exists then — you just have to reach it through the developer panel.
 
-## Method 2. DevTools — extract anything in 30 seconds
+## Method 2. DevTools — pulls anything in 30 seconds
 
-Works identically in [Chrome](../../logos/search/chrome/) and [Firefox](../../logos/search/firefox/):
+The panel works the same in [Chrome](../../logos/search/chrome/), [Yandex Browser](../../logos/search/yandexbrowser/) and [Firefox](../../logos/search/firefox/):
 
-1. Right click the logo → **Inspect**.
-2. The panel lands near the logo's element. The cases:
-   - **`<img src="...">`** — open the src URL in a new tab and save.
-   - **`<svg>...</svg>`** — inlined logo. Right click the tag in the panel → Copy → Copy element — the SVG code is in your clipboard. Paste into a file with an .svg extension, or straight into [Figma](../../logos/design/figma/) (Ctrl+V — [Figma](../../logos/design/figma/) parses SVG from the clipboard).
-   - **`background-image: url(...)`** in the styles — open the URL and save.
-3. Inspect the loot: a real SVG consists of `<path>` shapes, not a single `<image>` tag wrapping a bitmap.
+1. Right-click the logo → **"Inspect"**.
+2. The panel opens on the logo element. Three cases follow:
+   - **`<img src="...">`** — open the src link in a new tab and save the file.
+   - **`<svg>...</svg>`** — the logo is inlined. Right-click the tag → Copy → Copy element, and the SVG code is on your clipboard. Paste it into a `.svg` file or straight into [Figma](../../logos/design/figma/): it reads SVG code from the clipboard on Ctrl+V.
+   - **`background-image: url(...)`** in the styles — open the URL from the CSS and save.
+3. Inspect the loot: a real vector consists of `<path>` and shapes, while a single `<image>` tag inside means a raster in vector wrapping.
 
-:::tip Check the footer and the About page
-Headers often carry a simplified or animated version. Footers, press sections and inner pages frequently hold a fuller version — or a link to the official asset archive.
+Sprites are a case of their own. When the `<svg>` contains nothing but `<use href="#logo">`, the copied code lands in your file empty: the shape itself sits elsewhere on the page, in a `<symbol>` block or in a linked sprite file. Find that `id` with a document search (Ctrl+F in the Elements panel) and copy the shape from there, or open the whole sprite file via the `href` link — which hands you every icon on the site at once.
+
+:::tip Look in the footer and the "About" page
+The site header often carries a simplified or animated version of the mark. The footer, press section and inner pages frequently hold the full variant, and sometimes a direct link to the official archive with every file.
 :::
 
-## Method 3. The brand's press kit — the official path
+## Method 3. The brand's press kit — a source that stands behind its files
 
-Most mid-size and large companies keep a "Press", "Media" or "Brand assets" section with SVG/PNG logos, brand colors and usage rules. It's the most correct source: guaranteed-current official files with the rules printed right next to them. Look for a footer link or search "brand name brand assets".
+DevTools will pull any file, but it won't tell you whether that file is current. A press kit solves this too: most mid-size and large companies have a "Press", "Media" or "Brand assets" section with logos in SVG and PNG, brand colors and usage rules.
 
-## Method 4. Logo catalogs — when you need many, fast
+Hence two advantages that markup scraping lacks: the files are guaranteed fresh, and the usage rules sit right next to them. Look for the link in the site footer or search "brand name logo press kit" or "brand assets".
 
-When you need several logos (a bank list, a partner grid, a services diagram), visiting five sites with DevTools gets tedious. Catalogs solve it in one place: official versions, consistent quality, SVG and PNG together.
+A good press kit keeps the minimum clear space around the mark, the list of forbidden distortions and dark-background versions right next to the files. Those rules save approval time: if a partner asks you to redo a slide, a link to their own guideline settles it in a minute.
 
-Our [logo catalog](../../logos/) is built for exactly this: hundreds of Russian and global brands, each with SVG, sized PNGs, one-click code copy and even on-page recoloring. For "payment methods" and "trusted by" grids — the shortest route there is.
+## Method 4. Logo catalogs — when you need many marks
 
-## Method 5. The screenshot — last resort
+A press kit is great for one brand. But when you're assembling a grid of ten logos — a list of banks, a services diagram, a "trusted by" block — visiting ten press sections becomes a task of its own, and the files arrive in different quality and proportions.
 
-If the logo is baked into a raster image along with a background (a video thumbnail, say), a screenshot plus cleanup remains: crop, background removal. Quality equals on-screen size — i.e., mediocre. Before settling, try methods 3 and 4: a proper file exists somewhere for almost any brand.
+A catalog removes both problems at once: official versions gathered in one place and normalized to a single look. Our [logo catalog](../../logos/) is built exactly for this: hundreds of Russian and global brands, each with SVG, PNG at the size you need, one-click code copying and recoloring right on the page.
 
-## Is this even legal?
+## Method 5. Screenshot — the last resort
 
-Downloading a logo isn't infringement — the **manner of use** can be. The principle: showing a logo to refer to the brand itself (in an article, a deck, an integration list, payment methods) is fine; passing it off as yours, implying a partnership that doesn't exist, or putting it on merchandise you sell is not. The full breakdown with case law and a situation table is in [can you use someone else's logo](../mozhno-li-ispolzovat-chuzhoy-logotip/).
+One case remains where the file genuinely doesn't exist: the logo is baked into a raster image together with its background — in a video thumbnail, say, or a photo of a storefront sign. Then a screenshot with cropping and background removal is the only option, and the quality will equal the size on screen.
 
-:::warning One quality caveat
-Wherever you place someone's logo — don't distort it: no stretching, no recoloring into your palette, no cropping. That's both legally cleaner and more professional. The distortion rules are covered in [the brand book article](../chto-takoe-brendbuk/).
-:::
+Before settling for it, check methods 3 and 4: for almost any notable brand a proper file exists somewhere.
 
-## Advanced DevTools: three techniques for hard cases
+## What to do when Inspect finds nothing
 
-When plain Inspect can't find the logo, dig deeper:
+A separate category of sites hides the logo well enough that plain Inspect won't show it. Three deeper techniques help here:
 
-- **The Network tab.** DevTools → Network → filter Img, reload. The list shows every image the site fetched, including ones hidden in CSS and scripts. Sort by name — logos are usually called logo-something. Double-click opens the file for saving.
-- **Source-wide search.** DevTools → Ctrl+Shift+F → search "logo" or ".svg". Finds logo paths baked into JS bundles and JSON configs where Inspect never looks.
-- **Pseudo-elements and icon fonts.** If the logo is drawn via ::before with an icon font, no image file exists at all. Check Computed → content and font-family: you'll need the font itself or a proper file from the press kit.
+- **The Network tab.** DevTools → Network → the Img filter, then reload the page. The list will hold every image the site downloaded, including those buried in CSS and scripts. Sort by name: the logo is usually called logo-something, and a double click opens the file for saving.
+- **Search across sources.** DevTools → Ctrl+Shift+F → query "logo" or ".svg". This finds paths baked into JS bundles and JSON configs, where Inspect never looks.
+- **Pseudo-elements and icon fonts.** If the mark is drawn via `::before` with an icon font, no image file exists at all. Check Computed → content and font-family: you'll be downloading a font or looking for an alternative in the press kit.
 
-General tip: mobile versions sometimes serve a different, simpler logo file — toggle device emulation in DevTools and check.
+One general tip: the mobile version of a site sometimes serves a different, simpler logo file — switch on device emulation in DevTools and check.
 
-## Verifying the quality of what you grabbed
+## Where else the vector lives besides the site
 
-Three quick tests before use:
+A website is not the only place the file has already reached in vector form.
 
-1. **Vector or wrapper?** Open the SVG in a text editor: a real vector consists of `<path>` shapes; a single `<image>` tag is raster masquerading as SVG.
-2. **Is the version current?** Brands redesign, and old versions of marks live for years in footers, stale landing pages and subdomains. Compare your find against the brand's homepage or fresh social profiles.
-3. **Is it the full version?** Headers often carry a truncated variant (mark only, or a small-size simplification). Decks usually need the full logo — the press kit has it.
+**PDF.** A deck, a proposal or an annual report stores the logo as curves. Open the PDF in [Illustrator](../../logos/design/illustrator/) or Inkscape, select the mark and copy it as an ordinary group of shapes. It comes out raster only when it was placed into the layout as an image.
 
-## Typical tasks and the best route for each
+**Decks and documents.** PPTX and DOCX files are built as zip archives. Change the extension to `.zip`, unpack it and look into `ppt/media` or `word/media`: the embedded images sit there in their original form, SVG included.
 
-| Task | Optimal route |
+**A mobile app.** An APK unpacks the same way, and the icons live in `res/drawable` — a set of PNGs for different screen densities plus vector XML, which a converter turns into SVG.
+
+**Browser extensions.** Plugins like SVG Export and SVG Grabber collect every vector on the page into one list: faster than walking DevTools by hand when you need a dozen icons off one page. You still have to vet the haul, since the extension also pulls interface glyphs.
+
+## Four checks on the downloaded file
+
+The loot is in hand, but before it goes into a layout it's worth checking four things:
+
+1. **Vector or wrapper.** Open the SVG in a text editor: a real vector consists of `<path>` and shapes; a single `<image>` tag gives away a raster masquerading as SVG.
+2. **Currency.** Brands go through redesigns, while footers, old landing pages and subdomains keep previous versions of the mark alive for years. Compare the file against the brand's homepage or recent social accounts.
+3. **Completeness.** The header often carries a trimmed variant — the mark alone, without text. A deck usually needs the full logo, and that lives in the press kit.
+4. **Canvas and padding.** An SVG pulled out of markup often carries a generous viewBox: the mark sits in the corner of a large transparent rectangle and aligns crookedly in a layout. Open the file in [Figma](../../logos/design/figma/) — if the selection box is visibly larger than the shape, crop the canvas to the content.
+
+## Which path fits which task
+
+| Task | Best path |
 | --- | --- |
-| One known brand for a slide | catalog: SVG in 10 seconds |
-| A "trusted by" grid of 10 logos | catalog: uniform quality and style |
+| One well-known brand for a slide | catalog: SVG in 10 seconds |
+| A "trusted by" grid of 10 logos | catalog: consistent quality and style |
 | A little-known local company's logo | DevTools on their site |
-| A logo for high-quality print | press kit (vector + rules live there) |
+| A logo for high-quality print | press kit (vector plus the rules) |
 | A logo out of a PDF deck | open the PDF in [Illustrator](../../logos/design/illustrator/)/Inkscape and extract the vector |
-| An old logo no longer on the site | web.archive.org + DevTools |
+| An old logo that's no longer on the site | web archive (web.archive.org) + DevTools |
 
-The last row is the underrated trick: the Wayback Machine stores old site versions together with their logo files — a lifesaver when you need a historical variant of a mark.
+That last row saves the day more often than you'd think: the Wayback Machine keeps old site versions along with their logo files, and it's the only way to retrieve a historical mark after a rebrand. Check the inner pages in the archive too: snapshots of press sections are saved along with their files, and the older logo version usually turns up there.
+
+## Is any of this legal
+
+Downloading breaks no law — the questions concern how you use the file. The general principle: showing a logo to point at the brand itself (in an article, a deck, a list of integrations, payment methods) is fine; passing it off as your own, implying a partnership that doesn't exist, or printing it on merchandise you sell is not. A detailed breakdown with case law and a situation table is in [can you use someone else's logo](../mozhno-li-ispolzovat-chuzhoy-logotip/).
+
+:::warning Leave the mark undistorted
+Wherever you place someone else's logo, keep its proportions, colors and boundaries intact: a stretched or recolored mark violates the brand guideline and looks unprofessional. Distortion rules are covered in the article [on brand books](../chto-takoe-brendbuk/).
+:::
 
 ## In short
 
-The screenshot is the last resort, not the first. Catalog or press kit first (official SVG in seconds), DevTools second (extracts a logo from any site), raster compromises last. Place the vector undistorted — and it'll be both pretty and legal.
+The screenshot comes last because a vector almost always already exists: the site loaded it to show you, and the brand often published an official copy separately. So the order of operations runs opposite to instinct — catalog or press kit first, then DevTools, and only then raster compromises. Check the file you get for authenticity, currency and completeness, and place it in your layout undistorted.
 
-Save yourself the DevTools trip: in our [logo catalog](../../logos/) any major brand's logo downloads as SVG or PNG in one click — or copies as code straight into [Figma](../../logos/design/figma/).
+Save yourself the DevTools: in our [logo catalog](../../logos/) any major brand's mark downloads as SVG and PNG in one click — or copies as code straight into [Figma](../../logos/design/figma/).

@@ -23,7 +23,7 @@ Bento‑сетка — это способ раскладки, при кот�
 
 ## Откуда пришёл тренд
 
-Модульные сетки в дизайне существуют давно, но именно «бенто» в его нынешнем виде популяризировали презентации крупных технологических брендов — прежде всего [Apple](../../logos/store/apple/) на своих продуктовых событиях. Оттуда стиль разошёлся по лендингам, дашбордам и портфолио. К 2026 году bento‑сетка стала одним из самых узнаваемых приёмов раскладки.
+Модульные сетки в дизайне существуют давно, но именно «бенто» в его нынешнем виде популяризировали презентации крупных технологических брендов — прежде всего [Apple](../../logos/tech/apple/) на своих продуктовых событиях. Оттуда стиль разошёлся по лендингам, дашбордам и портфолио. К 2026 году bento‑сетка стала одним из самых узнаваемых приёмов раскладки.
 
 ## Почему bento стала стандартом 2026
 
@@ -81,7 +81,7 @@ The key idea: each cell is an independent, complete block. One large tile can ca
 
 ## Where the trend came from
 
-Modular grids have existed in design for a long time, but "bento" in its current form was popularized by the presentations of major tech brands — above all [Apple](../../logos/store/apple/) at its product events. From there the style spread to landing pages, dashboards, and portfolios. By 2026 the bento grid became one of the most recognizable layout techniques.
+Modular grids have existed in design for a long time, but "bento" in its current form was popularized by the presentations of major tech brands — above all [Apple](../../logos/tech/apple/) at its product events. From there the style spread to landing pages, dashboards, and portfolios. By 2026 the bento grid became one of the most recognizable layout techniques.
 
 ## Why bento became a 2026 standard
 

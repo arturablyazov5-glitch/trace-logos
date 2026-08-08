@@ -23,6 +23,8 @@ export const DICT = {
   copied:         'Copied!',
   downloadSvg:    'Download SVG',
   downloadPng:    'Download PNG',
+  downloadIco:    'Download ICO',
+  downloadIcns:   'Download ICNS',
   dlMore:         'Download other formats',
   dlZipAll:       'Download all (ZIP)',
   dlIco:          'ICO',
@@ -58,11 +60,6 @@ export const DICT = {
   'toast.imageLoadError': 'Failed to load image',
   'toast.catalogEnd':     'That\'s the whole catalog!',
 
-  // ── Achievements ─────────────────────────────────────────
-  achievementKicker:      'Achievement unlocked',
-  achievementHunterTitle: 'Logo Hunter',
-  achievementHunterDesc:  '20 cards opened this session',
-
   // ── Static UI ────────────────────────────────────────────
   searchPlaceholder:      'Search logos...',
   searchGo:               'Search',
@@ -92,6 +89,8 @@ export const DICT = {
   detailPage:             'Page',
   detailBrandRules:       'Brand usage guidelines',
   detailPageLink:         'More about this logo',
+  logoDescExpand:         'Read more',
+  logoDescCollapse:       'Show less',
   tabColor:               'Color',
   tabDark:                'Dark',
   tabLight:               'Light',
@@ -283,6 +282,9 @@ export const DICT = {
   'footerColl_cloud-storage':     'Cloud storage',
   'footerColl_music-streaming':   'Music streaming',
   'footerColl_video-streaming':   'Video streaming',
+  'footerColl_design-tools':      'Design tools',
+  'footerColl_education':         'Education platforms',
+  'footerColl_health-fitness':    'Health & fitness',
   // COLLECTIONS:END
   // TOOLS:START
   'footerTool_compress-webp':   'Compress image',
@@ -291,6 +293,11 @@ export const DICT = {
   'footerTool_edit-image':      'Crop & rotate photo',
   'footerTool_ios-call-screen': 'iOS call screen',
   // TOOLS:END
+
+  // Chrome extension (tools/extensions/reviews-exporter/), not a
+  // tools/<slug>/ page — outside tools.json/build-home-tools.js,
+  // hand-edited like footerFigmaPlugin.
+  footerToolReviewsExporter: 'Reviews Exporter',
 
   // H1 inside .ssr-grid on /logos/ and /emoji/ — crawler-only block, main.js
   // removes it on init. The catalog is JS-rendered, so without this the pages
@@ -388,9 +395,12 @@ export const DICT = {
   'sitemapCat_flag':      'Flags',
   'sitemapCat_games':     'Games',
   'sitemapCat_b2b':       'B2B & Enterprise',
+  'sitemapCat_game-platforms': 'Game Platforms',
+  'sitemapCat_tech':      'Tech & Gadgets',
   'sitemapCat_city':      'Cities',
   'sitemapCat_developers':'Developers & Real Estate',
   'sitemapCat_gas-stations': 'Gas Stations',
+  'sitemapCat_bookmakers': 'Bookmakers & Lotteries',
   // sitemap emoji category labels
   'sitemapEmoji_smileys':    'Smileys',
   'sitemapEmoji_people':     'People',

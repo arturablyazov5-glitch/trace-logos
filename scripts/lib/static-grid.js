@@ -34,19 +34,20 @@ function esc(str) {
     .replace(/>/g, '&gt;');
 }
 
-// Mirrors js/utils.js svgUrl()/previewUrl(): PNG logos use the lightweight
-// WebP preview when it exists, SVG logos load the SVG directly.
+// Mirrors js/utils.js svgUrl()/previewUrl(): every PNG or SVG logo uses its
+// lightweight WebP preview (build-webp-previews.js) when one exists, falling
+// back to the full asset otherwise (e.g. the preview hasn't been built yet).
 function imgSrc(file, assetBase) {
   const v = ASSET_VERSION ? `?v=${ASSET_VERSION}` : '';
   if (file.startsWith('/')) return `${file}${v}`;
-  if (file.endsWith('.png')) {
-    const webp = file.replace(/\.png$/, '.webp');
+  const ext = file.endsWith('.png') ? 'png' : file.endsWith('.svg') ? 'svg' : null;
+  if (ext) {
+    const webp = file.replace(new RegExp(`\\.${ext}$`), '.webp');
     if (fs.existsSync(path.join(ROOT, 'assets', 'logos', 'previews', webp))) {
       return `${assetBase}assets/logos/previews/${webp}${v}`;
     }
-    return `${assetBase}assets/logos/pngs/${file}${v}`;
   }
-  return `${assetBase}assets/logos/svgs/${file}${v}`;
+  return `${assetBase}assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}${v}`;
 }
 
 function card(item, { assetBase, hrefFor, lang }) {

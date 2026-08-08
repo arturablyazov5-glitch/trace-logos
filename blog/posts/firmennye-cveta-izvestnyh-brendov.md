@@ -9,7 +9,7 @@ tags: Цвета, Бренды, Дизайн
 tags_en: Colors, Brands, Design
 ---
 
-Жёлтый Яндекса, зелёный [Сбера](../../logos/bank/sber/), синий [VK](../../logos/social/vk/) — эти цвета мы узнаём раньше, чем успеваем прочитать название. Это не случайность: мозг считывает цвет быстрее формы и текста, и бренды это знают — потому и тратят миллионы, чтобы закрепить за собой оттенок и прописать его с точностью до кода. А потом дизайнер ставит кнопку «оплатить через СБП» в «примерно таком» фиолетовом — и глаз спотыкается, хотя вроде бы всё на месте. Спотыкается ровно потому, что фирменный цвет работает активом с точным номером, и мимо него нельзя попадать «на глазок».
+Жёлтый Яндекса, зелёный [Сбера](../../logos/bank/sber/), синий [VK](../../logos/social/vk/) — эти цвета мы узнаём раньше, чем успеваем прочитать название. Это не случайность: мозг считывает цвет быстрее формы и текста, и бренды это знают — потому и тратят миллионы, чтобы закрепить за собой оттенок и прописать его с точностью до кода. А потом дизайнер ставит кнопку «оплатить через СБП» в «примерно таком» фиолетовом, и глаз спотыкается, хотя вроде бы всё на месте. Спотыкается ровно потому, что фирменный цвет работает активом с точным номером, и мимо него нельзя попадать «на глазок».
 
 :::note Коротко
 У каждого крупного бренда цвет зафиксирован в брендбуке точным HEX‑кодом. «Похожий» оттенок — плохая идея сразу по двум причинам: падает узнаваемость и рушится юридическая защита цвета. Точные коды берут из официальных гайдлайнов или прямо из SVG‑логотипа, но никогда — пипеткой по картинке из поиска.
@@ -28,20 +28,20 @@ tags_en: Colors, Brands, Design
 | [Ozon](../../logos/market/ozon/) | синий | #005BFF |
 | [Wildberries](../../logos/market/wildberries/) | фиолетовый | #CB11AB |
 | [Авито](../../logos/market/avito/) | зелёный/синий | #97CF26 / #00AAFF |
-| [МТС](../../logos/bank/mts/) | красный | #E30 611 |
+| [МТС](../../logos/bank/mts/) | красный | #E30611 |
 
 ## Цвета мировых брендов
 
 | Бренд | Цвет | HEX |
 | --- | --- | --- |
 | [Google](../../logos/search/google/) | синий | #4285F4 (+ #EA4335, #FBBC05, #34A853) |
-| [Apple](../../logos/store/apple/) | графитовый | #000000 / #A2AAAD |
+| [Apple](../../logos/tech/apple/) | графитовый | #000000 / #A2AAAD |
 | [Meta](../../logos/social/meta/) | синий | #0866FF |
 | [YouTube](../../logos/media/youtube/) | красный | #FF0000 |
 | [Telegram](../../logos/social/telegram/) | голубой | #229ED9 |
 | [WhatsApp](../../logos/social/whatsapp/) | зелёный | #25D366 |
 | [Spotify](../../logos/media/spotify/) | зелёный | #1DB954 |
-| [Netflix](../../logos/media/netflix/) | красный | #E50 914 |
+| [Netflix](../../logos/media/netflix/) | красный | #E50914 |
 
 :::warning Оттенки меняются с редизайнами
 Эти коды — снимок на сегодня, и константой они не остаются. Бренды обновляют палитры: «синий [VK](../../logos/social/vk/)» до и после ребрендинга 2021 года — разные цвета, у [Meta](../../logos/social/meta/) синий тоже уточнялся. Делаете что‑то официальное — сверяйтесь с актуальным гайдлайном бренда: статья пятилетней давности тут подведёт.
@@ -51,13 +51,13 @@ tags_en: Colors, Brands, Design
 
 Раз коды перед глазами, возникает вопрос: а так ли важна точность, если оттенок почти совпал? Важна, и вот три причины, каждая из которых превращает «почти» в реальную потерю.
 
-Первая — **узнаваемость**. Она держится именно на точности попадания: мгновенное «о, это [Сбер](../../logos/bank/sber/)» срабатывает до того, как прочитано название, только если зелёный тот самый. Чуть сдвинули оттенок — и узнавание замедлилось, а вместе с ним пропал весь смысл, ради которого бренд этот цвет и закреплял.
+Первая — **узнаваемость**. Она держится именно на точности попадания: мгновенное «о, это [Сбер](../../logos/bank/sber/)» срабатывает до того, как прочитано название, только если зелёный тот самый. Чуть сдвинули оттенок, и узнавание замедлилось, а вместе с ним пропал весь смысл, ради которого бренд этот цвет и закреплял.
 
 Вторая причина серьёзнее узнаваемости: **юридическая защита**. Цвет может быть частью товарного знака, и тогда «примерно такой» оттенок превращается в правовую проблему. [Сбер](../../logos/bank/sber/) регистрировал свой зелёный, [Т‑Банк](../../logos/bank/tbank/) — жёлтый именно затем, чтобы конкурент не смог мимикрировать под них цветом. Использовать чужой фирменный оттенок в своём знаке в той же категории — прямой риск; где проходит граница дозволенного, разбирали в статье [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 
 И третья — **консистентность**. Когда у компании сотни точек контакта — сайт, приложение, реклама, вывески, — только точный код гарантирует, что зелёный на билборде и зелёный в приложении — один и тот же. Стоит пустить цвет «на глаз» хотя бы на одном носителе, и система начинает расползаться.
 
-Все три причины ведут к одному практическому выводу: цвет нельзя подбирать — его нужно брать из достоверного источника.
+Все три причины ведут к одному практическому выводу: цвет нельзя подбирать, его нужно брать из достоверного источника. Причём взять один раз мало: код стоит записать туда, откуда его возьмёт следующий исполнитель, будь то гайдлайн, переменная в дизайн‑системе или хотя бы закреплённое сообщение в рабочем чате.
 
 ## Где брать официальный цвет любого бренда
 
@@ -65,12 +65,12 @@ tags_en: Colors, Brands, Design
 
 1. **Гайдлайны бренда.** Ищите «brand guidelines» плюс название. У [Google](../../logos/search/google/), [Telegram](../../logos/social/telegram/), [Spotify](../../logos/media/spotify/) — публичные страницы с точными кодами и правилами использования. Это первоисточник, доверие максимальное.
 2. **SVG‑логотип.** Если гайдлайна нет, цвет записан прямо в коде файла атрибутом `fill` — источник без искажений: перед вами сам оригинал, а копии и пересъёмки в дело не идут. Как прочитать код из файла, разбирали в статье [как узнать цвет логотипа](../kak-uznat-cvet-logotipa/).
-3. **Пресс‑киты.** У большинства компаний есть страница «для прессы» с логотипами и цветами — запасной, но надёжный вариант.
+3. **Пресс‑киты.** У большинства компаний есть страница «для прессы» с логотипами и цветами: запасной, но надёжный вариант. Заодно там обычно лежит дата последнего обновления пакета, по которой видно, насколько свежие файлы вы забираете.
 
-А есть ровно один способ, который выглядит самым простым и потому самым соблазнительным, — и именно он даёт неверный результат.
+А есть ровно один способ, который выглядит самым простым и потому самым соблазнительным. Именно он и даёт неверный результат.
 
 :::danger Как делать не надо
-Пипетка по логотипу из выдачи картинок. Там лежат JPG с артефактами сжатия, перекодированные копии и просто фейки. Снимете #20A23C вместо #21A038 — вроде близко, а рядом с настоящим смотрится грязно. Пипетка честна ровно настолько, насколько честен файл под ней, — а файл из поиска почти всегда искажён.
+Пипетка по логотипу из выдачи картинок. Там лежат JPG с артефактами сжатия, перекодированные копии и просто фейки. Снимете #20A23C вместо #21A038 — вроде близко, а рядом с настоящим смотрится грязно. Пипетка честна ровно настолько, насколько честен файл под ней, а файл из поиска почти всегда искажён.
 :::
 
 ## Как использовать чужие цвета законно
@@ -84,6 +84,14 @@ tags_en: Colors, Brands, Design
 Да, и такие регистрации давно перестали быть экзотикой. Цвет (точнее, цветовое обозначение) регистрируется как товарный знак, если доказана его различительная способность: потребители устойчиво связывают оттенок именно с этим брендом. Мировая классика — фиолетовый Milka, бирюзовый Tiffany, красная подошва Louboutin. В России зарегистрированы, например, зелёный [Сбербанка](../../logos/bank/sber/) и жёлтый [Т‑Банка](../../logos/bank/tbank/); именно поэтому «жёлтый банк» в рекламе конкурента звучит юридическим риском.
 
 Но у этой защиты есть жёсткая граница, и она снимает половину страхов: охрана действует **только в конкретной товарной категории**. Зелёный сам по себе не принадлежит никому — принадлежит зелёный в банковских услугах. Флорист может спокойно быть зелёным, новый банк — уже нет. И порог доказательств высокий: цвет регистрируют единицы брендов с многолетней историей и опросами узнаваемости — молодой компании такой знак попросту не дадут.
+
+## Почему одного HEX мало
+
+Точный код закрывает экран, но у фирменного цвета обычно четыре записи, и путать их дорого. HEX и RGB описывают свечение пикселя, поэтому живут в вебе и приложениях. CMYK описывает смешение четырёх красок на бумаге. Pantone задаёт готовую краску по номеру из каталога.
+
+Разница возникает из физики: экран светится, бумага отражает. Часть экранных оттенков типография физически повторить не может, особенно яркие синие и зелёные, поэтому механический перевод HEX в CMYK даёт заметно более тусклый результат. Именно на этом шаге фирменный зелёный превращается в болотный на визитках, хотя в макете всё выглядело правильно.
+
+Отсюда практика зрелых брендов: в гайдлайне сразу прописаны все четыре значения, подобранные вручную под каждую среду, вместо пересчёта конвертером. Если вы собираете палитру для своего бренда, попросите у дизайнера именно такой набор, и печать перестанет удивлять.
 
 ## Тёмная тема: у цвета появилась вторая версия
 
@@ -101,13 +109,13 @@ tags_en: Colors, Brands, Design
 
 ## Что запомнить
 
-Фирменный цвет — такой же актив бренда, как логотип, и у него всегда есть точный код, потому что на этой точности держатся и узнаваемость, и правовая защита, и консистентность. Отсюда единственное правило: цвет берут из первоисточника — гайдлайна или SVG, — а не подбирают на глаз и не снимают пипеткой с картинки из поиска.
+Фирменный цвет — такой же актив бренда, как логотип, и у него всегда есть точный код, потому что на этой точности держатся и узнаваемость, и правовая защита, и консистентность. Отсюда единственное правило: цвет берут из первоисточника, гайдлайна или SVG. Подбор на глаз и пипетка по картинке из поиска дают промах.
 
 В нашем [каталоге логотипов](../../logos/) у каждого бренда есть блок «Цвета бренда»: официальные HEX‑коды извлечены из оригинального SVG и копируются одним кликом — быстрее, чем искать брендбук.
 
 ---EN---
 
-Yandex yellow, [Sber](../../logos/bank/sber/) green, [VK](../../logos/social/vk/) blue — we recognize these colors before we manage to read the name. That's no accident: the brain reads color faster than shape and text, and brands know it — which is why they spend millions to claim a shade and pin it down to the exact code. Then a designer makes a "pay via SBP" button in a "roughly this" purple, and the eye stumbles, though everything seems in place. It stumbles precisely because a brand color isn't decoration but an asset with an exact number, and you can't hit it "by eye."
+Yandex yellow, [Sber](../../logos/bank/sber/) green, [VK](../../logos/social/vk/) blue — we recognize these colors before we manage to read the name. That's no accident: the brain reads color faster than shape and text, and brands know it — which is why they spend millions to claim a shade and pin it down to the exact code. Then a designer makes a "pay via SBP" button in a "roughly this" purple, and the eye stumbles, though everything seems in place. It stumbles precisely because a brand color works as an asset with an exact number, and you can't hit it "by eye."
 
 :::note TL;DR
 Every major brand has its color fixed in the brand book with an exact HEX code. A "similar" shade is a bad idea for two reasons at once: recognition drops and the color's legal protection collapses. Exact codes come from official guidelines or straight from the SVG logo — never from an eyedropper on a search-result image.
@@ -133,7 +141,7 @@ Let's start with ready codes — then explain where they come from and why you c
 | Brand | Color | HEX |
 | --- | --- | --- |
 | [Google](../../logos/search/google/) | blue | #4285F4 (+ #EA4335, #FBBC05, #34A853) |
-| [Apple](../../logos/store/apple/) | graphite | #000000 / #A2AAAD |
+| [Apple](../../logos/tech/apple/) | graphite | #000000 / #A2AAAD |
 | [Meta](../../logos/social/meta/) | blue | #0866FF |
 | [YouTube](../../logos/media/youtube/) | red | #FF0000 |
 | [Telegram](../../logos/social/telegram/) | light blue | #229ED9 |
@@ -155,7 +163,7 @@ The second reason is graver than recognition: **legal protection**. A color can 
 
 And the third is **consistency**. When a company has hundreds of touchpoints — site, app, ads, signage — only an exact code guarantees the green on a billboard and the green in the app are one and the same. Let the color go "by eye" on even one carrier, and the system starts to fray.
 
-All three lead to one practical conclusion: color shouldn't be picked — it should be taken from a reliable source.
+All three lead to one practical conclusion: color shouldn't be picked, it should be taken from a reliable source. And taking it once isn't enough: write the code where the next person will find it, whether that's the guideline, a design-system variable or at least a pinned message in the team chat.
 
 ## Where to get any brand's official color
 
@@ -163,7 +171,7 @@ There are essentially three sources, ordered by descending reliability:
 
 1. **Brand guidelines.** Search "brand guidelines" plus the name. [Google](../../logos/search/google/), [Telegram](../../logos/social/telegram/), [Spotify](../../logos/media/spotify/) have public pages with exact codes and usage rules. This is the primary source, maximum trust.
 2. **The SVG logo.** If there's no guideline, the color is written right in the file's code as a `fill` attribute — a source without distortion: this is the original itself, while copies and re-shoots don't count. How to read the code from a file is covered in [how to find a logo's color](../kak-uznat-cvet-logotipa/).
-3. **Press kits.** Most companies have a "for press" page with logos and colors — a backup but reliable option.
+3. **Press kits.** Most companies have a "for press" page with logos and colors: a backup but reliable option. It usually carries the date the pack was last refreshed, which tells you how current the files you're taking are.
 
 And there's exactly one method that looks simplest and therefore most tempting — and it's the one that gives the wrong result.
 
@@ -182,6 +190,14 @@ Since we've mentioned that a color can be "taken," it's worth understanding how 
 Yes, and such registrations stopped being exotica long ago. A color (more precisely, a color designation) is registered as a trademark if its distinctiveness is proven: consumers reliably tie the shade to that specific brand. The global classics — Milka purple, Tiffany blue, Louboutin's red sole. In Russia, [Sberbank](../../logos/bank/sber/) green and [T-Bank](../../logos/bank/tbank/) yellow are registered; that's why "the yellow bank" in a competitor's ad reads as a legal risk.
 
 But this protection has a hard boundary that removes half the fears: it applies **only within a specific product category**. Green as such belongs to no one — green in banking services does. A florist can freely be green; a new bank cannot. And the bar of proof is high: color is registered by a handful of brands with years of history and recognition surveys — a young company simply won't be granted such a mark.
+
+## Why one HEX isn't enough
+
+An exact code covers the screen, but a brand color usually has four records, and mixing them up is expensive. HEX and RGB describe a pixel's glow, so they live on the web and in apps. CMYK describes the mixture of four inks on paper. Pantone names a ready-made ink by catalog number.
+
+The difference comes from physics: a screen emits light, paper reflects it. Some on-screen shades are physically beyond a print shop's reach, especially vivid blues and greens, so a mechanical HEX-to-CMYK conversion comes out noticeably duller. That's the step where a brand green turns swampy on business cards while the layout looked perfectly fine.
+
+Hence the practice of mature brands: the guideline lists all four values, hand-picked for each medium instead of run through a converter. If you're assembling a palette for your own brand, ask the designer for exactly that set, and printing will stop surprising you.
 
 ## Dark mode: a color now has a second version
 

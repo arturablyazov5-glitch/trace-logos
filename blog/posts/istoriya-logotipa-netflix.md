@@ -15,19 +15,19 @@ tags_en: Logo Histories, Branding, Media
 **1997** — фиолетово‑белый знак с кинолентой для DVD‑проката; **2000‑е** — красный текстовый логотип в «кинотеатральном» стиле; **2014** — плоское слово с фирменной аркой; **2016** — компактная **«N» из сложенной ленты** для иконок; **2015+** — звуковой логотип «та‑дам» и анимированная заставка. Файлы — на [странице бренда](../../logos/media/netflix/).
 :::
 
-##1997‑2000: кинолента эпохи DVD
+## 1997‑2000: кинолента эпохи DVD
 
 Первый знак Netflix — название с кинолентой в фиолетовой гамме: буквальная иллюстрация бизнеса «фильмы по почте». Как у большинства стартапов 90‑х, логотип был утилитарным и не претендовал на вечность — и правильно: бизнес‑модель сменилась дважды, прежде чем знак устоялся — [ранним брендам «вечный» логотип и не нужен](../kak-sdelat-logotip-samomu/).
 
-##2000‑е: красный кинотеатральный
+## 2000‑е: красный кинотеатральный
 
 С ростом сервиса появился знак, который помнят подписчики DVD‑эпохи: объёмные белые буквы с тенью на красной плашке‑дуге, стилизованные под вывеску кинотеатра. Красный закрепился как цвет бренда — и это оказалось стратегическим активом: на чёрном фоне интерфейса стриминга красный горит ярче всего — та же логика, что и в том, [как стриминги делят между собой цвета](../logotipy-strimingovyh-servisov/).
 
-##2014: плоское слово и арка
+## 2014: плоское слово и арка
 
 Переход к стримингу потребовал знак для экранов, а не вывесок: в 2014‑м логотип уплостили до красного слова с характерной **аркой** — буквы стоят на невидимой дуге, как титры на экране кинотеатра, слегка «обнимая» зрителя. Тень и объём ушли по общим законам эпохи — [почему все тогда уплощались](../pochemu-brendy-uproshchayut-logotipy/), мы разбирали отдельно.
 
-##2016: буква N из ленты
+## 2016: буква N из ленты
 
 Иконка приложения потребовала компактной версии — и Netflix собрал «N» из красной ленты, уходящей в тень: диагональ ленты намекает и на киноплёнку, и на луч проектора. Знак живёт на чёрном квадрате — смелое решение для эпохи белых иконок, которое сделало приложение мгновенно находимым на экране вопреки всем [законам иконок приложений](../ikonka-prilozheniya/). Пара «полное слово + N» — классическая система версий, и [зачем вообще нужны такие версии](../vidy-logotipov/), мы объясняли отдельно.
 
@@ -63,7 +63,7 @@ Netflix первым понял, что у цифрового бренда е�
 **1997** — a purple-and-white mark with a film strip for DVD rental; **2000s** — the red theater-marquee wordmark; **2014** — the flat word with the signature arc; **2016** — the compact **ribbon "N"** for icons; **2015+** — the "ta-dum" sonic logo and the animated ident. Files are on the [brand page](../../logos/media/netflix/).
 :::
 
-##1997-2000: the DVD-era film strip
+## 1997-2000: the DVD-era film strip
 
 Netflix's first mark was the name with a film strip in purple: a literal illustration of the "movies by mail" business. Like most 90s startups, the logo was utilitarian with no claim to eternity — rightly so: the business model changed twice before the mark settled — [early brands don't need a "forever" logo](../kak-sdelat-logotip-samomu/) anyway.
 
@@ -71,11 +71,11 @@ Netflix's first mark was the name with a film strip in purple: a literal illustr
 
 With growth came the mark DVD-era subscribers remember: dimensional white letters with a shadow on a red arced badge, styled like a cinema marquee. Red locked in as the brand color — a strategic asset, as it turned out: on a streaming interface's black background red burns brightest — the same logic behind [how streaming services divide up colors](../logotipy-strimingovyh-servisov/).
 
-##2014: the flat word and the arc
+## 2014: the flat word and the arc
 
 The streaming pivot demanded a mark for screens, not marquees: in 2014 the logo flattened into a red word with the signature **arc** — the letters stand on an invisible curve, like titles on a theater screen, slightly "hugging" the viewer. Shadow and volume left by the era's general laws — we cover [why everyone went flat](../pochemu-brendy-uproshchayut-logotipy/) separately.
 
-##2016: the ribbon N
+## 2016: the ribbon N
 
 The app icon demanded a compact version — and Netflix folded an "N" from a red ribbon receding into shadow: the diagonal hints at both film stock and a projector beam. The mark lives on a black square — a bold call in the era of white icons that made the app instantly findable on screen against every one of [the laws of app icons](../ikonka-prilozheniya/). The "full word + N" pair is the classic version system — [why versions exist](../vidy-logotipov/) at all is worth its own explanation.
 

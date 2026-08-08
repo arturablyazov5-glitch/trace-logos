@@ -171,8 +171,10 @@ function fixNumbers(text) {
     return `${prev}${NBSP}=${NBSP}`;
   });
   out = out.replace(/(\S)[^\S\n]*÷[^\S\n]*(?=\S)/g, `$1${NBSP}÷${NBSP}`);
-  out = out.replace(/\d{1,3}(?: \d{3})+/g, (m) => m.replace(/ /g, NBSP));
-  out = out.replace(/\d{5,}/g, (m) => (m[0] === '0' ? m : m.replace(/\B(?=(\d{3})+(?!\d))/g, NBSP)));
+  // Негативный lookbehind на «#» + hex-символы: иначе цифры внутри цветового кода
+  // читаются как число и разбиваются разрядом (#E30611 → «#E30 611»).
+  out = out.replace(/(?<!#[0-9A-Fa-f]{0,5})\d{1,3}(?: \d{3})+/g, (m) => m.replace(/ /g, NBSP));
+  out = out.replace(/(?<!#[0-9A-Fa-f]{0,5})\d{5,}/g, (m) => (m[0] === '0' ? m : m.replace(/\B(?=(\d{3})+(?!\d))/g, NBSP)));
   return out;
 }
 

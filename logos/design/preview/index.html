@@ -13,8 +13,7 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script src="/components/cookie-consent.js?v=20260801" defer></script>
+  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -120,7 +119,10 @@
       "name": "Preview",
       "logo": {
         "@id": "https://trace-logos.ru/logos/design/preview/#logo"
-      }
+      },
+      "sameAs": [
+        "https://support.apple.com"
+      ]
     },
     {
       "@type": "Organization",
@@ -235,7 +237,7 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../../css/seo-page.bundle.css?v=20260801">
+  <link rel="stylesheet" href="../../../css/seo-page.bundle.css?v=20260808">
   
   
   <!-- Yandex.RTB -->
@@ -304,15 +306,15 @@
     </div>
   </div>
 </nav>
-<script src="../../../components/lang-switcher.js?v=20260801" defer></script>
-<script src="../../../components/search-box.js?v=20260801" defer></script>
-<script src="../../../components/mobile-nav.js?v=20260801" defer></script>
+<script src="../../../components/lang-switcher.min.js?v=20260808" defer></script>
+<script src="../../../components/search-box.min.js?v=20260808" defer></script>
+<script src="../../../components/mobile-nav.min.js?v=20260808" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../../js/i18n-dict-ru.js?v=20260801">
-<script type="module" src="../../../components/donate-ticker.js?v=20260801"></script>
-<script type="module" src="../../../js/header-search.js?v=20260801"></script>
+<link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260808">
+<script type="module" src="../../../components/donate-ticker.min.js?v=20260808"></script>
+<script type="module" src="../../../js/header-search.min.js?v=20260808"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -361,34 +363,30 @@
         </button>
       </div>
 
-    <!-- ── Sponsor banner (data-driven, заменяет Threads-баннер если задан) ── -->
-
-
     <!-- ── Sidebar ad (десктоп: рядом с превью · мобилка: в конце) ── -->
-    <!-- RSYA sidebar banner — replaces templates/partials/_archived/threads-banner.html
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot, same width.
-     Height is hard-capped (css/seo-page.css .ad-sidebar-slot) so the ad can't
-     push the rest of the sidebar down. -->
-<div class="ad-sidebar-slot" id="ad-sidebar-slot-R-A-19679616-2">
-  <!-- Yandex.RTB R-A-19679616-2 -->
-  <div id="yandex_rtb_R-A-19679616-2"></div>
-  <script>
-  (() => {
-    const slotEl = document.getElementById('ad-sidebar-slot-R-A-19679616-2');
-    const adEl = document.getElementById('yandex_rtb_R-A-19679616-2');
-    const collapseTimer = setTimeout(() => {
-      if (adEl && !adEl.querySelector('iframe')) slotEl.classList.add('ad-collapsed');
-    }, 3000);
-    window.yaContextCb.push(() => {
-        Ya.Context.AdvManager.render({
-            "blockId": "R-A-19679616-2",
-            "renderTo": "yandex_rtb_R-A-19679616-2",
-            "onRender": () => clearTimeout(collapseTimer)
-        })
-    })
-  })();
-  </script>
+    <!-- Sidebar promo banner — house ad for landologovo.ru.
+     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
+     same width. Previously an RSYA ad unit, before that the Threads banner
+     (see templates/partials/_archived/threads-banner.html).
+     Styles: css/seo-page.css → «Sidebar promo banner».
+     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
+<div class="ad-sidebar-slot">
+  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
+    <span class="promo-banner-src">
+      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
+    </span>
+    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
+    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
+    <span class="promo-banner-cta">
+      Читать статью
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
+    </span>
+    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
+  </a>
 </div>
+
+
+    <!-- ── Sponsor banner (data-driven, заменяет Threads-баннер если задан) ── -->
 
     <support-btn></support-btn>
 
@@ -398,7 +396,18 @@
     <div class="logo-info">
 
       <h1 data-h1-en="Preview Logo">Логотип Preview</h1>
-      <p class="logo-desc">Preview — универсальное приложение macOS для просмотра и базового редактирования PDF и изображений. Умеет подписывать документы, обрезать фотографии, конвертировать форматы и добавлять аннотации без установки дополнительных программ.</p>
+      <p class="logo-desc" id="logo-desc">Preview — универсальное приложение macOS для просмотра и базового редактирования PDF и изображений. Умеет подписывать документы, обрезать фотографии, конвертировать форматы и добавлять аннотации без установки дополнительных программ. Базовое редактирование PDF также умеет <a href="/logos/design/adobeacrobat/">Adobe Acrobat</a>, но с куда большим набором функций.</p>
+      <!-- Мобилка: текст клэмпится до 2 строк CSS-ом (полный текст остаётся в HTML —
+           краулеры индексируют DOM, не видимую высоту, поэтому для SEO это безопасно),
+           кнопка раскрывает/сворачивает. Скрыта по умолчанию — js/seo-page.js сам решает,
+           нужна ли она (короткий about на 1-2 строки не клэмпится, кнопка не нужна). -->
+      <button type="button" class="logo-desc-toggle" id="logo-desc-toggle" data-i18n="logoDescExpand" aria-expanded="false" aria-controls="logo-desc" hidden>Подробнее</button>
+      <!-- Мобильная копия — на мобилке .logo-side схлопывается (display:contents) и
+           её дети реордерятся через order, из-за чего эта кнопка без order всплывала
+           в самое начало, ещё выше превью. Вместо order — отдельный инстанс сразу под
+           about-текстом, показывается только на мобилке; десктопная версия внутри
+           .logo-side ниже по файлу скрывается на этом брейкпоинте (см. seo-page.css). -->
+      <support-btn class="logo-desc-support"></support-btn>
 
       <hr class="divider">
 
@@ -418,6 +427,14 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             <span data-label="downloadPng">Скачать PNG</span> <span class="btn-size">42.8 KB</span>
           </a>
+          <button class="btn btn-secondary hidden" id="btn-download-ico" type="button">
+            <svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M15.49 6H6V15.492H15.492L15.49 6ZM26 6H16.508V15.492H26V6ZM15.49 16.508H6V26H15.492L15.49 16.508ZM26 16.508H16.508V26H26V16.508Z"/></svg>
+            <span data-label="downloadIco">Скачать ICO</span>
+          </button>
+          <button class="btn btn-secondary hidden" id="btn-download-icns" type="button">
+            <svg width="15" height="15" viewBox="0 0 32 32" fill="currentColor"><path d="M23.8457 11.5898C22.4743 12.4367 21.6274 13.8892 21.6274 15.503C21.6274 17.3178 22.7166 18.9715 24.3703 19.6572C24.0484 20.6909 23.5722 21.67 22.9577 22.5612C22.0709 23.8115 21.1429 25.103 19.7714 25.103C18.4 25.103 17.9966 24.2961 16.3829 24.2961C14.8103 24.2961 14.2457 25.143 12.9543 25.143C11.6629 25.143 10.776 23.9738 9.768 22.5212C8.43657 20.5041 7.67086 18.1647 7.63086 15.7041C7.63086 11.711 10.2114 9.57268 12.7931 9.57268C14.1646 9.57268 15.2937 10.4607 16.1417 10.4607C16.9474 10.4607 18.2389 9.53268 19.7714 9.53268C20.5678 9.51148 21.3569 9.68835 22.068 10.0474C22.7791 10.4064 23.39 10.9364 23.8457 11.5898ZM19.0457 7.83896C19.7314 7.03211 20.0937 6.0241 20.1349 4.97496C20.1349 4.85382 20.1349 4.69268 20.0937 4.57153C18.9223 4.69283 17.8409 5.25501 17.0686 6.1441C16.3829 6.91096 15.9794 7.87896 15.9394 8.9281C15.9394 9.04925 15.9394 9.17039 15.9794 9.29039C16.0606 9.29039 16.1817 9.33153 16.2629 9.33153C17.3509 9.25153 18.36 8.68582 19.0457 7.83896Z"/></svg>
+            <span data-label="downloadIcns">Скачать ICNS</span>
+          </button>
           <div class="btn-download-group" id="btn-download-all">
           <button class="btn btn-zip btn-download-trigger" id="btn-download-trigger" type="button">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
@@ -497,348 +514,348 @@
         <span class="section-label" data-eco-id="apple"><span data-i18n="detailEcosystem">Экосистема</span> <span class="eco-name">Apple</span></span>
         <div class="ecosystem-grid">
           <a class="ecosystem-card" href="../../../logos/social/applemessages/" aria-label="Messages">
-            <img src="../../../assets/logos/svgs/apple-Messages.svg" alt="Логотип Messages" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Messages.webp" alt="Логотип Messages" width="48" height="48">
             <span class="ecosystem-label">Messages</span>
           </a>
+          <a class="ecosystem-card" href="../../../logos/ai/siri/" aria-label="Siri">
+            <img src="../../../assets/logos/previews/apple/26/color/siri.webp" alt="Логотип Siri" width="48" height="48">
+            <span class="ecosystem-label">Siri</span>
+          </a>
           <a class="ecosystem-card" href="../../../logos/ai/imageplayground/" aria-label="Image Playground">
-            <img src="../../../assets/logos/pngs/apple/26/color/image-playground.png" alt="Логотип Image Playground" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/image-playground.webp" alt="Логотип Image Playground" width="48" height="48">
             <span class="ecosystem-label">Image Playground</span>
           </a>
           <div class="ecosystem-card soon" aria-label="Apple Intelligence (скоро)">
             <span class="ecosystem-soon-badge" data-i18n="comingSoon">Скоро</span>
-            <img src="../../../assets/logos/svgs/placeholder.svg" alt="Логотип Apple Intelligence" width="48" height="48">
+            <img src="../../../assets/logos/previews/placeholder.webp" alt="Логотип Apple Intelligence" width="48" height="48">
             <span class="ecosystem-label">Apple Intelligence</span>
           </div>
-          <a class="ecosystem-card" href="../../../logos/store/apple/" aria-label="Apple">
-            <img src="../../../assets/logos/svgs/apple.svg" alt="Логотип Apple" width="48" height="48">
-            <span class="ecosystem-label">Apple</span>
-          </a>
           <a class="ecosystem-card" href="../../../logos/store/appstore/" aria-label="App Store">
-            <img src="../../../assets/logos/svgs/apple-App Store.svg" alt="Логотип App Store" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-App Store.webp" alt="Логотип App Store" width="48" height="48">
             <span class="ecosystem-label">App Store</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/pay/applepay/" aria-label="Apple Pay">
-            <img src="../../../assets/logos/svgs/apple-pay.svg" alt="Логотип Apple Pay" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-pay.webp" alt="Логотип Apple Pay" width="48" height="48">
             <span class="ecosystem-label">Apple Pay</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/pay/applewallet/" aria-label="Apple Wallet">
-            <img src="../../../assets/logos/svgs/apple-Wallet.svg" alt="Логотип Apple Wallet" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Wallet.webp" alt="Логотип Apple Wallet" width="48" height="48">
             <span class="ecosystem-label">Apple Wallet</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/map/applemaps/" aria-label="Apple Maps">
-            <img src="../../../assets/logos/svgs/apple-Maps.svg" alt="Логотип Apple Maps" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Maps.webp" alt="Логотип Apple Maps" width="48" height="48">
             <span class="ecosystem-label">Apple Maps</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/map/findmy/" aria-label="Find My">
-            <img src="../../../assets/logos/pngs/apple/26/color/find-my.png" alt="Логотип Find My" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/find-my.webp" alt="Логотип Find My" width="48" height="48">
             <span class="ecosystem-label">Find My</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/appletv/" aria-label="Apple TV+">
-            <img src="../../../assets/logos/svgs/apple-tv.svg" alt="Логотип Apple TV+" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-tv.webp" alt="Логотип Apple TV+" width="48" height="48">
             <span class="ecosystem-label">Apple TV+</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/quicktime/" aria-label="QuickTime Player">
-            <img src="../../../assets/logos/pngs/apple/26/color/quicktime-player.png" alt="Логотип QuickTime Player" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/quicktime-player.webp" alt="Логотип QuickTime Player" width="48" height="48">
             <span class="ecosystem-label">QuickTime Player</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/finalcutpro/" aria-label="Final Cut Pro">
-            <img src="../../../assets/logos/pngs/apple/27/color/final-cut-pro.png" alt="Логотип Final Cut Pro" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/27/color/final-cut-pro.webp" alt="Логотип Final Cut Pro" width="48" height="48">
             <span class="ecosystem-label">Final Cut Pro</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/musicrecognition/" aria-label="Music Recognition">
-            <img src="../../../assets/logos/pngs/apple/26/color/musicrecognitionmac.png" alt="Логотип Music Recognition" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/musicrecognitionmac.webp" alt="Логотип Music Recognition" width="48" height="48">
             <span class="ecosystem-label">Music Recognition</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/applemusic/" aria-label="Apple Music">
-            <img src="../../../assets/logos/svgs/apple-Music.svg" alt="Логотип Apple Music" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Music.webp" alt="Логотип Apple Music" width="48" height="48">
             <span class="ecosystem-label">Apple Music</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/applenews/" aria-label="Apple News">
-            <img src="../../../assets/logos/svgs/apple-News.svg" alt="Логотип Apple News" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-News.webp" alt="Логотип Apple News" width="48" height="48">
             <span class="ecosystem-label">Apple News</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/audiomidi/" aria-label="Audio MIDI Setup">
-            <img src="../../../assets/logos/pngs/apple/26/color/audio-midi-setup.png" alt="Логотип Audio MIDI Setup" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/audio-midi-setup.webp" alt="Логотип Audio MIDI Setup" width="48" height="48">
             <span class="ecosystem-label">Audio MIDI Setup</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/applepodcasts/" aria-label="Apple Podcasts">
-            <img src="../../../assets/logos/svgs/apple-Podcasts.svg" alt="Логотип Apple Podcasts" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Podcasts.webp" alt="Логотип Apple Podcasts" width="48" height="48">
             <span class="ecosystem-label">Apple Podcasts</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/media/itunesstore/" aria-label="iTunes Store">
-            <img src="../../../assets/logos/pngs/apple/26/color/itunes-store.png" alt="Логотип iTunes Store" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/itunes-store.webp" alt="Логотип iTunes Store" width="48" height="48">
             <span class="ecosystem-label">iTunes Store</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/music/garageband/" aria-label="GarageBand">
-            <img src="../../../assets/logos/pngs/apple/26/color/garageband.png" alt="Логотип GarageBand" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/garageband.webp" alt="Логотип GarageBand" width="48" height="48">
             <span class="ecosystem-label">GarageBand</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/videocall/facetime/" aria-label="FaceTime">
-            <img src="../../../assets/logos/svgs/apple-FaceTime.svg" alt="Логотип FaceTime" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-FaceTime.webp" alt="Логотип FaceTime" width="48" height="48">
             <span class="ecosystem-label">FaceTime</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/search/spotlight/" aria-label="Spotlight">
-            <img src="../../../assets/logos/pngs/apple/26/color/spotlight.png" alt="Логотип Spotlight" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/spotlight.webp" alt="Логотип Spotlight" width="48" height="48">
             <span class="ecosystem-label">Spotlight</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/search/safari/" aria-label="Safari">
-            <img src="../../../assets/logos/svgs/apple-Safari.svg" alt="Логотип Safari" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Safari.webp" alt="Логотип Safari" width="48" height="48">
             <span class="ecosystem-label">Safari</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/applemail/" aria-label="Apple Mail">
-            <img src="../../../assets/logos/svgs/apple-Mail.svg" alt="Логотип Apple Mail" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Mail.webp" alt="Логотип Apple Mail" width="48" height="48">
             <span class="ecosystem-label">Apple Mail</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/numbers/" aria-label="Numbers">
-            <img src="../../../assets/logos/pngs/apple/26/color/numbers.png" alt="Логотип Numbers" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/numbers.webp" alt="Логотип Numbers" width="48" height="48">
             <span class="ecosystem-label">Numbers</span>
           </a>
-          <a class="ecosystem-card" href="../../../logos/office/applecalendar/" aria-label="Apple Calendar">
-            <img src="../../../assets/logos/svgs/apple-Calendar.svg" alt="Логотип Apple Calendar" width="48" height="48">
-            <span class="ecosystem-label">Apple Calendar</span>
+          <a class="ecosystem-card" href="../../../logos/office/applecalendar/" aria-label="Apple Календарь">
+            <img src="../../../assets/logos/previews/apple-Calendar.webp" alt="Логотип Apple Календарь" width="48" height="48">
+            <span class="ecosystem-label">Apple Календарь</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/applenotes/" aria-label="Notes">
-            <img src="../../../assets/logos/svgs/apple-Notes.svg" alt="Логотип Notes" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Notes.webp" alt="Логотип Notes" width="48" height="48">
             <span class="ecosystem-label">Notes</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/applereminders/" aria-label="Reminders">
-            <img src="../../../assets/logos/svgs/apple-Reminders.svg" alt="Логотип Reminders" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Reminders.webp" alt="Логотип Reminders" width="48" height="48">
             <span class="ecosystem-label">Reminders</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/pages/" aria-label="Pages">
-            <img src="../../../assets/logos/pngs/apple/26/color/pages.png" alt="Логотип Pages" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/pages.webp" alt="Логотип Pages" width="48" height="48">
             <span class="ecosystem-label">Pages</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/keynote/" aria-label="Keynote">
-            <img src="../../../assets/logos/pngs/apple/26/color/keynote.png" alt="Логотип Keynote" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/keynote.webp" alt="Логотип Keynote" width="48" height="48">
             <span class="ecosystem-label">Keynote</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/textedit/" aria-label="TextEdit">
-            <img src="../../../assets/logos/pngs/apple/26/color/textedit.png" alt="Логотип TextEdit" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/textedit.webp" alt="Логотип TextEdit" width="48" height="48">
             <span class="ecosystem-label">TextEdit</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/stickies/" aria-label="Stickies">
-            <img src="../../../assets/logos/pngs/apple/26/color/stickies.png" alt="Логотип Stickies" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/stickies.webp" alt="Логотип Stickies" width="48" height="48">
             <span class="ecosystem-label">Stickies</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/office/dictionary/" aria-label="Dictionary">
-            <img src="../../../assets/logos/pngs/apple/26/color/dictionary.png" alt="Логотип Dictionary" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/dictionary.webp" alt="Логотип Dictionary" width="48" height="48">
             <span class="ecosystem-label">Dictionary</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/cloud/icloud/" aria-label="iCloud">
-            <img src="../../../assets/logos/pngs/apple/26/color/icloud.png" alt="Логотип iCloud" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/icloud.webp" alt="Логотип iCloud" width="48" height="48">
             <span class="ecosystem-label">iCloud</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/cloud/applephotos/" aria-label="Apple Photos">
-            <img src="../../../assets/logos/svgs/apple-Photos.svg" alt="Логотип Apple Photos" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Photos.webp" alt="Логотип Apple Photos" width="48" height="48">
             <span class="ecosystem-label">Apple Photos</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/cloud/applefiles/" aria-label="Apple Files">
-            <img src="../../../assets/logos/pngs/apple/26/color/files.png" alt="Логотип Apple Files" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/files.webp" alt="Логотип Apple Files" width="48" height="48">
             <span class="ecosystem-label">Apple Files</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/cloud/airdrop/" aria-label="AirDrop">
-            <img src="../../../assets/logos/pngs/apple/26/color/airdrop.png" alt="Логотип AirDrop" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/airdrop.webp" alt="Логотип AirDrop" width="48" height="48">
             <span class="ecosystem-label">AirDrop</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/cloud/applecontacts/" aria-label="Contacts">
-            <img src="../../../assets/logos/pngs/apple/26/color/contacts.png" alt="Логотип Contacts" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/contacts.webp" alt="Логотип Contacts" width="48" height="48">
             <span class="ecosystem-label">Contacts</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/cloud/archiveutility/" aria-label="Archive Utility">
-            <img src="../../../assets/logos/pngs/apple/26/color/archive-utility.png" alt="Логотип Archive Utility" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/archive-utility.webp" alt="Логотип Archive Utility" width="48" height="48">
             <span class="ecosystem-label">Archive Utility</span>
           </a>
-          <a class="ecosystem-card" href="../../../logos/assistant/siri/" aria-label="Siri">
-            <img src="../../../assets/logos/pngs/apple/26/color/siri.png" alt="Логотип Siri" width="48" height="48">
-            <span class="ecosystem-label">Siri</span>
-          </a>
           <a class="ecosystem-card" href="../../../logos/assistant/appletranslate/" aria-label="Translate">
-            <img src="../../../assets/logos/pngs/apple/26/color/translate.png" alt="Логотип Translate" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/translate.webp" alt="Логотип Translate" width="48" height="48">
             <span class="ecosystem-label">Translate</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/assistant/applehome/" aria-label="Apple Home">
-            <img src="../../../assets/logos/pngs/apple/26/color/home.png" alt="Логотип Apple Home" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/home.webp" alt="Логотип Apple Home" width="48" height="48">
             <span class="ecosystem-label">Apple Home</span>
           </a>
-          <a class="ecosystem-card" href="../../../logos/system/applecalculator/" aria-label="Calculator">
-            <img src="../../../assets/logos/svgs/apple-Calculator.svg" alt="Логотип Calculator" width="48" height="48">
-            <span class="ecosystem-label">Calculator</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/automator/" aria-label="Automator">
-            <img src="../../../assets/logos/pngs/apple/26/color/automator.png" alt="Логотип Automator" width="48" height="48">
-            <span class="ecosystem-label">Automator</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/applesettings/" aria-label="Settings">
-            <img src="../../../assets/logos/svgs/apple-Settings.svg" alt="Логотип Settings" width="48" height="48">
-            <span class="ecosystem-label">Settings</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/applecamera/" aria-label="Camera">
-            <img src="../../../assets/logos/svgs/apple-Camera.svg" alt="Логотип Camera" width="48" height="48">
-            <span class="ecosystem-label">Camera</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/appleclock/" aria-label="Clock">
-            <img src="../../../assets/logos/svgs/apple-Clock.svg" alt="Логотип Clock" width="48" height="48">
-            <span class="ecosystem-label">Clock</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/finder/" aria-label="Finder">
-            <img src="../../../assets/logos/pngs/apple/26/color/finder.png" alt="Логотип Finder" width="48" height="48">
-            <span class="ecosystem-label">Finder</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/controlcenter/" aria-label="Control Center">
-            <img src="../../../assets/logos/pngs/apple/26/color/controlcenter.png" alt="Логотип Control Center" width="48" height="48">
-            <span class="ecosystem-label">Control Center</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/appleshortcuts/" aria-label="Shortcuts">
-            <img src="../../../assets/logos/pngs/apple/26/color/shortcuts.png" alt="Логотип Shortcuts" width="48" height="48">
-            <span class="ecosystem-label">Shortcuts</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/applemeasure/" aria-label="Measure">
-            <img src="../../../assets/logos/pngs/apple/26/color/measure.png" alt="Логотип Measure" width="48" height="48">
-            <span class="ecosystem-label">Measure</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/applevoicememos/" aria-label="Voice Memos">
-            <img src="../../../assets/logos/pngs/apple/26/color/voice-memos.png" alt="Логотип Voice Memos" width="48" height="48">
-            <span class="ecosystem-label">Voice Memos</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/gamecenter/" aria-label="Game Center">
-            <img src="../../../assets/logos/pngs/apple/26/color/game-center.png" alt="Логотип Game Center" width="48" height="48">
-            <span class="ecosystem-label">Game Center</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/iphonemirroring/" aria-label="iPhone Mirroring">
-            <img src="../../../assets/logos/pngs/apple/26/color/iphone-mirroring.png" alt="Логотип iPhone Mirroring" width="48" height="48">
-            <span class="ecosystem-label">iPhone Mirroring</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/screentime/" aria-label="Screen Time">
-            <img src="../../../assets/logos/pngs/apple/26/color/screen-time.png" alt="Логотип Screen Time" width="48" height="48">
-            <span class="ecosystem-label">Screen Time</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/journal/" aria-label="Journal">
-            <img src="../../../assets/logos/pngs/apple/26/color/journal.png" alt="Логотип Journal" width="48" height="48">
-            <span class="ecosystem-label">Journal</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/photobooth/" aria-label="Photo Booth">
-            <img src="../../../assets/logos/pngs/apple/26/color/photo-booth.png" alt="Логотип Photo Booth" width="48" height="48">
-            <span class="ecosystem-label">Photo Booth</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/screenshot/" aria-label="Screenshot">
-            <img src="../../../assets/logos/pngs/apple/26/color/screenshot.png" alt="Логотип Screenshot" width="48" height="48">
-            <span class="ecosystem-label">Screenshot</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/universalcontrol/" aria-label="Universal Control">
-            <img src="../../../assets/logos/pngs/apple/26/color/universalcontrol.png" alt="Логотип Universal Control" width="48" height="48">
-            <span class="ecosystem-label">Universal Control</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/batteries/" aria-label="Batteries">
-            <img src="../../../assets/logos/pngs/apple/26/color/batteries.png" alt="Логотип Batteries" width="48" height="48">
-            <span class="ecosystem-label">Batteries</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/magnifier/" aria-label="Magnifier">
-            <img src="../../../assets/logos/pngs/apple/26/color/magnifier.png" alt="Логотип Magnifier" width="48" height="48">
-            <span class="ecosystem-label">Magnifier</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/pip/" aria-label="Picture in Picture">
-            <img src="../../../assets/logos/pngs/apple/26/color/pipagent.png" alt="Логотип Picture in Picture" width="48" height="48">
-            <span class="ecosystem-label">Picture in Picture</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/apps/" aria-label="Apps">
-            <img src="../../../assets/logos/pngs/apple/26/color/apps.png" alt="Логотип Apps" width="48" height="48">
-            <span class="ecosystem-label">Apps</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/tips/" aria-label="Tips">
-            <img src="../../../assets/logos/pngs/apple/26/color/tips.png" alt="Логотип Tips" width="48" height="48">
-            <span class="ecosystem-label">Tips</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/applepasswords/" aria-label="Apple Passwords">
-            <img src="../../../assets/logos/pngs/apple/26/color/passwords.png" alt="Логотип Apple Passwords" width="48" height="48">
-            <span class="ecosystem-label">Apple Passwords</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/applewatch/" aria-label="Apple Watch">
-            <img src="../../../assets/logos/pngs/apple/26/color/watch.png" alt="Логотип Apple Watch" width="48" height="48">
-            <span class="ecosystem-label">Apple Watch</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/applestocks/" aria-label="Stocks">
-            <img src="../../../assets/logos/pngs/apple/26/color/stocks.png" alt="Логотип Stocks" width="48" height="48">
-            <span class="ecosystem-label">Stocks</span>
-          </a>
           <a class="ecosystem-card" href="../../../logos/design/freeform/" aria-label="Freeform">
-            <img src="../../../assets/logos/pngs/apple/26/color/freeform.png" alt="Логотип Freeform" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/freeform.webp" alt="Логотип Freeform" width="48" height="48">
             <span class="ecosystem-label">Freeform</span>
           </a>
           <a class="ecosystem-card current" href="#" aria-label="Preview (текущий)">
-            <img src="../../../assets/logos/pngs/apple/26/color/preview.png" alt="Логотип Preview" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/preview.webp" alt="Логотип Preview" width="48" height="48">
             <span class="ecosystem-label">Preview</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/design/fontbook/" aria-label="Font Book">
-            <img src="../../../assets/logos/pngs/apple/26/color/font-book.png" alt="Логотип Font Book" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/font-book.webp" alt="Логотип Font Book" width="48" height="48">
             <span class="ecosystem-label">Font Book</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/design/digitalcolormeter/" aria-label="Digital Color Meter">
-            <img src="../../../assets/logos/pngs/apple/26/color/digital-color-meter.png" alt="Логотип Digital Color Meter" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/digital-color-meter.webp" alt="Логотип Digital Color Meter" width="48" height="48">
             <span class="ecosystem-label">Digital Color Meter</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/dev/xcode/" aria-label="Xcode">
-            <img src="../../../assets/logos/pngs/apple/26/color/xcode.png" alt="Логотип Xcode" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/xcode.webp" alt="Логотип Xcode" width="48" height="48">
             <span class="ecosystem-label">Xcode</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/dev/activitymonitor/" aria-label="Activity Monitor">
-            <img src="../../../assets/logos/pngs/apple/26/color/activity-monitor.png" alt="Логотип Activity Monitor" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/activity-monitor.webp" alt="Логотип Activity Monitor" width="48" height="48">
             <span class="ecosystem-label">Activity Monitor</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/dev/terminal/" aria-label="Terminal">
-            <img src="../../../assets/logos/pngs/apple/26/color/terminal.png" alt="Логотип Terminal" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/terminal.webp" alt="Логотип Terminal" width="48" height="48">
             <span class="ecosystem-label">Terminal</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/dev/console/" aria-label="Console">
-            <img src="../../../assets/logos/pngs/apple/26/color/console.png" alt="Логотип Console" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/console.webp" alt="Логотип Console" width="48" height="48">
             <span class="ecosystem-label">Console</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/dev/scripteditor/" aria-label="Script Editor">
-            <img src="../../../assets/logos/pngs/apple/26/color/script-editor.png" alt="Логотип Script Editor" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/script-editor.webp" alt="Логотип Script Editor" width="48" height="48">
             <span class="ecosystem-label">Script Editor</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/dev/grapher/" aria-label="Grapher">
-            <img src="../../../assets/logos/pngs/apple/26/color/grapher.png" alt="Логотип Grapher" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/grapher.webp" alt="Логотип Grapher" width="48" height="48">
             <span class="ecosystem-label">Grapher</span>
           </a>
-          <a class="ecosystem-card" href="../../../logos/system/faceid/" aria-label="Face ID">
-            <img src="../../../assets/logos/svgs/face-id.svg" alt="Логотип Face ID" width="48" height="48">
-            <span class="ecosystem-label">Face ID</span>
-          </a>
-          <a class="ecosystem-card" href="../../../logos/system/touchid/" aria-label="Touch ID">
-            <img src="../../../assets/logos/svgs/touch-id.svg" alt="Логотип Touch ID" width="48" height="48">
-            <span class="ecosystem-label">Touch ID</span>
-          </a>
           <a class="ecosystem-card" href="../../../logos/telecom/applephone/" aria-label="Phone">
-            <img src="../../../assets/logos/svgs/apple-Phone.svg" alt="Логотип Phone" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Phone.webp" alt="Логотип Phone" width="48" height="48">
             <span class="ecosystem-label">Phone</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/telecom/bluetoothfileexchange/" aria-label="Bluetooth File Exchange">
-            <img src="../../../assets/logos/pngs/apple/26/color/bluetooth-file-exchange.png" alt="Логотип Bluetooth File Exchange" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/bluetooth-file-exchange.webp" alt="Логотип Bluetooth File Exchange" width="48" height="48">
             <span class="ecosystem-label">Bluetooth File Exchange</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/travel/appleweather/" aria-label="Weather">
-            <img src="../../../assets/logos/svgs/apple-Weather.svg" alt="Логотип Weather" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Weather.webp" alt="Логотип Weather" width="48" height="48">
             <span class="ecosystem-label">Weather</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/education/applebooks/" aria-label="Apple Books">
-            <img src="../../../assets/logos/pngs/apple/26/color/books.png" alt="Логотип Apple Books" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/books.webp" alt="Логотип Apple Books" width="48" height="48">
             <span class="ecosystem-label">Apple Books</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/health/applehealth/" aria-label="Apple Health">
-            <img src="../../../assets/logos/svgs/apple-Health.svg" alt="Логотип Apple Health" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple-Health.webp" alt="Логотип Apple Health" width="48" height="48">
             <span class="ecosystem-label">Apple Health</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/health/applefitness/" aria-label="Apple Fitness+">
-            <img src="../../../assets/logos/pngs/apple/26/color/fitness.png" alt="Логотип Apple Fitness+" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/fitness.webp" alt="Логотип Apple Fitness+" width="48" height="48">
             <span class="ecosystem-label">Apple Fitness+</span>
           </a>
+          <a class="ecosystem-card" href="../../../logos/tech/apple/" aria-label="Apple">
+            <img src="../../../assets/logos/previews/apple.webp" alt="Логотип Apple" width="48" height="48">
+            <span class="ecosystem-label">Apple</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/faceid/" aria-label="Face ID">
+            <img src="../../../assets/logos/previews/face-id.webp" alt="Логотип Face ID" width="48" height="48">
+            <span class="ecosystem-label">Face ID</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/touchid/" aria-label="Touch ID">
+            <img src="../../../assets/logos/previews/touch-id.webp" alt="Логотип Touch ID" width="48" height="48">
+            <span class="ecosystem-label">Touch ID</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/applecalculator/" aria-label="Calculator">
+            <img src="../../../assets/logos/previews/apple-Calculator.webp" alt="Логотип Calculator" width="48" height="48">
+            <span class="ecosystem-label">Calculator</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/automator/" aria-label="Automator">
+            <img src="../../../assets/logos/previews/apple/26/color/automator.webp" alt="Логотип Automator" width="48" height="48">
+            <span class="ecosystem-label">Automator</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/applesettings/" aria-label="Settings">
+            <img src="../../../assets/logos/previews/apple-Settings.webp" alt="Логотип Settings" width="48" height="48">
+            <span class="ecosystem-label">Settings</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/applecamera/" aria-label="Camera">
+            <img src="../../../assets/logos/previews/apple-Camera.webp" alt="Логотип Camera" width="48" height="48">
+            <span class="ecosystem-label">Camera</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/appleclock/" aria-label="Clock">
+            <img src="../../../assets/logos/previews/apple-Clock.webp" alt="Логотип Clock" width="48" height="48">
+            <span class="ecosystem-label">Clock</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/finder/" aria-label="Finder">
+            <img src="../../../assets/logos/previews/apple/26/color/finder.webp" alt="Логотип Finder" width="48" height="48">
+            <span class="ecosystem-label">Finder</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/controlcenter/" aria-label="Control Center">
+            <img src="../../../assets/logos/previews/apple/26/color/controlcenter.webp" alt="Логотип Control Center" width="48" height="48">
+            <span class="ecosystem-label">Control Center</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/appleshortcuts/" aria-label="Shortcuts">
+            <img src="../../../assets/logos/previews/apple/26/color/shortcuts.webp" alt="Логотип Shortcuts" width="48" height="48">
+            <span class="ecosystem-label">Shortcuts</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/applemeasure/" aria-label="Measure">
+            <img src="../../../assets/logos/previews/apple/26/color/measure.webp" alt="Логотип Measure" width="48" height="48">
+            <span class="ecosystem-label">Measure</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/applevoicememos/" aria-label="Voice Memos">
+            <img src="../../../assets/logos/previews/apple/26/color/voice-memos.webp" alt="Логотип Voice Memos" width="48" height="48">
+            <span class="ecosystem-label">Voice Memos</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/gamecenter/" aria-label="Game Center">
+            <img src="../../../assets/logos/previews/apple/26/color/game-center.webp" alt="Логотип Game Center" width="48" height="48">
+            <span class="ecosystem-label">Game Center</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/iphonemirroring/" aria-label="iPhone Mirroring">
+            <img src="../../../assets/logos/previews/apple/26/color/iphone-mirroring.webp" alt="Логотип iPhone Mirroring" width="48" height="48">
+            <span class="ecosystem-label">iPhone Mirroring</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/screentime/" aria-label="Screen Time">
+            <img src="../../../assets/logos/previews/apple/26/color/screen-time.webp" alt="Логотип Screen Time" width="48" height="48">
+            <span class="ecosystem-label">Screen Time</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/journal/" aria-label="Journal">
+            <img src="../../../assets/logos/previews/apple/26/color/journal.webp" alt="Логотип Journal" width="48" height="48">
+            <span class="ecosystem-label">Journal</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/photobooth/" aria-label="Photo Booth">
+            <img src="../../../assets/logos/previews/apple/26/color/photo-booth.webp" alt="Логотип Photo Booth" width="48" height="48">
+            <span class="ecosystem-label">Photo Booth</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/screenshot/" aria-label="Screenshot">
+            <img src="../../../assets/logos/previews/apple/26/color/screenshot.webp" alt="Логотип Screenshot" width="48" height="48">
+            <span class="ecosystem-label">Screenshot</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/universalcontrol/" aria-label="Universal Control">
+            <img src="../../../assets/logos/previews/apple/26/color/universalcontrol.webp" alt="Логотип Universal Control" width="48" height="48">
+            <span class="ecosystem-label">Universal Control</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/batteries/" aria-label="Batteries">
+            <img src="../../../assets/logos/previews/apple/26/color/batteries.webp" alt="Логотип Batteries" width="48" height="48">
+            <span class="ecosystem-label">Batteries</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/magnifier/" aria-label="Magnifier">
+            <img src="../../../assets/logos/previews/apple/26/color/magnifier.webp" alt="Логотип Magnifier" width="48" height="48">
+            <span class="ecosystem-label">Magnifier</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/pip/" aria-label="Picture in Picture">
+            <img src="../../../assets/logos/previews/apple/26/color/pipagent.webp" alt="Логотип Picture in Picture" width="48" height="48">
+            <span class="ecosystem-label">Picture in Picture</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/apps/" aria-label="Apps">
+            <img src="../../../assets/logos/previews/apple/26/color/apps.webp" alt="Логотип Apps" width="48" height="48">
+            <span class="ecosystem-label">Apps</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/tips/" aria-label="Tips">
+            <img src="../../../assets/logos/previews/apple/26/color/tips.webp" alt="Логотип Tips" width="48" height="48">
+            <span class="ecosystem-label">Tips</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/applepasswords/" aria-label="Apple Passwords">
+            <img src="../../../assets/logos/previews/apple/26/color/passwords.webp" alt="Логотип Apple Passwords" width="48" height="48">
+            <span class="ecosystem-label">Apple Passwords</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/applewatch/" aria-label="Apple Watch">
+            <img src="../../../assets/logos/previews/apple/26/color/watch.webp" alt="Логотип Apple Watch" width="48" height="48">
+            <span class="ecosystem-label">Apple Watch</span>
+          </a>
+          <a class="ecosystem-card" href="../../../logos/system/applestocks/" aria-label="Stocks">
+            <img src="../../../assets/logos/previews/apple/26/color/stocks.webp" alt="Логотип Stocks" width="48" height="48">
+            <span class="ecosystem-label">Stocks</span>
+          </a>
           <a class="ecosystem-card" href="../../../logos/system/chess/" aria-label="Chess">
-            <img src="../../../assets/logos/pngs/apple/26/color/chess.png" alt="Логотип Chess" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/chess.webp" alt="Логотип Chess" width="48" height="48">
             <span class="ecosystem-label">Chess</span>
           </a>
           <a class="ecosystem-card" href="../../../logos/system/applegames/" aria-label="Apple Games">
-            <img src="../../../assets/logos/pngs/apple/26/color/games.png" alt="Логотип Apple Games" width="48" height="48">
+            <img src="../../../assets/logos/previews/apple/26/color/games.webp" alt="Логотип Apple Games" width="48" height="48">
             <span class="ecosystem-label">Apple Games</span>
           </a>
         </div>
@@ -857,6 +874,9 @@
         <tr class="meta-row">
           <th scope="row" class="meta-key">Figma</th>
           <td class="meta-val">Icon / Design / Preview</td>
+        </tr><tr class="meta-row">
+          <th scope="row" class="meta-key" data-i18n="detailBrand">Бренд</th>
+          <td class="meta-val"><a href="https://support.apple.com" target="_blank" rel="noopener noreferrer" data-i18n="seoBrandRulesLink">Правила использования →</a></td>
         </tr><tr class="meta-row">
           <th scope="row" class="meta-key">Обновлено</th>
           <td class="meta-val"><time datetime="2026-06-25">25 июня 2026</time></td>
@@ -888,119 +908,135 @@
     <h2 class="catalog-section-title" data-i18n="seoRelatedLabel">Другие логотипы этой категории</h2>
     <div class="related-grid">
           <a class="related-card" href="../../../logos/design/figma/" aria-label="Figma">
-            <img src="../../../assets/logos/svgs/figma.svg" alt="Логотип Figma" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/figma.webp" alt="Логотип Figma" width="48" height="48" loading="lazy">
             <span class="related-label">Figma</span>
           </a>
+          <a class="related-card" href="../../../logos/design/pixso/" aria-label="Pixso">
+            <img src="../../../assets/logos/previews-related/pixso.webp" alt="Логотип Pixso" width="48" height="48" loading="lazy">
+            <span class="related-label">Pixso</span>
+          </a>
           <a class="related-card" href="../../../logos/design/miro/" aria-label="Miro">
-            <img src="../../../assets/logos/svgs/miro.svg" alt="Логотип Miro" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/miro.webp" alt="Логотип Miro" width="48" height="48" loading="lazy">
             <span class="related-label">Miro</span>
           </a>
           <a class="related-card" href="../../../logos/design/photoshop/" aria-label="Adobe Photoshop">
-            <img src="../../../assets/logos/previews/apple/26/color/photoshop.webp" alt="Логотип Adobe Photoshop" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/photoshop.webp" alt="Логотип Adobe Photoshop" width="48" height="48" loading="lazy">
             <span class="related-label">Adobe Photoshop</span>
           </a>
           <a class="related-card" href="../../../logos/design/adobescan/" aria-label="Adobe Scan">
-            <img src="../../../assets/logos/previews/apple/26/color/adobe-scan.webp" alt="Логотип Adobe Scan" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/adobe-scan.webp" alt="Логотип Adobe Scan" width="48" height="48" loading="lazy">
             <span class="related-label">Adobe Scan</span>
           </a>
           <a class="related-card" href="../../../logos/design/illustrator/" aria-label="Adobe Illustrator">
-            <img src="../../../assets/logos/previews/apple/26/color/adobe-illustrator.webp" alt="Логотип Adobe Illustrator" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/adobe-illustrator.webp" alt="Логотип Adobe Illustrator" width="48" height="48" loading="lazy">
             <span class="related-label">Adobe Illustrator</span>
           </a>
           <a class="related-card" href="../../../logos/design/adobeacrobat/" aria-label="Adobe Acrobat">
-            <img src="../../../assets/logos/previews/apple/26/color/adobe-acrobat.webp" alt="Логотип Adobe Acrobat" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/adobe-acrobat.webp" alt="Логотип Adobe Acrobat" width="48" height="48" loading="lazy">
             <span class="related-label">Adobe Acrobat</span>
           </a>
           <a class="related-card" href="../../../logos/design/adobeexpress/" aria-label="Adobe Express">
-            <img src="../../../assets/logos/previews/apple/26/color/adobe-express.webp" alt="Логотип Adobe Express" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/adobe-express.webp" alt="Логотип Adobe Express" width="48" height="48" loading="lazy">
             <span class="related-label">Adobe Express</span>
           </a>
           <a class="related-card" href="../../../logos/design/adobefresco/" aria-label="Adobe Fresco">
-            <img src="../../../assets/logos/previews/apple/26/color/adobe-fresco.webp" alt="Логотип Adobe Fresco" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/adobe-fresco.webp" alt="Логотип Adobe Fresco" width="48" height="48" loading="lazy">
             <span class="related-label">Adobe Fresco</span>
           </a>
           <a class="related-card" href="../../../logos/design/adobepremiere/" aria-label="Adobe Premiere Rush">
-            <img src="../../../assets/logos/previews/apple/26/color/adobe-premiere.webp" alt="Логотип Adobe Premiere Rush" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/adobe-premiere.webp" alt="Логотип Adobe Premiere Rush" width="48" height="48" loading="lazy">
             <span class="related-label">Adobe Premiere Rush</span>
           </a>
           <a class="related-card" href="../../../logos/design/adobelightroom/" aria-label="Adobe Lightroom">
-            <img src="../../../assets/logos/previews/apple/26/color/lightroom.webp" alt="Логотип Adobe Lightroom" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/lightroom.webp" alt="Логотип Adobe Lightroom" width="48" height="48" loading="lazy">
             <span class="related-label">Adobe Lightroom</span>
           </a>
           <a class="related-card" href="../../../logos/design/freeform/" aria-label="Freeform">
-            <img src="../../../assets/logos/previews/apple/26/color/freeform.webp" alt="Логотип Freeform" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/freeform.webp" alt="Логотип Freeform" width="48" height="48" loading="lazy">
             <span class="related-label">Freeform</span>
           </a>
           <a class="related-card" href="../../../logos/design/tracelogos/" aria-label="Trace Logos">
-            <img src="../../../assets/logos/svgs/trace-logos.svg" alt="Логотип Trace Logos" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/trace-logos.webp" alt="Логотип Trace Logos" width="48" height="48" loading="lazy">
             <span class="related-label">Trace Logos</span>
           </a>
           <a class="related-card" href="../../../logos/design/canva/" aria-label="Canva">
-            <img src="../../../assets/logos/previews/apple/26/color/canva.webp" alt="Логотип Canva" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/canva.webp" alt="Логотип Canva" width="48" height="48" loading="lazy">
             <span class="related-label">Canva</span>
           </a>
+          <a class="related-card" href="../../../logos/design/freepik/" aria-label="Freepik">
+            <img src="../../../assets/logos/previews-related/freepik.webp" alt="Логотип Freepik" width="48" height="48" loading="lazy">
+            <span class="related-label">Freepik</span>
+          </a>
+          <a class="related-card" href="../../../logos/design/magnific/" aria-label="Magnific">
+            <img src="../../../assets/logos/previews-related/magnific.webp" alt="Логотип Magnific" width="48" height="48" loading="lazy">
+            <span class="related-label">Magnific</span>
+          </a>
           <a class="related-card" href="../../../logos/design/fontbook/" aria-label="Font Book">
-            <img src="../../../assets/logos/previews/apple/26/color/font-book.webp" alt="Логотип Font Book" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/font-book.webp" alt="Логотип Font Book" width="48" height="48" loading="lazy">
             <span class="related-label">Font Book</span>
           </a>
+          <a class="related-card" href="../../../logos/design/googlefonts/" aria-label="Google Fonts">
+            <img src="../../../assets/logos/previews-related/google-fonts.webp" alt="Логотип Google Fonts" width="48" height="48" loading="lazy">
+            <span class="related-label">Google Fonts</span>
+          </a>
           <a class="related-card" href="../../../logos/design/cleanshotx/" aria-label="CleanShot X">
-            <img src="../../../assets/logos/previews/apple/26/color/CleanShot X.webp" alt="Логотип CleanShot X" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/CleanShot X.webp" alt="Логотип CleanShot X" width="48" height="48" loading="lazy">
             <span class="related-label">CleanShot X</span>
           </a>
           <a class="related-card" href="../../../logos/design/screenstudio/" aria-label="Screen Studio">
-            <img src="../../../assets/logos/previews/apple/26/color/Screen Studio.webp" alt="Логотип Screen Studio" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/Screen Studio.webp" alt="Логотип Screen Studio" width="48" height="48" loading="lazy">
             <span class="related-label">Screen Studio</span>
           </a>
           <a class="related-card" href="../../../logos/design/digitalcolormeter/" aria-label="Digital Color Meter">
-            <img src="../../../assets/logos/previews/apple/26/color/digital-color-meter.webp" alt="Логотип Digital Color Meter" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/digital-color-meter.webp" alt="Логотип Digital Color Meter" width="48" height="48" loading="lazy">
             <span class="related-label">Digital Color Meter</span>
           </a>
           <a class="related-card" href="../../../logos/design/colorslurp/" aria-label="ColorSlurp">
-            <img src="../../../assets/logos/previews/apple/26/color/ColorSlurp.webp" alt="Логотип ColorSlurp" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/ColorSlurp.webp" alt="Логотип ColorSlurp" width="48" height="48" loading="lazy">
             <span class="related-label">ColorSlurp</span>
           </a>
           <a class="related-card" href="../../../logos/design/flipaclip/" aria-label="FlipaClip: Draw 2D Animation">
-            <img src="../../../assets/logos/previews/flipaclip-draw-2d-animation.webp" alt="Логотип FlipaClip: Draw 2D Animation" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/flipaclip-draw-2d-animation.webp" alt="Логотип FlipaClip: Draw 2D Animation" width="48" height="48" loading="lazy">
             <span class="related-label">FlipaClip: Draw 2D Animation</span>
           </a>
           <a class="related-card" href="../../../logos/design/darkroom/" aria-label="Darkroom">
-            <img src="../../../assets/logos/previews/apple/26/color/darkroom.webp" alt="Логотип Darkroom" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/darkroom.webp" alt="Логотип Darkroom" width="48" height="48" loading="lazy">
             <span class="related-label">Darkroom</span>
           </a>
           <a class="related-card" href="../../../logos/design/facetune/" aria-label="Facetune">
-            <img src="../../../assets/logos/previews/apple/26/color/facetune.webp" alt="Логотип Facetune" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/facetune.webp" alt="Логотип Facetune" width="48" height="48" loading="lazy">
             <span class="related-label">Facetune</span>
           </a>
           <a class="related-card" href="../../../logos/design/halide/" aria-label="Halide">
-            <img src="../../../assets/logos/previews/apple/26/color/halide.webp" alt="Логотип Halide" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/halide.webp" alt="Логотип Halide" width="48" height="48" loading="lazy">
             <span class="related-label">Halide</span>
           </a>
           <a class="related-card" href="../../../logos/design/inshot/" aria-label="InShot">
-            <img src="../../../assets/logos/previews/apple/26/color/inshot.webp" alt="Логотип InShot" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/inshot.webp" alt="Логотип InShot" width="48" height="48" loading="lazy">
             <span class="related-label">InShot</span>
           </a>
           <a class="related-card" href="../../../logos/design/lumafusion/" aria-label="LumaFusion">
-            <img src="../../../assets/logos/previews/apple/26/color/lumafusion.webp" alt="Логотип LumaFusion" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/lumafusion.webp" alt="Логотип LumaFusion" width="48" height="48" loading="lazy">
             <span class="related-label">LumaFusion</span>
           </a>
           <a class="related-card" href="../../../logos/design/picsart/" aria-label="PicsArt">
-            <img src="../../../assets/logos/previews/apple/26/color/picsart.webp" alt="Логотип PicsArt" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/picsart.webp" alt="Логотип PicsArt" width="48" height="48" loading="lazy">
             <span class="related-label">PicsArt</span>
           </a>
           <a class="related-card" href="../../../logos/design/procreatepocket/" aria-label="Procreate Pocket">
-            <img src="../../../assets/logos/previews/apple/26/color/procreate-pocket.webp" alt="Логотип Procreate Pocket" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/procreate-pocket.webp" alt="Логотип Procreate Pocket" width="48" height="48" loading="lazy">
             <span class="related-label">Procreate Pocket</span>
           </a>
           <a class="related-card" href="../../../logos/design/procreate/" aria-label="Procreate">
-            <img src="../../../assets/logos/previews/apple/26/color/procreate.webp" alt="Логотип Procreate" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/procreate.webp" alt="Логотип Procreate" width="48" height="48" loading="lazy">
             <span class="related-label">Procreate</span>
           </a>
           <a class="related-card" href="../../../logos/design/snapseed/" aria-label="Snapseed">
-            <img src="../../../assets/logos/previews/apple/26/color/snapseed.webp" alt="Логотип Snapseed" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/snapseed.webp" alt="Логотип Snapseed" width="48" height="48" loading="lazy">
             <span class="related-label">Snapseed</span>
           </a>
           <a class="related-card" href="../../../logos/design/splice/" aria-label="Splice">
-            <img src="../../../assets/logos/previews/apple/26/color/splice.webp" alt="Логотип Splice" width="48" height="48" loading="lazy">
+            <img src="../../../assets/logos/previews-related/apple/26/color/splice.webp" alt="Логотип Splice" width="48" height="48" loading="lazy">
             <span class="related-label">Splice</span>
           </a>
     </div>
@@ -1011,276 +1047,297 @@
     <h2 class="catalog-section-title" data-i18n="seoCategoriesLabel">Остальные категории</h2>
     <div class="catalog-cats">
           <a class="catalog-cat" href="../../../logos/market/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/ozon.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/wildberries.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-market.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/avito.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/ozon.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/krasnoeibeloe.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/wildberries.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-market.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Marketplaces &amp; Retail">Маркетплейсы и ритейл</span>
-              <span class="catalog-cat-count">23</span>
+              <span class="catalog-cat-count">41<span class="catalog-cat-count-label" data-en=" logos"> логотип</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/social/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/telegram.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/max.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/vk.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/whatsapp.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/telegram.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/max.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/vk.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/whatsapp.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Messengers &amp; Social">Мессенджеры и соцсети</span>
-              <span class="catalog-cat-count">34</span>
+              <span class="catalog-cat-count">34<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/bank/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/sber.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/t-bank.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/mts-bank.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/gazprom-bank.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/dom-rf-bank.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/sber.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/t-bank.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/mts-bank.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Banks">Банки</span>
-              <span class="catalog-cat-count">23</span>
+              <span class="catalog-cat-count">26<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/ai/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/chatgpt.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/codex.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/chatgpt-atlas.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/sora.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/chatgpt.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/codex.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/chatgpt-atlas.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/sora.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="AI &amp; Neural Networks">Нейросети</span>
-              <span class="catalog-cat-count">32</span>
+              <span class="catalog-cat-count">34<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/food/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/yandex-eda.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-lavka.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-delivery-club.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/nyt-cooking.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex-eda.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-lavka.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-delivery-club.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/nyt-cooking.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Food &amp; Restaurants">Еда и рестораны</span>
-              <span class="catalog-cat-count">11</span>
+              <span class="catalog-cat-count">21<span class="catalog-cat-count-label" data-en=" logos"> логотип</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/store/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/vk-id.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-id.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/t-id.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/t-bank-premium.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/vk-id.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-id.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/t-id.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/t-bank-premium.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Stores &amp; Subscriptions">Сторы и подписки</span>
-              <span class="catalog-cat-count">20</span>
+              <span class="catalog-cat-count">16<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/pay/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/apple-pay.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/sbp.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/mir.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/mts-money.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/apple-pay.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/sbp.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/mir.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/mts-money.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Payments &amp; Cards">Платежи и карты</span>
-              <span class="catalog-cat-count">23</span>
+              <span class="catalog-cat-count">25<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/bnpl/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/podeli.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-split.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/dolyami.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/afterpay.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/podeli.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-split.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/dolyami.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/afterpay.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Installments &amp; BNPL">Рассрочка и BNPL</span>
-              <span class="catalog-cat-count">5</span>
+              <span class="catalog-cat-count">5<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/delivery/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/yandex-delivery.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-go.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-pro.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/lyft.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex-delivery.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-routing.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-go.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-pro.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Delivery &amp; Taxi">Доставка и такси</span>
-              <span class="catalog-cat-count">7</span>
+              <span class="catalog-cat-count">12<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/map/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/2gis.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-maps.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/google-maps.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-Maps.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/2gis.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-maps.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/google-maps.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-Maps.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Maps &amp; Navigation">Карты и навигация</span>
-              <span class="catalog-cat-count">6</span>
+              <span class="catalog-cat-count">6<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/video/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/vk-video.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/rutube.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/youtube.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-tv.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/vk-video.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/rutube.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/youtube.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-tv.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Video &amp; Streaming">Видео и стриминг</span>
-              <span class="catalog-cat-count">26</span>
+              <span class="catalog-cat-count">31<span class="catalog-cat-count-label" data-en=" logos"> логотип</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/music/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/yandex-dzen.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-music.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/spotify.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/musicrecognitionmac.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex-dzen.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/mos-ru.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-music.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-book.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Music &amp; Media">Музыка и медиа</span>
-              <span class="catalog-cat-count">39</span>
+              <span class="catalog-cat-count">40<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/videocall/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/yandex-telemost.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/discord.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/microsoft-teams.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-FaceTime.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex-telemost.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/discord.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/microsoft-teams.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-FaceTime.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Video Calls">Видеозвонки</span>
-              <span class="catalog-cat-count">7</span>
+              <span class="catalog-cat-count">7<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/ads/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/yandex-business.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-direct.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-direct-pro.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-ai-helper.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex-business.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-direct.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-promo-page.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-direct-pro.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Ads &amp; Analytics">Реклама и аналитика</span>
-              <span class="catalog-cat-count">8</span>
+              <span class="catalog-cat-count">11<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/reviews/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/prodoctors.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-weather.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/prodoctors.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-weather.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yell.webp" alt="" width="20" height="20" loading="lazy"></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Reviews &amp; Directories">Отзывы и справочники</span>
-              <span class="catalog-cat-count">2</span>
+              <span class="catalog-cat-count">3<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/search/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/yandex.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-browser.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-neuroprotect.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-neiro-search.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-browser.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-browser-corp.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-camera.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Search &amp; Browsers">Поиск и браузеры</span>
-              <span class="catalog-cat-count">11</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/mail/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/yandex-360.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-wiki.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/mail-ru.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-mail.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex-360.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-wiki.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/mail-ru.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-mail.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Email">Почта</span>
-              <span class="catalog-cat-count">9</span>
+              <span class="catalog-cat-count">9<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/office/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews/apple/26/color/numbers.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-Calendar.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/google-docs.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/google-keep.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/apple/26/color/numbers.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-Calendar.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/google-docs.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/google-keep.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Office &amp; Documents">Офис и документы</span>
-              <span class="catalog-cat-count">36</span>
+              <span class="catalog-cat-count">34<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/cloud/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/google-drive.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/icloud.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-Photos.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/files.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/google-drive.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/icloud.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-Photos.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/files.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Cloud &amp; Storage">Облака и хранилища</span>
-              <span class="catalog-cat-count">12</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/assistant/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews/apple/26/color/siri.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-interpreter.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/translate.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/home.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex-interpreter.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/deepl.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/translate.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/home.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Assistants">Ассистенты</span>
-              <span class="catalog-cat-count">10</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="../../../logos/system/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/apple-Calculator.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/automator.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-Settings.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-Camera.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="System Apps">Системные приложения</span>
-              <span class="catalog-cat-count">26</span>
+              <span class="catalog-cat-count">10<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/web/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/tilda.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/taptop.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-kit.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/webflow.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/tilda.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/taptop.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-kit.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/webflow.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Websites &amp; CMS">Сайты и CMS</span>
-              <span class="catalog-cat-count">11</span>
+              <span class="catalog-cat-count">12<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/dev/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/github.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/xcode.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/activity-monitor.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/terminal.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/github.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/xcode.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/activity-monitor.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/terminal.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Development">Разработка</span>
-              <span class="catalog-cat-count">11</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="../../../logos/macos/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews/apple/26/color/Dropover.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/BuhoLaunchpad.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/3uTools.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/1blocker.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="macOS Utilities">macOS утилиты</span>
-              <span class="catalog-cat-count">13</span>
+              <span class="catalog-cat-count">12<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/telecom/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/apple-Phone.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/bluetooth-file-exchange.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/LuLu.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/Blacktemple.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/apple-Phone.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/bluetooth-file-exchange.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/LuLu.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/Blacktemple.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Telecom &amp; Internet">Связь и интернет</span>
-              <span class="catalog-cat-count">8</span>
+              <span class="catalog-cat-count">10<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/travel/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/aviasales.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/yandex-travel.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-Weather.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/expedia.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/aviasales.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-travel.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-Weather.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/expedia.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Travel">Путешествия</span>
-              <span class="catalog-cat-count">10</span>
+              <span class="catalog-cat-count">12<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/education/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/yandex-praktikum.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/t-education.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/photomath.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/duolingo.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/yandex-praktikum.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/t-education.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/photomath.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/duolingo.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Education">Образование</span>
-              <span class="catalog-cat-count">25</span>
+              <span class="catalog-cat-count">26<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/health/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews/period-tracker-period-calendar.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/clue.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/fitbit.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/apple-Health.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/period-tracker-period-calendar.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/clue.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/fitbit.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-Health.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Health">Здоровье</span>
-              <span class="catalog-cat-count">15</span>
+              <span class="catalog-cat-count">16<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/insurance/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/alfa-insurance.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/sogaz.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/sravni.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/t-bank-insurance.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/alfa-insurance.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/sogaz.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/sravni.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/t-bank-insurance.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Insurance">Страхование</span>
-              <span class="catalog-cat-count">5</span>
+              <span class="catalog-cat-count">5<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/crm/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/amocrm.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/1c.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/moysklad.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/bitrix24.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/amocrm.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/1c.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/moysklad.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/bitrix24.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Warehouse, ERP &amp; CRM">Склад, ERP и CRM</span>
-              <span class="catalog-cat-count">4</span>
+              <span class="catalog-cat-count">5<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/docs/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/made-in-russia.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/gosuslugi.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/fns.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/made-in-russia.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/gosuslugi.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/fns.webp" alt="" width="20" height="20" loading="lazy"></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Documents &amp; EDI">Документы и ЭДО</span>
-              <span class="catalog-cat-count">3</span>
+              <span class="catalog-cat-count">3<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/hr/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews/wb-delivery.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/headhunter.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/ozon-profit.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/wb-delivery.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/headhunter.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/ozon-profit.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-team.webp" alt="" width="20" height="20" loading="lazy"></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Work &amp; HR">Работа и HR</span>
-              <span class="catalog-cat-count">3</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="../../../logos/car/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/mercedes-bens.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/haval.svg" alt="" width="20" height="20" loading="lazy"></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="Automotive">Автомобили</span>
-              <span class="catalog-cat-count">2</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="../../../logos/city/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/krasnodar.svg" alt="" width="20" height="20" loading="lazy"></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="Cities">Города</span>
-              <span class="catalog-cat-count">1</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="../../../logos/flag/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/flag-russia.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/belarus.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/flag-japan.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/flag-netherlands.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="Flags">Флаги</span>
-              <span class="catalog-cat-count">13</span>
-            </span>
-          </a>
-          <a class="catalog-cat" href="../../../logos/games/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews/apple/26/color/Counter-Strike 2.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/minecraft.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews/apple/26/color/doodle-jump.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/monopoly-game.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
-            <span class="catalog-cat-bottom">
-              <span class="catalog-cat-name" data-section-en="Games">Игры</span>
-              <span class="catalog-cat-count">45</span>
+              <span class="catalog-cat-count">4<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/b2b/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/sber-tech.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/open-ai.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/anthropic.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/mojang-studio.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/sber-tech.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/open-ai.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/anthropic.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/intra.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="B2B &amp; Enterprise">B2B и корпоративные сервисы</span>
-              <span class="catalog-cat-count">16</span>
+              <span class="catalog-cat-count">24<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/game-platforms/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/mojang-studio.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/valve.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/steam.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/supercell.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Game Platforms">Игровые платформы</span>
+              <span class="catalog-cat-count">7<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/tech/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/xiaomi.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/lg(2023).webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/microsoft.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Tech &amp; Gadgets">Техника и гаджеты</span>
+              <span class="catalog-cat-count">5<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/developers/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/hitech.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/brusnika.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/glora-x.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/samolet.svg" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/dom-rf.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/hitech.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/brusnika.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/glora-x.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Developers &amp; Real Estate">Девелоперы и недвижимость</span>
-              <span class="catalog-cat-count">8</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
           <a class="catalog-cat" href="../../../logos/gas-stations/">
-            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/svgs/rosneft.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/gazprom.svg" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/svgs/lukoil.svg" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/rosneft.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/gazprom.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/lukoil.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/yandex-azs.webp" alt="" width="20" height="20" loading="lazy"></span>
             <span class="catalog-cat-bottom">
               <span class="catalog-cat-name" data-section-en="Gas Stations">Заправки</span>
-              <span class="catalog-cat-count">3</span>
+              <span class="catalog-cat-count">4<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/bookmakers/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/winline.webp" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Bookmakers &amp; Lotteries">Букмекеры и лотереи</span>
+              <span class="catalog-cat-count">1<span class="catalog-cat-count-label" data-en=" logo"> логотип</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/macos/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/apple/26/color/Dropover.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/BuhoLaunchpad.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/3uTools.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/1blocker.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="macOS Utilities">macOS утилиты</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/system/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/apple-Calculator.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/automator.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-Settings.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple-Camera.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="System Apps">Системные приложения</span>
+              <span class="catalog-cat-count">25<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/car/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/mercedes-bens.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/haval.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/gwm.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/lada.webp" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Automotive">Автомобили</span>
+              <span class="catalog-cat-count">4<span class="catalog-cat-count-label" data-en=" logos"> логотипа</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/city/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/krasnodar.webp" alt="" width="20" height="20" loading="lazy"></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Cities">Города</span>
+              <span class="catalog-cat-count">1<span class="catalog-cat-count-label" data-en=" logo"> логотип</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/flag/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/flag-russia.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/belarus.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/flag-japan.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/flag-netherlands.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Flags">Флаги</span>
+              <span class="catalog-cat-count">13<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
+            </span>
+          </a>
+          <a class="catalog-cat" href="../../../logos/games/">
+            <span class="catalog-cat-thumbs" aria-hidden="true"><img src="../../../assets/logos/previews-mini/apple/26/color/Counter-Strike 2.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/minecraft.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/apple/26/color/doodle-jump.webp" alt="" width="20" height="20" loading="lazy"><img src="../../../assets/logos/previews-mini/monopoly-game.webp" alt="" width="20" height="20" loading="lazy"><span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span></span>
+            <span class="catalog-cat-bottom">
+              <span class="catalog-cat-name" data-section-en="Games">Игры</span>
+              <span class="catalog-cat-count">47<span class="catalog-cat-count-label" data-en=" logos"> логотипов</span></span>
             </span>
           </a>
     </div>
@@ -1344,7 +1401,7 @@
 
   <div class="catalog-cta">
     <div class="catalog-cta-text">
-      <span class="catalog-cta-title" data-catalog-count="596">596+ логотипов в каталоге</span>
+      <span class="catalog-cta-title" data-catalog-count="687">687+ логотипов в каталоге</span>
       <span class="catalog-cta-sub" data-i18n="seoCatalogSub">Яндекс, Сбер, ВК, Ozon, Google и другие бренды</span>
     </div>
     <a class="catalog-cta-link" href="../../../logos/">
@@ -1410,6 +1467,9 @@
           <li><a href="../../../collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Облачные хранилища</span></a></li>
           <li><a href="../../../collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Музыкальные сервисы</span></a></li>
           <li><a href="../../../collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Видеостриминг</span></a></li>
+          <li><a href="../../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
+          <li><a href="../../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
+          <li><a href="../../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -1425,6 +1485,7 @@
           <li><a href="../../../tools/edit-image/"><span data-i18n="footerTool_edit-image">Обрезать и повернуть фото</span></a></li>
           <li><a href="../../../tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">Экран вызова iOS</span></a></li>
           <!-- TOOLS:END -->
+          <li><a href="../../../tools/extensions/reviews-exporter/"><span data-i18n="footerToolReviewsExporter">Reviews Exporter</span></a></li>
         </ul>
       </div>
 
@@ -1530,7 +1591,7 @@
   </div>
 </div>
 
-<script src="../../../components/support-btn.js?v=20260801" defer></script>
+<script src="../../../components/support-btn.min.js?v=20260808" defer></script>
 <script>
 window.__SEO_PAGE__ = {
   assetBase:   '../../../assets/logos/',
@@ -1543,7 +1604,8 @@ window.__SEO_PAGE__ = {
   item:        {"figma":"Icon/Design/Preview","file":"apple/26/color/preview.png","variants":[{"labelKey":"ios-27-golden-gate","file":"apple/27/color/preview.png","macos_styles":{"dark":"apple/27/black/preview.png"},"label":"iOS 27 Golden Gate"}]},
 };
 </script>
-<script type="module" src="../../../js/seo-page.js?v=20260801"></script>
+<script type="module" src="../../../js/seo-page.min.js?v=20260808"></script>
+<script type="module" src="../../../js/promo-banner-track.min.js?v=20260808"></script>
 
 </body>
 </html>

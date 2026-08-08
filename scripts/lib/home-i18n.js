@@ -76,44 +76,12 @@ const PAIRS = [
   [`>Все логотипы →</a>`, `>All logos →</a>`],
 
   // ── Section: Categories ─────────────────────────────────────────────────
+  // Tile names are NOT hardcoded here — see loadCategoryPairs() below,
+  // derived straight from logos/manifest.json (section/section_en). A
+  // hand-copied list drifted stale repeatedly (36 categories added since,
+  // subtitle count outgrowing the tile list more than once) — this can't.
   [`>Категории логотипов</h2>`, `>Logo categories</h2>`],
-  [`>35 разделов — от банков до нейросетей</div>`, `>35 sections — from banks to AI</div>`],
   [`>Открыть каталог →</a>`, `>Open catalog →</a>`],
-  [`>Мессенджеры и соцсети</span>`, `>Messengers & social</span>`],
-  [`>Видеозвонки</span>`, `>Video calls</span>`],
-  [`>Видео и стриминг</span>`, `>Video & streaming</span>`],
-  [`>Музыка и медиа</span>`, `>Music & media</span>`],
-  [`>Маркетплейсы и ритейл</span>`, `>Marketplaces & retail</span>`],
-  [`>Еда и рестораны</span>`, `>Food & restaurants</span>`],
-  [`>Банки</span>`, `>Banks</span>`],
-  [`>Платежи и карты</span>`, `>Payments & cards</span>`],
-  [`>Рассрочка и BNPL</span>`, `>Installments & BNPL</span>`],
-  [`>Доставка и такси</span>`, `>Delivery & taxi</span>`],
-  [`>Карты и навигация</span>`, `>Maps & navigation</span>`],
-  [`>Реклама и аналитика</span>`, `>Ads & analytics</span>`],
-  [`>Отзывы и справочники</span>`, `>Reviews & directories</span>`],
-  [`>Поиск и браузеры</span>`, `>Search & browsers</span>`],
-  [`>Почта</span>`, `>Mail</span>`],
-  [`>Офис и документы</span>`, `>Office & documents</span>`],
-  [`>Облака и хранилища</span>`, `>Cloud & storage</span>`],
-  [`>Ассистенты</span>`, `>Assistants</span>`],
-  [`>Сторы и подписки</span>`, `>Stores & subscriptions</span>`],
-  [`>Системные приложения</span>`, `>System apps</span>`],
-  [`>Нейросети</span>`, `>AI & neural networks</span>`],
-  [`>Дизайн</span>`, `>Design</span>`],
-  [`>Сайты и CMS</span>`, `>Websites & CMS</span>`],
-  [`>Разработка</span>`, `>Development</span>`],
-  [`>macOS утилиты</span>`, `>macOS utilities</span>`],
-  [`>Связь и интернет</span>`, `>Telecom & internet</span>`],
-  [`>Путешествия</span>`, `>Travel</span>`],
-  [`>Образование</span>`, `>Education</span>`],
-  [`>Здоровье</span>`, `>Health</span>`],
-  [`>Страхование</span>`, `>Insurance</span>`],
-  [`>Склад, ERP и CRM</span>`, `>Warehouse, ERP & CRM</span>`],
-  [`>Документы и ЭДО</span>`, `>Documents & EDM</span>`],
-  [`>Работа и HR</span>`, `>Jobs & HR</span>`],
-  [`>Флаги</span>`, `>Flags</span>`],
-  [`>B2B и корпоративные сервисы</span>`, `>B2B & corporate services</span>`],
 
   // ── Section: Emoji ──────────────────────────────────────────────────────
   [`>Эмодзи Apple, Google и Microsoft</h2>`, `>Apple, Google and Microsoft emoji</h2>`],
@@ -149,6 +117,8 @@ const PAIRS = [
    `Download in the format you need or grab all logo variants in one archive.`],
   [`Редактор цвета`, `Color editor`],
   [`Экспорт в Figma`, `Export to Figma`],
+  [`Расширение для Chrome: выгружает все отзывы организации с Яндекс.Карт, Avito или комментарии из Telegram в один .md-файл.`,
+   `Chrome extension: exports all of an organization's reviews from Yandex Maps, Avito, or comments from Telegram into one .md file.`],
 
   // ── Section: Collections ────────────────────────────────────────────────
   // Tile names (cat-name span text) and footer short labels are NOT hardcoded
@@ -220,9 +190,26 @@ function loadCollectionPairs() {
   }
 }
 
+// Logo-category tile names (.catalog-cat-name span text, built by
+// scripts/build-home-categories.js), derived straight from
+// logos/manifest.json instead of hand-maintained pairs — see the note above
+// the "Section: Categories" PAIRS block.
+function loadCategoryPairs() {
+  try {
+    const { categories } = require('../../logos/manifest.json');
+    const pairs = [];
+    for (const c of categories) {
+      if (c.section && c.section_en) pairs.push([`>${c.section}</span>`, `>${c.section_en}</span>`]);
+    }
+    return pairs;
+  } catch {
+    return [];
+  }
+}
+
 function translateHome(html) {
   const popular = loadPopularNames();
-  for (const [ru, en] of [...PAIRS, ...loadCollectionPairs(), ...popular.pairs]) {
+  for (const [ru, en] of [...PAIRS, ...loadCategoryPairs(), ...loadCollectionPairs(), ...popular.pairs]) {
     // Source text uses typographic non-breaking spaces (U+00A0) in places, so a
     // plain substring match misses them. Match each space against ' ' OR NBSP.
     const pattern = ru.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]');
@@ -230,6 +217,12 @@ function translateHome(html) {
   }
   // alt="Логотип <name>" → "<name-en> logo" (Latin brands fall back to name).
   html = html.replace(/alt="Логотип ([^"]+)"/g, (m, name) => `alt="${popular.alt[name] || name} logo"`);
+  // "N разделов — от банков до нейросетей" — the count is patched live by
+  // build-home-sitemap.js's patchHomepageCounts() before this runs, so a
+  // literal PAIRS entry for one specific number goes stale the moment the
+  // category count changes again (as it already had: hardcoded for "35"
+  // while the live page said "43"). Number-agnostic regex instead.
+  html = html.replace(/>(\d+) разделов — от банков до нейросетей<\/div>/, (m, n) => `>${n} sections — from banks to AI</div>`);
   return html;
 }
 

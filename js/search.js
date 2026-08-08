@@ -215,4 +215,6 @@ export function filterCards(q, { animate = false } = {}) {
   else clearActiveCard();
   if (hasQuery && !animate) resetContentScroll();
   else requestAnimationFrame(() => { _updateScrollTopButton(); scheduleVirtualizedSections(); });
+
+  return visibleCardCount;
 }

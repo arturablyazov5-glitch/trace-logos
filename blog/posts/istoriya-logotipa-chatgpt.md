@@ -27,7 +27,7 @@ tags_en: Logo Histories, Branding, AI
 
 В категории, где все [сверкают градиентами](../logotipy-nejrosetej/), лидер носит чёрно‑белый знак — и это стратегия, а не бедность. Монохром сообщает «инструмент, а не игрушка», работает в любом интерфейсе и на любом носителе без адаптаций — [монохром недаром считается базой](../logotip-dlya-pechati/) — а главное, отстраивает лидера от подражателей: копируя «эстетику ИИ», конкуренты копируют градиенты, а не сдержанность.
 
-##2023: тихий редизайн и шрифт
+## 2023: тихий редизайн и шрифт
 
 В 2023‑м OpenAI провёл рестайлинг, который большинство пользователей не заметило: пропорции розетки слегка выровняли, дуги утолстили для лучшей читаемости в малых размерах — [та же логика, что и у фавиконки](../kak-sdelat-favicon/) — а рядом появился фирменный гротеск для текстовой части. Это образцовый «редизайн‑невидимка»: знак стал технически лучше, не потревожив ни одной привычки — противоположность [громким ребрендингам](../chto-takoe-rebrending/).
 
@@ -51,6 +51,7 @@ tags_en: Logo Histories, Branding, AI
 | 2022 | ChatGPT делает знак всемирно известным |
 | 2023 | рестайлинг: пропорции, шрифт |
 | 2024+ | розетка = пиктограмма «здесь ИИ» |
+| 2025 | первый официальный ребрендинг: обновлённая розетка и собственный шрифт OpenAI Sans |
 
 :::tip Урок кейса
 ChatGPT — редкий случай, когда бренд построила не айдентика, а продукт: знак просто оказался достаточно качественным, чтобы выдержать свалившуюся славу. Мораль для всех: рисуйте корпоративный знак «на вырост» — вы не знаете, какой из ваших продуктов однажды сделает его знаменитым — поэтому [заказывайте знак сразу с запасом прочности](../kak-zakazat-logotip-u-dizajnera/).
@@ -78,7 +79,7 @@ The rosette is built from **six identical arcs** interwoven with rotational symm
 
 In a category where everyone [glitters with gradients](../logotipy-nejrosetej/), the leader wears black and white — strategy, not poverty. Monochrome says "a tool, not a toy", works in any interface and on any medium without adaptation — [monochrome earns its baseline status](../logotip-dlya-pechati/) for that reason — and above all separates the leader from imitators: copying "AI aesthetics", competitors copy the gradients, not the restraint.
 
-##2023: the quiet refresh and the typeface
+## 2023: the quiet refresh and the typeface
 
 In 2023 OpenAI ran a restyle most users never noticed: the rosette's proportions were trued up, the arcs thickened for small-size readability — [the same logic a favicon follows](../kak-sdelat-favicon/) — and a corporate grotesque arrived for the wordmark. A model "invisible redesign": the mark got technically better without disturbing a single habit — the opposite of [loud rebrands](../chto-takoe-rebrending/).
 
@@ -102,6 +103,7 @@ The mark's success spawned a genre: after 2023 "interwoven rosettes" appeared at
 | 2022 | ChatGPT makes the mark world-famous |
 | 2023 | the refresh: proportions, typeface |
 | 2024+ | the rosette = the "AI here" pictogram |
+| 2025 | first official rebrand: refined rosette and the new OpenAI Sans typeface |
 
 :::tip The case's lesson
 ChatGPT is the rare case of a brand built by the product rather than the identity: the mark simply proved good enough to survive sudden fame. The moral for everyone: draw the corporate mark "with room to grow" — you don't know which of your products will one day make it famous — so [commission the mark with a safety margin](../kak-zakazat-logotip-u-dizajnera/) from the start.

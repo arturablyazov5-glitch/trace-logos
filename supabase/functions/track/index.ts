@@ -2,9 +2,12 @@ import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { checkRateLimit } from '../_shared/rate-limit.ts';
 
 // POST  /track            → публично. Инкремент счётчика просмотров логотипа или статьи.
-//                           body: { figma, name?, img? } OR { slug }
-// GET   /track            → только с заголовком x-admin-key == ADMIN_KEY (секрет).
+//                           body: { figma, name?, img? } OR { slug } OR { banner }
+// GET    /track           → только с заголовком x-admin-key == ADMIN_KEY (секрет).
 //                           Отдаёт всю статистику для админки.
+// DELETE /track            → только с заголовком x-admin-key == ADMIN_KEY (секрет).
+//                           body: { searchQuery } → удаляет одну строку из search_queries.
+//                           без тела → полный сброс logo_stats/export_stats.
 
 // Лимит намеренно щедрый: обычный сеанс листания каталога (virtual scroll) легко
 // генерирует десятки view-событий за минуту — это не злоупотребление.
@@ -61,11 +64,46 @@ serve(async (req: Request) => {
     let payload: {
       figma?: string; name?: string; img?: string; format?: string; variant?: string;
       slug?: string; // New field for blog posts
+      searchQuery?: string; resultsCount?: number; // Поиск в шапке каталога
+      banner?: string; // Клик по промо-баннеру (напр. sidebar landologovo)
     };
     try {
       payload = await req.json();
     } catch (_) {
       return json(origin, { error: 'Invalid JSON' }, 400);
+    }
+
+    // --- Search Query Tracking ---
+    const searchQuery = clean(payload.searchQuery, 200);
+    if (searchQuery) {
+      const resultsCount = Number.isFinite(payload.resultsCount) ? Math.max(0, Math.trunc(payload.resultsCount!)) : 0;
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_search_query`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SERVICE_KEY,
+          Authorization: `Bearer ${SERVICE_KEY}`,
+        },
+        body: JSON.stringify({ p_query: searchQuery, p_results_count: resultsCount }),
+      });
+      if (!res.ok) return json(origin, { error: 'DB error', detail: await res.text() }, 500);
+      return json(origin, { ok: true });
+    }
+
+    // --- Banner Click Tracking ---
+    const banner = clean(payload.banner, 100);
+    if (banner) {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_banner_click`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SERVICE_KEY,
+          Authorization: `Bearer ${SERVICE_KEY}`,
+        },
+        body: JSON.stringify({ p_banner_id: banner }),
+      });
+      if (!res.ok) return json(origin, { error: 'DB error', detail: await res.text() }, 500);
+      return json(origin, { ok: true });
     }
 
     // --- Blog Post Tracking ---
@@ -151,10 +189,22 @@ serve(async (req: Request) => {
       { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } }
     );
 
+    const searchQueries = await fetch(
+      `${SUPABASE_URL}/rest/v1/search_queries?select=query,count,results_count,last_seen&order=count.desc&limit=2000`,
+      { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } }
+    );
+
+    const bannerClicks = await fetch(
+      `${SUPABASE_URL}/rest/v1/banner_clicks?select=banner_id,count,updated_at&order=count.desc`,
+      { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } }
+    );
+
     return json(origin, {
       views: await res.json(),
       exports: exports.ok ? await exports.json() : [],
       post_views: postViews.ok ? await postViews.json() : [],
+      search_queries: searchQueries.ok ? await searchQueries.json() : [],
+      banner_clicks: bannerClicks.ok ? await bannerClicks.json() : [],
     });
   }
 
@@ -162,6 +212,32 @@ serve(async (req: Request) => {
   if (req.method === 'DELETE') {
     if (!ADMIN_KEY || req.headers.get('x-admin-key') !== ADMIN_KEY) {
       return json(origin, { error: 'Unauthorized' }, 401);
+    }
+
+    // Точечное удаление одной поисковой фразы — тело { searchQuery: "..." }.
+    // Полный сброс (без тела / без searchQuery) идёт дальше по коду и статистику поиска не трогает.
+    let payload: { searchQuery?: string } = {};
+    try {
+      payload = await req.clone().json();
+    } catch (_) {
+      // тела нет — это полный сброс, ниже по коду
+    }
+    const searchQuery = clean(payload.searchQuery, 200);
+    if (searchQuery) {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/search_queries?query=eq.${encodeURIComponent(searchQuery)}`,
+        {
+          method: 'DELETE',
+          headers: {
+            apikey: SERVICE_KEY,
+            Authorization: `Bearer ${SERVICE_KEY}`,
+          },
+        },
+      );
+      if (!res.ok) {
+        return json(origin, { error: 'DB error', detail: await res.text() }, 500);
+      }
+      return json(origin, { ok: true });
     }
 
     const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/reset_logo_stats`, {

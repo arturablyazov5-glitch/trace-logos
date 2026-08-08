@@ -15,13 +15,13 @@ tags_en: Logo Histories, Branding, Social Media
 Хронология: **2010** — коричневая полароидная камера первой версии приложения; **2011** — знаменитая ретро‑камера с радужной полоской работы Коула Райза; **2016** — радикальный переход к плоскому глифу на радужном градиенте (скандал года в дизайне); **2022** — рестайлинг: более яркий градиент и собственный шрифт Instagram Sans. Все версии знака — на странице [Instagram в каталоге](../../logos/social/instagram/).
 :::
 
-##2010: Burbn, который стал Instagram
+## 2010: Burbn, который стал Instagram
 
 Instagram начинался как приложение Burbn — чекины, планы с друзьями и фото. Когда основатели Кевин Систром и Майк Кригер поняли, что пользователи игнорируют всё, кроме фотографий, они выбросили лишнее и за несколько недель собрали чисто фотографическое приложение. Название сложили из «instant» и «telegram» — мгновенная фототелеграмма.
 
 Первый логотип Систром нарисовал сам: белая полароидная камера с коричневой кожаной вставкой и радужной полоской — прямая отсылка к Polaroid OneStep. Иконка честно объясняла суть продукта: «здесь делают квадратные ретро‑фото». Но выглядела она любительски, и основатели это понимали — знак прожил меньше года.
 
-##2011: камера Коула Райза — икона скевоморфизма
+## 2011: камера Коула Райза — икона скевоморфизма
 
 Для второй версии иконки Систром написал фотографу и дизайнеру Коулу Райзу. Райз взял за основу винтажную камеру Bell & Howell 1940‑х годов, которую… увидел на полке у себя дома. Он детально прорисовал корпус, объектив, видоискатель и кожаную фактуру, сохранив радужную полоску‑мостик к полароидной версии — и уложился, по его словам, в несколько часов работы.
 
@@ -31,7 +31,7 @@ Instagram начинался как приложение Burbn — чекин�
 Спросите любого, что было на старой иконке Instagram, — услышите «полароид». На самом деле полароидом была только самодельная версия 2010 года, прожившая несколько месяцев. Знаменитая камера 2011‑2016 годов — Bell & Howell, у которой с полароидом общего только радужная полоска. Так работает память на логотипы: она хранит образ, а не факт — мы разбирали этот эффект в статье [логотипы со скрытым смыслом](../logotipy-so-skrytym-smyslom/).
 :::
 
-##2016: редизайн, который возненавидел интернет
+## 2016: редизайн, который возненавидел интернет
 
 К 2016 году Instagram перерос «приложение для ретро‑фильтров»: появились видео, Stories на подходе, аудитория — полмиллиарда. Детализированная камера тянула бренд в прошлое и технически устарела: скевоморфизм умер ещё в 2013‑м с выходом плоской iOS 7, а мелкие детали иконки превращались в кашу на маленьких размерах — [почему детализация не выживает в иконках](../ikonka-prilozheniya/), мы объясняли отдельно.
 
@@ -48,7 +48,7 @@ Instagram начинался как приложение Burbn — чекин�
 3. **Семейство продуктов.** Вместе с основной иконкой перерисовали Layout, Boomerang и Hyperlapse — единым контурным стилем. Абстрактная система масштабируется на любое число продуктов; камера Райза — нет.
 4. **Техника.** Плоский глиф безупречно работает в любом размере и легко анимируется ([анимированный логотип](../animirovannyj-logotip/) — стандарт для сплеш‑скринов).
 
-##2022: ярче, «живее» и со своим шрифтом
+## 2022: ярче, «живее» и со своим шрифтом
 
 В 2022 году Instagram провёл рестайлинг: градиент стал насыщеннее и «электрических» оттенков, с акцентом на фиолетово‑розовую зону. Компания описала обновление как «яркий и живой» градиент, созданный с помощью 3D‑моделирования переходов. Одновременно представили собственную гарнитуру **Instagram Sans** — с фирменными «квадратно‑круглыми» формами букв, вдохновлёнными… квадратом рамки и кругом объектива всё той же камеры. Как шрифт становится носителем бренда — в статье [шрифт для логотипа](../shrift-dlya-logotipa/).
 
@@ -82,13 +82,13 @@ The [Instagram](../../logos/social/instagram/) icon is the rare case of a logo r
 The timeline: **2010** — the brown Polaroid camera of the first app version; **2011** — the famous retro camera with the rainbow stripe by Cole Rise; **2016** — the radical switch to a flat glyph on a rainbow gradient (the design scandal of the year); **2022** — a restyle: a brighter gradient and the custom Instagram Sans typeface. All versions of the mark are on the [Instagram catalog page](../../logos/social/instagram/).
 :::
 
-##2010: the Burbn that became Instagram
+## 2010: the Burbn that became Instagram
 
 Instagram began as an app called Burbn — check-ins, plans with friends, and photos. When founders Kevin Systrom and Mike Krieger noticed users ignored everything except the photos, they threw the rest away and built a purely photographic app in weeks. The name fused "instant" and "telegram" — an instant photo telegram.
 
 Systrom drew the first logo himself: a white Polaroid camera with a brown leather panel and a rainbow stripe — a direct nod to the Polaroid OneStep. The icon honestly explained the product: "square retro photos made here". But it looked amateur, the founders knew it, and the mark lasted less than a year.
 
-##2011: Cole Rise's camera — a skeuomorphism icon
+## 2011: Cole Rise's camera — a skeuomorphism icon
 
 For the second icon Systrom wrote to photographer and designer Cole Rise. Rise based it on a 1940s Bell & Howell vintage camera he had spotted... on his own shelf. He rendered the body, lens, viewfinder and leather texture in detail, keeping the rainbow stripe as a bridge to the Polaroid version — and by his own account spent just a few hours on it.
 
@@ -98,7 +98,7 @@ This was the golden age of **skeuomorphism** — the style imitating real materi
 Ask anyone what the old Instagram icon showed and you'll hear "a Polaroid". In fact the Polaroid was only the homemade 2010 version that lasted months. The famous 2011-2016 camera is a Bell & Howell, sharing only the rainbow stripe with a Polaroid. That's how logo memory works: it stores an impression, not a fact — an effect we covered in [logos with hidden meanings](../logotipy-so-skrytym-smyslom/).
 :::
 
-##2016: the redesign the internet hated
+## 2016: the redesign the internet hated
 
 By 2016 Instagram had outgrown "the retro-filter app": video had arrived, Stories were coming, the audience neared half a billion. The detailed camera pulled the brand into the past and was technically obsolete: skeuomorphism had died back in 2013 with flat iOS 7, and the icon's fine details turned to mush at small sizes — we explain [why detail dies in icons](../ikonka-prilozheniya/) separately.
 
@@ -115,7 +115,7 @@ The scandal drowned the logic, which was sound:
 3. **A product family.** Layout, Boomerang and Hyperlapse were redrawn alongside the main icon in one outlined style. An abstract system scales to any number of products; Rise's camera doesn't.
 4. **Engineering.** A flat glyph works flawlessly at any size and animates easily ([animated logos](../animirovannyj-logotip/) are the splash-screen standard).
 
-##2022: brighter, "alive", with its own typeface
+## 2022: brighter, "alive", with its own typeface
 
 In 2022 Instagram restyled: the gradient became more saturated and electric, weighted toward the violet-pink zone. The company described it as a "vibrant and alive" gradient built with 3D-modeled transitions. Alongside came the custom **Instagram Sans** typeface — its square-round letterforms inspired by... the frame square and lens circle of that same camera. How type carries a brand: [choosing a logo font](../shrift-dlya-logotipa/).
 

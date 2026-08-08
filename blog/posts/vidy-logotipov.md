@@ -15,43 +15,43 @@ tags_en: Branding, Basics, Design
 Логотипы делятся на **текстовые** (название целиком), **монограммы** (инициалы), **абстрактные знаки** (фигура без буквального смысла), **изобразительные знаки** (узнаваемый предмет), **эмблемы** (знак и текст в единой форме), **маскоты** (персонаж) и **комбинированные** (знак + текст). Большинство крупных брендов используют комбинированный вариант и «разбирают» его на части под разные носители.
 :::
 
-##1. Текстовый логотип (wordmark)
+## 1. Текстовый логотип (wordmark)
 
 Название компании, набранное фирменным шрифтом, — и больше ничего. Так работают [Google](../../logos/search/google/), [Canva](../../logos/design/canva/) и [Ozon](../../logos/market/ozon/): вся узнаваемость держится на типографике и цвете.
 
 **Сильные стороны:** мгновенно связывает изображение с именем — идеально для молодых брендов, которых ещё никто не знает. **Слабые:** длинное название плохо ужимается в аватарку или фавиконку, поэтому текстовым логотипам почти всегда приходится заводить сокращённую версию — как «G» у [Google](../../logos/search/google/).
 
-##2. Монограмма (lettermark)
+## 2. Монограмма (lettermark)
 
 Когда название длинное, в ход идут инициалы. [ВТБ](../../logos/bank/vtb/) — три буквы, ВкусВилл использует «ВВ» в иконке, а Мегамаркет — букву «М». Классика жанра в мировой практике — BMW и IBM.
 
 Монограмма отлично масштабируется до фавиконки, но сама по себе ничего не сообщает: аббревиатуру нужно ещё «привязать» к бренду рекламой и повторением.
 
-##3. Абстрактный знак
+## 3. Абстрактный знак
 
 Фигура, не изображающая ничего конкретного: галочка, росчерк, геометрическая композиция. Примеры — «шеврон» [Сбера](../../logos/bank/sber/) или упрощённая камера [Instagram](../../logos/social/instagram/), которая уже на грани абстракции.
 
 **Плюс:** абстракция не привязана к продукту, поэтому переживает любые повороты бизнеса — компания может уйти из исходной ниши, а знак останется актуальным. **Минус:** новый абстрактный знак — «пустой сосуд», в который годами вливают рекламный бюджет, прежде чем он начнёт что‑то значить.
 
-##4. Изобразительный знак (pictorial mark)
+## 4. Изобразительный знак (pictorial mark)
 
-Узнаваемый предмет или символ: надкушенное яблоко [Apple](../../logos/store/apple/), бумажный самолётик [Telegram](../../logos/social/telegram/), призрак [Snapchat](../../logos/social/snapchat/), птица у [Twitter](../../logos/social/x/) до ребрендинга. Историю самого известного из них мы разбирали в статье [про логотип Apple](../istoriya-logotipa-apple/).
+Узнаваемый предмет или символ: надкушенное яблоко [Apple](../../logos/tech/apple/), бумажный самолётик [Telegram](../../logos/social/telegram/), призрак [Snapchat](../../logos/social/snapchat/), птица у [Twitter](../../logos/social/x/) до ребрендинга. Историю самого известного из них мы разбирали в статье [про логотип Apple](../istoriya-logotipa-apple/).
 
 Такой знак легко запомнить и пересказать словами («у них самолётик»), но выбирать образ нужно осторожно: буквальная картинка привязывает бренд к конкретной ассоциации.
 
-##5. Эмблема
+## 5. Эмблема
 
 Текст, заключённый внутрь знака: щит, круг, гербовая форма. Так устроены логотипы [Starbucks](../../logos/food/starbucks/), Harley‑Davidson и большинства футбольных клубов, а среди автомобилей — Porsche с гербом Штутгарта и Land Rover с овальной плашкой.
 
 Эмблема выглядит солидно и «традиционно», но хуже всех типов переносит уменьшение: в 16 пикселях фавиконки мелкие детали герба превращаются в кашу. Подробнее о том, почему все стремятся к простоте, — в статье [почему бренды упрощают логотипы](../pochemu-brendy-uproshchayut-logotipy/).
 
-##6. Маскот
+## 6. Маскот
 
 Логотип‑персонаж: полковник Сандерс у KFC, зайцы и коты операторов связи, олимпийские талисманы. Маскот очеловечивает бренд и отлично живёт в соцсетях и рекламе — его можно анимировать, наряжать, ставить в мемы (о том, как оживить логотип, — в статье [про анимированные логотипы](../animirovannyj-logotip/)).
 
 Обратная сторона: персонаж требует постоянной поддержки иллюстратора, а в крошечных размерах различим ещё хуже эмблемы. Поэтому маскот почти всегда существует в паре с более простым знаком.
 
-##7. Комбинированный логотип
+## 7. Комбинированный логотип
 
 Знак + название рядом или друг под другом. Это самый распространённый тип: [Сбер](../../logos/bank/sber/), [Яндекс](../../logos/search/yandex/), [ВКонтакте](../../logos/social/vk/), [Т‑Банк](../../logos/bank/tbank/) — у всех есть полная версия с текстом и отдельная иконка.
 
@@ -89,7 +89,7 @@ tags_en: Branding, Basics, Design
 | Изобразительный знак | [Telegram](../../logos/social/telegram/) | ✅ хорошо | частично |
 | Эмблема | [Starbucks](../../logos/food/starbucks/) | ⛔ плохо | частично |
 | Маскот | KFC | ⛔ плохо | частично |
-| Комбинированный | [Яндекс](../../logos/search/yandex/) | ✅ (иконкой) | ✅ да |
+| Комбинированный | [Яндекс](../../logos/search/yandex/) | ✅ (иконкой) | ✅ да |
 
 ## Как выбрать свой тип
 
@@ -128,43 +128,43 @@ tags_en: Branding, Basics, Design
 Logos split into **wordmarks** (the full name), **lettermarks** (initials), **abstract marks** (a shape with no literal meaning), **pictorial marks** (a recognizable object), **emblems** (mark and text fused into one shape), **mascots** (a character) and **combination marks** (symbol + text). Most big brands use a combination mark and split it apart for different media.
 :::
 
-##1. Wordmark
+## 1. Wordmark
 
 The company name set in a custom typeface — nothing else. That's how [Google](../../logos/search/google/), [Canva](../../logos/design/canva/) and [Ozon](../../logos/market/ozon/) work: all the recognition rests on typography and color.
 
 **Strengths:** it instantly ties the image to the name — perfect for young brands nobody knows yet. **Weaknesses:** a long name won't squeeze into an avatar or favicon, so wordmark brands almost always maintain a short version — like the "G" of [Google](../../logos/search/google/).
 
-##2. Lettermark
+## 2. Lettermark
 
 When the name is long, initials step in. [VTB](../../logos/bank/vtb/) is three letters, VkusVill uses "VV" in its icon, Megamarket an "M". The world-famous classics are BMW and IBM.
 
 A lettermark scales down to a favicon beautifully, but says nothing by itself: the abbreviation still has to be tied to the brand through advertising and repetition.
 
-##3. Abstract mark
+## 3. Abstract mark
 
 A shape that depicts nothing in particular: a checkmark, a flourish, a geometric composition. Examples — the [Sber](../../logos/bank/sber/) chevron or the simplified camera of [Instagram](../../logos/social/instagram/), already on the edge of abstraction.
 
 **Pro:** abstraction isn't tied to a product, so it survives any business pivot — the company can leave its original niche and the mark stays relevant. **Con:** a new abstract mark is an "empty vessel" that takes years of marketing budget before it means anything.
 
-##4. Pictorial mark
+## 4. Pictorial mark
 
-A recognizable object or symbol: the bitten apple of [Apple](../../logos/store/apple/), the paper plane of [Telegram](../../logos/social/telegram/), the [Snapchat](../../logos/social/snapchat/) ghost, the bird [Twitter](../../logos/social/x/) had before its rebrand. We covered the most famous one in [the Apple logo history](../istoriya-logotipa-apple/).
+A recognizable object or symbol: the bitten apple of [Apple](../../logos/tech/apple/), the paper plane of [Telegram](../../logos/social/telegram/), the [Snapchat](../../logos/social/snapchat/) ghost, the bird [Twitter](../../logos/social/x/) had before its rebrand. We covered the most famous one in [the Apple logo history](../istoriya-logotipa-apple/).
 
 Such a mark is easy to remember and retell ("they have the paper plane"), but the image must be chosen carefully: a literal picture chains the brand to one association.
 
-##5. Emblem
+## 5. Emblem
 
 Text enclosed inside a mark: a shield, a circle, a crest. That's [Starbucks](../../logos/food/starbucks/), Harley-Davidson and most football clubs; among cars — Porsche with the Stuttgart crest and Land Rover with its oval badge.
 
 An emblem looks solid and "traditional", but handles downscaling worst of all types: at 16 favicon pixels the fine crest details turn to mush. More on why everyone chases simplicity in [why brands simplify their logos](../pochemu-brendy-uproshchayut-logotipy/).
 
-##6. Mascot
+## 6. Mascot
 
 A character logo: KFC's Colonel Sanders, telecom bunnies and cats, Olympic mascots. A mascot humanizes the brand and thrives in social media and ads — it can be animated, dressed up, memed (see [animated logos](../animirovannyj-logotip/)).
 
 The flip side: a character needs constant illustrator support, and at tiny sizes it's even less legible than an emblem. So a mascot almost always coexists with a simpler mark.
 
-##7. Combination mark
+## 7. Combination mark
 
 Symbol + name, side by side or stacked. The most common type: [Sber](../../logos/bank/sber/), [Yandex](../../logos/search/yandex/), [VK](../../logos/social/vk/), [T-Bank](../../logos/bank/tbank/) — all have a full lockup with text plus a standalone icon.
 

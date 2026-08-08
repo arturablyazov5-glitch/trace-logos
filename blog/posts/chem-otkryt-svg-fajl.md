@@ -9,10 +9,10 @@ tags: SVG, Инструменты, Инструкции
 tags_en: SVG, Tools, How-to
 ---
 
-Скачали логотип, кликнули по файлу — а вместо картинки открылся блокнот со стеной непонятного кода. Или система вообще растерянно спрашивает: «чем открыть этот файл?». Первая мысль — файл битый. Но с ним всё в порядке, и вся путаница вырастает из одной особенности формата, которую стоит понять раз и навсегда: **SVG — это одновременно и картинка, и текст**. Как только это уложится в голове, вопрос «чем открыть» распадается на два простых, и на каждый есть очевидный ответ.
+Скачали логотип, кликнули по файлу, а вместо картинки открылся блокнот со стеной непонятного кода. Или система вообще растерянно спрашивает: «чем открыть этот файл?». Первая мысль — файл битый. Но с ним всё в порядке, и вся путаница вырастает из одной особенности формата, которую стоит понять раз и навсегда: **SVG — это одновременно и картинка, и текст**. Как только это уложится в голове, вопрос «чем открыть» распадается на два простых, и на каждый есть очевидный ответ.
 
 :::note Коротко
-**Просто посмотреть** — перетащите SVG в любой браузер: [Chrome](../../logos/search/chrome/), [Safari](../../logos/search/safari/), [Яндекс Браузер](../../logos/search/yandexbrowser/). **Отредактировать** — [Figma](../../logos/design/figma/) (бесплатно, в браузере), Inkscape (бесплатно, оффлайн) или [Illustrator](../../logos/design/illustrator/). **Открылся как текст** — это не поломка: SVG и есть текст, просто система привязала расширение к блокноту.
+**Просто посмотреть** — перетащите SVG в любой браузер: [Chrome](../../logos/search/chrome/), [Safari](../../logos/search/safari/), [Яндекс Браузер](../../logos/search/yandexbrowser/). **Отредактировать** — [Figma](../../logos/design/figma/) (бесплатно, в браузере), Inkscape (бесплатно, оффлайн) или [Illustrator](../../logos/design/illustrator/). **Открылся как текст** — нормальное поведение: SVG и есть текст, просто система привязала расширение к блокноту.
 :::
 
 ## Почему SVG открывается «как код»
@@ -27,7 +27,7 @@ tags_en: SVG, Tools, How-to
 
 Перетащите файл в окно [Chrome](../../logos/search/chrome/), [Safari](../../logos/search/safari/), [Firefox](../../logos/search/firefox/) или [Яндекс Браузера](../../logos/search/yandexbrowser/) — картинка появится мгновенно, а колесо мыши приблизит её без потери чёткости (в этом и весь смысл вектора). Работает одинаково на любой системе, поэтому дальше — только нюансы по платформам, где есть варианты быстрее перетаскивания.
 
-- **[Windows](../../logos/store/windows/) 10/11.** Проводник показывает миниатюры SVG не всегда — зависит от установленных расширений. Если миниатюр нет, надёжнее всего браузер; либо поставьте из Microsoft Store бесплатное расширение с поддержкой SVG‑превью, и папка с иконками станет видимой без открывания каждого файла.
+- **[Windows](../../logos/tech/windows/) 10/11.** Проводник показывает миниатюры SVG не всегда — зависит от установленных расширений. Если миниатюр нет, надёжнее всего браузер; либо поставьте из Microsoft Store бесплатное расширение с поддержкой SVG‑превью, и папка с иконками станет видимой без открывания каждого файла.
 - **macOS.** Здесь проще всего: нажмите пробел на файле в [Finder](../../logos/system/finder/) — Quick Look покажет SVG из коробки. [Preview](../../logos/design/preview/) тоже откроет, но для просмотра, не для правок: при сохранении он превращает вектор в растр.
 - **Телефон.** И iOS, и Android откроют SVG во встроенном браузере — пришлите файл себе в мессенджер и нажмите на него. Отдельное приложение не нужно.
 
@@ -50,7 +50,7 @@ tags_en: SVG, Tools, How-to
 
 ### Inkscape — бесплатный оффлайн-редактор
 
-Когда нужен настольный редактор без интернета, есть Inkscape ([Windows](../../logos/store/windows/), macOS, Linux) — векторный редактор с открытым кодом. SVG для него родной формат, и поддержка самая полная из всех: трассировка растра, тонкая работа с узлами кривых, замена цвета по всему файлу. Интерфейс менее гламурный, чем у [Figma](../../logos/design/figma/), но по возможностям он не уступает платным пакетам.
+Когда нужен настольный редактор без интернета, есть Inkscape ([Windows](../../logos/tech/windows/), macOS, Linux) — векторный редактор с открытым кодом. SVG для него родной формат, и поддержка самая полная из всех: трассировка растра, тонкая работа с узлами кривых, замена цвета по всему файлу. Интерфейс менее гламурный, чем у [Figma](../../logos/design/figma/), но по возможностям он не уступает платным пакетам.
 
 ### Adobe Illustrator — профессиональный стандарт
 
@@ -70,7 +70,7 @@ tags_en: SVG, Tools, How-to
 | Профессиональная работа | [Illustrator](../../logos/design/illustrator/) | подписка |
 | Правка в одну строку | текстовый редактор | бесплатно |
 
-Обратите внимание, чего в таблице нет, — и это не случайный пропуск.
+Обратите внимание, чего в таблице нет: пропуск тут неслучайный.
 
 :::warning Чем НЕ надо открывать SVG
 - **Paint и стандартные «Фотографии»** — либо не откроют, либо растеризуют при сохранении, и вектор погибнет.
@@ -89,11 +89,17 @@ tags_en: SVG, Tools, How-to
 
 **Как открыть SVG в Word или PowerPoint?** Современный Office вставляет SVG напрямую: Вставка → Рисунки → выбрать файл, дальше доступны базовые операции (размер, поворот, смена цвета). Версии до 2016 года SVG не понимают — для них конвертируйте в PNG.
 
-**SVG из интернета не открывается вообще.** Проверьте, что скачался сам файл: вместо него часто сохраняется HTML‑страница (правый клик «Сохранить ссылку как» иногда сохраняет страницу). Откройте блокнотом: если внутри `<!DOCTYPE html>` — это страница, ищите прямую ссылку на `.svg`.
+**SVG из интернета не открывается вообще.** Проверьте, что скачался сам файл: вместо него часто сохраняется HTML‑страница (правый клик «Сохранить ссылку как» иногда сохраняет страницу). Откройте блокнотом: если внутри `<!DOCTYPE html>`, перед вами страница: ищите прямую ссылку на `.svg`.
+
+## Стоит ли открывать чужой SVG
+
+Один вопрос возникает раньше выбора программы: безопасно ли вообще открывать присланный файл. Двойная природа формата играет тут против пользователя, потому что текстовый файл умеет содержать исполняемый код. Внутри SVG допустимы теги `<script>` и обработчики событий, и браузер их выполнит.
+
+На практике риск делится надвое. Открыть файл локально, перетащив его в браузер, почти безопасно: скрипт отработает в контексте пустой страницы, где красть нечего. Опасен другой сценарий — вставить чужой SVG инлайном в свой сайт: там код получит доступ к странице и данным ваших посетителей. Поэтому чужие файлы либо подключают тегом `<img>`, который скрипты внутри блокирует, либо сначала чистят через SVGO, вырезающий скриптовые узлы. Подробнее о способах вставки — в статье [про SVG на сайте](../kak-vstavit-svg-na-sajt/).
 
 ## Откуда берутся «сломанные» SVG
 
-Отдельно стоит знать, почему внешне правильный файл вдруг ведёт себя не так, — это экономит часы на диагностике. Все причины сводятся к тому, что где‑то нарушена та самая связка «текст описывает картинку»:
+Отдельно стоит знать, почему внешне правильный файл вдруг ведёт себя не так: это экономит часы на диагностике. Все причины сводятся к тому, что где‑то нарушена та самая связка «текст описывает картинку»:
 
 - **Цвета вынесены в CSS‑классы.** Часть редакторов пишет цвета в блок `<style>` с классами. Файл корректен, но некоторые программы (и старый Office) стили игнорируют — картинка чернеет. Лечение: пересохранить через [Figma](../../logos/design/figma/), которая переносит стили в атрибуты фигур.
 - **Живой текст вместо кривых.** Если в SVG остался тег `<text>`, а нужного шрифта на машине нет, надпись съедет или отрисуется чужим шрифтом. Правильно подготовленный логотип хранит текст переведённым в кривые.
@@ -126,7 +132,7 @@ If you only need to see the logo, the most universal viewer is already on your d
 
 Drag the file into a [Chrome](../../logos/search/chrome/), [Safari](../../logos/search/safari/), [Firefox](../../logos/search/firefox/) or [Yandex Browser](../../logos/search/yandexbrowser/) window — the picture appears instantly, and the mouse wheel zooms it in with no loss of sharpness (the whole point of vector). It works the same on any system, so what follows are just per-platform shortcuts faster than dragging.
 
-- **[Windows](../../logos/store/windows/) 10/11.** Explorer doesn't always show SVG thumbnails — it depends on installed extensions. If there are none, the browser is safest; or install a free thumbnail extension from the Microsoft Store, and an icon folder becomes visible without opening each file.
+- **[Windows](../../logos/tech/windows/) 10/11.** Explorer doesn't always show SVG thumbnails — it depends on installed extensions. If there are none, the browser is safest; or install a free thumbnail extension from the Microsoft Store, and an icon folder becomes visible without opening each file.
 - **macOS.** Easiest here: press space on the file in [Finder](../../logos/system/finder/) — Quick Look shows the SVG out of the box. [Preview](../../logos/design/preview/) opens it too, but for viewing only: on save it turns vector into raster.
 - **Phone.** Both iOS and Android open SVG in the built-in browser — send the file to yourself in a messenger and tap it. No separate app needed.
 
@@ -149,7 +155,7 @@ For 90% of logo tasks [Figma](../../logos/design/figma/) is plenty: it runs in t
 
 ### Inkscape — a free offline editor
 
-When you need a desktop editor without internet, there's Inkscape ([Windows](../../logos/store/windows/), macOS, Linux) — an open-source vector editor. SVG is its native format, with the fullest support of all: raster tracing, fine node work, color replacement across the whole file. The interface is less glamorous than [Figma](../../logos/design/figma/)'s, but in capability it rivals paid packages.
+When you need a desktop editor without internet, there's Inkscape ([Windows](../../logos/tech/windows/), macOS, Linux) — an open-source vector editor. SVG is its native format, with the fullest support of all: raster tracing, fine node work, color replacement across the whole file. The interface is less glamorous than [Figma](../../logos/design/figma/)'s, but in capability it rivals paid packages.
 
 ### Adobe Illustrator — the professional standard
 
@@ -189,6 +195,12 @@ SVG's dual nature spawns a couple of recurring questions — let's settle them s
 **How to open SVG in Word or PowerPoint?** Modern Office inserts SVG directly: Insert → Pictures → choose the file; basic operations follow (size, rotation, color change). Pre-2016 versions don't understand SVG — convert to PNG for them.
 
 **An SVG from the internet won't open at all.** Check that the file itself downloaded: an HTML page often saves in its place ("Save link as" sometimes saves the page). Open it in a text editor: if it starts with `<!DOCTYPE html>`, it's a page — look for the direct `.svg` link.
+
+## Is it safe to open someone else's SVG
+
+One question comes before the choice of program: is it safe to open a file someone sent you. The format's dual nature works against the user here, because a text file can carry executable code. SVG permits `<script>` tags and event handlers inside, and a browser will run them.
+
+In practice the risk splits in two. Opening the file locally by dragging it into a browser is nearly harmless: the script runs in the context of a blank page with nothing to steal. The dangerous scenario is different — inlining someone else's SVG into your own site, where the code gains access to the page and your visitors' data. So third-party files either get embedded with an `<img>` tag, which blocks scripts inside, or run through SVGO first, which strips script nodes. More on embedding methods in [the article on SVG on websites](../kak-vstavit-svg-na-sajt/).
 
 ## Where "broken" SVGs come from
 

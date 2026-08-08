@@ -17,7 +17,7 @@ tags_en: Collections, Branding, Finance
 
 ## Coinbase: банк, который просто про крипту
 
-**[Coinbase](../../logos/pay/coinbase/)** сделал ставку на противоположность крипто‑хаосу: синее слово в спокойном гротеске и круглая «C»-монета в иконке. Ни молний, ни ромбов, ни киберпанка — палитра и пластика взяты у классического финтеха, а синий — тот же код доверия, что у банков и [платёжных систем](../logotipy-platezhnyh-sistem/), о [психологии цвета](../psihologiya-cveta-v-logotipe/) мы писали отдельно. Логика прозрачна: биржа, которая первой вышла на американскую фондовую биржу и работает с регуляторами, обязана выглядеть как финансовый институт, а не как форум энтузиастов.
+**[Coinbase](../../logos/pay/coinbase/)** сделал ставку на противоположность крипто‑хаосу: синее слово в спокойном гротеске и круглая «C»-монета в иконке. Ни молний, ни ромбов, ни киберпанка — палитра и пластика взяты у классического финтеха, а синий — тот же код доверия, что у банков и [платёжных систем](../logotipy-platezhnyh-sistem/), о [психологии цвета](../psihologiya-cveta-v-logotipe/) мы писали отдельно. Логика прозрачна: биржа, которая в апреле 2021 года первой из крупных криптосервисов вышла на Nasdaq и работает с регуляторами, обязана выглядеть как финансовый институт, а не как форум энтузиастов.
 
 ## Binance: ромб как собственный алфавит
 
@@ -61,7 +61,7 @@ The category stretches between two poles: **fintech rigor** — the blue [Coinba
 
 ## Coinbase: a bank that happens to do crypto
 
-**[Coinbase](../../logos/pay/coinbase/)** bet on the opposite of crypto chaos: a calm blue wordmark and a round "C"-coin icon. No lightning bolts, no diamonds, no cyberpunk — the palette and shapes come from classic fintech, and the blue is the same trust code as banks and [payment systems](../logotipy-platezhnyh-sistem/) — we cover [color psychology](../psihologiya-cveta-v-logotipe/) separately. The logic is transparent: the first exchange to go public in the US and work with regulators must look like a financial institution, not an enthusiast forum.
+**[Coinbase](../../logos/pay/coinbase/)** bet on the opposite of crypto chaos: a calm blue wordmark and a round "C"-coin icon. No lightning bolts, no diamonds, no cyberpunk — the palette and shapes come from classic fintech, and the blue is the same trust code as banks and [payment systems](../logotipy-platezhnyh-sistem/) — we cover [color psychology](../psihologiya-cveta-v-logotipe/) separately. The logic is transparent: the exchange that went public on Nasdaq in April 2021 — the first major crypto service to do so — and works with regulators must look like a financial institution, not an enthusiast forum.
 
 ## Binance: a diamond as a private alphabet
 

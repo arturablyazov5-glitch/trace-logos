@@ -4,8 +4,10 @@
  *
  * Посты в blog/posts/*.md датированы вперёд (frontmatter `date:`), публикуются
  * пачками по одной на день. Скрипт временно прячет ещё не наступившие посты,
- * снимает markdown-разметку с forward-ссылок на них и пересобирает сайт —
- * чтобы в прод уехало ровно то, что уже наступило. Деплой скрипт НЕ делает.
+ * снимает markdown-разметку с forward-ссылок на них в других постах, снимает
+ * HTML-ссылки на них из about-текстов логотипов (logos/categories/*.json)
+ * и пересобирает сайт — чтобы в прод уехало ровно то, что уже наступило.
+ * Деплой скрипт НЕ делает.
  *
  * Режимы:
  *   node scripts/publish-scheduled-posts.js           — спрятать future и собрать
@@ -28,9 +30,11 @@ const { spawnSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const POSTS_DIR = path.join(ROOT, 'blog', 'posts');
+const CATEGORIES_DIR = path.join(ROOT, 'logos', 'categories');
 const HOLD_ROOT = path.join(ROOT, '.blog-embargo-backup');
 const HELD_DIR = path.join(HOLD_ROOT, 'future-posts');
 const LINKS_DIR = path.join(HOLD_ROOT, 'link-backup');
+const CATALOG_LINKS_DIR = path.join(HOLD_ROOT, 'catalog-link-backup');
 const STATE_FILE = path.join(HOLD_ROOT, 'state.json');
 
 const argv = process.argv.slice(2);
@@ -125,9 +129,11 @@ function cmdStatus() {
   console.log(`  ещё впереди:       ${future.length}`);
 
   if (state) {
+    const catalogPatched = state.catalogPatched || [];
     console.log(
       c.y(`\n⚠ сейчас активен hold от ${state.date}: спрятано ${state.held.length} постов, ` +
-        `поправлено ссылок ${state.patched.reduce((n, p) => n + p.count, 0)}`)
+        `поправлено ссылок в постах ${state.patched.reduce((n, p) => n + p.count, 0)}, ` +
+        `в каталоге ${catalogPatched.reduce((n, p) => n + p.count, 0)}`)
     );
     console.log(c.dim('  вернуть: node scripts/publish-scheduled-posts.js restore'));
   }
@@ -173,13 +179,44 @@ function ensureCleanHoldDirs() {
     if (stray.length) console.log(c.dim(`  чищу остатки прошлого прогона: ${path.relative(ROOT, dir)} (${stray.length})`));
     fs.rmSync(dir, { recursive: true, force: true });
   }
+  // То же самое для бэкапов логотипов, только сверяем с logos/categories.
+  if (fs.existsSync(CATALOG_LINKS_DIR)) {
+    const stray = fs.readdirSync(CATALOG_LINKS_DIR).filter((f) => f.endsWith('.json'));
+    const lost = stray.filter((f) => !fs.existsSync(path.join(CATEGORIES_DIR, f)));
+    if (lost.length) {
+      die(
+        `в ${path.relative(ROOT, CATALOG_LINKS_DIR)} лежат файлы, которых нет в logos/categories: ` +
+          `${lost.join(', ')}. Похоже на недовосстановленный прогон — разберись руками.`
+      );
+    }
+    if (stray.length) console.log(c.dim(`  чищу остатки прошлого прогона: ${path.relative(ROOT, CATALOG_LINKS_DIR)} (${stray.length})`));
+    fs.rmSync(CATALOG_LINKS_DIR, { recursive: true, force: true });
+  }
   fs.mkdirSync(HELD_DIR, { recursive: true });
   fs.mkdirSync(LINKS_DIR, { recursive: true });
+  fs.mkdirSync(CATALOG_LINKS_DIR, { recursive: true });
 }
 
 /** [текст](../slug/) → текст, для слагов из held. Возвращает число замен. */
 function stripForwardLinks(text, slugs) {
   const re = new RegExp(`\\[([^\\]\\n]+)\\]\\(\\.\\./(?:${slugs.join('|')})/\\)`, 'g');
+  let count = 0;
+  const out = text.replace(re, (_, anchor) => {
+    count++;
+    return anchor;
+  });
+  return { out, count };
+}
+
+/**
+ * <a href="/blog/slug/">текст</a> → текст, для слагов из held.
+ * Работает на сыром тексте JSON-файла (about-поля хранят HTML внутри
+ * JSON-строки с экранированными кавычками \" — поэтому regex, а не JSON.parse:
+ * так правка остаётся точечной и не переформатирует остальной файл).
+ * Возвращает число замен.
+ */
+function stripCatalogLinks(text, slugs) {
+  const re = new RegExp(`<a href=\\\\"/blog/(?:${slugs.join('|')})/\\\\">([^<]*)<\\/a>`, 'g');
   let count = 0;
   const out = text.replace(re, (_, anchor) => {
     count++;
@@ -248,7 +285,22 @@ function cmdHold() {
   const totalLinks = patched.reduce((n, p) => n + p.count, 0);
   console.log(`  снято forward-ссылок:    ${totalLinks} в ${patched.length} постах  ${c.dim('(оригиналы в ' + path.relative(ROOT, LINKS_DIR) + ')')}`);
 
-  fs.writeFileSync(STATE_FILE, JSON.stringify({ mode: 'held', date: day, held, patched }, null, 2));
+  // 2b. То же самое для HTML-ссылок на спрятанные посты в about-текстах логотипов.
+  const catalogFiles = fs.readdirSync(CATEGORIES_DIR).filter((f) => f.endsWith('.json'));
+  const catalogPatched = [];
+  for (const file of catalogFiles) {
+    const src = path.join(CATEGORIES_DIR, file);
+    const text = fs.readFileSync(src, 'utf8');
+    const { out, count } = stripCatalogLinks(text, heldSlugs);
+    if (!count) continue;
+    fs.copyFileSync(src, path.join(CATALOG_LINKS_DIR, file));
+    fs.writeFileSync(src, out);
+    catalogPatched.push({ file, count });
+  }
+  const totalCatalogLinks = catalogPatched.reduce((n, p) => n + p.count, 0);
+  console.log(`  снято ссылок из каталога: ${totalCatalogLinks} в ${catalogPatched.length} файлах  ${c.dim('(оригиналы в ' + path.relative(ROOT, CATALOG_LINKS_DIR) + ')')}`);
+
+  fs.writeFileSync(STATE_FILE, JSON.stringify({ mode: 'held', date: day, held, patched, catalogPatched }, null, 2));
 
   // 3. Сборка (build-all сам гоняет test-data/test-html/test-links и падает на битой ссылке).
   runBuild('без будущих постов');
@@ -286,6 +338,17 @@ function cmdRestore() {
     fs.copyFileSync(backup, path.join(POSTS_DIR, file));
   }
   console.log(`  вернул ссылки:      ${state.patched.reduce((n, p) => n + p.count, 0)} в ${state.patched.length} постах`);
+
+  // 1b. Возвращаем оригинальные about-тексты логотипов со ссылками.
+  const catalogPatched = state.catalogPatched || []; // старые state.json (до этой доработки) поля не имеют — просто пропускаем
+  for (const { file } of catalogPatched) {
+    const backup = path.join(CATALOG_LINKS_DIR, file);
+    if (!fs.existsSync(backup)) die(`пропал бэкап ${path.relative(ROOT, backup)} — не могу вернуть ссылки в ${file}`);
+    fs.copyFileSync(backup, path.join(CATEGORIES_DIR, file));
+  }
+  if (catalogPatched.length) {
+    console.log(`  вернул ссылки в каталоге: ${catalogPatched.reduce((n, p) => n + p.count, 0)} в ${catalogPatched.length} файлах`);
+  }
 
   // 2. Возвращаем спрятанные посты.
   for (const file of state.held) {

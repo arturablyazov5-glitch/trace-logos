@@ -57,7 +57,9 @@ tags_en: How-To, Formats, Tools
 
 ## Способ 5. Photoshop — когда нужен идеальный контур
 
-[Photoshop](../../logos/design/photoshop/) остаётся выбором для сложных случаев: волосы, мех, полупрозрачные края, тени, которые нужно сохранить:
+[Photoshop](../../logos/design/photoshop/) остаётся выбором для сложных случаев: волосы, мех, полупрозрачные края, тени, которые нужно сохранить. Для быстрого результата достаточно одной кнопки: на панели «Свойства» (Window → Properties) у пиксельного слоя есть блок Quick Actions с кнопкой «Удалить фон» — нейросеть сама находит объект и строит маску слоя за пару секунд.
+
+Если результат нужно доработать вручную:
 
 1. **Выделение → Выделить объект** — нейросеть строит выделение одним кликом.
 2. Уточните край инструментом **«Выделение и маска»**: ползунки радиуса и растушёвки решают проблему «жёсткого» контура.
@@ -128,7 +130,9 @@ If all you have is a browser, online tools will do it: remove.bg (the benchmark 
 
 ## Method 5. Photoshop — when the edge must be perfect
 
-[Photoshop](../../logos/design/photoshop/) remains the choice for hard cases: hair, fur, translucent edges, shadows you want to keep:
+[Photoshop](../../logos/design/photoshop/) remains the choice for hard cases: hair, fur, translucent edges, shadows you want to keep. For a quick result, one button does it: with a pixel layer selected, the Properties panel (Window → Properties) has a Quick Actions section with a **Remove Background** button — the AI finds the subject and builds a layer mask in a couple of seconds.
+
+To refine the result by hand:
 
 1. **Select → Subject** — AI builds the selection in one click.
 2. Refine with **Select and Mask**: the radius and feather sliders fix harsh outlines.

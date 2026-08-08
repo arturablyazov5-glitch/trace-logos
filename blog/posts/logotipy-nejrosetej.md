@@ -17,15 +17,15 @@ tags_en: Collections, Branding, AI
 
 ## Общий язык: три приёма ИИ‑айдентики
 
-###1. Звёздочка‑искра ✨
+### 1. Звёздочка‑искра ✨
 
 Четырёхлучевая звезда стала де‑факто пиктограммой «здесь ИИ» во всех интерфейсах — от кнопок «улучшить текст» до бейджей «AI‑generated». Корень — эмодзи ✨, которым годами маркировали «волшебство» (о языке эмодзи — [значение популярных эмодзи](../znachenie-populyarnyh-emodzi/)). [Gemini](../../logos/ai/gemini/) сделал искру самим логотипом, и десятки сервисов встроили её в свои знаки как универсальный маркер.
 
-###2. Градиент и свечение
+### 2. Градиент и свечение
 
 Мы разбирали этот тренд в статье [тренды логотипов 2026](../trendy-logotipov-2026/): плавные многоцветные переходы стали визуальным синонимом генеративности — спектр как метафора бесконечного пространства ответов. [Gemini](../../logos/ai/gemini/) переливается сине‑фиолетовым, [GigaChat](../../logos/ai/gigachat/) носит градиент экосистемы Сбера, а [Copilot](../../logos/ai/copilot/) — целую радугу в форме значка‑петли.
 
-###3. Розетка‑узел
+### 3. Розетка‑узел
 
 Органическая фигура из переплетённых лепестков или нитей — намёк на нейронную сеть. Канонический пример — «цветок» [ChatGPT](../../logos/ai/chatgpt/): шестилучевой узел из переплетённых дуг, ставший таким же символом эпохи, каким была птичка Twitter (подробнее — в статье [история логотипа ChatGPT](../istoriya-logotipa-chatgpt/)). Похожую логику узла используют [DeepSeek](../../logos/ai/deepseek/) (кит из волнообразных сегментов) и множество стартапов второй волны.
 
@@ -75,15 +75,15 @@ AI branding has three signature devices: the **sparkle** (a "magic" symbol inher
 
 ## The shared language: three devices of AI identity
 
-###1. The sparkle ✨
+### 1. The sparkle ✨
 
 The four-pointed star became the de facto "AI here" pictogram across interfaces — from "improve my text" buttons to "AI-generated" badges. Its root is the ✨ emoji, long used to mark "magic" (on emoji language: [popular emoji meanings](../znachenie-populyarnyh-emodzi/)). [Gemini](../../logos/ai/gemini/) made the sparkle its actual logo, and dozens of services embedded it into their marks as a universal marker.
 
-###2. Gradient and glow
+### 2. Gradient and glow
 
 We covered the trend in [logo trends 2026](../trendy-logotipov-2026/): smooth multicolor transitions became the visual synonym of generativity — the spectrum as a metaphor for the infinite answer space. [Gemini](../../logos/ai/gemini/) shimmers blue-violet, [GigaChat](../../logos/ai/gigachat/) wears the Sber ecosystem gradient, and [Copilot](../../logos/ai/copilot/) sports a whole rainbow in its loop badge.
 
-###3. The knot-rosette
+### 3. The knot-rosette
 
 An organic figure of interwoven petals or threads — a hint at a neural network. The canonical example is the [ChatGPT](../../logos/ai/chatgpt/) "flower": a six-fold knot of interlaced arcs that became as much a symbol of its era as the Twitter bird once was (more in [the history of the ChatGPT logo](../istoriya-logotipa-chatgpt/)). [DeepSeek](../../logos/ai/deepseek/) (a whale of wave segments) and a raft of second-wave startups use the same knot logic.
 

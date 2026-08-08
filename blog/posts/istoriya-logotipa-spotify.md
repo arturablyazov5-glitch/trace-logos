@@ -15,15 +15,15 @@ tags_en: Logo Histories, Branding, Media
 **2008** — зелёное слово Spotify со «встроенными» волнами над буквой «o»; **2013** — волны переезжают в отдельный круглый знак; **2015** — большой редизайн: новый «неоновый» зелёный (тот самый спорный), система из круга и слова. Три дуги — звуковые волны, расходящиеся от источника. Файлы — на [странице бренда](../../logos/media/spotify/).
 :::
 
-##2008: слово с волнами
+## 2008: слово с волнами
 
 Шведский стартап запускался со скромным текстовым логотипом: зелёное слово с тремя дугами, «вылетающими» из буквы «o», — звук, расходящийся из динамика. Зелёный в музыкальной категории был свободен (лейблы жили в чёрном, плееры — в синем) — ставка на пустой участок спектра, тот же приём, что у [Т‑Банка](../istoriya-logotipa-t-banka/) с жёлтым — о том, [как вообще работает цветовая территория](../psihologiya-cveta-v-logotipe/), мы писали отдельно.
 
-##2013: волны получают собственный дом
+## 2013: волны получают собственный дом
 
 С мобильной эрой волнам стало тесно над буквой: иконке приложения нужен был самостоятельный знак. Три дуги переехали в зелёный круг — и быстро начали жить отдельной жизнью: в иконке, фавиконке, кнопках «слушать в Spotify» на сайтах артистов. Слово и круг образовали классическую пару «полная версия + компактный знак» — ровно то, [зачем логотипу вообще нужны версии](../vidy-logotipov/).
 
-##2015: тот самый зелёный
+## 2015: тот самый зелёный
 
 Большой редизайн 2015 года сменил спокойный травяной зелёный на яркий, почти неоновый оттенок. Интернет отреагировал бурно: дизайнеры спорили, издания писали колонки, пользователи требовали вернуть старый цвет. Логика компании была холодной: новый зелёный **горит на тёмном интерфейсе** — а Spotify как раз переводил приложение на чёрный фон, где старый оттенок тускнел. Через месяц споры кончились, а через год оттенок стал одним из самых узнаваемых цветов в технологиях. Знакомый сценарий: тот же цикл «возмущение → привыкание → канон» прошёл [градиент Instagram](../istoriya-logotipa-instagram/).
 
@@ -46,6 +46,7 @@ tags_en: Logo Histories, Branding, Media
 | 2008‑2013 | слово с волнами из «o» | запуск в Европе |
 | 2013‑2015 | волны в круге + слово | мобильная эра, выход в США |
 | 2015 – н. в. | «неоновый» зелёный, система | тёмный интерфейс, глобальный рост |
+| 2026 | временная «диско‑шар» иконка | 20‑летие сервиса, кампания «Your Party of the Year(s)» |
 
 :::tip Урок кейса
 Spotify показывает, как выбирать между «красивым» и «работающим» цветом: оттенок 2015 года многим не нравился в вакууме, но побеждал в реальной среде — на чёрном экране плеера. Проверяйте цвет знака не на белом листе, а в боевом контексте: интерфейс, вывеска, лента соцсети — [как вообще собирать палитру](../kak-podobrat-cvetovuyu-palitru-brenda/), мы разбирали отдельно.
@@ -61,15 +62,15 @@ The [Spotify](../../logos/media/spotify/) mark — a green circle with three arc
 **2008** — the green Spotify wordmark with waves "flying" out of the "o"; **2013** — the waves move into a standalone circular mark; **2015** — the big redesign: the new controversial neon green and the circle-plus-word system. The three arcs are sound waves radiating from a source. Files are on the [brand page](../../logos/media/spotify/).
 :::
 
-##2008: the word with waves
+## 2008: the word with waves
 
 The Swedish startup launched with a modest wordmark: a green word with three arcs escaping the letter "o" — sound radiating from a speaker. Green was free in the music category (labels lived in black, players in blue) — a bet on an empty patch of spectrum, the same move as [T-Bank](../istoriya-logotipa-t-banka/)'s yellow — we cover [how color territory works](../psihologiya-cveta-v-logotipe/) separately.
 
-##2013: the waves get their own home
+## 2013: the waves get their own home
 
 With the mobile era the waves grew cramped above the letter: the app icon needed a standalone mark. The three arcs moved into a green circle — and quickly took on a life of their own: in the icon, the favicon, the "listen on Spotify" buttons on artists' sites. The word and the circle formed the classic "full version + compact mark" pair — exactly [why logos need versions](../vidy-logotipov/) in the first place.
 
-##2015: that green
+## 2015: that green
 
 The big 2015 redesign replaced the calm grass green with a bright, almost neon shade. The internet erupted: designers argued, outlets ran columns, users demanded the old color back. The company's logic was cold: the new green **burns on a dark interface** — and Spotify was moving its app to a black background where the old shade went dull. The arguing ended within a month; within a year the shade became one of tech's most recognizable colors. A familiar script: the same "outrage → habit → canon" cycle as [Instagram's gradient](../istoriya-logotipa-instagram/).
 
@@ -92,6 +93,7 @@ Spotify owns a medium most brands lack — other people's content: "Listen on Sp
 | 2008-2013 | word with waves from the "o" | the European launch |
 | 2013-2015 | waves in a circle + word | the mobile era, the US launch |
 | 2015 – now | neon green, the system | dark UI, global growth |
+| 2026 | temporary "disco ball" icon | the service's 20th anniversary, the "Your Party of the Year(s)" campaign |
 
 :::tip The case's lesson
 Spotify shows how to choose between a "pretty" color and a "working" one: many disliked the 2015 shade in a vacuum, but it won in the real environment — the player's black screen. Test a mark's color not on white paper but in combat context: the interface, the signage, the social feed — we cover [how to build a palette](../kak-podobrat-cvetovuyu-palitru-brenda/) separately.

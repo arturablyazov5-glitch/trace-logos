@@ -15,7 +15,7 @@ tags_en: Logo Histories, Branding, Social
 Знак [WhatsApp](../../logos/social/whatsapp/) с 2009 года — **речевой пузырь + телефонная трубка**: разговор и звонок в одной форме. Менялись только детали: оттенок зелёного, градиент, толщина контура, скругления. Это пример стратегии «не трогай то, что работает» — как у [компаса Safari](../logotipy-brauzerov/). Файлы всех версий — [в каталоге](../../logos/social/whatsapp/).
 :::
 
-##2009: пузырь и трубка с первого дня
+## 2009: пузырь и трубка с первого дня
 
 Ян Кум и Брайан Эктон запустили WhatsApp в 2009 году как замену дорогим SMS, и логотип собрали из двух самых буквальных символов связи: речевого пузыря (сообщение) и телефонной трубки (звонок). Название — каламбур от «What's up?», и пузырь отыгрывает его напрямую: знак буквально «говорит».
 
@@ -27,7 +27,7 @@ WhatsApp закрепил за собой яркий жёлто‑зелёны�
 
 В ранних версиях иконки зелёный был с глянцем и объёмом — стандарт эпохи скевоморфизма. Флэт‑революция 2013‑2014 годов сняла блики, оставив чистую заливку, — WhatsApp прошёл этот переход тихо, без редизайн‑скандалов, потому что менял оформление, не трогая форму — та же дисциплина, о которой мы пишем в статье [почему бренды упрощают логотипы](../pochemu-brendy-uproshchayut-logotipy/).
 
-##2014‑2022: эпоха Meta и полировка деталей
+## 2014‑2022: эпоха Meta и полировка деталей
 
 В 2014 году Facebook (ныне [Meta](../../logos/social/meta/)) купил WhatsApp за 19 миллиардов долларов — крупнейшая сделка в истории мессенджеров. Вопреки ожиданиям, новый владелец не стал перекрашивать знак под корпоративный синий: зелёный пузырь был слишком ценным активом. Изменения ограничились типографикой и мелочами — например, в подписи «from Meta» на экране загрузки.
 
@@ -68,7 +68,7 @@ WhatsApp закрепил за собой яркий жёлто‑зелёны�
 Since 2009 the [WhatsApp](../../logos/social/whatsapp/) mark has been a **speech bubble + telephone handset**: conversation and call in one shape. Only details changed: the shade of green, the gradient, the outline weight, the corner radii. A textbook "don't touch what works" strategy — like the [Safari compass](../logotipy-brauzerov/). All versions are [in the catalog](../../logos/social/whatsapp/).
 :::
 
-##2009: a bubble and a handset from day one
+## 2009: a bubble and a handset from day one
 
 Jan Koum and Brian Acton launched WhatsApp in 2009 as a replacement for expensive SMS, and assembled the logo from the two most literal symbols of communication: a speech bubble (message) and a telephone handset (call). The name puns on "What's up?", and the bubble plays it straight: the mark literally "speaks".
 
@@ -80,7 +80,7 @@ WhatsApp claimed a bright yellow-green (#25D366) — effectively "owning" green 
 
 Early icons wore the green with gloss and depth — the skeuomorphic-era standard. The flat revolution of 2013-2014 stripped the highlights, leaving a clean fill — WhatsApp made that transition quietly, with no redesign scandals, because it changed the finish without touching the shape — the same discipline we cover in [why brands simplify logos](../pochemu-brendy-uproshchayut-logotipy/).
 
-##2014-2022: the Meta era and detail polish
+## 2014-2022: the Meta era and detail polish
 
 In 2014 Facebook (now [Meta](../../logos/social/meta/)) bought WhatsApp for 19 billion dollars — the biggest deal in messenger history. Against expectations, the new owner did not repaint the mark corporate blue: the green bubble was too valuable an asset. Changes stayed within typography and small print — like the "from Meta" credit on the splash screen.
 

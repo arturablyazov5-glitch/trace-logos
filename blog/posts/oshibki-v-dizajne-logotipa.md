@@ -15,43 +15,43 @@ tags_en: Design, Branding, Basics
 Топ‑10: перегруженность деталями; нечитаемость в 16 px; зависимость от цвета; трендовость вместо долговечности; шрифт без лицензии; клипарт и шаблоны; отсутствие версий; растровый исходник; похожесть на конкурентов; пропущенная проверка товарного знака. Ниже — как ловить и чинить каждую.
 :::
 
-##1. Перегруженность деталями
+## 1. Перегруженность деталями
 
 Градиент + тень + пять элементов + два шрифта — знак, который «показывает всё», не запоминается ничем. Все великие логотипы описываются одной фразой: у [Telegram](../../logos/social/telegram/) — самолётик, у [Apple](../istoriya-logotipa-apple/) — яблоко. **Тест:** опишите свой знак одним предложением по телефону. Не получается — упрощайте, тем более что [сегодня так делают почти все крупные бренды](../pochemu-brendy-uproshchayut-logotipy/).
 
-##2. Нечитаемость в малом размере
+## 2. Нечитаемость в малом размере
 
 Знак утверждали на экране презентации, а жить он будет в [фавиконке](../kak-sdelat-favicon/) 16×16 и аватарке 40 px. Тонкие линии слипаются, мелкий текст исчезает. **Тест:** уменьшите знак до размера ногтя — силуэт должен остаться узнаваемым. Большие бренды ради этого держат отдельную упрощённую [иконку приложения](../ikonka-prilozheniya/), заточенную именно под маленький размер.
 
-##3. Зависимость от цвета
+## 3. Зависимость от цвета
 
 Если знак различим только в фирменных цветах — он сломается на гравировке, чеке, факсе и в одноцветной печати: у [логотипа для печати](../logotip-dlya-pechati/) свои требования, и цвет туда не всегда попадает. **Тест:** переведите логотип в чёрно‑белый. Форма должна работать сама; цвет — усилитель, а не костыль, каким бы удачным ни был выбор по [психологии цвета](../psihologiya-cveta-v-logotipe/).
 
-##4. Погоня за трендом
+## 4. Погоня за трендом
 
 Градиентное свечение «как у ИИ‑сервисов» — мы разбирали этот эффект в подборке [логотипов нейросетей](../logotipy-nejrosetej/) — или модный шрифт сезона датируют знак годом создания. Логотип живёт 10‑20 лет; [тренд — 2‑3 года](../trendy-logotipov-2026/). **Правило:** база знака — вне моды, трендовое — только в сменяемом слое (градиент, анимация).
 
-##5. Шрифт без лицензии
+## 5. Шрифт без лицензии
 
 Знак набран красивым шрифтом, скачанным «откуда‑то» — а у шрифта лицензия «только для личного использования». Для коммерческого бренда это готовый иск. **Тест:** назовите шрифт своего логотипа и его лицензию. Не знаете — выясняйте до запуска, разобравшись, [как вообще выбирают шрифт для логотипа](../shrift-dlya-logotipa/). Надёжное решение — перевод текста в кривые плюс подтверждённая лицензия исходного шрифта.
 
-##6. Клипарт и шаблоны
+## 6. Клипарт и шаблоны
 
 Стоковая лампочка «идея», шаблон из [Canva](../kak-sdelat-logotip-v-canva/), необработанная генерация нейросети с её типовыми артефактами — [подробно про такие логотипы](../logotip-nejrosetyu/) — такой знак носят ещё сотни компаний. Он не различает вас и не регистрируется как товарный знак. **Тест:** поиск по картинке своего логотипа. Нашлись двойники — это не ваш знак.
 
-##7. Нет версий
+## 7. Нет версий
 
 Один файл «logo_final.jpg» на все случаи — не комплект. Нужны: полная версия, компактный знак, монохром, инверсия для тёмного фона — это и есть [полный набор видов логотипа](../vidy-logotipov/). **Тест:** положите знак на тёмный фон и в круглую аватарку. Если что‑то «чинится на месте» — версий не хватает.
 
-##8. Растровый исходник
+## 8. Растровый исходник
 
 Логотип существует только в PNG/JPG: на вывеске он превратится в [мыло](../pochemu-logotip-razmytyj/), а каждое масштабирование будет портить качество. Исходник обязан быть вектором — [вот почему разница так важна](../vektor-i-rastr-raznica/); растровый знак нужно [перевести в вектор](../kak-perevesti-logotip-v-vektor/) один раз — и хранить как мастер в одном из [векторных форматов](../vektornye-formaty-eps-ai-pdf-svg/).
 
-##9. Похожесть на соседей по нише
+## 9. Похожесть на соседей по нише
 
 Синий щит у страховой, зелёный крест у аптеки, пузырь у мессенджера — категорийные штампы делают бренд невидимым: это хорошо видно на [логотипах банков](../logotipy-rossijskih-bankov/), [мессенджеров](../logotipy-messendzherov/) и [маркетплейсов](../logotipy-marketplejsov/). **Тест:** поставьте свой знак в ряд с пятью конкурентами (наберите их в [каталоге](../../logos/)) и попросите постороннего найти ваш за три секунды.
 
-##10. Пропущенная юридическая проверка
+## 10. Пропущенная юридическая проверка
 
 Знак может быть уникальным на вид и всё равно нарушать чужой товарный знак — а значит, рискует принудительным ребрендингом в самый неподходящий момент. **До запуска:** поиск по базам Роспатента, затем [регистрация товарного знака](../kak-zaregistrirovat-logotip/); при заказе у дизайнера — письменная передача исключительных прав, о ней подробно в статье [как заказать логотип у дизайнера](../kak-zakazat-logotip-u-dizajnera/). А что можно и нельзя с чужими знаками, [разбираем отдельно](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 
@@ -84,43 +84,43 @@ A bad logo is rarely "ugly" — more often it just doesn't work: it crumbles in 
 The top 10: detail clutter; illegibility at 16 px; color dependence; trend-chasing over longevity; an unlicensed font; clipart and templates; missing versions; a raster-only source; niche look-alikes; a skipped trademark check. Below — how to catch and cure each.
 :::
 
-##1. Detail clutter
+## 1. Detail clutter
 
 Gradient + shadow + five elements + two fonts — a mark that "shows everything" is remembered for nothing. Every great logo fits one phrase: [Telegram](../../logos/social/telegram/) — the paper plane, [Apple](../istoriya-logotipa-apple/) — the apple. **Test:** describe your mark in one sentence over the phone. Can't? Simplify — [today almost every major brand does](../pochemu-brendy-uproshchayut-logotipy/).
 
-##2. Small-size illegibility
+## 2. Small-size illegibility
 
 The mark was approved on a presentation screen, but it will live in a 16×16 [favicon](../kak-sdelat-favicon/) and a 40 px avatar. Thin lines fuse, small text vanishes. **Test:** shrink the mark to fingernail size — the silhouette must stay recognizable. Big brands keep a separate, simplified [app icon](../ikonka-prilozheniya/) tuned specifically for small sizes.
 
-##3. Color dependence
+## 3. Color dependence
 
 If the mark is distinguishable only in brand colors, it breaks on engraving, receipts, faxes and single-color print — [logo-for-print](../logotip-dlya-pechati/) has its own demands, and color doesn't always survive there. **Test:** convert the logo to black and white. The form must work alone; color is an amplifier, not a crutch, however well it's chosen by [color psychology](../psihologiya-cveta-v-logotipe/).
 
-##4. Trend-chasing
+## 4. Trend-chasing
 
 The "AI-service" gradient glow — an effect we dissected in the [neural-network logos](../logotipy-nejrosetej/) roundup — or the season's fashionable font dates the mark to its birth year. A logo lives 10-20 years; a [trend lasts 2-3](../trendy-logotipov-2026/). **Rule:** the mark's core stays timeless; the trendy bits live only in the replaceable layer (gradient, animation).
 
-##5. An unlicensed font
+## 5. An unlicensed font
 
 The mark is set in a pretty font downloaded "somewhere" — and the font's license says "personal use only". For a commercial brand that's a lawsuit waiting. **Test:** name your logo's font and its license. Don't know? Find out before launch by learning [how logo fonts are actually chosen](../shrift-dlya-logotipa/). The robust fix: outline the text and hold a confirmed license for the source font.
 
-##6. Clipart and templates
+## 6. Clipart and templates
 
 The stock "idea" lightbulb, a [Canva](../kak-sdelat-logotip-v-canva/) template, an untouched AI generation with its typical artifacts — [covered in detail here](../logotip-nejrosetyu/) — hundreds of other companies wear the same mark. It doesn't differentiate you and won't register as a trademark. **Test:** reverse-image-search your own logo. Found twins? It's not your mark.
 
-##7. Missing versions
+## 7. Missing versions
 
 One "logo_final.jpg" for every occasion is not a kit. You need: the full version, the compact mark, monochrome, and an inverse for dark backgrounds — that's [the full set of logo types](../vidy-logotipov/). **Test:** place the mark on a dark background and in a round avatar. If anything needs "fixing on the spot", versions are missing.
 
-##8. A raster-only source
+## 8. A raster-only source
 
 The logo exists only as PNG/JPG: on signage it turns to [mush](../pochemu-logotip-razmytyj/), and every scaling pass degrades it further. The master has to be vector — [here's why that difference matters so much](../vektor-i-rastr-raznica/); a raster mark needs [tracing into vector](../kak-perevesti-logotip-v-vektor/) once, then stored as the master in one of the [vector formats](../vektornye-formaty-eps-ai-pdf-svg/).
 
-##9. Looking like the niche neighbors
+## 9. Looking like the niche neighbors
 
 The blue shield of an insurer, the green cross of a pharmacy, the messenger bubble — category clichés make a brand invisible, and it shows clearly across [bank logos](../logotipy-rossijskih-bankov/), [messenger logos](../logotipy-messendzherov/) and [marketplace logos](../logotipy-marketplejsov/). **Test:** line your mark up with five competitors (find them in the [catalog](../../logos/)) and ask an outsider to spot yours in three seconds.
 
-##10. The skipped legal check
+## 10. The skipped legal check
 
 A mark can look unique and still infringe an existing trademark — risking a forced rebrand at the worst possible moment. **Before launch:** search the trademark databases, then [register the mark](../kak-zaregistrirovat-logotip/); when commissioning a designer, get a written transfer of exclusive rights — details in [how to commission a logo from a designer](../kak-zakazat-logotip-u-dizajnera/). What's allowed and not with others' marks is [covered separately](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 

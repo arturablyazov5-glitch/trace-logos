@@ -80,11 +80,11 @@
 
     {{MACOS_STYLE_TABS}}
 
-    <!-- ── Sponsor banner (data-driven, заменяет Threads-баннер если задан) ── -->
-{{SPONSOR_SECTION}}
-
     <!-- ── Sidebar ad (десктоп: рядом с превью · мобилка: в конце) ── -->
     {{> ad-sidebar-banner}}
+
+    <!-- ── Sponsor banner (data-driven, заменяет Threads-баннер если задан) ── -->
+{{SPONSOR_SECTION}}
     <support-btn></support-btn>
 
     </div><!-- /.logo-side -->
@@ -93,7 +93,18 @@
     <div class="logo-info">
 
       <h1 data-h1-en="{{H1_EN}}">{{H1}}</h1>
-      <p class="logo-desc">{{LOGO_DESC}}</p>
+      <p class="logo-desc" id="logo-desc">{{LOGO_DESC}}</p>
+      <!-- Мобилка: текст клэмпится до 2 строк CSS-ом (полный текст остаётся в HTML —
+           краулеры индексируют DOM, не видимую высоту, поэтому для SEO это безопасно),
+           кнопка раскрывает/сворачивает. Скрыта по умолчанию — js/seo-page.js сам решает,
+           нужна ли она (короткий about на 1-2 строки не клэмпится, кнопка не нужна). -->
+      <button type="button" class="logo-desc-toggle" id="logo-desc-toggle" data-i18n="logoDescExpand" aria-expanded="false" aria-controls="logo-desc" hidden>Подробнее</button>
+      <!-- Мобильная копия — на мобилке .logo-side схлопывается (display:contents) и
+           её дети реордерятся через order, из-за чего эта кнопка без order всплывала
+           в самое начало, ещё выше превью. Вместо order — отдельный инстанс сразу под
+           about-текстом, показывается только на мобилке; десктопная версия внутри
+           .logo-side ниже по файлу скрывается на этом брейкпоинте (см. seo-page.css). -->
+      <support-btn class="logo-desc-support"></support-btn>
 
       <hr class="divider">
 {{NOICON_NOTE}}
@@ -225,11 +236,12 @@
   </div>
 </div>
 
-<script src="{{REL}}components/support-btn.js" defer></script>
+<script src="{{REL}}components/support-btn.min.js" defer></script>
 <script>
 {{SEO_PAGE_DATA}}
 </script>
-<script type="module" src="{{REL}}js/seo-page.js"></script>
+<script type="module" src="{{REL}}js/seo-page.min.js"></script>
+<script type="module" src="{{REL}}js/promo-banner-track.min.js"></script>
 {{EASTER_EGG_SCRIPT}}
 </body>
 </html>

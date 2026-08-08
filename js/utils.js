@@ -137,13 +137,16 @@ export function svgUrl(file) {
   return `${_assetBase}/${folder}/${file}?v=${SVG_URL_V}`;
 }
 
-// Returns the WebP preview URL for a PNG asset, or null when previews are not
-// enabled for this page / the asset is not a local PNG. Previews are
-// build-generated mirrors of assets/logos/pngs in assets/logos/previews.
+// Returns the WebP preview URL for a PNG or SVG logo asset, or null when
+// previews are not enabled for this page / the file is neither. Previews are
+// build-generated mirrors of assets/logos/{pngs,svgs} in assets/logos/previews
+// (build-webp-previews.js) — every logo gets one, so this never has to guess
+// whether a specific file qualifies.
 export function previewUrl(file) {
-  if (!_previewBase || file.startsWith('/') || !file.endsWith('.png')) return null;
-  const webp = file.replace(/\.png$/, '.webp');
-  return `${_previewBase}/${webp}?v=${SVG_URL_V}`;
+  if (!_previewBase || file.startsWith('/')) return null;
+  if (file.endsWith('.png')) return `${_previewBase}/${file.replace(/\.png$/, '.webp')}?v=${SVG_URL_V}`;
+  if (file.endsWith('.svg')) return `${_previewBase}/${file.replace(/\.svg$/, '.webp')}?v=${SVG_URL_V}`;
+  return null;
 }
 
 // ── Fuzzy search (Levenshtein) ───────────────────────────────────────────
@@ -377,25 +380,65 @@ export function trackLogoView(figma, name, file) {
   }).catch(() => {});
 }
 
-const METRIKA_ID = 109799147;
-let noResultsTimer = null;
-
-// Поисковый запрос без единого совпадения — сигнал спроса на лого, которого
-// нет в каталоге. Дебаунс на 800мс, чтобы не слать событие на каждую букву
-// при наборе, и шлём только финальный «застывший» запрос.
-export function trackSearchNoResults(query) {
+// ── Трекинг кликов по промо-баннеру (sidebar, landologovo и т.п.) ────────
+export function trackBannerClick(bannerId) {
+  if (!bannerId) return;
   if (isTrackingDisabled()) return;
   const host = location.hostname;
   if (host === 'localhost' || host === '127.0.0.1' || host === '') return;
-  const q = (query || '').trim();
-  clearTimeout(noResultsTimer);
-  if (q.length < 2) return;
-  noResultsTimer = setTimeout(() => {
-    if (typeof window.ym !== 'function') return;
-    // reachGoal — считает цель (конверсии по дням/периодам);
-    // params — кладёт сам текст запроса в отчёт «Параметры визитов»,
-    // где его можно агрегировать и увидеть частотность.
-    window.ym(METRIKA_ID, 'reachGoal', 'search_no_results');
-    window.ym(METRIKA_ID, 'params', { search_no_results: q });
-  }, 800);
+  fetch(TRACK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ banner: bannerId }),
+    keepalive: true, // клик открывает внешний сайт в новой вкладке, но keepalive не помешает
+  }).catch(() => {});
+}
+
+// ── Трекинг поисковых запросов ───────────────────────────────────────────
+// Поиск в шапке динамический — фильтрует на каждое нажатие клавиши, без
+// Enter/сабмита. Слать в Supabase каждую промежуточную букву («т», «те»,
+// «тес»…) бессмысленно, поэтому ждём паузу в наборе (settle-таймер) и шлём
+// только «застывший» запрос — тот, на котором пользователь на секунду
+// остановился. Это ловит и «дописал слово и посмотрел на результат», и
+// «начал печатать и стёр» (settle просто не наступает, ничего не летит).
+// В отличие от прежнего trackSearchNoResults, шлём ВСЕ запросы, а не только
+// нулевые — resultsCount едет вместе с текстом, разбирать по нулю или нет
+// удобнее уже в админке, чем терять контекст на клиенте.
+let searchQueryTimer = null;
+let pendingSearchLog = null;   // { query, resultsCount } — ждёт settle
+let lastLoggedSearchQuery = null; // не шлём подряд идентичный запрос дважды
+
+function sendSearchQuery(query, resultsCount) {
+  fetch(TRACK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ searchQuery: query, resultsCount }),
+    keepalive: true,
+  }).catch(() => {});
+  lastLoggedSearchQuery = query;
+  pendingSearchLog = null;
+}
+
+export function trackSearchQuery(query, resultsCount) {
+  if (isTrackingDisabled()) return;
+  const host = location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || host === '') return;
+  const q = (query || '').trim().toLowerCase();
+  clearTimeout(searchQueryTimer);
+  if (q.length < 2) { pendingSearchLog = null; return; }
+  pendingSearchLog = { query: q, resultsCount };
+  searchQueryTimer = setTimeout(() => {
+    if (pendingSearchLog && pendingSearchLog.query !== lastLoggedSearchQuery) {
+      sendSearchQuery(pendingSearchLog.query, pendingSearchLog.resultsCount);
+    }
+  }, 1200);
+}
+
+// Досылает незалогированный запрос сразу, не дожидаясь settle-таймера —
+// иначе «напечатал и тут же ушёл со страницы/убрал фокус» теряется.
+export function flushSearchQuery() {
+  clearTimeout(searchQueryTimer);
+  if (pendingSearchLog && pendingSearchLog.query !== lastLoggedSearchQuery) {
+    sendSearchQuery(pendingSearchLog.query, pendingSearchLog.resultsCount);
+  }
 }

@@ -71,7 +71,7 @@ QR‑код изначально спроектирован для суровы
 ### Шаг 5. Протестируйте до печати
 
 :::danger Обязательный шаг
-Проверьте код минимум на двух телефонах ([iPhone](../../logos/store/apple/) и Android), со штатной камеры, при плохом освещении и под углом. Если тираж печатный — сначала распечатайте один экземпляр в реальном размере. Минимальный физический размер кода для сканирования «с руки» — примерно 2×2 см; для плаката действует правило: размер кода ≈ расстояние сканирования ÷ 10.
+Проверьте код минимум на двух телефонах ([iPhone](../../logos/tech/apple/) и Android), со штатной камеры, при плохом освещении и под углом. Если тираж печатный — сначала распечатайте один экземпляр в реальном размере. Минимальный физический размер кода для сканирования «с руки» — примерно 2×2 см; для плаката действует правило: размер кода ≈ расстояние сканирования ÷ 10.
 :::
 
 ## Чем короче ссылка, тем надёжнее код
@@ -187,7 +187,7 @@ The logo must sit strictly in the center and clear all of these marks.
 ### Step 5. Test before printing
 
 :::danger Non-negotiable
-Test the code on at least two phones ([iPhone](../../logos/store/apple/) and Android), with the stock camera, in poor light and at an angle. For print runs, print one copy at real size first. The minimum physical size for handheld scanning is about 2×2 cm; for posters use the rule: code size ≈ scanning distance ÷ 10.
+Test the code on at least two phones ([iPhone](../../logos/tech/apple/) and Android), with the stock camera, in poor light and at an angle. For print runs, print one copy at real size first. The minimum physical size for handheld scanning is about 2×2 cm; for posters use the rule: code size ≈ scanning distance ÷ 10.
 :::
 
 ## The shorter the link, the tougher the code

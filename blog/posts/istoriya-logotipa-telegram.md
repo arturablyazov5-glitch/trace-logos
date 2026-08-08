@@ -31,11 +31,11 @@ tags_en: Logo History, Telegram, Branding
 
 ## Как знак менялся
 
-###2013: запуск
+### 2013: запуск
 
 Первый логотип — белый бумажный самолётик в синем круге с лёгким вертикальным градиентом и едва заметной бликовой «линзой» — наследие эстетики иконок iOS 6, где объём и глянец были нормой. Самолётик смотрит вправо и вверх, «в полёт».
 
-###2013‑2014: упрощение
+### 2013‑2014: упрощение
 
 Уже через год после запуска, вслед за iOS 7 и волной флэт‑дизайна, блик исчез, градиент стал спокойнее, контуры — чище. Сам силуэт самолётика при этом остался практически нетронутым.
 
@@ -120,11 +120,11 @@ The "paper plane = send" icon existed in interfaces before, but it was [Telegram
 
 ## How the mark evolved
 
-###2013: launch
+### 2013: launch
 
 The first logo — a white paper plane in a blue circle with a soft vertical gradient and a subtle glossy "lens" — an heir to iOS 6 icon aesthetics, where depth and shine were the norm. The plane points up and to the right, "into flight".
 
-###2013-2014: going flat
+### 2013-2014: going flat
 
 Within a year of launch, following iOS 7 and the flat-design wave, the gloss disappeared, the gradient calmed down, the contours got cleaner. The plane's silhouette itself stayed practically untouched.
 

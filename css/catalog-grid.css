@@ -1,0 +1,65 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   catalog-grid.css — full logo-catalog-by-category grid: "Остальные
+   категории" on SEO pages (scripts/build-seo-pages.js's
+   buildCatalogGridSection) and "Категории логотипов" on the homepage
+   (scripts/build-home-categories.js). One source, one look, everywhere it's
+   used — was duplicated by hand on the homepage before (stale Lucide-icon
+   tiles with hardcoded counts) and drifted out of sync with the real catalog.
+
+   Self-contained: no CSS custom properties. Both host stylesheets
+   (css/seo-page.css, css/home.css) define their own overlapping-but-
+   different `:root` token set — importing either one here would clobber the
+   other's colors sitewide via `:root` cascade order. Hardcoding the handful
+   of colors this grid needs keeps it safe to load on any page.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.catalog-cats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 8px;
+}
+.catalog-cat {
+  display: flex; flex-direction: column; gap: 8px;
+  padding: 12px 14px;
+  background: #161616; border: none; border-radius: 16px;
+  text-decoration: none;
+  transition: background .15s;
+}
+.catalog-cat:hover { background: #202020; }
+.catalog-cat-thumbs {
+  display: flex; gap: 5px;
+}
+.catalog-cat-thumbs img {
+  width: 26px; height: 26px; object-fit: contain; border-radius: 6px;
+}
+.catalog-cat-more {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 6px;
+  background: rgba(255,255,255,0.06); color: #666;
+}
+.catalog-cat-bottom {
+  display: flex; align-items: center; justify-content: space-between; gap: 6px;
+}
+.catalog-cat-name {
+  min-width: 0;
+  font-size: 13.5px; font-weight: 500; color: #fff;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.catalog-cat-count {
+  flex-shrink: 0;
+  font-size: 12px; color: #666;
+}
+/* Полное "N логотипов" вместо голого числа — только на мобилке (media query ниже). */
+.catalog-cat-count-label { display: none; }
+
+@media (max-width: 640px) {
+  .catalog-cats { grid-template-columns: repeat(2, 1fr); }
+  /* 2 узкие колонки не тянут 4 иконки + плюсик — прячем 4-ю, остаётся 3 + «+N». */
+  .catalog-cat-thumbs img:nth-child(4) { display: none; }
+  /* Счётчик рядом с названием обрезался/налезал в узкой колонке — переносим под текст. */
+  .catalog-cat-bottom { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .catalog-cat-count { font-size: 11px; }
+  .catalog-cat-count-label { display: inline; }
+  /* Длинные названия («Девелоперы и недвижимость») обрезались в одну строку — даём перенос. */
+  .catalog-cat-name { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.3; }
+}

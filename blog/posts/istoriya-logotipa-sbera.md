@@ -9,39 +9,53 @@ tags: Сбер, История, Ребрендинг
 tags_en: Sber, History, Rebranding
 ---
 
-Зелёный круг с галочкой видел каждый житель России — но мало кто помнит, что ему предшествовали копилка со сберкнижкой, строгие советские эмблемы и пятнадцать лет объёмного глянца. И за сменой картинок стоит большее: история знака [Сбербанка](../../logos/bank/sber/) — готовый учебник по эволюции айдентики, где каждый поворот случился потому, что менялась сама среда, в которой знак должен был жить. Пройдём по эпохам именно с этим вопросом: что изменилось вокруг — и почему знак был обязан ответить.
+Зелёный круг с галочкой видел каждый житель России, но мало кто помнит, что ему предшествовали копилка со сберкнижкой, строгие советские эмблемы и пятнадцать лет объёмного глянца. И за сменой картинок стоит большее: история знака [Сбербанка](../../logos/bank/sber/) — готовый учебник по эволюции айдентики, где каждый поворот случился потому, что менялась сама среда, в которой знак должен был жить. Пройдём по эпохам именно с этим вопросом: что изменилось вокруг и почему знак был обязан ответить.
 
 ## До логотипа: когда бренд был не нужен
 
 Сберегательное дело в России началось в 1841 году указом Николая I, и полтора века у сберкасс не было логотипа в современном смысле — только вывески, гербы и атрибуты бережливости: копилка, пчела, колос. Причина проста: логотип отличает одну компанию от другой, а отличать было не от кого. В советское время гострудсберкассы обходились строгой типографикой и госсимволикой — конкуренции не существовало, а «бренд» гарантировало государство.
 
-Всё изменилось в тот момент, когда касса перестала быть единственной. Появился рынок — и вместе с ним впервые понадобился знак, который узнают и выберут.
+Всё изменилось в тот момент, когда касса перестала быть единственной. Появился рынок, и вместе с ним впервые понадобился знак, который узнают и выберут.
 
-##1991: рождение галочки
+## 1991: рождение галочки
 
-С преобразованием в [Сбербанк](../../logos/bank/sber/) России появился первый настоящий логотип: **зелёный круг с «галочкой»** — стилизованный кошелёк с выпадающей монетой (распространённое прочтение; встречается и версия про раскрытый веер сберкнижки). Авторство эмблемы пересказывали по‑разному, но сам знак оказался на редкость удачным, и удачным именно для своей задачи: простая запоминающаяся форма, однозначная связь с деньгами, зелёный цвет как код финансовой надёжности. Рынку нужен был мгновенно читаемый символ доверия — его и получили.
+С преобразованием в [Сбербанк](../../logos/bank/sber/) России появился первый настоящий логотип: **зелёный круг с «галочкой»** — стилизованный кошелёк с выпадающей монетой (распространённое прочтение; встречается и версия про раскрытый веер сберкнижки). Авторство эмблемы пересказывали по‑разному, но сам знак оказался на редкость удачным, и удачным именно для своей задачи: простая запоминающаяся форма, однозначная связь с деньгами, зелёный цвет как код финансовой надёжности. Рынку нужен был мгновенно читаемый символ доверия, его и получили.
 
-Рядом со знаком встало набранное шрифтом с засечками «[Сбербанк](../../logos/bank/sber/) России». Композиция дышала девяностыми: чуть тяжеловесно, очень солидно. И в таком виде знак прожил почти два десятилетия — до тех пор, пока не сменилась мода на то, как вообще должен выглядеть «дорогой» бренд.
+Стоит отдельно заметить, почему сработала именно такая форма. Круг в финансовой символике читается как монета и как замкнутость, то есть сохранность; галочка внутри добавляет движение и согласие. Знак при этом остаётся начертанием в одну линию, которое воспроизводится любым способом: трафаретом на стекле, вышивкой на форме, штампом на бланке. В 1991 году это имело практическое значение, потому что цифровой печати в нынешнем виде не существовало, а филиалы по стране изготавливали вывески местными силами.
 
-##2009: объёмный глянец
+Рядом со знаком встало набранное шрифтом с засечками «[Сбербанк](../../logos/bank/sber/) России». Композиция дышала девяностыми: чуть тяжеловесно, очень солидно. И в таком виде знак прожил почти два десятилетия, до тех пор пока не сменилась мода на то, как вообще должен выглядеть «дорогой» бренд.
+
+## 2009: объёмный глянец
 
 К концу нулевых айдентика по всему рынку требовала объёма: градиенты, блики, тени — «дорого» тогда означало «глянцево». [Сбербанк](../../logos/bank/sber/) ответил на эту моду ребрендингом 2009 года (студия Fitch): галочку сохранили, но сделали трёхмерной — зелёный стал светлее и сочнее, круг получил объём и лучи, шрифт сменился на современный гротеск. Тогда же появился слоган «Всегда рядом».
 
-Ход был грамотный и эволюционный: узнаваемость сохранили, картинку осовременили. Но у решения был встроенный срок годности, и заложила его технология. Объёмные логотипы плохо живут в интерфейсах: в 16 пикселях фавикона блики превращаются в грязь. Пока бренд жил на вывесках и бланках, это не мешало, — но следующая среда была уже другой. Почему малые экраны в итоге убили объём во всей индустрии, разбирали в статье [про упрощение логотипов](../pochemu-brendy-uproshchayut-logotipy/).
+Ребрендинг 2009 года стоит помнить ещё и потому, что он показывает, как мода диктует форму задним числом. Объём в те годы ставили все: банки, операторы связи, производители техники, государственные порталы. Приём читался как признак современности и бюджета, поэтому отказ от него выглядел бы экономией. Через десять лет ровно тот же приём стал маркером устаревшего сайта, и вычищали его так же массово, как когда‑то добавляли.
 
-##2020: «Сбер» — знак для экрана
+Ход был грамотный и эволюционный: узнаваемость сохранили, картинку осовременили. Но у решения был встроенный срок годности, и заложила его технология. Объёмные логотипы плохо живут в интерфейсах: в 16 пикселях фавикона блики превращаются в грязь. Пока бренд жил на вывесках и бланках, это не мешало, но следующая среда была уже другой. Почему малые экраны в итоге убили объём во всей индустрии, разбирали в статье [про упрощение логотипов](../pochemu-brendy-uproshchayut-logotipy/).
 
-Этой новой средой стал смартфон. К 2020 году главной «вывеской» банка стала иконка приложения, а объёмная галочка для неё не годилась — и в сентябре банк объявил о трансформации в экосистему, убрав из бренда само слово «банк». Логотип сменился радикально: впервые с 1991 года изменилась сама форма знака — **незамкнутый круг с галочкой и градиентным штрихом** от зелёного через жёлто‑зелёный. Каждое решение здесь — прямой ответ на требования экрана и экосистемы:
+## 2020: «Сбер» — знак для экрана
+
+Этой новой средой стал смартфон. К 2020 году главной «вывеской» банка стала иконка приложения, а объёмная галочка для неё не годилась, и в сентябре банк объявил о трансформации в экосистему, убрав из бренда само слово «банк». Логотип сменился радикально: впервые с 1991 года изменилась сама форма знака — **незамкнутый круг с галочкой и градиентным штрихом** от зелёного через жёлто‑зелёный. Каждое решение здесь — прямой ответ на требования экрана и экосистемы:
 
 - **Плоскость.** Знак наконец одинаково живёт в любом размере — от фавикона до фасада, потому что рендерить блики больше не нужно.
 - **Градиент в штрихе, при чистой заливке.** Компромисс: цифровая свежесть без потери работоспособности в малом размере, а в монохроме знак спокойно живёт одним цветом.
 - **Короткое имя «[Сбер](../../logos/bank/sber/)».** Зонтик для десятков сервисов — СберМаркет, СберЗвук, СберПрайм. Знак сразу проектировали префиксом экосистемы, и роль банковской вывески он перерос.
 
-Ребрендинг оценивали в миллиарды рублей — замена тысяч вывесок, банкоматов, форм, — и споры «зачем менять узнаваемое» шли громкие. Но с дистанции решение читается однозначно: банк готовил айдентику к жизни, где тебя в первую очередь видят на экране телефона.
+Ребрендинг оценивали в миллиарды рублей — замена тысяч вывесок, банкоматов и форм, а споры «зачем менять узнаваемое» шли громкие. Но с дистанции решение читается однозначно: банк готовил айдентику к жизни, где тебя в первую очередь видят на экране телефона.
+
+## Что стоит сменить знак у банка
+
+Споры вокруг ребрендинга 2020 года держались на цифре в миллиарды, и цифра эта пугает ровно до того момента, пока не разложишь, из чего она складывается. У банка знак живёт на физических объектах, и каждый из них требует замены отдельно. Макетом дело не ограничивается.
+
+Считать приходится вывески отделений по всей стране, банкоматы и терминалы, пластиковые карты в обращении, бланки и печатные формы, форму сотрудников, транспорт инкассации, рекламные носители, интерфейсы приложения и сайта. Часть меняется за ночь обновлением кода, часть — годами, по мере износа и планового ремонта.
+
+Отсюда вырастает практика переходного периода, которую применяют все крупные бренды. Новый знак вводят сразу в цифре, где замена бесплатна, а физические носители обновляют волнами: сначала то, что видит больше всего людей, потом остальное. Несколько лет старая и новая версии сосуществуют, и это нормальная часть плана, которую закладывают заранее.
+
+Для небольшой компании выводы те же, только суммы меньше. Прежде чем менять знак, полезно выписать все места, где он физически стоит, и оценить замену каждого. Иногда этот список сам подсказывает, что дешевле обойтись сменой отделки, оставив форму.
 
 ## Все эпохи на одной шкале
 
-Три знака рядом — и путь виден без слов: от объёма к плоскости, от засечек к гротеску, при неизменном зелёном и неизменной галочке.
+Три знака рядом, и путь виден без слов: от объёма к плоскости, от засечек к гротеску, при неизменном зелёном и неизменной галочке.
 
 :::widget logo-timeline
 bank/sber 1991 | 1991
@@ -57,6 +71,16 @@ bank/sber full | 2020
 | 1991 | зелёная галочка в круге + засечки | появился рынок, нужен символ доверия |
 | 2009 | объёмная галочка, глянец, лучи | мода на «дорого‑богато» |
 | 2020 | плоский разомкнутый круг, градиентный штрих | бренд переехал в смартфон и экосистему |
+
+## Почему зелёный пережил все эпохи
+
+На фоне трёх смен оформления один элемент держится с 1991 года без единого пересмотра — цвет. И держится он не по инерции, а потому что цвет накапливает узнаваемость иначе, чем форма.
+
+Форму читают осознанно: глаз находит контур, мозг сверяет с памятью. Цвет опознаётся раньше, периферийным зрением, ещё до фокусировки на объекте. Поэтому зелёное пятно на улице читается как отделение банка с расстояния, на котором галочку разглядеть невозможно. Отказ от цвета обнулил бы именно этот дальний слой узнавания, самый дешёвый в работе и самый дорогой в накоплении.
+
+К этому добавляется правовая сторона. Зелёный [Сбера](../../logos/bank/sber/) зарегистрирован как цветовое обозначение, а такая регистрация требует многолетних доказательств связи оттенка с брендом. Смена цвета обнулила бы и её, вернув компанию в начало пути; подробнее про механику регистрации цвета — в статье [про фирменные цвета](../firmennye-cveta-izvestnyh-brendov/).
+
+Отсюда правило, применимое далеко за пределами банков и стоящее того, чтобы записать его в гайдлайн: в редизайне цвет трогают последним. Форму можно упростить, шрифт заменить, отделку сменить целиком, и бренд останется узнанным. Смена цвета читается публикой как смена компании.
 
 ## Чему учит эта история
 
@@ -75,35 +99,49 @@ bank/sber full | 2020
 
 ---EN---
 
-Every resident of Russia has seen the green circle with a check — but few remember it was preceded by a piggy bank with a savings book, austere Soviet emblems and fifteen years of glossy volume. And behind the change of pictures lies more: the history of the [Sberbank](../../logos/bank/sber/) mark is a ready textbook on identity evolution, where every turn happened because the very environment the mark had to live in was changing. Let's walk the eras with exactly that question: what changed around it — and why the mark was obliged to answer.
+Every resident of Russia has seen the green circle with a check, but few remember it was preceded by a piggy bank with a savings book, austere Soviet emblems and fifteen years of glossy volume. And behind the change of pictures lies more: the history of the [Sberbank](../../logos/bank/sber/) mark is a ready textbook on identity evolution, where every turn happened because the very environment the mark had to live in was changing. Let's walk the eras with exactly that question: what changed around it and why the mark was obliged to answer.
 
 ## Before the logo: when a brand wasn't needed
 
 Savings in Russia began in 1841 by decree of Nicholas I, and for a century and a half the savings banks had no logo in the modern sense — only signs, coats of arms and thrift attributes: a piggy bank, a bee, an ear of wheat. The reason is simple: a logo distinguishes one company from another, and there was no one to be distinguished from. In Soviet times the state savings banks made do with austere typography and state symbols — competition didn't exist, and the "brand" was guaranteed by the state.
 
-Everything changed the moment the bank stopped being the only one. A market appeared — and with it, for the first time, a mark was needed that people would recognize and choose.
+Everything changed the moment the bank stopped being the only one. A market appeared, and with it, for the first time, a mark was needed that people would recognize and choose.
 
 ## 1991: the birth of the check
 
-With the transformation into [Sberbank](../../logos/bank/sber/) of Russia came the first real logo: **a green circle with a "check"** — a stylized wallet with a coin falling out (a common reading; there's also a version about an opened fan of a savings book). Authorship of the emblem was retold in various ways, but the mark itself proved unusually apt — and apt precisely for its task: a simple memorable shape, an unambiguous link to money, green as the code of financial reliability. The market needed an instantly readable symbol of trust — and got it.
+With the transformation into [Sberbank](../../logos/bank/sber/) of Russia came the first real logo: **a green circle with a "check"** — a stylized wallet with a coin falling out (a common reading; there's also a version about an opened fan of a savings book). Authorship of the emblem was retold in various ways, but the mark itself proved unusually apt, and apt precisely for its task: a simple memorable shape, an unambiguous link to money, green as the code of financial reliability. The market needed an instantly readable symbol of trust, and got it.
 
-Beside the mark stood "[Sberbank](../../logos/bank/sber/) of Russia" set in a serif font. The composition breathed the nineties: a touch heavy, very solid. And in this form the mark lived nearly two decades — until the fashion for how a "premium" brand should even look had changed.
+It's worth noting separately why that particular shape worked. In financial symbolism a circle reads as a coin and as closure, meaning safekeeping; the check inside adds movement and assent. The mark meanwhile stays a single-stroke drawing reproducible by any means: a stencil on glass, embroidery on a uniform, a stamp on a form. In 1991 that mattered practically, because digital printing as we know it didn't exist and branches across the country produced their signage with local means.
+
+Beside the mark stood "[Sberbank](../../logos/bank/sber/) of Russia" set in a serif font. The composition breathed the nineties: a touch heavy, very solid. And in this form the mark lived nearly two decades, until the fashion for how a "premium" brand should even look had changed.
 
 ## 2009: glossy volume
 
 By the late 2000s identity across the market demanded volume: gradients, highlights, shadows — "premium" then meant "glossy." [Sberbank](../../logos/bank/sber/) answered this fashion with the 2009 rebrand (Fitch studio): the check was kept but made three-dimensional — the green grew lighter and richer, the circle gained volume and rays, the font changed to a modern sans. The slogan "Always nearby" appeared then too.
 
-The move was competent and evolutionary: recognition preserved, the picture modernized. But the decision had a built-in expiry date, set by technology. Voluminous logos live badly in interfaces: at 16 favicon pixels the highlights turn to dirt. While the brand lived on signage and letterheads this didn't matter — but the next environment was already different. Why small screens eventually killed volume across the whole industry is covered in the article [on simplifying logos](../pochemu-brendy-uproshchayut-logotipy/).
+The 2009 rebrand is worth remembering for another reason: it shows how fashion dictates form in hindsight. Everyone applied volume in those years — banks, telecom operators, hardware makers, government portals. The device read as a sign of being current and well funded, so refusing it would have looked like cost-cutting. Ten years later that same device became a marker of a dated website, and it was stripped out as massively as it had once been added.
+
+The move was competent and evolutionary: recognition preserved, the picture modernized. But the decision had a built-in expiry date, set by technology. Voluminous logos live badly in interfaces: at 16 favicon pixels the highlights turn to dirt. While the brand lived on signage and letterheads this didn't matter, though the next environment was already different. Why small screens eventually killed volume across the whole industry is covered in the article [on simplifying logos](../pochemu-brendy-uproshchayut-logotipy/).
 
 ## 2020: "Sber" — a mark for the screen
 
-That new environment was the smartphone. By 2020 the bank's main "sign" had become the app icon, and the voluminous check wasn't fit for it — so in September the bank announced its transformation into an ecosystem, dropping the very word "bank" from the brand. The logo changed radically: for the first time since 1991 the shape of the mark itself changed — **an open circle with a check and a gradient stroke** from green through yellow-green. Every decision here is a direct answer to the demands of the screen and the ecosystem:
+That new environment was the smartphone. By 2020 the bank's main "sign" had become the app icon, and the voluminous check no longer fit it, so in September the bank announced its transformation into an ecosystem, dropping the very word "bank" from the brand. The logo changed radically: for the first time since 1991 the shape of the mark itself changed — **an open circle with a check and a gradient stroke** from green through yellow-green. Every decision here is a direct answer to the demands of the screen and the ecosystem:
 
 - **Flatness.** The mark finally lives equally at any size — from favicon to facade — because there are no more highlights to render.
 - **Gradient in the stroke, with a clean fill.** A compromise: digital freshness without losing legibility at small size, while in monochrome the mark lives calmly in one color.
 - **The short name "[Sber](../../logos/bank/sber/)."** An umbrella for dozens of services — SberMarket, SberZvuk, SberPrime. The mark was designed from the start as an ecosystem prefix, outgrowing the role of a bank sign.
 
-The rebrand was estimated in billions of rubles — replacing thousands of signs, ATMs, forms — and the "why change something recognizable" debates ran loud. But from a distance the decision reads plainly: the bank was preparing its identity for a life where you're seen first on a phone screen.
+The rebrand was estimated in billions of rubles (replacing thousands of signs, ATMs and forms), and the "why change something recognizable" debates ran loud. But from a distance the decision reads plainly: the bank was preparing its identity for a life where you're seen first on a phone screen.
+
+## What it takes to change a bank's mark
+
+The arguments around the 2020 rebrand rested on a figure in the billions, and that figure alarms you only until you break down what it consists of. A bank's mark lives on physical objects instead of layouts, and each one needs replacing separately.
+
+The count covers branch signage across the country, ATMs and terminals, plastic cards in circulation, forms and printed paperwork, staff uniforms, cash-in-transit vehicles, advertising carriers, the app and website interfaces. Some of it changes overnight with a code deploy; some takes years, as things wear out and get refurbished on schedule.
+
+From this grows the transition-period practice every large brand uses. The new mark goes live in digital immediately, where replacement is free, while physical carriers update in waves: first what the most people see, then the rest. For several years the old and new versions coexist, and that's a normal part of the plan, budgeted in advance.
+
+For a small company the conclusions hold, only the sums shrink. Before changing a mark, it pays to list every place it physically stands and price the replacement of each. Sometimes that list alone suggests it's cheaper to change the finish and keep the shape.
 
 ## All eras on one scale
 
@@ -123,6 +161,16 @@ Compressing everything said into text, the same pattern emerges: each row marks 
 | 1991 | green check in a circle + serifs | a market appeared, a trust symbol was needed |
 | 2009 | voluminous check, gloss, rays | the fashion for "rich and premium" |
 | 2020 | flat open circle, gradient stroke | the brand moved into the smartphone and ecosystem |
+
+## Why the green outlived every era
+
+Against three changes of finish, one element has held since 1991 without a single revision: the color. And it holds for a reason: color accumulates recognition differently than shape does.
+
+Shape is read consciously: the eye finds the contour, the brain checks it against memory. Color registers earlier, in peripheral vision, before the object is even in focus. So a green patch on the street reads as a bank branch from a distance where the check is impossible to make out. Dropping the color would have zeroed out exactly that far layer of recognition, the cheapest to work with and the most expensive to accumulate.
+
+The legal side adds to this. [Sber](../../logos/bank/sber/) green is registered as a color designation, and such a registration demands years of proof tying the shade to the brand. Changing the color would have zeroed that out too, returning the company to the starting line; more on how color registration works is in [the article on brand colors](../firmennye-cveta-izvestnyh-brendov/).
+
+Hence a rule that applies far beyond banks and deserves a line in the guideline: in a redesign, color is touched last. The shape can be simplified, the font replaced, the finish changed entirely, and the brand still gets recognized. A change of color reads to the public as a change of company.
 
 ## What this story teaches
 

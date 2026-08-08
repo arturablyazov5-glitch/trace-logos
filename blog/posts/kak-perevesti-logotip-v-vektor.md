@@ -9,7 +9,7 @@ tags: Вектор, Логотипы, Инструкции
 tags_en: Vector, Logos, How-to
 ---
 
-Типография просит «логотип в кривых», конструктор сайтов в SVG, а у вас от логотипа остался один PNG с сайта десятилетней давности. Исходники потерялись вместе с дизайнером. Ситуация настолько частая, что «отрисовка логотипа в вектор» отдельная услуга на фрилансе. Разберём, когда её можно сделать самому за десять минут, когда за вечер, а когда честнее заплатить.
+Типография просит «логотип в кривых», конструктор сайтов в SVG, а у вас от логотипа остался один PNG с сайта десятилетней давности. Исходники потерялись вместе с дизайнером. Ситуация настолько частая, что «отрисовка логотипа в вектор» — отдельная услуга на фрилансе. Разберём, когда её можно сделать самому за десять минут, когда за вечер, а когда честнее заплатить.
 
 :::note Коротко
 Есть два пути. **Автотрассировка** (Inkscape, онлайн‑сервисы): быстро, но прилично работает только на простых одноцветных знаках с чёткими краями. **Ручная отрисовка** ([Figma](../../logos/design/figma/), [Illustrator](../../logos/design/illustrator/)): дольше, но результат настоящий чистый вектор. Правило выбора: одноцветный знак без мелких деталей — пробуйте трассировку; градиенты, текст, мелочи — только отрисовка.
@@ -24,11 +24,13 @@ tags_en: Vector, Logos, How-to
 - **Сайт компании.** Логотип в шапке может быть SVG, как проверить и вытащить, мы показывали в статье: [«Как скачать логотип с сайта»](../kak-skachat-logotip-s-sajta/).
 - **Известный бренд?** Тогда вектор точно есть в каталогах. В нашем [каталоге логотипов](../../logos/) сотни брендов в SVG.
 
+Отдельно проверьте печатные макеты. Визитка, буклет или коммерческое предложение в PDF почти всегда хранят логотип вектором внутри: откройте такой PDF в [Illustrator](../../logos/design/illustrator/) или Inkscape и вытащите знак обычной группой кривых. Тот же приём работает с презентациями — PPTX распаковывается как zip, а вставленные картинки лежат внутри папки `media` в исходном формате.
+
 Найденный оригинал всегда лучше любой реконструкции.
 
 ## Путь 1. Автотрассировка за 10 минут
 
-Трассировка — это алгоритм, который обводит границы пикселей кривыми. Лучший бесплатный инструмент — **Inkscape**:
+Трассировка обводит границы пикселей кривыми по формальному признаку — перепаду цвета. Лучший бесплатный инструмент — **Inkscape**:
 
 1. Откройте PNG в Inkscape (File → Open).
 2. Выделите картинку → Path → **Trace Bitmap**.
@@ -41,13 +43,25 @@ tags_en: Vector, Logos, How-to
 **Онлайн‑альтернативы** (vectorizer‑сервисы) делают то же самое без установки, но с ограничениями бесплатных тарифов и без тонких настроек.
 
 :::warning Когда трассировка провалится
-- **Маленький или сжатый исходник.** Из PNG 200×200 или JPG с артефактами алгоритм обведёт не логотип, а его искажения. Минимум для вменяемого результата 500‑1000 px по длинной стороне.
+- **Маленький или сжатый исходник.** Из PNG 200×200 или JPG с артефактами алгоритм обведёт искажения сжатия вместо самого логотипа. Минимум для вменяемого результата 500‑1000 px по длинной стороне.
 - **Градиенты.** Трассировка разобьёт плавный переход на десятки «ступенек»-фигур.
-- **Мелкий текст.** Буквы превратятся в кривые кляксы. Текст всегда перенабирается шрифтом.
+- **Мелкий текст.** Буквы теряют форму: засечки и тонкие штрихи слипаются в пятна. Текст всегда перенабирают шрифтом.
 - **Фотографические элементы.** Не векторизуются осмысленно в принципе.
 :::
 
+## Подготовка исходника: половина успеха трассировки
+
+Прежде чем скармливать PNG алгоритму, потратьте пять минут на подготовку. Качество результата вырастет заметно:
+
+1. **Найдите самую большую версию.** Поиск по картинке (Яндекс/Google) по вашему PNG часто находит копии выше разрешением. Также проверьте веб‑архив сайта бренда.
+2. **Увеличьте контраст.** В любом редакторе поднимите контраст и уберите полутона у краёв — алгоритму проще искать границы.
+3. **Очистите фон.** Пятна, водяные знаки и текстуры фона превратятся в лишние фигуры. Замажьте их белым до трассировки.
+4. **Обрежьте лишнее.** Оставьте в кадре один знак: всё остальное со страницы каталога алгоритм обведёт наравне с ним.
+5. **Для JPG — уберите артефакты.** Лёгкое размытие (Gaussian Blur 0,5‑1 px) парадоксально улучшает трассировку JPG: алгоритм перестаёт обводить квадратики сжатия.
+
 ## Путь 2. Ручная отрисовка за вечер
+
+Подготовка вытягивает трассировку там, где знак изначально простой. Градиент, тонкий штрих и буквы не спасёт ни один порог, поэтому остаётся второй путь.
 
 Честная реконструкция: растровый логотип кладётся на фон, и поверх него заново строятся фигуры. В [Figma](../../logos/design/figma/) процесс такой:
 
@@ -62,7 +76,9 @@ tags_en: Vector, Logos, How-to
 
 ## Путь 3. Заказать отрисовку
 
-Услуга «отрисовка в вектор» на фриланс‑биржах стоит недорого и делается за 1‑2 дня. Заказывайте, если логотип сложный (градиенты, иллюстрация, леттеринг), а времени нет. Проверяйте результат: в файле должны быть кривые (`<path>`), а не вставленный растр, текст в кривых или с приложенным шрифтом, цвета точными кодами.
+Услуга «отрисовка в вектор» на фриланс‑биржах стоит недорого и делается за 1‑2 дня. Заказывайте, если логотип сложный (градиенты, иллюстрация, леттеринг), а времени нет. Приложите к заказу самый крупный найденный растр, название шрифта или его образец, фирменные HEX, если они известны, и список нужных форматов. Без этих данных исполнитель подберёт шрифт и цвета на глаз, а расхождение вылезет уже в типографии. Правки оговаривайте до начала работы: одна‑две итерации по силуэту у большинства исполнителей входят в цену.
+
+Проверяйте результат: в файле должны быть кривые (`<path>`), текст в кривых или с приложенным шрифтом, цвета точными кодами. Один тег `<image>` внутри означает, что вам вернули тот же растр в другой обёртке.
 
 ## Сравнение путей
 
@@ -75,27 +91,7 @@ tags_en: Vector, Logos, How-to
 | Текст | ⛔ кляксы | ✅ перенабор | ✅ |
 | Чистота файла | ⚠️ нужна доводка | ✅ идеальная | ✅ проверять |
 
-## Частые вопросы
-
-**Онлайн‑конвертер «PNG в SVG» — это то же самое?** Да, внутри та же трассировка, только без настроек. А некоторые сервисы просто заворачивают растр в SVG‑обёртку — файл меняет расширение, но вектором не становится. Проверка: откройте результат текстовым редактором, внутри должны быть `<path>`, а не `<image>`.
-
-**Нейросети умеют векторизовать?** Появляются модели, генерирующие SVG по картинке, — на простых знаках результат уже приличный, на сложных пока хуже аккуратной ручной работы. Проверяйте те же критерии: чистые кривые, разумное число узлов.
-
-**Логотип чужой. Можно ли его отрисовывать?** Для использования по назначению (показать бренд в презентации, поставить иконку банка в список) — да, но отрисовка должна быть точной, без искажений. Подробно о правовой стороне в статье [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
-
-**Сколько узлов должно быть в хорошем векторе?** Ориентир: простой знак, десятки узлов, не сотни. Откройте результат в Inkscape и нажмите N (редактор узлов): если кривая усыпана точками, как бусами — файл после трассировки не доведён. Плавная дуга описывается 2‑4 узлами.
-
-**Как отрисовать градиент?** Снимите пипеткой оба крайних цвета исходника и постройте градиент заново инструментом редактора. Не пытайтесь «повторить пикселями». В SVG градиент — это математический объект `<linearGradient>` с точными стопами, он чище любой трассировки.
-
-## Подготовка исходника: половина успеха трассировки
-
-Прежде чем скармливать PNG алгоритму, потратьте пять минут на подготовку. Качество результата вырастет заметно:
-
-1. **Найдите самую большую версию.** Поиск по картинке (Яндекс/Google) по вашему PNG часто находит копии выше разрешением. Также проверьте веб‑архив сайта бренда.
-2. **Увеличьте контраст.** В любом редакторе поднимите контраст и уберите полутона у краёв — алгоритму проще искать границы.
-3. **Очистите фон.** Пятна, водяные знаки и текстуры фона превратятся в лишние фигуры. Замажьте их белым до трассировки.
-4. **Обрежьте лишнее.** Трассируйте только логотип, а не всю страницу каталога, где он напечатан.
-5. **Для JPG — уберите артефакты.** Лёгкое размытие (Gaussian Blur 0,5‑1 px) парадоксально улучшает трассировку JPG: алгоритм перестаёт обводить квадратики сжатия.
+Главная строка здесь последняя: она объясняет, почему быстрый путь редко оказывается конечным. Трассировка выдаёт результат за десять минут, а доводка до пригодного файла занимает потом столько же, сколько отрисовка простого знака с нуля.
 
 ## После векторизации: доводка до товарного вида
 
@@ -104,23 +100,35 @@ tags_en: Vector, Logos, How-to
 - **Simplify** (Ctrl+L в Inkscape) — убрать лишние узлы, поставленные на каждом пикселе.
 - **Выровнять геометрию.** Почти‑круглые элементы замените честными кругами, почти‑прямые — прямыми: трассировка не знает, что дуга задумывалась идеальной, а вы знаете.
 - **Замкнуть контуры и убрать мусор.** Приблизьте на 800% — найдёте микрофигуры-«пылинки» и разрывы контуров.
-- **Назначить точные цвета.** Не цвета «как получились» после трассировки, а фирменные HEX из гайдлайна или исходного SVG (как их узнать — в [статье про цвет](../kak-uznat-cvet-logotipa/)).
+- **Назначить точные цвета.** Возьмите фирменные HEX из гайдлайна или исходного SVG вместо тех, что получились после трассировки (как их узнать — в [статье про цвет](../kak-uznat-cvet-logotipa/)).
 - **Прогнать через оптимизатор** — финальный файл станет в разы легче по [нашей инструкции по SVGO](../kak-optimizirovat-svg/).
 - **Сравнить с оригиналом наложением** — последняя проверка перед сдачей.
 
 ## Векторизация нейросетями: состояние на 2026 год
 
-Отдельного упоминания заслуживают ИИ‑векторизаторы — за пару лет они выросли из игрушки в рабочий инструмент для части задач. Модели, генерирующие SVG по растру, уже прилично справляются с плоскими знаками средней сложности: меньше «бусин» на кривых, чем у классической трассировки, осмысленные формы вместо слепой обводки пикселей. Слабые места прежние: текст (перенабирайте шрифтом всегда), тонкие декоративные детали и градиентные переходы. Практический режим: пробуйте ИИ‑вариант параллельно с Inkscape — и выбирайте лучший из двух как заготовку для ручной доводки. Этап доводки не отменяет ни один инструмент: чек‑лист выше одинаков для всех путей.
+Отдельного упоминания заслуживают ИИ‑векторизаторы — за пару лет они дошли от демонстраций до рабочих задач определённого класса. Модели, генерирующие SVG по растру, уже прилично справляются с плоскими знаками средней сложности: меньше «бусин» на кривых, чем у классической трассировки, осмысленные формы вместо слепой обводки пикселей. Слабые места прежние: текст (перенабирайте шрифтом всегда), тонкие декоративные детали и градиентные переходы. Практический режим: пробуйте ИИ‑вариант параллельно с Inkscape и берите лучший из двух как заготовку для ручной доводки. Этап доводки не отменяет ни один инструмент: чек‑лист выше одинаков для всех путей.
+
+## Частые вопросы
+
+**Онлайн‑конвертер «PNG в SVG» — это то же самое?** Да, внутри та же трассировка, только без настроек. А некоторые сервисы просто заворачивают растр в SVG‑обёртку: файл меняет расширение, но вектором не становится. Проверка: откройте результат текстовым редактором, внутри должны быть `<path>`, а тег `<image>` выдаёт подделку.
+
+**Какие файлы отдать после векторизации?** Минимум такой: SVG для веба, PDF или EPS для типографии, PNG на прозрачном фоне для документов. Добавьте версию в одну краску: печать на ткани, гравировка и штамп требуют силуэта без градиентов. Полный список разобран в [гиде по форматам](../v-kakom-formate-nuzhen-logotip/).
+
+**Логотип чужой. Можно ли его отрисовывать?** Для использования по назначению (показать бренд в презентации, поставить иконку банка в список) — да, но отрисовка должна быть точной, без искажений. Подробно о правовой стороне в статье [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
+
+**Сколько узлов должно быть в хорошем векторе?** Ориентир: простой знак, десятки узлов, не сотни. Откройте результат в Inkscape и нажмите N (редактор узлов): если кривая усыпана точками, как бусами — файл после трассировки не доведён. Плавная дуга описывается 2‑4 узлами.
+
+**Как отрисовать градиент?** Снимите пипеткой оба крайних цвета исходника и постройте градиент заново инструментом редактора. Не пытайтесь «повторить пикселями». В SVG градиент — это математический объект `<linearGradient>` с точными стопами, он чище любой трассировки.
 
 ## Коротко
 
 Сначала ищите оригинальный вектор — он есть чаще, чем кажется. Не нашли: одноцветный простой знак — Inkscape Trace Bitmap плюс Simplify; всё остальное — ручная отрисовка поверх полупрозрачного исходника с перенабором текста. И в любом случае финальный файл — чистый SVG с точными фирменными цветами.
 
-Для известных брендов пропустите весь этот процесс: в нашем [каталоге логотипов](../../logos/) уже лежат официальные векторы — скачивайте SVG и живите спокойно.
+Для известных брендов пропустите весь этот процесс: в нашем [каталоге логотипов](../../logos/) уже лежат официальные векторы: скачивайте SVG и живите спокойно.
 
 ---EN---
 
-The print shop wants "the logo in curves", the site builder wants SVG — and all you have is a PNG from a ten-year-old website. The source files vanished along with the designer. The situation is so common that "logo vectorization" is a standalone freelance service. Let's sort out when you can do it yourself in ten minutes, when it takes an evening, and when paying is the honest choice.
+The print shop wants "the logo in curves", the site builder wants SVG, and all you have is a PNG from a ten-year-old website. The source files vanished along with the designer. The situation is so common that "logo vectorization" is a standalone freelance service. Let's sort out when you can do it yourself in ten minutes, when it takes an evening, and when paying is the honest choice.
 
 :::note TL;DR
 Two paths. **Auto-tracing** (Inkscape, online tools): fast, but decent only on simple one-color marks with clean edges. **Manual redrawing** ([Figma](../../logos/design/figma/), [Illustrator](../../logos/design/illustrator/)): slower, but produces genuinely clean vectors. The rule: one-color mark without fine detail — try tracing; gradients, text, small details — redraw only.
@@ -133,13 +141,15 @@ Before reconstructing from raster, spend ten minutes hunting the original — it
 - **Email and archives.** Messages from the designer or studio, old cloud folders. Look for .ai, .eps, .svg, .pdf.
 - **Vendors.** The print shop that made your business cards or the agency that built the site often keeps the vector.
 - **Your own website.** The header logo may be an SVG — how to check and extract it: [how to download a logo from a site](../kak-skachat-logotip-s-sajta/).
-- **A known brand?** Then the vector definitely exists in catalogs — ours has hundreds of brands in [SVG](../../logos/).
+- **A known brand?** Then the vector definitely exists in catalogs — our [logo catalog](../../logos/) holds hundreds of brands in SVG.
+
+Check print artwork separately. A business card, brochure or proposal saved as PDF almost always keeps the logo as vector inside: open that PDF in [Illustrator](../../logos/design/illustrator/) or Inkscape and pull the mark out as an ordinary group of curves. The same trick works on decks — a PPTX unpacks as a zip, and the embedded images sit in the `media` folder in their original format.
 
 A found original always beats any reconstruction.
 
 ## Path 1. Auto-tracing — 10 minutes
 
-Tracing is an algorithm that outlines pixel boundaries with curves. The best free tool is **Inkscape**:
+Tracing outlines pixel boundaries with curves by a formal signal: a change of color. The best free tool is **Inkscape**:
 
 1. Open the PNG (File → Open).
 2. Select the image → Path → **Trace Bitmap**.
@@ -152,13 +162,25 @@ Post-processing is almost always needed: Path → Simplify (Ctrl+L) removes the 
 **Online alternatives** (vectorizer services) do the same without installing anything, minus fine controls and plus free-tier limits.
 
 :::warning When tracing will fail
-- **A small or compressed source.** From a 200×200 PNG or an artifact-ridden JPG the algorithm traces the distortions, not the logo. Minimum for sane results: 500–1000 px on the long side.
+- **A small or compressed source.** From a 200×200 PNG or an artifact-ridden JPG the algorithm traces compression artifacts instead of the logo itself. Minimum for sane results: 500–1000 px on the long side.
 - **Gradients.** Tracing shatters smooth transitions into dozens of stepped shapes.
-- **Small text.** Letters become blobby curves — text is always re-typeset, never traced.
+- **Small text.** Letters lose their shape: serifs and hairlines merge into patches. Text is always re-typeset.
 - **Photographic elements.** Not meaningfully vectorizable at all.
 :::
 
+## Preparing the source: half of tracing's success
+
+Before feeding the PNG to the algorithm, spend five minutes on prep — the quality jump is real:
+
+1. **Find the largest version.** Reverse image search often surfaces higher-res copies. Also check the brand site's web archive.
+2. **Boost contrast.** Raise contrast and kill halftones at the edges — boundaries get easier to find.
+3. **Clean the background.** Stains, watermarks and textures become extra shapes. Paint them white before tracing.
+4. **Crop.** Keep only the mark in frame: everything else on the catalog page gets outlined along with it.
+5. **For JPG — soften the artifacts.** A slight blur (Gaussian 0.5–1 px) paradoxically improves JPG tracing: the algorithm stops outlining compression blocks.
+
 ## Path 2. Manual redrawing — an evening
+
+Prep rescues tracing where the mark is simple to begin with. No threshold saves a gradient, a hairline stroke or letterforms, so the second path takes over.
 
 The honest reconstruction: the raster goes underneath, and shapes are rebuilt on top. In [Figma](../../logos/design/figma/):
 
@@ -173,7 +195,9 @@ Sounds long, but a mid-complexity logo takes 1–3 hours even without experience
 
 ## Path 3. Ordering it
 
-"Vectorization" on freelance marketplaces is cheap and takes 1–2 days. Order it when the logo is complex (gradients, illustration, lettering) and time is short. Check the delivery: curves (`<path>`) rather than an embedded bitmap, text outlined or the font attached, colors as exact codes.
+"Vectorization" on freelance marketplaces is cheap and takes 1–2 days. Order it when the logo is complex (gradients, illustration, lettering) and time is short. Send along the largest raster you found, the font name or a sample of it, the brand HEX codes if you know them, and the list of formats you need. Without that the contractor picks the font and colors by eye, and the mismatch surfaces at the print shop. Agree on revisions before the work starts: one or two silhouette iterations are included in the price with most contractors.
+
+Check the delivery: curves (`<path>`), text outlined or the font attached, colors as exact codes. A single `<image>` tag inside means you got the same raster back in a different wrapper.
 
 ## Comparing the paths
 
@@ -186,27 +210,7 @@ Sounds long, but a mid-complexity logo takes 1–3 hours even without experience
 | Text | ⛔ blobs | ✅ re-typeset | ✅ |
 | File cleanliness | ⚠️ needs cleanup | ✅ perfect | ✅ verify |
 
-## FAQ
-
-**Is an online "PNG to SVG converter" the same thing?** Yes — the same tracing, minus settings. And some services just wrap the raster in an SVG shell: the extension changes, the pixels don't. Check: open the result in a text editor; you should see `<path>`, not `<image>`.
-
-**Can AI vectorize?** Models that generate SVG from images are emerging — already decent on simple marks, still behind careful manual work on complex ones. Apply the same checks: clean curves, sane node counts.
-
-**The logo isn't mine — may I redraw it?** For legitimate referential use (showing the brand in a deck, a bank icon in a list) — yes, but the redraw must be exact, with no distortion. The legal side in detail: [can you use someone else's logo](../mozhno-li-ispolzovat-chuzhoy-logotip/).
-
-**How many nodes should a good vector have?** Benchmark: a simple mark — dozens, not hundreds. Open the result in Inkscape and press N (node editor): a curve beaded with points means unfinished tracing. A smooth arc takes 2–4 nodes.
-
-**How do I redraw a gradient?** Eyedrop both end colors from the source and rebuild the gradient with the editor's tool — don't "repeat it in pixels". In SVG a gradient is a mathematical `<linearGradient>` with exact stops, cleaner than any trace.
-
-## Preparing the source: half of tracing's success
-
-Before feeding the PNG to the algorithm, spend five minutes on prep — the quality jump is real:
-
-1. **Find the largest version.** Reverse image search often surfaces higher-res copies. Also check the brand site's web archive.
-2. **Boost contrast.** Raise contrast and kill halftones at the edges — boundaries get easier to find.
-3. **Clean the background.** Stains, watermarks and textures become extra shapes. Paint them white before tracing.
-4. **Crop.** Trace the logo, not the whole catalog page it was printed on.
-5. **For JPG — soften the artifacts.** A slight blur (Gaussian 0.5–1 px) paradoxically improves JPG tracing: the algorithm stops outlining compression blocks.
+The last row is the one that matters: it explains why the fast path rarely ends up being the final one. Tracing returns a result in ten minutes, and cleaning it up to a usable file then takes as long as redrawing a simple mark from scratch.
 
 ## After vectorization: finishing to professional grade
 
@@ -214,17 +218,29 @@ Getting curves isn't the finish line. The polish checklist:
 
 - **Simplify** (Ctrl+L in Inkscape) — remove per-pixel nodes.
 - **True up the geometry.** Replace almost-circles with real circles, almost-straights with straights: the tracer doesn't know the arc was meant to be perfect — you do.
-- **Close contours, sweep the dust.** [Zoom](../../logos/videocall/zoom/) to 800% — you'll find micro-shapes and contour gaps.
-- **Assign exact colors.** Not "whatever the trace produced" but the brand HEX from guidelines or the source SVG — [how to find it](../kak-uznat-cvet-logotipa/) is a separate guide.
+- **Close contours, sweep the dust.** Zoom to 800% — you'll find micro-shapes and contour gaps.
+- **Assign exact colors.** Take the brand HEX from the guidelines or the source SVG instead of whatever the trace produced — [how to find it](../kak-uznat-cvet-logotipa/) is a separate guide.
 - **Run the optimizer** — the final file gets several times lighter with [our SVGO guide](../kak-optimizirovat-svg/).
 - **Overlay-compare with the original** — the last check before delivery.
 
 ## AI vectorization: the state of 2026
 
-AI vectorizers deserve their own note — in a couple of years they've grown from a toy into a working tool for part of the job. Models generating SVG from raster already handle flat marks of medium complexity decently: fewer "beads" on curves than classical tracing, meaningful shapes instead of blind pixel-outlining. The weak spots remain: text (always re-typeset), fine decorative detail and gradient transitions. The practical mode: run the AI variant alongside Inkscape — and pick the better of the two as the base for manual finishing. No tool cancels the finishing stage: the checklist above is identical for every path.
+AI vectorizers deserve their own note — in a couple of years they've moved from demos to production work of a certain class. Models generating SVG from raster already handle flat marks of medium complexity decently: fewer "beads" on curves than classical tracing, meaningful shapes instead of blind pixel-outlining. The weak spots remain: text (always re-typeset), fine decorative detail and gradient transitions. The practical mode: run the AI variant alongside Inkscape and take the better of the two as the base for manual finishing. No tool cancels the finishing stage: the checklist above is identical for every path.
+
+## FAQ
+
+**Is an online "PNG to SVG converter" the same thing?** Yes — the same tracing, minus settings. And some services just wrap the raster in an SVG shell: the extension changes, the pixels don't. Check: open the result in a text editor; you should see `<path>`, while an `<image>` tag gives away the fake.
+
+**Which files should I deliver after vectorization?** The minimum set: SVG for the web, PDF or EPS for the print shop, PNG on transparency for documents. Add a single-color version — fabric printing, engraving and stamps need a silhouette with no gradients. The full list is covered in [the format guide](../v-kakom-formate-nuzhen-logotip/).
+
+**The logo isn't mine — may I redraw it?** For legitimate referential use (showing the brand in a deck, a bank icon in a list) — yes, but the redraw must be exact, with no distortion. The legal side in detail: [can you use someone else's logo](../mozhno-li-ispolzovat-chuzhoy-logotip/).
+
+**How many nodes should a good vector have?** Benchmark: a simple mark — dozens, not hundreds. Open the result in Inkscape and press N (node editor): a curve beaded with points means unfinished tracing. A smooth arc takes 2–4 nodes.
+
+**How do I redraw a gradient?** Eyedrop both end colors from the source and rebuild the gradient with the editor's tool — don't "repeat it in pixels". In SVG a gradient is a mathematical `<linearGradient>` with exact stops, cleaner than any trace.
 
 ## In short
 
 Hunt for the original vector first — it exists more often than you think. Not found: a simple one-color mark — Inkscape Trace Bitmap plus Simplify; everything else — a manual redraw over a translucent source with re-typeset text. Either way, the final file is a clean SVG with exact brand colors.
 
-For known brands, skip the whole process: our [logo catalog](../../logos/) already holds the official vectors — download the SVG and move on.
+For known brands, skip the whole process: our [logo catalog](../../logos/) already holds the official vectors: download the SVG and move on.

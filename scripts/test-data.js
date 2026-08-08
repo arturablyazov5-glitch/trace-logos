@@ -12,7 +12,7 @@
  *           • orphan assets in assets/logos/svgs|pngs unreferenced by any JSON (warning)
  *
  *   --post  (after build-webp-previews) — build artifacts must be in sync:
- *           • every PNG logo has an up-to-date WebP preview
+ *           • every PNG and SVG logo has an up-to-date WebP preview
  *           • every non-comingSoon logo has assets/og/<slug>.png
  *             (warning by default — OG is the opt-in slow tier; --strict makes it fatal)
  *
@@ -200,22 +200,35 @@ function runPre() {
 function runPost() {
   const logoCats = loadCategories('logos/manifest.json', path.join(ROOT, 'logos'));
 
-  // WebP previews: mirror the sections of build-webp-previews.js
+  // WebP previews: mirror the sections of build-webp-previews.js. Every PNG
+  // and every SVG logo gets a preview (2026-08-06: dropped the earlier
+  // >300 KB "heavy SVG" threshold — rasterizing saves 80-98% regardless of
+  // source weight, so there's no reason to skip the light ones).
   const previewSections = [
-    { src: 'assets/logos/pngs', out: 'assets/logos/previews' },
-    { src: 'assets/emoji/pngs/apple', out: 'assets/emoji/previews/apple' },
+    { src: 'assets/logos/pngs', out: 'assets/logos/previews', ext: 'png' },
+    { src: 'assets/logos/svgs', out: 'assets/logos/previews', ext: 'svg' },
+    { src: 'assets/emoji/pngs/apple', out: 'assets/emoji/previews/apple', ext: 'png' },
+    // 48×48 tier for the "Остальные категории" tiles only (build-seo-pages.js's
+    // miniThumbSrc()) — separate output dir from the 192px previews above.
+    { src: 'assets/logos/pngs', out: 'assets/logos/previews-mini', ext: 'png' },
+    { src: 'assets/logos/svgs', out: 'assets/logos/previews-mini', ext: 'svg' },
+    // 100×100 tier for the "Другие логотипы этой категории" tiles only
+    // (build-seo-pages.js's relatedThumbSrc()) — own output dir.
+    { src: 'assets/logos/pngs', out: 'assets/logos/previews-related', ext: 'png' },
+    { src: 'assets/logos/svgs', out: 'assets/logos/previews-related', ext: 'svg' },
   ];
   let checked = 0;
-  for (const { src, out } of previewSections) {
+  for (const { src, out, ext } of previewSections) {
+    const re = new RegExp(`\\.${ext}$`, 'i');
     for (const rel of listFilesRecursive(path.join(ROOT, src))) {
-      if (!/\.png$/i.test(rel)) continue;
+      if (!re.test(rel)) continue;
       checked++;
       const srcAbs = path.join(ROOT, src, rel);
-      const outAbs = path.join(ROOT, out, rel.replace(/\.png$/i, '.webp'));
+      const outAbs = path.join(ROOT, out, rel.replace(re, '.webp'));
       if (!fs.existsSync(outAbs)) {
-        err(`нет WebP-превью: ${out}/${rel.replace(/\.png$/i, '.webp')} (запустить build-webp-previews.js)`);
+        err(`нет WebP-превью: ${out}/${rel.replace(re, '.webp')} (запустить build-webp-previews.js)`);
       } else if (fs.statSync(outAbs).mtimeMs < fs.statSync(srcAbs).mtimeMs) {
-        err(`WebP-превью устарело: ${out}/${rel.replace(/\.png$/i, '.webp')} старше исходника`);
+        err(`WebP-превью устарело: ${out}/${rel.replace(re, '.webp')} старше исходника`);
       }
     }
   }

@@ -15,19 +15,21 @@ tags_en: Logo Histories, Branding
 **1971** — коричневая гравюра: двухвостая сирена в полный рост, топлес, в кольце с названием; **1987** — зелёный цвет и «прикрытая» волосами сирена; **1992** — камера наезжает: виден только торс; **2011** — радикальный шаг: **имя убрано**, осталась одна сирена в зелёном круге. Актуальный знак — на [странице бренда](../../logos/food/starbucks/).
 :::
 
-##1971: гравюра из бестиария
+## 1971: гравюра из бестиария
 
 Первая кофейня Starbucks открылась в Сиэтле как магазин зёрен. Основатели искали морскую тему (город‑порт, кофе привозят по морю) и нашли в старой книге гравюру двухвостой сирены — та манила моряков, как кофе должен манить прохожих. Первый знак — коричневая гравюра в кольце «Starbucks Coffee Tea Spices»: подробная, с обнажённой грудью и раздвоенным хвостом, — по сегодняшним меркам немыслимая для массового бренда, по меркам лавки 70‑х — просто «винтажная картинка», ровно такая, [что называют эмблемой](../vidy-logotipov/) в классификации логотипов.
 
-##1987: зелёный и первая цензура
+## 1987: зелёный и первая цензура
 
 Когда Говард Шульц объединил Starbucks со своей сетью Il Giornale и начал строить «третье место» между домом и работой, знак причесали: кольцо стало **зелёным** (свежесть, рост — [психология цвета](../psihologiya-cveta-v-logotipe/)), гравюрную сирену упростили, грудь прикрыли волосами. Классическая механика выхода в массовый сегмент: чем шире аудитория, тем меньше провокации знак может себе позволить.
 
-##1992: камера наезжает
+## 1992: камера наезжает
 
 К IPO компании сирену «приблизили» ещё раз: в кольце остался только торс с короной и намёком на два хвоста. Причина прозаичная: на маленьких носителях (стакан, вывеска, [фавиконка](../kak-sdelat-favicon/) будущего сайта) детальная фигура в полный рост превращалась в пятно. Каждый «наезд камеры» — это адаптация к уменьшению носителей, тот же процесс, что стоит за [упрощением у всех брендов](../pochemu-brendy-uproshchayut-logotipy/).
 
-##2011: знак без имени
+## 2011: знак без имени
+
+За три года до этого, к юбилею 2008 года, компания уже пробовала вернуть архивную версию сирены в полный рост — публика встретила эксперимент прохладно, и его быстро свернули. Опыт показал: аудитория готова к более смелому знаку, но не к возврату в прошлое, а к движению вперёд.
 
 К 40‑летию Starbucks сделал шаг, который тогда казался безумием: **убрал из логотипа название и слово «Coffee»**. Осталась сирена в зелёном круге — без единой буквы. Расчёт был двойным:
 
@@ -67,19 +69,21 @@ On every [Starbucks](../../logos/food/starbucks/) cup sits a twin-tailed siren f
 **1971** — a brown engraving: the full-length twin-tailed siren, topless, in a ring with the name; **1987** — green arrives and the siren is "covered" by her hair; **1992** — the camera zooms: only the torso remains; **2011** — the radical step: **the name is removed**, leaving the siren alone in a green circle. The current mark is on the [brand page](../../logos/food/starbucks/).
 :::
 
-##1971: an engraving from a bestiary
+## 1971: an engraving from a bestiary
 
 The first Starbucks opened in Seattle as a coffee-bean shop. The founders wanted a maritime theme (a port city; coffee arrives by sea) and found an old engraving of a twin-tailed siren — she lured sailors the way coffee should lure passers-by. The first mark was a brown engraving in a "Starbucks Coffee Tea Spices" ring: detailed, bare-chested, split-tailed — unthinkable for a mass brand today, just a "vintage picture" for a 1970s shop — exactly [what an emblem is](../vidy-logotipov/) in logo classification.
 
-##1987: green and the first censorship
+## 1987: green and the first censorship
 
 When Howard Schultz merged Starbucks with his Il Giornale chain and began building the "third place" between home and work, the mark was groomed: the ring turned **green** (freshness, growth — [color psychology](../psihologiya-cveta-v-logotipe/)), the engraved siren was simplified, her chest covered by hair. The classic mechanics of going mass-market: the wider the audience, the less provocation a mark can afford.
 
-##1992: the camera zooms
+## 1992: the camera zooms
 
 For the IPO the siren was "zoomed" again: only the crowned torso with a hint of the two tails remained in the ring. The reason was prosaic: on small media (a cup, a sign, the future site's [favicon](../kak-sdelat-favicon/)) the detailed full-length figure turned into a blot. Each zoom was an adaptation to shrinking media — the same process behind [simplification everywhere](../pochemu-brendy-uproshchayut-logotipy/).
 
-##2011: the mark without a name
+## 2011: the mark without a name
+
+Three years earlier, for its 2008 anniversary, the company had already tried bringing back the archival full-length siren — the public reception was lukewarm, and the experiment was quietly shelved. The lesson was useful: the audience was ready for a bolder mark, just not for a step backward, only forward.
 
 For its 40th anniversary Starbucks did what then looked insane: **removed the name and the word "Coffee" from the logo**. What remained was the siren in a green circle — not a single letter. The calculation was twofold:
 

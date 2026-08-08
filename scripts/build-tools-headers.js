@@ -31,6 +31,7 @@ const PAGES = [
   { relPath: 'tools/ios-call-screen/index.html',   rel: '../../' },
   { relPath: 'tools/merge-pdf/index.html',         rel: '../../' },
   { relPath: 'tools/watermark/index.html',         rel: '../../' },
+  { relPath: 'tools/extensions/reviews-exporter/index.html', rel: '../../../' },
 ];
 
 function patchPage({ relPath, rel }) {

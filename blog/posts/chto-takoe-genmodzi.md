@@ -9,7 +9,7 @@ tags: Эмодзи, Apple, Нейросети
 tags_en: Emoji, Apple, AI
 ---
 
-Полвека эмодзи были «закрытым клубом»: новые символы утверждает консорциум Юникод, процесс занимает годы, а хотелки вроде «капибара в шляпе» не пройдут никогда. В 2024 году [Apple](../../logos/store/apple/) сломала эту монополию: функция **Genmoji** генерирует персональный эмодзи по текстовому описанию прямо на телефоне. Разбираем, как это работает, в чём подвох совместимости и что Genmoji значат для будущего эмодзи вообще.
+Полвека эмодзи были «закрытым клубом»: новые символы утверждает консорциум Юникод, процесс занимает годы, а хотелки вроде «капибара в шляпе» не пройдут никогда. В 2024 году [Apple](../../logos/tech/apple/) сломала эту монополию: функция **Genmoji** генерирует персональный эмодзи по текстовому описанию прямо на телефоне. Разбираем, как это работает, в чём подвох совместимости и что Genmoji значат для будущего эмодзи вообще.
 
 :::note Коротко
 **Genmoji** — функция Apple Intelligence (iOS 18.2+): описываете картинку словами («динозавр на скейте», «смеющийся авокадо») — нейросеть на устройстве генерирует эмодзи‑подобную картинку в стиле фирменных эмодзи Apple. Технически это **не эмодзи, а стикер‑изображение**: в Юникод он не входит, на старых устройствах и Android приходит картинкой, а не символом. Требуются совместимые устройства (iPhone 15 Pro и новее).
@@ -64,7 +64,7 @@ Genmoji — самое большое изменение в мире эмод�
 
 ---EN---
 
-For half a century emoji were a closed club: new symbols are approved by the Unicode Consortium, the process takes years, and wishes like "a capybara in a hat" would never pass. In 2024 [Apple](../../logos/store/apple/) broke the monopoly: the **Genmoji** feature generates a personal emoji from a text description right on the phone. Here's how it works, the compatibility catch, and what Genmoji mean for the future of emoji.
+For half a century emoji were a closed club: new symbols are approved by the Unicode Consortium, the process takes years, and wishes like "a capybara in a hat" would never pass. In 2024 [Apple](../../logos/tech/apple/) broke the monopoly: the **Genmoji** feature generates a personal emoji from a text description right on the phone. Here's how it works, the compatibility catch, and what Genmoji mean for the future of emoji.
 
 :::note TL;DR
 **Genmoji** is an Apple Intelligence feature (iOS 18.2+): describe a picture in words ("a dinosaur on a skateboard", "a laughing avocado") — an on-device model generates an emoji-like image in the style of Apple's emoji. Technically it's **not an emoji but a sticker image**: it's not in Unicode, and on older devices and Android it arrives as a picture, not a character. Compatible hardware required (iPhone 15 Pro and newer).
