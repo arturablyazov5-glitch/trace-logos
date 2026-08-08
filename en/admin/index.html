@@ -1268,7 +1268,7 @@ function renderSearch() {
   $('count-pill-search').textContent = (q || zeroOnly) ? `${rows.length} из ${searchData.length}` : '';
 
   if (!rows.length) {
-    $('tbody-search').innerHTML = `<tr><td colspan="5"><div class="empty">${searchData.length ? 'Ничего не найдено' : 'Пока нет данных. Запросы появятся, когда ими начнут пользоваться на сайте.'}</div></td></tr>`;
+    $('tbody-search').innerHTML = `<tr><td colspan="6"><div class="empty">${searchData.length ? 'Ничего не найдено' : 'Пока нет данных. Запросы появятся, когда ими начнут пользоваться на сайте.'}</div></td></tr>`;
     return;
   }
 
@@ -1277,16 +1277,46 @@ function renderSearch() {
     const zero = d.results_count === 0;
     const searchUrl = 'https://yandex.ru/search/?text=' + encodeURIComponent(d.query + ' logo svg');
     html += `
-    <tr onclick="window.open('${searchUrl}', '_blank', 'noopener')" title="Найти этот запрос в Яндексе">
+    <tr data-search-url="${escAttr(searchUrl)}" title="Найти этот запрос в Яндексе">
       <td class="rank">${i + 1}</td>
       <td class="fg-hide"><div class="logo-meta"><div class="nm">${esc(d.query)}</div></div></td>
       <td class="views"><b>${d.count.toLocaleString('ru-RU')}</b></td>
       <td class="views"><b${zero ? ' style="color:#ff6b6b"' : ''}>${d.results_count.toLocaleString('ru-RU')}</b></td>
       <td class="fg-hide"><span class="fg">${d.last_seen ? fmtDate(d.last_seen) : '—'}</span></td>
+      <td class="col-actions">
+        <button type="button" class="row-del-btn" data-del-query="${escAttr(d.query)}" title="Удалить эту запись">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+        </button>
+      </td>
     </tr>`;
   });
   $('tbody-search').innerHTML = html;
 }
+
+$('tbody-search').addEventListener('click', async (e) => {
+  const btn = e.target.closest('.row-del-btn');
+  if (!btn) {
+    const row = e.target.closest('tr[data-search-url]');
+    if (row) window.open(row.dataset.searchUrl, '_blank', 'noopener');
+    return;
+  }
+  const query = btn.dataset.delQuery;
+  if (!confirm(`Удалить запись «${query}» из статистики поиска?`)) return;
+  btn.disabled = true;
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'DELETE',
+      headers: { 'x-admin-key': adminKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ searchQuery: query }),
+    });
+    if (!res.ok) throw new Error('Ошибка удаления');
+    searchData = searchData.filter(d => d.query !== query);
+    renderSearch();
+  } catch (err) {
+    alert('Не удалось удалить: ' + (err.message || 'ошибка сети'));
+    btn.disabled = false;
+  }
+});
 
 // ── Клики по промо-баннерам ────────────────────────────────────────────
 function renderBanners() {
@@ -1446,6 +1476,7 @@ function fmtExports(detail) {
   return `<div class="ex-pills">${pills}</div>`;
 }
 function esc(s) { const d = document.createElement('div'); d.textContent = s ?? ''; return d.innerHTML; }
+function escAttr(s) { return esc(s).replace(/"/g, '&quot;'); }
 function fmtDate(iso) {
   try {
     return new Date(iso).toLocaleString('ru-RU', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
