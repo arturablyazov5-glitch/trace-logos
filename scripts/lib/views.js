@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..', '..');
 const ENV_PATH = path.join(ROOT, '.env');
@@ -24,25 +25,50 @@ async function getBlogViews() {
     return {};
   }
 
-  try {
-    const res = await fetch(`${SUPABASE_URL}/functions/v1/track`, {
-      headers: { 'x-admin-key': ADMIN_KEY }
-    });
-    
-    if (!res.ok) {
-      console.error('❌ Failed to fetch blog views:', await res.text());
-      return {};
-    }
+  const url = `${SUPABASE_URL}/functions/v1/track`;
 
-    const data = await res.json();
+  try {
+    const data = await fetchJson(url, ADMIN_KEY);
     const views = {};
     (data.post_views || []).forEach(v => {
       views[v.slug] = v.count;
     });
     return views;
   } catch (err) {
-    console.error('❌ Error fetching blog views:', err);
+    console.error('❌ Error fetching blog views:', err?.message || err);
     return {};
+  }
+}
+
+async function fetchJson(url, adminKey) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  try {
+    const res = await fetch(url, {
+      headers: { 'x-admin-key': adminKey },
+      signal: controller.signal,
+    });
+
+    if (!res.ok) {
+      throw new Error(await res.text());
+    }
+
+    return await res.json();
+  } catch (err) {
+    try {
+      const out = execFileSync('curl', [
+        '-sS',
+        '--connect-timeout', '20',
+        '--max-time', '60',
+        '-H', `x-admin-key: ${adminKey}`,
+        url,
+      ], { encoding: 'utf8', maxBuffer: 20 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
+      return JSON.parse(out);
+    } catch (curlErr) {
+      throw new Error(curlErr?.stderr?.toString().trim() || curlErr?.message || err?.message || 'Failed to fetch blog views');
+    }
+  } finally {
+    clearTimeout(timeout);
   }
 }
 

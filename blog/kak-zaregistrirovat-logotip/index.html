@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как зарегистрировать логотип как товарный знак — пошагово и без иллюзий · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(126 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(166 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(216 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(276 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(126 70% 38%) 0%, hsl(276 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(6 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(46 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(96 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(156 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(6 70% 38%) 0%, hsl(156 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-26">26 июня 2026</time>
@@ -202,18 +206,18 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            3
 	          </span>
         </div>
         <h1>Как зарегистрировать логотип как товарный знак — пошагово и без иллюзий</h1>
       </header>
       <div class="blog-body">
-        <p>Вы придумали название, нарисовали логотип, наклеили его на вывеску и упаковку — и уверены, что он ваш. Сюрприз: пока знак не зарегистрирован, «вашим» он является весьма условно. Более того — если похожий знак зарегистрирует кто‑то другой, претензию предъявят <strong>вам</strong>, даже если вы работали под этим логотипом годами. Разбираем процедуру регистрации по шагам: что проверять, сколько стоит, где отказывают.</p>
+        <p>Вы придумали название, нарисовали логотип, наклеили его на вывеску и упаковку — и уверены, что он ваш. Сюрприз: пока знак не зарегистрирован, «вашим» он является весьма условно. Более того — если похожий знак зарегистрирует кто‑то другой, претензию предъявят <strong>вам</strong>, даже если вы работали под этим логотипом годами. Разбираем процедуру регистрации по шагам: что проверять, сколько стоит, где отказывают.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Логотип регистрируется как <strong>товарный знак в Роспатенте</strong>: проверка уникальности → выбор классов МКТУ → заявка → экспертиза → свидетельство. Сроки — обычно от 4 до 12 месяцев, расходы на пошлины — от ~33 тыс. ₽ (зависят от числа классов). Главный этап, который все пропускают, — <strong>предварительная проверка</strong>: две трети проблем закладываются до подачи.</p></div></div>
       <h2 id="зачем-вообще-регистрировать">Зачем вообще регистрировать</h2>
       <ul>
-      <li><strong>Защита от копирования.</strong> Только зарегистрированный знак даёт право запрещать другим использовать такое же или сходное обозначение — и взыскивать компенсацию до 5 млн рублей (<a href="https://www.consultant.ru/document/cons_doc_LAW_64629/44bf2477089f6ece7185aaf3e37bae5ace2954cf/" target="_blank" rel="noopener">ст. 1515 ГК РФ</a>).</li>
-      <li><strong>Защита от претензий к вам.</strong> Регистрация подтверждает ваше право. Без неё владелец похожего зарегистрированного знака может запретить вам использовать ваш же логотип — со сменой вывесок, упаковки и домена за ваш счёт.</li>
+      <li><strong>Защита от копирования.</strong> Только зарегистрированный знак даёт право запрещать другим использовать такое же или сходное обозначение — и взыскивать компенсацию до 5 млн рублей (<a href="https://www.consultant.ru/document/cons_doc_LAW_64629/44bf2477089f6ece7185aaf3e37bae5ace2954cf/" target="_blank" rel="noopener">ст. 1515 ГК РФ</a>).</li>
+      <li><strong>Защита от претензий к вам.</strong> Регистрация подтверждает ваше право. Без неё владелец похожего зарегистрированного знака может запретить вам использовать ваш же логотип — со сменой вывесок, упаковки и домена за ваш счёт.</li>
       <li><strong>Актив.</strong> Знак можно продать, передать по лицензии, внести в франшизу, оценить и поставить на баланс. Франшиза без товарного знака невозможна юридически.</li>
       <li><strong>Маркетплейсы и реклама.</strong> Площадки всё чаще требуют подтверждение прав на бренд, а зарегистрированный знак — самый сильный аргумент в спорах о карточках товаров.</li>
       </ul>
@@ -228,19 +232,19 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="что-можно-зарегистрировать-а-что-нет">Что можно зарегистрировать, а что нет</h2>
-      <p>Товарным знаком может быть словесное обозначение (название), изобразительное (сам знак/логотип), комбинированное (знак + название) и даже цвет или звук. По практике самое рабочее — <strong>комбинированное обозначение</strong> плюс, если бюджет позволяет, отдельно словесное: оно защищает название в любом написании.</p>
-      <p>Не зарегистрируют (<a href="https://www.consultant.ru/document/cons_doc_LAW_64629/2e83c7a3d54808ca80d8f0b2a034caa0f7122b57/" target="_blank" rel="noopener">ст. 1483 ГК РФ</a>):</p>
+      <p>Товарным знаком может быть словесное обозначение (название), изобразительное (сам знак/логотип), комбинированное (знак + название) и даже цвет или звук. По практике самое рабочее — <strong>комбинированное обозначение</strong> плюс, если бюджет позволяет, отдельно словесное: оно защищает название в любом написании.</p>
+      <p>Не зарегистрируют (<a href="https://www.consultant.ru/document/cons_doc_LAW_64629/2e83c7a3d54808ca80d8f0b2a034caa0f7122b57/" target="_blank" rel="noopener">ст. 1483 ГК РФ</a>):</p>
       <ul>
       <li><strong>Описательные обозначения:</strong> «Вкусный хлеб» для пекарни, «Быстрая доставка» для курьеров — нет различительной способности.</li>
-      <li><strong>Сходные до степени смешения</strong> с уже зарегистрированными знаками в тех же классах — главная причина отказов.</li>
+      <li><strong>Сходные до степени смешения</strong> с уже зарегистрированными знаками в тех же классах — главная причина отказов.</li>
       <li><strong>Общепринятые символы и термины</strong>, госсимволика, вводящие в заблуждение обозначения.</li>
-      <li>Использование чужих объектов: узнаваемые элементы чужих брендов в вашем знаке — отказ и риск иска (границы дозволенного мы разбирали в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>).</li>
+      <li>Использование чужих объектов: узнаваемые элементы чужих брендов в вашем знаке — отказ и риск иска (границы дозволенного мы разбирали в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>).</li>
       </ul>
       <h2 id="шаг-1-предварительная-проверка" class="step-heading"><span class="step-badge">Шаг&nbsp;1</span><span class="step-title">Предварительная проверка</span></h2>
       <p>До подачи заявки знак проверяют по базам: зарегистрированные знаки и — важно — <strong>поданные заявки</strong>, которые в открытых бесплатных поисках видны не полностью. Проверка делается по вашим классам МКТУ и включает не только точные совпадения, но и сходство: фонетическое (Копейка/Капейка), визуальное, смысловое.</p>
       <p>Бесплатно и грубо — поиск по <a href="https://searchplatform.rospatent.gov.ru/trademarks" target="_blank" rel="noopener">открытым реестрам Роспатента</a> и по картинке. Полноценно — платный поиск через патентного поверенного: это та статья расходов, на которой экономить глупо, потому что пошлины за отказанную заявку не возвращают.</p>
       <h2 id="шаг-2-классы-мкту" class="step-heading"><span class="step-badge">Шаг&nbsp;2</span><span class="step-title">Классы МКТУ</span></h2>
-      <p>Знак регистрируется не «вообще», а для конкретных товаров и услуг — по Международной классификации (45 классов). Кофейня — это 43‑й класс (услуги питания), а если продаёте зерно в розницу — ещё и 30‑й с 35‑м. Логика выбора: текущая деятельность + реальные планы на 2‑3 года. Каждый класс — плюс к пошлинам, «на всякий случай все» не берут ещё и потому, что незарегистрированный по факту неиспользуемый класс могут аннулировать через суд после трёх лет неиспользования.</p>
+      <p>Знак регистрируется не «вообще», а для конкретных товаров и услуг — по Международной классификации (45 классов). Кофейня — это 43‑й класс (услуги питания), а если продаёте зерно в розницу — ещё и 30‑й с 35‑м. Логика выбора: текущая деятельность + реальные планы на 2‑3 года. Каждый класс — плюс к пошлинам, «на всякий случай все» не берут ещё и потому, что незарегистрированный по факту неиспользуемый класс могут аннулировать через суд после трёх лет неиспользования.</p>
       <h2 id="шаг-3-заявка-и-экспертиза" class="step-heading"><span class="step-badge">Шаг&nbsp;3</span><span class="step-title">Заявка и экспертиза</span></h2>
       <ol>
       <li><strong>Подача</strong> — онлайн через <a href="https://rospatent.gov.ru/ru/stateservices/gosudarstvennaya-registraciya-tovarnogo-znaka-znaka-obsluzhivaniya-kollektivnogo-znaka-i-vydacha-svidetelstv-na-tovarnyy-znak-znak-obsluzhivaniya-kollektivnyy-znak-ih-dublikatov" target="_blank" rel="noopener">сервисы Роспатента</a> (при электронной подаче пошлины ниже на 30%). В заявке: изображение знака, перечень классов, данные заявителя. С 2023 года заявителем может быть и физлицо/самозанятый, не только ИП и компании.</li>
@@ -248,7 +252,7 @@ window.yaContextCb.push(() => {
       <li><strong>Экспертиза по существу</strong> (обычно 4‑10 месяцев) — то самое сравнение с реестрами. Возможен запрос/предварительный отказ, на который можно и нужно аргументированно отвечать: часть отказов снимается.</li>
       <li><strong>Регистрация и свидетельство.</strong> Знак действует <strong>10 лет</strong> с даты подачи, продлевается неограниченно.</li>
       </ol>
-      <p>Ориентир по пошлинам на 2026 год: суммарно от ~33 тыс. ₽ за один класс при электронной подаче (проверяйте актуальные суммы на сайте Роспатента — они периодически индексируются). Услуги поверенного — отдельно.</p>
+      <p>Ориентир по пошлинам на 2026 год: суммарно от ~33 тыс. ₽ за один класс при электронной подаче (проверяйте актуальные суммы на сайте Роспатента — они периодически индексируются). Услуги поверенного — отдельно.</p>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Частые ошибки заявителей</span></div><div class="callout-body"><ul>
       <li><strong>Пропущенная проверка</strong> — отказ через год ожидания и потерянные пошлины.</li>
       <li><strong>Регистрация на дизайнера или «на друга‑ИП».</strong> Заявитель = правообладатель. Права на сам логотип тоже заберите у дизайнера по договору отчуждения — авторское право не переходит автоматически с оплатой макета.</li>
@@ -262,13 +266,13 @@ window.yaContextCb.push(() => {
       <li><strong>«Нет различительной способности»</strong> (знак описателен). Доказывайте приобретённую различительность: длительность использования, объёмы рекламы, узнаваемость — либо добавьте к слову охраноспособный графический элемент и заявите комбинированный знак.</li>
       <li><strong>«Введение в заблуждение»</strong> (например, иностранное слово у российского производителя). Помогают пояснения о реальной деятельности и корректировка перечня.</li>
       </ul>
-      <p>На ответ обычно даётся полгода — не тяните: аргументированные ответы снимают заметную долю отказов. Если экспертиза устояла — есть Палата по патентным спорам и суд, но это уже история с юристом.</p>
-      <h2 id="международная-регистрация-если-планируете-экспорт">Международная регистрация: если планируете экспорт</h2>
+      <p>На ответ обычно даётся полгода — не тяните: аргументированные ответы снимают заметную долю отказов. Если экспертиза устояла — есть Палата по патентным спорам и суд, но это уже история с юристом.</p>
+      <h2 id="международная-регистрация-если-планируете-экспорт">Международная регистрация: если планируете экспорт</h2>
       <p>Российское свидетельство действует только в России. Пути наружу:</p>
       <ul>
       <li><strong>Мадридская система</strong> — одна международная заявка через Роспатент с указанием нужных стран; дешевле и проще пачки национальных заявок. База — действующая российская заявка/регистрация.</li>
-      <li><strong>Национальные заявки</strong> напрямую в ведомства стран — когда стран одна‑две или они вне Мадридской системы.</li>
-      <li><strong>Приоритет 6 месяцев:</strong> подав в России, вы полгода можете подавать за рубежом с датой российской заявки — конкуренты не успеют «занять» знак.</li>
+      <li><strong>Национальные заявки</strong> напрямую в ведомства стран — когда стран одна‑две или они вне Мадридской системы.</li>
+      <li><strong>Приоритет 6 месяцев:</strong> подав в России, вы полгода можете подавать за рубежом с датой российской заявки — конкуренты не успеют «занять» знак.</li>
       </ul>
       <p>Практическое правило: регистрируйте там, где реально продаёте или производите, плюс страны ближайших планов. «Весь мир на всякий случай» стоит как автомобиль и требует продления в каждой юрисдикции.</p>
       <h2 id="после-регистрации-как-не-потерять-знак">После регистрации: как не потерять знак</h2>
@@ -277,7 +281,7 @@ window.yaContextCb.push(() => {
       <li><strong>Используйте знак в том виде, в котором зарегистрировали.</strong> Систематическое использование в сильно изменённом виде ослабляет защиту, а неиспользование три года подряд — основание для аннулирования по иску конкурента.</li>
       <li><strong>Следите за сроками.</strong> 10 лет пролетают; продление подаётся в последний год действия (плюс льготные полгода с доплатой). Поставьте напоминание — потеря знака из‑за просроченного продления случается регулярно.</li>
       <li><strong>Маркируйте:</strong> знак ® рядом с логотипом законен только после регистрации и дисциплинирует нарушителей.</li>
-      <li><strong>Мониторьте нарушения:</strong> поиск по картинке, мониторинг новых заявок (могут регистрировать похожее — вы вправе подать возражение), маркетплейсы. Чем раньше претензия, тем дешевле спор.</li>
+      <li><strong>Мониторьте нарушения:</strong> поиск по картинке, мониторинг новых заявок (могут регистрировать похожее — вы вправе подать возражение), маркетплейсы. Чем раньше претензия, тем дешевле спор.</li>
       <li><strong>Фиксируйте изменения:</strong> сменили название юрлица или продали бренд — вносите изменения в реестр, иначе при споре всплывут расхождения.</li>
       </ol>
       <h2 id="когда-с-регистрацией-можно-подождать">Когда с регистрацией можно подождать</h2>
@@ -297,11 +301,12 @@ window.yaContextCb.push(() => {
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Дисклеймер</span></div><div class="callout-body"><p>Это обзорный материал, а не юридическая консультация: в нестандартной ситуации (спорное сходство, международная регистрация, предварительный отказ) работайте с патентным поверенным.</p></div></div>
       <p>Прежде чем регистрировать — убедитесь, что ваш знак не похож на существующие: полистайте бренды своей категории в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> и проверьте выбранное обозначение по реестрам Роспатента.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../proverit-logotip-na-unikalnost/" data-date="2026-08-14" data-views="0">
+          <a class="blog-card" href="../proverit-logotip-na-unikalnost/" data-date="2026-08-14" data-views="14">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -314,7 +319,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            14
           </div>
           </div>
           <div class="blog-card-title">Как проверить логотип на уникальность</div>
@@ -322,7 +327,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../mozhno-li-ispolzovat-chuzhoy-logotip/" data-date="2026-07-03" data-views="1">
+      <a class="blog-card" href="../mozhno-li-ispolzovat-chuzhoy-logotip/" data-date="2026-07-03" data-views="23">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -335,15 +340,15 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            23
           </div>
           </div>
-          <div class="blog-card-title">Можно ли использовать чужой логотип — закон, риски и когда это законно</div>
+          <div class="blog-card-title">Можно ли использовать чужой логотип — закон, риски и когда это законно</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-i-tovarnyj-znak-raznica/" data-date="2026-08-17" data-views="0">
+      <a class="blog-card" href="../logotip-i-tovarnyj-znak-raznica/" data-date="2026-08-17" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -356,7 +361,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            4
           </div>
           </div>
           <div class="blog-card-title">Логотип и товарный знак — в чём разница и что это значит для бизнеса</div>
@@ -364,7 +369,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-ot-ii-avtorstvo/" data-date="2026-08-04" data-views="0">
+      <a class="blog-card" href="../logotip-ot-ii-avtorstvo/" data-date="2026-08-04" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -377,52 +382,52 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            5
           </div>
           </div>
-          <div class="blog-card-title">Логотип от нейросети — кому он принадлежит и как его защитить</div>
+          <div class="blog-card-title">Логотип от нейросети — кому он принадлежит и как его защитить</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-nejrosetyu/" data-date="2026-06-29" data-views="2">
+      <a class="blog-card" href="../kak-skachat-logotip-s-sajta/" data-date="2026-06-21" data-views="317">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            317
           </div>
           </div>
-          <div class="blog-card-title">Логотип нейросетью — честный разбор: когда это работает, а когда нет</div>
+          <div class="blog-card-title">Как скачать логотип с любого сайта — 5 легальных способов</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-google/" data-date="2026-07-29" data-views="0">
+      <a class="blog-card" href="../logotip-emblema/" data-date="2026-07-22" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.88 21.94 15.46 14" /><path d="M21.17 8H12" /><path d="M3.95 6.06 8.54 14" /><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Виды логотипов</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>22.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            5
           </div>
           </div>
-          <div class="blog-card-title">История логотипа Google — от BackRub до буквы G</div>
+          <div class="blog-card-title">Логотип‑эмблема — бейджи и печати возвращаются</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -432,7 +437,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#зачем-вообще-регистрировать">Зачем вообще регистрировать</a></li><li><a href="#что-можно-зарегистрировать-а-что-нет">Что можно зарегистрировать, а что нет</a></li><li><a href="#шаг-1-предварительная-проверка">Шаг 1. Предварительная проверка</a></li><li><a href="#шаг-2-классы-мкту">Шаг 2. Классы МКТУ</a></li><li><a href="#шаг-3-заявка-и-экспертиза">Шаг 3. Заявка и экспертиза</a></li><li><a href="#что-делать-при-предварительном-отказе">Что делать при предварительном отказе</a></li><li><a href="#международная-регистрация-если-планируете-экспорт">Международная регистрация: если планируете экспорт</a></li><li><a href="#после-регистрации-как-не-потерять-знак">После регистрации: как не потерять знак</a></li><li><a href="#когда-с-регистрацией-можно-подождать">Когда с регистрацией можно подождать</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#зачем-вообще-регистрировать">Зачем вообще регистрировать</a></li><li><a href="#что-можно-зарегистрировать-а-что-нет">Что можно зарегистрировать, а что нет</a></li><li><a href="#шаг-1-предварительная-проверка">Шаг 1. Предварительная проверка</a></li><li><a href="#шаг-2-классы-мкту">Шаг 2. Классы МКТУ</a></li><li><a href="#шаг-3-заявка-и-экспертиза">Шаг 3. Заявка и экспертиза</a></li><li><a href="#что-делать-при-предварительном-отказе">Что делать при предварительном отказе</a></li><li><a href="#международная-регистрация-если-планируете-экспорт">Международная регистрация: если планируете экспорт</a></li><li><a href="#после-регистрации-как-не-потерять-знак">После регистрации: как не потерять знак</a></li><li><a href="#когда-с-регистрацией-можно-подождать">Когда с регистрацией можно подождать</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -440,25 +445,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -535,6 +532,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -580,10 +578,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

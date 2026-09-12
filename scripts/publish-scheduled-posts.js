@@ -16,7 +16,7 @@
  *
  * Флаги:
  *   --force      прятать future даже если на сегодня нет новой пачки
- *   --no-build   не запускать build-all.js (для отладки самого скрипта)
+ *   --no-build   не запускать npm run build (для отладки самого скрипта)
  *
  * Типовой цикл:
  *   1) node scripts/publish-scheduled-posts.js
@@ -104,8 +104,8 @@ function runBuild(label) {
     console.log(c.y(`\n⚠ --no-build: пропускаю сборку (${label})`));
     return;
   }
-  console.log(c.b(`\n▶ node scripts/build-all.js  ${c.dim(`(${label})`)}\n`));
-  const res = spawnSync('node', ['scripts/build-all.js'], { cwd: ROOT, stdio: 'inherit' });
+  console.log(c.b(`\n▶ npm run build  ${c.dim(`(${label})`)}\n`));
+  const res = spawnSync('npm', ['run', 'build'], { cwd: ROOT, stdio: 'inherit' });
   if (res.status !== 0) {
     die(
       `сборка упала (exit ${res.status}). Рабочая копия осталась как есть — ` +

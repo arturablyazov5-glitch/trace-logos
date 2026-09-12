@@ -1,0 +1,21 @@
+{
+  "_comment": "Реестр скачиваемых продуктов для checkout'а «плати сколько хочешь». Единственный источник правды: фронт читает его напрямую (js/pwyw.js), бэкенд получает копию через scripts/sync-products.js → таблица public.products. Пояснительный текст модалки здесь НЕ живёт — он общий для всех продуктов и лежит в js/i18n-dict-{ru,en}.js (ключи pwyw*). Версия продукта здесь тоже не дублируется: для расширений источник — tools/extensions/<id>/manifest.json (см. build-extension-zip.js).",
+
+  "presets": {
+    "RUB": [100, 300, 500],
+    "USD": [2, 5, 10]
+  },
+
+  "products": [
+    {
+      "id": "reviews-exporter",
+      "kind": "extension",
+      "title": "Reviews Exporter",
+      "title_en": "Reviews Exporter",
+      "page": "/tools/extensions/reviews-exporter/",
+      "storageObject": "reviews-exporter/reviews-exporter.zip",
+      "downloadName": "reviews-exporter.zip",
+      "lavaOfferId": "f77c3cd2-3483-4c14-bf11-ee00bf668ad2"
+    }
+  ]
+}

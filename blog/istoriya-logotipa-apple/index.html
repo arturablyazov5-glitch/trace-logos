@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>История логотипа Apple — почему яблоко надкушено и куда делась радуга · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(114 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(154 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(204 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(264 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(114 70% 38%) 0%, hsl(264 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(353 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(33 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(83 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(143 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(353 70% 38%) 0%, hsl(143 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-12">12 июня 2026</time>
@@ -202,16 +206,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            2
+	            14
 	          </span>
         </div>
         <h1>История логотипа Apple — почему яблоко надкушено и куда делась радуга</h1>
       </header>
       <div class="blog-body">
-        <p>Надкушенное яблоко <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> — вероятно, самый узнаваемый знак на планете: его читают без подписи в любой стране. И его же окружает самая густая мифология в истории дизайна — Алан Тьюринг, запретный плод, байты‑укусы. Почти все эти легенды красивы и почти все ошибочны, а настоящая история знака оказывается поучительнее любой из них. Потому что она объясняет главное: почему один и тот же силуэт держится больше сорока лет, пока вокруг сменились три эпохи дизайна.</p>
+        <p>Надкушенное яблоко <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — вероятно, самый узнаваемый знак на планете: его читают без подписи в любой стране. И его же окружает самая густая мифология в истории дизайна — Алан Тьюринг, запретный плод, байты‑укусы. Почти все эти легенды красивы и почти все ошибочны, а настоящая история знака оказывается поучительнее любой из них. Потому что она объясняет главное: почему один и тот же силуэт держится больше сорока лет, пока вокруг сменились три эпохи дизайна.</p>
       <h2 id="1976-ньютон-под-деревом-фальстарт" class="step-heading"><span class="step-badge">1976</span><span class="step-title">Ньютон под деревом — фальстарт</span></h2>
-      <p>Чтобы понять, чем силён знак Янова, полезно сначала увидеть, каким <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> быть не смогла. Первый логотип нарисовал Рональд Уэйн — третий, забытый сооснователь: викторианская гравюра, Исаак Ньютон под яблоней, вьющаяся лента с названием и цитата Вордсворта по канту. Красиво, литературно и абсолютно нерабоче. Нечитаемо в малом размере, невоспроизводимо на корпусе компьютера, несовместимо с образом технологической компании. Знак прожил меньше года и стал идеальной иллюстрацией того, чем логотип отличается от иллюстрации: картинку разглядывают, знак узнают за долю секунды.</p>
-      <p>Именно эту задачу — добиться мгновенного узнавания — <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> и поставила перед следующим автором. Уэйн, к слову, к тому моменту уже вышел из компании, продав свою долю за 800 долларов, так что переделывать его работу никого не смущало.</p>
+      <p>Чтобы понять, чем силён знак Янова, полезно сначала увидеть, каким <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> быть не смогла. Первый логотип нарисовал Рональд Уэйн — третий, забытый сооснователь: викторианская гравюра, Исаак Ньютон под яблоней, вьющаяся лента с названием и цитата Вордсворта по канту. Красиво, литературно и абсолютно нерабоче. Нечитаемо в малом размере, невоспроизводимо на корпусе компьютера, несовместимо с образом технологической компании. Знак прожил меньше года и стал идеальной иллюстрацией того, чем логотип отличается от иллюстрации: картинку разглядывают, знак узнают за долю секунды.</p>
+      <p>Именно эту задачу — добиться мгновенного узнавания — <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и поставила перед следующим автором. Уэйн, к слову, к тому моменту уже вышел из компании, продав свою долю за 800 долларов, так что переделывать его работу никого не смущало.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -225,49 +229,49 @@ window.yaContextCb.push(() => {
       <h2 id="1977-роб-янов-рисует-главное-яблоко-в-истории" class="step-heading"><span class="step-badge">1977</span><span class="step-title">Роб Янов рисует главное яблоко в истории</span></h2>
       <p>Джобс заказал новый знак арт‑директору Робу Янову с единственным пожеланием: «не делай его милым» (cute). Янов купил пакет яблок, неделю резал их и рисовал, пока не получил силуэт с надкусом и шестью цветными полосами. Обе главные детали этого знака родились из простых прикладных задач, и в этом вся суть.</p>
       <p><strong>Зачем надкус.</strong> Ответ автора скучен и прекрасен: без укуса силуэт читался как вишня или томат. Укус задаёт масштаб (кусают только яблоки размером с ладонь) и делает форму однозначной. Знаменитая игра слов bite/byte, по словам Янова, обнаружилась уже потом и стала приятным бонусом поверх готового решения.</p>
-      <p><strong>Зачем радуга.</strong> Apple II был первым массовым компьютером с цветной графикой, и полосы кричали об этом прямо с корпуса. Заодно они смягчали образ: компьютер переставал быть серым ящиком для инженеров и становился дружелюбным. Порядок полос Янов выбрал произвольно, а зелёную поставил сверху — «потому что там лист».</p>
+      <p><strong>Зачем радуга.</strong> Apple II был первым массовым компьютером с цветной графикой, и полосы кричали об этом прямо с корпуса. Заодно они смягчали образ: компьютер переставал быть серым ящиком для инженеров и становился дружелюбным. Порядок полос Янов выбрал произвольно, а зелёную поставил сверху — «потому что там лист».</p>
       <p>Обратите внимание: ни одна из деталей не про «глубокий смысл». И это ровно то, вокруг чего потом наросли легенды.</p>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Мифы, которые пора отпустить</span></div><div class="callout-body"><ul>
-      <li><strong>Алан Тьюринг.</strong> Красивая версия (математик, надкушенное яблоко, преследование, радужный флаг), но и Янов, и <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> многократно её отрицали. Радужный флаг ЛГБТ‑движения, к слову, появился в 1978‑м — на год позже логотипа.</li>
+      <li><strong>Алан Тьюринг.</strong> Красивая версия (математик, надкушенное яблоко, преследование, радужный флаг), но и Янов, и <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> многократно её отрицали. Радужный флаг ЛГБТ‑движения, к слову, появился в 1978‑м — на год позже логотипа.</li>
       <li><strong>Библейский запретный плод и «яблоко знания»</strong> — пост‑рационализация фанатов; ни в брифе, ни в рассказах автора этого нет.</li>
       <li><strong>Ньютон и гравитация в надкусе</strong> — Ньютон был в предыдущем логотипе и к яблоку Янова отношения не имеет.</li>
       </ul></div></div>
-      <p>Мораль этой мифологии проста: великому знаку историю припишут задним числом. Причём чем знак известнее, тем охотнее: объяснение вида «просто чтобы не путали с вишней» кажется публике недостойным такого символа, и пустоту заполняет версия покрасивее. Но рождается он из различимости, масштаба и технологического послания, где тайным смыслам места нет. И как раз эта прикладная прочность позволила знаку пережить смену всех эпох, не меняя формы.</p>
+      <p>Мораль этой мифологии проста: великому знаку историю припишут задним числом. Причём чем знак известнее, тем охотнее: объяснение вида «просто чтобы не путали с вишней» кажется публике недостойным такого символа, и пустоту заполняет версия покрасивее. Но рождается он из различимости, масштаба и технологического послания, где тайным смыслам места нет. И как раз эта прикладная прочность позволила знаку пережить смену всех эпох, не меняя формы.</p>
       <h2 id="двадцать-лет-радуги-почему-знак-не-трогали">Двадцать лет радуги: почему знак не трогали</h2>
-      <p>Между 1977 и 1998 годом произошло то, что в истории брендов случается реже смены логотипа: с знаком не делали ничего. Двадцать лет радужное яблоко стояло на корпусах, коробках, рекламе и вывесках без единой правки формы, хотя компания за это время прошла через уход Джобса, череду провальных продуктов и почти дошла до банкротства.</p>
+      <p>Между 1977 и 1998 годом произошло то, что в истории брендов случается реже смены логотипа: с знаком не делали ничего. Двадцать лет радужное яблоко стояло на корпусах, коробках, рекламе и вывесках без единой правки формы, хотя компания за это время прошла через уход Джобса, череду провальных продуктов и почти дошла до банкротства.</p>
       <p>У постоянства была и цена, о которой редко вспоминают. Шестицветная печать дороже одноцветной, требует точной приводки и плохо переносит мелкий размер: на сувенирке и в факсах полосы сливались. Каждый год существования радуги компания доплачивала за неё в производстве.</p>
       <p>Знак пережил этот период именно потому, что форма и отделка держались раздельно. Полосы отвечали за сообщение эпохи (у нас цветная графика), силуэт — за узнаваемость. Когда сообщение устарело, менять пришлось только полосы.</p>
       <h2 id="1998-монохром-яблоко-взрослеет" class="step-heading"><span class="step-badge">1998</span><span class="step-title">Монохром — яблоко взрослеет</span></h2>
-      <p>К концу девяностых радуга устарела дважды. Технологически — цветная графика перестала быть новостью, полосам больше нечего было рекламировать. Эстетически — шестицветный знак на новых полупрозрачных корпусах iMac выглядел чужеродно. Вернувшийся Джобс сделал по тем временам радикальный шаг: <strong>тот же силуэт, один цвет</strong>. И вот здесь начинается главный урок всей истории — потому что дальше знак менялся, но менялась в нём только отделка, следуя за материалами продуктов.</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Эпоха</th><th>Отделка</th><th>Контекст</th></tr></thead><tbody><tr><td>1998</td><td>плоский монохром / полупрозрачность</td><td>iMac G3, новая <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a></td></tr><tr><td>2001‑2007</td><td>«аква»: стекло, блики</td><td>эстетика Mac OS X</td></tr><tr><td>2007‑2013</td><td>хром, металл</td><td>алюминиевые устройства</td></tr><tr><td>2013 — н.в.</td><td>плоская заливка, любой цвет по контексту</td><td>эпоха flat‑дизайна</td></tr></tbody></table></div>
-      <p>Прочтите таблицу ещё раз и заметьте, чего в ней нет: <strong>силуэт 1977 года не менялся ни разу</strong>. Менялась «краска», но не форма. <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> поняла раньше всех принцип, к которому индустрия пришла массово лишь в 2010‑х (этот тренд разбирали в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">про упрощение логотипов</a>): сильная форма живёт десятилетиями, а отделка — это одежда по погоде. Из этой дисциплины и вырастает вся сила знака.</p>
+      <p>К концу девяностых радуга устарела дважды. Технологически — цветная графика перестала быть новостью, полосам больше нечего было рекламировать. Эстетически — шестицветный знак на новых полупрозрачных корпусах iMac выглядел чужеродно. Вернувшийся Джобс сделал по тем временам радикальный шаг: <strong>тот же силуэт, один цвет</strong>. И вот здесь начинается главный урок всей истории — потому что дальше знак менялся, но менялась в нём только отделка, следуя за материалами продуктов.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Эпоха</th><th>Отделка</th><th>Контекст</th></tr></thead><tbody><tr><td>1998</td><td>плоский монохром / полупрозрачность</td><td>iMac G3, новая <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td></tr><tr><td>2001‑2007</td><td>«аква»: стекло, блики</td><td>эстетика Mac OS X</td></tr><tr><td>2007‑2013</td><td>хром, металл</td><td>алюминиевые устройства</td></tr><tr><td>2013 — н.в.</td><td>плоская заливка, любой цвет по контексту</td><td>эпоха flat‑дизайна</td></tr></tbody></table></div>
+      <p>Прочтите таблицу ещё раз и заметьте, чего в ней нет: <strong>силуэт 1977 года не менялся ни разу</strong>. Менялась «краска», но не форма. <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> поняла раньше всех принцип, к которому индустрия пришла массово лишь в 2010‑х (этот тренд разбирали в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">про упрощение логотипов</a>): сильная форма живёт десятилетиями, а отделка — это одежда по погоде. Из этой дисциплины и вырастает вся сила знака.</p>
       <h2 id="чего-стоила-эта-дисциплина">Чего стоила эта дисциплина</h2>
-      <p>Сорок пять лет без правок формы выглядят красиво в пересказе, но в реальности это отказ от множества соблазнов. Каждый год у бренда появляются поводы «оживить» знак: юбилей компании, запуск продукта, праздник, локальный рынок с другими вкусами. <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> на эти поводы почти не реагирует.</p>
-      <p>Сравнение с соседом делает цену наглядной. <a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a> построил на переменчивости отдельный жанр: дудлы меняют логотип на главной сотни раз в год, и это работает, потому что у бренда есть устойчивая буквенная основа, к которой рисунок всегда возвращается. <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> выбрала обратную стратегию и держит один силуэт, зато получает узнаваемость там, где дудл невозможен: на торце ноутбука, на витрине магазина, в 16 пикселях фавикона.</p>
+      <p>Сорок пять лет без правок формы выглядят красиво в пересказе, но в реальности это отказ от множества соблазнов. Каждый год у бренда появляются поводы «оживить» знак: юбилей компании, запуск продукта, праздник, локальный рынок с другими вкусами. <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> на эти поводы почти не реагирует.</p>
+      <p>Сравнение с соседом делает цену наглядной. <a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> построил на переменчивости отдельный жанр: дудлы меняют логотип на главной сотни раз в год, и это работает, потому что у бренда есть устойчивая буквенная основа, к которой рисунок всегда возвращается. <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> выбрала обратную стратегию и держит один силуэт, зато получает узнаваемость там, где дудл невозможен: на торце ноутбука, на витрине магазина, в 16 пикселях фавикона.</p>
       <p>Отказ от игры стоит бренду части инфоповодов, а взамен даёт то, что деньгами не покупается. Знак, который не переопределяли ни разу, читается как обещание постоянства, и это ощущение переносится с логотипа на продукт.</p>
       <h2 id="почему-этот-знак-работает">Почему этот знак работает</h2>
-      <p>Соберём причины воедино — они складываются в объяснение, почему яблоко стало эталоном узнаваемости:</p>
+      <p>Соберём причины воедино — они складываются в объяснение, почему яблоко стало эталоном узнаваемости:</p>
       <ol>
       <li><strong>Мгновенная читаемость.</strong> Простой природный силуэт распознаётся быстрее любых буквенных знаков, причём одинаково в 16 пикселях фавикона и на фасаде магазина.</li>
-      <li><strong>Без слов.</strong> Яблоку <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> не нужна подпись — редчайший статус, который зарабатывается десятилетиями последовательности. Тот же путь прошла галочка Nike.</li>
+      <li><strong>Без слов.</strong> Яблоку <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> не нужна подпись — редчайший статус, который зарабатывается десятилетиями последовательности. Тот же путь прошла галочка Nike.</li>
       <li><strong>Деталь‑фиксатор.</strong> Надкус — та единственная деталь, что делает форму собственностью: яблок в логотипах сотни, надкушенное — одно.</li>
-      <li><strong>Дисциплина.</strong> Сорок пять лет без редизайна формы. Узнаваемость работает как сложный процент: она накапливается только тогда, когда основу не трогают, и каждый несделанный редизайн капитализировал знак дальше.</li>
+      <li><strong>Дисциплина.</strong> Сорок пять лет без редизайна формы. Узнаваемость работает как сложный процент: она накапливается только тогда, когда основу не трогают, и каждый несделанный редизайн капитализировал знак дальше.</li>
       </ol>
-      <p>Все четыре пункта — следствия одного выбора: беречь форму. Из него же выводятся и практические уроки.</p>
+      <p>Все четыре пункта — следствия одного выбора: беречь форму. Из него же выводятся и практические уроки.</p>
       <h2 id="чему-учит-история-apple">Чему учит история Apple</h2>
       <ul>
       <li><strong>Иллюстрация ≠ логотип.</strong> Судьба гравюры с Ньютоном — приговор всем перегруженным знакам: то, что красиво разглядывать, плохо узнаётся.</li>
       <li><strong>Прикладное решение бьёт концепцию.</strong> Надкус «чтобы не путали с вишней» пережил все философские трактовки, которые ему потом придумали.</li>
-      <li><strong>Меняйте отделку, оставляя форму.</strong> Радуга, стекло и хром ушли — силуэт остался, и именно он несёт узнаваемость.</li>
-      <li><strong>Мифы — бесплатный маркетинг.</strong> <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> никогда особо не боролась с легендой о Тьюринге: красивые истории вокруг знака работают на бренд, даже будучи неправдой.</li>
+      <li><strong>Меняйте отделку, оставляя форму.</strong> Радуга, стекло и хром ушли — силуэт остался, и именно он несёт узнаваемость.</li>
+      <li><strong>Мифы — бесплатный маркетинг.</strong> <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> никогда особо не боролась с легендой о Тьюринге: красивые истории вокруг знака работают на бренд, даже будучи неправдой.</li>
       </ul>
       <h2 id="как-понять-что-ваша-форма-выдержит-десятилетия">Как понять, что ваша форма выдержит десятилетия</h2>
-      <p>История яблока переносится на чужой знак четырьмя проверками, и все они делаются за полчаса на готовом логотипе.</p>
-      <p><strong>Силуэт.</strong> Залейте знак сплошным чёрным и уберите все детали внутри. Если он остался узнаваемым, форма самостоятельна. Если превратился в бесформенное пятно, узнаваемость держалась на отделке, а её придётся менять каждые несколько лет.</p>
+      <p>История яблока переносится на чужой знак четырьмя проверками, и все они делаются за полчаса на готовом логотипе.</p>
+      <p><strong>Силуэт.</strong> Залейте знак сплошным чёрным и уберите все детали внутри. Если он остался узнаваемым, форма самостоятельна. Если превратился в бесформенное пятно, узнаваемость держалась на отделке, а её придётся менять каждые несколько лет.</p>
       <p><strong>Малый размер.</strong> Уменьшите до 16 пикселей. Яблоко проходит этот тест потому, что состоит из одного контура и одной выемки; знак с тремя уровнями вложенности не пройдёт.</p>
       <p><strong>Монохром.</strong> Уберите цвет полностью. Форма, которая читается только в фирменной палитре, окажется беспомощной в гравировке, тиснении и на однотонной вывеске.</p>
-      <p><strong>Деталь‑фиксатор.</strong> Найдите в своём знаке ту единственную особенность, которая делает его собственностью бренда. У яблока это надкус. Если такой детали нет, знак останется одним из многих в своей категории, сколько бы лет вы его ни берегли.</p>
-      <p>Прошли все четыре — форму можно не трогать десятилетиями, и она будет копить узнаваемость. Провалили хотя бы одну — сначала стоит доработать основу, а уже потом обещать себе дисциплину.</p>
+      <p><strong>Деталь‑фиксатор.</strong> Найдите в своём знаке ту единственную особенность, которая делает его собственностью бренда. У яблока это надкус. Если такой детали нет, знак останется одним из многих в своей категории, сколько бы лет вы его ни берегли.</p>
+      <p>Прошли все четыре — форму можно не трогать десятилетиями, и она будет копить узнаваемость. Провалили хотя бы одну — сначала стоит доработать основу, а уже потом обещать себе дисциплину.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -279,14 +283,15 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="что-в-итоге">Что в итоге</h2>
-      <p>Яблоко <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> прошло путь от викторианской гравюры до самого лаконичного знака планеты, но подлинная его история — про выдержку. Форму за неделю нарисовал Роб Янов в 1977‑м; надкус спасает силуэт от сходства с вишней; радуга рекламировала цветную графику и честно ушла вместе со своей эпохой. С тех пор менялась только отделка, и в этом весь секрет: форма, которую не трогают десятилетиями, успевает стать иконой, а знак, который переделывают каждые пять лет, так и остаётся картинкой.</p>
+      <p>Яблоко <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> прошло путь от викторианской гравюры до самого лаконичного знака планеты, но подлинная его история — про выдержку. Форму за неделю нарисовал Роб Янов в 1977‑м; надкус спасает силуэт от сходства с вишней; радуга рекламировала цветную графику и честно ушла вместе со своей эпохой. С тех пор менялась только отделка, и в этом весь секрет: форма, которую не трогают десятилетиями, успевает стать иконой, а знак, который переделывают каждые пять лет, так и остаётся картинкой.</p>
       <p>Сравнить эпохи яблока и другие великие знаки в векторе можно в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> — приближайте без потери качества и разглядывайте детали.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../chto-takoe-genmodzi/" data-date="2026-07-22" data-views="1">
+          <a class="blog-card" href="../chto-takoe-genmodzi/" data-date="2026-07-22" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -299,7 +304,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
           <div class="blog-card-title">Что такое Genmoji — эмодзи, которые генерирует нейросеть</div>
@@ -307,7 +312,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="17">
+      <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="35">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -320,7 +325,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            17
+            35
           </div>
           </div>
           <div class="blog-card-title">Чёрно‑белая версия логотипа — зачем нужна и как сделать правильно</div>
@@ -328,7 +333,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="4">
+      <a class="blog-card" href="../vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="31">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -341,7 +346,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            31
           </div>
           </div>
           <div class="blog-card-title">Водяной знак на фото — как поставить логотип, чтобы защищал и не портил</div>
@@ -349,7 +354,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="4">
+      <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="52">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -362,7 +367,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            52
           </div>
           </div>
           <div class="blog-card-title">В каком формате должен быть логотип — SVG, PNG, AI, EPS или PDF</div>
@@ -370,44 +375,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../vektornye-formaty-eps-ai-pdf-svg/" data-date="2026-08-30" data-views="0">
+      <a class="blog-card" href="../kogda-pora-menyat-logotip/" data-date="2026-08-14" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Форматы</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 12.5 8 15l2 2.5" /><path d="m14 12.5 2 2.5-2 2.5" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Редизайн</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 14v2.2l1.6 1" /><path d="M16 2v4" /><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" /><path d="M3 10h5" /><path d="M8 2v4" /><circle cx="16" cy="16" r="6" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>30.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            4
           </div>
           </div>
-          <div class="blog-card-title">SVG, EPS, AI, PDF — чем отличаются векторные форматы</div>
+          <div class="blog-card-title">Когда пора менять логотип — 7 честных признаков</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../chto-takoe-firmennyj-stil/" data-date="2026-07-21" data-views="9">
+      <a class="blog-card" href="../psihologiya-cveta-v-logotipe/" data-date="2026-07-09" data-views="22">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 17a4 4 0 0 1-8 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2Z" /><path d="M16.7 13H19a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7" /><path d="M 7 17h.01" /><path d="m11 8 2.3-2.3a2.4 2.4 0 0 1 3.404.004L18.6 7.6a2.4 2.4 0 0 1 .026 3.434L9.9 19.8" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Цвета</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Психология</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>09.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            9
+            22
           </div>
           </div>
-          <div class="blog-card-title">Что такое фирменный стиль — из чего состоит айдентика бренда</div>
+          <div class="blog-card-title">Психология цвета в логотипе — что работает на самом деле, а что миф</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -425,25 +430,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -520,6 +517,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -565,10 +563,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

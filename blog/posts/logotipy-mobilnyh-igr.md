@@ -3,21 +3,21 @@ title: Логотипы мобильных игр — почему у всех
 title_en: Mobile Game Logos — Why They All Use Chunky 3D Letters
 description: Разбираем логотипы мобильных игр: Brawl Stars, Clash of Clans, Among Us, Genshin Impact. Почему игровые знаки нарушают все правила «серьёзного» брендинга.
 description_en: Mobile game logos: Brawl Stars, Clash of Clans, Among Us, Genshin Impact. Why game marks break every rule of "serious" branding.
-date: 2026-08-22
+date: 2026-08-29
 slug: logotipy-mobilnyh-igr
 tags: Подборки, Брендинг, Игры
 tags_en: Collections, Branding, Games
 ---
 
-Откройте [категорию игр](../../logos/games/) в нашем каталоге после [банков](../logotipy-rossijskih-bankov/) — и увидите другой мир: объёмные золотые буквы, обводки, персонажи, никакого минимализма. Игровые логотипы демонстративно нарушают всё, чему учат статьи о «правильном» брендинге, — и делают это осознанно. Разбираем, почему у игр свои законы и чему у них можно научиться.
+Откройте [категорию игр](../../logos/games/) в нашем каталоге после банков — и увидите другой мир: объёмные золотые буквы, обводки, персонажи, никакого минимализма. Игровые логотипы демонстративно нарушают всё, чему учат статьи о «правильном» брендинге, — и делают это осознанно. Разбираем, почему у игр свои законы и чему у них можно научиться.
 
 :::note Коротко
-Игровой логотип — это **обложка товара на полке магазина приложений**, а не корпоративный знак: он обязан продавать жанр и эмоцию за секунду скролла. Отсюда каноны категории: объёмные буквы с обводкой ([Brawl Stars](../../logos/game/brawlstars/), [Clash of Clans](../../logos/game/clashofclans/)), персонаж в иконке, «дорогая» фактура металла и золота. Минимализм здесь не работает — он не продаёт веселье.
+Игровой логотип — это **обложка товара на полке магазина приложений**, а не корпоративный знак: он обязан продавать жанр и эмоцию за секунду скролла. Отсюда каноны категории: объёмные буквы с обводкой ([Brawl Stars](../../logos/game/brawlstars/), [Clash of Clans](../../logos/game/clashofclans/)), персонаж в иконке, «дорогая» фактура металла и золота. Минимализм здесь не работает — он не продаёт веселье.
 :::
 
 ## Логотип как упаковка
 
-Ключ к категории: игрок принимает решение об установке за секунды, листая сторы среди тысяч конкурентов. Логотип игры выполняет роль упаковки товара — как коробка хлопьев на полке: не «выразить ценности бренда», а крикнуть «здесь весело/эпично/страшно» раньше соседей. Поэтому игровые знаки оцениваются по законам афиши, а не той айдентики, что определяет [иконку приложения](../ikonka-prilozheniya/).
+Ключ к категории: игрок принимает решение об установке за секунды, листая сторы среди тысяч конкурентов. Логотип игры выполняет роль упаковки товара — как коробка хлопьев на полке: не «выразить ценности бренда», а крикнуть «здесь весело/эпично/страшно» раньше соседей. Поэтому игровые знаки оцениваются по законам афиши, а не той айдентики, что определяет [иконку приложения](../ikonka-prilozheniya/).
 
 ## Канон Supercell: объёмные буквы с обводкой
 
@@ -25,19 +25,19 @@ tags_en: Collections, Branding, Games
 
 - **Обводка** отделяет знак от любого фона — скриншота боя, баннера, видео.
 - **Объём и золото** сигналят «богатый мир, дорогая продукция» — фактура здесь несёт смысл.
-- **Наклон и «прыгающие» буквы** передают динамику: статичный строгий шрифт читался бы как офисный софт — наглядно, [как шрифт задаёт характер](../shrift-dlya-logotipa/) знака.
+- **Наклон и «прыгающие» буквы** передают динамику: статичный строгий шрифт читался бы как офисный софт — наглядно, [как шрифт задаёт характер](../shrift-dlya-logotipa/) знака.
 
 ## Персонаж вместо знака
 
-Вторая опора категории — [маскоты](../chto-takoe-maskot/). В иконке [Angry Birds 2](../../logos/game/angrybirds2/) живёт красная птица, у [Among Us](../../logos/game/amongus/) — космонавт-«амогус», ставший мемом планетарного масштаба. Персонаж решает задачу, недоступную буквам: его можно полюбить. Он живёт в стикерах, мерче и мемах, рекламируя игру бесплатно — та же логика, что и у [брендовых стикеров в Telegram](../kak-sdelat-svoi-emodzi-v-telegram/).
+Вторая опора категории — [маскоты](../chto-takoe-maskot/). В иконке [Angry Birds 2](../../logos/game/angrybirds2/) живёт красная птица, у [Among Us](../../logos/game/amongus/) — космонавт-«амогус», ставший мемом планетарного масштаба. Персонаж решает задачу, недоступную буквам: его можно полюбить. Он живёт в стикерах, мерче и мемах, рекламируя игру бесплатно — та же логика, что и у [брендовых стикеров в Telegram](../kak-sdelat-svoi-emodzi-v-telegram/).
 
 ## Genshin Impact: исключение азиатской школы
 
-[Genshin Impact](../../logos/game/genshinimpact/) показывает другую традицию: элегантная типографика с тонкими засечками, без кричащего объёма. Азиатские RPG продают не «весёлую жвачку», а «большое красивое приключение» — и их логотипы ближе к кинопостерам, чем к аркадам. Это полезное напоминание: канон категории — не закон, а отражение жанра. Казуалка в стиле Genshin потеряла бы установки; RPG в стиле Brawl Stars — репутацию.
+[Genshin Impact](../../logos/game/genshinimpact/) показывает другую традицию: элегантная типографика с тонкими засечками, без кричащего объёма. Азиатские RPG продают не «весёлую жвачку», а «большое красивое приключение» — и их логотипы ближе к кинопостерам, чем к аркадам. Это полезное напоминание: канон категории — не закон, а отражение жанра. Казуалка в стиле Genshin потеряла бы установки; RPG в стиле Brawl Stars — репутацию.
 
 ## Иконка против логотипа: двойная жизнь игрового знака
 
-У игр знак живёт двумя параллельными жизнями, и они подчиняются разным законам. **Логотип** (название на сплеш‑скрине и в магазине) — это афиша: объёмные буквы, фактуры, полная композиция. **Иконка** — это витрина в сетке стора, и там побеждает другое: крупное лицо персонажа, максимальный контраст, минимум текста. Посмотрите на [Brawl Stars](../../logos/game/brawlstars/) или [Clash Royale](../../logos/game/clashroyale/): в иконке нет ни одной буквы названия — только персонаж крупным планом. Студии A/B‑тестируют иконки как рекламные креативы и меняют их под сезонные события, при этом логотип остаётся стабильным. Разделение ролей доведено до предела: иконка продаёт клик, логотип копит узнаваемость — то же разделение, что мы описывали в статье про [устройство иконок приложений](../ikonka-prilozheniya/).
+У игр знак живёт двумя параллельными жизнями, и они подчиняются разным законам. **Логотип** (название на сплеш‑скрине и в магазине) — это афиша: объёмные буквы, фактуры, полная композиция. **Иконка** — это витрина в сетке стора, и там побеждает другое: крупное лицо персонажа, максимальный контраст, минимум текста. Посмотрите на [Brawl Stars](../../logos/game/brawlstars/) или [Clash Royale](../../logos/game/clashroyale/): в иконке нет ни одной буквы названия — только персонаж крупным планом. Студии A/B‑тестируют иконки как рекламные креативы и меняют их под сезонные события, при этом логотип остаётся стабильным. Разделение ролей доведено до предела: иконка продаёт клик, логотип копит узнаваемость — то же разделение, что мы описывали в статье про [устройство иконок приложений](../ikonka-prilozheniya/).
 
 ## Чем игровые знаки отличаются от «обычных»
 
@@ -49,17 +49,17 @@ tags_en: Collections, Branding, Games
 | Знак отдельно от продукта | знак = скриншот стиля игры |
 | Строгая сетка и геометрия | «прыгающие» буквы и наклон |
 
-Единственное общее правило — читаемость в малом размере: иконка в сторе такая же маленькая, как [фавиконка](../kak-sdelat-favicon/), и Supercell тестирует свои знаки в ней так же жёстко, как банки.
+Единственное общее правило — читаемость в малом размере: иконка в сторе такая же маленькая, как [фавиконка](../kak-sdelat-favicon/), и Supercell тестирует свои знаки в ней так же жёстко, как банки.
 
 :::tip Чему поучиться неигровым брендам
-Игры лучше всех умеют **продавать эмоцию за секунду** и **строить бренд вокруг персонажа**. Если ваш продукт про радость (детские товары, еда, развлечения) — посмотрите в сторону игровой выразительности, прежде чем заказывать очередной минималистичный гротеск из стандартных [видов логотипов](../vidy-logotipov/).
+Игры лучше всех умеют **продавать эмоцию за секунду** и **строить бренд вокруг персонажа**. Если ваш продукт про радость (детские товары, еда, развлечения) — посмотрите в сторону игровой выразительности, прежде чем заказывать очередной минималистичный гротеск из стандартных видов логотипов.
 :::
 
-В [каталоге игр](../../logos/games/) — десятки знаков мобильных хитов в SVG и PNG: от [Candy Crush](../../logos/game/candycrush/) до [Genshin Impact](../../logos/game/genshinimpact/). Про использование в обзорах и стримах — [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
+В [каталоге игр](../../logos/games/) — десятки знаков мобильных хитов в SVG и PNG: от [Candy Crush](../../logos/game/candycrush/) до [Genshin Impact](../../logos/game/genshinimpact/). Про использование в обзорах и стримах — [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 
 ---EN---
 
-Open the [games category](../../logos/games/) of our catalog right after [banks](../logotipy-rossijskih-bankov/) and you enter another world: chunky golden letters, outlines, characters, zero minimalism. Game logos defiantly break everything the "proper branding" articles teach — and do it on purpose. Here's why games have their own laws and what they can teach everyone else.
+Open the [games category](../../logos/games/) of our catalog right after banks and you enter another world: chunky golden letters, outlines, characters, zero minimalism. Game logos defiantly break everything the "proper branding" articles teach — and do it on purpose. Here's why games have their own laws and what they can teach everyone else.
 
 :::note TL;DR
 A game logo is **product packaging on the app-store shelf**, not a corporate mark: it must sell a genre and an emotion within one second of scrolling. Hence the category canon: chunky outlined 3D letters ([Brawl Stars](../../logos/game/brawlstars/), [Clash of Clans](../../logos/game/clashofclans/)), a character in the icon, "expensive" metal-and-gold textures. Minimalism doesn't work here — it doesn't sell fun.
@@ -102,7 +102,7 @@ A game's mark lives two parallel lives ruled by different laws. **The logo** (th
 The one shared rule is small-size readability: a store icon is as tiny as a [favicon](../kak-sdelat-favicon/), and Supercell tests its marks there as ruthlessly as banks do.
 
 :::tip What non-game brands can learn
-Games are the best at **selling an emotion in a second** and **building a brand around a character**. If your product is about joy (kids' goods, food, entertainment), look at game-grade expressiveness before ordering another minimalist grotesque off the standard list of [logo types](../vidy-logotipov/).
+Games are the best at **selling an emotion in a second** and **building a brand around a character**. If your product is about joy (kids' goods, food, entertainment), look at game-grade expressiveness before ordering another minimalist grotesque off the standard list of logo types.
 :::
 
 The [games catalog](../../logos/games/) holds dozens of mobile-hit marks in SVG and PNG — from [Candy Crush](../../logos/game/candycrush/) to [Genshin Impact](../../logos/game/genshinimpact/). On using them in reviews and streams: [can you use someone else's logo](../mozhno-li-ispolzovat-chuzhoy-logotip/).

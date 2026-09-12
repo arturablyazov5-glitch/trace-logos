@@ -14,24 +14,28 @@
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
   <script defer src="/_vercel/speed-insights/script.js"></script>
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reviews Exporter — расширение для выгрузки отзывов с Яндекс.Карт и Avito | Trace Logo's</title>
-  <meta name="description" content="Chrome-расширение: собирает все отзывы организации с Яндекс.Карт или продавца на Avito в один .md-файл. Автоскролл, фильтр дублей и пустых отзывов, лайки/дизлайки. Бесплатно, без публикации в Chrome Web Store — устанавливается вручную.">
-  <meta name="keywords" content="reviews exporter, выгрузить отзывы яндекс карты, скачать отзывы яндекс, выгрузить отзывы avito, скачать отзывы авито, парсер отзывов, chrome расширение отзывы">
+  <title>Reviews Exporter — выгрузка отзывов с Яндекс.Карт, Avito, Ozon и Telegram в .md | Trace Logo's</title>
+  <meta name="description" content="Chrome-расширение собирает все отзывы организации на Яндекс.Картах, продавца на Avito, товара на Ozon и комментарии к посту в Telegram в один .md-файл. Автоскролл, отсев дублей и пустых, лайки и оценки. Работает локально в браузере, бесплатно.">
+  <meta name="keywords" content="reviews exporter, выгрузить отзывы яндекс карты, скачать отзывы яндекс, выгрузить отзывы avito, скачать отзывы авито, выгрузить отзывы ozon, выгрузить комментарии telegram, парсер отзывов, chrome расширение отзывы">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <link rel="canonical" href="https://trace-logos.ru/tools/extensions/reviews-exporter/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trace Logo's">
   <meta property="og:url" content="https://trace-logos.ru/tools/extensions/reviews-exporter/">
-  <meta property="og:title" content="Reviews Exporter — расширение для выгрузки отзывов с Яндекс.Карт и Avito">
-  <meta property="og:description" content="Собирает все отзывы организации с Яндекс.Карт или продавца на Avito в .md-файл: автоскролл, фильтр дублей, лайки/дизлайки.">
+  <meta property="og:title" content="Reviews Exporter — выгрузка отзывов с Яндекс.Карт, Avito, Ozon и Telegram в .md">
+  <meta property="og:description" content="Собирает все отзывы организации, продавца или товара в один .md-файл: автоскролл, отсев дублей, оценки и реакции. Работает локально в браузере.">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/tools-reviews-exporter.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Reviews Exporter — Chrome-расширение для выгрузки отзывов в .md">
   <meta property="og:locale" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Reviews Exporter — расширение для выгрузки отзывов с Яндекс.Карт и Avito">
-  <meta name="twitter:description" content="Собирает все отзывы организации с Яндекс.Карт или продавца на Avito в .md-файл прямо в браузере.">
+  <meta name="twitter:title" content="Reviews Exporter — выгрузка отзывов с Яндекс.Карт, Avito, Ozon и Telegram">
+  <meta name="twitter:description" content="Все отзывы организации, продавца или товара — в один .md-файл прямо в браузере.">
+  <meta name="twitter:image" content="https://trace-logos.ru/assets/og/tools-reviews-exporter.png">
 
   <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
@@ -40,9 +44,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../../css/site-header.css?v=20260808">
+  <link rel="stylesheet" href="../../../css/site-header.css?v=20260910">
   <link rel="stylesheet" href="../../assets/tools.css?v=20260731">
-  <link rel="stylesheet" href="../../assets/extensions.css?v=20260807">
+  <link rel="stylesheet" href="../../assets/extensions.css?v=20260905">
+  <link rel="stylesheet" href="../../../css/site-footer.css?v=20260910">
 
   <script type="application/ld+json">
   {
@@ -50,12 +55,55 @@
     "@type": "SoftwareApplication",
     "name": "Reviews Exporter",
     "applicationCategory": "BrowserApplication",
-    "operatingSystem": "Chrome",
-    "description": "Chrome-расширение для сбора всех отзывов организации с Яндекс.Карт или продавца на Avito в .md-файл.",
+    "applicationSubCategory": "Chrome Extension",
+    "operatingSystem": "Chrome, Windows, macOS, Linux",
+    "description": "Chrome-расширение для сбора всех отзывов организации на Яндекс.Картах, продавца на Avito, товара на Ozon и комментариев к посту в Telegram Web в один .md-файл.",
     "url": "https://trace-logos.ru/tools/extensions/reviews-exporter/",
-    "downloadUrl": "https://trace-logos.ru/tools/extensions/reviews-exporter/reviews-exporter.zip",
-    "softwareVersion": "1.1.0",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" }
+    "downloadUrl": "https://trace-logos.ru/tools/extensions/reviews-exporter/",
+    "installUrl": "https://trace-logos.ru/tools/extensions/reviews-exporter/",
+    "image": "https://trace-logos.ru/assets/og/tools-reviews-exporter.png",
+    "softwareVersion": "1.2.0",
+    "inLanguage": "ru",
+    "isAccessibleForFree": true,
+    "featureList": [
+      "Сбор отзывов организации на Яндекс.Картах с автоскроллом",
+      "Сбор отзывов продавца на Avito и отзывов о новостройке",
+      "Сбор отзывов о товаре на Ozon",
+      "Сбор комментариев к посту в Telegram Web",
+      "Отсев дублей, пустых и эмодзи-отзывов",
+      "Экспорт в один .md-файл с оценками, датами и реакциями"
+    ],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
+    "publisher": { "@type": "Organization", "name": "Trace Logo's", "url": "https://trace-logos.ru/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Как установить Reviews Exporter в Chrome",
+    "totalTime": "PT2M",
+    "step": [
+      { "@type": "HowToStep", "position": 1, "name": "Скачать архив", "text": "Скачайте архив расширения кнопкой на странице и распакуйте его в папку, которую не будете удалять." },
+      { "@type": "HowToStep", "position": 2, "name": "Открыть страницу расширений", "text": "Откройте в Chrome адрес chrome://extensions — на странице он копируется в буфер по клику." },
+      { "@type": "HowToStep", "position": 3, "name": "Включить режим разработчика", "text": "Включите переключатель «Режим разработчика» в правом верхнем углу страницы расширений." },
+      { "@type": "HowToStep", "position": 4, "name": "Загрузить распакованное расширение", "text": "Нажмите «Загрузить распакованное расширение» и выберите распакованную папку." },
+      { "@type": "HowToStep", "position": 5, "name": "Запустить сбор", "text": "Откройте карточку организации, продавца, товара или ветку комментариев и нажмите кнопку сбора прямо в интерфейсе площадки." }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Куда уходят собранные отзывы?", "acceptedAnswer": { "@type": "Answer", "text": "Никуда. Расширение читает страницу, которая уже открыта в браузере, и собирает файл прямо на устройстве. Своего сервера у него нет, аккаунт и регистрация не нужны." } },
+      { "@type": "Question", "name": "Почему расширения нет в Chrome Web Store?", "acceptedAnswer": { "@type": "Answer", "text": "Оно устанавливается вручную из архива за пару минут. Обновления ставятся так же руками — расширение само показывает уведомление, когда выходит новая версия." } },
+      { "@type": "Question", "name": "Сколько отзывов получится собрать за раз?", "acceptedAnswer": { "@type": "Answer", "text": "Ограничение только одно — сколько отзывов площадка отдаёт в ленту. Расширение листает её до конца, поэтому на карточке с несколькими тысячами отзывов сбор просто идёт дольше." } },
+      { "@type": "Question", "name": "Почему выгрузка с Ozon бывает неполной?", "acceptedAnswer": { "@type": "Answer", "text": "Ozon отдаёт часть отзывов только авторизованным пользователям. В таком случае в шапке файла появляется пометка о неполной выгрузке — войдите в аккаунт и запустите сбор заново." } },
+      { "@type": "Question", "name": "Почему .md, а не Excel?", "acceptedAnswer": { "@type": "Answer", "text": "Markdown открывается любым текстовым редактором, читается глазами без конвертации и целиком помещается в окно нейросети, когда нужно свести отзывы в выводы. Из него же легко собрать таблицу." } },
+      { "@type": "Question", "name": "Расширение работает в других браузерах?", "acceptedAnswer": { "@type": "Answer", "text": "Да, во всех браузерах на движке Chromium — Chrome, Edge, Яндекс.Браузер, Arc, Brave. Установка везде одинаковая: режим разработчика и загрузка распакованной папки." } }
+    ]
   }
   </script>
   <script type="application/ld+json">
@@ -70,7 +118,7 @@
   }
   </script>
 </head>
-<body>
+<body class="ext-page">
 
 <!-- HEADER:START -->
 <header class="site-header">
@@ -133,66 +181,467 @@
     </div>
   </div>
 </nav>
-<script src="../../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../../js/header-search.min.js?v=20260910"></script>
 <!-- HEADER:END -->
-
 <div class="wrap">
   <a href="../../" class="back-link">
     <i data-lucide="arrow-left" style="width:14px;height:14px;stroke-width:1.5" aria-hidden="true"></i>
     Все инструменты
   </a>
 
-  <header class="header">
-    <div class="badge">
-      <i data-lucide="shield-check" class="badge-icon" aria-hidden="true"></i>
-      Chrome-расширение · без Web Store
+  <!-- ── HERO ── -->
+  <header class="ext-hero">
+    <div class="ext-hero-copy">
+      <div class="badge">
+        <i data-lucide="shield-check" class="badge-icon" aria-hidden="true"></i>
+        Chrome-расширение · без Web Store
+      </div>
+      <h1>Reviews <span>Exporter</span></h1>
+      <p class="subtitle">
+        Кнопка появляется прямо на странице отзывов. Одно нажатие — и все отзывы организации, продавца или товара лежат в одном .md-файле у&nbsp;вас на&nbsp;диске.
+      </p>
+
+      <div class="ext-hero-actions">
+        <!-- Прямой ссылки на .zip здесь больше нет: архив лежит в приватном бакете
+             Supabase Storage, и путь к нему выдаётся только на /thanks/ по токену
+             заказа. Кнопка объявляет продукт, всё остальное делает js/pwyw.js. -->
+        <button type="button" class="btn btn-primary" data-pwyw="reviews-exporter">
+          <i data-lucide="download" style="width:15px;height:15px" aria-hidden="true"></i>
+          Скачать (текущая версия <!-- VERSION:START -->1.2.0<!-- VERSION:END -->)
+        </button>
+        <a class="btn btn-ghost" href="#install">
+          <i data-lucide="terminal" style="width:15px;height:15px" aria-hidden="true"></i>
+          Как установить
+        </a>
+      </div>
+      <p class="ext-hero-note">Плати сколько хочешь, включая ноль. Chrome, Edge, Яндекс.Браузер, Arc.</p>
+
+      <div class="ext-facts">
+        <div class="ext-fact">
+          <span class="ext-fact-value">5</span>
+          <span class="ext-fact-label">площадок</span>
+        </div>
+        <div class="ext-fact">
+          <span class="ext-fact-value">.md</span>
+          <span class="ext-fact-label">один файл</span>
+        </div>
+        <div class="ext-fact">
+          <span class="ext-fact-value">0</span>
+          <span class="ext-fact-label">запросов на сервер</span>
+        </div>
+        <div class="ext-fact">
+          <span class="ext-fact-value">~1&nbsp;мин</span>
+          <span class="ext-fact-label">на установку</span>
+        </div>
+      </div>
     </div>
-    <h1>Reviews <span>Exporter</span></h1>
-    <p class="subtitle">
-      Собирает все отзывы организации с Яндекс.Карт или продавца на Avito в один .md-файл — с автоскроллом, лайками/дизлайками и без дублей
-    </p>
-    <div class="ext-hero-actions">
-      <a class="btn btn-primary" href="https://trace-logos.ru/tools/extensions/reviews-exporter/reviews-exporter.zip" download>
-        <i data-lucide="download" style="width:15px;height:15px" aria-hidden="true"></i>
-        Скачать (текущая версия <!-- VERSION:START -->1.2.0<!-- VERSION:END -->)
-      </a>
+
+    <!-- Мок окна: лента отзывов едет вверх (автоскролл), поверх — карточка прогресса -->
+    <div class="ext-window" role="img" aria-label="Окно браузера: расширение листает ленту отзывов и показывает прогресс сбора">
+      <div class="ext-window-bar">
+        <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+        <div class="ext-window-url">yandex.ru/maps/org/.../reviews/</div>
+      </div>
+      <div class="ext-window-body">
+        <div class="ext-scroller" aria-hidden="true">
+          <div class="ext-rev"><div class="ext-rev-top"><span class="ext-rev-ava"></span><span class="ext-rev-name"></span><span class="ext-rev-stars">★★★★★</span></div><div class="ext-rev-line w90"></div><div class="ext-rev-line w55"></div></div>
+          <div class="ext-rev"><div class="ext-rev-top"><span class="ext-rev-ava"></span><span class="ext-rev-name"></span><span class="ext-rev-stars">★★★★☆</span></div><div class="ext-rev-line"></div><div class="ext-rev-line w70"></div></div>
+          <div class="ext-rev"><div class="ext-rev-top"><span class="ext-rev-ava"></span><span class="ext-rev-name"></span><span class="ext-rev-stars">★★★★★</span></div><div class="ext-rev-line w90"></div><div class="ext-rev-line w70"></div><div class="ext-rev-line w55"></div></div>
+          <div class="ext-rev"><div class="ext-rev-top"><span class="ext-rev-ava"></span><span class="ext-rev-name"></span><span class="ext-rev-stars">★★★☆☆</span></div><div class="ext-rev-line w70"></div></div>
+          <div class="ext-rev"><div class="ext-rev-top"><span class="ext-rev-ava"></span><span class="ext-rev-name"></span><span class="ext-rev-stars">★★★★★</span></div><div class="ext-rev-line w90"></div><div class="ext-rev-line w55"></div></div>
+          <div class="ext-rev"><div class="ext-rev-top"><span class="ext-rev-ava"></span><span class="ext-rev-name"></span><span class="ext-rev-stars">★★★★☆</span></div><div class="ext-rev-line"></div><div class="ext-rev-line w70"></div></div>
+          <div class="ext-rev"><div class="ext-rev-top"><span class="ext-rev-ava"></span><span class="ext-rev-name"></span><span class="ext-rev-stars">★★★★★</span></div><div class="ext-rev-line w90"></div><div class="ext-rev-line w55"></div></div>
+          <div class="ext-rev"><div class="ext-rev-top"><span class="ext-rev-ava"></span><span class="ext-rev-name"></span><span class="ext-rev-stars">★★★★☆</span></div><div class="ext-rev-line"></div><div class="ext-rev-line w70"></div></div>
+        </div>
+        <div class="ext-window-veil">
+          <div class="ext-progress-card">
+            <div class="ext-progress-title">Собираю отзывы</div>
+            <div class="ext-progress-track"><div class="ext-progress-fill"></div></div>
+            <div class="ext-progress-meta">
+              <span>автоскролл ленты</span>
+              <span><span class="ext-odo" aria-hidden="true"><span>0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9</span></span>0&nbsp;%</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <section class="section" id="what">
-    <div class="section-label">Что делает</div>
-    <h2>Отзывы организации или продавца → готовый .md-файл</h2>
-    <p>Открой карточку компании на Яндекс.Картах или страницу отзывов продавца на Avito, нажми кнопку «Собрать отзывы» рядом с блоком отзывов — расширение само соберёт все отзывы (автоскролл на Яндекс.Картах, постраничная выгрузка на Avito), отфильтрует дубли, пустые и отзывы «только из эмодзи» (на Яндекс.Картах), распарсит лайки/дизлайки или оценку и этап сделки и скачает всё одним .md-файлом.</p>
+  <!-- ── ЧТО ПРОИСХОДИТ ── -->
+  <section class="section" id="how">
+    <div class="section-label">Как это работает</div>
+    <h2>Отзывы лежат в ленте, которая подгружается по кускам</h2>
+    <p>Площадка отдаёт первые десять-двадцать отзывов, остальные подтягивает на&nbsp;скролле. Скопировать такую ленту руками нельзя: пока долистаешь до&nbsp;конца, начало уже выгружено из&nbsp;памяти вкладки. Расширение проходит этот путь за&nbsp;вас — листает до&nbsp;последнего отзыва, забирает каждый по&nbsp;пути и складывает в&nbsp;один файл.</p>
+
+    <div class="ext-flow">
+      <span class="ext-flow-pulse" aria-hidden="true"></span>
+      <div class="ext-step">
+        <div class="ext-step-dot"><i data-lucide="mouse-pointer-click" aria-hidden="true"></i></div>
+        <span class="ext-step-num">ШАГ 01</span>
+        <div class="ext-step-title">Кнопка на странице</div>
+        <p class="ext-step-desc">Расширение встраивает кнопку сбора в&nbsp;интерфейс площадки, рядом с&nbsp;блоком отзывов. Никаких панелей и всплывающих окон.</p>
+      </div>
+      <div class="ext-step">
+        <div class="ext-step-dot"><i data-lucide="mouse" aria-hidden="true"></i></div>
+        <span class="ext-step-num">ШАГ 02</span>
+        <div class="ext-step-title">Автоскролл ленты</div>
+        <p class="ext-step-desc">Лента листается сама до&nbsp;последнего отзыва. Экран затемняется, чтобы случайный клик не&nbsp;сбил проход.</p>
+      </div>
+      <div class="ext-step">
+        <div class="ext-step-dot"><i data-lucide="filter" aria-hidden="true"></i></div>
+        <span class="ext-step-num">ШАГ 03</span>
+        <div class="ext-step-title">Разбор и отсев</div>
+        <p class="ext-step-desc">Каждый отзыв разбирается на&nbsp;поля: автор, дата, оценка, реакции, текст. Дубли и пустышки отсеиваются.</p>
+      </div>
+      <div class="ext-step">
+        <div class="ext-step-dot"><i data-lucide="file-text" aria-hidden="true"></i></div>
+        <span class="ext-step-num">ШАГ 04</span>
+        <div class="ext-step-title">Файл на диске</div>
+        <p class="ext-step-desc">В&nbsp;конце появляется карточка со&nbsp;сводкой и кнопкой «Скачать файл». Ничего не&nbsp;качается без вашего клика.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ПЛОЩАДКИ ── -->
+  <section class="section" id="platforms">
+    <div class="section-label">Площадки</div>
+    <h2>Пять источников, один формат на выходе</h2>
+    <p>Каждая площадка размечена по-своему, поэтому у&nbsp;каждой свой разборщик и свой набор полей. Выберите источник — ниже покажу, где появляется кнопка и что попадёт в&nbsp;файл.</p>
+
+    <div class="ext-plats" role="tablist" aria-label="Поддерживаемые площадки">
+      <button class="ext-plat" role="tab" id="tab-yandex" aria-controls="pane-yandex" aria-selected="true" type="button">
+        <img src="../../../assets/logos/svgs/yandex-maps.svg" alt="" width="16" height="16" loading="lazy"> Яндекс.Карты
+      </button>
+      <button class="ext-plat" role="tab" id="tab-avito" aria-controls="pane-avito" aria-selected="false" type="button">
+        <img src="../../../assets/logos/svgs/avito.svg" alt="" width="16" height="16" loading="lazy"> Avito · продавец
+      </button>
+      <button class="ext-plat" role="tab" id="tab-house" aria-controls="pane-house" aria-selected="false" type="button">
+        <img src="../../../assets/logos/svgs/avito.svg" alt="" width="16" height="16" loading="lazy"> Avito · новостройки
+      </button>
+      <button class="ext-plat" role="tab" id="tab-ozon" aria-controls="pane-ozon" aria-selected="false" type="button">
+        <img src="../../../assets/logos/svgs/ozon.svg" alt="" width="16" height="16" loading="lazy"> Ozon
+      </button>
+      <button class="ext-plat" role="tab" id="tab-telegram" aria-controls="pane-telegram" aria-selected="false" type="button">
+        <img src="../../../assets/logos/svgs/telegram.svg" alt="" width="16" height="16" loading="lazy"> Telegram
+      </button>
+    </div>
+
+    <div class="ext-panel" id="pane-yandex" role="tabpanel" aria-labelledby="tab-yandex">
+      <div class="ext-panel-side">
+        <div class="ext-panel-kicker">Отзывы организации</div>
+        <h3>Яндекс.Карты и Яндекс.Бизнес</h3>
+        <p>Откройте карточку компании и вкладку «Отзывы». Кнопка «Собрать отзывы» встаёт рядом со&nbsp;списком. Лента прокручивается наверх перед стартом, поэтому неважно, докуда вы долистали до&nbsp;этого. Логотип <a href="../../../logos/map/yandexmaps/">Яндекс.Карт</a> есть в&nbsp;каталоге.</p>
+        <div class="ext-fields">
+          <span class="ext-fields-label">Поля в файле</span>
+          <span class="ext-field">Организация</span>
+          <span class="ext-field">Дата</span>
+          <span class="ext-field">Оценка</span>
+          <span class="ext-field">👍 / 👎</span>
+          <span class="ext-field">Текст</span>
+        </div>
+      </div>
+      <div class="ext-panel-file">
+        <div class="ext-panel-filebar">
+          <span class="ext-panel-filename">yandex_reviews.md</span>
+          <span class="ext-panel-filetag">markdown</span>
+        </div>
+        <div class="ext-panel-code"><span class="md-h">## 12. Марина К.</span>
+
+<span class="md-k">- **Дата:**</span> <span class="md-v">12 июля</span>
+<span class="md-k">- **Оценка:**</span> <span class="md-v">5/5</span>
+<span class="md-k">- **Реакции:**</span> <span class="md-v">👍 4 / 👎 1</span>
+
+<span class="md-d">Зашли в субботу вечером, свободных
+столов не было, но нас посадили
+за барную стойку…</span></div>
+      </div>
+    </div>
+
+    <div class="ext-panel" id="pane-avito" role="tabpanel" aria-labelledby="tab-avito" hidden>
+      <div class="ext-panel-side">
+        <div class="ext-panel-kicker">Отзывы продавца</div>
+        <h3>Avito</h3>
+        <p>Кнопка появляется и на&nbsp;странице отзывов продавца, и прямо на&nbsp;карточке объявления. Отзывы разложены постранично, поэтому расширение проходит страницы одну за&nbsp;другой. Рядом с&nbsp;оценкой сохраняется этап сделки и объявление, по&nbsp;которому написан отзыв. Логотип <a href="../../../logos/market/avito/">Avito</a> есть в&nbsp;каталоге.</p>
+        <div class="ext-fields">
+          <span class="ext-fields-label">Поля в файле</span>
+          <span class="ext-field">Продавец</span>
+          <span class="ext-field">Дата</span>
+          <span class="ext-field">Оценка</span>
+          <span class="ext-field">Этап сделки</span>
+          <span class="ext-field">Объявление</span>
+        </div>
+      </div>
+      <div class="ext-panel-file">
+        <div class="ext-panel-filebar">
+          <span class="ext-panel-filename">avito_reviews.md</span>
+          <span class="ext-panel-filetag">markdown</span>
+        </div>
+        <div class="ext-panel-code"><span class="md-h">## 7. Дмитрий</span>
+
+<span class="md-k">- **Дата:**</span> <span class="md-v">неделю назад</span>
+<span class="md-k">- **Оценка:**</span> <span class="md-v">5/5</span>
+<span class="md-k">- **Этап сделки:**</span> <span class="md-v">Сделка состоялась</span>
+<span class="md-k">- **Объявление:**</span> <span class="md-v">Диван угловой</span>
+
+<span class="md-d">Привезли в тот же день, помогли
+занести на этаж…</span></div>
+      </div>
+    </div>
+
+    <div class="ext-panel" id="pane-house" role="tabpanel" aria-labelledby="tab-house" hidden>
+      <div class="ext-panel-side">
+        <div class="ext-panel-kicker">Отзывы о доме</div>
+        <h3>Avito Новостройки</h3>
+        <p>Отдельный разборщик для&nbsp;отзывов о&nbsp;жилом комплексе. Такой отзыв разбит на&nbsp;подразделы — двор, планировки, управляющая компания — и каждый из&nbsp;них попадает в&nbsp;файл своим абзацем с&nbsp;подписью. Сохраняется и статус автора: живёт в&nbsp;доме или только смотрел.</p>
+        <div class="ext-fields">
+          <span class="ext-fields-label">Поля в файле</span>
+          <span class="ext-field">Заголовок</span>
+          <span class="ext-field">Оценка</span>
+          <span class="ext-field">Статус жильца</span>
+          <span class="ext-field">Разделы отзыва</span>
+          <span class="ext-field">Фото</span>
+        </div>
+      </div>
+      <div class="ext-panel-file">
+        <div class="ext-panel-filebar">
+          <span class="ext-panel-filename">avito_house_reviews.md</span>
+          <span class="ext-panel-filetag">markdown</span>
+        </div>
+        <div class="ext-panel-code"><span class="md-h">## 3. Ольга</span>
+
+<span class="md-k">- **Дата:**</span> <span class="md-v">май 2026</span>
+<span class="md-k">- **Оценка:**</span> <span class="md-v">4/5</span>
+<span class="md-k">- **Статус:**</span> <span class="md-v">Живу здесь</span>
+<span class="md-k">- **Фото:**</span> <span class="md-v">3</span>
+
+<span class="md-v">**Двор без машин, но узкий</span>
+<span class="md-v">лифтовой холл**</span>
+<span class="md-d">Двор закрытый, детская площадка…</span>
+<span class="md-v">**Инфраструктура:**</span> <span class="md-d">школа рядом…</span></div>
+      </div>
+    </div>
+
+    <div class="ext-panel" id="pane-ozon" role="tabpanel" aria-labelledby="tab-ozon" hidden>
+      <div class="ext-panel-side">
+        <div class="ext-panel-kicker">Отзывы о товаре</div>
+        <h3>Ozon</h3>
+        <p>Собираются отзывы карточки товара вместе с&nbsp;числом приложенных фото и видео. Часть отзывов Ozon показывает только авторизованным — тогда в&nbsp;шапке файла появляется пометка о&nbsp;неполной выгрузке, чтобы средний балл не&nbsp;выглядел итоговым. Логотип <a href="../../../logos/market/ozon/">Ozon</a> есть в&nbsp;каталоге.</p>
+        <div class="ext-fields">
+          <span class="ext-fields-label">Поля в файле</span>
+          <span class="ext-field">Товар</span>
+          <span class="ext-field">Дата</span>
+          <span class="ext-field">Оценка</span>
+          <span class="ext-field">Фото/видео</span>
+          <span class="ext-field">Пометка о полноте</span>
+        </div>
+      </div>
+      <div class="ext-panel-file">
+        <div class="ext-panel-filebar">
+          <span class="ext-panel-filename">ozon_reviews.md</span>
+          <span class="ext-panel-filetag">markdown</span>
+        </div>
+        <div class="ext-panel-code"><span class="md-h"># Отзывы</span>
+
+<span class="md-k">- **Товар:**</span> <span class="md-v">Наушники TWS</span>
+<span class="md-k">- **Собрано отзывов:**</span> <span class="md-v">96 из 340</span>
+<span class="md-k">- **Средний рейтинг:**</span> <span class="md-v">4.71/5</span>
+
+<span class="md-d">&gt; Выгрузка неполная: Ozon отдаёт
+&gt; остальные отзывы только
+&gt; авторизованным пользователям.</span></div>
+      </div>
+    </div>
+
+    <div class="ext-panel" id="pane-telegram" role="tabpanel" aria-labelledby="tab-telegram" hidden>
+      <div class="ext-panel-side">
+        <div class="ext-panel-kicker">Комментарии к посту</div>
+        <h3>Telegram Web</h3>
+        <p>Работает в&nbsp;обоих клиентах — и на&nbsp;<code>/k/</code>, и на&nbsp;<code>/a/</code>. Откройте ветку обсуждения поста и нажмите «Собрать комментарии». Ветка листается в&nbsp;две фазы: сначала вверх до&nbsp;первого сообщения, потом вниз до&nbsp;последнего. В&nbsp;шапку файла попадает сам пост с&nbsp;просмотрами и реакциями. Логотип <a href="../../../logos/social/telegram/">Telegram</a> есть в&nbsp;каталоге.</p>
+        <div class="ext-fields">
+          <span class="ext-fields-label">Поля в файле</span>
+          <span class="ext-field">Текст поста</span>
+          <span class="ext-field">Просмотры</span>
+          <span class="ext-field">Реакции</span>
+          <span class="ext-field">Вложения</span>
+          <span class="ext-field">Автор и дата</span>
+        </div>
+      </div>
+      <div class="ext-panel-file">
+        <div class="ext-panel-filebar">
+          <span class="ext-panel-filename">telegram_comments.md</span>
+          <span class="ext-panel-filetag">markdown</span>
+        </div>
+        <div class="ext-panel-code"><span class="md-h"># Комментарии к посту</span>
+
+<span class="md-k">- **Просмотры:**</span> <span class="md-v">12.4K</span>
+<span class="md-k">- **Реакции на посте:**</span> <span class="md-v">318</span>
+<span class="md-k">- **Собрано комментариев:**</span> <span class="md-v">704</span>
+
+<span class="md-h">## 41. Аня</span>
+<span class="md-k">- **Реакции:**</span> <span class="md-v">7</span>
+<span class="md-d">- 🎤 Голосовое, 0:14
+- 📎 макет.pdf, 2.1 МБ</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── АНАТОМИЯ ФАЙЛА ── -->
+  <section class="section" id="output">
+    <div class="section-label">Что на выходе</div>
+    <h2>Анатомия .md-файла</h2>
+    <p>Файл открывается любым текстовым редактором и читается глазами без конвертации. Наведите курсор на&nbsp;пункт справа — слева подсветится соответствующая часть файла.</p>
+
+    <div class="ext-anatomy">
+      <div class="ext-md">
+        <div class="ext-window-bar">
+          <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+          <div class="ext-window-url">yandex_reviews.md</div>
+        </div>
+        <div class="ext-md-code" id="ext-md-code">
+<span class="ext-md-line" data-g="1"># Отзывы</span>
+<span class="ext-md-line">&nbsp;</span>
+<span class="ext-md-line" data-g="2">- **Организация:** Кофейня «Сюр»</span>
+<span class="ext-md-line" data-g="2">- **Собрано отзывов:** 484</span>
+<span class="ext-md-line" data-g="2">- **Средний рейтинг:** 4.63/5</span>
+<span class="ext-md-line">&nbsp;</span>
+<span class="ext-md-line" data-g="3">### Распределение по оценкам</span>
+<span class="ext-md-line" data-g="3">- 5★: 361</span>
+<span class="ext-md-line" data-g="3">- 4★: 68</span>
+<span class="ext-md-line" data-g="3">- 3★: 31</span>
+<span class="ext-md-line" data-g="3">- 2★: 12</span>
+<span class="ext-md-line" data-g="3">- 1★: 12</span>
+<span class="ext-md-line">&nbsp;</span>
+<span class="ext-md-line">---</span>
+<span class="ext-md-line">&nbsp;</span>
+<span class="ext-md-line" data-g="4">## 1. Марина К.</span>
+<span class="ext-md-line">&nbsp;</span>
+<span class="ext-md-line" data-g="5">- **Дата:** 12 июля</span>
+<span class="ext-md-line" data-g="5">- **Оценка:** 5/5</span>
+<span class="ext-md-line" data-g="5">- **Реакции:** 👍 4 / 👎 1</span>
+<span class="ext-md-line">&nbsp;</span>
+<span class="ext-md-line" data-g="4">Зашли в субботу вечером, свободных</span>
+<span class="ext-md-line" data-g="4">столов не было, но нас посадили…</span>
+        </div>
+      </div>
+
+      <div class="ext-legend" id="ext-legend">
+        <div class="ext-legend-item" data-g="1">
+          <span class="ext-legend-num">1</span>
+          <span>
+            <span class="ext-legend-title">Заголовок</span>
+            <span class="ext-legend-desc">Один и тот же на всех площадках, поэтому файлы из разных источников складываются в общую папку без путаницы.</span>
+          </span>
+        </div>
+        <div class="ext-legend-item" data-g="2">
+          <span class="ext-legend-num">2</span>
+          <span>
+            <span class="ext-legend-title">Шапка со сводкой</span>
+            <span class="ext-legend-desc">Название организации, продавца или товара, число собранных отзывов и средний балл, посчитанный по собранному.</span>
+          </span>
+        </div>
+        <div class="ext-legend-item" data-g="3">
+          <span class="ext-legend-num">3</span>
+          <span>
+            <span class="ext-legend-title">Распределение по оценкам</span>
+            <span class="ext-legend-desc">Пять строк, по которым сразу видно форму репутации: ровная пятёрка или провал в единицах.</span>
+          </span>
+        </div>
+        <div class="ext-legend-item" data-g="4">
+          <span class="ext-legend-num">4</span>
+          <span>
+            <span class="ext-legend-title">Отзыв = отдельная секция</span>
+            <span class="ext-legend-desc">Заголовок второго уровня с номером и автором. Такой файл сворачивается по секциям в редакторе и режется на части скриптом.</span>
+          </span>
+        </div>
+        <div class="ext-legend-item" data-g="5">
+          <span class="ext-legend-num">5</span>
+          <span>
+            <span class="ext-legend-title">Метаданные списком</span>
+            <span class="ext-legend-desc">Дата, оценка, реакции, этап сделки — каждое поле своей строкой, поэтому их легко вытащить регуляркой или разобрать в таблицу.</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
     <ul class="ext-feature-list">
-      <li><i data-lucide="check" aria-hidden="true"></i> Работает на Яндекс.Картах и Avito</li>
-      <li><i data-lucide="check" aria-hidden="true"></i> Автоскролл/автопагинация до полной загрузки всех отзывов</li>
-      <li><i data-lucide="check" aria-hidden="true"></i> Фильтрация дублей, пустых и эмодзи-only отзывов</li>
-      <li><i data-lucide="check" aria-hidden="true"></i> Лайки/дизлайки (Яндекс.Карты) или оценка и этап сделки (Avito)</li>
-      <li><i data-lucide="check" aria-hidden="true"></i> Работает локально в браузере — данные никуда не отправляются</li>
+      <li><i data-lucide="check" aria-hidden="true"></i> Markdown целиком помещается в окно нейросети, когда нужно свести отзывы в выводы</li>
+      <li><i data-lucide="check" aria-hidden="true"></i> Открывается в Obsidian, Notion, VS Code и любом текстовом редакторе</li>
+      <li><i data-lucide="check" aria-hidden="true"></i> Из плоских строк-полей собирается таблица под отчёт</li>
     </ul>
   </section>
 
+  <!-- ── ОТСЕВ ── -->
+  <section class="section" id="filter">
+    <div class="section-label">Отсев</div>
+    <h2>В файл попадает не всё, что видно на странице</h2>
+    <p>Лента отдаёт один и тот&nbsp;же отзыв несколько раз, пока листается, — виртуальный список переиспользует карточки. Плюс мусор: пустые карточки и отзывы из&nbsp;одних эмодзи. Всё это отсекается до&nbsp;того, как файл соберётся.</p>
+
+    <div class="ext-funnel">
+      <div class="ext-funnel-bar" role="img" aria-label="Из 526 найденных карточек в файл попали 484 отзыва: 24 дубля, 12 пустых и 6 эмодзи-отзывов отсеяны">
+        <div class="ext-funnel-seg keep" style="flex:484">484 в файле</div>
+        <div class="ext-funnel-seg dup" style="flex:24">24</div>
+        <div class="ext-funnel-seg empty" style="flex:12">12</div>
+        <div class="ext-funnel-seg emoji" style="flex:6">6</div>
+      </div>
+      <div class="ext-funnel-legend">
+        <span class="ext-funnel-key"><span class="ext-funnel-swatch" style="background:rgba(138,107,255,.55)"></span> Уникальные отзывы</span>
+        <span class="ext-funnel-key"><span class="ext-funnel-swatch" style="background:rgba(255,255,255,.13)"></span> Дубли из виртуального списка</span>
+        <span class="ext-funnel-key"><span class="ext-funnel-swatch" style="background:rgba(255,255,255,.09)"></span> Пустые карточки</span>
+        <span class="ext-funnel-key"><span class="ext-funnel-swatch" style="background:rgba(255,255,255,.05)"></span> Только эмодзи</span>
+      </div>
+      <p class="ext-funnel-note">Числа на схеме — пример одного прогона. В&nbsp;Telegram фильтр эмодзи отключён специально: там реплика одним смайликом остаётся частью живого обсуждения, поэтому она сохраняется.</p>
+    </div>
+  </section>
+
+  <!-- ── ПРИВАТНОСТЬ ── -->
+  <section class="section" id="privacy">
+    <div class="section-label">Приватность</div>
+    <h2>Данные не покидают вкладку</h2>
+    <p>Расширение читает страницу, которая уже открыта у&nbsp;вас в&nbsp;браузере, и собирает файл там&nbsp;же. Своего сервера у&nbsp;него нет, отправлять отзывы некуда, аккаунт и регистрация не&nbsp;нужны.</p>
+
+    <div class="ext-privacy">
+      <div class="ext-boundary">
+        <span class="ext-boundary-label">Ваш браузер</span>
+        <div class="ext-node"><i data-lucide="globe" aria-hidden="true"></i> Открытая вкладка с отзывами</div>
+        <div class="ext-node-arrow">↓</div>
+        <div class="ext-node"><i data-lucide="puzzle" aria-hidden="true"></i> Расширение читает и разбирает разметку</div>
+        <div class="ext-node-arrow">↓</div>
+        <div class="ext-node"><i data-lucide="hard-drive" aria-hidden="true"></i> Файл в папке «Загрузки»</div>
+      </div>
+      <div class="ext-blocked">
+        <div class="ext-blocked-row"><i data-lucide="x" aria-hidden="true"></i> Ни одного запроса на сторонний сервер</div>
+        <div class="ext-blocked-row"><i data-lucide="x" aria-hidden="true"></i> Ни регистрации, ни ключей, ни лимитов</div>
+        <div class="ext-blocked-row"><i data-lucide="x" aria-hidden="true"></i> Ни доступа к паролям и вкладкам за пределами площадок</div>
+        <div class="ext-blocked-row"><i data-lucide="x" aria-hidden="true"></i> Ни автоматического скачивания без вашего клика</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── УСТАНОВКА ── -->
   <section class="section" id="install">
     <div class="section-label">Установка</div>
-    <h2>Почему не Chrome Web Store</h2>
-    <p>Расширение не публикуется в официальном каталоге — устанавливается вручную за минуту, обновления придётся ставить так же руками (расширение само подскажет, когда вышла новая версия).</p>
+    <h2>Пять шагов и одна минута</h2>
+    <p>Расширение не&nbsp;публикуется в&nbsp;Chrome Web Store, поэтому ставится вручную из&nbsp;архива. Обновления ставятся так&nbsp;же — расширение само покажет уведомление, когда выйдет новая версия.</p>
     <ol class="ext-steps">
-      <li>Скачай и распакуй архив кнопкой выше.</li>
-      <li>Открой в Chrome страницу <code class="ext-copy-code" id="ext-chrome-url" title="Скопировать" role="button" tabindex="0">chrome://extensions</code> — по клику адрес скопируется в буфер, вставь его в адресную строку.</li>
-      <li>Включи переключатель «Режим разработчика» в правом верхнем углу.</li>
-      <li>Нажми «Загрузить распакованное расширение» и выбери распакованную папку.</li>
-      <li>Открой карточку компании на Яндекс.Картах или страницу отзывов продавца на Avito и нажми кнопку «Собрать отзывы» — она появляется прямо в интерфейсе, рядом с блоком отзывов.</li>
+      <li>Скачайте архив кнопкой выше и распакуйте его в&nbsp;папку, которую не&nbsp;будете удалять: Chrome читает расширение из&nbsp;неё при&nbsp;каждом запуске.</li>
+      <li>Откройте в&nbsp;браузере страницу <code class="ext-copy-code" id="ext-chrome-url" title="Скопировать" role="button" tabindex="0">chrome://extensions</code> — по&nbsp;клику адрес скопируется в&nbsp;буфер, вставьте его в&nbsp;адресную строку.</li>
+      <li>Включите переключатель «Режим разработчика» в&nbsp;правом верхнем углу.</li>
+      <li>Нажмите «Загрузить распакованное расширение» и выберите распакованную папку.</li>
+      <li>Откройте карточку организации, продавца, товара или ветку комментариев — кнопка сбора появится прямо в&nbsp;интерфейсе площадки.</li>
     </ol>
   </section>
 
+  <!-- ── ИСТОРИЯ ВЕРСИЙ ── -->
   <section class="section" id="changelog">
     <div class="section-label">История версий</div>
     <h2>Что нового</h2>
@@ -240,15 +689,166 @@
     </div>
   </section>
 
-  <footer class="tools-footer">
-    <span>© Trace Logo's — инструменты для файлов</span>
-    <span class="tools-footer-links">
-      <a href="../../">Все инструменты</a>
-      <a href="../../../">Главная</a>
-      <a href="../../../logos/">Логотипы</a>
-    </span>
-  </footer>
+  <!-- ── FAQ ── -->
+  <section class="section faq-section" id="faq">
+    <div class="section-label">Вопросы</div>
+    <h2>Частые вопросы</h2>
+
+    <details>
+      <summary>Куда уходят собранные отзывы?</summary>
+      <div class="details-body">
+        <p>Никуда. Расширение читает страницу, которая уже открыта в&nbsp;браузере, и собирает файл прямо на&nbsp;устройстве. Своего сервера у&nbsp;него нет, аккаунт и регистрация не&nbsp;нужны.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Почему расширения нет в&nbsp;Chrome Web Store?</summary>
+      <div class="details-body">
+        <p>Оно устанавливается вручную из&nbsp;архива за&nbsp;пару минут — порядок описан выше. Обновления ставятся так&nbsp;же руками, и расширение само показывает уведомление, когда выходит новая версия.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Сколько отзывов получится собрать за&nbsp;раз?</summary>
+      <div class="details-body">
+        <p>Ограничение одно — сколько отзывов площадка отдаёт в&nbsp;ленту. Расширение листает её до&nbsp;конца, поэтому на&nbsp;карточке с&nbsp;несколькими тысячами отзывов сбор просто идёт дольше. Прогресс и число собранного видны на&nbsp;карточке всё это время.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Почему выгрузка с&nbsp;Ozon бывает неполной?</summary>
+      <div class="details-body">
+        <p>Ozon отдаёт часть отзывов только авторизованным пользователям. В&nbsp;этом случае в&nbsp;шапке файла появляется пометка о&nbsp;неполной выгрузке, чтобы средний балл не&nbsp;выглядел итоговым. Войдите в&nbsp;аккаунт и запустите сбор заново.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Почему .md, а&nbsp;не&nbsp;Excel?</summary>
+      <div class="details-body">
+        <p>Markdown открывается любым текстовым редактором, читается глазами без конвертации и целиком помещается в&nbsp;окно нейросети, когда нужно свести пятьсот отзывов в&nbsp;несколько выводов. Поля лежат плоскими строками, поэтому таблица из&nbsp;такого файла собирается за&nbsp;пару минут.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Расширение работает в&nbsp;других браузерах?</summary>
+      <div class="details-body">
+        <p>Да, во&nbsp;всех браузерах на&nbsp;движке Chromium: <a href="../../../logos/search/chrome/">Chrome</a>, Edge, Яндекс.Браузер, Arc, Brave. Установка везде одинаковая: режим разработчика и загрузка распакованной папки.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Это законно — выгружать чужие отзывы?</summary>
+      <div class="details-body">
+        <p>Расширение сохраняет то, что площадка уже показала вам в&nbsp;браузере: публичные отзывы, открытые любому посетителю. Дальше действуют обычные правила — на&nbsp;чужой текст распространяется авторское право, поэтому публиковать отзывы целиком под своим именем нельзя, а&nbsp;анализировать, цитировать и сводить в&nbsp;отчёт можно.</p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ── ФИНАЛЬНЫЙ ПРИЗЫВ ── -->
+  <section class="section">
+    <div class="ext-cta">
+      <h2>Заберите все отзывы одним файлом</h2>
+      <p>Цену назначаете вы, включая ноль: файл отдаётся сразу, почту за&nbsp;бесплатную загрузку никто не&nbsp;спрашивает.</p>
+      <button type="button" class="btn btn-primary" data-pwyw="reviews-exporter">
+        <i data-lucide="download" style="width:15px;height:15px" aria-hidden="true"></i>
+        Скачать Reviews Exporter
+      </button>
+    </div>
+  </section>
+
 </div>
+
+<!-- FOOTER:START -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col footer-about">
+        <a class="brand" href="../../../" aria-label="Trace Logo's" style="margin-bottom:14px">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="../../../assets/brand/logo.svg" alt="" width="30" height="30">
+          </span>
+          <span class="brand-name">Trace Logo's</span>
+        </a>
+        <p data-i18n="footerAbout">Открытая библиотека логотипов и эмодзи. Бесплатно, без регистрации, с открытым исходным кодом.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCatalog">Каталог</h3>
+        <ul>
+          <li><a href="../../../logos/"><span data-i18n="footerAllLogos">Все логотипы</span></a></li>
+          <li><a href="../../../emoji/"><span data-i18n="footerEmoji">Эмодзи</span></a></li>
+          <li><a href="../../../blog/"><span data-i18n="footerBlog">Блог</span></a></li>
+          <li><a href="../../../logos/ai/"><span data-i18n="footerAI">Нейросети</span></a></li>
+          <li><a href="../../../logos/bank/"><span data-i18n="footerBanks">Банки</span></a></li>
+          <li><a href="../../../logos/market/"><span data-i18n="footerMarketplaces">Маркетплейсы</span></a></li>
+          <li><a href="../../../logos/social/"><span data-i18n="footerSocial">Соцсети</span></a></li>
+          <li><a href="../../../logos/flag/"><span data-i18n="footerFlags">Флаги</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCollections">Подборки</h3>
+        <ul>
+          <!-- COLLECTIONS:START -->
+          <li><a href="../../../collections/russian-banks/"><span data-i18n="footerColl_russian-banks">Логотипы банков</span></a></li>
+          <li><a href="../../../collections/neural-networks/"><span data-i18n="footerColl_neural-networks">Логотипы нейросетей</span></a></li>
+          <li><a href="../../../collections/marketplaces/"><span data-i18n="footerColl_marketplaces">Логотипы маркетплейсов</span></a></li>
+          <li><a href="../../../collections/payment-systems/"><span data-i18n="footerColl_payment-systems">Платёжные системы</span></a></li>
+          <li><a href="../../../collections/messengers-social/"><span data-i18n="footerColl_messengers-social">Соцсети и мессенджеры</span></a></li>
+          <li><a href="../../../collections/google-2026/"><span data-i18n="footerColl_google-2026">Иконки Google 2026</span></a></li>
+          <li><a href="../../../collections/delivery-taxi/"><span data-i18n="footerColl_delivery-taxi">Доставка и такси</span></a></li>
+          <li><a href="../../../collections/browsers/"><span data-i18n="footerColl_browsers">Браузеры</span></a></li>
+          <li><a href="../../../collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Облачные хранилища</span></a></li>
+          <li><a href="../../../collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Музыкальные сервисы</span></a></li>
+          <li><a href="../../../collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Видеостриминг</span></a></li>
+          <li><a href="../../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
+          <li><a href="../../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
+          <li><a href="../../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
+          <!-- COLLECTIONS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColTools">Инструменты</h3>
+        <ul>
+          <li><a href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerFigmaPlugin">Плагин для Figma</span></a></li>
+          <!-- TOOLS:START -->
+          <li><a href="../../../tools/compress-webp/"><span data-i18n="footerTool_compress-webp">Сжать изображение</span></a></li>
+          <li><a href="../../../tools/watermark/"><span data-i18n="footerTool_watermark">Убрать водяной знак</span></a></li>
+          <li><a href="../../../tools/merge-pdf/"><span data-i18n="footerTool_merge-pdf">Объединить PDF</span></a></li>
+          <li><a href="../../../tools/edit-image/"><span data-i18n="footerTool_edit-image">Обрезать и повернуть фото</span></a></li>
+          <li><a href="../../../tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">Экран вызова iOS</span></a></li>
+          <!-- TOOLS:END -->
+          <li><a href="../../../tools/extensions/reviews-exporter/"><span data-i18n="footerToolReviewsExporter">Reviews Exporter</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColDevelopers">Разработчикам</h3>
+        <ul>
+          <li><a href="../../../logos.json">API · logos.json</a></li>
+          <li><a href="../../../emoji.json">API · emoji.json</a></li>
+          <li><a href="../../../llms.txt">llms.txt</a></li>
+          <li><a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://status.trace-logos.ru" target="_blank" rel="noopener"><span data-i18n="footerServiceStatus">Статус сервисов</span></a></li>
+          <li><a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">@mansurov_rafael</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Trace Logo's Beta · <span data-i18n="footerCopyrightShort">Изображения могут быть защищены авторским правом их владельцев.</span></span>
+      <span class="footer-bottom-links">
+        <a href="../../../sitemap/"><span data-i18n="footerSitemap">Карта сайта</span></a>
+        <a href="../../../terms/"><span data-i18n="footerTerms">Правила использования</span></a>
+        <a href="../../../consent/"><span data-i18n="footerConsent">Обработка данных</span></a>
+        <a href="https://github.com/rafael-mansurov/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerOpenSource">Открытый исходный код</span></a>
+      </span>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
 
 <script src="https://cdn.jsdelivr.net/npm/lucide@0.462.0/dist/umd/lucide.min.js" integrity="sha384-8nT3SpButyvenpAdKYPJzXdSz3zidMGduMoaMvwjKnAWVv238n6P1mhveiJJQWrV" crossorigin="anonymous" defer onload="window.lucide&&window.lucide.createIcons()"></script>
 <script>
@@ -282,6 +882,53 @@
       }
     });
   })();
+
+  // Переключатель площадок. Панели уже в разметке — краулер и читатель без JS
+  // видят первую, остальные скрыты атрибутом hidden; скрипт только меняет,
+  // какая из них открыта.
+  (function () {
+    const tabs = [...document.querySelectorAll('.ext-plat[role="tab"]')];
+    if (!tabs.length) return;
+    const show = (tab) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        const pane = document.getElementById(t.getAttribute('aria-controls'));
+        if (pane) pane.hidden = !on;
+      });
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => show(tab));
+      tab.addEventListener('keydown', (e) => {
+        const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        const next = tabs[(i + step + tabs.length) % tabs.length];
+        next.focus();
+        show(next);
+      });
+    });
+  })();
+
+  // Подсветка блока .md-файла по наведению на пункт легенды.
+  (function () {
+    const legend = document.getElementById('ext-legend');
+    const code = document.getElementById('ext-md-code');
+    if (!legend || !code) return;
+    const lines = [...code.querySelectorAll('.ext-md-line')];
+    const light = (group) => {
+      lines.forEach((l) => l.classList.toggle('is-lit', !!group && l.dataset.g === group));
+      legend.querySelectorAll('.ext-legend-item').forEach((it) => {
+        it.classList.toggle('is-active', !!group && it.dataset.g === group);
+      });
+    };
+    legend.querySelectorAll('.ext-legend-item').forEach((item) => {
+      item.addEventListener('mouseenter', () => light(item.dataset.g));
+      item.addEventListener('focusin', () => light(item.dataset.g));
+    });
+    legend.addEventListener('mouseleave', () => light(null));
+  })();
 </script>
+<script type="module" src="../../../js/pwyw.min.js?v=20260910"></script>
 </body>
 </html>

@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотипы экосистемы Сбер · Trace Logo's</title>
@@ -96,50 +98,50 @@
           {
             "@type": "ListItem",
             "position": 3,
-            "name": "GigaChat",
-            "url": "https://trace-logos.ru/logos/ai/gigachat/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": "Самокат",
-            "url": "https://trace-logos.ru/logos/food/samokat/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 5,
-            "name": "Купер",
-            "url": "https://trace-logos.ru/logos/food/kuper/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 6,
-            "name": "Сбер ID",
-            "url": "https://trace-logos.ru/logos/store/sberid/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 7,
-            "name": "СберСпасибо",
-            "url": "https://trace-logos.ru/logos/store/sberspasibo/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 8,
             "name": "ЮMoney",
             "url": "https://trace-logos.ru/logos/pay/yumoney/"
           },
           {
             "@type": "ListItem",
-            "position": 9,
+            "position": 4,
             "name": "ЮКасса",
             "url": "https://trace-logos.ru/logos/pay/yukassa/"
           },
           {
             "@type": "ListItem",
-            "position": 10,
+            "position": 5,
             "name": "SberPay",
             "url": "https://trace-logos.ru/logos/pay/sberpay/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "name": "GigaChat",
+            "url": "https://trace-logos.ru/logos/ai/gigachat/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "name": "Сбер ID",
+            "url": "https://trace-logos.ru/logos/store/sberid/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 8,
+            "name": "СберСпасибо",
+            "url": "https://trace-logos.ru/logos/store/sberspasibo/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 9,
+            "name": "Самокат",
+            "url": "https://trace-logos.ru/logos/food/samokat/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 10,
+            "name": "Купер",
+            "url": "https://trace-logos.ru/logos/food/kuper/"
           },
           {
             "@type": "ListItem",
@@ -160,35 +162,23 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../../css/base.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/sidebar.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/search.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/cards.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/detail.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/support-btn.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/color.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/picker.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/modals.css?v=20260808">  <link rel="stylesheet" href="../../../css/filters.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/mobile.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/confetti.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-amongus.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-doodlejump.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-google.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-minicrewmate.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/microanim.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/category-seo.css?v=20260808">
+  <link rel="stylesheet" href="../../../css/catalog.bundle.css?v=20260910">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
-  <script src="../../../components/support-btn.min.js?v=20260808" defer></script>
-  <script src="../../../components/lang-switcher.min.js?v=20260808" defer></script>
-  <script src="../../../components/site-header.min.js?v=20260808" defer></script>
-  <script src="../../../components/section-nav.min.js?v=20260808" defer></script>
-  <script src="../../../components/copy-emoji-btn.min.js?v=20260808" defer></script>
-  <script src="../../../components/sidebar-contact.min.js?v=20260808" defer></script>
-  <script src="../../../components/help-modal.min.js?v=20260808" defer></script>
+  <script src="../../../components/support-btn.min.js?v=20260910" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="../../../components/site-chrome.min.js?v=20260910" defer></script>
+  <script src="../../../components/site-header.min.js?v=20260910" defer></script>
+  <script src="../../../components/section-nav.min.js?v=20260910" defer></script>
+  <script src="../../../components/copy-emoji-btn.min.js?v=20260910" defer></script>
+  <script src="../../../components/sidebar-contact.min.js?v=20260910" defer></script>
+  <script src="../../../components/help-modal.min.js?v=20260910" defer></script>
   <!-- см. комментарий в templates/partials/nav-header.html -->
-  <link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260808">
-  <script type="module" src="../../../components/donate-ticker.min.js?v=20260808"></script>
+  <link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260910">
+  <script type="module" src="../../../components/donate-ticker.min.js?v=20260910"></script>
   <script>
     window.__MANIFEST_BASE__ = '../../';
     window.__ASSET_SECTION__ = 'logos';
@@ -196,8 +186,8 @@
     window.__CAT_SLUG__ = '';
     window.__ECO_SLUG__ = 'sber';
   </script>
-  <script type="module" src="../../../js/main.min.js?v=20260808"></script>
-  <script type="module" src="../../../js/search-placeholder.min.js?v=20260808"></script>
+  <script type="module" src="../../../js/main.min.js?v=20260910"></script>
+  <script type="module" src="../../../js/search-placeholder.min.js?v=20260910"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -264,7 +254,7 @@
   <div class="center-body">
     <main>
 
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Логотипы экосистемы Сбер</h1><div class="grid"><a class="card" href="/logos/market/megamarket/"><div class="icon-wrap"><img src="/assets/logos/previews/mega-market.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Мегамаркет" title="Icon/Market/Megamarket"></div><div class="label">Мегамаркет</div><div class="card-path">Icon/Market/Megamarket</div></a><a class="card" href="/logos/bank/sber/"><div class="icon-wrap"><img src="/assets/logos/previews/sber.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Сбер" title="Icon/Bank/Sber"></div><div class="label">Сбер</div><div class="card-path">Icon/Bank/Sber</div></a><a class="card" href="/logos/ai/gigachat/"><div class="icon-wrap"><img src="/assets/logos/previews/giga-chat.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип GigaChat" title="Icon/AI/GigaChat"></div><div class="label">GigaChat</div><div class="card-path">Icon/AI/GigaChat</div></a><a class="card" href="/logos/food/samokat/"><div class="icon-wrap"><img src="/assets/logos/previews/samokat.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Самокат" title="Icon/Food/Samokat"></div><div class="label">Самокат</div><div class="card-path">Icon/Food/Samokat</div></a><a class="card" href="/logos/food/kuper/"><div class="icon-wrap"><img src="/assets/logos/previews/kuper.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Купер" title="Icon/Food/Kuper"></div><div class="label">Купер</div><div class="card-path">Icon/Food/Kuper</div></a><a class="card" href="/logos/store/sberid/"><div class="icon-wrap"><img src="/assets/logos/previews/sber-id.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Сбер ID" title="Icon/Store/SberID"></div><div class="label">Сбер ID</div><div class="card-path">Icon/Store/SberID</div></a><a class="card" href="/logos/store/sberspasibo/"><div class="icon-wrap"><img src="/assets/logos/previews/sber-spasibo.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип СберСпасибо" title="Icon/Store/SberSpasibo"></div><div class="label">СберСпасибо</div><div class="card-path">Icon/Store/SberSpasibo</div></a><a class="card" href="/logos/pay/yumoney/"><div class="icon-wrap"><img src="/assets/logos/previews/yoomoney.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип ЮMoney" title="Icon/Pay/YuMoney"></div><div class="label">ЮMoney</div><div class="card-path">Icon/Pay/YuMoney</div></a><a class="card" href="/logos/pay/yukassa/"><div class="icon-wrap"><img src="/assets/logos/previews/yookassa.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип ЮКасса" title="Icon/Pay/Yukassa"></div><div class="label">ЮКасса</div><div class="card-path">Icon/Pay/Yukassa</div></a><a class="card" href="/logos/pay/sberpay/"><div class="icon-wrap"><img src="/assets/logos/previews/sber-pay.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип SberPay" title="Icon/Pay/SberPay"></div><div class="label">SberPay</div><div class="card-path">Icon/Pay/SberPay</div></a><a class="card" href="/logos/b2b/sbertech/"><div class="icon-wrap"><img src="/assets/logos/previews/sber-tech.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип СберТех" title="Icon/B2B/SberTech"></div><div class="label">СберТех</div><div class="card-path">Icon/B2B/SberTech</div></a><a class="card" href="/logos/developers/domclick/"><div class="icon-wrap"><img src="/assets/logos/previews/domclick.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип ДомКлик" title="Icon/Developers/DomClick"></div><div class="label">ДомКлик</div><div class="card-path">Icon/Developers/DomClick</div></a></div></div></div></div>
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Логотипы экосистемы Сбер</h1><div class="grid"><a class="card" href="/logos/market/megamarket/"><div class="icon-wrap"><img src="/assets/logos/previews/mega-market.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Мегамаркет" title="Icon/Market/Megamarket"></div><div class="label">Мегамаркет</div><div class="card-path">Icon/Market/Megamarket</div></a><a class="card" href="/logos/bank/sber/"><div class="icon-wrap"><img src="/assets/logos/previews/sber.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Сбер" title="Icon/Bank/Sber"></div><div class="label">Сбер</div><div class="card-path">Icon/Bank/Sber</div></a><a class="card" href="/logos/pay/yumoney/"><div class="icon-wrap"><img src="/assets/logos/previews/yoomoney.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип ЮMoney" title="Icon/Pay/YuMoney"></div><div class="label">ЮMoney</div><div class="card-path">Icon/Pay/YuMoney</div></a><a class="card" href="/logos/pay/yukassa/"><div class="icon-wrap"><img src="/assets/logos/previews/yookassa.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип ЮКасса" title="Icon/Pay/Yukassa"></div><div class="label">ЮКасса</div><div class="card-path">Icon/Pay/Yukassa</div></a><a class="card" href="/logos/pay/sberpay/"><div class="icon-wrap"><img src="/assets/logos/previews/sber-pay.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип SberPay" title="Icon/Pay/SberPay"></div><div class="label">SberPay</div><div class="card-path">Icon/Pay/SberPay</div></a><a class="card" href="/logos/ai/gigachat/"><div class="icon-wrap"><img src="/assets/logos/previews/giga-chat.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип GigaChat" title="Icon/AI/GigaChat"></div><div class="label">GigaChat</div><div class="card-path">Icon/AI/GigaChat</div></a><a class="card" href="/logos/store/sberid/"><div class="icon-wrap"><img src="/assets/logos/previews/sber-id.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Сбер ID" title="Icon/Store/SberID"></div><div class="label">Сбер ID</div><div class="card-path">Icon/Store/SberID</div></a><a class="card" href="/logos/store/sberspasibo/"><div class="icon-wrap"><img src="/assets/logos/previews/sber-spasibo.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип СберСпасибо" title="Icon/Store/SberSpasibo"></div><div class="label">СберСпасибо</div><div class="card-path">Icon/Store/SberSpasibo</div></a><a class="card" href="/logos/food/samokat/"><div class="icon-wrap"><img src="/assets/logos/previews/samokat.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Самокат" title="Icon/Food/Samokat"></div><div class="label">Самокат</div><div class="card-path">Icon/Food/Samokat</div></a><a class="card" href="/logos/food/kuper/"><div class="icon-wrap"><img src="/assets/logos/previews/kuper.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Купер" title="Icon/Food/Kuper"></div><div class="label">Купер</div><div class="card-path">Icon/Food/Kuper</div></a><a class="card" href="/logos/b2b/sbertech/"><div class="icon-wrap"><img src="/assets/logos/previews/sber-tech.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип СберТех" title="Icon/B2B/SberTech"></div><div class="label">СберТех</div><div class="card-path">Icon/B2B/SberTech</div></a><a class="card" href="/logos/developers/domclick/"><div class="icon-wrap"><img src="/assets/logos/previews/domclick.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип ДомКлик" title="Icon/Developers/DomClick"></div><div class="label">ДомКлик</div><div class="card-path">Icon/Developers/DomClick</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Пока ничего нет — раздел в разработке</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<style>
+  /* ── Цвета — тёмная тема, токены сайта Trace Logo's (см. css/tokens.css в
+     корне репозитория: --bg/--bg-card/--accent/--text-N и т.д., значения
+     скопированы буквально, чтобы плагин читался как продолжение сайта, а
+     не как дефолтная светлая Figma-панель). Структура разметки/логики —
+     как в photo-editor/ui.html (обоснования [hidden] c !important, #root
+     вместо body для высоты и т.д. см. там, не дублируем). Светлая версия
+     этого же плагина (до 2026-08-16) держалась 1-в-1 с photo-editor —
+     photo-editor остался светлым, эта смена темы затронула только
+     clean-layers, по прямой просьбе пользователя. ── */
+  :root {
+    --accent: #8a6bff;
+    --accent-soft: rgba(138, 107, 255, 0.14);
+    --danger: #e5484d;
+    --danger-soft: rgba(229, 72, 77, 0.14);
+    --warn: #f5b544;
+    --warn-soft: rgba(245, 181, 68, 0.14);
+    --text: #e5e5e5;
+    --text-dim: #888;
+    --text-faint: #666;
+    --page-bg: #111111;
+    --card-bg: #161616;
+    --border: #222222;
+    --chip-bg: #252525; /* нейтральный тёмный чип для count-badge — var(--text) теперь светлый, для фона больше не годится */
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    padding: 16px;
+    background: var(--page-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    font-size: 12px;
+    color: var(--text);
+  }
+  button { font-family: inherit; border: none; background: none; padding: 0; margin: 0; }
+  #root { display: flex; flex-direction: column; }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  .screen { display: flex; flex-direction: column; gap: 18px; }
+
+  /* ── Экран 1: пустой стейт ──
+     1-в-1 с photo-editor — область действия здесь только явное выделение
+     (см. code.js), без него инструментам нечего делать, показывать их
+     задизейбленными смысла нет. */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 210px;
+    padding: 24px 16px;
+  }
+  .empty-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-faint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 2.8s ease-in-out infinite;
+  }
+  .empty-icon .icon { width: 24px; height: 24px; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .empty-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .empty-hint {
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    max-width: 250px;
+    margin-top: 4px;
+  }
+
+  /* ── Экран 2: есть выделение — карточка + инструменты ── */
+  .scope-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+  }
+  .scope-avatar {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .scope-avatar .icon { width: 17px; height: 17px; }
+  .count-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    /* var(--text) в светлой теме была тёмной — годилась и как фон бейджа
+       "инверсией". В тёмной теме var(--text) сам светлый, для фона больше
+       не подходит — отдельный нейтральный тёмный чип, светлее аватара и
+       card-bg, чтобы бейдж читался поверх обоих. */
+    background: var(--chip-bg);
+    color: #fff;
+    border: 2px solid var(--card-bg);
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .scope-body { min-width: 0; flex: 1; }
+  .scope-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .scope-meta { margin-top: 2px; font-size: 11px; color: var(--text-dim); }
+
+  .banner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .banner .icon { width: 14px; height: 14px; flex-shrink: 0; }
+  .banner.success { background: var(--accent-soft); color: var(--accent); }
+  .banner.warn { background: var(--warn-soft); color: var(--warn); }
+  .banner.error { background: var(--danger-soft); color: var(--danger); }
+
+  .section { display: flex; flex-direction: column; gap: 9px; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 1px 2px;
+  }
+
+  .tool-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s, transform 0.08s, opacity 0.12s;
+  }
+  .tool-row:hover:not(:disabled) { background: var(--accent-soft); border-color: transparent; }
+  .tool-row:active:not(:disabled) { transform: scale(0.98); }
+  .tool-row:disabled { cursor: progress; opacity: 0.45; }
+  /* Отдельно от "занято работой" (курсор progress выше) — "нечего делать":
+     нашли 0 удалимых слоёв/заливок, кнопка недоступна не потому что что-то
+     считается, а потому что действие бессмысленно. Выше по специфичности,
+     чем общий .tool-row:disabled — переопределяет курсор. */
+  .tool-row.is-unavailable:disabled { cursor: not-allowed; }
+  .tool-row-icon {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    transition: color 0.12s;
+  }
+  .tool-row-body { min-width: 0; flex: 1; }
+  .tool-row-title { display: block; font-size: 13px; font-weight: 600; color: var(--text); }
+  .tool-row-desc { display: block; font-size: 11px; color: var(--text-dim); margin-top: 2px; line-height: 1.4; }
+  .tool-row-chevron { color: var(--text-faint); flex-shrink: 0; display: flex; }
+  .tool-row-chevron .icon { width: 14px; height: 14px; }
+
+  .spinner {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    opacity: 0.9;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- Спрайт иконок (lucide, инлайн — networkAccess: none, никаких CDN) -->
+<svg style="display:none">
+  <!-- layers (lucide) — область действия и сам инструмент "скрытые слои" -->
+  <symbol id="icon-layers" viewBox="0 0 24 24">
+    <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.91a1 1 0 0 0 0-1.83Z"/>
+    <path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/>
+    <path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/>
+  </symbol>
+  <!-- eye-off (lucide) — инструмент "удалить скрытые слои" -->
+  <symbol id="icon-eye-off" viewBox="0 0 24 24">
+    <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/>
+    <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/>
+    <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/>
+    <line x1="2" x2="22" y1="2" y2="22"/>
+  </symbol>
+  <!-- paint-bucket (lucide) — инструмент "заливки/обводки/эффекты" -->
+  <symbol id="icon-paint-bucket" viewBox="0 0 24 24">
+    <path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/>
+    <path d="m5 2 5 5"/>
+    <path d="M2 13h15"/>
+    <path d="M22 20a2 2 0 1 1-4 0c0-1.6 1.7-2.4 2-4 .3 1.6 2 2.4 2 4Z"/>
+  </symbol>
+  <symbol id="icon-alert" viewBox="0 0 24 24">
+    <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+    <path d="M12 9v4"/>
+    <path d="M12 17h.01"/>
+  </symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24">
+    <path d="M20 6 9 17l-5-5"/>
+  </symbol>
+  <symbol id="icon-chevron" viewBox="0 0 24 24">
+    <path d="m9 18 6-6-6-6"/>
+  </symbol>
+</svg>
+
+<div id="root">
+
+<!-- ЭКРАН 1 — ничего не выделено -->
+<div class="screen" id="screenEmpty">
+  <div class="empty-state">
+    <span class="empty-icon"><svg class="icon"><use href="#icon-layers"/></svg></span>
+    <div>
+      <div class="empty-title">Ничего не выделено</div>
+      <div class="empty-hint">Выдели на холсте слои, в которых нужно найти скрытое — плагин работает только внутри выделения</div>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 2 — есть выделение, показываем его и инструменты -->
+<div class="screen" id="screenTools" hidden>
+
+  <div class="scope-card">
+    <span class="scope-avatar">
+      <svg class="icon"><use href="#icon-layers"/></svg>
+      <span class="count-badge" id="scopeCountBadge" hidden></span>
+    </span>
+    <div class="scope-body">
+      <div class="scope-title" id="scopeTitle">—</div>
+      <div class="scope-meta" id="scopeMeta"></div>
+    </div>
+  </div>
+
+  <div class="banner success" id="resultBanner" hidden>
+    <svg class="icon"><use id="resultIcon" href="#icon-check"/></svg>
+    <span id="resultText"></span>
+  </div>
+
+  <div class="banner error" id="errorBanner" hidden>
+    <svg class="icon"><use href="#icon-alert"/></svg>
+    <span id="errorText"></span>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Слои</div>
+    <button class="tool-row" id="cleanLayersBtn" type="button">
+      <span class="tool-row-icon">
+        <svg class="icon"><use href="#icon-eye-off"/></svg>
+        <span class="spinner" hidden></span>
+      </span>
+      <span class="tool-row-body">
+        <span class="tool-row-title">Удалить скрытые слои</span>
+        <span class="tool-row-desc">Любые скрытые узлы целиком: фреймы, группы, векторы, текст</span>
+      </span>
+      <span class="tool-row-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+    </button>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Заливки</div>
+    <button class="tool-row" id="cleanPaintsBtn" type="button">
+      <span class="tool-row-icon">
+        <svg class="icon"><use href="#icon-paint-bucket"/></svg>
+        <span class="spinner" hidden></span>
+      </span>
+      <span class="tool-row-body">
+        <span class="tool-row-title">Удалить скрытые заливки, обводки, эффекты</span>
+        <span class="tool-row-desc">Выключенные слои — и заливки под непрозрачным цветом сверху</span>
+      </span>
+      <span class="tool-row-chevron"><svg class="icon"><use href="#icon-chevron"/></svg></span>
+    </button>
+  </div>
+
+  <!-- Промо-блок Trace Logo's. Генерируется из
+       tools/figma-plugins/_shared/promo-banner.html скриптом
+       `node scripts/build-figma-promo.js` — руками между маркерами не
+       править, следующий прогон затрёт. Внутри screenTools: на пустом
+       экране инструментам нечего показывать, баннеру тоже незачем. -->
+  <!-- PROMO:START -->
+<style>
+  .tlp, .tlp * { box-sizing: border-box; }
+
+  .tlp {
+    position: relative;
+    overflow: hidden;
+    /* Без margin-top: во всех трёх плагинах .tlp — прямой ребёнок .screen
+       (display:flex; gap:18px), который уже расставляет 18px между всеми
+       своими детьми сам. Собственный margin-top:18px здесь эту дистанцию
+       ДУБЛИРОВАЛ (36px вместо 18px) — обнаружено 2026-08-19 замером в
+       headless Chrome (scripts нет, разовый puppeteer-скрипт): лишние
+       18px не были видны как явный зазор, потому что `html{overflow:
+       hidden}` в ui.html плагинов их просто обрезал, забирая высоту у
+       #screenTools — из-за этого блок правил (.rules, flex:1) был на
+       18px ниже, чем реально помещалось в отведённый бюджет высоты. */
+    padding: 14px;
+    border: 1px solid #242424;
+    border-radius: 14px;
+    background: #161616;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    color: #e6e6e6;
+  }
+  /* Мягкое фиолетовое свечение из правого верхнего угла — единственное
+     цветное пятно в блоке, задаёт «это про Trace Logo's», не отвлекая от
+     инструментов плагина выше. */
+  .tlp::before {
+    content: '';
+    position: absolute;
+    top: -70px;
+    right: -50px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(138, 107, 255, .20), rgba(138, 107, 255, 0) 68%);
+    pointer-events: none;
+  }
+  .tlp > * { position: relative; }
+
+  /* Шапка блока — она же кнопка перехода на сайт: кликается вся строка,
+     а не только стрелка. */
+  .tlp-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .tlp-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .06);
+  }
+  .tlp-body { min-width: 0; flex: 1; }
+  .tlp-title {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -.01em;
+  }
+  .tlp-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: #8f8f8f;
+  }
+  .tlp-arrow {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(138, 107, 255, .14);
+    color: #a68cff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .tlp-arrow svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .tlp-head:hover .tlp-arrow { background: rgba(138, 107, 255, .26); transform: translateX(2px); }
+  .tlp-head:hover .tlp-title { color: #a68cff; }
+
+  /* Полоска брендов — доказательство «в каталоге реально то, что ищут»:
+     шесть узнаваемых логотипов дешевле любого описания. Последний
+     элемент — счётчик остальных, чтобы полоска не читалась как «всего
+     шесть штук». */
+  .tlp-strip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .tlp-logo {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    object-fit: contain;
+  }
+  /* Перенос в 2 строки вместо обрезания многоточием — надёжнее: не
+     нужно бороться с тем, что text-overflow:ellipsis не срабатывает на
+     флекс-контейнере с текстом прямым потомком, и число не теряется
+     при нехватке ширины. .tlp-strip (родитель) — align-items:center,
+     поэтому при двух строках картинки-логотипы остаются по центру
+     высоты блока сами по себе. */
+  .tlp-more {
+    flex: 1;
+    min-width: 0;
+    padding: 0 8px;
+    color: #8f8f8f;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  .tlp-donate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 9px 12px;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    background: #1c1c1c;
+    color: #b0b0b0;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .tlp-donate svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+  .tlp-donate:hover { background: #232323; border-color: #3a3a3a; color: #e6e6e6; }
+  .tlp-donate:hover svg { fill: #ff6b81; }
+</style>
+
+<aside class="tlp">
+  <button class="tlp-head" type="button" data-tlp-url="https://trace-logos.ru/?utm_source=figma-clean-layers&amp;utm_medium=figma-plugin">
+    <img class="tlp-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF8xNjg5XzQ1MSkiPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzE2MTUxQSIvPgo8cGF0aCBkPSJNMjA4LjMgMTAxLjgwNEMyMDUuNjk0IDEwMC42MTUgMjAyLjg2NCAxMDAgMjAwIDEwMEMxOTcuMTM2IDEwMCAxOTQuMzA2IDEwMC42MTUgMTkxLjcgMTAxLjgwNEwxMDYgMTQwLjgwNEMxMDQuMjI2IDE0MS41ODYgMTAyLjcxNyAxNDIuODY4IDEwMS42NTggMTQ0LjQ5MkMxMDAuNTk5IDE0Ni4xMTcgMTAwLjAzNSAxNDguMDE0IDEwMC4wMzUgMTQ5Ljk1NEMxMDAuMDM1IDE1MS44OTMgMTAwLjU5OSAxNTMuNzkgMTAxLjY1OCAxNTUuNDE1QzEwMi43MTcgMTU3LjA0IDEwNC4yMjYgMTU4LjMyMSAxMDYgMTU5LjEwNEwxOTEuOCAxOTguMjA0QzE5NC40MDYgMTk5LjM5MiAxOTcuMjM2IDIwMC4wMDcgMjAwLjEgMjAwLjAwN0MyMDIuOTY0IDIwMC4wMDcgMjA1Ljc5NSAxOTkuMzkyIDIwOC40IDE5OC4yMDRMMjk0LjIgMTU5LjIwNEMyOTUuOTc1IDE1OC40MjEgMjk3LjQ4MyAxNTcuMTQgMjk4LjU0MyAxNTUuNTE1QzI5OS42MDIgMTUzLjg5IDMwMC4xNjYgMTUxLjk5MyAzMDAuMTY2IDE1MC4wNTRDMzAwLjE2NiAxNDguMTE0IDI5OS42MDIgMTQ2LjIxNyAyOTguNTQzIDE0NC41OTJDMjk3LjQ4MyAxNDIuOTY4IDI5NS45NzUgMTQxLjY4NiAyOTQuMiAxNDAuOTA0TDIwOC4zIDEwMS44MDRaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTEwMCAyMDBDOTkuOTk1MyAyMDEuOTEzIDEwMC41MzkgMjAzLjc4NyAxMDEuNTY3IDIwNS4zOTlDMTAyLjU5NSAyMDcuMDEyIDEwNC4wNjQgMjA4LjI5NyAxMDUuOCAyMDkuMUwxOTEuOCAyNDguMkMxOTQuMzkyIDI0OS4zNzQgMTk3LjIwNSAyNDkuOTgxIDIwMC4wNSAyNDkuOTgxQzIwMi44OTUgMjQ5Ljk4MSAyMDUuNzA4IDI0OS4zNzQgMjA4LjMgMjQ4LjJMMjk0LjEgMjA5LjJDMjk1Ljg3IDIwOC40MDQgMjk3LjM3IDIwNy4xMTEgMjk4LjQxOCAyMDUuNDc3QzI5OS40NjYgMjAzLjg0NCAzMDAuMDE1IDIwMS45NDEgMzAwIDIwMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMDAgMjUwQzk5Ljk5NTMgMjUxLjkxMyAxMDAuNTM5IDI1My43ODcgMTAxLjU2NyAyNTUuMzk5QzEwMi41OTUgMjU3LjAxMiAxMDQuMDY0IDI1OC4yOTcgMTA1LjggMjU5LjFMMTkxLjggMjk4LjJDMTk0LjM5MiAyOTkuMzc0IDE5Ny4yMDUgMjk5Ljk4MSAyMDAuMDUgMjk5Ljk4MUMyMDIuODk1IDI5OS45ODEgMjA1LjcwOCAyOTkuMzc0IDIwOC4zIDI5OC4yTDI5NC4xIDI1OS4yQzI5NS44NyAyNTguNDA0IDI5Ny4zNyAyNTcuMTExIDI5OC40MTggMjU1LjQ3N0MyOTkuNDY2IDI1My44NDQgMzAwLjAxNSAyNTEuOTQxIDMwMCAyNTAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8ZyBmaWx0ZXI9InVybCgjZmlsdGVyMF9mXzE2ODlfNDUxKSI+CjxwYXRoIGQ9Ik0zOTMgMTg2LjI5NEMxOTguMiAxMTEuMDk0IDEwMiAxODYuMjk0IC0zIDI1NS43OTRMLTI1NCA1NDkuMjk0TDE1Ni41IDU3Ni4yOTRMNTM4IDYyMi4yOTRDNTgwLjMzMyA1NzUuNjI3IDU4Ny44IDI2MS40OTQgMzkzIDE4Ni4yOTRaIiBmaWxsPSIjNTIyOUNEIi8+CjwvZz4KPGcgb3BhY2l0eT0iMC44IiBmaWx0ZXI9InVybCgjZmlsdGVyMV9mXzE2ODlfNDUxKSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOnBsdXMtbGlnaHRlciI+CjxwYXRoIGQ9Ik0zOTMgMzI2LjI5NEMyMTUuNSAzNjUuNzk0IDEwOCAyNjcuNzk0IC0yLjUgMzE5LjI5NEMtNy45MTc1NyAzMjEuODE5IC0yMTguNSA0NzIuNzk0IC0yMTguNSA0NzIuNzk0TC0zNjkgNTg1LjI5NEw1MjggNTk3Ljc5NFY0NTMuNzk0QzUyOCA0NTMuNzk0IDQxMC4zNjIgMzIyLjQzIDM5MyAzMjYuMjk0WiIgZmlsbD0id2hpdGUiLz4KPC9nPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2ZfMTY4OV80NTEiIHg9Ii00NTQiIHk9Ii00NSIgd2lkdGg9IjEyMTYuNTEiIGhlaWdodD0iODY3LjI5NCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPgo8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwIiByZXN1bHQ9IkJhY2tncm91bmRJbWFnZUZpeCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluPSJTb3VyY2VHcmFwaGljIiBpbjI9IkJhY2tncm91bmRJbWFnZUZpeCIgcmVzdWx0PSJzaGFwZSIvPgo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxMDAiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl8xNjg5XzQ1MSIvPgo8L2ZpbHRlcj4KPGZpbHRlciBpZD0iZmlsdGVyMV9mXzE2ODlfNDUxIiB4PSItNDk5IiB5PSIxNzMuOTU0IiB3aWR0aD0iMTE1NyIgaGVpZ2h0PSI1NTMuODQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNjUiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl8xNjg5XzQ1MSIvPgo8L2ZpbHRlcj4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xNjg5XzQ1MSI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPg==" alt="" />
+    <span class="tlp-body">
+      <span class="tlp-title">Trace Logo's</span>
+      <span class="tlp-sub">763 логотипа и 1918 эмодзи<br>в SVG и PNG</span>
+    </span>
+    <span class="tlp-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </button>
+
+  <div class="tlp-strip">
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzEwXzE2NDgpIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjRjkxMTU1Ii8+CjxwYXRoIGQ9Ik0zMiAzLjQ5MDIzQzMxLjI3OTQgNC40MzUyNCAzMC42MTc5IDUuNDI0NjkgMzAuMDk2NyA2LjQ5MTIxQzI5LjczMzUgNy4yMzg0IDI5LjQyMzUgNy45OTIyNSAyOS4wNTc2IDguNzM3M0MyOC4wNzc5IDEwLjc0NDggMjYuOTU2IDEyLjY4ODkgMjUuODU4NCAxNC42MjZDMjUuMDQ3OCAxNi4wNTUyIDI0LjE5MDcgMTcuNDI4MiAyMy4xNzQ4IDE4LjcwMTJDMjIuMjgwNSAxOS44MjExIDIxLjM4ODYgMjAuOTQzNSAyMC40Njk3IDIyLjA0MUMxOS44NTExIDIyLjc4MTIgMTkuMjI5OCAyMy41MTI5IDE4LjU1NDcgMjQuMTkyNEMxNy42IDI1LjE1NjYgMTYuNTAyNSAyNS45MzE0IDE1LjM4NjcgMjYuNjczOEMxNC4yMzE3IDI3LjQ0NTIgMTMuMDYzOCAyOC4xOTc3IDExLjg4NDggMjguOTMxNkMxMC41NDM3IDI5Ljc2OTEgOS4zOTYxMyAzMC44NzYxIDguMjc0NDEgMzJINi4zMzU5NEM4LjE5NDkxIDMwLjgzNDQgMTAuMDUxMyAyOS42NTMxIDExLjg0ODYgMjguMzkxNkMxMi45MjE2IDI3LjYzOTcgMTQuMDA5OCAyNi45Mjg4IDE0Ljk1OCAyNi4wMDc4QzE1LjU2NTEgMjUuNDIwNyAxNi4yMTI2IDI0Ljg3NjggMTYuODk1NSAyNC4zNzk5QzE3Ljg4NjQgMjMuNjU3OCAxOC43NjI3IDIyLjgyNjkgMTkuNTY2NCAyMS44ODA5QzIwLjQ1ODEgMjAuODMzNCAyMS4yNjkxIDE5LjY4MzYgMjEuOTkxMiAxOC40OThDMjIuNTY3IDE3LjU1MzMgMjMuMTE3OSAxNi41OTM2IDIzLjY0MzYgMTUuNjIwMUMyMy43OTkzIDE1LjMyNjggMjMuODk4NyAxNC45NjQ1IDIzLjk3MDcgMTQuNjMyOEMyNC4wMTMzIDE0LjQzNjEgMjMuODg5OSAxNC4zNTczIDIzLjcwNyAxNC40MjI5QzIzLjUzMTEgMTQuNDgzNiAyMy4zNDc4IDE0LjU0MjUgMjMuMTg5NSAxNC42NDY1QzIyLjQ2OTYgMTUuMTQwOCAyMS44MzggMTUuNzYxNyAyMS4yNTc4IDE2LjQyNzdDMjAuMTM3OSAxNy43MTI0IDE5LjA0OTMgMTkuMDE1MyAxNy45MTYgMjAuMjg2MUMxNi43NjY3IDIxLjU3NTIgMTUuNTc2NCAyMi44NTYzIDE0LjQwMDQgMjQuMTE4MkMxMy44NDA1IDI0LjcxOTEgMTMuMjg3NCAyNS4zMzk1IDEyLjY2ODkgMjUuODY1MkMxMC44MDMzIDI3LjQ1MjQgOC44MDA5NyAyOC43NjUyIDYuNTc5MSAyOS43NDcxQzUuMjE1NDMgMzAuMzQ5NyAzLjg4OTU1IDMxLjA3NzMgMi41NjY0MSAzMS43ODEyQzIuNDMwMjQgMzEuODUzOSAyLjI5NDMyIDMxLjkyNzEgMi4xNTgyIDMySDBWMjkuODUxNkMwLjA0ODA2NjMgMjkuODI1NCAwLjA5NjU0NTkgMjkuNzk5OSAwLjE0NDUzMSAyOS43NzM0QzMuMDgwOSAyOC4xNDM4IDUuOTY0MzYgMjYuNDIwMyA4Ljc5MDA0IDI0LjYwNTVDMTAuMDk2NyAyMy43NjU1IDExLjM5MTIgMjIuOTIzMyAxMi42NjIxIDIyLjAyMjVDMTQuMTg2MyAyMC45NDc4IDE1LjUxMjMgMTkuNjQzNCAxNi44MDU3IDE4LjI4NjFDMTguMzg4NiAxNi42MjQzIDE5Ljk0MSAxNC45MjgzIDIxLjQ4MzQgMTMuMjIxN0MyMi41MzU3IDEyLjA1NjMgMjMuNTYzNCAxMC44NDY1IDI0LjU4NzkgOS42NTIzNEMyNS4yNzQ4IDguODUyOTMgMjUuOTYxMSA4LjA2MDQ1IDI2LjYxODIgNy4yMzQzOEMyNy43MTczIDUuODQ1NiAyOC42NDUgNC4zNDE3NyAyOS42MDQ1IDIuODQ0NzNDMzAuMTk2NSAxLjkyMTUzIDMwLjgwMTYgMC45OTUyMTMgMzEuNDY3OCAwLjEzMjgxMkMzMS41MDE5IDAuMDg4NjM3NSAzMS41MzU0IDAuMDQ0MTEzNCAzMS41NjkzIDBIMzJWMy40OTAyM1oiIGZpbGw9IiMwMDVCRkYiLz4KPHBhdGggZD0iTTMyIDE3LjU2NjRDMzEuMjk1IDE4LjI5NjkgMzAuNjc2OCAxOS4xMDUgMzAuMDYwNSAxOS45MjI5QzI4Ljg5NzQgMjEuNDY0NyAyNy43NTMxIDIzLjA1MjIgMjYuNTk0NyAyNC41OTY3QzI2LjIzNTggMjUuMDc1MSAyNS44NDk2IDI1LjUyNSAyNS40Nzk1IDI1Ljk5MjJDMjQuOTEyNiAyNi43MDc4IDI0LjE1MjIgMjcuMTY2MSAyMy40MDcyIDI3LjYyMjFDMjEuMjY2NCAyOC45MzE5IDE5LjEzMjQgMzAuMjU3NCAxNi45Njk3IDMxLjUyODNDMTYuNjk0NCAzMS42ODk5IDE2LjQyNjggMzEuODQ2OSAxNi4xNjUgMzJIMTIuNTY0NUMxMi45NjkzIDMxLjc2MTggMTMuMzcxNCAzMS41MjM0IDEzLjc4NDIgMzEuMjg4MUMxNC42Mzc0IDMwLjgwMjggMTUuNTQ1MSAzMC4zODMyIDE2LjM1MzUgMjkuODI4MUMxNy45OTI0IDI4LjcwMTIgMTkuNjA3MyAyNy41MjAzIDIxLjE5MjQgMjYuMzE0NUMyMi42Nzc2IDI1LjE4MTIgMjQuMTExNyAyMy45NzgyIDI1LjU2NTQgMjIuODAxOEMyNi4wODAxIDIyLjM4NjMgMjYuNTE4IDIxLjkyODEgMjYuODU5NCAyMS4zMzRDMjcuNjc0MyAxOS45MTE2IDI4LjMxNDggMTguMzg5NCAyOC44NzcgMTYuODQyOEMyOS4zMjY1IDE1LjYwODIgMjkuNzI4NCAxNC4zNTAxIDMwLjE2NDEgMTMuMTA2NEMzMC42Njk2IDExLjY2NTEgMzEuMjk0NSAxMC4yODU1IDMyIDguOTUyMTVWMTcuNTY2NFoiIGZpbGw9IiMwMDVCRkYiLz4KPHBhdGggZD0iTTIzLjA5MjggMjkuNDg0NEMyMy4xOTg4IDI5LjQ1OTQgMjMuMzY4NiAyOS41NTAxIDIzLjQzODUgMjkuNjQwNkMyMy40OTIzIDI5LjcwOTkgMjMuNDU0MiAyOS44NzUyIDIzLjQwNjIgMjkuOTc2NkMyMy4zMzQzIDMwLjEzNjUgMjMuMjM5NiAzMC4yODE0IDIzLjExMzMgMzAuNDAxNEMyMi43NTQ5IDMwLjcyNyAyMi4zODQzIDMxLjAzOTUgMjIuMDAyOSAzMS4zMzc5QzIxLjcxOTIgMzEuNTU5MiAyMS40MzQ2IDMxLjc3OTggMjEuMTUwNCAzMkgxOC45MjM4QzIwLjA1ODUgMzEuMjQ0OCAyMS4xOTE2IDMwLjQ4OTIgMjIuMzM4OSAyOS43NTFDMjIuNTYwMSAyOS42MDg4IDIyLjgzNTkgMjkuNTM4NyAyMy4wOTI4IDI5LjQ4NDRaIiBmaWxsPSIjMDA1QkZGIi8+CjxwYXRoIGQ9Ik0zMiAyNS4xOTM0QzMxLjU0NzYgMjUuNjMgMzEuMTAyNCAyNi4wNzQ3IDMwLjc0NTEgMjYuNjA1NUMzMC4zNjk3IDI3LjE1ODkgMzAuMDM1OSAyNy43MjM1IDI5LjY2OCAyOC4yODEyQzI5LjE1NTUgMjkuMDU1NSAyOC41NjgyIDI5LjczOTQgMjcuODE2NCAzMC4yODEyQzI3LjQ5MzkgMzAuNTE2MyAyNy4yMjczIDMwLjg3MDUgMjYuOTYyOSAzMS4xODQ2QzI2Ljc1NjkgMzEuNDI4OCAyNi41ODA4IDMxLjY4MzcgMjYuNTA2OCAzMkgyMy43NjA3QzIzLjk2OTUgMzEuNjg2NyAyNC4xNzgzIDMxLjM3MzIgMjQuMzg0OCAzMS4wNjA1QzI1LjE4NjIgMjkuODM5OCAyNS45ODA4IDI4LjYxNDMgMjYuNzY4NiAyNy4zODQ4QzI3LjAwNzkgMjcuMDA3OCAyNy4xODQxIDI2LjU4NTggMjcuNDQ1MyAyNi4yMjg1QzI4LjA5NTQgMjUuMzQzNyAyOC44ODQzIDI0LjYwODIgMjkuNjk5MiAyMy44OTk0QzMwLjUwNTcgMjMuMTk4NiAzMS4yNzc3IDIyLjQ2OTIgMzIgMjEuNjgzNlYyNS4xOTM0WiIgZmlsbD0iIzAwNUJGRiIvPgo8cGF0aCBkPSJNMzIgMzJIMjkuODI5MUMyOS45OTg0IDMxLjkxNzQgMzAuMTY3MyAzMS44MzEyIDMwLjMzNCAzMS43MzgzQzMwLjkyNTkgMzEuNDA4NSAzMS40NzAyIDMwLjk4NSAzMiAzMC41MzcxVjMyWiIgZmlsbD0iIzAwNUJGRiIvPgo8cGF0aCBkPSJNMjYuNjI5OSAwQzI2LjI4MTkgMC42NjEzNDMgMjUuOTEzMyAxLjMxOTc5IDI1LjUwODggMS45Nzc1NEMyNC4yNzE2IDMuOTg5MDggMjIuOTk0MyA1Ljk1ODI4IDIxLjUyMjUgNy43ODkwNkMyMS4wMDc5IDguNDMwMDQgMjAuNDg2IDkuMDg3MzEgMTkuODI0MiA5LjU2ODM2QzE4Ljc4OCAxMC4zMjI1IDE3Ljc1MzMgMTEuMDQ5NCAxNi43MDggMTEuNzg4MUMxNS4yMjcgMTIuODMzNCAxMy43MzIyIDEzLjg3IDEyLjM2NDMgMTUuMDgwMUMxMS44MjQ1IDE1LjU1NjMgMTEuMzA5NSAxNi4wNjE4IDEwLjg4MjggMTYuNjYwMkMxMC41NTU0IDE3LjExODggMTAuMjMwNSAxNy41ODU4IDkuODQ4NjMgMTcuOTkyMkM4LjI5Nzc4IDE5LjY1NCA2LjU3NzUzIDIxLjExOTEgNC44NDM3NSAyMi41NTk2QzMuMjM2NzEgMjMuODg5MiAxLjYyMTA4IDI1LjIwOSAwIDI2LjUyMTVWMTguODE4NEMxLjk3MTM0IDE4LjEzOTIgMy45MzkzMyAxNy40OTU1IDUuOTE3OTcgMTYuODIwM0M2LjU5NzE4IDE2LjU4NzkgNy4yOTI1MSAxNi4zMzU1IDcuODcyMDcgMTUuODc1QzguODQ4MDcgMTUuMTAwNiA5LjgzNzQzIDE0LjM1NTIgMTAuNzc5MyAxMy41MzgxQzEzLjk2MjIgMTAuNzc2NSAxNy4xMzAzIDcuOTc3MDUgMjAuMzA0NyA1LjIwMjE1QzIwLjk4NjIgNC42MDY0NyAyMS42MjI3IDMuOTc1OSAyMi4xNTMzIDMuMjE5NzNDMjMuMjc2IDEuOTYwNzIgMjQuMTYwNSAwLjkyOTY4NyAyNC45MDQzIDBIMjYuNjI5OVoiIGZpbGw9IiMwMDVCRkYiLz4KPHBhdGggZD0iTTIwLjI0NDEgMEMxOS45ODk1IDAuMzk3MjIgMTkuNjc5MSAwLjc4OTMgMTkuMjgxMiAxLjE3MzgzQzE4LjIzODIgMi4xNzQ4NCAxNy4xNzI2IDMuMTUyMTUgMTYuMDg1IDQuMTA0NDlDMTUuMzc1NiA0LjczMDA4IDE0LjY0NDQgNS4zMDM2MiAxMy45MDYyIDUuODg4NjdDMTMuNDU2NiA2LjI0NTQ3IDEyLjk2NjEgNi41NTI5NyAxMi41MzUyIDYuOTMxNjRDMTEuODM1NyA3LjU1MDEzIDExLjIwMDkgOC4yNDc2NiAxMC40Nzg1IDguODMyMDNDOS4wNzY0OSA5Ljk2NTI4IDcuNjMzODcgMTEuMDY1NiA2LjE5ODI0IDEyLjE1MTRDNS44MTg1MSAxMi40MzgzIDUuMzkzNyAxMi42NjE2IDQuOTg3MyAxMi45MTAyQzQuODc4NTMgMTIuOTc3OCA0LjczODczIDEzLjAwNzIgNC42MTcxOSAxMy4wNDk4TDQuNTg1OTQgMTIuOTkxMkM0LjYyMjA2IDEyLjg5ODYgNC42NDAwOSAxMi43OTI4IDQuNjg5NDUgMTIuNzExOUM0Ljc5MjkyIDEyLjU0MjggNC45MjY2MSAxMi4zOTMyIDUuMDQzOTUgMTIuMjM1NEM2LjI0NzYxIDEwLjYwNDUgNy41MTg1MSA5LjAyNDM1IDguODU0NDkgNy41QzkuNzAzNTYgNi41MzE0NyAxMC41NTc0IDUuNTcyIDExLjUwNzggNC43MTM4N0MxMi4xMzU1IDQuMTQ3NTQgMTIuNzk5NSAzLjY0ODMzIDEzLjU1NTcgMy4yNzM0NEMxMy45MzAxIDMuMDg3NTQgMTQuMjc5OSAyLjg1NTY5IDE0LjU5NjcgMi41ODMwMUMxNS40MTcxIDEuODcwMzEgMTYuMDA4MSAwLjk3NjEzNiAxNi40OTggMEgyMC4yNDQxWiIgZmlsbD0iIzAwNUJGRiIvPgo8cGF0aCBkPSJNOS45NzU1OSAwQzkuNjM1NSAwLjM1ODA3NCA5LjMwNjk2IDAuNzI4MzY0IDkgMS4xMjAxMkM3LjQ3Nzk4IDMuMDU5NzEgNi4wNDY2NiA1LjA3NzcxIDQuNjM3NyA3LjEwNzQyQzMuNzQ4MSA4LjM4NzQyIDIuODQwMjUgOS42NTI1MSAxLjczMTQ1IDEwLjczMTRDMS4xNzIyMiAxMS4yNzc5IDAuNTk2ODgyIDExLjgwOTIgMCAxMi4zMTA1VjguMjEwOTRDMC41NDE0MTEgNy41NTgzIDEuMDY2NTEgNi44OTM0NCAxLjYzMjgxIDYuMjY1NjJDMy4wMjM2MSA0LjcyNjQ4IDQuNDMwODggMy4yMDIyMSA1Ljg1NDQ5IDEuNjkzMzZDNi4zODI0MyAxLjEzNDUyIDYuOTAwOTUgMC41NjkxNDYgNy40MTQwNiAwSDkuOTc1NTlaIiBmaWxsPSIjMDA1QkZGIi8+CjxwYXRoIGQ9Ik0zLjQwMjY5IDIxLjM5MzFDMi4xOTg5NSAyMS44ODkxIDAuODU1NDg3IDIxLjA4ODEgMC42NjgyODcgMTkuNzYwNkMwLjU0MTg4NyAxOC44NTcxIDEuMDM4NDIgMTcuOTY1NCAxLjg2MDI5IDE3LjYyNzNDMy4wNjQwMiAxNy4xMzAyIDQuNDA3NDkgMTcuOTMxMyA0LjU5NDY5IDE5LjI1OTNDNC43MTg5NSAyMC4xNjIyIDQuMjIxODkgMjEuMDU1IDMuNDAyNjkgMjEuMzkzMVpNMi4wMTM4OSAxNS43NDM1Qy0wLjMxMTQ0NiAxNi4xMjExIC0xLjY3NzMxIDE4LjU2ODYgLTAuODI4NzggMjAuODM5NUMtMC4yMDEwNDYgMjIuNTE5NSAxLjUyODU1IDIzLjU1MzcgMy4yNDkwOSAyMy4yNzM3QzUuNTc0NDIgMjIuODk4NyA2Ljk0MDgyIDIwLjQ0OTEgNi4wOTE3NSAxOC4xNzc3QzUuNDY0MDIgMTYuNDk3NyAzLjczNDQyIDE1LjQ2NjIgMi4wMTM4OSAxNS43NDQxTTcuMjExNzUgMTQuNDIwOUM2LjY4NzQ5IDE0LjU2MDYgNi40MDUzNSAxNS4xNTQ3IDYuNjYyNDIgMTUuNjc1OEM2Ljg1MDE1IDE2LjA1NzcgNy4yOTcwOSAxNi4yMzM3IDcuNzAzNDkgMTYuMTI1NEwxMC4wNTg3IDE1LjQ5NTVMNy43MTA0MiAyMS4zODYyQzcuNjMzNjIgMjEuNTgwMyA3LjgwNzQ5IDIxLjc4MDkgOC4wMDg1NSAyMS43MjdMMTMuNzU0NyAyMC4xODczQzE0LjE2MTEgMjAuMDc5IDE0LjQ1ODcgMTkuNzAxOSAxNC40Mjk5IDE5LjI3NzRDMTQuMzkxNSAxOC42OTcxIDEzLjg0OTYgMTguMzI0MyAxMy4zMjggMTguNDY0NkwxMC40NjAzIDE5LjIzMjZMMTIuODA2NCAxMy4zNDYyQzEyLjg4MzIgMTMuMTUyMSAxMi43MDcyIDEyLjk0ODkgMTIuNTA2MiAxMy4wMDI3TDcuMjExNzUgMTQuNDIwOVpNMzAuMTYgOC4yMzYzMkMyOS43ODk5IDguNDI2MTggMjkuNjE4MiA4Ljg2ODg1IDI5LjcyNjQgOS4yNzUyNUwzMC40OTE4IDEyLjEyN0wyNC45MTMxIDkuNjc4OTlDMjQuODY5MiA5LjY1OTU4IDI0LjgyMDcgOS42NTMxMSAyNC43NzMzIDkuNjYwMzVDMjQuNzI1OSA5LjY2NzU4IDI0LjY4MTUgOS42ODgyMiAyNC42NDU0IDkuNzE5ODNDMjQuNjA5MyA5Ljc1MTQzIDI0LjU4MyA5Ljc5MjY5IDI0LjU2OTYgOS44Mzg3NUMyNC41NTYyIDkuODg0OCAyNC41NTYyIDkuOTMzNzQgMjQuNTY5NiA5Ljk3OTc4TDI2LjE0NzggMTUuODY3OEMyNi4yNTYgMTYuMjc0MiAyNi42MjY3IDE2LjU3MjMgMjcuMDQxNiAxNi41NDk5QzI3LjE3MzYgMTYuNTQzNyAyNy4zMDI1IDE2LjUwOCAyNy40MTg3IDE2LjQ0NTNDMjcuNTM1IDE2LjM4MjYgMjcuNjM1NyAxNi4yOTQ1IDI3LjcxMzMgMTYuMTg3NkMyNy43OTA5IDE2LjA4MDcgMjcuODQzNSAxNS45NTc4IDI3Ljg2NzIgMTUuODI3OEMyNy44OTA5IDE1LjY5NzkgMjcuODg1MSAxNS41NjQyIDI3Ljg1MDIgMTUuNDM2OUwyNy4wOCAxMi41NjAxTDMyLjY1OTIgMTUuMDA4MUMzMi44NTM0IDE1LjA5MzQgMzMuMDU5MiAxNC45MTUzIDMzLjAwMjcgMTQuNzA3M0wzMS40MTk4IDguNzk2MzJDMzEuMzg2MSA4LjY2ODMxIDMxLjMyNDEgOC41NDk1MSAzMS4yMzg0IDguNDQ4NjlDMzEuMTUyNiA4LjM0Nzg3IDMxLjA0NTMgOC4yNjc2MSAzMC45MjQ0IDguMjEzODRDMzAuODAzNCA4LjE2MDA4IDMwLjY3MTkgOC4xMzQxOSAzMC41Mzk2IDguMTM4MDhDMzAuNDA3MyA4LjE0MTk3IDMwLjI3NzYgOC4xNzU1NCAzMC4xNiA4LjIzNjMyWk0xOC4xODI0IDExLjI5MTNDMTUuMzg3MiAxMi4wMzkgMTMuNTY0OCAxNC4yOTY2IDE0LjExMTUgMTYuMzMyOUMxNC42NTc2IDE4LjM2OTcgMTcuMzY0OCAxOS40MTI5IDIwLjE1NzkgMTguNjYzNUMyMi45NTA0IDE3LjkxMzcgMjQuNzc1IDE1LjY1ODIgMjQuMjI4OCAxMy42MjE0QzIzLjY4MjIgMTEuNTg1MSAyMC45NzU1IDEwLjU0MTkgMTguMTgyNCAxMS4yOTEzWk0xOC42NDI3IDEzLjAxMThDMjAuNTczNCAxMi40OTQ1IDIyLjI5MzkgMTMuMTQ1MSAyMi41NDE5IDE0LjA3MzFDMjIuNzkwNCAxNS4wMDExIDIxLjYyNzggMTYuNDI1NyAxOS42OTcxIDE2Ljk0MjVDMTcuNzY2NCAxNy40NTkzIDE2LjA0NjQgMTYuODA5MSAxNS43OTg0IDE1Ljg4MTFDMTUuNTQ3OCAxNC45NTE1IDE2LjcxMjYgMTMuNTI5MSAxOC42NDI3IDEzLjAxMThaIiBmaWxsPSJ3aGl0ZSIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzEwXzE2NDgiPgo8cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+" alt="Ozon" title="Ozon" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjAgNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNMCAwaDYwdjYwSDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTQzLjc3NiAyMS44MDRhOS4xNCA5LjE0IDAgMCAwLTUuMTUyIDEuNTh2LTkuMWgtNC4xMXYxNi43ODNjMCA1LjEwNyA0LjE1NSA5LjIxNiA5LjI0IDkuMjE2IDUuMDgzIDAgOS4yODUtNC4wODUgOS4yODUtOS4yNjNzLTQuMTEtOS4yMTYtOS4yNjMtOS4yMTZtLTE4LjY1IDEwLjQ1LTMuNzYtOS43OTdoLTIuODc4bC0zLjc4NCA5Ljc5Ni0zLjc4My05Ljc5Nkg2LjQ0bDYuNjE2IDE3LjIyNWgyLjg3OGwzLjk3LTEwLjI2IDMuOTkzIDEwLjI2aDIuODc4bDYuNTk0LTE3LjIyNUgyOC45MXptMTguNjMgMy45MjJhNS4xMTcgNS4xMTcgMCAwIDEtNS4xMzItNS4xMzFjMC0yLjkwMyAyLjIwNi01LjEwNyA1LjE1NC01LjEwN3M1LjE1NCAyLjI5OCA1LjE1NCA1LjEwN2MwIDIuODA4LTIuMzQ2IDUuMTMtNS4xNzcgNS4xMyIvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjU2LjUiIHgyPSIzLjUiIHkxPSIyLjUiIHkyPSI1Ni41IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iI0ZBNDdEOCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzczMDNGQSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==" alt="Wildberries" title="Wildberries" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTggMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjMTlBQTFFIiBkPSJNMCAwaDE4djE4SDB6Ii8+PHBhdGggZmlsbD0iI0ZGQjkxOSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMCAwaDE4djUuOTA2TDAgMy4wOTR6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBmaWxsPSIjODJENzE0IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Im0wIDE2LjAzIDE4LTIuODEyVjE4SDB6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Im0wIDIuNzM4IDYuMjgzLjk4MkE1LjA1IDUuMDUgMCAwIDEgOSAyLjk1M2MxLjM5IDAgMi42NC41MiAzLjU1IDEuNDM1cS4xNzIuMTczLjMyNS4zNjFMMTggNS41NXYuNzEybC00LjYwNS0uNzJjLjM0NS42NTkuNTI1IDEuMzkxLjUyNyAyLjEzNSAwIC45NjQtLjIxNiAxLjkyNS0uNjYyIDIuODlsLS4wMTMuMDMtLjE5LjQwNmgtLjQ0N2MtLjkyNSAwLTEuNTM4LjI3Ny0xLjk0Ljc2Ny0uMzE0LjM4NC0uNDk3LjkwNC0uNTU4IDEuNDdsLS4wMDIuMDE3LS4wMTIuMTMtLjAwOC4wNzdxLS4wMzUuMzgtLjA0Ny42NDJMMTggMTIuODYydi43MTJMMCAxNi4zODd2LS43MTJsNy45NjYtMS4yNDUtLjAwNC0uMTZ2LS4wNDRsLS4wMDItLjAyNHYtLjAzNWExNCAxNCAwIDAgMC0uMDU0LS43NDNsLS4wMDYtLjA1Ny0uMDEtLjA5OWMtLjA1Ni0uNTctLjIzNi0xLjA5NS0uNTUtMS40ODUtLjM5Ny0uNDk0LTEuMDA0LS43NzQtMS45MjItLjc4aC0uNDc2bC0uMTg5LS40MDZjLS40NTUtLjk3NS0uNjc1LTEuOTQ2LS42NzUtMi45MiAwLTEuMjI1LjQ5Ny0yLjQxIDEuMzcyLTMuMjlsLjA3Ni0uMDc0TDAgMy40NXoiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjxwYXRoIGZpbGw9IiMwMDczRkEiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTkgMy42NTZjMi41MTMgMCA0LjIxOCAxLjkzNCA0LjIxOCA0LjAyIDAgLjgzOC0uMTgyIDEuNzEtLjYwOSAyLjYyNC0yLjQ3MiAwLTMuMDgyIDEuNzctMy4xOTggMi44ODVsLS4wMDguMDc0cS0uMDU4LjU5Ny0uMDY3Ljk1N2wtLjY3LjEwNXYtLjAyMnEtLjAxNC0uNTMyLS4wNzItMS4wNmwtLjAwMi0uMDJjLS4xMDctMS4xMTMtLjcwNC0yLjkxOS0zLjIwMS0yLjkxOS0uNDI3LS45MTQtLjYxLTEuNzg2LS42MS0yLjYyM0M0Ljc4MSA1LjU5IDYuNDg3IDMuNjU2IDkgMy42NTYiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==" alt="2ГИС" title="2ГИС" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTggMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjRkMzRjFEIiBkPSJNMCAwaDE4djE4SDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTExLjgyMyAxNGgtMS43NDhWNS4zNTRoLS43NzhjLTEuNDI4IDAtMi4xNzYuNzEzLTIuMTc2IDEuNzc5IDAgMS4yMDkuNTE2IDEuNzY5IDEuNTgzIDIuNDgybC44NzkuNTkzLTIuNTI3IDMuNzloLTEuODhsMi4yNzUtMy4zODRDNi4xNDMgOS42OCA1LjQwNyA4Ljc2OSA1LjQwNyA3LjIzIDUuNDA3IDUuMzA4IDYuNzQ3IDQgOS4yODQgNGgyLjUyN3Y5Ljk5N2guMDEyeiIvPjwvc3ZnPg==" alt="Яндекс" title="Яндекс" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjI4IiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfMTEzMF81Nzg4KSIvPgo8cGF0aCBkPSJNMTMuOTkxMiA1QzE2LjA1MDYgNS4wMDExNCAxOC4wNDc2IDUuNzA4MzkgMTkuNjQ4NCA3LjAwMzkxTDE3Ljg5MjYgOC4yOTg4M0MxNi44NDE2IDcuNTc3MjkgMTUuNjE0OSA3LjE1OTYzIDE0LjM0NjcgNy4wODY5MUwxNC4zNDU3IDcuMTA4NEMxNC4yMjA5IDcuMDkwNDUgMTQuMTE1IDcuMDkwODIgMTMuOTkxMiA3LjA5MDgyQzEzLjA4MzcgNy4wOTA4NCAxMi4xODQ5IDcuMjY5OTEgMTEuMzQ3NyA3LjYyMDEyQzEwLjUxMDUgNy45NzAzMiA5Ljc1MTQ5IDguNDgzNzYgOS4xMTQyNiA5LjEyOTg4TDkuMTA4NCA5LjEyNDAyQzguNTA3NDUgOS43MjE5NSA4LjAyMTI1IDEwLjQyNjIgNy42NzQ4MSAxMS4yMDIxQzcuMzI5MzIgMTEuOTc2IDcuMTI4NjggMTIuODA2MSA3LjA4Mzk5IDEzLjY1MDRMNy4wOTI3NyAxMy42NTE0QzcuMDg2MyAxMy42OTYgNy4wODM3MSAxMy43Mzg2IDcuMDgxMDYgMTMuNzgwM0M3LjA3ODQ3IDEzLjg1NjEgNy4wNzUyOCAxMy45MzE5IDcuMDc1MiAxNC4wMDc4QzcuMDczODQgMTQuOTE0OCA3LjI1MjU4IDE1LjgxMjcgNy42MDI1NCAxNi42NDk0QzcuOTUyODQgMTcuNDg2OSA4LjQ2Njc2IDE4LjI0NjYgOS4xMTQyNiAxOC44ODI4TDkuMTA1NDcgMTguODkwNkM5LjcwMjkxIDE5LjQ5MzUgMTAuNDA3NyAxOS45ODEzIDExLjE4NDYgMjAuMzI4MUMxMS45NTkgMjAuNjczOCAxMi43ODk4IDIwLjg3MjkgMTMuNjM0OCAyMC45MTZMMTMuNjM1NyAyMC45MDYyQzEzLjY5IDIwLjkxNDEgMTMuNzQwOSAyMC45MTc0IDEzLjc5MSAyMC45MTk5QzEzLjg1NzYgMjAuOTIxOCAxMy45MjQ1IDIwLjkyNDkgMTMuOTkxMiAyMC45MjQ4QzE0Ljg5OTUgMjAuOTMwNCAxNS43OTk3IDIwLjc1MjggMTYuNjM3NyAyMC40MDIzQzE3LjQ3NTcgMjAuMDUxOCAxOC4yMzQzIDE5LjUzNTUgMTguODY4MiAxOC44ODQ4TDE4Ljg4MjggMTguODk5NEMxOS40ODkxIDE4LjMwMDQgMTkuOTc5OSAxNy41OTM1IDIwLjMyODEgMTYuODEzNUMyMC43MjIzIDE1LjkzMDQgMjAuOTI1NyAxNC45NzM5IDIwLjkyNDggMTQuMDA2OFYxMy44MjkxTDIyLjg1ODQgMTIuMzkyNkMyMi45NDY0IDEyLjkyNDUgMjMgMTMuNDU2OSAyMyAxNC4wMDY4QzIzLjAwMDQgMTUuMjYzNyAyMi43MzY4IDE2LjUwNjcgMjIuMjI2NiAxNy42NTUzQzIxLjcxNjQgMTguODAzOCAyMC45NzA5IDE5LjgzMjUgMjAuMDM4MSAyMC42NzQ4TDIwLjAyMzQgMjAuNjU4MkMxOS4yNTgyIDIxLjM1NDkgMTguMzc3OCAyMS45MTUgMTcuNDE5OSAyMi4zMTI1QzE2LjMzMjkgMjIuNzYzNiAxNS4xNjggMjIuOTk2NCAxMy45OTEyIDIyLjk5OFYyM0MxMi43MzQyIDIzLjAwMjMgMTEuNDkwNiAyMi43Mzk3IDEwLjM0MTggMjIuMjI5NUM5LjE5Mjk4IDIxLjcxOTIgOC4xNjQzIDIwLjk3MjMgNy4zMjMyNCAyMC4wMzgxTDcuMzMyMDMgMjAuMDI5M0M2LjYzOTI3IDE5LjI2NjMgNi4wODE0NSAxOC4zODk0IDUuNjg1NTUgMTcuNDM1NUM1LjIzMjE1IDE2LjM0MzEgNC45OTk0MiAxNS4xNzExIDUgMTMuOTg4M0M1IDEzLjk3NzMgNS4wMDA3OCAxMy45NjYyIDUuMDAwOTggMTMuOTU1MUM1LjAwNjA2IDEyLjcxNiA1LjI2NzMzIDExLjQ5MTIgNS43NzA1MSAxMC4zNTg0QzYuMjgwODYgOS4yMDk1MSA3LjAyNzU5IDguMTgwOTMgNy45NjE5MiA3LjMzOTg0TDcuOTY3NzcgNy4zNDY2OEM4LjczMDU1IDYuNjU0MzQgOS42MDggNi4wOTc4NSAxMC41NjE1IDUuNzAyMTVDMTEuNjQ4NyA1LjI1MTAyIDEyLjgxNDMgNS4wMTgyMyAxMy45OTEyIDUuMDE2NlY1WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTIxLjEyMDEgOC41MDk3N0MyMS41NDYxIDkuMDU5NzIgMjEuOTAwMiA5LjY2Mjg0IDIyLjIwMjIgMTAuMzAwOEwxNC4wMDg4IDE2LjM0ODZMMTAuNTY5MyAxNC4xODQ2VjExLjU5NTdMMTMuOTkxMiAxMy43NDEyTDIxLjEyMDEgOC41MDk3N1oiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfMTEzMF81Nzg4IiB4MT0iLTMuNjEwNDFlLTA3IiB5MT0iMjguNDc5IiB4Mj0iMzIuNDA0IiB5Mj0iNy4xOCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBvZmZzZXQ9IjAuMDciIHN0b3AtY29sb3I9IiNBM0NEMzkiLz4KPHN0b3Agb2Zmc2V0PSIwLjI2IiBzdG9wLWNvbG9yPSIjODFDNTVGIi8+CjxzdG9wIG9mZnNldD0iMC45MjIiIHN0b3AtY29sb3I9IiMwRkE4RTAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4=" alt="Сбер" title="Сбер" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjMDdGIiBkPSJNMCAwaDMydjMySDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE2LjggMjEuNjE1Yy02LjE1IDAtOS42NTYtNC4yMDgtOS44LTExLjIyaDMuMDkzYy4wOTkgNS4xNDIgMi4zNjQgNy4zMTggNC4xNjMgNy43Njd2LTcuNzY4aDIuOTA0djQuNDMzYzEuNzcxLS4xOSAzLjY0MS0yLjIxMiA0LjI3LTQuNDQyaDIuODk2YTguNTcgOC41NyAwIDAgMS0zLjkzOCA1LjYwMkE4Ljg3IDguODcgMCAwIDEgMjUgMjEuNjE1aC0zLjE5MmMtLjY4My0yLjEzMS0yLjM5MS0zLjc4NS00LjY0OC00LjAxdjQuMDFoLS4zNiIvPjwvc3ZnPg==" alt="ВКонтакте" title="ВКонтакте" />
+    <span class="tlp-more">и ещё<br>757 брендов</span>
+  </div>
+
+  <button class="tlp-donate" type="button" data-tlp-url="https://app.lava.top/products/6f3c8efd-27c3-41a8-acb1-559b83ea3b46/d9261f0e-d716-418c-b91d-764e83f1c01c?currency=RUB">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Поддержать автора
+  </button>
+</aside>
+
+<script>
+  // Открытие ссылок только через code.js: в iframe плагина ни
+  // <a target="_blank">, ни window.open() не работают — единственный
+  // рабочий путь наружу это figma.openExternal() на стороне плагина.
+  document.querySelectorAll('.tlp [data-tlp-url]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      parent.postMessage({ pluginMessage: { type: 'open-url', url: el.getAttribute('data-tlp-url') } }, '*');
+    });
+  });
+</script>
+<!-- PROMO:END -->
+
+</div><!-- /#screenTools -->
+
+</div><!-- /#root -->
+
+<script>
+(function () {
+  'use strict';
+
+  var root        = document.getElementById('root');
+  var screenEmpty = document.getElementById('screenEmpty');
+  var screenTools = document.getElementById('screenTools');
+
+  var scopeCountBadge = document.getElementById('scopeCountBadge');
+  var scopeTitle       = document.getElementById('scopeTitle');
+  var scopeMeta        = document.getElementById('scopeMeta');
+
+  var resultBanner = document.getElementById('resultBanner');
+  var resultIcon   = document.getElementById('resultIcon');
+  var resultText   = document.getElementById('resultText');
+  var errorBanner  = document.getElementById('errorBanner');
+  var errorText    = document.getElementById('errorText');
+
+  var cleanLayersBtn = document.getElementById('cleanLayersBtn');
+  var cleanPaintsBtn = document.getElementById('cleanPaintsBtn');
+
+  var busy = false;
+  var activeBtn = null;
+  var resultTimer = null;
+  var errorTimer = null;
+  // Доступность кнопок независима от busy: busy — "занято прямо сейчас",
+  // availability — "есть ли вообще что делать" (посчитано в renderScope).
+  // Обе учитываются при выставлении disabled — см. applyAvailability().
+  var layersAvailable = false;
+  var paintsAvailable = false;
+
+  function plural(n, one, few, many) {
+    var mod10 = n % 10;
+    var mod100 = n % 100;
+    if (mod10 === 1 && mod100 !== 11) return one;
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+    return many;
+  }
+
+  // См. фото-редактор — `el.hidden = bool` ненадёжно на SVGElement, через
+  // атрибут работает всегда.
+  function setHidden(el, value) {
+    if (!el) return;
+    if (value) el.setAttribute('hidden', ''); else el.removeAttribute('hidden');
+  }
+
+  var resizeScheduled = false;
+  function fitWindow() {
+    if (resizeScheduled) return;
+    resizeScheduled = true;
+    requestAnimationFrame(function () {
+      resizeScheduled = false;
+      var contentHeight = root.getBoundingClientRect().height;
+      var bodyPadding = 32; // padding: 16px сверху и снизу у body
+      parent.postMessage({
+        pluginMessage: { type: 'resize', height: Math.ceil(contentHeight + bodyPadding) },
+      }, '*');
+    });
+  }
+  if (window.ResizeObserver) {
+    new ResizeObserver(fitWindow).observe(root);
+  }
+  fitWindow();
+
+  function setBusy(value) {
+    busy = value;
+    applyAvailability();
+  }
+
+  // Единая точка, где реально выставляется disabled — учитывает и busy, и
+  // "нечего чистить". Кнопка "разблокируется" после busy только если для
+  // нового выделения она вообще доступна, а не безусловно всем rows сразу
+  // (как было раньше — тогда после клика кнопка "Слои" оживала, даже если
+  // чистить было уже нечего).
+  function applyAvailability() {
+    cleanLayersBtn.disabled = busy || !layersAvailable;
+    cleanPaintsBtn.disabled = busy || !paintsAvailable;
+    cleanLayersBtn.classList.toggle('is-unavailable', !busy && !layersAvailable);
+    cleanPaintsBtn.classList.toggle('is-unavailable', !busy && !paintsAvailable);
+  }
+
+  function setLoading(btn, loading) {
+    var icon = btn.querySelector('.icon');
+    var spinner = btn.querySelector('.spinner');
+    setHidden(icon, loading);
+    setHidden(spinner, !loading);
+  }
+
+  function showError(text) {
+    setHidden(resultBanner, true);
+    errorText.textContent = text;
+    setHidden(errorBanner, false);
+    clearTimeout(errorTimer);
+    errorTimer = setTimeout(function () { setHidden(errorBanner, true); fitWindow(); }, 4000);
+    fitWindow();
+  }
+
+  // warn: что-то реально пропущено (сейчас — только скрытые слои внутри
+  // инстанса, см. insideInstanceCount) — не ошибка, но стоит увидеть, что
+  // тронуто не всё. success: чисто.
+  function showResult(text, kind) {
+    setHidden(errorBanner, true);
+    resultBanner.classList.toggle('warn', kind === 'warn');
+    resultBanner.classList.toggle('success', kind !== 'warn');
+    resultIcon.setAttribute('href', kind === 'warn' ? '#icon-alert' : '#icon-check');
+    resultText.textContent = text;
+    setHidden(resultBanner, false);
+    clearTimeout(resultTimer);
+    resultTimer = setTimeout(function () { setHidden(resultBanner, true); fitWindow(); }, 6000);
+    fitWindow();
+  }
+
+  // Текст карточки — не "ищем", а прямой ответ, сколько уже нашлось: иначе
+  // непонятно, есть ли вообще смысл жать кнопку, пока её не нажал.
+  //
+  // Показываем только УДАЛИМОЕ число (hiddenLayers минус те, что внутри
+  // инстанса и не удалятся Plugin API) — не объясняем пользователю в
+  // карточке ПОЧЕМУ часть не в счёте, просто честно считаем то, что кнопка
+  // реально удалит. Причина ("внутри инстанса") — техническая деталь,
+  // видна в баннере результата после клика, если пригодится, а на этапе
+  // "сколько чистить" только шумит.
+  function countsText(hiddenLayers, hiddenPaints, insideInstance) {
+    var parts = [];
+    var removable = hiddenLayers - insideInstance;
+    if (removable > 0) {
+      parts.push(removable + ' ' + plural(removable, 'скрытый слой', 'скрытых слоя', 'скрытых слоёв'));
+    }
+    if (hiddenPaints > 0) {
+      parts.push(hiddenPaints + ' ' + plural(hiddenPaints, 'скрытая заливка', 'скрытые заливки', 'скрытых заливок'));
+    }
+    return parts.length ? parts.join(', ') : 'скрытого не найдено';
+  }
+  function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  function renderScope(count, hiddenLayers, hiddenPaints, insideInstance) {
+    var hasSelection = count > 0;
+    setHidden(screenEmpty, hasSelection);
+    setHidden(screenTools, !hasSelection);
+    if (!hasSelection) { fitWindow(); return; }
+
+    hiddenLayers = hiddenLayers || 0;
+    hiddenPaints = hiddenPaints || 0;
+    insideInstance = insideInstance || 0;
+    scopeCountBadge.textContent = count > 99 ? '99+' : String(count);
+    setHidden(scopeCountBadge, false);
+    scopeTitle.textContent = count + ' ' + plural(count, 'слой выделен', 'слоя выделено', 'слоёв выделено');
+    scopeMeta.textContent = capitalize(countsText(hiddenLayers, hiddenPaints, insideInstance));
+
+    layersAvailable = (hiddenLayers - insideInstance) > 0;
+    paintsAvailable = hiddenPaints > 0;
+    applyAvailability();
+
+    fitWindow();
+  }
+
+  renderScope(0, 0, 0, 0);
+
+  function finishActiveBtn() {
+    if (activeBtn) { setLoading(activeBtn, false); activeBtn = null; }
+    setBusy(false);
+  }
+
+  cleanLayersBtn.addEventListener('click', function () {
+    if (busy) return;
+    activeBtn = cleanLayersBtn;
+    setBusy(true);
+    setLoading(cleanLayersBtn, true);
+    parent.postMessage({ pluginMessage: { type: 'clean-hidden-layers' } }, '*');
+  });
+
+  cleanPaintsBtn.addEventListener('click', function () {
+    if (busy) return;
+    activeBtn = cleanPaintsBtn;
+    setBusy(true);
+    setLoading(cleanPaintsBtn, true);
+    parent.postMessage({ pluginMessage: { type: 'clean-hidden-paints' } }, '*');
+  });
+
+  window.onmessage = function (event) {
+    var msg = event.data.pluginMessage;
+    if (!msg) return;
+
+    if (msg.type === 'scope-info') {
+      renderScope(msg.selectionCount, msg.hiddenLayers, msg.hiddenPaints, msg.insideInstanceCount);
+      return;
+    }
+
+    if (msg.type === 'clean-layers-done') {
+      // insideInstanceCount технической причиной ("часть лежала внутри
+      // инстанса") пользователя не грузим — это уже отражено тем, что
+      // кнопка вообще была недоступна/доступна по факту удалимого числа
+      // (см. layersAvailable). В баннере — только результат и реальные
+      // ошибки, если были.
+      var parts = ['Удалено слоёв: ' + msg.removed];
+      if (msg.failed) parts.push('ошибок: ' + msg.failed);
+      showResult(parts.join(', '), msg.failed ? 'warn' : 'success');
+      finishActiveBtn();
+      return;
+    }
+
+    if (msg.type === 'clean-paints-done') {
+      var stats = msg.stats;
+      var total = stats.fills + stats.strokes + stats.effects;
+      showResult('Удалено скрытых слоёв: ' + total, 'success');
+      finishActiveBtn();
+      return;
+    }
+
+    if (msg.type === 'error') {
+      showError(msg.message);
+      finishActiveBtn();
+      return;
+    }
+  };
+
+})();
+</script>
+</body>
+</html>

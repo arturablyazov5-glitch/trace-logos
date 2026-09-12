@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как оптимизировать SVG — уменьшаем вес файла в 2‑10 раз без потери качества · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(284 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(324 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(14 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(74 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(284 70% 38%) 0%, hsl(74 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(163 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(203 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(253 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(313 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(163 70% 38%) 0%, hsl(313 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-16">16 июня 2026</time>
@@ -202,24 +206,24 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            12
+	            58
 	          </span>
         </div>
         <h1>Как оптимизировать SVG — уменьшаем вес файла в 2‑10 раз без потери качества</h1>
       </header>
       <div class="blog-body">
-        <p>SVG считается лёгким форматом и остаётся им ровно до момента экспорта. Откройте файл, выгруженный из <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> или <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>, текстовым редактором: там метаданные редактора, комментарии‑визитки, координаты с восемью знаками после запятой и стили, задублированные на каждой из сорока фигур. Ни одна из этих строк не влияет на картинку, но все они уезжают к пользователю. Типичный экспорт сжимается в 2‑10 раз, и на экране при этом не меняется ни один пиксель. Разберём, откуда берётся лишний вес и как его снимать так, чтобы это происходило само.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Прогоните файл через <strong>SVGO</strong> (или его веб‑версию <strong>SVGOMG</strong>) — это закроет 90% работы автоматически: уберёт метаданные, округлит координаты, схлопнет группы. Оставшиеся 10% ручные: проверить, нет ли внутри растра, невидимых фигур и текста, не переведённого в кривые. А чтобы шаг не забывался, его встраивают в сборку проекта.</p></div></div>
+        <p>SVG считается лёгким форматом и остаётся им ровно до момента экспорта. Откройте файл, выгруженный из <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> или <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, текстовым редактором: там метаданные редактора, комментарии‑визитки, координаты с восемью знаками после запятой и стили, задублированные на каждой из сорока фигур. Ни одна из этих строк не влияет на картинку, но все они уезжают к пользователю. Типичный экспорт сжимается в 2‑10 раз, и на экране при этом не меняется ни один пиксель. Разберём, откуда берётся лишний вес и как его снимать так, чтобы это происходило само.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Прогоните файл через <strong>SVGO</strong> (или его веб‑версию <strong>SVGOMG</strong>) — это закроет 90% работы автоматически: уберёт метаданные, округлит координаты, схлопнет группы. Оставшиеся 10% ручные: проверить, нет ли внутри растра, невидимых фигур и текста, не переведённого в кривые. А чтобы шаг не забывался, его встраивают в сборку проекта.</p></div></div>
       <h2 id="откуда-в-svg-лишний-вес">Откуда в SVG лишний вес</h2>
       <p>SVG — текстовый формат, и редакторы дописывают в него всё, что удобно им самим; браузеру эти строки без надобности. Мусор набирается пятью типовыми способами:</p>
       <ul>
-      <li><strong>Метаданные редактора:</strong> блок <code>&lt;metadata&gt;</code>, комментарий «Generator: Adobe <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>», приватные атрибуты <code>sodipodi:</code> и <code>inkscape:</code>. Браузеру они не нужны совсем.</li>
+      <li><strong>Метаданные редактора:</strong> блок <code>&lt;metadata&gt;</code>, комментарий «Generator: Adobe <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>», приватные атрибуты <code>sodipodi:</code> и <code>inkscape:</code>. Браузеру они не нужны совсем.</li>
       <li><strong>Избыточная точность:</strong> координата <code>12.000000381469727</code> вместо <code>12</code>. На глаз разницы ноль, в весе — ощутимо, когда точек тысячи.</li>
       <li><strong>Пустые группы и defs:</strong> остатки слоёв, неиспользуемые градиенты, обёртки без содержимого.</li>
       <li><strong>Задублированные стили:</strong> <code>fill=&quot;#21A038&quot;</code> на каждой из 40 фигур вместо одного объявления на группе.</li>
       <li><strong>Скрытые объекты:</strong> фигуры с <code>display:none</code> или за пределами viewBox — следы процесса рисования, уехавшие в экспорт.</li>
       </ul>
-      <p>Заметьте, что все пять пунктов механические: их можно найти и убрать по формальным признакам, без понимания картинки. Поэтому основную работу и делает автоматика.</p>
+      <p>Заметьте, что все пять пунктов механические: их можно найти и убрать по формальным признакам, без понимания картинки. Поэтому основную работу и делает автоматика.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -247,24 +251,24 @@ npx svgo -f ./icons -o ./dist  # папку целиком</code></pre>
       <p>Дефолтные настройки безопасны, менять их без нужды не стоит. Аккуратности требуют два тумблера:</p>
       <ul>
       <li><strong>Precision (точность округления).</strong> 2‑3 знака безопасны; единица заметно искажает мелкие детали и плавные кривые.</li>
-      <li><strong>Remove viewBox.</strong> Оставьте выключенным: без viewBox файл перестаёт масштабироваться через CSS. Это типичная причина жалобы «вставил SVG, а он не резинится».</li>
+      <li><strong>Remove viewBox.</strong> Оставьте выключенным: без viewBox файл перестаёт масштабироваться через CSS. Это типичная причина жалобы «вставил SVG, а он не резинится».</li>
       </ul>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Проверяйте результат глазами</span></div><div class="callout-body"><p>Откройте оптимизированный файл рядом с оригиналом и сравните мелкие детали и градиенты. Агрессивные настройки изредка ломают сложные файлы: маски, фильтры, узорные заливки. Сломалось — верните точность на шаг назад.</p></div></div>
       <h2 id="что-автоматика-сделать-не-может">Что автоматика сделать не может</h2>
-      <p>SVGO работает с формой записи, но не понимает содержимого. Поэтому остаются четыре случая, где нужен человек, и первый из них объясняет большинство историй «почему мой SVG весит 800 КБ».</p>
+      <p>SVGO работает с формой записи, но не понимает содержимого. Поэтому остаются четыре случая, где нужен человек, и первый из них объясняет большинство историй «почему мой SVG весит 800 КБ».</p>
       <h3>Найдите растр внутри</h3>
-      <p>Самая частая причина огромного веса: внутри вектора лежит растровая картинка в base64 (<code>&lt;image href=&quot;data:image/png…</code>). Расширение у файла векторное, содержимое растровое, со всеми ограничениями пикселей. Ищите тег <code>&lt;image&gt;</code>: если он есть, файл нужно перерисовывать в честный вектор, и никакая оптимизация тут не поможет.</p>
-      <p>Проверка занимает секунды: откройте файл текстовым редактором и поищите строку <code>data:image</code>. Нашлась — внутри растр, и на него приходится почти весь вес. Тот же признак виден косвенно, по размеру: SVG на 800 КБ при простой картинке физически не может состоять из одних координат, столько занимает только закодированная в base64 картинка.</p>
+      <p>Самая частая причина огромного веса: внутри вектора лежит растровая картинка в base64 (<code>&lt;image href=&quot;data:image/png…</code>). Расширение у файла векторное, содержимое растровое, со всеми ограничениями пикселей. Ищите тег <code>&lt;image&gt;</code>: если он есть, файл нужно перерисовывать в честный вектор, и никакая оптимизация тут не поможет.</p>
+      <p>Проверка занимает секунды: откройте файл текстовым редактором и поищите строку <code>data:image</code>. Нашлась — внутри растр, и на него приходится почти весь вес. Тот же признак виден косвенно, по размеру: SVG на 800 КБ при простой картинке физически не может состоять из одних координат, столько занимает только закодированная в base64 картинка.</p>
       <h3>Решите вопрос с текстом</h3>
       <p>Тег <code>&lt;text&gt;</code> рендерится шрифтом зрителя: шрифта нет — надпись перескочит на другой и поедет. Для логотипов текст переводят в кривые (Outline или Flatten в редакторе). У этого есть цена: каждая буква‑кривая занимает десятки точек, и длинные надписи раздувают файл. Отсюда правило: логотипы и иконки — в кривые, схемы с десятками подписей — оставляйте <code>&lt;text&gt;</code> с системными шрифтами.</p>
       <h3>Упростите пути</h3>
-      <p>В <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>: выделить фигуру → Flatten, затем удалить лишние точки. В Inkscape: Path → Simplify (Ctrl+L) уменьшает количество узлов с настраиваемой агрессивностью. Приём особенно выручает после автотрассировки растра, которая любит ставить точку на каждом пикселе.</p>
+      <p>В <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: выделить фигуру → Flatten, затем удалить лишние точки. В Inkscape: Path → Simplify (Ctrl+L) уменьшает количество узлов с настраиваемой агрессивностью. Приём особенно выручает после автотрассировки растра, которая любит ставить точку на каждом пикселе.</p>
       <h3>Объедините одинаковые заливки</h3>
       <p>Сорок фигур одного цвета? Сгруппируйте и задайте <code>fill</code> один раз на группе. Заодно упростится перекраска — та самая, которой пользуется наш <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">редактор цвета логотипов</a>.</p>
-      <p>Тот же приём чинит обратную ситуацию, когда один цвет записан в файле тремя способами сразу: <code>fill=&quot;#FF0000&quot;</code>, <code>fill=&quot;red&quot;</code> и <code>style=&quot;fill:rgb(255,0,0)&quot;</code>. Браузер нарисует одинаковые фигуры, а поиск по коду найдёт одно написание из трёх, и перекраска заменой строки сработает наполовину. После нормализации у цвета остаётся одна запись на весь файл.</p>
+      <p>Тот же приём чинит обратную ситуацию, когда один цвет записан в файле тремя способами сразу: <code>fill=&quot;#FF0000&quot;</code>, <code>fill=&quot;red&quot;</code> и <code>style=&quot;fill:rgb(255,0,0)&quot;</code>. Браузер нарисует одинаковые фигуры, а поиск по коду найдёт одно написание из трёх, и перекраска заменой строки сработает наполовину. После нормализации у цвета остаётся одна запись на весь файл.</p>
       <h2 id="сколько-это-даёт-в-килобайтах">Сколько это даёт в килобайтах</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Файл</th><th>До</th><th>После SVGO</th><th>Ручная доводка</th></tr></thead><tbody><tr><td>Иконка из <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a></td><td>4 КБ</td><td>1,5 КБ</td><td>1 КБ</td></tr><tr><td>Логотип из <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a></td><td>25 КБ</td><td>8 КБ</td><td>5 КБ</td></tr><tr><td>Автотрассировка PNG</td><td>300 КБ</td><td>150 КБ</td><td>перерисовка → 10 КБ</td></tr></tbody></table></div>
-      <p>Килобайты кажутся мелочью ровно до тех пор, пока иконок не станет тридцать на страницу: там разница между «моментально» и «заметно грузится» становится осязаемой, особенно на мобильных. А инлайн‑SVG входит прямо в HTML, поэтому его вес добавляется к весу каждой страницы.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Файл</th><th>До</th><th>После SVGO</th><th>Ручная доводка</th></tr></thead><tbody><tr><td>Иконка из <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>4 КБ</td><td>1,5 КБ</td><td>1 КБ</td></tr><tr><td>Логотип из <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>25 КБ</td><td>8 КБ</td><td>5 КБ</td></tr><tr><td>Автотрассировка PNG</td><td>300 КБ</td><td>150 КБ</td><td>перерисовка → 10 КБ</td></tr></tbody></table></div>
+      <p>Килобайты кажутся мелочью ровно до тех пор, пока иконок не станет тридцать на страницу: там разница между «моментально» и «заметно грузится» становится осязаемой, особенно на мобильных. А инлайн‑SVG входит прямо в HTML, поэтому его вес добавляется к весу каждой страницы.</p>
       <h2 id="разбор-файла-что-именно-выкидывается">Разбор файла: что именно выкидывается</h2>
       <p>Чтобы цифры из таблицы перестали быть абстракцией, посмотрим на типичный экспорт иконки построчно:</p>
       <div class="blog-code">
@@ -300,14 +304,14 @@ npx svgo -f ./icons -o ./dist  # папку целиком</code></pre>
       </div>
       <p>Каждая строка мусора безобидна по отдельности. Но их сотни в каждом файле, а файлов десятки — так 4 КБ и превращаются в 1 КБ без единого видимого изменения.</p>
       <h2 id="чем-проверить-что-стало-лучше">Чем проверить, что стало лучше</h2>
-      <p>Вес файла в проводнике — грубая мера: он ничего не говорит о том, что стало с картинкой и сколько работы осталось браузеру. Вопрос закрывают три проверки.</p>
-      <p>Первая — сравнение глазами при масштабе 400%: там видно, как округление до одного знака съедает скругления и стыки кривых. Вторая — число узлов: откройте оптимизированный файл в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> и посмотрите на количество точек в контуре. После автотрассировки их бывает несколько тысяч на простой знак, и тогда помогает перерисовка, а настройки SVGO уже ничего не изменят. Третья — вкладка Network в DevTools, где колонка Size показывает исходный размер файла и переданный по сети.</p>
-      <p>Отдельно стоит смотреть на инлайн‑иконки. Каждый <code>&lt;path&gt;</code> внутри HTML становится узлом DOM, поэтому набор из тридцати сложных иконок утяжеляет и загрузку, и отрисовку страницы.</p>
+      <p>Вес файла в проводнике — грубая мера: он ничего не говорит о том, что стало с картинкой и сколько работы осталось браузеру. Вопрос закрывают три проверки.</p>
+      <p>Первая — сравнение глазами при масштабе 400%: там видно, как округление до одного знака съедает скругления и стыки кривых. Вторая — число узлов: откройте оптимизированный файл в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и посмотрите на количество точек в контуре. После автотрассировки их бывает несколько тысяч на простой знак, и тогда помогает перерисовка, а настройки SVGO уже ничего не изменят. Третья — вкладка Network в DevTools, где колонка Size показывает исходный размер файла и переданный по сети.</p>
+      <p>Отдельно стоит смотреть на инлайн‑иконки. Каждый <code>&lt;path&gt;</code> внутри HTML становится узлом DOM, поэтому набор из тридцати сложных иконок утяжеляет и загрузку, и отрисовку страницы.</p>
       <h2 id="gzip-и-brotli-последний-множитель">Gzip и Brotli: последний множитель</h2>
-      <p>Раз SVG остаётся текстом, он отлично сжимается на лету. Правильно настроенный сервер отдаёт файлы со сжатием Brotli или Gzip — это минус 60‑80% к передаваемому размеру поверх всей оптимизации выше. Проверить можно в DevTools → Network → колонка Size: если transferred сильно меньше size, сжатие работает.</p>
-      <p>Порядок здесь важен: сжатие срабатывает поверх оптимизации. Прогнанный через SVGO файл после Brotli весит меньше, чем неоптимизированный после того же Brotli, потому что повторяющиеся метаданные архиватор сжимает хорошо, но всё же не до нуля.</p>
+      <p>Раз SVG остаётся текстом, он отлично сжимается на лету. Правильно настроенный сервер отдаёт файлы со сжатием Brotli или Gzip — это минус 60‑80% к передаваемому размеру поверх всей оптимизации выше. Проверить можно в DevTools → Network → колонка Size: если transferred сильно меньше size, сжатие работает.</p>
+      <p>Порядок здесь важен: сжатие срабатывает поверх оптимизации. Прогнанный через SVGO файл после Brotli весит меньше, чем неоптимизированный после того же Brotli, потому что повторяющиеся метаданные архиватор сжимает хорошо, но всё же не до нуля.</p>
       <h2 id="как-сделать-чтобы-оптимизация-происходила-сама">Как сделать, чтобы оптимизация происходила сама</h2>
-      <p>Всё описанное выше работает для разового файла. В проекте с десятками иконок ручной прогон рано или поздно забудут, поэтому шаг встраивают в процесс:</p>
+      <p>Всё описанное выше работает для разового файла. В проекте с десятками иконок ручной прогон рано или поздно забудут, поэтому шаг встраивают в процесс:</p>
       <ul>
       <li><strong>Конфиг в репозитории.</strong> Файл <code>svgo.config.js</code> фиксирует настройки для всей команды — например, выключённый removeViewBox и точность 3:</li>
       </ul>
@@ -329,7 +333,7 @@ npx svgo -f ./icons -o ./dist  # папку целиком</code></pre>
       <ul>
       <li><strong>Хук или CI‑шаг:</strong> прогон svgo по изменённым файлам на pre‑commit — тогда неоптимизированный SVG физически не попадёт в репозиторий.</li>
       <li><strong>Сборщики:</strong> для Vite и Webpack есть плагины, оптимизирующие SVG на лету при импорте; в React‑проектах SVGR совмещает оптимизацию с превращением иконок в компоненты.</li>
-      <li><strong><a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>-плагины</strong> (SVGO Compressor и аналоги) оптимизируют прямо при экспорте — удобно дизайнерам, которые отдают файлы разработчикам.</li>
+      <li><strong><a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>-плагины</strong> (SVGO Compressor и аналоги) оптимизируют прямо при экспорте — удобно дизайнерам, которые отдают файлы разработчикам.</li>
       </ul>
       <p>Принцип один: оптимизация должна случаться автоматически. «Помнить прогнать через SVGOMG» на дистанции перестаёт работать у любой команды.</p>
       <h2 id="когда-оптимизация-не-нужна">Когда оптимизация не нужна</h2>
@@ -337,7 +341,7 @@ npx svgo -f ./icons -o ./dist  # папку целиком</code></pre>
       <ul>
       <li><strong>Единственный логотип на статичном лендинге</strong> — разница в 3 КБ не изменит ни одной измеримой метрики.</li>
       <li><strong>SVG для печати или передачи дизайнеру</strong> — там важна структура слоёв, которую агрессивная оптимизация схлопывает. Оптимизируйте копию для веба, исходник храните как есть.</li>
-      <li><strong>Файлы, которые ещё будут редактироваться</strong> — оптимизация необратимо упрощает структуру: имена слоёв, группы и направляющие исчезают.</li>
+      <li><strong>Файлы, которые ещё будут редактироваться</strong> — оптимизация необратимо упрощает структуру: имена слоёв, группы и направляющие исчезают.</li>
       </ul>
       <p>Все три исключения сводятся к одному правилу: оптимизированный SVG — продакшен‑артефакт, как минифицированный JS. Исходник живёт отдельно.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
@@ -350,15 +354,16 @@ window.yaContextCb.push(() => {
     })
 })
 </script></div>
-      <h2 id="если-коротко">Если коротко</h2>
-      <p>Лишний вес в SVG возникает механически, на экспорте, поэтому и снимается механически: SVGO с дефолтами — обязательный шаг для любого файла, уходящего на сайт. Руками остаётся проверить четыре вещи: нет ли внутри растра, что с текстом, не переусложнены ли пути после трассировки, не задублированы ли заливки. И не отключайте viewBox. А главное — вынесите прогон в pre‑commit или сборщик: шаг, который надо помнить, рано или поздно забудут.</p>
+      <h2 id="если-коротко">Если коротко</h2>
+      <p>Лишний вес в SVG возникает механически, на экспорте, поэтому и снимается механически: SVGO с дефолтами — обязательный шаг для любого файла, уходящего на сайт. Руками остаётся проверить четыре вещи: нет ли внутри растра, что с текстом, не переусложнены ли пути после трассировки, не задублированы ли заливки. И не отключайте viewBox. А главное — вынесите прогон в pre‑commit или сборщик: шаг, который надо помнить, рано или поздно забудут.</p>
       <p>Все SVG в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> уже оптимизированы и нормализованы: скачивайте или копируйте код без метаданных, мусора и сюрпризов внутри.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../kak-vstavit-svg-na-sajt/" data-date="2026-06-25" data-views="1">
+          <a class="blog-card" href="../kak-vstavit-svg-na-sajt/" data-date="2026-06-25" data-views="30">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -371,7 +376,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            30
           </div>
           </div>
           <div class="blog-card-title">Как вставить SVG на сайт — img, инлайн, background и что выбрать</div>
@@ -379,7 +384,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-favicon/" data-date="2026-06-18" data-views="1">
+      <a class="blog-card" href="../kak-sdelat-favicon/" data-date="2026-06-18" data-views="48">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -392,7 +397,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            48
           </div>
           </div>
           <div class="blog-card-title">Фавикон для сайта в 2026 году — форматы, размеры и правильный HTML</div>
@@ -400,7 +405,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-umenshit-ves-png/" data-date="2026-08-12" data-views="0">
+      <a class="blog-card" href="../kak-umenshit-ves-png/" data-date="2026-08-12" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -413,7 +418,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            3
           </div>
           </div>
           <div class="blog-card-title">Как уменьшить вес PNG без потери качества — все способы</div>
@@ -421,7 +426,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../ekologichnyj-veb-dizajn/" data-date="2026-07-26" data-views="2">
+      <a class="blog-card" href="../ekologichnyj-veb-dizajn/" data-date="2026-07-26" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -434,7 +439,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            6
           </div>
           </div>
           <div class="blog-card-title">Экологичный веб‑дизайн — почему вес логотипа важен в 2026</div>
@@ -442,44 +447,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-fitnes-prilozhenij/" data-date="2026-08-19" data-views="0">
+      <a class="blog-card" href="../novye-emodzi-2026/" data-date="2026-08-06" data-views="39">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Здоровье</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Unicode</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" /><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5" /><rect x="3" y="7" width="18" height="4" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>06.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            39
           </div>
           </div>
-          <div class="blog-card-title">Логотипы фитнес‑приложений — Strava, Nike Run Club, Peloton и другие</div>
+          <div class="blog-card-title">Новые эмодзи 2026 — что добавят в Emoji 18.0</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-beauti-salona/" data-date="2026-09-05" data-views="1">
+      <a class="blog-card" href="../negativnoe-prostranstvo-v-logotipe/" data-date="2026-08-17" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Бьюти</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /><circle cx="12" cy="8" r="2" /><path d="M12 10v12" /><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Приёмы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3a2 2 0 0 0-2 2" /><path d="M19 3a2 2 0 0 1 2 2" /><path d="M21 19a2 2 0 0 1-2 2" /><path d="M5 21a2 2 0 0 1-2-2" /><path d="M9 3h1" /><path d="M9 21h1" /><path d="M14 3h1" /><path d="M14 21h1" /><path d="M3 9v1" /><path d="M21 9v1" /><path d="M3 14v1" /><path d="M21 14v1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>05.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
-          <div class="blog-card-title">Логотип для бьюти‑салона — элегантность, которая не ломается на вывеске</div>
+          <div class="blog-card-title">Негативное пространство в логотипе — искусство прятать смысл в пустоте</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -489,7 +494,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#откуда-в-svg-лишний-вес">Откуда в SVG лишний вес</a></li><li><a href="#автоматика-svgo-и-svgomg">Автоматика: SVGO и SVGOMG</a></li><li><a href="#что-автоматика-сделать-не-может">Что автоматика сделать не может</a></li><li><a href="#сколько-это-даёт-в-килобайтах">Сколько это даёт в килобайтах</a></li><li><a href="#разбор-файла-что-именно-выкидывается">Разбор файла: что именно выкидывается</a></li><li><a href="#чем-проверить-что-стало-лучше">Чем проверить, что стало лучше</a></li><li><a href="#gzip-и-brotli-последний-множитель">Gzip и Brotli: последний множитель</a></li><li><a href="#как-сделать-чтобы-оптимизация-происходила-сама">Как сделать, чтобы оптимизация происходила сама</a></li><li><a href="#когда-оптимизация-не-нужна">Когда оптимизация не нужна</a></li><li><a href="#если-коротко">Если коротко</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#откуда-в-svg-лишний-вес">Откуда в SVG лишний вес</a></li><li><a href="#автоматика-svgo-и-svgomg">Автоматика: SVGO и SVGOMG</a></li><li><a href="#что-автоматика-сделать-не-может">Что автоматика сделать не может</a></li><li><a href="#сколько-это-даёт-в-килобайтах">Сколько это даёт в килобайтах</a></li><li><a href="#разбор-файла-что-именно-выкидывается">Разбор файла: что именно выкидывается</a></li><li><a href="#чем-проверить-что-стало-лучше">Чем проверить, что стало лучше</a></li><li><a href="#gzip-и-brotli-последний-множитель">Gzip и Brotli: последний множитель</a></li><li><a href="#как-сделать-чтобы-оптимизация-происходила-сама">Как сделать, чтобы оптимизация происходила сама</a></li><li><a href="#когда-оптимизация-не-нужна">Когда оптимизация не нужна</a></li><li><a href="#если-коротко">Если коротко</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -497,25 +502,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -592,6 +589,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -637,10 +635,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

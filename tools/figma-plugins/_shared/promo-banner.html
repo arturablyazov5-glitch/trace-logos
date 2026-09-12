@@ -1,0 +1,220 @@
+<!--
+  ЕДИНСТВЕННЫЙ ИСТОЧНИК промо-блока Trace Logo's для плагинов Figma.
+
+  Этот файл НЕ подключается плагином напрямую: у плагина ровно один
+  ui.html, никаких include/сборки в Figma нет. Блок запекается внутрь
+  каждого ui.html скриптом `node scripts/build-figma-promo.js` между
+  маркерами PROMO:START / PROMO:END (в этой шапке они намеренно без
+  угловых скобок: закрывающий комментарий внутри комментария оборвал
+  бы её на середине — так и вышло на первом прогоне; скрипт режет
+  шапку по первому тегу style ниже). Править нужно
+  ЗДЕСЬ и прогонять скрипт — правки между маркерами в ui.html затрёт
+  следующий прогон (тот же договор, что у CATEGORIES/COLLECTIONS-блоков
+  на сайте).
+
+  Ставится во все плагины КРОМЕ trace-logos: тот сам и есть каталог,
+  рекламировать сайт внутри него незачем.
+
+  Плейсхолдеры, которые подставляет скрипт:
+    {{UTM}}         — utm_source, свой у каждого плагина
+    {{BRAND_ICON}}  — data:-URI иконки Trace Logo's
+    {{LOGO_STRIP}}  — 6 <img> популярных брендов, тоже data:-URI
+    {{LOGO_COUNT}}  — число готовых логотипов в каталоге (склонение — в скрипте)
+    {{EMOJI_COUNT}} — число эмодзи
+    {{MORE_COUNT}}  — сколько логотипов «ещё», кроме шести в полоске
+
+  Картинки инлайнятся как data:-URI, а не лежат файлами рядом: manifest
+  всех трёх плагинов объявляет networkAccess "none", а ui.html грузится
+  как единственный документ — внешний src не загрузится ни с сети, ни с
+  диска.
+
+  Ссылки открываются НЕ через <a target="_blank"> (в iframe плагина он
+  не работает), а сообщением 'open-url' в code.js → figma.openExternal().
+  Обработчик обязан быть в code.js каждого плагина.
+
+  Все классы и id — с префиксом tlp-, стили самодостаточны и не читают
+  токены плагина-хозяина: у Typograf палитра называется --bg/--bg-card,
+  у Clean Layers и Photo Editor --page-bg/--card-bg. Общего имени нет,
+  поэтому цвета здесь заданы буквально (фон страницы у всех трёх #111).
+-->
+<style>
+  .tlp, .tlp * { box-sizing: border-box; }
+
+  .tlp {
+    position: relative;
+    overflow: hidden;
+    /* Без margin-top: во всех трёх плагинах .tlp — прямой ребёнок .screen
+       (display:flex; gap:18px), который уже расставляет 18px между всеми
+       своими детьми сам. Собственный margin-top:18px здесь эту дистанцию
+       ДУБЛИРОВАЛ (36px вместо 18px) — обнаружено 2026-08-19 замером в
+       headless Chrome (scripts нет, разовый puppeteer-скрипт): лишние
+       18px не были видны как явный зазор, потому что `html{overflow:
+       hidden}` в ui.html плагинов их просто обрезал, забирая высоту у
+       #screenTools — из-за этого блок правил (.rules, flex:1) был на
+       18px ниже, чем реально помещалось в отведённый бюджет высоты. */
+    padding: 14px;
+    border: 1px solid #242424;
+    border-radius: 14px;
+    background: #161616;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    color: #e6e6e6;
+  }
+  /* Мягкое фиолетовое свечение из правого верхнего угла — единственное
+     цветное пятно в блоке, задаёт «это про Trace Logo's», не отвлекая от
+     инструментов плагина выше. */
+  .tlp::before {
+    content: '';
+    position: absolute;
+    top: -70px;
+    right: -50px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(138, 107, 255, .20), rgba(138, 107, 255, 0) 68%);
+    pointer-events: none;
+  }
+  .tlp > * { position: relative; }
+
+  /* Шапка блока — она же кнопка перехода на сайт: кликается вся строка,
+     а не только стрелка. */
+  .tlp-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .tlp-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .06);
+  }
+  .tlp-body { min-width: 0; flex: 1; }
+  .tlp-title {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -.01em;
+  }
+  .tlp-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: #8f8f8f;
+  }
+  .tlp-arrow {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(138, 107, 255, .14);
+    color: #a68cff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .tlp-arrow svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .tlp-head:hover .tlp-arrow { background: rgba(138, 107, 255, .26); transform: translateX(2px); }
+  .tlp-head:hover .tlp-title { color: #a68cff; }
+
+  /* Полоска брендов — доказательство «в каталоге реально то, что ищут»:
+     шесть узнаваемых логотипов дешевле любого описания. Последний
+     элемент — счётчик остальных, чтобы полоска не читалась как «всего
+     шесть штук». */
+  .tlp-strip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .tlp-logo {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    object-fit: contain;
+  }
+  /* Перенос в 2 строки вместо обрезания многоточием — надёжнее: не
+     нужно бороться с тем, что text-overflow:ellipsis не срабатывает на
+     флекс-контейнере с текстом прямым потомком, и число не теряется
+     при нехватке ширины. .tlp-strip (родитель) — align-items:center,
+     поэтому при двух строках картинки-логотипы остаются по центру
+     высоты блока сами по себе. */
+  .tlp-more {
+    flex: 1;
+    min-width: 0;
+    padding: 0 8px;
+    color: #8f8f8f;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  .tlp-donate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 9px 12px;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    background: #1c1c1c;
+    color: #b0b0b0;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .tlp-donate svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+  .tlp-donate:hover { background: #232323; border-color: #3a3a3a; color: #e6e6e6; }
+  .tlp-donate:hover svg { fill: #ff6b81; }
+</style>
+
+<aside class="tlp">
+  <button class="tlp-head" type="button" data-tlp-url="https://trace-logos.ru/?utm_source={{UTM}}&amp;utm_medium=figma-plugin">
+    <img class="tlp-icon" src="{{BRAND_ICON}}" alt="" />
+    <span class="tlp-body">
+      <span class="tlp-title">Trace Logo's</span>
+      <span class="tlp-sub">{{LOGO_COUNT}} и {{EMOJI_COUNT}}<br>в SVG и PNG</span>
+    </span>
+    <span class="tlp-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </button>
+
+  <div class="tlp-strip">
+    {{LOGO_STRIP}}
+    <span class="tlp-more">и ещё<br>{{MORE_COUNT}}</span>
+  </div>
+
+  <button class="tlp-donate" type="button" data-tlp-url="https://app.lava.top/products/6f3c8efd-27c3-41a8-acb1-559b83ea3b46/d9261f0e-d716-418c-b91d-764e83f1c01c?currency=RUB">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Поддержать автора
+  </button>
+</aside>
+
+<script>
+  // Открытие ссылок только через code.js: в iframe плагина ни
+  // <a target="_blank">, ни window.open() не работают — единственный
+  // рабочий путь наружу это figma.openExternal() на стороне плагина.
+  document.querySelectorAll('.tlp [data-tlp-url]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      parent.postMessage({ pluginMessage: { type: 'open-url', url: el.getAttribute('data-tlp-url') } }, '*');
+    });
+  });
+</script>

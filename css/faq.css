@@ -1,0 +1,47 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   faq.css — блок «Частые вопросы» (<details> со знаком «+»).
+
+   Одна забота: один компонент FAQ на весь сайт. Раньше эти правила лежали
+   внутри css/seo-page.css, и им пользовались только те страницы, что грузят
+   seo-page.css целиком (логотипы, эмодзи, подборки). Лендингу /tools/ нужен
+   тот же FAQ, но seo-page.css ему не подходит — тот переопределяет body,
+   шапку и сетку под свой шаблон и дрался бы с css/home.css. Вынесено в
+   отдельный файл, чтобы переиспользовать компонент, а не копировать правила.
+
+   Потребители:
+     - css/seo-page.css — через @import (страницы логотипов, эмодзи, подборок)
+     - css/seo-page.bundle.css — отдельной строкой в scripts/build-css-bundles.js
+       (бандлер вырезает @import-ы из вклада seo-page.css, поэтому файл должен
+       быть перечислен в списке бандла явно)
+     - tools/index.html — прямым <link>
+
+   Токены: --bg-card, --border-base, --text-1, --text-4, --text-5, --accent.
+   На страницах с css/tokens.css они приходят оттуда; на /tools/ недостающие
+   объявлены в css/tools-hub.css.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.faq-section { width: 100%; margin-top: 48px; }
+.faq-title {
+  font-size: 18px; font-weight: 600; color: var(--text-1);
+  margin-bottom: 14px; letter-spacing: -0.01em;
+}
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+.faq-item {
+  background: var(--bg-card); border: 1px solid var(--border-base);
+  border-radius: 12px; overflow: hidden;
+}
+.faq-q {
+  list-style: none; cursor: pointer; padding: 14px 16px;
+  font-size: 14px; font-weight: 500; color: var(--text-1);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: '+'; font-size: 18px; line-height: 1; color: var(--text-5);
+  flex-shrink: 0; transition: transform .15s;
+}
+.faq-item[open] .faq-q::after { transform: rotate(45deg); }
+.faq-a { padding: 0 16px 14px; font-size: 13px; line-height: 1.65; color: var(--text-4); }
+.faq-a a { color: var(--accent, #2563eb); text-decoration: none; }
+.faq-a a:hover { text-decoration: underline; }
+.faq-action-btn { margin: 0 16px 14px; }

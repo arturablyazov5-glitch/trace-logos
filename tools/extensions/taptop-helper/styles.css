@@ -1,0 +1,332 @@
+/* Дизайн-язык — тот же, что у Figma-плагинов проекта (Clean Layers /
+   Photo Editor / Trace Typograf, tools/figma-plugins/*/ui.html): тёмная
+   тема, карточки на --bg-card поверх --bg, воздух вместо разделительных
+   линий, единый акцентный фиолетовый на кнопках. Токены и контрасты
+   (WCAG AA) скопированы оттуда дословно, не подобраны заново на глаз. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+  --mono: "SF Mono", "Fira Code", ui-monospace, monospace;
+
+  --bg: #111111;
+  --bg-card: #1a1a1a;
+  --bg-raised: #202020;
+  --bg-active: #262626;
+
+  --border: #222222;
+  --border-hover: #3a3a3a;
+
+  --text-0: #ffffff;  /* 18,9:1 — заголовки      */
+  --text-1: #e6e6e6;  /* 15,2:1 — основной текст */
+  --text-3: #999999;  /*  6,6:1 — подписи        */
+  --text-5: #8a8a8a;  /*  5,3:1 — примечания     */
+  --text-dim: #666666; /* 3,3:1 — только декор   */
+
+  --ok: #3fb950;
+  --error: #f85149;
+
+  --accent-strong: #5b3fd9;  /* фон-заливка под белым текстом — 6,7:1 */
+  --accent-hover: #4c33bd;
+  --accent-ring: rgba(138, 107, 255, .45);
+}
+
+body {
+  width: 340px;
+  font: 13px/1.4 var(--font);
+  color: var(--text-1);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-ring);
+  border-radius: 6px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+
+.error {
+  display: none;
+  background: rgba(248, 81, 73, .12);
+  color: var(--error);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  border: 1px solid rgba(248, 81, 73, .3);
+}
+
+/* ── Карточка статуса — .scope-card/.scope-avatar/.scope-body, тот же
+   компонент, что в ui.html Figma-плагинов ("текущее выделение"). ── */
+.scope-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+.scope-avatar {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--bg-active);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, color .15s;
+}
+.scope-avatar.active { background: rgba(63, 185, 80, .16); color: var(--ok); }
+.scope-avatar.error { background: rgba(248, 81, 73, .16); color: var(--error); }
+.scope-avatar .icon { width: 17px; height: 17px; }
+.scope-body { min-width: 0; }
+.scope-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-1);
+  line-height: 1.35;
+}
+
+/* ── Секция — подпись капсом + содержимое, тот же .section/.section-label,
+   что в ui.html Figma-плагинов. ── */
+.section { display: flex; flex-direction: column; gap: 9px; }
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-left: 2px;
+}
+
+.publish-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+button {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent-strong);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+.btn-primary:active:not(:disabled) { opacity: .85; }
+.btn-primary:disabled {
+  background: var(--bg-active);
+  color: var(--text-dim);
+  cursor: default;
+}
+
+.publish-status {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-3);
+  min-height: 14px;
+  word-break: break-word;
+}
+.publish-status.success { color: var(--ok); }
+.publish-status.error { color: var(--error); }
+
+/* ── Список горячих клавиш — тот же язык, что .rule в ui.html Figma-
+   плагинов: карточка на --bg-card с бордером вместо голого списка. ── */
+.shortcuts {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px 12px;
+}
+.shortcut-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.shortcut-item:last-child { border-bottom: none; }
+
+.key {
+  align-self: flex-start;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-hover);
+  padding: 3px 7px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--text-1);
+}
+
+.key-description {
+  font-size: 12px;
+  color: var(--text-5);
+  line-height: 1.4;
+}
+
+/* ── Промо Trace Logo's — тот же компонент .tlp, что запекается в ui.html
+   Figma-плагинов (tools/figma-plugins/_shared/promo-banner.html), портирован
+   вручную: у расширения своя сборка (никакого build-figma-promo.js для
+   Chrome-пакетов), и здесь можно использовать обычные <a target="_blank">
+   вместо обхода через code.js/openExternal() — постман-хак нужен только
+   внутри песочницы Figma. Классы и структура — 1-в-1, чтобы баннер
+   узнавался как один и тот же элемент бренда везде, где встречается. ── */
+.tlp {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg-card);
+}
+.tlp::before {
+  content: '';
+  position: absolute;
+  top: -70px;
+  right: -50px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(138, 107, 255, .20), rgba(138, 107, 255, 0) 68%);
+  pointer-events: none;
+}
+.tlp > * { position: relative; }
+
+.tlp-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.tlp-icon {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  display: block;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .06);
+}
+.tlp-body { min-width: 0; flex: 1; }
+.tlp-title {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-0);
+  letter-spacing: -.01em;
+}
+.tlp-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+.tlp-arrow {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(138, 107, 255, .14);
+  color: #a68cff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .15s ease, background .15s ease;
+}
+.tlp-arrow svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.tlp-head:hover .tlp-arrow { background: rgba(138, 107, 255, .26); transform: translateX(2px); }
+.tlp-head:hover .tlp-title { color: #a68cff; }
+
+.tlp-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px 12px;
+}
+.tlp-logo {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  object-fit: contain;
+}
+/* Перенос в 2 строки вместо обрезания многоточием — надёжнее и число не
+   теряется при нехватке ширины (.tlp-strip — align-items:center, поэтому
+   логотипы остаются по центру высоты блока сами по себе). */
+.tlp-more {
+  flex: 1;
+  min-width: 0;
+  padding: 0 8px;
+  color: var(--text-3);
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.3;
+  text-align: left;
+}
+
+.tlp-donate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: calc(100% - 24px);
+  margin: 0 12px 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-hover);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  color: var(--text-3);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.tlp-donate svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+.tlp-donate:hover { background: var(--bg-active); border-color: var(--text-dim); color: var(--text-1); }
+.tlp-donate:hover svg { fill: #ff6b81; }

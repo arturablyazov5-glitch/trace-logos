@@ -94,6 +94,13 @@ function loadCategories(manifestRel, baseDir) {
 }
 
 const REQUIRED_FIELDS = ['name', 'tags', 'figma', 'file'];
+const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+function isValidIsoDate(value) {
+  if (!ISO_DATE_RE.test(value || '')) return false;
+  const date = new Date(`${value}T00:00:00Z`);
+  return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
+}
 
 function checkItems(cats, { label, assetPath, referenced, ecosystems, labels }) {
   for (const cat of cats) {
@@ -107,6 +114,16 @@ function checkItems(cats, { label, assetPath, referenced, ecosystems, labels }) 
       for (const f of REQUIRED_FIELDS) {
         if (typeof item[f] !== 'string' || !item[f].trim()) {
           err(`${where}: «${id}» — отсутствует или пустое поле "${f}"`);
+        }
+      }
+      if (label === 'logos' && !item.comingSoon && !isValidIsoDate(item.dateAdded)) {
+        err(`${where}: «${id}» — отсутствует или некорректно поле "dateAdded" (нужно YYYY-MM-DD)`);
+      }
+      if (label === 'logos' && item.dateModified !== undefined) {
+        if (!isValidIsoDate(item.dateModified)) {
+          err(`${where}: «${id}» — некорректно поле "dateModified" (нужно YYYY-MM-DD)`);
+        } else if (isValidIsoDate(item.dateAdded) && item.dateModified < item.dateAdded) {
+          err(`${where}: «${id}» — "dateModified" не может быть раньше "dateAdded"`);
         }
       }
       if (item.variants !== undefined && !Array.isArray(item.variants)) {

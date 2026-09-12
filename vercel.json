@@ -69,10 +69,29 @@
     { "source": "/en/logos/b2b/electronicarts/", "destination": "/en/logos/game-platforms/electronicarts/", "permanent": true },
     { "source": "/logos/b2b/mojangstudios/", "destination": "/logos/game-platforms/mojangstudios/", "permanent": true },
     { "source": "/en/logos/b2b/mojangstudios/", "destination": "/en/logos/game-platforms/mojangstudios/", "permanent": true },
+    { "source": "/logos/media/tnt/", "destination": "/logos/tv/tnt/", "permanent": true },
+    { "source": "/en/logos/media/tnt/", "destination": "/en/logos/tv/tnt/", "permanent": true },
+    { "source": "/logos/media/sts/", "destination": "/logos/tv/sts/", "permanent": true },
+    { "source": "/en/logos/media/sts/", "destination": "/en/logos/tv/sts/", "permanent": true },
+    { "source": "/logos/media/rentv/", "destination": "/logos/tv/rentv/", "permanent": true },
+    { "source": "/en/logos/media/rentv/", "destination": "/en/logos/tv/rentv/", "permanent": true },
+    { "source": "/logos/media/ntv/", "destination": "/logos/tv/ntv/", "permanent": true },
+    { "source": "/en/logos/media/ntv/", "destination": "/en/logos/tv/ntv/", "permanent": true },
+    { "source": "/logos/media/2x2/", "destination": "/logos/tv/2x2/", "permanent": true },
+    { "source": "/en/logos/media/2x2/", "destination": "/en/logos/tv/2x2/", "permanent": true },
+    { "source": "/logos/media/karusel/", "destination": "/logos/tv/karusel/", "permanent": true },
+    { "source": "/en/logos/media/karusel/", "destination": "/en/logos/tv/karusel/", "permanent": true },
     { "source": "/tools/extensions/yandex-reviews-exporter/", "destination": "/tools/extensions/reviews-exporter/", "permanent": true },
-    { "source": "/en/tools/extensions/yandex-reviews-exporter/", "destination": "/en/tools/extensions/reviews-exporter/", "permanent": true }
+    { "source": "/en/tools/extensions/yandex-reviews-exporter/", "destination": "/en/tools/extensions/reviews-exporter/", "permanent": true },
+    { "source": "/credits/", "destination": "/", "permanent": false },
+    { "source": "/en/credits/", "destination": "/en/", "permanent": false }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "(?<host>.*)\\.vercel\\.app" }],
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
     {
       "source": "/assets/fonts/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]

@@ -21,7 +21,7 @@ tags_en: Logo Histories, Branding, AI
 
 ## Геометрия: шесть дуг и вихрь
 
-Розетка построена из **шести одинаковых дуг**, переплетённых с поворотной симметрией — как лепестки, сложенные в кольцо. Форма собрана по строгой окружной сетке: дуги перекрывают друг друга «над‑под», создавая эффект плетения — принцип, который можно повторить, если [рисовать такие формы в Figma](../kak-narisovat-logotip-v-figma/). Считываний несколько, и все работают на бренд: цветок (рост, жизнь), узел (связь), вихрь (движение мысли), молекула (наука). Такая многослойность прочтения — признак сильного [абстрактного знака](../vidy-logotipov/).
+Розетка построена из **шести одинаковых дуг**, переплетённых с поворотной симметрией — как лепестки, сложенные в кольцо. Форма собрана по строгой окружной сетке: дуги перекрывают друг друга «над‑под», создавая эффект плетения — принцип, который можно повторить, если [рисовать такие формы в Figma](../kak-narisovat-logotip-v-figma/). Считываний несколько, и все работают на бренд: цветок (рост, жизнь), узел (связь), вихрь (движение мысли), молекула (наука). Такая многослойность прочтения — признак сильного абстрактного знака.
 
 ## Почему монохром
 
@@ -29,7 +29,7 @@ tags_en: Logo Histories, Branding, AI
 
 ## 2023: тихий редизайн и шрифт
 
-В 2023‑м OpenAI провёл рестайлинг, который большинство пользователей не заметило: пропорции розетки слегка выровняли, дуги утолстили для лучшей читаемости в малых размерах — [та же логика, что и у фавиконки](../kak-sdelat-favicon/) — а рядом появился фирменный гротеск для текстовой части. Это образцовый «редизайн‑невидимка»: знак стал технически лучше, не потревожив ни одной привычки — противоположность [громким ребрендингам](../chto-takoe-rebrending/).
+В 2023‑м OpenAI провёл рестайлинг, который большинство пользователей не заметило: пропорции розетки слегка выровняли, дуги утолстили для лучшей читаемости в малых размерах — [та же логика, что и у фавиконки](../kak-sdelat-favicon/) — а рядом появился фирменный гротеск для текстовой части. Это образцовый «редизайн‑невидимка»: знак стал технически лучше, не потревожив ни одной привычки — противоположность [громким ребрендингам](../chto-takoe-rebrending/).
 
 ## Знак и семья продуктов
 
@@ -37,11 +37,11 @@ tags_en: Logo Histories, Branding, AI
 
 ## Слово GPT: бренд, который убежал от владельца
 
-Параллельно знаку живёт вербальная драма: аббревиатура GPT (Generative Pre‑trained Transformer) стала настолько нарицательной, что сотни сторонних сервисов добавили её в свои названия. OpenAI пыталась зарегистрировать «GPT» как товарный знак — и получила отказ: ведомство сочло аббревиатуру описательной, то есть принадлежащей всем. Это классическая цена генерализации: когда имя становится названием технологии, юридическая защита слабеет (тот же путь прошли «эскалатор» и «термос»). Для нейминга вывод практический: описательные элементы в имени не защищаются — уникальность нужно закладывать в другую часть названия, о том, [как вообще выбирают имена](../kak-pridumat-nazvanie-brenda/) и [что можно зарегистрировать](../kak-zaregistrirovat-logotip/), мы писали отдельно.
+Параллельно знаку живёт вербальная драма: аббревиатура GPT (Generative Pre‑trained Transformer) стала настолько нарицательной, что сотни сторонних сервисов добавили её в свои названия. OpenAI пыталась зарегистрировать «GPT» как товарный знак — и получила отказ: ведомство сочло аббревиатуру описательной, то есть принадлежащей всем. Это классическая цена генерализации: когда имя становится названием технологии, юридическая защита слабеет (тот же путь прошли «эскалатор» и «термос»). Для нейминга вывод практический: описательные элементы в имени не защищаются — уникальность нужно закладывать в другую часть названия, о том, [как вообще выбирают имена](../kak-pridumat-nazvanie-brenda/) и [что можно зарегистрировать](../kak-zaregistrirovat-logotip/), мы писали отдельно.
 
 ## Розетка и волна подражателей
 
-Успех знака породил целый жанр: после 2023 года «переплетённые розетки» стали появляться у ИИ‑стартапов десятками — маркетплейсы шаблонов продают «логотипы в стиле OpenAI» пачками. Это создало парадоксальную проблему для самой OpenAI: чем больше подражателей, тем сильнее размывается уникальность формы, и тем важнее становятся вторичные признаки — точные пропорции, фирменный шрифт, монохромная дисциплина. Для остальных урок прямой: строить знак «в стиле лидера» — значит повторять [ошибку похожести](../oshibki-v-dizajne-logotipa/) и работать на чужую узнаваемость, а не искать, [как выделиться в ИИ‑категории](../logotipy-nejrosetej/), самому.
+Успех знака породил целый жанр: после 2023 года «переплетённые розетки» стали появляться у ИИ‑стартапов десятками — маркетплейсы шаблонов продают «логотипы в стиле OpenAI» пачками. Это создало парадоксальную проблему для самой OpenAI: чем больше подражателей, тем сильнее размывается уникальность формы, и тем важнее становятся вторичные признаки — точные пропорции, фирменный шрифт, монохромная дисциплина. Для остальных урок прямой: строить знак «в стиле лидера» — значит повторять ошибку похожести и работать на чужую узнаваемость, а не искать, [как выделиться в ИИ‑категории](../logotipy-nejrosetej/), самому.
 
 ## Хронология
 
@@ -54,7 +54,7 @@ tags_en: Logo Histories, Branding, AI
 | 2025 | первый официальный ребрендинг: обновлённая розетка и собственный шрифт OpenAI Sans |
 
 :::tip Урок кейса
-ChatGPT — редкий случай, когда бренд построила не айдентика, а продукт: знак просто оказался достаточно качественным, чтобы выдержать свалившуюся славу. Мораль для всех: рисуйте корпоративный знак «на вырост» — вы не знаете, какой из ваших продуктов однажды сделает его знаменитым — поэтому [заказывайте знак сразу с запасом прочности](../kak-zakazat-logotip-u-dizajnera/).
+ChatGPT — редкий случай, когда бренд построила не айдентика, а продукт: знак просто оказался достаточно качественным, чтобы выдержать свалившуюся славу. Мораль для всех: рисуйте корпоративный знак «на вырост» — вы не знаете, какой из ваших продуктов однажды сделает его знаменитым — поэтому [заказывайте знак сразу с запасом прочности](../kak-zakazat-logotip-u-dizajnera/).
 :::
 
 Логотипы ChatGPT и OpenAI в SVG и PNG — в [каталоге нейросетей](../../logos/ai/). Другие истории: [Google](../istoriya-logotipa-google/), [логотипы нейросетей](../logotipy-nejrosetej/), [Netflix](../istoriya-logotipa-netflix/).
@@ -73,7 +73,7 @@ The OpenAI rosette was drawn in the mid-2010s — when the company was a researc
 
 ## The geometry: six arcs and a whirl
 
-The rosette is built from **six identical arcs** interwoven with rotational symmetry — petals folded into a ring. The form follows a strict circular grid: the arcs overlap over-under, creating a weave effect — a principle you can reuse if you [build such forms in Figma](../kak-narisovat-logotip-v-figma/) yourself. It reads several ways, all serving the brand: a flower (growth, life), a knot (connection), a whirl (moving thought), a molecule (science). That multi-layered reading is the signature of a strong [abstract mark](../vidy-logotipov/).
+The rosette is built from **six identical arcs** interwoven with rotational symmetry — petals folded into a ring. The form follows a strict circular grid: the arcs overlap over-under, creating a weave effect — a principle you can reuse if you [build such forms in Figma](../kak-narisovat-logotip-v-figma/) yourself. It reads several ways, all serving the brand: a flower (growth, life), a knot (connection), a whirl (moving thought), a molecule (science). That multi-layered reading is the signature of a strong abstract mark.
 
 ## Why monochrome
 
@@ -93,7 +93,7 @@ A verbal drama runs parallel to the mark: the abbreviation GPT (Generative Pre-t
 
 ## The rosette and the imitator wave
 
-The mark's success spawned a genre: after 2023 "interwoven rosettes" appeared at AI startups by the dozen — template marketplaces sell "OpenAI-style logos" in bulk. That created a paradoxical problem for OpenAI itself: the more imitators, the more the form's uniqueness dilutes, and the more the secondary signals matter — exact proportions, the corporate typeface, the monochrome discipline. For everyone else the lesson is direct: building a mark "in the leader's style" means repeating [the look-alike mistake](../oshibki-v-dizajne-logotipa/) and working for their recognition, not asking, [how do you stand out in the AI category](../logotipy-nejrosetej/), on your own.
+The mark's success spawned a genre: after 2023 "interwoven rosettes" appeared at AI startups by the dozen — template marketplaces sell "OpenAI-style logos" in bulk. That created a paradoxical problem for OpenAI itself: the more imitators, the more the form's uniqueness dilutes, and the more the secondary signals matter — exact proportions, the corporate typeface, the monochrome discipline. For everyone else the lesson is direct: building a mark "in the leader's style" means repeating the look-alike mistake and working for their recognition, not asking, [how do you stand out in the AI category](../logotipy-nejrosetej/), on your own.
 
 ## The timeline
 

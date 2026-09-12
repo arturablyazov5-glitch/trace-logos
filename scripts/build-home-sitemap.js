@@ -154,6 +154,7 @@ function main() {
     { name: 'Все логотипы', href: `${REL}logos/` },
     { name: 'Все эмодзи', href: `${REL}emoji/` },
     { name: 'Блог', href: `${REL}blog/` },
+    { name: 'Люди, благодаря которым каталог жив', href: `${REL}credits/` },
     { name: 'Правила использования', href: `${REL}terms/` },
     { name: 'Согласие на обработку данных', href: `${REL}consent/` },
   ];

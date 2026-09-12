@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Градиент в логотипе — как использовать в 2026 · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(353 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(33 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(83 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(143 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(353 70% 38%) 0%, hsl(143 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a10 10 0 0 0-20 0" /><path d="M6 17a6 6 0 0 1 12 0" /><path d="M10 17a2 2 0 0 1 4 0" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(233 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(273 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(323 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(23 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(233 70% 38%) 0%, hsl(23 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a10 10 0 0 0-20 0" /><path d="M6 17a6 6 0 0 1 12 0" /><path d="M10 17a2 2 0 0 1 4 0" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-25">25 июля 2026</time>
@@ -202,15 +206,15 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            5
+	            26
 	          </span>
         </div>
         <h1>Градиент в логотипе — как использовать в 2026</h1>
       </header>
       <div class="blog-body">
-        <p>Градиент — плавный переход между цветами — то входит в моду, то объявляется дурным тоном. В 2026 году он снова на пике, но в новом виде: не кислотные заливки нулевых, а мягкие, почти незаметные переходы. И прежде чем разбираться, каким должен быть этот новый градиент, стоит ответить на более простой вопрос: зачем он логотипу вообще нужен?</p>
+        <p>Градиент — плавный переход между цветами — то входит в моду, то объявляется дурным тоном. В 2026 году он снова на пике, но в новом виде: не кислотные заливки нулевых, а мягкие, почти незаметные переходы. И прежде чем разбираться, каким должен быть этот новый градиент, стоит ответить на более простой вопрос: зачем он логотипу вообще нужен?</p>
       <h2 id="что-градиент-даёт-знаку">Что градиент даёт знаку</h2>
-      <p>Нужен он затем, что плоский одноцветный знак читается чётко, но нередко ощущается «сухим», — а градиент добавляет то, чего плоской заливке не хватает. Он имитирует свет на форме и потому создаёт ощущение объёма без буквального 3D. Он передаёт настроение — тепло, свежесть, футуристичность — точнее, чем ровный цвет. И он считывается как «цифровой» и современный, поэтому его так любят технологические и медийные бренды. Самый известный пример — <a href="../../logos/social/instagram/" target="_blank" rel="noopener">Instagram</a>: его радиальный переход от фиолетового к оранжевому стал иконой цифровой эпохи и во многом задал саму моду на градиенты в знаках.</p>
+      <p>Нужен он затем, что плоский одноцветный знак читается чётко, но нередко ощущается «сухим», — а градиент добавляет то, чего плоской заливке не хватает. Он имитирует свет на форме и потому создаёт ощущение объёма без буквального 3D. Он передаёт настроение — тепло, свежесть, футуристичность — точнее, чем ровный цвет. И он считывается как «цифровой» и современный, поэтому его так любят технологические и медийные бренды. Самый известный пример — <a href="../../logos/social/instagram/" target="_blank" rel="noopener">Instagram<img class="blog-mention-icon" src="../../assets/logos/svgs/instagram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: его радиальный переход от фиолетового к оранжевому стал иконой цифровой эпохи и во многом задал саму моду на градиенты в знаках.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -223,15 +227,15 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="каким-бывает-переход">Каким бывает переход</h2>
       <p>Раз градиент даёт объём и настроение, логично, что и переходы бывают разными — и каждый даёт своё ощущение:</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Вид</th><th>Как устроен</th><th>Ощущение</th></tr></thead><tbody><tr><td>Линейный</td><td>По прямой между двумя точками</td><td>Спокойствие, порядок</td></tr><tr><td>Радиальный</td><td>Из центра наружу кругами</td><td>Свет, объём, «сияние»</td></tr><tr><td>Угловой</td><td>Цвета идут по кругу вокруг точки</td><td>Динамика, движение</td></tr><tr><td>Меш (сетчатый)</td><td>Много цветов, перетекающих в зонах</td><td>Атмосфера, глубина, «космос»</td></tr></tbody></table></div>
-      <p>Из этих четырёх в 2026 году особенно заметен рост меш‑градиентов и мягких малоконтрастных переходов, где цвета блендятся почти незаметно. И это не случайная мода: тот же сдвиг происходит во всей палитре года, о котором мы писали в статье <a href="../cvetovye-trendy-2026/" target="_blank" rel="noopener">цветовые тренды 2026</a>, — от кислотности к спокойствию и «настоящести».</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Вид</th><th>Как устроен</th><th>Ощущение</th></tr></thead><tbody><tr><td>Линейный</td><td>По прямой между двумя точками</td><td>Спокойствие, порядок</td></tr><tr><td>Радиальный</td><td>Из центра наружу кругами</td><td>Свет, объём, «сияние»</td></tr><tr><td>Угловой</td><td>Цвета идут по кругу вокруг точки</td><td>Динамика, движение</td></tr><tr><td>Меш (сетчатый)</td><td>Много цветов, перетекающих в зонах</td><td>Атмосфера, глубина, «космос»</td></tr></tbody></table></div>
+      <p>Из этих четырёх в 2026 году особенно заметен рост меш‑градиентов и мягких малоконтрастных переходов, где цвета блендятся почти незаметно. И это не случайная мода: тот же сдвиг происходит во всей палитре года, о котором мы писали в статье <a href="../cvetovye-trendy-2026/" target="_blank" rel="noopener">цветовые тренды 2026</a>, — от кислотности к спокойствию и «настоящести».</p>
       <h2 id="у-красоты-есть-цена">У красоты есть цена</h2>
-      <p>Пока всё звучит выгодно — но именно здесь и появляется главный подвох, из‑за которого градиент нельзя делать основой знака. Дело в том, что за объём и настроение приходится платить сразу на четырёх фронтах. В печати переход капризен: он может «полосить» (бандинг) или лечь не тем цветом, поэтому для типографии часто готовят отдельную одноцветную версию (подробнее — в статье логотип для печати). В мелком размере, на <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a> 16×16, переход почти не виден и только «грязнит» цвет — нужна упрощённая версия, тот же принцип, что в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>. При перекраске одноцветный знак меняет цвет за секунду, а градиент приходится пересобирать целиком (как менять цвета SVG — в статье <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">как изменить цвет логотипа</a>). И на тёмном фоне светлый переход легко «проваливается» — проверяйте на <a href="../logotip-dlya-temnoj-temy/" target="_blank" rel="noopener">тёмной теме</a>.</p>
-      <p>Каждая из этих проблем по отдельности решаема, но вместе они означают одно, и это стоит проговорить прямо: градиент нельзя закладывать как единственный носитель узнаваемости. Представьте, что фирменный переход от синего к фиолетовому — это всё, что отличает ваш знак. На сайте он красив, но в чёрно‑белом договоре, на гравировке кружки, в факсе и на <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a> он исчезает — и от бренда не остаётся ничего, потому что узнавать больше нечего. А знак, который читается и без градиента, спокойно переживёт любой из этих носителей: там, где переход воспроизвести нельзя, останется работать форма, а там, где можно, градиент добавит ей выразительности. Разница между этими двумя знаками и есть разница между градиентом‑основой и градиентом‑усилением.</p>
+      <p>Пока всё звучит выгодно — но именно здесь и появляется главный подвох, из‑за которого градиент нельзя делать основой знака. Дело в том, что за объём и настроение приходится платить сразу на четырёх фронтах. В печати переход капризен: он может «полосить» (бандинг) или лечь не тем цветом, поэтому для типографии часто готовят отдельную одноцветную версию (подробнее — в статье логотип для печати). В мелком размере, на <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a> 16×16, переход почти не виден и только «грязнит» цвет — нужна упрощённая версия, тот же принцип, что в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>. При перекраске одноцветный знак меняет цвет за секунду, а градиент приходится пересобирать целиком (как менять цвета SVG — в статье <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">как изменить цвет логотипа</a>). И на тёмном фоне светлый переход легко «проваливается» — проверяйте на <a href="../logotip-dlya-temnoj-temy/" target="_blank" rel="noopener">тёмной теме</a>.</p>
+      <p>Каждая из этих проблем по отдельности решаема, но вместе они означают одно, и это стоит проговорить прямо: градиент нельзя закладывать как единственный носитель узнаваемости. Представьте, что фирменный переход от синего к фиолетовому — это всё, что отличает ваш знак. На сайте он красив, но в чёрно‑белом договоре, на гравировке кружки, в факсе и на <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a> он исчезает — и от бренда не остаётся ничего, потому что узнавать больше нечего. А знак, который читается и без градиента, спокойно переживёт любой из этих носителей: там, где переход воспроизвести нельзя, останется работать форма, а там, где можно, градиент добавит ей выразительности. Разница между этими двумя знаками и есть разница между градиентом‑основой и градиентом‑усилением.</p>
       <h2 id="как-использовать-градиент-правильно">Как использовать градиент правильно</h2>
-      <p>Все четыре проблемы ведут к одному выводу — и он же диктует правила работы. Раз в печати и мелком размере переход разваливается, у любого градиентного логотипа должна быть плоская монохромная версия для печати, гравировки и крошечных размеров: знак, который выживает в один цвет, выживет где угодно (как привести знак к одному цвету — в статье <a href="../cherno-belyj-logotip/" target="_blank" rel="noopener">чёрно‑белый логотип</a>). Раз резкий переход выглядит устаревшим, самые вкусные градиенты 2026 берут из соседних оттенков, а не из контрастных. Раз читаемость важнее эффектности, два‑три цвета в переходе — максимум для знака, а больше — это уже фон. И раз градиент технически описывается математически, живёт он нативно в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, где остаётся гладким на любом размере, тогда как в растровом <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> при увеличении полосит (почему вектор надёжнее — в статье <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор и растр</a>).</p>
-      <p>Заметьте, что все эти правила не запрещают градиент, а лишь ставят его на своё место — вторым слоем поверх готовой формы. На практике удобнее всего сначала довести знак до состояния, в котором он уверенно работает плоским и одноцветным, и только потом класть переход как финальную «подсветку». Тогда градиент нечего спасать при первой же трудности: понадобится факс, вышивка или <a href="../logotip-dlya-temnoj-temy/" target="_blank" rel="noopener">тёмная тема</a> — вы просто снимаете верхний слой и берёте ту же форму без перехода. Порядок «форма → цвет», а не «цвет → форма», и есть главный практический вывод из всех четырёх проблем.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Сначала форма, потом цвет</span></div><div class="callout-body"><p>За всеми этими правилами стоит одна проверка: хороший логотип должен работать даже плоским, одноцветным. Если знак держится только на красивом градиенте, а без него разваливается — проблема в форме, а не в цвете. Поэтому градиент и берут как усиление уже сильной формы, а не как её замену. Что делает форму сильной — в статье <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">что такое логотип</a>.</p></div></div>
+      <p>Все четыре проблемы ведут к одному выводу — и он же диктует правила работы. Раз в печати и мелком размере переход разваливается, у любого градиентного логотипа должна быть плоская монохромная версия для печати, гравировки и крошечных размеров: знак, который выживает в один цвет, выживет где угодно (как привести знак к одному цвету — в статье <a href="../cherno-belyj-logotip/" target="_blank" rel="noopener">чёрно‑белый логотип</a>). Раз резкий переход выглядит устаревшим, самые вкусные градиенты 2026 берут из соседних оттенков, а не из контрастных. Раз читаемость важнее эффектности, два‑три цвета в переходе — максимум для знака, а больше — это уже фон. И раз градиент технически описывается математически, живёт он нативно в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, где остаётся гладким на любом размере, тогда как в растровом <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> при увеличении полосит (почему вектор надёжнее — в статье <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор и растр</a>).</p>
+      <p>Заметьте, что все эти правила не запрещают градиент, а лишь ставят его на своё место — вторым слоем поверх готовой формы. На практике удобнее всего сначала довести знак до состояния, в котором он уверенно работает плоским и одноцветным, и только потом класть переход как финальную «подсветку». Тогда градиент нечего спасать при первой же трудности: понадобится факс, вышивка или <a href="../logotip-dlya-temnoj-temy/" target="_blank" rel="noopener">тёмная тема</a> — вы просто снимаете верхний слой и берёте ту же форму без перехода. Порядок «форма → цвет», а не «цвет → форма», и есть главный практический вывод из всех четырёх проблем.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Сначала форма, потом цвет</span></div><div class="callout-body"><p>За всеми этими правилами стоит одна проверка: хороший логотип должен работать даже плоским, одноцветным. Если знак держится только на красивом градиенте, а без него разваливается — проблема в форме, а не в цвете. Поэтому градиент и берут как усиление уже сильной формы, а не как её замену. Что делает форму сильной — в статье <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">что такое логотип</a>.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -243,14 +247,15 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="короткий-вывод">Короткий вывод</h2>
-      <p>Градиент оживляет логотип, добавляя объём и настроение, и в 2026 году он снова в моде — но в мягком, малоконтрастном и меш‑варианте, а не в кислотном. Платой за красоту становятся сложности с печатью, мелким размером, перекраской и тёмным фоном, и именно из‑за них градиент не может быть фундаментом знака: у любого градиентного логотипа должна быть запасная одноцветная версия, а исходник — храниться в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a>. Всё сводится к одному правилу: сначала сильная плоская форма, и только потом градиент как усиление.</p>
+      <p>Градиент оживляет логотип, добавляя объём и настроение, и в 2026 году он снова в моде — но в мягком, малоконтрастном и меш‑варианте, а не в кислотном. Платой за красоту становятся сложности с печатью, мелким размером, перекраской и тёмным фоном, и именно из‑за них градиент не может быть фундаментом знака: у любого градиентного логотипа должна быть запасная одноцветная версия, а исходник — храниться в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a>. Всё сводится к одному правилу: сначала сильная плоская форма, и только потом градиент как усиление.</p>
       <p>Поэкспериментировать с цветами логотипа и скачать результат в SVG или PNG можно в <a href="../../logos/" target="_blank" rel="noopener">каталоге Trace Logo's</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../rukopisnyj-logotip/" data-date="2026-07-29" data-views="4">
+          <a class="blog-card" href="../rukopisnyj-logotip/" data-date="2026-07-29" data-views="13">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -263,7 +268,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            13
           </div>
           </div>
           <div class="blog-card-title">Рукописный логотип и леттеринг — тренд на «человечность»</div>
@@ -271,7 +276,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../pikselnyj-logotip/" data-date="2026-07-28" data-views="4">
+      <a class="blog-card" href="../pikselnyj-logotip/" data-date="2026-07-28" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -284,7 +289,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            6
           </div>
           </div>
           <div class="blog-card-title">Пиксельный и ретро‑логотип — Y2K возвращается в 2026</div>
@@ -292,7 +297,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../obemnyj-logotip/" data-date="2026-07-27" data-views="7">
+      <a class="blog-card" href="../obemnyj-logotip/" data-date="2026-07-27" data-views="22">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -305,7 +310,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            7
+            22
           </div>
           </div>
           <div class="blog-card-title">Объёмный (3D) логотип — тренд глубины в 2026</div>
@@ -313,7 +318,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../cvetovye-trendy-2026/" data-date="2026-07-24" data-views="22">
+      <a class="blog-card" href="../cvetovye-trendy-2026/" data-date="2026-07-24" data-views="43">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -326,7 +331,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            22
+            43
           </div>
           </div>
           <div class="blog-card-title">Цветовые тренды 2026 — палитры года для брендов</div>
@@ -334,44 +339,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../chto-takoe-emodzi-i-otkuda-oni/" data-date="2026-06-04" data-views="0">
+      <a class="blog-card" href="../kak-izmenit-cvet-logotipa/" data-date="2026-06-03" data-views="34">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Unicode</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" x2="9.01" y1="9" y2="9" /><line x1="15" x2="15.01" y1="9" y2="9" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Цвет</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.622 17.897-10.68-2.913" /><path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z" /><path d="M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>03.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            34
           </div>
           </div>
-          <div class="blog-card-title">Что такое эмодзи и откуда они появились</div>
+          <div class="blog-card-title">Как изменить цвет логотипа онлайн</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-smajlika/" data-date="2026-08-06" data-views="1">
+      <a class="blog-card" href="../emodzi-flagi-kak-ustroeny/" data-date="2026-07-27" data-views="49">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Истории</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M18 13a6 6 0 0 1-6 5 6 6 0 0 1-6-5h12Z" /><line x1="9" x2="9.01" y1="9" y2="9" /><line x1="15" x2="15.01" y1="9" y2="9" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Форматы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>06.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            49
           </div>
           </div>
-          <div class="blog-card-title">История смайлика — от жёлтого значка 1963 года до эмодзи</div>
+          <div class="blog-card-title">Как устроены эмодзи‑флаги — и почему их не видно на Windows</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -389,25 +394,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -484,6 +481,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -529,10 +527,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

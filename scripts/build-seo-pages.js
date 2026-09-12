@@ -261,6 +261,7 @@ const CATEGORY_ICONS = {
   ai:        `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>`,
   flag:      `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>`,
   videocall: `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>`,
+  tv:        `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>`,
 };
 const DEFAULT_ICON = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>`;
 
@@ -389,8 +390,13 @@ function buildVariantCard(v, isActive, rel, itemName) {
 // panel. Emitted only for items carrying `thumb`, i.e. where the square tile in
 // the grid is a stand-in we drew and the real primary is the horizontal logo.
 // Placed above the download buttons so it is read before anything is clicked.
-function buildNoIconNote(item, lang = 'ru') {
+// Also suppressed when the page has neither a "Варианты" nor an "Экосистема"
+// section — with both absent the note has nothing on the page to anchor its
+// explanation to and reads as a non sequitur floating above the download
+// buttons.
+function buildNoIconNote(item, lang = 'ru', hasVariants = false, hasEcosystem = false) {
   if (!item.thumb) return '';
+  if (!hasVariants && !hasEcosystem) return '';
   const text = (lang === 'en' ? DICT.en : DICT.ru).noIconNote;
   return `
       <div class="noicon-note">
@@ -803,12 +809,15 @@ function buildMetaTableRows(item, lang = 'ru') {
         </tr>`
     : '';
 
-  const dateModified = itemDate(item);
-  const dateLabel    = lang === 'en' ? 'Updated' : 'Обновлено';
-  const dateFormatted = formatDate(dateModified, lang);
+  const date = itemDate(item);
+  const isModified = item.dateModified !== undefined;
+  const dateLabel = lang === 'en'
+    ? (isModified ? 'Modified' : 'Added')
+    : (isModified ? 'Изменён' : 'Добавлено');
+  const dateFormatted = formatDate(date, lang);
   const dateRow = `<tr class="meta-row">
           <th scope="row" class="meta-key">${dateLabel}</th>
-          <td class="meta-val"><time datetime="${dateModified}">${dateFormatted}</time></td>
+          <td class="meta-val"><time datetime="${date}">${dateFormatted}</time></td>
         </tr>`;
 
   const downloadCount = DOWNLOAD_STATS[item.figma] || 0;
@@ -1510,6 +1519,9 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   const siblings = (itemsByCat && itemsByCat[catSlug]) || [];
   const faqItems = buildFaqItems(item, brandColors, ecosystemLookup, siblings, section, section_en);
 
+  const variantsSection  = buildVariantsSection(item, rel, lang);
+  const ecosystemSection = buildEcosystemSection(item, ecosystemLookup, rel, lang);
+
   const vars = {
     REL:                      rel,
     HOME_REL:                 en ? '/en/' : rel,
@@ -1546,15 +1558,15 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
     DOWNLOAD_BUTTONS:         buildDownloadButtons(item, rel),
     MACOS_STYLE_TABS:         buildMacosStyleTabs(item, primaryType),
     MACOS_STYLE_TABS_MOBILE:  buildMacosStyleTabsMobile(item, primaryType),
-    NOICON_NOTE:              buildNoIconNote(item, lang),
-    VARIANTS_SECTION:         buildVariantsSection(item, rel, lang),
+    NOICON_NOTE:              buildNoIconNote(item, lang, variantsSection !== '', ecosystemSection !== ''),
+    VARIANTS_SECTION:         variantsSection,
     SPONSOR_SECTION:          buildSponsorSection(item, rel, lang),
     SPONSOR_CSS:              SPONSORS[sponsorKey(item)]?.title ? `<link rel="stylesheet" href="${rel}css/sponsor-banner.css">` : '',
     EASTER_EGG_CSS:           item.figma === 'Icon/Game/DoodleJump' ? `<link rel="stylesheet" href="${rel}css/easter-doodlejump.css">` : '',
     EASTER_EGG_SCRIPT:        item.figma === 'Icon/Game/DoodleJump'
       ? `<script type="module">import { showDoodleJumpWidget } from '/js/easter-doodlejump.min.js'; showDoodleJumpWidget();</script>`
       : '',
-    ECOSYSTEM_SECTION:        buildEcosystemSection(item, ecosystemLookup, rel, lang),
+    ECOSYSTEM_SECTION:        ecosystemSection,
     COLORS_SECTION:           buildColorsSection(brandColors, lang, nm),
     EMBED_SECTION:            buildEmbedSection(item, nm, fullUrl, lang),
     META_TABLE_SECTION:       buildMetaTableSection(item, nm, lang),

@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>История логотипа Telegram — откуда взялся бумажный самолётик · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(346 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(26 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(76 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(136 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(346 70% 38%) 0%, hsl(136 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 13v8" /><path d="M12 3v3" /><path d="M4 6a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h13a2 2 0 0 0 1.152-.365l3.424-2.317a1 1 0 0 0 0-1.635l-3.424-2.318A2 2 0 0 0 17 6z" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(225 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(265 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(315 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(15 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(225 70% 38%) 0%, hsl(15 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 13v8" /><path d="M12 3v3" /><path d="M4 6a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h13a2 2 0 0 0 1.152-.365l3.424-2.317a1 1 0 0 0 0-1.635l-3.424-2.318A2 2 0 0 0 17 6z" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-02">2 августа 2026</time>
@@ -202,24 +206,24 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            3
+	            37
 	          </span>
         </div>
         <h1>История логотипа Telegram — откуда взялся бумажный самолётик</h1>
       </header>
       <div class="blog-body">
-        <p>Бумажный самолётик <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> — один из самых узнаваемых знаков в мире мессенджеров: белый силуэт в синем круге сегодня стоит на экранах у более чем миллиарда пользователей. При этом сам знак почти не менялся с запуска в 2013 году — редкий случай, когда логотип «попал» с первого раза. Разбираемся, откуда взялся образ и что в нём зашито.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Логотип <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> — <strong>бумажный самолётик</strong>, символ отправленного сообщения: записки, которые запускали через класс или бросали с балкона. Знак появился вместе с мессенджером в 2013 году и с тех пор пережил лишь косметические правки: градиент стал плоским цветом, наклон и пропорции самолётика аккуратно выровняли. Фирменный синий в актуальной версии — примерно <code>#28A8E9</code>, в интерфейсах часто используется <code>#0088CC</code>.</p></div></div>
+        <p>Бумажный самолётик <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — один из самых узнаваемых знаков в мире мессенджеров: белый силуэт в синем круге сегодня стоит на экранах у более чем миллиарда пользователей. При этом сам знак почти не менялся с запуска в 2013 году — редкий случай, когда логотип «попал» с первого раза. Разбираемся, откуда взялся образ и что в нём зашито.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Логотип <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — <strong>бумажный самолётик</strong>, символ отправленного сообщения: записки, которые запускали через класс или бросали с балкона. Знак появился вместе с мессенджером в 2013 году и с тех пор пережил лишь косметические правки: градиент стал плоским цветом, наклон и пропорции самолётика аккуратно выровняли. Фирменный синий в актуальной версии — примерно <code>#28A8E9</code>, в интерфейсах часто используется <code>#0088CC</code>.</p></div></div>
       <h2 id="почему-именно-самолётик">Почему именно самолётик</h2>
       <p>Мессенджер запустили Павел и Николай Дуровы в августе 2013 года. Название отсылает к телеграфу и телеграмме — самому быстрому способу доставки текста доинтернетной эпохи. Визуальным продолжением этой идеи стал бумажный самолётик — универсальный, понятный без слов символ отправленного сообщения: сложенный лист, который летит к адресату.</p>
       <p>Образ оказался удачным сразу по нескольким причинам:</p>
       <ul>
       <li><strong>Не привязан к языку.</strong> Самолётик читается одинаково в любой стране — важно для продукта с глобальными амбициями.</li>
-      <li><strong>Означает действие, а не вещь.</strong> Не телефонная трубка и не конверт, а полёт — движение сообщения к получателю. Хорошо совпадает с главным маркетинговым тезисом <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a>: скорость.</li>
-      <li><strong>Геометрически прост.</strong> Знак строится из нескольких треугольников, поэтому безупречно выглядит и в 16 пикселях фавиконки, и на билборде — тот самый случай, о котором мы писали в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">почему бренды упрощают логотипы</a>.</li>
+      <li><strong>Означает действие, а не вещь.</strong> Не телефонная трубка и не конверт, а полёт — движение сообщения к получателю. Хорошо совпадает с главным маркетинговым тезисом <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: скорость.</li>
+      <li><strong>Геометрически прост.</strong> Знак строится из нескольких треугольников, поэтому безупречно выглядит и в 16 пикселях фавиконки, и на билборде — тот самый случай, о котором мы писали в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">почему бренды упрощают логотипы</a>.</li>
       </ul>
       <figure class="blog-figure"><img src="/assets/blog/istoriya-logotipa-telegram/banner.jpg" alt="Баннер Telegram" loading="lazy"></figure>
-      <p>Иконка «бумажный самолётик = отправить» существовала в интерфейсах и раньше, но именно <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> сделал её глобальным брендом: сегодня самолётик в кнопке «отправить» многих приложений читается как отсылка к мессенджеру, а не наоборот.</p>
+      <p>Иконка «бумажный самолётик = отправить» существовала в интерфейсах и раньше, но именно <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> сделал её глобальным брендом: сегодня самолётик в кнопке «отправить» многих приложений читается как отсылка к мессенджеру, а не наоборот.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -236,21 +240,21 @@ window.yaContextCb.push(() => {
       <h3>2013‑2014: упрощение</h3>
       <p>Уже через год после запуска, вслед за iOS 7 и волной флэт‑дизайна, блик исчез, градиент стал спокойнее, контуры — чище. Сам силуэт самолётика при этом остался практически нетронутым.</p>
       <h3>Дальнейшие правки: геометрия и цвет</h3>
-      <p>В последующие годы знак шлифовали почти незаметно для пользователя: выравнивали угол наклона и баланс «крыльев», унифицировали синий между платформами, готовили монохромные версии для тёмных тем и системных иконок. Никакого «ребрендинга» в привычном смысле у <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> не было ни разу — только эволюционная полировка одного и того же образа.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Сравните сами</span></div><div class="callout-body"><p>В нашем каталоге на странице <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> лежат актуальные версии знака в SVG и PNG — круглая иконка и «голый» самолётик без подложки. Скачайте и рассмотрите геометрию: весь логотип состоит из четырёх треугольников.</p></div></div>
+      <p>В последующие годы знак шлифовали почти незаметно для пользователя: выравнивали угол наклона и баланс «крыльев», унифицировали синий между платформами, готовили монохромные версии для тёмных тем и системных иконок. Никакого «ребрендинга» в привычном смысле у <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> не было ни разу — только эволюционная полировка одного и того же образа.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Сравните сами</span></div><div class="callout-body"><p>В нашем каталоге на странице <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> лежат актуальные версии знака в SVG и PNG — круглая иконка и «голый» самолётик без подложки. Скачайте и рассмотрите геометрию: весь логотип состоит из четырёх треугольников.</p></div></div>
       <h2 id="хронология-одним-взглядом">Хронология одним взглядом</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Год</th><th>Событие</th></tr></thead><tbody><tr><td>2013</td><td>Запуск мессенджера; самолётик в синем круге с градиентом и бликом</td></tr><tr><td>2014</td><td>Уплощение вслед за iOS 7: блик убран, градиент смягчён</td></tr><tr><td>2015‑2019</td><td>Тихая шлифовка геометрии, единый синий на всех платформах</td></tr><tr><td>2020‑е</td><td>Монохромные и «прозрачные» версии для тёмных тем, виджетов и системных иконок</td></tr></tbody></table></div>
-      <p>Сравните это с историей <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">Сбера</a>, у которого за тот же период — полноценный ребрендинг со сменой формы и палитры: два противоположных подхода к жизни бренда.</p>
+      <p>Сравните это с историей <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">Сбера</a>, у которого за тот же период — полноценный ребрендинг со сменой формы и палитры: два противоположных подхода к жизни бренда.</p>
       <h2 id="самолётик-за-пределами-иконки">Самолётик за пределами иконки</h2>
-      <p>Логотип <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> интересен тем, как далеко он расходится за пределы иконки приложения:</p>
+      <p>Логотип <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> интересен тем, как далеко он расходится за пределы иконки приложения:</p>
       <ul>
-      <li><strong>Кнопка «отправить».</strong> Внутри самого мессенджера сообщение отправляется нажатием на тот же самолётик — редкий случай, когда логотип продукта и главный элемент его интерфейса совпадают. Каждая отправка — микроконтакт с брендом.</li>
+      <li><strong>Кнопка «отправить».</strong> Внутри самого мессенджера сообщение отправляется нажатием на тот же самолётик — редкий случай, когда логотип продукта и главный элемент его интерфейса совпадают. Каждая отправка — микроконтакт с брендом.</li>
       <li><strong>Анимации загрузки.</strong> Самолётик летает в сплеш‑скринах и пустых состояниях — знак «оживает» без изменения формы (как это делается технически, разбирали в статье <a href="../animirovannyj-logotip/" target="_blank" rel="noopener">про анимированные логотипы</a>).</li>
       <li><strong>Стикеры и мерч.</strong> Утка‑талисман и стикерпаки регулярно обыгрывают самолётик, наращивая эмоциональную связь, которую строгая геометрия иконки дать не может.</li>
-      <li><strong>Каналы и боты.</strong> Тысячи каналов строят свои аватарки на основе самолётика с изменённым цветом — де‑факто это народная айдентика экосистемы. Если делаете свой канал, начните со статьи <a href="../logotip-dlya-telegram-kanala/" target="_blank" rel="noopener">логотип для Telegram‑канала</a>.</li>
+      <li><strong>Каналы и боты.</strong> Тысячи каналов строят свои аватарки на основе самолётика с изменённым цветом — де‑факто это народная айдентика экосистемы. Если делаете свой канал, начните со статьи <a href="../logotip-dlya-telegram-kanala/" target="_blank" rel="noopener">логотип для Telegram‑канала</a>.</li>
       </ul>
       <h2 id="какие-версии-знака-существуют">Какие версии знака существуют</h2>
-      <p>В работе дизайнеру обычно нужны три варианта, и все они есть на странице <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> в нашем каталоге:</p>
+      <p>В работе дизайнеру обычно нужны три варианта, и все они есть на странице <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> в нашем каталоге:</p>
       <ol>
       <li><strong>Круглая иконка</strong> — самолётик в синем круге. Версия для аватарок, списков приложений и любых мест, где логотип стоит в ряду других сервисов.</li>
       <li><strong>Знак без подложки</strong> — «голый» самолётик. Нужен, когда фон задаёте вы: тёмная тема сайта, фирменный цвет, печать.</li>
@@ -259,7 +263,7 @@ window.yaContextCb.push(() => {
       <p>Частая ошибка — растягивать круглую иконку там, где нужен знак без подложки: белый ободок круга на белом фоне даёт грязный край. Правильный путь — взять SVG без подложки и задать цвет самостоятельно (как это сделать за минуту в статье: <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">«Как изменить цвет логотипа»</a>).</p>
       <h2 id="анатомия-знака">Анатомия знака</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Элемент</th><th>Что означает</th></tr></thead><tbody><tr><td>Бумажный самолётик</td><td>отправленное сообщение, скорость доставки</td></tr><tr><td>Наклон вправо‑вверх</td><td>движение вперёд, полёт, рост</td></tr><tr><td>Синий круг</td><td>классический «телеком‑синий»: надёжность, связь</td></tr><tr><td>Белый силуэт</td><td>лаконичность, контраст, читаемость в любом размере</td></tr></tbody></table></div>
-      <p>Фирменный синий актуальной иконки — около <code>#28A8E9</code> (в разных носителях встречаются вариации, в вебе исторически закрепился <code>#0088CC</code>). Как самостоятельно вытащить точный цвет из SVG‑файла, мы показывали в статье <a href="../kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">как узнать цвет логотипа</a>, а о психологии синего в айдентике — в статье <a href="../psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">психология цвета в логотипе</a>.</p>
+      <p>Фирменный синий актуальной иконки — около <code>#28A8E9</code> (в разных носителях встречаются вариации, в вебе исторически закрепился <code>#0088CC</code>). Как самостоятельно вытащить точный цвет из SVG‑файла, мы показывали в статье <a href="../kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">как узнать цвет логотипа</a>, а о психологии синего в айдентике — в статье <a href="../psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">психология цвета в логотипе</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -274,136 +278,137 @@ window.yaContextCb.push(() => {
       <ol>
       <li><strong>Метафора действия сильнее метафоры предмета.</strong> Самолётик рассказывает, что делает продукт, — доставляет сообщения быстро.</li>
       <li><strong>Простая геометрия стареет медленно.</strong> За десятилетие знак не устарел ни разу — упрощать было уже нечего.</li>
-      <li><strong>Консистентность дороже новизны.</strong> Пока конкуренты перекрашивались и перерисовывались, <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> наращивал узнаваемость одного и того же силуэта.</li>
+      <li><strong>Консистентность дороже новизны.</strong> Пока конкуренты перекрашивались и перерисовывались, <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> наращивал узнаваемость одного и того же силуэта.</li>
       </ol>
-      <p>Похожие разборы читайте в нашей серии: <a href="../istoriya-logotipa-apple/" target="_blank" rel="noopener">история логотипа Apple</a>, <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">история логотипа Яндекса</a> и <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">история логотипа Сбера</a>. А все версии самолётика в векторе — на странице <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> в <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a>.</p>
+      <p>Похожие разборы читайте в нашей серии: <a href="../istoriya-logotipa-apple/" target="_blank" rel="noopener">история логотипа Apple</a>, <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">история логотипа Яндекса</a> и <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">история логотипа Сбера</a>. А все версии самолётика в векторе — на странице <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> в <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../kak-pisat-o-logotipe/" data-date="2026-09-13" data-views="0">
+          <a class="blog-card" href="../logotipy-oblachnyh-servisov/" data-date="2026-09-10" data-views="0">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Текст</span><span class="blog-card-tag">Практика</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             0
           </div>
           </div>
-          <div class="blog-card-title">Как писать о логотипе: почему сильный знак проваливают на словах</div>
+          <div class="blog-card-title">Логотипы облачных сервисов — почему все рисуют облако и кто нет</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../tochki-kontakta-brenda/" data-date="2026-09-12" data-views="0">
+      <a class="blog-card" href="../logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Стратегия</span><span class="blog-card-tag">Опыт</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Точки контакта бренда: почему впечатление считается по худшему касанию</div>
+          <div class="blog-card-title">Логотипы нейросетей — как выглядит айдентика ИИ‑сервисов</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../brending-s-pomoshyu-ii/" data-date="2026-09-11" data-views="0">
+      <a class="blog-card" href="../logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5" /><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /><path d="M18 18a4 4 0 0 0 2-7.464" /><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /><path d="M6 18a4 4 0 0 1-2-7.464" /><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Игры</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Брендинг с помощью ИИ — где нейросеть помогает, а где вредит</div>
+          <div class="blog-card-title">Логотипы мобильных игр — почему у всех объёмные буквы</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../arhetipy-brenda/" data-date="2026-09-09" data-views="0">
+      <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Стратегия</span><span class="blog-card-tag">Архетипы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" /><path d="M5 21h14" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>09.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">Архетипы бренда — как превратить типаж в проверяемое правило</div>
+          <div class="blog-card-title">Логотипы мессенджеров — почему все выбирают пузырь и самолётик</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-starbucks/" data-date="2026-08-01" data-views="2">
+      <a class="blog-card" href="../cvetovye-trendy-2026/" data-date="2026-07-24" data-views="43">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v2" /><path d="M14 2v2" /><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /><path d="M6 2v2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Цвет</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 7 6 2" /><path d="M18.992 12H2.041" /><path d="M21.145 18.38A3.34 3.34 0 0 1 20 16.5a3.3 3.3 0 0 1-1.145 1.88c-.575.46-.855 1.02-.855 1.595A2 2 0 0 0 20 22a2 2 0 0 0 2-2.025c0-.58-.285-1.13-.855-1.595" /><path d="m8.5 4.5 2.148-2.148a1.205 1.205 0 0 1 1.704 0l7.296 7.296a1.205 1.205 0 0 1 0 1.704l-7.592 7.592a3.615 3.615 0 0 1-5.112 0l-3.888-3.888a3.615 3.615 0 0 1 0-5.112L5.67 7.33" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>24.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            43
           </div>
           </div>
-          <div class="blog-card-title">История логотипа Starbucks — кто такая сирена и куда делось имя</div>
+          <div class="blog-card-title">Цветовые тренды 2026 — палитры года для брендов</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../sajt-dlya-nejrosetej-geo/" data-date="2026-08-10" data-views="0">
+      <a class="blog-card" href="../variativnye-shrifty/" data-date="2026-07-30" data-views="7">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SEO</span><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34" /><path d="M4 6h.01" /><path d="M2.29 9.62A10 10 0 1 0 21.31 8.35" /><path d="M16.24 7.76A6 6 0 1 0 8.23 16.67" /><path d="M12 18h.01" /><path d="M17.99 11.66A6 6 0 0 1 15.77 16.67" /><circle cx="12" cy="12" r="2" /><path d="m13.41 10.59 5.66-5.66" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Шрифт</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Веб</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" /><path d="M12 19H3" /><path d="M14 3v4" /><path d="M16 17v4" /><path d="M21 12h-9" /><path d="M21 19h-5" /><path d="M21 5h-7" /><path d="M8 10v4" /><path d="M8 12H3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>30.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            7
           </div>
           </div>
-          <div class="blog-card-title">Как подготовить сайт для нейросетей — GEO и llms.txt в 2026</div>
+          <div class="blog-card-title">Вариативные шрифты — что это и зачем в 2026</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -421,25 +426,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -516,6 +513,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -561,10 +559,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

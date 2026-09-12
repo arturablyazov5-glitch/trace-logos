@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(329 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(9 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(59 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(119 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(329 70% 38%) 0%, hsl(119 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8" /><path d="M10 19v-3.96 3.15" /><path d="M7 19h5" /><rect width="6" height="10" x="16" y="12" rx="2" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(208 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(248 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(298 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(358 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(208 70% 38%) 0%, hsl(358 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8" /><path d="M10 19v-3.96 3.15" /><path d="M7 19h5" /><rect width="6" height="10" x="16" y="12" rx="2" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-06">July 6, 2026</time>
@@ -203,7 +207,7 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            2
+	            25
 	          </span>
         </div>
         <h1>Why Emoji Look Different on iPhone, Android and Windows</h1>
@@ -217,7 +221,7 @@
       <ol>
       <li>Your system displays the character with <strong>its</strong> emoji set — say, Apple Color Emoji.</li>
       <li>Only the code travels over the network.</li>
-      <li>The recipient's system renders that code with <strong>its</strong> set — Google Noto on Android, Segoe UI Emoji on <a href="/en/logos/tech/windows/" target="_blank" rel="noopener">Windows</a>.</li>
+      <li>The recipient's system renders that code with <strong>its</strong> set — Google Noto on Android, Segoe UI Emoji on <a href="/en/logos/tech/windows/" target="_blank" rel="noopener">Windows<img class="blog-mention-icon" src="/assets/logos/svgs/windows.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</li>
       </ol>
       <p>So &quot;identical emoji&quot; across platforms don't exist in principle — only identical meaning, as written in the standard.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
@@ -231,7 +235,7 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="who-draws-them">Who draws them</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Set</th><th>Where it lives</th></tr></thead><tbody><tr><td>Apple Color Emoji</td><td>iPhone, iPad, Mac</td></tr><tr><td>Google Noto Emoji</td><td>Android, <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome</a> OS, many apps</td></tr><tr><td>Segoe UI Emoji</td><td><a href="/en/logos/tech/windows/" target="_blank" rel="noopener">Windows</a></td></tr><tr><td>Samsung One UI</td><td>Samsung phones</td></tr><tr><td>Twemoji</td><td>X/Twitter, various web services</td></tr><tr><td>Custom sets</td><td>Telegram (animated), WhatsApp, Facebook</td></tr></tbody></table></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Set</th><th>Where it lives</th></tr></thead><tbody><tr><td>Apple Color Emoji</td><td>iPhone, iPad, Mac</td></tr><tr><td>Google Noto Emoji</td><td>Android, <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> OS, many apps</td></tr><tr><td>Segoe UI Emoji</td><td><a href="/en/logos/tech/windows/" target="_blank" rel="noopener">Windows<img class="blog-mention-icon" src="/assets/logos/svgs/windows.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td></tr><tr><td>Samsung One UI</td><td>Samsung phones</td></tr><tr><td>Twemoji</td><td>X/Twitter, various web services</td></tr><tr><td>Custom sets</td><td>Telegram (animated), WhatsApp, Facebook</td></tr></tbody></table></div>
       <p>Note that messengers may override system emoji with their own: WhatsApp on Android ships its own set, Telegram animates the popular ones. Even on one phone, emoji differ between apps.</p>
       <h2 id="when-the-differences-bite">When the differences bite</h2>
       <p><strong>Meaning drift.</strong> The famous cases: Apple turned the pistol into a water gun in 2016 while others kept realistic weapons for years. &quot;Rolling eyes&quot; reads as light irony on one platform and contempt on another. Linguists have documented real misunderstandings.</p>
@@ -279,11 +283,12 @@ window.yaContextCb.push(() => {
       <p>An emoji is a code; the picture is the platform's interpretation. You send meaning, not pixels. Fine for daily chats; in marketing and design, a reason to preview across major platforms.</p>
       <p>Compare how the same emoji looks on Apple vs Google and download either version as PNG in our <a href="/en/emoji/" target="_blank" rel="noopener">emoji catalog</a> — both platforms' artwork sits side by side on every emoji's page.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/novye-emodzi-2026/" data-date="2026-08-06" data-views="0">
+          <a class="blog-card" href="/en/blog/novye-emodzi-2026/" data-date="2026-08-06" data-views="39">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -296,7 +301,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            39
           </div>
           </div>
           <div class="blog-card-title">New Emoji 2026 — What's Coming in Emoji 18.0</div>
@@ -304,7 +309,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/pochemu-ne-otobrazhayutsya-emodzi/" data-date="2026-07-08" data-views="20">
+      <a class="blog-card" href="/en/blog/pochemu-ne-otobrazhayutsya-emodzi/" data-date="2026-07-08" data-views="114">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -317,7 +322,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            20
+            114
           </div>
           </div>
           <div class="blog-card-title">Why Emoji Don't Display — Boxes, Question Marks and Flags on Windows</div>
@@ -325,7 +330,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/chto-takoe-emodzi-i-otkuda-oni/" data-date="2026-06-04" data-views="0">
+      <a class="blog-card" href="/en/blog/chto-takoe-emodzi-i-otkuda-oni/" data-date="2026-06-04" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -338,7 +343,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            3
           </div>
           </div>
           <div class="blog-card-title">What Are Emoji and Where Did They Come From</div>
@@ -346,65 +351,65 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-servisov-videozvonkov/" data-date="2026-08-26" data-views="0">
+      <a class="blog-card" href="/en/blog/kak-sdelat-svoi-emodzi-v-telegram/" data-date="2026-08-11" data-views="135">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Tech</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /><rect x="2" y="6" width="14" height="12" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Telegram</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z" /><path d="M15 3v5a1 1 0 0 0 1 1h5" /><path d="M8 13h.01" /><path d="M16 13h.01" /><path d="M10 16s.8 1 2 1c1.3 0 2-1 2-1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            135
           </div>
           </div>
-          <div class="blog-card-title">Video Call Service Logos — Zoom, Teams, Meet, Discord</div>
+          <div class="blog-card-title">How to Make Custom Emoji and Stickers in Telegram — Full Guide</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/memy-v-marketinge/" data-date="2026-09-08" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-fitnes-prilozhenij/" data-date="2026-08-19" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Marketing</span><span class="blog-card-tag">Memes</span><span class="blog-card-tag">2026 Trends</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /><path d="M7 10v12" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Health</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            4
           </div>
           </div>
-          <div class="blog-card-title">Memes in Marketing — How a Brand Can Joke Without Embarrassing Itself</div>
+          <div class="blog-card-title">Fitness App Logos — Strava, Nike Run Club, Peloton and More</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/pochemu-brendy-uproshchayut-logotipy/" data-date="2026-07-05" data-views="3">
+      <a class="blog-card" href="/en/blog/kak-zaregistrirovat-logotip/" data-date="2026-06-26" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Redesign</span><span class="blog-card-tag">Trends</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 10 7-7" /><path d="M20 10h-6V4" /><path d="m3 21 7-7" /><path d="M4 14h6v6" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Legal</span><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Trademark</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>05.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             3
           </div>
           </div>
-          <div class="blog-card-title">Why Every Brand Is Simplifying Its Logo — The Big Trend Explained</div>
+          <div class="blog-card-title">How to Register a Logo as a Trademark — Step by Step, No Illusions</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -422,25 +427,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -517,6 +514,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -562,10 +560,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

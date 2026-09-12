@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как узнать точный цвет логотипа — HEX‑код за 30 секунд · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(316 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(356 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(46 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(106 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(316 70% 38%) 0%, hsl(106 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 9-8.414 8.414A2 2 0 0 0 3 18.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 3.828 21h1.344a2 2 0 0 0 1.414-.586L15 12" /><path d="m18 9 .4.4a1 1 0 1 1-3 3l-3.8-3.8a1 1 0 1 1 3-3l.4.4 3.4-3.4a1 1 0 1 1 3 3z" /><path d="m2 22 .414-.414" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(196 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(236 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(286 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(346 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(196 70% 38%) 0%, hsl(346 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 9-8.414 8.414A2 2 0 0 0 3 18.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 3.828 21h1.344a2 2 0 0 0 1.414-.586L15 12" /><path d="m18 9 .4.4a1 1 0 1 1-3 3l-3.8-3.8a1 1 0 1 1 3-3l.4.4 3.4-3.4a1 1 0 1 1 3 3z" /><path d="m2 22 .414-.414" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-22">22 июня 2026</time>
@@ -202,16 +206,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            14
+	            32
 	          </span>
         </div>
         <h1>Как узнать точный цвет логотипа — HEX‑код за 30 секунд</h1>
       </header>
       <div class="blog-body">
-        <p>Нужно оформить кнопку «Войти через VK» в фирменном синем, подобрать фон под логотип клиента или собрать презентацию в цветах бренда — а точного кода цвета нет. На глаз подбирать нельзя: разница между «примерно таким зелёным» и фирменным #21A038 заметна сразу и выглядит неаккуратно. Разберём, как получить точный HEX‑код цвета любого логотипа.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Самый надёжный источник цвета — <strong>SVG‑файл логотипа</strong>: цвет записан прямо в коде, без искажений. Самый быстрый — <strong>пипетка</strong> в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> или расширении браузера. Самый опасный — пипетка по JPG‑картинке из поиска: сжатие искажает цвета, и вы скопируете «испорченный» оттенок.</p></div></div>
+        <p>Нужно оформить кнопку «Войти через VK» в фирменном синем, подобрать фон под логотип клиента или собрать презентацию в цветах бренда — а точного кода цвета нет. На глаз подбирать нельзя: разница между «примерно таким зелёным» и фирменным #21A038 заметна сразу и выглядит неаккуратно. Разберём, как получить точный HEX‑код цвета любого логотипа.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Самый надёжный источник цвета — <strong>SVG‑файл логотипа</strong>: цвет записан прямо в коде, без искажений. Самый быстрый — <strong>пипетка</strong> в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> или расширении браузера. Самый опасный — пипетка по JPG‑картинке из поиска: сжатие искажает цвета, и вы скопируете «испорченный» оттенок.</p></div></div>
       <h2 id="что-такое-hex-и-почему-все-говорят-на-нём">Что такое HEX и почему все говорят на нём</h2>
-      <p>HEX — это запись цвета в виде #RRGGBB: две шестнадцатеричных цифры на красный, зелёный и синий каналы. #FF0000 — чистый красный, #21A038 — зелёный <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера</a>. Это универсальный язык: HEX понимают CSS, <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>, <a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a>, конструкторы сайтов и любой разработчик. В брендбуках цвет дублируют ещё в RGB (для экранов) и CMYK/Pantone (для печати), но в цифровой работе достаточно HEX.</p>
+      <p>HEX — это запись цвета в виде #RRGGBB: две шестнадцатеричных цифры на красный, зелёный и синий каналы. #FF0000 — чистый красный, #21A038 — зелёный <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Это универсальный язык: HEX понимают CSS, <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/photoshop.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, конструкторы сайтов и любой разработчик. В брендбуках цвет дублируют ещё в RGB (для экранов) и CMYK/Pantone (для печати), но в цифровой работе достаточно HEX.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -223,7 +227,7 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="способ-1-взять-из-svg-эталонный">Способ 1. Взять из SVG — эталонный</h2>
-      <p>Если у вас есть SVG логотипа, цвет уже записан внутри файла. Откройте SVG любым текстовым редактором и найдите атрибуты <code>fill</code>:</p>
+      <p>Если у вас есть SVG логотипа, цвет уже записан внутри файла. Откройте SVG любым текстовым редактором и найдите атрибуты <code>fill</code>:</p>
       <div class="blog-code">
         <div class="blog-code-head">
           <span class="blog-code-lang">код</span>
@@ -234,14 +238,14 @@ window.yaContextCb.push(() => {
         </div>
         <pre><code class="language-">&lt;path fill=&quot;#21A038&quot; d=&quot;M45.2 12.6...&quot;/&gt;</code></pre>
       </div>
-      <p>Вот он, точный фирменный цвет — ровно тот, который заложил дизайнер, без искажений сжатия и цветовых профилей. Если заливок несколько, каждая — отдельный цвет палитры бренда.</p>
+      <p>Вот он, точный фирменный цвет — ровно тот, который заложил дизайнер, без искажений сжатия и цветовых профилей. Если заливок несколько, каждая — отдельный цвет палитры бренда.</p>
       <h2 id="способ-2-пипетка-в-figma">Способ 2. Пипетка в Figma</h2>
-      <p>Вставьте логотип в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>, выделите фигуру — цвет заливки покажется в правой панели, клик по нему открывает HEX. Либо пипетка (клавиша I) по любому месту холста. Работает и с векторными, и с растровыми файлами.</p>
+      <p>Вставьте логотип в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, выделите фигуру — цвет заливки покажется в правой панели, клик по нему открывает HEX. Либо пипетка (клавиша I) по любому месту холста. Работает и с векторными, и с растровыми файлами.</p>
       <h2 id="способ-3-пипетка-в-браузере">Способ 3. Пипетка в браузере</h2>
       <ul>
       <li><strong>Расширения‑колорпикеры</strong> (ColorZilla и аналоги) — пипетка по любой точке любой страницы.</li>
-      <li><strong>DevTools:</strong> если цвет задан в CSS сайта, откройте инспектор (F12), найдите элемент — в стилях будет точное значение. Клик по цветному квадратику открывает пипетку.</li>
-      <li><strong><a href="../../logos/search/chrome/" target="_blank" rel="noopener">Chrome</a> без расширений:</strong> в DevTools у любого поля цвета есть пипетка, которой можно ткнуть в страницу.</li>
+      <li><strong>DevTools:</strong> если цвет задан в CSS сайта, откройте инспектор (F12), найдите элемент — в стилях будет точное значение. Клик по цветному квадратику открывает пипетку.</li>
+      <li><strong><a href="../../logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> без расширений:</strong> в DevTools у любого поля цвета есть пипетка, которой можно ткнуть в страницу.</li>
       </ul>
       <h2 id="способ-4-официальные-гайдлайны-бренда">Способ 4. Официальные гайдлайны бренда</h2>
       <p>У крупных компаний есть страницы brand assets / brand guidelines, где фирменные цвета выписаны явно: HEX, RGB, CMYK, Pantone. Это юридически «самый правильный» источник — тот самый цвет, который бренд просит использовать. Ищите по запросу «название бренда brand guidelines».</p>
@@ -250,27 +254,27 @@ window.yaContextCb.push(() => {
       <h2 id="почему-пипетка-иногда-врёт">Почему пипетка иногда врёт</h2>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Три источника искажений</span></div><div class="callout-body"><ol>
       <li><strong>JPG‑сжатие.</strong> На границах цветов JPG создаёт переходные пиксели. Ткнули пипеткой в край буквы — получили не фирменный цвет, а его смесь с фоном. Всегда кликайте в центр крупной заливки.</li>
-      <li><strong>Цветовые профили.</strong> Одна и та же картинка на разных мониторах и в разных браузерах может отдавать чуть разные значения — особенно если файл сохранён в Display P3, а не sRGB.</li>
-      <li><strong>Полупрозрачность и наложения.</strong> Если логотип лежит на подложке с прозрачностью, пипетка снимет смешанный цвет, а не исходный.</li>
+      <li><strong>Цветовые профили.</strong> Одна и та же картинка на разных мониторах и в разных браузерах может отдавать чуть разные значения — особенно если файл сохранён в Display P3, а не sRGB.</li>
+      <li><strong>Полупрозрачность и наложения.</strong> Если логотип лежит на подложке с прозрачностью, пипетка снимет смешанный цвет, а не исходный.</li>
       </ol></div></div>
       <p>Отсюда правило: пипетка — для быстрых задач, SVG или гайдлайны — для чистовых.</p>
       <h2 id="что-делать-с-цветом-дальше">Что делать с цветом дальше</h2>
       <p>Получили HEX — дальше обычно нужно: собрать палитру вокруг него, проверить контраст текста на этом фоне (для доступности — контраст минимум 4.5:1 для обычного текста), сконвертировать в RGB или CMYK для печати. Любой конвертер цветов делает это мгновенно.</p>
-      <p>А если задача обратная — не узнать цвет, а поменять его в самом логотипе — у нас есть отдельная инструкция <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">как изменить цвет логотипа</a>.</p>
+      <p>А если задача обратная — не узнать цвет, а поменять его в самом логотипе — у нас есть отдельная инструкция <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">как изменить цвет логотипа</a>.</p>
       <h2 id="шпаргалка-по-цветовым-системам-hex-rgb-hsl-cmyk-pantone">Шпаргалка по цветовым системам: HEX, RGB, HSL, CMYK, Pantone</h2>
-      <p>Один и тот же цвет записывается пятью способами, и полезно понимать, когда какой нужен:</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Система</th><th>Пример (зелёный <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера</a>)</th><th>Где используется</th></tr></thead><tbody><tr><td>HEX</td><td>#21A038</td><td>CSS, <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>, все цифровые задачи</td></tr><tr><td>RGB</td><td>rgb(33, 160, 56)</td><td>то же самое, другая запись</td></tr><tr><td>HSL</td><td>hsl(131, 66%, 38%)</td><td>удобна для подбора оттенков в CSS</td></tr><tr><td>CMYK</td><td>≈ 79/0/89/0</td><td>печать</td></tr><tr><td>Pantone</td><td>плашечный цвет по каталогу</td><td>брендовая печать, когда оттенок критичен</td></tr></tbody></table></div>
-      <p>Важные следствия. HEX и RGB — одно и то же число в разных обёртках, конвертация между ними точная. А вот <strong>CMYK — другое цветовое пространство</strong>: часть ярких экранных цветов в печати недостижима, поэтому конвертация «на глазок» онлайн‑калькулятором может разочаровать на бумаге. Для важной печати бренды заказывают цветопробу или используют Pantone — физический каталог эталонных красок, который не зависит от настроек принтера.</p>
-      <p><strong>HSL</strong> — недооценённый помощник: запись «тон‑насыщенность‑светлота» позволяет осмысленно строить палитру от фирменного цвета: тёмная версия для ховера = тот же тон, меньше светлота; пастельный фон = тот же тон, меньше насыщенность, больше светлота.</p>
+      <p>Один и тот же цвет записывается пятью способами, и полезно понимать, когда какой нужен:</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Система</th><th>Пример (зелёный <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>)</th><th>Где используется</th></tr></thead><tbody><tr><td>HEX</td><td>#21A038</td><td>CSS, <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, все цифровые задачи</td></tr><tr><td>RGB</td><td>rgb(33, 160, 56)</td><td>то же самое, другая запись</td></tr><tr><td>HSL</td><td>hsl(131, 66%, 38%)</td><td>удобна для подбора оттенков в CSS</td></tr><tr><td>CMYK</td><td>≈ 79/0/89/0</td><td>печать</td></tr><tr><td>Pantone</td><td>плашечный цвет по каталогу</td><td>брендовая печать, когда оттенок критичен</td></tr></tbody></table></div>
+      <p>Важные следствия. HEX и RGB — одно и то же число в разных обёртках, конвертация между ними точная. А вот <strong>CMYK — другое цветовое пространство</strong>: часть ярких экранных цветов в печати недостижима, поэтому конвертация «на глазок» онлайн‑калькулятором может разочаровать на бумаге. Для важной печати бренды заказывают цветопробу или используют Pantone — физический каталог эталонных красок, который не зависит от настроек принтера.</p>
+      <p><strong>HSL</strong> — недооценённый помощник: запись «тон‑насыщенность‑светлота» позволяет осмысленно строить палитру от фирменного цвета: тёмная версия для ховера = тот же тон, меньше светлота; пастельный фон = тот же тон, меньше насыщенность, больше светлота.</p>
       <h2 id="как-собрать-всю-палитру-бренда-а-не-один-цвет">Как собрать всю палитру бренда, а не один цвет</h2>
       <p>Задача чаще звучит не «узнать цвет», а «собрать фирменные цвета для макета». Порядок:</p>
       <ol>
       <li><strong>Основной цвет</strong> — из SVG‑логотипа или гайдлайнов (способы выше).</li>
       <li><strong>Вторичные цвета</strong> — посмотрите живой продукт: сайт и приложение бренда. В DevTools загляните в CSS‑переменные (<code>:root</code> в стилях) — современные сайты держат палитру там, и это готовый список: основной, акцентный, фоновые, текстовые.</li>
       <li><strong>Проверка контраста</strong> — прежде чем использовать чужую палитру в своих макетах, прогоните пары «текст/фон» через проверку контраста (минимум 4.5:1 для обычного текста, 3:1 для крупного).</li>
-      <li><strong>Фиксация</strong> — сохраните собранное стилями в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> или переменными в CSS, чтобы цвет вводился один раз, а не копипастился по файлам.</li>
+      <li><strong>Фиксация</strong> — сохраните собранное стилями в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> или переменными в CSS, чтобы цвет вводился один раз, а не копипастился по файлам.</li>
       </ol>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Пипетка по видео и градиентам</span></div><div class="callout-body"><p>Два коварных случая. Видео: цвет в ролике искажён сжатием и цветокоррекцией — не снимайте фирменный цвет с кадра <a href="../../logos/media/youtube/" target="_blank" rel="noopener">YouTube</a>, найдите статичный исходник. Градиенты: у градиентного логотипа «главных» цветов два и более — снимайте оба конца градиента, а в SVG они видны в теге <code>&lt;linearGradient&gt;</code> явными стопами.</p></div></div>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Пипетка по видео и градиентам</span></div><div class="callout-body"><p>Два коварных случая. Видео: цвет в ролике искажён сжатием и цветокоррекцией — не снимайте фирменный цвет с кадра <a href="../../logos/media/youtube/" target="_blank" rel="noopener">YouTube<img class="blog-mention-icon" src="../../assets/logos/svgs/youtube.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, найдите статичный исходник. Градиенты: у градиентного логотипа «главных» цветов два и более — снимайте оба конца градиента, а в SVG они видны в теге <code>&lt;linearGradient&gt;</code> явными стопами.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -285,11 +289,12 @@ window.yaContextCb.push(() => {
       <p>HEX из SVG‑кода — эталон, гайдлайны бренда — официальный источник, пипетка — быстрый способ с осторожностью на JPG. Кликайте в центр заливки, а не в края, и не доверяйте цветам из перекодированных картинок.</p>
       <p>Чтобы не заниматься детективной работой: на странице каждого бренда в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> есть блок «Цвета бренда» — все фирменные HEX‑коды, извлечённые прямо из оригинального SVG, копируются кликом.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="17">
+          <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="35">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -302,7 +307,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            17
+            35
           </div>
           </div>
           <div class="blog-card-title">Чёрно‑белая версия логотипа — зачем нужна и как сделать правильно</div>
@@ -310,7 +315,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="4">
+      <a class="blog-card" href="../vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="31">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -323,7 +328,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            31
           </div>
           </div>
           <div class="blog-card-title">Водяной знак на фото — как поставить логотип, чтобы защищал и не портил</div>
@@ -331,7 +336,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-s-prozrachnym-fonom/" data-date="2026-06-30" data-views="11">
+      <a class="blog-card" href="../logotip-s-prozrachnym-fonom/" data-date="2026-06-30" data-views="118">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -344,7 +349,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            11
+            118
           </div>
           </div>
           <div class="blog-card-title">Логотип с прозрачным фоном — как сделать, скачать и не получить белый квадрат</div>
@@ -352,7 +357,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-skachat-logotip-s-sajta/" data-date="2026-06-21" data-views="74">
+      <a class="blog-card" href="../kak-skachat-logotip-s-sajta/" data-date="2026-06-21" data-views="317">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -365,7 +370,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            74
+            317
           </div>
           </div>
           <div class="blog-card-title">Как скачать логотип с любого сайта — 5 легальных способов</div>
@@ -373,44 +378,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../redizajn-ili-refresh-logotipa/" data-date="2026-09-01" data-views="0">
+      <a class="blog-card" href="../golos-brenda/" data-date="2026-08-15" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Ребрендинг</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Голос бренда</span><span class="blog-card-tag">Тексты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19v3" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><rect x="9" y="2" width="6" height="13" rx="3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Редизайн или рефреш логотипа — что выбрать и не потерять узнаваемость</div>
+          <div class="blog-card-title">Голос бренда (tone of voice) — как звучать узнаваемо</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-favicon/" data-date="2026-06-18" data-views="1">
+      <a class="blog-card" href="../istoriya-logotipa-yandeksa/" data-date="2026-06-14" data-views="41">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Фавикон</span><span class="blog-card-tag">Сайты</span><span class="blog-card-tag">SVG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Яндекс</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Ребрендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>18.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            41
           </div>
           </div>
-          <div class="blog-card-title">Фавикон для сайта в 2026 году — форматы, размеры и правильный HTML</div>
+          <div class="blog-card-title">История логотипа Яндекса — от «Яndex» 1997 года до ребрендинга 2021‑го</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -428,25 +433,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -523,6 +520,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -568,10 +566,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

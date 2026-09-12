@@ -47,7 +47,7 @@ const VERSION = versionMatch[1];
 // and unrelated mirrored repos.
 const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
-  'figna-plagins', 'supabase', 'sanitizer', 'upptime',
+  'figma-plugins', 'supabase', 'sanitizer', 'upptime',
 ]);
 
 function walkHtml(dir, out = []) {

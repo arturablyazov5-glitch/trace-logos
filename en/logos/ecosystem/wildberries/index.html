@@ -13,12 +13,14 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wildberries Ecosystem Logos · Trace Logo's</title>
-  <meta name="description" content="3 SVG and PNG logos from the Wildberries ecosystem. Download free, edit colors, export to Figma.">
+  <meta name="description" content="4 SVG and PNG logos from the Wildberries ecosystem. Download free, edit colors, export to Figma.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <link rel="canonical" href="https://trace-logos.ru/en/logos/ecosystem/wildberries/">
@@ -35,7 +37,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trace Logo's">
   <meta property="og:title" content="Wildberries Ecosystem Logos">
-  <meta property="og:description" content="3 SVG and PNG logos from the Wildberries ecosystem. Download free, edit colors, export to Figma.">
+  <meta property="og:description" content="4 SVG and PNG logos from the Wildberries ecosystem. Download free, edit colors, export to Figma.">
   <meta property="og:url" content="https://trace-logos.ru/en/logos/ecosystem/wildberries/">
   <meta property="og:image" content="https://trace-logos.ru/favicon-512.png">
   <meta property="og:image:width" content="512">
@@ -43,7 +45,7 @@
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Wildberries Ecosystem Logos">
-  <meta name="twitter:description" content="3 SVG and PNG logos from the Wildberries ecosystem. Download free, edit colors, export to Figma.">
+  <meta name="twitter:description" content="4 SVG and PNG logos from the Wildberries ecosystem. Download free, edit colors, export to Figma.">
   <meta name="twitter:image" content="https://trace-logos.ru/favicon-512.png">
 
   <script type="application/ld+json">
@@ -80,7 +82,7 @@
       "url": "https://trace-logos.ru/en/logos/ecosystem/wildberries/",
       "mainEntity": {
         "@type": "ItemList",
-        "numberOfItems": 3,
+        "numberOfItems": 4,
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -97,6 +99,12 @@
           {
             "@type": "ListItem",
             "position": 3,
+            "name": "WB ID",
+            "url": "https://trace-logos.ru/en/logos/store/wbid/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
             "name": "WB Courier",
             "url": "https://trace-logos.ru/en/logos/hr/wbcourier/"
           }
@@ -107,35 +115,23 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/base.css?v=20260808">
-  <link rel="stylesheet" href="/css/sidebar.css?v=20260808">
-  <link rel="stylesheet" href="/css/search.css?v=20260808">
-  <link rel="stylesheet" href="/css/cards.css?v=20260808">
-  <link rel="stylesheet" href="/css/detail.css?v=20260808">
-  <link rel="stylesheet" href="/css/support-btn.css?v=20260808">
-  <link rel="stylesheet" href="/css/color.css?v=20260808">
-  <link rel="stylesheet" href="/css/picker.css?v=20260808">
-  <link rel="stylesheet" href="/css/modals.css?v=20260808">  <link rel="stylesheet" href="/css/filters.css?v=20260808">
-  <link rel="stylesheet" href="/css/mobile.css?v=20260808">
-  <link rel="stylesheet" href="/css/confetti.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-amongus.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-doodlejump.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-google.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-minicrewmate.css?v=20260808">
-  <link rel="stylesheet" href="/css/microanim.css?v=20260808">
-  <link rel="stylesheet" href="/css/category-seo.css?v=20260808">
+  <link rel="stylesheet" href="/css/catalog.bundle.css?v=20260910">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
-  <script src="/components/support-btn.min.js?v=20260808" defer></script>
-  <script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-  <script src="/components/site-header.min.js?v=20260808" defer></script>
-  <script src="/components/section-nav.min.js?v=20260808" defer></script>
-  <script src="/components/copy-emoji-btn.min.js?v=20260808" defer></script>
-  <script src="/components/sidebar-contact.min.js?v=20260808" defer></script>
-  <script src="/components/help-modal.min.js?v=20260808" defer></script>
+  <script src="/components/support-btn.min.js?v=20260910" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="/components/site-chrome.min.js?v=20260910" defer></script>
+  <script src="/components/site-header.min.js?v=20260910" defer></script>
+  <script src="/components/section-nav.min.js?v=20260910" defer></script>
+  <script src="/components/copy-emoji-btn.min.js?v=20260910" defer></script>
+  <script src="/components/sidebar-contact.min.js?v=20260910" defer></script>
+  <script src="/components/help-modal.min.js?v=20260910" defer></script>
   <!-- см. комментарий в templates/partials/nav-header.html -->
-  <link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-  <script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
+  <link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260910">
+  <script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
   <script>
     window.__MANIFEST_BASE__ = '/logos/';
     window.__ASSET_SECTION__ = 'logos';
@@ -143,8 +139,8 @@
     window.__CAT_SLUG__ = '';
     window.__ECO_SLUG__ = 'wildberries';
   </script>
-  <script type="module" src="/js/main.min.js?v=20260808"></script>
-  <script type="module" src="/js/search-placeholder.min.js?v=20260808"></script>
+  <script type="module" src="/js/main.min.js?v=20260910"></script>
+  <script type="module" src="/js/search-placeholder.min.js?v=20260910"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -211,7 +207,7 @@
   <div class="center-body">
     <main>
 
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Wildberries Ecosystem Logos</h1><div class="grid"><a class="card" href="/en/logos/market/wildberries/"><div class="icon-wrap"><img src="/assets/logos/previews/wildberries.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Wildberries" title="Icon/Market/Wildberries"></div><div class="label">Wildberries</div><div class="card-path">Icon/Market/Wildberries</div></a><a class="card" href="/en/logos/bank/wbbank/"><div class="icon-wrap"><img src="/assets/logos/previews/wb-bank.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo WB Bank" title="Icon/Bank/WBBank"></div><div class="label">WB Bank</div><div class="card-path">Icon/Bank/WBBank</div></a><a class="card" href="/en/logos/hr/wbcourier/"><div class="icon-wrap"><img src="/assets/logos/previews/wb-delivery.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo WB Courier" title="Icon/HR/WBCourier"></div><div class="label">WB Courier</div><div class="card-path">Icon/HR/WBCourier</div></a></div></div></div></div>
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Wildberries Ecosystem Logos</h1><div class="grid"><a class="card" href="/en/logos/market/wildberries/"><div class="icon-wrap"><img src="/assets/logos/previews/wildberries.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Wildberries" title="Icon/Market/Wildberries"></div><div class="label">Wildberries</div><div class="card-path">Icon/Market/Wildberries</div></a><a class="card" href="/en/logos/bank/wbbank/"><div class="icon-wrap"><img src="/assets/logos/previews/wb-bank.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo WB Bank" title="Icon/Bank/WBBank"></div><div class="label">WB Bank</div><div class="card-path">Icon/Bank/WBBank</div></a><a class="card" href="/en/logos/store/wbid/"><div class="icon-wrap"><img src="/assets/logos/previews/wb-id.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo WB ID" title="Icon/Store/WBID"></div><div class="label">WB ID</div><div class="card-path">Icon/Store/WBID</div></a><a class="card" href="/en/logos/hr/wbcourier/"><div class="icon-wrap"><img src="/assets/logos/previews/wb-delivery.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo WB Courier" title="Icon/HR/WBCourier"></div><div class="label">WB Courier</div><div class="card-path">Icon/HR/WBCourier</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Nothing here yet — section in development</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

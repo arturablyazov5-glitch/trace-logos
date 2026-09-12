@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как конвертировать SVG в PNG и обратно — 5 способов без потери качества · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(61 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(101 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(151 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(211 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(61 70% 38%) 0%, hsl(211 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(301 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(341 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(31 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(91 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(301 70% 38%) 0%, hsl(91 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-15">15 июня 2026</time>
@@ -202,17 +206,17 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            3
+	            18
 	          </span>
         </div>
         <h1>Как конвертировать SVG в PNG и обратно — 5 способов без потери качества</h1>
       </header>
       <div class="blog-body">
         <p>Скачали логотип в SVG, а маркетплейс, CRM или конструктор писем принимает только PNG. Задача выглядит симметричной: есть кнопка «конвертировать» туда, есть и обратно. На деле два направления устроены совершенно по‑разному. SVG в PNG превращается за две минуты в любом инструменте, и ошибиться там можно ровно в одном месте. А PNG в SVG автоматика перевести не может в принципе: кнопка, которая обещает обратное, вас обманывает. Разберём оба направления и причину этой асимметрии.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>SVG → PNG — тривиально: браузер, <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>, любой онлайн‑конвертер. Важно единственное — сразу задать нужный размер в пикселях, потому что готовый PNG увеличивать уже поздно. PNG → SVG работает иначе: программа <strong>отрисовывает файл заново</strong>, угадывая контуры, и результат годится только для простых одноцветных знаков.</p></div></div>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>SVG → PNG — тривиально: браузер, <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, любой онлайн‑конвертер. Важно единственное — сразу задать нужный размер в пикселях, потому что готовый PNG увеличивать уже поздно. PNG → SVG работает иначе: программа <strong>отрисовывает файл заново</strong>, угадывая контуры, и результат годится только для простых одноцветных знаков.</p></div></div>
       <h2 id="почему-svg-в-png-превращается-легко">Почему SVG в PNG превращается легко</h2>
-      <p>Причина в том, что хранит каждый формат. SVG держит инструкцию: «провести кривую отсюда сюда, залить цветом #21A038». Чтобы получить PNG, программа просто выполняет эту инструкцию и записывает результат в пиксели. Описание полное, гадать не о чем, поэтому справится любой рендер, от браузера до консольной утилиты.</p>
-      <p>Но у операции есть один необратимый момент. Выполняя инструкцию, программа обязана выбрать, в каком размере её выполнять, и записанные пиксели уже не пересчитаешь. Отсюда единственная реальная ошибка конвертации: взять размер по умолчанию, получить картинку 48×48 и потом растягивать её до баннера. Поэтому способы ниже отличаются главным образом тем, насколько удобно в них задавать размер.</p>
+      <p>Причина в том, что хранит каждый формат. SVG держит инструкцию: «провести кривую отсюда сюда, залить цветом #21A038». Чтобы получить PNG, программа просто выполняет эту инструкцию и записывает результат в пиксели. Описание полное, гадать не о чем, поэтому справится любой рендер, от браузера до консольной утилиты.</p>
+      <p>Но у операции есть один необратимый момент. Выполняя инструкцию, программа обязана выбрать, в каком размере её выполнять, и записанные пиксели уже не пересчитаешь. Отсюда единственная реальная ошибка конвертации: взять размер по умолчанию, получить картинку 48×48 и потом растягивать её до баннера. Поэтому способы ниже отличаются главным образом тем, насколько удобно в них задавать размер.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -225,12 +229,12 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="пять-способов-получить-png">Пять способов получить PNG</h2>
       <h3>1. Прямо в браузере — когда PNG нужен на один раз</h3>
-      <p>Любой браузер открывает SVG и умеет его сохранить. Перетащите файл в окно <a href="../../logos/search/chrome/" target="_blank" rel="noopener">Chrome</a> или <a href="../../logos/search/firefox/" target="_blank" rel="noopener">Firefox</a>, затем правый клик → «Сохранить изображение как…»: часть браузеров сразу предложит PNG.</p>
-      <p>Способ выигрывает скоростью, но размером тут управляет масштаб на экране. Для крупных PNG он не подходит: переходите к следующему.</p>
+      <p>Любой браузер открывает SVG и умеет его сохранить. Перетащите файл в окно <a href="../../logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> или <a href="../../logos/search/firefox/" target="_blank" rel="noopener">Firefox<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/firefox.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, затем правый клик → «Сохранить изображение как…»: часть браузеров сразу предложит PNG.</p>
+      <p>Способ выигрывает скоростью, но размером тут управляет масштаб на экране. Для крупных PNG он не подходит: переходите к следующему.</p>
       <h3>2. Figma — самый предсказуемый контроль размера</h3>
-      <p>Здесь размер задаётся явно, поэтому способ подходит и дизайнерам, и всем остальным:</p>
+      <p>Здесь размер задаётся явно, поэтому способ подходит и дизайнерам, и всем остальным:</p>
       <ol>
-      <li>Перетащите SVG в любой файл <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> — он вставится редактируемым вектором.</li>
+      <li>Перетащите SVG в любой файл <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — он вставится редактируемым вектором.</li>
       <li>Выделите объект → справа внизу секция Export.</li>
       <li>Выберите PNG и множитель (1x, 2x, 4x) или конкретную ширину в пикселях.</li>
       <li>Export — готово.</li>
@@ -238,9 +242,9 @@ window.yaContextCb.push(() => {
       <p>Бонусом перед экспортом можно перекрасить логотип или подложить фон, о чём ниже будет отдельный сценарий.</p>
       <h3>3. Онлайн‑конвертеры — быстро, с двумя оговорками</h3>
       <p>Convertio, CloudConvert, svgtopng и десятки аналогов работают по схеме «загрузили файл — скачали PNG». Оговорок ровно две, и обе следуют из сказанного выше.</p>
-      <p>Первая — размер. Многие сервисы рендерят SVG в его «номинальном» размере (например, 48×48), и вы получаете крошечную картинку; настройку размера ищите до конвертации. Вторая касается приватности: файл уезжает на чужой сервер, поэтому конфиденциальные макеты через случайные сервисы гонять не стоит.</p>
-      <h3>4. Photoshop и Illustrator — если они уже открыты</h3>
-      <p><a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a>: File → Open, при открытии SVG задайте размер в пикселях с запасом, дальше File → Export → PNG. <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>: File → Export → Export As → PNG, разрешение выбирается там же. Логика та же самая: размер задают <strong>до</strong> растеризации, потому что после неё менять его поздно.</p>
+      <p>Первая — размер. Многие сервисы рендерят SVG в его «номинальном» размере (например, 48×48), и вы получаете крошечную картинку; настройку размера ищите до конвертации. Вторая касается приватности: файл уезжает на чужой сервер, поэтому конфиденциальные макеты через случайные сервисы гонять не стоит.</p>
+      <h3>4. Photoshop и Illustrator — если они уже открыты</h3>
+      <p><a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/photoshop.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: File → Open, при открытии SVG задайте размер в пикселях с запасом, дальше File → Export → PNG. <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: File → Export → Export As → PNG, разрешение выбирается там же. Логика та же самая: размер задают <strong>до</strong> растеризации, потому что после неё менять его поздно.</p>
       <h3>5. Командная строка — когда файлов много</h3>
       <p>Для пачки файлов быстрее один раз поставить инструмент, чем вручную прогонять каждый через интерфейс:</p>
       <div class="blog-code">
@@ -257,44 +261,44 @@ rsvg-convert -w 1024 logo.svg -o logo.png
 # Inkscape
 inkscape logo.svg --export-type=png --export-width=1024</code></pre>
       </div>
-      <p>Обратите внимание на флаг ширины (<code>-w 1024</code>): он и определяет итоговое качество. Тот же самый выбор размера, только записанный явно.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Главное правило конвертации</span></div><div class="callout-body"><p>Рендерьте PNG <strong>в нужном размере или крупнее</strong>. Из SVG вы бесплатно получите PNG любого размера, а увеличить готовый PNG без мыла уже не выйдет. Сомневаетесь — берите 1024 px и больше.</p></div></div>
+      <p>Обратите внимание на флаг ширины (<code>-w 1024</code>): он и определяет итоговое качество. Тот же самый выбор размера, только записанный явно.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Главное правило конвертации</span></div><div class="callout-body"><p>Рендерьте PNG <strong>в нужном размере или крупнее</strong>. Из SVG вы бесплатно получите PNG любого размера, а увеличить готовый PNG без мыла уже не выйдет. Сомневаетесь — берите 1024 px и больше.</p></div></div>
       <h2 id="почему-обратный-путь-так-не-работает">Почему обратный путь так не работает</h2>
       <p>Теперь понятно, за счёт чего работает прямое направление: у программы есть полное описание фигур. В обратную сторону этого описания просто нет. PNG хранит только сетку цветных точек — ни одного «круга», ни одной «кривой» внутри файла не записано.</p>
-      <p>Поэтому конвертер PNG → SVG ничего не переводит. Он <strong>угадывает</strong> контуры по границам цветов. Операция называется трассировкой, её результат зависит от того, насколько картинка похожа на набор простых фигур:</p>
+      <p>Поэтому конвертер PNG → SVG ничего не переводит. Он <strong>угадывает</strong> контуры по границам цветов. Операция называется трассировкой, её результат зависит от того, насколько картинка похожа на набор простых фигур:</p>
       <ul>
       <li><strong>Простой одноцветный знак</strong> (силуэт, иконка) — трассировка справится прилично. Inkscape (Path → Trace Bitmap) или vectorizer‑сервисы дадут рабочий результат.</li>
       <li><strong>Логотип с градиентами, мелкими деталями и текстом</strong> — получите рваные края, потерянные детали и файл тяжелее исходного PNG.</li>
       <li><strong>Фотография</strong> — результат бессмыслен при любых настройках.</li>
       </ul>
-      <p>Оценить результат трассировки можно, не разглядывая края. Откройте полученный SVG в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> и посмотрите на число опорных точек: у нарисованного вручную знака их десятки, у трассированного сотни и тысячи, потому что программа обводит отдельной точкой каждую ступеньку пиксельной границы. Отсюда и вес: SVG после трассировки логотипа с градиентом легко перевешивает исходный PNG в несколько раз. Второй признак виден по цвету: плоская заливка распадается на десятки близких оттенков, и перекрасить такой знак одной правкой <code>fill</code> уже не выйдет, ради чего вектор обычно и берут.</p>
+      <p>Оценить результат трассировки можно, не разглядывая края. Откройте полученный SVG в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и посмотрите на число опорных точек: у нарисованного вручную знака их десятки, у трассированного сотни и тысячи, потому что программа обводит отдельной точкой каждую ступеньку пиксельной границы. Отсюда и вес: SVG после трассировки логотипа с градиентом легко перевешивает исходный PNG в несколько раз. Второй признак виден по цвету: плоская заливка распадается на десятки близких оттенков, и перекрасить такой знак одной правкой <code>fill</code> уже не выйдет, ради чего вектор обычно и берут.</p>
       <p>Из‑за того что честная трассировка трудна, часть сервисов её имитирует.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Частая ловушка</span></div><div class="callout-body"><p>Некоторые онлайн‑«конвертеры PNG в SVG» заворачивают вашу растровую картинку внутрь SVG‑обёртки (<code>&lt;image href=&quot;...&quot;&gt;</code>). Расширение файла меняется на <code>.svg</code>, содержимое остаётся тем же PNG со всеми ограничениями растра. Проверить легко: откройте файл текстовым редактором. Настоящий вектор состоит из тегов <code>&lt;path&gt;</code>, <code>&lt;circle&gt;</code>, <code>&lt;rect&gt;</code>; один тег <code>&lt;image&gt;</code> внутри выдаёт подделку.</p></div></div>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Частая ловушка</span></div><div class="callout-body"><p>Некоторые онлайн‑«конвертеры PNG в SVG» заворачивают вашу растровую картинку внутрь SVG‑обёртки (<code>&lt;image href=&quot;...&quot;&gt;</code>). Расширение файла меняется на <code>.svg</code>, содержимое остаётся тем же PNG со всеми ограничениями растра. Проверить легко: откройте файл текстовым редактором. Настоящий вектор состоит из тегов <code>&lt;path&gt;</code>, <code>&lt;circle&gt;</code>, <code>&lt;rect&gt;</code>; один тег <code>&lt;image&gt;</code> внутри выдаёт подделку.</p></div></div>
       <p>Честных выходов для сложного логотипа два: отрисовать его в векторе вручную или найти оригинальный SVG. Второй быстрее и бесплатнее: у большинства известных брендов вектор существует, и в нашем каталоге лежат именно такие официальные файлы.</p>
       <h2 id="сравнение-направлений">Сравнение направлений</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Задача</th><th>Сложность</th><th>Инструмент</th><th>Качество результата</th></tr></thead><tbody><tr><td>SVG → PNG</td><td>2 минуты</td><td><a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>, браузер, онлайн</td><td>идентично оригиналу</td></tr><tr><td>PNG → SVG (простой знак)</td><td>10 минут</td><td>Inkscape Trace</td><td>приемлемо</td></tr><tr><td>PNG → SVG (сложный логотип)</td><td>часы работы</td><td>ручная отрисовка</td><td>зависит от исполнителя</td></tr></tbody></table></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Задача</th><th>Сложность</th><th>Инструмент</th><th>Качество результата</th></tr></thead><tbody><tr><td>SVG → PNG</td><td>2 минуты</td><td><a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, браузер, онлайн</td><td>идентично оригиналу</td></tr><tr><td>PNG → SVG (простой знак)</td><td>10 минут</td><td>Inkscape Trace</td><td>приемлемо</td></tr><tr><td>PNG → SVG (сложный логотип)</td><td>часы работы</td><td>ручная отрисовка</td><td>зависит от исполнителя</td></tr></tbody></table></div>
       <h2 id="типовые-сценарии">Типовые сценарии</h2>
       <p>Правило «сначала размер» на практике почти всегда означает «сначала кадр». Заметнее всего это в четырёх ситуациях.</p>
-      <p><strong>Аватарка для соцсети.</strong> Прямая конвертация горизонтального логотипа даст узкую полоску, непригодную для круглой аватарки. Соберите в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> квадратный кадр 1024×1024, поместите знак с полями 15‑20% и цветным фоном и экспортируйте уже этот кадр.</p>
-      <p><strong>Логотип в презентацию <a href="../../logos/office/microsoftpowerpoint/" target="_blank" rel="noopener">PowerPoint</a>.</strong> Современный <a href="../../logos/office/microsoftpowerpoint/" target="_blank" rel="noopener">PowerPoint</a> принимает SVG напрямую (Вставка → Рисунки), и вектор здесь выигрывает: логотип останется чётким на любом проекторе. PNG понадобится только для версий Office старше 2016 года.</p>
+      <p><strong>Аватарка для соцсети.</strong> Прямая конвертация горизонтального логотипа даст узкую полоску, непригодную для круглой аватарки. Соберите в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> квадратный кадр 1024×1024, поместите знак с полями 15‑20% и цветным фоном и экспортируйте уже этот кадр.</p>
+      <p><strong>Логотип в презентацию <a href="../../logos/office/microsoftpowerpoint/" target="_blank" rel="noopener">PowerPoint<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/microsoft-powerpoint.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</strong> Современный <a href="../../logos/office/microsoftpowerpoint/" target="_blank" rel="noopener">PowerPoint<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/microsoft-powerpoint.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> принимает SVG напрямую (Вставка → Рисунки), и вектор здесь выигрывает: логотип останется чётким на любом проекторе. PNG понадобится только для версий Office старше 2016 года.</p>
       <p><strong>Печать на футболке или кружке.</strong> Типографии просят PNG высокого разрешения и считают размер от физического: принт 30 см при 300 dpi — это около 3550 пикселей. Рендерьте с запасом, 4000 px по длинной стороне.</p>
       <p><strong>Пачка иконок для сайта.</strong> Здесь конвертация вообще лишняя: SVG в вёрстке легче, чётче и перекрашивается из CSS. Способы вставки разбирали в статье <a href="../kak-vstavit-svg-na-sajt/" target="_blank" rel="noopener">как вставить SVG на сайт</a>.</p>
       <h2 id="почему-конвертер-выдаёт-пустой-png">Почему конвертер выдаёт пустой PNG</h2>
       <p>Отдельная частая жалоба: сервис отработал, а PNG вышел прозрачным или чёрным. Причина всегда одна — рендер не смог полностью выполнить инструкцию из файла. Конкретных поводов три, по убыванию вероятности:</p>
       <ol>
-      <li><strong>Цвета заданы через CSS‑классы</strong>, а атрибуты <code>fill</code> при этом пусты — упрощённый рендер сервиса стили пропустил. Лечится пересохранением SVG из <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>: она запекает стили в атрибуты фигур.</li>
+      <li><strong>Цвета заданы через CSS‑классы</strong>, а атрибуты <code>fill</code> при этом пусты — упрощённый рендер сервиса стили пропустил. Лечится пересохранением SVG из <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: она запекает стили в атрибуты фигур.</li>
       <li><strong>В файле используются внешние шрифты или картинки</strong> — без доступа к ним конвертер рисует пустоту. Переводите текст в кривые до конвертации.</li>
-      <li><strong>Фильтры и маски</strong> — экзотические эффекты поддерживаются не всеми рендерами. Откройте файл в браузере: если пусто и там, проблема в самом файле.</li>
+      <li><strong>Фильтры и маски</strong> — экзотические эффекты поддерживаются не всеми рендерами. Откройте файл в браузере: если пусто и там, проблема в самом файле.</li>
       </ol>
-      <p>Универсальное решение при капризах онлайн‑сервисов — <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>: её рендер самый предсказуемый из общедоступных.</p>
+      <p>Универсальное решение при капризах онлайн‑сервисов — <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: её рендер самый предсказуемый из общедоступных.</p>
       <h2 id="частые-вопросы">Частые вопросы</h2>
       <p><strong>Какой размер PNG выбрать для соцсетей?</strong> Аватарки — минимум 400×400, посты и обложки — по требованиям площадки, но не меньше 1080 по длинной стороне. Проще один раз сделать 2048 px и уменьшать.</p>
       <p><strong>Прозрачность сохранится?</strong> Да: PNG поддерживает альфа‑канал, и все перечисленные способы оставляют фон прозрачным по умолчанию. Белый фон появится только при экспорте в JPG.</p>
-      <p><strong>Можно ли конвертировать пачку файлов сразу?</strong> Онлайн‑сервисы обычно ограничивают количество, поэтому для пачек берите командную строку (способ 5) или <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>: выделяете все объекты и экспортируете разом.</p>
-      <p><strong>Что выбрать для email‑рассылки?</strong> Только PNG: почтовые клиенты вектор почти не поддерживают, <a href="../../logos/office/gmail/" target="_blank" rel="noopener">Gmail</a> и <a href="../../logos/office/outlook/" target="_blank" rel="noopener">Outlook</a> игнорируют SVG молча, оставляя пустое место. Рендерьте в двойном размере от того, сколько картинка занимает на экране.</p>
-      <p><strong>Почему у PNG обрезаны края?</strong> У SVG есть viewBox — рамка, в которой живёт картинка. Фигуры, вышедшие за её пределы после ручных правок, рендер отрежет. Откройте файл в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> и проверьте, что всё содержимое лежит внутри кадра.</p>
-      <p><strong>Как получить PNG с фоном вместо прозрачности?</strong> В <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> подложите под логотип прямоугольник нужного цвета и экспортируйте вместе. В командной строке у <code>rsvg-convert</code> для этого есть флаг <code>-b '#FFFFFF'</code>.</p>
-      <p><strong>Почему из <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> PNG выходит с огромными полями?</strong> Экспортируется монтажная область (artboard) целиком. Подгоните её под логотип (Object → Artboards → Fit to Artwork Bounds) или используйте Export Selection.</p>
+      <p><strong>Можно ли конвертировать пачку файлов сразу?</strong> Онлайн‑сервисы обычно ограничивают количество, поэтому для пачек берите командную строку (способ 5) или <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: выделяете все объекты и экспортируете разом.</p>
+      <p><strong>Что выбрать для email‑рассылки?</strong> Только PNG: почтовые клиенты вектор почти не поддерживают, <a href="../../logos/office/gmail/" target="_blank" rel="noopener">Gmail<img class="blog-mention-icon" src="../../assets/logos/svgs/google-mail.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/office/outlook/" target="_blank" rel="noopener">Outlook<img class="blog-mention-icon" src="../../assets/logos/svgs/outlook.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> игнорируют SVG молча, оставляя пустое место. Рендерьте в двойном размере от того, сколько картинка занимает на экране.</p>
+      <p><strong>Почему у PNG обрезаны края?</strong> У SVG есть viewBox — рамка, в которой живёт картинка. Фигуры, вышедшие за её пределы после ручных правок, рендер отрежет. Откройте файл в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и проверьте, что всё содержимое лежит внутри кадра.</p>
+      <p><strong>Как получить PNG с фоном вместо прозрачности?</strong> В <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> подложите под логотип прямоугольник нужного цвета и экспортируйте вместе. В командной строке у <code>rsvg-convert</code> для этого есть флаг <code>-b '#FFFFFF'</code>.</p>
+      <p><strong>Почему из <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> PNG выходит с огромными полями?</strong> Экспортируется монтажная область (artboard) целиком. Подгоните её под логотип (Object → Artboards → Fit to Artwork Bounds) или используйте Export Selection.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -306,14 +310,15 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="что-в-итоге">Что в итоге</h2>
-      <p>Асимметрия двух направлений объясняется одним: в векторе записано описание фигур, в растре его нет. Поэтому SVG в PNG превращает любой инструмент, и следить нужно ровно за размером: задавайте его сразу и с запасом. Обратно дороги нет: трассировка вытянет простой одноцветный знак, всё остальное придётся отрисовывать заново вручную или искать оригинальный вектор.</p>
+      <p>Асимметрия двух направлений объясняется одним: в векторе записано описание фигур, в растре его нет. Поэтому SVG в PNG превращает любой инструмент, и следить нужно ровно за размером: задавайте его сразу и с запасом. Обратно дороги нет: трассировка вытянет простой одноцветный знак, всё остальное придётся отрисовывать заново вручную или искать оригинальный вектор.</p>
       <p>Последний вариант почти всегда быстрее: в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> у каждого бренда уже лежат и SVG, и PNG, причём PNG скачивается сразу в нужном размере, так что конвертировать не придётся вовсе.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../chem-otkryt-svg-fajl/" data-date="2026-06-06" data-views="151">
+          <a class="blog-card" href="../chem-otkryt-svg-fajl/" data-date="2026-06-06" data-views="645">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -326,7 +331,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            151
+            645
           </div>
           </div>
           <div class="blog-card-title">Чем открыть SVG‑файл — просмотр и редактирование на любой системе</div>
@@ -334,41 +339,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../qr-kod-s-logotipom/" data-date="2026-08-29" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="11">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">QR-код</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Как сделать QR‑код с логотипом — и чтобы он сканировался</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="1">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            11
           </div>
           </div>
           <div class="blog-card-title">Логотип и обложка для сообщества ВКонтакте — размеры и оформление</div>
@@ -376,20 +360,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-youtube-kanala/" data-date="2026-08-16" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-youtube-kanala/" data-date="2026-08-16" data-views="70">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">YouTube</span><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" /><path d="m10 15 5-3-5-3z" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">YouTube</span><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" /><path d="m10 15 5-3-5-3z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            70
           </div>
           </div>
           <div class="blog-card-title">Логотип и оформление YouTube‑канала — размеры и требования 2026</div>
@@ -397,44 +381,65 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-vizitki/" data-date="2026-08-11" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-pechati/" data-date="2026-08-15" data-views="9">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Печать</span><span class="blog-card-tag">Форматы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /><rect x="6" y="14" width="12" height="8" rx="1" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            9
+          </div>
+          </div>
+          <div class="blog-card-title">Логотип для печати — CMYK, Pantone и какие файлы нужны типографии</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../istoriya-logotipa-spotify/" data-date="2026-07-31" data-views="10">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Печать</span><span class="blog-card-tag">Визитка</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10h2" /><path d="M16 14h2" /><path d="M6.17 15a3 3 0 0 1 5.66 0" /><circle cx="9" cy="11" r="2" /><rect x="2" y="5" width="20" height="14" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Медиа</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            10
           </div>
           </div>
-          <div class="blog-card-title">Логотип для визитки — как подготовить знак для печати</div>
+          <div class="blog-card-title">История логотипа Spotify — зелёный круг и три волны</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-svoi-emodzi-v-telegram/" data-date="2026-08-11" data-views="0">
+      <a class="blog-card" href="../istoriya-logotipa-netflix/" data-date="2026-07-31" data-views="25">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Telegram</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z" /><path d="M15 3v5a1 1 0 0 0 1 1h5" /><path d="M8 13h.01" /><path d="M16 13h.01" /><path d="M10 16s.8 1 2 1c1.3 0 2-1 2-1" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Медиа</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.296 3.464 3.02 3.956" /><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z" /><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="m6.18 5.276 3.1 3.899" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            25
           </div>
           </div>
-          <div class="blog-card-title">Как сделать свои эмодзи и стикеры в Telegram — полный гайд</div>
+          <div class="blog-card-title">История логотипа Netflix — от DVD‑почты до «та‑дам»</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -452,25 +457,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -547,6 +544,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -592,10 +590,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

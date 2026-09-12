@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как заказать логотип у дизайнера — бриф, этапы, приёмка работ · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(43 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(83 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(133 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(193 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(43 70% 38%) 0%, hsl(193 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 11 2 2 4-4" /><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(283 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(323 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(13 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(73 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(283 70% 38%) 0%, hsl(73 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 11 2 2 4-4" /><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-14">14 августа 2026</time>
@@ -202,19 +206,19 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            7
 	          </span>
         </div>
         <h1>Как заказать логотип у дизайнера — бриф, этапы, приёмка работ</h1>
       </header>
       <div class="blog-body">
-        <p>Половина плохих логотипов — не вина дизайнера: работа проваливается на стороне заказчика ещё до первого эскиза. Размытый бриф «сделайте красиво», правки вкусовщиной, приёмка одним JPG без прав и исходников — и деньги потрачены, а пользоваться нечем. Разбираем весь процесс заказа: от выбора исполнителя до подписания акта — так, чтобы на выходе был работающий знак, а не спор в переписке.</p>
+        <p>Половина плохих логотипов — не вина дизайнера: работа проваливается на стороне заказчика ещё до первого эскиза. Размытый бриф «сделайте красиво», правки вкусовщиной, приёмка одним JPG без прав и исходников — и деньги потрачены, а пользоваться нечем. Разбираем весь процесс заказа: от выбора исполнителя до подписания акта — так, чтобы на выходе был работающий знак, а не спор в переписке.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Порядок действий: определить бюджет и уровень исполнителя, свериться с <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">вилками цен на рынке</a> → написать бриф с фактами о бизнесе, а не пожеланиями о красоте → зафиксировать в договоре этапы, число концепций и правок → принимать по чек‑листу: все версии знака, векторные исходники, <strong>передача исключительных прав</strong>. Пропуск любого пункта аукнется: без прав логотип нельзя <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">зарегистрировать</a>, без исходников — менять.</p></div></div>
       <h2 id="шаг-1-выбираем-уровень-исполнителя" class="step-heading"><span class="step-badge">Шаг&nbsp;1</span><span class="step-title">Выбираем уровень исполнителя</span></h2>
       <p>Рынок делится на три эшелона, и ожидать от одного результатов другого — главная ошибка:</p>
       <ul>
-      <li><strong>Фрилансер‑новичок / биржи.</strong> Дёшево и быстро; результат лотерейный, часто на шаблонах и стоковых элементах. Годится для теста ниши — примерно тот же уровень, что и <a href="../kak-sdelat-logotip-v-canva/" target="_blank" rel="noopener">сборка логотипа в Canva</a>.</li>
-      <li><strong>Опытный фрилансер.</strong> Оптимум для малого бизнеса: уникальный знак, вменяемый процесс, портфолио, по которому виден стиль. Смотрите не «красиво ли», а есть ли в портфолио задачи вашего типа.</li>
+      <li><strong>Фрилансер‑новичок / биржи.</strong> Дёшево и быстро; результат лотерейный, часто на шаблонах и стоковых элементах. Годится для теста ниши — примерно тот же уровень, что и <a href="../kak-sdelat-logotip-v-canva/" target="_blank" rel="noopener">сборка логотипа в Canva</a>.</li>
+      <li><strong>Опытный фрилансер.</strong> Оптимум для малого бизнеса: уникальный знак, вменяемый процесс, портфолио, по которому виден стиль. Смотрите не «красиво ли», а есть ли в портфолио задачи вашего типа.</li>
       <li><strong>Студия.</strong> Процесс с аналитикой, тестированием и полноценным <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменным стилем</a> в комплекте. Оправдана, когда бренд — ядро бизнеса.</li>
       </ul>
       <p>Где смотреть: Behance и Dribbble (портфолио), телеграм‑каналы с работами дизайнеров, рекомендации. Проверка на первом созвоне: хороший исполнитель задаёт вопросы о бизнесе; плохой сразу говорит о «стильном минимализме».</p>
@@ -233,14 +237,14 @@ window.yaContextCb.push(() => {
       <ol>
       <li><strong>Что за бизнес:</strong> продукт, цены, чем отличаетесь от конкурентов.</li>
       <li><strong>Кто клиент:</strong> возраст, контекст покупки, что для него «дорого» и «свои».</li>
-      <li><strong>Конкуренты:</strong> 3‑5 ссылок. Дизайнер должен увидеть, от кого отстраиваться — и какие цвета в нише уже заняты: это хорошо видно на примере <a href="../logotipy-rossijskih-bankov/" target="_blank" rel="noopener">логотипов российских банков</a> или <a href="../logotipy-messendzherov/" target="_blank" rel="noopener">мессенджеров</a>, где палитра давно поделена.</li>
-      <li><strong>Референсы с объяснениями:</strong> 3‑5 логотипов «нравится» и «не нравится» — обязательно с «почему». Удобно набрать примеры в <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a>: показывайте <a href="../vidy-logotipov/" target="_blank" rel="noopener">тип знака</a>, а не красоту.</li>
+      <li><strong>Конкуренты:</strong> 3‑5 ссылок. Дизайнер должен увидеть, от кого отстраиваться — и какие цвета в нише уже заняты: это хорошо видно на примере логотипов российских банков или <a href="../logotipy-messendzherov/" target="_blank" rel="noopener">мессенджеров</a>, где палитра давно поделена.</li>
+      <li><strong>Референсы с объяснениями:</strong> 3‑5 логотипов «нравится» и «не нравится» — обязательно с «почему». Удобно набрать примеры в <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a>: показывайте тип знака, а не красоту.</li>
       <li><strong>Носители:</strong> где знак будет жить — сайт, упаковка, вывеска, приложение. От этого зависят версии и форматы — сверьтесь с <a href="../razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">размерами логотипа для разных площадок</a>.</li>
-      <li><strong>Технические требования:</strong> читаемость в 16 px, монохромная версия, кириллица+латиница, если нужны обе.</li>
+      <li><strong>Технические требования:</strong> читаемость в 16 px, монохромная версия, кириллица+латиница, если нужны обе.</li>
       </ol>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Одно предложение, которое улучшит любой бриф</span></div><div class="callout-body"><p>Закончите бриф фразой: «Клиент, увидев логотип, должен подумать: „___«». Заполните пропуск — и у дизайнера появится критерий, по которому можно оценивать эскизы объективно, а не вкусом.</p></div></div>
       <h2 id="шаг-3-договариваемся-о-процессе" class="step-heading"><span class="step-badge">Шаг&nbsp;3</span><span class="step-title">Договариваемся о процессе</span></h2>
-      <p>До предоплаты зафиксируйте письменно (в договоре или хотя бы в переписке):</p>
+      <p>До предоплаты зафиксируйте письменно (в договоре или хотя бы в переписке):</p>
       <ul>
       <li><strong>Число концепций</strong> в первой подаче (обычно 2‑3) и <strong>число раундов правок</strong> (обычно 2‑3; дальше — за доплату).</li>
       <li><strong>Сроки</strong> по этапам и что считается просрочкой.</li>
@@ -252,16 +256,16 @@ window.yaContextCb.push(() => {
       <p>Правки — место, где заказчики чаще всего портят хорошую работу:</p>
       <ul>
       <li>Формулируйте <strong>проблему, а не решение</strong>: не «сделайте букву синей и побольше», а «знак теряется на аватарке». Решение — работа дизайнера.</li>
-      <li>Сверяйте с брифом, а не с настроением: «мы писали, что клиент — премиум, а это выглядит как дискаунтер» — валидная правка; «жене не нравится» — нет.</li>
+      <li>Сверяйте с брифом, а не с настроением: «мы писали, что клиент — премиум, а это выглядит как дискаунтер» — валидная правка; «жене не нравится» — нет.</li>
       <li>Проверяйте эскизы в реальном контексте: попросите показать знак на аватарке мессенджера, в <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавиконке</a> и на вывеске — слабые варианты отпадут сами.</li>
       <li>Не собирайте «франкенштейна» из кусков разных концепций — просите дизайнера развить лучшую.</li>
       </ul>
       <h2 id="шаг-5-принимаем-работу-чек-лист-файлов" class="step-heading"><span class="step-badge">Шаг&nbsp;5</span><span class="step-title">Принимаем работу: чек‑лист файлов</span></h2>
       <p>Не подписывайте акт, пока не получили весь комплект:</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Что</th><th>Формат</th><th>Зачем</th></tr></thead><tbody><tr><td>Исходник с живым текстом</td><td>AI / мастер‑SVG</td><td>будущие правки</td></tr><tr><td>Знак в кривых</td><td>SVG, PDF</td><td>сайт, печать — какой <a href="../vektornye-formaty-eps-ai-pdf-svg/" target="_blank" rel="noopener">векторный формат кому нужен</a></td></tr><tr><td>Все версии: полная, компактная, моно, инверсная</td><td>SVG + PNG</td><td>зачем нужны <a href="../vidy-logotipov/" target="_blank" rel="noopener">разные виды логотипа</a></td></tr><tr><td>PNG с прозрачным фоном, 2‑3 размера</td><td>PNG</td><td>площадки без вектора, <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">почему важна прозрачность фона</a></td></tr><tr><td>Мини‑гайдлайн</td><td>PDF</td><td>цвета HEX/CMYK, шрифты, охранное поле — это уже зачатки <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">брендбука</a></td></tr></tbody></table></div>
-      <p>Проверьте SVG: внутри должны быть кривые, а не вклеенная картинка — <a href="../chem-otkryt-svg-fajl/" target="_blank" rel="noopener">чем открыть файл и посмотреть его структуру</a>. Если планируется печать — сразу спросите CMYK‑версии, пригодятся при подготовке <a href="../logotip-dlya-pechati/" target="_blank" rel="noopener">логотипа для печати</a>.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Что</th><th>Формат</th><th>Зачем</th></tr></thead><tbody><tr><td>Исходник с живым текстом</td><td>AI / мастер‑SVG</td><td>будущие правки</td></tr><tr><td>Знак в кривых</td><td>SVG, PDF</td><td>сайт, печать — какой векторный формат кому нужен</td></tr><tr><td>Все версии: полная, компактная, моно, инверсная</td><td>SVG + PNG</td><td>зачем нужны разные виды логотипа</td></tr><tr><td>PNG с прозрачным фоном, 2‑3 размера</td><td>PNG</td><td>площадки без вектора, <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">почему важна прозрачность фона</a></td></tr><tr><td>Мини‑гайдлайн</td><td>PDF</td><td>цвета HEX/CMYK, шрифты, охранное поле — это уже зачатки <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">брендбука</a></td></tr></tbody></table></div>
+      <p>Проверьте SVG: внутри должны быть кривые, а не вклеенная картинка — <a href="../chem-otkryt-svg-fajl/" target="_blank" rel="noopener">чем открыть файл и посмотреть его структуру</a>. Если планируется печать — сразу спросите CMYK‑версии, пригодятся при подготовке <a href="../logotip-dlya-pechati/" target="_blank" rel="noopener">логотипа для печати</a>.</p>
       <h2 id="шаг-6-права-пункт-который-дороже-всего" class="step-heading"><span class="step-badge">Шаг&nbsp;6</span><span class="step-title">Права: пункт, который дороже всего</span></h2>
-      <p>По российскому законодательству исключительное право на произведение остаётся у автора, пока оно <strong>письменно не передано</strong>. Оплата работы ≠ передача прав. Без неё вы не сможете <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">зарегистрировать товарный знак</a>, а дизайнер формально сможет продать знак ещё раз. В договоре должно быть: отчуждение исключительных прав в полном объёме, на все способы использования, бессрочно. Заодно спросите об использованных шрифтах и стоковых элементах — их лицензии должны допускать коммерческое использование.</p>
+      <p>По российскому законодательству исключительное право на произведение остаётся у автора, пока оно <strong>письменно не передано</strong>. Оплата работы ≠ передача прав. Без неё вы не сможете <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">зарегистрировать товарный знак</a>, а дизайнер формально сможет продать знак ещё раз. В договоре должно быть: отчуждение исключительных прав в полном объёме, на все способы использования, бессрочно. Заодно спросите об использованных шрифтах и стоковых элементах — их лицензии должны допускать коммерческое использование.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -280,47 +284,27 @@ window.yaContextCb.push(() => {
       <li>В портфолио нет ни одного знака, проверяемого в малом размере.</li>
       <li>Уклоняется от письменной фиксации прав.</li>
       </ul>
-      <p>Если бюджет пока не дорос до заказа — начните с самостоятельных вариантов (<a href="../kak-sdelat-logotip-samomu/" target="_blank" rel="noopener">как сделать логотип самому</a>) и вернитесь к дизайнеру, когда бизнес проверен: хороший знак стоит заказывать один раз и надолго, а <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">что почём на рынке</a> — можно посмотреть заранее.</p>
+      <p>Если бюджет пока не дорос до заказа — начните с самостоятельных вариантов (<a href="../kak-sdelat-logotip-samomu/" target="_blank" rel="noopener">как сделать логотип самому</a>) и вернитесь к дизайнеру, когда бизнес проверен: хороший знак стоит заказывать один раз и надолго, а <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">что почём на рынке</a> — можно посмотреть заранее.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../qr-kod-s-logotipom/" data-date="2026-08-29" data-views="0">
+          <a class="blog-card" href="../logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="11">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">QR-код</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Как сделать QR‑код с логотипом — и чтобы он сканировался</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="1">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            11
           </div>
           </div>
           <div class="blog-card-title">Логотип и обложка для сообщества ВКонтакте — размеры и оформление</div>
@@ -328,20 +312,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-youtube-kanala/" data-date="2026-08-16" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-youtube-kanala/" data-date="2026-08-16" data-views="70">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">YouTube</span><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" /><path d="m10 15 5-3-5-3z" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">YouTube</span><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" /><path d="m10 15 5-3-5-3z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            70
           </div>
           </div>
           <div class="blog-card-title">Логотип и оформление YouTube‑канала — размеры и требования 2026</div>
@@ -349,20 +333,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kogda-pora-menyat-logotip/" data-date="2026-08-14" data-views="0">
+      <a class="blog-card" href="../kogda-pora-menyat-logotip/" data-date="2026-08-14" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Редизайн</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 14v2.2l1.6 1" /><path d="M16 2v4" /><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" /><path d="M3 10h5" /><path d="M8 2v4" /><circle cx="16" cy="16" r="6" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Редизайн</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 14v2.2l1.6 1" /><path d="M16 2v4" /><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" /><path d="M3 10h5" /><path d="M8 2v4" /><circle cx="16" cy="16" r="6" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            4
           </div>
           </div>
           <div class="blog-card-title">Когда пора менять логотип — 7 честных признаков</div>
@@ -370,44 +354,65 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-narisovat-logotip-v-figma/" data-date="2026-08-06" data-views="1">
+      <a class="blog-card" href="../kak-pridumat-nazvanie-brenda/" data-date="2026-08-08" data-views="2">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            2
+          </div>
+          </div>
+          <div class="blog-card-title">Как придумать название бренда — методы нейминга и проверки</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../emodzi-flagi-kak-ustroeny/" data-date="2026-07-27" data-views="49">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Figma</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" /><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" /><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" /><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" /><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Форматы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>06.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            49
           </div>
           </div>
-          <div class="blog-card-title">Как нарисовать логотип в Figma — пошаговая инструкция для новичка</div>
+          <div class="blog-card-title">Как устроены эмодзи‑флаги — и почему их не видно на Windows</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../maksimalizm-v-brendinge/" data-date="2026-07-31" data-views="6">
+      <a class="blog-card" href="../favicon-v-poiske-i-nejrosetyah/" data-date="2026-07-23" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 11.3 2 22l10.7-3.79" /><path d="M4 3h.01" /><path d="M22 8h.01" /><path d="M15 2h.01" /><path d="M22 20h.01" /><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10" /><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17" /><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7" /><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Фавикон</span><span class="blog-card-tag">SEO</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            6
+            4
           </div>
           </div>
-          <div class="blog-card-title">Максимализм в брендинге — почему «больше» снова в моде</div>
+          <div class="blog-card-title">Фавикон в поиске и ответах нейросетей — почему это важно в 2026</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -425,25 +430,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -520,6 +517,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -565,10 +563,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

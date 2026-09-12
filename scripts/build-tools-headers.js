@@ -51,6 +51,19 @@ function patchPage({ relPath, rel }) {
     `$1\n${header}\n$2`
   );
 
+  // Подвал — тот же приём и тот же принцип: единственный источник разметки
+  // templates/partials/site-footer.html, страница получает его копию между
+  // маркерами. Маркеры опциональны: у страницы-инструмента может быть свой
+  // короткий подвал, тогда FOOTER:START/END в ней просто нет и шаг молчит.
+  if (/<!-- FOOTER:START -->[\s\S]*?<!-- FOOTER:END -->/.test(html)) {
+    let footer = loadTemplate(path.join(ROOT, 'templates', 'partials', 'site-footer.html')).trimEnd();
+    footer = footer.replace(/\{\{REL\}\}/g, rel).replace(/\{\{HOME_REL\}\}/g, rel);
+    html = html.replace(
+      /(<!-- FOOTER:START -->)[\s\S]*?(<!-- FOOTER:END -->)/,
+      `$1\n${footer}\n$2`
+    );
+  }
+
   if (html === before) return false;
   if (!DRY_RUN) fs.writeFileSync(filePath, html, 'utf8');
   return true;

@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Почему логотип размытый и как сделать его чётким — разбор всех причин · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(191 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(231 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(281 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(341 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(191 70% 38%) 0%, hsl(341 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(71 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(111 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(161 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(221 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(71 70% 38%) 0%, hsl(221 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-07">7 июля 2026</time>
@@ -202,17 +206,17 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            1
+	            6
 	          </span>
         </div>
         <h1>Почему логотип размытый и как сделать его чётким — разбор всех причин</h1>
       </header>
       <div class="blog-body">
-        <p>На макете логотип был идеальным, а на сайте превратился в мыло. Или в презентации на проекторе. Или на визитках из типографии. Размытый логотип — это то, что клиенты и посетители замечают мгновенно: он делает бренд «дешёвым» ещё до того, как человек прочитал хоть слово. Хорошая новость: причин размытости всего шесть, и все они чинятся.</p>
+        <p>На макете логотип был идеальным, а на сайте превратился в мыло. Или в презентации на проекторе. Или на визитках из типографии. Размытый логотип — это то, что клиенты и посетители замечают мгновенно: он делает бренд «дешёвым» ещё до того, как человек прочитал хоть слово. Хорошая новость: причин размытости всего шесть, и все они чинятся.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>В 9 случаях из 10 логотип размытый потому, что <strong>маленький растровый файл растянули до большого размера</strong>. Лечится одним из двух способов: взять SVG (вектор не мылится в принципе) или взять PNG минимум в 2 раза больше размера показа — из‑за ретина‑экранов.</p></div></div>
       <h2 id="причина-1-маленький-png-растянули">Причина 1. Маленький PNG растянули</h2>
-      <p>Классика. Логотип скачали размером 200×200, а на сайте он стоит в блоке 400 пикселей шириной. Браузер вынужден «додумывать» недостающие пиксели — интерполировать, — и края плывут.</p>
-      <p><strong>Как проверить:</strong> откройте файл и посмотрите его реальные размеры в пикселях. Если размер показа больше размера файла — вот и диагноз.</p>
+      <p>Классика. Логотип скачали размером 200×200, а на сайте он стоит в блоке 400 пикселей шириной. Браузер вынужден «додумывать» недостающие пиксели — интерполировать, — и края плывут.</p>
+      <p><strong>Как проверить:</strong> откройте файл и посмотрите его реальные размеры в пикселях. Если размер показа больше размера файла — вот и диагноз.</p>
       <p><strong>Как починить:</strong> взять исходник большего размера. Увеличить сам PNG «без потери качества» нельзя — апскейлеры на нейросетях помогают фотографиям, но на логотипах с чёткими краями обычно оставляют артефакты.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
@@ -225,40 +229,40 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="причина-2-ретина-экраны-пикселей-нужно-в-два-раза-больше">Причина 2. Ретина‑экраны: пикселей нужно в два раза больше</h2>
-      <p>Даже если размеры совпадают точь‑в‑точь — 200‑пиксельный PNG в 200‑пиксельном блоке, — на iPhone и большинстве современных ноутбуков он всё равно будет мягким. Физических пикселей у таких экранов в 2‑3 раза больше, чем CSS‑пикселей: в блок 200×200 экран упаковывает 400×400 или 600×600 точек.</p>
+      <p>Даже если размеры совпадают точь‑в‑точь — 200‑пиксельный PNG в 200‑пиксельном блоке, — на iPhone и большинстве современных ноутбуков он всё равно будет мягким. Физических пикселей у таких экранов в 2‑3 раза больше, чем CSS‑пикселей: в блок 200×200 экран упаковывает 400×400 или 600×600 точек.</p>
       <p><strong>Как починить:</strong> правило 2x. Файл должен быть минимум вдвое больше размера показа: блок 200 px → PNG 400 px. Либо — SVG, которому плотность пикселей безразлична.</p>
       <h2 id="причина-3-это-jpg">Причина 3. Это JPG</h2>
       <p>JPG сжимает картинку с потерями и особенно плохо переносит резкие границы — именно из них состоит любой логотип. Вокруг букв и контуров появляется характерная «грязь» (артефакты сжатия), которую часто принимают за размытость.</p>
-      <p><strong>Как починить:</strong> пересохранить из JPG нельзя — потери уже случились. Нужен исходный PNG или SVG. Почему JPG вообще не подходит для логотипов, мы разбирали в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">сравнении форматов</a>.</p>
+      <p><strong>Как починить:</strong> пересохранить из JPG нельзя — потери уже случились. Нужен исходный PNG или SVG. Почему JPG вообще не подходит для логотипов, мы разбирали в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">сравнении форматов</a>.</p>
       <h2 id="причина-4-логотип-сжала-сама-платформа">Причина 4. Логотип сжала сама платформа</h2>
-      <p>Вы загрузили отличный файл, а соцсеть, маркетплейс или CMS пересжали его по‑своему: уменьшили, конвертировали в JPG, наложили своё сжатие. Особенно этим славятся аватарки и обложки.</p>
+      <p>Вы загрузили отличный файл, а соцсеть, маркетплейс или CMS пересжали его по‑своему: уменьшили, конвертировали в JPG, наложили своё сжатие. Особенно этим славятся аватарки и обложки.</p>
       <p><strong>Как починить:</strong> загружать файл ровно в том размере, который требует площадка (тогда её ресайзер не включится), и с запасом по качеству. Для аватарок — квадрат от 400×400, без мелких деталей: при уменьшении до 40 пикселей тонкие линии исчезнут у любого формата.</p>
       <h2 id="причина-5-дробные-размеры-и-трансформации-в-css">Причина 5. Дробные размеры и трансформации в CSS</h2>
       <p>Логотип может мылиться из‑за вёрстки: элемент получил дробную ширину (например, 199.5 px из‑за флексов), масштаб через <code>transform: scale()</code>, или картинка стоит в контейнере с <code>width: 100%</code> и растягивается на глазок.</p>
-      <p><strong>Как починить:</strong> задать картинке целые размеры, а лучше — вставить SVG, которому эти проблемы безразличны. Если SVG всё равно выглядит мягко в мелком размере, проверьте, не рендерится ли он через <code>filter</code> или <code>opacity</code> — некоторые комбинации заставляют браузер растеризовать вектор заранее.</p>
+      <p><strong>Как починить:</strong> задать картинке целые размеры, а лучше — вставить SVG, которому эти проблемы безразличны. Если SVG всё равно выглядит мягко в мелком размере, проверьте, не рендерится ли он через <code>filter</code> или <code>opacity</code> — некоторые комбинации заставляют браузер растеризовать вектор заранее.</p>
       <h2 id="причина-6-печать-72-dpi-вместо-300">Причина 6. Печать: 72 dpi вместо 300</h2>
       <p>На экране файл выглядел отлично, а на визитках — мыло. Экранного разрешения (72‑96 dpi) для печати мало: типографии нужно 300 dpi. PNG 1000×1000 px на печати — это всего 8,5 см чёткого изображения.</p>
-      <p><strong>Как починить:</strong> отдавать в печать вектор (EPS, PDF, SVG — что примет типография). Если вектора нет — растр из расчёта 300 пикселей на каждые 2,54 см физического размера.</p>
+      <p><strong>Как починить:</strong> отдавать в печать вектор (EPS, PDF, SVG — что примет типография). Если вектора нет — растр из расчёта 300 пикселей на каждые 2,54 см физического размера.</p>
       <h2 id="таблица-шпаргалка">Таблица‑шпаргалка</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Симптом</th><th>Причина</th><th>Лечение</th></tr></thead><tbody><tr><td>Мыло на сайте везде</td><td>маленький PNG растянут</td><td>SVG или PNG ×2 от размера</td></tr><tr><td>Чётко на мониторе, мыло на iPhone</td><td>ретина</td><td>правило 2x или SVG</td></tr><tr><td>«Грязь» вокруг букв</td><td>JPG‑артефакты</td><td>найти PNG/SVG‑исходник</td></tr><tr><td>Мыло только в соцсети</td><td>платформа пересжала</td><td>грузить точный размер</td></tr><tr><td>Мыло только на печати</td><td>72 dpi</td><td>вектор или 300 dpi</td></tr></tbody></table></div>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Универсальный ответ</span></div><div class="callout-body"><p>Заметили закономерность? Почти каждая строка таблицы лечится словом «SVG». Вектор не зависит ни от размера блока, ни от плотности экрана, ни от dpi печати. Если платформа принимает SVG — всегда выбирайте его, и класс проблем «размытый логотип» исчезнет целиком.</p></div></div>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Универсальный ответ</span></div><div class="callout-body"><p>Заметили закономерность? Почти каждая строка таблицы лечится словом «SVG». Вектор не зависит ни от размера блока, ни от плотности экрана, ни от dpi печати. Если платформа принимает SVG — всегда выбирайте его, и класс проблем «размытый логотип» исчезнет целиком.</p></div></div>
       <h2 id="пошаговая-диагностика-находим-причину-за-пять-минут">Пошаговая диагностика: находим причину за пять минут</h2>
       <p>Когда мыло на месте, а причина неочевидна, идите по цепочке:</p>
       <ol>
       <li><strong>Откройте сам файл отдельно от сайта</strong> (перетащите в браузер, посмотрите в 100%). Файл чёткий? Значит, проблема в том, как его показывают, — идите к шагу 3. Мыльный уже сам файл — к шагу 2.</li>
       <li><strong>Файл мыльный.</strong> Посмотрите свойства: расширение (JPG?), размеры в пикселях (меньше, чем нужно?). Ищите исходник лучшего качества — обработкой этот файл не спасти.</li>
-      <li><strong>Файл чёткий, на сайте мыло.</strong> Откройте DevTools (правый клик по логотипу → «Просмотреть код») и сравните два числа: реальный размер файла и размер, в котором он отображается (вкладка Computed или наведение на элемент). Отображается крупнее файла → причины 1‑2. Размеры совпадают, но мыло на телефоне → ретина, причина 2.</li>
+      <li><strong>Файл чёткий, на сайте мыло.</strong> Откройте DevTools (правый клик по логотипу → «Просмотреть код») и сравните два числа: реальный размер файла и размер, в котором он отображается (вкладка Computed или наведение на элемент). Отображается крупнее файла → причины 1‑2. Размеры совпадают, но мыло на телефоне → ретина, причина 2.</li>
       <li><strong>Мыло только в одном месте</strong> (соцсеть, маркетплейс, письмо) → площадка пересжала, причина 4. Сравните загруженный файл со скачанным обратно — разница будет видна.</li>
       </ol>
       <p>Эта последовательность закрывает практически все случаи и, что важнее, показывает, <strong>где</strong> чинить: в файле, в вёрстке или в настройках загрузки.</p>
-      <h2 id="про-улучшайзеры-может-ли-нейросеть-спасти-мыльный-логотип">Про «улучшайзеры»: может ли нейросеть спасти мыльный логотип</h2>
+      <h2 id="про-улучшайзеры-может-ли-нейросеть-спасти-мыльный-логотип">Про «улучшайзеры»: может ли нейросеть спасти мыльный логотип</h2>
       <p>Апскейлеры (Topaz, Real‑ESRGAN, встроенные в редакторы) творят чудеса с фотографиями, и рука тянется прогнать через них логотип. Результат обычно разочаровывает: на чётких границах и типографике нейросети дорисовывают волнистые края, скругляют углы букв и «изобретают» детали. Для логотипа корректный путь другой — не восстанавливать пиксели, а <strong>вернуться к вектору</strong>: найти SVG‑оригинал или отрисовать заново (как — в статье <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">про перевод логотипа в вектор</a>). Апскейлер допустим как временная мера для второстепенной картинки, но не для знака, который представляет бренд.</p>
       <h2 id="отдельный-случай-мыло-в-видео-и-презентациях">Отдельный случай: мыло в видео и презентациях</h2>
       <p>Логотип в углу ролика или на слайде мылится по своим причинам:</p>
       <ul>
-      <li><strong>Видео пережато.</strong> <a href="../../logos/media/youtube/" target="_blank" rel="noopener">YouTube</a> и соцсети жмут видео агрессивно, и мелкий логотип страдает первым. Лечение: крупнее размер логотипа в кадре, контрастный фон и — для интро — векторная анимация вместо статичной картинки (см. статью <a href="../animirovannyj-logotip/" target="_blank" rel="noopener">про анимированные логотипы</a>).</li>
+      <li><strong>Видео пережато.</strong> <a href="../../logos/media/youtube/" target="_blank" rel="noopener">YouTube<img class="blog-mention-icon" src="../../assets/logos/svgs/youtube.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и соцсети жмут видео агрессивно, и мелкий логотип страдает первым. Лечение: крупнее размер логотипа в кадре, контрастный фон и — для интро — векторная анимация вместо статичной картинки (см. статью <a href="../animirovannyj-logotip/" target="_blank" rel="noopener">про анимированные логотипы</a>).</li>
       <li><strong>Презентация проецируется в чужом разрешении.</strong> Проектор 1024×768 растянет ваш аккуратный макет. Вставляйте в слайды SVG (PowerPoint умеет) или PNG двойного размера.</li>
-      <li><strong><a href="../../logos/videocall/zoom/" target="_blank" rel="noopener">Zoom</a>/видеозвонки</strong> сжимают демонстрацию экрана — логотип на шаринге всегда выглядит хуже, чем локально. Это ограничение канала, а не вашего файла.</li>
+      <li><strong><a href="../../logos/videocall/zoom/" target="_blank" rel="noopener">Zoom<img class="blog-mention-icon" src="../../assets/logos/svgs/zoom.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>/видеозвонки</strong> сжимают демонстрацию экрана — логотип на шаринге всегда выглядит хуже, чем локально. Это ограничение канала, а не вашего файла.</li>
       </ul>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
@@ -274,11 +278,12 @@ window.yaContextCb.push(() => {
       <p>Размытость — это всегда нехватка пикселей в конкретном месте: их либо мало в файле, либо съело сжатие, либо им не хватило плотности под ретину или печать. Решение одно из двух: вектор — или растр с двойным запасом.</p>
       <p>Чтобы не искать чёткие исходники по всему интернету — в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> каждый бренд лежит в оригинальном SVG и PNG высокого разрешения. Скачивайте нужный размер сразу, без мыла.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="4">
+          <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="52">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -291,7 +296,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            52
           </div>
           </div>
           <div class="blog-card-title">В каком формате должен быть логотип — SVG, PNG, AI, EPS или PDF</div>
@@ -299,7 +304,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-izmenit-cvet-logotipa/" data-date="2026-06-03" data-views="8">
+      <a class="blog-card" href="../kak-izmenit-cvet-logotipa/" data-date="2026-06-03" data-views="34">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -312,7 +317,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            8
+            34
           </div>
           </div>
           <div class="blog-card-title">Как изменить цвет логотипа онлайн</div>
@@ -320,7 +325,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="17">
+      <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="35">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -333,7 +338,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            17
+            35
           </div>
           </div>
           <div class="blog-card-title">Чёрно‑белая версия логотипа — зачем нужна и как сделать правильно</div>
@@ -341,7 +346,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="4">
+      <a class="blog-card" href="../vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="31">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -354,7 +359,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            31
           </div>
           </div>
           <div class="blog-card-title">Водяной знак на фото — как поставить логотип, чтобы защищал и не портил</div>
@@ -362,44 +367,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-ot-ii-avtorstvo/" data-date="2026-08-04" data-views="0">
+      <a class="blog-card" href="../ekologichnyj-veb-dizajn/" data-date="2026-07-26" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Право</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M14.83 14.83a4 4 0 1 1 0-5.66" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Оптимизация</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Логотип от нейросети — кому он принадлежит и как его защитить</div>
+          <div class="blog-card-title">Экологичный веб‑дизайн — почему вес логотипа важен в 2026</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../qr-kod-v-brend-dizajne/" data-date="2026-09-03" data-views="1">
+      <a class="blog-card" href="../logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="11">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">QR-код</span><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /><path d="M7 12h10" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>03.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            11
           </div>
           </div>
-          <div class="blog-card-title">QR‑код в дизайне бренда — из уродливого квадрата в часть айдентики</div>
+          <div class="blog-card-title">Логотип и обложка для сообщества ВКонтакте — размеры и оформление</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -409,7 +414,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#причина-1-маленький-png-растянули">Причина 1. Маленький PNG растянули</a></li><li><a href="#причина-2-ретина-экраны-пикселей-нужно-в-два-раза-больше">Причина 2. Ретина‑экраны: пикселей нужно в два раза больше</a></li><li><a href="#причина-3-это-jpg">Причина 3. Это JPG</a></li><li><a href="#причина-4-логотип-сжала-сама-платформа">Причина 4. Логотип сжала сама платформа</a></li><li><a href="#причина-5-дробные-размеры-и-трансформации-в-css">Причина 5. Дробные размеры и трансформации в CSS</a></li><li><a href="#причина-6-печать-72-dpi-вместо-300">Причина 6. Печать: 72 dpi вместо 300</a></li><li><a href="#таблица-шпаргалка">Таблица‑шпаргалка</a></li><li><a href="#пошаговая-диагностика-находим-причину-за-пять-минут">Пошаговая диагностика: находим причину за пять минут</a></li><li><a href="#про-улучшайзеры-может-ли-нейросеть-спасти-мыльный-логотип">Про «улучшайзеры»: может ли нейросеть спасти мыльный логотип</a></li><li><a href="#отдельный-случай-мыло-в-видео-и-презентациях">Отдельный случай: мыло в видео и презентациях</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#причина-1-маленький-png-растянули">Причина 1. Маленький PNG растянули</a></li><li><a href="#причина-2-ретина-экраны-пикселей-нужно-в-два-раза-больше">Причина 2. Ретина‑экраны: пикселей нужно в два раза больше</a></li><li><a href="#причина-3-это-jpg">Причина 3. Это JPG</a></li><li><a href="#причина-4-логотип-сжала-сама-платформа">Причина 4. Логотип сжала сама платформа</a></li><li><a href="#причина-5-дробные-размеры-и-трансформации-в-css">Причина 5. Дробные размеры и трансформации в CSS</a></li><li><a href="#причина-6-печать-72-dpi-вместо-300">Причина 6. Печать: 72 dpi вместо 300</a></li><li><a href="#таблица-шпаргалка">Таблица‑шпаргалка</a></li><li><a href="#пошаговая-диагностика-находим-причину-за-пять-минут">Пошаговая диагностика: находим причину за пять минут</a></li><li><a href="#про-улучшайзеры-может-ли-нейросеть-спасти-мыльный-логотип">Про «улучшайзеры»: может ли нейросеть спасти мыльный логотип</a></li><li><a href="#отдельный-случай-мыло-в-видео-и-презентациях">Отдельный случай: мыло в видео и презентациях</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -417,25 +422,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -512,6 +509,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -557,10 +555,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

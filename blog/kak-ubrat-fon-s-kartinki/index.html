@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как убрать фон с картинки — 6 бесплатных способов · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(11 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(51 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(101 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(161 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(11 70% 38%) 0%, hsl(161 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(250 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(290 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(340 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(40 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(250 70% 38%) 0%, hsl(40 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-12">12 августа 2026</time>
@@ -202,18 +206,18 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            8
 	          </span>
         </div>
         <h1>Как убрать фон с картинки — 6 бесплатных способов</h1>
       </header>
       <div class="blog-body">
-        <p>Логотип прислали на белой плашке, а нужен прозрачный. Фото товара — на фоне склада, а нужен чистый каталожный кадр. Убрать фон — одна из самых частых графических задач, и в 2026 году она решается за секунды: нейросети вырезают объект точнее, чем вручную. Разбираем шесть рабочих способов — от кнопки в телефоне до профессиональных инструментов — и объясняем, в каком формате сохранять результат, чтобы прозрачность не пропала.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Быстрые пути: <strong>iPhone/Mac</strong> — прозрачный фон встроен в систему (долгое нажатие на объект / Быстрые действия); <strong>онлайн</strong> — сервисы типа remove.bg и Adobe Express вырезают фон нейросетью бесплатно; <strong><a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a></strong> и <strong><a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a></strong> — для контроля над результатом. Сохранять — только в <strong>PNG</strong>, <strong>WebP</strong> или <strong>SVG</strong>: JPG прозрачность не поддерживает.</p></div></div>
+        <p>Логотип прислали на белой плашке, а нужен прозрачный. Фото товара — на фоне склада, а нужен чистый каталожный кадр. Убрать фон — одна из самых частых графических задач, и в 2026 году она решается за секунды: нейросети вырезают объект точнее, чем вручную. Разбираем шесть рабочих способов — от кнопки в телефоне до профессиональных инструментов — и объясняем, в каком формате сохранять результат, чтобы прозрачность не пропала.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Быстрые пути: <strong>iPhone/Mac</strong> — прозрачный фон встроен в систему (долгое нажатие на объект / Быстрые действия); <strong>онлайн</strong> — сервисы типа remove.bg и Adobe Express вырезают фон нейросетью бесплатно; <strong><a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> и <strong><a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/photoshop.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — для контроля над результатом. Сохранять — только в <strong>PNG</strong>, <strong>WebP</strong> или <strong>SVG</strong>: JPG прозрачность не поддерживает.</p></div></div>
       <h2 id="сначала-главное-в-чём-сохранять-результат">Сначала главное: в чём сохранять результат</h2>
       <p>Самая обидная ошибка — аккуратно вырезать фон и сохранить в JPG: формат не поддерживает прозрачность, и на месте вырезанного появится белая заливка. Правила простые (подробно — в статье <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG или JPG</a>):</p>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Формат</th><th>Прозрачность</th><th>Когда использовать</th></tr></thead><tbody><tr><td><strong>PNG</strong></td><td>✅</td><td>универсальный выбор для фото и логотипов</td></tr><tr><td><strong>WebP</strong></td><td>✅</td><td>для сайтов — легче PNG</td></tr><tr><td><strong>SVG</strong></td><td>✅</td><td>только для векторных логотипов</td></tr><tr><td><strong>JPG</strong></td><td>⛔</td><td>никогда для картинок без фона</td></tr></tbody></table></div>
-      <p>Если задача — именно логотип с прозрачным фоном, у нас есть отдельная подробная статья: <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">логотип с прозрачным фоном</a>. А логотипы известных брендов проще не вырезать, а сразу скачать без фона из нашего <a href="../../logos/" target="_blank" rel="noopener">каталога</a> — в SVG и PNG.</p>
+      <p>Если задача — именно логотип с прозрачным фоном, у нас есть отдельная подробная статья: <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">логотип с прозрачным фоном</a>. А логотипы известных брендов проще не вырезать, а сразу скачать без фона из нашего <a href="../../logos/" target="_blank" rel="noopener">каталога</a> — в SVG и PNG.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -233,24 +237,24 @@ window.yaContextCb.push(() => {
       </ol>
       <p>Работает и в Safari с картинками на веб‑страницах. Качество вырезания на фото с чётким объектом — отличное; на сложных фонах и полупрозрачных объектах (стекло, волосы) возможны артефакты.</p>
       <h2 id="способ-2-mac-быстрые-действия-и-просмотр">Способ 2. Mac — «Быстрые действия» и Просмотр</h2>
-      <p>В macOS та же нейросеть доступна прямо в Finder: правый клик по файлу → <strong>«Быстрые действия» → «Удалить фон»</strong>. Рядом с исходником появится копия в PNG без фона. Альтернатива — приложение <a href="../../logos/design/preview/" target="_blank" rel="noopener">Просмотр (Preview)</a>: инструмент «Волшебная палочка» позволяет выделить и удалить фон вручную, что удобно для картинок с однотонной заливкой.</p>
+      <p>В macOS та же нейросеть доступна прямо в Finder: правый клик по файлу → <strong>«Быстрые действия» → «Удалить фон»</strong>. Рядом с исходником появится копия в PNG без фона. Альтернатива — приложение <a href="../../logos/design/preview/" target="_blank" rel="noopener">Просмотр (Preview)<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/preview.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: инструмент «Волшебная палочка» позволяет выделить и удалить фон вручную, что удобно для картинок с однотонной заливкой.</p>
       <h2 id="способ-3-онлайн-сервисы-с-нейросетью">Способ 3. Онлайн‑сервисы с нейросетью</h2>
-      <p>Если под рукой только браузер, фон уберут онлайн‑инструменты: remove.bg (эталон для фото), Adobe Express, Canva (в бесплатном тарифе — с ограничениями), PhotoRoom и десятки аналогов. Сценарий везде одинаковый: загрузили картинку → нейросеть вырезала объект за пару секунд → скачали PNG.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Два подводных камня онлайн‑сервисов</span></div><div class="callout-body"><p><strong>Разрешение.</strong> Бесплатные тарифы часто отдают результат в уменьшенном размере (например, до 0,25 мегапикселя у remove.bg), а полный — за деньги. Проверяйте размеры скачанного файла. <strong>Приватность.</strong> Вы загружаете изображение на чужой сервер. Для логотипа из интернета это неважно, для паспорта или закрытого макета — используйте локальные способы (iPhone, Mac, Figma).</p></div></div>
+      <p>Если под рукой только браузер, фон уберут онлайн‑инструменты: remove.bg (эталон для фото), Adobe Express, Canva (в бесплатном тарифе — с ограничениями), PhotoRoom и десятки аналогов. Сценарий везде одинаковый: загрузили картинку → нейросеть вырезала объект за пару секунд → скачали PNG.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Два подводных камня онлайн‑сервисов</span></div><div class="callout-body"><p><strong>Разрешение.</strong> Бесплатные тарифы часто отдают результат в уменьшенном размере (например, до 0,25 мегапикселя у remove.bg), а полный — за деньги. Проверяйте размеры скачанного файла. <strong>Приватность.</strong> Вы загружаете изображение на чужой сервер. Для логотипа из интернета это неважно, для паспорта или закрытого макета — используйте локальные способы (iPhone, Mac, Figma).</p></div></div>
       <h2 id="способ-4-figma-контроль-и-бесплатно">Способ 4. Figma — контроль и бесплатно</h2>
-      <p>У <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> есть встроенный ИИ‑инструмент <strong>Remove background</strong>: выделяете картинку на холсте → в панели действий или во всплывающем тулбаре изображения жмёте «Remove background» — фон уходит без плагинов, разрешение и слои сохраняются. Рядом там же — <strong>Boost resolution</strong> для апскейла размытой картинки. Нюанс: эти ИИ‑функции доступны только на платных планах (Professional/Organization/Enterprise) с полным местом (Full seat) и включённым AI. На бесплатном тарифе выручит плагин вроде Remove BG или Background Remover (найдите в меню плагинов) — либо трюк без плагинов для логотипов с белой плашкой: режим наложения <strong>Multiply</strong> делает белый фон визуально прозрачным на светлых макетах, но это маскировка, а не удаление. Про работу с логотипами в Figma у нас есть отдельная инструкция: <a href="../kak-vstavit-logotip-v-figma/" target="_blank" rel="noopener">как вставить логотип в Figma</a>.</p>
+      <p>У <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> есть встроенный ИИ‑инструмент <strong>Remove background</strong>: выделяете картинку на холсте → в панели действий или во всплывающем тулбаре изображения жмёте «Remove background» — фон уходит без плагинов, разрешение и слои сохраняются. Рядом там же — <strong>Boost resolution</strong> для апскейла размытой картинки. Нюанс: эти ИИ‑функции доступны только на платных планах (Professional/Organization/Enterprise) с полным местом (Full seat) и включённым AI. На бесплатном тарифе выручит плагин вроде Remove BG или Background Remover (найдите в меню плагинов) — либо трюк без плагинов для логотипов с белой плашкой: режим наложения <strong>Multiply</strong> делает белый фон визуально прозрачным на светлых макетах, но это маскировка, а не удаление. Про работу с логотипами в Figma у нас есть отдельная инструкция: <a href="../kak-vstavit-logotip-v-figma/" target="_blank" rel="noopener">как вставить логотип в Figma</a>.</p>
       <h2 id="способ-5-photoshop-когда-нужен-идеальный-контур">Способ 5. Photoshop — когда нужен идеальный контур</h2>
-      <p><a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a> остаётся выбором для сложных случаев: волосы, мех, полупрозрачные края, тени, которые нужно сохранить. Для быстрого результата достаточно одной кнопки: на панели «Свойства» (Window → Properties) у пиксельного слоя есть блок Quick Actions с кнопкой «Удалить фон» — нейросеть сама находит объект и строит маску слоя за пару секунд.</p>
-      <p>Если результат нужно доработать вручную:</p>
+      <p><a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/photoshop.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> остаётся выбором для сложных случаев: волосы, мех, полупрозрачные края, тени, которые нужно сохранить. Для быстрого результата достаточно одной кнопки: на панели «Свойства» (Window → Properties) у пиксельного слоя есть блок Quick Actions с кнопкой «Удалить фон» — нейросеть сама находит объект и строит маску слоя за пару секунд.</p>
+      <p>Если результат нужно доработать вручную:</p>
       <ol>
       <li><strong>Выделение → Выделить объект</strong> — нейросеть строит выделение одним кликом.</li>
       <li>Уточните край инструментом <strong>«Выделение и маска»</strong>: ползунки радиуса и растушёвки решают проблему «жёсткого» контура.</li>
       <li>Создайте маску слоя — фон скрыт, но не удалён: любую ошибку можно поправить кистью по маске.</li>
       <li><strong>Экспорт → PNG</strong> с прозрачностью.</li>
       </ol>
-      <p>Бесплатные альтернативы того же класса — GIMP (инструмент «Выделение переднего плана») и онлайновый Photopea, почти полностью повторяющий интерфейс Photoshop.</p>
+      <p>Бесплатные альтернативы того же класса — GIMP (инструмент «Выделение переднего плана») и онлайновый Photopea, почти полностью повторяющий интерфейс Photoshop.</p>
       <h2 id="способ-6-для-логотипов-перевод-в-вектор">Способ 6. Для логотипов — перевод в вектор</h2>
-      <p>Если нужно убрать фон именно у логотипа, растровые методы — полумера: даже идеально вырезанный PNG останется растровым и <a href="../pochemu-logotip-razmytyj/" target="_blank" rel="noopener">поплывёт при увеличении</a>. Правильное решение — трассировка в вектор: контуры перерисовываются кривыми, фон исчезает по определению, а результат масштабируется бесконечно. Как это сделать в <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>, Inkscape или онлайн — читайте в статье <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">как перевести логотип в вектор</a>.</p>
+      <p>Если нужно убрать фон именно у логотипа, растровые методы — полумера: даже идеально вырезанный PNG останется растровым и <a href="../pochemu-logotip-razmytyj/" target="_blank" rel="noopener">поплывёт при увеличении</a>. Правильное решение — трассировка в вектор: контуры перерисовываются кривыми, фон исчезает по определению, а результат масштабируется бесконечно. Как это сделать в <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, Inkscape или онлайн — читайте в статье <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">как перевести логотип в вектор</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -270,45 +274,25 @@ window.yaContextCb.push(() => {
       <li><strong>Свой логотип с плашкой</strong> → <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">перевести в вектор</a> один раз и забыть о проблеме.</li>
       </ul>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../vektornye-formaty-eps-ai-pdf-svg/" data-date="2026-08-30" data-views="0">
+          <a class="blog-card" href="../logotip-dlya-pechati/" data-date="2026-08-15" data-views="9">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Форматы</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 12.5 8 15l2 2.5" /><path d="m14 12.5 2 2.5-2 2.5" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>30.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">SVG, EPS, AI, PDF — чем отличаются векторные форматы</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../logotip-dlya-pechati/" data-date="2026-08-15" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Печать</span><span class="blog-card-tag">Форматы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /><rect x="6" y="14" width="12" height="8" rx="1" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Печать</span><span class="blog-card-tag">Форматы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /><rect x="6" y="14" width="12" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            9
           </div>
           </div>
           <div class="blog-card-title">Логотип для печати — CMYK, Pantone и какие файлы нужны типографии</div>
@@ -316,7 +300,28 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-uznat-shrift-logotipa/" data-date="2026-08-13" data-views="1">
+      <a class="blog-card" href="../analiz-ca-po-otzyvam-konkurentov/" data-date="2026-08-14" data-views="12">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Маркетинг</span><span class="blog-card-tag">Инструменты</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            12
+          </div>
+          </div>
+          <div class="blog-card-title">Как спарсить отзывы конкурентов за 2 минуты и собрать по ним анализ ЦА</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-uznat-shrift-logotipa/" data-date="2026-08-13" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -329,7 +334,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
           <div class="blog-card-title">Как узнать шрифт логотипа или сайта — все рабочие способы</div>
@@ -337,7 +342,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-umenshit-ves-png/" data-date="2026-08-12" data-views="0">
+      <a class="blog-card" href="../kak-umenshit-ves-png/" data-date="2026-08-12" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -350,7 +355,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            3
           </div>
           </div>
           <div class="blog-card-title">Как уменьшить вес PNG без потери качества — все способы</div>
@@ -358,44 +363,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../chto-takoe-brendbuk/" data-date="2026-06-07" data-views="6">
+      <a class="blog-card" href="../animirovannyj-logotip/" data-date="2026-06-05" data-views="11">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Гайдлайны</span><span class="blog-card-tag">Логотипы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Анимация</span><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>05.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            6
+            11
           </div>
           </div>
-          <div class="blog-card-title">Что такое брендбук и гайдлайн — и почему нельзя растягивать логотип</div>
+          <div class="blog-card-title">Анимированный логотип — когда он нужен, форматы и как не переборщить</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-instagram/" data-date="2026-07-30" data-views="6">
+      <a class="blog-card" href="../favicon-v-poiske-i-nejrosetyah/" data-date="2026-07-23" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" /><circle cx="12" cy="13" r="3" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Фавикон</span><span class="blog-card-tag">SEO</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>30.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            6
+            4
           </div>
           </div>
-          <div class="blog-card-title">История логотипа Instagram — от полароида до градиента</div>
+          <div class="blog-card-title">Фавикон в поиске и ответах нейросетей — почему это важно в 2026</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -413,25 +418,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -508,6 +505,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -553,10 +551,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

@@ -4,9 +4,12 @@
 // Самоинициализируется по разметке #seo-search-form. Охват задаётся атрибутом
 // data-scope на форме: "logos" — только логотипы, "all" — логотипы + эмодзи.
 // Путь к данным берётся из data-base (= {{REL}}, относительный путь до корня).
-// Один источник правды: ту же разметку/стили использует и лого-SEO.
+// Один источник правды: ту же разметку/стили использует и лого-SEO, а разбор
+// запроса и подсчёт релевантности (стоп-слова, RU↔EN раскладка, fuzzy) — тот
+// же движок из search.js, что фильтрует сетку каталога.
 // ─────────────────────────────────────────────────────────────────────────────
-import { switchLayout, highlight, escapeHtml, fuzzyMatchToken, trackSearchQuery, flushSearchQuery } from './utils.js';
+import { highlight, escapeHtml, trackSearchQuery, flushSearchQuery } from './utils.js';
+import { tokenizeQuery, scoreQuery } from './search.js';
 import { initPlaceholderTypewriter } from './placeholder-typewriter.js';
 import './search-shortcut.js';
 
@@ -21,7 +24,6 @@ if (form && input && dropdown) {
   const WITH_EMOJI = SCOPE !== 'logos';
   const IS_EN = window.__LANG__ === 'en';
   const MAX = 8;
-  const norm = s => (s || '').toLowerCase().replace(/ё/g, 'е');
   const enUrl = url => (IS_EN && url) ? '/en' + url.replace('https://trace-logos.ru', '') : url.replace('https://trace-logos.ru', '') || url;
 
   let data = null;
@@ -29,24 +31,6 @@ if (form && input && dropdown) {
   let current = [];
   let activeIdx = -1;
   let debTimer = 0;
-
-  function isExactMatch(word, hay) {
-    if (hay.includes(word)) return true;
-    const alt = switchLayout(word);
-    return alt !== word && hay.includes(alt);
-  }
-
-  function matchWord(word, hay) {
-    if (isExactMatch(word, hay)) return true;
-    if (word.length < 3) return false;
-    const alt = switchLayout(word);
-    const tokens = hay.split(/\s+/);
-    for (const t of tokens) {
-      if (fuzzyMatchToken(word, t) > 0) return true;
-      if (alt !== word && fuzzyMatchToken(alt, t) > 0) return true;
-    }
-    return false;
-  }
 
   async function loadData() {
     if (data) return data;
@@ -66,7 +50,7 @@ if (form && input && dropdown) {
         name: IS_EN ? (l.name_en || l.name) : l.name,
         url: enUrl(l.url),
         img: l.svgUrl || l.pngUrl || '',
-        search: norm(l.name + ' ' + (l.name_en || '') + ' ' + (l.tags || '')),
+        search: (l.name + ' ' + (l.name_en || '') + ' ' + (l.tags || '')).toLowerCase(),
       }));
       const emoji = (er.emoji || []).map(e => {
         const ch = (e.tags || '').trim().split(/\s+/)[0] || '';
@@ -75,7 +59,7 @@ if (form && input && dropdown) {
           name: IS_EN ? (e.name_en || e.name) : e.name,
           char: ch,
           url: enUrl(e.url) || (BASE + 'emoji/?q=' + encodeURIComponent(e.name)),
-          search: norm(e.name + ' ' + (e.name_en || '') + ' ' + (e.tags || '')),
+          search: (e.name + ' ' + (e.name_en || '') + ' ' + (e.tags || '')).toLowerCase(),
         };
       });
       data = { logos, emoji };
@@ -84,18 +68,12 @@ if (form && input && dropdown) {
     return loadPromise;
   }
 
-  function rank(items, words, raw) {
+  function rank(items, words) {
     const out = [];
     for (const it of items) {
-      if (!words.every(w => matchWord(w, it.search))) continue;
-      const nm = norm(it.name);
-      let score = -nm.length * 0.1;
-      if (nm === raw) score += 120;
-      if (nm.startsWith(words[0])) score += 80;
-      if (nm.split(/\s+/).some(t => t.startsWith(words[0]))) score += 30;
-      const fuzzyCount = words.filter(w => !isExactMatch(w, it.search)).length;
-      if (fuzzyCount > 0) score -= 40 * fuzzyCount;
-      out.push([score, it]);
+      const nameLow = it.name.toLowerCase().replace(/-/g, '');
+      const score = scoreQuery(words, it.search, nameLow);
+      if (score > 0) out.push([score, it]);
     }
     out.sort((a, b) => b[0] - a[0]);
     return out.map(p => p[1]);
@@ -144,14 +122,12 @@ if (form && input && dropdown) {
 
   async function runSearch() {
     const raw = input.value.trim();
-    const n = norm(raw);
-    const words = n.replace(/-/g, ' ').split(/\s+/).filter(Boolean);
+    const { words, rawWords } = tokenizeQuery(raw);
     if (!words.length) { trackSearchQuery('', 0); close(); return; }
     const d = await loadData();
     if (input.value.trim() !== raw) return;
-    const rawWords = raw.split(/\s+/).filter(Boolean);
-    const logosAll = rank(d.logos, words, n);
-    const emojiAll = WITH_EMOJI ? rank(d.emoji, words, n) : [];
+    const logosAll = rank(d.logos, words);
+    const emojiAll = WITH_EMOJI ? rank(d.emoji, words) : [];
     // Считаем до среза MAX: в статистику должно уходить реальное число
     // совпадений, а не размер выпадашки.
     trackSearchQuery(raw, logosAll.length + emojiAll.length);

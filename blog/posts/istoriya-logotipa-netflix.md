@@ -21,15 +21,15 @@ tags_en: Logo Histories, Branding, Media
 
 ## 2000‑е: красный кинотеатральный
 
-С ростом сервиса появился знак, который помнят подписчики DVD‑эпохи: объёмные белые буквы с тенью на красной плашке‑дуге, стилизованные под вывеску кинотеатра. Красный закрепился как цвет бренда — и это оказалось стратегическим активом: на чёрном фоне интерфейса стриминга красный горит ярче всего — та же логика, что и в том, [как стриминги делят между собой цвета](../logotipy-strimingovyh-servisov/).
+С ростом сервиса появился знак, который помнят подписчики DVD‑эпохи: объёмные белые буквы с тенью на красной плашке‑дуге, стилизованные под вывеску кинотеатра. Красный закрепился как цвет бренда — и это оказалось стратегическим активом: на чёрном фоне интерфейса стриминга красный горит ярче всего — та же логика, что и в том, как стриминги делят между собой цвета.
 
 ## 2014: плоское слово и арка
 
-Переход к стримингу потребовал знак для экранов, а не вывесок: в 2014‑м логотип уплостили до красного слова с характерной **аркой** — буквы стоят на невидимой дуге, как титры на экране кинотеатра, слегка «обнимая» зрителя. Тень и объём ушли по общим законам эпохи — [почему все тогда уплощались](../pochemu-brendy-uproshchayut-logotipy/), мы разбирали отдельно.
+Переход к стримингу потребовал знак для экранов, а не вывесок: в 2014‑м логотип уплостили до красного слова с характерной **аркой** — буквы стоят на невидимой дуге, как титры на экране кинотеатра, слегка «обнимая» зрителя. Тень и объём ушли по общим законам эпохи — [почему все тогда уплощались](../pochemu-brendy-uproshchayut-logotipy/), мы разбирали отдельно.
 
 ## 2016: буква N из ленты
 
-Иконка приложения потребовала компактной версии — и Netflix собрал «N» из красной ленты, уходящей в тень: диагональ ленты намекает и на киноплёнку, и на луч проектора. Знак живёт на чёрном квадрате — смелое решение для эпохи белых иконок, которое сделало приложение мгновенно находимым на экране вопреки всем [законам иконок приложений](../ikonka-prilozheniya/). Пара «полное слово + N» — классическая система версий, и [зачем вообще нужны такие версии](../vidy-logotipov/), мы объясняли отдельно.
+Иконка приложения потребовала компактной версии — и Netflix собрал «N» из красной ленты, уходящей в тень: диагональ ленты намекает и на киноплёнку, и на луч проектора. Знак живёт на чёрном квадрате — смелое решение для эпохи белых иконок, которое сделало приложение мгновенно находимым на экране вопреки всем [законам иконок приложений](../ikonka-prilozheniya/). Пара «полное слово + N» — классическая система версий, и зачем вообще нужны такие версии, мы объясняли отдельно.
 
 ## «Та‑дам»: логотип, который слышно
 
@@ -37,7 +37,7 @@ tags_en: Logo Histories, Branding, Media
 
 ## Система версий: где какая живёт
 
-У Netflix три носителя знака с жёсткими ролями. **Полное слово** — маркетинг, сайты, титры лицензионных шоу («A Netflix Original»). **Буква N** — иконка приложения, фавиконка, профили в соцсетях, водяной знак в углу превью. **Анимированный веер** — только заставки контента. Гайдлайны компании известны строгостью: слово нельзя ставить на пёстрые фоны, N не используется рядом с полным словом, красный не заменяется ни на что. Такая дисциплина — причина, по которой знак не «расползается» при миллиардных тиражах: правил мало, но исключений ноль — так же [фиксируются правила в брендбуке](../chto-takoe-brendbuk/) и собирается [комплект версий знака](../vidy-logotipov/) у любого продуманного бренда.
+У Netflix три носителя знака с жёсткими ролями. **Полное слово** — маркетинг, сайты, титры лицензионных шоу («A Netflix Original»). **Буква N** — иконка приложения, фавиконка, профили в соцсетях, водяной знак в углу превью. **Анимированный веер** — только заставки контента. Гайдлайны компании известны строгостью: слово нельзя ставить на пёстрые фоны, N не используется рядом с полным словом, красный не заменяется ни на что. Такая дисциплина — причина, по которой знак не «расползается» при миллиардных тиражах: правил мало, но исключений ноль — так же [фиксируются правила в брендбуке](../chto-takoe-brendbuk/) и собирается комплект версий знака у любого продуманного бренда.
 
 ## Хронология
 
@@ -50,7 +50,7 @@ tags_en: Logo Histories, Branding, Media
 | 2015 – н. в. | «та‑дам» + веер лучей | звуковой и анимированный слой |
 
 :::tip Урок кейса
-Netflix первым понял, что у цифрового бренда есть носители, которых нет в брендбуках прошлого: сплеш‑скрин, звук запуска, анимация загрузки. Если ваш продукт живёт на экране — проектируйте звуковую и анимированную версию знака сразу, а не «когда‑нибудь потом» — и сразу фиксируйте их в [брендбуке](../chto-takoe-brendbuk/).
+Netflix первым понял, что у цифрового бренда есть носители, которых нет в брендбуках прошлого: сплеш‑скрин, звук запуска, анимация загрузки. Если ваш продукт живёт на экране — проектируйте звуковую и анимированную версию знака сразу, а не «когда‑нибудь потом» — и сразу фиксируйте их в [брендбуке](../chto-takoe-brendbuk/).
 :::
 
 Логотип Netflix в SVG и PNG — на [странице бренда](../../logos/media/netflix/). Другие истории серии: [YouTube](../istoriya-logotipa-youtube/), [Spotify](../istoriya-logotipa-spotify/), [Starbucks](../istoriya-logotipa-starbucks/), [Instagram](../istoriya-logotipa-instagram/).
@@ -69,7 +69,7 @@ Netflix's first mark was the name with a film strip in purple: a literal illustr
 
 ## The 2000s: theater red
 
-With growth came the mark DVD-era subscribers remember: dimensional white letters with a shadow on a red arced badge, styled like a cinema marquee. Red locked in as the brand color — a strategic asset, as it turned out: on a streaming interface's black background red burns brightest — the same logic behind [how streaming services divide up colors](../logotipy-strimingovyh-servisov/).
+With growth came the mark DVD-era subscribers remember: dimensional white letters with a shadow on a red arced badge, styled like a cinema marquee. Red locked in as the brand color — a strategic asset, as it turned out: on a streaming interface's black background red burns brightest — the same logic behind how streaming services divide up colors.
 
 ## 2014: the flat word and the arc
 
@@ -77,7 +77,7 @@ The streaming pivot demanded a mark for screens, not marquees: in 2014 the logo 
 
 ## 2016: the ribbon N
 
-The app icon demanded a compact version — and Netflix folded an "N" from a red ribbon receding into shadow: the diagonal hints at both film stock and a projector beam. The mark lives on a black square — a bold call in the era of white icons that made the app instantly findable on screen against every one of [the laws of app icons](../ikonka-prilozheniya/). The "full word + N" pair is the classic version system — [why versions exist](../vidy-logotipov/) at all is worth its own explanation.
+The app icon demanded a compact version — and Netflix folded an "N" from a red ribbon receding into shadow: the diagonal hints at both film stock and a projector beam. The mark lives on a black square — a bold call in the era of white icons that made the app instantly findable on screen against every one of [the laws of app icons](../ikonka-prilozheniya/). The "full word + N" pair is the classic version system — why versions exist at all is worth its own explanation.
 
 ## "Ta-dum": the logo you can hear
 
@@ -85,7 +85,7 @@ Netflix's main branding innovation is the **sonic logo**: the double "ta-dum" be
 
 ## The version system: what lives where
 
-Netflix runs three mark carriers with strict roles. **The full word** — marketing, websites, licensed-show titles ("A Netflix Original"). **The N** — app icon, favicon, social profiles, the watermark on preview corners. **The animated fan** — content idents only. The company's guidelines are famously strict: the word never sits on busy backgrounds, the N never appears next to the full word, the red is never substituted. That discipline is why the mark doesn't "smear" across billions of impressions: few rules, zero exceptions — the same way [rules get codified in a brand book](../chto-takoe-brendbuk/) and any [version kit](../vidy-logotipov/) gets assembled for a serious brand.
+Netflix runs three mark carriers with strict roles. **The full word** — marketing, websites, licensed-show titles ("A Netflix Original"). **The N** — app icon, favicon, social profiles, the watermark on preview corners. **The animated fan** — content idents only. The company's guidelines are famously strict: the word never sits on busy backgrounds, the N never appears next to the full word, the red is never substituted. That discipline is why the mark doesn't "smear" across billions of impressions: few rules, zero exceptions — the same way [rules get codified in a brand book](../chto-takoe-brendbuk/) and any version kit gets assembled for a serious brand.
 
 ## The timeline
 

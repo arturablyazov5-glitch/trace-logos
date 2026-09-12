@@ -7,6 +7,30 @@ const RATE_LIMIT = 5;
 const RATE_WINDOW_SECONDS = 600; // 5 запросов / 10 минут с одного IP
 const DEDUP_WINDOW_SECONDS = 20; // повторная отправка той же формы в этом окне не шлётся в Telegram повторно
 
+// Расширение — не источник истины (его легко подделать, см. инцидент 2026-08-10:
+// файл .rs прошёл как "изображение" и улетел в Telegram без единой проверки).
+// Whitelist ниже сверяется и с расширением, и с magic bytes реального содержимого.
+const RASTER_SIGNATURES: Record<string, { mime: string; magic: (b: Uint8Array) => boolean }> = {
+  png: {
+    mime: 'image/png',
+    magic: (b) => b.length >= 8 && b[0] === 0x89 && b[1] === 0x50 && b[2] === 0x4e && b[3] === 0x47
+      && b[4] === 0x0d && b[5] === 0x0a && b[6] === 0x1a && b[7] === 0x0a,
+  },
+  jpg: {
+    mime: 'image/jpeg',
+    magic: (b) => b.length >= 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff,
+  },
+  jpeg: {
+    mime: 'image/jpeg',
+    magic: (b) => b.length >= 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff,
+  },
+  webp: {
+    mime: 'image/webp',
+    magic: (b) => b.length >= 12 && b[0] === 0x52 && b[1] === 0x49 && b[2] === 0x46 && b[3] === 0x46
+      && b[8] === 0x57 && b[9] === 0x45 && b[10] === 0x42 && b[11] === 0x50,
+  },
+};
+
 function sanitizeText(str: string): string {
   return String(str || '').replace(/[<>"'&]/g, '').trim().slice(0, 200);
 }
@@ -107,8 +131,11 @@ serve(async (req: Request) => {
       blob = new Blob([svgText], { type: 'image/svg+xml' });
       filename = `${brand}.svg`;
     } else {
-      const mime = ext === 'png' ? 'image/png' : 'image/jpeg';
-      blob = new Blob([bytes], { type: mime });
+      const sig = RASTER_SIGNATURES[ext];
+      if (!sig) return cors({ error: 'Unsupported file type' }, 422);
+      if (!sig.magic(bytes)) return cors({ error: 'File content does not match its extension' }, 422);
+
+      blob = new Blob([bytes], { type: sig.mime });
       filename = `${brand}.${ext}`;
     }
 

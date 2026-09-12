@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "name": "Typograf | Trace Logo's",
+  "version": "1.0.0",
+  "description": "Расставляет русскую типографику (НБСП, тире, кавычки-ёлочки, многоточие) прямо в текстовых полях сайта на Taptop",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Trace Typograf",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [],
+  "host_permissions": [
+    "*://*/-/cms/v1/mosaic/*",
+    "https://*.tilda.cc/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/-/cms/v1/mosaic/*",
+        "https://*.tilda.cc/*"
+      ],
+      "js": [
+        "dist/content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*/-/cms/v1/mosaic/*"
+      ],
+      "js": [
+        "dist/taptop-main-bridge.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "popup/promo-assets/*.svg"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

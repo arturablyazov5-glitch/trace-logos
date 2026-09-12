@@ -742,6 +742,7 @@ openDetailFn = function (item, card) {
   if (layoutMq.matches) closeNavDrawer();
 
   if (activeCard === card) { closeDetail(); return; }
+  clearSearchQueryParam();
   trackLogoView(item.figma, item.name, item.file);
   resetCopyBtn();
 
@@ -1112,6 +1113,10 @@ layoutMq.addEventListener('change', () => {
 
 const mobileSearchGo = document.getElementById('mobile-search-go');
 search.addEventListener('input', () => {
+  // `?q=` is only an entry point from homepage/SEO search. Once the visitor
+  // changes or clears that query, the address must reflect the live state
+  // instead of keeping the original request forever.
+  clearSearchQueryParam();
   const q = search.value.toLowerCase().trim();
   if (q) {
     // Search looks across the whole catalog — a lingering category/
@@ -1169,6 +1174,7 @@ document.addEventListener('keydown', (e) => {
     closeDetail();
   } else if (search.value) {
     search.value = '';
+    clearSearchQueryParam();
     filterCards('');
   }
 });
@@ -1235,6 +1241,9 @@ function reapplyView() {
 function syncViewToUrl() {
   const url = new URL(location.href);
 
+  // Category/ecosystem/format navigation leaves the incoming search context.
+  url.searchParams.delete('q');
+
   if (formatState.format === 'all') url.searchParams.delete('format');
   else url.searchParams.set('format', formatState.format);
 
@@ -1247,6 +1256,13 @@ function syncViewToUrl() {
     url.searchParams.set('eco', currentView.value);
   }
 
+  history.replaceState(history.state, '', url.pathname + url.search + url.hash);
+}
+
+function clearSearchQueryParam() {
+  const url = new URL(location.href);
+  if (!url.searchParams.has('q')) return;
+  url.searchParams.delete('q');
   history.replaceState(history.state, '', url.pathname + url.search + url.hash);
 }
 initFilters({
@@ -1435,7 +1451,7 @@ loadLogos(_manifestBase).then(logos => {
   }
 
   // Pre-fill search: via ?q=<query> (from SEO page search redirect)
-  const qParam = new URLSearchParams(location.search).get('q');
+  const qParam = _initParams.get('q');
   if (qParam) {
     search.value = qParam;
     filterCards(qParam.toLowerCase().trim());

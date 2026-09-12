@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как предложить свой эмодзи в Юникод — реальная процедура · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(83 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(123 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(173 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(233 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(83 70% 38%) 0%, hsl(233 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(323 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(3 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(53 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(113 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(323 70% 38%) 0%, hsl(113 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-08">8 августа 2026</time>
@@ -202,7 +206,7 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            9
 	          </span>
         </div>
         <h1>Как предложить свой эмодзи в Юникод — реальная процедура</h1>
@@ -211,8 +215,8 @@
         <p>Каждый новый эмодзи в вашей клавиатуре — чья‑то заявка: пельмень пролоббировала журналистка, хинкали продвигала целая кампания, а маття появился благодаря школьнице. Предложить эмодзи может любой человек — процедура открыта, бесплатна и описана по шагам. Другое дело, что консорциум отклоняет большинство заявок. Разбираем, как это устроено: кто решает, по каким критериям и что писать в заявке, чтобы у неё был шанс.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Новые эмодзи утверждает <strong>консорциум Юникод</strong> — некоммерческая организация, где заседают Apple, Google, Microsoft и другие. Заявку может подать кто угодно в открытое окно приёма: документ с обоснованием + образец картинки. Главные критерии: <strong>ожидаемая частота использования</strong>, многозначность, непохожесть на существующие. Запрещены: <strong>логотипы и бренды</strong>, конкретные люди, божества, флаги. Путь от заявки до клавиатуры — около <strong>двух лет</strong>.</p></div></div>
       <h2 id="кто-вообще-решает">Кто вообще решает</h2>
-      <p>Эмодзи стандартизирует <strong>Unicode Consortium</strong> — та же организация, что кодирует все письменности мира. Внутри неё работает эмодзи‑подкомитет: он собирает заявки, фильтрует и выносит шорт‑лист на голосование участников. Полноправные члены — в основном технологические корпорации (Apple, Google, Microsoft, Meta и другие): по сути, будущее вашей клавиатуры решает клуб компаний, которым потом эти эмодзи рисовать.</p>
-      <p>Важно понимать разделение ролей: Юникод утверждает <strong>символ и его смысл</strong>, а картинку каждый вендор рисует свою — поэтому утверждённый эмодзи выглядит по‑разному на iPhone и Android — <a href="../pochemu-emodzi-otobrazhayutsya-po-raznomu/" target="_blank" rel="noopener">подробно о причинах</a> мы писали отдельно. Сравнить отрисовки Apple и Google можно в нашем <a href="../../emoji/" target="_blank" rel="noopener">каталоге эмодзи</a>.</p>
+      <p>Эмодзи стандартизирует <strong>Unicode Consortium</strong> — та же организация, что кодирует все письменности мира. Внутри неё работает эмодзи‑подкомитет: он собирает заявки, фильтрует и выносит шорт‑лист на голосование участников. Полноправные члены — в основном технологические корпорации (Apple, Google, Microsoft, Meta и другие): по сути, будущее вашей клавиатуры решает клуб компаний, которым потом эти эмодзи рисовать.</p>
+      <p>Важно понимать разделение ролей: Юникод утверждает <strong>символ и его смысл</strong>, а картинку каждый вендор рисует свою — поэтому утверждённый эмодзи выглядит по‑разному на iPhone и Android — <a href="../pochemu-emodzi-otobrazhayutsya-po-raznomu/" target="_blank" rel="noopener">подробно о причинах</a> мы писали отдельно. Сравнить отрисовки Apple и Google можно в нашем <a href="../../emoji/" target="_blank" rel="noopener">каталоге эмодзи</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -228,13 +232,13 @@ window.yaContextCb.push(() => {
       <ul>
       <li><strong>Частота использования</strong> — главный. Нужно доказать, что символ будут применять массово: статистика поисковых запросов, частотность слова, петиции. Заявка на пельмень (дамплинг) прошла именно на данных о том, что дамплинги едят на всех континентах.</li>
       <li><strong>Многозначность.</strong> Сильный эмодзи работает шире буквального смысла: креветка 🦐 — это и еда, и «мелкий», и интернет‑сленг. Про то, как эмодзи обрастают смыслами, — <a href="../znachenie-populyarnyh-emodzi/" target="_blank" rel="noopener">значение популярных эмодзи</a>.</li>
-      <li><strong>Непохожесть.</strong> Если смысл выразим существующими эмодзи или их комбинацией — откажут.</li>
-      <li><strong>Полнота категории.</strong> Дыры в рядах: если есть 🐘 и 🦒, но нет капибары — аргумент «за» (капибара, кстати, так и прошла).</li>
+      <li><strong>Непохожесть.</strong> Если смысл выразим существующими эмодзи или их комбинацией — откажут.</li>
+      <li><strong>Полнота категории.</strong> Дыры в рядах: если есть 🐘 и 🦒, но нет капибары — аргумент «за» (капибара, кстати, так и прошла).</li>
       </ul>
       <h2 id="что-запрещено">Что запрещено</h2>
       <p>Список исключений жёсткий, и о него разбивается большинство наивных заявок:</p>
       <ul>
-      <li><strong>Логотипы, бренды, товарные знаки</strong> — эмодзи вашей компании не будет никогда: стандарт не может содержать чужую интеллектуальную собственность, о том, <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">как вообще охраняются знаки</a>, мы писали отдельно. Бренды решают задачу иначе — <a href="../kak-sdelat-svoi-emodzi-v-telegram/" target="_blank" rel="noopener">своими эмодзи в мессенджерах</a>, например в Telegram.</li>
+      <li><strong>Логотипы, бренды, товарные знаки</strong> — эмодзи вашей компании не будет никогда: стандарт не может содержать чужую интеллектуальную собственность, о том, <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">как вообще охраняются знаки</a>, мы писали отдельно. Бренды решают задачу иначе — <a href="../kak-sdelat-svoi-emodzi-v-telegram/" target="_blank" rel="noopener">своими эмодзи в мессенджерах</a>, например в Telegram.</li>
       <li><strong>Конкретные люди</strong> — ни живые, ни исторические, ни вымышленные персонажи.</li>
       <li><strong>Божества и религиозные фигуры.</strong></li>
       <li><strong>Новые флаги</strong> — приём заявок на флаги закрыт полностью, хотя <a href="../emodzi-flagi-kak-ustroeny/" target="_blank" rel="noopener">устройство эмодзи‑флагов</a> само по себе любопытно.</li>
@@ -246,10 +250,10 @@ window.yaContextCb.push(() => {
       <li><strong>Название и категория</strong> предлагаемого эмодзи.</li>
       <li><strong>Образцы изображения</strong> — чёрно‑белый и цветной, 18×18 px читаемость обязательна (по сути та же дисциплина, что у <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавиконок</a>): картинки должны быть свободны от чужих прав.</li>
       <li><strong>Обоснование по каждому критерию</strong> — с данными: графики поисковых трендов, частотные словари, сравнение с частотностью уже принятых эмодзи.</li>
-      <li><strong>Ожидаемые ZWJ‑комбинации</strong>, если есть (как символ будет сочетаться с существующими).</li>
+      <li><strong>Ожидаемые ZWJ‑комбинации</strong>, если есть (как символ будет сочетаться с существующими).</li>
       </ol>
-      <p>Дальше — рассмотрение подкомитетом (возможны вопросы и доработки), включение в кандидаты (Emoji N.0 draft), голосование, публикация стандарта и — ещё через год — отрисовка вендорами и появление в обновлениях iOS/Android. Суммарно от подачи до клавиатуры проходит <strong>полтора‑два года</strong>.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Реальные истории успеха</span></div><div class="callout-body"><p>Дамплинг 🥟 предложила журналистка Дженни Ли, собравшая заявку как расследование; хинкали не прошёл, зато прошли маття 🍵-совместимые и капибара 🦫-соседи по «дырам в категориях». Мораль всех успешных кейсов одна: побеждает не «милая идея», а таблица с данными о частотности.</p></div></div>
+      <p>Дальше — рассмотрение подкомитетом (возможны вопросы и доработки), включение в кандидаты (Emoji N.0 draft), голосование, публикация стандарта и — ещё через год — отрисовка вендорами и появление в обновлениях iOS/Android. Суммарно от подачи до клавиатуры проходит <strong>полтора‑два года</strong>.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Реальные истории успеха</span></div><div class="callout-body"><p>Дамплинг 🥟 предложила журналистка Дженни Ли, собравшая заявку как расследование; хинкали не прошёл, зато прошли маття 🍵-совместимые и капибара 🦫-соседи по «дырам в категориях». Мораль всех успешных кейсов одна: побеждает не «милая идея», а таблица с данными о частотности.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -261,19 +265,20 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="шансы-и-альтернативы">Шансы и альтернативы</h2>
-      <p>Честная статистика: в год утверждается несколько десятков новых эмодзи из сотен заявок, и доля «уличных» предложений среди принятых невелика. Если цель — не «войти в историю», а решить прикладную задачу, альтернативы быстрее:</p>
+      <p>Честная статистика: в год утверждается несколько десятков новых эмодзи из сотен заявок, и доля «уличных» предложений среди принятых невелика. Если цель — не «войти в историю», а решить прикладную задачу, альтернативы быстрее:</p>
       <ul>
       <li><strong>Кастомные эмодзи и стикеры</strong> в Telegram и Discord — свой набор за вечер по <a href="../kak-sdelat-svoi-emodzi-v-telegram/" target="_blank" rel="noopener">нашей инструкции</a>.</li>
       <li><strong><a href="../kaomodzi-i-tekstovye-smajliki/" target="_blank" rel="noopener">Каомодзи и текстовые смайлики</a></strong> — выразительность без всяких стандартов, как и <a href="../simvoly-i-emodzi-dlya-nika/" target="_blank" rel="noopener">символы для ника</a>.</li>
-      <li><strong>Комбинации существующих</strong> эмодзи — язык, который понимают все платформы, тот же приём, <a href="../emodzi-v-marketinge/" target="_blank" rel="noopener">что используют бренды в маркетинге</a>.</li>
+      <li><strong>Комбинации существующих</strong> эмодзи — язык, который понимают все платформы, тот же приём, <a href="../emodzi-v-marketinge/" target="_blank" rel="noopener">что используют бренды в маркетинге</a>.</li>
       </ul>
       <p>А полистать все 1900+ существующих эмодзи — с русскими названиями и версиями Apple и Google — можно в нашем <a href="../../emoji/" target="_blank" rel="noopener">каталоге</a>. Возможно, нужный символ уже есть: прежде чем писать заявку в консорциум, проверьте — именно с этого шага начинается официальная форма.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../istoriya-smajlika/" data-date="2026-08-06" data-views="1">
+          <a class="blog-card" href="../istoriya-smajlika/" data-date="2026-08-06" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -286,7 +291,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            8
           </div>
           </div>
           <div class="blog-card-title">История смайлика — от жёлтого значка 1963 года до эмодзи</div>
@@ -294,7 +299,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../emodzi-flagi-kak-ustroeny/" data-date="2026-07-27" data-views="8">
+      <a class="blog-card" href="../emodzi-flagi-kak-ustroeny/" data-date="2026-07-27" data-views="49">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -307,7 +312,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            8
+            49
           </div>
           </div>
           <div class="blog-card-title">Как устроены эмодзи‑флаги — и почему их не видно на Windows</div>
@@ -315,86 +320,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../vidy-logotipov/" data-date="2026-08-31" data-views="0">
+      <a class="blog-card" href="../logotip-i-tovarnyj-znak-raznica/" data-date="2026-08-17" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Право</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13" /><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z" /><path d="M5 22h14" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            4
           </div>
           </div>
-          <div class="blog-card-title">Виды логотипов — 7 типов с примерами известных брендов</div>
+          <div class="blog-card-title">Логотип и товарный знак — в чём разница и что это значит для бизнеса</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../vektornye-formaty-eps-ai-pdf-svg/" data-date="2026-08-30" data-views="0">
+      <a class="blog-card" href="../kak-sdelat-svoi-emodzi-v-telegram/" data-date="2026-08-11" data-views="135">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Форматы</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M10 12.5 8 15l2 2.5" /><path d="m14 12.5 2 2.5-2 2.5" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Telegram</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z" /><path d="M15 3v5a1 1 0 0 0 1 1h5" /><path d="M8 13h.01" /><path d="M16 13h.01" /><path d="M10 16s.8 1 2 1c1.3 0 2-1 2-1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>30.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            135
           </div>
           </div>
-          <div class="blog-card-title">SVG, EPS, AI, PDF — чем отличаются векторные форматы</div>
+          <div class="blog-card-title">Как сделать свои эмодзи и стикеры в Telegram — полный гайд</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../png-ili-jpg-chto-luchshe/" data-date="2026-07-04" data-views="12">
+      <a class="blog-card" href="../kak-vstavit-svg-na-sajt/" data-date="2026-06-25" data-views="30">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Форматы</span><span class="blog-card-tag">Графика</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /><path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /><circle cx="13" cy="7" r="1" fill="currentColor" /><rect x="8" y="2" width="14" height="14" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Вёрстка</span><span class="blog-card-tag">Сайты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>25.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            12
+            30
           </div>
           </div>
-          <div class="blog-card-title">PNG или JPG — чем отличаются и что выбрать для каждой задачи</div>
+          <div class="blog-card-title">Как вставить SVG на сайт — img, инлайн, background и что выбрать</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../memy-v-marketinge/" data-date="2026-09-08" data-views="0">
+      <a class="blog-card" href="../logotipy-fitnes-prilozhenij/" data-date="2026-08-19" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Маркетинг</span><span class="blog-card-tag">Мемы</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /><path d="M7 10v12" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Здоровье</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            4
           </div>
           </div>
-          <div class="blog-card-title">Мемы в маркетинге — как бренду шутить и не опозориться</div>
+          <div class="blog-card-title">Логотипы фитнес‑приложений — Strava, Nike Run Club, Peloton и другие</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -412,25 +417,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -507,6 +504,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -552,10 +550,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /assets/easter-egg/
+Disallow: /kb/
 
 # AI agents, explicitly named — wildcard Allow above already covers them, but
 # some bots ignore directives (Crawl-delay etc.) on rules meant for "*", and
@@ -46,11 +47,19 @@ Allow: /
 User-agent: Bytespider
 Allow: /
 
-User-agent: Amazonbot
-Allow: /
-
 User-agent: meta-externalagent
 Allow: /
+
+# No user-facing search surface (Amazonbot feeds internal shopping/AI data,
+# never sends referral traffic) or negligible relevant audience (PetalBot/
+# Petal Search — near-zero share outside Huawei-phone markets) — disallowed
+# to cut pointless crawl load. Everything else above stays Allow.
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
 
 Sitemap: https://trace-logos.ru/sitemap.xml
 

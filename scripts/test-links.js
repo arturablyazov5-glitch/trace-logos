@@ -46,7 +46,7 @@ const SITE_ORIGIN = 'trace-logos.ru'; // внутренний прод-доме�
 // Каталоги, куда не заходим: служебное, шаблоны с {{...}}, чужие зеркала.
 const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
-  'figna-plagins', 'supabase', 'sanitizer', 'upptime',
+  'figma-plugins', 'supabase', 'sanitizer', 'upptime', 'trace-typograf',
 ]);
 
 // Исключений НЕТ: любая неразрешимая внутренняя ссылка роняет сборку.

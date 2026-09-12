@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(301 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(341 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(31 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(91 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(301 70% 38%) 0%, hsl(91 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(181 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(221 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(271 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(331 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(181 70% 38%) 0%, hsl(331 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-26">July 26, 2026</time>
@@ -203,27 +207,27 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            9
+	            75
 	          </span>
         </div>
         <h1>The Yandex Ecosystem Logos — How the Mark System Works</h1>
       </header>
       <div class="blog-body">
-        <p><a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex</a> runs dozens of services — taxi, delivery, music, maps, a marketplace — and every icon reads as &quot;Yandex&quot; at first glance. Behind that sits a system with strict rules: one container, one typeface, a palette assigned per direction. Let's take it apart using the actual files from our catalog.</p>
+        <p><a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> runs dozens of services — taxi, delivery, music, maps, a marketplace — and every icon reads as &quot;Yandex&quot; at first glance. Behind that sits a system with strict rules: one container, one typeface, a palette assigned per direction. Let's take it apart using the actual files from our catalog.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The system rests on a split: <strong>the container, the typeface and the palette</strong> carry family membership, while <strong>the symbol inside</strong> carries the individual product. The typeface is in‑house — Yandex Sans, developed in 2016. Every service is gathered on the <a href="/en/logos/ecosystem/yandex/" target="_blank" rel="noopener">Yandex ecosystem page</a>.</p></div></div>
       <h2 id="the-core-the-letter-and-the-badge">The core: the letter and the badge</h2>
-      <p>The base mark is the <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">&quot;Yandex&quot;</a> wordmark and the red letter, whose <a href="/en/blog/istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">full history</a> we've covered elsewhere. For services the derived element matters more: the <strong><a href="/en/logos/search/yandex/" target="_blank" rel="noopener">&quot;Yandex&quot;</a> badge‑prefix</strong> before the product name. It works like a surname — first the shared brand, then the product — and the horizontal lockups show it literally:</p>
+      <p>The base mark is the <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">&quot;Yandex&quot;<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> wordmark and the red letter, whose <a href="/en/blog/istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">full history</a> we've covered elsewhere. For services the derived element matters more: the <strong><a href="/en/logos/search/yandex/" target="_blank" rel="noopener">&quot;Yandex&quot;<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> badge‑prefix</strong> before the product name. It works like a surname — first the shared brand, then the product — and the horizontal lockups show it literally:</p>
       <div class="blog-logo-fulls">
           <a class="blog-logo-full" href="/en/logos/search/yandex/">
-            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-en-full.svg?v=20260808" alt="Yandex full logo" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-en-full.svg?v=20260910" alt="Yandex full logo" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Yandex</span>
           </a>
           <a class="blog-logo-full" href="/en/logos/market/yandexmarket/">
-            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-market-full.svg?v=20260808" alt="Yandex Market full logo" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-market-full.svg?v=20260910" alt="Yandex Market full logo" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Yandex Market</span>
           </a>
           <a class="blog-logo-full" href="/en/logos/food/yandexlavka/">
-            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-lavka-full.svg?v=20260808" alt="Yandex Lavka full logo" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-lavka-full.svg?v=20260910" alt="Yandex Lavka full logo" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Yandex Lavka</span>
           </a>
         </div>
@@ -242,151 +246,151 @@ window.yaContextCb.push(() => {
       <p>But a surname only works where there's room for a word. In an interface the logo shrinks to a 40×40 square with no space for a caption at all — so here the system has to hold together by entirely different means. Look at the icons in a row:</p>
       <div class="ecosystem-grid blog-ecosystem-grid">
           <a class="ecosystem-card" href="/en/logos/delivery/yandexgo/" aria-label="Yandex Go">
-            <img src="/assets/logos/svgs/yandex-go.svg?v=20260808" alt="Yandex Go logo" width="48" height="48" loading="lazy" decoding="async">
+            <img src="/assets/logos/svgs/yandex-go.svg?v=20260910" alt="Yandex Go logo" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Yandex Go</span>
           </a>
           <a class="ecosystem-card" href="/en/logos/market/yandexmarket/" aria-label="Yandex Market">
-            <img src="/assets/logos/svgs/yandex-market.svg?v=20260808" alt="Yandex Market logo" width="48" height="48" loading="lazy" decoding="async">
+            <img src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="Yandex Market logo" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Yandex Market</span>
           </a>
           <a class="ecosystem-card" href="/en/logos/media/yandexmusic/" aria-label="Yandex Music">
-            <img src="/assets/logos/svgs/yandex-music.svg?v=20260808" alt="Yandex Music logo" width="48" height="48" loading="lazy" decoding="async">
+            <img src="/assets/logos/svgs/yandex-music.svg?v=20260910" alt="Yandex Music logo" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Yandex Music</span>
           </a>
           <a class="ecosystem-card" href="/en/logos/food/yandexfood/" aria-label="Yandex Eda">
-            <img src="/assets/logos/svgs/yandex-eda.svg?v=20260808" alt="Yandex Eda logo" width="48" height="48" loading="lazy" decoding="async">
+            <img src="/assets/logos/svgs/yandex-eda.svg?v=20260910" alt="Yandex Eda logo" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Yandex Eda</span>
           </a>
           <a class="ecosystem-card" href="/en/logos/food/yandexlavka/" aria-label="Yandex Lavka">
-            <img src="/assets/logos/svgs/yandex-lavka.svg?v=20260808" alt="Yandex Lavka logo" width="48" height="48" loading="lazy" decoding="async">
+            <img src="/assets/logos/svgs/yandex-lavka.svg?v=20260910" alt="Yandex Lavka logo" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Yandex Lavka</span>
           </a>
           <a class="ecosystem-card" href="/en/logos/store/yandexplus/" aria-label="Yandex Plus">
-            <img src="/assets/logos/svgs/yandex-plus.svg?v=20260808" alt="Yandex Plus logo" width="48" height="48" loading="lazy" decoding="async">
+            <img src="/assets/logos/svgs/yandex-plus.svg?v=20260910" alt="Yandex Plus logo" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Yandex Plus</span>
           </a>
         </div>
-      <p>The first thing a closer look reveals: these symbols are of completely different kinds. <a href="/en/logos/delivery/yandexgo/" target="_blank" rel="noopener">Go</a>'s mark is lettering — the word &quot;Go&quot; itself. <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Market</a> is a letter too, an &quot;M&quot;. From there it turns abstract: a starburst for <a href="/en/logos/media/yandexmusic/" target="_blank" rel="noopener">Music</a>, a spiral for <a href="/en/logos/food/yandexfood/" target="_blank" rel="noopener">Food</a>, a white silhouette on blue for <a href="/en/logos/food/yandexlavka/" target="_blank" rel="noopener">Lavka</a>, a mathematical plus for <a href="/en/logos/store/yandexplus/" target="_blank" rel="noopener">Plus</a>. As symbols, they have nothing in common.</p>
+      <p>The first thing a closer look reveals: these symbols are of completely different kinds. <a href="/en/logos/delivery/yandexgo/" target="_blank" rel="noopener">Go<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-go.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>'s mark is lettering — the word &quot;Go&quot; itself. <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Market<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is a letter too, an &quot;M&quot;. From there it turns abstract: a starburst for <a href="/en/logos/media/yandexmusic/" target="_blank" rel="noopener">Music<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-music.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, a spiral for <a href="/en/logos/food/yandexfood/" target="_blank" rel="noopener">Food<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-eda.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, a white silhouette on blue for <a href="/en/logos/food/yandexlavka/" target="_blank" rel="noopener">Lavka<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-lavka.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, a mathematical plus for <a href="/en/logos/store/yandexplus/" target="_blank" rel="noopener">Plus<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-plus.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. As symbols, they have nothing in common.</p>
       <p>And yet the row still reads as one family. So what holds it together isn't symbol similarity but everything around it: the same rounded square, the same stroke weight, the same optical density — plus a strict rule of one symbol per icon. No mark carries two meaningful elements at once, because a second one would destroy legibility at 40 pixels, which is where <a href="/en/blog/ikonka-prilozheniya/" target="_blank" rel="noopener">app icons</a> actually live.</p>
-      <p>Hence the system's first property, the one it was all built for: the membership layer and the product layer are separated. The container shape says &quot;this is <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex</a>&quot;; the symbol inside says &quot;this is <a href="/en/logos/media/yandexmusic/" target="_blank" rel="noopener">Music</a>&quot;. Change the second and you never touch the first.</p>
+      <p>Hence the system's first property, the one it was all built for: the membership layer and the product layer are separated. The container shape says &quot;this is <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>&quot;; the symbol inside says &quot;this is <a href="/en/logos/media/yandexmusic/" target="_blank" rel="noopener">Music<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-music.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>&quot;. Change the second and you never touch the first.</p>
       <p>Color is the third layer — and it's easy to verify against the files themselves, pulling the palettes straight out of the SVGs:</p>
       <div class="blog-colors">
           <a class="blog-colors-card" href="/en/logos/search/yandex/">
             <span class="blog-colors-bar"><span class="blog-colors-seg" style="background:#fc3f1d;color:#fff">#FC3F1D</span></span>
             <span class="blog-colors-foot">
-              <img src="/assets/logos/svgs/yandex.svg?v=20260808" alt="Yandex logo" width="22" height="22" loading="lazy" decoding="async">
+              <img src="/assets/logos/svgs/yandex.svg?v=20260910" alt="Yandex logo" width="22" height="22" loading="lazy" decoding="async">
               <span class="blog-colors-name">Yandex</span>
             </span>
           </a>
           <a class="blog-colors-card" href="/en/logos/delivery/yandexgo/">
             <span class="blog-colors-bar"><span class="blog-colors-seg" style="background:#ffea00;color:#000">#FFEA00</span></span>
             <span class="blog-colors-foot">
-              <img src="/assets/logos/svgs/yandex-go.svg?v=20260808" alt="Yandex Go logo" width="22" height="22" loading="lazy" decoding="async">
+              <img src="/assets/logos/svgs/yandex-go.svg?v=20260910" alt="Yandex Go logo" width="22" height="22" loading="lazy" decoding="async">
               <span class="blog-colors-name">Yandex Go</span>
             </span>
           </a>
           <a class="blog-colors-card" href="/en/logos/media/yandexmusic/">
             <span class="blog-colors-bar"><span class="blog-colors-seg" style="background:#000000;color:#fff">#000000</span><span class="blog-colors-seg" style="background:#fed42b;color:#000">#FED42B</span></span>
             <span class="blog-colors-foot">
-              <img src="/assets/logos/svgs/yandex-music.svg?v=20260808" alt="Yandex Music logo" width="22" height="22" loading="lazy" decoding="async">
+              <img src="/assets/logos/svgs/yandex-music.svg?v=20260910" alt="Yandex Music logo" width="22" height="22" loading="lazy" decoding="async">
               <span class="blog-colors-name">Yandex Music</span>
             </span>
           </a>
           <a class="blog-colors-card" href="/en/logos/store/yandexplus/">
             <span class="blog-colors-bar"><span class="blog-colors-seg" style="background:#ff5c4d;color:#fff">#FF5C4D</span><span class="blog-colors-seg" style="background:#eb469f;color:#fff">#EB469F</span><span class="blog-colors-seg" style="background:#8341ef;color:#fff">#8341EF</span></span>
             <span class="blog-colors-foot">
-              <img src="/assets/logos/svgs/yandex-plus.svg?v=20260808" alt="Yandex Plus logo" width="22" height="22" loading="lazy" decoding="async">
+              <img src="/assets/logos/svgs/yandex-plus.svg?v=20260910" alt="Yandex Plus logo" width="22" height="22" loading="lazy" decoding="async">
               <span class="blog-colors-name">Yandex Plus</span>
             </span>
           </a>
         </div>
-      <p>Red is reserved for the core, yellow for delivery and taxi, and <a href="/en/logos/media/yandexmusic/" target="_blank" rel="noopener">Music</a> goes black with a yellow accent. Each direction receives its shade from above, and product teams simply keep to it — exactly the mechanism <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">logo color psychology</a> describes. <a href="/en/logos/store/yandexplus/" target="_blank" rel="noopener">Plus</a> falls out of that row with its gradient, and there's a reason: it sells a subscription layered over every service at once, so it has to stand out among its own.</p>
+      <p>Red is reserved for the core, yellow for delivery and taxi, and <a href="/en/logos/media/yandexmusic/" target="_blank" rel="noopener">Music<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-music.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> goes black with a yellow accent. Each direction receives its shade from above, and product teams simply keep to it — exactly the mechanism <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">logo color psychology</a> describes. <a href="/en/logos/store/yandexplus/" target="_blank" rel="noopener">Plus<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-plus.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> falls out of that row with its gradient, and there's a reason: it sells a subscription layered over every service at once, so it has to stand out among its own.</p>
       <h2 id="the-container-that-holds-the-whole-system">The container that holds the whole system</h2>
       <p>Since the symbols differ yet the family still reads, that container deserves a closer look — it does most of the work. A rounded square with a fixed radius and fixed inner margins is a blank any new mark can drop into. A product drawn yesterday instantly looks like family because it lands in the same frame as services from a decade ago.</p>
       <p>That's why the system scales without convening a design council: the shape rules are already settled, so the only thing left to discuss is the symbol. And it's the cheapest device a small business can steal outright. A shared container — circle, square, badge — plus variable contents inside is a way to <a href="/en/blog/chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">assemble a mini identity</a> out of almost nothing, without commissioning a full brand book.</p>
       <h2 id="what-download-statistics-show">What download statistics show</h2>
-      <p>If the layers really are separated, there should be a measurable consequence: services live in people's heads individually, not as one undifferentiated <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">&quot;Yandex&quot;</a>. Our catalog lets us check that — here's how often each ecosystem mark gets downloaded:</p>
+      <p>If the layers really are separated, there should be a measurable consequence: services live in people's heads individually, not as one undifferentiated <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">&quot;Yandex&quot;<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Our catalog lets us check that — here's how often each ecosystem mark gets downloaded:</p>
       <div class="blog-top" aria-label="Top downloads">
           <a class="blog-top-row" href="/en/logos/search/yandex/">
             <span class="blog-top-rank">1</span>
-            <img class="blog-top-icon" src="/assets/logos/svgs/yandex.svg?v=20260808" alt="Yandex logo" width="28" height="28" loading="lazy" decoding="async">
+            <img class="blog-top-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="Yandex logo" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Yandex</span>
             <span class="blog-top-bar"><span style="width:100%"></span></span>
-            <span class="blog-top-num">218</span>
+            <span class="blog-top-num">761</span>
           </a>
           <a class="blog-top-row" href="/en/logos/map/yandexmaps/">
             <span class="blog-top-rank">2</span>
-            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-maps.svg?v=20260808" alt="Yandex Maps logo" width="28" height="28" loading="lazy" decoding="async">
+            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-maps.svg?v=20260910" alt="Yandex Maps logo" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Yandex Maps</span>
-            <span class="blog-top-bar"><span style="width:65%"></span></span>
-            <span class="blog-top-num">142</span>
+            <span class="blog-top-bar"><span style="width:57%"></span></span>
+            <span class="blog-top-num">430</span>
           </a>
           <a class="blog-top-row" href="/en/logos/market/yandexmarket/">
             <span class="blog-top-rank">3</span>
-            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260808" alt="Yandex Market logo" width="28" height="28" loading="lazy" decoding="async">
+            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="Yandex Market logo" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Yandex Market</span>
-            <span class="blog-top-bar"><span style="width:60%"></span></span>
-            <span class="blog-top-num">131</span>
+            <span class="blog-top-bar"><span style="width:52%"></span></span>
+            <span class="blog-top-num">396</span>
+          </a>
+          <a class="blog-top-row" href="/en/logos/media/yandexmusic/">
+            <span class="blog-top-rank">4</span>
+            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-music.svg?v=20260910" alt="Yandex Music logo" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-name">Yandex Music</span>
+            <span class="blog-top-bar"><span style="width:19%"></span></span>
+            <span class="blog-top-num">142</span>
           </a>
           <a class="blog-top-row" href="/en/logos/media/kinopoisk/">
-            <span class="blog-top-rank">4</span>
-            <img class="blog-top-icon" src="/assets/logos/svgs/kinopoisk.svg?v=20260808" alt="Kinopoisk logo" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-rank">5</span>
+            <img class="blog-top-icon" src="/assets/logos/svgs/kinopoisk.svg?v=20260910" alt="Kinopoisk logo" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Kinopoisk</span>
             <span class="blog-top-bar"><span style="width:18%"></span></span>
-            <span class="blog-top-num">39</span>
-          </a>
-          <a class="blog-top-row" href="/en/logos/bnpl/yandexsplit/">
-            <span class="blog-top-rank">5</span>
-            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-split.svg?v=20260808" alt="Yandex Split logo" width="28" height="28" loading="lazy" decoding="async">
-            <span class="blog-top-name">Yandex Split</span>
-            <span class="blog-top-bar"><span style="width:16%"></span></span>
-            <span class="blog-top-num">34</span>
+            <span class="blog-top-num">139</span>
           </a>
           <a class="blog-top-row" href="/en/logos/ai/alice/">
             <span class="blog-top-rank">6</span>
-            <img class="blog-top-icon" src="/assets/logos/svgs/alisa.svg?v=20260808" alt="Yandex Alice logo" width="28" height="28" loading="lazy" decoding="async">
+            <img class="blog-top-icon" src="/assets/logos/svgs/alisa.svg?v=20260910" alt="Yandex Alice logo" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Yandex Alice</span>
-            <span class="blog-top-bar"><span style="width:14%"></span></span>
-            <span class="blog-top-num">31</span>
-          </a>
-          <a class="blog-top-row" href="/en/logos/media/yandexmusic/">
-            <span class="blog-top-rank">7</span>
-            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-music.svg?v=20260808" alt="Yandex Music logo" width="28" height="28" loading="lazy" decoding="async">
-            <span class="blog-top-name">Yandex Music</span>
-            <span class="blog-top-bar"><span style="width:13%"></span></span>
-            <span class="blog-top-num">29</span>
+            <span class="blog-top-bar"><span style="width:17%"></span></span>
+            <span class="blog-top-num">130</span>
           </a>
           <a class="blog-top-row" href="/en/logos/food/yandexfood/">
-            <span class="blog-top-rank">8</span>
-            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-eda.svg?v=20260808" alt="Yandex Eda logo" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-rank">7</span>
+            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-eda.svg?v=20260910" alt="Yandex Eda logo" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Yandex Eda</span>
             <span class="blog-top-bar"><span style="width:11%"></span></span>
-            <span class="blog-top-num">24</span>
+            <span class="blog-top-num">83</span>
           </a>
-          <div class="blog-top-foot">Downloads from our catalog · August 8, 2026</div>
+          <a class="blog-top-row" href="/en/logos/bnpl/yandexsplit/">
+            <span class="blog-top-rank">8</span>
+            <img class="blog-top-icon" src="/assets/logos/svgs/yandex-split.svg?v=20260910" alt="Yandex Split logo" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-name">Yandex Split</span>
+            <span class="blog-top-bar"><span style="width:9%"></span></span>
+            <span class="blog-top-num">69</span>
+          </a>
+          <div class="blog-top-foot">Downloads from our catalog · September 10, 2026</div>
         </div>
-      <p>People come for a specific service's mark, and the ranking defies expectations. The core leads — <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex</a> with its 218 downloads, since anyone mentioning the company needs it. Then come the infrastructural products, <a href="/en/logos/map/yandexmaps/" target="_blank" rel="noopener">Maps</a> and <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Market</a>. The household names, <a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice</a> and <a href="/en/logos/delivery/yandexgo/" target="_blank" rel="noopener">Go</a>, collect 31 and 14 — several times less.</p>
-      <p>A mark gets downloaded when the service has to be written about — in an integration, a case study, a comparison table. <a href="/en/logos/map/yandexmaps/" target="_blank" rel="noopener">Maps</a> and <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Market</a> are embedded into other products and benchmarked constantly, while <a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice</a> is more often discussed out loud. Demand for a mark shows how often the brand lands in other people's documents. When downloading, mind the <a href="/en/blog/mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">usage rules</a>.</p>
+      <p>People come for a specific service's mark, and the ranking defies expectations. The core leads — <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> with its 761 downloads, since anyone mentioning the company needs it. Then come the infrastructural products, <a href="/en/logos/map/yandexmaps/" target="_blank" rel="noopener">Maps<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-maps.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> and <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Market<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. The household names, <a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice<img class="blog-mention-icon" src="/assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> and <a href="/en/logos/delivery/yandexgo/" target="_blank" rel="noopener">Go<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-go.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, collect 130 and 54 — several times less.</p>
+      <p>A mark gets downloaded when the service has to be written about — in an integration, a case study, a comparison table. <a href="/en/logos/map/yandexmaps/" target="_blank" rel="noopener">Maps<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-maps.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> and <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Market<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> are embedded into other products and benchmarked constantly, while <a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice<img class="blog-mention-icon" src="/assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is more often discussed out loud. Demand for a mark shows how often the brand lands in other people's documents. When downloading, mind the <a href="/en/blog/mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">usage rules</a>.</p>
       <h2 id="alice-a-mark-for-something-with-no-shape">Alice: a mark for something with no shape</h2>
-      <p>Closing that list is <a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice</a>, whose mark follows a separate set of rules. A voice assistant has no object you could draw, so the mark went abstract — a white rounded droplet on a violet‑blue gradient. The shape allows several readings at once: a flame, a speech bubble, a drop of sound.</p>
-      <p><a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice</a> takes her own palette too. The violet‑blue gradient moves her from the ecosystem's service tier into a technological one, toward the same color codes neural network logos run on. A voice assistant counts as technology, and the palette says so before any caption does.</p>
+      <p>Closing that list is <a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice<img class="blog-mention-icon" src="/assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, whose mark follows a separate set of rules. A voice assistant has no object you could draw, so the mark went abstract — a white rounded droplet on a violet‑blue gradient. The shape allows several readings at once: a flame, a speech bubble, a drop of sound.</p>
+      <p><a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice<img class="blog-mention-icon" src="/assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> takes her own palette too. The violet‑blue gradient moves her from the ecosystem's service tier into a technological one, toward the same color codes neural network logos run on. A voice assistant counts as technology, and the palette says so before any caption does.</p>
       <p>In the horizontal lockup, none of that gradient survives:</p>
       <div class="blog-logo-fulls">
           <a class="blog-logo-full" href="/en/logos/ai/alice/">
-            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/alisa-full.svg?v=20260808" alt="Yandex Alice full logo" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/alisa-full.svg?v=20260910" alt="Yandex Alice full logo" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Yandex Alice</span>
           </a>
         </div>
       <p>An outline and a word remain — the system demands exactly that of every mark. In one color a logo has to work the way it does in full color: on a business card, in a fax, in someone else's black‑and‑white deck. A simple silhouette meets that demand, and for the same reason it <a href="/en/blog/animirovannyj-logotip/" target="_blank" rel="noopener">animates</a> well into &quot;listening/thinking/answering&quot;: there's nothing in it to break in motion.</p>
       <h2 id="2021-what-happened-when-the-center-was-replaced" class="step-heading"><span class="step-badge">2021</span><span class="step-title">What happened when the center was replaced</span></h2>
-      <p>Extension tests a system weakly. Replacing its center tests it properly, and <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex</a> went through that on 31 March 2021, changing its logo for the first time in 13 years. A new mark appeared — the letter &quot;Я&quot; in a red circle — and the search bar stopped echoing the arrow shape the company had used for years. The Cyrillic and Latin spellings were equalized at the same time, so today it's one form in two alphabets:</p>
+      <p>Extension tests a system weakly. Replacing its center tests it properly, and <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> went through that on 31 March 2021, changing its logo for the first time in 13 years. A new mark appeared — the letter &quot;Я&quot; in a red circle — and the search bar stopped echoing the arrow shape the company had used for years. The Cyrillic and Latin spellings were equalized at the same time, so today it's one form in two alphabets:</p>
       <div class="blog-logo-fulls">
           <a class="blog-logo-full" href="/en/logos/search/yandex/">
-            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-full.svg?v=20260808" alt="Yandex full logo" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-full.svg?v=20260910" alt="Yandex full logo" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Cyrillic</span>
           </a>
           <a class="blog-logo-full" href="/en/logos/search/yandex/">
-            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-en-full.svg?v=20260808" alt="Yandex full logo" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="/assets/logos/svgs/yandex-en-full.svg?v=20260910" alt="Yandex full logo" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Latin</span>
           </a>
         </div>
@@ -403,137 +407,138 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="what-to-take-from-it">What to take from it</h2>
-      <p>So the whole system comes down to one decision made at the very start: split membership and product into separate layers. The container, typeface and palette say &quot;this is <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex</a>&quot;; the symbol inside says &quot;and this is <a href="/en/logos/media/yandexmusic/" target="_blank" rel="noopener">Music</a>&quot;. Everything else follows. A new service ships in a day because the only open question is its symbol. Colors don't collide because the palette is allocated from above. The company logo can be redrawn while <a href="/en/logos/map/yandexmaps/" target="_blank" rel="noopener">Maps</a> and <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Market</a> stay untouched — they rest on the shared container.</p>
-      <p>All of it works under one condition: the rules hold without exceptions. That discipline is what people call <a href="/en/blog/chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">a visual identity</a>. One considered departure across the whole family, like <a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice</a>'s gradient, the system absorbs. A dozen decisions of the &quot;we did it our way here&quot; kind will break it.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>For your own mini-brand</span></div><div class="callout-body"><p>The same scheme works on two or three products: a shared container, a fixed slot for the product name, a fixed palette. It's also an argument for keeping the brand name short from day one — &quot;<a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex</a> + word&quot; mints a name in a second, &quot;Manufacturing Company N + word&quot; doesn't.</p></div></div>
-      <p>All <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex</a> service logos — current and archival variants — are gathered on the <a href="/en/logos/ecosystem/yandex/" target="_blank" rel="noopener">ecosystem page</a> and in the <a href="/en/logos/" target="_blank" rel="noopener">catalog</a>: SVG, PNG, brand colors. Compare with other ecosystems: Sber, VK, Google.</p>
+      <p>So the whole system comes down to one decision made at the very start: split membership and product into separate layers. The container, typeface and palette say &quot;this is <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>&quot;; the symbol inside says &quot;and this is <a href="/en/logos/media/yandexmusic/" target="_blank" rel="noopener">Music<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-music.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>&quot;. Everything else follows. A new service ships in a day because the only open question is its symbol. Colors don't collide because the palette is allocated from above. The company logo can be redrawn while <a href="/en/logos/map/yandexmaps/" target="_blank" rel="noopener">Maps<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-maps.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> and <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Market<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> stay untouched — they rest on the shared container.</p>
+      <p>All of it works under one condition: the rules hold without exceptions. That discipline is what people call <a href="/en/blog/chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">a visual identity</a>. One considered departure across the whole family, like <a href="/en/logos/ai/alice/" target="_blank" rel="noopener">Alice<img class="blog-mention-icon" src="/assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>'s gradient, the system absorbs. A dozen decisions of the &quot;we did it our way here&quot; kind will break it.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>For your own mini-brand</span></div><div class="callout-body"><p>The same scheme works on two or three products: a shared container, a fixed slot for the product name, a fixed palette. It's also an argument for keeping the brand name short from day one — &quot;<a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> + word&quot; mints a name in a second, &quot;Manufacturing Company N + word&quot; doesn't.</p></div></div>
+      <p>All <a href="/en/logos/search/yandex/" target="_blank" rel="noopener">Yandex<img class="blog-mention-icon" src="/assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> service logos — current and archival variants — are gathered on the <a href="/en/logos/ecosystem/yandex/" target="_blank" rel="noopener">ecosystem page</a> and in the <a href="/en/logos/" target="_blank" rel="noopener">catalog</a>: SVG, PNG, brand colors. Compare with other ecosystems: Sber, VK, Google.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+          <a class="blog-card" href="/en/blog/logotipy-oblachnyh-servisov/" data-date="2026-09-10" data-views="0">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             0
           </div>
           </div>
-          <div class="blog-card-title">Streaming Service Logos — Netflix, YouTube, Twitch and More</div>
+          <div class="blog-card-title">Cloud Storage Logos — Why Everyone Draws a Cloud (and Who Doesn't)</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-socsetej/" data-date="2026-08-27" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">AI</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Social Network Logos — From the Instagram Gradient to the X</div>
+          <div class="blog-card-title">AI Company Logos — How Neural Network Services Brand Themselves</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-servisov-puteshestvij/" data-date="2026-08-26" data-views="1">
+      <a class="blog-card" href="/en/blog/logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Travel</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Games</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
-          <div class="blog-card-title">Travel Service Logos — Aviasales, Skyscanner, Kayak and More</div>
+          <div class="blog-card-title">Mobile Game Logos — Why They All Use Chunky 3D Letters</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-servisov-videozvonkov/" data-date="2026-08-26" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Tech</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /><rect x="2" y="6" width="14" height="12" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">Video Call Service Logos — Zoom, Teams, Meet, Discord</div>
+          <div class="blog-card-title">Messenger Logos — Why Everyone Picks Bubbles and Planes</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotip-dlya-pechati/" data-date="2026-08-15" data-views="0">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-tiktok/" data-date="2026-08-03" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Print</span><span class="blog-card-tag">Formats</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /><rect x="6" y="14" width="12" height="8" rx="1" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo Histories</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="18" r="4" /><path d="M12 18V2l7 4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>03.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            12
           </div>
           </div>
-          <div class="blog-card-title">Preparing a Logo for Print — CMYK, Pantone and the Files Printers Need</div>
+          <div class="blog-card-title">The TikTok Logo History — the Note, the Glitch and the Dark Stage</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/chto-takoe-monogramma/" data-date="2026-07-23" data-views="11">
+      <a class="blog-card" href="/en/blog/simvoly-i-emodzi-dlya-nika/" data-date="2026-07-14" data-views="54">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284" /><path d="M3 21h18" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Symbols</span><span class="blog-card-tag">Nicknames</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            11
+            54
           </div>
           </div>
-          <div class="blog-card-title">What Is a Monogram — Letter Logos and How They Work</div>
+          <div class="blog-card-title">Symbols and Emoji for Nicknames — Pretty, Rare, and Why Some Break Your Profile</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -551,25 +556,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -646,6 +643,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -691,10 +689,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

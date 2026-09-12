@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Психология цвета в логотипе — что работает на самом деле, а что миф · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(276 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(316 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(6 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(66 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(276 70% 38%) 0%, hsl(66 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(156 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(196 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(246 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(306 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(156 70% 38%) 0%, hsl(306 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-09">9 июля 2026</time>
@@ -202,7 +206,7 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            3
+	            22
 	          </span>
         </div>
         <h1>Психология цвета в логотипе — что работает на самом деле, а что миф</h1>
@@ -212,7 +216,7 @@
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Работают три вещи: <strong>категорийные коды</strong> (банки — синий/зелёный, еда — красный/жёлтый: люди ждут привычного), <strong>различимость</strong> (в категории красных — выигрывает не‑красный), <strong>консистентность</strong> (один точный оттенок годами). Не работает: вера, что конкретный цвет сам по себе внушит «доверие» или «премиальность» вне контекста.</p></div></div>
       <h2 id="что-миф-цвет-как-кнопка-эмоций">Что миф: цвет, как кнопка эмоций</h2>
       <p>Классическая таблица «красный возбуждает, синий успокаивает» опирается на реальные, но слабые и контекстные эффекты. Проверить легко: красный — это и Coca‑Cola (веселье), и МТС (связь), и «Магнит» (продукты), и знак «стоп» (опасность). Один цвет — четыре разных прочтения, потому что смысл создаёт не цвет сам по себе, а <strong>цвет + категория + форма + опыт человека с брендом</strong>.</p>
-      <p>Исследования потребительского восприятия сходятся в другом: важнее не «какую эмоцию вызывает цвет», а <strong>уместен ли цвет для этого продукта</strong> (fit). Фиолетовый банк не пугает — он просто требует больше рекламных денег, чтобы объяснить себя.</p>
+      <p>Исследования потребительского восприятия сходятся в другом: важнее не «какую эмоцию вызывает цвет», а <strong>уместен ли цвет для этого продукта</strong> (fit). Фиолетовый банк не пугает — он просто требует больше рекламных денег, чтобы объяснить себя.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -226,11 +230,11 @@ window.yaContextCb.push(() => {
       <h2 id="что-правда-категорийные-коды">Что правда: категорийные коды</h2>
       <p>В каждой отрасли за десятилетия сложились цветовые ожидания:</p>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Категория</th><th>Типичные цвета</th><th>Логика кода</th></tr></thead><tbody><tr><td>Банки, страхование</td><td>синий, зелёный</td><td>стабильность, «как у всех надёжных»</td></tr><tr><td>Еда, фастфуд</td><td>красный, жёлтый, оранжевый</td><td>аппетит, скорость, импульс</td></tr><tr><td>Экология, здоровье</td><td>зелёный</td><td>буквальная ассоциация</td></tr><tr><td>Технологии</td><td>синий, чёрный, монохром</td><td>нейтральность, «серьёзный софт»</td></tr><tr><td>Красота</td><td>пастель, чёрный, золото</td><td>мягкость или премиум</td></tr><tr><td>Детские товары</td><td>яркие основные цвета</td><td>радость, простота</td></tr></tbody></table></div>
-      <p>Код — это язык, на котором категория говорит с покупателем. Полностью игнорировать его дорого: вы тратите ресурсы на объяснение «почему мы не такие». Но и слепо следовать — значит слиться с фоном. Отсюда рабочая стратегия: <strong>код + сдвиг</strong>. <a href="../../logos/bank/tbank/" target="_blank" rel="noopener">Т‑Банк (Тинькофф)</a> пришёл в «синюю» банковскую категорию с жёлтым — и это стало половиной его узнаваемости. <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер</a> остался в зелёном коде, но забрал себе конкретный оттенок и защитил его.</p>
+      <p>Код — это язык, на котором категория говорит с покупателем. Полностью игнорировать его дорого: вы тратите ресурсы на объяснение «почему мы не такие». Но и слепо следовать — значит слиться с фоном. Отсюда рабочая стратегия: <strong>код + сдвиг</strong>. <a href="../../logos/bank/tbank/" target="_blank" rel="noopener">Т‑Банк (Тинькофф)<img class="blog-mention-icon" src="../../assets/logos/svgs/t-bank.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> пришёл в «синюю» банковскую категорию с жёлтым — и это стало половиной его узнаваемости. <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> остался в зелёном коде, но забрал себе конкретный оттенок и защитил его.</p>
       <h2 id="что-правда-различимость-важнее-правильности">Что правда: различимость важнее «правильности»</h2>
       <p>Когда все конкуренты красные, лучший цвет — не «психологически идеальный», а свободный. Перед выбором составьте карту: выпишите цвета 20 главных конкурентов и посмотрите, где пусто. Удобно делать по каталогу логотипов, где бренды собраны по отраслям, — полистайте свою категорию в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге</a> и раскрасьте табличку.</p>
       <h2 id="что-правда-консистентность-и-точный-оттенок">Что правда: консистентность и точный оттенок</h2>
-      <p>Эффект цвета накапливается повторением: «фирменный зелёный» становится фирменным после тысяч контактов с <strong>одним и тем же</strong> оттенком. Поэтому бренды фиксируют цвет кодом (#21A038, а не «зелёный») и бьются за него юридически. Меняющийся от носителя к носителю оттенок обнуляет накопление. Как зафиксировать цвет технически — в статьях <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">про цвета брендов</a> и <a href="../kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">как узнать точный цвет</a>.</p>
+      <p>Эффект цвета накапливается повторением: «фирменный зелёный» становится фирменным после тысяч контактов с <strong>одним и тем же</strong> оттенком. Поэтому бренды фиксируют цвет кодом (#21A038, а не «зелёный») и бьются за него юридически. Меняющийся от носителя к носителю оттенок обнуляет накопление. Как зафиксировать цвет технически — в статьях <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">про цвета брендов</a> и <a href="../kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">как узнать точный цвет</a>.</p>
       <h2 id="культурный-контекст-цвет-читается-по-разному">Культурный контекст: цвет читается по‑разному</h2>
       <p>Белый — чистота на Западе и траур в части Азии; красный — опасность в Европе и удача в Китае; зелёный — экология в России и религиозный смысл в исламских странах. Для локального бизнеса это неважно, для выхода на международные рынки — чек‑лист обязательной проверки. Даже внутри страны прочтение зависит от поколения: «кислотные» палитры для молодой аудитории — норма, для старшей — сигнал несерьёзности.</p>
       <h2 id="практический-алгоритм-выбора-цвета">Практический алгоритм выбора цвета</h2>
@@ -241,17 +245,17 @@ window.yaContextCb.push(() => {
       <li><strong>Проверка работоспособности:</strong> контраст на белом и чёрном, читаемость в монохроме, различимость для дальтоников (примерно каждый двенадцатый мужчина), вид в 16 пикселях.</li>
       <li><strong>Фиксация кодом</strong> во всех системах: HEX/RGB для экранов, CMYK/Pantone для печати.</li>
       </ol>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Тест важнее таблицы</span></div><div class="callout-body"><p>Если выбор сузился до двух цветов — не решайте по статье о психологии. Соберите два варианта логотипа и покажите двадцати людям из целевой аудитории вперемешку с конкурентами: какой запомнили, к какой категории отнесли, что почувствовали. Час теста даст больше, чем вся литература по психологии цвета.</p></div></div>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Тест важнее таблицы</span></div><div class="callout-body"><p>Если выбор сузился до двух цветов — не решайте по статье о психологии. Соберите два варианта логотипа и покажите двадцати людям из целевой аудитории вперемешку с конкурентами: какой запомнили, к какой категории отнесли, что почувствовали. Час теста даст больше, чем вся литература по психологии цвета.</p></div></div>
       <h2 id="кейсы-как-бренды-играли-с-цветовым-кодом">Кейсы: как бренды играли с цветовым кодом</h2>
       <p>Теория оживает на примерах — три показательные истории:</p>
       <ul>
-      <li><strong><a href="../../logos/bank/tbank/" target="_blank" rel="noopener">Т‑Банк</a>: слом кода как стратегия.</strong> В 2006 году все российские банки были синими и зелёными — <a href="../../logos/bank/tbank/" target="_blank" rel="noopener">Тинькофф</a> зашёл жёлто‑чёрным, цветами «несерьёзными» для финансов. Расчёт: аудитория онлайн‑банка без отделений и так нонконформна, а жёлтый в списке банков‑партнёров виден мгновенно. Слом кода сработал, потому что был подкреплён продуктом, который тоже ломал категорию.</li>
-      <li><strong><a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер</a>: захват кода.</strong> Обратная стратегия — не ломать код (зелёный = финансовая надёжность), а приватизировать его: конкретный оттенок зелёного зарегистрирован как товарный знак, и «зелёный банк» в России теперь один. Урок: внутри кода выигрывают точностью и юридической защитой.</li>
-      <li><strong><a href="../../logos/market/ozon/" target="_blank" rel="noopener">Ozon</a> и <a href="../../logos/market/wildberries/" target="_blank" rel="noopener">Wildberries</a>: делёж соседних кодов.</strong> Два маркетплейса развели палитры по разные стороны спектра — синий против фиолетово‑малинового. Когда две компании доминируют в категории, их цвета становятся её новыми кодами: заметьте, как последующие игроки e‑commerce вынужденно ищут «третий цвет».</li>
+      <li><strong><a href="../../logos/bank/tbank/" target="_blank" rel="noopener">Т‑Банк<img class="blog-mention-icon" src="../../assets/logos/svgs/t-bank.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: слом кода как стратегия.</strong> В 2006 году все российские банки были синими и зелёными — <a href="../../logos/bank/tbank/" target="_blank" rel="noopener">Тинькофф<img class="blog-mention-icon" src="../../assets/logos/svgs/t-bank.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> зашёл жёлто‑чёрным, цветами «несерьёзными» для финансов. Расчёт: аудитория онлайн‑банка без отделений и так нонконформна, а жёлтый в списке банков‑партнёров виден мгновенно. Слом кода сработал, потому что был подкреплён продуктом, который тоже ломал категорию.</li>
+      <li><strong><a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: захват кода.</strong> Обратная стратегия — не ломать код (зелёный = финансовая надёжность), а приватизировать его: конкретный оттенок зелёного зарегистрирован как товарный знак, и «зелёный банк» в России теперь один. Урок: внутри кода выигрывают точностью и юридической защитой.</li>
+      <li><strong><a href="../../logos/market/ozon/" target="_blank" rel="noopener">Ozon<img class="blog-mention-icon" src="../../assets/logos/svgs/ozon.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/market/wildberries/" target="_blank" rel="noopener">Wildberries<img class="blog-mention-icon" src="../../assets/logos/svgs/wildberries.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: делёж соседних кодов.</strong> Два маркетплейса развели палитры по разные стороны спектра — синий против фиолетово‑малинового. Когда две компании доминируют в категории, их цвета становятся её новыми кодами: заметьте, как последующие игроки e‑commerce вынужденно ищут «третий цвет».</li>
       </ul>
       <h2 id="частые-ошибки-при-выборе-цвета">Частые ошибки при выборе цвета</h2>
       <ol>
-      <li><strong>Выбор по личному вкусу основателя.</strong> «Люблю бордовый» — не аргумент: вы не целевая аудитория собственного бизнеса. Карта категории и тест важнее вкуса.</li>
+      <li><strong>Выбор по личному вкусу основателя.</strong> «Люблю бордовый» — не аргумент: вы не целевая аудитория собственного бизнеса. Карта категории и тест важнее вкуса.</li>
       <li><strong>Копия лидера.</strong> Стать «тоже зелёным банком» — значит работать рекламным отделом лидера: вас будут путать с ним, а не его с вами.</li>
       <li><strong>Трендовые цвета года.</strong> Палитры «цвет года по версии института X» устаревают за сезон, а логотип живёт десятилетие. Тренды — для кампаний, не для знака.</li>
       <li><strong>Игнорирование носителей.</strong> Прекрасный на экране неон в CMYK‑печати превращается в грязь. Проверяйте цвет в обоих пространствах до фиксации (о системах цвета — в статье <a href="../kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">как узнать цвет логотипа</a>).</li>
@@ -260,7 +264,7 @@ window.yaContextCb.push(() => {
       <h2 id="мини-faq">Мини‑FAQ</h2>
       <p><strong>Какой цвет самый «продающий»?</strong> Такого нет. Метаанализы показывают: на конверсию влияет контраст кнопки с окружением, а не её абсолютный цвет. «Красная кнопка лучше зелёной» — миф из плохо поставленных тестов.</p>
       <p><strong>Чёрно‑белый логотип — это скучно?</strong> Нет, это премиальный код (мода, техника) и максимальная универсальность. Монохромный знак с сильной формой часто выигрывает у цветного со слабой.</p>
-      <p><strong>Можно ли использовать несколько цветов, как Google?</strong> Можно, если вы готовы к цене: многоцветность требует безупречной формы (иначе — карнавал) и дорого воспроизводится на носителях. Google может себе позволить, а если у вас стартап — подумайте дважды.</p>
+      <p><strong>Можно ли использовать несколько цветов, как Google?</strong> Можно, если вы готовы к цене: многоцветность требует безупречной формы (иначе — карнавал) и дорого воспроизводится на носителях. Google может себе позволить, а если у вас стартап — подумайте дважды.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -272,135 +276,136 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="коротко">Коротко</h2>
-      <p>Психология цвета в логотипе — это не «синий = доверие», а три рабочих механизма: говорить на цветовом языке категории (или осознанно ломать его), отличаться от соседей по полке и повторять один точный оттенок годами. Цвет не внушает эмоцию — он помогает узнавать и ориентироваться. Этого более чем достаточно.</p>
+      <p>Психология цвета в логотипе — это не «синий = доверие», а три рабочих механизма: говорить на цветовом языке категории (или осознанно ломать его), отличаться от соседей по полке и повторять один точный оттенок годами. Цвет не внушает эмоцию — он помогает узнавать и ориентироваться. Этого более чем достаточно.</p>
       <p>Составить цветовую карту своей категории удобно в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a>: бренды сгруппированы по отраслям, а фирменные HEX‑коды каждого — прямо на странице логотипа.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../kak-pisat-o-logotipe/" data-date="2026-09-13" data-views="0">
+          <a class="blog-card" href="../logotipy-oblachnyh-servisov/" data-date="2026-09-10" data-views="0">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Текст</span><span class="blog-card-tag">Практика</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             0
           </div>
           </div>
-          <div class="blog-card-title">Как писать о логотипе: почему сильный знак проваливают на словах</div>
+          <div class="blog-card-title">Логотипы облачных сервисов — почему все рисуют облако и кто нет</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../tochki-kontakta-brenda/" data-date="2026-09-12" data-views="0">
+      <a class="blog-card" href="../logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Стратегия</span><span class="blog-card-tag">Опыт</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Точки контакта бренда: почему впечатление считается по худшему касанию</div>
+          <div class="blog-card-title">Логотипы нейросетей — как выглядит айдентика ИИ‑сервисов</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../brending-s-pomoshyu-ii/" data-date="2026-09-11" data-views="0">
+      <a class="blog-card" href="../logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5" /><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /><path d="M18 18a4 4 0 0 0 2-7.464" /><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /><path d="M6 18a4 4 0 0 1-2-7.464" /><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Игры</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Брендинг с помощью ИИ — где нейросеть помогает, а где вредит</div>
+          <div class="blog-card-title">Логотипы мобильных игр — почему у всех объёмные буквы</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../arhetipy-brenda/" data-date="2026-09-09" data-views="0">
+      <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Стратегия</span><span class="blog-card-tag">Архетипы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" /><path d="M5 21h14" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>09.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">Архетипы бренда — как превратить типаж в проверяемое правило</div>
+          <div class="blog-card-title">Логотипы мессенджеров — почему все выбирают пузырь и самолётик</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kaomodzi-i-tekstovye-smajliki/" data-date="2026-06-27" data-views="4">
+      <a class="blog-card" href="../kak-sdelat-logotip-samomu/" data-date="2026-06-19" data-views="31">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Каомодзи</span><span class="blog-card-tag">Общение</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11v1a10 10 0 1 1-9-10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" x2="9.01" y1="9" y2="9" /><line x1="15" x2="15.01" y1="9" y2="9" /><path d="M16 5h6" /><path d="M19 2v6" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" /><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" /><path d="m2.3 2.3 7.286 7.286" /><circle cx="11" cy="11" r="2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            31
           </div>
           </div>
-          <div class="blog-card-title">Каомодзи и текстовые смайлики — ¯\_(ツ)_/¯, ( ͡° ͜ʖ ͡°) и откуда они взялись</div>
+          <div class="blog-card-title">Как сделать логотип самому бесплатно — честная пошаговая инструкция</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-yandeksa/" data-date="2026-06-14" data-views="11">
+      <a class="blog-card" href="../ikonka-prilozheniya/" data-date="2026-06-11" data-views="92">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Яндекс</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Ребрендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Иконки</span><span class="blog-card-tag">Приложения</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" /><path d="M12 18h.01" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            11
+            92
           </div>
           </div>
-          <div class="blog-card-title">История логотипа Яндекса — от «Яndex» 1997 года до ребрендинга 2021‑го</div>
+          <div class="blog-card-title">Иконка приложения — размеры для iOS и Android, правила и ошибки</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -418,25 +423,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -513,6 +510,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -558,10 +556,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

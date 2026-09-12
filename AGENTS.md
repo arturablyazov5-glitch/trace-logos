@@ -40,7 +40,7 @@ Resolved label: `v.label ?? TYPE_LABELS[v.type] ?? v.type ?? ''` (main.js:482).
 **Adding a new logo:**
 1. Place SVG in `assets/logos/svgs/` (or PNG in `assets/logos/pngs/`)
 2. Add an entry to the appropriate `logos/categories/*.json`
-3. Required fields: `name`, `tags`, `figma`, `file`. Optional: `variants[]`, `ecosystem`
+3. Required fields: `name`, `tags`, `figma`, `file`, `dateAdded` (`YYYY-MM-DD`). Optional: `dateModified` (`YYYY-MM-DD`), `variants[]`, `ecosystem`. Without `dateModified` the page shows «Добавлено» using `dateAdded`; when `dateModified` is present it shows «Изменён» using that date. These JSON fields are the sole source of truth for the visible date, JSON-LD, and sitemap; builders never infer dates from Git, file timestamps, or the build date.
 4. Run `node scripts/build-seo-pages.js` — regenerates all `logos/<cat>/<slug>/index.html` (with FAQ + brand-color swatches)
 5. Run `node scripts/build-api-json.js` — regenerates `logos/<slug>.json` and `logos.json` (public API)
 6. Run `node scripts/build-collections.js` — regenerates `collections/<slug>/index.html` (reads fresh `logos.json`, so run after step 5)

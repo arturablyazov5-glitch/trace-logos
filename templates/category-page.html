@@ -35,27 +35,15 @@
   {{JSON_LD}}
   </script>
 
-  <link rel="stylesheet" href="{{REL}}css/base.css">
-  <link rel="stylesheet" href="{{REL}}css/sidebar.css">
-  <link rel="stylesheet" href="{{REL}}css/search.css">
-  <link rel="stylesheet" href="{{REL}}css/cards.css">
-  <link rel="stylesheet" href="{{REL}}css/detail.css">
-  <link rel="stylesheet" href="{{REL}}css/support-btn.css">
-  <link rel="stylesheet" href="{{REL}}css/color.css">
-  <link rel="stylesheet" href="{{REL}}css/picker.css">
-  <link rel="stylesheet" href="{{REL}}css/modals.css">  <link rel="stylesheet" href="{{REL}}css/filters.css">
-  <link rel="stylesheet" href="{{REL}}css/mobile.css">
-  <link rel="stylesheet" href="{{REL}}css/confetti.css">
-  <link rel="stylesheet" href="{{REL}}css/easter-amongus.css">
-  <link rel="stylesheet" href="{{REL}}css/easter-doodlejump.css">
-  <link rel="stylesheet" href="{{REL}}css/easter-google.css">
-  <link rel="stylesheet" href="{{REL}}css/easter-minicrewmate.css">
-  <link rel="stylesheet" href="{{REL}}css/microanim.css">
-  <link rel="stylesheet" href="{{REL}}css/category-seo.css">
+  <link rel="stylesheet" href="{{REL}}css/catalog.bundle.css">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
   <script src="{{REL}}components/support-btn.min.js" defer></script>
-  <script src="{{REL}}components/lang-switcher.min.js" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="{{REL}}components/site-chrome.min.js" defer></script>
   <script src="{{REL}}components/site-header.min.js" defer></script>
   <script src="{{REL}}components/section-nav.min.js" defer></script>
   <script src="{{REL}}components/copy-emoji-btn.min.js" defer></script>

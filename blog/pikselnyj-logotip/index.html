@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Пиксельный и ретро‑логотип — Y2K возвращается в 2026 · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(333 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(13 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(63 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(123 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(333 70% 38%) 0%, hsl(123 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" /><rect x="14" y="2" width="8" height="8" rx="1" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(213 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(253 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(303 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(3 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(213 70% 38%) 0%, hsl(3 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" /><rect x="14" y="2" width="8" height="8" rx="1" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-28">28 июля 2026</time>
@@ -202,17 +206,17 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            4
+	            6
 	          </span>
         </div>
         <h1>Пиксельный и ретро‑логотип — Y2K возвращается в 2026</h1>
       </header>
       <div class="blog-body">
-        <p>Пиксельные шрифты, кислотные градиенты, хромированный металл и «компьютерная» эстетика ранних нулевых — всё это внезапно снова везде. Само по себе это ещё не удивительно, ведь мода циклична. Удивительно другое: ретро- и Y2K‑стиль перестал быть шуткой и стал серьёзным инструментом брендинга. А раз стал инструментом — значит, у него есть причина работать именно сейчас.</p>
+        <p>Пиксельные шрифты, кислотные градиенты, хромированный металл и «компьютерная» эстетика ранних нулевых — всё это внезапно снова везде. Само по себе это ещё не удивительно, ведь мода циклична. Удивительно другое: ретро- и Y2K‑стиль перестал быть шуткой и стал серьёзным инструментом брендинга. А раз стал инструментом — значит, у него есть причина работать именно сейчас.</p>
       <h2 id="почему-ретро-вернулось-именно-в-2026">Почему ретро вернулось именно в 2026</h2>
-      <p>Причина, если коротко, в том, против чего ретро играет. К 2026 году идеально гладкий, «сгенерированный» дизайн стал приметой машины, и на его фоне плотный, шумный, «сделанный руками» Y2K‑язык считывается как анти‑ИИ‑сигнал: он про человека, а не про алгоритм. Этот же импульс двигает рукописные логотипы и максимализм — усталость от одинаковости сгенерированного ищет выход в характере и деталях.</p>
-      <p>Механизм тут стоит проговорить, потому что он не так очевиден. Нейросеть по умолчанию тянет к «усреднённо‑чистому»: ровные формы, аккуратные градиенты, безопасная композиция. Именно поэтому такой дизайн и стал восприниматься как машинный. А Y2K устроен наоборот — он намеренно «неудобный»: слоистый, перегруженный фильтрами, с явными артефактами эпохи. Эту нарочитую шероховатость сложно спутать с генерацией, и потому она работает как метка «здесь поработал человек с определённым вкусом». То есть ретро цепляет не само по себе, а как контраст к гладкости, от которой аудитория устала.</p>
-      <p>У тренда есть и второй мотор — поколение Z: пиксель‑арт и Y2K мгновенно считываются молодой аудиторией как «свои», это визуальный код игр и раннего интернета. Поэтому первыми стиль и подхватили игровые и финтех‑бренды, соединив ностальгию с современной подачей.</p>
+      <p>Причина, если коротко, в том, против чего ретро играет. К 2026 году идеально гладкий, «сгенерированный» дизайн стал приметой машины, и на его фоне плотный, шумный, «сделанный руками» Y2K‑язык считывается как анти‑ИИ‑сигнал: он про человека, а не про алгоритм. Этот же импульс двигает рукописные логотипы и максимализм — усталость от одинаковости сгенерированного ищет выход в характере и деталях.</p>
+      <p>Механизм тут стоит проговорить, потому что он не так очевиден. Нейросеть по умолчанию тянет к «усреднённо‑чистому»: ровные формы, аккуратные градиенты, безопасная композиция. Именно поэтому такой дизайн и стал восприниматься как машинный. А Y2K устроен наоборот — он намеренно «неудобный»: слоистый, перегруженный фильтрами, с явными артефактами эпохи. Эту нарочитую шероховатость сложно спутать с генерацией, и потому она работает как метка «здесь поработал человек с определённым вкусом». То есть ретро цепляет не само по себе, а как контраст к гладкости, от которой аудитория устала.</p>
+      <p>У тренда есть и второй мотор — поколение Z: пиксель‑арт и Y2K мгновенно считываются молодой аудиторией как «свои», это визуальный код игр и раннего интернета. Поэтому первыми стиль и подхватили игровые и финтех‑бренды, соединив ностальгию с современной подачей.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -228,12 +232,12 @@ window.yaContextCb.push(() => {
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Признак</th><th>Пиксельный</th><th>Y2K</th></tr></thead><tbody><tr><td>Основа</td><td>Видимая сетка пикселей</td><td>Хром, глянец, <a href="../gradient-v-logotipe/" target="_blank" rel="noopener">градиенты</a></td></tr><tr><td>Эпоха</td><td>8/16‑бит игры, ранние ПК</td><td>Рубеж 1999‑2005, ранний веб</td></tr><tr><td>Настроение</td><td>Чёткость, игра, ретро‑техно</td><td>Оптимизм, футуризм, «диджитал‑глянец»</td></tr><tr><td>Форма</td><td>Строго по сетке</td><td>Пузыри, капли, звёзды, блики</td></tr></tbody></table></div>
       <p>На практике их часто смешивают — пиксельный шрифт на хромированном <a href="../gradient-v-logotipe/" target="_blank" rel="noopener">градиентном</a> фоне — типичный ход 2026 года. Но смешивать осознанно можно, только понимая, что́ смешиваешь.</p>
       <h2 id="как-сделать-ретро-знак-а-не-дёшево">Как сделать ретро‑знак, а не «дёшево»</h2>
-      <p>И здесь всплывает главная опасность: ту же ностальгию легко превратить в дешёвую пародию. Чтобы этого не случилось, ретро‑логотип должен <strong>цитировать</strong> эпоху, а не буквально копировать старый знак, — иначе это выглядит как плагиат.</p>
-      <p>Полезно держать в голове конкретный ориентир: ретро должно работать как аромат, а не как костюм. Аромат эпохи — это одна точная деталь: пиксельная ступенька в букве, лёгкий хромовый блик, кислотная пара цветов, — которая намекает на нулевые, но оставляет знак современным и читаемым. Костюм — это когда бренд надевает на себя всё сразу: пиксели, хром, кислоту и пузыри, — и превращается в аттракцион «привет из 2003‑го». Первое считывается как вкус, второе — как пародия, и разница между ними ровно в дозе. Поэтому сильные ретро‑знаки почти всегда сдержаннее, чем эпоха, к которой они отсылают. Дальше работает то же правило, что и везде: одна идея, а не всё сразу. Хром, пиксели, кислота и пузыри в одном знаке — это перебор и типичная ошибка дизайна, поэтому выбирают один язык. Ретро‑эффекты при этом не должны мешать узнаванию: знак сначала обязан работать как обычный <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">логотип</a>, а уже потом удивлять. А поскольку на <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a> детали пропадают, под мелкий размер готовят упрощённую версию, как в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Пиксель — исключение из правила «только вектор»</span></div><div class="callout-body"><p>Обычно логотип рисуют в <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">векторе</a>. Пиксель‑арт — редкий случай, где важна именно жёсткая сетка, поэтому его часто рисуют попиксельно. Но экспортировать знак всё равно лучше как <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> из прямоугольников — так он останется чётким и масштабируемым, а не «замылится», как обычный растр при увеличении.</p></div></div>
+      <p>И здесь всплывает главная опасность: ту же ностальгию легко превратить в дешёвую пародию. Чтобы этого не случилось, ретро‑логотип должен <strong>цитировать</strong> эпоху, а не буквально копировать старый знак, — иначе это выглядит как плагиат.</p>
+      <p>Полезно держать в голове конкретный ориентир: ретро должно работать как аромат, а не как костюм. Аромат эпохи — это одна точная деталь: пиксельная ступенька в букве, лёгкий хромовый блик, кислотная пара цветов, — которая намекает на нулевые, но оставляет знак современным и читаемым. Костюм — это когда бренд надевает на себя всё сразу: пиксели, хром, кислоту и пузыри, — и превращается в аттракцион «привет из 2003‑го». Первое считывается как вкус, второе — как пародия, и разница между ними ровно в дозе. Поэтому сильные ретро‑знаки почти всегда сдержаннее, чем эпоха, к которой они отсылают. Дальше работает то же правило, что и везде: одна идея, а не всё сразу. Хром, пиксели, кислота и пузыри в одном знаке — это перебор и типичная ошибка дизайна, поэтому выбирают один язык. Ретро‑эффекты при этом не должны мешать узнаванию: знак сначала обязан работать как обычный <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">логотип</a>, а уже потом удивлять. А поскольку на <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a> детали пропадают, под мелкий размер готовят упрощённую версию, как в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Пиксель — исключение из правила «только вектор»</span></div><div class="callout-body"><p>Обычно логотип рисуют в <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">векторе</a>. Пиксель‑арт — редкий случай, где важна именно жёсткая сетка, поэтому его часто рисуют попиксельно. Но экспортировать знак всё равно лучше как <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> из прямоугольников — так он останется чётким и масштабируемым, а не «замылится», как обычный растр при увеличении.</p></div></div>
       <h2 id="уместность-решает">Уместность решает</h2>
-      <p>Но даже безупречно сделанный ретро‑знак сработает не всегда — и это последнее, что нужно проверить. Y2K органичен для игр, музыки, моды и молодёжных брендов, где эпоха что‑то значит для аудитории. А для банка или клиники те же пиксели и хром — просто шум, потому что вызывать тёплое «я это помню» тут не у кого. Как и в <a href="../cvetovye-trendy-2026/" target="_blank" rel="noopener">цветовых трендах 2026</a>, сила стиля зависит не от него самого, а от того, совпадает ли он с нишей.</p>
-      <p>Проверить это совпадение несложно ещё до отрисовки. Спросите себя, значит ли выбранная эпоха что‑то для вашей аудитории: играет ли она в ретро‑игры, застала ли ранний интернет, носит ли Y2K‑моду. Если да — ностальгия сработает как общий язык, и знак попадёт в «своих». Если нет — вы просто говорите на диалекте, которого аудитория не понимает, и никакое качество исполнения этого не компенсирует: чужая ностальгия не вызывает эмоции, она вызывает недоумение. Поэтому стиль здесь всегда вторичен — сначала совпадение с аудиторией, и только потом пиксели и хром.</p>
+      <p>Но даже безупречно сделанный ретро‑знак сработает не всегда — и это последнее, что нужно проверить. Y2K органичен для игр, музыки, моды и молодёжных брендов, где эпоха что‑то значит для аудитории. А для банка или клиники те же пиксели и хром — просто шум, потому что вызывать тёплое «я это помню» тут не у кого. Как и в <a href="../cvetovye-trendy-2026/" target="_blank" rel="noopener">цветовых трендах 2026</a>, сила стиля зависит не от него самого, а от того, совпадает ли он с нишей.</p>
+      <p>Проверить это совпадение несложно ещё до отрисовки. Спросите себя, значит ли выбранная эпоха что‑то для вашей аудитории: играет ли она в ретро‑игры, застала ли ранний интернет, носит ли Y2K‑моду. Если да — ностальгия сработает как общий язык, и знак попадёт в «своих». Если нет — вы просто говорите на диалекте, которого аудитория не понимает, и никакое качество исполнения этого не компенсирует: чужая ностальгия не вызывает эмоции, она вызывает недоумение. Поэтому стиль здесь всегда вторичен — сначала совпадение с аудиторией, и только потом пиксели и хром.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -245,14 +249,15 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="короткий-вывод">Короткий вывод</h2>
-      <p>Пиксельные, ретро- и Y2K‑логотипы вернулись в 2026 году не случайно, а как осознанный анти‑ИИ‑язык: плотный и человеческий против гладкого сгенерированного дизайна. Внутри него живут два разных языка — пиксель на жёсткой сетке и Y2K на хроме и <a href="../gradient-v-logotipe/" target="_blank" rel="noopener">градиентах</a>, — и смешивать их можно только осознанно. Но чтобы стиль работал, а не выглядел дёшево, он должен цитировать эпоху, а не копировать её, оставаться читаемым и быть уместным для ниши: там, где ностальгия ничего не значит аудитории, ретро превращается в шум. Даже пиксельный знак лучше хранить в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a> с упрощённой версией для мелких размеров.</p>
+      <p>Пиксельные, ретро- и Y2K‑логотипы вернулись в 2026 году не случайно, а как осознанный анти‑ИИ‑язык: плотный и человеческий против гладкого сгенерированного дизайна. Внутри него живут два разных языка — пиксель на жёсткой сетке и Y2K на хроме и <a href="../gradient-v-logotipe/" target="_blank" rel="noopener">градиентах</a>, — и смешивать их можно только осознанно. Но чтобы стиль работал, а не выглядел дёшево, он должен цитировать эпоху, а не копировать её, оставаться читаемым и быть уместным для ниши: там, где ностальгия ничего не значит аудитории, ретро превращается в шум. Даже пиксельный знак лучше хранить в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a> с упрощённой версией для мелких размеров.</p>
       <p>Посмотреть примеры знаков и скачать любой в SVG для экспериментов можно в <a href="../../logos/" target="_blank" rel="noopener">каталоге Trace Logo's</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../rukopisnyj-logotip/" data-date="2026-07-29" data-views="4">
+          <a class="blog-card" href="../rukopisnyj-logotip/" data-date="2026-07-29" data-views="13">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -265,7 +270,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            13
           </div>
           </div>
           <div class="blog-card-title">Рукописный логотип и леттеринг — тренд на «человечность»</div>
@@ -273,7 +278,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../obemnyj-logotip/" data-date="2026-07-27" data-views="7">
+      <a class="blog-card" href="../obemnyj-logotip/" data-date="2026-07-27" data-views="22">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -286,7 +291,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            7
+            22
           </div>
           </div>
           <div class="blog-card-title">Объёмный (3D) логотип — тренд глубины в 2026</div>
@@ -294,7 +299,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../gradient-v-logotipe/" data-date="2026-07-25" data-views="5">
+      <a class="blog-card" href="../gradient-v-logotipe/" data-date="2026-07-25" data-views="26">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -307,7 +312,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            5
+            26
           </div>
           </div>
           <div class="blog-card-title">Градиент в логотипе — как использовать в 2026</div>
@@ -315,7 +320,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-emblema/" data-date="2026-07-22" data-views="1">
+      <a class="blog-card" href="../logotip-emblema/" data-date="2026-07-22" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -328,7 +333,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            5
           </div>
           </div>
           <div class="blog-card-title">Логотип‑эмблема — бейджи и печати возвращаются</div>
@@ -336,44 +341,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-prezentacii/" data-date="2026-08-13" data-views="9">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Медиа</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Презентация</span><span class="blog-card-tag">PNG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            9
           </div>
           </div>
-          <div class="blog-card-title">Логотипы стриминговых сервисов — Netflix, Кинопоиск, YouTube и другие</div>
+          <div class="blog-card-title">Логотип для презентации — как вставить в PowerPoint и Google Slides</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-yurista/" data-date="2026-09-10" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-marketplejsa/" data-date="2026-08-20" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Юрист</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 13-8.381 8.38a1 1 0 0 1-3.001-3l8.384-8.381" /><path d="m16 16 6-6" /><path d="m21.5 10.5-8-8" /><path d="m8 8 6-6" /><path d="m8.5 7.5 8 8" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Маркетплейс</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5" /><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244" /><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>20.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            8
           </div>
           </div>
-          <div class="blog-card-title">Логотип для юриста — знак, который живёт на договоре</div>
+          <div class="blog-card-title">Логотип для маркетплейса — как выделиться в ленте Ozon и Wildberries</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -391,25 +396,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -486,6 +483,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -531,10 +529,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

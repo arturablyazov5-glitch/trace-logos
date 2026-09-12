@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex">
+    <title>Taptop Helper</title>
+    <link rel="stylesheet" href="/tools/extensions/taptop-helper/styles.css" />
+  </head>
+  <body>
+
+    <!-- Спрайт иконок (lucide, инлайн) — тот же приём, что в ui.html
+         Figma-плагинов (Clean Layers/Photo Editor/Trace Typograf): один
+         <symbol> на файл вместо разрозненных эмодзи/инлайн-SVG. -->
+    <svg style="display:none">
+      <symbol id="icon-zap" viewBox="0 0 24 24">
+        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"/>
+      </symbol>
+      <symbol id="icon-alert" viewBox="0 0 24 24">
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+        <line x1="12" y1="9" x2="12" y2="13"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </symbol>
+      <symbol id="icon-upload" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <polyline points="17 8 12 3 7 8"/>
+        <line x1="12" y1="3" x2="12" y2="15"/>
+      </symbol>
+    </svg>
+
+    <div id="root">
+
+      <div class="error" id="errorMessage"></div>
+
+      <!-- Карточка статуса — .scope-card, тот же компонент, что в
+           ui.html Figma-плагина Trace Typograf (аватар с иконкой +
+           бейдж + заголовок), вместо цветной точки-иконки текстом. -->
+      <div class="scope-card">
+        <span class="scope-avatar" id="statusAvatar">
+          <svg class="icon"><use href="#icon-zap" id="statusIcon"/></svg>
+        </span>
+        <div class="scope-body">
+          <div class="scope-title" id="statusText">Проверка…</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Публикация</div>
+        <div class="publish-card">
+          <button id="publishBtn" class="btn-primary">
+            <svg class="icon"><use href="#icon-upload"/></svg>
+            <span class="btn-label">Опубликовать все страницы</span>
+          </button>
+          <div id="publishStatus" class="publish-status">Публикует все страницы по очереди</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Горячие клавиши для слоёв</div>
+        <div class="shortcuts">
+          <div class="shortcut-item">
+            <span class="key">Ctrl/Cmd + Клик</span>
+            <span class="key-description">Выделить/снять выделение слоя</span>
+          </div>
+          <div class="shortcut-item">
+            <span class="key">Ctrl/Cmd + C</span>
+            <span class="key-description">Скопировать выделенные слои в буфер</span>
+          </div>
+          <div class="shortcut-item">
+            <span class="key">Ctrl/Cmd + V</span>
+            <span class="key-description">Вставить скопированные слои на текущей странице. Буфер сохраняется при переходе между страницами</span>
+          </div>
+          <div class="shortcut-item">
+            <span class="key">Delete / Backspace</span>
+            <span class="key-description">Удалить все выделенные слои</span>
+          </div>
+          <div class="shortcut-item">
+            <span class="key">Escape</span>
+            <span class="key-description">Снять выделение / очистить буфер</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Промо Trace Logo's — тот же .tlp, что запекается в ui.html
+           Figma-плагинов (tools/figma-plugins/_shared/promo-banner.html).
+           Обычные <a target="_blank"> — попап расширения не песочница
+           Figma, открывать новую вкладку можно напрямую. -->
+      <aside class="tlp">
+        <a class="tlp-head" href="https://trace-logos.ru/?utm_source=taptop-helper&amp;utm_medium=extension" target="_blank" rel="noopener noreferrer">
+          <img class="tlp-icon" src="/tools/extensions/taptop-helper/promo-assets/trace-logos.svg" alt="" />
+          <span class="tlp-body">
+            <span class="tlp-title">Trace Logo's</span>
+            <span class="tlp-sub">730 логотипов и 1918 эмодзи<br>в SVG и PNG</span>
+          </span>
+          <span class="tlp-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <div class="tlp-strip">
+          <img class="tlp-logo" src="/tools/extensions/taptop-helper/promo-assets/ozon.svg" alt="Ozon" title="Ozon" />
+          <img class="tlp-logo" src="/tools/extensions/taptop-helper/promo-assets/wildberries.svg" alt="Wildberries" title="Wildberries" />
+          <img class="tlp-logo" src="/tools/extensions/taptop-helper/promo-assets/2gis.svg" alt="2ГИС" title="2ГИС" />
+          <img class="tlp-logo" src="/tools/extensions/taptop-helper/promo-assets/yandex.svg" alt="Яндекс" title="Яндекс" />
+          <img class="tlp-logo" src="/tools/extensions/taptop-helper/promo-assets/sber.svg" alt="Сбер" title="Сбер" />
+          <img class="tlp-logo" src="/tools/extensions/taptop-helper/promo-assets/vk.svg" alt="ВКонтакте" title="ВКонтакте" />
+          <span class="tlp-more">и ещё<br>724</span>
+        </div>
+        <a class="tlp-donate" href="https://app.lava.top/products/6f3c8efd-27c3-41a8-acb1-559b83ea3b46/d9261f0e-d716-418c-b91d-764e83f1c01c?currency=RUB" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Поддержать автора
+        </a>
+      </aside>
+
+    </div>
+
+    <script src="/tools/extensions/taptop-helper/popup.js"></script>
+  </body>
+</html>

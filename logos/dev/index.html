@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотипы инструментов разработки — скачать SVG и PNG бесплатно · Trace Logo's</title>
@@ -160,35 +162,23 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/base.css?v=20260808">
-  <link rel="stylesheet" href="../../css/sidebar.css?v=20260808">
-  <link rel="stylesheet" href="../../css/search.css?v=20260808">
-  <link rel="stylesheet" href="../../css/cards.css?v=20260808">
-  <link rel="stylesheet" href="../../css/detail.css?v=20260808">
-  <link rel="stylesheet" href="../../css/support-btn.css?v=20260808">
-  <link rel="stylesheet" href="../../css/color.css?v=20260808">
-  <link rel="stylesheet" href="../../css/picker.css?v=20260808">
-  <link rel="stylesheet" href="../../css/modals.css?v=20260808">  <link rel="stylesheet" href="../../css/filters.css?v=20260808">
-  <link rel="stylesheet" href="../../css/mobile.css?v=20260808">
-  <link rel="stylesheet" href="../../css/confetti.css?v=20260808">
-  <link rel="stylesheet" href="../../css/easter-amongus.css?v=20260808">
-  <link rel="stylesheet" href="../../css/easter-doodlejump.css?v=20260808">
-  <link rel="stylesheet" href="../../css/easter-google.css?v=20260808">
-  <link rel="stylesheet" href="../../css/easter-minicrewmate.css?v=20260808">
-  <link rel="stylesheet" href="../../css/microanim.css?v=20260808">
-  <link rel="stylesheet" href="../../css/category-seo.css?v=20260808">
+  <link rel="stylesheet" href="../../css/catalog.bundle.css?v=20260910">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
-  <script src="../../components/support-btn.min.js?v=20260808" defer></script>
-  <script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-  <script src="../../components/site-header.min.js?v=20260808" defer></script>
-  <script src="../../components/section-nav.min.js?v=20260808" defer></script>
-  <script src="../../components/copy-emoji-btn.min.js?v=20260808" defer></script>
-  <script src="../../components/sidebar-contact.min.js?v=20260808" defer></script>
-  <script src="../../components/help-modal.min.js?v=20260808" defer></script>
+  <script src="../../components/support-btn.min.js?v=20260910" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="../../components/site-chrome.min.js?v=20260910" defer></script>
+  <script src="../../components/site-header.min.js?v=20260910" defer></script>
+  <script src="../../components/section-nav.min.js?v=20260910" defer></script>
+  <script src="../../components/copy-emoji-btn.min.js?v=20260910" defer></script>
+  <script src="../../components/sidebar-contact.min.js?v=20260910" defer></script>
+  <script src="../../components/help-modal.min.js?v=20260910" defer></script>
   <!-- см. комментарий в templates/partials/nav-header.html -->
-  <link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-  <script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
+  <link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+  <script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
   <script>
     window.__MANIFEST_BASE__ = '../';
     window.__ASSET_SECTION__ = 'logos';
@@ -196,8 +186,8 @@
     window.__CAT_SLUG__ = 'dev';
     window.__ECO_SLUG__ = '';
   </script>
-  <script type="module" src="../../js/main.min.js?v=20260808"></script>
-  <script type="module" src="../../js/search-placeholder.min.js?v=20260808"></script>
+  <script type="module" src="../../js/main.min.js?v=20260910"></script>
+  <script type="module" src="../../js/search-placeholder.min.js?v=20260910"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -264,7 +254,7 @@
   <div class="center-body">
     <main>
 
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Разработка</h1><div class="grid"><a class="card" href="/logos/dev/github/"><div class="icon-wrap"><img src="../../assets/logos/previews/github.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип GitHub" title="Icon/Dev/GitHub"></div><div class="label">GitHub</div><div class="card-path">Icon/Dev/GitHub</div></a><a class="card" href="/logos/dev/xcode/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/xcode.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Xcode" title="Icon/Dev/Xcode"></div><div class="label">Xcode</div><div class="card-path">Icon/Dev/Xcode</div></a><a class="card" href="/logos/dev/activitymonitor/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/activity-monitor.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Activity Monitor" title="Icon/Dev/ActivityMonitor"></div><div class="label">Activity Monitor</div><div class="card-path">Icon/Dev/ActivityMonitor</div></a><a class="card" href="/logos/dev/terminal/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/terminal.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Terminal" title="Icon/Dev/Terminal"></div><div class="label">Terminal</div><div class="card-path">Icon/Dev/Terminal</div></a><a class="card" href="/logos/dev/console/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/console.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Console" title="Icon/Dev/Console"></div><div class="label">Console</div><div class="card-path">Icon/Dev/Console</div></a><a class="card" href="/logos/dev/scripteditor/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/script-editor.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Script Editor" title="Icon/Dev/ScriptEditor"></div><div class="label">Script Editor</div><div class="card-path">Icon/Dev/ScriptEditor</div></a><a class="card" href="/logos/dev/phoenixcode/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/Phoenix Code.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Phoenix Code" title="Icon/Dev/PhoenixCode"></div><div class="label">Phoenix Code</div><div class="card-path">Icon/Dev/PhoenixCode</div></a><a class="card" href="/logos/dev/grapher/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/grapher.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Grapher" title="Icon/Dev/Grapher"></div><div class="label">Grapher</div><div class="card-path">Icon/Dev/Grapher</div></a><a class="card" href="/logos/dev/swiftbar/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/SwiftBar.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип SwiftBar" title="Icon/Dev/SwiftBar"></div><div class="label">SwiftBar</div><div class="card-path">Icon/Dev/SwiftBar</div></a><a class="card" href="/logos/dev/linear/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/linear.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Linear" title="Icon/Dev/Linear"></div><div class="label">Linear</div><div class="card-path">Icon/Dev/Linear</div></a><a class="card" href="/logos/dev/replit/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/replit.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Replit" title="Icon/Dev/Replit"></div><div class="label">Replit</div><div class="card-path">Icon/Dev/Replit</div></a><a class="card" href="/logos/dev/php/"><div class="icon-wrap"><img src="../../assets/logos/previews/php.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип PHP" title="Icon/Dev/PHP"></div><div class="label">PHP</div><div class="card-path">Icon/Dev/PHP</div></a></div></div></div></div>
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Разработка</h1><div class="grid"><a class="card" href="/logos/dev/github/"><div class="icon-wrap"><img src="../../assets/logos/previews/github.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип GitHub" title="Icon/Dev/GitHub"></div><div class="label">GitHub</div><div class="card-path">Icon/Dev/GitHub</div></a><a class="card" href="/logos/dev/xcode/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/xcode.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Xcode" title="Icon/Dev/Xcode"></div><div class="label">Xcode</div><div class="card-path">Icon/Dev/Xcode</div></a><a class="card" href="/logos/dev/activitymonitor/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/activity-monitor.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Activity Monitor" title="Icon/Dev/ActivityMonitor"></div><div class="label">Activity Monitor</div><div class="card-path">Icon/Dev/ActivityMonitor</div></a><a class="card" href="/logos/dev/terminal/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/terminal.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Terminal" title="Icon/Dev/Terminal"></div><div class="label">Terminal</div><div class="card-path">Icon/Dev/Terminal</div></a><a class="card" href="/logos/dev/console/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/console.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Console" title="Icon/Dev/Console"></div><div class="label">Console</div><div class="card-path">Icon/Dev/Console</div></a><a class="card" href="/logos/dev/scripteditor/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/script-editor.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Script Editor" title="Icon/Dev/ScriptEditor"></div><div class="label">Script Editor</div><div class="card-path">Icon/Dev/ScriptEditor</div></a><a class="card" href="/logos/dev/phoenixcode/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/Phoenix Code.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Phoenix Code" title="Icon/Dev/PhoenixCode"></div><div class="label">Phoenix Code</div><div class="card-path">Icon/Dev/PhoenixCode</div></a><a class="card" href="/logos/dev/grapher/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/grapher.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Grapher" title="Icon/Dev/Grapher"></div><div class="label">Grapher</div><div class="card-path">Icon/Dev/Grapher</div></a><a class="card" href="/logos/dev/swiftbar/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/SwiftBar.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип SwiftBar" title="Icon/Dev/SwiftBar"></div><div class="label">SwiftBar</div><div class="card-path">Icon/Dev/SwiftBar</div></a><a class="card" href="/logos/dev/linear/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/linear.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Linear" title="Icon/Dev/Linear"></div><div class="label">Linear</div><div class="card-path">Icon/Dev/Linear</div></a><a class="card" href="/logos/dev/replit/"><div class="icon-wrap"><img src="../../assets/logos/previews/apple/26/color/replit.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Replit" title="Icon/Dev/Replit"></div><div class="label">Replit</div><div class="card-path">Icon/Dev/Replit</div></a><a class="card" href="/logos/dev/php/"><div class="icon-wrap"><img src="../../assets/logos/previews/php.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип PHP" title="Icon/Dev/PHP"></div><div class="label">PHP</div><div class="card-path">Icon/Dev/PHP</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Пока ничего нет — раздел в разработке</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

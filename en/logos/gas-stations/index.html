@@ -13,12 +13,14 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Logos — Gas Stations · Trace Logo's</title>
-  <meta name="description" content="4+ SVG and PNG logos: Gas Stations. Download free, edit colors, export to Figma.">
+  <meta name="description" content="5+ SVG and PNG logos: Gas Stations. Download free, edit colors, export to Figma.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <link rel="canonical" href="https://trace-logos.ru/en/logos/gas-stations/">
@@ -35,7 +37,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Trace Logo's">
   <meta property="og:title" content="Logos — Gas Stations">
-  <meta property="og:description" content="4+ SVG and PNG logos: Gas Stations. Download free, edit colors, export to Figma.">
+  <meta property="og:description" content="5+ SVG and PNG logos: Gas Stations. Download free, edit colors, export to Figma.">
   <meta property="og:url" content="https://trace-logos.ru/en/logos/gas-stations/">
   <meta property="og:image" content="https://trace-logos.ru/assets/og/home.png">
   <meta property="og:image:width" content="512">
@@ -43,7 +45,7 @@
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Logos — Gas Stations">
-  <meta name="twitter:description" content="4+ SVG and PNG logos: Gas Stations. Download free, edit colors, export to Figma.">
+  <meta name="twitter:description" content="5+ SVG and PNG logos: Gas Stations. Download free, edit colors, export to Figma.">
   <meta name="twitter:image" content="https://trace-logos.ru/assets/og/home.png">
 
   <script type="application/ld+json">
@@ -76,11 +78,11 @@
     {
       "@type": "CollectionPage",
       "name": "Logos — Gas Stations",
-      "description": "4+ SVG and PNG logos: Gas Stations. Download free, edit colors, export to Figma.",
+      "description": "5+ SVG and PNG logos: Gas Stations. Download free, edit colors, export to Figma.",
       "url": "https://trace-logos.ru/en/logos/gas-stations/",
       "mainEntity": {
         "@type": "ItemList",
-        "numberOfItems": 4,
+        "numberOfItems": 5,
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -103,6 +105,12 @@
           {
             "@type": "ListItem",
             "position": 4,
+            "name": "Tatneft",
+            "url": "https://trace-logos.ru/en/logos/gasstation/tatneft/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
             "name": "Yandex Fuel",
             "url": "https://trace-logos.ru/en/logos/gasstation/yandexfuel/"
           }
@@ -113,35 +121,23 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/base.css?v=20260808">
-  <link rel="stylesheet" href="/css/sidebar.css?v=20260808">
-  <link rel="stylesheet" href="/css/search.css?v=20260808">
-  <link rel="stylesheet" href="/css/cards.css?v=20260808">
-  <link rel="stylesheet" href="/css/detail.css?v=20260808">
-  <link rel="stylesheet" href="/css/support-btn.css?v=20260808">
-  <link rel="stylesheet" href="/css/color.css?v=20260808">
-  <link rel="stylesheet" href="/css/picker.css?v=20260808">
-  <link rel="stylesheet" href="/css/modals.css?v=20260808">  <link rel="stylesheet" href="/css/filters.css?v=20260808">
-  <link rel="stylesheet" href="/css/mobile.css?v=20260808">
-  <link rel="stylesheet" href="/css/confetti.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-amongus.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-doodlejump.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-google.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-minicrewmate.css?v=20260808">
-  <link rel="stylesheet" href="/css/microanim.css?v=20260808">
-  <link rel="stylesheet" href="/css/category-seo.css?v=20260808">
+  <link rel="stylesheet" href="/css/catalog.bundle.css?v=20260910">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
-  <script src="/components/support-btn.min.js?v=20260808" defer></script>
-  <script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-  <script src="/components/site-header.min.js?v=20260808" defer></script>
-  <script src="/components/section-nav.min.js?v=20260808" defer></script>
-  <script src="/components/copy-emoji-btn.min.js?v=20260808" defer></script>
-  <script src="/components/sidebar-contact.min.js?v=20260808" defer></script>
-  <script src="/components/help-modal.min.js?v=20260808" defer></script>
+  <script src="/components/support-btn.min.js?v=20260910" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="/components/site-chrome.min.js?v=20260910" defer></script>
+  <script src="/components/site-header.min.js?v=20260910" defer></script>
+  <script src="/components/section-nav.min.js?v=20260910" defer></script>
+  <script src="/components/copy-emoji-btn.min.js?v=20260910" defer></script>
+  <script src="/components/sidebar-contact.min.js?v=20260910" defer></script>
+  <script src="/components/help-modal.min.js?v=20260910" defer></script>
   <!-- см. комментарий в templates/partials/nav-header.html -->
-  <link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-  <script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
+  <link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260910">
+  <script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
   <script>
     window.__MANIFEST_BASE__ = '/logos/';
     window.__ASSET_SECTION__ = 'logos';
@@ -149,8 +145,8 @@
     window.__CAT_SLUG__ = 'gas-stations';
     window.__ECO_SLUG__ = '';
   </script>
-  <script type="module" src="/js/main.min.js?v=20260808"></script>
-  <script type="module" src="/js/search-placeholder.min.js?v=20260808"></script>
+  <script type="module" src="/js/main.min.js?v=20260910"></script>
+  <script type="module" src="/js/search-placeholder.min.js?v=20260910"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -217,7 +213,7 @@
   <div class="center-body">
     <main>
 
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Gas Stations</h1><div class="grid"><a class="card" href="/en/logos/gasstation/rosneft/"><div class="icon-wrap"><img src="/assets/logos/previews/rosneft.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Rosneft" title="Icon/GasStation/Rosneft"></div><div class="label">Rosneft</div><div class="card-path">Icon/GasStation/Rosneft</div></a><a class="card" href="/en/logos/gasstation/gazprom/"><div class="icon-wrap"><img src="/assets/logos/previews/gazprom.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Gazprom" title="Icon/GasStation/Gazprom"></div><div class="label">Gazprom</div><div class="card-path">Icon/GasStation/Gazprom</div></a><a class="card" href="/en/logos/gasstation/lukoil/"><div class="icon-wrap"><img src="/assets/logos/previews/lukoil.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo LUKOIL" title="Icon/GasStation/Lukoil"></div><div class="label">LUKOIL</div><div class="card-path">Icon/GasStation/Lukoil</div></a><a class="card" href="/en/logos/gasstation/yandexfuel/"><div class="icon-wrap"><img src="/assets/logos/previews/yandex-azs.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Yandex Fuel" title="Icon/GasStation/YandexFuel"></div><div class="label">Yandex Fuel</div><div class="card-path">Icon/GasStation/YandexFuel</div></a></div></div></div></div>
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Gas Stations</h1><div class="grid"><a class="card" href="/en/logos/gasstation/rosneft/"><div class="icon-wrap"><img src="/assets/logos/previews/rosneft.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Rosneft" title="Icon/GasStation/Rosneft"></div><div class="label">Rosneft</div><div class="card-path">Icon/GasStation/Rosneft</div></a><a class="card" href="/en/logos/gasstation/gazprom/"><div class="icon-wrap"><img src="/assets/logos/previews/gazprom.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Gazprom" title="Icon/GasStation/Gazprom"></div><div class="label">Gazprom</div><div class="card-path">Icon/GasStation/Gazprom</div></a><a class="card" href="/en/logos/gasstation/lukoil/"><div class="icon-wrap"><img src="/assets/logos/previews/lukoil.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo LUKOIL" title="Icon/GasStation/Lukoil"></div><div class="label">LUKOIL</div><div class="card-path">Icon/GasStation/Lukoil</div></a><a class="card" href="/en/logos/gasstation/tatneft/"><div class="icon-wrap"><img src="/assets/logos/previews/tatneft.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Tatneft" title="Icon/GasStation/Tatneft"></div><div class="label">Tatneft</div><div class="card-path">Icon/GasStation/Tatneft</div></a><a class="card" href="/en/logos/gasstation/yandexfuel/"><div class="icon-wrap"><img src="/assets/logos/previews/yandex-azs.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Yandex Fuel" title="Icon/GasStation/YandexFuel"></div><div class="label">Yandex Fuel</div><div class="card-path">Icon/GasStation/YandexFuel</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Nothing here yet — section in development</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

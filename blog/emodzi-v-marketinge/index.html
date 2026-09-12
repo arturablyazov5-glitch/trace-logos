@@ -13,11 +13,13 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие · Trace Logo's</title>
-  <meta name="description" content="Эмодзи в теме письма, пушах, соцсетях и на сайте: что говорят исследования, сколько эмодзи — норма, и в каких нишах они вредят. Практические правила.">
+  <title>Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие · Trace Logo's</title>
+  <meta name="description" content="Эмодзи в теме письма, пушах, соцсетях и на сайте: что говорят исследования, сколько эмодзи — норма, и в каких нишах они вредят. Практические правила.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <link rel="canonical" href="https://trace-logos.ru/blog/emodzi-v-marketinge/">
@@ -31,8 +33,8 @@
 
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Trace Logo's">
-  <meta property="og:title" content="Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие">
-  <meta property="og:description" content="Эмодзи в теме письма, пушах, соцсетях и на сайте: что говорят исследования, сколько эмодзи — норма, и в каких нишах они вредят. Практические правила.">
+  <meta property="og:title" content="Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие">
+  <meta property="og:description" content="Эмодзи в теме письма, пушах, соцсетях и на сайте: что говорят исследования, сколько эмодзи — норма, и в каких нишах они вредят. Практические правила.">
   <meta property="og:url" content="https://trace-logos.ru/blog/emodzi-v-marketinge/">
   <meta property="og:image" content="https://trace-logos.ru/assets/og/blog/social/emodzi-v-marketinge.png">
   <meta property="og:image:width" content="1200">
@@ -62,15 +64,15 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие",
+          "name": "Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие",
           "item": "https://trace-logos.ru/blog/emodzi-v-marketinge/"
         }
       ]
     },
     {
       "@type": "BlogPosting",
-      "headline": "Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие",
-      "description": "Эмодзи в теме письма, пушах, соцсетях и на сайте: что говорят исследования, сколько эмодзи — норма, и в каких нишах они вредят. Практические правила.",
+      "headline": "Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие",
+      "description": "Эмодзи в теме письма, пушах, соцсетях и на сайте: что говорят исследования, сколько эмодзи — норма, и в каких нишах они вредят. Практические правила.",
       "datePublished": "2026-06-09",
       "dateModified": "2026-06-09",
       "url": "https://trace-logos.ru/blog/emodzi-v-marketinge/",
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,32 +170,34 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="../../">Trace Logo's</a><span class="sep">/</span>
   <a href="../../blog/"><span data-i18n="blogSection">Блог</span></a><span class="sep">/</span>
-  <span class="current" aria-current="page">Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие</span>
+  <span class="current" aria-current="page">Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие</span>
 </nav>
 
 <main>
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(166 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(206 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(256 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(316 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(166 70% 38%) 0%, hsl(316 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" /><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" /><path d="M8 6v8" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(46 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(86 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(136 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(196 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(46 70% 38%) 0%, hsl(196 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" /><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14" /><path d="M8 6v8" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-09">9 июня 2026</time>
@@ -202,17 +206,17 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            6
+	            21
 	          </span>
         </div>
-        <h1>Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие</h1>
+        <h1>Эмодзи в маркетинге — где они поднимают конверсию, а где убивают доверие</h1>
       </header>
       <div class="blog-body">
-        <p>Одни маркетологи ставят эмодзи в каждую строку и клянутся, что открываемость растёт. Другие вычищают их подчистую: «мы серьёзная компания». Спорить бесполезно, потому что правы обе стороны — просто говорят о разных ситуациях. Эмодзи работают как специи: та же щепотка, что спасает одно блюдо, портит другое. Весь вопрос сводится к тому, где именно их ставить и в какой дозе. Чтобы ответить, начнём с механизма: почему эмодзи вообще что‑то меняют.</p>
+        <p>Одни маркетологи ставят эмодзи в каждую строку и клянутся, что открываемость растёт. Другие вычищают их подчистую: «мы серьёзная компания». Спорить бесполезно, потому что правы обе стороны — просто говорят о разных ситуациях. Эмодзи работают как специи: та же щепотка, что спасает одно блюдо, портит другое. Весь вопрос сводится к тому, где именно их ставить и в какой дозе. Чтобы ответить, начнём с механизма: почему эмодзи вообще что‑то меняют.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Эмодзи повышают заметность сообщения в переполненных каналах — теме письма, пушах, ленте соцсетей. Но работают только при трёх условиях: <strong>уместность в нише</strong> (косметика — да, коллекторское агентство — нет), <strong>умеренность</strong> (1‑2 на сообщение) и <strong>смысловая связь с текстом</strong>. Эмодзи ради эмодзи снижают доверие, что тоже показывают исследования.</p></div></div>
       <h2 id="почему-эмодзи-вообще-работают">Почему эмодзи вообще работают</h2>
-      <p>Причина физиологическая: мозг обрабатывает картинку быстрее текста. В однородной ленте — списке писем, стопке пушей, потоке постов — цветной символ выхватывается периферийным зрением ещё до того, как вы начали читать. К этому добавляется эмоция: 🔥 передаёт «горячо» мгновенно, без слова. Добавьте экономию места: в пуше на 40 знаков один символ заменяет целое слово.</p>
-      <p>Но здесь же спрятана и обратная сторона, из которой вырастает всё остальное. Тот самый механизм заметности работает только на контрасте. Когда эмодзи стоят у одного из десяти — он выделяется. Когда у всех десяти — они превращаются в шум, а выделяться начинает как раз сообщение без них. Поэтому универсального «ставить/не ставить» не существует в принципе: эффект зависит от того, насколько канал уже забит символами. А забиты каналы по‑разному — с этого и построим разбор, от самых переполненных к самым чистым.</p>
+      <p>Причина физиологическая: мозг обрабатывает картинку быстрее текста. В однородной ленте — списке писем, стопке пушей, потоке постов — цветной символ выхватывается периферийным зрением ещё до того, как вы начали читать. К этому добавляется эмоция: 🔥 передаёт «горячо» мгновенно, без слова. Добавьте экономию места: в пуше на 40 знаков один символ заменяет целое слово.</p>
+      <p>Но здесь же спрятана и обратная сторона, из которой вырастает всё остальное. Тот самый механизм заметности работает только на контрасте. Когда эмодзи стоят у одного из десяти — он выделяется. Когда у всех десяти — они превращаются в шум, а выделяться начинает как раз сообщение без них. Поэтому универсального «ставить/не ставить» не существует в принципе: эффект зависит от того, насколько канал уже забит символами. А забиты каналы по‑разному — с этого и построим разбор, от самых переполненных к самым чистым.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -224,13 +228,13 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="тема-письма-где-всё-началось">Тема письма: где всё началось</h2>
-      <p>Почтовая рассылка — самый переполненный и самый исследованный канал, поэтому с него и начнём. Общая картина по A/B‑тестам рассылочных сервисов такая: эмодзи в теме повышают открываемость чаще, чем понижают, но эффект скромный и быстро выгорает при повторении — ровно потому, что контраст, о котором шла речь выше, стирается, как только вы начинаете так делать в каждом письме.</p>
-      <p>Отсюда и рабочие правила. Один эмодзи, в начале или в конце темы, обязательно связанный со смыслом: 🎁 у подарка, ⏰ у дедлайна — символ работает визуальным ярлыком темы. И обязательная проверка отображения: в старых клиентах на базе <a href="../../logos/office/outlook/" target="_blank" rel="noopener">Outlook</a> символ может превратиться в пустой квадратик, и вместо акцента вы получите брак прямо в теме. Почему так происходит и как символы ломаются на чужих устройствах — разбирали в <a href="../pochemu-emodzi-otobrazhayutsya-po-raznomu/" target="_blank" rel="noopener">статье про отображение эмодзи</a>. Отдельно про спам‑фильтры: сам по себе эмодзи в спам не отправляет, но эмодзи вместе с КАПСом и «СКИДКА 90%» — уже узнаваемый паттерн, на который фильтр реагирует.</p>
+      <p>Почтовая рассылка — самый переполненный и самый исследованный канал, поэтому с него и начнём. Общая картина по A/B‑тестам рассылочных сервисов такая: эмодзи в теме повышают открываемость чаще, чем понижают, но эффект скромный и быстро выгорает при повторении — ровно потому, что контраст, о котором шла речь выше, стирается, как только вы начинаете так делать в каждом письме.</p>
+      <p>Отсюда и рабочие правила. Один эмодзи, в начале или в конце темы, обязательно связанный со смыслом: 🎁 у подарка, ⏰ у дедлайна — символ работает визуальным ярлыком темы. И обязательная проверка отображения: в старых клиентах на базе <a href="../../logos/office/outlook/" target="_blank" rel="noopener">Outlook<img class="blog-mention-icon" src="../../assets/logos/svgs/outlook.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> символ может превратиться в пустой квадратик, и вместо акцента вы получите брак прямо в теме. Почему так происходит и как символы ломаются на чужих устройствах — разбирали в <a href="../pochemu-emodzi-otobrazhayutsya-po-raznomu/" target="_blank" rel="noopener">статье про отображение эмодзи</a>. Отдельно про спам‑фильтры: сам по себе эмодзи в спам не отправляет, но эмодзи вместе с КАПСом и «СКИДКА 90%» — уже узнаваемый паттерн, на который фильтр реагирует.</p>
       <h2 id="пуш-уведомления-где-эмодзи-почти-обязательны">Пуш‑уведомления: где эмодзи почти обязательны</h2>
-      <p>Если в письме эмодзи — приём на выбор, то в пуше он ближе к необходимости, и причина та же, только доведённая до предела: места ещё меньше, конкуренция за взгляд ещё выше, а решение открыть принимается за долю секунды. Символ в начале пуша работает как иконка категории и экономит те самые дефицитные знаки: 📦 — доставка, 💬 — сообщение, 🏷️ — скидка. Пользователь считывает тип уведомления, не дочитывая текст.</p>
-      <p>Но именно из «иконочной» роли следует единственное жёсткое условие — консистентность. Иконка полезна, только пока она постоянна: если каждый пуш начинается со случайного нового эмодзи, система распадается и символ снова становится шумом. Один смысл — один значок, закреплённый навсегда.</p>
+      <p>Если в письме эмодзи — приём на выбор, то в пуше он ближе к необходимости, и причина та же, только доведённая до предела: места ещё меньше, конкуренция за взгляд ещё выше, а решение открыть принимается за долю секунды. Символ в начале пуша работает как иконка категории и экономит те самые дефицитные знаки: 📦 — доставка, 💬 — сообщение, 🏷️ — скидка. Пользователь считывает тип уведомления, не дочитывая текст.</p>
+      <p>Но именно из «иконочной» роли следует единственное жёсткое условие — консистентность. Иконка полезна, только пока она постоянна: если каждый пуш начинается со случайного нового эмодзи, система распадается и символ снова становится шумом. Один смысл — один значок, закреплённый навсегда.</p>
       <h2 id="соцсети-эмодзи-как-вёрстка">Соцсети: эмодзи как вёрстка</h2>
-      <p>В соцсетях у текста нет ни подзаголовков, ни списков, ни отступов — редактор поста это голое поле. И здесь эмодзи берут на себя роль, которой в письме и пуше у них не было: они становятся вёрсткой. Маркеры списков, разделители смысловых блоков, акценты на ключевой мысли — всё то, что в обычном тексте делает типографика. Это законно и удобно, но доза решает всё:</p>
+      <p>В соцсетях у текста нет ни подзаголовков, ни списков, ни отступов — редактор поста это голое поле. И здесь эмодзи берут на себя роль, которой в письме и пуше у них не было: они становятся вёрсткой. Маркеры списков, разделители смысловых блоков, акценты на ключевой мысли — всё то, что в обычном тексте делает типографика. Это законно и удобно, но доза решает всё:</p>
       <ul>
       <li><strong>1‑3 эмодзи на абзац</strong> читаются как структура и помогают глазу.</li>
       <li><strong>Эмодзи после каждого слова</strong> читаются как спам‑канал с гороскопами — тот самый случай, когда контраст умер.</li>
@@ -238,12 +242,12 @@ window.yaContextCb.push(() => {
       </ul>
       <p>Пока канал переполнен, эмодзи помогают. Но есть территория, где логика переворачивается.</p>
       <h2 id="сайт-и-интерфейс-где-механизм-оборачивается-против">Сайт и интерфейс: где механизм оборачивается против</h2>
-      <p>Лендинг и интерфейс устроены иначе: здесь читатель принимает решение и оценивает, можно ли вам доверять. И тут заметность, которая помогала в ленте, начинает вредить: в продающем тексте эмодзи снижают ощущение профессионализма, особенно в B2B, финансах, медицине и юриспруденции. В интерфейсных кнопках к этому добавляется техническая беда — на разных устройствах символ выглядит по‑разному и может развалить вёрстку.</p>
-      <p>Исключения есть, и они логичны: молодёжные продукты, игровые механики, онбординг с лёгким тоном, блоги — там неформальность и есть часть обещания бренда. Но даже там эмодзи стоит вставлять картинками конкретной платформы, чтобы дизайн выглядел одинаково у всех: системный символ на каждом устройстве отрисуется по‑своему.</p>
+      <p>Лендинг и интерфейс устроены иначе: здесь читатель принимает решение и оценивает, можно ли вам доверять. И тут заметность, которая помогала в ленте, начинает вредить: в продающем тексте эмодзи снижают ощущение профессионализма, особенно в B2B, финансах, медицине и юриспруденции. В интерфейсных кнопках к этому добавляется техническая беда — на разных устройствах символ выглядит по‑разному и может развалить вёрстку.</p>
+      <p>Исключения есть, и они логичны: молодёжные продукты, игровые механики, онбординг с лёгким тоном, блоги — там неформальность и есть часть обещания бренда. Но даже там эмодзи стоит вставлять картинками конкретной платформы, чтобы дизайн выглядел одинаково у всех: системный символ на каждом устройстве отрисуется по‑своему.</p>
       <p>Разные ниши переносят эмодзи по‑разному, и удобнее всего свести это в шкалу — от «смело» до «почти никогда»:</p>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Ниша</th><th>Эмодзи в коммуникации</th></tr></thead><tbody><tr><td>E‑commerce, доставка еды</td><td>✅ смело</td></tr><tr><td>Красота, трэвел, развлечения</td><td>✅ смело</td></tr><tr><td>Образование, HR</td><td>✅ умеренно</td></tr><tr><td>IT, SaaS</td><td>⚠️ умеренно, зависит от тона бренда</td></tr><tr><td>Финансы, страхование</td><td>⚠️ точечно, не в цифрах и условиях</td></tr><tr><td>Медицина, юриспруденция</td><td>⛔ почти никогда</td></tr><tr><td>Госсектор, B2B‑тендеры</td><td>⛔ нет</td></tr></tbody></table></div>
       <h2 id="три-правила-которые-спасут-от-кринжа">Три правила, которые спасут от кринжа</h2>
-      <p>Из всего сказанного выводятся три простых проверки — они работают в любом канале, потому что вытекают из одного механизма.</p>
+      <p>Из всего сказанного выводятся три простых проверки — они работают в любом канале, потому что вытекают из одного механизма.</p>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Правила эмодзи‑гигиены</span></div><div class="callout-body"><ol>
       <li><strong>Эмодзи дополняет смысл.</strong> Сообщение должно работать и без символов — вырежьте их мысленно и перечитайте. Разваливается — значит эмодзи несли смысл, который должен был быть в словах.</li>
       <li><strong>Один тон — одна серия.</strong> Жёлтые смайлики, предметные эмодзи и флажки в одном абзаце выглядят как случайный набор и убивают ощущение системности.</li>
@@ -251,7 +255,7 @@ window.yaContextCb.push(() => {
       </ol></div></div>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Отдельная ловушка: скрытый смысл</span></div><div class="callout-body"><p>У многих эмодзи есть сленговые значения, о которых старшее поколение маркетологов не подозревает. Баклажан, персик, клоун — проверьте актуальное прочтение символа, прежде чем отправлять его на миллион адресов. Быстрый способ — свериться со <a href="../znachenie-populyarnyh-emodzi/" target="_blank" rel="noopener">значениями популярных эмодзи</a>.</p></div></div>
       <h2 id="что-говорят-исследования-цифры-вместо-ощущений">Что говорят исследования: цифры вместо ощущений</h2>
-      <p>Чтобы всё сказанное не осталось вкусовщиной, вот ключевые наблюдения из исследований рассылочных платформ и академических работ — они подтверждают ровно ту логику контраста и контекста, что мы разбирали:</p>
+      <p>Чтобы всё сказанное не осталось вкусовщиной, вот ключевые наблюдения из исследований рассылочных платформ и академических работ — они подтверждают ровно ту логику контраста и контекста, что мы разбирали:</p>
       <ul>
       <li><strong>Открываемость писем.</strong> Данные противоречивы даже у крупных игроков: одни A/B‑тесты (Experian) фиксируют более высокий open rate с эмодзи в теме, другие — обратный эффект. <a href="https://www.nngroup.com/articles/emojis-email/" target="_blank" rel="noopener">Исследование Nielsen Norman Group</a> прямо показывает, что эмодзи в теме не повышают вероятность открытия и могут усиливать негативное восприятие бренда. Вывод один: универсальной цифры нет, тестируйте на своих.</li>
       <li><strong>Эффект новизны выгорает.</strong> Первые письма с эмодзи дают всплеск, при регулярном применении показатели возвращаются к базе — тот самый стёртый контраст.</li>
@@ -260,11 +264,11 @@ window.yaContextCb.push(() => {
       <li><strong>Доступность.</strong> Скринридеры читают эмодзи вслух названиями («лицо со слезами радости»); строка из десяти символов превращается в минуту звукового мусора. Ставьте эмодзи в конце сообщения — простая вежливость к незрячим пользователям.</li>
       </ul>
       <h2 id="разбор-одна-тема-письма-в-четырёх-дозировках">Разбор: одна тема письма в четырёх дозировках</h2>
-      <p>Всё правило про «один эмодзи, привязанный к смыслу» проще увидеть, чем описать. Возьмём распродажу и посмотрим, как один и тот же смысл выглядит при разной дозе:</p>
+      <p>Всё правило про «один эмодзи, привязанный к смыслу» проще увидеть, чем описать. Возьмём распродажу и посмотрим, как один и тот же смысл выглядит при разной дозе:</p>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Вариант</th><th>Оценка</th></tr></thead><tbody><tr><td>Скидка 30% на всё до воскресенья</td><td>нейтрально: работает, но не выделяется</td></tr><tr><td>🔥 Скидка 30% на всё до воскресенья</td><td>хорошо: один смысловой акцент в начале</td></tr><tr><td>🔥🔥🔥 СКИДКА 30% 🔥🔥🔥</td><td>плохо: паттерн спама, риск фильтров</td></tr><tr><td>Скидка 30% 🔥 только до воскресенья ⏰ на всё 🛍️</td><td>плохо: эмодзи рвут фразу, читать тяжело</td></tr></tbody></table></div>
-      <p>Второй вариант выигрывает тесты чаще всего: он ставит на фразе одну точку внимания и оставляет её читаемой.</p>
+      <p>Второй вариант выигрывает тесты чаще всего: он ставит на фразе одну точку внимания и оставляет её читаемой.</p>
       <h2 id="высший-уровень-эмодзи-как-часть-айдентики">Высший уровень: эмодзи как часть айдентики</h2>
-      <p>Предыдущие разделы отвечали на вопрос «где ставить». Остался вопрос «как перестать ставить наугад». Продвинутый ход — закрепить за брендом 2‑4 фирменных символа и использовать их последовательно во всех рассылках, пушах и постах. Тогда эмодзи работает как мини‑логотип в строке: 💜 давно ассоциируется с одним оператором связи, 🖤 — с чёрной пятницей конкретных ритейлеров. Выбор этих символов стоит зафиксировать в гайдлайне рядом с tone of voice (что такое гайдлайн и зачем он нужен, <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">разбирали здесь</a>) — иначе каждый SMM‑менеджер будет украшать посты по своему вкусу, и вся системность, ради которой всё затевалось, рассыплется.</p>
+      <p>Предыдущие разделы отвечали на вопрос «где ставить». Остался вопрос «как перестать ставить наугад». Продвинутый ход — закрепить за брендом 2‑4 фирменных символа и использовать их последовательно во всех рассылках, пушах и постах. Тогда эмодзи работает как мини‑логотип в строке: 💜 давно ассоциируется с одним оператором связи, 🖤 — с чёрной пятницей конкретных ритейлеров. Выбор этих символов стоит зафиксировать в гайдлайне рядом с tone of voice (что такое гайдлайн и зачем он нужен, <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">разбирали здесь</a>) — иначе каждый SMM‑менеджер будет украшать посты по своему вкусу, и вся системность, ради которой всё затевалось, рассыплется.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -276,48 +280,28 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="что-в-итоге">Что в итоге</h2>
-      <p>Эмодзи работают усилителем внимания, и это одна и та же сила, направленная в разные стороны. В переполненных каналах — письмах, пушах, лентах — они честно отрабатывают заметность за счёт контраста. На серьёзных страницах, где решается доверие, тот же контраст читается как несерьёзность и вредит. Отсюда и вся дозировка: один‑два символа на сообщение, привязанные к смыслу, в одной стилистике. И обязательная проверка, как они выглядят на чужих устройствах.</p>
-      <p>Подобрать точный символ под задачу — с русским поиском, значениями и картинками <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> и <a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a> — можно в нашем <a href="../../emoji/" target="_blank" rel="noopener">каталоге эмодзи</a>: тысячи эмодзи с описаниями и копированием в один клик.</p>
+      <p>Эмодзи работают усилителем внимания, и это одна и та же сила, направленная в разные стороны. В переполненных каналах — письмах, пушах, лентах — они честно отрабатывают заметность за счёт контраста. На серьёзных страницах, где решается доверие, тот же контраст читается как несерьёзность и вредит. Отсюда и вся дозировка: один‑два символа на сообщение, привязанные к смыслу, в одной стилистике. И обязательная проверка, как они выглядят на чужих устройствах.</p>
+      <p>Подобрать точный символ под задачу — с русским поиском, значениями и картинками <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — можно в нашем <a href="../../emoji/" target="_blank" rel="noopener">каталоге эмодзи</a>: тысячи эмодзи с описаниями и копированием в один клик.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../memy-v-marketinge/" data-date="2026-09-08" data-views="0">
+          <a class="blog-card" href="../golos-brenda/" data-date="2026-08-15" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Маркетинг</span><span class="blog-card-tag">Мемы</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z" /><path d="M7 10v12" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.09.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Мемы в маркетинге — как бренду шутить и не опозориться</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../golos-brenda/" data-date="2026-08-15" data-views="1">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Голос бренда</span><span class="blog-card-tag">Тексты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19v3" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><rect x="9" y="2" width="6" height="13" rx="3" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Голос бренда</span><span class="blog-card-tag">Тексты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19v3" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><rect x="9" y="2" width="6" height="13" rx="3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
           <div class="blog-card-title">Голос бренда (tone of voice) — как звучать узнаваемо</div>
@@ -325,7 +309,28 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-svoi-emodzi-v-telegram/" data-date="2026-08-11" data-views="0">
+      <a class="blog-card" href="../analiz-ca-po-otzyvam-konkurentov/" data-date="2026-08-14" data-views="12">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Маркетинг</span><span class="blog-card-tag">Инструменты</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            12
+          </div>
+          </div>
+          <div class="blog-card-title">Как спарсить отзывы конкурентов за 2 минуты и собрать по ним анализ ЦА</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-sdelat-svoi-emodzi-v-telegram/" data-date="2026-08-11" data-views="135">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -338,7 +343,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            135
           </div>
           </div>
           <div class="blog-card-title">Как сделать свои эмодзи и стикеры в Telegram — полный гайд</div>
@@ -346,7 +351,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-predlozhit-svoj-emodzi/" data-date="2026-08-08" data-views="0">
+      <a class="blog-card" href="../kak-predlozhit-svoj-emodzi/" data-date="2026-08-08" data-views="9">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -359,7 +364,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            9
           </div>
           </div>
           <div class="blog-card-title">Как предложить свой эмодзи в Юникод — реальная процедура</div>
@@ -367,44 +372,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../qr-kod-s-logotipom/" data-date="2026-08-29" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-prezentacii/" data-date="2026-08-13" data-views="9">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">QR-код</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1" /><rect width="5" height="5" x="16" y="3" rx="1" /><rect width="5" height="5" x="3" y="16" rx="1" /><path d="M21 16h-3a2 2 0 0 0-2 2v3" /><path d="M21 21v.01" /><path d="M12 7v3a2 2 0 0 1-2 2H7" /><path d="M3 12h.01" /><path d="M12 3h.01" /><path d="M12 16v.01" /><path d="M16 12h1" /><path d="M21 12v.01" /><path d="M12 21v-1" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Презентация</span><span class="blog-card-tag">PNG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h20" /><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" /><path d="m7 21 5-5 5 5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            9
           </div>
           </div>
-          <div class="blog-card-title">Как сделать QR‑код с логотипом — и чтобы он сканировался</div>
+          <div class="blog-card-title">Логотип для презентации — как вставить в PowerPoint и Google Slides</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="0">
+      <a class="blog-card" href="../ekosistema-yandeksa-logotipy/" data-date="2026-07-26" data-views="75">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Экосистемы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            75
           </div>
           </div>
-          <div class="blog-card-title">История логотипа WhatsApp — телефонная трубка, пережившая всё</div>
+          <div class="blog-card-title">Логотипы экосистемы Яндекса — как устроена система знаков</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -422,25 +427,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -517,6 +514,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -562,10 +560,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

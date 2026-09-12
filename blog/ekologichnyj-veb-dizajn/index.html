@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Экологичный веб‑дизайн — почему вес логотипа важен в 2026 · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(163 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(203 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(253 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(313 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(163 70% 38%) 0%, hsl(313 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(43 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(83 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(133 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(193 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(43 70% 38%) 0%, hsl(193 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" /><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-26">26 июля 2026</time>
@@ -202,7 +206,7 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            2
+	            6
 	          </span>
         </div>
         <h1>Экологичный веб‑дизайн — почему вес логотипа важен в 2026</h1>
@@ -222,13 +226,13 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="причём-тут-логотип">Причём тут логотип</h2>
-      <p>И вот здесь появляется логотип. Из всех элементов сайта он один из немногих, что присутствует <strong>на каждой странице</strong> — в шапке, подвале, <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a>. А раз он грузится при каждом заходе на любую страницу, его вес умножается на все просмотры сразу — и именно поэтому «облегчение логотипа» становится самым быстрым и заметным шагом к экологичному сайту. Тяжёлый <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a>-логотип на 300 КБ в шапке тянет за собой каждую загрузку. Часто в код вообще кладут картинку в разы больше нужной и сжимают её стилями — про эту ошибку мы писали в статье <a href="../pochemu-logotip-razmytyj/" target="_blank" rel="noopener">почему логотип размытый</a>. А несколько неоптимизированных версий знака — светлая, тёмная, для соцсетей — незаметно превращаются в лишние сотни килобайт.</p>
-      <p>Чтобы почувствовать масштаб, переведём это в числа. Пусть логотип в шапке весит 300 КБ вместо возможных 10 КБ в SVG — разница всего 290 КБ, и на одной странице она незаметна. Но логотип грузится на каждом просмотре, поэтому при ста тысячах просмотров в месяц те же 290 КБ превращаются примерно в 29 ГБ лишнего трафика, который кто‑то передал по сети, обработал на сервере и на который потратил электричество. Один‑единственный тяжёлый файл, умноженный на посещаемость, весит куда больше, чем кажется, — и потому его замена даёт непропорционально большой выигрыш по сравнению с усилием. В этом и суть: облегчать в первую очередь стоит не то, что весит много само по себе, а то, что грузится чаще всего, — а чаще логотипа не грузится почти ничто.</p>
+      <p>И вот здесь появляется логотип. Из всех элементов сайта он один из немногих, что присутствует <strong>на каждой странице</strong> — в шапке, подвале, <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a>. А раз он грузится при каждом заходе на любую страницу, его вес умножается на все просмотры сразу — и именно поэтому «облегчение логотипа» становится самым быстрым и заметным шагом к экологичному сайту. Тяжёлый <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a>-логотип на 300 КБ в шапке тянет за собой каждую загрузку. Часто в код вообще кладут картинку в разы больше нужной и сжимают её стилями — про эту ошибку мы писали в статье <a href="../pochemu-logotip-razmytyj/" target="_blank" rel="noopener">почему логотип размытый</a>. А несколько неоптимизированных версий знака — светлая, тёмная, для соцсетей — незаметно превращаются в лишние сотни килобайт.</p>
+      <p>Чтобы почувствовать масштаб, переведём это в числа. Пусть логотип в шапке весит 300 КБ вместо возможных 10 КБ в SVG — разница всего 290 КБ, и на одной странице она незаметна. Но логотип грузится на каждом просмотре, поэтому при ста тысячах просмотров в месяц те же 290 КБ превращаются примерно в 29 ГБ лишнего трафика, который кто‑то передал по сети, обработал на сервере и на который потратил электричество. Один‑единственный тяжёлый файл, умноженный на посещаемость, весит куда больше, чем кажется, — и потому его замена даёт непропорционально большой выигрыш по сравнению с усилием. В этом и суть: облегчать в первую очередь стоит не то, что весит много само по себе, а то, что грузится чаще всего, — а чаще логотипа не грузится почти ничто.</p>
       <h2 id="как-сделать-логотип-лёгким">Как сделать логотип лёгким</h2>
-      <p>Раз вес логотипа умножается на все страницы, облегчать его нужно системно, и путь здесь один — от самого весомого к деталям. Главный рычаг — вектор: для большинства логотипов <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> весит в разы меньше растра и при этом остаётся чётким на любом размере, потому что это текстовый код, а не сетка пикселей, — простой знак в SVG часто занимает несколько килобайт против сотен килобайт в <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> (разница форматов — в статье <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор и растр</a>). Но и вектор бывает раздутым: лишние точки, метаданные редактора, невидимые слои. Поэтому его чистят — это уменьшает вес ещё на десятки процентов без потери качества (как — в статье <a href="../kak-optimizirovat-svg/" target="_blank" rel="noopener">как оптимизировать SVG</a>). Если же логотип всё‑таки растровый — со сложными эффектами или фото, — то вместо PNG берут <a href="../chto-takoe-webp/" target="_blank" rel="noopener">WebP</a>: при том же качестве он весит значительно меньше (когда он уместен — в статье <a href="../chto-takoe-webp/" target="_blank" rel="noopener">что такое WebP</a>; а если нужно оставить PNG, его хотя бы сжимают, как в статье как уменьшить вес PNG). И последнее: логотипу в шапке на 40 пикселей не нужен файл на 2000 px — ассет готовят под реальный размер отображения, тот же принцип, что в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>.</p>
-      <p>Стоит оговорить и порядок этих шагов, потому что он экономит силы. Начинать всегда выгоднее с формата, а не с тонкой оптимизации: перевод тяжёлого PNG в SVG срезает вес сразу в разы, тогда как чистка уже лёгкого SVG добавляет лишь проценты. То есть сначала выбирают правильный тип файла — вектор для простого знака, <a href="../chto-takoe-webp/" target="_blank" rel="noopener">WebP</a> для сложного растра, — и только потом дожимают деталями. Перепутать порядок — значит вылизывать килобайты там, где рядом лежат неиспользованные сотни.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Простой аудит веса</span></div><div class="callout-body"><p>Всё это легко проверить на своём сайте: откройте инструменты разработчика, вкладку загрузки, и найдите логотип. Если он весит больше 20‑30 КБ — почти наверняка его можно облегчить: перевести в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, оптимизировать или пересохранить в <a href="../chto-takoe-webp/" target="_blank" rel="noopener">WebP</a>. Это самая быстрая победа в скорости сайта из возможных.</p></div></div>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Экологичность — это не про «уродливо и пусто»</span></div><div class="callout-body"><p>Здесь важно не понять всё превратно: лёгкий сайт не значит примитивный. Речь не о том, чтобы убрать графику, а о том, чтобы каждый килобайт был оправдан — вектор вместо тяжёлого растра, оптимизированные файлы, ассеты под реальный размер. Хороший экологичный дизайн выглядит так же богато, просто грузится быстрее.</p></div></div>
+      <p>Раз вес логотипа умножается на все страницы, облегчать его нужно системно, и путь здесь один — от самого весомого к деталям. Главный рычаг — вектор: для большинства логотипов <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> весит в разы меньше растра и при этом остаётся чётким на любом размере, потому что это текстовый код, а не сетка пикселей, — простой знак в SVG часто занимает несколько килобайт против сотен килобайт в <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> (разница форматов — в статье <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор и растр</a>). Но и вектор бывает раздутым: лишние точки, метаданные редактора, невидимые слои. Поэтому его чистят — это уменьшает вес ещё на десятки процентов без потери качества (как — в статье <a href="../kak-optimizirovat-svg/" target="_blank" rel="noopener">как оптимизировать SVG</a>). Если же логотип всё‑таки растровый — со сложными эффектами или фото, — то вместо PNG берут <a href="../chto-takoe-webp/" target="_blank" rel="noopener">WebP</a>: при том же качестве он весит значительно меньше (когда он уместен — в статье <a href="../chto-takoe-webp/" target="_blank" rel="noopener">что такое WebP</a>; а если нужно оставить PNG, его хотя бы сжимают, как в статье как уменьшить вес PNG). И последнее: логотипу в шапке на 40 пикселей не нужен файл на 2000 px — ассет готовят под реальный размер отображения, тот же принцип, что в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>.</p>
+      <p>Стоит оговорить и порядок этих шагов, потому что он экономит силы. Начинать всегда выгоднее с формата, а не с тонкой оптимизации: перевод тяжёлого PNG в SVG срезает вес сразу в разы, тогда как чистка уже лёгкого SVG добавляет лишь проценты. То есть сначала выбирают правильный тип файла — вектор для простого знака, <a href="../chto-takoe-webp/" target="_blank" rel="noopener">WebP</a> для сложного растра, — и только потом дожимают деталями. Перепутать порядок — значит вылизывать килобайты там, где рядом лежат неиспользованные сотни.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Простой аудит веса</span></div><div class="callout-body"><p>Всё это легко проверить на своём сайте: откройте инструменты разработчика, вкладку загрузки, и найдите логотип. Если он весит больше 20‑30 КБ — почти наверняка его можно облегчить: перевести в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, оптимизировать или пересохранить в <a href="../chto-takoe-webp/" target="_blank" rel="noopener">WebP</a>. Это самая быстрая победа в скорости сайта из возможных.</p></div></div>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Экологичность — это не про «уродливо и пусто»</span></div><div class="callout-body"><p>Здесь важно не понять всё превратно: лёгкий сайт не значит примитивный. Речь не о том, чтобы убрать графику, а о том, чтобы каждый килобайт был оправдан — вектор вместо тяжёлого растра, оптимизированные файлы, ассеты под реальный размер. Хороший экологичный дизайн выглядит так же богато, просто грузится быстрее.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -240,69 +244,28 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="короткий-вывод">Короткий вывод</h2>
-      <p>Экологичный веб‑дизайн в 2026 году — это стандарт, а не лозунг, и суть его не в том, чтобы убрать графику, а в том, чтобы каждый килобайт был оправдан. Логотип влияет на вес сайта сильнее прочего, потому что грузится на каждой странице, — поэтому его облегчение и есть самая быстрая победа: держите знак в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a>, <a href="../kak-optimizirovat-svg/" target="_blank" rel="noopener">оптимизируйте SVG</a>, для растра используйте <a href="../chto-takoe-webp/" target="_blank" rel="noopener">WebP</a> и не грузите размеры больше нужного. Лёгкий бренд — это быстрее, дешевле и экологичнее без потери качества.</p>
+      <p>Экологичный веб‑дизайн в 2026 году — это стандарт, а не лозунг, и суть его не в том, чтобы убрать графику, а в том, чтобы каждый килобайт был оправдан. Логотип влияет на вес сайта сильнее прочего, потому что грузится на каждой странице, — поэтому его облегчение и есть самая быстрая победа: держите знак в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a>, <a href="../kak-optimizirovat-svg/" target="_blank" rel="noopener">оптимизируйте SVG</a>, для растра используйте <a href="../chto-takoe-webp/" target="_blank" rel="noopener">WebP</a> и не грузите размеры больше нужного. Лёгкий бренд — это быстрее, дешевле и экологичнее без потери качества.</p>
       <p>Все логотипы в <a href="../../logos/" target="_blank" rel="noopener">каталоге Trace Logo's</a> отдаются в оптимизированном SVG и лёгких превью — скачивайте и используйте готовыми.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../skevomorfizm/" data-date="2026-09-09" data-views="0">
+          <a class="blog-card" href="../brutalizm-v-veb-dizajne/" data-date="2026-08-09" data-views="10">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">UI</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.7 10.3a2.41 2.41 0 0 0 0 3.41l7.59 7.59a2.41 2.41 0 0 0 3.41 0l7.59-7.59a2.41 2.41 0 0 0 0-3.41l-7.59-7.59a2.41 2.41 0 0 0-3.41 0Z" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>09.09.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Скевоморфизм и «жидкое стекло» — почему реализм вернулся в 2026</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../qr-kod-v-brend-dizajne/" data-date="2026-09-03" data-views="1">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">QR-код</span><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /><path d="M7 12h10" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>03.09.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
-          </div>
-          </div>
-          <div class="blog-card-title">QR‑код в дизайне бренда — из уродливого квадрата в часть айдентики</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../brutalizm-v-veb-dizajne/" data-date="2026-08-09" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">UI</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9" /><path d="m18 15 4-4" /><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">UI</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9" /><path d="m18 15 4-4" /><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>09.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            10
           </div>
           </div>
           <div class="blog-card-title">Брутализм в веб‑дизайне — эстетика «сырого» интерфейса</div>
@@ -310,20 +273,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../bento-setka/" data-date="2026-08-08" data-views="1">
+      <a class="blog-card" href="../bento-setka/" data-date="2026-08-08" data-views="15">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Вёрстка</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18" /><path d="M3 12h18" /><rect x="3" y="3" width="18" height="18" rx="2" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Вёрстка</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18" /><path d="M3 12h18" /><rect x="3" y="3" width="18" height="18" rx="2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            15
           </div>
           </div>
           <div class="blog-card-title">Bento‑сетка — модульная раскладка, покорившая дизайн 2026</div>
@@ -331,44 +294,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-emblema/" data-date="2026-07-22" data-views="1">
+      <a class="blog-card" href="../glassmorfizm/" data-date="2026-08-07" data-views="23">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">UI</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m14.31 8 5.74 9.94" /><path d="M9.69 8h11.48" /><path d="m7.38 12 5.74-9.94" /><path d="M9.69 16 3.95 6.06" /><path d="M14.31 16H2.83" /><path d="m16.62 12-5.74 9.94" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            23
+          </div>
+          </div>
+          <div class="blog-card-title">Глассморфизм — эффект матового стекла в дизайне 2026</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../maksimalizm-v-brendinge/" data-date="2026-07-31" data-views="17">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 11.3 2 22l10.7-3.79" /><path d="M4 3h.01" /><path d="M22 8h.01" /><path d="M15 2h.01" /><path d="M22 20h.01" /><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10" /><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17" /><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7" /><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            17
+          </div>
+          </div>
+          <div class="blog-card-title">Максимализм в брендинге — почему «больше» снова в моде</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../samye-dorogie-logotipy/" data-date="2026-07-11" data-views="31">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Виды логотипов</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Истории</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>22.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            31
           </div>
           </div>
-          <div class="blog-card-title">Логотип‑эмблема — бейджи и печати возвращаются</div>
+          <div class="blog-card-title">Самые дорогие логотипы мира — и почему цена почти не связана с картинкой</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-obrazovatelnyh-servisov/" data-date="2026-08-24" data-views="2">
+      <a class="blog-card" href="../kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="15">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Образование</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /><path d="M22 10v6" /><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Инструменты</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="7" x="3" y="3" rx="1" /><rect width="9" height="7" x="3" y="14" rx="1" /><rect width="5" height="7" x="16" y="14" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>24.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            15
           </div>
           </div>
-          <div class="blog-card-title">Логотипы образовательных сервисов — Duolingo, Coursera, Khan Academy</div>
+          <div class="blog-card-title">Как сделать логотип в Canva — и какие у неё ограничения</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -386,25 +391,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -481,6 +478,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -526,10 +524,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

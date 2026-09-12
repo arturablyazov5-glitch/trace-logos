@@ -34,13 +34,13 @@ tags_en: How-To, Social Media, Design
 | [Instagram](../../logos/social/instagram/) | от 320×320 | круг + кольцо сторис поверх края |
 | [X](../../logos/social/x/) | 400×400 | круг |
 
-Один мастер‑файл **800×800** с запасом закрывает всё: платформы уменьшают сами, а вот увеличить маленькую картинку без потерь нельзя — [почему так происходит](../pochemu-logotip-razmytyj/), мы объясняли отдельно.
+Один мастер‑файл **800×800** с запасом закрывает всё: платформы уменьшают сами, а вот увеличить маленькую картинку без потерь нельзя — [почему так происходит](../pochemu-logotip-razmytyj/), мы объясняли отдельно.
 
 ## Готовим аватарку из логотипа
 
-1. **Возьмите компактный знак, не полный логотип.** Текстовая часть в круге диаметром 40 пикселей нечитаема — нужна иконочная версия — о том, [чем иконка отличается от логотипа](../ikonka-i-logotip-raznica/) и [зачем вообще нужны разные версии знака](../vidy-logotipov/), мы рассказывали отдельно.
+1. **Возьмите компактный знак, не полный логотип.** Текстовая часть в круге диаметром 40 пикселей нечитаема — нужна иконочная версия — о том, [чем иконка отличается от логотипа](../ikonka-i-logotip-raznica/) и зачем вообще нужны разные версии знака, мы рассказывали отдельно.
 2. **Холст‑квадрат, знак по центру.** В [Figma](../../logos/design/figma/): фрейм 800×800, знак — 55‑65% ширины, строго по центру. Для проверки наложите сверху окружность‑шаблон и убедитесь, что ничего не выпирает.
-3. **Задайте фон.** Прозрачный фон платформы зальют своим цветом (в тёмной теме — тёмным, и чёрный знак исчезнет). Надёжно: фирменный цвет фона + контрастный знак — о том, [как подобрать такую пару](../kak-podobrat-cvetovuyu-palitru-brenda/), мы писали отдельно.
+3. **Задайте фон.** Прозрачный фон платформы зальют своим цветом (в тёмной теме — тёмным, и чёрный знак исчезнет). Надёжно: фирменный цвет фона + контрастный знак — о том, [как подобрать такую пару](../kak-podobrat-cvetovuyu-palitru-brenda/), мы писали отдельно.
 4. **Не рисуйте круг сами.** Частая ошибка — вписать знак в белый круг на квадрате «для надёжности»: платформа обрежет своим кругом чуть иначе, и получится кольцо‑артефакт по краю.
 5. **Экспорт в PNG** 800×800 — [почему не JPG](../png-ili-jpg-chto-luchshe/) для такой графики.
 
@@ -59,10 +59,10 @@ tags_en: How-To, Social Media, Design
 
 1. **Страница профиля** (~100‑160 px) — здесь красиво почти всё.
 2. **Список чатов / лента** (~40‑48 px) — здесь умирает текст и тонкие линии; главная проверка.
-3. **Мини‑контексты** (~24 px): комментарии, реакции, «печатает…» — здесь выживает только пятно цвета и силуэт. Ровно поэтому [цвет — главный актив](../kak-podobrat-cvetovuyu-palitru-brenda/) аватарки, как и [фавиконки](../kak-sdelat-favicon/).
+3. **Мини‑контексты** (~24 px): комментарии, реакции, «печатает…» — здесь выживает только пятно цвета и силуэт. Ровно поэтому [цвет — главный актив](../kak-podobrat-cvetovuyu-palitru-brenda/) аватарки, как и [фавиконки](../kak-sdelat-favicon/).
 
 :::tip Тест соседей
-Откройте свой профиль в списке диалогов между десятком чужих и честно ответьте: находится ли ваша аватарка за полсекунды? Если нет — упрощайте знак и усиливайте цвет. Тот же тест мы советовали для [иконок мессенджеров](../logotipy-messendzherov/) — аватарка конкурирует в той же сетке.
+Откройте свой профиль в списке диалогов между десятком чужих и честно ответьте: находится ли ваша аватарка за полсекунды? Если нет — упрощайте знак и усиливайте цвет. Тот же тест мы советовали для [иконок мессенджеров](../logotipy-messendzherov/) — аватарка конкурирует в той же сетке.
 :::
 
 ## Частые ошибки
@@ -71,7 +71,7 @@ tags_en: How-To, Social Media, Design
 2. **Важное в углах** — срезано геометрией, без вариантов.
 3. **Прозрачный фон** — цвет подложки решает за вас платформа.
 4. **Маленький исходник** — мыло при любом показе крупнее списка чатов.
-5. **Разные аватарки на разных площадках** — узнаваемость собирается из повторения: один знак везде — [как выстроить такую систему](../chto-takoe-firmennyj-stil/), мы разбирали отдельно.
+5. **Разные аватарки на разных площадках** — узнаваемость собирается из повторения: один знак везде — [как выстроить такую систему](../chto-takoe-firmennyj-stil/), мы разбирали отдельно.
 
 Смежные гайды: [логотип для Telegram‑канала](../logotip-dlya-telegram-kanala/), [для YouTube](../logotip-dlya-youtube-kanala/), [для сообщества ВКонтакте](../logotip-dlya-vk-soobshchestva/) и [размеры логотипа для всех площадок](../razmery-logotipa-dlya-sajta-i-socsetej/). Компактные версии знаков для аватарок — у большинства брендов в [каталоге](../../logos/).
 
@@ -106,7 +106,7 @@ One **800×800** master covers everything: platforms downscale on their own, whi
 
 ## Making an avatar from a logo
 
-1. **Use the compact mark, not the full logo.** Text inside a 40-pixel circle is unreadable — you need the icon version — see [icon vs logo](../ikonka-i-logotip-raznica/) and [why different versions exist](../vidy-logotipov/) for more.
+1. **Use the compact mark, not the full logo.** Text inside a 40-pixel circle is unreadable — you need the icon version — see [icon vs logo](../ikonka-i-logotip-raznica/) and why different versions exist for more.
 2. **A square canvas, the mark centered.** In [Figma](../../logos/design/figma/): an 800×800 frame, the mark at 55-65% of the width, dead center. Overlay a circle template to confirm nothing pokes out.
 3. **Set a background.** Platforms flood transparent backgrounds with their own color (dark in dark theme — and a black mark vanishes). Reliable: a brand background color + a contrasting mark — see [picking that pair](../kak-podobrat-cvetovuyu-palitru-brenda/) for how.
 4. **Don't draw the circle yourself.** A common error is placing the mark in a white circle on the square "to be safe": the platform's crop lands slightly differently, producing an artifact ring at the edge.

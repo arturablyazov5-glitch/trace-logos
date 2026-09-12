@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(94 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(134 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(184 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(244 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(94 70% 38%) 0%, hsl(244 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(333 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(13 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(63 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(123 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(333 70% 38%) 0%, hsl(123 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-21">June 21, 2026</time>
@@ -203,7 +207,7 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            74
+	            317
 	          </span>
         </div>
         <h1>How to Download a Logo from Any Website — 5 Legitimate Ways</h1>
@@ -225,14 +229,14 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="method-2-devtools-pulls-anything-in-30-seconds">Method 2. DevTools — pulls anything in 30 seconds</h2>
-      <p>The panel works the same in <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome</a>, <a href="/en/logos/search/yandexbrowser/" target="_blank" rel="noopener">Yandex Browser</a> and <a href="/en/logos/search/firefox/" target="_blank" rel="noopener">Firefox</a>:</p>
+      <p>The panel works the same in <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/search/yandexbrowser/" target="_blank" rel="noopener">Yandex Browser<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-browser.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> and <a href="/en/logos/search/firefox/" target="_blank" rel="noopener">Firefox<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/firefox.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>:</p>
       <ol>
       <li>Right‑click the logo → <strong>&quot;Inspect&quot;</strong>.</li>
       <li>The panel opens on the logo element. Three cases follow:</li>
       </ol>
       <ul>
       <li><strong><code>&lt;img src=&quot;...&quot;&gt;</code></strong> — open the src link in a new tab and save the file.</li>
-      <li><strong><code>&lt;svg&gt;...&lt;/svg&gt;</code></strong> — the logo is inlined. Right‑click the tag → Copy → Copy element, and the SVG code is on your clipboard. Paste it into a <code>.svg</code> file or straight into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>: it reads SVG code from the clipboard on Ctrl+V.</li>
+      <li><strong><code>&lt;svg&gt;...&lt;/svg&gt;</code></strong> — the logo is inlined. Right‑click the tag → Copy → Copy element, and the SVG code is on your clipboard. Paste it into a <code>.svg</code> file or straight into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: it reads SVG code from the clipboard on Ctrl+V.</li>
       <li><strong><code>background-image: url(...)</code></strong> in the styles — open the URL from the CSS and save.</li>
       </ul>
       <ol>
@@ -260,7 +264,7 @@ window.yaContextCb.push(() => {
       <p>One general tip: the mobile version of a site sometimes serves a different, simpler logo file — switch on device emulation in DevTools and check.</p>
       <h2 id="where-else-the-vector-lives-besides-the-site">Where else the vector lives besides the site</h2>
       <p>A website is not the only place the file has already reached in vector form.</p>
-      <p><strong>PDF.</strong> A deck, a proposal or an annual report stores the logo as curves. Open the PDF in <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> or Inkscape, select the mark and copy it as an ordinary group of shapes. It comes out raster only when it was placed into the layout as an image.</p>
+      <p><strong>PDF.</strong> A deck, a proposal or an annual report stores the logo as curves. Open the PDF in <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> or Inkscape, select the mark and copy it as an ordinary group of shapes. It comes out raster only when it was placed into the layout as an image.</p>
       <p><strong>Decks and documents.</strong> PPTX and DOCX files are built as zip archives. Change the extension to <code>.zip</code>, unpack it and look into <code>ppt/media</code> or <code>word/media</code>: the embedded images sit there in their original form, SVG included.</p>
       <p><strong>A mobile app.</strong> An APK unpacks the same way, and the icons live in <code>res/drawable</code> — a set of PNGs for different screen densities plus vector XML, which a converter turns into SVG.</p>
       <p><strong>Browser extensions.</strong> Plugins like SVG Export and SVG Grabber collect every vector on the page into one list: faster than walking DevTools by hand when you need a dozen icons off one page. You still have to vet the haul, since the extension also pulls interface glyphs.</p>
@@ -270,10 +274,10 @@ window.yaContextCb.push(() => {
       <li><strong>Vector or wrapper.</strong> Open the SVG in a text editor: a real vector consists of <code>&lt;path&gt;</code> and shapes; a single <code>&lt;image&gt;</code> tag gives away a raster masquerading as SVG.</li>
       <li><strong>Currency.</strong> Brands go through redesigns, while footers, old landing pages and subdomains keep previous versions of the mark alive for years. Compare the file against the brand's homepage or recent social accounts.</li>
       <li><strong>Completeness.</strong> The header often carries a trimmed variant — the mark alone, without text. A deck usually needs the full logo, and that lives in the press kit.</li>
-      <li><strong>Canvas and padding.</strong> An SVG pulled out of markup often carries a generous viewBox: the mark sits in the corner of a large transparent rectangle and aligns crookedly in a layout. Open the file in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> — if the selection box is visibly larger than the shape, crop the canvas to the content.</li>
+      <li><strong>Canvas and padding.</strong> An SVG pulled out of markup often carries a generous viewBox: the mark sits in the corner of a large transparent rectangle and aligns crookedly in a layout. Open the file in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — if the selection box is visibly larger than the shape, crop the canvas to the content.</li>
       </ol>
       <h2 id="which-path-fits-which-task">Which path fits which task</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Task</th><th>Best path</th></tr></thead><tbody><tr><td>One well‑known brand for a slide</td><td>catalog: SVG in 10 seconds</td></tr><tr><td>A &quot;trusted by&quot; grid of 10 logos</td><td>catalog: consistent quality and style</td></tr><tr><td>A little‑known local company's logo</td><td>DevTools on their site</td></tr><tr><td>A logo for high‑quality print</td><td>press kit (vector plus the rules)</td></tr><tr><td>A logo out of a PDF deck</td><td>open the PDF in <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>/Inkscape and extract the vector</td></tr><tr><td>An old logo that's no longer on the site</td><td>web archive (web.archive.org) + DevTools</td></tr></tbody></table></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Task</th><th>Best path</th></tr></thead><tbody><tr><td>One well‑known brand for a slide</td><td>catalog: SVG in 10 seconds</td></tr><tr><td>A &quot;trusted by&quot; grid of 10 logos</td><td>catalog: consistent quality and style</td></tr><tr><td>A little‑known local company's logo</td><td>DevTools on their site</td></tr><tr><td>A logo for high‑quality print</td><td>press kit (vector plus the rules)</td></tr><tr><td>A logo out of a PDF deck</td><td>open the PDF in <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>/Inkscape and extract the vector</td></tr><tr><td>An old logo that's no longer on the site</td><td>web archive (web.archive.org) + DevTools</td></tr></tbody></table></div>
       <p>That last row saves the day more often than you'd think: the Wayback Machine keeps old site versions along with their logo files, and it's the only way to retrieve a historical mark after a rebrand. Check the inner pages in the archive too: snapshots of press sections are saved along with their files, and the older logo version usually turns up there.</p>
       <h2 id="is-any-of-this-legal">Is any of this legal</h2>
       <p>Downloading breaks no law — the questions concern how you use the file. The general principle: showing a logo to point at the brand itself (in an article, a deck, a list of integrations, payment methods) is fine; passing it off as your own, implying a partnership that doesn't exist, or printing it on merchandise you sell is not. A detailed breakdown with case law and a situation table is in <a href="/en/blog/mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">can you use someone else's logo</a>.</p>
@@ -290,26 +294,48 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="in-short">In short</h2>
       <p>The screenshot comes last because a vector almost always already exists: the site loaded it to show you, and the brand often published an official copy separately. So the order of operations runs opposite to instinct — catalog or press kit first, then DevTools, and only then raster compromises. Check the file you get for authenticity, currency and completeness, and place it in your layout undistorted.</p>
-      <p>Save yourself the DevTools: in our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a> any major brand's mark downloads as SVG and PNG in one click — or copies as code straight into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>.</p>
+      <p>Save yourself the DevTools: in our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a> any major brand's mark downloads as SVG and PNG in one click — or copies as code straight into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/kak-uznat-shrift-logotipa/" data-date="2026-08-13" data-views="1">
+          <a class="blog-card" href="/en/blog/analiz-ca-po-otzyvam-konkurentov/" data-date="2026-08-14" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Fonts</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16" /><path d="M22 9v7" /><path d="M3.304 13h6.392" /><circle cx="18.5" cy="12.5" r="3.5" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Marketing</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">How-to</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            12
+          </div>
+          </div>
+          <div class="blog-card-title">How to Scrape Competitor Reviews in 2 Minutes and Build Audience Research From Them</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-uznat-shrift-logotipa/" data-date="2026-08-13" data-views="6">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Fonts</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16" /><path d="M22 9v7" /><path d="M3.304 13h6.392" /><circle cx="18.5" cy="12.5" r="3.5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
           <div class="blog-card-title">How to Identify a Font From a Logo or Website — Every Working Method</div>
@@ -317,20 +343,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-ubrat-fon-s-kartinki/" data-date="2026-08-12" data-views="0">
+      <a class="blog-card" href="/en/blog/kak-ubrat-fon-s-kartinki/" data-date="2026-08-12" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Formats</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Formats</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            8
           </div>
           </div>
           <div class="blog-card-title">How to Remove a Background From an Image — 6 Free Ways</div>
@@ -338,20 +364,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="0">
+      <a class="blog-card" href="/en/blog/kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="15">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="7" x="3" y="3" rx="1" /><rect width="9" height="7" x="3" y="14" rx="1" /><rect width="5" height="7" x="16" y="14" rx="1" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="7" x="3" y="3" rx="1" /><rect width="9" height="7" x="3" y="14" rx="1" /><rect width="5" height="7" x="16" y="14" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            15
           </div>
           </div>
           <div class="blog-card-title">How to Make a Logo in Canva — and Where It Falls Short</div>
@@ -359,65 +385,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-sdelat-logotip-v-illustrator/" data-date="2026-08-10" data-views="1">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z" /><path d="M16 8 2 22" /><path d="M17.5 15H9" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
-          </div>
-          </div>
-          <div class="blog-card-title">How to Make a Logo in Adobe Illustrator — Step by Step</div>
-          
-          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="/en/blog/cherno-belyj-logotip/" data-date="2026-07-21" data-views="17">
+      <a class="blog-card" href="/en/blog/samye-dorogie-logotipy/" data-date="2026-07-11" data-views="31">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logos</span><span class="blog-card-tag">How-to</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 18a6 6 0 0 0 0-12v12z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Stories</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            17
+            31
           </div>
           </div>
-          <div class="blog-card-title">The Black‑and‑White Logo Version — Why You Need One</div>
+          <div class="blog-card-title">The World's Most Expensive Logos — and Why Price Has Little to Do with the Picture</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-konvertirovat-svg-v-png/" data-date="2026-06-15" data-views="3">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-apple/" data-date="2026-06-12" data-views="14">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Conversion</span><span class="blog-card-tag">How-to</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Apple</span><span class="blog-card-tag">History</span><span class="blog-card-tag">Logos</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            3
+            14
           </div>
           </div>
-          <div class="blog-card-title">How to Convert SVG to PNG and Back — 5 Lossless Methods</div>
+          <div class="blog-card-title">The History of the Apple Logo — Why the Apple Is Bitten and Where the Rainbow Went</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -435,25 +440,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -530,6 +527,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -575,10 +573,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

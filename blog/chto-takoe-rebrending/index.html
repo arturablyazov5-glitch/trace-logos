@@ -13,11 +13,13 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Что такое ребрендинг — зачем компании меняют логотип и имя · Trace Logo's</title>
-  <meta name="description" content="Ребрендинг простыми словами: чем отличается от редизайна и рестайлинга, когда он нужен, сколько стоит, примеры Сбера, VK, X и Т‑Банка. Чек‑лист для бизнеса.">
+  <meta name="description" content="Ребрендинг простыми словами: чем отличается от редизайна и рестайлинга, когда он нужен, сколько стоит, примеры Сбера, VK, X и Т‑Банка. Чек‑лист для бизнеса.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <link rel="canonical" href="https://trace-logos.ru/blog/chto-takoe-rebrending/">
@@ -32,7 +34,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Trace Logo's">
   <meta property="og:title" content="Что такое ребрендинг — зачем компании меняют логотип и имя">
-  <meta property="og:description" content="Ребрендинг простыми словами: чем отличается от редизайна и рестайлинга, когда он нужен, сколько стоит, примеры Сбера, VK, X и Т‑Банка. Чек‑лист для бизнеса.">
+  <meta property="og:description" content="Ребрендинг простыми словами: чем отличается от редизайна и рестайлинга, когда он нужен, сколько стоит, примеры Сбера, VK, X и Т‑Банка. Чек‑лист для бизнеса.">
   <meta property="og:url" content="https://trace-logos.ru/blog/chto-takoe-rebrending/">
   <meta property="og:image" content="https://trace-logos.ru/assets/og/blog/social/chto-takoe-rebrending.png">
   <meta property="og:image:width" content="1200">
@@ -70,7 +72,7 @@
     {
       "@type": "BlogPosting",
       "headline": "Что такое ребрендинг — зачем компании меняют логотип и имя",
-      "description": "Ребрендинг простыми словами: чем отличается от редизайна и рестайлинга, когда он нужен, сколько стоит, примеры Сбера, VK, X и Т‑Банка. Чек‑лист для бизнеса.",
+      "description": "Ребрендинг простыми словами: чем отличается от редизайна и рестайлинга, когда он нужен, сколько стоит, примеры Сбера, VK, X и Т‑Банка. Чек‑лист для бизнеса.",
       "datePublished": "2026-07-24",
       "dateModified": "2026-07-24",
       "url": "https://trace-logos.ru/blog/chto-takoe-rebrending/",
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(131 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(171 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(221 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(281 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(131 70% 38%) 0%, hsl(281 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(11 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(51 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(101 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(161 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(11 70% 38%) 0%, hsl(161 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-24">24 июля 2026</time>
@@ -202,18 +206,18 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            3
+	            15
 	          </span>
         </div>
         <h1>Что такое ребрендинг — зачем компании меняют логотип и имя</h1>
       </header>
       <div class="blog-body">
-        <p>«Сбербанк стал Сбером», «Mail.ru стал VK», «Twitter стал X» — каждые несколько месяцев какой‑нибудь крупный бренд объявляет о «ребрендинге». Но под этим словом скрываются очень разные по масштабу вещи: от замены оттенка в логотипе до полной смены имени и стратегии. Разбираем, что такое ребрендинг на самом деле, когда он оправдан и во что обходится.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p><strong>Ребрендинг</strong> — это изменение позиционирования бренда: как компания хочет восприниматься и кем. Новый логотип — лишь видимая верхушка. Если меняется только картинка — это <strong>редизайн</strong> (или рестайлинг), не ребрендинг. Поводы для настоящего ребрендинга: смена бизнес‑модели, слияние, выход на новые рынки, испорченная репутация или имя, которое перестало соответствовать продукту.</p></div></div>
+        <p>«Сбербанк стал Сбером», «Mail.ru стал VK», «Twitter стал X» — каждые несколько месяцев какой‑нибудь крупный бренд объявляет о «ребрендинге». Но под этим словом скрываются очень разные по масштабу вещи: от замены оттенка в логотипе до полной смены имени и стратегии. Разбираем, что такое ребрендинг на самом деле, когда он оправдан и во что обходится.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p><strong>Ребрендинг</strong> — это изменение позиционирования бренда: как компания хочет восприниматься и кем. Новый логотип — лишь видимая верхушка. Если меняется только картинка — это <strong>редизайн</strong> (или рестайлинг), не ребрендинг. Поводы для настоящего ребрендинга: смена бизнес‑модели, слияние, выход на новые рынки, испорченная репутация или имя, которое перестало соответствовать продукту.</p></div></div>
       <h2 id="ребрендинг-редизайн-рестайлинг-в-чём-разница">Ребрендинг, редизайн, рестайлинг — в чём разница</h2>
       <p>Эти слова часто путают, а разница принципиальная:</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Термин</th><th>Что меняется</th><th>Пример</th></tr></thead><tbody><tr><td><strong>Рестайлинг</strong></td><td>косметика: оттенки, шрифт, детали знака</td><td><a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a> в 2010 — почистили тени</td></tr><tr><td><strong>Редизайн</strong></td><td>логотип и визуальный стиль целиком</td><td><a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a> в 2015 — новый шрифт и система, но тот же бренд</td></tr><tr><td><strong>Ребрендинг</strong></td><td>позиционирование: имя, аудитория, обещание бренда</td><td>Сбербанк → <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер</a>: из банка — в экосистему</td></tr></tbody></table></div>
-      <p>Простой тест: если после изменений компания отвечает на вопрос «кто мы и для кого» по‑другому — это ребрендинг. Если отвечает так же, но выглядит свежее, — редизайн. Историю постепенных редизайнов мы разбирали на примерах <a href="../istoriya-logotipa-apple/" target="_blank" rel="noopener">Apple</a> и <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">Яндекса</a>.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Термин</th><th>Что меняется</th><th>Пример</th></tr></thead><tbody><tr><td><strong>Рестайлинг</strong></td><td>косметика: оттенки, шрифт, детали знака</td><td><a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> в 2010 — почистили тени</td></tr><tr><td><strong>Редизайн</strong></td><td>логотип и визуальный стиль целиком</td><td><a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> в 2015 — новый шрифт и система, но тот же бренд</td></tr><tr><td><strong>Ребрендинг</strong></td><td>позиционирование: имя, аудитория, обещание бренда</td><td>Сбербанк → <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: из банка — в экосистему</td></tr></tbody></table></div>
+      <p>Простой тест: если после изменений компания отвечает на вопрос «кто мы и для кого» по‑другому — это ребрендинг. Если отвечает так же, но выглядит свежее, — редизайн. Историю постепенных редизайнов мы разбирали на примерах <a href="../istoriya-logotipa-apple/" target="_blank" rel="noopener">Apple</a> и <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">Яндекса</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -226,19 +230,19 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="когда-ребрендинг-оправдан">Когда ребрендинг оправдан</h2>
       <ol>
-      <li><strong>Бизнес перерос имя.</strong> Классика — <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер</a>: слово «банк» ушло из названия, потому что компания стала экосистемой с доставкой, музыкой и облаком (подробности — в статье <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">история логотипа Сбера</a>). По той же причине Mail.ru Group стала <a href="../../logos/social/vk/" target="_blank" rel="noopener">VK</a> — см. историю логотипа ВКонтакте.</li>
+      <li><strong>Бизнес перерос имя.</strong> Классика — <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: слово «банк» ушло из названия, потому что компания стала экосистемой с доставкой, музыкой и облаком (подробности — в статье <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">история логотипа Сбера</a>). По той же причине Mail.ru Group стала <a href="../../logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — см. историю логотипа ВКонтакте.</li>
       <li><strong>Слияние или поглощение.</strong> Двум брендам нужно единое лицо — или поглощённый бренд растворяется в материнском.</li>
       <li><strong>Выход на новые рынки.</strong> Название не читается, не произносится или означает что‑то неприличное на языке нового рынка.</li>
       <li><strong>Репутационный кризис.</strong> Иногда проще сменить вывеску, чем отмыть старую. Это работает только вместе с реальными изменениями — иначе аудитория переносит негатив на новое имя за месяцы.</li>
-      <li><strong>Смена владельца с новой стратегией.</strong> Пример‑рекордсмен — превращение Twitter в <strong>X</strong>: Илон Маск заменил один из самых узнаваемых знаков планеты (<a href="../../logos/social/x/" target="_blank" rel="noopener">синюю птичку</a>) на букву, декларируя переход от соцсети к «приложению для всего». Оценки потерь стоимости бренда доходили до миллиардов долларов — мы упоминали этот кейс в статье <a href="../samye-dorogie-logotipy/" target="_blank" rel="noopener">самые дорогие логотипы</a>.</li>
+      <li><strong>Смена владельца с новой стратегией.</strong> Пример‑рекордсмен — превращение Twitter в <strong>X</strong>: Илон Маск заменил один из самых узнаваемых знаков планеты (<a href="../../logos/social/x/" target="_blank" rel="noopener">синюю птичку<img class="blog-mention-icon" src="../../assets/logos/svgs/x.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>) на букву, декларируя переход от соцсети к «приложению для всего». Оценки потерь стоимости бренда доходили до миллиардов долларов — мы упоминали этот кейс в статье <a href="../samye-dorogie-logotipy/" target="_blank" rel="noopener">самые дорогие логотипы</a>.</li>
       </ol>
-      <div class="callout callout-danger"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg><span>Когда ребрендинг НЕ нужен</span></div><div class="callout-body"><p>«Логотип надоел директору» — худшая причина. Узнаваемость — накопленный капитал: аудитория тратит годы, чтобы связать знак с компанией. Сжигать его стоит только ради стратегии, которую старый бренд действительно не вмещает. Если проблема в том, что знак устарел визуально, — достаточно рестайлинга.</p></div></div>
+      <div class="callout callout-danger"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg><span>Когда ребрендинг НЕ нужен</span></div><div class="callout-body"><p>«Логотип надоел директору» — худшая причина. Узнаваемость — накопленный капитал: аудитория тратит годы, чтобы связать знак с компанией. Сжигать его стоит только ради стратегии, которую старый бренд действительно не вмещает. Если проблема в том, что знак устарел визуально, — достаточно рестайлинга.</p></div></div>
       <h2 id="из-чего-состоит-ребрендинг">Из чего состоит ребрендинг</h2>
       <p>Полный цикл — это не «нарисовать новый логотип», а последовательность, где дизайн стоит ближе к концу:</p>
       <ol>
       <li><strong>Аудит.</strong> Исследование: как бренд воспринимают клиенты, сотрудники, рынок. Что работает, что мешает.</li>
       <li><strong>Стратегия.</strong> Новое позиционирование: аудитория, обещание, характер, отличие от конкурентов.</li>
-      <li><strong>Вербальная идентичность.</strong> Имя (если меняется), слоган, тон коммуникации.</li>
+      <li><strong>Вербальная идентичность.</strong> Имя (если меняется), слоган, тон коммуникации.</li>
       <li><strong>Визуальная идентичность.</strong> Логотип, палитра, шрифты, графика — всё то, что фиксируется в <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">брендбуке</a>. Как выбрать тип знака — в статье виды логотипов.</li>
       <li><strong>Юридическая часть.</strong> Проверка и <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">регистрация нового товарного знака</a> — до запуска, а не после.</li>
       <li><strong>Внедрение.</strong> Самая дорогая фаза: сайт, приложения, вывески, упаковка, транспорт, документы, мерч. У федерального ритейла замена вывесок может стоить дороже всей дизайнерской работы.</li>
@@ -248,11 +252,11 @@ window.yaContextCb.push(() => {
       <p>Порядок цифр радикально зависит от масштаба. Фрилансер и шаблонный рестайлинг обойдутся в десятки тысяч рублей; ребрендинг среднего бизнеса силами студии — от сотен тысяч до нескольких миллионов; федеральный бренд с исследованиями, стратегией и заменой всех носителей — сотни миллионов (публичные оценки ребрендинга Сбера в 2020 году начинались от 2,5 млрд рублей с учётом замены вывесок и оборудования). Подробная раскладка цен на дизайнерскую часть — в статье <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">сколько стоит логотип</a>.</p>
       <h2 id="чек-лист-как-не-провалить-ребрендинг">Чек‑лист: как не провалить ребрендинг</h2>
       <ul>
-      <li><strong>Сформулируйте причину одним предложением.</strong> «Мы меняем бренд, потому что…» Если после «потому что» получается «старый надоел» — остановитесь.</li>
+      <li><strong>Сформулируйте причину одним предложением.</strong> «Мы меняем бренд, потому что…» Если после «потому что» получается «старый надоел» — остановитесь.</li>
       <li><strong>Посчитайте внедрение до старта.</strong> Дизайн — 10‑20% бюджета; остальное — замена носителей.</li>
-      <li><strong>Проверьте имя и знак юридически</strong> до анонса: занятый товарный знак превратит запуск в катастрофу; <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">как проверить и зарегистрировать</a> знак, мы разбирали отдельно.</li>
-      <li><strong>Подготовьте переходный период.</strong> Старый и новый знак какое‑то время живут вместе: редиректы, «мы сменили имя» в шапке, обновление профилей в соцсетях (про требования площадок — <a href="../razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">размеры логотипа для сайта и соцсетей</a>).</li>
-      <li><strong>Не выбрасывайте капитал зря.</strong> Эволюция обычно бьёт революцию: <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер</a> сохранил зелёный цвет и мотив круга, VK — синий и монограмму. Полный разрыв, как у X, — экстремальный и дорогой путь.</li>
+      <li><strong>Проверьте имя и знак юридически</strong> до анонса: занятый товарный знак превратит запуск в катастрофу; <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">как проверить и зарегистрировать</a> знак, мы разбирали отдельно.</li>
+      <li><strong>Подготовьте переходный период.</strong> Старый и новый знак какое‑то время живут вместе: редиректы, «мы сменили имя» в шапке, обновление профилей в соцсетях (про требования площадок — <a href="../razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">размеры логотипа для сайта и соцсетей</a>).</li>
+      <li><strong>Не выбрасывайте капитал зря.</strong> Эволюция обычно бьёт революцию: <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> сохранил зелёный цвет и мотив круга, VK — синий и монограмму. Полный разрыв, как у X, — экстремальный и дорогой путь.</li>
       </ul>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
@@ -266,18 +270,19 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="мини-кейсы-из-каталога">Мини‑кейсы из каталога</h2>
       <ul>
-      <li><strong><a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер</a>, 2020</strong> — эталонная «эволюция»: имя укоротилось, галочка стала градиентным шевроном, зелёный остался. Цель — из банка в технологическую экосистему.</li>
-      <li><strong><a href="../../logos/social/vk/" target="_blank" rel="noopener">VK</a>, 2021</strong> — ребрендинг холдинга: имя продукта стало именем компании, знак соцсети — зонтичным брендом.</li>
-      <li><strong><a href="../../logos/social/x/" target="_blank" rel="noopener">X</a>, 2023</strong> — революция: смена имени, знака и позиционирования одновременно; хрестоматийный пример цены такого решения.</li>
-      <li><strong><a href="../../logos/bank/tbank/" target="_blank" rel="noopener">Т‑Банк</a>, 2024</strong> — вынужденный ребрендинг: Тинькофф Банк сменил имя после расставания с основателем‑тёзкой, сохранив жёлтый щит и узнаваемость.</li>
+      <li><strong><a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, 2020</strong> — эталонная «эволюция»: имя укоротилось, галочка стала градиентным шевроном, зелёный остался. Цель — из банка в технологическую экосистему.</li>
+      <li><strong><a href="../../logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, 2021</strong> — ребрендинг холдинга: имя продукта стало именем компании, знак соцсети — зонтичным брендом.</li>
+      <li><strong><a href="../../logos/social/x/" target="_blank" rel="noopener">X<img class="blog-mention-icon" src="../../assets/logos/svgs/x.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, 2023</strong> — революция: смена имени, знака и позиционирования одновременно; хрестоматийный пример цены такого решения.</li>
+      <li><strong><a href="../../logos/bank/tbank/" target="_blank" rel="noopener">Т‑Банк<img class="blog-mention-icon" src="../../assets/logos/svgs/t-bank.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, 2024</strong> — вынужденный ребрендинг: Тинькофф Банк сменил имя после расставания с основателем‑тёзкой, сохранив жёлтый щит и узнаваемость.</li>
       </ul>
       <p>Все актуальные версии логотипов из этих кейсов — в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге</a>: SVG и PNG, бесплатно, с фирменными цветами каждого бренда.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../kak-pridumat-nazvanie-brenda/" data-date="2026-08-08" data-views="0">
+          <a class="blog-card" href="../kak-pridumat-nazvanie-brenda/" data-date="2026-08-08" data-views="2">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -290,7 +295,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            2
           </div>
           </div>
           <div class="blog-card-title">Как придумать название бренда — методы нейминга и проверки</div>
@@ -298,62 +303,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../vidy-logotipov/" data-date="2026-08-31" data-views="0">
+      <a class="blog-card" href="../logotip-i-tovarnyj-znak-raznica/" data-date="2026-08-17" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Виды логотипов — 7 типов с примерами известных брендов</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../oshibki-v-dizajne-logotipa/" data-date="2026-08-28" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">10 ошибок в дизайне логотипа — проверьте свой знак</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../logotip-i-tovarnyj-znak-raznica/" data-date="2026-08-17" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Право</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13" /><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z" /><path d="M5 22h14" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Право</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13" /><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z" /><path d="M5 22h14" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            4
           </div>
           </div>
           <div class="blog-card-title">Логотип и товарный знак — в чём разница и что это значит для бизнеса</div>
@@ -361,44 +324,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-favicon/" data-date="2026-06-18" data-views="1">
+      <a class="blog-card" href="../kak-zakazat-logotip-u-dizajnera/" data-date="2026-08-14" data-views="7">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Бизнес</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 11 2 2 4-4" /><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            7
+          </div>
+          </div>
+          <div class="blog-card-title">Как заказать логотип у дизайнера — бриф, этапы, приёмка работ</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kogda-pora-menyat-logotip/" data-date="2026-08-14" data-views="4">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Редизайн</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 14v2.2l1.6 1" /><path d="M16 2v4" /><path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" /><path d="M3 10h5" /><path d="M8 2v4" /><circle cx="16" cy="16" r="6" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            4
+          </div>
+          </div>
+          <div class="blog-card-title">Когда пора менять логотип — 7 честных признаков</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../istoriya-logotipa-yandeksa/" data-date="2026-06-14" data-views="41">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Фавикон</span><span class="blog-card-tag">Сайты</span><span class="blog-card-tag">SVG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Яндекс</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Ребрендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>18.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            41
           </div>
           </div>
-          <div class="blog-card-title">Фавикон для сайта в 2026 году — форматы, размеры и правильный HTML</div>
+          <div class="blog-card-title">История логотипа Яндекса — от «Яndex» 1997 года до ребрендинга 2021‑го</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../pozicionirovanie-brenda/" data-date="2026-09-07" data-views="0">
+      <a class="blog-card" href="../logotipy-brauzerov/" data-date="2026-08-18" data-views="30">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Стратегия</span><span class="blog-card-tag">Позиционирование</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>18.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            30
           </div>
           </div>
-          <div class="blog-card-title">Позиционирование бренда — как занять место в голове клиента</div>
+          <div class="blog-card-title">Логотипы браузеров — от лисы Firefox до компаса Safari</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -416,25 +421,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -511,6 +508,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -556,10 +554,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

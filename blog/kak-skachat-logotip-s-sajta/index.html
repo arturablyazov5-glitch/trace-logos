@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как скачать логотип с любого сайта — 5 легальных способов · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(94 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(134 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(184 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(244 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(94 70% 38%) 0%, hsl(244 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(333 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(13 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(63 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(123 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(333 70% 38%) 0%, hsl(123 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-21">21 июня 2026</time>
@@ -202,16 +206,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            74
+	            317
 	          </span>
         </div>
         <h1>Как скачать логотип с любого сайта — 5 легальных способов</h1>
       </header>
       <div class="blog-body">
-        <p>Нужен логотип банка для презентации, иконка сервиса для схемы интеграций, знак партнёра для слайда «нам доверяют». Рука тянется сделать скриншот, и в макет уезжает мыльный растр с куском чужого фона. Между тем логотип, который вы только что сфотографировали с экрана, лежит на том же сайте в векторе: сайт обязан был его откуда‑то загрузить, чтобы показать вам. Скриншот означает лишь то, что файл искали не там. Разберём, где он лежит на самом деле, — от самых быстрых источников к самым трудоёмким.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Порядок от лучшего к худшему: <strong>каталог логотипов</strong> (SVG в один клик) → <strong>пресс‑кит бренда</strong> (официальные файлы с правилами) → <strong>DevTools</strong> (достанет логотип с любого сайта за 30 секунд) → <strong>правый клик → сохранить картинку</strong> → скриншот, если провалилось всё остальное. Про право использовать чужой знак — в конце: для большинства бытовых задач можно.</p></div></div>
+        <p>Нужен логотип банка для презентации, иконка сервиса для схемы интеграций, знак партнёра для слайда «нам доверяют». Рука тянется сделать скриншот, и в макет уезжает мыльный растр с куском чужого фона. Между тем логотип, который вы только что сфотографировали с экрана, лежит на том же сайте в векторе: сайт обязан был его откуда‑то загрузить, чтобы показать вам. Скриншот означает лишь то, что файл искали не там. Разберём, где он лежит на самом деле, — от самых быстрых источников к самым трудоёмким.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Порядок от лучшего к худшему: <strong>каталог логотипов</strong> (SVG в один клик) → <strong>пресс‑кит бренда</strong> (официальные файлы с правилами) → <strong>DevTools</strong> (достанет логотип с любого сайта за 30 секунд) → <strong>правый клик → сохранить картинку</strong> → скриншот, если провалилось всё остальное. Про право использовать чужой знак — в конце: для большинства бытовых задач можно.</p></div></div>
       <h2 id="способ-1-правый-клик-когда-повезло">Способ 1. Правый клик — когда повезло</h2>
-      <p>Правый клик по логотипу → «Сохранить изображение как…» или «Открыть изображение в новой вкладке». Если логотип вставлен обычным тегом <code>&lt;img&gt;</code>, вы получите исходный файл, и нередко это сразу SVG.</p>
+      <p>Правый клик по логотипу → «Сохранить изображение как…» или «Открыть изображение в новой вкладке». Если логотип вставлен обычным тегом <code>&lt;img&gt;</code>, вы получите исходный файл, и нередко это сразу SVG.</p>
       <p>Везёт так примерно в половине случаев. Пункт «сохранить изображение» исчезает из меню, когда логотип вставлен инлайн‑кодом, нарисован фоном через CSS или прикрыт прозрачным элементом. Тогда файл всё равно существует — просто до него нужно добраться через панель разработчика.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
@@ -224,14 +228,14 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="способ-2-devtools-достаёт-что-угодно-за-30-секунд">Способ 2. DevTools — достаёт что угодно за 30 секунд</h2>
-      <p>Панель работает одинаково в <a href="../../logos/search/chrome/" target="_blank" rel="noopener">Chrome</a>, <a href="../../logos/search/yandexbrowser/" target="_blank" rel="noopener">Яндекс Браузере</a> и <a href="../../logos/search/firefox/" target="_blank" rel="noopener">Firefox</a>:</p>
+      <p>Панель работает одинаково в <a href="../../logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/search/yandexbrowser/" target="_blank" rel="noopener">Яндекс Браузере<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-browser.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/search/firefox/" target="_blank" rel="noopener">Firefox<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/firefox.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>:</p>
       <ol>
       <li>Правый клик по логотипу → <strong>«Просмотреть код»</strong> (Inspect).</li>
       <li>Панель откроется на элементе логотипа. Дальше три варианта:</li>
       </ol>
       <ul>
       <li><strong><code>&lt;img src=&quot;...&quot;&gt;</code></strong> — откройте ссылку из src в новой вкладке и сохраните файл.</li>
-      <li><strong><code>&lt;svg&gt;...&lt;/svg&gt;</code></strong> — логотип вставлен инлайн. Правый клик по тегу → Copy → Copy element, и SVG‑код у вас в буфере. Вставьте его в файл с расширением <code>.svg</code> или прямо в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>: она понимает SVG‑код из буфера по Ctrl+V.</li>
+      <li><strong><code>&lt;svg&gt;...&lt;/svg&gt;</code></strong> — логотип вставлен инлайн. Правый клик по тегу → Copy → Copy element, и SVG‑код у вас в буфере. Вставьте его в файл с расширением <code>.svg</code> или прямо в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: она понимает SVG‑код из буфера по Ctrl+V.</li>
       <li><strong><code>background-image: url(...)</code></strong> в стилях — откройте URL из CSS и сохраните.</li>
       </ul>
       <ol>
@@ -240,9 +244,9 @@ window.yaContextCb.push(() => {
       <p>Отдельный случай — спрайт. Когда внутри <code>&lt;svg&gt;</code> стоит только <code>&lt;use href=&quot;#logo&quot;&gt;</code>, скопированный код в файле окажется пустым: сама фигура лежит в другом месте страницы, в блоке <code>&lt;symbol&gt;</code> или в подключённом файле спрайта. Найдите этот <code>id</code> поиском по документу (Ctrl+F в панели Elements) и копируйте фигуру оттуда либо откройте файл спрайта целиком по ссылке из <code>href</code> — заодно получите все иконки сайта разом.</p>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Ищите логотип в футере и на странице «О компании»</span></div><div class="callout-body"><p>В шапке сайта часто стоит упрощённая или анимированная версия знака. В футере, пресс‑разделе и на внутренних страницах нередко лежит полный вариант, а иногда и прямая ссылка на официальный архив со всеми файлами.</p></div></div>
       <h2 id="способ-3-пресс-кит-бренда-источник-который-отвечает-за-файлы">Способ 3. Пресс‑кит бренда — источник, который отвечает за файлы</h2>
-      <p>DevTools достанет любой файл, но не скажет, актуален ли он. Пресс‑кит решает и это: у большинства средних и крупных компаний есть раздел «Пресс‑центр», «Медиа» или «Brand assets» с логотипами в SVG и PNG, фирменными цветами и правилами использования.</p>
+      <p>DevTools достанет любой файл, но не скажет, актуален ли он. Пресс‑кит решает и это: у большинства средних и крупных компаний есть раздел «Пресс‑центр», «Медиа» или «Brand assets» с логотипами в SVG и PNG, фирменными цветами и правилами использования.</p>
       <p>Отсюда два преимущества, которых нет у добычи из вёрстки: файлы гарантированно свежие, а правила применения написаны прямо рядом с ними. Ищите ссылку в футере сайта или по запросу «название бренда логотип пресс‑кит» либо «brand assets».</p>
-      <p>В хорошем пресс‑ките рядом с файлами лежат минимальные отступы вокруг знака, список запрещённых искажений и версии для тёмного фона. Эти правила экономят время на согласовании: если партнёр попросит переделать слайд, ссылка на его же гайдлайн закрывает вопрос за минуту.</p>
+      <p>В хорошем пресс‑ките рядом с файлами лежат минимальные отступы вокруг знака, список запрещённых искажений и версии для тёмного фона. Эти правила экономят время на согласовании: если партнёр попросит переделать слайд, ссылка на его же гайдлайн закрывает вопрос за минуту.</p>
       <h2 id="способ-4-каталоги-логотипов-когда-знаков-нужно-много">Способ 4. Каталоги логотипов — когда знаков нужно много</h2>
       <p>Пресс‑кит хорош для одного бренда. Но когда собираешь сетку из десяти логотипов — список банков, схему сервисов, блок «нам доверяют», — обход десяти пресс‑разделов превращается в отдельную задачу, и файлы придут в разном качестве и разных пропорциях.</p>
       <p>Каталог снимает обе проблемы разом: официальные версии собраны в одном месте и приведены к единому виду. Наш <a href="../../logos/" target="_blank" rel="noopener">каталог логотипов</a> сделан ровно под это: сотни российских и мировых брендов, у каждого — SVG, PNG нужного размера, копирование кода в один клик и перекраска прямо на странице.</p>
@@ -254,14 +258,14 @@ window.yaContextCb.push(() => {
       <ul>
       <li><strong>Вкладка Network.</strong> DevTools → Network → фильтр Img, затем обновите страницу. В списке окажутся все картинки, которые сайт скачал, включая спрятанные в CSS и скриптах. Отсортируйте по имени: логотип обычно называется logo‑что‑нибудь, двойной клик открывает файл для сохранения.</li>
       <li><strong>Поиск по исходникам.</strong> DevTools → Ctrl+Shift+F → запрос «logo» или «.svg». Находит пути, зашитые в JS‑бандлы и JSON‑конфиги, куда Inspect не заглядывает.</li>
-      <li><strong>Псевдоэлементы и иконочные шрифты.</strong> Если знак нарисован через <code>::before</code> иконочным шрифтом, файла‑картинки не существует вовсе. Смотрите Computed → content и font‑family: скачивать придётся шрифт или искать альтернативу в пресс‑ките.</li>
+      <li><strong>Псевдоэлементы и иконочные шрифты.</strong> Если знак нарисован через <code>::before</code> иконочным шрифтом, файла‑картинки не существует вовсе. Смотрите Computed → content и font‑family: скачивать придётся шрифт или искать альтернативу в пресс‑ките.</li>
       </ul>
       <p>И общий совет: мобильная версия сайта иногда отдаёт другой, более простой файл логотипа — включите эмуляцию устройства в DevTools и проверьте.</p>
-      <h2 id="где-ещё-лежит-вектор-кроме-сайта">Где ещё лежит вектор, кроме сайта</h2>
+      <h2 id="где-ещё-лежит-вектор-кроме-сайта">Где ещё лежит вектор, кроме сайта</h2>
       <p>Сайт — не единственное место, куда файл уже попал в векторе.</p>
-      <p><strong>PDF.</strong> Презентация, коммерческое предложение или годовой отчёт хранят логотип кривыми. Откройте PDF в <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> или Inkscape, выделите знак и скопируйте его обычной группой фигур. Растровым он окажется только тогда, когда в макет его вставили картинкой.</p>
+      <p><strong>PDF.</strong> Презентация, коммерческое предложение или годовой отчёт хранят логотип кривыми. Откройте PDF в <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> или Inkscape, выделите знак и скопируйте его обычной группой фигур. Растровым он окажется только тогда, когда в макет его вставили картинкой.</p>
       <p><strong>Презентации и документы.</strong> Файлы PPTX и DOCX устроены как zip‑архивы. Смените расширение на <code>.zip</code>, распакуйте и загляните в папку <code>ppt/media</code> или <code>word/media</code>: вставленные картинки лежат там в исходном виде, включая SVG.</p>
-      <p><strong>Мобильное приложение.</strong> APK распаковывается тем же способом, а иконки внутри лежат в <code>res/drawable</code> — набором PNG под разные плотности экрана и векторным XML, который переводится в SVG конвертером.</p>
+      <p><strong>Мобильное приложение.</strong> APK распаковывается тем же способом, а иконки внутри лежат в <code>res/drawable</code> — набором PNG под разные плотности экрана и векторным XML, который переводится в SVG конвертером.</p>
       <p><strong>Расширения браузера.</strong> Плагины вроде SVG Export и SVG Grabber собирают все векторы страницы в один список: это быстрее ручного обхода DevTools, когда со страницы нужно снять сразу десяток иконок. Проверять добычу всё равно придётся, потому что расширение вытащит и служебные значки интерфейса.</p>
       <h2 id="четыре-проверки-скачанного-файла">Четыре проверки скачанного файла</h2>
       <p>Добыча в руках, но перед вставкой в макет её стоит проверить по четырём пунктам:</p>
@@ -269,14 +273,14 @@ window.yaContextCb.push(() => {
       <li><strong>Вектор или обёртка.</strong> Откройте SVG текстовым редактором: настоящий вектор состоит из <code>&lt;path&gt;</code> и фигур; один тег <code>&lt;image&gt;</code> выдаёт растр, замаскированный под SVG.</li>
       <li><strong>Актуальность.</strong> У брендов случаются редизайны, а в футерах, на старых лендингах и поддоменах годами живут прошлые версии знака. Сверьте файл с главной страницей бренда или его свежими соцсетями.</li>
       <li><strong>Полнота.</strong> В шапке часто стоит урезанный вариант — только знак без текста. Для презентации обычно нужен полный логотип, и его ищут в пресс‑ките.</li>
-      <li><strong>Поля и холст.</strong> Вытащенный из вёрстки SVG нередко несёт viewBox с запасом: знак сидит в углу большого прозрачного прямоугольника и в макете выравнивается криво. Откройте файл в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> — если рамка выделения заметно больше самой фигуры, обрежьте холст по содержимому.</li>
+      <li><strong>Поля и холст.</strong> Вытащенный из вёрстки SVG нередко несёт viewBox с запасом: знак сидит в углу большого прозрачного прямоугольника и в макете выравнивается криво. Откройте файл в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — если рамка выделения заметно больше самой фигуры, обрежьте холст по содержимому.</li>
       </ol>
       <h2 id="какой-путь-выбрать-под-задачу">Какой путь выбрать под задачу</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Задача</th><th>Оптимальный путь</th></tr></thead><tbody><tr><td>Один известный бренд для слайда</td><td>каталог: SVG за 10 секунд</td></tr><tr><td>Сетка «нам доверяют» из 10 логотипов</td><td>каталог: единое качество и стиль</td></tr><tr><td>Логотип малоизвестной локальной компании</td><td>DevTools по их сайту</td></tr><tr><td>Логотип для печати в высоком качестве</td><td>пресс‑кит (там вектор и правила)</td></tr><tr><td>Логотип из PDF‑презентации</td><td>открыть PDF в <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>/Inkscape и извлечь вектор</td></tr><tr><td>Старый логотип, которого нет на сайте</td><td>веб‑архив (web.archive.org) + DevTools</td></tr></tbody></table></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Задача</th><th>Оптимальный путь</th></tr></thead><tbody><tr><td>Один известный бренд для слайда</td><td>каталог: SVG за 10 секунд</td></tr><tr><td>Сетка «нам доверяют» из 10 логотипов</td><td>каталог: единое качество и стиль</td></tr><tr><td>Логотип малоизвестной локальной компании</td><td>DevTools по их сайту</td></tr><tr><td>Логотип для печати в высоком качестве</td><td>пресс‑кит (там вектор и правила)</td></tr><tr><td>Логотип из PDF‑презентации</td><td>открыть PDF в <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>/Inkscape и извлечь вектор</td></tr><tr><td>Старый логотип, которого нет на сайте</td><td>веб‑архив (web.archive.org) + DevTools</td></tr></tbody></table></div>
       <p>Последняя строка выручает чаще, чем кажется: Wayback Machine хранит старые версии сайтов вместе с файлами логотипов, и это единственный способ достать исторический вариант знака после ребрендинга. Проверяйте в архиве и внутренние страницы: снимки пресс‑разделов сохраняются вместе с файлами, и старая версия логотипа чаще находится именно там.</p>
       <h2 id="а-это-вообще-законно">А это вообще законно</h2>
-      <p>Само скачивание закон не нарушает — вопросы возникают к способу использования. Общий принцип такой: показывать логотип, чтобы указать на сам бренд (в статье, презентации, списке интеграций, способах оплаты), можно; выдавать за свой, намекать на несуществующее партнёрство или печатать на продаваемом товаре нельзя. Подробный разбор с судебной практикой и таблицей ситуаций — в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Не искажайте знак</span></div><div class="callout-body"><p>Куда бы вы ни поставили чужой логотип, оставьте его пропорции, цвета и границы нетронутыми: растянутый или перекрашенный знак нарушает гайдлайн бренда и выглядит непрофессионально. Правила искажений разбирали в статье <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">про брендбуки</a>.</p></div></div>
+      <p>Само скачивание закон не нарушает — вопросы возникают к способу использования. Общий принцип такой: показывать логотип, чтобы указать на сам бренд (в статье, презентации, списке интеграций, способах оплаты), можно; выдавать за свой, намекать на несуществующее партнёрство или печатать на продаваемом товаре нельзя. Подробный разбор с судебной практикой и таблицей ситуаций — в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Не искажайте знак</span></div><div class="callout-body"><p>Куда бы вы ни поставили чужой логотип, оставьте его пропорции, цвета и границы нетронутыми: растянутый или перекрашенный знак нарушает гайдлайн бренда и выглядит непрофессионально. Правила искажений разбирали в статье <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">про брендбуки</a>.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -287,28 +291,50 @@ window.yaContextCb.push(() => {
     })
 })
 </script></div>
-      <h2 id="если-коротко">Если коротко</h2>
-      <p>Скриншот стоит последним в списке, потому что вектор почти всегда уже существует: сайт загрузил его, чтобы показать вам, а бренд нередко выложил официальную копию отдельно. Поэтому и порядок действий обратный привычному — сначала каталог или пресс‑кит, затем DevTools, и лишь потом растровые компромиссы. Добытый файл проверьте на подлинность, актуальность и полноту, а в макет ставьте неискажённым.</p>
-      <p>Сэкономьте себе DevTools: в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> знак любого крупного бренда скачивается в SVG и PNG за один клик — или копируется кодом сразу в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>.</p>
+      <h2 id="если-коротко">Если коротко</h2>
+      <p>Скриншот стоит последним в списке, потому что вектор почти всегда уже существует: сайт загрузил его, чтобы показать вам, а бренд нередко выложил официальную копию отдельно. Поэтому и порядок действий обратный привычному — сначала каталог или пресс‑кит, затем DevTools, и лишь потом растровые компромиссы. Добытый файл проверьте на подлинность, актуальность и полноту, а в макет ставьте неискажённым.</p>
+      <p>Сэкономьте себе DevTools: в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> знак любого крупного бренда скачивается в SVG и PNG за один клик — или копируется кодом сразу в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../kak-uznat-shrift-logotipa/" data-date="2026-08-13" data-views="1">
+          <a class="blog-card" href="../analiz-ca-po-otzyvam-konkurentov/" data-date="2026-08-14" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Шрифты</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16" /><path d="M22 9v7" /><path d="M3.304 13h6.392" /><circle cx="18.5" cy="12.5" r="3.5" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Маркетинг</span><span class="blog-card-tag">Инструменты</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            12
+          </div>
+          </div>
+          <div class="blog-card-title">Как спарсить отзывы конкурентов за 2 минуты и собрать по ним анализ ЦА</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-uznat-shrift-logotipa/" data-date="2026-08-13" data-views="6">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Шрифты</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16" /><path d="M22 9v7" /><path d="M3.304 13h6.392" /><circle cx="18.5" cy="12.5" r="3.5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
           <div class="blog-card-title">Как узнать шрифт логотипа или сайта — все рабочие способы</div>
@@ -316,20 +342,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-ubrat-fon-s-kartinki/" data-date="2026-08-12" data-views="0">
+      <a class="blog-card" href="../kak-ubrat-fon-s-kartinki/" data-date="2026-08-12" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Форматы</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Форматы</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            8
           </div>
           </div>
           <div class="blog-card-title">Как убрать фон с картинки — 6 бесплатных способов</div>
@@ -337,20 +363,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="0">
+      <a class="blog-card" href="../kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="15">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Инструменты</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="7" x="3" y="3" rx="1" /><rect width="9" height="7" x="3" y="14" rx="1" /><rect width="5" height="7" x="16" y="14" rx="1" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Инструменты</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="7" x="3" y="3" rx="1" /><rect width="9" height="7" x="3" y="14" rx="1" /><rect width="5" height="7" x="16" y="14" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            15
           </div>
           </div>
           <div class="blog-card-title">Как сделать логотип в Canva — и какие у неё ограничения</div>
@@ -358,65 +384,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-logotip-v-illustrator/" data-date="2026-08-10" data-views="1">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Инструменты</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z" /><path d="M16 8 2 22" /><path d="M17.5 15H9" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
-          </div>
-          </div>
-          <div class="blog-card-title">Как сделать логотип в Illustrator — пошаговый гайд</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="17">
+      <a class="blog-card" href="../samye-dorogie-logotipy/" data-date="2026-07-11" data-views="31">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 18a6 6 0 0 0 0-12v12z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Истории</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            17
+            31
           </div>
           </div>
-          <div class="blog-card-title">Чёрно‑белая версия логотипа — зачем нужна и как сделать правильно</div>
+          <div class="blog-card-title">Самые дорогие логотипы мира — и почему цена почти не связана с картинкой</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-konvertirovat-svg-v-png/" data-date="2026-06-15" data-views="3">
+      <a class="blog-card" href="../istoriya-logotipa-apple/" data-date="2026-06-12" data-views="14">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Конвертация</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /><path d="M8 16H3v5" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Apple</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Логотипы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            3
+            14
           </div>
           </div>
-          <div class="blog-card-title">Как конвертировать SVG в PNG и обратно — 5 способов без потери качества</div>
+          <div class="blog-card-title">История логотипа Apple — почему яблоко надкушено и куда делась радуга</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -426,7 +431,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#способ-1-правый-клик-когда-повезло">Способ 1. Правый клик — когда повезло</a></li><li><a href="#способ-2-devtools-достаёт-что-угодно-за-30-секунд">Способ 2. DevTools — достаёт что угодно за 30 секунд</a></li><li><a href="#способ-3-пресс-кит-бренда-источник-который-отвечает-за-файлы">Способ 3. Пресс‑кит бренда — источник, который отвечает за файлы</a></li><li><a href="#способ-4-каталоги-логотипов-когда-знаков-нужно-много">Способ 4. Каталоги логотипов — когда знаков нужно много</a></li><li><a href="#способ-5-скриншот-крайняя-мера">Способ 5. Скриншот — крайняя мера</a></li><li><a href="#что-делать-когда-inspect-ничего-не-нашёл">Что делать, когда Inspect ничего не нашёл</a></li><li><a href="#где-ещё-лежит-вектор-кроме-сайта">Где ещё лежит вектор, кроме сайта</a></li><li><a href="#четыре-проверки-скачанного-файла">Четыре проверки скачанного файла</a></li><li><a href="#какой-путь-выбрать-под-задачу">Какой путь выбрать под задачу</a></li><li><a href="#а-это-вообще-законно">А это вообще законно</a></li><li><a href="#если-коротко">Если коротко</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#способ-1-правый-клик-когда-повезло">Способ 1. Правый клик — когда повезло</a></li><li><a href="#способ-2-devtools-достаёт-что-угодно-за-30-секунд">Способ 2. DevTools — достаёт что угодно за 30 секунд</a></li><li><a href="#способ-3-пресс-кит-бренда-источник-который-отвечает-за-файлы">Способ 3. Пресс‑кит бренда — источник, который отвечает за файлы</a></li><li><a href="#способ-4-каталоги-логотипов-когда-знаков-нужно-много">Способ 4. Каталоги логотипов — когда знаков нужно много</a></li><li><a href="#способ-5-скриншот-крайняя-мера">Способ 5. Скриншот — крайняя мера</a></li><li><a href="#что-делать-когда-inspect-ничего-не-нашёл">Что делать, когда Inspect ничего не нашёл</a></li><li><a href="#где-ещё-лежит-вектор-кроме-сайта">Где ещё лежит вектор, кроме сайта</a></li><li><a href="#четыре-проверки-скачанного-файла">Четыре проверки скачанного файла</a></li><li><a href="#какой-путь-выбрать-под-задачу">Какой путь выбрать под задачу</a></li><li><a href="#а-это-вообще-законно">А это вообще законно</a></li><li><a href="#если-коротко">Если коротко</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -434,25 +439,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -529,6 +526,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -574,10 +572,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

@@ -105,7 +105,22 @@ function main() {
   pushPage(`${BASE_URL}/logos/`,  'weekly',  '0.9');
   pushPage(`${BASE_URL}/emoji/`,  'weekly',  '0.8');
   pushPage(`${BASE_URL}/blog/`,   'weekly',  '0.6');
+  pushPage(`${BASE_URL}/tools/`,  'weekly',  '0.8');
+  // Public browser utilities are owned by tools.json. Source-only plugin and
+  // extension folders are not landing pages and must not enter the sitemap.
+  const toolPages = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools.json'), 'utf8')).tools
+    .map(tool => `tools/${tool.slug}/`);
+  toolPages.push('tools/extensions/reviews-exporter/');
+  for (const rel of toolPages) {
+    const file = path.join(ROOT, rel, 'index.html');
+    if (!fs.existsSync(file)) throw new Error(`Missing tool landing page: ${rel}`);
+    const html = fs.readFileSync(file, 'utf8');
+    if (/<meta\s+name="robots"\s+content="[^"]*noindex/i.test(html)) continue;
+    pushPage(`${BASE_URL}/${rel}`, 'monthly', '0.6');
+  }
   pushPage(`${BASE_URL}/sitemap/`, 'monthly', '0.3');
+  // /credits/ намеренно не в sitemap.xml — страница noindex, пока данные заглушки
+  // (см. templates/credits-page.html). Вернуть строку, когда снимем noindex.
   pushPage(`${BASE_URL}/terms/`,  'yearly',  '0.3');
   pushPage(`${BASE_URL}/consent/`, 'yearly', '0.3');
   pushPage(`${BASE_URL}/icons/`,  'monthly', '0.5');

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+{{> metrika}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}}</title>
+  <meta name="description" content="{{META_DESC}}">
+  <!-- noindex пока: страница свежая, данные — заглушки, снять когда наполним реальными записями -->
+  <meta name="robots" content="noindex, follow">
+
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  {{HREFLANG_TAGS}}
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{REL}}favicon-32.png">
+  <link rel="apple-touch-icon" href="{{REL}}apple-touch-icon.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:title" content="{{OG_TITLE}}">
+  <meta property="og:description" content="{{META_DESC}}">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/home.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ru_RU">
+
+  <script type="application/ld+json">
+  {{JSON_LD}}
+  </script>
+
+  <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-header.css">
+  <link rel="stylesheet" href="{{REL}}css/credits.css">
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="{{REL}}css/site-footer.css"></noscript>
+</head>
+<body>
+
+{{> nav-header }}
+
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
+  <a href="{{REL}}">Trace Logo's</a><span class="sep">/</span>
+  <span class="current" aria-current="page">{{BREADCRUMB}}</span>
+</nav>
+
+<main class="cw-main">
+  <div class="cw-hero">
+    <h1>{{H1}}</h1>
+    <p class="cw-lead">{{LEAD}}</p>
+    <p class="cw-count">{{COUNT_LINE}}</p>
+  </div>
+
+  <section class="cw-wall" id="cw-wall" aria-label="{{WALL_ARIA}}">
+    <div class="cw-notes" id="cw-notes">
+{{NOTES}}
+    </div>
+  </section>
+
+  <section class="cw-how">
+    <h2>{{HOW_TITLE}}</h2>
+    <div class="cw-how-grid">
+      <div class="cw-how-item">
+        <span class="cw-how-badge cw-how-badge--logo">{{BADGE_LOGO}}</span>
+        <p>{{HOW_LOGO}}</p>
+      </div>
+      <div class="cw-how-item">
+        <span class="cw-how-badge cw-how-badge--outdated">{{BADGE_OUTDATED}}</span>
+        <p>{{HOW_OUTDATED}}</p>
+      </div>
+      <div class="cw-how-item">
+        <span class="cw-how-badge cw-how-badge--donate">{{BADGE_DONATE}}</span>
+        <p>{{HOW_DONATE}}</p>
+      </div>
+      <div class="cw-how-item">
+        <span class="cw-how-badge cw-how-badge--big">{{BADGE_BIG}}</span>
+        <p>{{HOW_BIG}}</p>
+      </div>
+    </div>
+    <p class="cw-how-note">{{HOW_NOTE}}</p>
+  </section>
+
+  <div class="catalog-cta">
+    <div class="catalog-cta-text">
+      <span class="catalog-cta-title">{{CTA_TITLE}}</span>
+      <span class="catalog-cta-sub">{{CTA_SUB}}</span>
+    </div>
+    <a class="catalog-cta-link" href="{{HOME_REL}}logos/">
+      {{CTA_LINK}}
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</main>
+
+{{> site-footer}}
+
+<script type="module" src="{{REL}}js/credits-wall.min.js"></script>
+</body>
+</html>

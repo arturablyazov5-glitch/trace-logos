@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(330 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(10 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(60 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(120 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(330 70% 38%) 0%, hsl(120 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(73 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(113 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(163 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(223 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(73 70% 38%) 0%, hsl(223 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-19">August 19, 2026</time>
@@ -203,19 +207,19 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            4
 	          </span>
         </div>
         <h1>Fitness App Logos — Strava, Nike Run Club, Peloton and More</h1>
       </header>
       <div class="blog-body">
         <p>The health category is a rare case where one app‑store shelf splits into two opposite visual languages. Sports services shout: sharp angles, motion, orange and red. Meditation services whisper: soft shapes, pastels, plenty of air. Here are the logos of the main fitness and wellness apps — and how the design reveals the product's promise before you even install it.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The category speaks two languages: <strong>dynamics</strong> — the <a href="/en/logos/health/strava/" target="_blank" rel="noopener">Strava</a> chevron, the <a href="/en/logos/health/nikerunclub/" target="_blank" rel="noopener">Nike Run Club</a> swoosh, the <a href="/en/logos/health/peloton/" target="_blank" rel="noopener">Peloton</a> &quot;P&quot;-wheel — and <strong>calm</strong> — the gradient sky of <a href="/en/logos/health/calm/" target="_blank" rel="noopener">Calm</a>, the orange blob of <a href="/en/logos/health/headspace/" target="_blank" rel="noopener">Headspace</a>. What they share: extremely simple shapes, because the mark lives on a tiny watch screen. Files are in the <a href="/en/logos/health/" target="_blank" rel="noopener">Health category</a>.</p></div></div>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The category speaks two languages: <strong>dynamics</strong> — the <a href="/en/logos/health/strava/" target="_blank" rel="noopener">Strava<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/strava.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> chevron, the <a href="/en/logos/health/nikerunclub/" target="_blank" rel="noopener">Nike Run Club<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/nike-run-club.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> swoosh, the <a href="/en/logos/health/peloton/" target="_blank" rel="noopener">Peloton<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/peloton.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> &quot;P&quot;-wheel — and <strong>calm</strong> — the gradient sky of <a href="/en/logos/health/calm/" target="_blank" rel="noopener">Calm<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/calm.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, the orange blob of <a href="/en/logos/health/headspace/" target="_blank" rel="noopener">Headspace<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/headspace.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. What they share: extremely simple shapes, because the mark lives on a tiny watch screen. Files are in the <a href="/en/logos/health/" target="_blank" rel="noopener">Health category</a>.</p></div></div>
       <h2 id="the-sports-pole-angle-slant-motion">The sports pole: angle, slant, motion</h2>
-      <p><strong><a href="/en/logos/health/strava/" target="_blank" rel="noopener">Strava</a></strong> — an orange mark of two chevrons fused into a stylized &quot;M&quot;-summit: at once a mountain, an upward arrow and a route trace on a map. Sharp angles and signature orange are pure achievement aggression; a brand whose social mechanics are built on competition looks like competition — we cover <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">color psychology in logos</a> separately.</p>
-      <p><strong><a href="/en/logos/health/nikerunclub/" target="_blank" rel="noopener">Nike Run Club</a></strong> — a derivative brand: the Nike swoosh plus running context. The stroke drawn in 1971 for 35 dollars remains probably the purest expression of motion in graphic history — NRC simply inherits its energy. A classic &quot;company mark + product marks&quot; system, like the <a href="/en/blog/ekosistema-yandeksa-logotipy/" target="_blank" rel="noopener">Yandex ecosystem</a>.</p>
-      <p><strong><a href="/en/logos/health/peloton/" target="_blank" rel="noopener">Peloton</a></strong> — a red &quot;P&quot; whose counterform hides a bicycle wheel with a spoke: monogram and pictogram in one letter — we cover <a href="/en/blog/chto-takoe-monogramma/" target="_blank" rel="noopener">what a monogram is</a> and <a href="/en/blog/logotipy-so-skrytym-smyslom/" target="_blank" rel="noopener">logos with hidden meanings</a> separately.</p>
-      <p><strong><a href="/en/logos/health/mapmyrun/" target="_blank" rel="noopener">MapMyRun</a></strong> and <strong><a href="/en/logos/health/alltrails/" target="_blank" rel="noopener">AllTrails</a></strong> work with the landscape: a route line and a mountain silhouette. The trail, the summit and the GPS trace are the base hieroglyphs of the whole activity‑tracker segment.</p>
+      <p><strong><a href="/en/logos/health/strava/" target="_blank" rel="noopener">Strava<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/strava.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — an orange mark of two chevrons fused into a stylized &quot;M&quot;-summit: at once a mountain, an upward arrow and a route trace on a map. Sharp angles and signature orange are pure achievement aggression; a brand whose social mechanics are built on competition looks like competition — we cover <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">color psychology in logos</a> separately.</p>
+      <p><strong><a href="/en/logos/health/nikerunclub/" target="_blank" rel="noopener">Nike Run Club<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/nike-run-club.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — a derivative brand: the Nike swoosh plus running context. The stroke drawn in 1971 for 35 dollars remains probably the purest expression of motion in graphic history — NRC simply inherits its energy. A classic &quot;company mark + product marks&quot; system, like the <a href="/en/blog/ekosistema-yandeksa-logotipy/" target="_blank" rel="noopener">Yandex ecosystem</a>.</p>
+      <p><strong><a href="/en/logos/health/peloton/" target="_blank" rel="noopener">Peloton<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/peloton.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — a red &quot;P&quot; whose counterform hides a bicycle wheel with a spoke: monogram and pictogram in one letter — we cover <a href="/en/blog/chto-takoe-monogramma/" target="_blank" rel="noopener">what a monogram is</a> and <a href="/en/blog/logotipy-so-skrytym-smyslom/" target="_blank" rel="noopener">logos with hidden meanings</a> separately.</p>
+      <p><strong><a href="/en/logos/health/mapmyrun/" target="_blank" rel="noopener">MapMyRun<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/mapmyrun.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> and <strong><a href="/en/logos/health/alltrails/" target="_blank" rel="noopener">AllTrails<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/alltrails.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> work with the landscape: a route line and a mountain silhouette. The trail, the summit and the GPS trace are the base hieroglyphs of the whole activity‑tracker segment.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -227,11 +231,11 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="the-calm-pole-circle-gradient-air">The calm pole: circle, gradient, air</h2>
-      <p><strong><a href="/en/logos/health/calm/" target="_blank" rel="noopener">Calm</a></strong> — the word itself over a gradient sky: a mood logo where the meaning is carried by atmosphere, not shape. The app icon is a rare case of the background mattering more than the mark.</p>
-      <p><strong><a href="/en/logos/health/headspace/" target="_blank" rel="noopener">Headspace</a></strong> — an orange blob‑circle with a perfectly flat bottom: a meditating figure reduced to a spot. The friendly imperfection is deliberate: meditation here is a warm daily habit, not esoterics. The brand leans heavily on <a href="/en/blog/chto-takoe-maskot/" target="_blank" rel="noopener">mascots</a> — drawn characters in the same style.</p>
-      <p><strong><a href="/en/logos/health/fitbit/" target="_blank" rel="noopener">Fitbit</a></strong> — a diamond of dots: pulse, steps, discrete data. A mark speaking data, not emotion — a legacy of the era when a fitness tracker was a geek gadget, not jewelry.</p>
+      <p><strong><a href="/en/logos/health/calm/" target="_blank" rel="noopener">Calm<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/calm.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — the word itself over a gradient sky: a mood logo where the meaning is carried by atmosphere, not shape. The app icon is a rare case of the background mattering more than the mark.</p>
+      <p><strong><a href="/en/logos/health/headspace/" target="_blank" rel="noopener">Headspace<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/headspace.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — an orange blob‑circle with a perfectly flat bottom: a meditating figure reduced to a spot. The friendly imperfection is deliberate: meditation here is a warm daily habit, not esoterics. The brand leans heavily on <a href="/en/blog/chto-takoe-maskot/" target="_blank" rel="noopener">mascots</a> — drawn characters in the same style.</p>
+      <p><strong><a href="/en/logos/health/fitbit/" target="_blank" rel="noopener">Fitbit<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/fitbit.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — a diamond of dots: pulse, steps, discrete data. A mark speaking data, not emotion — a legacy of the era when a fitness tracker was a geek gadget, not jewelry.</p>
       <h2 id="the-utility-row-platform-marks">The utility row: platform marks</h2>
-      <p>A separate group is the system health apps: <a href="/en/logos/health/applehealth/" target="_blank" rel="noopener">Apple Health</a> with its heart on white, <a href="/en/logos/health/applefitness/" target="_blank" rel="noopener">Apple Fitness</a> with the activity rings, <a href="/en/logos/health/habitica/" target="_blank" rel="noopener">Habitica</a> with its pixel gamification aesthetic, habit trackers like <a href="/en/logos/health/streaks/" target="_blank" rel="noopener">Streaks</a>. Apple's activity rings are an interesting case: a UI element (three progress rings) became a standalone mark recognized without a caption — the same logic that drives <a href="/en/blog/ikonka-prilozheniya/" target="_blank" rel="noopener">app icon design</a>.</p>
+      <p>A separate group is the system health apps: <a href="/en/logos/health/applehealth/" target="_blank" rel="noopener">Apple Health<img class="blog-mention-icon" src="/assets/logos/svgs/apple-Health.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> with its heart on white, <a href="/en/logos/health/applefitness/" target="_blank" rel="noopener">Apple Fitness<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/fitness.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> with the activity rings, <a href="/en/logos/health/habitica/" target="_blank" rel="noopener">Habitica<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/habitica.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> with its pixel gamification aesthetic, habit trackers like <a href="/en/logos/health/streaks/" target="_blank" rel="noopener">Streaks<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/streaks.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Apple's activity rings are an interesting case: a UI element (three progress rings) became a standalone mark recognized without a caption — the same logic that drives <a href="/en/blog/ikonka-prilozheniya/" target="_blank" rel="noopener">app icon design</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -243,137 +247,138 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="the-summary-table">The summary table</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>App</th><th>Mark</th><th>Language</th><th>Color</th></tr></thead><tbody><tr><td><a href="/en/logos/health/strava/" target="_blank" rel="noopener">Strava</a></td><td>chevron summit</td><td>dynamics</td><td>orange</td></tr><tr><td><a href="/en/logos/health/nikerunclub/" target="_blank" rel="noopener">Nike Run Club</a></td><td>swoosh</td><td>dynamics</td><td>black/white</td></tr><tr><td><a href="/en/logos/health/peloton/" target="_blank" rel="noopener">Peloton</a></td><td>&quot;P&quot; with a wheel</td><td>dynamics</td><td>red</td></tr><tr><td><a href="/en/logos/health/fitbit/" target="_blank" rel="noopener">Fitbit</a></td><td>diamond of dots</td><td>data</td><td>teal</td></tr><tr><td><a href="/en/logos/health/calm/" target="_blank" rel="noopener">Calm</a></td><td>word on gradient</td><td>calm</td><td>blue gradient</td></tr><tr><td><a href="/en/logos/health/headspace/" target="_blank" rel="noopener">Headspace</a></td><td>blob circle</td><td>calm</td><td>orange</td></tr><tr><td><a href="/en/logos/health/applefitness/" target="_blank" rel="noopener">Apple Fitness</a></td><td>activity rings</td><td>data</td><td>multicolor</td></tr></tbody></table></div>
-      <p>The pattern is immediate: <strong>sport takes the angle and the hot color, calm takes the circle and the gradient</strong>. Orange is the only color living on both poles: at <a href="/en/logos/health/strava/" target="_blank" rel="noopener">Strava</a> it means &quot;energy&quot;, at <a href="/en/logos/health/headspace/" target="_blank" rel="noopener">Headspace</a> — &quot;warmth&quot;. Color sets the temperature; shape sets the meaning.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>App</th><th>Mark</th><th>Language</th><th>Color</th></tr></thead><tbody><tr><td><a href="/en/logos/health/strava/" target="_blank" rel="noopener">Strava<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/strava.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>chevron summit</td><td>dynamics</td><td>orange</td></tr><tr><td><a href="/en/logos/health/nikerunclub/" target="_blank" rel="noopener">Nike Run Club<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/nike-run-club.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>swoosh</td><td>dynamics</td><td>black/white</td></tr><tr><td><a href="/en/logos/health/peloton/" target="_blank" rel="noopener">Peloton<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/peloton.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>&quot;P&quot; with a wheel</td><td>dynamics</td><td>red</td></tr><tr><td><a href="/en/logos/health/fitbit/" target="_blank" rel="noopener">Fitbit<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/fitbit.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>diamond of dots</td><td>data</td><td>teal</td></tr><tr><td><a href="/en/logos/health/calm/" target="_blank" rel="noopener">Calm<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/calm.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>word on gradient</td><td>calm</td><td>blue gradient</td></tr><tr><td><a href="/en/logos/health/headspace/" target="_blank" rel="noopener">Headspace<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/headspace.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>blob circle</td><td>calm</td><td>orange</td></tr><tr><td><a href="/en/logos/health/applefitness/" target="_blank" rel="noopener">Apple Fitness<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/fitness.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>activity rings</td><td>data</td><td>multicolor</td></tr></tbody></table></div>
+      <p>The pattern is immediate: <strong>sport takes the angle and the hot color, calm takes the circle and the gradient</strong>. Orange is the only color living on both poles: at <a href="/en/logos/health/strava/" target="_blank" rel="noopener">Strava<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/strava.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> it means &quot;energy&quot;, at <a href="/en/logos/health/headspace/" target="_blank" rel="noopener">Headspace<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/headspace.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — &quot;warmth&quot;. Color sets the temperature; shape sets the meaning.</p>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>What to take away</span></div><div class="callout-body"><p>Building an activity product — the mark needs a motion vector: a slant, an arrow, a diagonal. Building recovery and sleep — a circle, a horizontal, a soft gradient. Mixing the languages is dangerous: &quot;aggressive meditation&quot; and &quot;calm interval running&quot; are equally unsellable. And test the mark at watch‑screen size — in this category 40 pixels matter more than a billboard — we cover <a href="/en/blog/razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">logo sizes</a> separately.</p></div></div>
       <p>All marks from this roundup in SVG and PNG are in the <a href="/en/logos/health/" target="_blank" rel="noopener">Health category</a>: download them, <a href="/en/blog/kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">recolor them</a>, compare. The rules on using others' logos are <a href="/en/blog/mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">covered separately</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+          <a class="blog-card" href="/en/blog/logotipy-oblachnyh-servisov/" data-date="2026-09-10" data-views="0">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             0
           </div>
           </div>
-          <div class="blog-card-title">Streaming Service Logos — Netflix, YouTube, Twitch and More</div>
+          <div class="blog-card-title">Cloud Storage Logos — Why Everyone Draws a Cloud (and Who Doesn't)</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-socsetej/" data-date="2026-08-27" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">AI</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Social Network Logos — From the Instagram Gradient to the X</div>
-          
-          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="/en/blog/logotipy-servisov-puteshestvij/" data-date="2026-08-26" data-views="1">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Travel</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
-          </div>
-          </div>
-          <div class="blog-card-title">Travel Service Logos — Aviasales, Skyscanner, Kayak and More</div>
-          
-          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="/en/blog/logotipy-servisov-videozvonkov/" data-date="2026-08-26" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Tech</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /><rect x="2" y="6" width="14" height="12" rx="2" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Video Call Service Logos — Zoom, Teams, Meet, Discord</div>
-          
-          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="/en/blog/chto-takoe-brendbuk/" data-date="2026-06-07" data-views="6">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Guidelines</span><span class="blog-card-tag">Logos</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             6
           </div>
           </div>
-          <div class="blog-card-title">What Brand Books and Guidelines Are — and Why You Can't Stretch a Logo</div>
+          <div class="blog-card-title">AI Company Logos — How Neural Network Services Brand Themselves</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Games</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            6
+          </div>
+          </div>
+          <div class="blog-card-title">Mobile Game Logos — Why They All Use Chunky 3D Letters</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            17
+          </div>
+          </div>
+          <div class="blog-card-title">Messenger Logos — Why Everyone Picks Bubbles and Planes</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/animirovannyj-logotip/" data-date="2026-06-05" data-views="11">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Animation</span><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>05.06.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            11
+          </div>
+          </div>
+          <div class="blog-card-title">Animated Logos — When You Need One, the Formats, and How Not to Overdo It</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/maksimalizm-v-brendinge/" data-date="2026-07-31" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="7" x="3" y="3" rx="1" /><rect width="9" height="7" x="3" y="14" rx="1" /><rect width="5" height="7" x="16" y="14" rx="1" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">2026 Trends</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 11.3 2 22l10.7-3.79" /><path d="M4 3h.01" /><path d="M22 8h.01" /><path d="M15 2h.01" /><path d="M22 20h.01" /><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10" /><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17" /><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7" /><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">How to Make a Logo in Canva — and Where It Falls Short</div>
+          <div class="blog-card-title">Maximalism in Branding — Why &quot;More&quot; Is Fashionable Again</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -391,25 +396,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -486,6 +483,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -531,10 +529,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>История логотипа Google — от BackRub до буквы G · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(281 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(321 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(11 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(71 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(281 70% 38%) 0%, hsl(71 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.88 21.94 15.46 14" /><path d="M21.17 8H12" /><path d="M3.95 6.06 8.54 14" /><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(161 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(201 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(251 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(311 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(161 70% 38%) 0%, hsl(311 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.88 21.94 15.46 14" /><path d="M21.17 8H12" /><path d="M3.95 6.06 8.54 14" /><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-29">29 июля 2026</time>
@@ -202,14 +206,14 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            19
 	          </span>
         </div>
         <h1>История логотипа Google — от BackRub до буквы G</h1>
       </header>
       <div class="blog-body">
-        <p>Логотип <a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a> — один из самых узнаваемых в мире, и при этом один из самых консервативных: за четверть века компания ни разу не сменила ни название в знаке, ни четырёхцветную схему. Менялись только шрифты и степень «полировки». Разбираем всю хронологию — от студенческого проекта до буквы G, которая живёт в миллиардах телефонов.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Ключевые вехи: <strong>1997</strong> — первый логотип для проекта, ещё недавно называвшегося BackRub; <strong>1999</strong> — версия на засечковом шрифте Catull с тенью, прожившая 11 лет; <strong>2010</strong> — уплощение и яркие чистые цвета; <strong>2015</strong> — полный редизайн: геометрический гротеск Product Sans, четырёхцветная буква <strong>G</strong> для иконок; <strong>сегодня</strong> — та же система плюс дудлы и анимации. Актуальные файлы — в <a href="../../logos/search/google/" target="_blank" rel="noopener">каталоге</a>.</p></div></div>
+        <p>Логотип <a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — один из самых узнаваемых в мире, и при этом один из самых консервативных: за четверть века компания ни разу не сменила ни название в знаке, ни четырёхцветную схему. Менялись только шрифты и степень «полировки». Разбираем всю хронологию — от студенческого проекта до буквы G, которая живёт в миллиардах телефонов.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Ключевые вехи: <strong>1997</strong> — первый логотип для проекта, ещё недавно называвшегося BackRub; <strong>1999</strong> — версия на засечковом шрифте Catull с тенью, прожившая 11 лет; <strong>2010</strong> — уплощение и яркие чистые цвета; <strong>2015</strong> — полный редизайн: геометрический гротеск Product Sans, четырёхцветная буква <strong>G</strong> для иконок; <strong>сегодня</strong> — та же система плюс дудлы и анимации. Актуальные файлы — в <a href="../../logos/search/google/" target="_blank" rel="noopener">каталоге<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p></div></div>
       <h2 id="1997-1998-backrub-и-первые-опыты" class="step-heading"><span class="step-badge">1997‑1998</span><span class="step-title">BackRub и первые опыты</span></h2>
       <p>Поисковик Ларри Пейджа и Сергея Брина изначально назывался BackRub — по «обратным ссылкам», на анализе которых строился алгоритм. В 1997 году проект переименовали в Google (искажённое «googol», единица со ста нулями), и появился первый логотип: название, набранное дефолтным шрифтом с примитивным 3D‑эффектом, — типичная самоделка эпохи ранних генераторов текстовых логотипов. Сергей Брин сделал его сам в бесплатном редакторе GIMP.</p>
       <p>Уже в первой цветной версии заложили идею, которая переживёт все редизайны: буквы раскрашены в четыре цвета — синий, красный, жёлтый, зелёный. По легенде, разноцветная схема отсылает к детскому конструктору: основатели хотели показать, что Google «играет не по правилам» — даже порядок цветов нарушает паттерн (после сине‑красно‑жёлтой последовательности буква «l» неожиданно зелёная).</p>
@@ -224,21 +228,21 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="1999-2010-эпоха-catull-засечки-и-тень" class="step-heading"><span class="step-badge">1999‑2010</span><span class="step-title">Эпоха Catull — засечки и тень</span></h2>
-      <p>В 1999 году за логотип взялась профессионал — художница и дизайнер Рут Кедар. Она перебрала десятки вариантов и остановилась на засечковом шрифте <strong>Catull</strong>: он соединял «академичность» (поиск = знания, библиотека) с достаточно живой пластикой. Логотип получил лёгкую тень и объём — по моде тех лет — и в этом виде прожил одиннадцать лет, став фоном целой эпохи интернета.</p>
-      <p>Именно на эту версию наложился феномен <strong>дудлов</strong>: с 1998 года Google по праздникам заменяет логотип на тематическую иллюстрацию или игру. Дудлы превратили самый консервативный элемент сайта в самый живой — классический пример динамического логотипа, о котором мы писали в статье <a href="../vidy-logotipov/" target="_blank" rel="noopener">виды логотипов</a>.</p>
+      <p>В 1999 году за логотип взялась профессионал — художница и дизайнер Рут Кедар. Она перебрала десятки вариантов и остановилась на засечковом шрифте <strong>Catull</strong>: он соединял «академичность» (поиск = знания, библиотека) с достаточно живой пластикой. Логотип получил лёгкую тень и объём — по моде тех лет — и в этом виде прожил одиннадцать лет, став фоном целой эпохи интернета.</p>
+      <p>Именно на эту версию наложился феномен <strong>дудлов</strong>: с 1998 года Google по праздникам заменяет логотип на тематическую иллюстрацию или игру. Дудлы превратили самый консервативный элемент сайта в самый живой — классический пример динамического логотипа, о котором мы писали в статье виды логотипов.</p>
       <h2 id="2010-генеральная-уборка" class="step-heading"><span class="step-badge">2010</span><span class="step-title">Генеральная уборка</span></h2>
       <p>В 2010 году логотип «почистили»: убрали большую часть тени, сделали цвета ярче и чище, буквы — чуть светлее. Знак остался прежним по конструкции, но задышал современнее. Это был подготовительный шаг — интернет стремительно переезжал в мобильные телефоны, и засечковый логотип с тенью всё хуже чувствовал себя на маленьких экранах.</p>
       <h2 id="2015-product-sans-и-четырёхцветная-g" class="step-heading"><span class="step-badge">2015</span><span class="step-title">Product Sans и четырёхцветная G</span></h2>
-      <p>1 сентября 2015 года Google провёл самый радикальный редизайн в своей истории — и он идеально иллюстрирует тренд, разобранный в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">почему бренды упрощают логотипы</a>:</p>
+      <p>1 сентября 2015 года Google провёл самый радикальный редизайн в своей истории — и он идеально иллюстрирует тренд, разобранный в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">почему бренды упрощают логотипы</a>:</p>
       <ul>
       <li><strong>Шрифт.</strong> Засечковый Catull заменили на собственный геометрический гротеск <strong>Product Sans</strong> — круглые формы, открытые апертуры, никакого объёма. Про то, как шрифт задаёт характер знака, — в статье <a href="../shrift-dlya-logotipa/" target="_blank" rel="noopener">шрифт для логотипа</a>.</li>
-      <li><strong>Буква G.</strong> Появилась компактная версия — четырёхцветная <strong>G</strong> для фавиконки, иконок приложений и аватарок. Она решила проблему, с которой сталкивается любой текстовый логотип: полное название не читается в 16 пикселях (почему — в статье <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">как сделать фавиконку</a>).</li>
+      <li><strong>Буква G.</strong> Появилась компактная версия — четырёхцветная <strong>G</strong> для фавиконки, иконок приложений и аватарок. Она решила проблему, с которой сталкивается любой текстовый логотип: полное название не читается в 16 пикселях (почему — в статье <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">как сделать фавиконку</a>).</li>
       <li><strong>Точки.</strong> Третий элемент системы — четыре анимированных точки, обозначающие «Google слушает/думает/отвечает» в голосовом помощнике.</li>
       <li><strong>Вес.</strong> Новый плоский логотип в векторе занимал считаные килобайты против сотен у старого — критично для загрузки на медленных мобильных сетях. О том, почему вектор столько выигрывает, — в статье <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">векторная и растровая графика</a>.</li>
       </ul>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Инженерная причина редизайна</span></div><div class="callout-body"><p>Редизайн 2015 года часто объясняют модой на флэт, но у Google была и сугубо техническая мотивация: старый логотип со сглаженными засечками требовал растровых файлов под каждый размер, а новый геометрический знак идеально воспроизводится вектором при любом масштабе — от смарт‑часов до билборда.</p></div></div>
       <h2 id="сегодня-система-а-не-картинка">Сегодня: система, а не картинка</h2>
-      <p>Современный логотип Google — это не один файл, а система из трёх элементов: полный текстовый знак, буква G и точки. Вместе с ним живёт вся экосистема продуктов с единой четырёхцветной ДНК: <a href="../../logos/search/chrome/" target="_blank" rel="noopener">Chrome</a>, <a href="../../logos/store/googleplay/" target="_blank" rel="noopener">Google Play</a>, <a href="../../logos/cloud/googledrive/" target="_blank" rel="noopener">Google Диск</a>, <a href="../../logos/ecosystem/google/" target="_blank" rel="noopener">Gmail и другие сервисы</a>. В 2025 году буква G получила первое заметное обновление за десять лет — жёсткие границы между четырьмя цветами сменились плавными градиентными переходами, в духе эпохи ИИ и знака <a href="../../logos/ai/gemini/" target="_blank" rel="noopener">Gemini</a>.</p>
+      <p>Современный логотип Google — это не один файл, а система из трёх элементов: полный текстовый знак, буква G и точки. Вместе с ним живёт вся экосистема продуктов с единой четырёхцветной ДНК: <a href="../../logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/store/googleplay/" target="_blank" rel="noopener">Google Play<img class="blog-mention-icon" src="../../assets/logos/svgs/google-play.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/cloud/googledrive/" target="_blank" rel="noopener">Google Диск<img class="blog-mention-icon" src="../../assets/logos/svgs/google-drive.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/ecosystem/google/" target="_blank" rel="noopener">Gmail и другие сервисы</a>. В 2025 году буква G получила первое заметное обновление за десять лет — жёсткие границы между четырьмя цветами сменились плавными градиентными переходами, в духе эпохи ИИ и знака <a href="../../logos/ai/gemini/" target="_blank" rel="noopener">Gemini<img class="blog-mention-icon" src="../../assets/logos/svgs/gemini.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p>
       <h2 id="хронология-одной-таблицей">Хронология одной таблицей</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Годы</th><th>Шрифт</th><th>Стиль</th><th>Событие</th></tr></thead><tbody><tr><td>1997‑1998</td><td>дефолтный, 3D</td><td>самоделка в GIMP</td><td>переименование из BackRub</td></tr><tr><td>1999‑2010</td><td>Catull (засечки)</td><td>тень, объём</td><td>версия Рут Кедар; старт дудлов</td></tr><tr><td>2010‑2015</td><td>Catull</td><td>площе, ярче</td><td>подготовка к мобильной эре</td></tr><tr><td>2015‑2025</td><td>Product Sans</td><td>флэт</td><td>буква G, точки, анимации</td></tr><tr><td>2025 – н. в.</td><td>Product Sans</td><td>флэт + градиент</td><td>G с плавными переходами цветов</td></tr></tbody></table></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
@@ -253,18 +257,19 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="чему-учит-история-google">Чему учит история Google</h2>
       <ol>
-      <li><strong>Консистентность дороже новизны.</strong> Четыре цвета и название не менялись 25+ лет — менялась только форма. Узнаваемость копится, когда ядро неизменно.</li>
-      <li><strong>Играть можно, если есть жёсткая база.</strong> Тысячи дудлов не размыли бренд именно потому, что базовый знак железобетонно стабилен.</li>
+      <li><strong>Консистентность дороже новизны.</strong> Четыре цвета и название не менялись 25+ лет — менялась только форма. Узнаваемость копится, когда ядро неизменно.</li>
+      <li><strong>Играть можно, если есть жёсткая база.</strong> Тысячи дудлов не размыли бренд именно потому, что базовый знак железобетонно стабилен.</li>
       <li><strong>Редизайн должен решать задачу, а не освежать картинку.</strong> Каждая итерация отвечала на конкретный вызов: профессионализация (1999), чистота (2010), мобильные экраны и вектор (2015).</li>
       </ol>
-      <p>Скачать актуальный логотип Google в SVG и PNG можно на <a href="../../logos/search/google/" target="_blank" rel="noopener">странице бренда</a> — там же лежат HEX‑коды фирменных цветов (все четыре — в статье <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">фирменные цвета известных брендов</a>). Про юридические рамки использования — <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>.</p>
+      <p>Скачать актуальный логотип Google в SVG и PNG можно на <a href="../../logos/search/google/" target="_blank" rel="noopener">странице бренда<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — там же лежат HEX‑коды фирменных цветов (все четыре — в статье <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">фирменные цвета известных брендов</a>). Про юридические рамки использования — <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>.</p>
       <p>Другие истории серии: <a href="../istoriya-logotipa-apple/" target="_blank" rel="noopener">Apple</a>, <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">Сбер</a>, <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">Яндекс</a>, <a href="../istoriya-logotipa-telegram/" target="_blank" rel="noopener">Telegram</a>, <a href="../istoriya-logotipa-vk/" target="_blank" rel="noopener">ВКонтакте</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../istoriya-logotipa-youtube/" data-date="2026-08-05" data-views="0">
+          <a class="blog-card" href="../istoriya-logotipa-youtube/" data-date="2026-08-05" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -277,7 +282,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            8
           </div>
           </div>
           <div class="blog-card-title">История логотипа YouTube — как кнопка «плей» стала брендом</div>
@@ -285,7 +290,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-vk/" data-date="2026-08-04" data-views="0">
+      <a class="blog-card" href="../istoriya-logotipa-vk/" data-date="2026-08-04" data-views="668">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -298,15 +303,15 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            668
           </div>
           </div>
-          <div class="blog-card-title">История логотипа ВКонтакте — от синей плашки 2006 года до VK</div>
+          <div class="blog-card-title">История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="0">
+      <a class="blog-card" href="../istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="24">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -319,7 +324,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            24
           </div>
           </div>
           <div class="blog-card-title">История логотипа WhatsApp — телефонная трубка, пережившая всё</div>
@@ -327,7 +332,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-tiktok/" data-date="2026-08-03" data-views="2">
+      <a class="blog-card" href="../istoriya-logotipa-tiktok/" data-date="2026-08-03" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -340,7 +345,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            12
           </div>
           </div>
           <div class="blog-card-title">История логотипа TikTok — нота, глитч и сцена в темноте</div>
@@ -348,44 +353,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-narisovat-logotip-v-figma/" data-date="2026-08-06" data-views="1">
+      <a class="blog-card" href="../ekosistema-yandeksa-logotipy/" data-date="2026-07-26" data-views="75">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Figma</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" /><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" /><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" /><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" /><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Экосистемы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>06.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            75
           </div>
           </div>
-          <div class="blog-card-title">Как нарисовать логотип в Figma — пошаговая инструкция для новичка</div>
+          <div class="blog-card-title">Логотипы экосистемы Яндекса — как устроена система знаков</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-servisov-puteshestvij/" data-date="2026-08-26" data-views="1">
+      <a class="blog-card" href="../logotip-dlya-email-podpisi/" data-date="2026-08-12" data-views="24">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Путешествия</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Email</span><span class="blog-card-tag">PNG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /><path d="M19 16v6" /><path d="M16 19h6" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            24
           </div>
           </div>
-          <div class="blog-card-title">Логотипы сервисов путешествий — Aviasales, Skyscanner, Kayak и другие</div>
+          <div class="blog-card-title">Логотип для email‑подписи — как вставить, чтобы не сломался</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -403,25 +408,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -498,6 +495,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -543,10 +541,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

@@ -13,11 +13,13 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Рукописный логотип и леттеринг — тренд на «человечность» · Trace Logo's</title>
-  <meta name="description" content="Почему рукописные логотипы и леттеринг снова в моде в 2026 году, чем леттеринг отличается от каллиграфии и шрифта, каким брендам он подходит и как сделать такой знак технически. Приёмы, плюсы, минусы.">
+  <meta name="description" content="Почему рукописные логотипы и леттеринг снова в моде в 2026 году, чем леттеринг отличается от каллиграфии и шрифта, каким брендам он подходит и как сделать такой знак технически. Приёмы, плюсы, минусы.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <link rel="canonical" href="https://trace-logos.ru/blog/rukopisnyj-logotip/">
@@ -32,7 +34,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Trace Logo's">
   <meta property="og:title" content="Рукописный логотип и леттеринг — тренд на «человечность»">
-  <meta property="og:description" content="Почему рукописные логотипы и леттеринг снова в моде в 2026 году, чем леттеринг отличается от каллиграфии и шрифта, каким брендам он подходит и как сделать такой знак технически. Приёмы, плюсы, минусы.">
+  <meta property="og:description" content="Почему рукописные логотипы и леттеринг снова в моде в 2026 году, чем леттеринг отличается от каллиграфии и шрифта, каким брендам он подходит и как сделать такой знак технически. Приёмы, плюсы, минусы.">
   <meta property="og:url" content="https://trace-logos.ru/blog/rukopisnyj-logotip/">
   <meta property="og:image" content="https://trace-logos.ru/assets/og/blog/social/rukopisnyj-logotip.png">
   <meta property="og:image:width" content="1200">
@@ -70,7 +72,7 @@
     {
       "@type": "BlogPosting",
       "headline": "Рукописный логотип и леттеринг — тренд на «человечность»",
-      "description": "Почему рукописные логотипы и леттеринг снова в моде в 2026 году, чем леттеринг отличается от каллиграфии и шрифта, каким брендам он подходит и как сделать такой знак технически. Приёмы, плюсы, минусы.",
+      "description": "Почему рукописные логотипы и леттеринг снова в моде в 2026 году, чем леттеринг отличается от каллиграфии и шрифта, каким брендам он подходит и как сделать такой знак технически. Приёмы, плюсы, минусы.",
       "datePublished": "2026-07-29",
       "dateModified": "2026-07-29",
       "url": "https://trace-logos.ru/blog/rukopisnyj-logotip/",
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(58 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(98 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(148 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(208 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(58 70% 38%) 0%, hsl(208 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(298 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(338 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(28 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(88 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(298 70% 38%) 0%, hsl(88 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-29">29 июля 2026</time>
@@ -202,17 +206,17 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            4
+	            13
 	          </span>
         </div>
         <h1>Рукописный логотип и леттеринг — тренд на «человечность»</h1>
       </header>
       <div class="blog-body">
-        <p>На фоне волны идеально гладких, «сгенерированных» логотипов рукописный знак с живой, чуть неровной линией стал глотком воздуха. И причина, по которой он цепляет, ровно та же, по которой он вернулся в моду: он несёт то, чего лишён машинный дизайн, — характер и человеческое прикосновение. Но прежде чем разбирать, как его сделать, стоит понять, что именно делает такой знак уникальным.</p>
+        <p>На фоне волны идеально гладких, «сгенерированных» логотипов рукописный знак с живой, чуть неровной линией стал глотком воздуха. И причина, по которой он цепляет, ровно та же, по которой он вернулся в моду: он несёт то, чего лишён машинный дизайн, — характер и человеческое прикосновение. Но прежде чем разбирать, как его сделать, стоит понять, что именно делает такой знак уникальным.</p>
       <h2 id="леттеринг-каллиграфия-и-шрифт-в-чём-разница">Леттеринг, каллиграфия и шрифт — в чём разница</h2>
       <p>Уникальным его делает то, что буквы в нём <strong>нарисованы</strong>, а не набраны, — и именно это отличает леттеринг от двух похожих вещей:</p>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Понятие</th><th>Что это</th><th>Пример задачи</th></tr></thead><tbody><tr><td>Шрифт</td><td>Готовый набор всех букв, набирается</td><td>Текст, <a href="../shrift-dlya-logotipa/" target="_blank" rel="noopener">начертание названия</a></td></tr><tr><td>Каллиграфия</td><td>Красивое письмо пером в реальном времени</td><td>Открытки, арт, вывески</td></tr><tr><td>Леттеринг</td><td>Рисование конкретных букв под конкретный знак</td><td>Логотип, обложка, упаковка</td></tr></tbody></table></div>
-      <p>Ключевое различие: шрифтом вы <strong>набираете</strong>, а леттеринг <strong>рисуете</strong>. Поэтому логотип на основе леттеринга уникален по определению — эти буквы существуют только в этом знаке и нигде больше, в отличие от логотипа, набранного готовым <a href="../shrift-dlya-logotipa/" target="_blank" rel="noopener">шрифтом</a>.</p>
+      <p>Ключевое различие: шрифтом вы <strong>набираете</strong>, а леттеринг <strong>рисуете</strong>. Поэтому логотип на основе леттеринга уникален по определению — эти буквы существуют только в этом знаке и нигде больше, в отличие от логотипа, набранного готовым <a href="../shrift-dlya-logotipa/" target="_blank" rel="noopener">шрифтом</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -224,13 +228,13 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="почему-рукописное-вернулось-в-2026">Почему рукописное вернулось в 2026</h2>
-      <p>Эта уникальность и объясняет тренд. Машинный дизайн идеально ровный — и потому обезличенный, а живая линия с лёгкими неровностями мгновенно считывается как «сделано человеком». Отсюда и запрос на «настоящесть»: рукописный знак ощущается тёплым, честным, ремесленным — тот же импульс, что вернул <a href="../logotip-emblema/" target="_blank" rel="noopener">логотипы‑эмблемы</a> и земляные <a href="../cvetovye-trendy-2026/" target="_blank" rel="noopener">цвета 2026</a>. Вдобавок уникальные буквы невозможно повторить готовым шрифтом, а значит, знак автоматически непохож на других — а непохожесть и есть цель логотипа.</p>
-      <p>Стоит понять, почему именно неровность работает так сильно. Идеально ровная линия — это то, что машина выдаёт по умолчанию, поэтому она перестала что‑либо сообщать: за ней не чувствуется выбора. А живая линия хранит след руки — нажим, чуть дрогнувший изгиб, неповторимый наклон, — и мозг считывает эти микроотклонения как присутствие человека, который принимал решения. Парадокс в том, что несовершенство здесь не изъян, а носитель смысла: оно и есть доказательство, что знак сделали, а не сгенерировали. Из этого следует и практическая осторожность — чистить рукописный логотип нужно бережно: убрать случайную грязь, но сохранить те самые «ошибки», ради которых всё и затевалось, иначе от рукописного останется только форма без души.</p>
-      <h2 id="каким-брендам-он-подходит">Каким брендам он подходит</h2>
-      <p>Раз рукописный знак несёт тепло и ремесло, он органичен там, где эти качества и нужны: в еде, кофе и кондитерских он передаёт «сделано с любовью», в моде и бьюти — индивидуальность, у локальных и авторских брендов — почерк основателя как часть истории, а на <a href="../logotip-dlya-mercha/" target="_blank" rel="noopener">мерче</a> усиливает ощущение ручной работы. Но из той же логики следует и обратное: технологическим, финансовым и медицинским брендам живой почерк чаще мешает — он читается как «несерьёзно» там, где нужна точность и доверие.</p>
-      <p>Чтобы решить, ваш ли это случай, полезно посмотреть, что именно бренд обещает. Если ключевое обещание — тепло, забота, ручная работа, авторская история, — рукописный знак усиливает его без слов: он сам выглядит как что‑то, сделанное конкретным человеком, а не выпущенное конвейером. Если же обещание — точность, безопасность, технологичность, масштаб, — тот же почерк начинает работать против бренда, потому что подсознательно читается как «кустарно». Одна и та же живая линия в вывеске пекарни вызывает доверие, а на фасаде банка — тревогу; дело не в качестве знака, а в том, совпадает ли его характер с обещанием. Выбор образа, как всегда, идёт от аудитории; что делает знак уместным — в статье <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">что такое логотип</a>.</p>
+      <p>Эта уникальность и объясняет тренд. Машинный дизайн идеально ровный — и потому обезличенный, а живая линия с лёгкими неровностями мгновенно считывается как «сделано человеком». Отсюда и запрос на «настоящесть»: рукописный знак ощущается тёплым, честным, ремесленным — тот же импульс, что вернул <a href="../logotip-emblema/" target="_blank" rel="noopener">логотипы‑эмблемы</a> и земляные <a href="../cvetovye-trendy-2026/" target="_blank" rel="noopener">цвета 2026</a>. Вдобавок уникальные буквы невозможно повторить готовым шрифтом, а значит, знак автоматически непохож на других — а непохожесть и есть цель логотипа.</p>
+      <p>Стоит понять, почему именно неровность работает так сильно. Идеально ровная линия — это то, что машина выдаёт по умолчанию, поэтому она перестала что‑либо сообщать: за ней не чувствуется выбора. А живая линия хранит след руки — нажим, чуть дрогнувший изгиб, неповторимый наклон, — и мозг считывает эти микроотклонения как присутствие человека, который принимал решения. Парадокс в том, что несовершенство здесь не изъян, а носитель смысла: оно и есть доказательство, что знак сделали, а не сгенерировали. Из этого следует и практическая осторожность — чистить рукописный логотип нужно бережно: убрать случайную грязь, но сохранить те самые «ошибки», ради которых всё и затевалось, иначе от рукописного останется только форма без души.</p>
+      <h2 id="каким-брендам-он-подходит">Каким брендам он подходит</h2>
+      <p>Раз рукописный знак несёт тепло и ремесло, он органичен там, где эти качества и нужны: в еде, кофе и кондитерских он передаёт «сделано с любовью», в моде и бьюти — индивидуальность, у локальных и авторских брендов — почерк основателя как часть истории, а на <a href="../logotip-dlya-mercha/" target="_blank" rel="noopener">мерче</a> усиливает ощущение ручной работы. Но из той же логики следует и обратное: технологическим, финансовым и медицинским брендам живой почерк чаще мешает — он читается как «несерьёзно» там, где нужна точность и доверие.</p>
+      <p>Чтобы решить, ваш ли это случай, полезно посмотреть, что именно бренд обещает. Если ключевое обещание — тепло, забота, ручная работа, авторская история, — рукописный знак усиливает его без слов: он сам выглядит как что‑то, сделанное конкретным человеком, а не выпущенное конвейером. Если же обещание — точность, безопасность, технологичность, масштаб, — тот же почерк начинает работать против бренда, потому что подсознательно читается как «кустарно». Одна и та же живая линия в вывеске пекарни вызывает доверие, а на фасаде банка — тревогу; дело не в качестве знака, а в том, совпадает ли его характер с обещанием. Выбор образа, как всегда, идёт от аудитории; что делает знак уместным — в статье <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">что такое логотип</a>.</p>
       <h2 id="как-сделать-рукописный-логотип-технически">Как сделать рукописный логотип технически</h2>
-      <p>Если знак подходит бренду, остаётся вопрос, как перенести живую линию в рабочий логотип, — и порядок здесь важен. Начинают с руки: настоящая живость рождается на бумаге или планшете, а не в фильтрах, поэтому сначала набрасывают несколько вариантов и выбирают лучший. Дальше рисунок оцифровывают — переводят в <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор</a> трассировкой или перерисовкой поверх скана (как это делают — в статье <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">как перевести логотип в вектор</a>). Затем линии чистят от лишних точек и шума, но — и это принципиально — сохраняют «живость»: идеально ровный контур убил бы весь смысл (про чистку — в статье <a href="../kak-optimizirovat-svg/" target="_blank" rel="noopener">как оптимизировать SVG</a>). Параллельно проверяют читаемость, потому что красивый почерк не должен превращать название в нечитаемую вязь — это частая <a href="../oshibki-v-dizajne-logotipa/" target="_blank" rel="noopener">ошибка дизайна</a>. И под мелкий размер готовят более плотную версию, ведь тонкие рукописные линии пропадают на <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a>, как в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>.</p>
+      <p>Если знак подходит бренду, остаётся вопрос, как перенести живую линию в рабочий логотип, — и порядок здесь важен. Начинают с руки: настоящая живость рождается на бумаге или планшете, а не в фильтрах, поэтому сначала набрасывают несколько вариантов и выбирают лучший. Дальше рисунок оцифровывают — переводят в <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор</a> трассировкой или перерисовкой поверх скана (как это делают — в статье <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">как перевести логотип в вектор</a>). Затем линии чистят от лишних точек и шума, но — и это принципиально — сохраняют «живость»: идеально ровный контур убил бы весь смысл (про чистку — в статье <a href="../kak-optimizirovat-svg/" target="_blank" rel="noopener">как оптимизировать SVG</a>). Параллельно проверяют читаемость, потому что красивый почерк не должен превращать название в нечитаемую вязь — это частая ошибка дизайна. И под мелкий размер готовят более плотную версию, ведь тонкие рукописные линии пропадают на <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавиконе</a>, как в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>.</p>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Почему обязательно вектор</span></div><div class="callout-body"><p>Через всю технику проходит одно требование: рукописный знак, оставленный как <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> со скана, будет «мылиться» при увеличении и плохо печататься. Только <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> сохранит тонкие линии чёткими на любом размере — от <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавикона</a> до вывески. Почему вектор надёжнее растра — в статье <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор и растр</a>.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
@@ -243,14 +247,15 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="короткий-вывод">Короткий вывод</h2>
-      <p>Рукописный логотип и леттеринг вернулись в 2026 году как ответ на обезличенный машинный дизайн: живая, неидеальная линия несёт характер и «настоящесть», которых нет у сгенерированного знака. Ценность его в том, что буквы нарисованы, а не набраны, — поэтому такой логотип уникален по определению и органичен для еды, моды, локальных и крафтовых брендов, но мешает там, где нужна строгая точность. Однако сама эта живость работает только при двух условиях: её нужно оцифровать в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">вектор</a>, иначе знак не масштабируется, и не убить при этом читаемость, иначе характер обернётся нечитаемой вязью.</p>
+      <p>Рукописный логотип и леттеринг вернулись в 2026 году как ответ на обезличенный машинный дизайн: живая, неидеальная линия несёт характер и «настоящесть», которых нет у сгенерированного знака. Ценность его в том, что буквы нарисованы, а не набраны, — поэтому такой логотип уникален по определению и органичен для еды, моды, локальных и крафтовых брендов, но мешает там, где нужна строгая точность. Однако сама эта живость работает только при двух условиях: её нужно оцифровать в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">вектор</a>, иначе знак не масштабируется, и не убить при этом читаемость, иначе характер обернётся нечитаемой вязью.</p>
       <p>Посмотреть, как устроены знаки известных брендов, и скачать любой в SVG можно в <a href="../../logos/" target="_blank" rel="noopener">каталоге Trace Logo's</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../variativnye-shrifty/" data-date="2026-07-30" data-views="0">
+          <a class="blog-card" href="../variativnye-shrifty/" data-date="2026-07-30" data-views="7">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -263,7 +268,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            7
           </div>
           </div>
           <div class="blog-card-title">Вариативные шрифты — что это и зачем в 2026</div>
@@ -271,7 +276,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../pikselnyj-logotip/" data-date="2026-07-28" data-views="4">
+      <a class="blog-card" href="../pikselnyj-logotip/" data-date="2026-07-28" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -284,7 +289,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            6
           </div>
           </div>
           <div class="blog-card-title">Пиксельный и ретро‑логотип — Y2K возвращается в 2026</div>
@@ -292,7 +297,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../obemnyj-logotip/" data-date="2026-07-27" data-views="7">
+      <a class="blog-card" href="../obemnyj-logotip/" data-date="2026-07-27" data-views="22">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -305,7 +310,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            7
+            22
           </div>
           </div>
           <div class="blog-card-title">Объёмный (3D) логотип — тренд глубины в 2026</div>
@@ -313,7 +318,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../gradient-v-logotipe/" data-date="2026-07-25" data-views="5">
+      <a class="blog-card" href="../gradient-v-logotipe/" data-date="2026-07-25" data-views="26">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -326,7 +331,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            5
+            26
           </div>
           </div>
           <div class="blog-card-title">Градиент в логотипе — как использовать в 2026</div>
@@ -334,44 +339,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-hr-brenda/" data-date="2026-08-31" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-pechati/" data-date="2026-08-15" data-views="9">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">HR</span><span class="blog-card-tag">Логотип</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /><rect width="20" height="14" x="2" y="6" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Печать</span><span class="blog-card-tag">Форматы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /><rect x="6" y="14" width="12" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            9
           </div>
           </div>
-          <div class="blog-card-title">HR‑бренд и его айдентика — как компания выглядит для соискателя</div>
+          <div class="blog-card-title">Логотип для печати — CMYK, Pantone и какие файлы нужны типографии</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../favicon-v-poiske-i-nejrosetyah/" data-date="2026-07-23" data-views="2">
+      <a class="blog-card" href="../shrift-dlya-logotipa/" data-date="2026-07-12" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Фавикон</span><span class="blog-card-tag">SEO</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Шрифты</span><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16" /><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /><path d="M9 20h6" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            12
           </div>
           </div>
-          <div class="blog-card-title">Фавикон в поиске и ответах нейросетей — почему это важно в 2026</div>
+          <div class="blog-card-title">Шрифт для логотипа — как выбрать и не попасть на штраф за лицензию</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -381,7 +386,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#леттеринг-каллиграфия-и-шрифт-в-чём-разница">Леттеринг, каллиграфия и шрифт — в чём разница</a></li><li><a href="#почему-рукописное-вернулось-в-2026">Почему рукописное вернулось в 2026</a></li><li><a href="#каким-брендам-он-подходит">Каким брендам он подходит</a></li><li><a href="#как-сделать-рукописный-логотип-технически">Как сделать рукописный логотип технически</a></li><li><a href="#короткий-вывод">Короткий вывод</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#леттеринг-каллиграфия-и-шрифт-в-чём-разница">Леттеринг, каллиграфия и шрифт — в чём разница</a></li><li><a href="#почему-рукописное-вернулось-в-2026">Почему рукописное вернулось в 2026</a></li><li><a href="#каким-брендам-он-подходит">Каким брендам он подходит</a></li><li><a href="#как-сделать-рукописный-логотип-технически">Как сделать рукописный логотип технически</a></li><li><a href="#короткий-вывод">Короткий вывод</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -389,25 +394,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -484,6 +481,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -529,10 +527,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

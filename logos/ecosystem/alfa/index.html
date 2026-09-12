@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотипы экосистемы Альфа-Групп · Trace Logo's</title>
@@ -118,35 +120,23 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../../css/base.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/sidebar.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/search.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/cards.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/detail.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/support-btn.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/color.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/picker.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/modals.css?v=20260808">  <link rel="stylesheet" href="../../../css/filters.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/mobile.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/confetti.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-amongus.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-doodlejump.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-google.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-minicrewmate.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/microanim.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/category-seo.css?v=20260808">
+  <link rel="stylesheet" href="../../../css/catalog.bundle.css?v=20260910">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
-  <script src="../../../components/support-btn.min.js?v=20260808" defer></script>
-  <script src="../../../components/lang-switcher.min.js?v=20260808" defer></script>
-  <script src="../../../components/site-header.min.js?v=20260808" defer></script>
-  <script src="../../../components/section-nav.min.js?v=20260808" defer></script>
-  <script src="../../../components/copy-emoji-btn.min.js?v=20260808" defer></script>
-  <script src="../../../components/sidebar-contact.min.js?v=20260808" defer></script>
-  <script src="../../../components/help-modal.min.js?v=20260808" defer></script>
+  <script src="../../../components/support-btn.min.js?v=20260910" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="../../../components/site-chrome.min.js?v=20260910" defer></script>
+  <script src="../../../components/site-header.min.js?v=20260910" defer></script>
+  <script src="../../../components/section-nav.min.js?v=20260910" defer></script>
+  <script src="../../../components/copy-emoji-btn.min.js?v=20260910" defer></script>
+  <script src="../../../components/sidebar-contact.min.js?v=20260910" defer></script>
+  <script src="../../../components/help-modal.min.js?v=20260910" defer></script>
   <!-- см. комментарий в templates/partials/nav-header.html -->
-  <link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260808">
-  <script type="module" src="../../../components/donate-ticker.min.js?v=20260808"></script>
+  <link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260910">
+  <script type="module" src="../../../components/donate-ticker.min.js?v=20260910"></script>
   <script>
     window.__MANIFEST_BASE__ = '../../';
     window.__ASSET_SECTION__ = 'logos';
@@ -154,8 +144,8 @@
     window.__CAT_SLUG__ = '';
     window.__ECO_SLUG__ = 'alfa';
   </script>
-  <script type="module" src="../../../js/main.min.js?v=20260808"></script>
-  <script type="module" src="../../../js/search-placeholder.min.js?v=20260808"></script>
+  <script type="module" src="../../../js/main.min.js?v=20260910"></script>
+  <script type="module" src="../../../js/search-placeholder.min.js?v=20260910"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -222,7 +212,7 @@
   <div class="center-body">
     <main>
 
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Логотипы экосистемы Альфа-Групп</h1><div class="grid"><a class="card" href="/logos/bank/alfa/"><div class="icon-wrap"><img src="/assets/logos/previews/alfa-bank.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Альфа Банк" title="Icon/Bank/Alfa"></div><div class="label">Альфа Банк</div><div class="card-path">Icon/Bank/Alfa</div></a><a class="card" href="/logos/bank/alfabusiness/"><div class="icon-wrap"><img src="/assets/logos/previews/alfa-bank-business.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Альфа-Бизнес" title="Icon/Bank/AlfaBusiness"></div><div class="label">Альфа-Бизнес</div><div class="card-path">Icon/Bank/AlfaBusiness</div></a><a class="card" href="/logos/pay/alfapay/"><div class="icon-wrap"><img src="/assets/logos/previews/alfa-pay.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Альфа Pay" title="Icon/Pay/AlfaPay"></div><div class="label">Альфа Pay</div><div class="card-path">Icon/Pay/AlfaPay</div></a><a class="card" href="/logos/bnpl/podeli/"><div class="icon-wrap"><img src="/assets/logos/previews/podeli.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Подели" title="Icon/BNPL/Podeli"></div><div class="label">Подели</div><div class="card-path">Icon/BNPL/Podeli</div></a><a class="card" href="/logos/insurance/alfa/"><div class="icon-wrap"><img src="/assets/logos/previews/alfa-insurance.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Альфа Страхование" title="Icon/Insurance/Alfa"></div><div class="label">Альфа Страхование</div><div class="card-path">Icon/Insurance/Alfa</div></a></div></div></div></div>
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Логотипы экосистемы Альфа-Групп</h1><div class="grid"><a class="card" href="/logos/bank/alfa/"><div class="icon-wrap"><img src="/assets/logos/previews/alfa-bank.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Альфа Банк" title="Icon/Bank/Alfa"></div><div class="label">Альфа Банк</div><div class="card-path">Icon/Bank/Alfa</div></a><a class="card" href="/logos/bank/alfabusiness/"><div class="icon-wrap"><img src="/assets/logos/previews/alfa-bank-business.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Альфа-Бизнес" title="Icon/Bank/AlfaBusiness"></div><div class="label">Альфа-Бизнес</div><div class="card-path">Icon/Bank/AlfaBusiness</div></a><a class="card" href="/logos/pay/alfapay/"><div class="icon-wrap"><img src="/assets/logos/previews/alfa-pay.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Альфа Pay" title="Icon/Pay/AlfaPay"></div><div class="label">Альфа Pay</div><div class="card-path">Icon/Pay/AlfaPay</div></a><a class="card" href="/logos/bnpl/podeli/"><div class="icon-wrap"><img src="/assets/logos/previews/podeli.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Подели" title="Icon/BNPL/Podeli"></div><div class="label">Подели</div><div class="card-path">Icon/BNPL/Podeli</div></a><a class="card" href="/logos/insurance/alfa/"><div class="icon-wrap"><img src="/assets/logos/previews/alfa-insurance.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Альфа Страхование" title="Icon/Insurance/Alfa"></div><div class="label">Альфа Страхование</div><div class="card-path">Icon/Insurance/Alfa</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Пока ничего нет — раздел в разработке</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

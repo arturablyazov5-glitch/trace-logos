@@ -1,3 +1,5 @@
+import { trackFormatFilterClick } from './utils.js';
+
 // Format filter (SVG / PNG) for the logos catalog.
 // Single source of truth for the active file format. Renders a segmented
 // control into one or more host slots (topbar + mobile drawer), keeps every
@@ -44,7 +46,10 @@ function renderControl(slot) {
     btn.className = 'format-filter__opt';
     btn.dataset.format = opt.value;
     btn.innerHTML = `<span class="format-filter__icon">${opt.icon}</span><span>${opt.label}</span>`;
-    btn.addEventListener('click', () => setFormat(opt.value));
+    btn.addEventListener('click', () => {
+      trackFormatFilterClick(opt.value);
+      setFormat(opt.value);
+    });
     ctrl.appendChild(btn);
   });
 
@@ -54,10 +59,11 @@ function renderControl(slot) {
 }
 
 export function setFormat(value) {
-  if (value === formatState.format) return;
+  if (value === formatState.format) return false;
   formatState.format = value;
   _controls.forEach(syncControl);
   _onChange?.();
+  return true;
 }
 
 function syncControl(ctrl) {

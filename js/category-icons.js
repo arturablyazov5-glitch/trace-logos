@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // category-icons.js — Lucide icons (ISC license) for catalog categories.
 // Maps a category slug → the inner SVG markup of a Lucide line icon.
-// Shared concept with the Figma plugin ("figna-plagins/Trace Logos/ui.html" keeps an inline copy,
+// Shared concept with the Figma plugin ("tools/figma-plugins/trace-logos/ui.html" keeps an inline copy,
 // since the plugin UI is a standalone document and can't import site modules).
 // Covers all logo + emoji category slugs; '_default' is the fallback.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -9,6 +9,7 @@
 export const CATEGORY_ICONS = {
   social: "<path d=\"M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719\" />",
   videocall: "<path d=\"m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5\" /><rect x=\"2\" y=\"6\" width=\"14\" height=\"12\" rx=\"2\" />",
+  tv: "<rect width=\"20\" height=\"15\" x=\"2\" y=\"7\" rx=\"2\" ry=\"2\" /><polyline points=\"17 2 12 7 7 2\" />",
   video: "<path d=\"m12.296 3.464 3.02 3.956\" /><path d=\"M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z\" /><path d=\"M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" /><path d=\"m6.18 5.276 3.1 3.899\" />",
   music: "<path d=\"M9 18V5l12-2v13\" /><circle cx=\"6\" cy=\"18\" r=\"3\" /><circle cx=\"18\" cy=\"16\" r=\"3\" />",
   market: "<circle cx=\"8\" cy=\"21\" r=\"1\" /><circle cx=\"19\" cy=\"21\" r=\"1\" /><path d=\"M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12\" />",

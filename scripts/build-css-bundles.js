@@ -33,21 +33,61 @@ const CSS_DIR = path.join(ROOT, 'css');
 const DRY_RUN = process.argv.includes('--dry-run');
 
 const BUNDLES = {
-  // tokens.css and catalog-grid.css go first — seo-page.css pulls both in via
-  // `@import`, which stays render-blocking even inside a bundled file (the
-  // browser still fetches it as a separate request, just later). Inlined
-  // here instead, with the `@import` lines stripped from seo-page.css's own
-  // contribution below — neither has another <link> consumer of its own on
+  // tokens.css, catalog-grid.css and faq.css go first — seo-page.css pulls all
+  // three in via `@import`, which stays render-blocking even inside a bundled
+  // file (the browser still fetches it as a separate request, just later).
+  // Inlined here instead, with the `@import` lines stripped from seo-page.css's
+  // own contribution below — none has another <link> consumer of its own on
   // pages using this bundle (grep confirmed), so this is safe.
+  // faq.css also has a direct <link> on tools/index.html, which doesn't use
+  // this bundle — that page is unaffected either way.
   'seo-page.bundle.css': [
     'tokens.css',
     'catalog-grid.css',
+    'faq.css',
     'seo-page.css',
     'support-btn.css',
     'site-header.css',
     'modals.css',
     'confetti.css',
     'site-footer.css',
+  ],
+
+  // The four hand-written/templated pages that load js/main.js (logos/index.html,
+  // emoji/index.html, icons/index.html, templates/category-page.html) each linked
+  // their own 15-18 <link rel="stylesheet"> tags — every one a separate request on
+  // every catalog page view, and the single biggest contributor to the site's Edge
+  // Request count. One bundle instead: 19 requests → 1.
+  //
+  // Deliberately a SUPERSET of what any one of those pages linked: emoji/ and
+  // icons/ never linked filters.css / support-btn.css / category-seo.css, which
+  // style markup they don't render. Shipping those rules to them costs a few dead
+  // selectors and zero extra requests — the point of the bundle. (support-btn.css
+  // was arguably a real gap: all four pages DO load components/support-btn.min.js.)
+  //
+  // Order is logos/index.html's original link order, which the pages' cascade
+  // already depended on — tokens.css hoisted to the front because base.css pulls
+  // it via @import, and mobile.css kept late so its media queries still override.
+  'catalog.bundle.css': [
+    'tokens.css',
+    'base.css',
+    'sidebar.css',
+    'search.css',
+    'filters.css',
+    'cards.css',
+    'detail.css',
+    'support-btn.css',
+    'color.css',
+    'picker.css',
+    'modals.css',
+    'mobile.css',
+    'confetti.css',
+    'easter-amongus.css',
+    'easter-doodlejump.css',
+    'easter-google.css',
+    'easter-minicrewmate.css',
+    'category-seo.css',
+    'microanim.css',
   ],
 };
 
@@ -89,10 +129,27 @@ function minifyCss(src) {
     .trim();
 }
 
+// An `@import` inside a bundled file is worse than useless: CSS only honours
+// @import before any rule, so once a contribution lands mid-bundle the browser
+// ignores the line entirely — and where it IS honoured it costs the extra
+// request the bundle exists to remove. Every import naming a file the bundle
+// already inlines is therefore stripped from that file's contribution. Derived
+// from the sources list rather than hard-coded per file, so adding a bundle
+// can't reintroduce the problem by forgetting a name (that is how seo-page.css's
+// `@import './faq.css'` survived: the old strip list covered only tokens and
+// catalog-grid, leaving a line that happened to be inert only by position).
+function stripBundledImports(src, sources) {
+  const names = sources.map(n => n.replace(/\.css$/, '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  return src.replace(
+    new RegExp(`^@import\\s+['"]\\./(?:${names.join('|')})\\.css['"];\\s*\\n?`, 'gm'),
+    ''
+  );
+}
+
 function buildBundle(outFile, sources) {
   const parts = sources.map(name => {
     let src = fs.readFileSync(path.join(CSS_DIR, name), 'utf8').replace(/\s+$/, '');
-    if (name === 'seo-page.css') src = src.replace(/^@import\s+['"]\.\/(?:tokens|catalog-grid)\.css['"];\s*\n?/gm, '');
+    src = stripBundledImports(src, sources);
     return minifyCss(src);
   });
   const banner =
@@ -122,4 +179,9 @@ function main() {
   if (!DRY_RUN) console.log(`✓ CSS-бандлы: written=${written} unchanged=${unchanged}`);
 }
 
-main();
+// BUNDLES is the single source of truth for what each bundle inlines;
+// scripts/test-css-parity.js reads it to tell "linked via bundle" from "missing".
+// Guarded so that require() doesn't run a build as a side effect.
+module.exports = { BUNDLES };
+
+if (require.main === module) main();

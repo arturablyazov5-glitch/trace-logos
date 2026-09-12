@@ -12,16 +12,16 @@ tags_en: How-To, Tools, Design
 Adobe [Illustrator](../../logos/design/illustrator/) — профессиональный стандарт логотип‑дизайна: практически каждый знак из нашего [каталога](../../logos/) прошёл через него или его аналоги. Для новичка программа выглядит пугающе — сотни инструментов, из которых для логотипа нужны от силы десять. Разбираем весь маршрут: от нового документа до комплекта файлов, который примут и типография, и разработчик.
 
 :::note Коротко
-Маршрут: документ RGB для экрана (CMYK‑версия — потом) → знак собирается из **фигур и Pathfinder**, а не рисуется пером → сетка и направляющие для выравнивания → текст → **Create Outlines** перед экспортом → Export для SVG/PNG, Save As для PDF. Если Illustrator недоступен, тот же процесс работает в бесплатных Inkscape и [Figma](../kak-narisovat-logotip-v-figma/).
+Маршрут: документ RGB для экрана (CMYK‑версия — потом) → знак собирается из **фигур и Pathfinder**, а не рисуется пером → сетка и направляющие для выравнивания → текст → **Create Outlines** перед экспортом → Export для SVG/PNG, Save As для PDF. Если Illustrator недоступен, тот же процесс работает в бесплатных Inkscape и [Figma](../kak-narisovat-logotip-v-figma/).
 :::
 
 ## Чем Illustrator отличается от Figma для этой задачи
 
-Оба — векторные редакторы, и для простого знака хватит любого, о чём мы писали в [нашем гайде по Figma](../kak-narisovat-logotip-v-figma/). Illustrator выигрывает там, где нужна точность и печать: полноценный CMYK и Pantone — [подробно зачем](../logotip-dlya-pechati/) — тонкие булевы операции Pathfinder, инструменты для сложной пластики (Width Tool, скругления отдельных углов), экспорт в EPS для консервативных подрядчиков, которым нужен [свой формат под свою задачу](../vektornye-formaty-eps-ai-pdf-svg/). Плата — цена подписки и порог входа.
+Оба — векторные редакторы, и для простого знака хватит любого, о чём мы писали в [нашем гайде по Figma](../kak-narisovat-logotip-v-figma/). Illustrator выигрывает там, где нужна точность и печать: полноценный CMYK и Pantone — [подробно зачем](../logotip-dlya-pechati/) — тонкие булевы операции Pathfinder, инструменты для сложной пластики (Width Tool, скругления отдельных углов), экспорт в EPS для консервативных подрядчиков, которым нужен свой формат под свою задачу. Плата — цена подписки и порог входа.
 
 ## Шаг 1. Документ
 
-Создайте документ **1000×1000 px, RGB** — для проектирования удобнее экранный режим; CMYK‑версию для печати вы сделаете конвертацией в конце. Сразу добавьте ещё две монтажные области (Artboard): 48×48 и 16×16 — контрольные, для проверки знака в размере иконки и [фавиконки](../kak-sdelat-favicon/). Включите Smart Guides (`⌘U`) — «умные» направляющие, без которых выравнивание превращается в мучение.
+Создайте документ **1000×1000 px, RGB** — для проектирования удобнее экранный режим; CMYK‑версию для печати вы сделаете конвертацией в конце. Сразу добавьте ещё две монтажные области (Artboard): 48×48 и 16×16 — контрольные, для проверки знака в размере иконки и [фавиконки](../kak-sdelat-favicon/). Включите Smart Guides (`⌘U`) — «умные» направляющие, без которых выравнивание превращается в мучение.
 
 ## Шаг 2. Знак: фигуры + Pathfinder
 
@@ -34,18 +34,18 @@ Adobe [Illustrator](../../logos/design/illustrator/) — профессиона
 5. **Направляющие из фигур**: постройте сетку из окружностей (как в [знаке ChatGPT](../istoriya-logotipa-chatgpt/) или яблоке [Apple](../istoriya-logotipa-apple/)), выделите и превратите в направляющие (`⌘5`) — по ним выверяются дуги.
 
 :::tip Оптические компенсации
-Illustrator идеально точен математически — но глаз работает иначе: круг рядом с квадратом одинаковой высоты кажется меньше, горизонтальная линия той же толщины, что вертикальная, выглядит толще. Профессионалы правят такие вещи «на глаз» поверх геометрии — именно это отличает живой знак от машинного — хороший [пример с дугами в логотипе Spotify](../istoriya-logotipa-spotify/).
+Illustrator идеально точен математически — но глаз работает иначе: круг рядом с квадратом одинаковой высоты кажется меньше, горизонтальная линия той же толщины, что вертикальная, выглядит толще. Профессионалы правят такие вещи «на глаз» поверх геометрии — именно это отличает живой знак от машинного — хороший [пример с дугами в логотипе Spotify](../istoriya-logotipa-spotify/).
 :::
 
 ## Шаг 3. Текстовая часть
 
-Наберите название инструментом Type (`T`). Подбор гарнитуры — отдельная дисциплина с юридическими ловушками: шрифт должен иметь лицензию на коммерческое использование — [подробно про шрифты для логотипа](../shrift-dlya-logotipa/) у нас есть отдельная статья. Настройте трекинг и кернинг вручную (`Alt+стрелки` между буквами): дефолтный набор почти всегда требует правок в паре мест — классика: сочетания «ГА», «ТА», «АУ».
+Наберите название инструментом Type (`T`). Подбор гарнитуры — отдельная дисциплина с юридическими ловушками: шрифт должен иметь лицензию на коммерческое использование — [подробно про шрифты для логотипа](../shrift-dlya-logotipa/) у нас есть отдельная статья. Настройте трекинг и кернинг вручную (`Alt+стрелки` между буквами): дефолтный набор почти всегда требует правок в паре мест — классика: сочетания «ГА», «ТА», «АУ».
 
 **Перед экспортом — Type → Create Outlines (`⇧⌘O`):** текст превращается в кривые и перестаёт зависеть от установленных шрифтов. Обязательно сохраните копию файла с живым текстом — из кривых обратно в текст пути нет.
 
 ## Шаг 4. Цвет и версии
 
-Задайте цвета и сохраните их в Swatches как глобальные (галочка Global) — тогда смена оттенка обновит все объекты разом. Палитру собирайте по методике из статьи [как подобрать цветовую палитру бренда](../kak-podobrat-cvetovuyu-palitru-brenda/). Сразу постройте обязательный комплект — [почему он именно такой](../vidy-logotipov/): цветная версия, чёрная, белая (проверьте на тёмной монтажной области), компактный знак без текста.
+Задайте цвета и сохраните их в Swatches как глобальные (галочка Global) — тогда смена оттенка обновит все объекты разом. Палитру собирайте по методике из статьи [как подобрать цветовую палитру бренда](../kak-podobrat-cvetovuyu-palitru-brenda/). Сразу постройте обязательный комплект — почему он именно такой: цветная версия, чёрная, белая (проверьте на тёмной монтажной области), компактный знак без текста.
 
 ## Шаг 5. Проверки
 
@@ -62,7 +62,7 @@ Illustrator идеально точен математически — но г
 | Типография | File → Save As → **PDF** | конвертируйте цвета в CMYK ([детали](../logotip-dlya-pechati/)) |
 | Соцсети, документы | Export As → **PNG** | 1x/2x/4x, галочка Transparent ([зачем прозрачность](../logotip-s-prozrachnym-fonom/)) |
 
-Экспортированный SVG стоит прогнать через оптимизатор — Illustrator пишет в файл лишние метаданные, и мы рассказывали, [как чистить такой SVG](../kak-optimizirovat-svg/). Рабочий AI‑файл с живым текстом — в архив: это ваш мастер‑исходник, и [что вообще должно быть в комплекте](../kak-zakazat-logotip-u-dizajnera/) от дизайнера, тоже стоит держать в голове.
+Экспортированный SVG стоит прогнать через оптимизатор — Illustrator пишет в файл лишние метаданные, и мы рассказывали, [как чистить такой SVG](../kak-optimizirovat-svg/). Рабочий AI‑файл с живым текстом — в архив: это ваш мастер‑исходник, и [что вообще должно быть в комплекте](../kak-zakazat-logotip-u-dizajnera/) от дизайнера, тоже стоит держать в голове.
 
 ## Частые ошибки новичков в Illustrator
 
@@ -70,9 +70,9 @@ Illustrator идеально точен математически — но г
 2. **Знак «на глазок» без сетки.** Расхождения в полпикселя незаметны в макете и очевидны на вывеске.
 3. **Прозрачности и эффекты в SVG.** Тени, растровые эффекты и режимы наложения ломают SVG — знак должен состоять из чистых заливок.
 4. **Один artboard на все версии.** Каждой версии — своя монтажная область: экспорт пакетом, ничего не потеряется.
-5. **CMYK‑документ для экранного знака.** Цвета «тускнеют» ещё на этапе дизайна. Порядок обратный: RGB для проектирования, CMYK — конвертацией для печати.
+5. **CMYK‑документ для экранного знака.** Цвета «тускнеют» ещё на этапе дизайна. Порядок обратный: RGB для проектирования, CMYK — конвертацией для печати.
 
-Дальше: проверьте знак по [чек‑листу ошибок](../oshibki-v-dizajne-logotipa/), соберите [палитру](../kak-podobrat-cvetovuyu-palitru-brenda/) и мини‑гайдлайн — [что такое брендбук](../chto-takoe-brendbuk/) и зачем он нужен, мы объясняли отдельно. Бесплатные альтернативы всему описанному — Inkscape (полноценный векторный редактор) и [Figma](../kak-narisovat-logotip-v-figma/); генеративный путь — [логотип нейросетью](../logotip-nejrosetyu/) с доводкой в том же Illustrator.
+Дальше: проверьте знак по чек‑листу ошибок, соберите [палитру](../kak-podobrat-cvetovuyu-palitru-brenda/) и мини‑гайдлайн — [что такое брендбук](../chto-takoe-brendbuk/) и зачем он нужен, мы объясняли отдельно. Бесплатные альтернативы всему описанному — Inkscape (полноценный векторный редактор) и [Figma](../kak-narisovat-logotip-v-figma/); генеративный путь — [логотип нейросетью](../logotip-nejrosetyu/) с доводкой в том же Illustrator.
 
 ---EN---
 
@@ -84,7 +84,7 @@ The route: an RGB document for screen (the CMYK version comes later) → the mar
 
 ## How Illustrator differs from Figma for this job
 
-Both are vector editors, and a simple mark can be built in either — see [our Figma guide](../kak-narisovat-logotip-v-figma/). Illustrator wins where precision and print matter: full CMYK and Pantone (and [here's why that matters](../logotip-dlya-pechati/)), fine-grained Pathfinder booleans, tools for complex curves (Width Tool, per-corner rounding), EPS export for conservative vendors who need [the right format for the right job](../vektornye-formaty-eps-ai-pdf-svg/). The price — the subscription and the learning curve.
+Both are vector editors, and a simple mark can be built in either — see [our Figma guide](../kak-narisovat-logotip-v-figma/). Illustrator wins where precision and print matter: full CMYK and Pantone (and [here's why that matters](../logotip-dlya-pechati/)), fine-grained Pathfinder booleans, tools for complex curves (Width Tool, per-corner rounding), EPS export for conservative vendors who need the right format for the right job. The price — the subscription and the learning curve.
 
 ## Step 1. The document
 
@@ -112,7 +112,7 @@ Set the name with the Type tool (`T`). Choosing the face is its own discipline w
 
 ## Step 4. Color and versions
 
-Assign colors and save them as global Swatches (the Global checkbox) — changing a shade then updates every object at once. Build the palette by the method in [how to build a brand color palette](../kak-podobrat-cvetovuyu-palitru-brenda/). Produce the mandatory kit immediately — [here's why it looks the way it does](../vidy-logotipov/): color version, black, white (check it on a dark artboard), the compact mark without text.
+Assign colors and save them as global Swatches (the Global checkbox) — changing a shade then updates every object at once. Build the palette by the method in [how to build a brand color palette](../kak-podobrat-cvetovuyu-palitru-brenda/). Produce the mandatory kit immediately — here's why it looks the way it does: color version, black, white (check it on a dark artboard), the compact mark without text.
 
 ## Step 5. Checks
 
@@ -139,4 +139,4 @@ Run the exported SVG through an optimizer — Illustrator writes redundant metad
 4. **One artboard for all versions.** Each version gets its own artboard: batch export, nothing gets lost.
 5. **A CMYK document for a screen mark.** Colors go dull at the design stage. The order is the reverse: RGB for design, CMYK by conversion for print.
 
-Next: run the mark through the [mistake checklist](../oshibki-v-dizajne-logotipa/), assemble the [palette](../kak-podobrat-cvetovuyu-palitru-brenda/) and a mini guideline — we explain [what a brand book actually is](../chto-takoe-brendbuk/) separately. Free alternatives to everything above — Inkscape and [Figma](../kak-narisovat-logotip-v-figma/); the generative route — [an AI logo](../logotip-nejrosetyu/) polished in the same Illustrator.
+Next: run the mark through the mistake checklist, assemble the [palette](../kak-podobrat-cvetovuyu-palitru-brenda/) and a mini guideline — we explain [what a brand book actually is](../chto-takoe-brendbuk/) separately. Free alternatives to everything above — Inkscape and [Figma](../kak-narisovat-logotip-v-figma/); the generative route — [an AI logo](../logotip-nejrosetyu/) polished in the same Illustrator.

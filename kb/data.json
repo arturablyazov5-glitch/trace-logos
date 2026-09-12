@@ -1,0 +1,96 @@
+[
+  {
+    "type": "section",
+    "id": "start",
+    "title": "Начало работы",
+    "icon": "🚀",
+    "children": [
+      {
+        "type": "article",
+        "id": "chto-eto",
+        "title": "Что такое эта база знаний",
+        "excerpt": "Зачем нужен этот раздел и как им пользоваться",
+        "content": "<p>Это внутренняя база знаний — закрытый раздел, который не индексируется поисковиками и открывается только по прямой ссылке. Структура — дерево: раздел может содержать другие разделы и статьи, а те, в свою очередь, — ещё разделы и статьи, на любую глубину.</p>\n<p>Статьи оформлены в той же типографике, что и статьи блога: заголовки, списки, цитаты, врезки (callout) и код — всё уже настроено.</p>\n<div class=\"callout callout-tip\"><div class=\"callout-head\"><svg class=\"callout-icon\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z\"/></svg><span>Совет</span></div><div class=\"callout-body\"><p>Открой <code>kb/articles/</code> — каждая папка это раздел, каждый <code>.md</code> файл это статья. Добавляй файлы прямо туда, <code>data.json</code> соберётся сам.</p></div></div>"
+      },
+      {
+        "type": "article",
+        "id": "kak-dobavit-statyu",
+        "title": "Как добавить статью или раздел",
+        "excerpt": "Формат markdown-файлов и как их редактировать",
+        "content": "<p>Всё содержимое базы знаний — обычные markdown-файлы в <code>kb/articles/</code>. Структура папок и есть дерево:</p>\n<ul><li><strong>папка</strong> = раздел. Может содержать вложенные папки (подразделы) и <code>.md</code> файлы (статьи), в любом сочетании и на любую глубину.</li><li><strong><code>.md</code> файл</strong> = статья. Начинается с frontmatter (<code>title</code> обязателен, <code>excerpt</code>/<code>icon</code>/<code>order</code> — опционально), дальше обычный markdown.</li><li><strong><code>_section.json</code></strong> (необязательный, лежит внутри папки-раздела) — задаёт <code>title</code>/<code>icon</code>/<code>order</code> для раздела. Без него заголовок берётся из имени папки, а порядок — алфавитный.</li></ul>\n<h2>Пример</h2>\n<pre><code>kb/articles/\n  design/\n    _section.json          → { &quot;title&quot;: &quot;Дизайн&quot;, &quot;icon&quot;: &quot;🎨&quot; }\n    logotipy/\n      _section.json        → { &quot;title&quot;: &quot;Логотипы&quot; }\n      seo-2026.md\n    palitra.md</code></pre>\n<p>Такая структура даст раздел «Дизайн», внутри — подраздел «Логотипы» со статьёй «seo-2026», и статью «palitra» прямо в «Дизайн».</p>\n<p>После правки файлов запусти:</p>\n<pre><code>node scripts/build-kb.js</code></pre>\n<div class=\"callout callout-note\"><div class=\"callout-head\"><svg class=\"callout-icon\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v4h1\"/></svg><span>Заметка</span></div><div class=\"callout-body\"><p><code>id</code> статьи/раздела — это имя файла или папки без расширения. Он должен быть уникален по всему дереву: на нём строится прямая ссылка вида <code>#/seo-2026</code>. Сборка упадёт с понятной ошибкой, если два узла назвать одинаково.</p></div></div>"
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "processy",
+    "title": "Процессы",
+    "icon": "🗂️",
+    "children": [
+      {
+        "type": "section",
+        "id": "kontent",
+        "title": "Контент",
+        "icon": "📝",
+        "children": [
+          {
+            "type": "section",
+            "id": "blog",
+            "title": "Блог",
+            "children": [
+              {
+                "type": "article",
+                "id": "redakcionnyj-plan",
+                "title": "Редакционный план",
+                "excerpt": "Как устроен пайплайн публикации постов",
+                "content": "<p>Пример статьи третьего уровня вложенности: раздел <em>Процессы</em> → раздел <em>Контент</em> → раздел <em>Блог</em> → эта статья.</p>\n<blockquote><p>Дерево может уходить настолько глубоко, насколько нужно — ограничения на уровни вложенности нет.</p></blockquote>\n<h2>Что проверять перед публикацией</h2>\n<ol><li>Заголовок и описание заполнены на обоих языках</li><li>OG-картинка сгенерирована</li><li>Ссылки на бренды ведут в каталог</li></ol>"
+              },
+              {
+                "type": "article",
+                "id": "embargo",
+                "title": "Эмбарго на публикацию",
+                "content": "<p>Перед любым деплоем нужно прогонять скрипт эмбарго — он придерживает ещё не наступившие по расписанию посты, деплоит, и возвращает их обратно в черновики.</p>"
+              }
+            ]
+          },
+          {
+            "type": "article",
+            "id": "socseti",
+            "title": "Соцсети",
+            "excerpt": "Черновик регламента постинга",
+            "content": "<p>Заглушка статьи — замени на реальный текст, когда будет готов регламент.</p>"
+          }
+        ]
+      },
+      {
+        "type": "article",
+        "id": "relizy",
+        "title": "Релизы и деплой",
+        "excerpt": "Порядок сборки и выката на прод",
+        "content": "<p>Пример статьи, лежащей прямо в разделе «Процессы», минуя дополнительный подраздел.</p>\n<div class=\"callout callout-warning\"><div class=\"callout-head\"><svg class=\"callout-icon\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z\"/></svg><span>Важно</span></div><div class=\"callout-body\"><p>Это заглушка. Наполни реальными шагами деплоя.</p></div></div>"
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "dostup",
+    "title": "Доступы и сервисы",
+    "icon": "🔐",
+    "children": [
+      {
+        "type": "article",
+        "id": "supabase",
+        "title": "Supabase",
+        "excerpt": "Проект, секреты, edge-функции",
+        "content": "<p>Заглушка статьи про Supabase — id проекта, где смотреть секреты, как их менять.</p>"
+      },
+      {
+        "type": "article",
+        "id": "vercel",
+        "title": "Vercel",
+        "excerpt": "Аккаунт, деплой, кэш",
+        "content": "<p>Заглушка статьи про Vercel — под какой учёткой сейчас живёт прод, как деплоить руками.</p>"
+      }
+    ]
+  }
+]

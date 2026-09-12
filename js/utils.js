@@ -344,7 +344,11 @@ function assetAbsUrl(file) {
   if (/^https?:\/\//.test(file)) return file;
   if (file.startsWith('/')) return SITE_ORIGIN + file;
   const folder = file.endsWith('.png') ? 'pngs' : 'svgs';
-  return `${SITE_ORIGIN}/assets/logos/${folder}/${file}`;
+  // _assetBase уже несёт текущий раздел (logos/emoji/icons) — setAssetBase()
+  // выставляет его из main.js. Раньше здесь была захардкожена "logos", из-за
+  // чего превью эмодзи и иконок в админке всегда 404-ились.
+  const section = _assetBase.match(/assets\/([^/]+)/)?.[1] ?? 'logos';
+  return `${SITE_ORIGIN}/assets/${section}/${folder}/${file}`;
 }
 
 export function trackExport(figma, format, variant) {
@@ -392,6 +396,15 @@ export function trackBannerClick(bannerId) {
     body: JSON.stringify({ banner: bannerId }),
     keepalive: true, // клик открывает внешний сайт в новой вкладке, но keepalive не помешает
   }).catch(() => {});
+}
+
+// ── Трекинг использования UI-фильтров ───────────────────────────────────
+// Храним в той же таблице, что и баннеры, с namespace `ui:*`: админка уже
+// показывает эти счетчики, а отдельная функция не размазывает смысл по коду.
+export function trackFormatFilterClick(format) {
+  const value = String(format || '').trim().toLowerCase();
+  if (!['all', 'svg', 'png'].includes(value)) return;
+  trackBannerClick(`ui:format-filter:${value}`);
 }
 
 // ── Трекинг поисковых запросов ───────────────────────────────────────────

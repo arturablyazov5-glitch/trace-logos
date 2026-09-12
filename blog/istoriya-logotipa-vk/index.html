@@ -13,11 +13,13 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>История логотипа ВКонтакте — от синей плашки 2006 года до VK · Trace Logo's</title>
-  <meta name="description" content="Как менялся логотип ВКонтакте: первая версия 2006 года, буквы «ВК», ребрендинг в VK, фирменный синий и единый знак экосистемы. Все этапы с датами.">
+  <title>История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK · Trace Logo's</title>
+  <meta name="description" content="Как менялся логотип ВКонтакте в 2006, 2012, 2016 и 2020 годах, почему появилась монограмма VK и как знак соцсети стал центром целой экосистемы">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <link rel="canonical" href="https://trace-logos.ru/blog/istoriya-logotipa-vk/">
@@ -31,8 +33,8 @@
 
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Trace Logo's">
-  <meta property="og:title" content="История логотипа ВКонтакте — от синей плашки 2006 года до VK">
-  <meta property="og:description" content="Как менялся логотип ВКонтакте: первая версия 2006 года, буквы «ВК», ребрендинг в VK, фирменный синий и единый знак экосистемы. Все этапы с датами.">
+  <meta property="og:title" content="История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK">
+  <meta property="og:description" content="Как менялся логотип ВКонтакте в 2006, 2012, 2016 и 2020 годах, почему появилась монограмма VK и как знак соцсети стал центром целой экосистемы">
   <meta property="og:url" content="https://trace-logos.ru/blog/istoriya-logotipa-vk/">
   <meta property="og:image" content="https://trace-logos.ru/assets/og/blog/social/istoriya-logotipa-vk.png">
   <meta property="og:image:width" content="1200">
@@ -62,15 +64,15 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "История логотипа ВКонтакте — от синей плашки 2006 года до VK",
+          "name": "История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK",
           "item": "https://trace-logos.ru/blog/istoriya-logotipa-vk/"
         }
       ]
     },
     {
       "@type": "BlogPosting",
-      "headline": "История логотипа ВКонтакте — от синей плашки 2006 года до VK",
-      "description": "Как менялся логотип ВКонтакте: первая версия 2006 года, буквы «ВК», ребрендинг в VK, фирменный синий и единый знак экосистемы. Все этапы с датами.",
+      "headline": "История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK",
+      "description": "Как менялся логотип ВКонтакте в 2006, 2012, 2016 и 2020 годах, почему появилась монограмма VK и как знак соцсети стал центром целой экосистемы",
       "datePublished": "2026-08-04",
       "dateModified": "2026-08-04",
       "url": "https://trace-logos.ru/blog/istoriya-logotipa-vk/",
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,51 +170,54 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
   <a href="../../">Trace Logo's</a><span class="sep">/</span>
   <a href="../../blog/"><span data-i18n="blogSection">Блог</span></a><span class="sep">/</span>
-  <span class="current" aria-current="page">История логотипа ВКонтакте — от синей плашки 2006 года до VK</span>
+  <span class="current" aria-current="page">История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK</span>
 </nav>
 
 <main>
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(241 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(281 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(331 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(31 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(241 70% 38%) 0%, hsl(31 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(120 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(160 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(210 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(270 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(120 70% 38%) 0%, hsl(270 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-04">4 августа 2026</time>
           <span class="blog-meta-sep" aria-hidden="true">·</span>
-          <span class="blog-read">4 мин чтения</span>
+          <span class="blog-read">9 мин чтения</span>
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            668
 	          </span>
         </div>
-        <h1>История логотипа ВКонтакте — от синей плашки 2006 года до VK</h1>
+        <h1>История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK</h1>
       </header>
       <div class="blog-body">
-        <p><a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте</a> — самая большая соцсеть рунета, и её логотип прошёл путь, типичный для целого поколения интернет‑брендов: от подробного «веб‑двухнольного» знака с градиентами до плоской монограммы из двух букв, которая сегодня обозначает не сайт, а целую экосистему. Разбираем все этапы с датами и причинами.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Логотип ВКонтакте эволюционировал в четыре больших шага: <strong>2006</strong> — синяя плашка с полным названием «ВКонтакте»; <strong>2012</strong> — упрощение и переход к короткому «ВК» в иконке; <strong>2016</strong> — плоский редизайн и фирменный синий; <strong>2021</strong> — ребрендинг компании в <strong>VK</strong>: латинская монограмма стала знаком всей экосистемы, а не только соцсети. Актуальные файлы всех версий — в <a href="../../logos/social/vk/" target="_blank" rel="noopener">каталоге</a>.</p></div></div>
-      <h2 id="2006-рождение-вконтакте" class="step-heading"><span class="step-badge">2006</span><span class="step-title">Рождение «ВКонтакте»</span></h2>
-      <p>Сайт vkontakte.ru запустился осенью 2006 года. Первый логотип был предельно функциональным: слово «ВКонтакте» белым шрифтом на синей плашке. Никакой легенды, никакого скрытого смысла — просто название, читаемое в шапке сайта. Синий цвет выбрали по той же логике, что и <a href="../../logos/social/facebook/" target="_blank" rel="noopener">Facebook</a>, на который ранний ВКонтакте откровенно ориентировался: синий ассоциируется с надёжностью и одинаково хорошо выглядит на любых экранах (подробнее о том, как цвета влияют на восприятие, — в статье <a href="../psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">психология цвета в логотипе</a>).</p>
-      <p>Характерная деталь ранних версий — буква «В» с засечкой‑хвостиком и плотная, слегка «книжная» типографика. По меркам 2006 года это выглядело солидно; по сегодняшним — безнадёжно перегружено.</p>
+        <p>История знака <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> состоит из двух связанных сюжетов. Сначала длинное название сжалось до монограммы, потому что логотип переехал из шапки сайта в квадратную иконку. Затем эта монограмма выросла из обозначения одной соцсети в общий знак компании и её сервисов. Форма менялась вслед за носителями, а синий цвет и буквы VK удерживали узнаваемость на каждом этапе.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>У логотипа <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> пять важных дат: <strong>2006</strong> — полное название на синей плашке; <strong>2012</strong> — квадратная иконка с монограммой; <strong>2016</strong> — плоская версия для нового интерфейса; <strong>2020</strong> — яркий синий, кириллическое начертание и фирменный шрифт VK Sans; <strong>2021</strong> — превращение VK в единый бренд компании. Исторические и актуальные файлы собраны в <a href="../../logos/social/vk/" target="_blank" rel="noopener">каталоге<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p></div></div>
+      <h2 id="2006-логотип-объяснял-куда-попал-пользователь" class="step-heading"><span class="step-badge">2006</span><span class="step-title">Логотип объяснял, куда попал пользователь</span></h2>
+      <p>Домен vkontakte.ru зарегистрировали 1 октября 2006 года, а официальным днём запуска считают 10 октября. Первый знак решал задачу раннего веб‑сервиса: сообщал название прямо в шапке страницы. На широкой синей плашке стояло белое слово «вконтакте»; начальная «в» находилась в отдельном светлом квадрате. <a href="https://commons.wikimedia.org/wiki/File:VKontakte_logo2006.svg" target="_blank" rel="noopener">Архивный файл 2006 года</a> сохранил эту композицию в векторе.</p>
+      <p>У такой формы был понятный контекст. Пользователь открывал сайт с настольного компьютера и видел логотип в одной заранее известной точке. Горизонтальной композиции хватало места, а полное имя помогало запомнить новый сервис. Фавикон уже требовал короткого элемента, поэтому выделенная первая буква работала как заготовка для будущего компактного знака.</p>
+      <p>Синий тоже появился в самом начале и пережил все последующие версии. Оттенок менялся, зато цветовая категория оставалась постоянной. Благодаря этому логотип можно было упрощать без полного обнуления зрительной памяти: новая форма всё равно появлялась в знакомом синем поле.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -223,24 +228,108 @@ window.yaContextCb.push(() => {
     })
 })
 </script></div>
-      <h2 id="2012-эпоха-вк-название-сжимается-до-двух-букв" class="step-heading"><span class="step-badge">2012</span><span class="step-title">Эпоха «ВК» — название сжимается до двух букв</span></h2>
-      <p>К началу 2010‑х аудитория переросла десятки миллионов, и полное «ВКонтакте» перестало помещаться туда, где живут современные логотипы: в квадратную иконку приложения и крошечную фавиконку. Ответ классический (мы разбирали его в статье <a href="../vidy-logotipov/" target="_blank" rel="noopener">виды логотипов</a>): длинному текстовому логотипу заводят монограмму. Так появился знак «ВК» на синем квадрате со скруглёнными углами — сначала как иконка мобильного приложения, затем как полноценный самостоятельный знак.</p>
-      <p>В этот же период домен сократился до vk.com (2012) — интернационализация подталкивала и к латинскому написанию VK, которое до поры жило параллельно с кириллическим «ВК».</p>
-      <h2 id="2016-плоский-редизайн" class="step-heading"><span class="step-badge">2016</span><span class="step-title">Плоский редизайн</span></h2>
-      <p>В 2016 году соцсеть провела большой редизайн интерфейса и вместе с ним «выгладила» логотип: исчезли градиенты и объём, знак стал плоским, шрифт — геометричнее, а синий — светлее и чище. Это часть глобального тренда, о котором мы писали в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">почему бренды упрощают логотипы</a>: плоский знак лучше масштабируется, быстрее грузится и одинаково выглядит на любой плотности пикселей.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Как проверить эпоху скриншота</span></div><div class="callout-body"><p>Быстрый способ датировать старый скриншот ВКонтакте: градиентная плашка — до 2016 года, плоская светло‑синяя — 2016‑2021, монограмма VK с новым оттенком — после ребрендинга 2021 года.</p></div></div>
-      <h2 id="2021-ребрендинг-в-vk-знак-экосистемы" class="step-heading"><span class="step-badge">2021</span><span class="step-title">Ребрендинг в VK — знак экосистемы</span></h2>
-      <p>Осенью 2021 года произошло самое крупное изменение: холдинг Mail.ru Group переименовался в VK и забрал себе имя и знак соцсети. Латинская монограмма <strong>VK</strong> стала зонтичным брендом для десятков сервисов — <a href="../../logos/store/vkid/" target="_blank" rel="noopener">VK ID</a>, <a href="../../logos/social/vkclips/" target="_blank" rel="noopener">VK Клипов</a>, <a href="../../logos/social/vkmessenger/" target="_blank" rel="noopener">VK Мессенджера</a> и многих других. Сама соцсеть при этом сохранила отдельную иконку, а знак VK начал жить в двух ролях: логотип продукта и логотип компании.</p>
-      <p>Вместе с ребрендингом обновили и палитру: фирменный синий стал ярче (в сторону сине‑голубого спектра), появилась характерная плашка‑суперэллипс — форма между квадратом и кругом, унифицированная для иконок всех сервисов экосистемы. Посмотреть, сколько продуктов сегодня носит этот знак, можно на странице <a href="../../logos/ecosystem/vk/" target="_blank" rel="noopener">экосистемы VK</a> в нашем каталоге.</p>
-      <h2 id="почему-монограмма-победила">Почему монограмма победила</h2>
-      <p>История логотипа ВКонтакте — почти учебная иллюстрация к трём законам эволюции логотипов:</p>
-      <ol>
-      <li><strong>Носители диктуют форму.</strong> Пока логотип жил в шапке сайта, полное название работало. Как только главным носителем стала иконка 60×60 пикселей на экране телефона, победили две буквы. Про требования разных площадок — в статье <a href="../razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">размеры логотипа для сайта и соцсетей</a>.</li>
-      <li><strong>Упрощение необратимо.</strong> Каждый следующий редизайн убирал детали и ни один не добавлял. Градиенты, тени и засечки уходили по мере того, как рос парк устройств, на которых знак должен выглядеть одинаково.</li>
-      <li><strong>Знак перерастает продукт.</strong> Удачная монограмма оказалась ценнее названия: VK сегодня — это не «сайт вконтакте.ру», а бренд‑зонтик, под которым живут музыка, видео, почта, облако и мессенджер <a href="../../logos/social/max/" target="_blank" rel="noopener">MAX</a>… то есть целая экосистема.</li>
-      </ol>
-      <h2 id="сравнение-версий">Сравнение версий</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Период</th><th>Знак</th><th>Стиль</th><th>Главный носитель</th></tr></thead><tbody><tr><td>2006‑2012</td><td>«ВКонтакте» на плашке</td><td>объём, градиенты</td><td>шапка сайта</td></tr><tr><td>2012‑2016</td><td>«ВК» в скруглённом квадрате</td><td>градиент, блик</td><td>иконка приложения</td></tr><tr><td>2016‑2021</td><td>плоский «ВК»</td><td>флэт, светлый синий</td><td>иконка + веб</td></tr><tr><td>2021 – н. в.</td><td>монограмма VK в суперэллипсе</td><td>флэт, яркий синий</td><td>вся экосистема</td></tr></tbody></table></div>
+      <h2 id="2012-домен-и-экран-сократили-имя-до-двух-букв" class="step-heading"><span class="step-badge">2012</span><span class="step-title">Домен и экран сократили имя до двух букв</span></h2>
+      <p>В 2012 году основным адресом стал vk.com. Короткий домен совпал с тем, как пользователи уже называли соцсеть, и подготовил переход к латинской монограмме VK. Одновременно росла роль мобильных приложений, где длинная плашка превращалась в нечитаемую полоску.</p>
+      <p>Ответом стала квадратная иконка со скруглёнными углами. Внутри разместили белую монограмму VK, собранную в единый силуэт. <a href="https://commons.wikimedia.org/wiki/File:VK.com-logo.svg" target="_blank" rel="noopener">Версия начала 2010‑х</a> ещё сохраняла тёмный приглушённый синий и крупное белое поле вокруг знака. В ней уже есть главный принцип всех будущих вариантов: контур иконки задаёт носитель, а монограмма отвечает за узнавание.</p>
+      <p>Смена оказалась важнее обычного упрощения. Полное русское название описывало конкретную соцсеть. Две латинские буквы читались и как сокращение, и как самостоятельное имя. Так логотип получил запас для международного использования и для новых продуктов, хотя корпоративная экосистема появилась значительно позже.</p>
+      <div class="blog-ad-slot">
+  
+  <div id="yandex_rtb_R-A-19679616-14"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-14",
+          "renderTo": "yandex_rtb_R-A-19679616-14"
+      })
+  })
+  </script>
+</div>
+      <h2 id="2016-плоский-знак-стал-частью-интерфейса" class="step-heading"><span class="step-badge">2016</span><span class="step-title">Плоский знак стал частью интерфейса</span></h2>
+      <p>Весной 2016 года <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> начала переводить пользователей на новый десктопный интерфейс. Страница стала шире, меню получило пиктограммы, а визуальный шум сократился. Логотип прошёл ту же очистку: подложка стала ровной, монограмма — геометричнее, цвет — светлее. <a href="https://commons.wikimedia.org/wiki/File:Vk_Logo.svg" target="_blank" rel="noopener">Архивная версия 2016 года</a> показывает знак без бликов и декоративного объёма.</p>
+      <p>Плоская графика помогла держать одинаковый силуэт в браузере, мобильном приложении и маленькой служебной иконке. Для логотипа соцсети это особенно важно: пользователь встречает его десятки раз в интерфейсе, уведомлениях, кнопках авторизации и ссылках с других сайтов. Каждая лишняя деталь размножается по всей системе.</p>
+      <p>Этот этап закрепил монограмму как основной компактный знак. Полное имя продолжало жить в текстовой коммуникации, а квадратная версия стала повседневным лицом продукта. Разделение ролей подготовило следующий шаг: отдельные начертания могли меняться независимо, сохраняя общий буквенный силуэт.</p>
+      <h2 id="2020-у-соцсети-появилась-система-способная-расти" class="step-heading"><span class="step-badge">2020</span><span class="step-title">У соцсети появилась система, способная расти</span></h2>
+      <p>9 октября 2020 года <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> представила новый логотип, собственный шрифт и обновлённую веб‑версию. Синий стал ярким #0077FF, монограмма получила более чёткую геометрию, а рядом вернулось полное кириллическое имя. Его набрали гарнитурой VK Sans Display, которую команда соцсети разработала вместе со студией <a href="https://typetype.ru/blog/how-we-created-corporate-fonts-for-vk-services/" target="_blank" rel="noopener">TypeType</a>.</p>
+      <p>Возвращение слова «ВКонтакте» решало задачу продуктовой системы. Новый сервис мог поставить собственное название рядом с общей подписью и сохранить связь с главным брендом. Гарнитура работала сразу в логотипах, интерфейсах и рекламе, поэтому родство выражалось уже несколькими средствами: монограммой, шрифтом, цветом и правилами компоновки.</p>
+      <p>Этот момент точнее объясняет нынешнюю форму, чем простая ссылка на тренд минимализма. Знак готовили к множеству размеров и соседству с названиями сервисов. Яркий цвет усиливал заметность в сетке приложений, единый шрифт собирал подписи, а компактная монограмма оставляла продуктам место для собственного образа.</p>
+      <h2 id="четыре-версии-показывают-смену-носителя">Четыре версии показывают смену носителя</h2>
+      <p>На одной шкале видно, какие элементы исчезали и что оставалось постоянным. Широкое имя уступило место квадрату, сложная пластика стала плоской, а синий и буквы сохранили связь между эпохами.</p>
+      <div class="blog-timeline">
+          <a class="blog-timeline-node" href="../../logos/social/vk/">
+            <span class="blog-timeline-logo blog-timeline-logo--full"><img src="../../assets/logos/svgs/vk(2006)-full.svg?v=20260910" alt="Логотип ВКонтакте, 2006" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
+            <span class="blog-timeline-year">2006</span>
+          </a>
+          <a class="blog-timeline-node" href="../../logos/social/vk/">
+            <span class="blog-timeline-logo"><img src="../../assets/logos/svgs/vk(2012).svg?v=20260910" alt="Логотип ВКонтакте, 2012" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
+            <span class="blog-timeline-year">2012</span>
+          </a>
+          <a class="blog-timeline-node" href="../../logos/social/vk/">
+            <span class="blog-timeline-logo"><img src="../../assets/logos/svgs/vk(2016).svg?v=20260910" alt="Логотип ВКонтакте, 2016" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
+            <span class="blog-timeline-year">2016</span>
+          </a>
+          <a class="blog-timeline-node" href="../../logos/social/vk/">
+            <span class="blog-timeline-logo"><img src="../../assets/logos/svgs/vk.svg?v=20260910" alt="Логотип ВКонтакте, 2020–2021" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
+            <span class="blog-timeline-year">2020–2021</span>
+          </a>
+        </div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Период</th><th>Основная форма</th><th>Главный носитель</th><th>Что решал редизайн</th></tr></thead><tbody><tr><td>2006‑2011</td><td>полное имя на широкой плашке</td><td>шапка сайта</td><td>знакомил с новым названием</td></tr><tr><td>2012‑2015</td><td>монограмма VK в квадрате</td><td>мобильное приложение и фавикон</td><td>сохранял читаемость в малом размере</td></tr><tr><td>2016‑2019</td><td>плоская компактная монограмма</td><td>единый веб- и мобильный интерфейс</td><td>убирал лишние детали</td></tr><tr><td>с 2020</td><td>яркая иконка + кириллическое начертание</td><td>продуктовая система</td><td>связывал сервисы общим языком</td></tr></tbody></table></div>
+      <p>Шкала показывает причинную цепь. Каждый новый носитель отнимал у логотипа место и одновременно увеличивал число ситуаций, где знак должен работать. Поэтому композиция сокращалась, а система вокруг неё становилась подробнее.</p>
+      <h2 id="почему-монограмма-читается-в-32-пикселях">Почему монограмма читается в 32 пикселях</h2>
+      <p>Буквы VK в актуальном знаке соединены в один контур. Левая диагональ задаёт V, вертикальный штрих связывает половины, а развилка справа образует K. Между буквами нет обычного межбуквенного расстояния, поэтому глаз воспринимает их как единую фигуру. Такая сборка полезна в маленьком размере: два раздельных символа потребовали бы больше воздуха и стали бы тоньше.</p>
+      <p>В исходном SVG из каталога знак действительно задан на поле 32×32 пикселя. Внутри нет обводок, масок, градиентов и мелких островков. Синяя подложка и белый силуэт образуют максимальный цветовой контраст, а скругление углов отличает иконку от обычной синей плашки интерфейса. Поэтому знак остаётся различимым рядом с десятками приложений, где у каждого конкурента тот же небольшой квадрат.</p>
+      <p>Горизонтальное начертание решает другую задачу. В нём квадратная иконка стоит рядом с полным словом «ВКонтакте», набранным чёрным. Иконка быстро сообщает, чей это продукт, а название снимает двусмысленность в официальном документе, партнёрском блоке или крупной вывеске.</p>
+      <div class="blog-logo-fulls">
+          <a class="blog-logo-full" href="../../logos/social/vk/">
+            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/vk-full.svg?v=20260910" alt="Полный логотип ВКонтакте" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-cap">ВКонтакте</span>
+          </a>
+        </div>
+      <p>Система получает два режима без попытки уместить всё в одну композицию. В интерфейсе работает компактная монограмма. Там, где читателю нужно полное имя, появляется горизонтальное начертание. Такое разделение полезнее универсального логотипа, который одинаково посредственно чувствует себя и в фавиконе, и на титульном слайде.</p>
+      <h2 id="2021-знак-соцсети-стал-корпоративным-брендом" class="step-heading"><span class="step-badge">2021</span><span class="step-title">Знак соцсети стал корпоративным брендом</span></h2>
+      <p>В октябре 2021 года Mail.ru Group переименовалась в <a href="../../logos/ecosystem/vk/" target="_blank" rel="noopener">VK</a>. Компания объяснила выбор высокой узнаваемостью бренда <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и его потенциалом как общего имени экосистемы. Это зафиксировано в <a href="https://corp.vkcdn.ru/media/files/vk-esg-2021_eng.pdf" target="_blank" rel="noopener">отчёте VK за 2021 год</a>: новый бренд должен был усиливать связи между продуктами и показывать их принадлежность одной группе.</p>
+      <p>Визуальная основа уже существовала после редизайна 2020 года. Корпоративный ребрендинг расширил область применения монограммы. Раньше она обозначала соцсеть и её внутренние сервисы, теперь стала подписью для продуктов с разной историей: <a href="../../logos/store/vkid/" target="_blank" rel="noopener">VK ID<img class="blog-mention-icon" src="../../assets/logos/svgs/vk-id.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/social/vkclips/" target="_blank" rel="noopener">VK Клипов<img class="blog-mention-icon" src="../../assets/logos/svgs/vk-clips.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/social/vkmessenger/" target="_blank" rel="noopener">VK Мессенджера<img class="blog-mention-icon" src="../../assets/logos/svgs/vk-messenger.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/media/vkvideo/" target="_blank" rel="noopener">VK Видео<img class="blog-mention-icon" src="../../assets/logos/svgs/vk-video.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/social/vkgood/" target="_blank" rel="noopener">VK Добра<img class="blog-mention-icon" src="../../assets/logos/svgs/vk-good.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p>
+      <p>Разница между датами заметна и по тому, где пользователь встречал изменения. В 2020 году новый стиль появился внутри самой соцсети: в логотипе, шрифте и интерфейсе. В 2021‑м тот же визуальный словарь вышел на корпоративный уровень и начал связывать отдельные продукты. Поэтому 2020 год отвечает за форму актуального знака, а 2021‑й — за его новую роль. Если объединить события в один редизайн, пропадает главное: продуктовая система была испытана до того, как стала системой всей компании.</p>
+      <div class="ecosystem-grid blog-ecosystem-grid">
+          <a class="ecosystem-card" href="../../logos/social/vk/" aria-label="ВКонтакте">
+            <img src="../../assets/logos/svgs/vk.svg?v=20260910" alt="Логотип ВКонтакте" width="48" height="48" loading="lazy" decoding="async">
+            <span class="ecosystem-label">ВКонтакте</span>
+          </a>
+          <a class="ecosystem-card" href="../../logos/store/vkid/" aria-label="VK ID">
+            <img src="../../assets/logos/svgs/vk-id.svg?v=20260910" alt="Логотип VK ID" width="48" height="48" loading="lazy" decoding="async">
+            <span class="ecosystem-label">VK ID</span>
+          </a>
+          <a class="ecosystem-card" href="../../logos/social/vkclips/" aria-label="ВК Клипы">
+            <img src="../../assets/logos/svgs/vk-clips.svg?v=20260910" alt="Логотип ВК Клипы" width="48" height="48" loading="lazy" decoding="async">
+            <span class="ecosystem-label">ВК Клипы</span>
+          </a>
+          <a class="ecosystem-card" href="../../logos/social/vkmessenger/" aria-label="ВК Мессенджер">
+            <img src="../../assets/logos/svgs/vk-messenger.svg?v=20260910" alt="Логотип ВК Мессенджер" width="48" height="48" loading="lazy" decoding="async">
+            <span class="ecosystem-label">ВК Мессенджер</span>
+          </a>
+          <a class="ecosystem-card" href="../../logos/media/vkvideo/" aria-label="VK Видео">
+            <img src="../../assets/logos/svgs/vk-video.svg?v=20260910" alt="Логотип VK Видео" width="48" height="48" loading="lazy" decoding="async">
+            <span class="ecosystem-label">VK Видео</span>
+          </a>
+          <a class="ecosystem-card" href="../../logos/social/vkgood/" aria-label="VK Добро">
+            <img src="../../assets/logos/svgs/vk-good.svg?v=20260910" alt="Логотип VK Добро" width="48" height="48" loading="lazy" decoding="async">
+            <span class="ecosystem-label">VK Добро</span>
+          </a>
+        </div>
+      <p>В отличие от экосистемы <a href="../ekosistema-yandeksa-logotipy/" target="_blank" rel="noopener">Яндекса</a>, продукты <a href="../../logos/ecosystem/vk/" target="_blank" rel="noopener">VK</a> сильнее расходятся по цветам и характеру символов. Родство поддерживают название VK, фирменная типографика и повторяющаяся компактная геометрия. У каждого сервиса остаётся собственный акцент, поэтому ряд выглядит разнообразным и всё же читается как группа.</p>
+      <p>Именно здесь монограмма оправдала раннее сокращение. Слово «ВКонтакте» слишком тесно связывало бы новый продукт с социальной сетью. Две буквы выдерживают роль корпоративной подписи и оставляют сервису пространство для своего названия.</p>
+      <h2 id="почему-синий-пережил-все-редизайны">Почему синий пережил все редизайны</h2>
+      <p>Цвет в этой истории работает как самый быстрый маркер преемственности. Между #4D71A9 в ранней плашке, #4C75A3 в версии начала 2010‑х, #5181B8 в знаке 2016 года и нынешним #0077FF заметна разница. Все оттенки остаются в синем диапазоне, поэтому обновление выглядит продолжением знакомого бренда.</p>
+      <p>Менялась и функция цвета. В 2006 году синяя плашка была частью шапки сайта. В 2012‑м она стала фоном приложения. После 2020 года яркий синий превратился в опорный цвет интерфейса и продуктовой системы. Один и тот же элемент последовательно обслуживал страницу, иконку и экосистему.</p>
+      <p>Такой переход полезен как практический пример редизайна. Форму можно сокращать, если у зрителя остаются другие устойчивые признаки. <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> удерживала сразу два: синий диапазон и монограмму VK. Поэтому даже заметный скачок яркости в 2020 году сохранил преемственность.</p>
+      <h2 id="что-эта-история-даёт-дизайнеру">Что эта история даёт дизайнеру</h2>
+      <p>Первый вывод касается носителя. Логотип 2006 года хорошо работал в шапке и проигрывал в квадрате. Версия 2012 года решила проблему иконки, а вариант 2016‑го подчинился интерфейсу. Оценивать редизайн полезно на самом тесном и самом частом носителе, поскольку именно там быстро проявляются лишние детали.</p>
+      <p>Второй вывод связан с запасом роста. Монограмма появилась за девять лет до корпоративного ребрендинга. Её короткая нейтральная форма позволила перенести узнаваемость соцсети на группу продуктов. Длинное описательное имя такого запаса почти не оставляет.</p>
+      <p>Третий вывод относится к системе. В 2020 году обновили одновременно знак, шрифт, палитру и интерфейсные правила. Благодаря этому ребрендинг 2021 года получил готовый визуальный язык. Один логотип обозначает компанию только на титульной странице; в реальном продукте бренд собирают повторяющиеся решения на десятках экранов.</p>
+      <p>Перед похожим редизайном стоит составить карту носителей в хронологическом порядке: где знак появился сначала, где его видят чаще всего и какой формат станет главным через несколько лет. У <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> такой картой были шапка сайта, мобильная иконка, единый интерфейс и линейка сервисов. Последовательность объясняет каждый этап лучше субъективного спора о красоте старой и новой версии.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -251,16 +340,17 @@ window.yaContextCb.push(() => {
     })
 })
 </script></div>
-      <h2 id="где-скачать-актуальный-логотип-vk">Где скачать актуальный логотип VK</h2>
-      <p>Все текущие варианты — полный знак, иконка, монохромные версии — лежат на странице <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте в нашем каталоге</a>: SVG и PNG с прозрачным фоном, бесплатно. Точные фирменные цвета можно посмотреть в статье <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">фирменные цвета известных брендов</a> или прямо на странице логотипа — блок «Цвета бренда» показывает HEX‑коды из оригинального SVG.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Про использование</span></div><div class="callout-body"><p>Логотип VK — зарегистрированный товарный знак. Использовать его можно в новостях, обзорах и справочных материалах, но нельзя — в своей айдентике или так, будто VK одобрил ваш продукт. Подробнее — в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>.</p></div></div>
-      <p>Другие истории из этой серии: <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">логотип Сбера</a>, <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">логотип Яндекса</a>, <a href="../istoriya-logotipa-telegram/" target="_blank" rel="noopener">логотип Telegram</a> и <a href="../istoriya-logotipa-apple/" target="_blank" rel="noopener">логотип Apple</a>.</p>
+      <h2 id="где-скачать-логотип-vk">Где скачать логотип VK</h2>
+      <p>На странице <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте в каталоге<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> лежат актуальная иконка, полное горизонтальное начертание и исторические версии 2006, 2012 и 2016 годов. Файлы доступны в SVG, а текущий знак можно экспортировать и в PNG. Фирменный ресурс <a href="https://brand.vklanding.com/" target="_blank" rel="noopener">ВКонтакте</a> просит сохранять форму и цвета основной версии; чёрно‑белое и монохромное начертания подходят только для предусмотренных правилами случаев.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Про использование</span></div><div class="callout-body"><p>Логотип <a href="../../logos/ecosystem/vk/" target="_blank" rel="noopener">VK</a> остаётся товарным знаком. Справочная публикация, новость или сравнительная таблица требуют точного воспроизведения и ясного контекста. Использование знака в собственной айдентике создаёт ложную связь с компанией. Подробности собраны в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">«Можно ли использовать чужой логотип»</a>.</p></div></div>
+      <p>Главная линия этой истории проста: знак <a href="../../logos/social/vk/" target="_blank" rel="noopener">ВКонтакте<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> сокращался по мере уменьшения носителя, а затем вырос по смыслу вместе с экосистемой. Синий цвет связал версии, монограмма пережила смену интерфейсов, а шрифт и продуктовые правила превратили две буквы в общий язык компании.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="0">
+          <a class="blog-card" href="../istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="24">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -273,7 +363,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            24
           </div>
           </div>
           <div class="blog-card-title">История логотипа WhatsApp — телефонная трубка, пережившая всё</div>
@@ -281,7 +371,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-tiktok/" data-date="2026-08-03" data-views="2">
+      <a class="blog-card" href="../istoriya-logotipa-tiktok/" data-date="2026-08-03" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -294,7 +384,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            12
           </div>
           </div>
           <div class="blog-card-title">История логотипа TikTok — нота, глитч и сцена в темноте</div>
@@ -302,7 +392,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-instagram/" data-date="2026-07-30" data-views="6">
+      <a class="blog-card" href="../istoriya-logotipa-instagram/" data-date="2026-07-30" data-views="37">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -315,73 +405,73 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            6
+            37
           </div>
           </div>
-          <div class="blog-card-title">История логотипа Instagram — от полароида до градиента</div>
+          <div class="blog-card-title">История логотипа Instagram — от полароида до вордмарка 2026 года</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../oformlenie-socsetej/" data-date="2026-09-08" data-views="0">
+      <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3v18" /><rect width="12" height="18" x="6" y="3" rx="2" /><path d="M22 3v18" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">Оформление соцсетей — как превратить ленту в витрину бренда</div>
+          <div class="blog-card-title">Логотипы мессенджеров — почему все выбирают пузырь и самолётик</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-uznat-cvet-logotipa/" data-date="2026-06-22" data-views="14">
+      <a class="blog-card" href="../kak-optimizirovat-svg/" data-date="2026-06-16" data-views="58">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Цвета</span><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Инструкции</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 9-8.414 8.414A2 2 0 0 0 3 18.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 3.828 21h1.344a2 2 0 0 0 1.414-.586L15 12" /><path d="m18 9 .4.4a1 1 0 1 1-3 3l-3.8-3.8a1 1 0 1 1 3-3l.4.4 3.4-3.4a1 1 0 1 1 3 3z" /><path d="m2 22 .414-.414" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Оптимизация</span><span class="blog-card-tag">Сайты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>22.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            14
+            58
           </div>
           </div>
-          <div class="blog-card-title">Как узнать точный цвет логотипа — HEX‑код за 30 секунд</div>
+          <div class="blog-card-title">Как оптимизировать SVG — уменьшаем вес файла в 2‑10 раз без потери качества</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../png-ili-jpg-chto-luchshe/" data-date="2026-07-04" data-views="12">
+      <a class="blog-card" href="../kak-vstavit-svg-na-sajt/" data-date="2026-06-25" data-views="30">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Форматы</span><span class="blog-card-tag">Графика</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16" /><path d="M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2" /><circle cx="13" cy="7" r="1" fill="currentColor" /><rect x="8" y="2" width="14" height="14" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Вёрстка</span><span class="blog-card-tag">Сайты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>25.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            12
+            30
           </div>
           </div>
-          <div class="blog-card-title">PNG или JPG — чем отличаются и что выбрать для каждой задачи</div>
+          <div class="blog-card-title">Как вставить SVG на сайт — img, инлайн, background и что выбрать</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -391,7 +481,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#2006-рождение-вконтакте">2006: рождение «ВКонтакте»</a></li><li><a href="#2012-эпоха-вк-название-сжимается-до-двух-букв">2012: эпоха «ВК» — название сжимается до двух букв</a></li><li><a href="#2016-плоский-редизайн">2016: плоский редизайн</a></li><li><a href="#2021-ребрендинг-в-vk-знак-экосистемы">2021: ребрендинг в VK — знак экосистемы</a></li><li><a href="#почему-монограмма-победила">Почему монограмма победила</a></li><li><a href="#сравнение-версий">Сравнение версий</a></li><li><a href="#где-скачать-актуальный-логотип-vk">Где скачать актуальный логотип VK</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#2006-логотип-объяснял-куда-попал-пользователь">2006: логотип объяснял, куда попал пользователь</a></li><li><a href="#2012-домен-и-экран-сократили-имя-до-двух-букв">2012: домен и экран сократили имя до двух букв</a></li><li><a href="#2016-плоский-знак-стал-частью-интерфейса">2016: плоский знак стал частью интерфейса</a></li><li><a href="#2020-у-соцсети-появилась-система-способная-расти">2020: у соцсети появилась система, способная расти</a></li><li><a href="#четыре-версии-показывают-смену-носителя">Четыре версии показывают смену носителя</a></li><li><a href="#почему-монограмма-читается-в-32-пикселях">Почему монограмма читается в 32 пикселях</a></li><li><a href="#2021-знак-соцсети-стал-корпоративным-брендом">2021: знак соцсети стал корпоративным брендом</a></li><li><a href="#почему-синий-пережил-все-редизайны">Почему синий пережил все редизайны</a></li><li><a href="#что-эта-история-даёт-дизайнеру">Что эта история даёт дизайнеру</a></li><li><a href="#где-скачать-логотип-vk">Где скачать логотип VK</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -399,25 +489,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -494,6 +576,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -539,10 +622,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

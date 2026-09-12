@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "scripts/git-autobackup-hook.sh",
+            "timeout": 15,
+            "statusMessage": "Проверка на разрушительную git-команду…"
+          }
+        ]
+      }
+    ]
+  }
+}

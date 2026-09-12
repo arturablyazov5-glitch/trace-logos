@@ -1,0 +1,909 @@
+// Tilda Helper — показывает ID блока в панели кнопок редактора Tilda.
+//
+// Как устроен редактор: блоки страницы — div.r.t-rec с id="recXXXXXXXXXX".
+// Панели кнопок («Настройки», «Редактировать блок») лежат ОТДЕЛЬНО от блоков,
+// в .tp-record-ui-container: по одному .tp-record-ui на блок, без ссылки на id.
+// Сопоставление панель↔блок — только по геометрии: top панели совпадает
+// с top блока с точностью до долей пикселя.
+//
+// Панели пересоздаются при добавлении/удалении/перемещении блоков, поэтому
+// бейджи поддерживаются периодическим проходом (интервал), а не разовой вставкой.
+// Проход идемпотентен: существующий бейдж переиспользуется, текст обновляется
+// только при смене id.
+//
+// Кнопка-бейдж переиспользует нативные классы Tilda (tp-record-ui__button,
+// __icon, __button-text), поэтому шрифт, цвет и hover-стили совпадают с
+// соседними кнопками «Настройки» / «Редактировать блок» без лишнего CSS.
+//
+// Верхняя панель редактора (mainmenu): кнопка «Предпросмотр» скрывается,
+// а «Опубликовать» / «Настройки» / «Еще» остаются теми же элементами
+// (id, data-action, обработчики кликов не трогаем) — меняется только
+// содержимое (innerHTML на иконку), поэтому вся штатная логика Tilda
+// продолжает работать.
+
+(() => {
+  if (location.pathname.startsWith('/projects/')) {
+    // Список страниц сайта / список сайтов. Тильда сама предлагает
+    // «продвинутый режим» (компактная таблица вместо крупных превью)
+    // только когда страниц/сайтов больше 15 — флаг лежит в
+    // localStorage.powermode и читается как фолбэк, если сервер не прислал
+    // window.powermode (см. td-p-all.min.js). Включаем всегда, не дожидаясь порога.
+    try {
+      localStorage.setItem('powermode', 'y');
+      if (!window.powermode && typeof window.td__project__initPowerMode === 'function') {
+        window.powermode = 'y';
+        window.td__project__initPowerMode();
+      }
+    } catch (e) {}
+    return;
+  }
+
+  const BADGE_CLASS = 'th-block-id-badge';
+  const CLASS_BADGE_CLASS = 'th-block-class-badge';
+  const COPIED_TEXT = 'Скопировано';
+
+  // Иконка копирования (Feather "copy"), подогнана под размер нативных
+  // иконок Tilda (14×14, currentColor — наследует чёрный цвет текста кнопки).
+  const COPY_ICON_SVG = `
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    </svg>
+  `;
+
+  // Иконка для бейджа CSS-класса блока — та же иконка копирования, что и у ID.
+  const CLASS_ICON_SVG = COPY_ICON_SVG;
+
+  // Иконки для верхней панели (Feather icons, 20×20, currentColor).
+  const PUBLISH_ICON_SVG = `
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+      <polyline points="16 16 12 12 8 16"></polyline>
+      <line x1="12" y1="12" x2="12" y2="21"></line>
+    </svg>
+  `;
+  const SETTINGS_ICON_SVG = `
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    </svg>
+  `;
+  const MORE_ICON_SVG = `
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" stroke="none">
+      <circle cx="12" cy="5" r="1.6"></circle>
+      <circle cx="12" cy="12" r="1.6"></circle>
+      <circle cx="12" cy="19" r="1.6"></circle>
+    </svg>
+  `;
+  // Иконка для поля Z-index (Feather "layers"), как background-image для
+  // ::before нативного .t-button__text
+  // (см. ZINDEX_TOGGLE_CLASS ниже) — там uже зарезервирован слот 14×14 под
+  // фоновую SVG-картинку, currentColor в data-URI не резолвится, поэтому
+  // цвет прошит явно (#333 — совпадает с цветом текста нативных кнопок).
+  const ZINDEX_ICON_DATA_URL =
+    'url("data:image/svg+xml;charset=utf-8,' +
+    encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14" ' +
+        'fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+        '<polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>' +
+        '<polyline points="2 17 12 22 22 17"></polyline>' +
+        '<polyline points="2 12 12 17 22 12"></polyline>' +
+        '</svg>'
+    ) +
+    '")';
+
+  const style = document.createElement('style');
+  style.textContent = `
+    .${BADGE_CLASS} .th-block-id-icon,
+    .${CLASS_BADGE_CLASS} .th-block-class-icon {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+    .th-icon-only {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+    /* .dropdown-toggle рисует каретку через ::after (CSS-треугольник border-трюком) —
+       это не часть innerHTML, поэтому убирается только так. */
+    .th-icon-only.dropdown-toggle::after {
+      display: none !important;
+    }
+    /* .t-button__text у нативных строк .pe-properties__items резервирует слот
+       14×14 под иконку через ::before (пустой по умолчанию, картинка задаётся
+       модификатором вида .pe-properties__css-class .t-button__text::before) —
+       подключаемся к тому же слоту, чтобы не плодить лишний flex-элемент
+       (отдельный <span> с иконкой сдвигал бы текст на этот же слот + свой gap). */
+    .th-zindex-toggle-btn .t-button__text::before {
+      background-image: ${ZINDEX_ICON_DATA_URL};
+    }
+    /* У ЛЮБОГО блока T123 («HTML-код») кнопка «Настройки» бесполезна — там
+       нечего настраивать, кроме кода, который и так открывается кликом по
+       блоку. Прячем ТОЛЬКО саму кнопку (не всю группу — в ней рядом лежит
+       «Контент», которую трогать не нужно) у всех T123, не только у
+       carrier'ов z-index. */
+    .th-t123-panel .tp-record-ui__group > button:has(.tp-record-ui__icon_settings) {
+      display: none !important;
+    }
+    /* Левая рамка/скругление группы висят на :first-child — если «Настройки»
+       была первой кнопкой в группе, после её скрытия рамка слева у соседней
+       видимой кнопки (например «Контент») пропадает. Рисуем её сами. */
+    .th-t123-panel .tp-record-ui__group > button:has(.tp-record-ui__icon_settings):first-child
+      + button {
+      border-left: 1px solid rgb(204, 204, 204) !important;
+      border-radius: 3px !important;
+    }
+    /* Панель carrier-блока T123 (им управляет поле z-index в сайдбаре, руками
+       трогать не нужно) — прячем всё, кроме родной кнопки «Удалить»:
+       переключатель типа блока («T123 ▾»), настройки/редактирование, порядок
+       (вверх/вниз), дублировать, скрыть и меню «⋮». */
+    .th-carrier-panel .tp-record-ui__group_tpl,
+    .th-carrier-panel .tp-record-ui__group:has(.tp-record-ui__icon_settings),
+    .th-carrier-panel .tp-record-ui__group:has(.tp-record-ui__icon_up) {
+      display: none !important;
+    }
+    /* «Удалить» сидит в одной группе с «Дублировать», «Скрыть» и меню «⋮» —
+       группу целиком оставляем, а прячем в ней все кнопки, КРОМЕ удаления. */
+    .th-carrier-panel .tp-record-ui__container_top.tp-record-ui__container_right
+      .tp-record-ui__group_borders
+      > button:not(:has(.tp-record-ui__icon_delete)) {
+      display: none !important;
+    }
+    /* Родная левая рамка и скругление группы висят на :first-child (кнопка
+       «Дублировать»), а не на самой видимой кнопке — при её скрытии рамка
+       слева у «Удалить» пропадает. Раз «Удалить» теперь визуально первая
+       (и единственная) в группе — рисуем ей рамку/скругление сами, 1:1 с
+       тем, что computed-style показывает у родного first-child. */
+    .th-carrier-panel .tp-record-ui__container_top.tp-record-ui__container_right
+      .tp-record-ui__group_borders
+      > button:has(.tp-record-ui__icon_delete) {
+      border-left: 1px solid rgb(204, 204, 204) !important;
+      border-radius: 3px !important;
+    }
+    /* Фон carrier-блока в канвасе — свой синий оттенок вместо родного
+       зелёного (#eeffed), чтобы визуально отличать служебный блок от
+       обычных T123. */
+    .th-carrier-block .tmod {
+      background-color: #eaf2ff !important;
+    }
+  `;
+  (document.head || document.documentElement).appendChild(style);
+
+  function updateTopToolbar() {
+    // Скрыть кнопку «Предпросмотр» целиком (переключатель Предпросмотр/Редактирование).
+    const previewLi = document.querySelector('.tp-menu__navbar__item_preview');
+    if (previewLi && previewLi.style.display !== 'none') {
+      previewLi.style.display = 'none';
+    }
+
+    // «Опубликовать» → иконка
+    const publishBtn = document.getElementById('page_menu_publishlink');
+    if (publishBtn && !publishBtn.dataset.thIcon) {
+      publishBtn.dataset.thIcon = '1';
+      publishBtn.classList.add('th-icon-only');
+      publishBtn.title = 'Опубликовать';
+      publishBtn.setAttribute('aria-label', 'Опубликовать');
+      publishBtn.innerHTML = PUBLISH_ICON_SVG;
+    }
+
+    // «Настройки» → иконка
+    const settingsBtn = document.querySelector('button[data-action="settings"]');
+    if (settingsBtn && !settingsBtn.dataset.thIcon) {
+      settingsBtn.dataset.thIcon = '1';
+      settingsBtn.classList.add('th-icon-only');
+      settingsBtn.title = 'Настройки';
+      settingsBtn.setAttribute('aria-label', 'Настройки');
+      settingsBtn.innerHTML = SETTINGS_ICON_SVG;
+    }
+
+    // «Еще» → три точки
+    const moreBtn = document.querySelector('button[data-action="dropdown"]');
+    if (moreBtn && !moreBtn.dataset.thIcon) {
+      moreBtn.dataset.thIcon = '1';
+      moreBtn.classList.add('th-icon-only');
+      moreBtn.title = 'Еще';
+      moreBtn.setAttribute('aria-label', 'Еще');
+      moreBtn.innerHTML = MORE_ICON_SVG;
+    }
+  }
+
+  function findRecForPanel(panel, recs) {
+    const panelTop = panel.getBoundingClientRect().top;
+    let best = null;
+    let bestDist = 3; // панель и блок совпадают по top почти точно
+    for (const rec of recs) {
+      const d = Math.abs(rec.getBoundingClientRect().top - panelTop);
+      if (d < bestDist) {
+        bestDist = d;
+        best = rec;
+      }
+    }
+    return best;
+  }
+
+  function onBadgeClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const badge = e.currentTarget;
+    const textSpan = badge.querySelector('.tp-record-ui__button-text');
+    const text = '#' + badge.dataset.rec;
+    const done = () => {
+      badge.dataset.copied = '1';
+      textSpan.textContent = COPIED_TEXT;
+      setTimeout(() => {
+        delete badge.dataset.copied;
+        textSpan.textContent = '#' + badge.dataset.rec;
+      }, 1200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+
+  function onClassBadgeClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const badge = e.currentTarget;
+    const textSpan = badge.querySelector('.tp-record-ui__button-text');
+    const text = badge.dataset.cls;
+    const done = () => {
+      badge.dataset.copied = '1';
+      textSpan.textContent = COPIED_TEXT;
+      setTimeout(() => {
+        delete badge.dataset.copied;
+        textSpan.textContent = badge.dataset.cls;
+      }, 1200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+
+  function fallbackCopy(text, done) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+    done();
+  }
+
+  function updateBadges() {
+    const panels = document.querySelectorAll('.tp-record-ui');
+    if (!panels.length) return;
+    const recs = [];
+    document.querySelectorAll('.r.t-rec').forEach((r) => {
+      if (/^rec\d+$/.test(r.id)) recs.push(r);
+    });
+    if (!recs.length) return;
+
+    panels.forEach((panel) => {
+      const rec = findRecForPanel(panel, recs);
+      if (!rec) return;
+
+      // Помечаем панель carrier-блока T123, чтобы CSS спрятал у него лишние
+      // действия (настройки/редактирование/порядок/дублирование) — блоком
+      // управляет поле z-index в сайдбаре, руками его трогать не нужно.
+      const isCarrier = isT123Wrapper(getRecordWrapper(rec.id)) && rec.textContent.includes(CARRIER_MARKER_PREFIX);
+      panel.classList.toggle('th-carrier-panel', isCarrier);
+      rec.classList.toggle('th-carrier-block', isCarrier);
+
+      // .tmod — контейнер плейсхолдера «Код будет выполнен на опубликованной
+      // странице…», рисуется в редакторе только у блоков T123 («HTML-код»).
+      // По нему отличаем любой T123 (не только наш carrier), чтобы спрятать
+      // у него бесполезную кнопку «Настройки».
+      const isT123 = !!rec.querySelector('.tmod');
+      panel.classList.toggle('th-t123-panel', isT123);
+
+      const row = panel.querySelector('.tp-record-ui__container_top .tp-record-ui__row');
+      if (!row) return;
+
+      let badge = row.querySelector('.' + BADGE_CLASS);
+      let textSpan;
+      if (!badge) {
+        const group = document.createElement('div');
+        group.className = 'tp-record-ui__group';
+        badge = document.createElement('button');
+        badge.type = 'button';
+        badge.className = 'tp-record-ui__button tp-record-ui__button_white ' + BADGE_CLASS;
+        badge.title = 'ID блока — клик, чтобы скопировать';
+
+        const icon = document.createElement('span');
+        icon.className = 'tp-record-ui__icon th-block-id-icon';
+        icon.innerHTML = COPY_ICON_SVG;
+
+        textSpan = document.createElement('span');
+        textSpan.className = 'tp-record-ui__button-text';
+
+        badge.appendChild(icon);
+        badge.appendChild(textSpan);
+        badge.addEventListener('click', onBadgeClick);
+        group.appendChild(badge);
+        row.appendChild(group);
+      } else {
+        textSpan = badge.querySelector('.tp-record-ui__button-text');
+      }
+
+      if (badge.dataset.rec !== rec.id && !badge.dataset.copied) {
+        badge.dataset.rec = rec.id;
+        textSpan.textContent = '#' + rec.id;
+      }
+
+      // CSS-класс блока лежит не на самом .r.t-rec, а на его обёртке
+      // сортировки div#record<numericId> — атрибут data-custom-class
+      // (см. tilda-internal-api). Бейдж показываем только если класс задан.
+      const wrapper = document.getElementById('record' + rec.id.slice(3));
+      const customClass = wrapper && wrapper.getAttribute('data-custom-class');
+      let classBadge = row.querySelector('.' + CLASS_BADGE_CLASS);
+      if (customClass) {
+        if (!classBadge) {
+          const classGroup = document.createElement('div');
+          classGroup.className = 'tp-record-ui__group';
+          classBadge = document.createElement('button');
+          classBadge.type = 'button';
+          classBadge.className = 'tp-record-ui__button tp-record-ui__button_white ' + CLASS_BADGE_CLASS;
+          classBadge.title = 'CSS класс блока — клик, чтобы скопировать';
+
+          const classIcon = document.createElement('span');
+          classIcon.className = 'tp-record-ui__icon th-block-class-icon';
+          classIcon.innerHTML = CLASS_ICON_SVG;
+
+          const classTextSpan = document.createElement('span');
+          classTextSpan.className = 'tp-record-ui__button-text';
+
+          classBadge.appendChild(classIcon);
+          classBadge.appendChild(classTextSpan);
+          classBadge.addEventListener('click', onClassBadgeClick);
+          classGroup.appendChild(classBadge);
+          row.appendChild(classGroup);
+        }
+        const classTextSpan = classBadge.querySelector('.tp-record-ui__button-text');
+        if (classBadge.dataset.cls !== customClass && !classBadge.dataset.copied) {
+          classBadge.dataset.cls = customClass;
+          classTextSpan.textContent = customClass;
+        }
+      } else if (classBadge) {
+        classBadge.closest('.tp-record-ui__group').remove();
+      }
+
+      if (isCarrier) updateCarrierPlaceholderText(rec);
+    });
+  }
+
+  // Родная заглушка T123 в канвасе редактора («Код будет выполнен на
+  // опубликованной странице…») вводит в заблуждение именно у carrier-блока:
+  // эффект z-index виден в редакторе сразу (см. applyLiveCssPreview), и
+  // блок никто не должен редактировать руками — им управляет поле z-index
+  // в сайдбаре блока выше. Подменяем текст на понятное объяснение.
+  const CARRIER_PLACEHOLDER_TEXT =
+    'Задаёт z-index блоку выше. Управляйте им через поле «Изменить Z-index» в настройках того блока.';
+
+  function updateCarrierPlaceholderText(rec) {
+    const holder = rec.querySelector('.tmod__text');
+    if (!holder || holder.dataset.thPlaceholderSet) return;
+    const leaf = holder.querySelector('div');
+    if (!leaf) return;
+    leaf.textContent = CARRIER_PLACEHOLDER_TEXT;
+    holder.dataset.thPlaceholderSet = '1';
+  }
+
+  // ---- Z-index (поле в сайдбаре «Настройки» блока → T123-блок ПОД этим блоком) ----
+  //
+  // T123 «HTML-код» не выполняется в редакторе — код там виден только как
+  // текст-превью, а реально работает после публикации. Для каждого блока, которому
+  // задан z-index, держим ОТДЕЛЬНЫЙ T123-блок, вставленный прямо под ним, с одним
+  // CSS-правилом. Такой carrier помечен комментарием «th-zi:recXXXX» — по нему мы
+  // находим carrier конкретного блока. В самом редакторе эффект имитируем
+  // inline-стилем на .r.t-rec (T123 в редакторе не исполняется).
+  //
+  // БЕЗОПАСНОСТЬ (после инцидента с потерей контента):
+  //  • Сохраняем ТОЛЬКО через штатную tp__saveOnlyOneFieldInRecord(id,'code','code',html)
+  //    — она пишет одно поле КОНКРЕТНОГО блока по ID напрямую на сервер.
+  //  • Пишем ТОЛЬКО в свой carrier (созданный нами или помеченный нашим маркером).
+  //  • НИКОГДА не открываем редактор чужого блока и не жмём «Сохранить» за юзера.
+  //  • Сброс значения удаляет только наш carrier (tp__delRecord).
+  //  • Любое действие попадает в историю Tilda и отменяется через Cmd+Z.
+  const ZINDEX_TOGGLE_CLASS = 'th-zindex-toggle-btn';
+  const ZINDEX_WRAPPER_CLASS = 'th-zindex-wrapper';
+  const CARRIER_MARKER_PREFIX = 'th-zi:'; // + full rec id (rec2031118111)
+
+  // Раскрыто ли поле вручную — хранится не в глобальной карте по recId, а на
+  // самом DOM-узле панели (wrapper.dataset.userOpened), потому что Tilda
+  // пересоздаёт .pe-properties при закрытии/открытии сайдбара заново: новый
+  // узел стартует без этого флага, и поле снова сворачивается в кнопку, если
+  // значение не задано. Глобальный Set держал бы флаг вечно и не давал полю
+  // схлопнуться после переоткрытия сайдбара.
+
+  function getAllRecs() {
+    const out = [];
+    document.querySelectorAll('.r.t-rec').forEach((r) => {
+      if (/^rec\d+$/.test(r.id)) out.push(r);
+    });
+    return out;
+  }
+
+  // Блоки типа T123 «HTML-код» — единственные, чей textContent нам вообще
+  // интересен (CSS/JS-текст, z-index carrier'ы). Фильтруем по атрибуту
+  // data-record-cod="T123" на обёртке #recordXXXX (см. getRecordWrapper) —
+  // это O(1) на блок, без чтения textContent. На типичной странице блоков
+  // T123 единицы, а обычных (текст/картинки/каталог) — десятки; читать
+  // textContent КАЖДОГО блока на каждый tick (700мс) ради поиска CSS/маркера
+  // означало бы гонять весь текст страницы через regex вхолостую даже тогда,
+  // когда T123 на странице вообще нет.
+  function isT123Wrapper(wrapper) {
+    return !!wrapper && wrapper.getAttribute('data-record-cod') === 'T123';
+  }
+
+  function getT123Recs() {
+    return getAllRecs().filter((r) => isT123Wrapper(getRecordWrapper(r.id)));
+  }
+
+  // Все carrier'ы целевого блока = T123, чей код содержит маркер «th-zi:recXXXX».
+  // Обычно один, но пользователь мог продублировать блок — тогда их несколько.
+  function findAllCarriersFor(targetFullId) {
+    return getT123Recs().filter((r) =>
+      r.textContent.includes(CARRIER_MARKER_PREFIX + targetFullId)
+    );
+  }
+
+  function delRecord(rec) {
+    if (rec && typeof window.tp__delRecord === 'function') {
+      window.tp__delRecord(rec.id.replace('rec', ''));
+    }
+  }
+
+  function buildCarrierContent(targetFullId, val) {
+    // position:relative обязателен — на static-блоке (дефолт Tilda) z-index
+    // игнорируется браузером и на опубликованном сайте не сработает.
+    return (
+      '<style>\n/* ' + CARRIER_MARKER_PREFIX + targetFullId + ' */\n' +
+      '#' + targetFullId + '{position:relative;z-index:' + val + ' !important;}\n' +
+      '</style>'
+    );
+  }
+
+  // Карта numericId → z-index по всем нашим carrier-блокам на странице.
+  function getCurrentZIndexMap() {
+    const map = new Map();
+    getT123Recs().forEach((r) => {
+      if (!r.textContent.includes(CARRIER_MARKER_PREFIX)) return;
+      const t = r.textContent;
+      const blockRe = /#rec(\d+)\s*\{([^}]*)\}/g;
+      let m;
+      while ((m = blockRe.exec(t))) {
+        const z = m[2].match(/z-index\s*:\s*(-?\d+)/);
+        if (z) map.set(m[1], z[1]);
+      }
+    });
+    return map;
+  }
+
+  // Оптимистичные правки поверх карты из carrier — держим их, пока сохранение
+  // не подтвердилось, иначе tick() затирал бы свежий ввод старым значением.
+  const zIndexOverrides = new Map();
+
+  function getEffectiveZIndexMap() {
+    const map = getCurrentZIndexMap();
+    zIndexOverrides.forEach((val, recId) => {
+      if (val === null) map.delete(recId); else map.set(recId, val);
+    });
+    return map;
+  }
+
+  // ---- Live CSS Preview ----
+  //
+  // T123 «HTML-код» не выполняется в редакторе — виден только как текст-превью
+  // (r.textContent содержит буквально «<style>...</style>» как текст, не как
+  // распарсенный DOM). Вместо симуляции одного свойства (как раньше делал
+  // z-index через el.style.zIndex) — вживую зеркалим CSS-текст в один <style>
+  // тег в <head> редактора на каждый tick. Тогда ЛЮБОЙ CSS из любого T123-блока
+  // виден в редакторе сразу, без публикации, а не только z-index.
+  const LIVE_CSS_ZINDEX_ID = 'th-live-css-zindex';
+  const LIVE_CSS_BLOCK_PREFIX = 'th-live-css-';
+
+  // z-index собираем не парсингом чужого текста, а прямо из effective-карты
+  // (карта уже включает оптимистичные правки из поля ввода до сохранения на
+  // сервер) — иначе typing-preview отставал бы на время сохранения+рендера.
+  // Это наш собственный сгенерированный CSS, гарантированно валидный —
+  // достаточно одного общего тега.
+  function buildZIndexCss(map) {
+    let css = '';
+    map.forEach((val, recId) => {
+      css += '#rec' + recId + '{position:relative;z-index:' + val + ' !important;}\n';
+    });
+    return css;
+  }
+
+  function getOrCreateStyleEl(id) {
+    let el = document.getElementById(id);
+    if (!el) {
+      el = document.createElement('style');
+      el.id = id;
+      document.head.appendChild(el);
+    }
+    return el;
+  }
+
+  // Сырой CSS из ЛЮБЫХ других T123-блоков со <style> на странице (не наши
+  // z-index carrier'ы — для них CSS уже строится из effective-карты выше).
+  // ВАЖНО: у каждого исходного блока — СВОЙ <style>-тег, а не общий. Это
+  // пользовательский текст, не гарантированно валидный CSS (например, забытая
+  // закрывающая скобка в @media); один общий тег означал бы, что ошибка в
+  // одном блоке обрывает парсинг стилей ВСЕХ блоков после него в общем
+  // CSSOM. На опубликованной странице у каждого блока свой <style>, поэтому
+  // ошибка там локальна — воспроизводим то же самое здесь.
+  function applyLiveCssPreview(zIndexMap) {
+    const zEl = getOrCreateStyleEl(LIVE_CSS_ZINDEX_ID);
+    const zCss = buildZIndexCss(zIndexMap);
+    if (zEl.textContent !== zCss) zEl.textContent = zCss;
+
+    const seen = new Set();
+    getT123Recs().forEach((r) => {
+      if (r.textContent.includes(CARRIER_MARKER_PREFIX)) return;
+      const t = r.textContent;
+      if (!t.includes('<style')) return;
+      let css = '';
+      const re = /<style[^>]*>([\s\S]*?)<\/style>/gi;
+      let m;
+      while ((m = re.exec(t))) css += m[1] + '\n';
+      if (!css) return;
+
+      const id = LIVE_CSS_BLOCK_PREFIX + r.id;
+      seen.add(id);
+      const el = getOrCreateStyleEl(id);
+      if (el.textContent !== css) el.textContent = css;
+    });
+
+    // Убираем теги блоков, которые удалили или из которых убрали <style>.
+    document.querySelectorAll('style[id^="' + LIVE_CSS_BLOCK_PREFIX + '"]').forEach((el) => {
+      if (!seen.has(el.id)) el.remove();
+    });
+  }
+
+  function waitFor(checkFn, timeout, interval) {
+    timeout = timeout || 4000;
+    interval = interval || 100;
+    return new Promise((resolve) => {
+      const start = Date.now();
+      (function poll() {
+        const result = checkFn();
+        if (result) return resolve(result);
+        if (Date.now() - start > timeout) return resolve(null);
+        setTimeout(poll, interval);
+      })();
+    });
+  }
+
+  // tplid шаблона «T123 HTML-код» = "131" (НЕ 123 — проверено перехватом
+  // tp__addRecord при клике по карточке T123 в библиотеке).
+  const T123_TPLID = '131';
+
+  // Создать T123 ПОД целевым блоком. Через штатный tp__addRecord(tplid, afterid,
+  // beforeid): сервер добавляет блок СТРОГО после блока с afterid — привязка по
+  // ID, без геометрии и без чувствительности к скроллу/раскладке (прежний путь
+  // через клик кнопки «+» нужной панели ловил соседний блок при недосхлопнутой
+  // раскладке). Это ДОБАВЛЕНИЕ блока — существующие не трогаются; попадает в
+  // Undo-историю. Контент зальём отдельно безопасным API (без открытия редактора).
+  // tp__addRecord не возвращает id нового блока — ловим его диффом getAllRecs().
+  async function createCarrierUnder(targetFullId) {
+    if (typeof window.tp__addRecord !== 'function') return null;
+    const numericId = targetFullId.replace('rec', '');
+    const before = new Set(getAllRecs().map((r) => r.id));
+    window.tp__addRecord(T123_TPLID, numericId, '');
+    return waitFor(() => getAllRecs().find((r) => !before.has(r.id)) || null);
+  }
+
+  // Держим carrier физически СРАЗУ ЗА целевым блоком в общем списке записей
+  // страницы. Если юзер перетащил/поменял местами блоки — carrier должен
+  // переехать вместе с целевым, иначе на публикации z-index уйдёт не туда.
+  // Обёртка записи в общем списке — div#recordXXXXXXXXXX (НЕ .r.t-rec — это
+  // содержимое ВНУТРИ обёртки), порядок этих div и есть порядок публикации
+  // (см. tp__saveRecordsSort — читает DOM-порядок и шлёт его на сервер, тем
+  // же способом, что и родной drag-and-drop).
+  function getRecordWrapper(fullId) {
+    return document.getElementById('record' + fullId.replace('rec', ''));
+  }
+
+  // Считаем рассинхрон подряд идущими тиками, чтобы не чинить порядок
+  // посреди ещё не завершённого перетаскивания блока пользователем.
+  const carrierMisplacedTicks = new Map(); // carrierId -> счётчик
+
+  function reorderMisplacedCarriers() {
+    // Если у target'а временно оказалось НЕСКОЛЬКО carrier'ов (юзер
+    // продублировал блок, а консолидация дублей происходит только «on-edit»,
+    // см. doSaveForBlock) — трогаем только первый (канонический, DOM-порядок
+    // как в findAllCarriersFor). Иначе каждый из них добивался бы позиции
+    // «сразу за target», бесконечно вытесняя друг друга и без остановки
+    // вызывая tp__saveRecordsSort на каждой паре тиков.
+    const canonicalByTarget = new Map(); // targetFullId -> carrierRec
+
+    getT123Recs().forEach((carrierRec) => {
+      if (!carrierRec.textContent.includes(CARRIER_MARKER_PREFIX)) return;
+      const m = carrierRec.textContent.match(/th-zi:(rec\d+)/);
+      if (!m) return;
+      if (!canonicalByTarget.has(m[1])) canonicalByTarget.set(m[1], carrierRec);
+    });
+
+    canonicalByTarget.forEach((carrierRec, targetFullId) => {
+      const targetWrapper = getRecordWrapper(targetFullId);
+      const carrierWrapper = getRecordWrapper(carrierRec.id);
+      if (!targetWrapper || !carrierWrapper || targetWrapper.nextElementSibling === carrierWrapper) {
+        carrierMisplacedTicks.delete(carrierRec.id);
+        return;
+      }
+
+      const ticks = (carrierMisplacedTicks.get(carrierRec.id) || 0) + 1;
+      carrierMisplacedTicks.set(carrierRec.id, ticks);
+      if (ticks < 2) return;
+
+      targetWrapper.parentNode.insertBefore(carrierWrapper, targetWrapper.nextSibling);
+      carrierMisplacedTicks.delete(carrierRec.id);
+      if (typeof window.tp__saveRecordsSort === 'function') window.tp__saveRecordsSort();
+    });
+  }
+
+  function isCarrierRecordWrapper(wrapper) {
+    if (!isT123Wrapper(wrapper)) return false;
+    const rec = document.getElementById(wrapper.id.replace(/^record/, 'rec'));
+    return !!(rec && rec.textContent.includes(CARRIER_MARKER_PREFIX));
+  }
+
+  // «Юнит» перестановки для кнопок «вверх»/«вниз» — блок + его carrier (если
+  // есть), одним целым: юзеру не нужно двигать T123 отдельным шагом, он
+  // должен «прозрачно» пропускаться при перестановке соседних блоков.
+  function reorderUnitFor(wrapper) {
+    const next = wrapper.nextElementSibling;
+    return isCarrierRecordWrapper(next) ? [wrapper, next] : [wrapper];
+  }
+
+  // Переставляет юнит блока на место юнита соседа, целиком перепрыгивая
+  // через carrier(ы) обеих сторон. Возвращает false, если двигать некуда —
+  // тогда вызывающий код падает обратно на нативный tp__upRecord/downRecord.
+  function moveRecordUnit(numericId, direction) {
+    const wrapper = getRecordWrapper('rec' + numericId);
+    if (!wrapper || isCarrierRecordWrapper(wrapper)) return false;
+    const unit = reorderUnitFor(wrapper);
+
+    if (direction === 'down') {
+      const tail = unit[unit.length - 1];
+      const neighborHead = tail.nextElementSibling;
+      if (!neighborHead || !neighborHead.getAttribute('recordid')) return false;
+      const neighborUnit = reorderUnitFor(neighborHead);
+      let anchor = neighborUnit[neighborUnit.length - 1];
+      unit.forEach((el) => {
+        anchor.insertAdjacentElement('afterend', el);
+        anchor = el;
+      });
+    } else {
+      let neighborHead = unit[0].previousElementSibling;
+      if (!neighborHead || !neighborHead.getAttribute('recordid')) return false;
+      // Сосед сверху — чужой carrier: его настоящий владелец (юнит соседа)
+      // начинается ещё на блок выше.
+      if (isCarrierRecordWrapper(neighborHead)) {
+        neighborHead = neighborHead.previousElementSibling;
+        if (!neighborHead || !neighborHead.getAttribute('recordid')) return false;
+      }
+      unit.forEach((el) => neighborHead.insertAdjacentElement('beforebegin', el));
+    }
+    return true;
+  }
+
+  // tp__upRecord/tp__downRecord родные — двигают ровно на одну соседнюю
+  // запись, поэтому наш carrier то и дело оказывался между блоком и его
+  // соседом (или сам блок утыкался в чужой carrier). Подменяем реализацию:
+  // если рядом carrier — двигаем юнитом (см. moveRecordUnit), иначе отдаём
+  // управление нативной функции без изменений. Патчим лениво на тике, т.к.
+  // в момент инициализации content-script'а window.tp__upRecord может быть
+  // ещё не определён (грузится позже основным бандлом редактора).
+  let reorderPatched = false;
+  function ensureReorderPatched() {
+    if (reorderPatched) return;
+    if (typeof window.tp__upRecord !== 'function' || typeof window.tp__downRecord !== 'function') return;
+    const nativeUp = window.tp__upRecord;
+    const nativeDown = window.tp__downRecord;
+
+    function afterMove(numericId) {
+      if (window.tp_view && typeof window.tp_view.updateStyles === 'function') window.tp_view.updateStyles();
+      if (typeof window.tp__scrollToRecord === 'function') window.tp__scrollToRecord(numericId);
+      window.clearTimeout(window.autosavesort_timer);
+      window.autosavesort_timer = window.setTimeout(window.tp__saveRecordsSort, 4000);
+    }
+
+    window.tp__upRecord = function (numericId) {
+      if (moveRecordUnit(numericId, 'up')) return afterMove(numericId);
+      return nativeUp.apply(this, arguments);
+    };
+    window.tp__downRecord = function (numericId) {
+      if (moveRecordUnit(numericId, 'down')) return afterMove(numericId);
+      return nativeDown.apply(this, arguments);
+    };
+    reorderPatched = true;
+  }
+
+  // Прямое безопасное сохранение поля 'code' конкретного блока на сервер.
+  function saveCarrierCode(numericId, html) {
+    if (typeof window.tp__saveOnlyOneFieldInRecord !== 'function') {
+      alert('Не удалось сохранить z-index: функция сохранения Tilda недоступна.');
+      return;
+    }
+    // tp__saveOnlyOneFieldInRecord при успехе делает scrollToRecord(carrier) —
+    // возвращаем прокрутку на место, чтобы не отпрыгивать от редактируемого блока.
+    const sx = window.scrollX;
+    const sy = window.scrollY;
+    window.tp__saveOnlyOneFieldInRecord(numericId, 'code', 'code', html);
+    [400, 900].forEach((t) => setTimeout(() => window.scrollTo(sx, sy), t));
+  }
+
+  // Очередь сохранений: по одному за раз (создание блока асинхронно), ключ —
+  // numericId целевого блока, last-write-wins.
+  let zIndexSaving = false;
+  const zIndexPending = new Map(); // numericId -> val|null
+
+  function queueSave(numericId, valOrNull) {
+    zIndexPending.set(numericId, valOrNull);
+    drainSaves();
+  }
+
+  async function drainSaves() {
+    if (zIndexSaving) return;
+    zIndexSaving = true;
+    try {
+      while (zIndexPending.size) {
+        const [numericId, val] = zIndexPending.entries().next().value;
+        zIndexPending.delete(numericId);
+        await doSaveForBlock(numericId, val);
+      }
+    } finally {
+      zIndexSaving = false;
+    }
+  }
+
+  async function doSaveForBlock(numericId, valOrNull) {
+    const targetFullId = 'rec' + numericId;
+    const carriers = findAllCarriersFor(targetFullId);
+
+    if (valOrNull === null) {
+      // Сброс: удаляем ВСЕ carrier'ы этого блока (включая дубли) — иначе
+      // забытая копия оставила бы z-index на опубликованном сайте.
+      carriers.forEach(delRecord);
+    } else {
+      let carrier = carriers[0];
+      if (!carrier) {
+        carrier = await createCarrierUnder(targetFullId);
+        if (!carrier) {
+          alert(
+            'Не удалось автоматически создать блок для стилей под этим блоком.\n' +
+              'Добавьте вручную блок «T123 HTML-код» и повторите попытку.'
+          );
+          return;
+        }
+      } else {
+        // Защита от дублей: пишем в первый carrier, лишние копии удаляем,
+        // чтобы не было конфликтующих правил на один блок.
+        carriers.slice(1).forEach(delRecord);
+      }
+      saveCarrierCode(carrier.id.replace('rec', ''), buildCarrierContent(targetFullId, valOrNull));
+    }
+
+    // Даём Tilda перерисовать carrier, затем снимаем оптимистичный override,
+    // если он всё ещё совпадает с тем, что мы сохраняли.
+    setTimeout(() => {
+      if (zIndexOverrides.get(numericId) === valOrNull) zIndexOverrides.delete(numericId);
+    }, 1500);
+  }
+
+  const zIndexDebounceTimers = new Map();
+
+  function onZIndexInputChange(numericId, input) {
+    // Поле уже открыто пользователем (иначе он бы не печатал в него) — держим
+    // его раскрытым, даже если значение временно стало пустым по ходу правки.
+    const wrapper = input.closest('.' + ZINDEX_WRAPPER_CLASS);
+    if (wrapper) wrapper.dataset.userOpened = '1';
+    const raw = input.value.trim();
+    const val = raw === '' ? null : raw;
+    zIndexOverrides.set(numericId, val);
+    applyLiveCssPreview(getEffectiveZIndexMap());
+
+    clearTimeout(zIndexDebounceTimers.get(numericId));
+    zIndexDebounceTimers.set(
+      numericId,
+      setTimeout(() => queueSave(numericId, val), 700)
+    );
+  }
+
+  // Раскрывает панель поля, если z-index уже задан или юзер раскрыл её кнопкой;
+  // при этом кнопка-переключатель прячется — иначе на экране одновременно
+  // видны и кнопка «Z-index», и открытая панель «Z-index» над ней (дубль).
+  function renderZIndexState(recId, toggle, wrapper) {
+    const isOpen = getEffectiveZIndexMap().has(recId) || wrapper.dataset.userOpened === '1';
+    toggle.style.display = isOpen ? 'none' : '';
+    wrapper.style.display = isOpen ? '' : 'none';
+  }
+
+  function updateZIndexSidebarField() {
+    const form = document.querySelector('.pe-settings-form[data-rec-id]');
+    if (!form) return;
+    const recId = form.dataset.recId;
+    const body = form.querySelector('.edrec__wrapper.panel-body');
+    if (!body) return;
+    const properties = body.querySelector('.pe-properties');
+    const itemsList = properties && properties.querySelector('.pe-properties__items');
+    if (!itemsList) return;
+
+    // Кнопка — первым элементом того же ряда, что «Добавить в библиотеку» /
+    // «CSS Class Name» / «Якорная ссылка» (реальные классы Tilda: t-button
+    // pe-properties__item, текст — span.t-button__text). Иконка — через
+    // ::before того же span (см. CSS выше), а не отдельный <span>: у
+    // .t-button__text уже зарезервирован под неё слот 14×14 сам по себе,
+    // добавление ещё одного элемента задвоило бы отступ.
+    let toggle = itemsList.querySelector('.' + ZINDEX_TOGGLE_CLASS);
+    if (!toggle) {
+      toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 't-button pe-properties__item ' + ZINDEX_TOGGLE_CLASS;
+      toggle.innerHTML = '<span class="t-button__text">Изменить Z-index</span>';
+      itemsList.insertBefore(toggle, itemsList.firstChild);
+    } else if (toggle !== itemsList.firstChild) {
+      // Панель Tilda пересоздаётся при смене блока — переносим кнопку в начало.
+      itemsList.insertBefore(toggle, itemsList.firstChild);
+    }
+
+    // Раскрывающаяся панель — вставлена в .pe-properties ПЕРЕД рядом кнопок,
+    // как и родная панель CSS Class Name (`.pe-properties__wrapper`).
+    let wrapper = properties.querySelector('.' + ZINDEX_WRAPPER_CLASS);
+    if (!wrapper) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'pe-properties__wrapper ' + ZINDEX_WRAPPER_CLASS;
+      wrapper.innerHTML =
+        '<div class="pe-form-group">' +
+          '<label class="pe-label">Z-index</label>' +
+          '<div class="pe-input__wrapper">' +
+          '<input class="pe-input" type="number" step="1" placeholder="Не задан"></div>' +
+        '</div>';
+      properties.insertBefore(wrapper, itemsList);
+
+      const input = wrapper.querySelector('input');
+      input.addEventListener('input', () => onZIndexInputChange(wrapper.dataset.recId, input));
+
+      toggle.addEventListener('click', () => {
+        wrapper.dataset.userOpened = '1';
+        renderZIndexState(toggle.dataset.recId, toggle, wrapper);
+        wrapper.querySelector('input').focus();
+      });
+    } else if (wrapper.nextSibling !== itemsList) {
+      properties.insertBefore(wrapper, itemsList);
+    }
+
+    if (wrapper.dataset.recId !== recId) {
+      wrapper.dataset.recId = recId;
+      toggle.dataset.recId = recId;
+      delete wrapper.dataset.userOpened;
+      const input = wrapper.querySelector('input');
+      const map = getEffectiveZIndexMap();
+      input.value = map.has(recId) ? map.get(recId) : '';
+    }
+    renderZIndexState(recId, toggle, wrapper);
+  }
+
+  function tick() {
+    updateBadges();
+    updateTopToolbar();
+    applyLiveCssPreview(getEffectiveZIndexMap());
+    updateZIndexSidebarField();
+    ensureReorderPatched();
+    reorderMisplacedCarriers();
+  }
+
+  setInterval(tick, 700);
+  tick();
+})();

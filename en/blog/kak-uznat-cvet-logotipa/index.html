@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(316 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(356 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(46 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(106 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(316 70% 38%) 0%, hsl(106 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 9-8.414 8.414A2 2 0 0 0 3 18.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 3.828 21h1.344a2 2 0 0 0 1.414-.586L15 12" /><path d="m18 9 .4.4a1 1 0 1 1-3 3l-3.8-3.8a1 1 0 1 1 3-3l.4.4 3.4-3.4a1 1 0 1 1 3 3z" /><path d="m2 22 .414-.414" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(196 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(236 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(286 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(346 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(196 70% 38%) 0%, hsl(346 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 9-8.414 8.414A2 2 0 0 0 3 18.828v1.344a2 2 0 0 1-.586 1.414A2 2 0 0 1 3.828 21h1.344a2 2 0 0 0 1.414-.586L15 12" /><path d="m18 9 .4.4a1 1 0 1 1-3 3l-3.8-3.8a1 1 0 1 1 3-3l.4.4 3.4-3.4a1 1 0 1 1 3 3z" /><path d="m2 22 .414-.414" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-22">June 22, 2026</time>
@@ -203,16 +207,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            14
+	            32
 	          </span>
         </div>
         <h1>How to Find a Logo's Exact Color — the HEX Code in 30 Seconds</h1>
       </header>
       <div class="blog-body">
         <p>You need a &quot;Sign in with VK&quot; button in the brand's exact blue, a background that matches a client's logo, or a deck in corporate colors — and there's no color code in sight. Eyeballing it doesn't work: the gap between &quot;roughly that green&quot; and the official #21A038 is visible instantly and looks sloppy. Here's how to get the exact HEX of any logo color.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The most reliable source is the <strong>logo's SVG file</strong> — the color is written right in the code, undistorted. The fastest is an <strong>eyedropper</strong> in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> or a browser extension. The most dangerous is an eyedropper on a JPG from image search: compression distorts colors and you'll copy a corrupted shade.</p></div></div>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The most reliable source is the <strong>logo's SVG file</strong> — the color is written right in the code, undistorted. The fastest is an <strong>eyedropper</strong> in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> or a browser extension. The most dangerous is an eyedropper on a JPG from image search: compression distorts colors and you'll copy a corrupted shade.</p></div></div>
       <h2 id="what-hex-is-and-why-everyone-speaks-it">What HEX is and why everyone speaks it</h2>
-      <p>HEX writes color as #RRGGBB: two hexadecimal digits each for red, green and blue. #FF0000 is pure red. It's the universal language understood by CSS, <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, <a href="/en/logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a>, site builders and every developer. Brand books duplicate colors in RGB (screens) and CMYK/Pantone (print), but for digital work HEX is enough.</p>
+      <p>HEX writes color as #RRGGBB: two hexadecimal digits each for red, green and blue. #FF0000 is pure red. It's the universal language understood by CSS, <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/design/photoshop/" target="_blank" rel="noopener">Photoshop<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/photoshop.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, site builders and every developer. Brand books duplicate colors in RGB (screens) and CMYK/Pantone (print), but for digital work HEX is enough.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -237,12 +241,12 @@ window.yaContextCb.push(() => {
       </div>
       <p>That's the exact brand color as the designer defined it — no compression, no color‑profile drift. Multiple fills means multiple palette colors.</p>
       <h2 id="method-2-the-figma-eyedropper">Method 2. The Figma eyedropper</h2>
-      <p>Drop the logo into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, select a shape — the fill shows in the right panel with its HEX. Or press I for the eyedropper anywhere on canvas. Works with vector and raster files alike.</p>
+      <p>Drop the logo into <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, select a shape — the fill shows in the right panel with its HEX. Or press I for the eyedropper anywhere on canvas. Works with vector and raster files alike.</p>
       <h2 id="method-3-the-browser-eyedropper">Method 3. The browser eyedropper</h2>
       <ul>
       <li><strong>Color‑picker extensions</strong> (ColorZilla and friends) — sample any pixel of any page.</li>
       <li><strong>DevTools:</strong> if the color is set in the site's CSS, inspect the element (F12) — the exact value is right there in the styles.</li>
-      <li><strong><a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome</a> without extensions:</strong> any color swatch in DevTools opens an eyedropper you can point at the page.</li>
+      <li><strong><a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> without extensions:</strong> any color swatch in DevTools opens an eyedropper you can point at the page.</li>
       </ul>
       <h2 id="method-4-official-brand-guidelines">Method 4. Official brand guidelines</h2>
       <p>Large companies publish brand‑assets pages where corporate colors are spelled out: HEX, RGB, CMYK, Pantone. Legally this is the &quot;most correct&quot; source — the color the brand itself asks you to use. Search for &quot;brand name brand guidelines&quot;.</p>
@@ -260,7 +264,7 @@ window.yaContextCb.push(() => {
       <p>And if your task is the reverse — not reading the color but changing it in the logo itself — we have a separate guide: <a href="/en/blog/kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">how to change a logo's color</a>.</p>
       <h2 id="the-color-system-cheat-sheet-hex-rgb-hsl-cmyk-pantone">The color‑system cheat sheet: HEX, RGB, HSL, CMYK, Pantone</h2>
       <p>One color, five notations — and it pays to know which is for what:</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>System</th><th>Example (<a href="/en/logos/bank/sber/" target="_blank" rel="noopener">Sber</a> green)</th><th>Used in</th></tr></thead><tbody><tr><td>HEX</td><td>#21A038</td><td>CSS, <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, everything digital</td></tr><tr><td>RGB</td><td>rgb(33, 160, 56)</td><td>same number, different wrapper</td></tr><tr><td>HSL</td><td>hsl(131, 66%, 38%)</td><td>handy for deriving shades in CSS</td></tr><tr><td>CMYK</td><td>≈ 79/0/89/0</td><td>print</td></tr><tr><td>Pantone</td><td>a spot color from the catalog</td><td>brand print where the shade is critical</td></tr></tbody></table></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>System</th><th>Example (<a href="/en/logos/bank/sber/" target="_blank" rel="noopener">Sber<img class="blog-mention-icon" src="/assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> green)</th><th>Used in</th></tr></thead><tbody><tr><td>HEX</td><td>#21A038</td><td>CSS, <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, everything digital</td></tr><tr><td>RGB</td><td>rgb(33, 160, 56)</td><td>same number, different wrapper</td></tr><tr><td>HSL</td><td>hsl(131, 66%, 38%)</td><td>handy for deriving shades in CSS</td></tr><tr><td>CMYK</td><td>≈ 79/0/89/0</td><td>print</td></tr><tr><td>Pantone</td><td>a spot color from the catalog</td><td>brand print where the shade is critical</td></tr></tbody></table></div>
       <p>The consequences that matter. HEX and RGB are the same number — conversion is exact. <strong>CMYK is a different color space</strong>: some bright screen colors are unreachable in print, so a casual online conversion can disappoint on paper. For serious print, brands order proofs or use Pantone — a physical catalog of reference inks independent of any printer's settings.</p>
       <p><strong>HSL</strong> is the underrated helper: hue‑saturation‑lightness lets you derive a palette from the brand color meaningfully: the hover shade = same hue, lower lightness; a pastel background = same hue, lower saturation, higher lightness.</p>
       <h2 id="collecting-the-whole-brand-palette-not-just-one-color">Collecting the whole brand palette, not just one color</h2>
@@ -269,9 +273,9 @@ window.yaContextCb.push(() => {
       <li><strong>The primary</strong> — from the SVG logo or the guidelines (methods above).</li>
       <li><strong>The secondaries</strong> — inspect the live product: the brand's site and app. In DevTools, check the CSS variables (<code>:root</code> in the styles) — modern sites keep the palette there, a ready‑made list: primary, accent, backgrounds, text colors.</li>
       <li><strong>Contrast check</strong> — before using a borrowed palette, run the text/background pairs through a contrast checker (4.5:1 minimum for body text, 3:1 for large).</li>
-      <li><strong>Fixation</strong> — store the result as <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> styles or CSS variables so the color is entered once, not copy‑pasted around.</li>
+      <li><strong>Fixation</strong> — store the result as <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> styles or CSS variables so the color is entered once, not copy‑pasted around.</li>
       </ol>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Eyedropping video and gradients</span></div><div class="callout-body"><p>Two treacherous cases. Video: colors in footage are skewed by compression and grading — don't sample a brand color from a <a href="/en/logos/media/youtube/" target="_blank" rel="noopener">YouTube</a> frame; find a static source. Gradients: a gradient logo has two or more &quot;primary&quot; colors — sample both ends; in the SVG they're explicit stops inside <code>&lt;linearGradient&gt;</code>.</p></div></div>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Eyedropping video and gradients</span></div><div class="callout-body"><p>Two treacherous cases. Video: colors in footage are skewed by compression and grading — don't sample a brand color from a <a href="/en/logos/media/youtube/" target="_blank" rel="noopener">YouTube<img class="blog-mention-icon" src="/assets/logos/svgs/youtube.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> frame; find a static source. Gradients: a gradient logo has two or more &quot;primary&quot; colors — sample both ends; in the SVG they're explicit stops inside <code>&lt;linearGradient&gt;</code>.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -286,11 +290,12 @@ window.yaContextCb.push(() => {
       <p>HEX from the SVG source is the gold standard, brand guidelines are the official source, the eyedropper is the quick way — used carefully on JPGs. Click the middle of solid fills, not edges, and don't trust colors from re‑encoded images.</p>
       <p>To skip the detective work entirely: every brand page in our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a> has a &quot;Brand colors&quot; block — all official HEX codes extracted straight from the original SVG, copied with one click.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/cherno-belyj-logotip/" data-date="2026-07-21" data-views="17">
+          <a class="blog-card" href="/en/blog/cherno-belyj-logotip/" data-date="2026-07-21" data-views="35">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -303,7 +308,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            17
+            35
           </div>
           </div>
           <div class="blog-card-title">The Black‑and‑White Logo Version — Why You Need One</div>
@@ -311,7 +316,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="4">
+      <a class="blog-card" href="/en/blog/vodyanoj-znak-na-foto/" data-date="2026-07-18" data-views="31">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -324,7 +329,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            31
           </div>
           </div>
           <div class="blog-card-title">Watermarking Photos — Placing a Logo So It Protects Without Ruining</div>
@@ -332,7 +337,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotip-s-prozrachnym-fonom/" data-date="2026-06-30" data-views="11">
+      <a class="blog-card" href="/en/blog/logotip-s-prozrachnym-fonom/" data-date="2026-06-30" data-views="118">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -345,7 +350,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            11
+            118
           </div>
           </div>
           <div class="blog-card-title">Logo with a Transparent Background — How to Make One and Avoid the White Box</div>
@@ -353,7 +358,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-skachat-logotip-s-sajta/" data-date="2026-06-21" data-views="74">
+      <a class="blog-card" href="/en/blog/kak-skachat-logotip-s-sajta/" data-date="2026-06-21" data-views="317">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -366,7 +371,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            74
+            317
           </div>
           </div>
           <div class="blog-card-title">How to Download a Logo from Any Website — 5 Legitimate Ways</div>
@@ -374,44 +379,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/redizajn-ili-refresh-logotipa/" data-date="2026-09-01" data-views="0">
+      <a class="blog-card" href="/en/blog/golos-brenda/" data-date="2026-08-15" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">Rebrand</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Brand Voice</span><span class="blog-card-tag">Copy</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19v3" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><rect x="9" y="2" width="6" height="13" rx="3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Logo Redesign or Refresh — What to Choose Without Losing Recognizability</div>
+          <div class="blog-card-title">Brand Voice (Tone of Voice) — How to Sound Recognizable</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-sdelat-favicon/" data-date="2026-06-18" data-views="1">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-yandeksa/" data-date="2026-06-14" data-views="41">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Favicon</span><span class="blog-card-tag">Websites</span><span class="blog-card-tag">SVG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" /><path d="M2 12h20" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Yandex</span><span class="blog-card-tag">History</span><span class="blog-card-tag">Rebranding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34" /><circle cx="11" cy="11" r="8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>18.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            41
           </div>
           </div>
-          <div class="blog-card-title">Favicons in 2026 — Formats, Sizes and the Right HTML</div>
+          <div class="blog-card-title">The History of the Yandex Logo — From «Яndex» in 1997 to the 2021 Rebrand</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -429,25 +434,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -524,6 +521,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -569,10 +567,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

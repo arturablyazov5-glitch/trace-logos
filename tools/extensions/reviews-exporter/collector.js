@@ -1,10 +1,11 @@
-// Логика сбора отзывов организации на Яндекс.Картах/Бизнесе, продавца на Avito
-// и комментариев к посту канала в Telegram Web.
+// Логика сбора отзывов организации на Яндекс.Картах/Бизнесе, продавца на Avito,
+// товара на Ozon и комментариев к посту канала в Telegram Web.
 // Файл НЕ выполняет сбор сам по себе — он лишь объявляет
 // window.__rvwCollectReviews() / window.__rvwCollectAvitoReviews() /
-// window.__rvwCollectTelegramComments(), которые вызывает button-injector.js
-// по клику на кнопку, встроенную в интерфейс страницы. Попапа у расширения
-// нет — единственная точка входа в интерфейсе.
+// window.__rvwCollectOzonReviews() / window.__rvwCollectTelegramComments(),
+// которые вызывает button-injector.js по клику на кнопку, встроенную
+// в интерфейс страницы. Попапа у расширения нет — единственная точка
+// входа в интерфейсе.
 //
 // Подключается как обычный content script (manifest.json → content_scripts),
 // поэтому объявление идемпотентно: повторная инъекция просто
@@ -562,6 +563,17 @@ function createRvwProgress({ initialText = 'Начинаю сбор', statusText
     }
     #rvw-progress-overlay.rvw-done #rvw-progress-bar { background: #5dcaa5; }
     #rvw-progress-overlay.rvw-done #rvw-progress-hint { visibility: hidden; }
+    #rvw-progress-overlay.rvw-partial #rvw-progress-bar { background: #e8b14c; }
+    #rvw-progress-overlay.rvw-partial #rvw-progress-hint { visibility: hidden; }
+    #rvw-progress-overlay.rvw-partial #rvw-progress-done-check {
+      background: rgba(232, 177, 76, 0.14);
+    }
+    #rvw-progress-warning-text {
+      font-size: 12px;
+      line-height: 1.5;
+      opacity: .7;
+      margin: -12px 0 20px;
+    }
     .rvw-progress-divider {
       height: 1px;
       margin: 20px 0;
@@ -600,6 +612,16 @@ function createRvwProgress({ initialText = 'Начинаю сбор', statusText
       background: rgb(36, 36, 36);
     }
     #rvw-progress-card .rvw-btn-secondary:hover { background: rgb(50, 50, 50); }
+    /* Скачивание частичной выгрузки: действие есть, но оно вторично по
+       отношению к «Войти» — поэтому не сплошная заливка, а контур. */
+    #rvw-progress-card .rvw-btn-tertiary {
+      background: transparent;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    #rvw-progress-card .rvw-btn-tertiary:hover { background: rgba(255, 255, 255, 0.07); }
     ${RVW_PROMO_CSS}
     #rvw-update-banner {
       box-sizing: border-box;
@@ -679,23 +701,50 @@ function createRvwProgress({ initialText = 'Начинаю сбор', statusText
         countEl.textContent = `Собрано ${total} ${rvwPluralWord(total, noun)}`;
       }
 
+      // btn.textContent затёр бы иконку внутри кнопки (button-injector.js
+      // рендерит её как svg + <span class="rvw-ext-btn-label">) — пишем
+      // только в лейбл-спан, как это делает setLabel() там же.
       const btn = document.getElementById('rvw-collector-btn');
-      if (btn && btn.disabled) btn.textContent = `Собираю… ${total}`;
+      if (btn && btn.disabled) {
+        const label = btn.querySelector('.rvw-ext-btn-label');
+        if (label) label.textContent = `Собираю… ${total}`;
+        else btn.textContent = `Собираю… ${total}`;
+      }
     },
-    finish(count, { content, filename } = {}) {
+    // warning (необязательный) — { message, actionLabel, onAction }: сбор
+    // прошёл, но собрано НЕ всё, и причина не техническая, а внешняя, которую
+    // может снять сам пользователь (сейчас единственный случай — стена
+    // авторизации Ozon, см. rvwFindOzonLoginWall). Показываем это отдельным
+    // состоянием карточки: янтарная иконка вместо зелёной галочки, текст
+    // с объяснением и кнопка действия. Скачивание при этом остаётся
+    // доступным — частичная выгрузка всё равно полезна.
+    finish(count, { content, filename, warning } = {}) {
       // Файл ещё не скачан — это происходит только по клику на «Скачать
       // файл» ниже. Карточка не исчезает сама по себе: пользователь должен
       // успеть увидеть «Поддержать автора», а не только мелькнувшее «Готово».
-      overlay.classList.add('rvw-done');
+      overlay.classList.add(warning ? 'rvw-partial' : 'rvw-done');
+      const iconHtml = warning
+        ? `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8B14C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>`
+        : `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>`;
+      const headlineHtml = warning
+        ? `<div id="rvw-progress-done-text">Собрано ${count} ${rvwPluralWord(count, noun)}, но это не все</div>
+           <div id="rvw-progress-warning-text">${warning.message}</div>`
+        : `<div id="rvw-progress-done-text">${count} ${rvwPluralWord(count, noun)} собралось успешно</div>`;
+      const actionHtml = warning && warning.actionLabel
+        ? `<button id="rvw-progress-action-btn" class="rvw-btn rvw-btn-primary" type="button">${warning.actionLabel}</button>`
+        : '';
+      // Кнопку скачивания прячем, только если скачивать нечего вовсе.
+      const downloadHtml = content
+        ? `<button id="rvw-progress-download-btn" class="rvw-btn ${warning ? 'rvw-btn-tertiary' : 'rvw-btn-primary'}" type="button">Скачать файл</button>`
+        : '';
       card.innerHTML = `
         <button id="rvw-progress-close" type="button" aria-label="Закрыть">
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 1l10 10M11 1 1 11"/></svg>
         </button>
-        <div id="rvw-progress-done-check">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5DCAA5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-        </div>
-        <div id="rvw-progress-done-text">${count} ${rvwPluralWord(count, noun)} собралось успешно</div>
-        <button id="rvw-progress-download-btn" class="rvw-btn rvw-btn-primary" type="button">Скачать файл</button>
+        <div id="rvw-progress-done-check">${iconHtml}</div>
+        ${headlineHtml}
+        ${actionHtml}
+        ${downloadHtml}
         <a class="rvw-btn rvw-btn-secondary" href="${RVW_DONATE_URL}" target="_blank" rel="noopener noreferrer">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           Поддержать автора
@@ -704,6 +753,18 @@ function createRvwProgress({ initialText = 'Начинаю сбор', statusText
       // Крестик — на случай, если человек передумал скачивать: просто
       // закрывает карточку, файл не трогаем.
       card.querySelector('#rvw-progress-close').addEventListener('click', cleanup);
+
+      const actionBtn = card.querySelector('#rvw-progress-action-btn');
+      if (actionBtn) {
+        actionBtn.addEventListener('click', () => {
+          // Карточку убираем ДО действия: вход на Ozon открывает собственную
+          // модалку поверх страницы, наш оверлей перекрыл бы её.
+          cleanup();
+          try { warning.onAction(); } catch (e) { console.error('[rvw] действие из карточки не сработало:', e); }
+        });
+      }
+
+      if (!content) return; // ниже — только обработчик скачивания
       // Клик по «Скачать файл» сам триггерит скачивание и закрывает карточку —
       // не завязываем это на промис finish(), иначе кнопка «Собираю…» в шапке
       // страницы зависла бы до тех пор, пока пользователь не нажмёт кнопку.
@@ -917,6 +978,518 @@ async function collectAvitoReviewsData(sellerId, indicator, sellerName) {
     filename: 'avito_reviews.md',
   };
 }
+
+// Отзывы о доме/ЖК (avito.ru/catalog/houses/.../reviews) — совсем другая
+// страница, чем карточка продавца/объявления: JSON-API нет, отзывы уже лежат
+// в разметке карточками [data-marker="model-review"]. Пагинация — НЕ клиентский
+// роутинг: клик по номеру страницы — настоящая навигация браузера (см. журнал
+// beforeunload/pagehide без единого pushState, снятый вживую 2026-08-10), это
+// убивало бы контент-скрипт и весь накопленный прогресс на середине сбора.
+// Тот же journal показал главное: следующая страница — тот же URL с тем же
+// query-параметром `context`, только `reviewsPage` увеличивается на 1
+// (подтверждено по dl/dr в событии Google Analytics прямо перед переходом).
+// Значит страницы можно просто зафетчить в фоне (fetch + DOMParser), не покидая
+// текущую вкладку вообще — тем же приёмом, что и JSON-API продавца, только
+// парсим не JSON, а HTML.
+//
+// Разбор карточки — по data-marker, где он есть; статус проживания
+// («Живу в своей квартире» и т.п.) и короткий заголовок-хайлайт отзыва
+// data-marker не имеют — достаём их чисто по структуре разметки (см.
+// комментарии внутри rvwParseAvitoModelReviewCard), а не по хэшированным
+// классам, которые меняются между деплоями Avito.
+function rvwParseAvitoModelReviewCard(card) {
+  const header = card.querySelector('[data-marker="model-review/header"]');
+  const author = header?.querySelector('[data-marker="model-review/header/title"]')?.textContent.trim() || 'Без имени';
+  const date = header?.querySelector('[data-marker="model-review/header/subtitle"]')?.textContent.trim() || '';
+
+  const scoreMeta = card.querySelector('[data-marker="model-review/score"] meta[itemprop="ratingValue"]');
+  const score = scoreMeta ? parseFloat(scoreMeta.getAttribute('content')) : null;
+
+  // Статус проживания — <p> без data-marker сразу после блока со звёздами.
+  // Структура: score → слот → ряд, а сам <p> — соседний со всем этим рядом
+  // (не с самим score), поэтому поднимаемся на два уровня и берём nextSibling.
+  let residency = '';
+  const scoreWrap = card.querySelector('[data-marker="model-review/score"]');
+  const scoreRow = scoreWrap?.parentElement?.parentElement;
+  const residencyEl = scoreRow?.nextElementSibling;
+  if (residencyEl && residencyEl.tagName === 'P') residency = residencyEl.textContent.trim();
+
+  // Короткий заголовок-хайлайт — единственный h3 в карточке (заголовки
+  // остальных блоков — h5: имя автора и «Преимущества»/«Недостатки»).
+  const title = card.querySelector('h3')?.textContent.trim() || '';
+
+  const photoCount = card.querySelectorAll('[data-marker^="model-review/image("]').length;
+
+  // Текстовые секции идут вперемешку title/text по одному data-marker'у на
+  // элемент: если text не предварён title — это основной текст отзыва,
+  // иначе он относится к предыдущему заголовку («Преимущества»/«Недостатки»
+  // или любой другой ярлык, который подставит Avito).
+  let mainText = '';
+  const sections = [];
+  let pendingLabel = null;
+  card.querySelectorAll(
+    '[data-marker="model-review/text-section/title"], [data-marker="model-review/text-section/text"]'
+  ).forEach((el) => {
+    if (el.matches('[data-marker="model-review/text-section/title"]')) {
+      pendingLabel = el.textContent.trim();
+      return;
+    }
+    const text = el.textContent.trim();
+    if (pendingLabel) {
+      sections.push({ label: pendingLabel, text });
+      pendingLabel = null;
+    } else if (!mainText) {
+      mainText = text;
+    }
+  });
+
+  // Своего id в разметке нет (в отличие от JSON-API продавца) — ключ для
+  // дедупликации между страницами собираем из устойчивой связки полей.
+  const identity = [author, date, title, mainText.slice(0, 40)].join('|');
+
+  return { identity, author, date, score, residency, title, photoCount, mainText, sections };
+}
+
+function rvwParseAvitoModelReviewCards(root = document) {
+  return Array.from(root.querySelectorAll('[data-marker="model-review/header"]'))
+    .map((h) => h.closest('[data-marker="model-review"]'))
+    .filter(Boolean)
+    .map(rvwParseAvitoModelReviewCard);
+}
+
+window.__rvwCollectAvitoModelReviews = async function collectAvitoModelReviews() {
+  const indicator = createRvwProgress({ initialText: 'Читаю отзывы о доме' });
+  try {
+    const result = await collectAvitoModelReviewsData(indicator);
+    if (result && result.ok) {
+      indicator.finish(result.total, { content: result.content, filename: result.filename });
+    } else {
+      indicator.remove();
+    }
+    return result;
+  } catch (err) {
+    indicator.remove();
+    throw err;
+  }
+};
+
+async function collectAvitoModelReviewsData(indicator) {
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  const collected = [];
+  const seen = new Set();
+
+  function harvest(root) {
+    let added = 0;
+    rvwParseAvitoModelReviewCards(root).forEach((r) => {
+      if (seen.has(r.identity)) return;
+      seen.add(r.identity);
+      collected.push(r);
+      added++;
+    });
+    return added;
+  }
+
+  // Первая страница уже отрендерена в живом DOM — она может быть прогружена
+  // сильнее (например, если пользователь сам долистал вниз или сайт что-то
+  // домонтировал), поэтому берём её из текущего document, а не перезапрашиваем.
+  harvest(document);
+  if (indicator) indicator.progress({ total: collected.length, done: collected.length, expected: null });
+
+  const maxPages = 300; // страховка от бесконечного цикла
+  let staleRounds = 0;
+  const parser = new DOMParser();
+
+  for (let page = 2; page <= maxPages; page++) {
+    const url = new URL(location.href);
+    url.searchParams.set('reviewsPage', String(page));
+
+    let html;
+    try {
+      const res = await fetch(url.toString(), { credentials: 'include' });
+      if (!res.ok) break; // страницы с таким номером больше нет
+      html = await res.text();
+    } catch (e) {
+      console.error('[rvw] ошибка при загрузке страницы отзывов о доме:', e);
+      break;
+    }
+
+    const doc = parser.parseFromString(html, 'text/html');
+    const added = harvest(doc);
+    if (indicator) indicator.progress({ total: collected.length, done: collected.length, expected: null });
+
+    // Сервер может молча отдать ту же (последнюю валидную) страницу вместо
+    // 404 на несуществующий номер — единственный надёжный сигнал «дальше
+    // пусто» в этом случае — что harvest() не добавил ни одного нового
+    // отзыва. Две страницы подряд без нового — останавливаемся.
+    if (added === 0) {
+      staleRounds++;
+      if (staleRounds >= 2) break;
+    } else {
+      staleRounds = 0;
+    }
+
+    await sleep(400); // не долбим сервер запросами подряд без паузы
+  }
+
+  if (!collected.length) {
+    return { ok: false, error: 'Не нашёл ни одного отзыва на странице.' };
+  }
+
+  const ratingCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: 0 };
+  let ratingSum = 0;
+  let ratedCount = 0;
+  collected.forEach((r) => {
+    const rounded = r.score != null ? Math.round(r.score) : 0;
+    ratingCounts[rounded] = (ratingCounts[rounded] || 0) + 1;
+    if (r.score != null) { ratingSum += r.score; ratedCount++; }
+  });
+  const avgRating = ratedCount
+    ? parseFloat((ratingSum / ratedCount).toFixed(2)).toString()
+    : 'нет';
+  const distribution = [5, 4, 3, 2, 1].map((star) => `- ${star}★: ${ratingCounts[star]}`).join('\n') +
+    (ratingCounts[0] ? `\n- без оценки: ${ratingCounts[0]}` : '');
+
+  const objectName = document.querySelector('h1')?.textContent.trim() || '';
+
+  const header =
+    `# Отзывы о доме\n\n` +
+    (objectName ? `- **Объект:** ${objectName}\n` : '') +
+    `- **Собрано отзывов:** ${collected.length}\n` +
+    `- **Средний рейтинг:** ${avgRating}/5\n\n` +
+    `### Распределение по оценкам\n\n${distribution}`;
+
+  const lines = collected.map((r, i) => {
+    const meta = [];
+    if (r.date) meta.push(`- **Дата:** ${r.date}`);
+    meta.push(`- **Оценка:** ${r.score != null ? r.score : 'нет'}/5`);
+    if (r.residency) meta.push(`- **Статус:** ${r.residency}`);
+    if (r.photoCount) meta.push(`- **Фото:** ${r.photoCount}`);
+
+    const body = [];
+    if (r.title) body.push(`**${r.title}**`);
+    body.push(r.mainText || '_без текста_');
+    r.sections.forEach((s) => body.push(`**${s.label}:** ${s.text}`));
+
+    return `## ${i + 1}. ${r.author}\n\n${meta.join('\n')}\n\n${body.join('\n\n')}`;
+  });
+
+  const footer =
+    `Сделано при поддержке [Trace Logos](${RVW_TRACE_LOGOS_URL})\n\n` +
+    `Telegram автора: [@mansurov_rafael](https://t.me/mansurov_rafael)`;
+
+  const content = `${header}\n\n---\n\n` + lines.join('\n\n---\n\n') + `\n\n---\n\n${footer}`;
+
+  console.log(`[rvw] Avito (отзывы о доме) готово! Собрано отзывов: ${collected.length}`);
+
+  return {
+    ok: true,
+    total: collected.length,
+    content,
+    filename: 'avito_house_reviews.md',
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// Сбор отзывов о товаре на Ozon (карточка товара, блок «Отзывы о товаре»).
+//
+// В отличие от Яндекс.Карт (один контейнер прокрутки) список тут не
+// пагинирован по URL, а подгружается порциями по мере прокрутки всей
+// страницы товара — между порциями Ozon вставляет виджеты «Рекомендуем
+// также» (`data-widget="skuGrid"`), так что каждая новая порция отзывов —
+// это ЕЩЁ ОДИН `[data-widget="webListReviews"]` где-то ниже по документу,
+// а не довставка карточек в один и тот же контейнер. Прокручиваем поэтому
+// не внутренний div, а всю страницу (document.scrollingElement), как
+// показал живой дамп разметки 2026-08-16.
+//
+// Разметка Ozon — «атомарный» CSS: почти все классы (jn0_25, z4i_25,
+// mj3_25 и т.п.) Ozon перегенерирует при каждом деплое, стабильных
+// data-marker (как на Avito) нет. Держимся везде, где можно, за реально
+// устойчивые вещи: `data-review-uuid` (уникальный id карточки — из него и
+// дедуп, и ключ, а не текстовый слепок «автор+дата+начало», как на
+// Яндекс.Картах), `publishedat` (unix-время публикации в секундах — дату не
+// нужно парсить из русского текста вроде «изменен 15 августа 2026»),
+// `href="/product/…"` у ссылки на вариант товара и `aria-label="Открыть
+// галерею"` у миниатюр фото/видео. Имя автора и текст отзыва такой опоры не
+// имеют — используются короткие хэш-классы по снимку разметки на момент
+// написания; если Ozon их поменяет, парсинг конкретной карточки просто
+// вернёт пустой текст и она уйдёт в пропущенные (см. skip: 'empty' ниже),
+// без падения всего сбора.
+function rvwParseOzonReview(el) {
+  const uuid = el.getAttribute('data-review-uuid') || '';
+
+  const tsRaw = parseInt(el.getAttribute('publishedat'), 10);
+  const date = Number.isFinite(tsRaw) ? new Date(tsRaw * 1000) : null;
+
+  const nameEl = el.querySelector('.tsCompactControl500Medium');
+  const name = nameEl ? nameEl.textContent.trim() : 'Без имени';
+
+  const textEl = el.querySelector('.jm5_25');
+  const text = textEl
+    ? textEl.textContent.replace(/ /g, ' ').replace(/\s+/g, ' ').trim()
+    : '';
+
+  if (!text) return { uuid, skip: 'empty' };
+  if (RVW_EMOJI_ONLY_RE.test(text)) return { uuid, skip: 'emoji' };
+
+  // Заполненная звезда несёт третий, дополнительный хэш-класс поверх общей
+  // пары классов пустой звезды — считаем по нему среди пяти звёзд карточки.
+  // svg.className — SVGAnimatedString, не строка, поэтому читаем через
+  // getAttribute('class'), а не .className.includes(...).
+  let rating = 0;
+  el.querySelectorAll('svg[class*="a5d5_5_1-a8"]').forEach((s) => {
+    if ((s.getAttribute('class') || '').includes('a9')) rating += 1;
+  });
+
+  const itemLink = el.querySelector('a[href^="/product/"]');
+  const item = itemLink ? itemLink.textContent.trim() : '';
+
+  const photoCount = el.querySelectorAll('button[aria-label="Открыть галерею"]').length;
+
+  return { uuid, review: { uuid, date, name, text, rating, item, photoCount } };
+}
+
+// Стена авторизации: после некоторого числа отзывов (у гостя — около сотни)
+// Ozon перестаёт отдавать следующие порции и вместо них показывает кнопку
+// «Войдите или зарегистрируйтесь, чтобы посмотреть больше отзывов». Дальше
+// скроллить бессмысленно — новых карточек не появится, сбор надо честно
+// останавливать и говорить об этом пользователю, а не молча отдавать
+// неполную выгрузку как полную.
+//
+// Ищем по `data-widget="buttonWidget"` (стабильный атрибут-реестр Ozon)
+// + тексту кнопки: сам `buttonWidget` — общий тип для любых кнопок-виджетов
+// на странице, отличает нашу именно текст. Возвращаем сам DOM-узел кнопки,
+// а не факт её наличия: у неё нет href (это `<button>`, открывающий модалку
+// входа), поэтому единственный способ «перейти по той же ссылке» — кликнуть
+// по ней настоящим кликом.
+function rvwFindOzonLoginWall() {
+  for (const w of document.querySelectorAll('[data-widget="buttonWidget"]')) {
+    const btn = w.querySelector('button');
+    if (!btn) continue;
+    if (/войдите|зарегистрируйтесь|log in|sign in/i.test(btn.textContent || '')) return btn;
+  }
+  return null;
+}
+
+window.__rvwCollectOzonReviews = async function collectOzonReviews() {
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const scroller = document.scrollingElement || document.documentElement;
+
+  const indicator = createRvwProgress({ initialText: 'Открываю список отзывов' });
+
+  try {
+    const result = await collectWithIndicator();
+    if (result && result.ok) {
+      indicator.finish(result.total, {
+        content: result.content,
+        filename: result.filename,
+        warning: result.loginRequired ? {
+          message: 'Ozon показывает остальные отзывы только тем, кто вошёл в аккаунт. Войдите и запустите сбор заново — тогда выгрузятся все.',
+          actionLabel: 'Войти на Ozon',
+          // Кнопка Ozon живёт в DOM и после нашего сбора — кликаем по ней,
+          // это открывает штатную модалку входа. Если Ozon успел её убрать
+          // (перерисовка/ушла из DOM) — ищем заново, и лишь в крайнем
+          // случае уводим на страницу входа напрямую.
+          onAction: () => {
+            const btn = document.body.contains(result.loginBtn) ? result.loginBtn : rvwFindOzonLoginWall();
+            if (btn) btn.click();
+            else window.open('https://www.ozon.ru/login/', '_blank', 'noopener');
+          },
+        } : null,
+      });
+    } else {
+      indicator.remove();
+    }
+    return result;
+  } catch (err) {
+    indicator.remove();
+    throw err;
+  }
+
+  async function collectWithIndicator() {
+    function readProductName() {
+      const el = document.querySelector('h1');
+      return el ? el.textContent.trim() : '';
+    }
+    const productName = readProductName();
+    console.log('[rvw] Ozon: товар —', productName || '(не нашёл)');
+
+    // Знаменатель прогресса — число рядом со словом «Отзыв» в переключателе
+    // вкладок «Отзывы о товаре» / «Вопросы о товаре» (у обеих вкладок свой
+    // счётчик, поэтому матчим именно на текст с «отзыв»). Разряды числа
+    // разделены неразрывным/узким пробелом при больших значениях — сначала
+    // склеиваем их, тот же приём, что и в readTotalExpected() на Картах.
+    function readTotalExpected() {
+      const tabs = document.querySelector('[data-widget="webReviewTabs"]');
+      if (!tabs) return null;
+      for (const btn of tabs.querySelectorAll('button')) {
+        const text = (btn.textContent || '').replace(/(\d)[\s  ](?=\d)/g, '$1');
+        if (/отзыв/i.test(text)) {
+          const m = text.match(/\d+/);
+          if (m) return parseInt(m[0], 10);
+        }
+      }
+      return null;
+    }
+
+    const reviews = new Map();  // uuid → отзыв, который уйдёт в файл
+    const dropped = new Set();  // uuid без текста / только эмодзи
+
+    function harvest() {
+      document.querySelectorAll('[data-review-uuid]').forEach((el) => {
+        const uuid = el.getAttribute('data-review-uuid');
+        if (!uuid || reviews.has(uuid) || dropped.has(uuid)) return;
+        const parsed = rvwParseOzonReview(el);
+        if (parsed.skip) dropped.add(uuid);
+        else reviews.set(uuid, parsed.review);
+      });
+    }
+
+    harvest();
+
+    let totalExpected = readTotalExpected();
+    console.log('[rvw] Ozon: заявлено отзывов в переключателе вкладок:', totalExpected);
+
+    const seenCount = () => reviews.size + dropped.size;
+    indicator.progress({ total: reviews.size, done: seenCount(), expected: totalExpected });
+
+    const stepPx = 500;             // страница длиннее, чем блок отзывов на Картах — шаг покрупнее
+    const stepDelay = 150;
+    const bottomPauseDelay = 900;   // доп. пауза внизу страницы, вдруг подгрузится ещё порция
+
+    let stableRounds = 0;
+    const maxStableRounds = 8;
+    let lastSeen = -1;
+    let iterations = 0;
+    const maxIterations = 5000;
+    // Узел кнопки «Войдите или зарегистрируйтесь» — если он найдётся, сбор
+    // останавливается досрочно, а карточка прогресса показывает предупреждение
+    // с кнопкой входа (см. warning в __rvwCollectOzonReviews).
+    let loginBtn = null;
+
+    while (iterations < maxIterations) {
+      iterations++;
+
+      const atBottom = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 5;
+
+      if (!atBottom) {
+        scroller.scrollTop += stepPx;
+        await sleep(stepDelay);
+      } else {
+        await sleep(bottomPauseDelay);
+      }
+
+      harvest();
+
+      const expectedNow = readTotalExpected();
+      if (expectedNow && (!totalExpected || expectedNow > totalExpected)) totalExpected = expectedNow;
+
+      const seen = seenCount();
+
+      if (iterations % 10 === 0 || seen !== lastSeen) {
+        console.log(`[rvw] Ozon: итерация ${iterations}: прочитано — ${seen}${totalExpected ? ' из ' + totalExpected : ''}, в файл — ${reviews.size}, scrollTop ${scroller.scrollTop}/${scroller.scrollHeight}`);
+      }
+
+      indicator.progress({ total: reviews.size, done: seen, expected: totalExpected });
+
+      if (totalExpected && seen >= totalExpected) {
+        console.log('[rvw] Ozon: достигли заявленного количества отзывов, останавливаемся.');
+        break;
+      }
+
+      // Стена авторизации: дальше Ozon отзывов не отдаст, сколько ни листай.
+      // Проверяем ПОСЛЕ harvest(), чтобы забрать всё, что уже отрисовано над
+      // этой кнопкой, и только потом выйти.
+      loginBtn = rvwFindOzonLoginWall();
+      if (loginBtn) {
+        console.warn('[rvw] Ozon: упёрлись в стену авторизации — дальше отзывы только для авторизованных.');
+        break;
+      }
+
+      if (seen === lastSeen) {
+        stableRounds++;
+      } else {
+        stableRounds = 0;
+        lastSeen = seen;
+      }
+      if (stableRounds >= maxStableRounds && atBottom) {
+        console.warn('[rvw] Ozon: список перестал расти, а до заявленного числа не дотянули. Останавливаюсь на том, что есть.');
+        break;
+      }
+    }
+
+    harvest();
+
+    const collected = [...reviews.values()];
+    if (!collected.length) {
+      // Стена авторизации на самом верху списка (Ozon иногда закрывает
+      // отзывы целиком): это не ошибка парсинга — показываем то же
+      // предупреждение с кнопкой входа, а не сообщение «не нашёл отзывов».
+      if (loginBtn) {
+        return { ok: true, total: 0, loginRequired: true, loginBtn, content: '', filename: 'ozon_reviews.md' };
+      }
+      return { ok: false, error: 'Не нашёл ни одного отзыва с текстом. Открой блок «Отзывы о товаре» на странице Ozon.' };
+    }
+
+    const ratingCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: 0 };
+    let ratingSum = 0;
+    let ratedCount = 0;
+
+    const dateFormatter = new Intl.DateTimeFormat('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+    const lines = collected.map((r, i) => {
+      const rounded = Math.round(r.rating);
+      ratingCounts[rounded] = (ratingCounts[rounded] || 0) + 1;
+      if (r.rating > 0) { ratingSum += r.rating; ratedCount++; }
+
+      const meta = [];
+      if (r.date) meta.push(`- **Дата:** ${dateFormatter.format(r.date)}`);
+      meta.push(`- **Оценка:** ${r.rating || 'нет'}/5`);
+      if (r.item) meta.push(`- **Товар:** ${r.item}`);
+      if (r.photoCount) meta.push(`- **Фото/видео:** ${r.photoCount}`);
+
+      return `## ${i + 1}. ${r.name}\n\n${meta.join('\n')}\n\n${r.text}`;
+    });
+
+    const avgRating = ratedCount
+      ? parseFloat((ratingSum / ratedCount).toFixed(2)).toString()
+      : 'нет';
+    const distribution = [5, 4, 3, 2, 1].map((star) => `- ${star}★: ${ratingCounts[star]}`).join('\n') +
+      (ratingCounts[0] ? `\n- без оценки: ${ratingCounts[0]}` : '');
+
+    const header =
+      `# Отзывы\n\n` +
+      (productName ? `- **Товар:** ${productName}\n` : '') +
+      `- **Собрано отзывов:** ${collected.length}${loginBtn && totalExpected ? ` из ${totalExpected}` : ''}\n` +
+      `- **Средний рейтинг:** ${avgRating}/5\n` +
+      // Без этой пометки частичная выгрузка в файле неотличима от полной,
+      // а средний рейтинг и распределение посчитаны только по собранному.
+      (loginBtn
+        ? `\n> Выгрузка неполная: Ozon отдаёт остальные отзывы только авторизованным пользователям. Войдите в аккаунт и запустите сбор заново, чтобы получить все.\n`
+        : '') +
+      `\n### Распределение по оценкам\n\n${distribution}`;
+
+    const footer =
+      `Сделано при поддержке [Trace Logos](${RVW_TRACE_LOGOS_URL})\n\n` +
+      `Telegram автора: [@mansurov_rafael](https://t.me/mansurov_rafael)`;
+
+    const content = `${header}\n\n---\n\n` + lines.join('\n\n---\n\n') + `\n\n---\n\n${footer}`;
+
+    const skippedEmpty = [...dropped].length; // все dropped здесь — пустые/эмодзи-онли, отдельно не разделяем
+
+    console.log(`[rvw] Ozon готово! Собрано отзывов: ${collected.length} из ${totalExpected} (пропущено: ${skippedEmpty})${loginBtn ? ' — остановлено стеной авторизации' : ''}`);
+
+    return {
+      ok: true,
+      total: collected.length,
+      expected: totalExpected,
+      loginRequired: !!loginBtn,
+      loginBtn,
+      content,
+      filename: 'ozon_reviews.md',
+    };
+  }
+};
 
 // Сбор комментариев к посту канала в Telegram Web (клиент K, web.telegram.org/k/).
 //

@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>История логотипа ChatGPT — как устроен «цветок» OpenAI · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(143 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(183 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(233 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(293 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(143 70% 38%) 0%, hsl(293 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /><path d="M9 13a4.5 4.5 0 0 0 3-4" /><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /><path d="M3.477 10.896a4 4 0 0 1 .585-.396" /><path d="M6 18a4 4 0 0 1-1.967-.516" /><path d="M12 13h4" /><path d="M12 18h6a2 2 0 0 1 2 2v1" /><path d="M12 8h8" /><path d="M16 8V5a2 2 0 0 1 2-2" /><circle cx="16" cy="13" r=".5" /><circle cx="18" cy="3" r=".5" /><circle cx="20" cy="21" r=".5" /><circle cx="20" cy="8" r=".5" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(23 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(63 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(113 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(173 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(23 70% 38%) 0%, hsl(173 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /><path d="M9 13a4.5 4.5 0 0 0 3-4" /><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" /><path d="M3.477 10.896a4 4 0 0 1 .585-.396" /><path d="M6 18a4 4 0 0 1-1.967-.516" /><path d="M12 13h4" /><path d="M12 18h6a2 2 0 0 1 2 2v1" /><path d="M12 8h8" /><path d="M16 8V5a2 2 0 0 1 2-2" /><circle cx="16" cy="13" r=".5" /><circle cx="18" cy="3" r=".5" /><circle cx="20" cy="21" r=".5" /><circle cx="20" cy="8" r=".5" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-29">29 июля 2026</time>
@@ -202,14 +206,14 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            5
+	            24
 	          </span>
         </div>
         <h1>История логотипа ChatGPT — как устроен «цветок» OpenAI</h1>
       </header>
       <div class="blog-body">
-        <p>Знак <a href="../../logos/ai/chatgpt/" target="_blank" rel="noopener">ChatGPT</a> — переплетённая шестилучевая розетка, которую называют «цветком» или «узлом», — за два года прошёл путь, на который у птички Twitter ушло десятилетие: стал универсальной пиктограммой целой технологии. Разбираем, как устроена его геометрия, почему самый громкий продукт эпохи носит скромный чёрно‑белый знак и что изменил тихий редизайн 2023 года.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Розетка — знак компании <strong>OpenAI</strong>, созданный до славы ChatGPT: шесть переплетённых дуг, читающихся одновременно как цветок, узел и вихрь. Смыслы по замыслу: переплетение — связь человека и машины, вращение — динамика интеллекта. Знак принципиально <strong>монохромный</strong> — на фоне <a href="../logotipy-nejrosetej/" target="_blank" rel="noopener">градиентной моды ИИ</a> это осознанная отстройка. Файлы — на страницах <a href="../../logos/ai/chatgpt/" target="_blank" rel="noopener">ChatGPT</a> и <a href="../../logos/ecosystem/openai/" target="_blank" rel="noopener">экосистемы OpenAI</a>.</p></div></div>
+        <p>Знак <a href="../../logos/ai/chatgpt/" target="_blank" rel="noopener">ChatGPT<img class="blog-mention-icon" src="../../assets/logos/svgs/chatgpt.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — переплетённая шестилучевая розетка, которую называют «цветком» или «узлом», — за два года прошёл путь, на который у птички Twitter ушло десятилетие: стал универсальной пиктограммой целой технологии. Разбираем, как устроена его геометрия, почему самый громкий продукт эпохи носит скромный чёрно‑белый знак и что изменил тихий редизайн 2023 года.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Розетка — знак компании <strong>OpenAI</strong>, созданный до славы ChatGPT: шесть переплетённых дуг, читающихся одновременно как цветок, узел и вихрь. Смыслы по замыслу: переплетение — связь человека и машины, вращение — динамика интеллекта. Знак принципиально <strong>монохромный</strong> — на фоне <a href="../logotipy-nejrosetej/" target="_blank" rel="noopener">градиентной моды ИИ</a> это осознанная отстройка. Файлы — на страницах <a href="../../logos/ai/chatgpt/" target="_blank" rel="noopener">ChatGPT<img class="blog-mention-icon" src="../../assets/logos/svgs/chatgpt.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/ecosystem/openai/" target="_blank" rel="noopener">экосистемы OpenAI</a>.</p></div></div>
       <h2 id="знак-старше-славы">Знак старше славы</h2>
       <p>Розетку OpenAI нарисовали в середине 2010‑х — когда компания была исследовательской лабораторией без потребительских продуктов. Знак проектировался как «научный»: строгая геометрия, монохром, ассоциации с молекулярными структурами и узлами. Когда в конце 2022‑го ChatGPT взорвал интернет, у продукта не было собственного логотипа — интерфейс носил знак компании. Так корпоративная эмблема случайно стала самым тиражируемым знаком десятилетия: скриншоты диалогов разнесли её по всем соцсетям мира.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
@@ -223,17 +227,17 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="геометрия-шесть-дуг-и-вихрь">Геометрия: шесть дуг и вихрь</h2>
-      <p>Розетка построена из <strong>шести одинаковых дуг</strong>, переплетённых с поворотной симметрией — как лепестки, сложенные в кольцо. Форма собрана по строгой окружной сетке: дуги перекрывают друг друга «над‑под», создавая эффект плетения — принцип, который можно повторить, если <a href="../kak-narisovat-logotip-v-figma/" target="_blank" rel="noopener">рисовать такие формы в Figma</a>. Считываний несколько, и все работают на бренд: цветок (рост, жизнь), узел (связь), вихрь (движение мысли), молекула (наука). Такая многослойность прочтения — признак сильного <a href="../vidy-logotipov/" target="_blank" rel="noopener">абстрактного знака</a>.</p>
+      <p>Розетка построена из <strong>шести одинаковых дуг</strong>, переплетённых с поворотной симметрией — как лепестки, сложенные в кольцо. Форма собрана по строгой окружной сетке: дуги перекрывают друг друга «над‑под», создавая эффект плетения — принцип, который можно повторить, если <a href="../kak-narisovat-logotip-v-figma/" target="_blank" rel="noopener">рисовать такие формы в Figma</a>. Считываний несколько, и все работают на бренд: цветок (рост, жизнь), узел (связь), вихрь (движение мысли), молекула (наука). Такая многослойность прочтения — признак сильного абстрактного знака.</p>
       <h2 id="почему-монохром">Почему монохром</h2>
       <p>В категории, где все <a href="../logotipy-nejrosetej/" target="_blank" rel="noopener">сверкают градиентами</a>, лидер носит чёрно‑белый знак — и это стратегия, а не бедность. Монохром сообщает «инструмент, а не игрушка», работает в любом интерфейсе и на любом носителе без адаптаций — <a href="../logotip-dlya-pechati/" target="_blank" rel="noopener">монохром недаром считается базой</a> — а главное, отстраивает лидера от подражателей: копируя «эстетику ИИ», конкуренты копируют градиенты, а не сдержанность.</p>
       <h2 id="2023-тихий-редизайн-и-шрифт" class="step-heading"><span class="step-badge">2023</span><span class="step-title">Тихий редизайн и шрифт</span></h2>
-      <p>В 2023‑м OpenAI провёл рестайлинг, который большинство пользователей не заметило: пропорции розетки слегка выровняли, дуги утолстили для лучшей читаемости в малых размерах — <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">та же логика, что и у фавиконки</a> — а рядом появился фирменный гротеск для текстовой части. Это образцовый «редизайн‑невидимка»: знак стал технически лучше, не потревожив ни одной привычки — противоположность <a href="../chto-takoe-rebrending/" target="_blank" rel="noopener">громким ребрендингам</a>.</p>
+      <p>В 2023‑м OpenAI провёл рестайлинг, который большинство пользователей не заметило: пропорции розетки слегка выровняли, дуги утолстили для лучшей читаемости в малых размерах — <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">та же логика, что и у фавиконки</a> — а рядом появился фирменный гротеск для текстовой части. Это образцовый «редизайн‑невидимка»: знак стал технически лучше, не потревожив ни одной привычки — противоположность <a href="../chto-takoe-rebrending/" target="_blank" rel="noopener">громким ребрендингам</a>.</p>
       <h2 id="знак-и-семья-продуктов">Знак и семья продуктов</h2>
-      <p>Розетка работает зонтиком для всей <a href="../../logos/ecosystem/openai/" target="_blank" rel="noopener">экосистемы продуктов OpenAI</a>: <a href="../../logos/ai/sora/" target="_blank" rel="noopener">Sora</a>, <a href="../../logos/ai/dalle/" target="_blank" rel="noopener">DALL‑E</a>, <a href="../../logos/ai/codex/" target="_blank" rel="noopener">Codex</a> и <a href="../../logos/ai/chatgptatlas/" target="_blank" rel="noopener">ChatGPT Atlas</a> живут под общим стилем. Интересно сравнить с конкурентами: <a href="../../logos/ai/claude/" target="_blank" rel="noopener">Claude</a> выбрал тёплую терракотовую розетку-«взрыв», <a href="../../logos/ai/gemini/" target="_blank" rel="noopener">Gemini</a> — градиентную искру: три лидера заняли три разных угла одного смыслового поля.</p>
+      <p>Розетка работает зонтиком для всей <a href="../../logos/ecosystem/openai/" target="_blank" rel="noopener">экосистемы продуктов OpenAI</a>: <a href="../../logos/ai/sora/" target="_blank" rel="noopener">Sora<img class="blog-mention-icon" src="../../assets/logos/svgs/sora.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/ai/dalle/" target="_blank" rel="noopener">DALL‑E<img class="blog-mention-icon" src="../../assets/logos/svgs/dall-e.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/ai/codex/" target="_blank" rel="noopener">Codex<img class="blog-mention-icon" src="../../assets/logos/svgs/codex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/ai/chatgptatlas/" target="_blank" rel="noopener">ChatGPT Atlas<img class="blog-mention-icon" src="../../assets/logos/svgs/chatgpt-atlas.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> живут под общим стилем. Интересно сравнить с конкурентами: <a href="../../logos/ai/claude/" target="_blank" rel="noopener">Claude<img class="blog-mention-icon" src="../../assets/logos/svgs/claude.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> выбрал тёплую терракотовую розетку-«взрыв», <a href="../../logos/ai/gemini/" target="_blank" rel="noopener">Gemini<img class="blog-mention-icon" src="../../assets/logos/svgs/gemini.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — градиентную искру: три лидера заняли три разных угла одного смыслового поля.</p>
       <h2 id="слово-gpt-бренд-который-убежал-от-владельца">Слово GPT: бренд, который убежал от владельца</h2>
-      <p>Параллельно знаку живёт вербальная драма: аббревиатура GPT (Generative Pre‑trained Transformer) стала настолько нарицательной, что сотни сторонних сервисов добавили её в свои названия. OpenAI пыталась зарегистрировать «GPT» как товарный знак — и получила отказ: ведомство сочло аббревиатуру описательной, то есть принадлежащей всем. Это классическая цена генерализации: когда имя становится названием технологии, юридическая защита слабеет (тот же путь прошли «эскалатор» и «термос»). Для нейминга вывод практический: описательные элементы в имени не защищаются — уникальность нужно закладывать в другую часть названия, о том, <a href="../kak-pridumat-nazvanie-brenda/" target="_blank" rel="noopener">как вообще выбирают имена</a> и <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">что можно зарегистрировать</a>, мы писали отдельно.</p>
+      <p>Параллельно знаку живёт вербальная драма: аббревиатура GPT (Generative Pre‑trained Transformer) стала настолько нарицательной, что сотни сторонних сервисов добавили её в свои названия. OpenAI пыталась зарегистрировать «GPT» как товарный знак — и получила отказ: ведомство сочло аббревиатуру описательной, то есть принадлежащей всем. Это классическая цена генерализации: когда имя становится названием технологии, юридическая защита слабеет (тот же путь прошли «эскалатор» и «термос»). Для нейминга вывод практический: описательные элементы в имени не защищаются — уникальность нужно закладывать в другую часть названия, о том, <a href="../kak-pridumat-nazvanie-brenda/" target="_blank" rel="noopener">как вообще выбирают имена</a> и <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">что можно зарегистрировать</a>, мы писали отдельно.</p>
       <h2 id="розетка-и-волна-подражателей">Розетка и волна подражателей</h2>
-      <p>Успех знака породил целый жанр: после 2023 года «переплетённые розетки» стали появляться у ИИ‑стартапов десятками — маркетплейсы шаблонов продают «логотипы в стиле OpenAI» пачками. Это создало парадоксальную проблему для самой OpenAI: чем больше подражателей, тем сильнее размывается уникальность формы, и тем важнее становятся вторичные признаки — точные пропорции, фирменный шрифт, монохромная дисциплина. Для остальных урок прямой: строить знак «в стиле лидера» — значит повторять <a href="../oshibki-v-dizajne-logotipa/" target="_blank" rel="noopener">ошибку похожести</a> и работать на чужую узнаваемость, а не искать, <a href="../logotipy-nejrosetej/" target="_blank" rel="noopener">как выделиться в ИИ‑категории</a>, самому.</p>
+      <p>Успех знака породил целый жанр: после 2023 года «переплетённые розетки» стали появляться у ИИ‑стартапов десятками — маркетплейсы шаблонов продают «логотипы в стиле OpenAI» пачками. Это создало парадоксальную проблему для самой OpenAI: чем больше подражателей, тем сильнее размывается уникальность формы, и тем важнее становятся вторичные признаки — точные пропорции, фирменный шрифт, монохромная дисциплина. Для остальных урок прямой: строить знак «в стиле лидера» — значит повторять ошибку похожести и работать на чужую узнаваемость, а не искать, <a href="../logotipy-nejrosetej/" target="_blank" rel="noopener">как выделиться в ИИ‑категории</a>, самому.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -246,48 +250,28 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="хронология">Хронология</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Годы</th><th>Событие</th></tr></thead><tbody><tr><td>~2015‑2016</td><td>создан знак‑розетка OpenAI</td></tr><tr><td>2022</td><td>ChatGPT делает знак всемирно известным</td></tr><tr><td>2023</td><td>рестайлинг: пропорции, шрифт</td></tr><tr><td>2024+</td><td>розетка = пиктограмма «здесь ИИ»</td></tr><tr><td>2025</td><td>первый официальный ребрендинг: обновлённая розетка и собственный шрифт OpenAI Sans</td></tr></tbody></table></div>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Урок кейса</span></div><div class="callout-body"><p>ChatGPT — редкий случай, когда бренд построила не айдентика, а продукт: знак просто оказался достаточно качественным, чтобы выдержать свалившуюся славу. Мораль для всех: рисуйте корпоративный знак «на вырост» — вы не знаете, какой из ваших продуктов однажды сделает его знаменитым — поэтому <a href="../kak-zakazat-logotip-u-dizajnera/" target="_blank" rel="noopener">заказывайте знак сразу с запасом прочности</a>.</p></div></div>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Урок кейса</span></div><div class="callout-body"><p>ChatGPT — редкий случай, когда бренд построила не айдентика, а продукт: знак просто оказался достаточно качественным, чтобы выдержать свалившуюся славу. Мораль для всех: рисуйте корпоративный знак «на вырост» — вы не знаете, какой из ваших продуктов однажды сделает его знаменитым — поэтому <a href="../kak-zakazat-logotip-u-dizajnera/" target="_blank" rel="noopener">заказывайте знак сразу с запасом прочности</a>.</p></div></div>
       <p>Логотипы ChatGPT и OpenAI в SVG и PNG — в <a href="../../logos/ai/" target="_blank" rel="noopener">каталоге нейросетей</a>. Другие истории: <a href="../istoriya-logotipa-google/" target="_blank" rel="noopener">Google</a>, <a href="../logotipy-nejrosetej/" target="_blank" rel="noopener">логотипы нейросетей</a>, <a href="../istoriya-logotipa-netflix/" target="_blank" rel="noopener">Netflix</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../brending-s-pomoshyu-ii/" data-date="2026-09-11" data-views="0">
+          <a class="blog-card" href="../logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5" /><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /><path d="M18 18a4 4 0 0 0 2-7.464" /><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /><path d="M6 18a4 4 0 0 1-2-7.464" /><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Брендинг с помощью ИИ — где нейросеть помогает, а где вредит</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../logotipy-nejrosetej/" data-date="2026-08-22" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>22.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
           <div class="blog-card-title">Логотипы нейросетей — как выглядит айдентика ИИ‑сервисов</div>
@@ -295,20 +279,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-youtube/" data-date="2026-08-05" data-views="0">
+      <a class="blog-card" href="../istoriya-logotipa-youtube/" data-date="2026-08-05" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Медиа</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Медиа</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>05.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            8
           </div>
           </div>
           <div class="blog-card-title">История логотипа YouTube — как кнопка «плей» стала брендом</div>
@@ -316,65 +300,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-vk/" data-date="2026-08-04" data-views="0">
+      <a class="blog-card" href="../istoriya-logotipa-vk/" data-date="2026-08-04" data-views="668">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            668
           </div>
           </div>
-          <div class="blog-card-title">История логотипа ВКонтакте — от синей плашки 2006 года до VK</div>
+          <div class="blog-card-title">История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-obrazovatelnyh-servisov/" data-date="2026-08-24" data-views="2">
+      <a class="blog-card" href="../istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="24">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            24
+          </div>
+          </div>
+          <div class="blog-card-title">История логотипа WhatsApp — телефонная трубка, пережившая всё</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../kak-sdelat-logotip-v-illustrator/" data-date="2026-08-10" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Образование</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /><path d="M22 10v6" /><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Инструменты</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z" /><path d="M16 8 2 22" /><path d="M17.5 15H9" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>24.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            12
           </div>
           </div>
-          <div class="blog-card-title">Логотипы образовательных сервисов — Duolingo, Coursera, Khan Academy</div>
+          <div class="blog-card-title">Как сделать логотип в Illustrator — пошаговый гайд</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../firmennye-cveta-izvestnyh-brendov/" data-date="2026-06-10" data-views="31">
+      <a class="blog-card" href="../chto-takoe-brendbuk/" data-date="2026-06-07" data-views="10">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Цвета</span><span class="blog-card-tag">Бренды</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Гайдлайны</span><span class="blog-card-tag">Логотипы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14" /><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            31
+            10
           </div>
           </div>
-          <div class="blog-card-title">Фирменные цвета известных брендов — HEX‑коды и где брать официальные</div>
+          <div class="blog-card-title">Что такое брендбук и гайдлайн — и почему нельзя растягивать логотип</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -392,25 +397,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -487,6 +484,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -532,10 +530,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

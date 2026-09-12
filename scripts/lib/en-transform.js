@@ -127,7 +127,14 @@ function enChrome(html, sourceRelPath) {
   // Подсказка <link rel="modulepreload"> в исходнике всегда указывает на русский
   // словарь (RU — язык по умолчанию). На /en/ странице js/i18n.js импортирует
   // английский; без этой замены браузер прогрел бы не тот файл — качал бы оба.
-  html = html.replace(/(<link\b[^>]*\brel="modulepreload"[^>]*\bhref="[^"]*i18n-dict)-ru(\.js")/g, '$1-en$2');
+  // Хвост после -ru обязан допускать и .min (build-js-minify.js), и ?v=…
+  // (build-cache-bust.js): обе конвенции появились ПОЗЖЕ этой замены, и с
+  // 2026-08 она молча не срабатывала — каждая /en/ страница прогревала русский
+  // словарь и тянула оба файла. Тот же класс промаха, что был у test-css-parity.js.
+  html = html.replace(
+    /(<link\b[^>]*\brel="modulepreload"[^>]*\bhref="[^"]*i18n-dict)-ru((?:\.min)?\.js(?:\?[^"]*)?")/g,
+    '$1-en$2',
+  );
   return html;
 }
 

@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотип для email‑подписи — как вставить, чтобы не сломался · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(286 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(326 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(16 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(76 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(286 70% 38%) 0%, hsl(76 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /><path d="M19 16v6" /><path d="M16 19h6" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(165 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(205 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(255 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(315 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(165 70% 38%) 0%, hsl(315 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 13V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h8" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /><path d="M19 16v6" /><path d="M16 19h6" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-12">12 августа 2026</time>
@@ -202,16 +206,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            1
+	            24
 	          </span>
         </div>
         <h1>Логотип для email‑подписи — как вставить, чтобы не сломался</h1>
       </header>
       <div class="blog-body">
-        <p>Подпись в письме — маленькая, но заметная витрина бренда: её видит каждый получатель, часто по нескольку раз в переписке. И именно в почте логотип ломается чаще всего: то не отображается вовсе, то обрастает белым прямоугольником, то «весит» больше самого письма. Причина у всех этих бед одна — почта устроена не как браузер, и это самая капризная среда для картинок из всех. Поэтому готовить логотип для подписи нужно, исходя не из того, «как красивее», а из того, что почта вообще способна показать.</p>
+        <p>Подпись в письме — маленькая, но заметная витрина бренда: её видит каждый получатель, часто по нескольку раз в переписке. И именно в почте логотип ломается чаще всего: то не отображается вовсе, то обрастает белым прямоугольником, то «весит» больше самого письма. Причина у всех этих бед одна — почта устроена не как браузер, и это самая капризная среда для картинок из всех. Поэтому готовить логотип для подписи нужно, исходя не из того, «как красивее», а из того, что почта вообще способна показать.</p>
       <h2 id="почему-в-почте-логотип-ломается">Почему в почте логотип ломается</h2>
-      <p>Чтобы понять, что делать, надо сначала увидеть, почему ломается. Разные почтовые клиенты — Gmail, Outlook, Apple Mail, мобильные приложения — показывают письма по‑своему и сильно урезают возможности, и отсюда четыре типичных сбоя. Первый: SVG не отображается. Большинство клиентов, особенно на базе Outlook, не рендерят <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, и получатель видит пустое место вместо знака. Второй: белый прямоугольник — если логотип на непрозрачном фоне, в тёмной теме почты вокруг него появляется белый блок. Третий: «битая» картинка — если логотип лежит по ссылке, которая недоступна, вместо него показывается значок сломанного изображения. И четвёртый: тяжёлый файл — крупный <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> утяжеляет каждое письмо (про вес — в статье <a href="../kak-umenshit-ves-png/" target="_blank" rel="noopener">как уменьшить вес PNG</a>).</p>
-      <p>Коварство почты в том, что свою подпись автор видит идеальной — в своём клиенте, на своём экране, в своей теме. А получатели открывают её в десятке разных программ, и там всплывает то, чего автор не видел: в корпоративном Outlook исчез знак, у коллеги в тёмной теме вокруг него загорелся белый штамп, на телефоне картинка не догрузилась и повисла «сломанным» значком. Именно поэтому подпись нельзя оценивать «у себя»: то, что работает на одном экране, ничего не говорит о том, как её увидят остальные, — а видят её сотни людей.</p>
+      <p>Чтобы понять, что делать, надо сначала увидеть, почему ломается. Разные почтовые клиенты — Gmail, Outlook, Apple Mail, мобильные приложения — показывают письма по‑своему и сильно урезают возможности, и отсюда четыре типичных сбоя. Первый: SVG не отображается. Большинство клиентов, особенно на базе Outlook, не рендерят <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, и получатель видит пустое место вместо знака. Второй: белый прямоугольник — если логотип на непрозрачном фоне, в тёмной теме почты вокруг него появляется белый блок. Третий: «битая» картинка — если логотип лежит по ссылке, которая недоступна, вместо него показывается значок сломанного изображения. И четвёртый: тяжёлый файл — крупный <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> утяжеляет каждое письмо (про вес — в статье <a href="../kak-umenshit-ves-png/" target="_blank" rel="noopener">как уменьшить вес PNG</a>).</p>
+      <p>Коварство почты в том, что свою подпись автор видит идеальной — в своём клиенте, на своём экране, в своей теме. А получатели открывают её в десятке разных программ, и там всплывает то, чего автор не видел: в корпоративном Outlook исчез знак, у коллеги в тёмной теме вокруг него загорелся белый штамп, на телефоне картинка не догрузилась и повисла «сломанным» значком. Именно поэтому подпись нельзя оценивать «у себя»: то, что работает на одном экране, ничего не говорит о том, как её увидят остальные, — а видят её сотни людей.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -223,13 +227,13 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="какой-формат-и-размер-выбрать">Какой формат и размер выбрать</h2>
-      <p>Каждый из этих сбоев прямо подсказывает решение. Раз SVG не отображается, формат берут растровый — <strong><a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> с прозрачным фоном</strong>: он открывается везде и не даёт белой подложки (если нужны эффекты или фото, можно JPG, но без прозрачности; разница — в статье <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG или JPG — что лучше</a>). Раз тяжёлый файл вредит, размер держат небольшим: обычно высота 100‑200 пикселей достаточна, и картинку готовят под реальный размер отображения, а не гигантскую — тот же принцип, что в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>, и заодно забота о <a href="../ekologichnyj-veb-dizajn/" target="_blank" rel="noopener">весе</a>. А чтобы знак оставался чётким на плотных экранах, PNG экспортируют в 2× от нужного размера и задают меньший размер уже в вёрстке подписи.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Не вставляйте SVG в подпись</span></div><div class="callout-body"><p>Самая частая ошибка — взять «правильный» векторный <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> и вставить его в подпись, ведь для сайта вектор действительно лучше. Но на вашем экране он покажется, а у половины получателей — нет, потому что их почтовый клиент его не понимает. Для почты логотип всегда экспортируют в <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a>; SVG при этом держат как исходник, из которого делают PNG нужного размера. Здесь работает то же правило, что и везде: формат выбирают под среду, а не наоборот.</p></div></div>
+      <p>Каждый из этих сбоев прямо подсказывает решение. Раз SVG не отображается, формат берут растровый — <strong><a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> с прозрачным фоном</strong>: он открывается везде и не даёт белой подложки (если нужны эффекты или фото, можно JPG, но без прозрачности; разница — в статье <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG или JPG — что лучше</a>). Раз тяжёлый файл вредит, размер держат небольшим: обычно высота 100‑200 пикселей достаточна, и картинку готовят под реальный размер отображения, а не гигантскую — тот же принцип, что в <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивном логотипе</a>, и заодно забота о <a href="../ekologichnyj-veb-dizajn/" target="_blank" rel="noopener">весе</a>. А чтобы знак оставался чётким на плотных экранах, PNG экспортируют в 2× от нужного размера и задают меньший размер уже в вёрстке подписи.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Не вставляйте SVG в подпись</span></div><div class="callout-body"><p>Самая частая ошибка — взять «правильный» векторный <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> и вставить его в подпись, ведь для сайта вектор действительно лучше. Но на вашем экране он покажется, а у половины получателей — нет, потому что их почтовый клиент его не понимает. Для почты логотип всегда экспортируют в <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a>; SVG при этом держат как исходник, из которого делают PNG нужного размера. Здесь работает то же правило, что и везде: формат выбирают под среду, а не наоборот.</p></div></div>
       <h2 id="прозрачный-фон-и-тёмная-тема">Прозрачный фон и тёмная тема</h2>
-      <p>Отдельного внимания требует фон, потому что многие читают почту в тёмной теме, и это сразу две ловушки. Прозрачный фон обязателен — иначе вокруг знака появится белый прямоугольник (как его получить, в статье <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">логотип с прозрачным фоном</a>; а если готовой версии нет, фон убирают, как в статье <a href="../kak-ubrat-fon-s-kartinki/" target="_blank" rel="noopener">как убрать фон с картинки</a>). Но одного прозрачного фона мало: тёмный логотип на тёмном фоне почты попросту пропадёт, поэтому нужна светлая версия — принцип тот же, что в статье <a href="../logotip-dlya-temnoj-temy/" target="_blank" rel="noopener">логотип для тёмной темы</a>. Универсально безопасный вариант — знак с контрастной обводкой или на нейтральной подложке самой подписи, который читается и на светлом, и на тёмном.</p>
+      <p>Отдельного внимания требует фон, потому что многие читают почту в тёмной теме, и это сразу две ловушки. Прозрачный фон обязателен — иначе вокруг знака появится белый прямоугольник (как его получить, в статье <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">логотип с прозрачным фоном</a>; а если готовой версии нет, фон убирают, как в статье <a href="../kak-ubrat-fon-s-kartinki/" target="_blank" rel="noopener">как убрать фон с картинки</a>). Но одного прозрачного фона мало: тёмный логотип на тёмном фоне почты попросту пропадёт, поэтому нужна светлая версия — принцип тот же, что в статье <a href="../logotip-dlya-temnoj-temy/" target="_blank" rel="noopener">логотип для тёмной темы</a>. Универсально безопасный вариант — знак с контрастной обводкой или на нейтральной подложке самой подписи, который читается и на светлом, и на тёмном.</p>
       <h2 id="как-вставить-логотип-в-подпись">Как вставить логотип в подпись</h2>
-      <p>Когда файл готов, остаётся собственно вставка, и её делают по шагам. Сначала экспортируют PNG нужного размера с прозрачным фоном. Затем размещают картинку — либо загружают на надёжный хостинг и вставляют по абсолютной ссылке, либо добавляют через настройки почтового клиента. Дальше задают ссылку, чтобы логотип был кликабельным и вёл на сайт. Обязательно добавляют alt‑текст — на случай, если картинка не загрузится, получатель увидит хотя бы название бренда вместо «битого» значка. И в конце проверяют результат в разных клиентах: отправляют тест на Gmail, Outlook и мобильную почту, в светлой и тёмной теме, — потому что почта именно та среда, где «у меня работает» ничего не гарантирует.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Согласуйте подпись с брендом</span></div><div class="callout-body"><p>Логотип, цвета и шрифт в подписи должны совпадать с остальным брендом — сайтом, визиткой, соцсетями, — потому что подпись видят чаще многого другого. Разнобой в мелочах здесь разрушает <a href="../soglasovannost-brenda/" target="_blank" rel="noopener">согласованность</a> не меньше, чем разные версии знака на разных страницах сайта. Подпись — такая же точка контакта, как <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавикон</a> или аватарка, и относиться к ней стоит так же.</p></div></div>
+      <p>Когда файл готов, остаётся собственно вставка, и её делают по шагам. Сначала экспортируют PNG нужного размера с прозрачным фоном. Затем размещают картинку — либо загружают на надёжный хостинг и вставляют по абсолютной ссылке, либо добавляют через настройки почтового клиента. Дальше задают ссылку, чтобы логотип был кликабельным и вёл на сайт. Обязательно добавляют alt‑текст — на случай, если картинка не загрузится, получатель увидит хотя бы название бренда вместо «битого» значка. И в конце проверяют результат в разных клиентах: отправляют тест на Gmail, Outlook и мобильную почту, в светлой и тёмной теме, — потому что почта именно та среда, где «у меня работает» ничего не гарантирует.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Согласуйте подпись с брендом</span></div><div class="callout-body"><p>Логотип, цвета и шрифт в подписи должны совпадать с остальным брендом — сайтом, визиткой, соцсетями, — потому что подпись видят чаще многого другого. Разнобой в мелочах здесь разрушает <a href="../soglasovannost-brenda/" target="_blank" rel="noopener">согласованность</a> не меньше, чем разные версии знака на разных страницах сайта. Подпись — такая же точка контакта, как <a href="../favicon-v-poiske-i-nejrosetyah/" target="_blank" rel="noopener">фавикон</a> или аватарка, и относиться к ней стоит так же.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -244,11 +248,12 @@ window.yaContextCb.push(() => {
       <p>Логотип для email‑подписи ломается чаще всего потому, что почта — самая капризная среда для картинок: разные клиенты режут возможности, не показывают SVG и по‑разному ведут себя с фоном. Отсюда и все решения: знак берут в <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> с <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">прозрачным фоном</a> (не в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>), небольшого размера и лёгким, делают его кликабельным и снабжают alt‑текстом. Обязательно продумывают тёмную тему и готовят светлую версию, а перед использованием тестируют подпись в разных почтовых клиентах. И держат её стиль единым с брендом — это часть <a href="../soglasovannost-brenda/" target="_blank" rel="noopener">согласованности</a>.</p>
       <p>Скачать логотип, сделать светлую версию и экспортировать PNG для подписи можно в <a href="../../logos/" target="_blank" rel="noopener">каталоге Trace Logo's</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../logotip-dlya-prezentacii/" data-date="2026-08-13" data-views="0">
+          <a class="blog-card" href="../logotip-dlya-prezentacii/" data-date="2026-08-13" data-views="9">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -261,7 +266,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            9
           </div>
           </div>
           <div class="blog-card-title">Логотип для презентации — как вставить в PowerPoint и Google Slides</div>
@@ -269,107 +274,107 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-muzykanta/" data-date="2026-09-11" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-startapa/" data-date="2026-09-07" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Музыка</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="18" r="4" /><path d="M16 18V2" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Стартап</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" /><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            5
           </div>
           </div>
-          <div class="blog-card-title">Логотип для музыканта — знак, который живёт от обложки до мерча</div>
+          <div class="blog-card-title">Логотип для стартапа — сколько знака нужно на старте</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-eko-brenda/" data-date="2026-09-10" data-views="1">
+      <a class="blog-card" href="../mokap-logotipa/" data-date="2026-09-04" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Экология</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" /><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" /><path d="M5 21h14" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Презентация</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            5
           </div>
           </div>
-          <div class="blog-card-title">Логотип для эко‑бренда — знак, который стоит рядом с маркировкой</div>
+          <div class="blog-card-title">Мокап логотипа — как показать знак, чтобы его приняли</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-obrazovaniya/" data-date="2026-09-10" data-views="0">
+      <a class="blog-card" href="../brief-na-logotip/" data-date="2026-08-23" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Образование</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" /><path d="M8 10h8" /><path d="M8 18h8" /><path d="M8 22v-6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6" /><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Бриф</span><span class="blog-card-tag">Заказ</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4" /><path d="M12 16h4" /><path d="M8 11h.01" /><path d="M8 16h.01" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            3
           </div>
           </div>
-          <div class="blog-card-title">Логотип для образования — две аудитории, один знак</div>
+          <div class="blog-card-title">Бриф на логотип — как поставить задачу, чтобы не переделывать десять раз</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../razmery-logotipa-dlya-sajta-i-socsetej/" data-date="2026-07-10" data-views="23">
+      <a class="blog-card" href="../logotip-nejrosetyu/" data-date="2026-06-29" data-views="11">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Размеры</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /><path d="m14.5 12.5 2-2" /><path d="m11.5 9.5 2-2" /><path d="m8.5 6.5 2-2" /><path d="m17.5 15.5 2-2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            23
+            11
           </div>
           </div>
-          <div class="blog-card-title">Размеры логотипа для сайта и соцсетей — полная шпаргалка 2026</div>
+          <div class="blog-card-title">Логотип нейросетью — честный разбор: когда это работает, а когда нет</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../mikrovzaimodejstviya/" data-date="2026-09-12" data-views="0">
+      <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">UX</span><span class="blog-card-tag">Анимация</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.1 12 6" /><path d="m5.1 8-2.9-.8" /><path d="m6 12-1.9 2" /><path d="M7.2 2.2 8 5.1" /><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">Микровзаимодействия: сколько миллисекунд между нажатием и доверием</div>
+          <div class="blog-card-title">Логотипы мессенджеров — почему все выбирают пузырь и самолётик</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -387,25 +392,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -482,6 +479,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -527,10 +525,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

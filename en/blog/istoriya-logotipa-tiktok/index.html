@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(71 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(111 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(161 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(221 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(71 70% 38%) 0%, hsl(221 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="18" r="4" /><path d="M12 18V2l7 4" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(310 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(350 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(40 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(100 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(310 70% 38%) 0%, hsl(100 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="18" r="4" /><path d="M12 18V2l7 4" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-03">August 3, 2026</time>
@@ -203,14 +207,14 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            2
+	            12
 	          </span>
         </div>
         <h1>The TikTok Logo History — the Note, the Glitch and the Dark Stage</h1>
       </header>
       <div class="blog-body">
-        <p>The <a href="/en/logos/social/tiktok/" target="_blank" rel="noopener">TikTok</a> logo — a note with a neon blue‑red &quot;split&quot; on black — is recognized instantly and resembles no other <a href="/en/blog/logotipy-socsetej/" target="_blank" rel="noopener">social network mark</a>. Curiously, it wasn't invented for TikTok: the mark was born in China for the Douyin app, and its legend is one of modern branding's most beautiful. Here's the story.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The mark was created in 2016 for China's <strong>Douyin</strong> (parent company ByteDance): a note inspired by a dark concert hall where only the stage glows. The blue‑red &quot;split&quot; imitates chromatic aberration — light separating at the edges. <strong>2018</strong> — after the Musical.ly acquisition the mark becomes TikTok's global face; everything since is polish. Files are on the <a href="/en/logos/social/tiktok/" target="_blank" rel="noopener">brand page</a>.</p></div></div>
+        <p>The <a href="/en/logos/social/tiktok/" target="_blank" rel="noopener">TikTok<img class="blog-mention-icon" src="/assets/logos/svgs/tiktok.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> logo — a note with a neon blue‑red &quot;split&quot; on black — is recognized instantly and resembles no other social network mark. Curiously, it wasn't invented for TikTok: the mark was born in China for the Douyin app, and its legend is one of modern branding's most beautiful. Here's the story.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The mark was created in 2016 for China's <strong>Douyin</strong> (parent company ByteDance): a note inspired by a dark concert hall where only the stage glows. The blue‑red &quot;split&quot; imitates chromatic aberration — light separating at the edges. <strong>2018</strong> — after the Musical.ly acquisition the mark becomes TikTok's global face; everything since is polish. Files are on the <a href="/en/logos/social/tiktok/" target="_blank" rel="noopener">brand page<img class="blog-mention-icon" src="/assets/logos/svgs/tiktok.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p></div></div>
       <h2 id="2016-the-dark-hall-and-the-glowing-stage" class="step-heading"><span class="step-badge">2016</span><span class="step-title">The dark hall and the glowing stage</span></h2>
       <p>By the official legend, Douyin's designer hunted for an image conveying music in darkness — and started from a rock concert picture: a black hall, a glowing stage, vibrating sound. Thus the note on black with a &quot;doubled&quot; contour — teal and red, like light splitting in smoke. The black background is fundamental: like <a href="/en/blog/istoriya-logotipa-netflix/" target="_blank" rel="noopener">Netflix</a>, TikTok was designed for the dark video screen, where a bright icon on black burns stronger than any white tile — the same <a href="/en/blog/ikonka-prilozheniya/" target="_blank" rel="noopener">laws of app icons</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
@@ -224,13 +228,13 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="glitch-as-the-signature-device">Glitch as the signature device</h2>
-      <p>The split contour imitates <strong>chromatic aberration</strong> — the color fringing familiar from old screens and 3D glasses. The device hit the era's nerve: glitch reads as video, digital culture, the internet's &quot;broken&quot; aesthetic. Crucially, the effect carries meaning — motion and the vibration of sound — rather than decorating: the static mark looks like a &quot;trembling&quot; video frame — a clear case of <a href="/en/blog/trendy-logotipov-2026/" target="_blank" rel="noopener">when an effect is justified</a> in a logo.</p>
+      <p>The split contour imitates <strong>chromatic aberration</strong> — the color fringing familiar from old screens and 3D glasses. The device hit the era's nerve: glitch reads as video, digital culture, the internet's &quot;broken&quot; aesthetic. Crucially, the effect carries meaning — motion and the vibration of sound — rather than decorating: the static mark looks like a &quot;trembling&quot; video frame — a clear case of when an effect is justified in a logo.</p>
       <h2 id="2018-the-musical-ly-merger" class="step-heading"><span class="step-badge">2018</span><span class="step-title">The Musical.ly merger</span></h2>
       <p>The mark's global story began when ByteDance bought Musical.ly — the teen‑favorite app with a pink‑orange note icon — and merged it into TikTok. Of two brands one survived: Musical.ly's audience woke up to a new icon on their screens. An instructive case: an acquired brand with tens of millions of users dissolved with no long transition — ByteDance judged a single global mark worth more than local habit — we cover <a href="/en/blog/chto-takoe-rebrending/" target="_blank" rel="noopener">how such mergers go</a> separately.</p>
       <h2 id="why-a-note-and-not-a-letter">Why a note and not a letter</h2>
-      <p>In a category <a href="/en/blog/logotipy-socsetej/" target="_blank" rel="noopener">won by letters</a>, TikTok kept an object symbol — and won: the note sets it apart in a row of single‑letter neighbors. The risk of a too‑narrow metaphor (note = music, while TikTok is long past that) is hedged by abstraction: the glitch note reads as &quot;sound and motion&quot; rather than &quot;songs&quot; — the same insurance as <a href="/en/blog/istoriya-logotipa-spotify/" target="_blank" rel="noopener">Spotify's waves</a>.</p>
+      <p>In a category won by letters, TikTok kept an object symbol — and won: the note sets it apart in a row of single‑letter neighbors. The risk of a too‑narrow metaphor (note = music, while TikTok is long past that) is hedged by abstraction: the glitch note reads as &quot;sound and motion&quot; rather than &quot;songs&quot; — the same insurance as <a href="/en/blog/istoriya-logotipa-spotify/" target="_blank" rel="noopener">Spotify's waves</a>.</p>
       <h2 id="how-the-glitch-actually-works">How the glitch actually works</h2>
-      <p>The blue‑red split is not two contours eyeballed together but a precise construction: the teal and red silhouettes are offset from the white core by equal diagonal distances, imitating white light decomposing into components. That gives the mark strict background demands: on white the &quot;glow&quot; dies, so the primary version lives on black, with a simplified single‑color note for light media. The practitioner's lesson: a spectacular device always drags along a package of extra versions — plan both <a href="/en/blog/vidy-logotipov/" target="_blank" rel="noopener">the version kit</a> and <a href="/en/blog/logotip-dlya-pechati/" target="_blank" rel="noopener">what print demands</a> from the start.</p>
+      <p>The blue‑red split is not two contours eyeballed together but a precise construction: the teal and red silhouettes are offset from the white core by equal diagonal distances, imitating white light decomposing into components. That gives the mark strict background demands: on white the &quot;glow&quot; dies, so the primary version lives on black, with a simplified single‑color note for light media. The practitioner's lesson: a spectacular device always drags along a package of extra versions — plan both the version kit and <a href="/en/blog/logotip-dlya-pechati/" target="_blank" rel="noopener">what print demands</a> from the start.</p>
       <h2 id="the-type-and-the-wordmark">The type and the wordmark</h2>
       <p>The word &quot;TikTok&quot; is set in a bold grotesque with one telling detail — the leg of the &quot;k&quot; looks clipped, giving the word the same &quot;knocked&quot; quality as the note's glitch. Since 2023 the company has its own TikTok Sans, unifying interface and marketing typography. The logic is familiar from <a href="/en/blog/istoriya-logotipa-netflix/" target="_blank" rel="noopener">Netflix</a> and <a href="/en/blog/istoriya-logotipa-youtube/" target="_blank" rel="noopener">YouTube</a>: a platform of TikTok's scale saves on licenses and gains uniqueness by commissioning a typeface once — we cover <a href="/en/blog/shrift-dlya-logotipa/" target="_blank" rel="noopener">how type serves a brand</a> separately.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
@@ -246,13 +250,14 @@ window.yaContextCb.push(() => {
       <h2 id="the-timeline">The timeline</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Years</th><th>Mark</th><th>Event</th></tr></thead><tbody><tr><td>2016</td><td>the glitch note (Douyin)</td><td>the China launch</td></tr><tr><td>2017</td><td>the same mark for TikTok</td><td>the international version</td></tr><tr><td>2018</td><td>the mark unified</td><td>the Musical.ly merger</td></tr><tr><td>2020s</td><td>detail polish</td><td>global dominance</td></tr></tbody></table></div>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>The case's lesson</span></div><div class="callout-body"><p>TikTok shows the power of an &quot;atmospheric&quot; idea: the mark grew not from shape iteration but from a scene image (a dark hall, a glowing note). If a mark refuses to be found, change the question from &quot;what shape do we need?&quot; to &quot;what picture conveys the product's feeling?&quot; — we've collected <a href="/en/blog/kak-narisovat-logotip-v-figma/" target="_blank" rel="noopener">idea-hunting methods</a> separately.</p></div></div>
-      <p>The TikTok logo in SVG and PNG is on the <a href="/en/logos/social/tiktok/" target="_blank" rel="noopener">brand page</a>. More stories in the series: <a href="/en/blog/istoriya-logotipa-instagram/" target="_blank" rel="noopener">Instagram</a>, <a href="/en/blog/istoriya-logotipa-youtube/" target="_blank" rel="noopener">YouTube</a>, <a href="/en/blog/istoriya-logotipa-spotify/" target="_blank" rel="noopener">Spotify</a>, <a href="/en/blog/istoriya-logotipa-telegram/" target="_blank" rel="noopener">Telegram</a>.</p>
+      <p>The TikTok logo in SVG and PNG is on the <a href="/en/logos/social/tiktok/" target="_blank" rel="noopener">brand page<img class="blog-mention-icon" src="/assets/logos/svgs/tiktok.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. More stories in the series: <a href="/en/blog/istoriya-logotipa-instagram/" target="_blank" rel="noopener">Instagram</a>, <a href="/en/blog/istoriya-logotipa-youtube/" target="_blank" rel="noopener">YouTube</a>, <a href="/en/blog/istoriya-logotipa-spotify/" target="_blank" rel="noopener">Spotify</a>, <a href="/en/blog/istoriya-logotipa-telegram/" target="_blank" rel="noopener">Telegram</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/istoriya-logotipa-vk/" data-date="2026-08-04" data-views="0">
+          <a class="blog-card" href="/en/blog/istoriya-logotipa-vk/" data-date="2026-08-04" data-views="668">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -265,15 +270,15 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            668
           </div>
           </div>
-          <div class="blog-card-title">The VK Logo History — From the 2006 Blue Badge to Today</div>
+          <div class="blog-card-title">The VK Logo History — From the 2006 Blue Badge to the VK Ecosystem</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="0">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="24">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -286,7 +291,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            24
           </div>
           </div>
           <div class="blog-card-title">The WhatsApp Logo History — The Handset That Outlived Everything</div>
@@ -294,7 +299,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/istoriya-logotipa-instagram/" data-date="2026-07-30" data-views="6">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-instagram/" data-date="2026-07-30" data-views="37">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -307,73 +312,73 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            6
+            37
           </div>
           </div>
-          <div class="blog-card-title">The Instagram Logo History — From Polaroid to Gradient</div>
+          <div class="blog-card-title">The Instagram Logo History — From Polaroid to the 2026 Wordmark</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/oformlenie-socsetej/" data-date="2026-09-08" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Social Media</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3v18" /><rect width="12" height="18" x="6" y="3" rx="2" /><path d="M22 3v18" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">Social Media Design — How to Turn a Feed into a Brand Storefront</div>
+          <div class="blog-card-title">Messenger Logos — Why Everyone Picks Bubbles and Planes</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-predlozhit-svoj-emodzi/" data-date="2026-08-08" data-views="0">
+      <a class="blog-card" href="/en/blog/pikselnyj-logotip/" data-date="2026-07-28" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Basics</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">2026 Trends</span><span class="blog-card-tag">Retro</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" /><rect x="14" y="2" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">How to Propose a New Emoji to Unicode — the Real Process</div>
+          <div class="blog-card-title">A Pixel and Retro Logo — Y2K Returns in 2026</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-optimizirovat-svg/" data-date="2026-06-16" data-views="12">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-sbera/" data-date="2026-06-13" data-views="53">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Optimization</span><span class="blog-card-tag">Websites</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Sber</span><span class="blog-card-tag">History</span><span class="blog-card-tag">Rebranding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18v-7" /><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M3 22h18" /><path d="M6 18v-7" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            12
+            53
           </div>
           </div>
-          <div class="blog-card-title">How to Optimize SVG — Cut File Size 2–10× with Zero Quality Loss</div>
+          <div class="blog-card-title">The History of the Sberbank Logo — From 1841 to the Gradient Circle</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -391,25 +396,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -486,6 +483,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -531,10 +529,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

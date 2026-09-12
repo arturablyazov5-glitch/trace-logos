@@ -13,11 +13,13 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Что такое логотип — простыми словами · Trace Logo's</title>
-  <meta name="description" content="Что такое логотип, из чего он состоит и чем отличается от товарного знака и фирменного стиля. Виды логотипов, зачем он нужен бизнесу и как выглядит хороший знак — на примерах известных брендов.">
+  <meta name="description" content="Что такое логотип, из чего он состоит и чем отличается от товарного знака и фирменного стиля. Виды логотипов, зачем он нужен бизнесу и как выглядит хороший знак — на примерах известных брендов.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
   <link rel="canonical" href="https://trace-logos.ru/blog/chto-takoe-logotip/">
@@ -32,7 +34,7 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Trace Logo's">
   <meta property="og:title" content="Что такое логотип — простыми словами">
-  <meta property="og:description" content="Что такое логотип, из чего он состоит и чем отличается от товарного знака и фирменного стиля. Виды логотипов, зачем он нужен бизнесу и как выглядит хороший знак — на примерах известных брендов.">
+  <meta property="og:description" content="Что такое логотип, из чего он состоит и чем отличается от товарного знака и фирменного стиля. Виды логотипов, зачем он нужен бизнесу и как выглядит хороший знак — на примерах известных брендов.">
   <meta property="og:url" content="https://trace-logos.ru/blog/chto-takoe-logotip/">
   <meta property="og:image" content="https://trace-logos.ru/assets/og/blog/social/chto-takoe-logotip.png">
   <meta property="og:image:width" content="1200">
@@ -70,7 +72,7 @@
     {
       "@type": "BlogPosting",
       "headline": "Что такое логотип — простыми словами",
-      "description": "Что такое логотип, из чего он состоит и чем отличается от товарного знака и фирменного стиля. Виды логотипов, зачем он нужен бизнесу и как выглядит хороший знак — на примерах известных брендов.",
+      "description": "Что такое логотип, из чего он состоит и чем отличается от товарного знака и фирменного стиля. Виды логотипов, зачем он нужен бизнесу и как выглядит хороший знак — на примерах известных брендов.",
       "datePublished": "2026-07-18",
       "dateModified": "2026-07-18",
       "url": "https://trace-logos.ru/blog/chto-takoe-logotip/",
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(119 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(159 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(209 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(269 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(119 70% 38%) 0%, hsl(269 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(358 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(38 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(88 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(148 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(358 70% 38%) 0%, hsl(148 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-18">18 июля 2026</time>
@@ -202,16 +206,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            4
+	            21
 	          </span>
         </div>
         <h1>Что такое логотип — простыми словами</h1>
       </header>
       <div class="blog-body">
-        <p>Надкушенное яблоко <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> работает без единого слова: вы видите силуэт — и в голове мгновенно всплывает всё, что связано с брендом. Причём знак не объясняет, чем занимается компания, и не пытается быть красивым сам по себе. Он делает одну‑единственную вещь — служит якорем узнавания. И если понять, что именно эта работа, а не «красота», и есть суть логотипа, всё остальное встаёт на свои места.</p>
+        <p>Надкушенное яблоко <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> работает без единого слова: вы видите силуэт — и в голове мгновенно всплывает всё, что связано с брендом. Причём знак не объясняет, чем занимается компания, и не пытается быть красивым сам по себе. Он делает одну‑единственную вещь — служит якорем узнавания. И если понять, что именно эта работа, а не «красота», и есть суть логотипа, всё остальное встаёт на свои места.</p>
       <h2 id="что-на-самом-деле-делает-логотип">Что на самом деле делает логотип</h2>
       <p>Слово «логотип» происходит от греческих <em>logos</em> («слово») и <em>typos</em> («отпечаток»), и изначально означало именно текстовое начертание названия. Но со временем логотипом стали называть любой опознавательный знак бренда — и надпись, и символ. Что не изменилось, так это его задача: чтобы человек, увидев знак, за долю секунды достал из памяти всё, что связано с компанией.</p>
-      <p>Из этого вытекает и то, из чего логотип собран. Раз его работа — узнавание, значит, он должен быть <strong>системой из нескольких опорных признаков</strong>, а не одной случайной картинкой. Обычно таких признаков три: форма (символ, значок или <a href="../chto-takoe-monogramma/" target="_blank" rel="noopener">монограмма</a>), начертание названия (<a href="../shrift-dlya-logotipa/" target="_blank" rel="noopener">шрифт</a>, которым написано имя) и <a href="../psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">цвет</a> — часто именно он опознаётся первым, ещё до формы. Не в каждом знаке есть все три: у <a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a> основа — цветное текстовое начертание, а у <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a> вообще только символ без слова. Но принцип общий — знак держится на устойчивом сочетании формы, шрифта и цвета, и именно поэтому его узнают.</p>
+      <p>Из этого вытекает и то, из чего логотип собран. Раз его работа — узнавание, значит, он должен быть <strong>системой из нескольких опорных признаков</strong>, а не одной случайной картинкой. Обычно таких признаков три: форма (символ, значок или <a href="../chto-takoe-monogramma/" target="_blank" rel="noopener">монограмма</a>), начертание названия (<a href="../shrift-dlya-logotipa/" target="_blank" rel="noopener">шрифт</a>, которым написано имя) и <a href="../psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">цвет</a> — часто именно он опознаётся первым, ещё до формы. Не в каждом знаке есть все три: у <a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> основа — цветное текстовое начертание, а у <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> вообще только символ без слова. Но принцип общий — знак держится на устойчивом сочетании формы, шрифта и цвета, и именно поэтому его узнают.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -224,18 +228,18 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="почему-его-путают-с-товарным-знаком-и-фирменным-стилем">Почему его путают с товарным знаком и фирменным стилем</h2>
       <p>Раз уж речь зашла о том, что такое логотип, стоит сразу отделить его от двух соседних понятий, с которыми его постоянно смешивают, — и путаница эта не случайна, потому что все три и правда про бренд, только с разных сторон.</p>
-      <p>Логотип — это то, что вы <strong>видите</strong>: графика, знак. Товарный знак — это уже не про внешний вид, а про <strong>юридический статус</strong>: тот же логотип или название, зарегистрированные и защищённые законом (как это оформить — в статье <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">как зарегистрировать логотип</a>). А <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменный стиль</a> — это <strong>вся визуальная система</strong> бренда: логотип плюс цвета, шрифты, паттерны, оформление. То есть логотип — ядро фирменного стиля, но не он сам. Отдельно его часто путают ещё и с иконкой приложения — близкая, но не та же вещь, о чём мы говорим в статье <a href="../ikonka-i-logotip-raznica/" target="_blank" rel="noopener">иконка и логотип — в чём разница</a>.</p>
+      <p>Логотип — это то, что вы <strong>видите</strong>: графика, знак. Товарный знак — это уже не про внешний вид, а про <strong>юридический статус</strong>: тот же логотип или название, зарегистрированные и защищённые законом (как это оформить — в статье <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">как зарегистрировать логотип</a>). А <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменный стиль</a> — это <strong>вся визуальная система</strong> бренда: логотип плюс цвета, шрифты, паттерны, оформление. То есть логотип — ядро фирменного стиля, но не он сам. Отдельно его часто путают ещё и с иконкой приложения — близкая, но не та же вещь, о чём мы говорим в статье <a href="../ikonka-i-logotip-raznica/" target="_blank" rel="noopener">иконка и логотип — в чём разница</a>.</p>
       <h2 id="какими-бывают-логотипы">Какими бывают логотипы</h2>
-      <p>Понимание разницы между типами знаков помогает выбрать свой. Текстовый логотип (логотайп) — это название фирменным шрифтом, как у <a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a>. Знак‑символ живёт без слов, как у <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a>. <a href="../chto-takoe-monogramma/" target="_blank" rel="noopener">Монограмма</a> строится из инициалов, как у <a href="../../logos/social/vk/" target="_blank" rel="noopener">VK</a>. Комбинированный ставит символ и текст рядом, как у <a href="../../logos/media/spotify/" target="_blank" rel="noopener">Spotify</a>. Эмблема заключает название внутрь замкнутой формы, как у <a href="../../logos/food/starbucks/" target="_blank" rel="noopener">Starbucks</a>. А отдельный класс — <a href="../chto-takoe-maskot/" target="_blank" rel="noopener">маскот</a>, фирменный персонаж. Подробный разбор всех типов с примерами — в статье виды логотипов.</p>
+      <p>Понимание разницы между типами знаков помогает выбрать свой. Текстовый логотип (логотайп) — это название фирменным шрифтом, как у <a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Знак‑символ живёт без слов, как у <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. <a href="../chto-takoe-monogramma/" target="_blank" rel="noopener">Монограмма</a> строится из инициалов, как у <a href="../../logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Комбинированный ставит символ и текст рядом, как у <a href="../../logos/media/spotify/" target="_blank" rel="noopener">Spotify<img class="blog-mention-icon" src="../../assets/logos/svgs/spotify.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Эмблема заключает название внутрь замкнутой формы, как у <a href="../../logos/food/starbucks/" target="_blank" rel="noopener">Starbucks<img class="blog-mention-icon" src="../../assets/logos/svgs/starbucks.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. А отдельный класс — <a href="../chto-takoe-maskot/" target="_blank" rel="noopener">маскот</a>, фирменный персонаж. Подробный разбор всех типов с примерами — в статье виды логотипов.</p>
       <h2 id="зачем-логотип-бизнесу">Зачем логотип бизнесу</h2>
-      <p>Всё перечисленное было бы теорией, если бы не приносило пользы. А пользу логотип даёт по цепочке. Он самый компактный носитель бренда: помещается и на фавиконе, и в шапке письма, и на аватарке одинаково, — а значит, работает на узнаваемость чаще любого другого элемента. Из узнаваемости растёт доверие: аккуратный, последовательный знак читается как признак того, что за продуктом стоит серьёзная команда. Доверие, в свою очередь, помогает отстроиться от конкурентов — в переполненной нише логотип часто первое, что отличает вас от соседа по полке. А зарегистрированный как товарный знак, он становится ещё и юридическим активом, который нельзя законно скопировать. Кстати, обратная сторона той же медали: использовать чужой знак без разрешения можно далеко не всегда — границы мы разобрали в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>.</p>
+      <p>Всё перечисленное было бы теорией, если бы не приносило пользы. А пользу логотип даёт по цепочке. Он самый компактный носитель бренда: помещается и на фавиконе, и в шапке письма, и на аватарке одинаково, — а значит, работает на узнаваемость чаще любого другого элемента. Из узнаваемости растёт доверие: аккуратный, последовательный знак читается как признак того, что за продуктом стоит серьёзная команда. Доверие, в свою очередь, помогает отстроиться от конкурентов — в переполненной нише логотип часто первое, что отличает вас от соседа по полке. А зарегистрированный как товарный знак, он становится ещё и юридическим активом, который нельзя законно скопировать. Кстати, обратная сторона той же медали: использовать чужой знак без разрешения можно далеко не всегда — границы мы разобрали в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">можно ли использовать чужой логотип</a>.</p>
       <h2 id="что-делает-логотип-хорошим">Что делает логотип хорошим</h2>
-      <p>Если задача знака — узнавание, то и признаки хорошего логотипа выводятся из неё, а не из вкуса. Он должен быть <strong>простым</strong>, потому что простое узнаётся в миниатюре и легко воспроизводится — не случайно бренды годами <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">упрощают свои логотипы</a>. Он должен быть <strong>масштабируемым</strong>, потому что работать ему и на билборде, и на <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавиконе</a> 16×16 пикселей. Он должен быть <strong>уникальным</strong>, иначе перепутается с чужим и не выполнит свою главную работу — отличать (типовые промахи собраны в статье ошибки в дизайне логотипа). И, наконец, <strong>гибким</strong>: современный знак живёт в разных контекстах — светлом и тёмном, большом и крошечном, — про что у нас есть отдельные разборы про <a href="../logotip-dlya-temnoj-temy/" target="_blank" rel="noopener">логотип для тёмной темы</a> и <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивный логотип</a>.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Логотип ≠ сложная иллюстрация</span></div><div class="callout-body"><p>Из всего этого следует и главная ошибка новичка — попытка вложить в знак максимум: и деятельность, и город, и год основания, и три цвета разом. Но чем больше смыслов, тем хуже читаемость в мелком размере и тем быстрее знак устаревает. Сильный логотип почти всегда проще, чем кажется на старте, — и это не компромисс, а прямое следствие того, зачем он вообще нужен.</p></div></div>
+      <p>Если задача знака — узнавание, то и признаки хорошего логотипа выводятся из неё, а не из вкуса. Он должен быть <strong>простым</strong>, потому что простое узнаётся в миниатюре и легко воспроизводится — не случайно бренды годами <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">упрощают свои логотипы</a>. Он должен быть <strong>масштабируемым</strong>, потому что работать ему и на билборде, и на <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавиконе</a> 16×16 пикселей. Он должен быть <strong>уникальным</strong>, иначе перепутается с чужим и не выполнит свою главную работу — отличать (типовые промахи собраны в статье ошибки в дизайне логотипа). И, наконец, <strong>гибким</strong>: современный знак живёт в разных контекстах — светлом и тёмном, большом и крошечном, — про что у нас есть отдельные разборы про <a href="../logotip-dlya-temnoj-temy/" target="_blank" rel="noopener">логотип для тёмной темы</a> и <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивный логотип</a>.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Логотип ≠ сложная иллюстрация</span></div><div class="callout-body"><p>Из всего этого следует и главная ошибка новичка — попытка вложить в знак максимум: и деятельность, и город, и год основания, и три цвета разом. Но чем больше смыслов, тем хуже читаемость в мелком размере и тем быстрее знак устаревает. Сильный логотип почти всегда проще, чем кажется на старте, — и это не компромисс, а прямое следствие того, зачем он вообще нужен.</p></div></div>
       <h2 id="почему-его-хранят-в-векторе">Почему его хранят в векторе</h2>
-      <p>Требование простоты и масштабируемости объясняет и техническую сторону. Логотип — это исходник, из которого потом делают все производные: фавикон, аватарку, макет для печати. Чтобы он не терял качество ни при каком размере, его хранят в <strong>векторе</strong> — формате <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, AI или EPS, где изображение описано формулами, а не пикселями. Из вектора всегда можно получить <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> любого размера, а вот наоборот — сложно; почему так, подробно в статьях <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор и растр</a> и <a href="../v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">в каком формате нужен логотип</a>.</p>
+      <p>Требование простоты и масштабируемости объясняет и техническую сторону. Логотип — это исходник, из которого потом делают все производные: фавикон, аватарку, макет для печати. Чтобы он не терял качество ни при каком размере, его хранят в <strong>векторе</strong> — формате <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, AI или EPS, где изображение описано формулами, а не пикселями. Из вектора всегда можно получить <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> любого размера, а вот наоборот — сложно; почему так, подробно в статьях <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">вектор и растр</a> и <a href="../v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">в каком формате нужен логотип</a>.</p>
       <h2 id="как-сделать-логотип">Как сделать логотип</h2>
-      <p>Способ зависит от задачи и бюджета, и тут работает та же логика. Если нужен простой знак и есть базовые навыки — можно <a href="../kak-sdelat-logotip-samomu/" target="_blank" rel="noopener">собрать самому</a> или в конструкторе, а то и <a href="../logotip-nejrosetyu/" target="_blank" rel="noopener">нейросетью</a>. Если нужен уникальный знак под конкретную задачу — есть смысл идти к дизайнеру; что входит в работу и сколько это стоит — в статьях как заказать логотип у дизайнера и <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">сколько стоит логотип</a>.</p>
+      <p>Способ зависит от задачи и бюджета, и тут работает та же логика. Если нужен простой знак и есть базовые навыки — можно <a href="../kak-sdelat-logotip-samomu/" target="_blank" rel="noopener">собрать самому</a> или в конструкторе, а то и <a href="../logotip-nejrosetyu/" target="_blank" rel="noopener">нейросетью</a>. Если нужен уникальный знак под конкретную задачу — есть смысл идти к дизайнеру; что входит в работу и сколько это стоит — в статьях как заказать логотип у дизайнера и <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">сколько стоит логотип</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -247,135 +251,136 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="короткий-вывод">Короткий вывод</h2>
-      <p>Логотип — это графический знак, единственная задача которого сделать бренд узнаваемым; всё остальное — форма, шрифт, цвет — подчинено ей, поэтому логотип и собирают как систему из этих трёх опор, а не как красивую картинку. Он не равен товарному знаку (юридический статус) и не равен <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменному стилю</a> (вся визуальная система), хотя и связан с обоими. А признаки хорошего знака — простота, масштабируемость, уникальность и гибкость — не про вкус, а прямо выводятся из того, ради чего логотип существует; хранят его в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a>, чтобы получать из него любые производные.</p>
+      <p>Логотип — это графический знак, единственная задача которого сделать бренд узнаваемым; всё остальное — форма, шрифт, цвет — подчинено ей, поэтому логотип и собирают как систему из этих трёх опор, а не как красивую картинку. Он не равен товарному знаку (юридический статус) и не равен <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменному стилю</a> (вся визуальная система), хотя и связан с обоими. А признаки хорошего знака — простота, масштабируемость, уникальность и гибкость — не про вкус, а прямо выводятся из того, ради чего логотип существует; хранят его в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a>, чтобы получать из него любые производные.</p>
       <p>Посмотреть, как устроены логотипы известных брендов, и скачать любой в SVG или PNG можно в <a href="../../logos/" target="_blank" rel="noopener">каталоге Trace Logo's</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../logotip-dlya-hr-brenda/" data-date="2026-08-31" data-views="0">
+          <a class="blog-card" href="../logotip-i-tovarnyj-znak-raznica/" data-date="2026-08-17" data-views="4">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">HR</span><span class="blog-card-tag">Логотип</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /><rect width="20" height="14" x="2" y="6" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Право</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13" /><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z" /><path d="M5 22h14" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            4
           </div>
           </div>
-          <div class="blog-card-title">HR‑бренд и его айдентика — как компания выглядит для соискателя</div>
+          <div class="blog-card-title">Логотип и товарный знак — в чём разница и что это значит для бизнеса</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../vidy-logotipov/" data-date="2026-08-31" data-views="0">
+      <a class="blog-card" href="../kak-pridumat-nazvanie-brenda/" data-date="2026-08-08" data-views="2">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            2
           </div>
           </div>
-          <div class="blog-card-title">Виды логотипов — 7 типов с примерами известных брендов</div>
+          <div class="blog-card-title">Как придумать название бренда — методы нейминга и проверки</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../personalnyj-brend/" data-date="2026-08-29" data-views="1">
+      <a class="blog-card" href="../chto-takoe-slogan/" data-date="2026-07-25" data-views="11">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Личный бренд</span><span class="blog-card-tag">Логотип</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Маркетинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>25.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            11
           </div>
           </div>
-          <div class="blog-card-title">Персональный бренд — нужен ли эксперту логотип</div>
+          <div class="blog-card-title">Что такое слоган — и чем он отличается от дескриптора и УТП</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../arhitektura-brenda/" data-date="2026-08-28" data-views="0">
+      <a class="blog-card" href="../chto-takoe-rebrending/" data-date="2026-07-24" data-views="15">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Стратегия</span><span class="blog-card-tag">Логотип</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 12h4" /><path d="M10 8h4" /><path d="M14 21v-3a2 2 0 0 0-4 0v3" /><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>24.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            15
           </div>
           </div>
-          <div class="blog-card-title">Архитектура бренда — один логотип или семья знаков</div>
+          <div class="blog-card-title">Что такое ребрендинг — зачем компании меняют логотип и имя</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-beauti-salona/" data-date="2026-09-05" data-views="1">
+      <a class="blog-card" href="../audio-logotip/" data-date="2026-08-16" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Бьюти</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /><circle cx="12" cy="8" r="2" /><path d="M12 10v12" /><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Звук</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10v3" /><path d="M6 6v11" /><path d="M10 3v18" /><path d="M14 8v7" /><path d="M18 5v13" /><path d="M22 10v3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>05.09.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
-          </div>
-          </div>
-          <div class="blog-card-title">Логотип для бьюти‑салона — элегантность, которая не ломается на вывеске</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../emodzi-flagi-kak-ustroeny/" data-date="2026-07-27" data-views="8">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Форматы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             8
           </div>
           </div>
-          <div class="blog-card-title">Как устроены эмодзи‑флаги — и почему их не видно на Windows</div>
+          <div class="blog-card-title">Звуковой логотип — бренд, который узнают с закрытыми глазами</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../dinamicheskij-logotip/" data-date="2026-07-21" data-views="13">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12q2.5 2 5 0t5 0 5 0 5 0" /><path d="M2 19q2.5 2 5 0t5 0 5 0 5 0" /><path d="M2 5q2.5 2 5 0t5 0 5 0 5 0" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.07.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            13
+          </div>
+          </div>
+          <div class="blog-card-title">Динамический логотип — что это и зачем в 2026</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -393,25 +398,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -488,6 +485,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -533,10 +531,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

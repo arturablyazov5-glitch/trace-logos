@@ -1,44 +1,903 @@
-.ext-hero-actions {
-  margin-top: 20px;
+/* ── Лендинг расширения: /tools/extensions/<slug>/ ──────────────────────────
+   Общий стиль для всех внутренних страниц расширений. Токены и базовые
+   классы (.wrap, .section, .badge, .btn) приходят из tools.css — здесь
+   только то, что специфично для лендинга продукта.
+   ─────────────────────────────────────────────────────────────────────── */
+
+.ext-page {
+  --ext-accent: var(--blue);
+  --ext-accent-soft: rgba(138, 107, 255, 0.12);
+  --ext-accent-line: rgba(138, 107, 255, 0.28);
 }
 
+/* Одна ширина на всю страницу — ровно та же, что у компонента подвала
+   (.site-footer .wrap в css/site-footer.css: 1080px + 24px по бокам).
+   Блоки не должны гулять по ширине от секции к секции. */
+.ext-page .wrap {
+  max-width: 1080px;
+}
+
+/* Абзацы-подводки читаются длинной строкой плохо, поэтому текст ограничен
+   по ширине. Левый край у него общий с блоками, поэтому «разной ширины
+   блоков» это не создаёт. */
+.ext-page .section > p {
+  max-width: 780px;
+}
+
+/* ── HERO ─────────────────────────────────────────────────────────────── */
+.ext-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 88px;
+  animation: fadeUp 0.6s ease both;
+}
+
+.ext-hero h1 {
+  margin-bottom: 18px;
+}
+
+.ext-hero .subtitle {
+  max-width: 460px;
+}
+
+.ext-hero-actions {
+  margin-top: 26px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.ext-hero-note {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+/* Полоска фактов под кнопкой */
+.ext-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 30px;
+  border-top: 1px solid var(--border2);
+  padding-top: 18px;
+}
+
+.ext-fact {
+  padding-right: 22px;
+  margin-right: 22px;
+  border-right: 1px solid var(--border2);
+}
+
+.ext-fact:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.ext-fact-value {
+  display: block;
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.ext-fact-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 5px;
+}
+
+/* ── Мок окна браузера в hero ──────────────────────────────────────────── */
+.ext-window {
+  position: relative;
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+}
+
+.ext-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border2);
+}
+
+.ext-window-url {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ext-window-body {
+  position: relative;
+  height: 292px;
+  overflow: hidden;
+  padding: 14px;
+}
+
+/* Лента отзывов, уезжающая вверх — это и есть автоскролл */
+.ext-scroller {
+  display: grid;
+  gap: 10px;
+  animation: ext-scroll 14s linear infinite;
+}
+
+@keyframes ext-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -50%, 0); }
+}
+
+.ext-rev {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--bg-muted);
+}
+
+.ext-rev-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ext-rev-ava {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(140deg, rgba(138, 107, 255, 0.5), rgba(167, 139, 250, 0.16));
+  flex-shrink: 0;
+}
+
+.ext-rev-name {
+  height: 6px;
+  width: 74px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.ext-rev-stars {
+  margin-left: auto;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #f5b544;
+}
+
+.ext-rev-line {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 6px;
+}
+
+.ext-rev-line:last-child { margin-bottom: 0; }
+.ext-rev-line.w90 { width: 90%; }
+.ext-rev-line.w70 { width: 70%; }
+.ext-rev-line.w55 { width: 55%; }
+
+/* Затемнение + карточка прогресса поверх ленты */
+.ext-window-veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 12, 0.74);
+  backdrop-filter: blur(1.5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ext-progress-card {
+  width: 76%;
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 18px 40px -24px #000;
+}
+
+.ext-progress-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.ext-progress-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.07);
+  overflow: hidden;
+}
+
+.ext-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--blue-dim), var(--cyan));
+  width: 8%;
+  animation: ext-fill 14s cubic-bezier(0.35, 0, 0.2, 1) infinite;
+}
+
+@keyframes ext-fill {
+  0%   { width: 6%; }
+  88%  { width: 100%; }
+  100% { width: 100%; }
+}
+
+.ext-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 9px;
+}
+
+/* Одометр процентов — цифры едут вертикально по steps() */
+.ext-odo {
+  display: inline-flex;
+  height: 12px;
+  overflow: hidden;
+  vertical-align: -2px;
+}
+
+.ext-odo span {
+  display: block;
+  line-height: 12px;
+  animation: ext-odo 14s steps(10) infinite;
+}
+
+@keyframes ext-odo {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-120px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ext-scroller,
+  .ext-progress-fill,
+  .ext-odo span,
+  .ext-panel,
+  .ext-flow-pulse { animation: none; }
+}
+
+/* ── Конвейер «как это работает» ───────────────────────────────────────── */
+.ext-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.ext-flow::before {
+  content: '';
+  position: absolute;
+  top: 27px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border2), var(--ext-accent-line), var(--border2));
+}
+
+.ext-flow-pulse {
+  position: absolute;
+  top: 24px;
+  left: 12%;
+  width: 7px;
+  height: 7px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+  animation: ext-pulse 4.2s ease-in-out infinite;
+}
+
+@keyframes ext-pulse {
+  0%   { left: 12%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { left: 88%; opacity: 0; }
+}
+
+.ext-step {
+  position: relative;
+  text-align: center;
+}
+
+.ext-step-dot {
+  position: relative;
+  z-index: 1;
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 14px;
+  border-radius: 14px;
+  border: 1px solid var(--ext-accent-line);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cyan);
+}
+
+.ext-step-dot i { width: 20px; height: 20px; stroke-width: 1.5; }
+
+.ext-step-num {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--blue);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ext-step-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.ext-step-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-mid);
+}
+
+/* ── Площадки: переключатель + панель ──────────────────────────────────── */
+.ext-plats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.ext-plat {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 15px 7px 7px;
+  border-radius: 12px;
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  color: var(--text-mid);
+  font-size: 13px;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s, box-shadow 0.2s;
+}
+
+/* Логотипы площадок разной формы — круг, скруглённый квадрат, наклейка.
+   Плитка одного размера ставит их на общую оптическую сетку, иначе ряд
+   выглядит как случайно сваленные картинки. */
+.ext-plat img {
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  opacity: 0.62;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.ext-plat:hover { border-color: var(--border-hover); color: var(--text); }
+.ext-plat:hover img { opacity: 0.9; }
+
+/* Выбранная вкладка: цвет логотипа в полную силу — главный признак «здесь
+   сейчас смотрим», плюс акцентная рамка и свечение под ней. */
+.ext-plat[aria-selected="true"] {
+  border-color: var(--ext-accent-line);
+  background: var(--ext-accent-soft);
+  color: #fff;
+  box-shadow: 0 14px 30px -20px rgba(138, 107, 255, 0.95);
+}
+
+.ext-plat[aria-selected="true"] img {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ext-panel {
+  position: relative;
+  margin-top: 18px;
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  background: var(--surface);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  box-shadow: 0 24px 60px -34px rgba(0, 0, 0, 0.9);
+  animation: ext-panel-in 0.24s ease both;
+}
+
+/* Акцентная волосок-линия по верхней кромке — связывает панель с выбранной
+   вкладкой над ней, без хрупкой геометрии «хвостика» (вкладки переносятся
+   на вторую строку на узком экране, и хвостик уехал бы мимо). */
+.ext-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 1px;
+  z-index: 1;
+  background: linear-gradient(90deg, transparent, var(--ext-accent-line) 16%, var(--cyan) 50%, var(--ext-accent-line) 84%, transparent);
+}
+
+@keyframes ext-panel-in {
+  from { opacity: 0; transform: translate3d(0, 6px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+.ext-panel[hidden] { display: none; }
+
+.ext-panel-side {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border-right: 1px solid var(--border2);
+}
+
+.ext-panel-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  padding: 4px 10px 4px 8px;
+  border: 1px solid var(--ext-accent-line);
+  border-radius: 999px;
+  background: var(--ext-accent-soft);
+  margin-bottom: 13px;
+}
+
+.ext-panel-kicker::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+.ext-panel-side h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: -0.01em;
+  margin-bottom: 9px;
+}
+
+.ext-panel-side p {
+  font-size: 13px;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* Поля прижаты к низу колонки и отбиты линией: так они читаются как итог
+   «что попадёт в файл», а не как хвост абзаца, и низ обеих колонок совпадает
+   независимо от длины описания. */
+.ext-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 18px;
+}
+
+.ext-fields-label {
+  flex: 0 0 100%;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 3px;
+}
+
+.ext-field {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--cyan);
+  padding: 4px 9px;
+  border-radius: 6px;
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  background: rgba(167, 139, 250, 0.07);
+}
+
+/* Правая колонка — панель файла: шапка с настоящим именем файла (тем самым,
+   что расширение отдаёт на скачивание, см. filename в collector.js) и код
+   под ней. Без шапки это был просто текст на фоне. */
+.ext-panel-file {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ext-panel-filebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border2);
+}
+
+.ext-panel-filename {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text);
+}
+
+.ext-panel-filename::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 8px;
+  border-radius: 2px;
+  background: var(--blue);
+  vertical-align: 1px;
+}
+
+.ext-panel-filetag {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.ext-panel-code {
+  flex: 1;
+  padding: 20px 22px;
+  background:
+    radial-gradient(ellipse 70% 60% at 100% 0%, rgba(138, 107, 255, 0.1), transparent 70%),
+    var(--bg);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--text-mid);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.ext-panel-code .md-h { color: #fff; font-weight: 500; }
+.ext-panel-code .md-k { color: var(--cyan); }
+.ext-panel-code .md-v { color: var(--text); }
+.ext-panel-code .md-d { color: var(--text-dim); }
+
+/* ── Анатомия .md-файла ────────────────────────────────────────────────── */
+.ext-anatomy {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 20px;
+  margin-top: 24px;
+  align-items: start;
+}
+
+.ext-md {
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.ext-md-code {
+  padding: 16px 18px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--text-mid);
+  overflow-x: auto;
+}
+
+/* Строки — блочные span'ы, а не <pre>: так переносы в исходнике не дают
+   лишних пустых строк, а подсветка ложится на всю ширину строки. */
+.ext-md-line {
+  display: block;
+  white-space: pre;
+  border-radius: 4px;
+  padding: 0 6px;
+  margin: 0 -6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ext-md-line.is-lit {
+  background: rgba(138, 107, 255, 0.16);
+  color: var(--text);
+}
+
+.ext-legend {
+  display: grid;
+  gap: 8px;
+}
+
+.ext-legend-item {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 11px 13px;
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  background: var(--surface);
+  cursor: default;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.ext-legend-item:hover,
+.ext-legend-item.is-active {
+  border-color: var(--ext-accent-line);
+  background: var(--ext-accent-soft);
+}
+
+.ext-legend-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--blue);
+  border: 1px solid var(--ext-accent-line);
+  border-radius: 6px;
+  text-align: center;
+  line-height: 22px;
+  height: 24px;
+}
+
+.ext-legend-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.ext-legend-desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-mid);
+  margin-top: 2px;
+}
+
+/* ── Воронка отсева ────────────────────────────────────────────────────── */
+.ext-funnel {
+  margin-top: 24px;
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 22px;
+}
+
+.ext-funnel-bar {
+  display: flex;
+  height: 34px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border2);
+}
+
+.ext-funnel-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.ext-funnel-seg.keep { background: linear-gradient(90deg, rgba(138, 107, 255, 0.55), rgba(167, 139, 250, 0.4)); }
+.ext-funnel-seg.dup  { background: rgba(255, 255, 255, 0.13); color: var(--text-mid); }
+.ext-funnel-seg.empty{ background: rgba(255, 255, 255, 0.09); color: var(--text-mid); }
+.ext-funnel-seg.emoji{ background: rgba(255, 255, 255, 0.05); color: var(--text-dim); }
+
+.ext-funnel-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.ext-funnel-key {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-mid);
+}
+
+.ext-funnel-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.ext-funnel-note {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border2);
+}
+
+/* ── Приватность ──────────────────────────────────────────────────────── */
+.ext-privacy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+  align-items: stretch;
+}
+
+.ext-boundary {
+  border: 1px dashed var(--ext-accent-line);
+  border-radius: 14px;
+  padding: 18px;
+  background: rgba(138, 107, 255, 0.04);
+  position: relative;
+}
+
+.ext-boundary-label {
+  position: absolute;
+  top: -9px;
+  left: 16px;
+  background: var(--bg);
+  padding: 0 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.ext-node {
+  border: 1px solid var(--border2);
+  border-radius: 9px;
+  background: var(--surface);
+  padding: 11px 13px;
+  font-size: 13px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.ext-node i { width: 15px; height: 15px; color: var(--cyan); stroke-width: 1.5; flex-shrink: 0; }
+.ext-node + .ext-node { margin-top: 8px; }
+
+.ext-node-arrow {
+  text-align: center;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 12px;
+  margin: 6px 0;
+}
+
+.ext-blocked {
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 18px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ext-blocked-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--text-mid);
+}
+
+.ext-blocked-row i { width: 15px; height: 15px; color: #ef6b6b; flex-shrink: 0; stroke-width: 1.5; }
+
+/* ── Список фактов и шаги установки ───────────────────────────────────── */
 .ext-feature-list {
   list-style: none;
-  margin: 16px 0 0;
+  margin: 18px 0 0;
   padding: 0;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 10px;
 }
 
 .ext-feature-list li {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
+  align-items: flex-start;
+  gap: 9px;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--text-mid);
+  border: 1px solid var(--border2);
+  border-radius: 9px;
+  padding: 11px 13px;
+  background: var(--surface);
 }
 
 .ext-feature-list i {
   width: 15px;
   height: 15px;
   flex-shrink: 0;
+  margin-top: 2px;
   color: var(--green, #10b981);
 }
 
 .ext-steps {
-  margin: 16px 0 0;
-  padding-left: 20px;
+  list-style: none;
+  counter-reset: ext-step;
+  margin: 20px 0 0;
+  padding: 0 0 0 34px;
   display: grid;
-  gap: 8px;
-  color: var(--text-mid);
+  gap: 16px;
+  position: relative;
+}
+
+.ext-steps::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--border2);
+}
+
+.ext-steps li {
+  counter-increment: ext-step;
+  position: relative;
   font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-mid);
+}
+
+.ext-steps li::before {
+  content: counter(ext-step);
+  position: absolute;
+  left: -34px;
+  top: 0;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  border: 1px solid var(--ext-accent-line);
+  background: var(--bg);
+  color: var(--blue);
+  font-family: var(--mono);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ext-steps code {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.06);
   padding: 1px 6px;
   border-radius: 4px;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--mono);
   font-size: 13px;
 }
 
@@ -47,28 +906,66 @@
   transition: background .15s, color .15s;
 }
 
-.ext-copy-code:hover {
-  background: rgba(255,255,255,0.12);
-}
+.ext-copy-code:hover { background: rgba(255, 255, 255, 0.12); }
 
 .ext-copy-code.is-copied {
   background: rgba(93, 202, 165, 0.18);
   color: #5dcaa5;
 }
 
+/* ── История версий ───────────────────────────────────────────────────── */
 .ext-changelog {
-  margin-top: 16px;
+  margin-top: 22px;
   display: grid;
-  gap: 20px;
+  gap: 4px;
+  padding-left: 26px;
+  position: relative;
+}
+
+.ext-changelog::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--border2);
+}
+
+.ext-changelog-entry {
+  position: relative;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ext-changelog-entry:last-child { border-bottom: none; }
+
+.ext-changelog-entry::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 21px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border-bold);
+}
+
+.ext-changelog-entry:first-child::before {
+  border-color: var(--blue);
+  background: var(--blue);
+  box-shadow: 0 0 10px rgba(138, 107, 255, 0.6);
 }
 
 .ext-changelog-entry ul {
-  margin: 6px 0 0;
-  padding-left: 20px;
+  margin: 8px 0 0;
+  padding-left: 18px;
   color: var(--text-mid);
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.65;
   display: grid;
-  gap: 4px;
+  gap: 5px;
 }
 
 .ext-changelog-head {
@@ -78,7 +975,7 @@
 }
 
 .ext-changelog-version {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--mono);
   font-weight: 600;
   color: var(--text);
 }
@@ -86,4 +983,47 @@
 .ext-changelog-date {
   font-size: 12px;
   color: var(--text-dim, #6b7280);
+}
+
+/* ── Финальный призыв ─────────────────────────────────────────────────── */
+.ext-cta {
+  margin-top: 8px;
+  border: 1px solid var(--ext-accent-line);
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(138, 107, 255, 0.14), transparent 62%),
+    var(--surface);
+  padding: 32px;
+  text-align: center;
+}
+
+.ext-cta h2 { margin-bottom: 10px; }
+
+.ext-cta p {
+  max-width: 440px;
+  margin: 0 auto 20px;
+  font-size: 14px;
+}
+
+/* ── Адаптив ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .ext-hero { grid-template-columns: 1fr; gap: 34px; margin-bottom: 64px; }
+  .ext-hero .subtitle { max-width: none; }
+  .ext-anatomy,
+  .ext-privacy,
+  .ext-panel { grid-template-columns: 1fr; }
+  .ext-panel-side { border-right: none; border-bottom: 1px solid var(--border2); }
+  /* В одну колонку описание уже не «держит» высоту кода — прижимать поля
+     к низу нечего, отступ фиксированный. */
+  .ext-fields { margin-top: 0; }
+  .ext-flow { grid-template-columns: repeat(2, 1fr); gap: 24px 14px; }
+  .ext-flow::before, .ext-flow-pulse { display: none; }
+}
+
+@media (max-width: 560px) {
+  .ext-flow { grid-template-columns: 1fr; }
+  .ext-step { display: grid; grid-template-columns: 46px 1fr; gap: 14px; text-align: left; align-items: start; }
+  .ext-step-dot { width: 46px; height: 46px; margin: 0; }
+  .ext-facts { gap: 14px 0; }
+  .ext-funnel-seg { font-size: 10px; }
 }

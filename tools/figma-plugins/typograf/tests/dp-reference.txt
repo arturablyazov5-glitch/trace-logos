@@ -1,0 +1,63 @@
+function diffHunks(oldText, newText) {
+  if (oldText === newText) return [];
+
+  const n = oldText.length;
+  const m = newText.length;
+  const dp = new Array(n + 1);
+  for (let i = 0; i <= n; i++) dp[i] = new Uint32Array(m + 1);
+  for (let i = 0; i <= n; i++) dp[i][0] = i;
+  for (let j = 0; j <= m; j++) dp[0][j] = j;
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= m; j++) {
+      dp[i][j] = oldText[i - 1] === newText[j - 1]
+        ? dp[i - 1][j - 1]
+        : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+    }
+  }
+
+  const hunks = [];
+  let i = n;
+  let j = m;
+  let pendingOldStart = null;
+  let pendingOldEnd = null;
+  let pendingInsert = [];
+  const flush = () => {
+    if (pendingOldStart === null) return;
+    hunks.push({ oldStart: pendingOldStart, oldEnd: pendingOldEnd, insertText: pendingInsert.reverse().join('') });
+    pendingInsert = [];
+    pendingOldStart = null;
+    pendingOldEnd = null;
+  };
+
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && oldText[i - 1] === newText[j - 1] && dp[i][j] === dp[i - 1][j - 1]) {
+      flush();
+      i--;
+      j--;
+      continue;
+    }
+    if (i > 0 && j > 0 && dp[i][j] === dp[i - 1][j - 1] + 1) {
+      if (pendingOldStart === null) pendingOldEnd = i;
+      pendingOldStart = i - 1;
+      pendingInsert.push(newText[j - 1]);
+      i--;
+      j--;
+      continue;
+    }
+    if (j > 0 && dp[i][j] === dp[i][j - 1] + 1) {
+      if (pendingOldStart === null) {
+        pendingOldEnd = i;
+        pendingOldStart = i;
+      }
+      pendingInsert.push(newText[j - 1]);
+      j--;
+      continue;
+    }
+    if (pendingOldStart === null) pendingOldEnd = i;
+    pendingOldStart = i - 1;
+    i--;
+  }
+  flush();
+
+  return hunks.reverse();
+}

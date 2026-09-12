@@ -1,9 +1,12 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // home-search.js — единый живой поиск на главной (логотипы + эмодзи).
 // Прогрессивное улучшение: без JS форма уходит на /logos/?q=… (см. index.html).
-// Переиспользует switchLayout / highlight / escapeHtml из utils.js (RU↔EN раскладка).
+// Разбор запроса и подсчёт релевантности (стоп-слова, RU↔EN раскладка, fuzzy) —
+// общий движок из search.js (тот же, что фильтрует сетку каталога), чтобы
+// поведение поиска не расходилось между страницами.
 // ─────────────────────────────────────────────────────────────────────────────
-import { switchLayout, highlight, escapeHtml, fuzzyMatchToken, trackSearchQuery, flushSearchQuery } from './utils.js';
+import { highlight, escapeHtml, trackSearchQuery, flushSearchQuery } from './utils.js';
+import { tokenizeQuery, scoreQuery } from './search.js';
 import './search-shortcut.js';
 
 const MAX_PER_GROUP = 6;
@@ -14,26 +17,6 @@ let loadingPromise = null;
 let current = [];           // плоский список отображаемых результатов (для клавиатуры)
 let activeIdx = -1;
 let debTimer = 0;
-
-const norm = s => (s || '').toLowerCase().replace(/ё/g, 'е');
-
-function isExactMatch(word, haystack) {
-  if (haystack.includes(word)) return true;
-  const alt = switchLayout(word);
-  return alt !== word && haystack.includes(alt);
-}
-
-function matchWord(word, haystack) {
-  if (isExactMatch(word, haystack)) return true;
-  if (word.length < 3) return false;
-  const alt = switchLayout(word);
-  const tokens = haystack.split(/\s+/);
-  for (const t of tokens) {
-    if (fuzzyMatchToken(word, t) > 0) return true;
-    if (alt !== word && fuzzyMatchToken(alt, t) > 0) return true;
-  }
-  return false;
-}
 
 async function loadData() {
   if (data) return data;
@@ -48,7 +31,7 @@ async function loadData() {
       name: l.name,
       url: l.url,
       img: l.svgUrl || l.pngUrl || '',
-      search: norm(l.name + ' ' + (l.tags || '')),
+      search: (l.name + ' ' + (l.tags || '')).toLowerCase(),
     }));
     const emoji = (er.emoji || []).map(e => {
       const ch = (e.tags || '').trim().split(/\s+/)[0] || '';
@@ -57,7 +40,7 @@ async function loadData() {
         name: e.name,
         char: ch,
         url: e.url || ('emoji/?q=' + encodeURIComponent(e.name)),
-        search: norm(e.name + ' ' + (e.tags || '')),
+        search: (e.name + ' ' + (e.tags || '')).toLowerCase(),
       };
     });
     data = { logos, emoji };
@@ -66,18 +49,12 @@ async function loadData() {
   return loadingPromise;
 }
 
-function rank(items, words, raw) {
+function rank(items, words) {
   const out = [];
   for (const it of items) {
-    if (!words.every(w => matchWord(w, it.search))) continue;
-    const nm = norm(it.name);
-    let score = -nm.length * 0.1;
-    if (nm === raw) score += 120;
-    if (nm.startsWith(words[0])) score += 80;
-    if (nm.split(/\s+/).some(t => t.startsWith(words[0]))) score += 30;
-    const fuzzyCount = words.filter(w => !isExactMatch(w, it.search)).length;
-    if (fuzzyCount > 0) score -= 40 * fuzzyCount;
-    out.push([score, it]);
+    const nameLow = it.name.toLowerCase().replace(/-/g, '');
+    const score = scoreQuery(words, it.search, nameLow);
+    if (score > 0) out.push([score, it]);
   }
   out.sort((a, b) => b[0] - a[0]);
   return out.map(p => p[1]);
@@ -129,14 +106,12 @@ function close() {
 
 async function runSearch() {
   const raw = input.value.trim();
-  const n = norm(raw);
-  const words = n.replace(/-/g, ' ').split(/\s+/).filter(Boolean);
+  const { words, rawWords } = tokenizeQuery(raw);
   if (!words.length) { trackSearchQuery('', 0); close(); return; }
   const d = await loadData();
   if (input.value.trim() !== raw) return; // устарело
-  const rawWords = raw.split(/\s+/).filter(Boolean);
-  const logosAll = rank(d.logos, words, n);
-  const emojiAll = rank(d.emoji, words, n);
+  const logosAll = rank(d.logos, words);
+  const emojiAll = rank(d.emoji, words);
   // Считаем до среза MAX_PER_GROUP: в статистику должно уходить реальное число
   // совпадений, а не размер выпадашки.
   trackSearchQuery(raw, logosAll.length + emojiAll.length);

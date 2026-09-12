@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как проверить логотип на уникальность · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(318 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(358 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(48 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(108 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(318 70% 38%) 0%, hsl(108 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 11 2 2 4-4" /><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(198 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(238 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(288 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(348 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(198 70% 38%) 0%, hsl(348 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 11 2 2 4-4" /><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-14">14 августа 2026</time>
@@ -202,17 +206,17 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            14
 	          </span>
         </div>
         <h1>Как проверить логотип на уникальность</h1>
       </header>
       <div class="blog-body">
-        <p>Придумать или сгенерировать логотип — только полдела. Прежде чем печатать его на вывеске, сайте и <a href="../logotip-dlya-vizitki/" target="_blank" rel="noopener">визитках</a>, стоит убедиться, что знак действительно ваш и ни на кого не похож. Иначе можно вложиться в бренд, а потом получить претензию от владельца похожего знака или обнаружить, что тот же логотип уже носит десяток компаний. И проверка эта — не бюрократия: уникальность — это то самое свойство, ради которого логотип и существует, ведь его задача отличать вас от других.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Не юридическая консультация</span></div><div class="callout-body"><p>Это обзор методов самопроверки, а не юридическая консультация. Для регистрации знака и в спорных случаях обращайтесь к патентному поверенному — он проведёт полный поиск по официальным базам.</p></div></div>
+        <p>Придумать или сгенерировать логотип — только полдела. Прежде чем печатать его на вывеске, сайте и <a href="../logotip-dlya-vizitki/" target="_blank" rel="noopener">визитках</a>, стоит убедиться, что знак действительно ваш и ни на кого не похож. Иначе можно вложиться в бренд, а потом получить претензию от владельца похожего знака или обнаружить, что тот же логотип уже носит десяток компаний. И проверка эта — не бюрократия: уникальность — это то самое свойство, ради которого логотип и существует, ведь его задача отличать вас от других.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Не юридическая консультация</span></div><div class="callout-body"><p>Это обзор методов самопроверки, а не юридическая консультация. Для регистрации знака и в спорных случаях обращайтесь к патентному поверенному — он проведёт полный поиск по официальным базам.</p></div></div>
       <h2 id="зачем-вообще-проверять">Зачем вообще проверять</h2>
-      <p>Прежде чем разбирать, как проверять, стоит увидеть, чем грозит пропуск этого шага, — а грозит он сразу с нескольких сторон. Есть риск конфликта: если ваш знак похож на чужой зарегистрированный <a href="../logotip-i-tovarnyj-znak-raznica/" target="_blank" rel="noopener">товарный знак</a> в той же сфере, вы рискуете получить претензию и потерять вложения в бренд. Есть невозможность регистрации: похожий знак просто не пройдёт регистрацию, а без неё бренд не защищён (как регистрируют, в статье <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">как зарегистрировать логотип</a>). Есть потеря узнаваемости: если такой же знак носят другие, ваш бренд не отстроится от них — а отстройка и есть смысл логотипа, см. <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">что такое логотип</a>. И есть репутация: обвинение в копировании, пусть и случайном, бьёт по доверию. Все четыре угрозы снимаются одной привычкой — проверять знак до запуска, а не после, — и делается это в три шага.</p>
-      <p>Чтобы понять, почему это не пустая осторожность, достаточно представить обычный сценарий. Компания год работает под новым знаком — печатает вывеску и визитки, оформляет соцсети, набирает узнаваемость, — а потом получает письмо от юристов другого бренда с похожим зарегистрированным знаком в той же нише. Дальше два пути, и оба дорогие: либо судиться, либо менять логотип и всю накопленную под ним узнаваемость. И самое обидное — почти всё это отлавливается за полчаса проверки до запуска. Именно поэтому её и делают в начале, а не когда знак уже висит на здании.</p>
+      <p>Прежде чем разбирать, как проверять, стоит увидеть, чем грозит пропуск этого шага, — а грозит он сразу с нескольких сторон. Есть риск конфликта: если ваш знак похож на чужой зарегистрированный <a href="../logotip-i-tovarnyj-znak-raznica/" target="_blank" rel="noopener">товарный знак</a> в той же сфере, вы рискуете получить претензию и потерять вложения в бренд. Есть невозможность регистрации: похожий знак просто не пройдёт регистрацию, а без неё бренд не защищён (как регистрируют, в статье <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">как зарегистрировать логотип</a>). Есть потеря узнаваемости: если такой же знак носят другие, ваш бренд не отстроится от них — а отстройка и есть смысл логотипа, см. <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">что такое логотип</a>. И есть репутация: обвинение в копировании, пусть и случайном, бьёт по доверию. Все четыре угрозы снимаются одной привычкой — проверять знак до запуска, а не после, — и делается это в три шага.</p>
+      <p>Чтобы понять, почему это не пустая осторожность, достаточно представить обычный сценарий. Компания год работает под новым знаком — печатает вывеску и визитки, оформляет соцсети, набирает узнаваемость, — а потом получает письмо от юристов другого бренда с похожим зарегистрированным знаком в той же нише. Дальше два пути, и оба дорогие: либо судиться, либо менять логотип и всю накопленную под ним узнаваемость. И самое обидное — почти всё это отлавливается за полчаса проверки до запуска. Именно поэтому её и делают в начале, а не когда знак уже висит на здании.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -224,14 +228,14 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="шаг-1-обратный-поиск-по-картинке" class="step-heading"><span class="step-badge">Шаг&nbsp;1</span><span class="step-title">Обратный поиск по картинке</span></h2>
-      <p>Первый шаг — самый быстрый: найти визуальных двойников. Для этого свой логотип загружают в обратный поиск по изображениям (Google Images, Яндекс.Картинки и специализированные сервисы), и система показывает похожие картинки со всего интернета. Смотреть тут стоит на три вещи: есть ли знаки с такой же формой, символом или композицией; не повторяет ли ваш логотип чужой просто в других цветах (перекраска не делает знак уникальным); и нет ли совпадений в вашей нише, где сходство опаснее всего. Этот шаг ловит очевидные совпадения, но не юридические — их проверяет следующий.</p>
+      <p>Первый шаг — самый быстрый: найти визуальных двойников. Для этого свой логотип загружают в обратный поиск по изображениям (Google Images, Яндекс.Картинки и специализированные сервисы), и система показывает похожие картинки со всего интернета. Смотреть тут стоит на три вещи: есть ли знаки с такой же формой, символом или композицией; не повторяет ли ваш логотип чужой просто в других цветах (перекраска не делает знак уникальным); и нет ли совпадений в вашей нише, где сходство опаснее всего. Этот шаг ловит очевидные совпадения, но не юридические — их проверяет следующий.</p>
       <h2 id="шаг-2-проверка-по-базам-товарных-знаков" class="step-heading"><span class="step-badge">Шаг&nbsp;2</span><span class="step-title">Проверка по базам товарных знаков</span></h2>
-      <p>Обратный поиск находит визуальные совпадения, а вот юридические — только базы товарных знаков, государственные реестры зарегистрированных знаков. В них проверяют похожие изображения в вашем классе товаров и услуг, похожие названия, если логотип текстовый, и статус — действует ли знак и кто владелец. Здесь есть важный нюанс, который многих удивляет: сходство оценивают <strong>внутри класса</strong>, то есть сферы деятельности. Один и тот же символ может законно использоваться в разных, не пересекающихся нишах, поэтому «где‑то уже есть похожее» само по себе ещё не проблема — проблема, если похожее есть в вашем классе. Разницу логотипа и товарного знака разбираем в статье <a href="../logotip-i-tovarnyj-znak-raznica/" target="_blank" rel="noopener">логотип и товарный знак — в чём разница</a>.</p>
+      <p>Обратный поиск находит визуальные совпадения, а вот юридические — только базы товарных знаков, государственные реестры зарегистрированных знаков. В них проверяют похожие изображения в вашем классе товаров и услуг, похожие названия, если логотип текстовый, и статус — действует ли знак и кто владелец. Здесь есть важный нюанс, который многих удивляет: сходство оценивают <strong>внутри класса</strong>, то есть сферы деятельности. Один и тот же символ может законно использоваться в разных, не пересекающихся нишах, поэтому «где‑то уже есть похожее» само по себе ещё не проблема — проблема, если похожее есть в вашем классе. Разницу логотипа и товарного знака разбираем в статье <a href="../logotip-i-tovarnyj-znak-raznica/" target="_blank" rel="noopener">логотип и товарный знак — в чём разница</a>.</p>
       <h2 id="шаг-3-проверка-на-случайное-сходство" class="step-heading"><span class="step-badge">Шаг&nbsp;3</span><span class="step-title">Проверка на случайное сходство</span></h2>
-      <p>Даже уникальный по базам знак может нечаянно напоминать известный бренд — и это уже репутационный риск, который двумя первыми шагами не ловится. Поэтому третий шаг — оценить сходство «на глаз», но целенаправленно: нет ли невольного сходства с крупными узнаваемыми логотипами; не читается ли знак двусмысленно, когда простая форма случайно повторяет чужой символ (это одна из <a href="../oshibki-v-dizajne-logotipa/" target="_blank" rel="noopener">ошибок дизайна логотипа</a>); не пересекается ли он с чужим настолько, что аудитория спутает бренды.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Логотипы от нейросетей — особый риск</span></div><div class="callout-body"><p>Знаки, сгенерированные ИИ, требуют особенно тщательной проверки, и вот почему: нейросети учатся на огромных массивах чужих изображений и могут невольно воспроизвести элементы существующего бренда. То есть риск случайного совпадения у них выше, чем у рисованного вручную, а вы об этом даже не подозреваете. Поэтому <a href="../logotip-ot-ii-avtorstvo/" target="_blank" rel="noopener">логотип от нейросети</a> обязательно прогоняют через обратный поиск и базы знаков до использования — генерация экономит время на создании, но не отменяет проверку.</p></div></div>
-      <h2 id="что-делать-если-нашли-похожий-знак">Что делать, если нашли похожий знак</h2>
-      <p>Если проверка что‑то нашла, паниковать рано — важно оценить, насколько это серьёзно. Отдалённое сходство в другой сфере обычно не проблема, а вот близкое сходство в вашей нише — сигнал переделать. Дальше знак дорабатывают: меняют форму, композицию, добавляют уникальные элементы (как довести знак вручную — в статьях <a href="../rukopisnyj-logotip/" target="_blank" rel="noopener">рукописный логотип</a> и <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">как перевести логотип в вектор</a>). После правок проверку повторяют заново, обоими шагами. А перед регистрацией и крупными вложениями в бренд консультируются с патентным поверенным, потому что самопроверка снижает риск, но не заменяет юридическую.</p>
+      <p>Даже уникальный по базам знак может нечаянно напоминать известный бренд — и это уже репутационный риск, который двумя первыми шагами не ловится. Поэтому третий шаг — оценить сходство «на глаз», но целенаправленно: нет ли невольного сходства с крупными узнаваемыми логотипами; не читается ли знак двусмысленно, когда простая форма случайно повторяет чужой символ (это одна из ошибок дизайна логотипа); не пересекается ли он с чужим настолько, что аудитория спутает бренды.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Логотипы от нейросетей — особый риск</span></div><div class="callout-body"><p>Знаки, сгенерированные ИИ, требуют особенно тщательной проверки, и вот почему: нейросети учатся на огромных массивах чужих изображений и могут невольно воспроизвести элементы существующего бренда. То есть риск случайного совпадения у них выше, чем у рисованного вручную, а вы об этом даже не подозреваете. Поэтому <a href="../logotip-ot-ii-avtorstvo/" target="_blank" rel="noopener">логотип от нейросети</a> обязательно прогоняют через обратный поиск и базы знаков до использования — генерация экономит время на создании, но не отменяет проверку.</p></div></div>
+      <h2 id="что-делать-если-нашли-похожий-знак">Что делать, если нашли похожий знак</h2>
+      <p>Если проверка что‑то нашла, паниковать рано — важно оценить, насколько это серьёзно. Отдалённое сходство в другой сфере обычно не проблема, а вот близкое сходство в вашей нише — сигнал переделать. Дальше знак дорабатывают: меняют форму, композицию, добавляют уникальные элементы (как довести знак вручную — в статьях <a href="../rukopisnyj-logotip/" target="_blank" rel="noopener">рукописный логотип</a> и <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">как перевести логотип в вектор</a>). После правок проверку повторяют заново, обоими шагами. А перед регистрацией и крупными вложениями в бренд консультируются с патентным поверенным, потому что самопроверка снижает риск, но не заменяет юридическую.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -246,11 +250,12 @@ window.yaContextCb.push(() => {
       <p>Проверить логотип на уникальность — значит пройти три шага: обратный поиск по картинке ловит визуальных двойников, базы товарных знаков в вашем классе — юридические конфликты, а оценка на глаз — случайное сходство с известными брендами. Особенно тщательно проверяют <a href="../logotip-ot-ii-avtorstvo/" target="_blank" rel="noopener">логотипы от нейросетей</a>, у которых риск невольного повтора выше. Всё это делают до запуска, а не после, и помнят, что самопроверка не заменяет юридическую: перед регистрацией знака обращаются к патентному поверенному. Уникальность здесь — не формальность, а основа того, ради чего логотип и существует: <a href="../chto-takoe-logotip/" target="_blank" rel="noopener">отстройки бренда</a>.</p>
       <p>Скачать готовые логотипы в SVG и сравнить их с вашим знаком можно в <a href="../../logos/" target="_blank" rel="noopener">каталоге Trace Logo's</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../logotip-ot-ii-avtorstvo/" data-date="2026-08-04" data-views="0">
+          <a class="blog-card" href="../logotip-ot-ii-avtorstvo/" data-date="2026-08-04" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -263,15 +268,15 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            5
           </div>
           </div>
-          <div class="blog-card-title">Логотип от нейросети — кому он принадлежит и как его защитить</div>
+          <div class="blog-card-title">Логотип от нейросети — кому он принадлежит и как его защитить</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-zaregistrirovat-logotip/" data-date="2026-06-26" data-views="0">
+      <a class="blog-card" href="../kak-zaregistrirovat-logotip/" data-date="2026-06-26" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -284,7 +289,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            3
           </div>
           </div>
           <div class="blog-card-title">Как зарегистрировать логотип как товарный знак — пошагово и без иллюзий</div>
@@ -292,86 +297,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-muzykanta/" data-date="2026-09-11" data-views="0">
+      <a class="blog-card" href="../logotip-dlya-startapa/" data-date="2026-09-07" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Музыка</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="18" r="4" /><path d="M16 18V2" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Стартап</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" /><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" /><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            5
           </div>
           </div>
-          <div class="blog-card-title">Логотип для музыканта — знак, который живёт от обложки до мерча</div>
+          <div class="blog-card-title">Логотип для стартапа — сколько знака нужно на старте</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-eko-brenda/" data-date="2026-09-10" data-views="1">
+      <a class="blog-card" href="../mokap-logotipa/" data-date="2026-09-04" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Экология</span><span class="blog-card-tag">Бренд</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" /><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" /><path d="M5 21h14" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Презентация</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            5
           </div>
           </div>
-          <div class="blog-card-title">Логотип для эко‑бренда — знак, который стоит рядом с маркировкой</div>
+          <div class="blog-card-title">Мокап логотипа — как показать знак, чтобы его приняли</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-sbera/" data-date="2026-06-13" data-views="13">
+      <a class="blog-card" href="../firmennye-cveta-izvestnyh-brendov/" data-date="2026-06-10" data-views="114">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Сбер</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Ребрендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18v-7" /><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M3 22h18" /><path d="M6 18v-7" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Цвета</span><span class="blog-card-tag">Бренды</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            13
+            114
           </div>
           </div>
-          <div class="blog-card-title">История логотипа Сбербанка — от копилки 1841 года до градиентного круга</div>
+          <div class="blog-card-title">Фирменные цвета известных брендов — HEX‑коды и где брать официальные</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-nejrosetyu/" data-date="2026-06-29" data-views="2">
+      <a class="blog-card" href="../kak-skachat-logotip-s-sajta/" data-date="2026-06-21" data-views="317">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Инструменты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3" /><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="m7 10 5 5 5-5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            317
           </div>
           </div>
-          <div class="blog-card-title">Логотип нейросетью — честный разбор: когда это работает, а когда нет</div>
+          <div class="blog-card-title">Как скачать логотип с любого сайта — 5 легальных способов</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -381,7 +386,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#зачем-вообще-проверять">Зачем вообще проверять</a></li><li><a href="#шаг-1-обратный-поиск-по-картинке">Шаг 1. Обратный поиск по картинке</a></li><li><a href="#шаг-2-проверка-по-базам-товарных-знаков">Шаг 2. Проверка по базам товарных знаков</a></li><li><a href="#шаг-3-проверка-на-случайное-сходство">Шаг 3. Проверка на случайное сходство</a></li><li><a href="#что-делать-если-нашли-похожий-знак">Что делать, если нашли похожий знак</a></li><li><a href="#короткий-вывод">Короткий вывод</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#зачем-вообще-проверять">Зачем вообще проверять</a></li><li><a href="#шаг-1-обратный-поиск-по-картинке">Шаг 1. Обратный поиск по картинке</a></li><li><a href="#шаг-2-проверка-по-базам-товарных-знаков">Шаг 2. Проверка по базам товарных знаков</a></li><li><a href="#шаг-3-проверка-на-случайное-сходство">Шаг 3. Проверка на случайное сходство</a></li><li><a href="#что-делать-если-нашли-похожий-знак">Что делать, если нашли похожий знак</a></li><li><a href="#короткий-вывод">Короткий вывод</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -389,25 +394,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -484,6 +481,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -529,10 +527,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

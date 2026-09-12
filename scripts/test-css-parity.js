@@ -42,6 +42,7 @@ const path = require('path');
 
 const ROOT      = path.resolve(__dirname, '..');
 const WARN_ONLY = process.argv.includes('--warn-only');
+const { BUNDLES: CSS_BUNDLES } = require('./build-css-bundles.js');
 
 const REQUIRED = [
   'css/confetti.css',
@@ -71,11 +72,26 @@ for (const rel of SOURCES) {
   const abs = path.join(ROOT, rel);
   if (!fs.existsSync(abs)) { fail(`${rel}: файл не найден`); continue; }
   const html = fs.readFileSync(abs, 'utf8');
-  if (!/<script[^>]+type="module"[^>]+src="[^"]*js\/main\.js"/.test(html)) continue;
+  // `.min` and `?v=…` are both applied to these tags after the fact, by
+  // build-js-minify.js and build-cache-bust.js — matching the bare `js/main.js`
+  // an author writes would silently match nothing on a built page, and a check
+  // that matches nothing reports success.
+  if (!/<script[^>]+type="module"[^>]+src="[^"]*js\/main(?:\.min)?\.js(?:\?[^"]*)?"/.test(html)) continue;
 
-  const links = new Set(Array.from(html.matchAll(/href="[^"]*?(css\/[a-z0-9_-]+\.css)"/gi), m => m[1]));
+  const links = new Set(
+    Array.from(html.matchAll(/href="[^"]*?(css\/[a-z0-9_.-]+\.css)(?:\?[^"]*)?"/gi), m => m[1])
+  );
+  // A page may satisfy a requirement either with its own <link> or by pulling in
+  // a bundle that inlines the file (scripts/build-css-bundles.js). Ask that script
+  // what each bundle contains rather than restating the list here — two copies of
+  // it is exactly the drift this test exists to catch.
+  const covered = new Set(links);
+  for (const linked of links) {
+    const sources = CSS_BUNDLES[path.basename(linked)];
+    if (sources) sources.forEach(s => covered.add(`css/${s}`));
+  }
   for (const req of REQUIRED) {
-    if (!links.has(req)) fail(`${rel}: грузит js/main.js, но не подключает ${req}`);
+    if (!covered.has(req)) fail(`${rel}: грузит js/main.js, но не подключает ${req} (ни напрямую, ни через бандл)`);
   }
 }
 

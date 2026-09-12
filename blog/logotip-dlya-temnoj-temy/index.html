@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотип для тёмной темы — как адаптировать · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(204 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(244 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(294 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(354 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(204 70% 38%) 0%, hsl(354 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(83 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(123 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(173 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(233 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(83 70% 38%) 0%, hsl(233 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-19">19 июля 2026</time>
@@ -202,16 +206,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            6
+	            32
 	          </span>
         </div>
         <h1>Логотип для тёмной темы — как адаптировать</h1>
       </header>
       <div class="blog-body">
-        <p>Логотип, который безупречно смотрится на белом сайте, вставляют в тёмный интерфейс — и он либо сливается с фоном до нечитаемости, либо обрастает уродливым белым прямоугольником. Тёмная тема давно стала стандартом, её поддерживают сайты, приложения и сами операционные системы, поэтому с этой проблемой рано или поздно сталкивается почти каждый бренд. Хорошая новость в том, что причин у неё всего две, и, разобравшись в них, легко подобрать решение.</p>
+        <p>Логотип, который безупречно смотрится на белом сайте, вставляют в тёмный интерфейс — и он либо сливается с фоном до нечитаемости, либо обрастает уродливым белым прямоугольником. Тёмная тема давно стала стандартом, её поддерживают сайты, приложения и сами операционные системы, поэтому с этой проблемой рано или поздно сталкивается почти каждый бренд. Хорошая новость в том, что причин у неё всего две, и, разобравшись в них, легко подобрать решение.</p>
       <h2 id="почему-знак-пропадает-на-тёмном-фоне">Почему знак пропадает на тёмном фоне</h2>
-      <p>Первая причина — <strong>тёмный цвет самого знака</strong>. Чёрный или тёмно‑синий логотип контрастен на белом, но на почти чёрном фоне его контраст падает почти до нуля, и знак просто растворяется. Вторая причина — <strong>непрозрачная подложка</strong>: если логотип сохранён как <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> или JPG с белым фоном, на тёмной странице вокруг него появляется белый прямоугольник. Часто обе причины встречаются вместе, и тогда знак и сливается, и «прилипает» одновременно.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Белый прямоугольник вокруг логотипа</span></div><div class="callout-body"><p>Это самый частый симптом, и лечится он не подбором фона под логотип, а заменой файла на версию с <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">прозрачным фоном</a>: проблема почти всегда именно в непрозрачной подложке. Если готовой прозрачной версии нет, фон придётся убрать — как это сделать, разбираем в статье как убрать фон с картинки.</p></div></div>
+      <p>Первая причина — <strong>тёмный цвет самого знака</strong>. Чёрный или тёмно‑синий логотип контрастен на белом, но на почти чёрном фоне его контраст падает почти до нуля, и знак просто растворяется. Вторая причина — <strong>непрозрачная подложка</strong>: если логотип сохранён как <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> или JPG с белым фоном, на тёмной странице вокруг него появляется белый прямоугольник. Часто обе причины встречаются вместе, и тогда знак и сливается, и «прилипает» одновременно.</p>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Белый прямоугольник вокруг логотипа</span></div><div class="callout-body"><p>Это самый частый симптом, и лечится он не подбором фона под логотип, а заменой файла на версию с <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">прозрачным фоном</a>: проблема почти всегда именно в непрозрачной подложке. Если готовой прозрачной версии нет, фон придётся убрать — как это сделать, разбираем в статье как убрать фон с картинки.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -224,9 +228,9 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="от-простого-к-надёжному-как-это-чинят">От простого к надёжному: как это чинят</h2>
       <p>Раз причин две, и решения выстраиваются по нарастающей — от самого лёгкого к самому основательному.</p>
-      <p>Самый простой случай — <strong>монохромный знак</strong>. Если логотип одноцветный, достаточно инверсии: чёрный на светлой теме, белый на тёмной. Это работает, потому что такой знак несёт информацию формой, а не цветом, — и если он в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, инверсию проще всего сделать прямо в коде, поменяв значение <code>fill</code> (как менять цвета вручную — в статье <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">как изменить цвет логотипа</a>). Как привести знак к одному цвету, если он ещё цветной, — в статье <a href="../cherno-belyj-logotip/" target="_blank" rel="noopener">чёрно‑белый логотип</a>.</p>
-      <p>А вот для <strong>цветного знака</strong> инверсия уже не годится: буквальная перекраска испортит фирменные цвета — синий станет оранжевым, красный голубым. Поэтому здесь нужен следующий уровень — <strong>отдельная версия для тёмного фона</strong>, подготовленная заранее. Обычно в ней фирменные цвета оставляют как есть, но осветляют или заменяют только тот элемент, что «пропадал» (например, чёрный текст делают белым), а при необходимости добавляют тонкую обводку. Именно так поступают крупные бренды: у <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple</a>, <a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a> и <a href="../../logos/media/spotify/" target="_blank" rel="noopener">Spotify</a> в гайдлайнах прописаны отдельные варианты знака под светлый и тёмный фон — это часть <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменного стиля</a>, которую фиксируют в <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">брендбуке</a>. Многие логотипы в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге</a> уже содержат такие варианты в блоке версий.</p>
-      <p>Но даже идеально подобранный цвет не спасёт, если у файла непрозрачная подложка, — поэтому в основе любого решения лежит третье, базовое условие: <strong>прозрачный фон</strong>. И здесь снова выручает вектор: в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> прозрачность заложена в саму природу формата — фон есть только там, где вы явно нарисовали заливку, — поэтому SVG почти всегда безопаснее для тёмной темы, чем растровый файл. Подробнее про сам файл — в статье <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">логотип с прозрачным фоном</a>.</p>
+      <p>Самый простой случай — <strong>монохромный знак</strong>. Если логотип одноцветный, достаточно инверсии: чёрный на светлой теме, белый на тёмной. Это работает, потому что такой знак несёт информацию формой, а не цветом, — и если он в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a>, инверсию проще всего сделать прямо в коде, поменяв значение <code>fill</code> (как менять цвета вручную — в статье <a href="../kak-izmenit-cvet-logotipa/" target="_blank" rel="noopener">как изменить цвет логотипа</a>). Как привести знак к одному цвету, если он ещё цветной, — в статье <a href="../cherno-belyj-logotip/" target="_blank" rel="noopener">чёрно‑белый логотип</a>.</p>
+      <p>А вот для <strong>цветного знака</strong> инверсия уже не годится: буквальная перекраска испортит фирменные цвета — синий станет оранжевым, красный голубым. Поэтому здесь нужен следующий уровень — <strong>отдельная версия для тёмного фона</strong>, подготовленная заранее. Обычно в ней фирменные цвета оставляют как есть, но осветляют или заменяют только тот элемент, что «пропадал» (например, чёрный текст делают белым), а при необходимости добавляют тонкую обводку. Именно так поступают крупные бренды: у <a href="../../logos/tech/apple/" target="_blank" rel="noopener">Apple<img class="blog-mention-icon" src="../../assets/logos/svgs/apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/media/spotify/" target="_blank" rel="noopener">Spotify<img class="blog-mention-icon" src="../../assets/logos/svgs/spotify.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> в гайдлайнах прописаны отдельные варианты знака под светлый и тёмный фон — это часть <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменного стиля</a>, которую фиксируют в <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">брендбуке</a>. Многие логотипы в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге</a> уже содержат такие варианты в блоке версий.</p>
+      <p>Но даже идеально подобранный цвет не спасёт, если у файла непрозрачная подложка, — поэтому в основе любого решения лежит третье, базовое условие: <strong>прозрачный фон</strong>. И здесь снова выручает вектор: в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> прозрачность заложена в саму природу формата — фон есть только там, где вы явно нарисовали заливку, — поэтому SVG почти всегда безопаснее для тёмной темы, чем растровый файл. Подробнее про сам файл — в статье <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">логотип с прозрачным фоном</a>.</p>
       <h2 id="на-сайте-версии-переключаются-сами">На сайте версии переключаются сами</h2>
       <p>Когда все версии готовы, остаётся последний шаг — и на сайте его не нужно делать руками. Браузер и так знает, какая тема выбрана в системе, а медиазапрос <code>prefers-color-scheme</code> сам подставляет нужный файл:</p>
       <div class="blog-code">
@@ -242,10 +246,10 @@ window.yaContextCb.push(() => {
   .logo { content: url(&quot;logo-light.svg&quot;); }     /* белая версия для тёмной темы */
 }</code></pre>
       </div>
-      <p>Пользователь со светлой системной темой увидит тёмный логотип, а с тёмной — светлый, без единой строчки JavaScript. Тот же приём работает и для <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавикона</a>, где тоже можно задать отдельную версию под тёмную тему браузера.</p>
+      <p>Пользователь со светлой системной темой увидит тёмный логотип, а с тёмной — светлый, без единой строчки JavaScript. Тот же приём работает и для <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавикона</a>, где тоже можно задать отдельную версию под тёмную тему браузера.</p>
       <h2 id="что-учесть-заранее">Что учесть заранее</h2>
-      <p>Чтобы не переделывать, полезно держать в голове несколько нюансов. Контраст стоит проверять не «на глаз», а по‑настоящему: слишком тёмные элементы теряются даже на не‑чёрном сером. При этом «тёмная тема» почти никогда не означает чистый чёрный — большинство интерфейсов используют тёмно‑серый вроде #1e1e1e, поэтому и проверять знак нужно на реальном фоне, а не на #000000. И, наконец, не стоит плодить версии без нужды: двух вариантов, светлого и тёмного, почти всегда достаточно, а если знак должен работать ещё и в разных размерах — это уже соседняя задача, <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивный логотип</a>. Всё это гораздо проще, если исходник в <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">векторе</a>: из <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> любая версия делается за минуту, из готового <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> — уже нет.</p>
-      <p>Отдельно стоит сказать про случай, когда фон контролировать нельзя вообще, — например, когда логотип уходит партнёрам, в чужие презентации или на площадки, где он ляжет неизвестно на что. Тогда двух версий мало, и выручает третий, «нейтральный» вариант: знак с тонкой контурной обводкой или на собственной небольшой подложке фирменного цвета, который читается и на белом, и на чёрном, и на пёстром фото. Он жертвует частью изящества ради надёжности, зато не пропадёт нигде. Разумно держать такой универсальный вариант в наборе рядом со светлой и тёмной версиями и отдавать именно его, когда заранее неизвестно, на каком фоне окажется знак, — это избавляет от разбирательств уже постфактум.</p>
+      <p>Чтобы не переделывать, полезно держать в голове несколько нюансов. Контраст стоит проверять не «на глаз», а по‑настоящему: слишком тёмные элементы теряются даже на не‑чёрном сером. При этом «тёмная тема» почти никогда не означает чистый чёрный — большинство интерфейсов используют тёмно‑серый вроде #1e1e1e, поэтому и проверять знак нужно на реальном фоне, а не на #000000. И, наконец, не стоит плодить версии без нужды: двух вариантов, светлого и тёмного, почти всегда достаточно, а если знак должен работать ещё и в разных размерах — это уже соседняя задача, <a href="../adaptivnyj-logotip/" target="_blank" rel="noopener">адаптивный логотип</a>. Всё это гораздо проще, если исходник в <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">векторе</a>: из <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG</a> любая версия делается за минуту, из готового <a href="../png-ili-jpg-chto-luchshe/" target="_blank" rel="noopener">PNG</a> — уже нет.</p>
+      <p>Отдельно стоит сказать про случай, когда фон контролировать нельзя вообще, — например, когда логотип уходит партнёрам, в чужие презентации или на площадки, где он ляжет неизвестно на что. Тогда двух версий мало, и выручает третий, «нейтральный» вариант: знак с тонкой контурной обводкой или на собственной небольшой подложке фирменного цвета, который читается и на белом, и на чёрном, и на пёстром фото. Он жертвует частью изящества ради надёжности, зато не пропадёт нигде. Разумно держать такой универсальный вариант в наборе рядом со светлой и тёмной версиями и отдавать именно его, когда заранее неизвестно, на каком фоне окажется знак, — это избавляет от разбирательств уже постфактум.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -260,66 +264,25 @@ window.yaContextCb.push(() => {
       <p>Логотип пропадает на тёмном фоне по двум причинам — из‑за тёмного цвета знака или непрозрачной подложки, — и решения выстраиваются по нарастающей: монохромному знаку хватит инверсии, цветному нужна отдельная светлая версия, но в основе всего лежит <a href="../logotip-s-prozrachnym-fonom/" target="_blank" rel="noopener">прозрачный фон</a>, без которого не спасёт ни один подобранный цвет. На сайте версии стоит переключать автоматически через <code>prefers-color-scheme</code>, а исходник держать в <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">векторе</a> — тогда любая версия под тёмную тему делается за минуту.</p>
       <p>Логотипы в <a href="../../logos/" target="_blank" rel="noopener">каталоге Trace Logo's</a> можно перекрасить прямо в браузере и скачать готовую светлую или тёмную версию в SVG и PNG.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../geshtalt-v-logotipe/" data-date="2026-09-09" data-views="0">
+          <a class="blog-card" href="../mokap-logotipa/" data-date="2026-09-04" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Восприятие</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Презентация</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>09.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Гештальт в логотипе — почему знак узнают по обрывку</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../redizajn-ili-refresh-logotipa/" data-date="2026-09-01" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Ребрендинг</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Редизайн или рефреш логотипа — что выбрать и не потерять узнаваемость</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../mokap-logotipa/" data-date="2026-08-22" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Презентация</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>22.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            5
           </div>
           </div>
           <div class="blog-card-title">Мокап логотипа — как показать знак, чтобы его приняли</div>
@@ -327,20 +290,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../dostupnyj-logotip/" data-date="2026-08-19" data-views="0">
+      <a class="blog-card" href="../dostupnyj-logotip/" data-date="2026-08-19" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Доступность</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="4" r="1" /><path d="m18 19 1-7-6 1" /><path d="m5 8 3-3 5.5 3-2.36 3.5" /><path d="M4.24 14.5a5 5 0 0 0 6.88 6" /><path d="M13.76 17.5a5 5 0 0 0-6.88-6" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Доступность</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="16" cy="4" r="1" /><path d="m18 19 1-7-6 1" /><path d="m5 8 3-3 5.5 3-2.36 3.5" /><path d="M4.24 14.5a5 5 0 0 0 6.88 6" /><path d="M13.76 17.5a5 5 0 0 0-6.88-6" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
           <div class="blog-card-title">Доступный логотип — почему ваш знак должен видеть каждый</div>
@@ -348,44 +311,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-pisat-o-logotipe/" data-date="2026-09-13" data-views="0">
+      <a class="blog-card" href="../psihologiya-formy-v-logotipe/" data-date="2026-08-18" data-views="2">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Психология</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>18.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            2
+          </div>
+          </div>
+          <div class="blog-card-title">Психология формы в логотипе — почему круг кажется добрым, а угол — резким</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../negativnoe-prostranstvo-v-logotipe/" data-date="2026-08-17" data-views="6">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Приёмы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3a2 2 0 0 0-2 2" /><path d="M19 3a2 2 0 0 1 2 2" /><path d="M21 19a2 2 0 0 1-2 2" /><path d="M5 21a2 2 0 0 1-2-2" /><path d="M9 3h1" /><path d="M9 21h1" /><path d="M14 3h1" /><path d="M14 21h1" /><path d="M3 9v1" /><path d="M21 9v1" /><path d="M3 14v1" /><path d="M21 14v1" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            6
+          </div>
+          </div>
+          <div class="blog-card-title">Негативное пространство в логотипе — искусство прятать смысл в пустоте</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Текст</span><span class="blog-card-tag">Практика</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Игры</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Как писать о логотипе: почему сильный знак проваливают на словах</div>
+          <div class="blog-card-title">Логотипы мобильных игр — почему у всех объёмные буквы</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../brending-s-pomoshyu-ii/" data-date="2026-09-11" data-views="0">
+      <a class="blog-card" href="../brief-na-logotip/" data-date="2026-08-23" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 18V5" /><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4" /><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5" /><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77" /><path d="M18 18a4 4 0 0 0 2-7.464" /><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517" /><path d="M6 18a4 4 0 0 1-2-7.464" /><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Бриф</span><span class="blog-card-tag">Заказ</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /><path d="M12 11h4" /><path d="M12 16h4" /><path d="M8 11h.01" /><path d="M8 16h.01" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>11.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            3
           </div>
           </div>
-          <div class="blog-card-title">Брендинг с помощью ИИ — где нейросеть помогает, а где вредит</div>
+          <div class="blog-card-title">Бриф на логотип — как поставить задачу, чтобы не переделывать десять раз</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -403,25 +408,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -498,6 +495,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -543,10 +541,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

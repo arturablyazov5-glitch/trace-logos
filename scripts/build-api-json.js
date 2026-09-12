@@ -116,6 +116,8 @@ function buildEntry(item, catSlug, catName, includeCategorySlug, includeAbout) {
     ...(item.name_en ? { name_en: item.name_en } : {}),
     tags:      item.tags || '',
     url:       `${BASE_URL}${url}`,
+    dateAdded: item.dateAdded,
+    ...(item.dateModified ? { dateModified: item.dateModified } : {}),
     svgUrl,
     pngUrl,
     ecosystem: item.ecosystem || null,

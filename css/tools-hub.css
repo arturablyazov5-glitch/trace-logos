@@ -1,0 +1,1301 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   tools-hub.css — стили лендинга /tools/ (хаб расширений, плагинов и утилит).
+
+   Одна забота: только tools/index.html. Базовый слой (токены, body, .wrap,
+   .section, .section-head, .tools-grid/.tool-card, .figma-feature/.ff-*)
+   берётся из css/home.css — тот же визуальный язык, что на главной. FAQ —
+   общий компонент css/faq.css. Здесь только то, чего нет ни там, ни там:
+   макеты-«скриншоты», карточки расширений, шаги установки.
+
+   ВАЖНО про макеты. Все имитации интерфейсов на странице — СВЕТЛЫЕ, на тёмном
+   фоне сайта, и рисуются так, чтобы читаться настоящим скриншотом: оконная
+   хрома (вкладки, точки, адресная строка), живой текст вместо серых полосок
+   там, где он влезает, тени и наводки как в реальном UI. Палитра макетов
+   живёт в переменных --m-* и используется всеми тремя семействами:
+     .hv-*  — первый экран (браузер, окно утилиты, панель Figma)
+     .ev-*  — макеты в карточках расширений и плагинов
+     .st-*  — макеты шагов установки
+   Новый макет — бери те же переменные, не заводи свои хексы.
+   ────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Токены компонента css/faq.css, которых нет в home.css (там своя, более
+     короткая шкала). Значения — из css/tokens.css, чтобы FAQ выглядел ровно
+     так же, как на страницах логотипов и подборок. */
+  --border-base: #2e2e2e;
+  --text-1: #e5e5e5;
+  --text-4: #777;
+  --text-5: #666;
+
+  /* Палитра светлых макетов */
+  --m-bg:     #ffffff;
+  --m-soft:   #f4f4f6;
+  --m-soft-2: #ebebef;
+  --m-line:   #e4e4ea;
+  --m-line-2: #d3d3db;
+  --m-text:   #1b1b20;
+  --m-mid:    #55555f;
+  --m-dim:    #8d8d98;
+  --m-star:   #f5b544;
+  --m-red:    #e5484d;
+  --m-green:  #2ea36a;
+  --m-blue:   #2f7ff0;
+
+  /* Подложка под макетом. Светлая — иначе окно висит в темноте и вся идея
+     «светлого острова на тёмной странице» держится на одном белом окне. */
+  --m-back:   linear-gradient(155deg, #f2f1f9 0%, #e6e5f1 55%, #dedded 100%);
+  --m-back-2: rgba(138, 107, 255, .16);   /* цветное пятно поверх подложки */
+}
+
+/* ── Hero ── */
+/* overflow: hidden обязателен — ::before со свечением вылезает за края секции
+   (inset: -10%), и без обрезки он растягивал страницу по горизонтали: на
+   мобильном появлялась прокрутка вбок и весь контент уезжал за экран. */
+.hub-hero { position: relative; padding: 60px 0 0; overflow: hidden; }
+/* Свечение первого экрана. body в home.css красит узкий ореол по верхней
+   кромке окна; на главной этого хватает, потому что герой по центру. Здесь
+   контент раскинут в две колонки, и та подсветка не долетает ни до заголовка,
+   ни до макета — поэтому у секции своё широкое пятно. */
+.hub-hero::before {
+  content: ''; position: absolute; inset: -120px -10% auto -10%; height: 720px;
+  background:
+    radial-gradient(46% 52% at 28% 34%, rgba(138,107,255,.20), transparent 70%),
+    radial-gradient(42% 46% at 74% 26%, rgba(120,90,255,.16), transparent 72%);
+  pointer-events: none; z-index: 0;
+}
+.hub-hero > .wrap { position: relative; z-index: 1; }
+.hub-hero-inner {
+  display: grid; grid-template-columns: 1.02fr 0.98fr;
+  align-items: center; gap: 56px;
+}
+/* min-width: 0 обязателен: у грид-элемента min-width по умолчанию auto, а
+   внутри макета есть nowrap-строки (вкладка браузера с длинным заголовком).
+   Без этого колонка раздувается до min-content и окно вылезает за контейнер —
+   на мобильном макет уезжал за правый край экрана. */
+.hub-hero-inner > * { min-width: 0; }
+.hub-hero-copy { position: relative; z-index: 1; }
+.hub-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.01em;
+  color: var(--text); background: var(--card-bg);
+  border: 1px solid var(--border-hover); border-radius: 999px;
+  padding: 6px 14px 6px 11px; margin-bottom: 22px;
+}
+.hub-eyebrow svg { width: 14px; height: 14px; stroke: var(--accent); stroke-width: 2; }
+.hub-hero h1 {
+  font-size: clamp(32px, 3.9vw, 54px); font-weight: 700; line-height: 1.06;
+  letter-spacing: -0.032em; margin: 0 0 18px;
+}
+.hub-hero h1 .accent { color: var(--accent); display: block; }
+.hub-lead {
+  font-size: 15px; color: var(--text-muted); line-height: 1.65; max-width: 520px;
+}
+.hub-lead strong { color: var(--text); font-weight: 600; }
+
+.hub-jump { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
+.hub-jump a {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13.5px; font-weight: 500; text-decoration: none; color: var(--text);
+  background: #161616; border-radius: 999px; padding: 10px 18px;
+  transition: background .15s, transform .12s;
+}
+.hub-jump a:hover { background: #202020; transform: translateY(-1px); }
+.hub-jump a.primary { background: var(--accent); box-shadow: 0 6px 22px rgba(138,107,255,.28); }
+.hub-jump a.primary:hover { background: var(--accent); filter: brightness(1.06); }
+.hub-jump svg { width: 15px; height: 15px; stroke: currentColor; stroke-width: 2; fill: none; }
+
+/* ══ Первый экран: окно браузера + окно утилиты + панель Figma ══ */
+.hub-visual { position: relative; padding: 14px 0 64px; }
+.hub-visual::before {                       /* свечение под «стеклом» */
+  content: ''; position: absolute; inset: -12% -8% 4% -4%;
+  background: radial-gradient(58% 54% at 60% 40%, rgba(138,107,255,.34), transparent 70%);
+  filter: blur(8px); pointer-events: none;
+}
+
+.hv-browser {
+  position: relative; border-radius: 14px; overflow: hidden;
+  background: var(--m-bg); color: var(--m-text);
+  box-shadow: 0 30px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.10);
+  transform: perspective(1500px) rotateY(-6deg) rotateX(2deg);
+  transition: transform .35s ease;
+}
+.hub-visual:hover .hv-browser { transform: perspective(1500px) rotateY(-2deg) rotateX(1deg); }
+
+/* Полоса вкладок — без неё «окно браузера» не читается браузером */
+.hv-tabs {
+  display: flex; align-items: flex-end; gap: 4px;
+  padding: 7px 8px 0; background: #dcdce2;
+}
+.hv-tab {
+  display: flex; align-items: center; gap: 6px; min-width: 0;
+  padding: 6px 9px; border-radius: 7px 7px 0 0;
+  font-size: 10px; color: var(--m-mid);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hv-tab img { width: 11px; height: 11px; border-radius: 3px; flex-shrink: 0; }
+.hv-tab.active { background: var(--m-bg); color: var(--m-text); font-weight: 500; }
+.hv-tab.mini { max-width: 96px; }
+.hv-tab-x { margin-left: 2px; color: var(--m-dim); font-size: 11px; line-height: 1; }
+.hv-tab-new { margin-left: 2px; padding: 4px 7px; color: var(--m-mid); font-size: 12px; line-height: 1; }
+
+.hv-bar {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 10px; background: var(--m-bg); border-bottom: 1px solid var(--m-line);
+}
+.hv-nav { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.hv-nav svg { width: 13px; height: 13px; stroke: var(--m-mid); stroke-width: 2; fill: none; }
+.hv-nav svg.off { stroke: var(--m-line-2); }
+.hv-url {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 7px;
+  background: var(--m-soft); border-radius: 999px; padding: 5px 12px;
+  font-size: 10.5px; color: var(--m-mid);
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+}
+.hv-url b { color: var(--m-text); font-weight: 500; }
+.hv-url svg { width: 10px; height: 10px; flex-shrink: 0; stroke: var(--m-dim); stroke-width: 2; fill: none; }
+.hv-exts { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.hv-exts img {
+  width: 19px; height: 19px; border-radius: 6px; object-fit: contain;
+  opacity: .45; transition: opacity .2s, transform .2s;
+}
+.hv-exts img.on { opacity: 1; transform: scale(1.1); box-shadow: 0 0 0 2px rgba(138,107,255,.55); }
+.hv-ava {
+  width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(140deg, #ffb020, #ff5c16);
+}
+
+/* Страница внутри окна — карточка организации на Яндекс Картах */
+.hv-page { padding: 12px; background: var(--m-soft); }
+.hv-org {
+  background: var(--m-bg); border: 1px solid var(--m-line);
+  border-radius: 10px; padding: 10px 11px 0;
+}
+.hv-org-top { display: flex; align-items: center; gap: 8px; }
+.hv-org-logo { width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; }
+.hv-org-name { display: block; font-size: 11.5px; font-weight: 600; letter-spacing: -0.01em; }
+.hv-org-meta { display: flex; align-items: center; gap: 5px; margin-top: 2px; font-size: 9.5px; color: var(--m-dim); }
+.hv-rate { font-weight: 700; color: var(--m-text); }
+.hv-org-tabs { display: flex; gap: 12px; margin-top: 9px; }
+.hv-org-tab { font-size: 10px; color: var(--m-dim); padding-bottom: 6px; }
+.hv-org-tab.on { color: var(--m-text); font-weight: 600; box-shadow: inset 0 -2px 0 var(--m-red); }
+
+.hv-rows { display: grid; gap: 7px; margin-top: 8px; }
+.hv-rev {
+  background: var(--m-bg); border: 1px solid var(--m-line);
+  border-radius: 10px; padding: 9px 10px;
+}
+.hv-rev-top { display: flex; align-items: center; gap: 7px; }
+.hv-ava-sm {
+  width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8.5px; font-weight: 700; color: #fff;
+}
+.hv-ava-sm.a { background: #7c6cf0; } .hv-ava-sm.b { background: #f0806c; }
+.hv-rev-name { font-size: 10px; font-weight: 600; }
+.hv-rev-date { font-size: 9px; color: var(--m-dim); margin-left: auto; }
+.hv-stars { display: flex; gap: 1.5px; margin: 6px 0 5px; }
+.hv-stars svg { width: 9px; height: 9px; fill: var(--m-star); stroke: none; }
+.hv-stars svg.off { fill: var(--m-line-2); }
+.hv-rev-text { font-size: 9.5px; line-height: 1.5; color: var(--m-mid); }
+.hv-rev.dim { opacity: .45; }
+
+/* Попап расширения — висит под своей иконкой в тулбаре, со стрелкой вверх */
+.hv-popup {
+  position: absolute; top: 66px; right: 10px; width: 178px; z-index: 3;
+  border-radius: 11px; padding: 11px;
+  background: var(--m-bg); border: 1px solid var(--m-line-2);
+  box-shadow: 0 18px 38px rgba(0,0,0,.26);
+}
+.hv-popup::after {                          /* «клювик» к иконке расширения */
+  content: ''; position: absolute; top: -5px; right: 17px;
+  width: 9px; height: 9px; background: var(--m-bg);
+  border-left: 1px solid var(--m-line-2); border-top: 1px solid var(--m-line-2);
+  transform: rotate(45deg);
+}
+.hv-popup-head { display: flex; align-items: center; gap: 7px; }
+.hv-popup-head img { width: 20px; height: 20px; border-radius: 6px; }
+.hv-popup-name { font-size: 10.5px; font-weight: 600; white-space: nowrap; }
+.hv-popup-ver {
+  margin-left: auto; font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 8.5px; color: var(--m-dim);
+}
+.hv-popup-sub { display: block; font-size: 9.5px; color: var(--m-mid); margin-top: 9px; }
+.hv-popup-sub b { color: var(--m-text); font-weight: 700; }
+.hv-progress { height: 5px; border-radius: 3px; background: var(--m-soft-2); margin-top: 6px; overflow: hidden; }
+.hv-progress i { display: block; height: 100%; width: 100%; border-radius: 3px; background: var(--m-green); }
+.hv-src { display: flex; gap: 4px; margin-top: 8px; }
+.hv-src span {
+  font-size: 8.5px; color: var(--m-dim);
+  background: var(--m-soft); border-radius: 4px; padding: 2px 5px;
+}
+.hv-src span.on { color: var(--m-red); background: rgba(229,68,51,.10); font-weight: 600; }
+.hv-popup-btn {
+  margin-top: 9px; border-radius: 8px; padding: 7px; text-align: center;
+  font-size: 10.5px; font-weight: 700; color: #fff; background: var(--accent);
+  box-shadow: 0 5px 14px rgba(138,107,255,.4);
+}
+
+/* Второе окно — веб-утилита. Наклон в другую сторону, чем у панели Figma:
+   три окна не должны читаться одним стеком. */
+.hv-tool {
+  position: absolute; left: -20px; bottom: 6px; width: 206px; z-index: 4;
+  border-radius: 13px; overflow: hidden; background: var(--m-bg); color: var(--m-text);
+  box-shadow: 0 24px 50px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.12);
+  transform: rotate(2deg); transition: transform .35s ease;
+}
+.hub-visual:hover .hv-tool { transform: rotate(0deg) translateY(-4px); }
+.hv-tool-head {
+  display: flex; align-items: center; gap: 7px;
+  padding: 8px 10px; background: var(--m-soft); border-bottom: 1px solid var(--m-line);
+}
+.hv-tool-head .hv-dots { display: flex; gap: 4px; }
+.hv-tool-head .hv-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--m-line-2); }
+.hv-tool-title { font-size: 10px; font-weight: 600; }
+.hv-tool-body { padding: 9px 10px 10px; }
+.hv-file { display: flex; align-items: center; gap: 8px; }
+.hv-file .thumb {
+  width: 26px; height: 26px; border-radius: 6px; flex-shrink: 0;
+  background: linear-gradient(135deg, #8a6bff, #4ec9f5 65%, #3cc878);
+}
+.hv-file-name { display: block; font-size: 9.5px; font-weight: 600; }
+.hv-file-sub {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  display: block; font-size: 8.5px; color: var(--m-dim); margin-top: 2px;
+}
+.hv-file-sub s { color: var(--m-dim); }
+.hv-file-sub b { color: var(--m-green); font-weight: 700; }
+.hv-badge-webp {
+  margin-left: auto; flex-shrink: 0; font-size: 8px; font-weight: 700;
+  color: var(--m-green); background: rgba(46,163,106,.12);
+  border-radius: 4px; padding: 2px 5px;
+}
+.hv-save { display: flex; align-items: center; gap: 8px; margin-top: 9px; }
+.hv-save-bar { flex: 1; height: 4px; border-radius: 2px; background: var(--m-soft-2); overflow: hidden; }
+.hv-save-bar i { display: block; height: 100%; width: 91%; border-radius: 2px; background: var(--m-green); }
+.hv-save-num { font-size: 9px; font-weight: 700; color: var(--m-green); }
+.hv-tool-btn {
+  margin-top: 9px; border-radius: 7px; padding: 6px; text-align: center;
+  font-size: 9.5px; font-weight: 700; color: #fff; background: var(--accent);
+}
+
+/* Третье окно — панель плагина в Figma */
+.hv-figma {
+  position: absolute; right: -16px; bottom: -6px; width: 196px; z-index: 5;
+  border-radius: 13px; overflow: hidden; background: var(--m-bg); color: var(--m-text);
+  box-shadow: 0 26px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.12);
+  transform: rotate(-2.5deg); transition: transform .35s ease;
+}
+.hub-visual:hover .hv-figma { transform: rotate(0deg) translateY(-4px); }
+.hv-figma-head {
+  display: flex; align-items: center; gap: 7px;
+  padding: 8px 10px; background: var(--m-soft); border-bottom: 1px solid var(--m-line);
+}
+.hv-figma-head img { width: 17px; height: 17px; border-radius: 5px; }
+.hv-figma-title { font-size: 10px; font-weight: 600; }
+.hv-figma-x { margin-left: auto; font-size: 11px; line-height: 1; color: var(--m-dim); }
+.hv-figma-tabs { display: flex; gap: 3px; padding: 8px 10px 0; }
+.hv-figma-tab { font-size: 9.5px; color: var(--m-dim); padding: 4px 9px; border-radius: 6px; }
+.hv-figma-tab.on { color: var(--m-text); font-weight: 600; background: var(--m-soft-2); }
+.hv-figma-search {
+  display: flex; align-items: center; gap: 6px; margin: 8px 10px 0;
+  background: var(--m-soft); border: 1px solid var(--m-line); border-radius: 7px;
+  padding: 5px 8px; font-size: 9.5px; color: var(--m-dim);
+}
+.hv-figma-search svg { width: 10px; height: 10px; stroke: var(--m-dim); stroke-width: 2; fill: none; }
+.hv-figma-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 8px 10px; }
+.hv-tile {
+  aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  background: var(--m-bg); border: 1px solid var(--m-line); border-radius: 9px;
+}
+.hv-tile img { width: 22px; height: 22px; object-fit: contain; border-radius: 6px; }
+.hv-tile.sel { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.hv-figma-btn {
+  margin: 0 10px 10px; border-radius: 8px; padding: 7px; text-align: center;
+  font-size: 10px; font-weight: 700; color: #fff; background: var(--accent);
+  box-shadow: 0 5px 14px rgba(138,107,255,.4);
+}
+
+/* ── Панель плагина в большом блоке «Плагины для Figma» ──
+   Внешняя рамка блока (.figma-feature, glow, копия, кнопка) — общий компонент
+   из css/home.css, он остаётся как на главной. А вот превью внутри .ff-preview
+   на этой странице своё: тёмное окно .ff-window выбивалось бы из светлого ряда
+   макетов. Поэтому не переопределяем правила home.css, а кладём в тот же слот
+   собственную вёрстку .fp-*. */
+.fp {
+  width: 100%; max-width: 306px; border-radius: 14px; overflow: hidden;
+  background: var(--m-bg); color: var(--m-text);
+  box-shadow: 0 26px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.14);
+  transform: rotate(-1.2deg); transition: transform .3s ease;
+}
+.figma-feature:hover .fp { transform: rotate(0deg) translateY(-3px); }
+.fp-head {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; background: var(--m-soft); border-bottom: 1px solid var(--m-line);
+}
+.fp-head img { width: 20px; height: 20px; border-radius: 6px; }
+.fp-name { font-size: 11.5px; font-weight: 600; }
+.fp-x { margin-left: auto; font-size: 13px; line-height: 1; color: var(--m-dim); }
+.fp-tabs { display: flex; gap: 4px; padding: 10px 12px 0; }
+.fp-tab { font-size: 10.5px; color: var(--m-dim); padding: 5px 10px; border-radius: 7px; }
+.fp-tab.on { color: var(--m-text); font-weight: 600; background: var(--m-soft-2); }
+.fp-search {
+  display: flex; align-items: center; gap: 7px; margin: 10px 12px 0;
+  background: var(--m-bg); border: 1px solid var(--accent); border-radius: 8px;
+  padding: 7px 10px; font-size: 11px; color: var(--m-text);
+  box-shadow: 0 0 0 3px rgba(138,107,255,.13);
+}
+.fp-search svg { width: 12px; height: 12px; stroke: var(--m-dim); stroke-width: 2; fill: none; flex-shrink: 0; }
+.fp-caret { display: inline-block; width: 1.5px; height: 12px; background: var(--accent); }
+.fp-found { margin-left: auto; font-size: 9.5px; color: var(--m-dim); }
+.fp-chips { display: flex; gap: 5px; padding: 10px 12px 0; }
+.fp-chips span {
+  font-size: 9.5px; color: var(--m-mid); background: var(--m-soft);
+  border: 1px solid var(--m-line); border-radius: 999px; padding: 3px 8px;
+}
+.fp-chips span.on { color: #fff; background: var(--m-text); border-color: transparent; }
+.fp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; padding: 10px 12px; }
+.fp-tile {
+  position: relative; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+  background: var(--m-bg); border: 1px solid var(--m-line); border-radius: 10px;
+}
+.fp-tile img { width: 26px; height: 26px; object-fit: contain; border-radius: 7px; }
+.fp-tile.sel { border-color: var(--accent); box-shadow: 0 0 0 1.5px var(--accent); }
+.fp-tile.sel::after {
+  content: ''; position: absolute; inset: 0; border-radius: 9px;
+  background: rgba(138,107,255,.07);
+}
+.fp-foot {
+  display: flex; align-items: center; gap: 7px;
+  padding: 0 12px 12px;
+}
+.fp-fmt {
+  font-size: 9.5px; font-weight: 600; color: var(--m-mid);
+  background: var(--m-soft); border: 1px solid var(--m-line); border-radius: 6px; padding: 5px 8px;
+}
+.fp-fmt.on { color: var(--m-text); background: var(--m-soft-2); }
+.fp-btn {
+  flex: 1; text-align: center; border-radius: 8px; padding: 8px;
+  font-size: 11px; font-weight: 700; color: #fff; background: var(--accent);
+  box-shadow: 0 6px 16px rgba(138,107,255,.4);
+}
+
+/* ── Док: намёк, что инструментов сильно больше трёх окон ── */
+.hub-dock {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+  flex-wrap: wrap; margin-top: 10px;
+}
+.hub-dock-icons { display: flex; align-items: center; gap: 7px; }
+.hub-dock-icons img {
+  width: 34px; height: 34px; border-radius: 11px; object-fit: contain;
+  background: #161616; transition: transform .18s;
+}
+.hub-dock-icons img:hover { transform: translateY(-3px); }
+.hub-dock-more {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 34px; padding: 0 13px; border-radius: 11px;
+  font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-dim);
+}
+.hub-dock-text { font-size: 12.5px; color: var(--text-dim); }
+
+/* ── Полоса цифр ── */
+.hub-stats {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  margin-top: 40px;
+}
+.hub-stat {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  background: #161616; border-radius: 16px; padding: 16px 20px;
+}
+.hub-stat-num { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+.hub-stat-label { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; }
+
+/* ══ Карточки расширений и плагинов ══ */
+.ext-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(430px, 1fr)); gap: 12px; }
+
+.ext-card {
+  position: relative; min-width: 0; display: flex; flex-direction: column;
+  padding: 22px; border-radius: 18px; background: #161616;
+  text-decoration: none; color: inherit;
+  transition: background .15s, transform .15s;
+}
+a.ext-card:hover { background: #202020; transform: translateY(-2px); }
+.ext-card.is-soon { opacity: .9; }
+
+/* ── Светлый макет в шапке карточки ──
+   Самостоятельный контейнер, как .st-vis у шагов: подложка со скруглением,
+   внутри — светлое «окно». */
+.ext-vis {
+  position: relative; min-width: 0; height: 214px; overflow: hidden;
+  margin-bottom: 18px; padding: 13px;
+  border-radius: 13px;
+  background: var(--m-back);
+}
+.ext-vis::before {                           /* цветное пятно, чтобы подложка не была плоской */
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(90% 70% at 78% 4%, var(--m-back-2), transparent 62%);
+  pointer-events: none;
+}
+
+.ev {                                        /* «окно» макета */
+  position: relative; height: 100%; border-radius: 10px; overflow: hidden;
+  background: var(--m-bg); color: var(--m-text);
+  box-shadow: 0 10px 24px rgba(30, 26, 60, .16), 0 0 0 1px rgba(27, 27, 32, .07);
+  display: flex; flex-direction: column;
+}
+.ev-head {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+  padding: 7px 10px; background: var(--m-soft); border-bottom: 1px solid var(--m-line);
+}
+.ev-head-title { font-size: 10px; font-weight: 600; color: var(--m-text); }
+.ev-head-title.mono {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 400; color: var(--m-dim);
+}
+.ev-head img.ico { width: 15px; height: 15px; border-radius: 4px; flex-shrink: 0; }
+.ev-dots { display: flex; gap: 4px; flex-shrink: 0; }
+.ev-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--m-line-2); }
+.ev-body { padding: 9px 10px; flex: 1; min-height: 0; overflow: hidden; }
+.ev-body.with-toast { padding-bottom: 32px; }
+
+/* мелкие детали, общие для макетов */
+.ev-btn {
+  font-size: 9px; font-weight: 700; border-radius: 6px; padding: 5px 8px;
+  background: var(--accent); color: #fff; white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(138,107,255,.35);
+}
+.ev-btn.ghost { background: var(--m-soft-2); color: var(--m-mid); box-shadow: none; }
+.ev-ml { margin-left: auto; }
+.ev-tag {
+  display: inline-block; font-size: 8.5px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--m-dim); margin-bottom: 5px;
+}
+.ev-tag.ok { color: var(--m-green); }
+
+/* ── Reviews Exporter: лента отзывов + вшитая кнопка выгрузки ── */
+.ev-rate {
+  display: inline-flex; align-items: center; gap: 3px; flex-shrink: 0;
+  font-size: 9px; font-weight: 700; color: #fff;
+  background: var(--m-green); border-radius: 4px; padding: 2px 5px;
+}
+.ev-rev { border-bottom: 1px solid var(--m-line); padding: 7px 0; }
+.ev-rev:first-child { padding-top: 2px; }
+.ev-rev:last-child { border-bottom: 0; }
+.ev-rev-top { display: flex; align-items: center; gap: 6px; }
+.ev-ava {
+  width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 700; color: #fff;
+}
+.ev-ava.a { background: #7c6cf0; } .ev-ava.b { background: #f0806c; } .ev-ava.c { background: #4bb3a0; }
+.ev-rev-name { font-size: 9.5px; font-weight: 600; }
+.ev-rev-date { margin-left: auto; font-size: 8.5px; color: var(--m-dim); }
+.ev-stars { display: flex; gap: 1.5px; margin: 4px 0 3px; }
+.ev-stars svg { width: 8.5px; height: 8.5px; fill: var(--m-star); stroke: none; }
+.ev-stars svg.off { fill: var(--m-line-2); }
+.ev-rev-text { font-size: 9px; line-height: 1.45; color: var(--m-mid); }
+.ev-toast {
+  position: absolute; left: 10px; right: 10px; bottom: 9px;
+  display: flex; align-items: center; gap: 6px;
+  background: var(--m-text); color: #fff; border-radius: 8px; padding: 6px 9px;
+  font-size: 9px; box-shadow: 0 8px 20px rgba(0,0,0,.28);
+}
+.ev-toast svg { width: 11px; height: 11px; stroke: #4ade80; stroke-width: 2.6; fill: none; flex-shrink: 0; }
+.ev-toast b { font-weight: 700; }
+
+/* ── Tilda Helper: панель блока над блоком ──
+   В настоящем редакторе при наведении над блоком всплывает ряд кнопок
+   «Настройки / Редактировать блок / Скопировать код», а слева внизу подпись
+   вроде «Нулевой Блок». Расширение добавляет в этот же ряд два чипа —
+   ID блока и его класс, — поэтому они подсвечены акцентом. */
+.ev-tilda-head {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 9px; border-bottom: 1px solid var(--m-line); background: var(--m-bg);
+  font-size: 9px; color: var(--m-mid);
+}
+.ev-crumb { display: flex; align-items: center; gap: 5px; min-width: 0; }
+.ev-crumb svg { width: 9px; height: 9px; stroke: var(--m-dim); stroke-width: 1.8; fill: none; flex-shrink: 0; }
+.ev-crumb span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ev-pub {
+  margin-left: auto; flex-shrink: 0;
+  font-size: 8.5px; font-weight: 600; color: var(--m-text);
+  border: 1px solid var(--m-line-2); border-radius: 5px; padding: 3px 7px;
+}
+.ev-tb {
+  display: flex; align-items: center; gap: 4px; flex-wrap: nowrap;
+  background: var(--m-bg); border-bottom: 1px solid var(--m-line); padding: 6px 8px;
+}
+.ev-tb-btn {
+  display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;
+  font-size: 8px; font-weight: 600; color: var(--m-mid);
+  background: var(--m-soft); border-radius: 5px; padding: 4px 6px; white-space: nowrap;
+}
+.ev-tb-btn svg { width: 8px; height: 8px; stroke: currentColor; stroke-width: 2; fill: none; }
+.ev-tb-btn.orange { color: #fff; background: #ff5c16; }
+/* Чипы, которых в родном редакторе нет — их дорисовывает расширение */
+.ev-tb-btn.ext {
+  color: #fff; background: #1b1b20;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 500; box-shadow: 0 0 0 2px rgba(138,107,255,.45);
+}
+.ev-tb-ico { margin-left: auto; display: flex; gap: 4px; flex-shrink: 0; }
+.ev-tb-ico svg { width: 9px; height: 9px; stroke: var(--m-dim); stroke-width: 1.8; fill: none; }
+.ev-stage {
+  position: relative; flex: 1; min-height: 0; overflow: hidden;
+  background: var(--m-soft);
+  display: flex; flex-direction: column; justify-content: center; gap: 6px;
+  padding: 12px 14px;
+}
+.ev-stage-label {
+  position: absolute; top: 6px; left: 8px;
+  font-size: 7.5px; color: var(--m-dim);
+}
+.ev-blk-h { height: 8px; width: 54%; border-radius: 3px; background: var(--m-text); opacity: .85; }
+.ev-blk-l { height: 5px; border-radius: 3px; background: var(--m-line-2); }
+.ev-blk-l.w80 { width: 80%; }
+.ev-blk-l.w64 { width: 64%; }
+.ev-blk-btn { margin-top: 4px; width: 52px; height: 13px; border-radius: 4px; background: #ff5c16; }
+.ev-copied {
+  position: absolute; right: 8px; top: 8px;
+  font-size: 7.5px; font-weight: 600; color: #fff;
+  background: var(--m-green); border-radius: 4px; padding: 2px 5px;
+}
+.ev-zpanel {
+  position: absolute; right: 8px; bottom: 8px; width: 104px;
+  background: var(--m-bg); border: 1px solid var(--m-line); border-radius: 7px; padding: 6px;
+  box-shadow: 0 8px 18px rgba(30,26,60,.16);
+}
+.ev-zpanel-t { font-size: 7.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--m-dim); margin-bottom: 4px; }
+.ev-zrow {
+  display: flex; align-items: center; justify-content: space-between; gap: 5px;
+  background: var(--m-bg); border: 1px solid var(--accent); border-radius: 5px; padding: 3px 6px;
+  box-shadow: 0 0 0 2px rgba(138,107,255,.14);
+  font-size: 8px; color: var(--m-text); font-weight: 600;
+}
+.ev-zrow b {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 600;
+}
+/* Курсор — тот же, что на странице 404 (.nf-cursor): фиолетовая стрелка
+   с белой обводкой. Один рисунок на весь сайт, не выдумываем второй. */
+.ev-cursor, .st-cursor { position: absolute; width: 17px; height: 19px; filter: drop-shadow(0 3px 5px rgba(0,0,0,.35)); }
+
+/* ── Taptop Helper: верхняя панель редактора + дерево слоёв ──
+   Срисовано с реального редактора: слева панель «Слои» с деревом (chevron,
+   иконка типа элемента, css-имена вроде card-green 1), справа вверху родная
+   синяя «Опубликовать» и рядом «Опубликовать всё», которую вшивает расширение.
+   Мультивыбор расширение подсвечивает красным — так же, как в content.js. */
+.ev-topbar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 9px; border-bottom: 1px solid var(--m-line); background: var(--m-bg);
+}
+.ev-tt-zoom {
+  font-size: 9px; color: var(--m-dim);
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.ev-tt-btn {
+  font-size: 8.5px; font-weight: 600; border-radius: 5px; padding: 4px 7px;
+  border: 1px solid var(--m-line-2); color: var(--m-text); background: var(--m-bg);
+  white-space: nowrap;
+}
+.ev-tt-btn.blue { background: var(--m-blue); border-color: transparent; color: #fff; }
+.ev-tt-btn.ext {
+  border-color: transparent; color: #fff; background: var(--accent);
+  box-shadow: 0 3px 9px rgba(138,107,255,.4);
+}
+
+.ev-panel-title {
+  display: flex; align-items: center; gap: 5px; margin-bottom: 5px;
+  font-size: 9.5px; font-weight: 700; color: var(--m-text);
+}
+.ev-panel-title svg { width: 9px; height: 9px; stroke: var(--m-dim); stroke-width: 2; fill: none; }
+.ev-node {
+  display: flex; align-items: center; gap: 5px;
+  padding: 2.5px 6px; border-radius: 5px; border: 1px solid transparent;
+  font-size: 8.5px; color: var(--m-mid); white-space: nowrap;
+}
+.ev-node + .ev-node { margin-top: 1px; }
+.ev-node.l1 { padding-left: 14px; } .ev-node.l2 { padding-left: 24px; }
+.ev-node.l3 { padding-left: 34px; } .ev-node.l4 { padding-left: 44px; }
+.ev-chev {
+  width: 0; height: 0; flex-shrink: 0; margin-right: -1px;
+  border-left: 3.5px solid var(--m-dim); border-top: 2.5px solid transparent; border-bottom: 2.5px solid transparent;
+}
+.ev-chev.open { border-left: 3px solid transparent; border-right: 3px solid transparent; border-top: 4px solid var(--m-dim); border-bottom: 0; }
+.ev-node svg.t { width: 9px; height: 9px; stroke: var(--m-dim); stroke-width: 1.7; fill: none; flex-shrink: 0; }
+.ev-node.pick {
+  background: rgba(229,72,77,.10); border-color: rgba(229,72,77,.5);
+  color: var(--m-red); font-weight: 600;
+}
+.ev-node.pick svg.t { stroke: var(--m-red); }
+.ev-kbd {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 7.5px; color: var(--m-mid);
+  background: var(--m-soft); border: 1px solid var(--m-line-2);
+  border-bottom-width: 2px; border-radius: 4px; padding: 1px 4px; margin-left: auto;
+}
+.ev-note {
+  display: flex; align-items: center; gap: 5px; margin-top: 7px;
+  font-size: 8.5px; font-weight: 600; color: var(--m-green);
+}
+.ev-note svg { width: 10px; height: 10px; stroke: var(--m-green); stroke-width: 2.4; fill: none; flex-shrink: 0; }
+
+/* ── Typograf: строка «было → стало» ── */
+.ev-input {
+  position: relative; border: 1px solid var(--m-line-2); border-radius: 8px;
+  padding: 7px 8px; background: var(--m-bg);
+  font-size: 10px; line-height: 1.5; color: var(--m-text);
+}
+.ev-input.focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(138,107,255,.13); }
+.ev-input.was { color: var(--m-dim); background: var(--m-soft); }
+.ev-caret {
+  display: inline-block; width: 1.5px; height: 11px; margin-left: 1px;
+  background: var(--accent); vertical-align: -2px;
+}
+.ev-mark { background: rgba(46,163,106,.18); border-radius: 3px; padding: 0 2px; color: #17603f; font-weight: 700; }
+.ev-bad { background: rgba(229,72,77,.14); border-radius: 3px; padding: 0 2px; color: #a8353a; }
+.ev-nb {                                    /* видимый маркер неразрывного пробела */
+  display: inline-block; width: 4px; height: 4px; margin: 0 2px 2px; border-radius: 50%;
+  background: rgba(46,163,106,.55); vertical-align: middle;
+}
+.ev-down { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
+.ev-down svg { width: 12px; height: 12px; stroke: var(--accent); stroke-width: 2.2; fill: none; }
+.ev-down span { font-size: 8.5px; font-weight: 600; color: var(--accent); }
+
+/* ── Photo Editor: до и после обрезки по содержимому ──
+   Главное здесь — размер РАМКИ, а не предмета. До обрезки границы узла
+   большие, предмет болтается внутри со смещением, вокруг прозрачные поля
+   (шахматка). После — рамка сжата ровно по предмету и физически меньше.
+   Пока рамки были одинаковыми, а менялся масштаб предмета, картинка читалась
+   как «то же самое, только крупнее». */
+.ev-fig-toolbar { display: flex; gap: 4px; margin-bottom: 10px; }
+.ev-fig-toolbar span {
+  font-size: 8.5px; color: var(--m-mid); background: var(--m-soft);
+  border: 1px solid var(--m-line); border-radius: 5px; padding: 3px 6px;
+}
+.ev-fig-toolbar span.on { color: #fff; background: var(--accent); border-color: transparent; font-weight: 700; }
+
+/* Сетка в две строки: кадры и стрелка лежат в ОДНОЙ строке, подписи — во
+   второй. Раньше стрелка центрировалась по колонке целиком (кадр + подпись)
+   и висела ниже кадров. */
+.ev-photo-row {
+  display: grid; grid-template-columns: 1fr 16px 1fr;
+  column-gap: 8px; row-gap: 8px; align-items: center;
+}
+.ev-fbox { grid-row: 1; height: 76px; display: flex; align-items: center; justify-content: center; }
+.ev-photo-arrow { grid-row: 1; display: flex; align-items: center; justify-content: center; }
+.ev-photo-arrow svg { width: 14px; height: 14px; stroke: var(--m-dim); stroke-width: 2; fill: none; }
+.ev-cap-cell { grid-row: 2; }
+
+.ev-frame { position: relative; border-radius: 6px; }
+/* До: границы узла заметно больше содержимого */
+.ev-frame.big {
+  width: 100%; height: 76px;
+  border: 1px solid var(--m-line-2);
+  background: conic-gradient(from 90deg at 50% 50%, var(--m-soft) 0 25%, var(--m-bg) 0 50%) 0 0/9px 9px;
+}
+/* После: границы совпали с предметом — рамка меньше и без шахматки */
+.ev-frame.tight {
+  width: 56px; height: 56px;
+  border: 1.5px solid var(--accent); background: var(--m-bg);
+}
+.ev-obj { position: absolute; }
+.ev-obj svg { display: block; width: 100%; height: 100%; }
+/* Смещён от центра: полей слева и сверху больше — видно, что обрезать есть что */
+.ev-frame.big .ev-obj { width: 38px; height: 38px; left: 32%; top: 17px; }
+.ev-frame.tight .ev-obj { inset: 0; }
+.ev-crop { position: absolute; inset: -4px; border: 1.5px dashed var(--accent); border-radius: 5px; }
+.ev-handle {
+  position: absolute; width: 5px; height: 5px; background: var(--m-bg);
+  border: 1.2px solid var(--accent); border-radius: 1px;
+}
+.ev-handle.tl { top: -4px; left: -4px; } .ev-handle.tr { top: -4px; right: -4px; }
+.ev-handle.bl { bottom: -4px; left: -4px; } .ev-handle.br { bottom: -4px; right: -4px; }
+.ev-cap { font-size: 8.5px; color: var(--m-dim); text-align: center; line-height: 1.4; }
+.ev-cap b {
+  display: block; color: var(--m-text); font-weight: 600;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 8px; margin-bottom: 2px;
+}
+
+/* ── Панель плагина в карточке (Figma Typograf) ── */
+.ev-layer-row {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 7px;
+  font-size: 9px; color: var(--m-mid);
+}
+.ev-layer-row svg { width: 10px; height: 10px; stroke: var(--m-dim); stroke-width: 1.8; fill: none; }
+.ev-layer-row b { color: var(--m-text); font-weight: 600; }
+.ev-sel-chip {
+  margin-left: auto; font-size: 8px; font-weight: 700; color: var(--accent);
+  background: rgba(138,107,255,.13); border-radius: 4px; padding: 1px 5px;
+}
+
+/* ══ Текстовая часть карточки ══ */
+.ext-head { display: flex; align-items: flex-start; gap: 14px; }
+.ext-ico {
+  width: 46px; height: 46px; border-radius: 13px; flex-shrink: 0;
+  object-fit: contain; background: #101010;
+}
+.ext-head-text { min-width: 0; flex: 1; }
+/* Версия ушла из строки чипов на строку заголовка: в одном ряду с площадками
+   она читалась как ещё один чип и мешала. */
+.ext-name-row { display: flex; align-items: baseline; gap: 10px; }
+.ext-name { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+.ext-ver {
+  margin-left: auto; flex-shrink: 0;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px; color: var(--text-dim);
+}
+.ext-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-top: 9px; }
+.ext-tag {
+  display: inline-flex; align-items: center; gap: 4px; white-space: nowrap;
+  font-size: 11px; font-weight: 500; color: var(--text-muted);
+  background: rgba(255,255,255,0.05); border-radius: 1000px; padding: 4px 7px;
+}
+/* Логотип в чипе круглый, и слева паддинг меньше — иначе иконка «тонет»
+   в поле и чип выглядит длиннее, чем нужно. */
+.ext-tag img { width: 13px; height: 13px; object-fit: contain; border-radius: 100px; }
+.ext-tag:has(img) { padding-left: 4px; }
+.ext-tag.accent { color: var(--accent); background: var(--accent-dim); }
+
+/* Чип площадки красится в фирменный цвет сервиса. Значения --chip взяты не с
+   потолка: это первый (самый частый) цвет из SVG логотипа по
+   scripts/lib/brand-colors.js — тому же модулю, что рисует блок «Цвета бренда»
+   на странице логотипа. Меняется логотип в каталоге — сверь цвет отсюда.
+   Логотип в чипе — 48px-превью (assets/logos/previews-mini/), не полный SVG.
+
+   Модификатор называется tag-brand, а НЕ brand: `.brand` — глобальный класс
+   логотипа в шапке (css/site-header.css), он задаёт gap: 10px и
+   border-radius: 8px. Тот файл подключён после этого, специфичность у
+   `.brand` и `.ext-tag` одинаковая — и шапка молча перебивала чипам отступ и
+   скругление. Не наследуй общесайтовые имена классов в локальных компонентах. */
+.ext-tag.tag-brand {
+  color: var(--chip);
+  background: color-mix(in srgb, var(--chip) 15%, transparent);
+}
+.ext-tag.t-yandex-maps { --chip: #ff4433; }
+.ext-tag.t-avito      { --chip: #04e061; }
+.ext-tag.t-telegram   { --chip: #2aabee; }
+.ext-tag.t-tilda      { --chip: #fa8669; }
+.ext-tag.t-taptop     { --chip: #3290ff; }
+.ext-tag.t-figma      { --chip: #a259ff; }
+.ext-tag.t-figjam     { --chip: #8638e5; }
+.ext-tag.t-slides     { --chip: #ff5c16; }
+
+.ext-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-top: 14px; }
+
+.ext-feats { list-style: none; margin: 14px 0 0; display: grid; gap: 8px; }
+/* Не flex: строка может содержать инлайновые <code>, а во flex-контейнере каждый
+   элемент-потомок становится отдельным flex-item — текст вокруг чипа рвался бы
+   на самостоятельные куски и переставлялся местами при переносе. */
+.ext-feats li {
+  position: relative; padding-left: 14px;
+  font-size: 12.5px; color: var(--text); line-height: 1.5;
+}
+.ext-feats code, .faq-a code {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px; color: var(--text); background: rgba(255,255,255,0.06);
+  border-radius: 5px; padding: 1px 5px; white-space: nowrap;
+}
+.ext-feats li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+
+/* ── Низ карточки: кнопка + статус ──
+   Кнопка всегда в одну строку (переносы делали из неё «недокнопку»), статус —
+   отдельная пилюля рядом. На узкой карточке пилюля уезжает на строку ниже
+   целиком, а не рвётся пополам. */
+.ext-foot {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin-top: auto; padding-top: 18px;
+}
+.ext-btn {
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  font-size: 13px; font-weight: 600; text-decoration: none;
+  border-radius: 10px; padding: 10px 16px;
+  color: #fff; background: var(--accent);
+  box-shadow: 0 6px 18px rgba(138,107,255,.28);
+  transition: filter .15s, transform .15s, background .15s;
+}
+.ext-btn svg { width: 15px; height: 15px; stroke: currentColor; stroke-width: 2; fill: none; flex-shrink: 0; }
+a.ext-card:hover .ext-btn { filter: brightness(1.06); transform: translateY(-1px); }
+.ext-btn.ghost {
+  color: var(--text); background: rgba(255,255,255,.07); box-shadow: none;
+}
+.ext-btn.ghost:hover { background: rgba(255,255,255,.12); transform: translateY(-1px); }
+
+.ext-status {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 999px; padding: 6px 13px;
+}
+.ext-status svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2; fill: none; flex-shrink: 0; }
+
+/* ══ Секция веб-утилит: макет окна + сетка карточек ══
+   Без макета эта секция была единственной «слепой» на странице — голые
+   карточки между двумя блоками со скриншотами. Заодно двухколоночная раскладка
+   убирает дыру от шести карточек, которые в четыре столбца ложились как 4 + 2. */
+.web-split { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.web-split .tools-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.web-showcase { display: grid; grid-template-columns: .9fr 1.1fr; gap: 28px; align-items: center; min-width: 0; padding: 24px; border-radius: 18px; background: #161616; }
+.web-showcase > * { min-width: 0; }
+.web-showcase-copy { padding: 8px 16px; }
+.web-showcase-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 11px; background: #8a6bff18; color: #bda6ff; margin-bottom: 21px; }
+.web-showcase-icon svg { width: 23px; height: 23px; stroke-width: 1.5; }
+.web-showcase h3 { font-size: clamp(24px, 2.7vw, 31px); font-weight: 600; line-height: 1.16; letter-spacing: -.035em; margin: 0 0 14px; }
+.web-showcase p { font-size: 14px; line-height: 1.65; color: #a0a0a0; max-width: 340px; margin: 0; }
+.web-showcase-formats { display: flex; gap: 7px; margin-top: 22px; }
+.web-showcase-formats span { padding: 5px 8px; border: 1px solid #36313f; border-radius: 5px; color: #b8aec7; font-size: 10px; }
+.web-split .tool-card { padding: 23px; }
+.web-split .tool-title { font-size: 15px; line-height: 1.35; }
+.web-split .tool-desc { font-size: 13px; line-height: 1.65; color: #999; }
+.web-split .tool-ico { color: #b29bcc; margin-bottom: 16px; }
+
+.wt-vis {
+  position: relative; border-radius: 16px; overflow: hidden; padding: 16px;
+  background: var(--m-back);
+}
+.wt-vis::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(90% 70% at 78% 4%, var(--m-back-2), transparent 62%);
+  pointer-events: none;
+}
+.wt {
+  position: relative; border-radius: 11px; overflow: hidden;
+  background: var(--m-bg); color: var(--m-text);
+  box-shadow: 0 12px 30px rgba(30,26,60,.18), 0 0 0 1px rgba(27,27,32,.07);
+}
+.wt-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 11px; background: var(--m-soft); border-bottom: 1px solid var(--m-line);
+}
+.wt-bar .st-win-dots span { background: var(--m-line-2); }
+.wt-url {
+  flex: 1; min-width: 0; background: var(--m-bg); border: 1px solid var(--m-line);
+  border-radius: 999px; padding: 3px 10px;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9.5px; color: var(--m-dim); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.wt-body { padding: 12px; }
+.wt-drop {
+  display: flex; align-items: center; gap: 10px;
+  border: 1.5px dashed var(--accent); border-radius: 10px; padding: 11px 13px;
+  background: rgba(138,107,255,.06);
+}
+.wt-drop svg { width: 20px; height: 20px; stroke: var(--accent); stroke-width: 1.8; fill: none; flex-shrink: 0; }
+.wt-drop-t { display: block; font-size: 11px; font-weight: 600; }
+.wt-drop-s { display: block; font-size: 9.5px; color: var(--m-dim); margin-top: 2px; }
+.wt-files { display: grid; gap: 6px; margin-top: 10px; }
+.wt-file {
+  display: flex; align-items: center; gap: 9px;
+  border: 1px solid var(--m-line); border-radius: 9px; padding: 8px 10px;
+}
+.wt-thumb { width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0; }
+.wt-thumb.a { background: linear-gradient(135deg, #8a6bff, #4ec9f5); }
+.wt-thumb.b { background: linear-gradient(135deg, #ff9f43, #ff5c16); }
+.wt-thumb.c { background: linear-gradient(135deg, #3cc878, #16a34a); }
+.wt-name { display: block; font-size: 10px; font-weight: 600; }
+.wt-sub {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  display: block; font-size: 9px; color: var(--m-dim); margin-top: 2px;
+}
+.wt-sub s { color: var(--m-dim); }
+.wt-sub b { color: var(--m-text); font-weight: 600; }
+.wt-win {
+  margin-left: auto; flex-shrink: 0; font-size: 9px; font-weight: 700;
+  color: var(--m-green); background: rgba(46,163,106,.12); border-radius: 5px; padding: 3px 6px;
+}
+.wt-file.wait .wt-win { color: var(--m-dim); background: var(--m-soft); }
+.wt-foot { display: flex; align-items: center; gap: 10px; margin-top: 11px; }
+.wt-btn {
+  border-radius: 8px; padding: 8px 14px; font-size: 10.5px; font-weight: 700;
+  color: #fff; background: var(--accent); box-shadow: 0 6px 16px rgba(138,107,255,.35);
+}
+.wt-hint { display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: var(--m-dim); }
+.wt-hint svg { width: 11px; height: 11px; stroke: var(--m-green); stroke-width: 2; fill: none; }
+
+/* ══ Шаги установки ══ */
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.step { position: relative; background: #161616; border-radius: 18px; padding: 16px 16px 22px; }
+/* Шеврон в зазоре между карточками — читается как «дальше сюда». */
+.step:not(:last-child)::after {
+  content: ''; position: absolute; right: -12px; top: 84px; z-index: 2;
+  width: 9px; height: 9px;
+  border-top: 2px solid #3a3a3a; border-right: 2px solid #3a3a3a;
+  transform: translateX(1px) rotate(45deg);
+}
+.step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 9px; margin: 0 0 8px 6px;
+  font-size: 13px; font-weight: 700; color: var(--accent); background: var(--accent-dim);
+}
+.step-title { font-size: 14.5px; font-weight: 600; margin: 0 6px 6px; }
+.step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin: 0 6px; }
+.step-desc code {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px; color: var(--text); background: rgba(255,255,255,0.06);
+  border-radius: 5px; padding: 2px 6px; white-space: nowrap;
+}
+
+/* ── Макет шага ── */
+.st-vis {
+  position: relative; height: 172px; margin-bottom: 18px;
+  border-radius: 13px; overflow: hidden;
+  background: var(--m-back);
+  display: flex; align-items: center; justify-content: center;
+  padding: 13px;
+}
+.st-vis::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(90% 70% at 78% 4%, var(--m-back-2), transparent 62%);
+  pointer-events: none;
+}
+.st-win {
+  position: relative; width: 100%; border-radius: 10px; overflow: hidden;
+  background: var(--m-bg); color: var(--m-text);
+  box-shadow: 0 12px 28px rgba(30, 26, 60, .18), 0 0 0 1px rgba(27, 27, 32, .07);
+}
+.st-win-bar {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 9px; background: var(--m-soft); border-bottom: 1px solid var(--m-line);
+}
+.st-win-dots { display: flex; gap: 4px; flex-shrink: 0; }
+.st-win-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--m-line-2); }
+.st-win-title { font-size: 9.5px; font-weight: 600; color: var(--m-mid); }
+.st-win-url {
+  flex: 1; min-width: 0; background: var(--m-bg); border: 1px solid var(--m-line);
+  border-radius: 999px; padding: 3px 9px;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 9px; color: var(--m-mid); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.st-win-body { padding: 9px 10px; }
+
+/* Шаг 1 — окно загрузок: архив распаковывается в папку */
+.st-flow { display: grid; grid-template-columns: 1fr 14px 1fr; align-items: center; gap: 7px; }
+.st-file {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  border-radius: 8px; padding: 8px 6px; border: 1px solid transparent;
+}
+.st-file.sel { background: rgba(47,127,240,.10); border-color: rgba(47,127,240,.4); }
+.st-file svg { width: 22px; height: 22px; stroke: var(--m-mid); stroke-width: 1.5; fill: none; }
+.st-file.sel svg { stroke: var(--m-blue); }
+.st-file span {
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 8px; color: var(--m-mid); text-align: center; line-height: 1.3;
+}
+.st-arrow { justify-self: center; width: 14px; height: 14px; stroke: var(--m-dim); stroke-width: 2; fill: none; }
+.st-folder-files { display: grid; gap: 3px; margin-top: 6px; }
+.st-folder-files span {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 8px; color: var(--m-dim);
+}
+.st-folder-files svg { width: 9px; height: 9px; stroke: var(--m-line-2); stroke-width: 1.8; fill: none; flex-shrink: 0; }
+
+/* Шаг 2 — chrome://extensions с тумблером */
+.st-page-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--m-line);
+}
+.st-page-title { font-size: 10.5px; font-weight: 600; }
+.st-toggle-wrap { display: flex; align-items: center; gap: 6px; }
+.st-toggle-label { font-size: 9px; color: var(--m-mid); font-weight: 500; }
+.st-toggle {
+  flex-shrink: 0; width: 26px; height: 15px; border-radius: 999px;
+  background: var(--accent); position: relative;
+  box-shadow: 0 0 0 3px rgba(138,107,255,.18);
+}
+.st-toggle::after {
+  content: ''; position: absolute; top: 2px; right: 2px;
+  width: 11px; height: 11px; border-radius: 50%; background: #fff;
+}
+.st-cursor { right: 20px; top: 58px; z-index: 2; }
+.st-ghosts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 9px; }
+.st-ghost {
+  height: 34px; border-radius: 7px; background: var(--m-soft);
+  border: 1px dashed var(--m-line-2);
+}
+
+/* Шаг 3 — кнопки панели и установленная карточка */
+.st-btns { display: flex; gap: 5px; margin-bottom: 9px; }
+.st-btn {
+  font-size: 8.5px; font-weight: 600; border-radius: 6px; padding: 5px 7px;
+  background: var(--m-bg); color: var(--m-mid); border: 1px solid var(--m-line); white-space: nowrap;
+}
+.st-btn.on {
+  background: var(--accent); color: #fff; border-color: transparent;
+  box-shadow: 0 5px 14px rgba(138,107,255,.35);
+}
+.st-installed {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--m-bg); border: 1px solid var(--m-line);
+  border-radius: 8px; padding: 8px 9px;
+}
+.st-installed img { width: 24px; height: 24px; border-radius: 7px; flex-shrink: 0; }
+.st-installed-name { display: block; font-size: 9.5px; font-weight: 600; color: var(--m-text); }
+.st-installed-ver {
+  display: block; font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 8px; color: var(--m-dim); margin-top: 2px;
+}
+.st-mini-toggle {
+  margin-left: auto; flex-shrink: 0; width: 22px; height: 13px; border-radius: 999px;
+  background: var(--m-green); position: relative;
+}
+.st-mini-toggle::after {
+  content: ''; position: absolute; top: 2px; right: 2px;
+  width: 9px; height: 9px; border-radius: 50%; background: #fff;
+}
+
+/* ── Приватность ── */
+.hub-note {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  border: 1px solid var(--border); border-radius: 18px; padding: 24px 26px;
+}
+.hub-note-ico {
+  flex-shrink: 0; width: 40px; height: 40px; border-radius: 12px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--accent-dim);
+}
+.hub-note-ico svg { width: 20px; height: 20px; stroke: var(--accent); stroke-width: 1.9; fill: none; }
+.hub-note h2 { font-size: 16px; font-weight: 600; margin-bottom: 7px; }
+.hub-note p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+
+/* .section даёт верхний отступ секции, .faq-section — свой margin-top: 48px.
+   Вместе они складывались бы в двойной провал, поэтому гасим второй. */
+.section.faq-section { margin-top: 0; }
+
+/* Своих стилей FAQ здесь не имеет — используется общий компонент css/faq.css
+   (.faq-section / .faq-list / .faq-item / .faq-q / .faq-a), тот же, что на
+   страницах логотипов, эмодзи и подборок. Недостающие токены объявлены в
+   :root в начале файла. */
+
+/* ── Хвост страницы ── */
+.hub-tail { padding: 18px 0 40px; }
+
+/* ══ Адаптив ══ */
+@media (max-width: 1080px) {
+  .hub-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hub-hero h1 { font-size: clamp(32px, 6vw, 46px); }
+  .hub-lead { max-width: 640px; }
+  .hub-visual { max-width: 560px; padding-bottom: 56px; }
+  .hv-browser { transform: none; }
+  .hub-visual:hover .hv-browser { transform: translateY(-2px); }
+}
+@media (max-width: 900px) {
+  .web-showcase { grid-template-columns: 1fr; }
+  .web-split .tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hub-stats { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: 1fr; }
+  .step:not(:last-child)::after { display: none; }  /* карточки друг под другом — стрелка вбок врёт */
+  .st-vis { height: 186px; }
+}
+@media (max-width: 600px) {
+  .hub-hero { padding: 40px 0 0; }
+  .hub-lead { font-size: 14px; }
+  .hub-jump a { font-size: 12.5px; padding: 9px 14px; }
+  .hub-dock { flex-direction: column; gap: 12px; }
+  .hub-dock-icons { flex-wrap: wrap; justify-content: center; }
+  .hub-dock-text { text-align: center; }
+  .hub-stat { padding: 14px 16px; gap: 8px; }
+  .hub-stat-num { font-size: 21px; }
+  .hub-visual { padding-bottom: 96px; }
+  .hv-tool { display: none; }        /* на узком экране третье окно только мешает */
+  .hv-figma { right: auto; left: 8px; bottom: 0; width: 196px; }
+  .hv-popup { top: 62px; right: 8px; width: 150px; }
+  .ext-grid { grid-template-columns: 1fr; }
+  .web-split .tools-grid { grid-template-columns: 1fr; }
+  .web-showcase { padding: 16px; gap: 22px; }
+  .web-showcase-copy { padding: 5px; }
+  .web-showcase h3 { font-size: 25px; }
+  .web-split .tool-card { padding: 20px; }
+  .ext-vis { height: 202px; }
+  .hub-note { flex-direction: column; gap: 14px; padding: 20px; }
+  .hub-tail { padding: 12px 0 32px; }
+}
+
+/* Навигация по задачам: короткие маршруты вместо абзацев со ссылками. */
+.hub-updated { margin-top: 14px; font-size: 12px; color: var(--text-muted); }
+.hub-breadcrumbs { display: flex; gap: 10px; padding-top: 30px; font-size: 13px; color: var(--text-muted); }
+.hub-breadcrumbs a { color: inherit; text-underline-offset: 4px; }
+.hub-task-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.hub-task { --task-color: #b49bff; padding: 24px 20px 18px; border-radius: 16px; background: #161616; }
+.hub-task-files { --task-color: #91bfff; }
+.hub-task-site { --task-color: #efb893; }
+.hub-task-reviews { --task-color: #9cd7bc; }
+.hub-task-icon { display: grid; place-items: center; width: 46px; height: 46px; margin-bottom: 22px; border-radius: 13px; color: var(--task-color); background: color-mix(in srgb, var(--task-color) 11%, transparent); }
+.hub-task-icon svg { width: 24px; height: 24px; stroke-width: 1.5; }
+.hub-task h3 { font-size: 17px; line-height: 1.25; letter-spacing: -.02em; margin: 0 0 9px; }
+.hub-task p { margin: 0 0 18px; color: #a0a0a0; font-size: 13px; line-height: 1.6; min-height: 42px; }
+.hub-task-links { display: grid; }
+.hub-task-links a { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 0; border-top: 1px solid #292929; color: #d6d6d6; font-size: 12px; line-height: 1.45; text-decoration: none; }
+.hub-task-links a svg { width: 13px; height: 13px; flex-shrink: 0; color: #666; }
+.hub-task-links a:hover, .hub-task-links a:hover svg { color: var(--task-color); }
+
+/* Новые превью показывают действие плагина на макете. */
+.hub-plugin-icon { width: 46px; height: 46px; flex-shrink: 0; display: grid; place-items: center; color: #ddceff; border-radius: 13px; background: radial-gradient(ellipse at 50% 110%, #c5a9ff 0, #634592 35%, #271d3b 72%); box-shadow: inset 0 0 0 1px #ffffff12; }
+.hub-plugin-icon svg { width: 26px; height: 26px; stroke-width: 1.5; filter: drop-shadow(0 0 5px #baa0ff77); }
+.hub-app-preview { width: 100%; }
+.hub-mock-menu { margin-left: auto; color: var(--m-dim); line-height: 0; }
+.hub-mock-menu svg { width: 14px; height: 14px; }
+.hub-app-body { display: grid; grid-template-columns: 40% 1fr; flex: 1; min-height: 0; }
+.hub-layer-tree { padding: 9px 0; border-right: 1px solid var(--m-line); background: var(--m-bg); }
+.hub-panel-label { display: block; font-size: 8px; font-weight: 600; color: var(--m-dim); padding: 0 10px; margin-bottom: 7px; }
+.hub-layer { display: flex; align-items: center; gap: 6px; font-size: 9px; height: 25px; padding: 0 9px; color: var(--m-mid); }
+.hub-layer svg { width: 11px; height: 11px; flex-shrink: 0; stroke-width: 1.5; }
+.hub-layer span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hub-layer svg:last-child:not(:first-child) { margin-left: auto; }
+.hub-layer.selected { background: #e7e0ff; color: #6a49b7; }
+.hub-layer.muted { color: #b2acbc; text-decoration: line-through; padding-left: 20px; }
+.hub-mock-canvas { display: grid; place-items: center; padding: 12px 14px 24px; background: var(--m-soft-2); }
+.hub-mini-design { position: relative; width: 100%; max-width: 190px; padding: 11px 12px; background: #f9f8f2; box-shadow: 0 4px 9px #201c3814; min-height: 117px; overflow: hidden; }
+.hub-mini-wordmark { font-size: 10px; font-weight: 700; }
+.hub-mini-design strong { position: relative; display: block; font-size: 17px; line-height: 1.08; letter-spacing: -.04em; margin-top: 13px; }
+.hub-mini-orbit { position: absolute; width: 73px; height: 73px; border: 18px solid #c5b1f0; border-radius: 50%; right: -20px; top: 19px; }
+.hub-mini-button { display: inline-block; margin-top: 8px; padding: 4px 6px; color: white; background: #25232b; font-size: 6px; border-radius: 3px; }
+.hub-mock-toast { position: absolute; left: 10px; right: 10px; bottom: 9px; display: flex; align-items: center; gap: 6px; padding: 8px 10px; font-size: 9px; color: #fff; background: #222126; border-radius: 7px; box-shadow: 0 4px 14px #0003; }
+.hub-mock-toast svg { width: 12px; height: 12px; color: #8fe2b3; }
+.hub-mock-toast svg:last-child { margin-left: auto; color: #cdb9ff; }
+.hub-scan-canvas { position: relative; flex: 1; background: var(--m-soft-2); overflow: hidden; }
+.hub-scan-design { position: absolute; top: 18px; bottom: 17px; left: 18px; width: 48%; background: white; padding: 10px 12px; box-shadow: 0 3px 10px #201c3810; }
+.hub-scan-design .hub-panel-label { padding: 0; font-size: 7px; margin-bottom: 12px; }
+.hub-scan-design strong { font-size: 19px; line-height: 1.05; letter-spacing: -.05em; }
+.hub-selected-button { display: block; position: relative; width: fit-content; padding: 7px 12px; margin-top: 12px; color: white; background: #8a6bff; font-size: 8px; outline: 1px solid var(--m-blue); outline-offset: 3px; }
+.hub-selected-button i, .hub-vector-path i { position: absolute; width: 5px; height: 5px; background: white; border: 1px solid var(--m-blue); }
+.hub-selected-button i:nth-child(1), .hub-vector-path i:nth-child(1) { top: -5px; left: -5px; }
+.hub-selected-button i:nth-child(2), .hub-vector-path i:nth-child(2) { top: -5px; right: -5px; }
+.hub-selected-button i:nth-child(3), .hub-vector-path i:nth-child(3) { bottom: -5px; left: -5px; }
+.hub-selected-button i:nth-child(4), .hub-vector-path i:nth-child(4) { bottom: -5px; right: -5px; }
+.hub-token-wire { position: absolute; left: 117px; top: 91px; width: 58px; height: 1px; background: var(--m-blue); }
+.hub-scan-panel { position: absolute; z-index: 1; top: 19px; right: 10px; width: 49%; border-radius: 8px; background: var(--m-bg); box-shadow: 0 10px 25px #26213b26, 0 0 0 1px #dddbe3; overflow: hidden; }
+.hub-scan-panel-title { display: flex; align-items: center; gap: 5px; padding: 8px; font-size: 9px; background: var(--m-soft); border-bottom: 1px solid var(--m-line); }
+.hub-scan-panel-title svg { width: 12px; height: 12px; color: #7854ce; }
+.hub-scan-panel-title > span { margin-left: auto; border-radius: 4px; padding: 2px 4px; color: #7854ce; background: #e9e0fc; font-size: 8px; }
+.hub-scan-result { display: flex; align-items: center; gap: 7px; padding: 9px; border-bottom: 1px solid var(--m-line); }
+.hub-scan-result b { display: block; font-size: 8px; }
+.hub-scan-result small { display: block; margin-top: 2px; color: var(--m-dim); font-size: 7px; }
+.hub-scan-result svg { width: 10px; height: 10px; margin-left: auto; color: var(--m-dim); flex-shrink: 0; }
+.hub-token-dot { width: 15px; height: 15px; background: #8a6bff; border-radius: 4px; }
+.hub-token-letter, .hub-token-effect { width: 15px; text-align: center; font-size: 11px; font-weight: 600; color: #817391; }
+
+/* Широкий импорт PDF замыкает нечётный ряд плагинов. */
+.hub-wide-card { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 28px; }
+.hub-wide-copy { min-width: 0; }
+.hub-wide-card .ext-foot { margin-top: 20px; }
+.hub-vis-pdf { margin: 0; height: 330px; padding: 20px; display: flex; flex-direction: column; justify-content: center; gap: 17px; }
+.hub-pdf-file { display: flex; align-items: center; gap: 9px; background: #ffffffd9; border: 1px solid #fff; padding: 10px 12px; border-radius: 9px; color: var(--m-text); z-index: 1; }
+.hub-pdf-file > svg { width: 25px; height: 25px; color: #a45b66; stroke-width: 1.5; }
+.hub-pdf-file b { display: block; font-size: 10px; }
+.hub-pdf-file div span { display: block; margin-top: 3px; font-size: 8px; color: var(--m-dim); }
+.hub-pdf-format { margin-left: auto; font-size: 8px; background: #f4e2e7; color: #a45b66; padding: 4px 6px; border-radius: 4px; }
+.hub-pdf-pages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; z-index: 1; }
+.hub-pdf-sheet { position: relative; height: 166px; background: white; color: #28252e; padding: 13px 10px; box-shadow: 0 7px 12px #2921381f; display: flex; flex-direction: column; }
+.hub-pdf-sheet > span { font-size: 7px; font-weight: 600; }
+.hub-pdf-sheet > strong { font-size: 17px; line-height: 1.04; letter-spacing: -.04em; }
+.hub-pdf-sheet > small { font-size: 5px; margin-top: auto; color: #67616e; }
+.hub-pdf-sheet.cover { background: #e8dcfb; }
+.hub-pdf-sheet.cover > span { font-size: 10px; letter-spacing: -.06em; }
+.hub-pdf-symbol { width: 36px; height: 36px; border-radius: 50%; border: 10px solid #695180; margin: 13px 0 10px; }
+.hub-pdf-swatches { display: flex; gap: 3px; margin: 17px 0; }
+.hub-pdf-swatches i { width: 33%; height: 26px; border-radius: 3px; background: #312b3a; }
+.hub-pdf-swatches i:nth-child(2) { background: #bfa2e9; }
+.hub-pdf-swatches i:nth-child(3) { background: #e8dcfb; }
+.hub-pdf-sheet.type > b { font-size: 51px; font-weight: 500; line-height: 1; letter-spacing: -.08em; margin: 27px 0 0; }
+.hub-vector-path { position: absolute; left: 12px; right: 12px; top: 52px; height: 52px; border: 1px solid var(--m-blue); }
+.hub-pdf-result { display: flex; align-items: center; gap: 7px; color: #514364; font-size: 10px; z-index: 1; }
+.hub-pdf-result > svg { width: 14px; height: 14px; color: #408065; }
+.hub-pdf-mode { margin-left: auto; padding: 4px 8px; border-radius: 5px; background: #ffffffb3; font-size: 9px; }
+
+/* Статьи: настоящие обложки, ниже два входа в каталоги. */
+.hub-related { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.hub-article { color: inherit; text-decoration: none; min-width: 0; }
+.hub-article-image { display: block; aspect-ratio: 1200 / 630; overflow: hidden; border-radius: 10px; background: #191919; }
+.hub-article-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
+.hub-article-title { display: flex; align-items: flex-start; gap: 14px; margin-top: 13px; font-size: 14px; line-height: 1.5; }
+.hub-article-title svg { width: 15px; height: 15px; margin: 3px 0 0 auto; flex-shrink: 0; color: #777; }
+.hub-article:hover .hub-article-title { color: #bca7ff; }
+.hub-article:hover img { transform: scale(1.03); }
+.hub-catalog-links { display: flex; gap: 28px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border); }
+.hub-catalog-links a { display: flex; align-items: center; gap: 9px; color: #aaa; font-size: 13px; text-decoration: none; }
+.hub-catalog-links a:hover { color: white; }
+.hub-catalog-links svg { width: 16px; height: 16px; flex-shrink: 0; color: #9e86d3; }
+#figma-trace-logos h3 { font-size: clamp(24px, 3vw, 32px); line-height: 1.15; letter-spacing: -.025em; margin: 14px 0 18px; }
+.tools-grid .tool-title { margin-top: 0; }
+.tools-grid .tool-desc { margin: 0; }
+.ext-name-row { flex-wrap: wrap; }
+.ext-card[id], .figma-feature[id], .tool-card[id], .section[id] { scroll-margin-top: 90px; }
+.hub-jump a:focus-visible, .hub-guide a:focus-visible, .ext-btn:focus-visible, .ext-card:focus-visible, .tool-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+@media (max-width: 900px) {
+  .hub-task-grid, .hub-related { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hub-wide-card { grid-template-columns: 1fr; gap: 20px; }
+  .hub-vis-pdf { height: 310px; }
+  .hub-pdf-pages { max-width: 440px; width: 100%; margin: 0 auto; }
+}
+@media (max-width: 520px) {
+  .hub-task-grid { gap: 9px; }
+  .hub-task { padding: 17px 13px 9px; }
+  .hub-task-icon { width: 38px; height: 38px; border-radius: 10px; margin-bottom: 17px; }
+  .hub-task h3 { font-size: 15px; min-height: 38px; }
+  .hub-task p { font-size: 12px; min-height: 58px; margin-bottom: 10px; }
+  .hub-task-links a { font-size: 11px; min-height: 47px; }
+  .hub-task-links a svg { width: 10px; }
+  .hub-vis-pdf { padding: 14px; height: 310px; }
+  .hub-pdf-sheet { height: 154px; padding: 12px 8px; }
+  .hub-pdf-sheet > strong { font-size: 14px; }
+  .hub-pdf-sheet.type > b { font-size: 43px; }
+  .hub-related { gap: 22px 12px; }
+  .hub-article-title { font-size: 12px; gap: 4px; margin-top: 9px; }
+  .hub-catalog-links { flex-direction: column; gap: 16px; }
+  .hub-scan-design { left: 9px; padding-left: 9px; }
+  .hub-scan-design strong { font-size: 17px; }
+  .hub-scan-panel { right: 8px; width: 51%; }
+  .hub-scan-result { padding: 9px 6px; gap: 5px; }
+  .hub-scan-result b { font-size: 7px; }
+  .hub-layer-tree .hub-layer { font-size: 8px; padding-left: 6px; }
+  .hub-layer-tree .hub-layer.muted { padding-left: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub-article-image img { transition: none; }
+  .hub-article:hover img { transform: none; }
+}
+/* Обложки инструкций остаются читаемыми и в маленьком размере. */
+.hub-article-image { position: relative; display: grid; place-items: center; background: #211d2c; border: 1px solid #ffffff08; }
+.hub-article-image > * { transition: transform .2s; }
+.hub-article:hover .hub-article-image > * { transform: translateY(-2px); }
+.hub-art-png { background: #20232b; }
+.hub-art-figma { background: #25202c; }
+.hub-art-color { background: #202228; }
+.hub-file-art { display: grid; grid-template-columns: 39px 70px; gap: 8px 14px; align-items: center; }
+.hub-file-stamp { grid-row: span 2; display: grid; place-items: center; height: 52px; font-size: 11px; font-weight: 700; color: #a9c9fa; border: 1px solid #a9c9fa55; border-radius: 4px 10px 4px 4px; }
+.hub-compression-line { display: grid; gap: 6px; }
+.hub-compression-line i { height: 7px; border-radius: 2px; background: #637391; }
+.hub-compression-line i:nth-child(2) { width: 27%; background: #a9c9fa; }
+.hub-file-size { display: flex; justify-content: space-between; color: #7f8aa0; font-size: 7px; }
+.hub-file-size b { color: #a9c9fa; font-weight: 500; }
+.hub-svg-art { width: 100%; height: 100%; }
+.hub-art-label { position: absolute; bottom: 15px; font-size: 10px; font-weight: 600; color: #b99eea; }
+.hub-figma-art { display: flex; align-items: center; gap: 19px; }
+.hub-figma-art img { width: auto; height: 42px; object-fit: contain; }
+.hub-figma-art > span { display: grid; place-items: center; color: #746581; }
+.hub-figma-art svg { width: 18px; height: 18px; }
+.hub-colors-art { display: flex; position: relative; padding-right: 12px; }
+.hub-colors-art > i { width: 44px; height: 44px; border-radius: 50%; background: #c1a1f0; border: 3px solid #202228; }
+.hub-colors-art > i + i { margin-left: -12px; background: #8faee8; }
+.hub-colors-art > i:nth-child(3) { background: #b4dac7; }
+.hub-colors-art > span { position: absolute; bottom: -10px; right: 0; color: #f0eaff; }
+.hub-colors-art svg { width: 29px; height: 29px; filter: drop-shadow(0 1px 1px #202228); }
+.hub-scan-result { padding-top: 7px; padding-bottom: 7px; }
+@media (max-width: 520px) {
+  .hub-file-art { transform: scale(.82); }
+  .hub-figma-art { gap: 11px; }
+  .hub-figma-art img { height: 33px; }
+  .hub-art-label { bottom: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hub-article-image > * { transition: none; }
+  .hub-article:hover .hub-article-image > * { transform: none; }
+}

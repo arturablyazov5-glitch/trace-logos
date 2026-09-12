@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* Шрифты не подгружаются извне: manifest объявляет networkAccess "none",
+     любой <link> на Google Fonts в этом окне просто не загрузится. Поэтому
+     только системный стек — в отличие от плагина Trace Logos, которому сеть
+     разрешена и который тянет Inter. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* Без фиксированной height: 100% — окно теперь подгоняется под контент
+     (см. body ниже и fitWindow() в JS), а не наоборот. */
+  html { overflow: hidden; width: 100%; }
+
+  /* ── Токены — тёмная тема ── */
+  /* До 2026-08-16 была светлая и только светлая: первая попытка тёмной темы
+     напрямую взяла палитру сайта (css/tokens.css) и провалилась —
+     серый текст #666 на #111 даёт 3,4:1, а описания правил и подписи
+     примеров были ещё светлее, больше половины интерфейса не читалось.
+     Смена на тёмную тему по прямой просьбе пользователя (тем же заходом,
+     что Clean Layers и Photo Editor) сделана правильно: не взяты токены
+     сайта "как есть", а под каждую текстовую роль подобран и ИЗМЕРЕН
+     оттенок, держащий минимум 4,5:1 против --bg (WCAG AA), элементы
+     управления — минимум 3:1. Значение контраста проставлено у каждого
+     токена, как и раньше, чтобы новый оттенок не завели на глаз.
+
+     Полярность акцента развернулась относительно светлой темы. Там
+     фиолетовый #8a6bff на белом давал только 3,7:1, поэтому и текстом, и
+     фоном кнопки был затемнённый --accent-strong (6,7:1). На тёмном фоне
+     всё наоборот: тот же --accent-strong (#5b3fd9) — сам ПО СЕБЕ тёмный,
+     как текст на тёмной странице он давал бы ~2,6:1 (провал). Поэтому:
+     - --accent-text (новый токен, светлее) — там, где раньше стоял
+       accent-strong как ЦВЕТ ТЕКСТА (.hl, hover/expanded у rule-toggle);
+     - --accent-strong остался, но сузилась роль — ТОЛЬКО фон-заливка под
+       белым текстом/белым кружком тумблера (кнопка, прогресс-бар, "вкл."
+       у тумблера) — там контраст считается для белого поверх заливки, а
+       не для самой заливки поверх страницы, полярность фона не флипается. */
+  :root {
+    --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+    --mono: 'SF Mono', 'Fira Code', ui-monospace, monospace;
+
+    --bg: #111111;
+    --bg-card: #1a1a1a;
+    --bg-raised: #202020;
+    --bg-hover: #1c1c1c;
+    --bg-active: #262626;
+
+    --border: #222222;
+    --border-muted: #2a2a2a;
+    --border-hover: #3a3a3a;
+    --border-strong: #666666;  /* выключенный тумблер — 3,3:1, порог для контролов */
+
+    --text-0: #ffffff;  /* 18,9:1 — заголовки        */
+    --text-1: #e6e6e6;  /* 15,2:1 — основной текст   */
+    --text-2: #b0b0b0;  /*  8,7:1 — вторичный        */
+    --text-3: #999999;  /*  6,6:1 — описания правил  */
+    --text-5: #8a8a8a;  /*  5,3:1 — примечания       */
+    --text-6: #7c7c7c;  /*  4,5:1 — мелкие подписи   */
+    --text-dim: #666666; /* 3,3:1 — ТОЛЬКО декор: иконки, стрелки, разделители */
+
+    --ok: #3fb950;      /*  7,4:1 */
+    --warn: #d29922;    /*  7,5:1 */
+    --error: #f85149;   /*  5,6:1 */
+
+    --accent: #8a6bff;                          /* канонический бренд-цвет — сам по себе нигде не применяется, только основа для accent-soft/accent-ring ниже (как и в исходной светлой версии) */
+    --accent-text: #a68cff;                     /* 7,0:1 — ЦВЕТ ТЕКСТА на странице: .hl, hover/expanded у rule-toggle */
+    --accent-strong: #5b3fd9;                   /* фон-заливка под белым текстом — кнопка, прогресс-бар: белый поверх даёт 6,7:1 */
+    --accent-hover: #4c33bd;
+    --accent-soft: rgba(138, 107, 255, .16);
+    --accent-ring: rgba(138, 107, 255, .45);
+
+    /* Шумовая текстура для стеклянных панелей (.scope-card/.sticky-bottom/
+       .skip-header) — тайл feTurbulence, альфа обрезана до ~5% через
+       feColorMatrix (последнее число в строке alpha), белый шум поверх
+       тёмного фона на глаз читается как мягкое зерно. Задаётся ОДИН раз
+       здесь и накладывается вторым слоем background у каждой панели —
+       не как фильтр/псевдоэлемент поверх содержимого (шум должен быть
+       ЧАСТЬЮ фона, под текстом/кнопкой/карточкой промо, а не поверх них).
+       backdrop-filter: blur сам по себе размывает то, что ПОЗАДИ панели
+       (карточки правил), но не добавляет зерно — то, что размывается,
+       остаётся чистым цветным пятном. Этот тайл ложится НА panel'ную
+       заливку (rgba) уже ПОСЛЕ блюра, поэтому зерно видно поверх
+       размытых карточек, а не вместо них. */
+    --glass-noise: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCc+CiAgPGZpbHRlciBpZD0nbic+CiAgICA8ZmVUdXJidWxlbmNlIHR5cGU9J2ZyYWN0YWxOb2lzZScgYmFzZUZyZXF1ZW5jeT0nMC44NScgbnVtT2N0YXZlcz0nMicgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPgogICAgPGZlQ29sb3JNYXRyaXggdHlwZT0nbWF0cml4JyB2YWx1ZXM9JzAgMCAwIDAgMSAgMCAwIDAgMCAxICAwIDAgMCAwIDEgIDAgMCAwIDAuMDUgMCcvPgogIDwvZmlsdGVyPgogIDxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNuKScvPgo8L3N2Zz4K");
+  }
+
+  /* ── Каркас окна ──
+     Тот же «холст с карточками», что в Clean Layers/Photo Editor: фон
+     страницы (--bg) с общим padding 16px, поверх него — карточки на
+     --bg-card с бордером и радиусом 14. Линий-разделителей нет вообще:
+     блоки разделяет воздух (gap 18px между секциями), а не border.
+     Раньше здесь была совсем другая композиция — липкая шапка с
+     border-bottom, скролл-середина и липкий футер с border-top во всю
+     ширину окна, край-в-край, без полей. Из-за этого плагин читался как
+     отдельный продукт, хотя цвета уже совпадали.
+
+     Высота НЕ фиксирована на весь документ — как и у Clean Layers/Photo
+     Editor, окно подгоняется под контент через fitWindow()/'resize' (см.
+     JS ниже). Раньше body сидел на жёстком height: 100vh, из-за чего
+     пустой экран (пара строк текста) занимал все 600px окна — несуразно
+     высокая пустая панель, ровно то, что заметил пользователь.
+     Свою фиксированную высоту (см. TOOLS_HEIGHT в JS) сохранили
+     только #screenTools/#screenSkipped — там она осмысленна: 7 правил с
+     раскрывающимися примерами (или длинный список пропущенных слоёв) не
+     помещаются в окно целиком, и список должен СКРОЛЛИТЬСЯ внутри бокса
+     заданной высоты, а не диктовать высоту окна собой. */
+  body {
+    font-family: var(--font);
+    font-size: 13px;
+    background: var(--bg);
+    color: var(--text-1);
+    width: 100%;
+    margin: 0;
+    /* Только низ. Боковой раздан группам (см. .screen/.section и
+       full-bleed .tools-scroll ниже). Раньше здесь было padding: 16px на
+       все стороны, а каждая полоса-стекло гасила его собственным
+       margin: 0 -16px — из-за чего .scope-card/.footer/.skip-header
+       оказывались ШИРЕ своего скролл-контейнера, тот получал реальное
+       горизонтальное переполнение и рисовал горизонтальный скроллбар.
+       Видно его было как серую полосу во всю ширину под кнопкой запуска
+       (скриншот пользователя): ::-webkit-scrollbar ниже задаёт только
+       width — для горизонтальной полосы нужен height, — поэтому она шла
+       дефолтной толщиной и дефолтным серым. Инсет группами вместо
+       "общий padding минус negative margin" убирает переполнение в
+       принципе, а не прячет полосу.
+       padding-top тоже убран (не просто "0 0", специально закомментировано
+       отдельно от истории выше): .scope-card — первое, что рисуется в
+       #screenTools, и она же липкая стеклянная шапка, рассчитанная сидеть
+       вровень с краем окна (border-bottom, без своих полей). Низ по той
+       же логике: body больше НЕ резервирует свои 16px снизу — это тоже
+       был "общий" отступ вместо группового (по отзыву пользователя после
+       того, как поправили верх и бока — тот же класс бага, что и раньше).
+       Воздух перед промо-блоком Trace Logo's (последнее, что рисуется в
+       #screenTools/#screenSkipped) теперь даёт padding-bottom у самих
+       этих экранов (см. их правило ниже), а не body — тот же принцип
+       "паддинг держит группа, которой он реально нужен", а не общий
+       контейнер. #screenEmpty не пострадал: его отступы — целиком
+       собственный padding .empty-state, ни к body, ни к .screen отношения
+       не имеют. */
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* #root — та же роль, что в Clean Layers/Photo Editor: сюда переехал
+     display:flex/flex-direction:column/gap, раньше был на body напрямую.
+     body теперь просто отступ вокруг #root, а не сам flex-контейнер. */
+  #root { display: flex; flex-direction: column; gap: 18px; }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent-ring);
+    border-radius: 6px;
+  }
+
+  /* ── Icon sprite — тот же паттерн, что в Clean Layers/Photo Editor:
+     инлайн lucide-иконки через <symbol>+<use>, одно место на весь файл, а
+     не копия одного и того же <svg> в каждой из 7 строк правил (было так
+     раньше — 7 идентичных инлайн-SVG шеврона, один на каждый .rule-toggle;
+     дублирование, а не намеренное отличие). ── */
+  .icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  /* ── Экраны ──
+     Тот же паттерн, что в Clean Layers/Photo Editor: два взаимоисключающих
+     состояния — "ничего не выделено" и "выделено — вот инструменты", а не
+     один экран, где инструменты просто разблокируются кнопкой. Раньше
+     список правил и кнопка запуска были видны всегда, даже без всякого
+     выделения на холсте (кнопка просто стояла disabled) — рабочий, но
+     другой подход, чем у остальных двух плагинов. */
+  [hidden] { display: none !important; }
+  /* Боковой инсет живёт здесь, а не на body — экран целиком инсечен, а
+     полосы-стекла внутри выходят на всю ширину через свой скролл-контейнер
+     (см. .tools-scroll), не через negative margin поверх body. */
+  .screen { display: flex; flex-direction: column; gap: 18px; padding: 0 16px; }
+
+  /* #screenTools — единственное место с фиксированной высотой во всём
+     файле (число синхронизировано с TOOLS_HEIGHT в JS): внутри 7 правил
+     со своим скроллом, эта высота задаёт видимую "рамку" списка. Просто
+     .screen без своей высоты (как #screenEmpty) здесь не годится — тогда
+     .rules{flex:1} нечего было бы ограничивать, и скролл не появился бы:
+     список просто растянул бы body/окно под себя целиком.
+     580 (было 733 до 2026-08-19) — плагин целиком читался слишком
+     высоким/длинным (по отзыву пользователя): список правил занимал
+     ~6,6 строк из 7 без единого скролла, хотя сам список задуман именно
+     скроллящимся коротким окном, а не полным листингом. .rules — flex:1,
+     он же и единственный, кто ужимается при уменьшении бюджета — карточка
+     выделения, подвал и промо-блок ниже своего размера не меняют. */
+  /* #screenSkipped — тот же бюджет, что и #screenTools: это два взаимно
+     заменяющих друг друга состояния "выделение выбрано" (список правил
+     или список пропущенных слоёв), окно не должно прыгать при переходе
+     между ними через кнопку "назад"/"пропущено N". */
+  /* 612 = вся высота окна: body больше не резервирует ни верх, ни низ (см.
+     её комментарий) — оба экрана растянуты на весь бюджет TOOLS_HEIGHT.
+     #screenEmpty спокойно живёт без явного padding-bottom (у него свой
+     воздух в .empty-state). */
+  #screenTools, #screenSkipped { height: 612px; }
+  /* padding-bottom для #screenSkipped задаётся НИЖЕ, одним правилом с
+     остальным padding/margin (см. #screenSkipped дальше по файлу) — не
+     здесь отдельной строкой. Раньше он был именно тут, отдельно, и
+     ловился в шорткод `padding: 0` того второго правила (тот же уровень
+     специфичности — ID, побеждает последнее по каскаду): #screenSkipped
+     не оканчивается липкой панелью (как #screenTools — .sticky-bottom,
+     сама flush до края окна), последняя карточка .skip-list — просто
+     конец обычного скролла, ей нужен свой отступ перед краем окна, а он
+     молча пропадал. #screenTools этот отступ не наследует (см. её
+     комментарий у .sticky-bottom) — иначе между низом липкой панели и
+     краем окна была бы пустая полоса чистого фона, та же по сути ошибка,
+     что уже поправили сверху и снизу у body. */
+
+  /* min-height, не flex:1 — тот же приём, что у .empty-state в Clean
+     Layers: блок сам определяет свой размер по контенту (плюс отступ для
+     воздуха), а не растягивается на всю высоту, которую ему выделили.
+     Раньше здесь стоял flex:1, а высота ВСЕГО документа была жёстко
+     100vh (см. body выше) — вместе это и давало непропорционально
+     высокий пустой экран на паре строк текста. */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 210px;
+    padding: 24px 16px;
+  }
+  .empty-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 2.8s ease-in-out infinite;
+  }
+  .empty-icon .icon { width: 24px; height: 24px; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  .empty-title { font-size: 13px; font-weight: 600; color: var(--text-0); }
+  .empty-hint {
+    font-size: 11px;
+    color: var(--text-3);
+    line-height: 1.5;
+    max-width: 250px;
+    margin-top: 4px;
+  }
+
+  /* ── Шапка = карточка текущего выделения ──
+     Раньше здесь дублировалось название плагина ("Trace Typograf" в <h1>) —
+     лишнее: Figma и так показывает имя плагина в своей нативной шапке окна
+     (см. любой скриншот Clean Layers/Photo Editor — заголовок рисует сама
+     Figma, ни один из них не повторяет его внутри ui.html). Убрано.
+     Вместо связки "точка-индикатор + текст" — тот же компонент, что и в
+     Clean Layers/Photo Editor: аватар-плашка с иконкой + бейдж-счётчик +
+     заголовок. Три состояния (было: .selection.ready/.empty/нейтральное)
+     сохранены, но теперь это не смена цвета точки, а бейдж (виден только
+     когда есть что посчитать) + цвет заголовка. */
+  /* position: sticky + фон-стекло — карточка выделения "прилипает" к
+     верху .tools-scroll (см. ниже), а карточки правил реально проезжают
+     ПОД ней при скролле. rgba вместо сплошного var(--bg-card) — иначе не
+     было бы видно, что под шапкой что-то проезжает; backdrop-filter даёт
+     непрозрачному тексту читаемый фон поверх смазанных карточек.
+     Во всю ширину окна, край-в-край, БЕЗ border-radius и БЕЗ рамки со
+     всех сторон — ширину даёт full-bleed .tools-scroll (см. его
+     комментарий), border-bottom вместо border. Раньше (до правки
+     2026-08-19) была замкнутая скруглённая плашка, инсеченная в те же
+     16px, что и остальной контент — по отзыву пользователя читалась как
+     "плавающая карточка" поверх списка, а не как полоса-подложка под
+     ним; список правил визуально обрывался о её край, будто обрезанный
+     паддингом плагина. z-index выше .rule (которые сами не позиционированы,
+     но stacking context .tools-scroll общий). */
+  .scope-card {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--glass-noise), rgba(26, 26, 26, .78);
+    /* saturate(1.6) — vibrancy а-ля iOS 26 Liquid Glass: цвета ПОД стеклом
+       становятся сочнее, а не просто мутнее от одного blur. */
+    backdrop-filter: blur(3px) saturate(1.6);
+    -webkit-backdrop-filter: blur(3px) saturate(1.6);
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .scope-avatar {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border-radius: 11px;
+    background: var(--accent-strong);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .scope-avatar .icon { width: 17px; height: 17px; }
+  .count-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--bg-active);
+    color: #fff;
+    /* Обводка цветом КАРТОЧКИ, не страницы — бейдж теперь лежит на
+       .scope-card (--bg-card), а не на голом холсте, как было у полосы. */
+    border: 2px solid var(--bg-card);
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .scope-body { min-width: 0; flex: 1; }
+  .scope-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-1);
+    line-height: 1.35;
+  }
+  /* Вторая строка — тот же .scope-meta, что в Clean Layers: заголовок про
+     ВЫДЕЛЕНИЕ (сколько узлов на холсте), meta — про НАЙДЕННОЕ внутри него
+     (сколько из них текстовые слои). Раньше это было одно число на двоих:
+     бейдж и заголовок показывали count текстовых слоёв ОДНО И ТО ЖЕ, но
+     бейдж обрезал его до "99+", а заголовок — нет ("99+" рядом с "281" на
+     скриншоте пользователя). Теперь бейдж — про выделение, meta — про
+     текст, два разных числа не притворяются одним. */
+  .scope-meta {
+    margin-top: 2px;
+    font-size: 11px;
+    color: var(--text-3);
+    line-height: 1.35;
+    transition: color .15s;
+  }
+  .scope-meta.warn { color: var(--warn); }
+
+  /* ── Общий скролл-контейнер ──
+     Раньше скроллился только .rules сам по себе (flex:1 + overflow-y:auto),
+     .scope-card/.footer были соседними блоками НАД и ПОД ним в обычном
+     потоке — список карточек никогда физически не проезжал "под" ними,
+     максимум соседствовал. Теперь единственный, кто скроллится — этот
+     контейнер целиком (карточка выделения + секция правил + подвал), а
+     .scope-card/.footer внутри него — position:sticky (см. их стили) —
+     эффект стекла: карточки правил реально уезжают под полупрозрачную,
+     размытую шапку/подвал, а не просто рядом с ними.
+     Full-bleed: margin 0 -16px гасит боковой инсет .screen — но гасит его
+     У КОНТЕЙНЕРА, а не у каждой полосы-стекла по отдельности, как было
+     раньше. Разница принципиальная: полосы теперь ровно по ширине своего
+     скролл-контейнера, горизонтального переполнения (и горизонтального
+     скроллбара — см. комментарий у body) не возникает вовсе. Инсет
+     содержимого раздан внутрь: .scope-card/.footer держат его своим
+     padding, список правил — паддингом .section.
+     Отдельный отступ под вертикальную полосу скролла больше не нужен:
+     она 4px по правому краю контейнера, карточки заканчиваются за 16px
+     до него. */
+  .tools-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    margin: 0 -16px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .tools-scroll::-webkit-scrollbar { width: 4px; }
+  .tools-scroll::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+
+  /* ── Секция ──
+     Тот же блок «подпись + содержимое», что .section/.section-label в
+     Clean Layers/Photo Editor: заголовок капсом мелким кеглем, gap 9px до
+     содержимого, отступ подписи 2px слева. Раньше «Правила» жили отдельной
+     полосой .rules-bar со своим padding во всю ширину окна. flex:1 больше
+     не нужен — секция больше не сама скроллящийся бокс, а обычный блок
+     внутри общего .tools-scroll, высоту диктует контент. */
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    /* Инсет списка правил. Раньше его давал боковой padding body — теперь
+       .tools-scroll намеренно full-bleed (ради полос-стекла), поэтому
+       содержимое инсекает себя само. */
+    padding: 0 16px;
+  }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin: 0 0 1px 2px;
+    flex-shrink: 0;
+  }
+
+  /* ── Список правил ──
+     Каждое правило — отдельная бордер-карточка (background+border+14px
+     радиус), тот же язык, что .tool-row в Clean Layers/Photo Editor. Раньше
+     строки ничем не были отделены друг от друга (ни фона, ни рамки, gap
+     между ними 1px) и в самом списке визуально не читались как отдельные
+     элементы — то, ради чего в других двух плагинах и заведена карточка.
+     Свой скролл убран — скроллится общий .tools-scroll (см. выше). */
+  .rules {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .rule {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+
+  /* Тумблер вместо чекбокса — тот же паттерн, что .icns-toggle/.icns-switch
+     в js/icns.js (css/icns.css), только на светлой палитре плагина. */
+  .rule-switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 30px;
+    height: 17px;
+    margin-top: 1px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .rule-switch input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .rule-switch-track {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: var(--border-strong);
+    transition: background .12s;
+  }
+  .rule-switch-track::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,.25);
+    transition: transform .18s ease;
+  }
+  .rule-switch input:not(:checked):hover + .rule-switch-track { background: var(--border-hover); }
+  .rule-switch input:checked + .rule-switch-track { background: var(--accent-strong); }
+  .rule-switch input:checked:hover + .rule-switch-track { background: var(--accent-hover); }
+  .rule-switch input:checked + .rule-switch-track::after { transform: translateX(13px); }
+  .rule-switch input:focus-visible + .rule-switch-track { outline: 2px solid var(--accent-ring); outline-offset: 2px; }
+
+  .rule-body { flex: 1; min-width: 0; }
+  /* <label for> — клик по тексту переключает тумблер, отсюда cursor: pointer.
+     Без фона на hover: заголовок/описание — это текст, а не кнопка, подсветка
+     фоном создавала ложное впечатление отдельного интерактивного элемента. */
+  .rule-head {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    cursor: pointer;
+  }
+  .rule-title {
+    font-size: 13px;
+    color: var(--text-1);
+    font-weight: 500;
+    transition: color .12s;
+  }
+  .rule-desc {
+    font-size: 11.5px;
+    color: var(--text-3);
+    line-height: 1.35;
+    transition: color .12s;
+  }
+  /* Выключенное правило приглушаем — но в пределах читаемости (4,8:1 и выше).
+     Основной признак «выключено» несёт сам тумблер: серый против фиолетового,
+     это видно с одного взгляда и без игры с прозрачностью текста. */
+  .rule:has(input:not(:checked)) .rule-title { color: var(--text-2); }
+  .rule:has(input:not(:checked)) .rule-desc { color: var(--text-6); }
+
+  .rule-toggle {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--text-dim);
+    border-radius: 6px;
+    transition: color .12s, background .12s;
+  }
+  .rule-toggle:hover { color: var(--accent-text); background: var(--accent-soft); }
+  /* 12px и stroke-width 2.5 — тот же зрительный вес шеврона, что был у
+     инлайн-SVG до перехода на общий спрайт (.icon по умолчанию 16px/2). */
+  .rule-toggle .icon { width: 12px; height: 12px; stroke-width: 2.5; transition: transform .18s; }
+  .rule-toggle[aria-expanded="true"] .icon { transform: rotate(180deg); }
+  .rule-toggle[aria-expanded="true"] { color: var(--accent-text); }
+
+  /* ── Пример «было → стало» ──
+     background: --bg-raised, не --bg-card — .rule (родитель) сам теперь
+     карточка на --bg-card (см. выше), тем же тоном вложенный блок просто
+     слился бы с ней, различим был бы только по рамке. Радиус 10, не 8 —
+     единая шкала скруглений с кнопками ниже (14 — карточки верхнего
+     уровня, 10 — вложенные блоки и кнопки, 999 — пилюли/бейджи). */
+  .rule-example {
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    animation: exIn .16s ease-out;
+  }
+  .rule-example[hidden] { display: none; }
+  @keyframes exIn {
+    from { opacity: 0; transform: translateY(-2px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .ex {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+  .ex-a { color: var(--text-6); }
+  .ex-arrow { color: var(--text-dim); flex-shrink: 0; }
+  .ex-b { color: var(--text-1); }
+  /* Изменённый фрагмент — иначе половина правил (неразрывные пробелы!) выглядит
+     в примере ровно так же, как исходная строка. */
+  .hl {
+    color: var(--accent-text);
+    background: var(--accent-soft);
+    border-radius: 3px;
+    padding: 0 2px;
+    font-weight: 600;
+  }
+  /* Удалённый фрагмент — зачёркнутый и приглушённый, в отличие от .hl
+     (вставка): без этого различия «до» и «после» в примере с точкой в конце
+     списка выглядели бы как одна и та же подсветка на разный текст. */
+  .hl-del {
+    color: var(--error);
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+    font-weight: 600;
+  }
+  .ex-note {
+    font-family: var(--font);
+    font-size: 10.5px;
+    color: var(--text-5);
+    line-height: 1.4;
+  }
+
+  /* ── Липкая нижняя панель ──
+     position: sticky снизу .tools-scroll + фон-стекло — та же логика, что
+     у .scope-card сверху (см. её комментарий): карточки правил реально
+     проезжают ПОД панелью при скролле, не просто соседствуют с ней.
+     Полоса во всю ширину окна (border-top вместо рамки со всех сторон,
+     без border-radius) — не инсеченная плашка, тот же формат, что и у
+     .scope-card сверху (см. её комментарий про "плавающую карточку").
+     Ширину даёт full-bleed .tools-scroll, своего negative margin здесь нет.
+     Раньше sticky/фон/blur держал .footer один — кнопка блюрила карточки
+     под собой, а промо-блок Trace Logo's ниже её (тогда вне .tools-scroll)
+     не блюрил ничего, оставаясь отдельной непрозрачной карточкой. По
+     отзыву пользователя это читалось как нестыковка ("кнопка и баннер —
+     одна группа, почему стекло только у кнопки"). Теперь стекло — на
+     ОБЩЕЙ панели, кнопка (.footer) и промо-карточка (.tlp) — её дети,
+     gap:18px между ними (та дистанция, что раньше давал .screen как
+     соседям). .footer сам больше не sticky и без фона — просто раскладка
+     содержимого кнопки. */
+  .sticky-bottom {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex-shrink: 0;
+    padding: 12px 16px;
+    background: var(--glass-noise), rgba(17, 17, 17, .82);
+    backdrop-filter: blur(3px) saturate(1.6);
+    -webkit-backdrop-filter: blur(3px) saturate(1.6);
+    border-top: 1px solid var(--border);
+  }
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .status {
+    font-size: 11.5px;
+    color: var(--text-3);
+    min-height: 15px;
+    line-height: 1.3;
+  }
+  /* Пусто — до первого запуска, пока нет ни ошибки, ни "Готово". До этой
+     правки высота 15px + собственный gap:9px у .footer держались всегда,
+     даже когда показывать нечего — воздух над кнопкой читался как дыра
+     "на месте чего-то", а не как отступ. :empty — про буквально пустой
+     элемент (setStatus('') не добавляет ни одного дочернего узла, см. JS
+     ниже), поэтому запасной текст/статус после первого запуска показывается
+     как обычно, ничего не задевая. */
+  .status:empty { display: none; }
+  .status.ok { color: var(--ok); }
+  .status.error { color: var(--error); }
+  .status.info { color: var(--text-2); }
+  .status-hint { color: var(--text-6); }
+
+  /* "пропущено N" в статусе — кликабельная кнопка, открывает ОТДЕЛЬНЫЙ
+     экран #screenSkipped (см. ниже) со списком: какой слой и почему.
+     Без этого пропуск был виден только цифрой, разбираться дальше было
+     решительно негде — обычному пользователю консоль плагина неудобна.
+     До 2026-08-19 список разворачивался ВНУТРИ статуса, узкой плотной
+     полоской (max-height:110px, паддинг 6px, шрифт 11px) — при длинной
+     причине («шрифт не найден — установите локально или замените…») имя
+     слоя и причина слипались почти без отступа. Теперь у списка — весь
+     экран, карточки как у .rule. */
+  .skipped-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+  .skipped-toggle:hover { color: var(--text-0); }
+
+  /* ── Экран 3 — пропущенные слои ──
+     Тот же фиксированный бюджет высоты, что у #screenTools (см. ниже),
+     чтобы окно не прыгало при переходе туда-обратно. Скроллится сам
+     #screenSkipped целиком (нет отдельного .tools-scroll — здесь, в
+     отличие от #screenTools, после списка ничего не идёт, разводить два
+     контейнера незачем), .skip-header внутри него — position:sticky, тот
+     же эффект стекла, что у .scope-card/.footer в #screenTools: карточки
+     списка реально проезжают под полупрозрачной размытой шапкой. */
+  /* #screenSkipped САМ является .screen (в отличие от #screenTools, где
+     .screen и скролл-контейнер — два разных узла: #screenTools/.tools-
+     scroll). Поэтому боковой padding у .screen (0 16px) здесь трогать не
+     нужно и НЕЛЬЗЯ — это нормальный инсет для .skip-list, тот самый,
+     что уже даёт 16px от края каждой карточке. Раньше здесь по ошибке
+     стоял тот же приём, что у .tools-scroll (margin: 0 -16px + обнулённый
+     padding) — но .tools-scroll УБЕГАЕТ от padding РОДИТЕЛЯ (#screenTools),
+     а у #screenSkipped родитель — #root, вообще без padding. Убегать было
+     не от чего: margin: -16px просто утаскивал весь экран на 16px ЗА
+     пределы окна (там его срезало html{overflow:hidden}), а обнулённый
+     padding убирал инсет у .skip-list — итог: и шапка, и карточки визуально
+     прилипали к краям окна, хотя цифры в CSS выглядели как full-bleed.
+     Только padding-bottom (см. ниже) — не шорткодом, чтобы не задеть
+     .screen'овские left/right. */
+  #screenSkipped {
+    overflow-y: auto;
+    padding-bottom: 16px;
+  }
+  #screenSkipped::-webkit-scrollbar { width: 4px; }
+  #screenSkipped::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 4px; }
+  /* Во всю ширину, без border-radius/рамки со всех сторон — тот же формат
+     полосы-стекла, что у .scope-card/.footer в #screenTools (см. их
+     комментарии), не инсеченная плавающая плашка. margin: 0 -16px — сама
+     эта панель убегает от бокового padding #screenSkipped (тот у него
+     родной, .screen'овский, и его трогать нельзя, см. комментарий у
+     #screenSkipped) — та же роль, что у .tools-scroll в #screenTools,
+     просто на уровень ниже, потому что здесь .screen и full-bleed-скролл —
+     одно и то же, а не два разных узла. */
+  .skip-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin: 0 -16px;
+    padding: 12px 16px;
+    background: var(--glass-noise), rgba(26, 26, 26, .78);
+    backdrop-filter: blur(3px) saturate(1.6);
+    -webkit-backdrop-filter: blur(3px) saturate(1.6);
+    border-bottom: 1px solid var(--border);
+  }
+  .skip-back {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .12s, color .12s, border-color .12s;
+  }
+  .skip-back:hover { background: var(--bg-active); border-color: var(--border-hover); color: var(--text-0); }
+  .skip-header-title { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; color: var(--text-0); }
+  .skip-count {
+    flex-shrink: 0;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--bg-active);
+    color: var(--text-3);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  /* Плавающая кнопка "наверх" — круглая, в правом нижнем углу окна, поверх
+     списка (z-index выше .skip-header/карточек). Появляется/исчезает по
+     scroll-порогу — см. JS (toggleScrollTopBtn). Тот же тёмный акцентный
+     стиль, что у .btn-primary, но круглая и меньше — она не основное
+     действие экрана, а вспомогательная навигация. */
+  .skip-scrolltop {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 3;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent-strong);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .4);
+    transition: background .12s, opacity .15s, transform .15s;
+  }
+  .skip-scrolltop:hover { background: var(--accent-hover); }
+  .skip-scrolltop:active { transform: scale(.92); }
+  /* [hidden] уже даёт display:none глобально (см. правило [hidden] в
+     начале файла) — своей анимации появления это не мешает, скрытие
+     мгновенное, а не через opacity/transition (кнопка либо есть, либо её
+     нет, полёт по фейду не заказан). */
+  /* Свой скролл убран — скроллится #screenSkipped целиком (см. выше), тот
+     же приём, что у .rules/.tools-scroll в #screenTools. gap:18 между
+     .skip-header и .skip-list по-прежнему даёт .screen (#screenSkipped
+     остаётся flex-column) — отдельный отступ здесь не нужен. */
+  /* Без своего padding — #screenSkipped (родитель, он же .screen) уже даёт
+     16px инсета с боков, как любому нормальному контенту. Отдельный
+     padding здесь ставил бы карточки на 32px от края вместо 16 (двойной
+     инсет — родительский плюс свой), не совпадая с .skip-header. */
+  .skip-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .skip-item {
+    padding: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .skip-item-name { font-size: 13px; font-weight: 500; color: var(--text-1); }
+  .skip-item-reason { font-size: 11.5px; color: var(--text-3); line-height: 1.4; }
+  /* Две кнопки на карточке: "Показать на холсте" — центрирует и выделяет
+     проблемный слой в Figma, "Повторить" — прогоняет типографику заново
+     ТОЛЬКО для этого слоя. Сценарий: плагин показал где проблема →
+     пользователь исправил её на холсте (обычно — поставил недостающий
+     шрифт) → жмёт "Повторить" тут же, не запуская всё выделение с нуля
+     (см. комментарий у processTextNode/'retry-node' в code.js). */
+  .skip-item-actions { display: flex; gap: 8px; margin-top: 2px; }
+  .skip-item-btn {
+    flex: 1;
+    padding: 7px 10px;
+    border-radius: 9px;
+    border: 1px solid var(--border);
+    background: var(--bg-raised);
+    color: var(--text-2);
+    font: inherit;
+    font-size: 11.5px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: background .12s, color .12s, border-color .12s;
+  }
+  .skip-item-btn .icon { width: 13px; height: 13px; }
+  .skip-item-btn:hover { background: var(--bg-active); color: var(--text-0); border-color: var(--border-hover); }
+  .skip-item-btn:disabled { opacity: .5; cursor: default; pointer-events: none; }
+  /* "Повторить" — акцентная, это основное действие карточки (то, ради
+     чего вообще открываешь этот экран после починки шрифта). "Показать
+     на холсте" — вспомогательная навигация, нейтральный стиль выше. */
+  .skip-item-btn.retry {
+    background: var(--accent-strong);
+    color: #fff;
+    border-color: transparent;
+  }
+  .skip-item-btn.retry:hover { background: var(--accent-hover); color: #fff; }
+  /* Состояние "исправлено" — после успешного 'retry-result' карточка не
+     исчезает молча (пользователь мог не заметить, сколько их было и что
+     именно ушло), а помечается зелёной галочкой вместо причины и теряет
+     кнопки — второй раз чинить нечего. */
+  .skip-item.fixed { border-color: var(--ok); }
+  /* Встряска после неудачного повтора — видимый ответ на клик даже когда
+     текст причины не изменился (например, шрифт всё ещё не установлен).
+     Без этого сигнала карточка после клика "Повторить" внешне выглядела
+     бы так же, как до, — попытка терялась (см. отзыв пользователя,
+     "нажал повторить и ничего не произошло"). Класс снимает сам себя —
+     JS убирает его на 'animationend', см. обработчик ниже. */
+  .skip-item.retry-failed { animation: skip-item-shake .38s ease; }
+  @keyframes skip-item-shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-4px); }
+    40%, 60% { transform: translateX(4px); }
+  }
+  .skip-item-fixed-note {
+    font-size: 11.5px;
+    color: var(--ok);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .skip-item-fixed-note .icon { width: 13px; height: 13px; }
+  .skip-empty { padding: 24px 12px; text-align: center; font-size: 12px; color: var(--text-3); }
+
+  /* Полоса прогресса. Показывается только во время работы: на паре слоёв она
+     мелькнула бы и исчезла, а на большом выделении это единственный признак,
+     что плагин занят делом, а не завис. */
+  .progress {
+    height: 3px;
+    border-radius: 999px;
+    background: var(--bg-active);
+    overflow: hidden;
+  }
+  .progress[hidden] { display: none; }
+  .progress-bar {
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: var(--accent-strong);
+    transition: width .2s linear;
+  }
+
+  .buttons { display: flex; }
+
+  /* Радиус 10 — та же ступень шкалы, что у .rule-example выше (было 8,
+     отдельно от всех остальных скруглений в файле). */
+  button {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: opacity .15s, background .15s, border-color .15s, color .15s;
+  }
+
+  .btn-primary {
+    padding: 12px 14px;
+    flex: 1;
+    background: var(--accent-strong);
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+  .btn-primary:active:not(:disabled) { opacity: .85; }
+  .btn-primary:disabled {
+    background: var(--bg-active);
+    color: var(--text-dim);
+    cursor: default;
+  }
+</style>
+</head>
+<body>
+
+<!-- Спрайт иконок (lucide, инлайн — networkAccess: none, никаких CDN) —
+     тот же паттерн, что в Clean Layers/Photo Editor. icon-chevron заменяет
+     7 идентичных инлайн-SVG, раньше по одному в каждой .rule-toggle. -->
+<svg style="display:none">
+  <symbol id="icon-type" viewBox="0 0 24 24">
+    <path d="M12 4v16"/>
+    <path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"/>
+    <path d="M9 20h6"/>
+  </symbol>
+  <symbol id="icon-chevron" viewBox="0 0 24 24">
+    <polyline points="6 9 12 15 18 9"/>
+  </symbol>
+  <symbol id="icon-arrow-left" viewBox="0 0 24 24">
+    <path d="M19 12H5"/>
+    <path d="m12 19-7-7 7-7"/>
+  </symbol>
+  <symbol id="icon-arrow-up" viewBox="0 0 24 24">
+    <path d="M12 19V5"/>
+    <path d="m5 12 7-7 7 7"/>
+  </symbol>
+  <symbol id="icon-eye" viewBox="0 0 24 24">
+    <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+    <circle cx="12" cy="12" r="3"/>
+  </symbol>
+  <symbol id="icon-refresh" viewBox="0 0 24 24">
+    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+    <path d="M21 3v5h-5"/>
+    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+    <path d="M8 16H3v5"/>
+  </symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24">
+    <path d="M20 6 9 17l-5-5"/>
+  </symbol>
+</svg>
+
+<!-- #root — обёртка ВСЕГО видимого контента, точка измерения высоты
+     (см. fitWindow() в JS). 1-в-1 с Clean Layers/Photo Editor — там
+     измеряют #root, а не body: body.getBoundingClientRect() у нас
+     раньше отдавал не то, что нужно (окно не сжималось — тот самый
+     репорт "не помог перезапуск"), #root тот же трюк без гадания, почему
+     именно body вёл себя иначе. -->
+<div id="root">
+
+<!-- ЭКРАН 1 — ничего не выделено. Тот же двухэкранный паттерн, что в
+     Clean Layers/Photo Editor: правила/кнопка запуска бессмысленны без
+     выделения, показывать их задизейбленными незачем. -->
+<div class="screen" id="screenEmpty">
+  <div class="empty-state">
+    <span class="empty-icon"><svg class="icon"><use href="#icon-type"/></svg></span>
+    <div>
+      <div class="empty-title">Ничего не выделено</div>
+      <div class="empty-hint">Выдели на холсте текстовый слой или фрейм с текстом — плагин найдёт все текстовые слои внутри</div>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 2 — есть выделение: карточка + правила + подвал. -->
+<div class="screen" id="screenTools" hidden>
+
+<!-- .tools-scroll — единый скролл-контейнер для карточки выделения,
+     списка правил и подвала с кнопкой. Раньше скроллился только сам
+     .rules (свой overflow-y:auto), а .scope-card/.footer были соседними
+     блоками НАД и ПОД ним в обычном потоке — список никогда физически не
+     оказывался "под" ними, скроллить можно было только within .rules.
+     Теперь всё внутри одного скролла, а .scope-card/.footer — position:
+     sticky (см. CSS) с полупрозрачным фоном и backdrop-filter: blur —
+     "стекло" поверх карточек правил, которые реально проезжают под ними
+     при скролле. -->
+<div class="tools-scroll" id="tools-scroll">
+
+<!-- Название плагина не дублируем — Figma уже показывает его в своей
+     нативной шапке окна (как у Clean Layers/Photo Editor). Здесь —
+     карточка текущего выделения, тот же компонент (.scope-avatar +
+     .count-badge + .scope-title), что и в тех двух плагинах. -->
+<div class="scope-card">
+  <span class="scope-avatar">
+    <svg class="icon"><use href="#icon-type"/></svg>
+    <span class="count-badge" id="selection-badge" hidden></span>
+  </span>
+  <div class="scope-body">
+    <div class="scope-title" id="selection-text">Выделите текстовый слой или фрейм с текстом</div>
+    <div class="scope-meta" id="selection-meta"></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-label">Правила</div>
+  <div class="rules" id="rules">
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-nbsp" data-rule="nbsp" checked>
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-nbsp">
+        <span class="rule-title">Неразрывные пробелы</span>
+        <span class="rule-desc">Предлоги, частицы, числа, инициалы</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">в 2020 году</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">в<span class="hl">·</span>2020<span class="hl">·</span>году</span>
+        </div>
+        <div class="ex">
+          <span class="ex-a">10 кг, № 5, И. И. Иванов</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">10<span class="hl">·</span>кг, №<span class="hl">·</span>5, И.<span class="hl">·</span>И.<span class="hl">·</span>Иванов</span>
+        </div>
+        <div class="ex-note">· — неразрывный пробел: слова по его сторонам никогда не разъедутся по разным строкам</div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-dashes" data-rule="dashes" checked>
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-dashes">
+        <span class="rule-title">Тире</span>
+        <span class="rule-desc">Длинное тире и диапазоны чисел</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">Логотип - лицо бренда</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">Логотип<span class="hl">·—</span> лицо бренда</span>
+        </div>
+        <div class="ex">
+          <span class="ex-a">2019-2020</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">2019<span class="hl">‑</span>2020</span>
+        </div>
+        <div class="ex-note">Перед длинным тире — неразрывный пробел, чтобы тире не осталось одно в начале строки</div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-quotes" data-rule="quotes" checked>
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-quotes">
+        <span class="rule-title">Кавычки-ёлочки</span>
+        <span class="rule-desc">Прямые и «умные» кавычки → ёлочки</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">"Сбер" и “Яндекс”</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b"><span class="hl">«</span>Сбер<span class="hl">»</span> и <span class="hl">«</span>Яндекс<span class="hl">»</span></span>
+        </div>
+        <div class="ex">
+          <span class="ex-a">Клиент: «отлично сработали»</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">Клиент: «<span class="hl">О</span>тлично сработали»</span>
+        </div>
+        <div class="ex">
+          <span class="ex-a">Д'Артаньян и О'Брайен</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">Д<span class="hl">’</span>Артаньян и О<span class="hl">’</span>Брайен</span>
+        </div>
+        <div class="ex-note">Один уровень вложенности: кавычки внутри кавычек не различаются. После «подпись: «цитата»» первая буква цитаты — заглавная. Апостроф между двумя буквами (без пробела) — типографский, не прямая кавычка</div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-ellipsis" data-rule="ellipsis" checked>
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-ellipsis">
+        <span class="rule-title">Многоточие</span>
+        <span class="rule-desc">Три точки подряд → один символ</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">Скоро...</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">Скоро<span class="hl">…</span></span>
+        </div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-spaces" data-rule="spaces" checked>
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-spaces">
+        <span class="rule-title">Пробелы</span>
+        <span class="rule-desc">Лишние — убрать, перед эмодзи — добавить</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">Логотип&nbsp;&nbsp;и&nbsp;&nbsp;шрифт&nbsp;.</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">Логотип и шрифт<span class="hl">.</span></span>
+        </div>
+        <div class="ex">
+          <span class="ex-a">Тур в минус🥵🥵🥵</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">Тур в минус<span class="hl">·</span>🥵🥵🥵</span>
+        </div>
+        <div class="ex-note">· — тот же неразрывный пробел, что и в первом правиле: эмодзи не оторвётся от последнего слова при переносе строки. Ставится только один раз, перед всей серией эмодзи, а не между эмодзи внутри неё</div>
+        <div class="ex">
+          <span class="ex-a">Стоимость ( примерно )</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">Стоимость (примерно)</span>
+        </div>
+        <div class="ex-note">Пробел сразу внутри скобок — квадратных и круглых — убирается с обеих сторон</div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-lists" data-rule="lists" checked>
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-lists">
+        <span class="rule-title">Списки</span>
+        <span class="rule-desc">Дефис или цифра → список Figma</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">- вектор</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b"><span class="hl">•</span> <span class="hl">В</span>ектор</span>
+        </div>
+        <div class="ex">
+          <span class="ex-a">1. растр</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b"><span class="hl">1.</span> <span class="hl">Р</span>астр</span>
+        </div>
+        <div class="ex">
+          <span class="ex-a">- сделать превью<span class="hl-del">.</span></span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">• Сделать превью</span>
+        </div>
+        <div class="ex-note">Маркер убирается из текста — нумерацию рисует сама Figma. Первая буква пункта — заглавная. Точка в самом конце пункта убирается — а внутри, если там несколько предложений, остаётся</div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-lineWraps" data-rule="lineWraps" checked>
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-lineWraps">
+        <span class="rule-title">Склеить переносы строк</span>
+        <span class="rule-desc">Enter внутри абзаца → пробел, Figma сама перенесёт по ширине</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">После занятий родитель<span class="hl-del">⏎</span>понимает, как ребёнок<span class="hl-del">⏎</span>включается</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">После занятий родитель<span class="hl"> </span>понимает, как ребёнок<span class="hl"> </span>включается</span>
+        </div>
+        <div class="ex-note">Пустая строка (двойной перенос) и строка со списочным маркером не склеиваются — это осмысленная граница абзаца или пункта списка, а не перенос по ширине слоя</div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-underline" data-rule="underline" checked>
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-underline">
+        <span class="rule-title">Подчёркивание согласий</span>
+        <span class="rule-desc">«Персональных данных», «конфиденциальности» → подчёркнуто</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">на обработку персональных данных</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">на <span class="hl" style="text-decoration: underline">обработку персональных данных</span></span>
+        </div>
+        <div class="ex-note">Курируемый список конкретных формулировок (не по любому падежу автоматически) — обычно это ссылка на юридический документ, даже когда самой ссылки в макете нет. Уже подчёркнутое повторно не трогается</div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  <div class="rule">
+    <label class="rule-switch">
+      <input type="checkbox" id="r-yo" data-rule="yo">
+      <span class="rule-switch-track" aria-hidden="true"></span>
+    </label>
+    <div class="rule-body">
+      <label class="rule-head" for="r-yo">
+        <span class="rule-title">Расставить ё</span>
+        <span class="rule-desc">По словарю однозначных слов: елка → ёлка</span>
+      </label>
+      <div class="rule-example" hidden>
+        <div class="ex">
+          <span class="ex-a">медвежонок ищет мед</span>
+          <span class="ex-arrow">→</span>
+          <span class="ex-b">медвеж<span class="hl">ё</span>нок ищет м<span class="hl">ё</span>д</span>
+        </div>
+        <div class="ex-note">Выключено по умолчанию — отдельное действие поверх остальной типографики, не автоматическое правило. Словарь узнаёт только слова, где «ё» обязательна по написанию, поэтому омографы вроде «все»/«всё» не трогает — их в списке нет</div>
+      </div>
+    </div>
+    <button class="rule-toggle" type="button" aria-expanded="false" aria-label="Показать пример">
+      <svg class="icon"><use href="#icon-chevron"/></svg>
+    </button>
+  </div>
+
+  </div><!-- /.rules -->
+</div><!-- /.section -->
+
+<!-- .sticky-bottom — общая липкая стеклянная панель для кнопки И промо-блока.
+     Раньше у них было два разных материала: .footer — блюр-стекло, .tlp —
+     сплошная непрозрачная карточка сразу под ним, вне .tools-scroll. По
+     отзыву пользователя это читалось как нестыковка: "почему под кнопкой
+     карточки блюрятся, а под баннером нет — они же одна группа". Дело не в
+     самом .tlp (он как был непрозрачной карточкой — так и остаётся, это
+     генерируемый блок, его саму не трогаем), а в том, ЧТО находится под
+     ним: раньше .tlp сидел вне .tools-scroll, ничего под ним не проезжало,
+     поэтому и блюрить было нечего. Теперь промо-блок физически внутри
+     .tools-scroll, и .sticky-bottom (не .footer) несёт sticky/фон/blur —
+     карточки правил уезжают под ВСЮ панель целиком, включая зазор перед
+     промо-карточкой, а не только под кнопку. gap:18px — та же дистанция,
+     что раньше давал .screen между .tools-scroll и .tlp как соседями
+     (см. комментарий у .tlp про "без margin-top"); здесь её задаёт сам
+     .sticky-bottom, потому что оба теперь его прямые дети. -->
+<div class="sticky-bottom">
+
+<div class="footer">
+  <div class="progress" id="progress" hidden>
+    <div class="progress-bar" id="progress-bar"></div>
+  </div>
+  <div class="status" id="status"></div>
+  <!-- "Закрыть" убрана — у окна плагина есть нативный крестик Figma в
+       заголовке (см. любой скриншот трёх плагинов), отдельная кнопка
+       закрытия внутри ui.html дублировала его, и ни у Clean Layers, ни у
+       Photo Editor такой кнопки нет. Esc по-прежнему закрывает (см. JS). -->
+  <div class="buttons">
+    <button class="btn-primary" id="run" type="button" disabled>Расставить типографику</button>
+  </div>
+</div>
+
+<!-- Промо-блок Trace Logo's. Генерируется из
+     tools/figma-plugins/_shared/promo-banner.html скриптом
+     `node scripts/build-figma-promo.js` — руками между маркерами не
+     править, следующий прогон затрёт. Раньше был вне .tools-scroll и вне
+     этой панели (см. комментарий у .sticky-bottom про причину переезда).
+     На пустом экране (нет выделения) не показывается вовсе: инструментам
+     нечего показывать — баннеру тоже незачем. -->
+<!-- PROMO:START -->
+<style>
+  .tlp, .tlp * { box-sizing: border-box; }
+
+  .tlp {
+    position: relative;
+    overflow: hidden;
+    /* Без margin-top: во всех трёх плагинах .tlp — прямой ребёнок .screen
+       (display:flex; gap:18px), который уже расставляет 18px между всеми
+       своими детьми сам. Собственный margin-top:18px здесь эту дистанцию
+       ДУБЛИРОВАЛ (36px вместо 18px) — обнаружено 2026-08-19 замером в
+       headless Chrome (scripts нет, разовый puppeteer-скрипт): лишние
+       18px не были видны как явный зазор, потому что `html{overflow:
+       hidden}` в ui.html плагинов их просто обрезал, забирая высоту у
+       #screenTools — из-за этого блок правил (.rules, flex:1) был на
+       18px ниже, чем реально помещалось в отведённый бюджет высоты. */
+    padding: 14px;
+    border: 1px solid #242424;
+    border-radius: 14px;
+    background: #161616;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+    color: #e6e6e6;
+  }
+  /* Мягкое фиолетовое свечение из правого верхнего угла — единственное
+     цветное пятно в блоке, задаёт «это про Trace Logo's», не отвлекая от
+     инструментов плагина выше. */
+  .tlp::before {
+    content: '';
+    position: absolute;
+    top: -70px;
+    right: -50px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(138, 107, 255, .20), rgba(138, 107, 255, 0) 68%);
+    pointer-events: none;
+  }
+  .tlp > * { position: relative; }
+
+  /* Шапка блока — она же кнопка перехода на сайт: кликается вся строка,
+     а не только стрелка. */
+  .tlp-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  .tlp-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .06);
+  }
+  .tlp-body { min-width: 0; flex: 1; }
+  .tlp-title {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: -.01em;
+  }
+  .tlp-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 10.5px;
+    line-height: 1.4;
+    color: #8f8f8f;
+  }
+  .tlp-arrow {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(138, 107, 255, .14);
+    color: #a68cff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .tlp-arrow svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .tlp-head:hover .tlp-arrow { background: rgba(138, 107, 255, .26); transform: translateX(2px); }
+  .tlp-head:hover .tlp-title { color: #a68cff; }
+
+  /* Полоска брендов — доказательство «в каталоге реально то, что ищут»:
+     шесть узнаваемых логотипов дешевле любого описания. Последний
+     элемент — счётчик остальных, чтобы полоска не читалась как «всего
+     шесть штук». */
+  .tlp-strip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .tlp-logo {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    object-fit: contain;
+  }
+  /* Перенос в 2 строки вместо обрезания многоточием — надёжнее: не
+     нужно бороться с тем, что text-overflow:ellipsis не срабатывает на
+     флекс-контейнере с текстом прямым потомком, и число не теряется
+     при нехватке ширины. .tlp-strip (родитель) — align-items:center,
+     поэтому при двух строках картинки-логотипы остаются по центру
+     высоты блока сами по себе. */
+  .tlp-more {
+    flex: 1;
+    min-width: 0;
+    padding: 0 8px;
+    color: #8f8f8f;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  .tlp-donate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 9px 12px;
+    border: 1px solid #2a2a2a;
+    border-radius: 10px;
+    background: #1c1c1c;
+    color: #b0b0b0;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .tlp-donate svg { width: 12px; height: 12px; flex-shrink: 0; fill: currentColor; }
+  .tlp-donate:hover { background: #232323; border-color: #3a3a3a; color: #e6e6e6; }
+  .tlp-donate:hover svg { fill: #ff6b81; }
+</style>
+
+<aside class="tlp">
+  <button class="tlp-head" type="button" data-tlp-url="https://trace-logos.ru/?utm_source=figma-typograf&amp;utm_medium=figma-plugin">
+    <img class="tlp-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF8xNjg5XzQ1MSkiPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzE2MTUxQSIvPgo8cGF0aCBkPSJNMjA4LjMgMTAxLjgwNEMyMDUuNjk0IDEwMC42MTUgMjAyLjg2NCAxMDAgMjAwIDEwMEMxOTcuMTM2IDEwMCAxOTQuMzA2IDEwMC42MTUgMTkxLjcgMTAxLjgwNEwxMDYgMTQwLjgwNEMxMDQuMjI2IDE0MS41ODYgMTAyLjcxNyAxNDIuODY4IDEwMS42NTggMTQ0LjQ5MkMxMDAuNTk5IDE0Ni4xMTcgMTAwLjAzNSAxNDguMDE0IDEwMC4wMzUgMTQ5Ljk1NEMxMDAuMDM1IDE1MS44OTMgMTAwLjU5OSAxNTMuNzkgMTAxLjY1OCAxNTUuNDE1QzEwMi43MTcgMTU3LjA0IDEwNC4yMjYgMTU4LjMyMSAxMDYgMTU5LjEwNEwxOTEuOCAxOTguMjA0QzE5NC40MDYgMTk5LjM5MiAxOTcuMjM2IDIwMC4wMDcgMjAwLjEgMjAwLjAwN0MyMDIuOTY0IDIwMC4wMDcgMjA1Ljc5NSAxOTkuMzkyIDIwOC40IDE5OC4yMDRMMjk0LjIgMTU5LjIwNEMyOTUuOTc1IDE1OC40MjEgMjk3LjQ4MyAxNTcuMTQgMjk4LjU0MyAxNTUuNTE1QzI5OS42MDIgMTUzLjg5IDMwMC4xNjYgMTUxLjk5MyAzMDAuMTY2IDE1MC4wNTRDMzAwLjE2NiAxNDguMTE0IDI5OS42MDIgMTQ2LjIxNyAyOTguNTQzIDE0NC41OTJDMjk3LjQ4MyAxNDIuOTY4IDI5NS45NzUgMTQxLjY4NiAyOTQuMiAxNDAuOTA0TDIwOC4zIDEwMS44MDRaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTEwMCAyMDBDOTkuOTk1MyAyMDEuOTEzIDEwMC41MzkgMjAzLjc4NyAxMDEuNTY3IDIwNS4zOTlDMTAyLjU5NSAyMDcuMDEyIDEwNC4wNjQgMjA4LjI5NyAxMDUuOCAyMDkuMUwxOTEuOCAyNDguMkMxOTQuMzkyIDI0OS4zNzQgMTk3LjIwNSAyNDkuOTgxIDIwMC4wNSAyNDkuOTgxQzIwMi44OTUgMjQ5Ljk4MSAyMDUuNzA4IDI0OS4zNzQgMjA4LjMgMjQ4LjJMMjk0LjEgMjA5LjJDMjk1Ljg3IDIwOC40MDQgMjk3LjM3IDIwNy4xMTEgMjk4LjQxOCAyMDUuNDc3QzI5OS40NjYgMjAzLjg0NCAzMDAuMDE1IDIwMS45NDEgMzAwIDIwMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMDAgMjUwQzk5Ljk5NTMgMjUxLjkxMyAxMDAuNTM5IDI1My43ODcgMTAxLjU2NyAyNTUuMzk5QzEwMi41OTUgMjU3LjAxMiAxMDQuMDY0IDI1OC4yOTcgMTA1LjggMjU5LjFMMTkxLjggMjk4LjJDMTk0LjM5MiAyOTkuMzc0IDE5Ny4yMDUgMjk5Ljk4MSAyMDAuMDUgMjk5Ljk4MUMyMDIuODk1IDI5OS45ODEgMjA1LjcwOCAyOTkuMzc0IDIwOC4zIDI5OC4yTDI5NC4xIDI1OS4yQzI5NS44NyAyNTguNDA0IDI5Ny4zNyAyNTcuMTExIDI5OC40MTggMjU1LjQ3N0MyOTkuNDY2IDI1My44NDQgMzAwLjAxNSAyNTEuOTQxIDMwMCAyNTAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8ZyBmaWx0ZXI9InVybCgjZmlsdGVyMF9mXzE2ODlfNDUxKSI+CjxwYXRoIGQ9Ik0zOTMgMTg2LjI5NEMxOTguMiAxMTEuMDk0IDEwMiAxODYuMjk0IC0zIDI1NS43OTRMLTI1NCA1NDkuMjk0TDE1Ni41IDU3Ni4yOTRMNTM4IDYyMi4yOTRDNTgwLjMzMyA1NzUuNjI3IDU4Ny44IDI2MS40OTQgMzkzIDE4Ni4yOTRaIiBmaWxsPSIjNTIyOUNEIi8+CjwvZz4KPGcgb3BhY2l0eT0iMC44IiBmaWx0ZXI9InVybCgjZmlsdGVyMV9mXzE2ODlfNDUxKSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOnBsdXMtbGlnaHRlciI+CjxwYXRoIGQ9Ik0zOTMgMzI2LjI5NEMyMTUuNSAzNjUuNzk0IDEwOCAyNjcuNzk0IC0yLjUgMzE5LjI5NEMtNy45MTc1NyAzMjEuODE5IC0yMTguNSA0NzIuNzk0IC0yMTguNSA0NzIuNzk0TC0zNjkgNTg1LjI5NEw1MjggNTk3Ljc5NFY0NTMuNzk0QzUyOCA0NTMuNzk0IDQxMC4zNjIgMzIyLjQzIDM5MyAzMjYuMjk0WiIgZmlsbD0id2hpdGUiLz4KPC9nPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2ZfMTY4OV80NTEiIHg9Ii00NTQiIHk9Ii00NSIgd2lkdGg9IjEyMTYuNTEiIGhlaWdodD0iODY3LjI5NCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPgo8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwIiByZXN1bHQ9IkJhY2tncm91bmRJbWFnZUZpeCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluPSJTb3VyY2VHcmFwaGljIiBpbjI9IkJhY2tncm91bmRJbWFnZUZpeCIgcmVzdWx0PSJzaGFwZSIvPgo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxMDAiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl8xNjg5XzQ1MSIvPgo8L2ZpbHRlcj4KPGZpbHRlciBpZD0iZmlsdGVyMV9mXzE2ODlfNDUxIiB4PSItNDk5IiB5PSIxNzMuOTU0IiB3aWR0aD0iMTE1NyIgaGVpZ2h0PSI1NTMuODQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNjUiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl8xNjg5XzQ1MSIvPgo8L2ZpbHRlcj4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xNjg5XzQ1MSI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPg==" alt="" />
+    <span class="tlp-body">
+      <span class="tlp-title">Trace Logo's</span>
+      <span class="tlp-sub">763 логотипа и 1918 эмодзи<br>в SVG и PNG</span>
+    </span>
+    <span class="tlp-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+  </button>
+
+  <div class="tlp-strip">
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzEwXzE2NDgpIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSIjRjkxMTU1Ii8+CjxwYXRoIGQ9Ik0zMiAzLjQ5MDIzQzMxLjI3OTQgNC40MzUyNCAzMC42MTc5IDUuNDI0NjkgMzAuMDk2NyA2LjQ5MTIxQzI5LjczMzUgNy4yMzg0IDI5LjQyMzUgNy45OTIyNSAyOS4wNTc2IDguNzM3M0MyOC4wNzc5IDEwLjc0NDggMjYuOTU2IDEyLjY4ODkgMjUuODU4NCAxNC42MjZDMjUuMDQ3OCAxNi4wNTUyIDI0LjE5MDcgMTcuNDI4MiAyMy4xNzQ4IDE4LjcwMTJDMjIuMjgwNSAxOS44MjExIDIxLjM4ODYgMjAuOTQzNSAyMC40Njk3IDIyLjA0MUMxOS44NTExIDIyLjc4MTIgMTkuMjI5OCAyMy41MTI5IDE4LjU1NDcgMjQuMTkyNEMxNy42IDI1LjE1NjYgMTYuNTAyNSAyNS45MzE0IDE1LjM4NjcgMjYuNjczOEMxNC4yMzE3IDI3LjQ0NTIgMTMuMDYzOCAyOC4xOTc3IDExLjg4NDggMjguOTMxNkMxMC41NDM3IDI5Ljc2OTEgOS4zOTYxMyAzMC44NzYxIDguMjc0NDEgMzJINi4zMzU5NEM4LjE5NDkxIDMwLjgzNDQgMTAuMDUxMyAyOS42NTMxIDExLjg0ODYgMjguMzkxNkMxMi45MjE2IDI3LjYzOTcgMTQuMDA5OCAyNi45Mjg4IDE0Ljk1OCAyNi4wMDc4QzE1LjU2NTEgMjUuNDIwNyAxNi4yMTI2IDI0Ljg3NjggMTYuODk1NSAyNC4zNzk5QzE3Ljg4NjQgMjMuNjU3OCAxOC43NjI3IDIyLjgyNjkgMTkuNTY2NCAyMS44ODA5QzIwLjQ1ODEgMjAuODMzNCAyMS4yNjkxIDE5LjY4MzYgMjEuOTkxMiAxOC40OThDMjIuNTY3IDE3LjU1MzMgMjMuMTE3OSAxNi41OTM2IDIzLjY0MzYgMTUuNjIwMUMyMy43OTkzIDE1LjMyNjggMjMuODk4NyAxNC45NjQ1IDIzLjk3MDcgMTQuNjMyOEMyNC4wMTMzIDE0LjQzNjEgMjMuODg5OSAxNC4zNTczIDIzLjcwNyAxNC40MjI5QzIzLjUzMTEgMTQuNDgzNiAyMy4zNDc4IDE0LjU0MjUgMjMuMTg5NSAxNC42NDY1QzIyLjQ2OTYgMTUuMTQwOCAyMS44MzggMTUuNzYxNyAyMS4yNTc4IDE2LjQyNzdDMjAuMTM3OSAxNy43MTI0IDE5LjA0OTMgMTkuMDE1MyAxNy45MTYgMjAuMjg2MUMxNi43NjY3IDIxLjU3NTIgMTUuNTc2NCAyMi44NTYzIDE0LjQwMDQgMjQuMTE4MkMxMy44NDA1IDI0LjcxOTEgMTMuMjg3NCAyNS4zMzk1IDEyLjY2ODkgMjUuODY1MkMxMC44MDMzIDI3LjQ1MjQgOC44MDA5NyAyOC43NjUyIDYuNTc5MSAyOS43NDcxQzUuMjE1NDMgMzAuMzQ5NyAzLjg4OTU1IDMxLjA3NzMgMi41NjY0MSAzMS43ODEyQzIuNDMwMjQgMzEuODUzOSAyLjI5NDMyIDMxLjkyNzEgMi4xNTgyIDMySDBWMjkuODUxNkMwLjA0ODA2NjMgMjkuODI1NCAwLjA5NjU0NTkgMjkuNzk5OSAwLjE0NDUzMSAyOS43NzM0QzMuMDgwOSAyOC4xNDM4IDUuOTY0MzYgMjYuNDIwMyA4Ljc5MDA0IDI0LjYwNTVDMTAuMDk2NyAyMy43NjU1IDExLjM5MTIgMjIuOTIzMyAxMi42NjIxIDIyLjAyMjVDMTQuMTg2MyAyMC45NDc4IDE1LjUxMjMgMTkuNjQzNCAxNi44MDU3IDE4LjI4NjFDMTguMzg4NiAxNi42MjQzIDE5Ljk0MSAxNC45MjgzIDIxLjQ4MzQgMTMuMjIxN0MyMi41MzU3IDEyLjA1NjMgMjMuNTYzNCAxMC44NDY1IDI0LjU4NzkgOS42NTIzNEMyNS4yNzQ4IDguODUyOTMgMjUuOTYxMSA4LjA2MDQ1IDI2LjYxODIgNy4yMzQzOEMyNy43MTczIDUuODQ1NiAyOC42NDUgNC4zNDE3NyAyOS42MDQ1IDIuODQ0NzNDMzAuMTk2NSAxLjkyMTUzIDMwLjgwMTYgMC45OTUyMTMgMzEuNDY3OCAwLjEzMjgxMkMzMS41MDE5IDAuMDg4NjM3NSAzMS41MzU0IDAuMDQ0MTEzNCAzMS41NjkzIDBIMzJWMy40OTAyM1oiIGZpbGw9IiMwMDVCRkYiLz4KPHBhdGggZD0iTTMyIDE3LjU2NjRDMzEuMjk1IDE4LjI5NjkgMzAuNjc2OCAxOS4xMDUgMzAuMDYwNSAxOS45MjI5QzI4Ljg5NzQgMjEuNDY0NyAyNy43NTMxIDIzLjA1MjIgMjYuNTk0NyAyNC41OTY3QzI2LjIzNTggMjUuMDc1MSAyNS44NDk2IDI1LjUyNSAyNS40Nzk1IDI1Ljk5MjJDMjQuOTEyNiAyNi43MDc4IDI0LjE1MjIgMjcuMTY2MSAyMy40MDcyIDI3LjYyMjFDMjEuMjY2NCAyOC45MzE5IDE5LjEzMjQgMzAuMjU3NCAxNi45Njk3IDMxLjUyODNDMTYuNjk0NCAzMS42ODk5IDE2LjQyNjggMzEuODQ2OSAxNi4xNjUgMzJIMTIuNTY0NUMxMi45NjkzIDMxLjc2MTggMTMuMzcxNCAzMS41MjM0IDEzLjc4NDIgMzEuMjg4MUMxNC42Mzc0IDMwLjgwMjggMTUuNTQ1MSAzMC4zODMyIDE2LjM1MzUgMjkuODI4MUMxNy45OTI0IDI4LjcwMTIgMTkuNjA3MyAyNy41MjAzIDIxLjE5MjQgMjYuMzE0NUMyMi42Nzc2IDI1LjE4MTIgMjQuMTExNyAyMy45NzgyIDI1LjU2NTQgMjIuODAxOEMyNi4wODAxIDIyLjM4NjMgMjYuNTE4IDIxLjkyODEgMjYuODU5NCAyMS4zMzRDMjcuNjc0MyAxOS45MTE2IDI4LjMxNDggMTguMzg5NCAyOC44NzcgMTYuODQyOEMyOS4zMjY1IDE1LjYwODIgMjkuNzI4NCAxNC4zNTAxIDMwLjE2NDEgMTMuMTA2NEMzMC42Njk2IDExLjY2NTEgMzEuMjk0NSAxMC4yODU1IDMyIDguOTUyMTVWMTcuNTY2NFoiIGZpbGw9IiMwMDVCRkYiLz4KPHBhdGggZD0iTTIzLjA5MjggMjkuNDg0NEMyMy4xOTg4IDI5LjQ1OTQgMjMuMzY4NiAyOS41NTAxIDIzLjQzODUgMjkuNjQwNkMyMy40OTIzIDI5LjcwOTkgMjMuNDU0MiAyOS44NzUyIDIzLjQwNjIgMjkuOTc2NkMyMy4zMzQzIDMwLjEzNjUgMjMuMjM5NiAzMC4yODE0IDIzLjExMzMgMzAuNDAxNEMyMi43NTQ5IDMwLjcyNyAyMi4zODQzIDMxLjAzOTUgMjIuMDAyOSAzMS4zMzc5QzIxLjcxOTIgMzEuNTU5MiAyMS40MzQ2IDMxLjc3OTggMjEuMTUwNCAzMkgxOC45MjM4QzIwLjA1ODUgMzEuMjQ0OCAyMS4xOTE2IDMwLjQ4OTIgMjIuMzM4OSAyOS43NTFDMjIuNTYwMSAyOS42MDg4IDIyLjgzNTkgMjkuNTM4NyAyMy4wOTI4IDI5LjQ4NDRaIiBmaWxsPSIjMDA1QkZGIi8+CjxwYXRoIGQ9Ik0zMiAyNS4xOTM0QzMxLjU0NzYgMjUuNjMgMzEuMTAyNCAyNi4wNzQ3IDMwLjc0NTEgMjYuNjA1NUMzMC4zNjk3IDI3LjE1ODkgMzAuMDM1OSAyNy43MjM1IDI5LjY2OCAyOC4yODEyQzI5LjE1NTUgMjkuMDU1NSAyOC41NjgyIDI5LjczOTQgMjcuODE2NCAzMC4yODEyQzI3LjQ5MzkgMzAuNTE2MyAyNy4yMjczIDMwLjg3MDUgMjYuOTYyOSAzMS4xODQ2QzI2Ljc1NjkgMzEuNDI4OCAyNi41ODA4IDMxLjY4MzcgMjYuNTA2OCAzMkgyMy43NjA3QzIzLjk2OTUgMzEuNjg2NyAyNC4xNzgzIDMxLjM3MzIgMjQuMzg0OCAzMS4wNjA1QzI1LjE4NjIgMjkuODM5OCAyNS45ODA4IDI4LjYxNDMgMjYuNzY4NiAyNy4zODQ4QzI3LjAwNzkgMjcuMDA3OCAyNy4xODQxIDI2LjU4NTggMjcuNDQ1MyAyNi4yMjg1QzI4LjA5NTQgMjUuMzQzNyAyOC44ODQzIDI0LjYwODIgMjkuNjk5MiAyMy44OTk0QzMwLjUwNTcgMjMuMTk4NiAzMS4yNzc3IDIyLjQ2OTIgMzIgMjEuNjgzNlYyNS4xOTM0WiIgZmlsbD0iIzAwNUJGRiIvPgo8cGF0aCBkPSJNMzIgMzJIMjkuODI5MUMyOS45OTg0IDMxLjkxNzQgMzAuMTY3MyAzMS44MzEyIDMwLjMzNCAzMS43MzgzQzMwLjkyNTkgMzEuNDA4NSAzMS40NzAyIDMwLjk4NSAzMiAzMC41MzcxVjMyWiIgZmlsbD0iIzAwNUJGRiIvPgo8cGF0aCBkPSJNMjYuNjI5OSAwQzI2LjI4MTkgMC42NjEzNDMgMjUuOTEzMyAxLjMxOTc5IDI1LjUwODggMS45Nzc1NEMyNC4yNzE2IDMuOTg5MDggMjIuOTk0MyA1Ljk1ODI4IDIxLjUyMjUgNy43ODkwNkMyMS4wMDc5IDguNDMwMDQgMjAuNDg2IDkuMDg3MzEgMTkuODI0MiA5LjU2ODM2QzE4Ljc4OCAxMC4zMjI1IDE3Ljc1MzMgMTEuMDQ5NCAxNi43MDggMTEuNzg4MUMxNS4yMjcgMTIuODMzNCAxMy43MzIyIDEzLjg3IDEyLjM2NDMgMTUuMDgwMUMxMS44MjQ1IDE1LjU1NjMgMTEuMzA5NSAxNi4wNjE4IDEwLjg4MjggMTYuNjYwMkMxMC41NTU0IDE3LjExODggMTAuMjMwNSAxNy41ODU4IDkuODQ4NjMgMTcuOTkyMkM4LjI5Nzc4IDE5LjY1NCA2LjU3NzUzIDIxLjExOTEgNC44NDM3NSAyMi41NTk2QzMuMjM2NzEgMjMuODg5MiAxLjYyMTA4IDI1LjIwOSAwIDI2LjUyMTVWMTguODE4NEMxLjk3MTM0IDE4LjEzOTIgMy45MzkzMyAxNy40OTU1IDUuOTE3OTcgMTYuODIwM0M2LjU5NzE4IDE2LjU4NzkgNy4yOTI1MSAxNi4zMzU1IDcuODcyMDcgMTUuODc1QzguODQ4MDcgMTUuMTAwNiA5LjgzNzQzIDE0LjM1NTIgMTAuNzc5MyAxMy41MzgxQzEzLjk2MjIgMTAuNzc2NSAxNy4xMzAzIDcuOTc3MDUgMjAuMzA0NyA1LjIwMjE1QzIwLjk4NjIgNC42MDY0NyAyMS42MjI3IDMuOTc1OSAyMi4xNTMzIDMuMjE5NzNDMjMuMjc2IDEuOTYwNzIgMjQuMTYwNSAwLjkyOTY4NyAyNC45MDQzIDBIMjYuNjI5OVoiIGZpbGw9IiMwMDVCRkYiLz4KPHBhdGggZD0iTTIwLjI0NDEgMEMxOS45ODk1IDAuMzk3MjIgMTkuNjc5MSAwLjc4OTMgMTkuMjgxMiAxLjE3MzgzQzE4LjIzODIgMi4xNzQ4NCAxNy4xNzI2IDMuMTUyMTUgMTYuMDg1IDQuMTA0NDlDMTUuMzc1NiA0LjczMDA4IDE0LjY0NDQgNS4zMDM2MiAxMy45MDYyIDUuODg4NjdDMTMuNDU2NiA2LjI0NTQ3IDEyLjk2NjEgNi41NTI5NyAxMi41MzUyIDYuOTMxNjRDMTEuODM1NyA3LjU1MDEzIDExLjIwMDkgOC4yNDc2NiAxMC40Nzg1IDguODMyMDNDOS4wNzY0OSA5Ljk2NTI4IDcuNjMzODcgMTEuMDY1NiA2LjE5ODI0IDEyLjE1MTRDNS44MTg1MSAxMi40MzgzIDUuMzkzNyAxMi42NjE2IDQuOTg3MyAxMi45MTAyQzQuODc4NTMgMTIuOTc3OCA0LjczODczIDEzLjAwNzIgNC42MTcxOSAxMy4wNDk4TDQuNTg1OTQgMTIuOTkxMkM0LjYyMjA2IDEyLjg5ODYgNC42NDAwOSAxMi43OTI4IDQuNjg5NDUgMTIuNzExOUM0Ljc5MjkyIDEyLjU0MjggNC45MjY2MSAxMi4zOTMyIDUuMDQzOTUgMTIuMjM1NEM2LjI0NzYxIDEwLjYwNDUgNy41MTg1MSA5LjAyNDM1IDguODU0NDkgNy41QzkuNzAzNTYgNi41MzE0NyAxMC41NTc0IDUuNTcyIDExLjUwNzggNC43MTM4N0MxMi4xMzU1IDQuMTQ3NTQgMTIuNzk5NSAzLjY0ODMzIDEzLjU1NTcgMy4yNzM0NEMxMy45MzAxIDMuMDg3NTQgMTQuMjc5OSAyLjg1NTY5IDE0LjU5NjcgMi41ODMwMUMxNS40MTcxIDEuODcwMzEgMTYuMDA4MSAwLjk3NjEzNiAxNi40OTggMEgyMC4yNDQxWiIgZmlsbD0iIzAwNUJGRiIvPgo8cGF0aCBkPSJNOS45NzU1OSAwQzkuNjM1NSAwLjM1ODA3NCA5LjMwNjk2IDAuNzI4MzY0IDkgMS4xMjAxMkM3LjQ3Nzk4IDMuMDU5NzEgNi4wNDY2NiA1LjA3NzcxIDQuNjM3NyA3LjEwNzQyQzMuNzQ4MSA4LjM4NzQyIDIuODQwMjUgOS42NTI1MSAxLjczMTQ1IDEwLjczMTRDMS4xNzIyMiAxMS4yNzc5IDAuNTk2ODgyIDExLjgwOTIgMCAxMi4zMTA1VjguMjEwOTRDMC41NDE0MTEgNy41NTgzIDEuMDY2NTEgNi44OTM0NCAxLjYzMjgxIDYuMjY1NjJDMy4wMjM2MSA0LjcyNjQ4IDQuNDMwODggMy4yMDIyMSA1Ljg1NDQ5IDEuNjkzMzZDNi4zODI0MyAxLjEzNDUyIDYuOTAwOTUgMC41NjkxNDYgNy40MTQwNiAwSDkuOTc1NTlaIiBmaWxsPSIjMDA1QkZGIi8+CjxwYXRoIGQ9Ik0zLjQwMjY5IDIxLjM5MzFDMi4xOTg5NSAyMS44ODkxIDAuODU1NDg3IDIxLjA4ODEgMC42NjgyODcgMTkuNzYwNkMwLjU0MTg4NyAxOC44NTcxIDEuMDM4NDIgMTcuOTY1NCAxLjg2MDI5IDE3LjYyNzNDMy4wNjQwMiAxNy4xMzAyIDQuNDA3NDkgMTcuOTMxMyA0LjU5NDY5IDE5LjI1OTNDNC43MTg5NSAyMC4xNjIyIDQuMjIxODkgMjEuMDU1IDMuNDAyNjkgMjEuMzkzMVpNMi4wMTM4OSAxNS43NDM1Qy0wLjMxMTQ0NiAxNi4xMjExIC0xLjY3NzMxIDE4LjU2ODYgLTAuODI4NzggMjAuODM5NUMtMC4yMDEwNDYgMjIuNTE5NSAxLjUyODU1IDIzLjU1MzcgMy4yNDkwOSAyMy4yNzM3QzUuNTc0NDIgMjIuODk4NyA2Ljk0MDgyIDIwLjQ0OTEgNi4wOTE3NSAxOC4xNzc3QzUuNDY0MDIgMTYuNDk3NyAzLjczNDQyIDE1LjQ2NjIgMi4wMTM4OSAxNS43NDQxTTcuMjExNzUgMTQuNDIwOUM2LjY4NzQ5IDE0LjU2MDYgNi40MDUzNSAxNS4xNTQ3IDYuNjYyNDIgMTUuNjc1OEM2Ljg1MDE1IDE2LjA1NzcgNy4yOTcwOSAxNi4yMzM3IDcuNzAzNDkgMTYuMTI1NEwxMC4wNTg3IDE1LjQ5NTVMNy43MTA0MiAyMS4zODYyQzcuNjMzNjIgMjEuNTgwMyA3LjgwNzQ5IDIxLjc4MDkgOC4wMDg1NSAyMS43MjdMMTMuNzU0NyAyMC4xODczQzE0LjE2MTEgMjAuMDc5IDE0LjQ1ODcgMTkuNzAxOSAxNC40Mjk5IDE5LjI3NzRDMTQuMzkxNSAxOC42OTcxIDEzLjg0OTYgMTguMzI0MyAxMy4zMjggMTguNDY0NkwxMC40NjAzIDE5LjIzMjZMMTIuODA2NCAxMy4zNDYyQzEyLjg4MzIgMTMuMTUyMSAxMi43MDcyIDEyLjk0ODkgMTIuNTA2MiAxMy4wMDI3TDcuMjExNzUgMTQuNDIwOVpNMzAuMTYgOC4yMzYzMkMyOS43ODk5IDguNDI2MTggMjkuNjE4MiA4Ljg2ODg1IDI5LjcyNjQgOS4yNzUyNUwzMC40OTE4IDEyLjEyN0wyNC45MTMxIDkuNjc4OTlDMjQuODY5MiA5LjY1OTU4IDI0LjgyMDcgOS42NTMxMSAyNC43NzMzIDkuNjYwMzVDMjQuNzI1OSA5LjY2NzU4IDI0LjY4MTUgOS42ODgyMiAyNC42NDU0IDkuNzE5ODNDMjQuNjA5MyA5Ljc1MTQzIDI0LjU4MyA5Ljc5MjY5IDI0LjU2OTYgOS44Mzg3NUMyNC41NTYyIDkuODg0OCAyNC41NTYyIDkuOTMzNzQgMjQuNTY5NiA5Ljk3OTc4TDI2LjE0NzggMTUuODY3OEMyNi4yNTYgMTYuMjc0MiAyNi42MjY3IDE2LjU3MjMgMjcuMDQxNiAxNi41NDk5QzI3LjE3MzYgMTYuNTQzNyAyNy4zMDI1IDE2LjUwOCAyNy40MTg3IDE2LjQ0NTNDMjcuNTM1IDE2LjM4MjYgMjcuNjM1NyAxNi4yOTQ1IDI3LjcxMzMgMTYuMTg3NkMyNy43OTA5IDE2LjA4MDcgMjcuODQzNSAxNS45NTc4IDI3Ljg2NzIgMTUuODI3OEMyNy44OTA5IDE1LjY5NzkgMjcuODg1MSAxNS41NjQyIDI3Ljg1MDIgMTUuNDM2OUwyNy4wOCAxMi41NjAxTDMyLjY1OTIgMTUuMDA4MUMzMi44NTM0IDE1LjA5MzQgMzMuMDU5MiAxNC45MTUzIDMzLjAwMjcgMTQuNzA3M0wzMS40MTk4IDguNzk2MzJDMzEuMzg2MSA4LjY2ODMxIDMxLjMyNDEgOC41NDk1MSAzMS4yMzg0IDguNDQ4NjlDMzEuMTUyNiA4LjM0Nzg3IDMxLjA0NTMgOC4yNjc2MSAzMC45MjQ0IDguMjEzODRDMzAuODAzNCA4LjE2MDA4IDMwLjY3MTkgOC4xMzQxOSAzMC41Mzk2IDguMTM4MDhDMzAuNDA3MyA4LjE0MTk3IDMwLjI3NzYgOC4xNzU1NCAzMC4xNiA4LjIzNjMyWk0xOC4xODI0IDExLjI5MTNDMTUuMzg3MiAxMi4wMzkgMTMuNTY0OCAxNC4yOTY2IDE0LjExMTUgMTYuMzMyOUMxNC42NTc2IDE4LjM2OTcgMTcuMzY0OCAxOS40MTI5IDIwLjE1NzkgMTguNjYzNUMyMi45NTA0IDE3LjkxMzcgMjQuNzc1IDE1LjY1ODIgMjQuMjI4OCAxMy42MjE0QzIzLjY4MjIgMTEuNTg1MSAyMC45NzU1IDEwLjU0MTkgMTguMTgyNCAxMS4yOTEzWk0xOC42NDI3IDEzLjAxMThDMjAuNTczNCAxMi40OTQ1IDIyLjI5MzkgMTMuMTQ1MSAyMi41NDE5IDE0LjA3MzFDMjIuNzkwNCAxNS4wMDExIDIxLjYyNzggMTYuNDI1NyAxOS42OTcxIDE2Ljk0MjVDMTcuNzY2NCAxNy40NTkzIDE2LjA0NjQgMTYuODA5MSAxNS43OTg0IDE1Ljg4MTFDMTUuNTQ3OCAxNC45NTE1IDE2LjcxMjYgMTMuNTI5MSAxOC42NDI3IDEzLjAxMThaIiBmaWxsPSJ3aGl0ZSIvPgo8L2c+CjxkZWZzPgo8Y2xpcFBhdGggaWQ9ImNsaXAwXzEwXzE2NDgiPgo8cmVjdCB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIGZpbGw9IndoaXRlIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+" alt="Ozon" title="Ozon" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjAgNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNMCAwaDYwdjYwSDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTQzLjc3NiAyMS44MDRhOS4xNCA5LjE0IDAgMCAwLTUuMTUyIDEuNTh2LTkuMWgtNC4xMXYxNi43ODNjMCA1LjEwNyA0LjE1NSA5LjIxNiA5LjI0IDkuMjE2IDUuMDgzIDAgOS4yODUtNC4wODUgOS4yODUtOS4yNjNzLTQuMTEtOS4yMTYtOS4yNjMtOS4yMTZtLTE4LjY1IDEwLjQ1LTMuNzYtOS43OTdoLTIuODc4bC0zLjc4NCA5Ljc5Ni0zLjc4My05Ljc5Nkg2LjQ0bDYuNjE2IDE3LjIyNWgyLjg3OGwzLjk3LTEwLjI2IDMuOTkzIDEwLjI2aDIuODc4bDYuNTk0LTE3LjIyNUgyOC45MXptMTguNjMgMy45MjJhNS4xMTcgNS4xMTcgMCAwIDEtNS4xMzItNS4xMzFjMC0yLjkwMyAyLjIwNi01LjEwNyA1LjE1NC01LjEwN3M1LjE1NCAyLjI5OCA1LjE1NCA1LjEwN2MwIDIuODA4LTIuMzQ2IDUuMTMtNS4xNzcgNS4xMyIvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYSIgeDE9IjU2LjUiIHgyPSIzLjUiIHkxPSIyLjUiIHkyPSI1Ni41IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agc3RvcC1jb2xvcj0iI0ZBNDdEOCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzczMDNGQSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==" alt="Wildberries" title="Wildberries" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTggMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjMTlBQTFFIiBkPSJNMCAwaDE4djE4SDB6Ii8+PHBhdGggZmlsbD0iI0ZGQjkxOSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMCAwaDE4djUuOTA2TDAgMy4wOTR6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBmaWxsPSIjODJENzE0IiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Im0wIDE2LjAzIDE4LTIuODEyVjE4SDB6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Im0wIDIuNzM4IDYuMjgzLjk4MkE1LjA1IDUuMDUgMCAwIDEgOSAyLjk1M2MxLjM5IDAgMi42NC41MiAzLjU1IDEuNDM1cS4xNzIuMTczLjMyNS4zNjFMMTggNS41NXYuNzEybC00LjYwNS0uNzJjLjM0NS42NTkuNTI1IDEuMzkxLjUyNyAyLjEzNSAwIC45NjQtLjIxNiAxLjkyNS0uNjYyIDIuODlsLS4wMTMuMDMtLjE5LjQwNmgtLjQ0N2MtLjkyNSAwLTEuNTM4LjI3Ny0xLjk0Ljc2Ny0uMzE0LjM4NC0uNDk3LjkwNC0uNTU4IDEuNDdsLS4wMDIuMDE3LS4wMTIuMTMtLjAwOC4wNzdxLS4wMzUuMzgtLjA0Ny42NDJMMTggMTIuODYydi43MTJMMCAxNi4zODd2LS43MTJsNy45NjYtMS4yNDUtLjAwNC0uMTZ2LS4wNDRsLS4wMDItLjAyNHYtLjAzNWExNCAxNCAwIDAgMC0uMDU0LS43NDNsLS4wMDYtLjA1Ny0uMDEtLjA5OWMtLjA1Ni0uNTctLjIzNi0xLjA5NS0uNTUtMS40ODUtLjM5Ny0uNDk0LTEuMDA0LS43NzQtMS45MjItLjc4aC0uNDc2bC0uMTg5LS40MDZjLS40NTUtLjk3NS0uNjc1LTEuOTQ2LS42NzUtMi45MiAwLTEuMjI1LjQ5Ny0yLjQxIDEuMzcyLTMuMjlsLjA3Ni0uMDc0TDAgMy40NXoiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjxwYXRoIGZpbGw9IiMwMDczRkEiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTkgMy42NTZjMi41MTMgMCA0LjIxOCAxLjkzNCA0LjIxOCA0LjAyIDAgLjgzOC0uMTgyIDEuNzEtLjYwOSAyLjYyNC0yLjQ3MiAwLTMuMDgyIDEuNzctMy4xOTggMi44ODVsLS4wMDguMDc0cS0uMDU4LjU5Ny0uMDY3Ljk1N2wtLjY3LjEwNXYtLjAyMnEtLjAxNC0uNTMyLS4wNzItMS4wNmwtLjAwMi0uMDJjLS4xMDctMS4xMTMtLjcwNC0yLjkxOS0zLjIwMS0yLjkxOS0uNDI3LS45MTQtLjYxLTEuNzg2LS42MS0yLjYyM0M0Ljc4MSA1LjU5IDYuNDg3IDMuNjU2IDkgMy42NTYiIGNsaXAtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==" alt="2ГИС" title="2ГИС" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTggMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjRkMzRjFEIiBkPSJNMCAwaDE4djE4SDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTExLjgyMyAxNGgtMS43NDhWNS4zNTRoLS43NzhjLTEuNDI4IDAtMi4xNzYuNzEzLTIuMTc2IDEuNzc5IDAgMS4yMDkuNTE2IDEuNzY5IDEuNTgzIDIuNDgybC44NzkuNTkzLTIuNTI3IDMuNzloLTEuODhsMi4yNzUtMy4zODRDNi4xNDMgOS42OCA1LjQwNyA4Ljc2OSA1LjQwNyA3LjIzIDUuNDA3IDUuMzA4IDYuNzQ3IDQgOS4yODQgNGgyLjUyN3Y5Ljk5N2guMDEyeiIvPjwvc3ZnPg==" alt="Яндекс" title="Яндекс" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjI4IiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfMTEzMF81Nzg4KSIvPgo8cGF0aCBkPSJNMTMuOTkxMiA1QzE2LjA1MDYgNS4wMDExNCAxOC4wNDc2IDUuNzA4MzkgMTkuNjQ4NCA3LjAwMzkxTDE3Ljg5MjYgOC4yOTg4M0MxNi44NDE2IDcuNTc3MjkgMTUuNjE0OSA3LjE1OTYzIDE0LjM0NjcgNy4wODY5MUwxNC4zNDU3IDcuMTA4NEMxNC4yMjA5IDcuMDkwNDUgMTQuMTE1IDcuMDkwODIgMTMuOTkxMiA3LjA5MDgyQzEzLjA4MzcgNy4wOTA4NCAxMi4xODQ5IDcuMjY5OTEgMTEuMzQ3NyA3LjYyMDEyQzEwLjUxMDUgNy45NzAzMiA5Ljc1MTQ5IDguNDgzNzYgOS4xMTQyNiA5LjEyOTg4TDkuMTA4NCA5LjEyNDAyQzguNTA3NDUgOS43MjE5NSA4LjAyMTI1IDEwLjQyNjIgNy42NzQ4MSAxMS4yMDIxQzcuMzI5MzIgMTEuOTc2IDcuMTI4NjggMTIuODA2MSA3LjA4Mzk5IDEzLjY1MDRMNy4wOTI3NyAxMy42NTE0QzcuMDg2MyAxMy42OTYgNy4wODM3MSAxMy43Mzg2IDcuMDgxMDYgMTMuNzgwM0M3LjA3ODQ3IDEzLjg1NjEgNy4wNzUyOCAxMy45MzE5IDcuMDc1MiAxNC4wMDc4QzcuMDczODQgMTQuOTE0OCA3LjI1MjU4IDE1LjgxMjcgNy42MDI1NCAxNi42NDk0QzcuOTUyODQgMTcuNDg2OSA4LjQ2Njc2IDE4LjI0NjYgOS4xMTQyNiAxOC44ODI4TDkuMTA1NDcgMTguODkwNkM5LjcwMjkxIDE5LjQ5MzUgMTAuNDA3NyAxOS45ODEzIDExLjE4NDYgMjAuMzI4MUMxMS45NTkgMjAuNjczOCAxMi43ODk4IDIwLjg3MjkgMTMuNjM0OCAyMC45MTZMMTMuNjM1NyAyMC45MDYyQzEzLjY5IDIwLjkxNDEgMTMuNzQwOSAyMC45MTc0IDEzLjc5MSAyMC45MTk5QzEzLjg1NzYgMjAuOTIxOCAxMy45MjQ1IDIwLjkyNDkgMTMuOTkxMiAyMC45MjQ4QzE0Ljg5OTUgMjAuOTMwNCAxNS43OTk3IDIwLjc1MjggMTYuNjM3NyAyMC40MDIzQzE3LjQ3NTcgMjAuMDUxOCAxOC4yMzQzIDE5LjUzNTUgMTguODY4MiAxOC44ODQ4TDE4Ljg4MjggMTguODk5NEMxOS40ODkxIDE4LjMwMDQgMTkuOTc5OSAxNy41OTM1IDIwLjMyODEgMTYuODEzNUMyMC43MjIzIDE1LjkzMDQgMjAuOTI1NyAxNC45NzM5IDIwLjkyNDggMTQuMDA2OFYxMy44MjkxTDIyLjg1ODQgMTIuMzkyNkMyMi45NDY0IDEyLjkyNDUgMjMgMTMuNDU2OSAyMyAxNC4wMDY4QzIzLjAwMDQgMTUuMjYzNyAyMi43MzY4IDE2LjUwNjcgMjIuMjI2NiAxNy42NTUzQzIxLjcxNjQgMTguODAzOCAyMC45NzA5IDE5LjgzMjUgMjAuMDM4MSAyMC42NzQ4TDIwLjAyMzQgMjAuNjU4MkMxOS4yNTgyIDIxLjM1NDkgMTguMzc3OCAyMS45MTUgMTcuNDE5OSAyMi4zMTI1QzE2LjMzMjkgMjIuNzYzNiAxNS4xNjggMjIuOTk2NCAxMy45OTEyIDIyLjk5OFYyM0MxMi43MzQyIDIzLjAwMjMgMTEuNDkwNiAyMi43Mzk3IDEwLjM0MTggMjIuMjI5NUM5LjE5Mjk4IDIxLjcxOTIgOC4xNjQzIDIwLjk3MjMgNy4zMjMyNCAyMC4wMzgxTDcuMzMyMDMgMjAuMDI5M0M2LjYzOTI3IDE5LjI2NjMgNi4wODE0NSAxOC4zODk0IDUuNjg1NTUgMTcuNDM1NUM1LjIzMjE1IDE2LjM0MzEgNC45OTk0MiAxNS4xNzExIDUgMTMuOTg4M0M1IDEzLjk3NzMgNS4wMDA3OCAxMy45NjYyIDUuMDAwOTggMTMuOTU1MUM1LjAwNjA2IDEyLjcxNiA1LjI2NzMzIDExLjQ5MTIgNS43NzA1MSAxMC4zNTg0QzYuMjgwODYgOS4yMDk1MSA3LjAyNzU5IDguMTgwOTMgNy45NjE5MiA3LjMzOTg0TDcuOTY3NzcgNy4zNDY2OEM4LjczMDU1IDYuNjU0MzQgOS42MDggNi4wOTc4NSAxMC41NjE1IDUuNzAyMTVDMTEuNjQ4NyA1LjI1MTAyIDEyLjgxNDMgNS4wMTgyMyAxMy45OTEyIDUuMDE2NlY1WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTIxLjEyMDEgOC41MDk3N0MyMS41NDYxIDkuMDU5NzIgMjEuOTAwMiA5LjY2Mjg0IDIyLjIwMjIgMTAuMzAwOEwxNC4wMDg4IDE2LjM0ODZMMTAuNTY5MyAxNC4xODQ2VjExLjU5NTdMMTMuOTkxMiAxMy43NDEyTDIxLjEyMDEgOC41MDk3N1oiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfMTEzMF81Nzg4IiB4MT0iLTMuNjEwNDFlLTA3IiB5MT0iMjguNDc5IiB4Mj0iMzIuNDA0IiB5Mj0iNy4xOCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBvZmZzZXQ9IjAuMDciIHN0b3AtY29sb3I9IiNBM0NEMzkiLz4KPHN0b3Agb2Zmc2V0PSIwLjI2IiBzdG9wLWNvbG9yPSIjODFDNTVGIi8+CjxzdG9wIG9mZnNldD0iMC45MjIiIHN0b3AtY29sb3I9IiMwRkE4RTAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4=" alt="Сбер" title="Сбер" />
+    <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjMDdGIiBkPSJNMCAwaDMydjMySDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE2LjggMjEuNjE1Yy02LjE1IDAtOS42NTYtNC4yMDgtOS44LTExLjIyaDMuMDkzYy4wOTkgNS4xNDIgMi4zNjQgNy4zMTggNC4xNjMgNy43Njd2LTcuNzY4aDIuOTA0djQuNDMzYzEuNzcxLS4xOSAzLjY0MS0yLjIxMiA0LjI3LTQuNDQyaDIuODk2YTguNTcgOC41NyAwIDAgMS0zLjkzOCA1LjYwMkE4Ljg3IDguODcgMCAwIDEgMjUgMjEuNjE1aC0zLjE5MmMtLjY4My0yLjEzMS0yLjM5MS0zLjc4NS00LjY0OC00LjAxdjQuMDFoLS4zNiIvPjwvc3ZnPg==" alt="ВКонтакте" title="ВКонтакте" />
+    <span class="tlp-more">и ещё<br>757 брендов</span>
+  </div>
+
+  <button class="tlp-donate" type="button" data-tlp-url="https://app.lava.top/products/6f3c8efd-27c3-41a8-acb1-559b83ea3b46/d9261f0e-d716-418c-b91d-764e83f1c01c?currency=RUB">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    Поддержать автора
+  </button>
+</aside>
+
+<script>
+  // Открытие ссылок только через code.js: в iframe плагина ни
+  // <a target="_blank">, ни window.open() не работают — единственный
+  // рабочий путь наружу это figma.openExternal() на стороне плагина.
+  document.querySelectorAll('.tlp [data-tlp-url]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      parent.postMessage({ pluginMessage: { type: 'open-url', url: el.getAttribute('data-tlp-url') } }, '*');
+    });
+  });
+</script>
+<!-- PROMO:END -->
+
+</div><!-- /.sticky-bottom -->
+
+</div><!-- /.tools-scroll -->
+
+</div><!-- /#screenTools -->
+
+<!-- ЭКРАН 3 — пропущенные слои. Открывается кнопкой "пропущено N" в
+     статусе, закрывается кнопкой "назад". Раньше список был плотной
+     полоской ВНУТРИ статуса (max-height:110px, паддинг 6px) — при длинной
+     причине имя слоя и причина слипались. Отдельный экран даёт списку
+     карточки в духе .rule и весь бюджет высоты, что и у #screenTools. -->
+<div class="screen" id="screenSkipped" hidden>
+  <div class="skip-header">
+    <button class="skip-back" type="button" id="skip-back" aria-label="Назад к правилам">
+      <svg class="icon"><use href="#icon-arrow-left"/></svg>
+    </button>
+    <div class="skip-header-title">Пропущенные слои</div>
+    <span class="skip-count" id="skip-count"></span>
+  </div>
+  <div class="skip-list" id="skip-list"></div>
+  <!-- Плавающая кнопка "наверх" — не внутри скролла #screenSkipped, а
+     position:fixed относительно окна плагина целиком: html/body сами не
+     скроллятся (см. их overflow:hidden), скроллится только #screenSkipped,
+     поэтому fixed здесь равнозначен "прибито к экрану", как и было бы с
+     position:sticky, только без завязки на порядок в потоке — кнопке не
+     нужно место в разметке списка, она просто накладывается поверх.
+     hidden по умолчанию — появляется JS-скроллом (см. ниже), после
+     небольшого скролла вниз, и обратно скрывается у самого верха. */ -->
+  <button class="skip-scrolltop" type="button" id="skip-scrolltop" aria-label="Наверх" hidden>
+    <svg class="icon"><use href="#icon-arrow-up"/></svg>
+  </button>
+</div>
+
+</div><!-- /#root -->
+
+<script>
+  const root = document.getElementById('root');
+  const statusEl = document.getElementById('status');
+  const screenEmpty = document.getElementById('screenEmpty');
+  const screenTools = document.getElementById('screenTools');
+  const screenSkipped = document.getElementById('screenSkipped');
+  const skipListEl = document.getElementById('skip-list');
+  const skipCountEl = document.getElementById('skip-count');
+  const skipBackBtn = document.getElementById('skip-back');
+  const skipScrollTopBtn = document.getElementById('skip-scrolltop');
+  const selectionTextEl = document.getElementById('selection-text');
+  const selectionMetaEl = document.getElementById('selection-meta');
+  const selectionBadgeEl = document.getElementById('selection-badge');
+  const runBtn = document.getElementById('run');
+  const progressEl = document.getElementById('progress');
+  const progressBarEl = document.getElementById('progress-bar');
+  const boxes = Array.from(document.querySelectorAll('[data-rule]'));
+
+  // Высота окна — тот же контракт 'resize', что в Clean Layers/Photo
+  // Editor (там код.js слушает 'resize' и вызывает figma.ui.resize()), но
+  // с двумя режимами вместо единого "подогнать под контент":
+  // - #screenEmpty почти без контента — меряем реальную высоту #root
+  //   (не body! см. комментарий у #root в CSS — это и было причиной, по
+  //   которой перезапуск плагина не помогал: body.getBoundingClientRect()
+  //   отдавал не то, что нужно, окно оставалось на изначальных 600) и
+  //   подгоняем окно вниз, добавляя отступ body вручную — тот же приём,
+  //   что в тех двух плагинах (requestAnimationFrame коалесит подряд
+  //   идущие вызовы в один).
+  // - #screenTools и #screenSkipped — фиксированные TOOLS_HEIGHT (число
+  //   совпадает с height: 612px в CSS, там же
+  //   обоснование): список из 7 правил (или список пропущенных слоёв) со
+  //   своим скроллом должен жить в боксе заданной высоты, а не диктовать
+  //   высоту окна собой при разворачивании примеров или длинном списке.
+  //   Экраны взаимозаменяемы (кнопка "пропущено N" ↔ "назад"), поэтому у
+  //   них общий бюджет — иначе окно прыгало бы при переходе между ними.
+  const TOOLS_HEIGHT = 612;
+  const BODY_PADDING = 0; // body больше не резервирует отступ ни с одной стороны — см. её CSS
+  let resizeScheduled = false;
+  function fitWindow() {
+    if (resizeScheduled) return;
+    resizeScheduled = true;
+    requestAnimationFrame(() => {
+      resizeScheduled = false;
+      const height = screenEmpty.hidden
+        ? TOOLS_HEIGHT
+        : Math.ceil(root.getBoundingClientRect().height + BODY_PADDING);
+      parent.postMessage({ pluginMessage: { type: 'resize', height } }, '*');
+    });
+  }
+  if (window.ResizeObserver) new ResizeObserver(fitWindow).observe(root);
+  fitWindow();
+
+  // Сколько текстовых слоёв в выделении — приходит из code.js по selectionchange.
+  let textNodeCount = 0;
+  let running = false;
+
+  // Подсказка про отмену — платформозависимая. Плагин исполняется внутри
+  // Figma (десктоп-обёртка или браузер), а не в собственном рантайме, так
+  // что navigator.platform здесь смотрит на реальную ОС пользователя, а не
+  // на что-то фигмо-специфичное. userAgentData — новее и точнее (platform
+  // жив, но помечен как legacy), но есть не везде (в первую очередь в
+  // Safari) — тогда просто откатываемся на platform/userAgent.
+  const isMac = (() => {
+    if (navigator.userAgentData && navigator.userAgentData.platform) {
+      return navigator.userAgentData.platform === 'macOS';
+    }
+    return /Mac|iPhone|iPad|iPod/.test(navigator.platform || navigator.userAgent || '');
+  })();
+  const UNDO_HINT = (isMac ? '⌘Z' : 'Ctrl+Z') + ' — отменить';
+
+  function plural(n, forms) {
+    const n10 = n % 10;
+    const n100 = n % 100;
+    if (n10 === 1 && n100 !== 11) return forms[0];
+    if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return forms[1];
+    return forms[2];
+  }
+
+  function getOpts() {
+    const opts = {};
+    boxes.forEach((el) => { opts[el.dataset.rule] = el.checked; });
+    return opts;
+  }
+
+  function anyRuleOn() {
+    return boxes.some((el) => el.checked);
+  }
+
+  function setStatus(text, cls, hint) {
+    statusEl.textContent = '';
+    statusEl.className = 'status' + (cls ? ' ' + cls : '');
+    closeSkippedScreen();
+    if (!text) return;
+    statusEl.append(text);
+    if (hint) {
+      const span = document.createElement('span');
+      span.className = 'status-hint';
+      span.textContent = '  ' + hint;
+      statusEl.append(span);
+    }
+  }
+
+  // Возврат на #screenTools, если сейчас открыт #screenSkipped — вызывается
+  // при каждом новом статусе (новый прогон должен закрывать чужой экран,
+  // не оставлять пользователя на списке от предыдущего запуска).
+  function closeSkippedScreen() {
+    if (!screenSkipped.hidden) {
+      screenSkipped.hidden = true;
+      screenTools.hidden = false;
+      fitWindow();
+    }
+    skipListEl.textContent = '';
+  }
+  skipBackBtn.onclick = closeSkippedScreen;
+
+  // Снимает .retry-failed по завершении анимации — делегировано на
+  // skipListEl (сам список пересоздаётся при каждом открытии, но
+  // слушатель на контейнере переживает пересоздание детей).
+  skipListEl.addEventListener('animationend', (e) => {
+    if (e.animationName === 'skip-item-shake') e.target.classList.remove('retry-failed');
+  });
+
+  // Плавающая кнопка "наверх" — появляется, если списком уже успели
+  // проскроллить (порог тот же, что обычно у "back to top" в длинных
+  // списках: чуть больше высоты шапки, чтобы не мигала от одного лёгкого
+  // покачивания), исчезает у самого верха. scrollend не используем —
+  // Safari/старые WebView его не знают, а это не тот случай, где нужен
+  // debounce ценой лишней сложности: обработчик дешёвый (сравнение числа).
+  const SCROLL_TOP_THRESHOLD = 120;
+  screenSkipped.addEventListener('scroll', () => {
+    skipScrollTopBtn.hidden = screenSkipped.scrollTop < SCROLL_TOP_THRESHOLD;
+  });
+  skipScrollTopBtn.onclick = () => {
+    screenSkipped.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Карточка одного пропущенного слоя. d.id есть не всегда — только у
+  // причин, добавленных за время этой правки ("слишком длинный текст" и
+  // сбой обработки, см. code.js); по нему строятся кнопки "Показать на
+  // холсте"/"Повторить" — без id их некуда адресовать. Вынесена в
+  // отдельную функцию (не инлайн в цикле ниже), потому что buildSkipItem
+  // повторно вызывается из retryNode() при неудачной попытке — карточка
+  // заменяется на СВЕЖУЮ с новой причиной, а не патчится точечно.
+  function buildSkipItem(d) {
+    const item = document.createElement('div');
+    item.className = 'skip-item';
+    if (d.id) item.dataset.id = d.id;
+    const name = document.createElement('div');
+    name.className = 'skip-item-name';
+    // В кавычках-ёлочках — это имя СЛОЯ (текст с макета пользователя), не
+    // фраза от плагина; без кавычек строка сливалась с остальным UI и
+    // читалась как ещё одно системное сообщение (см. отзыв пользователя).
+    // "(без имени)" — сам это уже плейсхолдер плагина, не кавычим.
+    name.textContent = d.name ? `«${d.name}»` : '(без имени)';
+    const reason = document.createElement('div');
+    reason.className = 'skip-item-reason';
+    reason.textContent = d.reason || '';
+    item.append(name, reason);
+
+    if (d.id) {
+      const actions = document.createElement('div');
+      actions.className = 'skip-item-actions';
+
+      const focusBtn = document.createElement('button');
+      focusBtn.type = 'button';
+      focusBtn.className = 'skip-item-btn';
+      // "На холсте" короче "Показать на холсте" — то же самое с иконкой
+      // глаза не переносилось на две строки только у длинного варианта
+      // (кнопки flex:1, равная ширина с "Повторить" — см. .skip-item-btn),
+      // из-за чего высота карточки скакала на карточках с разной причиной.
+      focusBtn.innerHTML = '<svg class="icon"><use href="#icon-eye"/></svg>На холсте';
+      focusBtn.onclick = () => {
+        parent.postMessage({ pluginMessage: { type: 'focus-node', id: d.id } }, '*');
+      };
+
+      const retryBtn = document.createElement('button');
+      retryBtn.type = 'button';
+      retryBtn.className = 'skip-item-btn retry';
+      retryBtn.innerHTML = '<svg class="icon"><use href="#icon-refresh"/></svg>Повторить';
+      retryBtn.onclick = () => retryNode(d.id, retryBtn, focusBtn);
+
+      actions.append(focusBtn, retryBtn);
+      item.append(actions);
+    }
+    return item;
+  }
+
+  // "Повторить" на карточке — прогоняет typografize ЗАНОВО только для
+  // этого узла (см. 'retry-node'/processTextNode в code.js), с текущими
+  // (не теми, что были при первом запуске) настройками правил. Кнопки на
+  // время запроса блокируются — сообщение асинхронное, повторный клик до
+  // ответа задвоил бы попытку.
+  function retryNode(id, retryBtn, focusBtn) {
+    retryBtn.disabled = true;
+    focusBtn.disabled = true;
+    retryBtn.textContent = 'Повторяю…';
+    parent.postMessage({ pluginMessage: { type: 'retry-node', id, opts: getOpts() } }, '*');
+  }
+
+  // "пропущено N" — кнопка внутри статуса, открывает отдельный экран
+  // #screenSkipped со списком (имя слоя + причина). Обычному пользователю
+  // консоль плагина неудобна, поэтому список рисуется прямо в UI, а не
+  // уходит в devtools. До 2026-08-19 список разворачивался узкой полоской
+  // прямо внутри статуса — при длинной причине текст слипался почти без
+  // отступа (см. комментарий у .skip-item в CSS).
+  function appendSkippedToggle(count, details) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'skipped-toggle';
+    const word = plural(count, ['слой', 'слоя', 'слоёв']);
+    btn.textContent = 'пропущено ' + count + ' ' + word;
+    btn.onclick = () => {
+      skipListEl.textContent = '';
+      skipCountEl.textContent = String(count);
+      if (details && details.length) {
+        for (const d of details) {
+          skipListEl.append(buildSkipItem(d));
+        }
+      } else {
+        const empty = document.createElement('div');
+        empty.className = 'skip-empty';
+        empty.textContent = 'Подробностей нет.';
+        skipListEl.append(empty);
+      }
+      screenTools.hidden = true;
+      screenSkipped.hidden = false;
+      // Свежий список — свежий скролл: без явного сброса scrollTop мог бы
+      // остаться от прошлого открытия (DOM очищен через textContent='',
+      // но позиция скролла контейнера сама по себе не обнуляется), а
+      // "наверх" синхронно спрятана — иначе кнопка мелькнула бы поверх
+      // только что открывшегося (и ещё нескроленного) списка до первого
+      // события scroll.
+      screenSkipped.scrollTop = 0;
+      skipScrollTopBtn.hidden = true;
+      fitWindow();
+    };
+    // ", " и кнопка вставляются ОДНОЙ парой в одну и ту же позицию —
+    // перед хинтом "⌘Z — отменить" (уже добавлен setStatus'ом), если он
+    // есть, иначе в конец. Раньше запятая уходила в statusEl.append(', ')
+    // отдельно и всегда в самый конец — если хинт уже стоял, разделитель
+    // оказывался ПОСЛЕ него, а кнопка (insertBefore) — ДО, порядок чтения
+    // ломался: "…N ⌘Z — отменить, " с кнопкой не на своём месте. Заодно
+    // запятая с пробелом раньше была частью textContent самой кнопки —
+    // у .skipped-toggle подчёркивание на весь текст, и запятая
+    // подчёркивалась вместе с кликабельной частью, хотя сама никуда не
+    // ведёт (см. скриншот пользователя). Теперь запятая — обычный текстовый
+    // узел рядом с кнопкой, не внутри неё.
+    const hintSpan = statusEl.querySelector('.status-hint');
+    const comma = document.createTextNode(', ');
+    if (hintSpan) {
+      statusEl.insertBefore(comma, hintSpan);
+      statusEl.insertBefore(btn, hintSpan);
+    } else {
+      statusEl.append(comma, btn);
+    }
+  }
+
+  // Кнопка запуска включается только когда есть что обрабатывать И включено
+  // хотя бы одно правило — вместо того чтобы разрешить клик и ответить ошибкой.
+  // Во время работы она же становится кнопкой остановки: отдельная кнопка
+  // рядом в подвале не помещается, а прерывать долгий проход надо уметь.
+  function syncRunState() {
+    if (running) {
+      runBtn.disabled = false;
+      runBtn.textContent = 'Остановить';
+      return;
+    }
+    runBtn.disabled = textNodeCount === 0 || !anyRuleOn();
+    runBtn.textContent = 'Расставить типографику';
+  }
+
+  function showProgress(done, total) {
+    progressEl.hidden = false;
+    progressBarEl.style.width = (total ? Math.round((done / total) * 100) : 0) + '%';
+    setStatus('Обработано ' + done + ' из ' + total, 'info');
+  }
+
+  function hideProgress() {
+    progressEl.hidden = true;
+    progressBarEl.style.width = '0%';
+  }
+
+  // Два экрана — тот же переключатель, что renderScope() в Clean Layers:
+  // hasSelection === false ⇒ screenEmpty, иначе screenTools. Внутри
+  // screenTools ещё два состояния несёт карточка (было: точка-индикатор
+  // .dot меняла цвет рядом с текстом) — бейдж-счётчик (виден только когда
+  // есть что посчитать) и цвет заголовка (warn, когда выделено, но
+  // текстовых слоёв нет).
+  // Заголовок — про ВЫДЕЛЕНИЕ (сколько узлов на холсте, тот же порядок
+  // слов, что "N слоёв выделено" в Clean Layers), meta — про то, что
+  // НАШЛОСЬ внутри него (сколько из них текстовые слои). Раньше оба числа
+  // были одним и тем же count (текстовые слои), и бейдж его же обрезал до
+  // "99+" — при 281 найденном тексте внутри одного выделенного фрейма это
+  // давало "99+" на бейдже рядом с "281" в заголовке, два вида одного и
+  // того же числа врозь. Теперь бейдж считает selectionCount (сырое число
+  // выделенных узлов — их обычно единицы, обрезка до "99+" почти никогда
+  // не понадобится), а count (текстовые слои, потенциально сотни) —
+  // отдельной строкой без обрезки.
+  // keepSkipped — см. keepSkippedScreenOnSelect в code.js: смена
+  // selection БЫЛА вызвана самим плагином (кнопка "Показать на холсте" на
+  // карточке пропущенного слоя), а не кликом пользователя по другому
+  // объекту на холсте. В этом случае экран #screenSkipped НЕ закрываем —
+  // только тихо обновляем textNodeCount/кнопку запуска в фоне, чтобы
+  // состояние было верным, если пользователь потом вручную вернётся на
+  // #screenTools кнопкой "назад". Без этой развилки клик по "Показать на
+  // холсте" сам себе закрывал бы список пропусков — ту самую подсказку,
+  // ради которой на карточку и смотрят.
+  function renderSelection(count, hasSelection, selectionCount, keepSkipped) {
+    textNodeCount = count;
+    if (keepSkipped && !screenSkipped.hidden) {
+      syncRunState();
+      return;
+    }
+    screenEmpty.hidden = hasSelection;
+    screenTools.hidden = !hasSelection;
+    // Смена выделения всегда возвращает на #screenTools, даже если
+    // пользователь был на #screenSkipped — иначе оба экрана оказались бы
+    // видны одновременно (screenTools.hidden=false выше, а screenSkipped
+    // никто не спрятал).
+    screenSkipped.hidden = true;
+    // Явный вызов сразу после переключения экрана — не ждём тика
+    // ResizeObserver'а: смена hasSelection почти всегда означает и смену
+    // целевой высоты окна (авто ↔ TOOLS_HEIGHT), лучше сразу.
+    fitWindow();
+    if (!hasSelection) { syncRunState(); return; }
+
+    selectionBadgeEl.textContent = selectionCount > 99 ? '99+' : String(selectionCount);
+    selectionBadgeEl.hidden = false;
+    selectionTextEl.textContent =
+      selectionCount + ' ' + plural(selectionCount, ['слой выделен', 'слоя выделено', 'слоёв выделено']);
+
+    if (count > 0) {
+      selectionMetaEl.classList.remove('warn');
+      selectionMetaEl.textContent =
+        count + ' ' + plural(count, ['текстовый слой', 'текстовых слоя', 'текстовых слоёв']) + ' найдено';
+    } else {
+      selectionMetaEl.classList.add('warn');
+      selectionMetaEl.textContent = 'Текстовых слоёв не найдено';
+    }
+    syncRunState();
+  }
+
+  function run() {
+    if (runBtn.disabled) return;
+    running = true;
+    syncRunState();
+    showProgress(0, textNodeCount);
+    parent.postMessage({ pluginMessage: { type: 'run', opts: getOpts() } }, '*');
+  }
+
+  // Останавливает проход, но НЕ закрывает плагин: code.js доработает текущий
+  // слой и пришлёт обычный result с пометкой stopped — уже применённые правки
+  // остаются, их снимает ⌘Z как и всегда.
+  function stop() {
+    parent.postMessage({ pluginMessage: { type: 'stop' } }, '*');
+    setStatus('Останавливаю…', 'info');
+  }
+
+  // Кнопки в UI нет (закрывает нативный крестик Figma) — cancel() остаётся
+  // только для Esc, см. keydown ниже.
+  function cancel() {
+    parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*');
+  }
+
+  runBtn.onclick = () => (running ? stop() : run());
+
+  boxes.forEach((el) => {
+    el.addEventListener('change', () => {
+      syncRunState();
+      // Настройки переживают перезапуск плагина — сохраняет code.js в clientStorage.
+      parent.postMessage({ pluginMessage: { type: 'opts', opts: getOpts() } }, '*');
+    });
+  });
+
+  // Раскрытие примера «было → стало». Кнопка вынесена из <label>, иначе клик по
+  // ней заодно переключал бы галочку правила.
+  document.querySelectorAll('.rule-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const example = btn.closest('.rule').querySelector('.rule-example');
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.setAttribute('aria-label', open ? 'Показать пример' : 'Скрыть пример');
+      example.hidden = open;
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    // Во время работы Escape останавливает проход, а не закрывает плагин:
+    // закрытие оборвало бы его на середине выделения без внятного итога.
+    if (e.key === 'Escape') { running ? stop() : cancel(); return; }
+    // Enter на кнопке отрабатывает браузер — иначе запуск ушёл бы дважды.
+    if (e.key === 'Enter' && e.target.tagName !== 'BUTTON' && !running) run();
+  });
+
+  window.onmessage = (event) => {
+    const msg = event.data.pluginMessage;
+    if (!msg) return;
+
+    if (msg.type === 'init') {
+      if (msg.opts) {
+        boxes.forEach((el) => {
+          if (typeof msg.opts[el.dataset.rule] === 'boolean') el.checked = msg.opts[el.dataset.rule];
+        });
+      }
+      renderSelection(msg.count, msg.hasSelection, msg.selectionCount);
+      return;
+    }
+
+    if (msg.type === 'selection') {
+      renderSelection(msg.count, msg.hasSelection, msg.selectionCount, msg.keepSkipped);
+      // Прошлый результат относится к прошлому выделению — не оставляем его
+      // врать. Но не при keepSkipped: там статус в подвале #screenTools не
+      // виден (мы на #screenSkipped), а очищать его незачем — он развидит
+      // причину, к которой пользователь вот-вот вернётся.
+      if (!running && !msg.keepSkipped) setStatus('', '');
+      return;
+    }
+
+    if (msg.type === 'progress') {
+      showProgress(msg.done, msg.total);
+      return;
+    }
+
+    // Ответ на 'retry-node' (кнопка "Повторить" на карточке пропущенного
+    // слоя) — карточка ищется по data-id, а не хранится в замыкании:
+    // к моменту ответа пользователь мог уже проскроллить или это вообще
+    // не та карточка, что была видна при клике (список не переупорядочен,
+    // но на всякий случай ищем по актуальному DOM, а не по ссылке).
+    if (msg.type === 'retry-result') {
+      const item = skipListEl.querySelector(`.skip-item[data-id="${CSS.escape(msg.id)}"]`);
+      if (!item) return;
+      if (msg.ok) {
+        item.classList.add('fixed');
+        const reason = item.querySelector('.skip-item-reason');
+        const actions = item.querySelector('.skip-item-actions');
+        if (reason) reason.remove();
+        if (actions) actions.remove();
+        const note = document.createElement('div');
+        note.className = 'skip-item-fixed-note';
+        note.innerHTML = '<svg class="icon"><use href="#icon-check"/></svg>Исправлено';
+        item.append(note);
+      } else {
+        const reason = item.querySelector('.skip-item-reason');
+        if (reason) reason.textContent = msg.reason || '';
+        const retryBtn = item.querySelector('.skip-item-btn.retry');
+        const focusBtn = item.querySelector('.skip-item-btn:not(.retry)');
+        if (retryBtn) { retryBtn.disabled = false; retryBtn.innerHTML = '<svg class="icon"><use href="#icon-refresh"/></svg>Повторить'; }
+        if (focusBtn) focusBtn.disabled = false;
+        // Причина после неудачного повтора часто СОВПАДАЕТ с прежней
+        // (шрифт всё ещё не поставлен) — reason.textContent тогда не
+        // меняется, и без этого класса карточка выглядела бы так, будто
+        // клик вообще ничего не сделал (см. отзыв пользователя). Класс
+        // сам себя снимает через анимацию (animationend) — re-trigger при
+        // повторном клике иначе не сыграл бы (тот же класс уже стоит).
+        item.classList.remove('retry-failed');
+        // eslint-disable-next-line no-unused-expressions
+        void item.offsetWidth; // форсируем reflow — без этого браузер схлопнёт remove+add в один кадр
+        item.classList.add('retry-failed');
+      }
+      return;
+    }
+
+    if (msg.type !== 'result') return;
+
+    running = false;
+    hideProgress();
+    syncRunState();
+
+    if (!msg.ok) {
+      setStatus(msg.error, 'error');
+      return;
+    }
+
+    if (msg.stopped) {
+      const word = plural(msg.changed, ['слой', 'слоя', 'слоёв']);
+      setStatus('Остановлено: изменено ' + msg.changed + ' ' + word + ' из ' + msg.processed, 'info', UNDO_HINT);
+      if (msg.skipped) appendSkippedToggle(msg.skipped, msg.skippedDetails);
+      return;
+    }
+
+    if (msg.changed === 0) {
+      setStatus('Всё уже по типографике', 'info');
+      if (msg.skipped) appendSkippedToggle(msg.skipped, msg.skippedDetails);
+      return;
+    }
+
+    const word = plural(msg.changed, ['слой', 'слоя', 'слоёв']);
+    setStatus('Изменено ' + msg.changed + ' ' + word + ' из ' + msg.total, 'ok', UNDO_HINT);
+    if (msg.skipped) appendSkippedToggle(msg.skipped, msg.skippedDetails);
+  };
+
+  parent.postMessage({ pluginMessage: { type: 'ready' } }, '*');
+</script>
+
+</body>
+</html>

@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,12 +100,12 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
-  <link rel="stylesheet" href="/css/blog-widget-svg.css?v=20260808">
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
+  <link rel="stylesheet" href="/css/blog-widget-svg.css?v=20260910">
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -170,15 +172,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -191,11 +195,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(81 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(121 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(171 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(231 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(81 70% 38%) 0%, hsl(231 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(321 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(1 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(51 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(111 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(321 70% 38%) 0%, hsl(111 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-06">June 6, 2026</time>
@@ -204,14 +208,14 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            151
+	            645
 	          </span>
         </div>
         <h1>How to Open an SVG File — Viewing and Editing on Any System</h1>
       </header>
       <div class="blog-body">
         <p>You downloaded a logo, clicked the file — and instead of a picture, a text editor opened with a wall of baffling code. Or the system just asks, bewildered: &quot;what should I open this with?&quot; The first thought is that the file is broken. But it's fine, and the whole confusion grows from one property of the format worth understanding once and for all: <strong>an SVG is both a picture and text at the same time</strong>. Once that settles in, the &quot;what do I open it with&quot; question splits into two simple ones, each with an obvious answer.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>Just view it</strong> — drag the SVG into any browser: <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome</a>, <a href="/en/logos/search/safari/" target="_blank" rel="noopener">Safari</a>, <a href="/en/logos/search/yandexbrowser/" target="_blank" rel="noopener">Yandex Browser</a>. <strong>Edit it</strong> — <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> (free, in‑browser), Inkscape (free, offline) or <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>. <strong>Opened as text</strong> — not a breakage: an SVG is text; the system just tied the extension to a text editor.</p></div></div>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>Just view it</strong> — drag the SVG into any browser: <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/search/safari/" target="_blank" rel="noopener">Safari<img class="blog-mention-icon" src="/assets/logos/svgs/apple-Safari.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/search/yandexbrowser/" target="_blank" rel="noopener">Yandex Browser<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-browser.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. <strong>Edit it</strong> — <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> (free, in‑browser), Inkscape (free, offline) or <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. <strong>Opened as text</strong> — not a breakage: an SVG is text; the system just tied the extension to a text editor.</p></div></div>
       <h2 id="why-svg-opens-as-code">Why SVG opens &quot;as code&quot;</h2>
       <p>Let's start with that wall of code, since it scares people most. An SVG is an XML document: inside are <code>&lt;svg&gt;</code>, <code>&lt;path&gt;</code>, <code>&lt;circle&gt;</code> tags with shape coordinates. A browser reads these tags and draws a picture; a text editor honestly shows them as text — because to it, that's what they are. Neither is wrong; the system just sent the file to the wrong program on double‑click.</p>
       <p>Hence the fix, with no &quot;conversion&quot; whatsoever: right‑click the file → &quot;Open with&quot; → pick a browser → check &quot;Always open with this app.&quot; The file doesn't change by a single byte — only the program the system shows it in does. And now that it's clear nothing is broken, let's split the two tasks.</p>
@@ -227,10 +231,10 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="task-one-just-view-it" class="step-heading"><span class="step-badge">Task one</span><span class="step-title">Just view it</span></h2>
       <p>If you only need to see the logo, the most universal viewer is already on your device — the browser.</p>
-      <p>Drag the file into a <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome</a>, <a href="/en/logos/search/safari/" target="_blank" rel="noopener">Safari</a>, <a href="/en/logos/search/firefox/" target="_blank" rel="noopener">Firefox</a> or <a href="/en/logos/search/yandexbrowser/" target="_blank" rel="noopener">Yandex Browser</a> window — the picture appears instantly, and the mouse wheel zooms it in with no loss of sharpness (the whole point of vector). It works the same on any system, so what follows are just per‑platform shortcuts faster than dragging.</p>
+      <p>Drag the file into a <a href="/en/logos/search/chrome/" target="_blank" rel="noopener">Chrome<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/google-chrome.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/search/safari/" target="_blank" rel="noopener">Safari<img class="blog-mention-icon" src="/assets/logos/svgs/apple-Safari.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/search/firefox/" target="_blank" rel="noopener">Firefox<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/firefox.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> or <a href="/en/logos/search/yandexbrowser/" target="_blank" rel="noopener">Yandex Browser<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-browser.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> window — the picture appears instantly, and the mouse wheel zooms it in with no loss of sharpness (the whole point of vector). It works the same on any system, so what follows are just per‑platform shortcuts faster than dragging.</p>
       <ul>
-      <li><strong><a href="/en/logos/tech/windows/" target="_blank" rel="noopener">Windows</a> 10/11.</strong> Explorer doesn't always show SVG thumbnails — it depends on installed extensions. If there are none, the browser is safest; or install a free thumbnail extension from the Microsoft Store, and an icon folder becomes visible without opening each file.</li>
-      <li><strong>macOS.</strong> Easiest here: press space on the file in <a href="/en/logos/system/finder/" target="_blank" rel="noopener">Finder</a> — Quick Look shows the SVG out of the box. <a href="/en/logos/design/preview/" target="_blank" rel="noopener">Preview</a> opens it too, but for viewing only: on save it turns vector into raster.</li>
+      <li><strong><a href="/en/logos/tech/windows/" target="_blank" rel="noopener">Windows<img class="blog-mention-icon" src="/assets/logos/svgs/windows.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> 10/11.</strong> Explorer doesn't always show SVG thumbnails — it depends on installed extensions. If there are none, the browser is safest; or install a free thumbnail extension from the Microsoft Store, and an icon folder becomes visible without opening each file.</li>
+      <li><strong>macOS.</strong> Easiest here: press space on the file in <a href="/en/logos/system/finder/" target="_blank" rel="noopener">Finder<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/finder.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — Quick Look shows the SVG out of the box. <a href="/en/logos/design/preview/" target="_blank" rel="noopener">Preview<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/preview.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> opens it too, but for viewing only: on save it turns vector into raster.</li>
       <li><strong>Phone.</strong> Both iOS and Android open SVG in the built‑in browser — send the file to yourself in a messenger and tap it. No separate app needed.</li>
       </ul>
       <p>For a single file you don't even have to leave this page — drop it into the box below. Everything runs in your browser: the file is never uploaded, and you immediately see its dimensions, its source code and whatever is wrong with it.</p>
@@ -333,25 +337,25 @@ window.yaContextCb.push(() => {
       <h2 id="task-two-edit-it" class="step-heading"><span class="step-badge">Task two</span><span class="step-title">Edit it</span></h2>
       <p>Since an SVG is also text describing shapes, it can be changed. The tool depends on how deep you go.</p>
       <h3>Figma — free and no install</h3>
-      <p>For 90% of logo tasks <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> is plenty: it runs in the browser and is free for personal use. Drag the SVG onto the canvas — it lands as a fully editable vector: recolor, reshape, delete elements, export back to SVG or PNG. A sensible entry point for anyone who just needs to fix someone else's logo without design skills.</p>
+      <p>For 90% of logo tasks <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is plenty: it runs in the browser and is free for personal use. Drag the SVG onto the canvas — it lands as a fully editable vector: recolor, reshape, delete elements, export back to SVG or PNG. A sensible entry point for anyone who just needs to fix someone else's logo without design skills.</p>
       <h3>Inkscape — a free offline editor</h3>
-      <p>When you need a desktop editor without internet, there's Inkscape (<a href="/en/logos/tech/windows/" target="_blank" rel="noopener">Windows</a>, macOS, Linux) — an open‑source vector editor. SVG is its native format, with the fullest support of all: raster tracing, fine node work, color replacement across the whole file. The interface is less glamorous than <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>'s, but in capability it rivals paid packages.</p>
+      <p>When you need a desktop editor without internet, there's Inkscape (<a href="/en/logos/tech/windows/" target="_blank" rel="noopener">Windows<img class="blog-mention-icon" src="/assets/logos/svgs/windows.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, macOS, Linux) — an open‑source vector editor. SVG is its native format, with the fullest support of all: raster tracing, fine node work, color replacement across the whole file. The interface is less glamorous than <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>'s, but in capability it rivals paid packages.</p>
       <h3>Adobe Illustrator — the professional standard</h3>
-      <p>If you already have <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>, install nothing extra — it opens and saves SVG. One nuance to remember: with a plain &quot;Save As,&quot; <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a> adds service data and bloats the file. For the web, save via &quot;Export As&quot; with &quot;Minify&quot; checked — you'll get a clean, light SVG.</p>
+      <p>If you already have <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, install nothing extra — it opens and saves SVG. One nuance to remember: with a plain &quot;Save As,&quot; <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> adds service data and bloats the file. For the web, save via &quot;Export As&quot; with &quot;Minify&quot; checked — you'll get a clean, light SVG.</p>
       <h3>A text editor — yes, really</h3>
       <p>And since an SVG is literally text, small edits are fastest right in the code, with no graphics editor at all. Change a color — find <code>fill=&quot;#FF0000&quot;</code> and replace the value. Change the size — tweak <code>width</code> and <code>height</code> (or delete both: then the site's layout controls size via CSS, while <code>viewBox</code> holds the proportions). VS Code with a preview plugin makes it comfortable: code on the left, a live picture updating on the right.</p>
       <p>So you don't hold all this in your head, here's the whole fork in one table, by task:</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Task</th><th>Tool</th><th>Price</th></tr></thead><tbody><tr><td>View</td><td>any browser</td><td>free</td></tr><tr><td>Recolor, tweak</td><td><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a></td><td>free</td></tr><tr><td>Serious offline editing</td><td>Inkscape</td><td>free</td></tr><tr><td>Professional work</td><td><a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a></td><td>subscription</td></tr><tr><td>One‑line edit</td><td>text editor</td><td>free</td></tr></tbody></table></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Task</th><th>Tool</th><th>Price</th></tr></thead><tbody><tr><td>View</td><td>any browser</td><td>free</td></tr><tr><td>Recolor, tweak</td><td><a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>free</td></tr><tr><td>Serious offline editing</td><td>Inkscape</td><td>free</td></tr><tr><td>Professional work</td><td><a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>subscription</td></tr><tr><td>One‑line edit</td><td>text editor</td><td>free</td></tr></tbody></table></div>
       <p>Notice what's missing from the table — and that's no accident.</p>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>What NOT to open SVG with</span></div><div class="callout-body"><ul>
       <li><strong>Paint and the default &quot;Photos&quot;</strong> — either won't open it or will rasterize on save, killing the vector.</li>
-      <li><strong><a href="/en/logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a></strong> — opens it but immediately turns it to raster: it's a raster editor, vector doesn't survive there.</li>
+      <li><strong><a href="/en/logos/design/photoshop/" target="_blank" rel="noopener">Photoshop<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/photoshop.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — opens it but immediately turns it to raster: it's a raster editor, vector doesn't survive there.</li>
       <li><strong>Word and PowerPoint</strong> — you can insert an SVG into a document, but not edit the vector inside.</li>
       </ul>
       <p>The logic is one: anything that turns shapes into pixels on save destroys the format's main property.</p></div></div>
       <h2 id="common-questions">Common questions</h2>
       <p>SVG's dual nature spawns a couple of recurring questions — let's settle them so you don't guess.</p>
-      <p><strong>Why a black square instead of a picture?</strong> Most likely the shapes have no fill set and the renderer used black by default, or the file uses CSS variables only the source site understands. Open it in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> — it shows the layer structure and the real colors.</p>
+      <p><strong>Why a black square instead of a picture?</strong> Most likely the shapes have no fill set and the renderer used black by default, or the file uses CSS variables only the source site understands. Open it in <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — it shows the layer structure and the real colors.</p>
       <p><strong>Is SVG safe?</strong> From a trusted source — yes. But technically an SVG can contain scripts, so someone else's SVG from a random place shouldn't be inlined into your site — more in the article on <a href="/en/blog/kak-vstavit-svg-na-sajt/" target="_blank" rel="noopener">embedding SVG on a website</a>.</p>
       <p><strong>How to open SVG in Word or PowerPoint?</strong> Modern Office inserts SVG directly: Insert → Pictures → choose the file; basic operations follow (size, rotation, color change). Pre-2016 versions don't understand SVG — convert to PNG for them.</p>
       <p><strong>An SVG from the internet won't open at all.</strong> Check that the file itself downloaded: an HTML page often saves in its place (&quot;Save link as&quot; sometimes saves the page). Open it in a text editor: if it starts with <code>&lt;!DOCTYPE html&gt;</code>, it's a page — look for the direct <code>.svg</code> link.</p>
@@ -361,10 +365,10 @@ window.yaContextCb.push(() => {
       <h2 id="where-broken-svgs-come-from">Where &quot;broken&quot; SVGs come from</h2>
       <p>Worth knowing separately why an outwardly correct file suddenly misbehaves — it saves hours of diagnosis. Every cause boils down to the &quot;text describes the picture&quot; link being broken somewhere:</p>
       <ul>
-      <li><strong>Colors moved into CSS classes.</strong> Some editors write colors into a <code>&lt;style&gt;</code> block with classes. The file is valid, but some programs (and old Office) ignore the styles — the picture goes black. Fix: re‑save through <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, which moves styles into shape attributes.</li>
+      <li><strong>Colors moved into CSS classes.</strong> Some editors write colors into a <code>&lt;style&gt;</code> block with classes. The file is valid, but some programs (and old Office) ignore the styles — the picture goes black. Fix: re‑save through <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, which moves styles into shape attributes.</li>
       <li><strong>Live text instead of curves.</strong> If a <code>&lt;text&gt;</code> tag stays in the SVG and the needed font isn't on the machine, the caption shifts or renders in a wrong font. A properly prepared logo stores text converted to curves.</li>
       <li><strong>External links.</strong> SVG can reference images and fonts by URL — moving the file or losing internet makes those pieces vanish.</li>
-      <li><strong>A cropped <code>viewBox</code>.</strong> After manual edits, shapes can end up outside the visible area — the file looks empty though the data is there. <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a> shows all content, including what's off‑frame.</li>
+      <li><strong>A cropped <code>viewBox</code>.</strong> After manual edits, shapes can end up outside the visible area — the file looks empty though the data is there. <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> shows all content, including what's off‑frame.</li>
       </ul>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
@@ -377,27 +381,49 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="the-bottom-line">The bottom line</h2>
-      <p>All of SVG's apparent fussiness is the flip side of its convenience: it's a picture and text at once, so you view it with what draws from tags (a browser) and edit it with what understands vector (<a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma</a>, Inkscape, <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>). And &quot;opened as text&quot; is simply the format's nature. Unlike most graphics, working with SVG requires buying no program at all.</p>
+      <p>All of SVG's apparent fussiness is the flip side of its convenience: it's a picture and text at once, so you view it with what draws from tags (a browser) and edit it with what understands vector (<a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, Inkscape, <a href="/en/logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>). And &quot;opened as text&quot; is simply the format's nature. Unlike most graphics, working with SVG requires buying no program at all.</p>
       <p>And the most common reason to open an SVG — just to change a logo's color — is handled with no editor at all: in our <a href="/en/logos/" target="_blank" rel="noopener">logo catalog</a> the color editor is built right into every brand's page.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/kak-uznat-shrift-logotipa/" data-date="2026-08-13" data-views="1">
+          <a class="blog-card" href="/en/blog/analiz-ca-po-otzyvam-konkurentov/" data-date="2026-08-14" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Fonts</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16" /><path d="M22 9v7" /><path d="M3.304 13h6.392" /><circle cx="18.5" cy="12.5" r="3.5" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Marketing</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">How-to</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            12
+          </div>
+          </div>
+          <div class="blog-card-title">How to Scrape Competitor Reviews in 2 Minutes and Build Audience Research From Them</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-uznat-shrift-logotipa/" data-date="2026-08-13" data-views="6">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Fonts</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 16 4.039-9.69a.5.5 0 0 1 .923 0L11 16" /><path d="M22 9v7" /><path d="M3.304 13h6.392" /><circle cx="18.5" cy="12.5" r="3.5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
           <div class="blog-card-title">How to Identify a Font From a Logo or Website — Every Working Method</div>
@@ -405,20 +431,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-ubrat-fon-s-kartinki/" data-date="2026-08-12" data-views="0">
+      <a class="blog-card" href="/en/blog/kak-ubrat-fon-s-kartinki/" data-date="2026-08-12" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Formats</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Formats</span><span class="blog-card-tag">Tools</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3" /><path d="M8.12 8.12 12 12" /><path d="M20 4 8.12 15.88" /><circle cx="6" cy="18" r="3" /><path d="M14.8 14.8 20 20" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            8
           </div>
           </div>
           <div class="blog-card-title">How to Remove a Background From an Image — 6 Free Ways</div>
@@ -426,20 +452,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="0">
+      <a class="blog-card" href="/en/blog/kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="15">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="7" x="3" y="3" rx="1" /><rect width="9" height="7" x="3" y="14" rx="1" /><rect width="5" height="7" x="16" y="14" rx="1" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="7" x="3" y="3" rx="1" /><rect width="9" height="7" x="3" y="14" rx="1" /><rect width="5" height="7" x="16" y="14" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            15
           </div>
           </div>
           <div class="blog-card-title">How to Make a Logo in Canva — and Where It Falls Short</div>
@@ -447,65 +473,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-sdelat-logotip-v-illustrator/" data-date="2026-08-10" data-views="1">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">How-To</span><span class="blog-card-tag">Tools</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z" /><path d="M16 8 2 22" /><path d="M17.5 15H9" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
-          </div>
-          </div>
-          <div class="blog-card-title">How to Make a Logo in Adobe Illustrator — Step by Step</div>
-          
-          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="/en/blog/kak-pisat-o-logotipe/" data-date="2026-09-13" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Copy</span><span class="blog-card-tag">Practice</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">AI</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">How to Write About a Logo: Why Strong Marks Fail on Words</div>
+          <div class="blog-card-title">AI Company Logos — How Neural Network Services Brand Themselves</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/variativnye-shrifty/" data-date="2026-07-30" data-views="0">
+      <a class="blog-card" href="/en/blog/chto-takoe-genmodzi/" data-date="2026-07-22" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Typography</span><span class="blog-card-tag">2026 Trends</span><span class="blog-card-tag">Web</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" /><path d="M12 19H3" /><path d="M14 3v4" /><path d="M16 17v4" /><path d="M21 12h-9" /><path d="M21 19h-5" /><path d="M21 5h-7" /><path d="M8 10v4" /><path d="M8 12H3" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Apple</span><span class="blog-card-tag">AI</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" /><path d="m14 7 3 3" /><path d="M5 6v4" /><path d="M19 14v4" /><path d="M10 2v2" /><path d="M7 8H3" /><path d="M21 16h-4" /><path d="M11 3H9" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>30.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>22.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Variable Fonts — What They Are and Why They Matter in 2026</div>
+          <div class="blog-card-title">What Are Genmoji — the AI‑Generated Emoji Explained</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -523,25 +528,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -618,6 +615,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -663,11 +661,11 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
-<script type="module" src="/js/blog-svg-viewer.min.js?v=20260808"></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
+<script type="module" src="/js/blog-svg-viewer.min.js?v=20260910"></script>
 </body>
 </html>

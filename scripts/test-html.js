@@ -45,7 +45,8 @@ const BASE_URL  = 'https://trace-logos.ru';
 // templates/ полон {{...}} by design; остальное — служебное и чужие зеркала.
 const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
-  'figna-plagins', 'supabase', 'sanitizer', 'upptime', 'assets',
+  'figma-plugins', 'supabase', 'sanitizer', 'upptime', 'assets',
+  'trace-typograf',
 ]);
 
 // Единственное исключение: файлы-подтверждения владения доменом для сторонних
@@ -103,6 +104,16 @@ function main() {
     const html = fs.readFileSync(page, 'utf8');
     const at   = msg => fail(`${rel}: ${msg}`);
 
+    // Редирект-стаб (build-redirect-pages.js) — статический эквивалент 301 для
+    // GitHub Pages, у которого нет vercel.json redirects. Meta refresh — точный,
+    // невозможный по случайности маркер. У стаба нет собственного контента,
+    // так что он освобождён от 4 (description), 6 (h1), 7 (уникальность
+    // canonical — его canonical намеренно дублирует canonical destination,
+    // в этом весь смысл редиректа, не баг) и 9 (Organization в JSON-LD).
+    // Не noindex: смысл canonical здесь как раз в передаче сигнала на
+    // destination, а noindex его по факту отменяет.
+    const isRedirectStub = /<meta[^>]+http-equiv="refresh"/i.test(html);
+
     // 1. Незамещённые плейсхолдеры. Учитываем только UPPER_SNAKE — это формат
     //    билд-переменных; JS-шаблоны в <script> используют ${…}.
     const ph = [...new Set([...html.matchAll(/\{\{([A-Z][A-Z0-9_]*)\}\}/g)].map(m => m[1]))];
@@ -119,8 +130,9 @@ function main() {
     }
 
     // 9. Страница логотипа обязана нести Organization в @graph (E-E-A-T/publisher —
-    //    см. комментарий в шапке файла).
-    if (isLogoPage(rel) && !hasOrganization) at('нет "@type": "Organization" в JSON-LD @graph');
+    //    см. комментарий в шапке файла). Не применяется к редирект-стабам — у
+    //    них нет собственного контента, откуда взяться JSON-LD.
+    if (isLogoPage(rel) && !hasOrganization && !isRedirectStub) at('нет "@type": "Organization" в JSON-LD @graph');
 
     // 3. Ровно один непустой <title>.
     const titles = [...html.matchAll(/<title[^>]*>([\s\S]*?)<\/title>/gi)];
@@ -136,19 +148,19 @@ function main() {
 
     // 4. meta description — только у индексируемых: у noindex-страницы (админка,
     //    прототип) сниппета в выдаче не будет, требовать описание бессмысленно.
-    if (!noindex) {
+    if (!noindex && !isRedirectStub) {
       const desc = attr(html, /<meta[^>]+name="description"[^>]+content="([^"]*)"/i)
                 ?? attr(html, /<meta[^>]+content="([^"]*)"[^>]+name="description"/i);
       if (desc === null)  at('нет <meta name="description">');
       else if (!desc)     at('пустой <meta name="description">');
     }
-    if (canonical) {
+    if (canonical && !isRedirectStub) {
       if (!canonicals.has(canonical)) canonicals.set(canonical, []);
       canonicals.get(canonical).push(rel);
     }
 
     // 6. Ровно один <h1> — только у индексируемых страниц.
-    if (!noindex) {
+    if (!noindex && !isRedirectStub) {
       const h1 = [...html.matchAll(/<h1[\s>]/gi)].length;
       if (h1 === 0)     at('нет <h1>');
       else if (h1 > 1)  at(`${h1} тегов <h1>`);

@@ -53,7 +53,20 @@ export function openSearchSelection() {
   return true;
 }
 
-const STOP_WORDS = new Set(['логотип', 'лого', 'logo', 'logotype', 'логотипы']);
+// Единый источник правды для разбора запроса и подсчёта релевантности — им
+// пользуется не только этот модуль (сетка каталога), но и home-search.js
+// (живой поиск на главной) и header-search.js (живой поиск в шапке SEO-страниц),
+// чтобы стоп-слова и правила совпадения не расходились по трём копиям.
+export const STOP_WORDS = new Set(['логотип', 'лого', 'logo', 'logotype', 'логотипы']);
+
+// q → { words, rawWords }. words — для подсчёта релевантности (без дефисов,
+// без стоп-слов); rawWords — для highlight() на исходном написании запроса.
+export function tokenizeQuery(q) {
+  const trimmed = q.trim();
+  const words = trimmed.toLowerCase().replace(/-/g, '').split(/\s+/).filter(w => w && !STOP_WORDS.has(w));
+  const rawWords = trimmed.split(/\s+/).filter(Boolean);
+  return { words, rawWords };
+}
 
 export function scoreWord(word, haystack) {
   if (haystack.includes(word)) return 100;
@@ -95,13 +108,13 @@ function nameBonus(w, nameLow) {
 }
 
 // Words don't all have to match (AND) — a query like "скачать вк" or "значок
-// вк" carries filler words no tag will ever contain. Any card with at least
-// one matching word qualifies; cards matching every word are ranked above
+// вк" carries filler words no tag will ever contain. Any item with at least
+// one matching word qualifies; items matching every word are ranked above
 // partial matches via the matched/total fraction, so noise words can't drown
 // out a full match without needing a hand-maintained stop-word list.
-function scoreCard(words, card) {
-  const haystack = card.dataset.search;
-  const nameLow = card._item.name.toLowerCase().replace(/-/g, '');
+// haystack/nameLow are plain strings so this also works for JSON items
+// (home-search.js, header-search.js), not just DOM cards.
+export function scoreQuery(words, haystack, nameLow) {
   let total = 0;
   let matched = 0;
   for (const w of words) {
@@ -112,6 +125,10 @@ function scoreCard(words, card) {
   }
   if (matched === 0) return 0;
   return matched === words.length ? total : total * matched / words.length;
+}
+
+function scoreCard(words, card) {
+  return scoreQuery(words, card.dataset.search, card._item.name.toLowerCase().replace(/-/g, ''));
 }
 
 function updateSearchCount(visible, hasQuery) {
@@ -125,8 +142,7 @@ function updateSearchCount(visible, hasQuery) {
 }
 
 export function filterCards(q, { animate = false } = {}) {
-  const words = q.trim().toLowerCase().replace(/-/g, '').split(/\s+/).filter(w => w && !STOP_WORDS.has(w));
-  const rawWords = q.trim().split(/\s+/).filter(Boolean);
+  const { words, rawWords } = tokenizeQuery(q);
   const hasQuery = words.length > 0;
   let visibleCardCount = 0;
   const hitSections = [];

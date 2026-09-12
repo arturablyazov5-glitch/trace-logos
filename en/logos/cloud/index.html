@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -167,35 +169,23 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/base.css?v=20260808">
-  <link rel="stylesheet" href="/css/sidebar.css?v=20260808">
-  <link rel="stylesheet" href="/css/search.css?v=20260808">
-  <link rel="stylesheet" href="/css/cards.css?v=20260808">
-  <link rel="stylesheet" href="/css/detail.css?v=20260808">
-  <link rel="stylesheet" href="/css/support-btn.css?v=20260808">
-  <link rel="stylesheet" href="/css/color.css?v=20260808">
-  <link rel="stylesheet" href="/css/picker.css?v=20260808">
-  <link rel="stylesheet" href="/css/modals.css?v=20260808">  <link rel="stylesheet" href="/css/filters.css?v=20260808">
-  <link rel="stylesheet" href="/css/mobile.css?v=20260808">
-  <link rel="stylesheet" href="/css/confetti.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-amongus.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-doodlejump.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-google.css?v=20260808">
-  <link rel="stylesheet" href="/css/easter-minicrewmate.css?v=20260808">
-  <link rel="stylesheet" href="/css/microanim.css?v=20260808">
-  <link rel="stylesheet" href="/css/category-seo.css?v=20260808">
+  <link rel="stylesheet" href="/css/catalog.bundle.css?v=20260910">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
-  <script src="/components/support-btn.min.js?v=20260808" defer></script>
-  <script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-  <script src="/components/site-header.min.js?v=20260808" defer></script>
-  <script src="/components/section-nav.min.js?v=20260808" defer></script>
-  <script src="/components/copy-emoji-btn.min.js?v=20260808" defer></script>
-  <script src="/components/sidebar-contact.min.js?v=20260808" defer></script>
-  <script src="/components/help-modal.min.js?v=20260808" defer></script>
+  <script src="/components/support-btn.min.js?v=20260910" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="/components/site-chrome.min.js?v=20260910" defer></script>
+  <script src="/components/site-header.min.js?v=20260910" defer></script>
+  <script src="/components/section-nav.min.js?v=20260910" defer></script>
+  <script src="/components/copy-emoji-btn.min.js?v=20260910" defer></script>
+  <script src="/components/sidebar-contact.min.js?v=20260910" defer></script>
+  <script src="/components/help-modal.min.js?v=20260910" defer></script>
   <!-- см. комментарий в templates/partials/nav-header.html -->
-  <link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-  <script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
+  <link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260910">
+  <script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
   <script>
     window.__MANIFEST_BASE__ = '/logos/';
     window.__ASSET_SECTION__ = 'logos';
@@ -203,8 +193,8 @@
     window.__CAT_SLUG__ = 'cloud';
     window.__ECO_SLUG__ = '';
   </script>
-  <script type="module" src="/js/main.min.js?v=20260808"></script>
-  <script type="module" src="/js/search-placeholder.min.js?v=20260808"></script>
+  <script type="module" src="/js/main.min.js?v=20260910"></script>
+  <script type="module" src="/js/search-placeholder.min.js?v=20260910"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -271,7 +261,7 @@
   <div class="center-body">
     <main>
 
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Cloud &amp; Storage</h1><div class="grid"><a class="card" href="/en/logos/cloud/googledrive/"><div class="icon-wrap"><img src="/assets/logos/previews/google-drive.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Google Drive" title="Icon/Cloud/GoogleDrive"></div><div class="label">Google Drive</div><div class="card-path">Icon/Cloud/GoogleDrive</div></a><a class="card" href="/en/logos/cloud/icloud/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/icloud.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo iCloud" title="Icon/Cloud/iCloud"></div><div class="label">iCloud</div><div class="card-path">Icon/Cloud/iCloud</div></a><a class="card" href="/en/logos/cloud/applephotos/"><div class="icon-wrap"><img src="/assets/logos/previews/apple-Photos.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Apple Photos" title="Icon/Cloud/ApplePhotos"></div><div class="label">Apple Photos</div><div class="card-path">Icon/Cloud/ApplePhotos</div></a><a class="card" href="/en/logos/cloud/applefiles/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/files.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Apple Files" title="Icon/Cloud/AppleFiles"></div><div class="label">Apple Files</div><div class="card-path">Icon/Cloud/AppleFiles</div></a><a class="card" href="/en/logos/cloud/airdrop/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/airdrop.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo AirDrop" title="Icon/Cloud/AirDrop"></div><div class="label">AirDrop</div><div class="card-path">Icon/Cloud/AirDrop</div></a><a class="card" href="/en/logos/cloud/applecontacts/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/contacts.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Contacts" title="Icon/Cloud/AppleContacts"></div><div class="label">Contacts</div><div class="card-path">Icon/Cloud/AppleContacts</div></a><a class="card" href="/en/logos/cloud/googlephotos/"><div class="icon-wrap"><img src="/assets/logos/previews/google-photos.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Google Photos" title="Icon/Cloud/GooglePhotos"></div><div class="label">Google Photos</div><div class="card-path">Icon/Cloud/GooglePhotos</div></a><a class="card" href="/en/logos/cloud/onedrive/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-onedrive.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo OneDrive" title="Icon/Cloud/OneDrive"></div><div class="label">OneDrive</div><div class="card-path">Icon/Cloud/OneDrive</div></a><a class="card" href="/en/logos/cloud/dropbox/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/dropbox.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Dropbox" title="Icon/Cloud/Dropbox"></div><div class="label">Dropbox</div><div class="card-path">Icon/Cloud/Dropbox</div></a><a class="card" href="/en/logos/cloud/cyberduck/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/Cyberduck.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Cyberduck" title="Icon/Cloud/Cyberduck"></div><div class="label">Cyberduck</div><div class="card-path">Icon/Cloud/Cyberduck</div></a><a class="card" href="/en/logos/cloud/archiveutility/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/archive-utility.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Archive Utility" title="Icon/Cloud/ArchiveUtility"></div><div class="label">Archive Utility</div><div class="card-path">Icon/Cloud/ArchiveUtility</div></a><a class="card" href="/en/logos/cloud/yandexcloud/"><div class="icon-wrap"><img src="/assets/logos/previews/yandex-cloud.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Yandex Cloud" title="Icon/Cloud/YandexCloud"></div><div class="label">Yandex Cloud</div><div class="card-path">Icon/Cloud/YandexCloud</div></a><a class="card" href="/en/logos/cloud/yandexdisk/"><div class="icon-wrap"><img src="/assets/logos/previews/yandex-disk.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Logo Yandex Disk" title="Icon/Cloud/YandexDisk"></div><div class="label">Yandex Disk</div><div class="card-path">Icon/Cloud/YandexDisk</div></a></div></div></div></div>
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Cloud &amp; Storage</h1><div class="grid"><a class="card" href="/en/logos/cloud/googledrive/"><div class="icon-wrap"><img src="/assets/logos/previews/google-drive.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Google Drive" title="Icon/Cloud/GoogleDrive"></div><div class="label">Google Drive</div><div class="card-path">Icon/Cloud/GoogleDrive</div></a><a class="card" href="/en/logos/cloud/icloud/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/icloud.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo iCloud" title="Icon/Cloud/iCloud"></div><div class="label">iCloud</div><div class="card-path">Icon/Cloud/iCloud</div></a><a class="card" href="/en/logos/cloud/applephotos/"><div class="icon-wrap"><img src="/assets/logos/previews/apple-Photos.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Apple Photos" title="Icon/Cloud/ApplePhotos"></div><div class="label">Apple Photos</div><div class="card-path">Icon/Cloud/ApplePhotos</div></a><a class="card" href="/en/logos/cloud/applefiles/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/files.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Apple Files" title="Icon/Cloud/AppleFiles"></div><div class="label">Apple Files</div><div class="card-path">Icon/Cloud/AppleFiles</div></a><a class="card" href="/en/logos/cloud/airdrop/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/airdrop.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo AirDrop" title="Icon/Cloud/AirDrop"></div><div class="label">AirDrop</div><div class="card-path">Icon/Cloud/AirDrop</div></a><a class="card" href="/en/logos/cloud/applecontacts/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/contacts.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Contacts" title="Icon/Cloud/AppleContacts"></div><div class="label">Contacts</div><div class="card-path">Icon/Cloud/AppleContacts</div></a><a class="card" href="/en/logos/cloud/googlephotos/"><div class="icon-wrap"><img src="/assets/logos/previews/google-photos.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Google Photos" title="Icon/Cloud/GooglePhotos"></div><div class="label">Google Photos</div><div class="card-path">Icon/Cloud/GooglePhotos</div></a><a class="card" href="/en/logos/cloud/onedrive/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-onedrive.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo OneDrive" title="Icon/Cloud/OneDrive"></div><div class="label">OneDrive</div><div class="card-path">Icon/Cloud/OneDrive</div></a><a class="card" href="/en/logos/cloud/dropbox/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/dropbox.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Dropbox" title="Icon/Cloud/Dropbox"></div><div class="label">Dropbox</div><div class="card-path">Icon/Cloud/Dropbox</div></a><a class="card" href="/en/logos/cloud/cyberduck/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/Cyberduck.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Cyberduck" title="Icon/Cloud/Cyberduck"></div><div class="label">Cyberduck</div><div class="card-path">Icon/Cloud/Cyberduck</div></a><a class="card" href="/en/logos/cloud/archiveutility/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/archive-utility.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Logo Archive Utility" title="Icon/Cloud/ArchiveUtility"></div><div class="label">Archive Utility</div><div class="card-path">Icon/Cloud/ArchiveUtility</div></a><a class="card" href="/en/logos/cloud/yandexcloud/"><div class="icon-wrap"><img src="/assets/logos/previews/yandex-cloud.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Yandex Cloud" title="Icon/Cloud/YandexCloud"></div><div class="label">Yandex Cloud</div><div class="card-path">Icon/Cloud/YandexCloud</div></a><a class="card" href="/en/logos/cloud/yandexdisk/"><div class="icon-wrap"><img src="/assets/logos/previews/yandex-disk.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Logo Yandex Disk" title="Icon/Cloud/YandexDisk"></div><div class="label">Yandex Disk</div><div class="card-path">Icon/Cloud/YandexDisk</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Nothing here yet — section in development</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

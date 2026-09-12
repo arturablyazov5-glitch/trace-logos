@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Размеры логотипа для сайта и соцсетей — полная шпаргалка 2026 · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(139 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(179 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(229 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(289 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(139 70% 38%) 0%, hsl(289 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /><path d="m14.5 12.5 2-2" /><path d="m11.5 9.5 2-2" /><path d="m8.5 6.5 2-2" /><path d="m17.5 15.5 2-2" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(18 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(58 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(108 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(168 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(18 70% 38%) 0%, hsl(168 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" /><path d="m14.5 12.5 2-2" /><path d="m11.5 9.5 2-2" /><path d="m8.5 6.5 2-2" /><path d="m17.5 15.5 2-2" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-10">10 июля 2026</time>
@@ -202,21 +206,21 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            23
+	            163
 	          </span>
         </div>
         <h1>Размеры логотипа для сайта и соцсетей — полная шпаргалка 2026</h1>
       </header>
       <div class="blog-body">
-        <p>«Пришлите логотип для сайта» — а какого размера? В пикселях ответа нет. В шапке сайта логотип занимает 120‑200 пикселей, в аватарке <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> его сожмут до кружочка, а в поисковой выдаче до 16 пикселей. Один и тот же знак живёт в десятке размеров одновременно. Собрали шпаргалку по всем основным площадкам и правилам подготовки файлов.</p>
+        <p>«Пришлите логотип для сайта» — а какого размера? В пикселях ответа нет. В шапке сайта логотип занимает 120‑200 пикселей, в аватарке <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> его сожмут до кружочка, а в поисковой выдаче до 16 пикселей. Один и тот же знак живёт в десятке размеров одновременно. Собрали шпаргалку по всем основным площадкам и правилам подготовки файлов.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Для сайта — <strong>SVG, высота 28‑40 px в шапке</strong>, размер не важен, вектор чёткий везде. Для соцсетей — <strong>PNG‑квадрат от 512×512</strong> с крупным знаком по центру: площадки сами нарежут его в свои размеры. Главная ошибка — грузить в аватарку горизонтальный логотип с текстом: после обрезки в круг от него остаётся нечитаемый огрызок.</p></div></div>
       <h2 id="логотип-на-сайте">Логотип на сайте</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Место</th><th>Рекомендация</th></tr></thead><tbody><tr><td>Шапка (десктоп)</td><td>высота 28‑40 px, ширина до ~200 px</td></tr><tr><td>Шапка (мобайл)</td><td>высота 24‑32 px</td></tr><tr><td>Подвал</td><td>можно мельче, часто монохром</td></tr><tr><td>Фавикон</td><td>16‑48 px, отдельный упрощённый знак</td></tr></tbody></table></div>
       <p>Три правила:</p>
       <ol>
-      <li><strong>Формат — SVG.</strong> Один файл закрывает все плотности экранов. Если только PNG — берите вдвое больше отображаемого размера, иначе на ретине будет мыло (почему, разбирали в статье <a href="../pochemu-logotip-razmytyj/" target="_blank" rel="noopener">про размытые логотипы</a>).</li>
-      <li><strong>Задавайте высоту, а не ширину.</strong> Логотипы разных пропорций в шапке выравнивают по высоте. Так они смотрятся соразмерно навигации.</li>
-      <li><strong>Не растягивайте на всю шапку.</strong> Гигантский логотип признак сайта из 2008‑го. Он должен быть заметен, но не доминировать.</li>
+      <li><strong>Формат — SVG.</strong> Один файл закрывает все плотности экранов. Если только PNG — берите вдвое больше отображаемого размера, иначе на ретине будет мыло (почему, разбирали в статье <a href="../pochemu-logotip-razmytyj/" target="_blank" rel="noopener">про размытые логотипы</a>).</li>
+      <li><strong>Задавайте высоту, а не ширину.</strong> Логотипы разных пропорций в шапке выравнивают по высоте. Так они смотрятся соразмерно навигации.</li>
+      <li><strong>Не растягивайте на всю шапку.</strong> Гигантский логотип признак сайта из 2008‑го. Он должен быть заметен, но не доминировать.</li>
       </ol>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
@@ -229,15 +233,15 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="аватарки-соцсетей-и-мессенджеров">Аватарки соцсетей и мессенджеров</h2>
-      <p>Площадки просят квадрат, а показывают часто круг. Поэтому знак должен уверенно жить в круге: без важных деталей по углам.</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Площадка</th><th>Загружаемый размер</th><th>Показ</th></tr></thead><tbody><tr><td><a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a></td><td>от 512×512</td><td>круг</td></tr><tr><td><a href="../../logos/social/vk/" target="_blank" rel="noopener">VK</a></td><td>от 400×400</td><td>круг</td></tr><tr><td><a href="../../logos/media/youtube/" target="_blank" rel="noopener">YouTube</a></td><td>800×800</td><td>круг</td></tr><tr><td><a href="../../logos/social/whatsapp/" target="_blank" rel="noopener">WhatsApp</a></td><td>500×500</td><td>круг</td></tr><tr><td><a href="../../logos/social/x/" target="_blank" rel="noopener">X (Twitter)</a></td><td>400×400</td><td>круг</td></tr><tr><td><a href="../../logos/media/yandexdzen/" target="_blank" rel="noopener">Дзен</a></td><td>от 300×300</td><td>круг</td></tr></tbody></table></div>
+      <p>Площадки просят квадрат, а показывают часто круг. Поэтому знак должен уверенно жить в круге: без важных деталей по углам.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Площадка</th><th>Загружаемый размер</th><th>Показ</th></tr></thead><tbody><tr><td><a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>от 512×512</td><td>круг</td></tr><tr><td><a href="../../logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>от 400×400</td><td>круг</td></tr><tr><td><a href="../../logos/media/youtube/" target="_blank" rel="noopener">YouTube<img class="blog-mention-icon" src="../../assets/logos/svgs/youtube.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>800×800</td><td>круг</td></tr><tr><td><a href="../../logos/social/whatsapp/" target="_blank" rel="noopener">WhatsApp<img class="blog-mention-icon" src="../../assets/logos/svgs/whatsapp.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>500×500</td><td>круг</td></tr><tr><td><a href="../../logos/social/x/" target="_blank" rel="noopener">X (Twitter)<img class="blog-mention-icon" src="../../assets/logos/svgs/x.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>400×400</td><td>круг</td></tr><tr><td><a href="../../logos/media/yandexdzen/" target="_blank" rel="noopener">Дзен<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-dzen.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>от 300×300</td><td>круг</td></tr></tbody></table></div>
       <div class="callout callout-danger"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6M9 9l6 6"/></svg><span>Классическая ошибка</span></div><div class="callout-body"><p>Загрузить в аватарку полный горизонтальный логотип «знак + название». После вписывания в круг текст обрезается или становится микроскопическим. В аватарку идёт <strong>только знак</strong>: иконка, буква или символ, занимающий 60‑80% площади квадрата.</p></div></div>
       <p>Разбор конкретно под Telegram‑канал (с обрезкой в круг и читаемостью в 40 пикселях) — в <a href="../logotip-dlya-telegram-kanala/" target="_blank" rel="noopener">отдельной статье про аватарку Telegram‑канала</a>. Полное оформление YouTube‑канала — обложка, водяной знак, безопасные зоны — в гиде по оформлению YouTube‑канала.</p>
       <h2 id="обложки-и-превью">Обложки и превью</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Место</th><th>Размер</th></tr></thead><tbody><tr><td>OG‑превью (превью ссылки в соцсетях)</td><td>1200×630</td></tr><tr><td>Обложка сообщества <a href="../../logos/social/vk/" target="_blank" rel="noopener">VK</a></td><td>1920×768</td></tr><tr><td>Шапка канала <a href="../../logos/media/youtube/" target="_blank" rel="noopener">YouTube</a></td><td>2560×1440 (безопасная зона 1546×423)</td></tr><tr><td>Обложка <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a>-канала</td><td>не поддерживается, только аватар</td></tr></tbody></table></div>
-      <p>OG‑превью — недооценённая точка контакта: именно эту картинку видят, когда вашей ссылкой делятся в <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram</a> или <a href="../../logos/social/vk/" target="_blank" rel="noopener">VK</a>. Логотип на ней должен быть в безопасной зоне по центру: края превью подрезаются на разных устройствах.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Место</th><th>Размер</th></tr></thead><tbody><tr><td>OG‑превью (превью ссылки в соцсетях)</td><td>1200×630</td></tr><tr><td>Обложка сообщества <a href="../../logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>1920×768</td></tr><tr><td>Шапка канала <a href="../../logos/media/youtube/" target="_blank" rel="noopener">YouTube<img class="blog-mention-icon" src="../../assets/logos/svgs/youtube.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>2560×1440 (безопасная зона 1546×423)</td></tr><tr><td>Обложка <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>-канала</td><td>не поддерживается, только аватар</td></tr></tbody></table></div>
+      <p>OG‑превью — недооценённая точка контакта: именно эту картинку видят, когда вашей ссылкой делятся в <a href="../../logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="../../assets/logos/svgs/telegram.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> или <a href="../../logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="../../assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Логотип на ней должен быть в безопасной зоне по центру: края превью подрезаются на разных устройствах.</p>
       <h2 id="логотип-в-письмах">Логотип в письмах</h2>
-      <p>Почтовые клиенты — территория ограничений: SVG поддерживается плохо, поэтому здесь исключение из правила «всегда вектор».</p>
+      <p>Почтовые клиенты — территория ограничений: SVG поддерживается плохо, поэтому здесь исключение из правила «всегда вектор».</p>
       <ul>
       <li>Формат: <strong>PNG с прозрачным фоном</strong>.</li>
       <li>Ширина в вёрстке: 120‑200 px, файл вдвое больше (240‑400 px) для ретины.</li>
@@ -248,20 +252,20 @@ window.yaContextCb.push(() => {
       <h2 id="как-подготовить-комплект-за-10-минут">Как подготовить комплект за 10 минут</h2>
       <ol>
       <li>Возьмите SVG‑исходник логотипа и отдельно SVG знака (без текста).</li>
-      <li>Из знака экспортируйте PNG 512×512 и 1024×1024 — это закроет все аватарки. Те же 1024×1024 нужны для иконки мобильного приложения (App Store требует ровно этот размер) — правила и подводные камни разбирали в <a href="../ikonka-prilozheniya/" target="_blank" rel="noopener">гиде по иконке приложения</a>.</li>
+      <li>Из знака экспортируйте PNG 512×512 и 1024×1024 — это закроет все аватарки. Те же 1024×1024 нужны для иконки мобильного приложения (App Store требует ровно этот размер) — правила и подводные камни разбирали в <a href="../ikonka-prilozheniya/" target="_blank" rel="noopener">гиде по иконке приложения</a>.</li>
       <li>Из полного логотипа — PNG шириной 400 px для писем и документов.</li>
-      <li>Проверьте каждую версию на светлом и тёмном фоне: если знак пропадает на тёмном, нужна светлая версия.</li>
+      <li>Проверьте каждую версию на светлом и тёмном фоне: если знак пропадает на тёмном, нужна светлая версия.</li>
       </ol>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Правило запаса</span></div><div class="callout-body"><p>Всегда храните растровые версии в 2 раза больше, чем требует площадка. Уменьшить — секунда, увеличить без потерь — невозможно. А лучше храните вектор и генерируйте растр по запросу.</p></div></div>
       <h2 id="логотип-в-поисковой-выдаче-и-сниппетах">Логотип в поисковой выдаче и сниппетах</h2>
-      <p>Ещё два места, где живёт ваш логотип и о которых часто забывают:</p>
+      <p>Ещё два места, где живёт ваш логотип и о которых часто забывают:</p>
       <ul>
       <li><strong>Фавикон в выдаче</strong> — Яндекс и Google показывают иконку сайта рядом со сниппетом; без неё место занимает серый глобус. Требования и сборка — в <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">отдельном гиде по фавиконам</a>.</li>
-      <li><strong>Логотип организации для <a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a> или <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекса</a></strong> — поисковики берут его из микроразметки <code>Organization</code> (поле <code>logo</code>) и карточек компаний. Рекомендации: квадратное или близкое к квадрату изображение от 112×112, доступное по постоянному URL. Это тот логотип, который появляется в панели знаний и карточке организации.</li>
-      <li><strong>OG‑разметка</strong> — превью ссылок собирается из <code>og:image</code> (1200×630). Если специальной OG‑картинки нет, соцсети возьмут случайное изображение со страницы — задайте её явно, поместив логотип в безопасную центральную зону.</li>
+      <li><strong>Логотип организации для <a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> или <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекса<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — поисковики берут его из микроразметки <code>Organization</code> (поле <code>logo</code>) и карточек компаний. Рекомендации: квадратное или близкое к квадрату изображение от 112×112, доступное по постоянному URL. Это тот логотип, который появляется в панели знаний и карточке организации.</li>
+      <li><strong>OG‑разметка</strong> — превью ссылок собирается из <code>og:image</code> (1200×630). Если специальной OG‑картинки нет, соцсети возьмут случайное изображение со страницы — задайте её явно, поместив логотип в безопасную центральную зону.</li>
       </ul>
       <h2 id="как-отдавать-логотип-в-разных-плотностях-srcset">Как отдавать логотип в разных плотностях: srcset</h2>
-      <p>Если вы верстаете сайт и вынуждены использовать PNG (например, логотип фотографический), отдавайте его в двух плотностях через <code>srcset</code> — браузер сам выберет версию под экран:</p>
+      <p>Если вы верстаете сайт и вынуждены использовать PNG (например, логотип фотографический), отдавайте его в двух плотностях через <code>srcset</code> — браузер сам выберет версию под экран:</p>
       <div class="blog-code">
         <div class="blog-code-head">
           <span class="blog-code-lang">код</span>
@@ -292,66 +296,25 @@ window.yaContextCb.push(() => {
       <p>На сайт — SVG и высота 28‑40 px, в соцсети — квадратный PNG от 512 px с одним только знаком, в письма — PNG с двойным запасом, в печать — вектор. И никогда не суйте горизонтальный логотип в круглую аватарку.</p>
       <p>Нужные размеры удобно получать из нашего <a href="../../logos/" target="_blank" rel="noopener">каталога логотипов</a>: каждый бренд лежит в SVG и PNG, а PNG при скачивании можно выбрать в нужном размере — от иконки до 4K.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../oformlenie-socsetej/" data-date="2026-09-08" data-views="0">
+          <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3v18" /><rect width="12" height="18" x="6" y="3" rx="2" /><path d="M22 3v18" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Оформление соцсетей — как превратить ленту в витрину бренда</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../logotipy-socsetej/" data-date="2026-08-27" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Логотипы социальных сетей — от градиента Instagram до буквы X</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-21" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
           <div class="blog-card-title">Логотипы мессенджеров — почему все выбирают пузырь и самолётик</div>
@@ -359,20 +322,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="1">
+      <a class="blog-card" href="../logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="11">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 21a8 8 0 0 0-16 0" /><circle cx="10" cy="8" r="5" /><path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            11
           </div>
           </div>
           <div class="blog-card-title">Логотип и обложка для сообщества ВКонтакте — размеры и оформление</div>
@@ -380,44 +343,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-igrovogo-brenda/" data-date="2026-09-04" data-views="1">
+      <a class="blog-card" href="../kak-sdelat-krugluyu-avatarku/" data-date="2026-08-09" data-views="21">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Соцсети</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="10" r="3" /><path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>09.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            21
+          </div>
+          </div>
+          <div class="blog-card-title">Как сделать круглую аватарку — чтобы ничего не обрезалось</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../istoriya-logotipa-vk/" data-date="2026-08-04" data-views="668">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            668
+          </div>
+          </div>
+          <div class="blog-card-title">История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../golos-brenda/" data-date="2026-08-15" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Игры</span><span class="blog-card-tag">Киберспорт</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 17a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2Z" /><path d="M6 15v-2" /><path d="M12 15V9" /><circle cx="12" cy="6" r="3" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Голос бренда</span><span class="blog-card-tag">Тексты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19v3" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><rect x="9" y="2" width="6" height="13" rx="3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
-          <div class="blog-card-title">Логотип для игрового бренда — энергия, агрессия и характер</div>
+          <div class="blog-card-title">Голос бренда (tone of voice) — как звучать узнаваемо</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-sbera/" data-date="2026-06-13" data-views="13">
+      <a class="blog-card" href="../firmennye-cveta-izvestnyh-brendov/" data-date="2026-06-10" data-views="114">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Сбер</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Ребрендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18v-7" /><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M3 22h18" /><path d="M6 18v-7" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Цвета</span><span class="blog-card-tag">Бренды</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z" /><circle cx="13.5" cy="6.5" r=".5" fill="currentColor" /><circle cx="17.5" cy="10.5" r=".5" fill="currentColor" /><circle cx="6.5" cy="12.5" r=".5" fill="currentColor" /><circle cx="8.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>13.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            13
+            114
           </div>
           </div>
-          <div class="blog-card-title">История логотипа Сбербанка — от копилки 1841 года до градиентного круга</div>
+          <div class="blog-card-title">Фирменные цвета известных брендов — HEX‑коды и где брать официальные</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -435,25 +440,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -530,6 +527,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -575,10 +573,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

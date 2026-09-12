@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как изменить цвет логотипа онлайн · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(134 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(174 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(224 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(284 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(134 70% 38%) 0%, hsl(284 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.622 17.897-10.68-2.913" /><path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z" /><path d="M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(14 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(54 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(104 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(164 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(14 70% 38%) 0%, hsl(164 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.622 17.897-10.68-2.913" /><path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z" /><path d="M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-03">3 июня 2026</time>
@@ -202,16 +206,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            8
+	            34
 	          </span>
         </div>
         <h1>Как изменить цвет логотипа онлайн</h1>
       </header>
       <div class="blog-body">
-        <p>Тёмный футер сайта, и на нём нужен белый логотип. Печать на визитке требует чёрного. Партнёрская страница в чужой палитре просит логотип в её цветах. Задача возникает постоянно, и ещё несколько лет назад ответ на неё был один: открыть <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator</a>, найти каждый узел и перекрасить вручную. Сегодня та же операция укладывается в минуту, причём без единой установленной программы, прямо в браузере. Дело тут в самом формате файла.</p>
+        <p>Тёмный футер сайта, и на нём нужен белый логотип. Печать на визитке требует чёрного. Партнёрская страница в чужой палитре просит логотип в её цветах. Задача возникает постоянно, и ещё несколько лет назад ответ на неё был один: открыть <a href="../../logos/design/illustrator/" target="_blank" rel="noopener">Illustrator<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/adobe-illustrator.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, найти каждый узел и перекрасить вручную. Сегодня та же операция укладывается в минуту, причём без единой установленной программы, прямо в браузере. Дело тут в самом формате файла.</p>
       <h2 id="почему-перекрасить-можно-только-вектор">Почему перекрасить можно только вектор</h2>
-      <p>Вся лёгкость держится на одном свойстве SVG: в нём <strong>цвет хранится отдельно от формы</strong>. Внутри тега <code>&lt;path&gt;</code> стоит атрибут вроде <code>fill=&quot;#005BFF&quot;</code>, отдельный параметр рядом с рисунком. Поменяли значение, и залилось иначе, а линии, кривые и пропорции остались нетронутыми. По сути вы правите текстовый файл.</p>
-      <p>У PNG всё устроено наоборот. Отсюда и вся разница. В растре цвет <strong>впечатан в каждый пиксель</strong>: чтобы сделать синий логотип белым, нужно перекрасить тысячи точек, аккуратно обходя сглаженные края. Это полноценная работа в графическом редакторе вместо смены одного значения. Поэтому правило простое: перекрашивается легко только SVG. Если у вас на руках PNG, сначала понадобится вектор; почему и как, разбирали в сравнении <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG или PNG для логотипа</a>.</p>
+      <p>Вся лёгкость держится на одном свойстве SVG: в нём <strong>цвет хранится отдельно от формы</strong>. Внутри тега <code>&lt;path&gt;</code> стоит атрибут вроде <code>fill=&quot;#005BFF&quot;</code>, отдельный параметр рядом с рисунком. Поменяли значение, и залилось иначе, а линии, кривые и пропорции остались нетронутыми. По сути вы правите текстовый файл.</p>
+      <p>У PNG всё устроено наоборот. Отсюда и вся разница. В растре цвет <strong>впечатан в каждый пиксель</strong>: чтобы сделать синий логотип белым, нужно перекрасить тысячи точек, аккуратно обходя сглаженные края. Это полноценная работа в графическом редакторе вместо смены одного значения. Поэтому правило простое: перекрашивается легко только SVG. Если у вас на руках PNG, сначала понадобится вектор; почему и как, разбирали в сравнении <a href="../svg-ili-png-dlya-logotipa/" target="_blank" rel="noopener">SVG или PNG для логотипа</a>.</p>
       <p>А раз цвет в SVG хранится обычным значением, которое можно подменить, то и менять его необязательно в тяжёлом редакторе. Достаточно интерфейса, который покажет эти значения и даст по ним кликнуть.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
@@ -224,49 +228,49 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="как-изменить-цвет-в-trace-logo-s">Как изменить цвет в Trace Logo's</h2>
-      <p>Именно так устроен редактор на страницах каталога: он вытаскивает цвета прямо из SVG и позволяет заменить любой.</p>
+      <p>Именно так устроен редактор на страницах каталога: он вытаскивает цвета прямо из SVG и позволяет заменить любой.</p>
       <ol>
       <li>Откройте страницу нужного логотипа в <a href="../../logos/" target="_blank" rel="noopener">каталоге</a>.</li>
       <li>Нажмите на логотип, чтобы открыть панель редактирования.</li>
       <li>В блоке <strong>«Цвета бренда»</strong> видны все цвета, использованные в SVG, ровно те самые значения <code>fill</code>.</li>
-      <li>Кликните по цвету и выберите новый в HSV‑пикере или введите точный HEX‑код, если он уже известен.</li>
+      <li>Кликните по цвету и выберите новый в HSV‑пикере или введите точный HEX‑код, если он уже известен.</li>
       <li>Скачайте результат в SVG или PNG либо скопируйте готовый код для вставки на сайт.</li>
       </ol>
-      <p>Важная деталь, которая снимает страх что‑то испортить: история изменений поддерживает <strong>отмену и повтор</strong>. Можно перебрать пять вариантов подряд и в любой момент вернуться к исходному; файл в каталоге при этом не меняется, вы работаете с копией. А если логотип многоцветный, у него несколько независимых заливок: получится перекрасить одну деталь, оставив остальные, или свести все цвета к одному. Это и определяет, какие задачи решаются в пару кликов.</p>
-      <p>Один нюанс касается способа выгрузки. Скачанный SVG хранит новые цвета внутри файла, поэтому его можно смело отдавать в вёрстку или в печать. Скопированный код ведёт себя иначе: он вставляется прямо в HTML‑разметку, и цвет там дальше живёт как обычный CSS‑параметр, который переопределяется стилями страницы. Для тёмной темы это удобно, потому что один и тот же знак перекрашивается медиазапросом без второго файла. Но если разметка уже задаёт свой <code>fill</code> для вложенных элементов, ваш выбранный цвет она перебьёт, и знак на странице окажется совсем не того оттенка, который вы видели в редакторе.</p>
+      <p>Важная деталь, которая снимает страх что‑то испортить: история изменений поддерживает <strong>отмену и повтор</strong>. Можно перебрать пять вариантов подряд и в любой момент вернуться к исходному; файл в каталоге при этом не меняется, вы работаете с копией. А если логотип многоцветный, у него несколько независимых заливок: получится перекрасить одну деталь, оставив остальные, или свести все цвета к одному. Это и определяет, какие задачи решаются в пару кликов.</p>
+      <p>Один нюанс касается способа выгрузки. Скачанный SVG хранит новые цвета внутри файла, поэтому его можно смело отдавать в вёрстку или в печать. Скопированный код ведёт себя иначе: он вставляется прямо в HTML‑разметку, и цвет там дальше живёт как обычный CSS‑параметр, который переопределяется стилями страницы. Для тёмной темы это удобно, потому что один и тот же знак перекрашивается медиазапросом без второго файла. Но если разметка уже задаёт свой <code>fill</code> для вложенных элементов, ваш выбранный цвет она перебьёт, и знак на странице окажется совсем не того оттенка, который вы видели в редакторе.</p>
       <h2 id="где-это-реально-нужно">Где это реально нужно</h2>
-      <p>Дальше идут ровно те ситуации, из‑за которых вы и открыли эту статью.</p>
+      <p>Дальше идут ровно те ситуации, из‑за которых вы и открыли эту статью.</p>
       <ul>
       <li><strong>Белый логотип для тёмного фона.</strong> Замените основной цвет на <code>#FFFFFF</code>. Стандартное решение для футеров, тёмных хедеров и слайдов с тёмной темой, тот самый случай из начала статьи.</li>
       <li><strong>Одноцветная версия.</strong> Сведите все цвета к одному: чёрный для печати на визитках, серый для водяного знака на фото. Чем меньше цветов, тем дешевле и предсказуемее печать.</li>
-      <li><strong>Логотип для футболок и мерча.</strong> Здесь одноцветный вариант нужен почти всегда: многоцветная печать по ткани дороже и не везде доступна, поэтому бренд заранее готовит моно‑версию.</li>
+      <li><strong>Логотип для футболок и мерча.</strong> Здесь одноцветный вариант нужен почти всегда: многоцветная печать по ткани дороже и не везде доступна, поэтому бренд заранее готовит моно‑версию.</li>
       <li><strong>Favicon или иконка приложения.</strong> На крошечном размере упрощённая одноцветная версия читается лучше многоцветной, подробнее в разборе <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">про фавикон</a>.</li>
-      <li><strong>Адаптация под палитру проекта.</strong> Подгонка логотипа партнёра под цвета вашего макета, но только если это разрешено гайдлайном бренда. К гайдлайнам вернёмся ниже.</li>
+      <li><strong>Адаптация под палитру проекта.</strong> Подгонка логотипа партнёра под цвета вашего макета, но только если это разрешено гайдлайном бренда. К гайдлайнам вернёмся ниже.</li>
       </ul>
       <p>Три из пяти сценариев требуют точного цвета. А точность на глаз не берётся.</p>
       <h2 id="как-узнать-точный-hex-перед-перекраской">Как узнать точный HEX перед перекраской</h2>
-      <p>Если вы подбираете оттенок в пикере визуально, итог почти всегда чуть промахивается мимо фирменного, и разница между «примерно таким синим» и точным <code>#005BFF</code> заметна сразу, особенно рядом с оригиналом. Поэтому, когда нужен конкретный цвет бренда, HEX‑код надо знать заранее.</p>
-      <p>Для исходного файла код уже показан в блоке «Цвета бренда» на странице логотипа, искать его не придётся. Но если оттенок нужен от стороннего логотипа, скриншота или элемента чужого дизайна, его сначала придётся считать. Как это сделать надёжно (пипеткой, из скриншота, из кода) разобрано в отдельной статье <a href="../kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">«Как узнать точный цвет логотипа»</a>. С готовым HEX перекраска превращается в подстановку одного значения, и промахнуться уже невозможно.</p>
+      <p>Если вы подбираете оттенок в пикере визуально, итог почти всегда чуть промахивается мимо фирменного, и разница между «примерно таким синим» и точным <code>#005BFF</code> заметна сразу, особенно рядом с оригиналом. Поэтому, когда нужен конкретный цвет бренда, HEX‑код надо знать заранее.</p>
+      <p>Для исходного файла код уже показан в блоке «Цвета бренда» на странице логотипа, искать его не придётся. Но если оттенок нужен от стороннего логотипа, скриншота или элемента чужого дизайна, его сначала придётся считать. Как это сделать надёжно (пипеткой, из скриншота, из кода) разобрано в отдельной статье <a href="../kak-uznat-cvet-logotipa/" target="_blank" rel="noopener">«Как узнать точный цвет логотипа»</a>. С готовым HEX перекраска превращается в подстановку одного значения, и промахнуться уже невозможно.</p>
       <h2 id="как-проверить-контраст-цифрами">Как проверить контраст цифрами</h2>
-      <p>Точный код решает первую половину задачи. Вторая половина начинается там, где перекрашенный знак ложится на конкретный фон, и здесь глаз обманывает так же охотно, как при подборе оттенка.</p>
-      <p>Пороги заданы стандартом доступности WCAG: для крупной графики и элементов интерфейса контраст с фоном должен быть не ниже 3:1. Логотип формально к тексту не относится, но если он несёт название компании, читаемость подчиняется тем же цифрам. Проверить пару цветов можно любым онлайн‑калькулятором контраста: вводите два HEX и получаете коэффициент.</p>
+      <p>Точный код решает первую половину задачи. Вторая половина начинается там, где перекрашенный знак ложится на конкретный фон, и здесь глаз обманывает так же охотно, как при подборе оттенка.</p>
+      <p>Пороги заданы стандартом доступности WCAG: для крупной графики и элементов интерфейса контраст с фоном должен быть не ниже 3:1. Логотип формально к тексту не относится, но если он несёт название компании, читаемость подчиняется тем же цифрам. Проверить пару цветов можно любым онлайн‑калькулятором контраста: вводите два HEX и получаете коэффициент.</p>
       <p>Отдельная сложность возникает на неоднородном фоне. Фотография или градиент под логотипом дают разный контраст в разных точках, и знак, читаемый в левом углу, пропадает в правом. Стандартное решение здесь — подложка: полупрозрачная плашка под знаком либо затемняющий слой на всю картинку. Так поступают гайдлайны платёжных систем, которые прямо предписывают, на каком фоне какую версию значка ставить.</p>
-      <h2 id="что-делать-если-у-вас-только-png">Что делать, если у вас только PNG</h2>
+      <h2 id="что-делать-если-у-вас-только-png">Что делать, если у вас только PNG</h2>
       <p>Всё описанное работает при одном условии: на руках есть вектор. Но чаще всего приходит именно PNG, скачанный когда‑то с сайта, и вопрос «как его перекрасить» встаёт заново.</p>
-      <p>Прямой ответ такой: сначала найдите SVG, и только если поиск провалился, беритесь за растр. Официальный вектор почти всегда существует, и добыть его быстрее, чем возиться с пикселями. Проверьте страницу бренда в <a href="../../logos/" target="_blank" rel="noopener">нашем каталоге</a>, пресс‑кит на сайте компании и её раздел «Медиа»; подробный порядок поиска разобран в статье <a href="../kak-skachat-logotip-s-sajta/" target="_blank" rel="noopener">как скачать логотип с сайта</a>.</p>
+      <p>Прямой ответ такой: сначала найдите SVG, и только если поиск провалился, беритесь за растр. Официальный вектор почти всегда существует, и добыть его быстрее, чем возиться с пикселями. Проверьте страницу бренда в <a href="../../logos/" target="_blank" rel="noopener">нашем каталоге</a>, пресс‑кит на сайте компании и её раздел «Медиа»; подробный порядок поиска разобран в статье <a href="../kak-skachat-logotip-s-sajta/" target="_blank" rel="noopener">как скачать логотип с сайта</a>.</p>
       <p>Когда вектора нет нигде, перекраска PNG остаётся возможной, но сложность зависит от знака. Одноцветный логотип на прозрачном фоне перекрашивается за минуту: в любом редакторе накладывается слой нужного цвета в режиме наложения, который сохраняет альфа‑канал. Знак с градиентами, тенями или несколькими цветами так не поддаётся, потому что каждый оттенок придётся выделять отдельно, а сглаженные края по контуру всё равно сохранят следы старого цвета. В этой ситуации дешевле перевести логотип в вектор один раз и дальше работать с ним; способы и подводные камни собраны в разборе <a href="../kak-perevesti-logotip-v-vektor/" target="_blank" rel="noopener">как перевести логотип в вектор</a>.</p>
       <h2 id="частые-ошибки">Частые ошибки</h2>
       <p>Почти все проблемы при перекраске сводятся к двум причинам: доверие глазу там, где нужен код, и невнимание к контексту, в который логотип встанет.</p>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Менять цвет «на глаз» вместо HEX</span></div><div class="callout-body"><p>Визуальный подбор в пикере почти всегда даёт оттенок мимо фирменного. Если нужен конкретный цвет бренда, вводите точный HEX. Разница в пару процентов яркости видна сразу.</p></div></div>
-      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Низкий контраст на новом фоне</span></div><div class="callout-body"><p>Перекрашивая логотип в белый или светлый, проверяйте контраст с фоном, куда он ляжет, особенно если знак попадёт на фото или градиент. Слишком светлый знак на светлом фоне становится нечитаемым, и это уже ошибка доступности.</p></div></div>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Менять цвет «на глаз» вместо HEX</span></div><div class="callout-body"><p>Визуальный подбор в пикере почти всегда даёт оттенок мимо фирменного. Если нужен конкретный цвет бренда, вводите точный HEX. Разница в пару процентов яркости видна сразу.</p></div></div>
+      <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Низкий контраст на новом фоне</span></div><div class="callout-body"><p>Перекрашивая логотип в белый или светлый, проверяйте контраст с фоном, куда он ляжет, особенно если знак попадёт на фото или градиент. Слишком светлый знак на светлом фоне становится нечитаемым, и это уже ошибка доступности.</p></div></div>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Перекраска элементов, которые нельзя трогать</span></div><div class="callout-body"><p>У некоторых логотипов часть деталей (знак ® рядом с названием, защищённый элемент формы) не подлежит изменению по гайдлайну бренда, даже когда редактор технически позволяет. Здесь техническая свобода упирается в юридическую границу.</p></div></div>
       <p>Последняя ошибка уводит из интерфейса в область права. О ней стоит сказать отдельно: инструмент вам всё разрешит, а бренд может запретить.</p>
       <h2 id="техническая-свобода-не-отменяет-прав">Техническая свобода не отменяет прав</h2>
-      <p>Редактор даст перекрасить любой логотип в любой цвет, такова его работа. Но большинство брендов публикуют <strong>гайдлайны</strong>, которые регламентируют палитру, минимальные отступы, пропорции и допустимые фоны. Для официальных материалов (партнёрских страниц, пресс‑релизов, презентаций с чужим логотипом) сверяйтесь с правилами конкретного бренда; на странице логотипа в нашем каталоге мы даём ссылку на гайдлайн, если он опубликован.</p>
-      <p>Типичные ограничения повторяются от бренда к бренду, и знать их полезно заранее. Монохромная версия обычно разрешена только в двух вариантах: полностью чёрный и полностью белый знак. Перекраска в произвольный цвет чаще всего запрещена совсем. Инверсия (белый знак на фирменном фоне) разрешается почти всегда, а вот фирменный цвет на чужом цветном фоне — почти никогда. То, что вы физически можете сделать белый логотип из синего, ещё не значит, что бренд разрешает его так показывать. Где проходит граница между «можно» и «нельзя» с чужим знаком, подробно разобрано в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">«Можно ли использовать чужой логотип»</a>.</p>
+      <p>Редактор даст перекрасить любой логотип в любой цвет, такова его работа. Но большинство брендов публикуют <strong>гайдлайны</strong>, которые регламентируют палитру, минимальные отступы, пропорции и допустимые фоны. Для официальных материалов (партнёрских страниц, пресс‑релизов, презентаций с чужим логотипом) сверяйтесь с правилами конкретного бренда; на странице логотипа в нашем каталоге мы даём ссылку на гайдлайн, если он опубликован.</p>
+      <p>Типичные ограничения повторяются от бренда к бренду, и знать их полезно заранее. Монохромная версия обычно разрешена только в двух вариантах: полностью чёрный и полностью белый знак. Перекраска в произвольный цвет чаще всего запрещена совсем. Инверсия (белый знак на фирменном фоне) разрешается почти всегда, а вот фирменный цвет на чужом цветном фоне — почти никогда. То, что вы физически можете сделать белый логотип из синего, ещё не значит, что бренд разрешает его так показывать. Где проходит граница между «можно» и «нельзя» с чужим знаком, подробно разобрано в статье <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">«Можно ли использовать чужой логотип»</a>.</p>
       <h2 id="что-дальше">Что дальше</h2>
-      <p>Готовый перекрашенный логотип не обязательно скачивать файлом. Скопируйте SVG‑код прямо из редактора и <a href="../kak-vstavit-logotip-v-figma/" target="_blank" rel="noopener">вставьте в Figma</a>: он ляжет на холст полностью векторным и редактируемым, как будто вы его там и создали. Оттуда знак отправится в макет сайта, презентацию или на мерч.</p>
-      <p>Если же перекрашенная версия нужна регулярно, сохраните её в общую библиотеку команды; личная папка тут не поможет. Иначе через полгода каждый дизайнер снова начнёт перекрашивать логотип заново и неизбежно промахнётся мимо оттенка.</p>
+      <p>Готовый перекрашенный логотип не обязательно скачивать файлом. Скопируйте SVG‑код прямо из редактора и <a href="../kak-vstavit-logotip-v-figma/" target="_blank" rel="noopener">вставьте в Figma</a>: он ляжет на холст полностью векторным и редактируемым, как будто вы его там и создали. Оттуда знак отправится в макет сайта, презентацию или на мерч.</p>
+      <p>Если же перекрашенная версия нужна регулярно, сохраните её в общую библиотеку команды; личная папка тут не поможет. Иначе через полгода каждый дизайнер снова начнёт перекрашивать логотип заново и неизбежно промахнётся мимо оттенка.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -277,14 +281,15 @@ window.yaContextCb.push(() => {
     })
 })
 </script></div>
-      <h2 id="если-коротко">Если коротко</h2>
+      <h2 id="если-коротко">Если коротко</h2>
       <p>Перекраска логотипа перестала быть работой для дизайнера ровно потому, что в SVG цвет хранится отдельным значением; поменять его можно кликом в браузере. Но лёгкость инструмента заканчивается там, где начинаются две границы: точность (нужен HEX и проверка контраста) и право (нужен гайдлайн бренда). Держите обе в голове и попробуйте редактор цвета на любом логотипе из <a href="../../logos/" target="_blank" rel="noopener">нашего каталога</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="4">
+          <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="52">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -297,7 +302,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            52
           </div>
           </div>
           <div class="blog-card-title">В каком формате должен быть логотип — SVG, PNG, AI, EPS или PDF</div>
@@ -305,7 +310,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../pochemu-logotip-razmytyj/" data-date="2026-07-07" data-views="1">
+      <a class="blog-card" href="../pochemu-logotip-razmytyj/" data-date="2026-07-07" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -318,7 +323,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
           <div class="blog-card-title">Почему логотип размытый и как сделать его чётким — разбор всех причин</div>
@@ -326,7 +331,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../gradient-v-logotipe/" data-date="2026-07-25" data-views="5">
+      <a class="blog-card" href="../gradient-v-logotipe/" data-date="2026-07-25" data-views="26">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -339,7 +344,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            5
+            26
           </div>
           </div>
           <div class="blog-card-title">Градиент в логотипе — как использовать в 2026</div>
@@ -347,7 +352,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../cvetovye-trendy-2026/" data-date="2026-07-24" data-views="22">
+      <a class="blog-card" href="../cvetovye-trendy-2026/" data-date="2026-07-24" data-views="43">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -360,7 +365,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            22
+            43
           </div>
           </div>
           <div class="blog-card-title">Цветовые тренды 2026 — палитры года для брендов</div>
@@ -368,44 +373,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../svyaznost-teksta/" data-date="2026-09-14" data-views="0">
+      <a class="blog-card" href="../mokap-logotipa/" data-date="2026-09-04" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Текст</span><span class="blog-card-tag">Контент</span><span class="blog-card-tag">Практика</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Презентация</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.09.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            5
           </div>
           </div>
-          <div class="blog-card-title">Почему текст бросают на середине: тезис, причинная цепь и три теста</div>
+          <div class="blog-card-title">Мокап логотипа — как показать знак, чтобы его приняли</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../ekosistema-yandeksa-logotipy/" data-date="2026-07-26" data-views="9">
+      <a class="blog-card" href="../chto-takoe-logotip/" data-date="2026-07-18" data-views="21">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Экосистемы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>18.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            9
+            21
           </div>
           </div>
-          <div class="blog-card-title">Логотипы экосистемы Яндекса — как устроена система знаков</div>
+          <div class="blog-card-title">Что такое логотип — простыми словами</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -415,7 +420,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#почему-перекрасить-можно-только-вектор">Почему перекрасить можно только вектор</a></li><li><a href="#как-изменить-цвет-в-trace-logo-s">Как изменить цвет в Trace Logo's</a></li><li><a href="#где-это-реально-нужно">Где это реально нужно</a></li><li><a href="#как-узнать-точный-hex-перед-перекраской">Как узнать точный HEX перед перекраской</a></li><li><a href="#как-проверить-контраст-цифрами">Как проверить контраст цифрами</a></li><li><a href="#что-делать-если-у-вас-только-png">Что делать, если у вас только PNG</a></li><li><a href="#частые-ошибки">Частые ошибки</a></li><li><a href="#техническая-свобода-не-отменяет-прав">Техническая свобода не отменяет прав</a></li><li><a href="#что-дальше">Что дальше</a></li><li><a href="#если-коротко">Если коротко</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#почему-перекрасить-можно-только-вектор">Почему перекрасить можно только вектор</a></li><li><a href="#как-изменить-цвет-в-trace-logo-s">Как изменить цвет в Trace Logo's</a></li><li><a href="#где-это-реально-нужно">Где это реально нужно</a></li><li><a href="#как-узнать-точный-hex-перед-перекраской">Как узнать точный HEX перед перекраской</a></li><li><a href="#как-проверить-контраст-цифрами">Как проверить контраст цифрами</a></li><li><a href="#что-делать-если-у-вас-только-png">Что делать, если у вас только PNG</a></li><li><a href="#частые-ошибки">Частые ошибки</a></li><li><a href="#техническая-свобода-не-отменяет-прав">Техническая свобода не отменяет прав</a></li><li><a href="#что-дальше">Что дальше</a></li><li><a href="#если-коротко">Если коротко</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -423,25 +428,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -518,6 +515,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -563,10 +561,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

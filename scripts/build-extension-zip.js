@@ -23,6 +23,7 @@ const JSZip = require('jszip');
 
 const ROOT      = path.resolve(__dirname, '..');
 const EXT_ROOT  = path.join(ROOT, 'tools', 'extensions');
+const DIST_ROOT = path.join(ROOT, 'dist', 'products');
 const DRY_RUN   = process.argv.includes('--dry-run');
 
 // Files that live alongside the extension but aren't part of its payload.
@@ -101,7 +102,11 @@ async function buildExtension(slug) {
   addDirToZip(zip, dirPath, dirPath);
   const buf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE', compressionOptions: { level: 9 } });
 
-  const zipPath = path.join(dirPath, `${slug}.zip`);
+  // Архив НЕ лежит в публичной директории сайта: он попадает к пользователю
+  // только через checkout (приватный бакет Supabase Storage + подписанная
+  // ссылка на /thanks/, см. scripts/sync-products.js). dist/ в .gitignore.
+  const zipPath = path.join(DIST_ROOT, `${slug}.zip`);
+  if (!DRY_RUN) fs.mkdirSync(DIST_ROOT, { recursive: true });
   const zipChanged = !fs.existsSync(zipPath) || !buf.equals(fs.readFileSync(zipPath));
   if (zipChanged && !DRY_RUN) fs.writeFileSync(zipPath, buf);
 

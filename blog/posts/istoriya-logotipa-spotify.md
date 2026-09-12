@@ -17,27 +17,27 @@ tags_en: Logo Histories, Branding, Media
 
 ## 2008: слово с волнами
 
-Шведский стартап запускался со скромным текстовым логотипом: зелёное слово с тремя дугами, «вылетающими» из буквы «o», — звук, расходящийся из динамика. Зелёный в музыкальной категории был свободен (лейблы жили в чёрном, плееры — в синем) — ставка на пустой участок спектра, тот же приём, что у [Т‑Банка](../istoriya-logotipa-t-banka/) с жёлтым — о том, [как вообще работает цветовая территория](../psihologiya-cveta-v-logotipe/), мы писали отдельно.
+Шведский стартап запускался со скромным текстовым логотипом: зелёное слово с тремя дугами, «вылетающими» из буквы «o», — звук, расходящийся из динамика. Зелёный в музыкальной категории был свободен (лейблы жили в чёрном, плееры — в синем) — ставка на пустой участок спектра, тот же приём, что у [Т‑Банка](../istoriya-logotipa-t-banka/) с жёлтым — о том, [как вообще работает цветовая территория](../psihologiya-cveta-v-logotipe/), мы писали отдельно.
 
 ## 2013: волны получают собственный дом
 
-С мобильной эрой волнам стало тесно над буквой: иконке приложения нужен был самостоятельный знак. Три дуги переехали в зелёный круг — и быстро начали жить отдельной жизнью: в иконке, фавиконке, кнопках «слушать в Spotify» на сайтах артистов. Слово и круг образовали классическую пару «полная версия + компактный знак» — ровно то, [зачем логотипу вообще нужны версии](../vidy-logotipov/).
+С мобильной эрой волнам стало тесно над буквой: иконке приложения нужен был самостоятельный знак. Три дуги переехали в зелёный круг — и быстро начали жить отдельной жизнью: в иконке, фавиконке, кнопках «слушать в Spotify» на сайтах артистов. Слово и круг образовали классическую пару «полная версия + компактный знак» — ровно то, зачем логотипу вообще нужны версии.
 
 ## 2015: тот самый зелёный
 
-Большой редизайн 2015 года сменил спокойный травяной зелёный на яркий, почти неоновый оттенок. Интернет отреагировал бурно: дизайнеры спорили, издания писали колонки, пользователи требовали вернуть старый цвет. Логика компании была холодной: новый зелёный **горит на тёмном интерфейсе** — а Spotify как раз переводил приложение на чёрный фон, где старый оттенок тускнел. Через месяц споры кончились, а через год оттенок стал одним из самых узнаваемых цветов в технологиях. Знакомый сценарий: тот же цикл «возмущение → привыкание → канон» прошёл [градиент Instagram](../istoriya-logotipa-instagram/).
+Большой редизайн 2015 года сменил спокойный травяной зелёный на яркий, почти неоновый оттенок. Интернет отреагировал бурно: дизайнеры спорили, издания писали колонки, пользователи требовали вернуть старый цвет. Логика компании была холодной: новый зелёный **горит на тёмном интерфейсе** — а Spotify как раз переводил приложение на чёрный фон, где старый оттенок тускнел. Через месяц споры кончились, а через год оттенок стал одним из самых узнаваемых цветов в технологиях. Знакомый сценарий: тот же цикл «возмущение → привыкание → канон» прошёл [градиент Instagram](../istoriya-logotipa-instagram/).
 
 ## Что означают три дуги
 
-Официально — звуковые волны, расходящиеся от источника: универсальный символ «здесь звук», не привязанный ни к нотам, ни к наушникам. Практичный выбор: нота обозначала бы «музыку», а Spotify давно шире — подкасты, аудиокниги. Абстрактные волны пережили расширение продукта без редизайна — ровно та ловушка, в которую попало слово «Coffee» у [Starbucks](../istoriya-logotipa-starbucks/) и слог «Tube» у [YouTube](../istoriya-logotipa-youtube/), но которой избежал Spotify.
+Официально — звуковые волны, расходящиеся от источника: универсальный символ «здесь звук», не привязанный ни к нотам, ни к наушникам. Практичный выбор: нота обозначала бы «музыку», а Spotify давно шире — подкасты, аудиокниги. Абстрактные волны пережили расширение продукта без редизайна — ровно та ловушка, в которую попало слово «Coffee» у [Starbucks](../istoriya-logotipa-starbucks/) и слог «Tube» у [YouTube](../istoriya-logotipa-youtube/), но которой избежал Spotify.
 
 ## Наклон, из‑за которого спорят дизайнеры
 
-У знака Spotify есть деталь-«пасхалка» для профессионалов: три дуги наклонены, а не лежат горизонтально, и их толщина неодинакова — верхняя дуга самая длинная и толстая. Наклон создаёт ощущение движения (горизонтальные дуги выглядели бы как значок Wi‑Fi, положенный набок, — с этим сходством знак путают до сих пор), а разная толщина компенсирует оптическую иллюзию: одинаковые по толщине дуги разного радиуса кажутся неравными. Такие оптические компенсации — признак профессиональной отрисовки, отличающий её от «геометрически правильной» любительской: о том, [как рисуются такие знаки](../kak-narisovat-logotip-v-figma/), и о типичных [ошибках самодельных логотипов](../oshibki-v-dizajne-logotipa/) мы писали отдельно.
+У знака Spotify есть деталь-«пасхалка» для профессионалов: три дуги наклонены, а не лежат горизонтально, и их толщина неодинакова — верхняя дуга самая длинная и толстая. Наклон создаёт ощущение движения (горизонтальные дуги выглядели бы как значок Wi‑Fi, положенный набок, — с этим сходством знак путают до сих пор), а разная толщина компенсирует оптическую иллюзию: одинаковые по толщине дуги разного радиуса кажутся неравными. Такие оптические компенсации — признак профессиональной отрисовки, отличающий её от «геометрически правильной» любительской: о том, [как рисуются такие знаки](../kak-narisovat-logotip-v-figma/), и о типичных ошибках самодельных логотипов мы писали отдельно.
 
 ## Знак на обложках: кнопка «слушать» как носитель
 
-Особый носитель Spotify, которого нет у большинства брендов, — чужой контент: кнопки «Listen on Spotify» стоят на сайтах артистов, в подкастах, на афишах концертов. Для этого сценария у компании отдельный набор правил и готовых бейджей: знак нельзя перекрашивать под дизайн афиши, минимальный размер зафиксирован, вокруг — охранное поле. Это типовая задача любого платформенного бренда: ваш знак будут ставить люди без дизайнеров, значит нужны «защищённые от дурака» готовые блоки — [зачем вообще нужен брендбук](../chto-takoe-brendbuk/), мы объясняли отдельно.
+Особый носитель Spotify, которого нет у большинства брендов, — чужой контент: кнопки «Listen on Spotify» стоят на сайтах артистов, в подкастах, на афишах концертов. Для этого сценария у компании отдельный набор правил и готовых бейджей: знак нельзя перекрашивать под дизайн афиши, минимальный размер зафиксирован, вокруг — охранное поле. Это типовая задача любого платформенного бренда: ваш знак будут ставить люди без дизайнеров, значит нужны «защищённые от дурака» готовые блоки — [зачем вообще нужен брендбук](../chto-takoe-brendbuk/), мы объясняли отдельно.
 
 ## Хронология
 
@@ -49,10 +49,10 @@ tags_en: Logo Histories, Branding, Media
 | 2026 | временная «диско‑шар» иконка | 20‑летие сервиса, кампания «Your Party of the Year(s)» |
 
 :::tip Урок кейса
-Spotify показывает, как выбирать между «красивым» и «работающим» цветом: оттенок 2015 года многим не нравился в вакууме, но побеждал в реальной среде — на чёрном экране плеера. Проверяйте цвет знака не на белом листе, а в боевом контексте: интерфейс, вывеска, лента соцсети — [как вообще собирать палитру](../kak-podobrat-cvetovuyu-palitru-brenda/), мы разбирали отдельно.
+Spotify показывает, как выбирать между «красивым» и «работающим» цветом: оттенок 2015 года многим не нравился в вакууме, но побеждал в реальной среде — на чёрном экране плеера. Проверяйте цвет знака не на белом листе, а в боевом контексте: интерфейс, вывеска, лента соцсети — [как вообще собирать палитру](../kak-podobrat-cvetovuyu-palitru-brenda/), мы разбирали отдельно.
 :::
 
-Логотип Spotify в SVG и PNG — на [странице бренда](../../logos/media/spotify/); соседи по категории — в подборке [логотипы стриминговых сервисов](../logotipy-strimingovyh-servisov/). Другие истории: [Netflix](../istoriya-logotipa-netflix/), [YouTube](../istoriya-logotipa-youtube/), [Telegram](../istoriya-logotipa-telegram/).
+Логотип Spotify в SVG и PNG — на [странице бренда](../../logos/media/spotify/); соседи по категории — в подборке логотипы стриминговых сервисов. Другие истории: [Netflix](../istoriya-logotipa-netflix/), [YouTube](../istoriya-logotipa-youtube/), [Telegram](../istoriya-logotipa-telegram/).
 
 ---EN---
 
@@ -68,7 +68,7 @@ The Swedish startup launched with a modest wordmark: a green word with three arc
 
 ## 2013: the waves get their own home
 
-With the mobile era the waves grew cramped above the letter: the app icon needed a standalone mark. The three arcs moved into a green circle — and quickly took on a life of their own: in the icon, the favicon, the "listen on Spotify" buttons on artists' sites. The word and the circle formed the classic "full version + compact mark" pair — exactly [why logos need versions](../vidy-logotipov/) in the first place.
+With the mobile era the waves grew cramped above the letter: the app icon needed a standalone mark. The three arcs moved into a green circle — and quickly took on a life of their own: in the icon, the favicon, the "listen on Spotify" buttons on artists' sites. The word and the circle formed the classic "full version + compact mark" pair — exactly why logos need versions in the first place.
 
 ## 2015: that green
 
@@ -80,7 +80,7 @@ Officially — sound waves radiating from a source: the universal "sound here" s
 
 ## The tilt designers argue about
 
-The Spotify mark hides a detail for professionals: the three arcs are tilted, not horizontal, and their thickness varies — the top arc is the longest and fattest. The tilt creates motion (horizontal arcs would look like a Wi-Fi icon lying on its side — a resemblance the mark still gets teased about), and the varied thickness compensates an optical illusion: equal-thickness arcs of different radii look unequal. Such optical compensations are the tell of professional drawing versus the "geometrically correct" amateur kind — we cover [how such marks are drawn](../kak-narisovat-logotip-v-figma/) and typical [DIY logo mistakes](../oshibki-v-dizajne-logotipa/) separately.
+The Spotify mark hides a detail for professionals: the three arcs are tilted, not horizontal, and their thickness varies — the top arc is the longest and fattest. The tilt creates motion (horizontal arcs would look like a Wi-Fi icon lying on its side — a resemblance the mark still gets teased about), and the varied thickness compensates an optical illusion: equal-thickness arcs of different radii look unequal. Such optical compensations are the tell of professional drawing versus the "geometrically correct" amateur kind — we cover [how such marks are drawn](../kak-narisovat-logotip-v-figma/) and typical DIY logo mistakes separately.
 
 ## The mark on covers: the "listen" button as a medium
 
@@ -99,4 +99,4 @@ Spotify owns a medium most brands lack — other people's content: "Listen on Sp
 Spotify shows how to choose between a "pretty" color and a "working" one: many disliked the 2015 shade in a vacuum, but it won in the real environment — the player's black screen. Test a mark's color not on white paper but in combat context: the interface, the signage, the social feed — we cover [how to build a palette](../kak-podobrat-cvetovuyu-palitru-brenda/) separately.
 :::
 
-The Spotify logo in SVG and PNG is on the [brand page](../../logos/media/spotify/); its category neighbors are in [streaming service logos](../logotipy-strimingovyh-servisov/). More stories: [Netflix](../istoriya-logotipa-netflix/), [YouTube](../istoriya-logotipa-youtube/), [Telegram](../istoriya-logotipa-telegram/).
+The Spotify logo in SVG and PNG is on the [brand page](../../logos/media/spotify/); its category neighbors are in streaming service logos. More stories: [Netflix](../istoriya-logotipa-netflix/), [YouTube](../istoriya-logotipa-youtube/), [Telegram](../istoriya-logotipa-telegram/).

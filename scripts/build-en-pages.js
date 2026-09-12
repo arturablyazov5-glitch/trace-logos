@@ -20,13 +20,15 @@ const fs   = require('fs');
 const path = require('path');
 const { loadDict, transformToEn } = require('./lib/en-transform');
 const { translateHome } = require('./lib/home-i18n');
+const { translateToolsHub } = require('./lib/tools-hub-i18n');
+const { build: buildToolsHub } = require('./build-tools-hub');
 
 const ROOT    = path.join(__dirname, '..');
 const DRY_RUN = process.argv.includes('--dry-run');
 
 const EXCLUDE_DIRS = new Set([
   'en', 'node_modules', 'scripts', '.git', '.claude', 'sanitizer',
-  'assets', 'css', 'js', 'components', 'templates', 'upptime', 'figna-plagins',
+  'assets', 'css', 'js', 'components', 'templates', 'upptime', 'figma-plugins',
 ]);
 
 // Skip non-content HTML files at root level (search-engine verification stubs)
@@ -44,6 +46,8 @@ const COLLECTION = /^collections\/[^/]+\/index\.html$/;
 const LOGOS_CATEGORY = /^logos\/[^/]+\/index\.html$/;
 // Blog pages (index + posts) are generated (with English titles/cards) by build-blog.js.
 const BLOG_POST = /^blog\/(?:[^/]+\/)?index\.html$/;
+// Стену благодарностей (RU + EN) целиком генерирует build-credits.js.
+const CREDITS = /^credits\/index\.html$/;
 
 function findHtmlFiles(dir, rel = '') {
   const results = [];
@@ -63,7 +67,9 @@ function findHtmlFiles(dir, rel = '') {
 (() => {
   const EN = loadDict().en;
 
-  const sources = findHtmlFiles(ROOT);
+  const pageArg = process.argv.find(arg => arg.startsWith('--page='));
+  const sources = findHtmlFiles(ROOT).filter(rel => !pageArg || rel === pageArg.slice(7));
+  if (pageArg && sources.length !== 1) throw new Error(`Unknown source page: ${pageArg.slice(7)}`);
   let count = 0, skipped = 0;
 
   for (const relPath of sources) {
@@ -73,14 +79,17 @@ function findHtmlFiles(dir, rel = '') {
     if (COLLECTION.test(relPath)) { skipped++; continue; }
     if (LOGOS_CATEGORY.test(relPath)) { skipped++; continue; }
     if (BLOG_POST.test(relPath)) { skipped++; continue; }
+    if (CREDITS.test(relPath)) { skipped++; continue; }
 
     const src       = path.join(ROOT, relPath);
     const dest       = path.join(ROOT, 'en', relPath);
     const html      = fs.readFileSync(src, 'utf8');
     // The hand-written homepage has no data-i18n — translate it via a dedicated
     // RU→EN string map before the generic chrome/bake pass.
-    const base      = relPath === 'index.html' ? translateHome(html) : html;
-    const processed = transformToEn(base, relPath, EN);
+    const base      = relPath === 'index.html' ? translateHome(html)
+      : relPath === 'tools/index.html' ? translateToolsHub(html) : html;
+    let processed = transformToEn(base, relPath, EN);
+    if (relPath === 'tools/index.html') processed = buildToolsHub(processed, 'en');
 
     if (DRY_RUN) {
       console.log(`→ en/${relPath}`);

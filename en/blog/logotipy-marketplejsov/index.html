@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(55 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(95 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(145 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(205 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(55 70% 38%) 0%, hsl(205 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(158 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(198 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(248 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(308 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(158 70% 38%) 0%, hsl(308 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-20">August 20, 2026</time>
@@ -203,16 +207,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            16
 	          </span>
         </div>
         <h1>Marketplace Logos — Ozon, Wildberries, Avito and More</h1>
       </header>
       <div class="blog-body">
         <p>Marketplaces are the only category whose logo tens of millions of people see daily in four roles at once: app icon, site header, the box at the door and the pickup‑point sign. Let's unpack the marks of the market's main players, why wordmarks won here, and how the brands divide up colors.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>Nearly all marketplaces use <strong>wordmarks</strong>: the name matters more than a symbol when the brand is &quot;the place you go for everything&quot;. Differentiation rests on color: blue — <a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon</a>, violet‑magenta gradient — <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries</a>, black — <a href="/en/logos/market/lamoda/" target="_blank" rel="noopener">Lamoda</a>, red‑orange — <a href="/en/logos/market/aliexpress/" target="_blank" rel="noopener">AliExpress</a>. All marks are in the <a href="/en/logos/market/" target="_blank" rel="noopener">Marketplaces &amp; Retail category</a>.</p></div></div>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>Nearly all marketplaces use <strong>wordmarks</strong>: the name matters more than a symbol when the brand is &quot;the place you go for everything&quot;. Differentiation rests on color: blue — <a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon<img class="blog-mention-icon" src="/assets/logos/svgs/ozon.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, violet‑magenta gradient — <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries<img class="blog-mention-icon" src="/assets/logos/svgs/wildberries.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, black — <a href="/en/logos/market/lamoda/" target="_blank" rel="noopener">Lamoda<img class="blog-mention-icon" src="/assets/logos/svgs/lamoda.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, red‑orange — <a href="/en/logos/market/aliexpress/" target="_blank" rel="noopener">AliExpress<img class="blog-mention-icon" src="/assets/logos/svgs/aliexpress.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. All marks are in the <a href="/en/logos/market/" target="_blank" rel="noopener">Marketplaces &amp; Retail category</a>.</p></div></div>
       <h2 id="why-marketplaces-use-wordmarks">Why marketplaces use wordmarks</h2>
-      <p>In a category with infinite assortment, no symbol fits: any picture (a cart, a box, a bag) narrows the image to one association. So the market almost unanimously chose the wordmark — the name in a custom face (the type is covered in <a href="/en/blog/vidy-logotipov/" target="_blank" rel="noopener">types of logos</a>). The &quot;text doesn't fit the icon&quot; problem gets solved individually: <a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon</a> wins with four letters, <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries</a> shortens to &quot;WB&quot;, <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Yandex Market</a> to an &quot;M&quot; in the signature badge.</p>
+      <p>In a category with infinite assortment, no symbol fits: any picture (a cart, a box, a bag) narrows the image to one association. So the market almost unanimously chose the wordmark — the name in a custom face (the type is covered in types of logos). The &quot;text doesn't fit the icon&quot; problem gets solved individually: <a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon<img class="blog-mention-icon" src="/assets/logos/svgs/ozon.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> wins with four letters, <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries<img class="blog-mention-icon" src="/assets/logos/svgs/wildberries.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> shortens to &quot;WB&quot;, <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Yandex Market<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> to an &quot;M&quot; in the signature badge.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -224,23 +228,23 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="ozon-a-short-name-as-a-superpower">Ozon: a short name as a superpower</h2>
-      <p><a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon</a> is a Runet veteran (since 1998, started with books like Amazon) and owner of a rare asset: a four‑letter name that fits into an app icon whole. Its blue is so established that every ecosystem service inherits it — <a href="/en/logos/bank/ozonbank/" target="_blank" rel="noopener">Ozon Bank</a> is recognized instantly. The short name is exactly what spared Ozon a separate monogram — one form works everywhere — we cover <a href="/en/blog/razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">logo sizes for platforms</a> separately.</p>
+      <p><a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon<img class="blog-mention-icon" src="/assets/logos/svgs/ozon.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is a Runet veteran (since 1998, started with books like Amazon) and owner of a rare asset: a four‑letter name that fits into an app icon whole. Its blue is so established that every ecosystem service inherits it — <a href="/en/logos/bank/ozonbank/" target="_blank" rel="noopener">Ozon Bank<img class="blog-mention-icon" src="/assets/logos/svgs/ozon-bank.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is recognized instantly. The short name is exactly what spared Ozon a separate monogram — one form works everywhere — we cover <a href="/en/blog/razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">logo sizes for platforms</a> separately.</p>
       <h2 id="wildberries-a-gradient-against-the-field">Wildberries: a gradient against the field</h2>
-      <p><a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries</a> long lived with an austere wordmark, then in the 2020s switched to a violet‑magenta gradient — the category's boldest color move. The logic is visible: blue (Ozon), red (AliExpress) and yellow (Yandex's marketplace arm) were taken, and a gradient claims a whole zone of spectrum at once. The long name still demands a short version — &quot;WB&quot; lives in the icon and in the subsidiary <a href="/en/logos/bank/wbbank/" target="_blank" rel="noopener">Wildberries Bank</a>. On the gradient fashion: <a href="/en/blog/trendy-logotipov-2026/" target="_blank" rel="noopener">logo trends 2026</a>.</p>
+      <p><a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries<img class="blog-mention-icon" src="/assets/logos/svgs/wildberries.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> long lived with an austere wordmark, then in the 2020s switched to a violet‑magenta gradient — the category's boldest color move. The logic is visible: blue (Ozon), red (AliExpress) and yellow (Yandex's marketplace arm) were taken, and a gradient claims a whole zone of spectrum at once. The long name still demands a short version — &quot;WB&quot; lives in the icon and in the subsidiary <a href="/en/logos/bank/wbbank/" target="_blank" rel="noopener">Wildberries Bank<img class="blog-mention-icon" src="/assets/logos/pngs/wb-bank.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. On the gradient fashion: logo trends 2026.</p>
       <h2 id="avito-multicolor-dots">Avito: multicolor dots</h2>
-      <p><a href="/en/logos/market/avito/" target="_blank" rel="noopener">Avito</a> is a classifieds board rather than a classic marketplace, and its mark solves a different problem: showing variety. The signature device is a cluster of colored circles next to the name: each dot reads as a &quot;category&quot; (cars, housing, goods, jobs). A rare combination mark with abstract graphics in this category — and one of the Runet's most recognized brands overall.</p>
+      <p><a href="/en/logos/market/avito/" target="_blank" rel="noopener">Avito<img class="blog-mention-icon" src="/assets/logos/svgs/avito.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is a classifieds board rather than a classic marketplace, and its mark solves a different problem: showing variety. The signature device is a cluster of colored circles next to the name: each dot reads as a &quot;category&quot; (cars, housing, goods, jobs). A rare combination mark with abstract graphics in this category — and one of the Runet's most recognized brands overall.</p>
       <h2 id="aliexpress-parent-brand-heritage">AliExpress: parent‑brand heritage</h2>
-      <p><a href="/en/logos/market/aliexpress/" target="_blank" rel="noopener">AliExpress</a> wears red‑orange and a wordmark with a &quot;smile&quot; flourish — the DNA of parent Alibaba. Warm colors in e‑commerce drive impulse: red and orange traditionally connect to discounts and urgency — we cover <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">color psychology in logo design</a> separately — the opposite strategy to Ozon's calm blue.</p>
+      <p><a href="/en/logos/market/aliexpress/" target="_blank" rel="noopener">AliExpress<img class="blog-mention-icon" src="/assets/logos/svgs/aliexpress.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> wears red‑orange and a wordmark with a &quot;smile&quot; flourish — the DNA of parent Alibaba. Warm colors in e‑commerce drive impulse: red and orange traditionally connect to discounts and urgency — we cover <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">color psychology in logo design</a> separately — the opposite strategy to Ozon's calm blue.</p>
       <h2 id="niche-players-black-as-positioning">Niche players: black as positioning</h2>
       <ul>
-      <li><strong><a href="/en/logos/market/lamoda/" target="_blank" rel="noopener">Lamoda</a></strong> — a strict black wordmark: fashion sells through restraint; a &quot;fashionable&quot; logo would age in a season.</li>
-      <li><strong><a href="/en/logos/market/goldenapple/" target="_blank" rel="noopener">Golden Apple</a></strong> — a laconic apple emblem: a beauty retailer can afford a symbol because its category is narrower than &quot;everything&quot;.</li>
-      <li><strong>Ecosystem marketplaces</strong> inherit their parents' identity — like <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Yandex Market</a> living in the yellow <a href="/en/blog/istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">Yandex</a> badge.</li>
+      <li><strong><a href="/en/logos/market/lamoda/" target="_blank" rel="noopener">Lamoda<img class="blog-mention-icon" src="/assets/logos/svgs/lamoda.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — a strict black wordmark: fashion sells through restraint; a &quot;fashionable&quot; logo would age in a season.</li>
+      <li><strong><a href="/en/logos/market/goldenapple/" target="_blank" rel="noopener">Golden Apple<img class="blog-mention-icon" src="/assets/logos/svgs/golden-apple.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — a laconic apple emblem: a beauty retailer can afford a symbol because its category is narrower than &quot;everything&quot;.</li>
+      <li><strong>Ecosystem marketplaces</strong> inherit their parents' identity — like <a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Yandex Market<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> living in the yellow <a href="/en/blog/istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">Yandex</a> badge.</li>
       </ul>
       <h2 id="the-market-color-map">The market color map</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Color</th><th>Player</th><th>Message</th></tr></thead><tbody><tr><td>Blue</td><td><a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon</a></td><td>reliability, &quot;all is well&quot;</td></tr><tr><td>Violet gradient</td><td><a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries</a></td><td>vibrancy, emotion</td></tr><tr><td>Red‑orange</td><td><a href="/en/logos/market/aliexpress/" target="_blank" rel="noopener">AliExpress</a></td><td>deals, impulse</td></tr><tr><td>Black</td><td><a href="/en/logos/market/lamoda/" target="_blank" rel="noopener">Lamoda</a></td><td>fashion, restraint</td></tr><tr><td>Yellow</td><td><a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Yandex Market</a></td><td>the Yandex ecosystem</td></tr><tr><td>Multicolor</td><td><a href="/en/logos/market/avito/" target="_blank" rel="noopener">Avito</a></td><td>category variety</td></tr></tbody></table></div>
-      <p>As in <a href="/en/blog/logotipy-rossijskih-bankov/" target="_blank" rel="noopener">banking</a> and <a href="/en/blog/logotipy-messendzherov/" target="_blank" rel="noopener">messengers</a>, color is territory: overlaps are rare, and a newcomer must hunt for free spectrum.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>The cardboard test</span></div><div class="callout-body"><p>Marketplaces own a medium nobody else has: the cardboard box and the bag. The mark must survive single‑color print on brown board — the harshest simplicity test there is. Open the <a href="/en/logos/market/" target="_blank" rel="noopener">marketplace category</a> and mentally print each mark in one color: they all survive, and that's no coincidence — we explain <a href="/en/blog/vidy-logotipov/" target="_blank" rel="noopener">why monochrome versions exist</a> separately.</p></div></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Color</th><th>Player</th><th>Message</th></tr></thead><tbody><tr><td>Blue</td><td><a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon<img class="blog-mention-icon" src="/assets/logos/svgs/ozon.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>reliability, &quot;all is well&quot;</td></tr><tr><td>Violet gradient</td><td><a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries<img class="blog-mention-icon" src="/assets/logos/svgs/wildberries.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>vibrancy, emotion</td></tr><tr><td>Red‑orange</td><td><a href="/en/logos/market/aliexpress/" target="_blank" rel="noopener">AliExpress<img class="blog-mention-icon" src="/assets/logos/svgs/aliexpress.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>deals, impulse</td></tr><tr><td>Black</td><td><a href="/en/logos/market/lamoda/" target="_blank" rel="noopener">Lamoda<img class="blog-mention-icon" src="/assets/logos/svgs/lamoda.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>fashion, restraint</td></tr><tr><td>Yellow</td><td><a href="/en/logos/market/yandexmarket/" target="_blank" rel="noopener">Yandex Market<img class="blog-mention-icon" src="/assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>the Yandex ecosystem</td></tr><tr><td>Multicolor</td><td><a href="/en/logos/market/avito/" target="_blank" rel="noopener">Avito<img class="blog-mention-icon" src="/assets/logos/svgs/avito.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>category variety</td></tr></tbody></table></div>
+      <p>As in banking and <a href="/en/blog/logotipy-messendzherov/" target="_blank" rel="noopener">messengers</a>, color is territory: overlaps are rare, and a newcomer must hunt for free spectrum.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>The cardboard test</span></div><div class="callout-body"><p>Marketplaces own a medium nobody else has: the cardboard box and the bag. The mark must survive single‑color print on brown board — the harshest simplicity test there is. Open the <a href="/en/logos/market/" target="_blank" rel="noopener">marketplace category</a> and mentally print each mark in one color: they all survive, and that's no coincidence — we explain why monochrome versions exist separately.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -260,132 +264,133 @@ window.yaContextCb.push(() => {
       </ol>
       <p>All the logos — with variants and exact colors — are in the <a href="/en/logos/market/" target="_blank" rel="noopener">catalog</a>: SVG and PNG, free. On using others' marks: <a href="/en/blog/mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">can you use someone else's logo</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+          <a class="blog-card" href="/en/blog/logotipy-oblachnyh-servisov/" data-date="2026-09-10" data-views="0">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             0
           </div>
           </div>
-          <div class="blog-card-title">Streaming Service Logos — Netflix, YouTube, Twitch and More</div>
+          <div class="blog-card-title">Cloud Storage Logos — Why Everyone Draws a Cloud (and Who Doesn't)</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-socsetej/" data-date="2026-08-27" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">AI</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Social Network Logos — From the Instagram Gradient to the X</div>
+          <div class="blog-card-title">AI Company Logos — How Neural Network Services Brand Themselves</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-servisov-puteshestvij/" data-date="2026-08-26" data-views="1">
+      <a class="blog-card" href="/en/blog/logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Travel</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Games</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
-          <div class="blog-card-title">Travel Service Logos — Aviasales, Skyscanner, Kayak and More</div>
+          <div class="blog-card-title">Mobile Game Logos — Why They All Use Chunky 3D Letters</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-servisov-videozvonkov/" data-date="2026-08-26" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Tech</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /><rect x="2" y="6" width="14" height="12" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">Video Call Service Logos — Zoom, Teams, Meet, Discord</div>
+          <div class="blog-card-title">Messenger Logos — Why Everyone Picks Bubbles and Planes</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/istoriya-smajlika/" data-date="2026-08-06" data-views="1">
+      <a class="blog-card" href="/en/blog/pikselnyj-logotip/" data-date="2026-07-28" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Histories</span><span class="blog-card-tag">Basics</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M18 13a6 6 0 0 1-6 5 6 6 0 0 1-6-5h12Z" /><line x1="9" x2="9.01" y1="9" y2="9" /><line x1="15" x2="15.01" y1="9" y2="9" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">2026 Trends</span><span class="blog-card-tag">Retro</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" /><rect x="14" y="2" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>06.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
-          <div class="blog-card-title">The History of the Smiley — From the 1963 Yellow Badge to Emoji</div>
+          <div class="blog-card-title">A Pixel and Retro Logo — Y2K Returns in 2026</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/kak-pridumat-nazvanie-brenda/" data-date="2026-08-08" data-views="0">
+      <a class="blog-card" href="/en/blog/rukopisnyj-logotip/" data-date="2026-07-29" data-views="13">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Business</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">Typography</span><span class="blog-card-tag">2026 Trends</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /><path d="m15 5 4 4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            13
           </div>
           </div>
-          <div class="blog-card-title">How to Name a Brand — Naming Methods and Checks</div>
+          <div class="blog-card-title">A Hand‑Drawn Logo and Lettering — The &quot;Human Touch&quot; Trend</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -403,25 +408,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -498,6 +495,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -543,10 +541,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

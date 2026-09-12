@@ -1,6 +1,7 @@
 /* ── Общие стили: index.html, watermark.html, merge-pdf.html, compress-webp.html ── */
 
 @import '../../css/tokens.css';
+@import '../../css/page-bg.css';
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -51,7 +52,6 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
   font-size: 15px;
@@ -65,22 +65,8 @@ body.webp-params-open {
   touch-action: none;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.35;
-  pointer-events: none;
-  z-index: 0;
-}
-
 .wrap {
   position: relative;
-  z-index: 1;
   max-width: 760px;
   margin: 0 auto;
   padding: 80px 24px 80px;
@@ -2388,15 +2374,8 @@ details[open] .details-body {
    Appended after the re-themed browser-tools base so these win.
    ══════════════════════════════════════════════════════════════════════════ */
 
-/* ── Page background: subtle purple glow над сеткой ── */
-body {
-  background-color: var(--bg);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(138,107,255,0.16) 0%, transparent 60%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-body::before { opacity: 0.5; }   /* мягче исходная сетка */
+/* Фон страницы — единственный источник: css/page-bg.css (импортирован
+   наверху файла), там же цвет --bg. Не переопределять здесь снова. */
 
 /* ── Site header ── — стили в css/site-header.css (единый источник правды,
    используемый главной/блогом/каталогом/tools через templates/partials/nav-header.html) */

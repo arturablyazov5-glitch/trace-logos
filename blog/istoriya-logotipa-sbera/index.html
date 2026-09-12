@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>История логотипа Сбербанка — от копилки 1841 года до градиентного круга · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(336 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(16 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(66 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(126 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(336 70% 38%) 0%, hsl(126 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18v-7" /><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M3 22h18" /><path d="M6 18v-7" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(216 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(256 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(306 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(6 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(216 70% 38%) 0%, hsl(6 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18v-7" /><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z" /><path d="M14 18v-7" /><path d="M18 18v-7" /><path d="M3 22h18" /><path d="M6 18v-7" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-13">13 июня 2026</time>
@@ -202,13 +206,13 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            13
+	            53
 	          </span>
         </div>
         <h1>История логотипа Сбербанка — от копилки 1841 года до градиентного круга</h1>
       </header>
       <div class="blog-body">
-        <p>Зелёный круг с галочкой видел каждый житель России, но мало кто помнит, что ему предшествовали копилка со сберкнижкой, строгие советские эмблемы и пятнадцать лет объёмного глянца. И за сменой картинок стоит большее: история знака <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбербанка</a> — готовый учебник по эволюции айдентики, где каждый поворот случился потому, что менялась сама среда, в которой знак должен был жить. Пройдём по эпохам именно с этим вопросом: что изменилось вокруг и почему знак был обязан ответить.</p>
+        <p>Зелёный круг с галочкой видел каждый житель России, но мало кто помнит, что ему предшествовали копилка со сберкнижкой, строгие советские эмблемы и пятнадцать лет объёмного глянца. И за сменой картинок стоит большее: история знака <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбербанка<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — готовый учебник по эволюции айдентики, где каждый поворот случился потому, что менялась сама среда, в которой знак должен был жить. Пройдём по эпохам именно с этим вопросом: что изменилось вокруг и почему знак был обязан ответить.</p>
       <h2 id="до-логотипа-когда-бренд-был-не-нужен">До логотипа: когда бренд был не нужен</h2>
       <p>Сберегательное дело в России началось в 1841 году указом Николая I, и полтора века у сберкасс не было логотипа в современном смысле — только вывески, гербы и атрибуты бережливости: копилка, пчела, колос. Причина проста: логотип отличает одну компанию от другой, а отличать было не от кого. В советское время гострудсберкассы обходились строгой типографикой и госсимволикой — конкуренции не существовало, а «бренд» гарантировало государство.</p>
       <p>Всё изменилось в тот момент, когда касса перестала быть единственной. Появился рынок, и вместе с ним впервые понадобился знак, который узнают и выберут.</p>
@@ -223,59 +227,59 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="1991-рождение-галочки" class="step-heading"><span class="step-badge">1991</span><span class="step-title">Рождение галочки</span></h2>
-      <p>С преобразованием в <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбербанк</a> России появился первый настоящий логотип: <strong>зелёный круг с «галочкой»</strong> — стилизованный кошелёк с выпадающей монетой (распространённое прочтение; встречается и версия про раскрытый веер сберкнижки). Авторство эмблемы пересказывали по‑разному, но сам знак оказался на редкость удачным, и удачным именно для своей задачи: простая запоминающаяся форма, однозначная связь с деньгами, зелёный цвет как код финансовой надёжности. Рынку нужен был мгновенно читаемый символ доверия, его и получили.</p>
+      <p>С преобразованием в <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбербанк<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> России появился первый настоящий логотип: <strong>зелёный круг с «галочкой»</strong> — стилизованный кошелёк с выпадающей монетой (распространённое прочтение; встречается и версия про раскрытый веер сберкнижки). Авторство эмблемы пересказывали по‑разному, но сам знак оказался на редкость удачным, и удачным именно для своей задачи: простая запоминающаяся форма, однозначная связь с деньгами, зелёный цвет как код финансовой надёжности. Рынку нужен был мгновенно читаемый символ доверия, его и получили.</p>
       <p>Стоит отдельно заметить, почему сработала именно такая форма. Круг в финансовой символике читается как монета и как замкнутость, то есть сохранность; галочка внутри добавляет движение и согласие. Знак при этом остаётся начертанием в одну линию, которое воспроизводится любым способом: трафаретом на стекле, вышивкой на форме, штампом на бланке. В 1991 году это имело практическое значение, потому что цифровой печати в нынешнем виде не существовало, а филиалы по стране изготавливали вывески местными силами.</p>
-      <p>Рядом со знаком встало набранное шрифтом с засечками «<a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбербанк</a> России». Композиция дышала девяностыми: чуть тяжеловесно, очень солидно. И в таком виде знак прожил почти два десятилетия, до тех пор пока не сменилась мода на то, как вообще должен выглядеть «дорогой» бренд.</p>
+      <p>Рядом со знаком встало набранное шрифтом с засечками «<a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбербанк<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> России». Композиция дышала девяностыми: чуть тяжеловесно, очень солидно. И в таком виде знак прожил почти два десятилетия, до тех пор пока не сменилась мода на то, как вообще должен выглядеть «дорогой» бренд.</p>
       <h2 id="2009-объёмный-глянец" class="step-heading"><span class="step-badge">2009</span><span class="step-title">Объёмный глянец</span></h2>
-      <p>К концу нулевых айдентика по всему рынку требовала объёма: градиенты, блики, тени — «дорого» тогда означало «глянцево». <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбербанк</a> ответил на эту моду ребрендингом 2009 года (студия Fitch): галочку сохранили, но сделали трёхмерной — зелёный стал светлее и сочнее, круг получил объём и лучи, шрифт сменился на современный гротеск. Тогда же появился слоган «Всегда рядом».</p>
-      <p>Ребрендинг 2009 года стоит помнить ещё и потому, что он показывает, как мода диктует форму задним числом. Объём в те годы ставили все: банки, операторы связи, производители техники, государственные порталы. Приём читался как признак современности и бюджета, поэтому отказ от него выглядел бы экономией. Через десять лет ровно тот же приём стал маркером устаревшего сайта, и вычищали его так же массово, как когда‑то добавляли.</p>
+      <p>К концу нулевых айдентика по всему рынку требовала объёма: градиенты, блики, тени — «дорого» тогда означало «глянцево». <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбербанк<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> ответил на эту моду ребрендингом 2009 года (студия Fitch): галочку сохранили, но сделали трёхмерной — зелёный стал светлее и сочнее, круг получил объём и лучи, шрифт сменился на современный гротеск. Тогда же появился слоган «Всегда рядом».</p>
+      <p>Ребрендинг 2009 года стоит помнить ещё и потому, что он показывает, как мода диктует форму задним числом. Объём в те годы ставили все: банки, операторы связи, производители техники, государственные порталы. Приём читался как признак современности и бюджета, поэтому отказ от него выглядел бы экономией. Через десять лет ровно тот же приём стал маркером устаревшего сайта, и вычищали его так же массово, как когда‑то добавляли.</p>
       <p>Ход был грамотный и эволюционный: узнаваемость сохранили, картинку осовременили. Но у решения был встроенный срок годности, и заложила его технология. Объёмные логотипы плохо живут в интерфейсах: в 16 пикселях фавикона блики превращаются в грязь. Пока бренд жил на вывесках и бланках, это не мешало, но следующая среда была уже другой. Почему малые экраны в итоге убили объём во всей индустрии, разбирали в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">про упрощение логотипов</a>.</p>
       <h2 id="2020-сбер-знак-для-экрана" class="step-heading"><span class="step-badge">2020</span><span class="step-title">«Сбер» — знак для экрана</span></h2>
       <p>Этой новой средой стал смартфон. К 2020 году главной «вывеской» банка стала иконка приложения, а объёмная галочка для неё не годилась, и в сентябре банк объявил о трансформации в экосистему, убрав из бренда само слово «банк». Логотип сменился радикально: впервые с 1991 года изменилась сама форма знака — <strong>незамкнутый круг с галочкой и градиентным штрихом</strong> от зелёного через жёлто‑зелёный. Каждое решение здесь — прямой ответ на требования экрана и экосистемы:</p>
       <ul>
       <li><strong>Плоскость.</strong> Знак наконец одинаково живёт в любом размере — от фавикона до фасада, потому что рендерить блики больше не нужно.</li>
       <li><strong>Градиент в штрихе, при чистой заливке.</strong> Компромисс: цифровая свежесть без потери работоспособности в малом размере, а в монохроме знак спокойно живёт одним цветом.</li>
-      <li><strong>Короткое имя «<a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер</a>».</strong> Зонтик для десятков сервисов — СберМаркет, СберЗвук, СберПрайм. Знак сразу проектировали префиксом экосистемы, и роль банковской вывески он перерос.</li>
+      <li><strong>Короткое имя «<a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбер<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>».</strong> Зонтик для десятков сервисов — СберМаркет, СберЗвук, СберПрайм. Знак сразу проектировали префиксом экосистемы, и роль банковской вывески он перерос.</li>
       </ul>
       <p>Ребрендинг оценивали в миллиарды рублей — замена тысяч вывесок, банкоматов и форм, а споры «зачем менять узнаваемое» шли громкие. Но с дистанции решение читается однозначно: банк готовил айдентику к жизни, где тебя в первую очередь видят на экране телефона.</p>
       <h2 id="что-стоит-сменить-знак-у-банка">Что стоит сменить знак у банка</h2>
-      <p>Споры вокруг ребрендинга 2020 года держались на цифре в миллиарды, и цифра эта пугает ровно до того момента, пока не разложишь, из чего она складывается. У банка знак живёт на физических объектах, и каждый из них требует замены отдельно. Макетом дело не ограничивается.</p>
+      <p>Споры вокруг ребрендинга 2020 года держались на цифре в миллиарды, и цифра эта пугает ровно до того момента, пока не разложишь, из чего она складывается. У банка знак живёт на физических объектах, и каждый из них требует замены отдельно. Макетом дело не ограничивается.</p>
       <p>Считать приходится вывески отделений по всей стране, банкоматы и терминалы, пластиковые карты в обращении, бланки и печатные формы, форму сотрудников, транспорт инкассации, рекламные носители, интерфейсы приложения и сайта. Часть меняется за ночь обновлением кода, часть — годами, по мере износа и планового ремонта.</p>
       <p>Отсюда вырастает практика переходного периода, которую применяют все крупные бренды. Новый знак вводят сразу в цифре, где замена бесплатна, а физические носители обновляют волнами: сначала то, что видит больше всего людей, потом остальное. Несколько лет старая и новая версии сосуществуют, и это нормальная часть плана, которую закладывают заранее.</p>
-      <p>Для небольшой компании выводы те же, только суммы меньше. Прежде чем менять знак, полезно выписать все места, где он физически стоит, и оценить замену каждого. Иногда этот список сам подсказывает, что дешевле обойтись сменой отделки, оставив форму.</p>
+      <p>Для небольшой компании выводы те же, только суммы меньше. Прежде чем менять знак, полезно выписать все места, где он физически стоит, и оценить замену каждого. Иногда этот список сам подсказывает, что дешевле обойтись сменой отделки, оставив форму.</p>
       <h2 id="все-эпохи-на-одной-шкале">Все эпохи на одной шкале</h2>
       <p>Три знака рядом, и путь виден без слов: от объёма к плоскости, от засечек к гротеску, при неизменном зелёном и неизменной галочке.</p>
       <div class="blog-timeline">
           <a class="blog-timeline-node" href="../../logos/bank/sber/">
-            <span class="blog-timeline-logo"><img src="../../assets/logos/svgs/sberbank(1991)-full.svg?v=20260808" alt="Логотип Сбер, 1991" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-logo blog-timeline-logo--full"><img src="../../assets/logos/svgs/sberbank(1991)-full.svg?v=20260910" alt="Логотип Сбер, 1991" loading="lazy" decoding="async"></span>
             <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
             <span class="blog-timeline-year">1991</span>
           </a>
           <a class="blog-timeline-node" href="../../logos/bank/sber/">
-            <span class="blog-timeline-logo"><img src="../../assets/logos/svgs/sberbank(2009)-full.svg?v=20260808" alt="Логотип Сбер, 2009" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-logo blog-timeline-logo--full"><img src="../../assets/logos/svgs/sberbank(2009)-full.svg?v=20260910" alt="Логотип Сбер, 2009" loading="lazy" decoding="async"></span>
             <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
             <span class="blog-timeline-year">2009</span>
           </a>
           <a class="blog-timeline-node" href="../../logos/bank/sber/">
-            <span class="blog-timeline-logo"><img src="../../assets/logos/svgs/sberbank-full.svg?v=20260808" alt="Логотип Сбер, 2020" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-logo blog-timeline-logo--full"><img src="../../assets/logos/svgs/sberbank-full.svg?v=20260910" alt="Логотип Сбер, 2020" loading="lazy" decoding="async"></span>
             <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
             <span class="blog-timeline-year">2020</span>
           </a>
         </div>
-      <p>Если сжать всё сказанное в текст, видна та же закономерность: каждая строка отмечает смену среды, а вкусы тут ни при чём.</p>
+      <p>Если сжать всё сказанное в текст, видна та же закономерность: каждая строка отмечает смену среды, а вкусы тут ни при чём.</p>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Период</th><th>Знак</th><th>Что изменилось вокруг</th></tr></thead><tbody><tr><td>до 1991</td><td>вывески, гербы, атрибуты бережливости</td><td>госмонополия, отличаться не от кого</td></tr><tr><td>1991</td><td>зелёная галочка в круге + засечки</td><td>появился рынок, нужен символ доверия</td></tr><tr><td>2009</td><td>объёмная галочка, глянец, лучи</td><td>мода на «дорого‑богато»</td></tr><tr><td>2020</td><td>плоский разомкнутый круг, градиентный штрих</td><td>бренд переехал в смартфон и экосистему</td></tr></tbody></table></div>
       <h2 id="почему-зелёный-пережил-все-эпохи">Почему зелёный пережил все эпохи</h2>
-      <p>На фоне трёх смен оформления один элемент держится с 1991 года без единого пересмотра — цвет. И держится он не по инерции, а потому что цвет накапливает узнаваемость иначе, чем форма.</p>
-      <p>Форму читают осознанно: глаз находит контур, мозг сверяет с памятью. Цвет опознаётся раньше, периферийным зрением, ещё до фокусировки на объекте. Поэтому зелёное пятно на улице читается как отделение банка с расстояния, на котором галочку разглядеть невозможно. Отказ от цвета обнулил бы именно этот дальний слой узнавания, самый дешёвый в работе и самый дорогой в накоплении.</p>
-      <p>К этому добавляется правовая сторона. Зелёный <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера</a> зарегистрирован как цветовое обозначение, а такая регистрация требует многолетних доказательств связи оттенка с брендом. Смена цвета обнулила бы и её, вернув компанию в начало пути; подробнее про механику регистрации цвета — в статье <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">про фирменные цвета</a>.</p>
+      <p>На фоне трёх смен оформления один элемент держится с 1991 года без единого пересмотра — цвет. И держится он не по инерции, а потому что цвет накапливает узнаваемость иначе, чем форма.</p>
+      <p>Форму читают осознанно: глаз находит контур, мозг сверяет с памятью. Цвет опознаётся раньше, периферийным зрением, ещё до фокусировки на объекте. Поэтому зелёное пятно на улице читается как отделение банка с расстояния, на котором галочку разглядеть невозможно. Отказ от цвета обнулил бы именно этот дальний слой узнавания, самый дешёвый в работе и самый дорогой в накоплении.</p>
+      <p>К этому добавляется правовая сторона. Зелёный <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> зарегистрирован как цветовое обозначение, а такая регистрация требует многолетних доказательств связи оттенка с брендом. Смена цвета обнулила бы и её, вернув компанию в начало пути; подробнее про механику регистрации цвета — в статье <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">про фирменные цвета</a>.</p>
       <p>Отсюда правило, применимое далеко за пределами банков и стоящее того, чтобы записать его в гайдлайн: в редизайне цвет трогают последним. Форму можно упростить, шрифт заменить, отделку сменить целиком, и бренд останется узнанным. Смена цвета читается публикой как смена компании.</p>
       <h2 id="чему-учит-эта-история">Чему учит эта история</h2>
       <p>Из четырёх эпох выводятся четыре урока, полезных для любого редизайна:</p>
       <ol>
       <li><strong>Форма живёт дольше стиля.</strong> Галочка в круге пережила три оформления и тридцать с лишним лет, потому что сама форма проста и осмысленна. Вкладываться стоит в силуэт: спецэффекты устареют с ближайшей модой.</li>
-      <li><strong>Ребрендинг отвечает на смену среды.</strong> 2009‑й отвечал моде на глянец, 2020‑й — переезду бренда в смартфон. Меняться без причины дорого; не меняться, когда среда уже сменилась, — ещё дороже.</li>
+      <li><strong>Ребрендинг отвечает на смену среды.</strong> 2009‑й отвечал моде на глянец, 2020‑й — переезду бренда в смартфон. Меняться без причины дорого; не меняться, когда среда уже сменилась, — ещё дороже.</li>
       <li><strong>Эволюция бьёт революцию.</strong> Даже радикальный 2020‑й сохранил ядро: круг, галочку, зелёный. Узнаваемость — накопленный актив, и его не сжигают ради новизны.</li>
-      <li><strong>Цвет — константа.</strong> Зелёный <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера</a> пережил все эпохи, менялся только оттенок (текущий — #21A038). Точный код цвета — часть бренда наравне со знаком, о чём писали в статье <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">про фирменные цвета</a>.</li>
+      <li><strong>Цвет — константа.</strong> Зелёный <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> пережил все эпохи, менялся только оттенок (текущий — #21A038). Точный код цвета — часть бренда наравне со знаком, о чём писали в статье <a href="../firmennye-cveta-izvestnyh-brendov/" target="_blank" rel="noopener">про фирменные цвета</a>.</li>
       </ol>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
@@ -287,15 +291,16 @@ window.yaContextCb.push(() => {
     })
 })
 </script></div>
-      <h2 id="если-коротко">Если коротко</h2>
-      <p>Галочка <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера</a> — редкий пример знака‑долгожителя: рождённый в 1991‑м, он пережил глянец нулевых и минимализм двадцатых, потеряв объём, но сохранив форму и цвет. И вся его история подчинена одной логике — знак менялся ровно тогда и ровно настолько, насколько менялась среда вокруг: рынок, мода, экран. Это готовая шкала, по которой можно калибровать любой редизайн: оформление меняют по эпохе, ядро — почти никогда.</p>
-      <p>Сравнить все версии своими глазами можно в нашем каталоге: на странице <a href="../../logos/bank/sber/" target="_blank" rel="noopener">логотипа Сбера</a> собраны и актуальный знак, и исторические варианты — от эмблемы 1991 года до градиентного круга, все в векторе.</p>
+      <h2 id="если-коротко">Если коротко</h2>
+      <p>Галочка <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — редкий пример знака‑долгожителя: рождённый в 1991‑м, он пережил глянец нулевых и минимализм двадцатых, потеряв объём, но сохранив форму и цвет. И вся его история подчинена одной логике — знак менялся ровно тогда и ровно настолько, насколько менялась среда вокруг: рынок, мода, экран. Это готовая шкала, по которой можно калибровать любой редизайн: оформление меняют по эпохе, ядро — почти никогда.</p>
+      <p>Сравнить все версии своими глазами можно в нашем каталоге: на странице <a href="../../logos/bank/sber/" target="_blank" rel="noopener">логотипа Сбера<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> собраны и актуальный знак, и исторические варианты — от эмблемы 1991 года до градиентного круга, все в векторе.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../istoriya-logotipa-yandeksa/" data-date="2026-06-14" data-views="11">
+          <a class="blog-card" href="../istoriya-logotipa-yandeksa/" data-date="2026-06-14" data-views="41">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -308,7 +313,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            11
+            41
           </div>
           </div>
           <div class="blog-card-title">История логотипа Яндекса — от «Яndex» 1997 года до ребрендинга 2021‑го</div>
@@ -316,41 +321,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../redizajn-ili-refresh-logotipa/" data-date="2026-09-01" data-views="0">
+      <a class="blog-card" href="../istoriya-logotipa-apple/" data-date="2026-06-12" data-views="14">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Ребрендинг</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" /><path d="M21 3v5h-5" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Редизайн или рефреш логотипа — что выбрать и не потерять узнаваемость</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../istoriya-logotipa-apple/" data-date="2026-06-12" data-views="2">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Apple</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Логотипы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Apple</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Логотипы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            14
           </div>
           </div>
           <div class="blog-card-title">История логотипа Apple — почему яблоко надкушено и куда делась радуга</div>
@@ -358,65 +342,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../chto-takoe-emodzi-i-otkuda-oni/" data-date="2026-06-04" data-views="0">
+      <a class="blog-card" href="../chto-takoe-emodzi-i-otkuda-oni/" data-date="2026-06-04" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Unicode</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" x2="9.01" y1="9" y2="9" /><line x1="15" x2="15.01" y1="9" y2="9" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Unicode</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M8 14s1.5 2 4 2 4-2 4-2" /><line x1="9" x2="9.01" y1="9" y2="9" /><line x1="15" x2="15.01" y1="9" y2="9" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            3
           </div>
           </div>
-          <div class="blog-card-title">Что такое эмодзи и откуда они появились</div>
+          <div class="blog-card-title">Что такое эмодзи и откуда они появились</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../obemnyj-logotip/" data-date="2026-07-27" data-views="7">
+      <a class="blog-card" href="../logotipy-oblachnyh-servisov/" data-date="2026-09-10" data-views="0">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            0
+          </div>
+          </div>
+          <div class="blog-card-title">Логотипы облачных сервисов — почему все рисуют облако и кто нет</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../adaptivnyj-logotip/" data-date="2026-07-20" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" /><path d="m3.3 7 8.7 5 8.7-5" /><path d="M12 22V12" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Адаптивность</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="10" height="14" x="3" y="8" rx="2" /><path d="M5 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-2.4" /><path d="M8 18h.01" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>20.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            7
+            17
           </div>
           </div>
-          <div class="blog-card-title">Объёмный (3D) логотип — тренд глубины в 2026</div>
+          <div class="blog-card-title">Адаптивный логотип — что это и как сделать</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-21" data-views="0">
+      <a class="blog-card" href="../kak-pridumat-nazvanie-brenda/" data-date="2026-08-08" data-views="2">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            2
           </div>
           </div>
-          <div class="blog-card-title">Логотипы мессенджеров — почему все выбирают пузырь и самолётик</div>
+          <div class="blog-card-title">Как придумать название бренда — методы нейминга и проверки</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -426,7 +431,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#до-логотипа-когда-бренд-был-не-нужен">До логотипа: когда бренд был не нужен</a></li><li><a href="#1991-рождение-галочки">1991: рождение галочки</a></li><li><a href="#2009-объёмный-глянец">2009: объёмный глянец</a></li><li><a href="#2020-сбер-знак-для-экрана">2020: «Сбер» — знак для экрана</a></li><li><a href="#что-стоит-сменить-знак-у-банка">Что стоит сменить знак у банка</a></li><li><a href="#все-эпохи-на-одной-шкале">Все эпохи на одной шкале</a></li><li><a href="#почему-зелёный-пережил-все-эпохи">Почему зелёный пережил все эпохи</a></li><li><a href="#чему-учит-эта-история">Чему учит эта история</a></li><li><a href="#если-коротко">Если коротко</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#до-логотипа-когда-бренд-был-не-нужен">До логотипа: когда бренд был не нужен</a></li><li><a href="#1991-рождение-галочки">1991: рождение галочки</a></li><li><a href="#2009-объёмный-глянец">2009: объёмный глянец</a></li><li><a href="#2020-сбер-знак-для-экрана">2020: «Сбер» — знак для экрана</a></li><li><a href="#что-стоит-сменить-знак-у-банка">Что стоит сменить знак у банка</a></li><li><a href="#все-эпохи-на-одной-шкале">Все эпохи на одной шкале</a></li><li><a href="#почему-зелёный-пережил-все-эпохи">Почему зелёный пережил все эпохи</a></li><li><a href="#чему-учит-эта-история">Чему учит эта история</a></li><li><a href="#если-коротко">Если коротко</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -434,25 +439,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -529,6 +526,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -574,10 +572,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

@@ -17,15 +17,15 @@ tags_en: Collections, Branding, Marketplaces
 
 ## Почему у маркетплейсов текстовые логотипы
 
-В категории, где ассортимент бесконечен, символ подобрать невозможно: любая картинка (тележка, коробка, сумка) сужает образ до одной ассоциации. Поэтому рынок почти единогласно выбрал текстовый знак — название фирменным шрифтом (тип разбираем в статье [виды логотипов](../vidy-logotipov/)). А проблему «текст не влезает в иконку» каждый решает по‑своему: [Ozon](../../logos/market/ozon/) выкрутился короткими четырьмя буквами, [Wildberries](../../logos/market/wildberries/) сокращается до «WB», [Яндекс Маркет](../../logos/market/yandexmarket/) — до буквы «М» в фирменной плашке.
+В категории, где ассортимент бесконечен, символ подобрать невозможно: любая картинка (тележка, коробка, сумка) сужает образ до одной ассоциации. Поэтому рынок почти единогласно выбрал текстовый знак — название фирменным шрифтом (тип разбираем в статье виды логотипов). А проблему «текст не влезает в иконку» каждый решает по‑своему: [Ozon](../../logos/market/ozon/) выкрутился короткими четырьмя буквами, [Wildberries](../../logos/market/wildberries/) сокращается до «WB», [Яндекс Маркет](../../logos/market/yandexmarket/) — до буквы «М» в фирменной плашке.
 
 ## Ozon: короткое имя как суперсила
 
-[Ozon](../../logos/market/ozon/) — ветеран рунета (работает с 1998 года, начинал с книг, как Amazon) и обладатель редкого актива: название из четырёх букв, которое целиком помещается в иконку приложения. Синий цвет закрепился как «цвет Ozon» настолько, что его наследуют все сервисы экосистемы — [Ozon Банк](../../logos/bank/ozonbank/) узнаётся мгновенно. Именно короткое имя позволило Ozon не заводить отдельную монограмму — одна форма работает везде — про [размеры логотипа для площадок](../razmery-logotipa-dlya-sajta-i-socsetej/) мы писали отдельно.
+[Ozon](../../logos/market/ozon/) — ветеран рунета (работает с 1998 года, начинал с книг, как Amazon) и обладатель редкого актива: название из четырёх букв, которое целиком помещается в иконку приложения. Синий цвет закрепился как «цвет Ozon» настолько, что его наследуют все сервисы экосистемы — [Ozon Банк](../../logos/bank/ozonbank/) узнаётся мгновенно. Именно короткое имя позволило Ozon не заводить отдельную монограмму — одна форма работает везде — про [размеры логотипа для площадок](../razmery-logotipa-dlya-sajta-i-socsetej/) мы писали отдельно.
 
-## Wildberries: градиент против всех
+## Wildberries: градиент против всех
 
-[Wildberries](../../logos/market/wildberries/) долго жил со строгим текстовым знаком, а в 2020‑х перешёл на фиолетово‑малиновый градиент — самый смелый цветовой ход категории. Логика различима: рынок уже занял синий (Ozon), красный (AliExpress) и жёлтый (маркетплейс‑направление Яндекса), а градиент застолбил сразу целую зону спектра. Длинное название при этом требует сокращённой версии — «WB» живёт в иконке и в дочернем [Вайлдберриз Банке](../../logos/bank/wbbank/). Про моду на градиенты — в статье [тренды логотипов 2026](../trendy-logotipov-2026/).
+[Wildberries](../../logos/market/wildberries/) долго жил со строгим текстовым знаком, а в 2020‑х перешёл на фиолетово‑малиновый градиент — самый смелый цветовой ход категории. Логика различима: рынок уже занял синий (Ozon), красный (AliExpress) и жёлтый (маркетплейс‑направление Яндекса), а градиент застолбил сразу целую зону спектра. Длинное название при этом требует сокращённой версии — «WB» живёт в иконке и в дочернем [Вайлдберриз Банке](../../logos/bank/wbbank/). Про моду на градиенты — в статье тренды логотипов 2026.
 
 ## Авито: разноцветные точки против машин с пробегом
 
@@ -33,11 +33,11 @@ tags_en: Collections, Branding, Marketplaces
 
 ## AliExpress: наследие материнского бренда
 
-[AliExpress](../../logos/market/aliexpress/) носит красно‑оранжевую гамму и текстовый знак с «улыбкой»-росчерком — ДНК материнской Alibaba. Тёплые цвета в e‑commerce работают на импульс: красный и оранжевый традиционно связывают со скидками и срочностью — о том, [как вообще работает психология цвета в логотипе](../psihologiya-cveta-v-logotipe/), мы писали отдельно — стратегия, противоположная «спокойному» синему Ozon.
+[AliExpress](../../logos/market/aliexpress/) носит красно‑оранжевую гамму и текстовый знак с «улыбкой»-росчерком — ДНК материнской Alibaba. Тёплые цвета в e‑commerce работают на импульс: красный и оранжевый традиционно связывают со скидками и срочностью — о том, [как вообще работает психология цвета в логотипе](../psihologiya-cveta-v-logotipe/), мы писали отдельно — стратегия, противоположная «спокойному» синему Ozon.
 
 ## Нишевые игроки: чёрный как позиционирование
 
-- **[Lamoda](../../logos/market/lamoda/)** — строгий чёрный текстовый знак: мода продаёт себя через сдержанность, «модный» логотип состарился бы за сезон.
+- **[Lamoda](../../logos/market/lamoda/)** — строгий чёрный текстовый знак: мода продаёт себя через сдержанность, «модный» логотип состарился бы за сезон.
 - **[Золотое Яблоко](../../logos/market/goldenapple/)** — лаконичная эмблема‑яблоко: бьюти‑ритейлер может позволить себе символ, потому что категория уже, чем «всё на свете».
 - **Экосистемные маркетплейсы** наследуют айдентику родителей — как [Яндекс Маркет](../../logos/market/yandexmarket/), живущий в жёлтой плашке [Яндекса](../istoriya-logotipa-yandeksa/).
 
@@ -52,10 +52,10 @@ tags_en: Collections, Branding, Marketplaces
 | Жёлтый | [Яндекс Маркет](../../logos/market/yandexmarket/) | экосистема Яндекса |
 | Мультицвет | [Авито](../../logos/market/avito/) | многообразие категорий |
 
-Как и в [банках](../logotipy-rossijskih-bankov/) и [мессенджерах](../logotipy-messendzherov/), цвет здесь — территория: пересечений почти нет, и новому игроку приходится искать свободный участок спектра.
+Как и в банках и [мессенджерах](../logotipy-messendzherov/), цвет здесь — территория: пересечений почти нет, и новому игроку приходится искать свободный участок спектра.
 
 :::tip Проверка на коробке
-У маркетплейсов есть носитель, которого нет больше ни у кого: картонная коробка и пакет. Знак обязан работать в одноцветной печати на буром картоне — это самый жёсткий тест на простоту формы. Открой [категорию маркетплейсов](../../logos/market/) и мысленно напечатай каждый знак одним цветом: все выживут, и это не совпадение — [зачем нужны монохромные версии](../vidy-logotipov/), мы объясняли отдельно.
+У маркетплейсов есть носитель, которого нет больше ни у кого: картонная коробка и пакет. Знак обязан работать в одноцветной печати на буром картоне — это самый жёсткий тест на простоту формы. Открой [категорию маркетплейсов](../../logos/market/) и мысленно напечатай каждый знак одним цветом: все выживут, и это не совпадение — зачем нужны монохромные версии, мы объясняли отдельно.
 :::
 
 ## Выводы
@@ -65,7 +65,7 @@ tags_en: Collections, Branding, Marketplaces
 3. **Цвет делится, как частоты связи.** Занял зону спектра — защищай её годами и крась в неё всё: коробки, пункты выдачи, банковские карты.
 4. **Экосистемность видна в знаке.** Дочерние сервисы наследуют айдентику — по знаку банка можно угадать материнский маркетплейс.
 
-Все логотипы — с вариантами и точными цветами — в [каталоге](../../logos/market/): SVG и PNG, бесплатно. Про использование чужих знаков — [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
+Все логотипы — с вариантами и точными цветами — в [каталоге](../../logos/market/): SVG и PNG, бесплатно. Про использование чужих знаков — [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 
 ---EN---
 
@@ -77,7 +77,7 @@ Nearly all marketplaces use **wordmarks**: the name matters more than a symbol w
 
 ## Why marketplaces use wordmarks
 
-In a category with infinite assortment, no symbol fits: any picture (a cart, a box, a bag) narrows the image to one association. So the market almost unanimously chose the wordmark — the name in a custom face (the type is covered in [types of logos](../vidy-logotipov/)). The "text doesn't fit the icon" problem gets solved individually: [Ozon](../../logos/market/ozon/) wins with four letters, [Wildberries](../../logos/market/wildberries/) shortens to "WB", [Yandex Market](../../logos/market/yandexmarket/) to an "M" in the signature badge.
+In a category with infinite assortment, no symbol fits: any picture (a cart, a box, a bag) narrows the image to one association. So the market almost unanimously chose the wordmark — the name in a custom face (the type is covered in types of logos). The "text doesn't fit the icon" problem gets solved individually: [Ozon](../../logos/market/ozon/) wins with four letters, [Wildberries](../../logos/market/wildberries/) shortens to "WB", [Yandex Market](../../logos/market/yandexmarket/) to an "M" in the signature badge.
 
 ## Ozon: a short name as a superpower
 
@@ -85,7 +85,7 @@ In a category with infinite assortment, no symbol fits: any picture (a cart, a b
 
 ## Wildberries: a gradient against the field
 
-[Wildberries](../../logos/market/wildberries/) long lived with an austere wordmark, then in the 2020s switched to a violet-magenta gradient — the category's boldest color move. The logic is visible: blue (Ozon), red (AliExpress) and yellow (Yandex's marketplace arm) were taken, and a gradient claims a whole zone of spectrum at once. The long name still demands a short version — "WB" lives in the icon and in the subsidiary [Wildberries Bank](../../logos/bank/wbbank/). On the gradient fashion: [logo trends 2026](../trendy-logotipov-2026/).
+[Wildberries](../../logos/market/wildberries/) long lived with an austere wordmark, then in the 2020s switched to a violet-magenta gradient — the category's boldest color move. The logic is visible: blue (Ozon), red (AliExpress) and yellow (Yandex's marketplace arm) were taken, and a gradient claims a whole zone of spectrum at once. The long name still demands a short version — "WB" lives in the icon and in the subsidiary [Wildberries Bank](../../logos/bank/wbbank/). On the gradient fashion: logo trends 2026.
 
 ## Avito: multicolor dots
 
@@ -112,10 +112,10 @@ In a category with infinite assortment, no symbol fits: any picture (a cart, a b
 | Yellow | [Yandex Market](../../logos/market/yandexmarket/) | the Yandex ecosystem |
 | Multicolor | [Avito](../../logos/market/avito/) | category variety |
 
-As in [banking](../logotipy-rossijskih-bankov/) and [messengers](../logotipy-messendzherov/), color is territory: overlaps are rare, and a newcomer must hunt for free spectrum.
+As in banking and [messengers](../logotipy-messendzherov/), color is territory: overlaps are rare, and a newcomer must hunt for free spectrum.
 
 :::tip The cardboard test
-Marketplaces own a medium nobody else has: the cardboard box and the bag. The mark must survive single-color print on brown board — the harshest simplicity test there is. Open the [marketplace category](../../logos/market/) and mentally print each mark in one color: they all survive, and that's no coincidence — we explain [why monochrome versions exist](../vidy-logotipov/) separately.
+Marketplaces own a medium nobody else has: the cardboard box and the bag. The mark must survive single-color print on brown board — the harshest simplicity test there is. Open the [marketplace category](../../logos/market/) and mentally print each mark in one color: they all survive, and that's no coincidence — we explain why monochrome versions exist separately.
 :::
 
 ## Takeaways

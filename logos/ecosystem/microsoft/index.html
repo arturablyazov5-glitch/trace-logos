@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотипы экосистемы Microsoft · Trace Logo's</title>
@@ -90,50 +92,50 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Microsoft Teams",
-            "url": "https://trace-logos.ru/logos/videocall/teams/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
             "name": "Edge",
             "url": "https://trace-logos.ru/logos/search/edge/"
           },
           {
             "@type": "ListItem",
-            "position": 4,
-            "name": "Outlook",
-            "url": "https://trace-logos.ru/logos/office/outlook/"
+            "position": 3,
+            "name": "Minecraft",
+            "url": "https://trace-logos.ru/logos/game/minecraft/"
           },
           {
             "@type": "ListItem",
-            "position": 5,
+            "position": 4,
             "name": "Microsoft Word",
             "url": "https://trace-logos.ru/logos/office/microsoftword/"
           },
           {
             "@type": "ListItem",
-            "position": 6,
+            "position": 5,
             "name": "Microsoft Excel",
             "url": "https://trace-logos.ru/logos/office/microsoftexcel/"
           },
           {
             "@type": "ListItem",
-            "position": 7,
+            "position": 6,
             "name": "Microsoft PowerPoint",
             "url": "https://trace-logos.ru/logos/office/microsoftpowerpoint/"
           },
           {
             "@type": "ListItem",
-            "position": 8,
+            "position": 7,
             "name": "Microsoft To Do",
             "url": "https://trace-logos.ru/logos/office/microsofttodo/"
           },
           {
             "@type": "ListItem",
-            "position": 9,
+            "position": 8,
             "name": "Microsoft OneNote",
             "url": "https://trace-logos.ru/logos/office/microsoftonenote/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 9,
+            "name": "Outlook",
+            "url": "https://trace-logos.ru/logos/office/outlook/"
           },
           {
             "@type": "ListItem",
@@ -156,20 +158,20 @@
           {
             "@type": "ListItem",
             "position": 13,
+            "name": "Microsoft Teams",
+            "url": "https://trace-logos.ru/logos/videocall/teams/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 14,
             "name": "Microsoft",
             "url": "https://trace-logos.ru/logos/tech/microsoft/"
           },
           {
             "@type": "ListItem",
-            "position": 14,
+            "position": 15,
             "name": "Windows",
             "url": "https://trace-logos.ru/logos/tech/windows/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 15,
-            "name": "Minecraft",
-            "url": "https://trace-logos.ru/logos/game/minecraft/"
           }
         ]
       }
@@ -178,35 +180,23 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../../css/base.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/sidebar.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/search.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/cards.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/detail.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/support-btn.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/color.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/picker.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/modals.css?v=20260808">  <link rel="stylesheet" href="../../../css/filters.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/mobile.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/confetti.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-amongus.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-doodlejump.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-google.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-minicrewmate.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/microanim.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/category-seo.css?v=20260808">
+  <link rel="stylesheet" href="../../../css/catalog.bundle.css?v=20260910">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
-  <script src="../../../components/support-btn.min.js?v=20260808" defer></script>
-  <script src="../../../components/lang-switcher.min.js?v=20260808" defer></script>
-  <script src="../../../components/site-header.min.js?v=20260808" defer></script>
-  <script src="../../../components/section-nav.min.js?v=20260808" defer></script>
-  <script src="../../../components/copy-emoji-btn.min.js?v=20260808" defer></script>
-  <script src="../../../components/sidebar-contact.min.js?v=20260808" defer></script>
-  <script src="../../../components/help-modal.min.js?v=20260808" defer></script>
+  <script src="../../../components/support-btn.min.js?v=20260910" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="../../../components/site-chrome.min.js?v=20260910" defer></script>
+  <script src="../../../components/site-header.min.js?v=20260910" defer></script>
+  <script src="../../../components/section-nav.min.js?v=20260910" defer></script>
+  <script src="../../../components/copy-emoji-btn.min.js?v=20260910" defer></script>
+  <script src="../../../components/sidebar-contact.min.js?v=20260910" defer></script>
+  <script src="../../../components/help-modal.min.js?v=20260910" defer></script>
   <!-- см. комментарий в templates/partials/nav-header.html -->
-  <link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260808">
-  <script type="module" src="../../../components/donate-ticker.min.js?v=20260808"></script>
+  <link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260910">
+  <script type="module" src="../../../components/donate-ticker.min.js?v=20260910"></script>
   <script>
     window.__MANIFEST_BASE__ = '../../';
     window.__ASSET_SECTION__ = 'logos';
@@ -214,8 +204,8 @@
     window.__CAT_SLUG__ = '';
     window.__ECO_SLUG__ = 'microsoft';
   </script>
-  <script type="module" src="../../../js/main.min.js?v=20260808"></script>
-  <script type="module" src="../../../js/search-placeholder.min.js?v=20260808"></script>
+  <script type="module" src="../../../js/main.min.js?v=20260910"></script>
+  <script type="module" src="../../../js/search-placeholder.min.js?v=20260910"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -282,7 +272,7 @@
   <div class="center-body">
     <main>
 
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Логотипы экосистемы Microsoft</h1><div class="grid"><a class="card" href="/logos/ai/copilot/"><div class="icon-wrap"><img src="/assets/logos/previews/microsoft-copilot.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Copilot" title="Icon/AI/Copilot"></div><div class="label">Copilot</div><div class="card-path">Icon/AI/Copilot</div></a><a class="card" href="/logos/videocall/teams/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-teams.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft Teams" title="Icon/VideoCall/Teams"></div><div class="label">Microsoft Teams</div><div class="card-path">Icon/VideoCall/Teams</div></a><a class="card" href="/logos/search/edge/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/edge.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Edge" title="Icon/Search/Edge"></div><div class="label">Edge</div><div class="card-path">Icon/Search/Edge</div></a><a class="card" href="/logos/office/outlook/"><div class="icon-wrap"><img src="/assets/logos/previews/outlook.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Outlook" title="Icon/Office/Outlook"></div><div class="label">Outlook</div><div class="card-path">Icon/Office/Outlook</div></a><a class="card" href="/logos/office/microsoftword/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-word.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft Word" title="Icon/Office/MicrosoftWord"></div><div class="label">Microsoft Word</div><div class="card-path">Icon/Office/MicrosoftWord</div></a><a class="card" href="/logos/office/microsoftexcel/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-excel.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft Excel" title="Icon/Office/MicrosoftExcel"></div><div class="label">Microsoft Excel</div><div class="card-path">Icon/Office/MicrosoftExcel</div></a><a class="card" href="/logos/office/microsoftpowerpoint/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-powerpoint.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft PowerPoint" title="Icon/Office/MicrosoftPowerPoint"></div><div class="label">Microsoft PowerPoint</div><div class="card-path">Icon/Office/MicrosoftPowerPoint</div></a><a class="card" href="/logos/office/microsofttodo/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-todo.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft To Do" title="Icon/Office/MicrosoftToDo"></div><div class="label">Microsoft To Do</div><div class="card-path">Icon/Office/MicrosoftToDo</div></a><a class="card" href="/logos/office/microsoftonenote/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-onenote.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft OneNote" title="Icon/Office/MicrosoftOneNote"></div><div class="label">Microsoft OneNote</div><div class="card-path">Icon/Office/MicrosoftOneNote</div></a><a class="card" href="/logos/cloud/onedrive/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-onedrive.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип OneDrive" title="Icon/Cloud/OneDrive"></div><div class="label">OneDrive</div><div class="card-path">Icon/Cloud/OneDrive</div></a><a class="card" href="/logos/game-platforms/mojangstudios/"><div class="icon-wrap"><img src="/assets/logos/previews/mojang-studio.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Mojang Studios" title="Icon/Game-Platforms/MojangStudios"></div><div class="label">Mojang Studios</div><div class="card-path">Icon/Game-Platforms/MojangStudios</div></a><a class="card" href="/logos/game-platforms/xbox/"><div class="icon-wrap"><img src="/assets/logos/previews/xbox.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Xbox" title="Icon/Game-Platforms/Xbox"></div><div class="label">Xbox</div><div class="card-path">Icon/Game-Platforms/Xbox</div></a><a class="card" href="/logos/tech/microsoft/"><div class="icon-wrap"><img src="/assets/logos/previews/microsoft.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Microsoft" title="Icon/Tech/Microsoft"></div><div class="label">Microsoft</div><div class="card-path">Icon/Tech/Microsoft</div></a><a class="card" href="/logos/tech/windows/"><div class="icon-wrap"><img src="/assets/logos/previews/windows.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Windows" title="Icon/Tech/Windows"></div><div class="label">Windows</div><div class="card-path">Icon/Tech/Windows</div></a><a class="card" href="/logos/game/minecraft/"><div class="icon-wrap"><img src="/assets/logos/previews/minecraft.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Minecraft" title="Icon/Game/Minecraft"></div><div class="label">Minecraft</div><div class="card-path">Icon/Game/Minecraft</div></a></div></div></div></div>
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Логотипы экосистемы Microsoft</h1><div class="grid"><a class="card" href="/logos/ai/copilot/"><div class="icon-wrap"><img src="/assets/logos/previews/microsoft-copilot.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Copilot" title="Icon/AI/Copilot"></div><div class="label">Copilot</div><div class="card-path">Icon/AI/Copilot</div></a><a class="card" href="/logos/search/edge/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/edge.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Edge" title="Icon/Search/Edge"></div><div class="label">Edge</div><div class="card-path">Icon/Search/Edge</div></a><a class="card" href="/logos/game/minecraft/"><div class="icon-wrap"><img src="/assets/logos/previews/minecraft.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Minecraft" title="Icon/Game/Minecraft"></div><div class="label">Minecraft</div><div class="card-path">Icon/Game/Minecraft</div></a><a class="card" href="/logos/office/microsoftword/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-word.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft Word" title="Icon/Office/MicrosoftWord"></div><div class="label">Microsoft Word</div><div class="card-path">Icon/Office/MicrosoftWord</div></a><a class="card" href="/logos/office/microsoftexcel/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-excel.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft Excel" title="Icon/Office/MicrosoftExcel"></div><div class="label">Microsoft Excel</div><div class="card-path">Icon/Office/MicrosoftExcel</div></a><a class="card" href="/logos/office/microsoftpowerpoint/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-powerpoint.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft PowerPoint" title="Icon/Office/MicrosoftPowerPoint"></div><div class="label">Microsoft PowerPoint</div><div class="card-path">Icon/Office/MicrosoftPowerPoint</div></a><a class="card" href="/logos/office/microsofttodo/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-todo.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft To Do" title="Icon/Office/MicrosoftToDo"></div><div class="label">Microsoft To Do</div><div class="card-path">Icon/Office/MicrosoftToDo</div></a><a class="card" href="/logos/office/microsoftonenote/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-onenote.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft OneNote" title="Icon/Office/MicrosoftOneNote"></div><div class="label">Microsoft OneNote</div><div class="card-path">Icon/Office/MicrosoftOneNote</div></a><a class="card" href="/logos/office/outlook/"><div class="icon-wrap"><img src="/assets/logos/previews/outlook.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Outlook" title="Icon/Office/Outlook"></div><div class="label">Outlook</div><div class="card-path">Icon/Office/Outlook</div></a><a class="card" href="/logos/cloud/onedrive/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-onedrive.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип OneDrive" title="Icon/Cloud/OneDrive"></div><div class="label">OneDrive</div><div class="card-path">Icon/Cloud/OneDrive</div></a><a class="card" href="/logos/game-platforms/mojangstudios/"><div class="icon-wrap"><img src="/assets/logos/previews/mojang-studio.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Mojang Studios" title="Icon/Game-Platforms/MojangStudios"></div><div class="label">Mojang Studios</div><div class="card-path">Icon/Game-Platforms/MojangStudios</div></a><a class="card" href="/logos/game-platforms/xbox/"><div class="icon-wrap"><img src="/assets/logos/previews/xbox.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Xbox" title="Icon/Game-Platforms/Xbox"></div><div class="label">Xbox</div><div class="card-path">Icon/Game-Platforms/Xbox</div></a><a class="card" href="/logos/videocall/teams/"><div class="icon-wrap"><img src="/assets/logos/previews/apple/26/color/microsoft-teams.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Microsoft Teams" title="Icon/VideoCall/Teams"></div><div class="label">Microsoft Teams</div><div class="card-path">Icon/VideoCall/Teams</div></a><a class="card" href="/logos/tech/microsoft/"><div class="icon-wrap"><img src="/assets/logos/previews/microsoft.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Microsoft" title="Icon/Tech/Microsoft"></div><div class="label">Microsoft</div><div class="card-path">Icon/Tech/Microsoft</div></a><a class="card" href="/logos/tech/windows/"><div class="icon-wrap"><img src="/assets/logos/previews/windows.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Windows" title="Icon/Tech/Windows"></div><div class="label">Windows</div><div class="card-path">Icon/Tech/Windows</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Пока ничего нет — раздел в разработке</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>

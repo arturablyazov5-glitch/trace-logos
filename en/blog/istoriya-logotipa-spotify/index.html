@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(313 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(353 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(43 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(103 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(313 70% 38%) 0%, hsl(103 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(193 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(233 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(283 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(343 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(193 70% 38%) 0%, hsl(343 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-31">July 31, 2026</time>
@@ -203,14 +207,14 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            4
+	            10
 	          </span>
         </div>
         <h1>The Spotify Logo History — The Green Circle and Three Waves</h1>
       </header>
       <div class="blog-body">
-        <p>The <a href="/en/logos/media/spotify/" target="_blank" rel="noopener">Spotify</a> mark — a green circle with three arcs — is now recognized faster than the logos of most music labels the service was once built around. Here's its history: where the &quot;waves&quot; came from, why the company swapped its calm green for a &quot;neon&quot; one, and why the internet argued about that shade for weeks.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>2008</strong> — the green Spotify wordmark with waves &quot;flying&quot; out of the &quot;o&quot;; <strong>2013</strong> — the waves move into a standalone circular mark; <strong>2015</strong> — the big redesign: the new controversial neon green and the circle‑plus‑word system. The three arcs are sound waves radiating from a source. Files are on the <a href="/en/logos/media/spotify/" target="_blank" rel="noopener">brand page</a>.</p></div></div>
+        <p>The <a href="/en/logos/media/spotify/" target="_blank" rel="noopener">Spotify<img class="blog-mention-icon" src="/assets/logos/svgs/spotify.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> mark — a green circle with three arcs — is now recognized faster than the logos of most music labels the service was once built around. Here's its history: where the &quot;waves&quot; came from, why the company swapped its calm green for a &quot;neon&quot; one, and why the internet argued about that shade for weeks.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p><strong>2008</strong> — the green Spotify wordmark with waves &quot;flying&quot; out of the &quot;o&quot;; <strong>2013</strong> — the waves move into a standalone circular mark; <strong>2015</strong> — the big redesign: the new controversial neon green and the circle‑plus‑word system. The three arcs are sound waves radiating from a source. Files are on the <a href="/en/logos/media/spotify/" target="_blank" rel="noopener">brand page<img class="blog-mention-icon" src="/assets/logos/svgs/spotify.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p></div></div>
       <h2 id="2008-the-word-with-waves" class="step-heading"><span class="step-badge">2008</span><span class="step-title">The word with waves</span></h2>
       <p>The Swedish startup launched with a modest wordmark: a green word with three arcs escaping the letter &quot;o&quot; — sound radiating from a speaker. Green was free in the music category (labels lived in black, players in blue) — a bet on an empty patch of spectrum, the same move as <a href="/en/blog/istoriya-logotipa-t-banka/" target="_blank" rel="noopener">T-Bank</a>'s yellow — we cover <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">how color territory works</a> separately.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
@@ -224,13 +228,13 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="2013-the-waves-get-their-own-home" class="step-heading"><span class="step-badge">2013</span><span class="step-title">The waves get their own home</span></h2>
-      <p>With the mobile era the waves grew cramped above the letter: the app icon needed a standalone mark. The three arcs moved into a green circle — and quickly took on a life of their own: in the icon, the favicon, the &quot;listen on Spotify&quot; buttons on artists' sites. The word and the circle formed the classic &quot;full version + compact mark&quot; pair — exactly <a href="/en/blog/vidy-logotipov/" target="_blank" rel="noopener">why logos need versions</a> in the first place.</p>
+      <p>With the mobile era the waves grew cramped above the letter: the app icon needed a standalone mark. The three arcs moved into a green circle — and quickly took on a life of their own: in the icon, the favicon, the &quot;listen on Spotify&quot; buttons on artists' sites. The word and the circle formed the classic &quot;full version + compact mark&quot; pair — exactly why logos need versions in the first place.</p>
       <h2 id="2015-that-green" class="step-heading"><span class="step-badge">2015</span><span class="step-title">That green</span></h2>
       <p>The big 2015 redesign replaced the calm grass green with a bright, almost neon shade. The internet erupted: designers argued, outlets ran columns, users demanded the old color back. The company's logic was cold: the new green <strong>burns on a dark interface</strong> — and Spotify was moving its app to a black background where the old shade went dull. The arguing ended within a month; within a year the shade became one of tech's most recognizable colors. A familiar script: the same &quot;outrage → habit → canon&quot; cycle as <a href="/en/blog/istoriya-logotipa-instagram/" target="_blank" rel="noopener">Instagram's gradient</a>.</p>
       <h2 id="what-the-three-arcs-mean">What the three arcs mean</h2>
       <p>Officially — sound waves radiating from a source: the universal &quot;sound here&quot; symbol, tied to neither notes nor headphones. A practical choice: a note would have meant &quot;music&quot;, and Spotify has long been wider — podcasts, audiobooks. The abstract waves survived the product's expansion without a redesign — exactly the trap that caught the word &quot;Coffee&quot; at <a href="/en/blog/istoriya-logotipa-starbucks/" target="_blank" rel="noopener">Starbucks</a> and the &quot;Tube&quot; syllable at <a href="/en/blog/istoriya-logotipa-youtube/" target="_blank" rel="noopener">YouTube</a>, and that Spotify dodged.</p>
       <h2 id="the-tilt-designers-argue-about">The tilt designers argue about</h2>
-      <p>The Spotify mark hides a detail for professionals: the three arcs are tilted, not horizontal, and their thickness varies — the top arc is the longest and fattest. The tilt creates motion (horizontal arcs would look like a Wi‑Fi icon lying on its side — a resemblance the mark still gets teased about), and the varied thickness compensates an optical illusion: equal‑thickness arcs of different radii look unequal. Such optical compensations are the tell of professional drawing versus the &quot;geometrically correct&quot; amateur kind — we cover <a href="/en/blog/kak-narisovat-logotip-v-figma/" target="_blank" rel="noopener">how such marks are drawn</a> and typical <a href="/en/blog/oshibki-v-dizajne-logotipa/" target="_blank" rel="noopener">DIY logo mistakes</a> separately.</p>
+      <p>The Spotify mark hides a detail for professionals: the three arcs are tilted, not horizontal, and their thickness varies — the top arc is the longest and fattest. The tilt creates motion (horizontal arcs would look like a Wi‑Fi icon lying on its side — a resemblance the mark still gets teased about), and the varied thickness compensates an optical illusion: equal‑thickness arcs of different radii look unequal. Such optical compensations are the tell of professional drawing versus the &quot;geometrically correct&quot; amateur kind — we cover <a href="/en/blog/kak-narisovat-logotip-v-figma/" target="_blank" rel="noopener">how such marks are drawn</a> and typical DIY logo mistakes separately.</p>
       <h2 id="the-mark-on-covers-the-listen-button-as-a-medium">The mark on covers: the &quot;listen&quot; button as a medium</h2>
       <p>Spotify owns a medium most brands lack — other people's content: &quot;Listen on Spotify&quot; buttons live on artist sites, in podcasts, on concert posters. For that scenario the company keeps a separate rulebook and ready‑made badges: the mark can't be recolored to match a poster, the minimum size is fixed, clear space is mandatory. It's the standard problem of any platform brand: your mark will be placed by people without designers, so you need fool‑proof prefab blocks — we cover <a href="/en/blog/chto-takoe-brendbuk/" target="_blank" rel="noopener">why brand books exist</a> separately.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
@@ -246,13 +250,14 @@ window.yaContextCb.push(() => {
       <h2 id="the-timeline">The timeline</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Years</th><th>Mark</th><th>Event</th></tr></thead><tbody><tr><td>2008-2013</td><td>word with waves from the &quot;o&quot;</td><td>the European launch</td></tr><tr><td>2013-2015</td><td>waves in a circle + word</td><td>the mobile era, the US launch</td></tr><tr><td>2015 – now</td><td>neon green, the system</td><td>dark UI, global growth</td></tr><tr><td>2026</td><td>temporary &quot;disco ball&quot; icon</td><td>the service's 20th anniversary, the &quot;Your Party of the Year(s)&quot; campaign</td></tr></tbody></table></div>
       <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>The case's lesson</span></div><div class="callout-body"><p>Spotify shows how to choose between a &quot;pretty&quot; color and a &quot;working&quot; one: many disliked the 2015 shade in a vacuum, but it won in the real environment — the player's black screen. Test a mark's color not on white paper but in combat context: the interface, the signage, the social feed — we cover <a href="/en/blog/kak-podobrat-cvetovuyu-palitru-brenda/" target="_blank" rel="noopener">how to build a palette</a> separately.</p></div></div>
-      <p>The Spotify logo in SVG and PNG is on the <a href="/en/logos/media/spotify/" target="_blank" rel="noopener">brand page</a>; its category neighbors are in <a href="/en/blog/logotipy-strimingovyh-servisov/" target="_blank" rel="noopener">streaming service logos</a>. More stories: <a href="/en/blog/istoriya-logotipa-netflix/" target="_blank" rel="noopener">Netflix</a>, <a href="/en/blog/istoriya-logotipa-youtube/" target="_blank" rel="noopener">YouTube</a>, <a href="/en/blog/istoriya-logotipa-telegram/" target="_blank" rel="noopener">Telegram</a>.</p>
+      <p>The Spotify logo in SVG and PNG is on the <a href="/en/logos/media/spotify/" target="_blank" rel="noopener">brand page<img class="blog-mention-icon" src="/assets/logos/svgs/spotify.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>; its category neighbors are in streaming service logos. More stories: <a href="/en/blog/istoriya-logotipa-netflix/" target="_blank" rel="noopener">Netflix</a>, <a href="/en/blog/istoriya-logotipa-youtube/" target="_blank" rel="noopener">YouTube</a>, <a href="/en/blog/istoriya-logotipa-telegram/" target="_blank" rel="noopener">Telegram</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/istoriya-logotipa-youtube/" data-date="2026-08-05" data-views="0">
+          <a class="blog-card" href="/en/blog/istoriya-logotipa-youtube/" data-date="2026-08-05" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -265,7 +270,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            8
           </div>
           </div>
           <div class="blog-card-title">The YouTube Logo History — How the Play Button Became the Brand</div>
@@ -273,7 +278,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/istoriya-logotipa-netflix/" data-date="2026-07-31" data-views="0">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-netflix/" data-date="2026-07-31" data-views="25">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -286,7 +291,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            25
           </div>
           </div>
           <div class="blog-card-title">The Netflix Logo History — From DVD Mail to &quot;Ta‑Dum&quot;</div>
@@ -294,86 +299,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-vk/" data-date="2026-08-04" data-views="668">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Streaming Service Logos — Netflix, YouTube, Twitch and More</div>
-          
-          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="/en/blog/istoriya-logotipa-vk/" data-date="2026-08-04" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo Histories</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo Histories</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            668
           </div>
           </div>
-          <div class="blog-card-title">The VK Logo History — From the 2006 Blue Badge to Today</div>
+          <div class="blog-card-title">The VK Logo History — From the 2006 Blue Badge to the VK Ecosystem</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/audio-logotip/" data-date="2026-08-16" data-views="1">
+      <a class="blog-card" href="/en/blog/istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="24">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo Histories</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            24
+          </div>
+          </div>
+          <div class="blog-card-title">The WhatsApp Logo History — The Handset That Outlived Everything</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/logotip-ot-ii-avtorstvo/" data-date="2026-08-04" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Sound</span><span class="blog-card-tag">2026 Trends</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 10v3" /><path d="M6 6v11" /><path d="M10 3v18" /><path d="M14 8v7" /><path d="M18 5v13" /><path d="M22 10v3" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">AI</span><span class="blog-card-tag">Law</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M14.83 14.83a4 4 0 1 1 0-5.66" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            5
           </div>
           </div>
-          <div class="blog-card-title">The Sonic Logo — A Brand You Recognize with Your Eyes Closed</div>
+          <div class="blog-card-title">A Logo from AI — Who Owns It and How to Protect It</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/chto-takoe-logotip/" data-date="2026-07-18" data-views="4">
+      <a class="blog-card" href="/en/blog/pochemu-emodzi-otobrazhayutsya-po-raznomu/" data-date="2026-07-06" data-views="25">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Branding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Unicode</span><span class="blog-card-tag">Technology</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8" /><path d="M10 19v-3.96 3.15" /><path d="M7 19h5" /><rect width="6" height="10" x="16" y="12" rx="2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>18.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>06.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            25
           </div>
           </div>
-          <div class="blog-card-title">What Is a Logo — In Plain Words</div>
+          <div class="blog-card-title">Why Emoji Look Different on iPhone, Android and Windows</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -391,25 +396,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -486,6 +483,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -531,10 +529,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

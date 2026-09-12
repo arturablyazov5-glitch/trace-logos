@@ -1,0 +1,442 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   credits.css — «Люди, благодаря которым каталог жив» (/credits/).
+
+   Стена: шероховатая штукатурка (SVG-turbulence зерно + пятна грязи + виньетка).
+   На ней — бумажные стикеры, каждый приколот настоящей канцелярской кнопкой
+   (шляпка + игла + контактная тень), с загнутым уголком и неровным краем.
+
+   Раскладку (left/top/z-index/задержку появления) считает js/credits-wall.js.
+   Без JS стикеры остаются обычным flex-потоком — страница читается как есть.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.cw-main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+}
+
+/* ── Шапка страницы ── */
+.cw-hero {
+  max-width: 720px;
+  margin: 8px 0 28px;
+}
+.cw-hero h1 {
+  font-size: clamp(26px, 4.4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-0);
+  margin-bottom: 14px;
+}
+.cw-lead {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+.cw-count {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text-5);
+}
+
+/* ── Стена ──
+   Слои сверху вниз: зерно → грязные пятна → виньетка → базовая штукатурка. */
+.cw-wall {
+  --wall-base: #23211e;
+  position: relative;
+  border-radius: 14px;
+  padding: 34px 28px 36px;
+  overflow: hidden;
+  background-color: var(--wall-base);
+  background-image:
+    /* зерно штукатурки */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E"),
+    /* крупные разводы и потёртости */
+    radial-gradient(ellipse 40% 30% at 18% 22%, rgba(0,0,0,.30), transparent 70%),
+    radial-gradient(ellipse 34% 26% at 76% 12%, rgba(255,255,255,.035), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 62% 78%, rgba(0,0,0,.26), transparent 72%),
+    radial-gradient(ellipse 30% 22% at 8% 88%, rgba(255,255,255,.028), transparent 70%),
+    /* виньетка */
+    radial-gradient(ellipse 120% 100% at 50% 40%, transparent 42%, rgba(0,0,0,.42)),
+    /* свет сверху */
+    linear-gradient(178deg, #2b2825 0%, #232120 45%, #1c1a18 100%);
+  background-size: 260px 260px, auto, auto, auto, auto, auto, auto;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    inset 0 0 0 1px rgba(0,0,0,.45),
+    inset 0 20px 44px rgba(0,0,0,.32),
+    0 18px 46px rgba(0,0,0,.38);
+}
+/* Тонкая шероховатость поверх — второй, более мелкий слой зерна. */
+.cw-wall::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;                     /* иначе overlay-зерно ложится и на стикеры:
+                                     ::after идёт позже .cw-notes в дереве */
+  pointer-events: none;
+  opacity: .5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='2.2' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23m)' opacity='0.42'/%3E%3C/svg%3E");
+}
+
+/* Контейнер стикеров. До раскладки — обычный поток (и это же фолбэк без JS). */
+.cw-notes {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px 22px;
+  justify-content: center;
+  padding: 14px 0;
+}
+/* JS взял раскладку на себя: стикеры позиционируются абсолютно. */
+.cw-notes.is-scattered {
+  display: block;
+  padding: 0;
+}
+.cw-notes.is-scattered .cw-note {
+  position: absolute;
+  margin: 0;
+}
+
+/* ── Стикер ──
+   Сама бумага — слой ::before: на нём фон, неровный край (clip-path) и тени.
+   Если клипать сам .cw-note, вместе с бумагой обрезаются и кнопка с её тенью —
+   кнопка перестаёт выглядеть воткнутой. Поэтому article остаётся прозрачной
+   коробкой, а обрезается только «лист». */
+.cw-note {
+  --paper:      #f2e6b8;
+  --paper-dark: #e3d49f;
+  --ink:        #2f2a22;
+  --ink-dim:    #6b6152;
+
+  position: relative;
+  width: var(--w, 232px);
+  padding: 26px 18px 16px;
+  color: var(--ink);
+  transform: rotate(var(--tilt, 0deg));
+  transform-origin: var(--pin-x, 50%) 8px;
+  transition: transform .2s cubic-bezier(.2, .8, .3, 1);
+}
+.cw-note::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;                        /* под текстом, но внутри стикера:
+                                         transform выше создаёт свой контекст */
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,.30), rgba(0,0,0,.045)),
+    repeating-linear-gradient(96deg, rgba(0,0,0,.011) 0 1px, transparent 1px 7px),  /* волокна */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23p)' opacity='0.22'/%3E%3C/svg%3E");
+  /* Контактная тень под кнопкой + мягкая отброшенная тень ниже. */
+  box-shadow:
+    0 1px 1px rgba(0,0,0,.30),
+    0 10px 18px -6px rgba(0,0,0,.45),
+    0 22px 36px -14px rgba(0,0,0,.55);
+  /* Неровный край бумаги — рез ножницами, а не штамповка. */
+  clip-path: polygon(
+    0.4% 1.2%, 22% 0.2%, 51% 1.4%, 78% 0.3%, 99.6% 1.6%,
+    99% 26%, 99.8% 58%, 98.8% 82%, 99.4% 98.4%,
+    74% 99.2%, 47% 98.4%, 21% 99.6%, 0.6% 98.6%,
+    1.2% 74%, 0.2% 47%, 1% 23%
+  );
+  transition: box-shadow .22s ease, filter .22s ease;
+}
+.cw-note:nth-of-type(2n)::before {
+  clip-path: polygon(
+    0.8% 0.4%, 27% 1.6%, 55% 0.3%, 82% 1.4%, 99.2% 0.6%,
+    99.8% 29%, 98.8% 55%, 99.6% 79%, 98.6% 99.4%,
+    71% 98.6%, 43% 99.6%, 18% 98.4%, 1% 99.2%,
+    0.4% 71%, 1.4% 44%, 0.2% 20%
+  );
+}
+.cw-note:nth-of-type(3n)::before {
+  clip-path: polygon(
+    1.4% 1.6%, 25% 0.4%, 49% 1.2%, 76% 0.6%, 98.8% 0.8%,
+    99.4% 31%, 98.6% 61%, 99.8% 84%, 98.8% 98.8%,
+    69% 99.6%, 41% 98.6%, 16% 99.4%, 1.2% 98.4%,
+    0.2% 69%, 1.6% 41%, 0.6% 18%
+  );
+}
+/* Клавиатура: стикер под соседями всплывает, когда фокус заходит на его ссылку. */
+.cw-note:focus-within { z-index: 998 !important; }
+
+@media (hover: hover) {
+  .cw-note:hover { z-index: 999 !important; }
+  /* Бумажку приподняли и почти выровняли — как будто придержали рукой.
+     Работает только после того, как JS снимет .is-landing: пока анимация
+     висит с fill:forwards, её transform перебивает любой из CSS. */
+  .cw-notes.is-scattered .cw-note:hover {
+    transform: rotate(calc(var(--tilt) * .35)) translate3d(0, -3px, 0) scale(1.025);
+  }
+  .cw-note:hover::before {
+    box-shadow:
+      0 1px 1px rgba(0,0,0,.30),
+      0 16px 26px -6px rgba(0,0,0,.48),
+      0 34px 52px -14px rgba(0,0,0,.62);
+    filter: brightness(1.04);
+  }
+}
+
+/* Оттенки бумаги. */
+.cw-paper-a { --paper: #f2e6b8; --paper-dark: #e0d09b; }            /* классический жёлтый */
+.cw-paper-b { --paper: #d9e9d2; --paper-dark: #c3d7ba; }            /* мятный */
+.cw-paper-c { --paper: #f3d9d6; --paper-dark: #e2c2be; }            /* розовый */
+.cw-paper-d { --paper: #d6e2f0; --paper-dark: #bfd0e3; }            /* голубой */
+.cw-paper-e { --paper: #f0e0c8; --paper-dark: #ddcab0; }            /* крафт */
+.cw-paper-f { --paper: #e6dcef; --paper-dark: #d1c4dd; }            /* сиреневый */
+
+/* Загнутый нижний правый уголок. */
+.cw-note-curl {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 24px;
+  height: 24px;
+  /* Отворот — треугольник: сам загиб светлее у сгиба и темнее к краю,
+     а тень падает внутрь стикера, к сгибу. */
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(315deg, var(--paper) 0 38%, var(--paper-dark) 62%, rgba(0,0,0,.22) 100%);
+  filter: drop-shadow(-2px -2px 3px rgba(0,0,0,.22));
+}
+
+/* ── Канцелярская кнопка ── */
+.cw-pin {
+  --pin-a: #dfe3e8;
+  --pin-b: #8b939c;
+  --pin-c: #5a6169;
+  position: absolute;
+  left: var(--pin-x, 50%);
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  z-index: 3;
+}
+.cw-pin-head {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255,255,255,.95) 0 8%, transparent 42%),
+    radial-gradient(circle at 34% 30%, var(--pin-a) 0 26%, var(--pin-b) 62%, var(--pin-c) 100%);
+  box-shadow:
+    inset 0 -2px 3px rgba(0,0,0,.35),
+    inset 0 1px 1px rgba(255,255,255,.5),
+    0 2px 3px rgba(0,0,0,.45),
+    0 5px 9px rgba(0,0,0,.35);
+}
+/* Игла: короткий тёмный клин, уходящий в бумагу — именно он делает кнопку
+   воткнутой, а не наклеенной. */
+.cw-pin-needle {
+  position: absolute;
+  left: 50%;
+  top: 13px;
+  width: 4px;
+  height: 8px;
+  margin-left: -2px;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(180deg, var(--pin-c), rgba(0,0,0,.75));
+  box-shadow: 0 2px 3px rgba(0,0,0,.45);
+}
+.cw-pin--steel { --pin-a: #eef1f4; --pin-b: #9aa2ab; --pin-c: #5c636b; }
+.cw-pin--brass { --pin-a: #f7e2a6; --pin-b: #c69a3c; --pin-c: #7c5c17; }
+.cw-pin--red   { --pin-a: #ff9a90; --pin-b: #d43b2b; --pin-c: #7d1d13; }
+.cw-pin--blue  { --pin-a: #9dc4ff; --pin-b: #2f6bd0; --pin-c: #17376e; }
+.cw-pin--amber { --pin-a: #ffd08a; --pin-b: #e08a12; --pin-c: #7d4a05; }
+.cw-pin--green { --pin-a: #a8e6a0; --pin-b: #2f9e44; --pin-c: #175a20; }
+
+/* ── Содержимое стикера ── */
+.cw-note-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #6b6152;
+  box-shadow: 0 1px 0 rgba(255,255,255,.35);
+}
+.cw-note--logo     .cw-note-badge { background: #2f7d4f; }
+.cw-note--outdated .cw-note-badge { background: #c2451f; }
+.cw-note--donate   .cw-note-badge { background: #7a4bd0; }
+.cw-note--big      .cw-note-badge { background: #a67c00; }
+
+.cw-note-email {
+  display: block;
+  margin: 10px 0 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  word-break: break-all;
+}
+.cw-note-deed {
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+.cw-note-link {
+  color: #1f4fb0;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.cw-note-link:hover { color: #12306e; }
+.cw-note-link:focus-visible {
+  outline: 2px solid #1f4fb0;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+.cw-note-date {
+  display: block;
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--ink-dim);
+}
+
+/* «Большой вклад» — крупнее, толще бумага, двойная тень: почти медаль. */
+.cw-note.is-big { padding: 30px 20px 20px; }
+.cw-note.is-big::before {
+  box-shadow:
+    0 1px 1px rgba(0,0,0,.32),
+    0 3px 0 -1px var(--paper-dark),      /* второй лист под первым — толще стопка */
+    0 14px 24px -6px rgba(0,0,0,.5),
+    0 30px 46px -16px rgba(0,0,0,.6);
+}
+.cw-note.is-big .cw-note-deed {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* Ни одной записи — стена не должна выглядеть сломанной. */
+.cw-empty {
+  padding: 40px 20px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.42);
+}
+
+/* ── Появление: стикер прилетает, чуть качается, потом втыкается кнопка ── */
+.cw-notes.is-landing .cw-note {
+  opacity: 0;
+  animation: cw-drop .62s cubic-bezier(.22, 1.2, .36, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+.cw-notes.is-landing .cw-pin {
+  opacity: 0;
+  animation: cw-pin-in .34s cubic-bezier(.2, 1.5, .4, 1) forwards;
+  animation-delay: calc(var(--delay, 0ms) + 300ms);
+}
+@keyframes cw-drop {
+  0%   { opacity: 0; transform: rotate(calc(var(--tilt) + 8deg)) translate3d(0, -30px, 0) scale(.9); }
+  55%  { opacity: 1; transform: rotate(calc(var(--tilt) - 2.4deg)) translate3d(0, 5px, 0) scale(1.015); }
+  78%  { transform: rotate(calc(var(--tilt) + 1.1deg)) translate3d(0, -1px, 0) scale(1); }
+  100% { opacity: 1; transform: rotate(var(--tilt)) translate3d(0, 0, 0) scale(1); }
+}
+@keyframes cw-pin-in {
+  0%   { opacity: 0; transform: translate3d(0, -18px, 0) scale(2.4); }
+  70%  { opacity: 1; transform: translate3d(0, 1px, 0) scale(.92); }
+  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cw-notes.is-landing .cw-note,
+  .cw-notes.is-landing .cw-pin {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ── Как попасть на стену ── */
+.cw-how {
+  margin-top: 44px;
+}
+.cw-how h2 {
+  font-size: 20px;
+  color: var(--text-0);
+  margin-bottom: 18px;
+}
+.cw-how-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.cw-how-item {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-card);
+}
+.cw-how-item p {
+  margin-top: 10px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.cw-how-badge {
+  display: inline-block;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.cw-how-badge--logo     { background: #2f7d4f; }
+.cw-how-badge--outdated { background: #c2451f; }
+.cw-how-badge--donate   { background: #7a4bd0; }
+.cw-how-badge--big      { background: #a67c00; }
+.cw-how-note {
+  margin-top: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-5);
+}
+
+/* ── Мобильные ──
+   Хаоса меньше: js/credits-wall.js переходит на две колонки с небольшим
+   перекрытием, стикеры уже. Пытаться разложить 15 бумажек по ширине 390px
+   бессмысленно — получится каша. */
+@media (max-width: 720px) {
+  .cw-main { padding: 18px 12px 48px; }
+  .cw-hero { margin-bottom: 20px; }
+  .cw-lead { font-size: 15px; }
+  .cw-wall { padding: 22px 12px 30px; border-radius: 12px; }
+  .cw-notes { gap: 20px 12px; }
+
+  .cw-note { padding: 22px 13px 13px; }
+  .cw-note-badge { font-size: 9.5px; padding: 2px 7px; }
+  .cw-note-email { margin: 8px 0 5px; font-size: 11.5px; }
+  .cw-note-deed { font-size: 13px; line-height: 1.4; }
+  .cw-note-date { margin-top: 8px; font-size: 10.5px; }
+  .cw-note.is-big { padding: 26px 14px 15px; }
+  .cw-note.is-big .cw-note-deed { font-size: 15px; }
+
+  /* Кнопка мельче — иначе на узком стикере она выглядит гвоздём из другой оперы. */
+  .cw-pin { width: 17px; height: 17px; margin-left: -8.5px; top: 3px; }
+  .cw-pin-needle { top: 11px; height: 7px; }
+  .cw-note-curl { width: 20px; height: 20px; }
+
+  /* Палец, а не курсор: ссылке нужна площадь. */
+  .cw-note-link {
+    display: inline-block;
+    padding: 2px 0;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .cw-how { margin-top: 34px; }
+  .cw-how-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cw-how-item { padding: 13px; }
+  .cw-how-item p { font-size: 12.5px; margin-top: 8px; }
+}
+
+@media (max-width: 420px) {
+  .cw-how-grid { grid-template-columns: 1fr; }
+}

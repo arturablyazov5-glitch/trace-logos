@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотипы экосистемы Яндекса — как устроена система знаков · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(301 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(341 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(31 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(91 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(301 70% 38%) 0%, hsl(91 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(181 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(221 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(271 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(331 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(181 70% 38%) 0%, hsl(331 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="16" width="6" height="6" rx="1" /><rect x="2" y="16" width="6" height="6" rx="1" /><rect x="9" y="2" width="6" height="6" rx="1" /><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3" /><path d="M12 12V8" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-26">26 июля 2026</time>
@@ -202,31 +206,31 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            9
+	            75
 	          </span>
         </div>
         <h1>Логотипы экосистемы Яндекса — как устроена система знаков</h1>
       </header>
       <div class="blog-body">
-        <p>У <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекса</a> десятки сервисов — такси, доставка, музыка, карты, маркетплейс, — и все их иконки опознаются как «Яндекс» с первого взгляда. За этим стоит система с жёсткими правилами: единый контейнер, один шрифт, палитра, закреплённая за направлениями. Разбираем её по частям на файлах из каталога.</p>
+        <p>У <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекса<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> десятки сервисов — такси, доставка, музыка, карты, маркетплейс, — и все их иконки опознаются как «Яндекс» с первого взгляда. За этим стоит система с жёсткими правилами: единый контейнер, один шрифт, палитра, закреплённая за направлениями. Разбираем её по частям на файлах из каталога.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Система держится на разделении: <strong>контейнер, шрифт и палитра</strong> отвечают за принадлежность к семье, <strong>символ внутри</strong> — за конкретный продукт. Шрифт у компании свой — гарнитура Yandex Sans, выпущенная в 2016 году. Все сервисы собраны на странице <a href="../../logos/ecosystem/yandex/" target="_blank" rel="noopener">экосистемы Яндекса</a>.</p></div></div>
       <h2 id="ядро-буква-и-плашка">Ядро: буква и плашка</h2>
-      <p>Базовый знак — текстовый логотип <a href="../../logos/search/yandex/" target="_blank" rel="noopener">«Яндекс»</a> и красная буква «Я», о <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">полной истории</a> которых мы уже рассказывали. Сервисы наследуют от него другое: <strong>подпись</strong> <a href="../../logos/search/yandex/" target="_blank" rel="noopener">«Яндекс»</a> перед названием продукта. Она работает как фамилия — сначала общий бренд, затем имя продукта:</p>
+      <p>Базовый знак — текстовый логотип <a href="../../logos/search/yandex/" target="_blank" rel="noopener">«Яндекс»<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и красная буква «Я», о <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">полной истории</a> которых мы уже рассказывали. Сервисы наследуют от него другое: <strong>подпись</strong> <a href="../../logos/search/yandex/" target="_blank" rel="noopener">«Яндекс»<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> перед названием продукта. Она работает как фамилия — сначала общий бренд, затем имя продукта:</p>
       <div class="blog-logo-fulls">
           <a class="blog-logo-full" href="../../logos/search/yandex/">
-            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-full.svg?v=20260808" alt="Полный логотип Яндекс" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-full.svg?v=20260910" alt="Полный логотип Яндекс" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Яндекс</span>
           </a>
           <a class="blog-logo-full" href="../../logos/market/yandexmarket/">
-            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-market-full.svg?v=20260808" alt="Полный логотип Яндекс Маркет" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-market-full.svg?v=20260910" alt="Полный логотип Яндекс Маркет" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Яндекс Маркет</span>
           </a>
           <a class="blog-logo-full" href="../../logos/food/yandexlavka/">
-            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-lavka-full.svg?v=20260808" alt="Полный логотип Яндекс Лавка" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-lavka-full.svg?v=20260910" alt="Полный логотип Яндекс Лавка" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Яндекс Лавка</span>
           </a>
         </div>
-      <p>Одна и та же «фамилия», один и тот же шрифт, меняется только слово справа. По такой же зонтичной логике строят айдентику VK и <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">Сбер</a>.</p>
+      <p>Одна и та же «фамилия», один и тот же шрифт, меняется только слово справа. По такой же зонтичной логике строят айдентику VK и <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">Сбер</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -241,156 +245,156 @@ window.yaContextCb.push(() => {
       <p>«Фамилия» работает там, где есть место для слова. В интерфейсе от логотипа остаётся квадрат 40×40 пикселей, где помещается только знак, и систему здесь держат другие средства. Посмотрите на иконки в ряд:</p>
       <div class="ecosystem-grid blog-ecosystem-grid">
           <a class="ecosystem-card" href="../../logos/delivery/yandexgo/" aria-label="Яндекс Go">
-            <img src="../../assets/logos/svgs/yandex-go.svg?v=20260808" alt="Логотип Яндекс Go" width="48" height="48" loading="lazy" decoding="async">
+            <img src="../../assets/logos/svgs/yandex-go.svg?v=20260910" alt="Логотип Яндекс Go" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Яндекс Go</span>
           </a>
           <a class="ecosystem-card" href="../../logos/market/yandexmarket/" aria-label="Яндекс Маркет">
-            <img src="../../assets/logos/svgs/yandex-market.svg?v=20260808" alt="Логотип Яндекс Маркет" width="48" height="48" loading="lazy" decoding="async">
+            <img src="../../assets/logos/svgs/yandex-market.svg?v=20260910" alt="Логотип Яндекс Маркет" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Яндекс Маркет</span>
           </a>
           <a class="ecosystem-card" href="../../logos/media/yandexmusic/" aria-label="Яндекс Музыка">
-            <img src="../../assets/logos/svgs/yandex-music.svg?v=20260808" alt="Логотип Яндекс Музыка" width="48" height="48" loading="lazy" decoding="async">
+            <img src="../../assets/logos/svgs/yandex-music.svg?v=20260910" alt="Логотип Яндекс Музыка" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Яндекс Музыка</span>
           </a>
           <a class="ecosystem-card" href="../../logos/food/yandexfood/" aria-label="Яндекс Еда">
-            <img src="../../assets/logos/svgs/yandex-eda.svg?v=20260808" alt="Логотип Яндекс Еда" width="48" height="48" loading="lazy" decoding="async">
+            <img src="../../assets/logos/svgs/yandex-eda.svg?v=20260910" alt="Логотип Яндекс Еда" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Яндекс Еда</span>
           </a>
           <a class="ecosystem-card" href="../../logos/food/yandexlavka/" aria-label="Яндекс Лавка">
-            <img src="../../assets/logos/svgs/yandex-lavka.svg?v=20260808" alt="Логотип Яндекс Лавка" width="48" height="48" loading="lazy" decoding="async">
+            <img src="../../assets/logos/svgs/yandex-lavka.svg?v=20260910" alt="Логотип Яндекс Лавка" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Яндекс Лавка</span>
           </a>
           <a class="ecosystem-card" href="../../logos/store/yandexplus/" aria-label="Яндекс Плюс">
-            <img src="../../assets/logos/svgs/yandex-plus.svg?v=20260808" alt="Логотип Яндекс Плюс" width="48" height="48" loading="lazy" decoding="async">
+            <img src="../../assets/logos/svgs/yandex-plus.svg?v=20260910" alt="Логотип Яндекс Плюс" width="48" height="48" loading="lazy" decoding="async">
             <span class="ecosystem-label">Яндекс Плюс</span>
           </a>
         </div>
-      <p>Символы здесь разного типа. У <a href="../../logos/delivery/yandexgo/" target="_blank" rel="noopener">Go</a> знак буквенный — сама надпись «Go». У <a href="../../logos/market/yandexmarket/" target="_blank" rel="noopener">Маркета</a> тоже буква, «М». Дальше идёт абстракция: звезда‑вспышка у <a href="../../logos/media/yandexmusic/" target="_blank" rel="noopener">Музыки</a>, спираль у <a href="../../logos/food/yandexfood/" target="_blank" rel="noopener">Еды</a>, белый силуэт на голубом у <a href="../../logos/food/yandexlavka/" target="_blank" rel="noopener">Лавки</a>, математический плюс у <a href="../../logos/store/yandexplus/" target="_blank" rel="noopener">Плюса</a>. Общего между ними мало.</p>
-      <p>Ряд при этом читается как одна семья. Держит её всё остальное: одинаковый скруглённый квадрат, одна толщина линий, одна оптическая плотность и правило «один символ на иконку». Второй смысловой элемент внутри знака сломал бы читаемость в 40 пикселях, где живёт <a href="../ikonka-prilozheniya/" target="_blank" rel="noopener">иконка приложения</a>, — поэтому его нигде и нет.</p>
-      <p>Отсюда первое свойство системы: слой принадлежности и слой продукта разведены. За «это <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс</a>» отвечает форма контейнера, за «это <a href="../../logos/media/yandexmusic/" target="_blank" rel="noopener">Музыка</a>» — символ внутри. Дизайнер меняет символ и не трогает контейнер.</p>
+      <p>Символы здесь разного типа. У <a href="../../logos/delivery/yandexgo/" target="_blank" rel="noopener">Go<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-go.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> знак буквенный — сама надпись «Go». У <a href="../../logos/market/yandexmarket/" target="_blank" rel="noopener">Маркета<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> тоже буква, «М». Дальше идёт абстракция: звезда‑вспышка у <a href="../../logos/media/yandexmusic/" target="_blank" rel="noopener">Музыки<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-music.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, спираль у <a href="../../logos/food/yandexfood/" target="_blank" rel="noopener">Еды<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-eda.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, белый силуэт на голубом у <a href="../../logos/food/yandexlavka/" target="_blank" rel="noopener">Лавки<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-lavka.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, математический плюс у <a href="../../logos/store/yandexplus/" target="_blank" rel="noopener">Плюса<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-plus.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Общего между ними мало.</p>
+      <p>Ряд при этом читается как одна семья. Держит её всё остальное: одинаковый скруглённый квадрат, одна толщина линий, одна оптическая плотность и правило «один символ на иконку». Второй смысловой элемент внутри знака сломал бы читаемость в 40 пикселях, где живёт <a href="../ikonka-prilozheniya/" target="_blank" rel="noopener">иконка приложения</a>, — поэтому его нигде и нет.</p>
+      <p>Отсюда первое свойство системы: слой принадлежности и слой продукта разведены. За «это <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>» отвечает форма контейнера, за «это <a href="../../logos/media/yandexmusic/" target="_blank" rel="noopener">Музыка<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-music.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>» — символ внутри. Дизайнер меняет символ и не трогает контейнер.</p>
       <p>Третьим слоем идёт цвет. Его удобно проверить на самих файлах, вытащив палитры из SVG:</p>
       <div class="blog-colors">
           <a class="blog-colors-card" href="../../logos/search/yandex/">
             <span class="blog-colors-bar"><span class="blog-colors-seg" style="background:#fc3f1d;color:#fff">#FC3F1D</span></span>
             <span class="blog-colors-foot">
-              <img src="../../assets/logos/svgs/yandex.svg?v=20260808" alt="Логотип Яндекс" width="22" height="22" loading="lazy" decoding="async">
+              <img src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="Логотип Яндекс" width="22" height="22" loading="lazy" decoding="async">
               <span class="blog-colors-name">Яндекс</span>
             </span>
           </a>
           <a class="blog-colors-card" href="../../logos/delivery/yandexgo/">
             <span class="blog-colors-bar"><span class="blog-colors-seg" style="background:#ffea00;color:#000">#FFEA00</span></span>
             <span class="blog-colors-foot">
-              <img src="../../assets/logos/svgs/yandex-go.svg?v=20260808" alt="Логотип Яндекс Go" width="22" height="22" loading="lazy" decoding="async">
+              <img src="../../assets/logos/svgs/yandex-go.svg?v=20260910" alt="Логотип Яндекс Go" width="22" height="22" loading="lazy" decoding="async">
               <span class="blog-colors-name">Яндекс Go</span>
             </span>
           </a>
           <a class="blog-colors-card" href="../../logos/media/yandexmusic/">
             <span class="blog-colors-bar"><span class="blog-colors-seg" style="background:#000000;color:#fff">#000000</span><span class="blog-colors-seg" style="background:#fed42b;color:#000">#FED42B</span></span>
             <span class="blog-colors-foot">
-              <img src="../../assets/logos/svgs/yandex-music.svg?v=20260808" alt="Логотип Яндекс Музыка" width="22" height="22" loading="lazy" decoding="async">
+              <img src="../../assets/logos/svgs/yandex-music.svg?v=20260910" alt="Логотип Яндекс Музыка" width="22" height="22" loading="lazy" decoding="async">
               <span class="blog-colors-name">Яндекс Музыка</span>
             </span>
           </a>
           <a class="blog-colors-card" href="../../logos/store/yandexplus/">
             <span class="blog-colors-bar"><span class="blog-colors-seg" style="background:#ff5c4d;color:#fff">#FF5C4D</span><span class="blog-colors-seg" style="background:#eb469f;color:#fff">#EB469F</span><span class="blog-colors-seg" style="background:#8341ef;color:#fff">#8341EF</span></span>
             <span class="blog-colors-foot">
-              <img src="../../assets/logos/svgs/yandex-plus.svg?v=20260808" alt="Логотип Яндекс Плюс" width="22" height="22" loading="lazy" decoding="async">
+              <img src="../../assets/logos/svgs/yandex-plus.svg?v=20260910" alt="Логотип Яндекс Плюс" width="22" height="22" loading="lazy" decoding="async">
               <span class="blog-colors-name">Яндекс Плюс</span>
             </span>
           </a>
         </div>
-      <p>Красный закреплён за ядром, жёлтый — за доставкой и такси, <a href="../../logos/media/yandexmusic/" target="_blank" rel="noopener">Музыка</a> уходит в чёрный с жёлтым акцентом. Каждое направление получает свой оттенок сверху, командам продуктов остаётся его соблюдать. Работает тот же механизм, который описывает <a href="../psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">психология цвета в логотипе</a>. Из общего ряда выпадает <a href="../../logos/store/yandexplus/" target="_blank" rel="noopener">Плюс</a> с градиентом, и у этого есть причина: он продаёт подписку поверх всех сервисов сразу, поэтому обязан выделяться среди своих.</p>
+      <p>Красный закреплён за ядром, жёлтый — за доставкой и такси, <a href="../../logos/media/yandexmusic/" target="_blank" rel="noopener">Музыка<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-music.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> уходит в чёрный с жёлтым акцентом. Каждое направление получает свой оттенок сверху, командам продуктов остаётся его соблюдать. Работает тот же механизм, который описывает <a href="../psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">психология цвета в логотипе</a>. Из общего ряда выпадает <a href="../../logos/store/yandexplus/" target="_blank" rel="noopener">Плюс<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-plus.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> с градиентом, и у этого есть причина: он продаёт подписку поверх всех сервисов сразу, поэтому обязан выделяться среди своих.</p>
       <h2 id="контейнер-который-держит-всю-систему">Контейнер, который держит всю систему</h2>
-      <p>Символы разные, а семья узнаётся — значит, основную работу делает контейнер. Скруглённый квадрат с одинаковым радиусом и одинаковыми полями внутри подходит любому новому знаку. Нарисованный вчера продукт сразу выглядит членом семьи, потому что попадает в тот же контейнер, что и сервисы десятилетней давности.</p>
-      <p>Поэтому новый сервис не требует отдельного проекта айдентики: правила формы заданы заранее, обсуждать остаётся только символ. Малому бизнесу этот приём стоит красть буквально. Общий контейнер — круг, квадрат или скруглённый прямоугольник — плюс переменное содержимое внутри дают <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">мини‑айдентику</a> без заказа брендбука.</p>
+      <p>Символы разные, а семья узнаётся — значит, основную работу делает контейнер. Скруглённый квадрат с одинаковым радиусом и одинаковыми полями внутри подходит любому новому знаку. Нарисованный вчера продукт сразу выглядит членом семьи, потому что попадает в тот же контейнер, что и сервисы десятилетней давности.</p>
+      <p>Поэтому новый сервис не требует отдельного проекта айдентики: правила формы заданы заранее, обсуждать остаётся только символ. Малому бизнесу этот приём стоит красть буквально. Общий контейнер — круг, квадрат или скруглённый прямоугольник — плюс переменное содержимое внутри дают <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">мини‑айдентику</a> без заказа брендбука.</p>
       <h2 id="что-показывает-статистика-скачиваний">Что показывает статистика скачиваний</h2>
       <p>У развязанных слоёв есть измеримое следствие: сервисы живут в головах людей по отдельности. Наш каталог позволяет это проверить — вот сколько раз скачивали знаки экосистемы:</p>
       <div class="blog-top" aria-label="Топ скачиваний">
           <a class="blog-top-row" href="../../logos/search/yandex/">
             <span class="blog-top-rank">1</span>
-            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex.svg?v=20260808" alt="Логотип Яндекс" width="28" height="28" loading="lazy" decoding="async">
+            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="Логотип Яндекс" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Яндекс</span>
             <span class="blog-top-bar"><span style="width:100%"></span></span>
-            <span class="blog-top-num">218</span>
+            <span class="blog-top-num">761</span>
           </a>
           <a class="blog-top-row" href="../../logos/map/yandexmaps/">
             <span class="blog-top-rank">2</span>
-            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-maps.svg?v=20260808" alt="Логотип Яндекс Карты" width="28" height="28" loading="lazy" decoding="async">
+            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-maps.svg?v=20260910" alt="Логотип Яндекс Карты" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Яндекс Карты</span>
-            <span class="blog-top-bar"><span style="width:65%"></span></span>
-            <span class="blog-top-num">142</span>
+            <span class="blog-top-bar"><span style="width:57%"></span></span>
+            <span class="blog-top-num">430</span>
           </a>
           <a class="blog-top-row" href="../../logos/market/yandexmarket/">
             <span class="blog-top-rank">3</span>
-            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-market.svg?v=20260808" alt="Логотип Яндекс Маркет" width="28" height="28" loading="lazy" decoding="async">
+            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-market.svg?v=20260910" alt="Логотип Яндекс Маркет" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Яндекс Маркет</span>
-            <span class="blog-top-bar"><span style="width:60%"></span></span>
-            <span class="blog-top-num">131</span>
+            <span class="blog-top-bar"><span style="width:52%"></span></span>
+            <span class="blog-top-num">396</span>
+          </a>
+          <a class="blog-top-row" href="../../logos/media/yandexmusic/">
+            <span class="blog-top-rank">4</span>
+            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-music.svg?v=20260910" alt="Логотип Яндекс Музыка" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-name">Яндекс Музыка</span>
+            <span class="blog-top-bar"><span style="width:19%"></span></span>
+            <span class="blog-top-num">142</span>
           </a>
           <a class="blog-top-row" href="../../logos/media/kinopoisk/">
-            <span class="blog-top-rank">4</span>
-            <img class="blog-top-icon" src="../../assets/logos/svgs/kinopoisk.svg?v=20260808" alt="Логотип Кинопоиск" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-rank">5</span>
+            <img class="blog-top-icon" src="../../assets/logos/svgs/kinopoisk.svg?v=20260910" alt="Логотип Кинопоиск" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Кинопоиск</span>
             <span class="blog-top-bar"><span style="width:18%"></span></span>
-            <span class="blog-top-num">39</span>
-          </a>
-          <a class="blog-top-row" href="../../logos/bnpl/yandexsplit/">
-            <span class="blog-top-rank">5</span>
-            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-split.svg?v=20260808" alt="Логотип Яндекс Сплит" width="28" height="28" loading="lazy" decoding="async">
-            <span class="blog-top-name">Яндекс Сплит</span>
-            <span class="blog-top-bar"><span style="width:16%"></span></span>
-            <span class="blog-top-num">34</span>
+            <span class="blog-top-num">139</span>
           </a>
           <a class="blog-top-row" href="../../logos/ai/alice/">
             <span class="blog-top-rank">6</span>
-            <img class="blog-top-icon" src="../../assets/logos/svgs/alisa.svg?v=20260808" alt="Логотип Яндекс Алиса" width="28" height="28" loading="lazy" decoding="async">
+            <img class="blog-top-icon" src="../../assets/logos/svgs/alisa.svg?v=20260910" alt="Логотип Яндекс Алиса" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Яндекс Алиса</span>
-            <span class="blog-top-bar"><span style="width:14%"></span></span>
-            <span class="blog-top-num">31</span>
-          </a>
-          <a class="blog-top-row" href="../../logos/media/yandexmusic/">
-            <span class="blog-top-rank">7</span>
-            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-music.svg?v=20260808" alt="Логотип Яндекс Музыка" width="28" height="28" loading="lazy" decoding="async">
-            <span class="blog-top-name">Яндекс Музыка</span>
-            <span class="blog-top-bar"><span style="width:13%"></span></span>
-            <span class="blog-top-num">29</span>
+            <span class="blog-top-bar"><span style="width:17%"></span></span>
+            <span class="blog-top-num">130</span>
           </a>
           <a class="blog-top-row" href="../../logos/food/yandexfood/">
-            <span class="blog-top-rank">8</span>
-            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-eda.svg?v=20260808" alt="Логотип Яндекс Еда" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-rank">7</span>
+            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-eda.svg?v=20260910" alt="Логотип Яндекс Еда" width="28" height="28" loading="lazy" decoding="async">
             <span class="blog-top-name">Яндекс Еда</span>
             <span class="blog-top-bar"><span style="width:11%"></span></span>
-            <span class="blog-top-num">24</span>
+            <span class="blog-top-num">83</span>
           </a>
-          <div class="blog-top-foot">Скачивания из нашего каталога · 8 августа 2026</div>
+          <a class="blog-top-row" href="../../logos/bnpl/yandexsplit/">
+            <span class="blog-top-rank">8</span>
+            <img class="blog-top-icon" src="../../assets/logos/svgs/yandex-split.svg?v=20260910" alt="Логотип Яндекс Сплит" width="28" height="28" loading="lazy" decoding="async">
+            <span class="blog-top-name">Яндекс Сплит</span>
+            <span class="blog-top-bar"><span style="width:9%"></span></span>
+            <span class="blog-top-num">69</span>
+          </a>
+          <div class="blog-top-foot">Скачивания из нашего каталога · 10 сентября 2026</div>
         </div>
-      <p>Люди приходят за знаком конкретного сервиса, и расклад расходится с ожиданиями. Лидирует ядро — <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс</a> со своими 218 скачиваниями: его знак нужен каждому, кто упоминает компанию. Дальше идут инфраструктурные продукты, <a href="../../logos/map/yandexmaps/" target="_blank" rel="noopener">Карты</a> и <a href="../../logos/market/yandexmarket/" target="_blank" rel="noopener">Маркет</a>. А хорошо знакомые всем <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алиса</a> и <a href="../../logos/delivery/yandexgo/" target="_blank" rel="noopener">Go</a> набирают 31 и 14 — в разы меньше.</p>
-      <p>Знак скачивают, когда про сервис нужно написать — в интеграции, кейсе, таблице сравнения. <a href="../../logos/map/yandexmaps/" target="_blank" rel="noopener">Карты</a> и <a href="../../logos/market/yandexmarket/" target="_blank" rel="noopener">Маркет</a> встраивают в чужие продукты и сравнивают с конкурентами постоянно, про <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алису</a> чаще говорят вслух. Востребованность знака показывает, как часто бренд попадает в чужие документы. Скачивая, помните о <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">правилах использования</a>.</p>
+      <p>Люди приходят за знаком конкретного сервиса, и расклад расходится с ожиданиями. Лидирует ядро — <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> со своими 761 скачиваниями: его знак нужен каждому, кто упоминает компанию. Дальше идут инфраструктурные продукты, <a href="../../logos/map/yandexmaps/" target="_blank" rel="noopener">Карты<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-maps.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/market/yandexmarket/" target="_blank" rel="noopener">Маркет<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. А хорошо знакомые всем <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алиса<img class="blog-mention-icon" src="../../assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/delivery/yandexgo/" target="_blank" rel="noopener">Go<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-go.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> набирают 130 и 54 — в разы меньше.</p>
+      <p>Знак скачивают, когда про сервис нужно написать — в интеграции, кейсе, таблице сравнения. <a href="../../logos/map/yandexmaps/" target="_blank" rel="noopener">Карты<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-maps.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/market/yandexmarket/" target="_blank" rel="noopener">Маркет<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> встраивают в чужие продукты и сравнивают с конкурентами постоянно, про <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алису<img class="blog-mention-icon" src="../../assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> чаще говорят вслух. Востребованность знака показывает, как часто бренд попадает в чужие документы. Скачивая, помните о <a href="../mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">правилах использования</a>.</p>
       <h2 id="алиса-знак-для-того-у-чего-нет-формы">Алиса: знак для того, у чего нет формы</h2>
-      <p>Замыкает этот список <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алиса</a>, и её знак собран по отдельным правилам. У голосового помощника нет предмета, который можно нарисовать, поэтому знак ушёл в абстракцию — белая капля со скруглёнными углами на фиолетово‑синем градиенте. Форма допускает несколько прочтений сразу: язычок пламени, пузырь речи, капля звука.</p>
-      <p>Палитру <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алиса</a> тоже берёт свою. Фиолетово‑синий градиент уводит её из сервисной части экосистемы в технологическую, к тем же цветовым кодам, которыми пользуются логотипы нейросетей. Голосовой помощник числится технологией, и палитра сообщает об этом раньше любой подписи.</p>
+      <p>Замыкает этот список <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алиса<img class="blog-mention-icon" src="../../assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, и её знак собран по отдельным правилам. У голосового помощника нет предмета, который можно нарисовать, поэтому знак ушёл в абстракцию — белая капля со скруглёнными углами на фиолетово‑синем градиенте. Форма допускает несколько прочтений сразу: язычок пламени, пузырь речи, капля звука.</p>
+      <p>Палитру <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алиса<img class="blog-mention-icon" src="../../assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> тоже берёт свою. Фиолетово‑синий градиент уводит её из сервисной части экосистемы в технологическую, к тем же цветовым кодам, которыми пользуются логотипы нейросетей. Голосовой помощник числится технологией, и палитра сообщает об этом раньше любой подписи.</p>
       <p>В горизонтальном начертании от этого градиента ничего не остаётся:</p>
       <div class="blog-logo-fulls">
           <a class="blog-logo-full" href="../../logos/ai/alice/">
-            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/alisa-full.svg?v=20260808" alt="Полный логотип Яндекс Алиса" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/alisa-full.svg?v=20260910" alt="Полный логотип Яндекс Алиса" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Яндекс Алиса</span>
           </a>
         </div>
-      <p>Остаются контур и слово — так система требует от каждого знака. В одном цвете логотип обязан работать так же, как в полноцветном: на визитке, в факсе, в чужой чёрно‑белой презентации. Простой силуэт этому требованию отвечает и по той же причине хорошо <a href="../animirovannyj-logotip/" target="_blank" rel="noopener">анимируется</a> в «слушаю/думаю/отвечаю» — ломаться при движении там нечему.</p>
+      <p>Остаются контур и слово — так система требует от каждого знака. В одном цвете логотип обязан работать так же, как в полноцветном: на визитке, в факсе, в чужой чёрно‑белой презентации. Простой силуэт этому требованию отвечает и по той же причине хорошо <a href="../animirovannyj-logotip/" target="_blank" rel="noopener">анимируется</a> в «слушаю/думаю/отвечаю» — ломаться при движении там нечему.</p>
       <h2 id="2021-что-случилось-когда-заменили-центр-системы" class="step-heading"><span class="step-badge">2021</span><span class="step-title">Что случилось, когда заменили центр системы</span></h2>
-      <p>Расширение проверяет систему слабо. Проверяет замена центра, и <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс</a> прошёл через неё 31 марта 2021 года, впервые за 13 лет сменив логотип. Появился новый знак — красный круг с буквой «Я», — а поисковая строка перестала повторять форму стрелки, которую компания использовала годами. Тогда же уравняли кириллическое и латинское написания, так что сегодня это одна форма в двух алфавитах:</p>
+      <p>Расширение проверяет систему слабо. Проверяет замена центра, и <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> прошёл через неё 31 марта 2021 года, впервые за 13 лет сменив логотип. Появился новый знак — красный круг с буквой «Я», — а поисковая строка перестала повторять форму стрелки, которую компания использовала годами. Тогда же уравняли кириллическое и латинское написания, так что сегодня это одна форма в двух алфавитах:</p>
       <div class="blog-logo-fulls">
           <a class="blog-logo-full" href="../../logos/search/yandex/">
-            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-full.svg?v=20260808" alt="Полный логотип Яндекс" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-full.svg?v=20260910" alt="Полный логотип Яндекс" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Кириллица</span>
           </a>
           <a class="blog-logo-full" href="../../logos/search/yandex/">
-            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-en-full.svg?v=20260808" alt="Полный логотип Яндекс" loading="lazy" decoding="async"></span>
+            <span class="blog-logo-full-canvas"><img src="../../assets/logos/svgs/yandex-en-full.svg?v=20260910" alt="Полный логотип Яндекс" loading="lazy" decoding="async"></span>
             <span class="blog-logo-full-cap">Латиница</span>
           </a>
         </div>
       <p>Одна гарнитура, одна высота букв, красный акцент строго на первой букве — латиница работает как вторая родная версия знака.</p>
-      <p>Сотни иконок сервисов при этом остались прежними: перерисовывать их не пришлось. Обновилось только ядро, а связи между ним и сервисами — контейнер, шрифт, палитра — сохранились. Так развязанные слои и работают на практике: замена центра прошла без цепной реакции на периферии. Ту же механику мы разбирали в <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">полной истории знака Яндекса</a> и в статье о том, <a href="../chto-takoe-rebrending/" target="_blank" rel="noopener">как проходят аккуратные ребрендинги</a>.</p>
+      <p>Сотни иконок сервисов при этом остались прежними: перерисовывать их не пришлось. Обновилось только ядро, а связи между ним и сервисами — контейнер, шрифт, палитра — сохранились. Так развязанные слои и работают на практике: замена центра прошла без цепной реакции на периферии. Ту же механику мы разбирали в <a href="../istoriya-logotipa-yandeksa/" target="_blank" rel="noopener">полной истории знака Яндекса</a> и в статье о том, <a href="../chto-takoe-rebrending/" target="_blank" rel="noopener">как проходят аккуратные ребрендинги</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -402,137 +406,138 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="что-из-этого-забрать-себе">Что из этого забрать себе</h2>
-      <p>Вся система сводится к одному решению, принятому в самом начале: развести принадлежность и продукт по разным слоям. Контейнер, шрифт и палитра говорят «это <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс</a>», символ внутри — «а это <a href="../../logos/media/yandexmusic/" target="_blank" rel="noopener">Музыка</a>». Дальше идут следствия. Новый сервис добавляется за день, потому что обсуждать остаётся только символ. Цвета не конфликтуют, потому что палитру раздают сверху. Логотип компании можно переделать, оставив <a href="../../logos/map/yandexmaps/" target="_blank" rel="noopener">Карты</a> и <a href="../../logos/market/yandexmarket/" target="_blank" rel="noopener">Маркет</a> как есть, — они держатся на общем контейнере.</p>
-      <p>Работает всё это при одном условии: правила соблюдаются без исключений. Именно такую дисциплину и называют <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменным стилем</a>. Одно продуманное отступление на всю семью, как градиент <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алисы</a>, система выдержит. Десяток решений «мы тут сделали по‑своему» её разрушат.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Для собственного мини‑бренда</span></div><div class="callout-body"><p>Та же схема работает и на двух‑трёх продуктах: общий контейнер, постоянное место для имени продукта, фиксированная палитра. Заодно это аргумент называть бренд коротко с самого начала: из «<a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс</a> + слово» новое имя складывается за секунду, из «Производственная компания N + слово» — нет.</p></div></div>
-      <p>Все логотипы сервисов <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекса</a> — актуальные и архивные варианты — собраны на странице <a href="../../logos/ecosystem/yandex/" target="_blank" rel="noopener">экосистемы</a> и в <a href="../../logos/" target="_blank" rel="noopener">каталоге</a>: SVG, PNG, фирменные цвета. Сравнить с другими экосистемами: Сбер, VK, Google.</p>
+      <p>Вся система сводится к одному решению, принятому в самом начале: развести принадлежность и продукт по разным слоям. Контейнер, шрифт и палитра говорят «это <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>», символ внутри — «а это <a href="../../logos/media/yandexmusic/" target="_blank" rel="noopener">Музыка<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-music.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>». Дальше идут следствия. Новый сервис добавляется за день, потому что обсуждать остаётся только символ. Цвета не конфликтуют, потому что палитру раздают сверху. Логотип компании можно переделать, оставив <a href="../../logos/map/yandexmaps/" target="_blank" rel="noopener">Карты<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-maps.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/market/yandexmarket/" target="_blank" rel="noopener">Маркет<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex-market.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> как есть, — они держатся на общем контейнере.</p>
+      <p>Работает всё это при одном условии: правила соблюдаются без исключений. Именно такую дисциплину и называют <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">фирменным стилем</a>. Одно продуманное отступление на всю семью, как градиент <a href="../../logos/ai/alice/" target="_blank" rel="noopener">Алисы<img class="blog-mention-icon" src="../../assets/logos/svgs/alisa.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, система выдержит. Десяток решений «мы тут сделали по‑своему» её разрушат.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Для собственного мини‑бренда</span></div><div class="callout-body"><p>Та же схема работает и на двух‑трёх продуктах: общий контейнер, постоянное место для имени продукта, фиксированная палитра. Заодно это аргумент называть бренд коротко с самого начала: из «<a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> + слово» новое имя складывается за секунду, из «Производственная компания N + слово» — нет.</p></div></div>
+      <p>Все логотипы сервисов <a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекса<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — актуальные и архивные варианты — собраны на странице <a href="../../logos/ecosystem/yandex/" target="_blank" rel="noopener">экосистемы</a> и в <a href="../../logos/" target="_blank" rel="noopener">каталоге</a>: SVG, PNG, фирменные цвета. Сравнить с другими экосистемами: Сбер, VK, Google.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+          <a class="blog-card" href="../logotipy-oblachnyh-servisov/" data-date="2026-09-10" data-views="0">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Медиа</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             0
           </div>
           </div>
-          <div class="blog-card-title">Логотипы стриминговых сервисов — Netflix, Кинопоиск, YouTube и другие</div>
+          <div class="blog-card-title">Логотипы облачных сервисов — почему все рисуют облако и кто нет</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-socsetej/" data-date="2026-08-27" data-views="0">
+      <a class="blog-card" href="../logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Логотипы социальных сетей — от градиента Instagram до буквы X</div>
+          <div class="blog-card-title">Логотипы нейросетей — как выглядит айдентика ИИ‑сервисов</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-servisov-puteshestvij/" data-date="2026-08-26" data-views="1">
+      <a class="blog-card" href="../logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Путешествия</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Игры</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
-          <div class="blog-card-title">Логотипы сервисов путешествий — Aviasales, Skyscanner, Kayak и другие</div>
+          <div class="blog-card-title">Логотипы мобильных игр — почему у всех объёмные буквы</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-servisov-videozvonkov/" data-date="2026-08-26" data-views="0">
+      <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Технологии</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /><rect x="2" y="6" width="14" height="12" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            17
           </div>
           </div>
-          <div class="blog-card-title">Логотипы сервисов видеозвонков — Zoom, Teams, Meet, Discord</div>
+          <div class="blog-card-title">Логотипы мессенджеров — почему все выбирают пузырь и самолётик</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-dlya-pechati/" data-date="2026-08-15" data-views="0">
+      <a class="blog-card" href="../istoriya-logotipa-tiktok/" data-date="2026-08-03" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Печать</span><span class="blog-card-tag">Форматы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 9V3a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6" /><rect x="6" y="14" width="12" height="8" rx="1" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="18" r="4" /><path d="M12 18V2l7 4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>15.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>03.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            12
           </div>
           </div>
-          <div class="blog-card-title">Логотип для печати — CMYK, Pantone и какие файлы нужны типографии</div>
+          <div class="blog-card-title">История логотипа TikTok — нота, глитч и сцена в темноте</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../chto-takoe-monogramma/" data-date="2026-07-23" data-views="11">
+      <a class="blog-card" href="../simvoly-i-emodzi-dlya-nika/" data-date="2026-07-14" data-views="54">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284" /><path d="M3 21h18" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Символы</span><span class="blog-card-tag">Ники</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            11
+            54
           </div>
           </div>
-          <div class="blog-card-title">Что такое монограмма — логотипы из букв и как их делают</div>
+          <div class="blog-card-title">Символы и эмодзи для ника — красивые, редкие и почему часть из них ломает профиль</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -550,25 +555,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -645,6 +642,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -690,10 +688,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

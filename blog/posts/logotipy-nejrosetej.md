@@ -3,7 +3,7 @@ title: Логотипы нейросетей — как выглядит ай�
 title_en: AI Company Logos — How Neural Network Services Brand Themselves
 description: Разбираем логотипы ChatGPT, Claude, Gemini, Midjourney, GigaChat и других ИИ‑сервисов: общие приёмы, градиенты и «звёздочки», почему все похожи и кто выделяется
 description_en: The logos of ChatGPT, Claude, Gemini, Midjourney, GigaChat and other AI services: shared devices, gradients and sparkles, why they look alike
-date: 2026-08-22
+date: 2026-09-01
 slug: logotipy-nejrosetej
 tags: Подборки, Брендинг, Нейросети
 tags_en: Collections, Branding, AI
@@ -23,11 +23,11 @@ tags_en: Collections, Branding, AI
 
 ### 2. Градиент и свечение
 
-Мы разбирали этот тренд в статье [тренды логотипов 2026](../trendy-logotipov-2026/): плавные многоцветные переходы стали визуальным синонимом генеративности — спектр как метафора бесконечного пространства ответов. [Gemini](../../logos/ai/gemini/) переливается сине‑фиолетовым, [GigaChat](../../logos/ai/gigachat/) носит градиент экосистемы Сбера, а [Copilot](../../logos/ai/copilot/) — целую радугу в форме значка‑петли.
+Мы разбирали этот тренд в статье тренды логотипов 2026: плавные многоцветные переходы стали визуальным синонимом генеративности — спектр как метафора бесконечного пространства ответов. [Gemini](../../logos/ai/gemini/) переливается сине‑фиолетовым, [GigaChat](../../logos/ai/gigachat/) носит градиент экосистемы Сбера, а [Copilot](../../logos/ai/copilot/) — целую радугу в форме значка‑петли.
 
 ### 3. Розетка‑узел
 
-Органическая фигура из переплетённых лепестков или нитей — намёк на нейронную сеть. Канонический пример — «цветок» [ChatGPT](../../logos/ai/chatgpt/): шестилучевой узел из переплетённых дуг, ставший таким же символом эпохи, каким была птичка Twitter (подробнее — в статье [история логотипа ChatGPT](../istoriya-logotipa-chatgpt/)). Похожую логику узла используют [DeepSeek](../../logos/ai/deepseek/) (кит из волнообразных сегментов) и множество стартапов второй волны.
+Органическая фигура из переплетённых лепестков или нитей — намёк на нейронную сеть. Канонический пример — «цветок» [ChatGPT](../../logos/ai/chatgpt/): шестилучевой узел из переплетённых дуг, ставший таким же символом эпохи, каким была птичка Twitter (подробнее — в статье [история логотипа ChatGPT](../istoriya-logotipa-chatgpt/)). Похожую логику узла используют [DeepSeek](../../logos/ai/deepseek/) (кит из волнообразных сегментов) и множество стартапов второй волны.
 
 ## Разбор главных знаков
 
@@ -42,10 +42,10 @@ tags_en: Collections, Branding, AI
 
 ## Почему все похожи — и чем это опасно
 
-Причина монотонности проста: категория новая, все объясняют одно и то же («у нас умный ИИ»), и все смотрят на пионеров. Получается то, что дизайнеры зовут «морем одинаковости»: градиент + искра + округлый гротеск. Для пользователя это уже неразличимо — а значит, приём перестал работать; [об этом эффекте мы писали](../trendy-logotipov-2026/) отдельно.
+Причина монотонности проста: категория новая, все объясняют одно и то же («у нас умный ИИ»), и все смотрят на пионеров. Получается то, что дизайнеры зовут «морем одинаковости»: градиент + искра + округлый гротеск. Для пользователя это уже неразличимо — а значит, приём перестал работать; об этом эффекте мы писали отдельно.
 
 :::tip Урок для своих проектов
-Если делаете ИИ‑продукт, дефолтный набор «градиент + звёздочка» сегодня сообщает не «мы инновационные», а «мы как все». Сильные бренды категории — ChatGPT, Claude, Midjourney — выделяются именно отказом от части клише. Как искать собственный ход — в статьях [виды логотипов](../vidy-logotipov/) и [психология цвета](../psihologiya-cveta-v-logotipe/).
+Если делаете ИИ‑продукт, дефолтный набор «градиент + звёздочка» сегодня сообщает не «мы инновационные», а «мы как все». Сильные бренды категории — ChatGPT, Claude, Midjourney — выделяются именно отказом от части клише. Как искать собственный ход — в статьях виды логотипов и [психология цвета](../psihologiya-cveta-v-logotipe/).
 :::
 
 ## Сводная таблица
@@ -54,7 +54,7 @@ tags_en: Collections, Branding, AI
 | --- | --- | --- | --- |
 | [ChatGPT](../../logos/ai/chatgpt/) | розетка‑узел | монохром | наполовину |
 | [Claude](../../logos/ai/claude/) | лучистая розетка | терракота | нет |
-| [Gemini](../../logos/ai/gemini/) | искра | сине‑фиолетовый градиент | оно и есть |
+| [Gemini](../../logos/ai/gemini/) | искра | сине‑фиолетовый градиент | оно и есть |
 | [Copilot](../../logos/ai/copilot/) | петля‑значок | радужный градиент | да |
 | [Midjourney](../../logos/ai/midjourney/) | рукописная «М»-парус | монохром | нет |
 | [GigaChat](../../logos/ai/gigachat/) | диалоговая форма | градиент Сбера | да |
@@ -63,7 +63,7 @@ tags_en: Collections, Branding, AI
 
 ## Где скачать и как использовать
 
-Все логотипы из подборки — плюс [Sora](../../logos/ai/sora/), [Cursor](../../logos/ai/cursor/), [Stable Diffusion](../../logos/ai/stablediffusion/), [Runway](../../logos/ai/runway/) и ещё десятки — лежат в [категории «Нейросети»](../../logos/ai/): SVG и PNG с прозрачным фоном, с точными фирменными цветами. Используйте их в обзорах, презентациях и сравнениях сервисов — но помните о [правилах использования чужих знаков](../mozhno-li-ispolzovat-chuzhoy-logotip/). А если хотите, чтобы нейросеть нарисовала логотип вам, — читайте [как сделать логотип нейросетью](../logotip-nejrosetyu/).
+Все логотипы из подборки — плюс [Sora](../../logos/ai/sora/), [Cursor](../../logos/ai/cursor/), [Stable Diffusion](../../logos/ai/stablediffusion/), [Runway](../../logos/ai/runway/) и ещё десятки — лежат в [категории «Нейросети»](../../logos/ai/): SVG и PNG с прозрачным фоном, с точными фирменными цветами. Используйте их в обзорах, презентациях и сравнениях сервисов — но помните о [правилах использования чужих знаков](../mozhno-li-ispolzovat-chuzhoy-logotip/). А если хотите, чтобы нейросеть нарисовала логотип вам, — читайте [как сделать логотип нейросетью](../logotip-nejrosetyu/).
 
 ---EN---
 
@@ -81,7 +81,7 @@ The four-pointed star became the de facto "AI here" pictogram across interfaces 
 
 ### 2. Gradient and glow
 
-We covered the trend in [logo trends 2026](../trendy-logotipov-2026/): smooth multicolor transitions became the visual synonym of generativity — the spectrum as a metaphor for the infinite answer space. [Gemini](../../logos/ai/gemini/) shimmers blue-violet, [GigaChat](../../logos/ai/gigachat/) wears the Sber ecosystem gradient, and [Copilot](../../logos/ai/copilot/) sports a whole rainbow in its loop badge.
+We covered the trend in logo trends 2026: smooth multicolor transitions became the visual synonym of generativity — the spectrum as a metaphor for the infinite answer space. [Gemini](../../logos/ai/gemini/) shimmers blue-violet, [GigaChat](../../logos/ai/gigachat/) wears the Sber ecosystem gradient, and [Copilot](../../logos/ai/copilot/) sports a whole rainbow in its loop badge.
 
 ### 3. The knot-rosette
 
@@ -100,10 +100,10 @@ An organic figure of interwoven petals or threads — a hint at a neural network
 
 ## Why they all look alike — and why that's a risk
 
-The monotony has a simple cause: the category is new, everyone is explaining the same thing ("our AI is smart"), and everyone watches the pioneers. The result is what designers call a "sea of sameness": gradient + sparkle + rounded sans. To users it's already indistinguishable — meaning the device stopped working; [we wrote about this effect](../trendy-logotipov-2026/) separately.
+The monotony has a simple cause: the category is new, everyone is explaining the same thing ("our AI is smart"), and everyone watches the pioneers. The result is what designers call a "sea of sameness": gradient + sparkle + rounded sans. To users it's already indistinguishable — meaning the device stopped working; we wrote about this effect separately.
 
 :::tip A lesson for your own projects
-If you're building an AI product, the default "gradient + sparkle" kit today says not "we're innovative" but "we're like everyone". The category's strong brands — ChatGPT, Claude, Midjourney — stand out precisely by dropping part of the cliché. How to find your own move: [types of logos](../vidy-logotipov/) and [color psychology](../psihologiya-cveta-v-logotipe/).
+If you're building an AI product, the default "gradient + sparkle" kit today says not "we're innovative" but "we're like everyone". The category's strong brands — ChatGPT, Claude, Midjourney — stand out precisely by dropping part of the cliché. How to find your own move: types of logos and [color psychology](../psihologiya-cveta-v-logotipe/).
 :::
 
 ## Summary table

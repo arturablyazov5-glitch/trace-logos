@@ -72,12 +72,13 @@ if (getLang() === 'en') {
   }
 }
 
-// ── Mobile: "Подробнее" toggle for the about text ─────────────────────────
-// The 2-line clamp is pure CSS (css/seo-page.css, mobile media query) — the
-// full text stays in the HTML at all times, only its rendered height is
-// clamped, so this is not a content-hiding trick that could hurt SEO.
-// The button itself is `hidden` until we confirm the text actually overflows
-// 2 lines — a short about doesn't need a toggle at all.
+// ── "Читать ещё" toggle for the about text ─────────────────────────────────
+// The 2-line clamp is pure CSS (css/seo-page.css) — the full text stays in
+// the HTML at all times, only its rendered height is clamped, so this is not
+// a content-hiding trick that could hurt SEO. Applies on desktop and mobile
+// alike (desktop parity added 2026-08-19). The button itself is `hidden`
+// until we confirm the text actually overflows 2 lines — a short about
+// doesn't need a toggle at all.
 function setupLogoDescToggle() {
   const descEl = document.getElementById('logo-desc');
   const toggleBtn = document.getElementById('logo-desc-toggle');
@@ -85,8 +86,7 @@ function setupLogoDescToggle() {
 
   const sync = () => {
     if (descEl.classList.contains('expanded')) return; // don't re-clamp mid-read on resize
-    const overflowing = matchMedia('(max-width: 640px)').matches
-      && descEl.scrollHeight > descEl.clientHeight + 1;
+    const overflowing = descEl.scrollHeight > descEl.clientHeight + 1;
     toggleBtn.hidden = !overflowing;
   };
   sync();
@@ -329,7 +329,7 @@ btnCopy.addEventListener('click', function() {
     .then(() => {
       triggerConfetti(btnCopy);
       showToast(TOASTS.copiedSvg);
-      trackExport(PAGE.figma, 'copy-svg', PAGE.item?.file || '');
+      trackExport(PAGE.figma, 'copy-svg', currentFile());
       btnCopyLbl.textContent = LABELS.copied;
       btnCopy.disabled = true;
       if (copyTimer) clearTimeout(copyTimer);
@@ -355,7 +355,7 @@ function downloadPngFromSvg(svgUrl, filename, square) {
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 10000);
       showToast(TOASTS.downloaded(filename));
-      trackExport(PAGE.figma, filename.endsWith('.png') ? 'png' : 'svg', PAGE.item?.file || '');
+      trackExport(PAGE.figma, filename.endsWith('.png') ? 'png' : 'svg', currentFile());
     });
 }
 
@@ -429,7 +429,7 @@ if (embedCode) {
     try {
       await navigator.clipboard.writeText(embedCode.textContent);
     } catch { showToast(TOASTS.copyError); return; }
-    trackExport(PAGE.figma, 'embed', PAGE.item?.file || '');
+    trackExport(PAGE.figma, 'embed', currentFile());
     triggerConfetti(embedCopyBtn);
     showToast(t('toast.embedCopied'));
     embedCopyLbl.textContent = LABELS.copied;
@@ -495,8 +495,8 @@ function downloadCurrent() {
 
 btnExpand.addEventListener('click', e => { e.stopPropagation(); openLightbox(); });
 
-btnDlSvg.addEventListener('click', () => { showToast(TOASTS.downloaded(btnDlSvg.download)); trackExport(PAGE.figma, 'svg', PAGE.item?.file || ''); });
-btnDlPng.addEventListener('click', () => { if (btnDlPng.href) { showToast(TOASTS.downloaded(btnDlPng.download)); trackExport(PAGE.figma, 'png', PAGE.item?.file || ''); } });
+btnDlSvg.addEventListener('click', () => { showToast(TOASTS.downloaded(btnDlSvg.download)); trackExport(PAGE.figma, 'svg', currentFile()); });
+btnDlPng.addEventListener('click', () => { if (btnDlPng.href) { showToast(TOASTS.downloaded(btnDlPng.download)); trackExport(PAGE.figma, 'png', currentFile()); } });
 
 btnMenu.addEventListener('click', e => {
   e.stopPropagation();

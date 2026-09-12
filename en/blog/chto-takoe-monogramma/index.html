@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(184 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(224 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(274 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(334 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(184 70% 38%) 0%, hsl(334 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284" /><path d="M3 21h18" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(63 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(103 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(153 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(213 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(63 70% 38%) 0%, hsl(213 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284" /><path d="M3 21h18" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-23">July 23, 2026</time>
@@ -203,14 +207,14 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            11
+	            60
 	          </span>
         </div>
         <h1>What Is a Monogram — Letter Logos and How They Work</h1>
       </header>
       <div class="blog-body">
-        <p>Half the marks you see every day are just letters: the <a href="/en/logos/search/google/" target="_blank" rel="noopener">Google</a> &quot;G&quot;, the <a href="/en/logos/social/vk/" target="_blank" rel="noopener">VK</a> letters, the <a href="/en/logos/media/netflix/" target="_blank" rel="noopener">Netflix</a> &quot;N&quot;, the <a href="/en/logos/social/facebook/" target="_blank" rel="noopener">Facebook</a> &quot;f&quot;. The monogram is the oldest type of logo and the most durable one: it outlived heraldry, flourished ciphers, Web 2.0 and total flat design. Here is how a letter mark works, when it is the best choice — and when it is a trap.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>A <strong>monogram</strong> is a mark built from one to three letters of the brand name, designed as a single shape. It works when the name is long and the mark must live in a tiny icon: <a href="/en/logos/media/netflix/" target="_blank" rel="noopener">Netflix</a> → &quot;N&quot;, <a href="/en/logos/social/facebook/" target="_blank" rel="noopener">Facebook</a> → &quot;f&quot;. It fails when the letter looks like a thousand other letters. The key test: is your letter recognized without a caption.</p></div></div>
+        <p>Half the marks you see every day are just letters: the <a href="/en/logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="/assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> &quot;G&quot;, the <a href="/en/logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="/assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> letters, the <a href="/en/logos/media/netflix/" target="_blank" rel="noopener">Netflix<img class="blog-mention-icon" src="/assets/logos/svgs/netflix.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> &quot;N&quot;, the <a href="/en/logos/social/facebook/" target="_blank" rel="noopener">Facebook<img class="blog-mention-icon" src="/assets/logos/svgs/facebook.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> &quot;f&quot;. The monogram is the oldest type of logo and the most durable one: it outlived heraldry, flourished ciphers, Web 2.0 and total flat design. Here is how a letter mark works, when it is the best choice — and when it is a trap.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>A <strong>monogram</strong> is a mark built from one to three letters of the brand name, designed as a single shape. It works when the name is long and the mark must live in a tiny icon: <a href="/en/logos/media/netflix/" target="_blank" rel="noopener">Netflix<img class="blog-mention-icon" src="/assets/logos/svgs/netflix.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> → &quot;N&quot;, <a href="/en/logos/social/facebook/" target="_blank" rel="noopener">Facebook<img class="blog-mention-icon" src="/assets/logos/svgs/facebook.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> → &quot;f&quot;. It fails when the letter looks like a thousand other letters. The key test: is your letter recognized without a caption.</p></div></div>
       <h2 id="where-monograms-came-from">Where monograms came from</h2>
       <p>The monogram is older than the very idea of a &quot;logo&quot;. Ancient rulers minted their initials on coins, medieval craftsmen marked work with ciphers, and painters from Dürer to Whistler signed canvases with interlaced letters. The idea was always the same: <strong>compress a name into a mark that fits anywhere</strong>. An app icon on a phone screen solves exactly that problem — which is why monograms, not pictorial emblems, became the leading genre of the digital era — the same logic behind <a href="/en/blog/ikonka-prilozheniya/" target="_blank" rel="noopener">how app icons work</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
@@ -225,12 +229,12 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="monogram-vs-lettermark-vs-wordmark">Monogram vs lettermark vs wordmark</h2>
       <p>The terms get mixed up, but the boundary is simple — the number of letters and how they are treated:</p>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Type</th><th>What it is</th><th>Examples</th></tr></thead><tbody><tr><td>Monogram</td><td>1–3 letters fused into one shape</td><td>the <a href="/en/logos/social/vk/" target="_blank" rel="noopener">VK</a> letters, the <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries</a> &quot;W&quot;</td></tr><tr><td>Lettermark</td><td>an abbreviation set as a mark</td><td><a href="/en/logos/media/cnn/" target="_blank" rel="noopener">CNN</a>, <a href="/en/logos/media/nba/" target="_blank" rel="noopener">NBA</a></td></tr><tr><td>Wordmark</td><td>the full name in a custom typeface</td><td><a href="/en/logos/search/google/" target="_blank" rel="noopener">Google</a>, <a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon</a></td></tr></tbody></table></div>
-      <p>The difference is not academic. A monogram is a <strong>shape</strong> you draw; a lettermark is a <strong>setting</strong> you fine‑tune typographically; a wordmark is <a href="/en/blog/shrift-dlya-logotipa/" target="_blank" rel="noopener">type design</a> across the whole name. Many brands carry both: the full <a href="/en/logos/search/google/" target="_blank" rel="noopener">Google logo</a> is a word, the icon is a four‑color &quot;G&quot;. More on mark + word pairs in types of logos.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Type</th><th>What it is</th><th>Examples</th></tr></thead><tbody><tr><td>Monogram</td><td>1–3 letters fused into one shape</td><td>the <a href="/en/logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="/assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> letters, the <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries<img class="blog-mention-icon" src="/assets/logos/svgs/wildberries.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> &quot;W&quot;</td></tr><tr><td>Lettermark</td><td>an abbreviation set as a mark</td><td><a href="/en/logos/media/cnn/" target="_blank" rel="noopener">CNN<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/cnn.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/media/nba/" target="_blank" rel="noopener">NBA<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/nba.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td></tr><tr><td>Wordmark</td><td>the full name in a custom typeface</td><td><a href="/en/logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="/assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/market/ozon/" target="_blank" rel="noopener">Ozon<img class="blog-mention-icon" src="/assets/logos/svgs/ozon.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td></tr></tbody></table></div>
+      <p>The difference is not academic. A monogram is a <strong>shape</strong> you draw; a lettermark is a <strong>setting</strong> you fine‑tune typographically; a wordmark is <a href="/en/blog/shrift-dlya-logotipa/" target="_blank" rel="noopener">type design</a> across the whole name. Many brands carry both: the full <a href="/en/logos/search/google/" target="_blank" rel="noopener">Google logo<img class="blog-mention-icon" src="/assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is a word, the icon is a four‑color &quot;G&quot;. More on mark + word pairs in types of logos.</p>
       <h2 id="when-a-monogram-is-the-right-call">When a monogram is the right call</h2>
-      <p><strong>The name is long, the surfaces are small.</strong> &quot;Netflix&quot; is unreadable in a 16×16 favicon — the red ribbon‑fold &quot;N&quot; from the Netflix logo history is. Same with <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries</a>: a courier badge and an app icon fit a &quot;W&quot;, not thirteen letters. Platform size requirements are <a href="/en/blog/razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">covered separately</a>.</p>
-      <p><strong>The brand is already known.</strong> A monogram is an abbreviation, and abbreviations only work when everyone knows the full form. <a href="/en/logos/social/facebook/" target="_blank" rel="noopener">Facebook</a> could retreat to a single &quot;f&quot; because a billion people already knew it. A no‑name startup that starts with a lone letter asks the audience to memorize two names at once — the letter and the word.</p>
-      <p><strong>You need a sub‑brand system.</strong> A letter logic scales easily: <a href="/en/logos/social/vk/" target="_blank" rel="noopener">VK</a> runs dozens of products — <a href="/en/logos/media/vkvideo/" target="_blank" rel="noopener">VK Video</a>, <a href="/en/logos/social/vkmessenger/" target="_blank" rel="noopener">VK Messenger</a>, <a href="/en/logos/media/vkplay/" target="_blank" rel="noopener">VK Play</a> — all held together by one &quot;letters in a circle&quot; system whose origins are told in the VK logo history.</p>
+      <p><strong>The name is long, the surfaces are small.</strong> &quot;Netflix&quot; is unreadable in a 16×16 favicon — the red ribbon‑fold &quot;N&quot; from the Netflix logo history is. Same with <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries<img class="blog-mention-icon" src="/assets/logos/svgs/wildberries.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: a courier badge and an app icon fit a &quot;W&quot;, not thirteen letters. Platform size requirements are <a href="/en/blog/razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">covered separately</a>.</p>
+      <p><strong>The brand is already known.</strong> A monogram is an abbreviation, and abbreviations only work when everyone knows the full form. <a href="/en/logos/social/facebook/" target="_blank" rel="noopener">Facebook<img class="blog-mention-icon" src="/assets/logos/svgs/facebook.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> could retreat to a single &quot;f&quot; because a billion people already knew it. A no‑name startup that starts with a lone letter asks the audience to memorize two names at once — the letter and the word.</p>
+      <p><strong>You need a sub‑brand system.</strong> A letter logic scales easily: <a href="/en/logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="/assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> runs dozens of products — <a href="/en/logos/media/vkvideo/" target="_blank" rel="noopener">VK Video<img class="blog-mention-icon" src="/assets/logos/svgs/vk-video.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/social/vkmessenger/" target="_blank" rel="noopener">VK Messenger<img class="blog-mention-icon" src="/assets/logos/svgs/vk-messenger.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/media/vkplay/" target="_blank" rel="noopener">VK Play<img class="blog-mention-icon" src="/assets/logos/svgs/vk-play.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — all held together by one &quot;letters in a circle&quot; system whose origins are told in the VK logo history.</p>
       <h2 id="when-a-monogram-fails">When a monogram fails</h2>
       <ul>
       <li><strong>The letter belongs to no one.</strong> The alphabet is finite, companies are not. A lonely &quot;A&quot; in a circle belongs to nobody — so nobody remembers it. A monogram must own a unique gesture: a bend, a ligature, a signature cut.</li>
@@ -241,13 +245,13 @@ window.yaContextCb.push(() => {
       <h2 id="how-to-design-a-monogram-practice">How to design a monogram: practice</h2>
       <ol>
       <li><strong>Start from the full word.</strong> Set the name in 5–7 typefaces and see which letter has the most distinctive silhouette — build the mark from that one — our guide to <a href="/en/blog/shrift-dlya-logotipa/" target="_blank" rel="noopener">choosing a typeface for a logo</a> helps here.</li>
-      <li><strong>Draw a shape, don't type a letter.</strong> A glyph straight from a font is not a monogram. Change proportions and cuts, add ligatures: the <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries</a> &quot;W&quot; is a drawn figure, not a font W.</li>
+      <li><strong>Draw a shape, don't type a letter.</strong> A glyph straight from a font is not a monogram. Change proportions and cuts, add ligatures: the <a href="/en/logos/market/wildberries/" target="_blank" rel="noopener">Wildberries<img class="blog-mention-icon" src="/assets/logos/svgs/wildberries.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> &quot;W&quot; is a drawn figure, not a font W.</li>
       <li><strong>Test at 16 pixels.</strong> Export the mark as a <a href="/en/blog/kak-sdelat-favicon/" target="_blank" rel="noopener">favicon</a> and look at the browser tab: whatever detail disappeared was unnecessary.</li>
       <li><strong>Test in one color.</strong> A monogram must survive black‑on‑white — no gradient, no backing shape; we explain separately <a href="/en/blog/cherno-belyj-logotip/" target="_blank" rel="noopener">why you need a black-and-white version</a> of any logo.</li>
       <li><strong>Assemble the surfaces.</strong> Avatar, icon, stamp, email signature — that is where a monogram actually lives, so check the exact <a href="/en/blog/razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">sizes per platform</a> ahead of time.</li>
       </ol>
       <p>Draw in vector from the first sketch — in Figma or any editor that exports clean SVG — <a href="/en/blog/vektor-i-rastr-raznica/" target="_blank" rel="noopener">why vector is mandatory here</a> we cover separately.</p>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>The caption test</span></div><div class="callout-body"><p>Cover the caption under the mark with your hand. If the letter could be mistaken for someone else's, the shape isn't ready. A good monogram has a unique gesture: the <a href="/en/logos/search/google/" target="_blank" rel="noopener">Google</a> &quot;G&quot; with its horizontal bar cannot be confused with a font G.</p></div></div>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>The caption test</span></div><div class="callout-body"><p>Cover the caption under the mark with your hand. If the letter could be mistaken for someone else's, the shape isn't ready. A good monogram has a unique gesture: the <a href="/en/logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="/assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> &quot;G&quot; with its horizontal bar cannot be confused with a font G.</p></div></div>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -259,68 +263,27 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="bottom-line">Bottom line</h2>
-      <p>A monogram is not a &quot;small logo&quot; but a genre of its own: it compresses a name into a shape and demands either accumulated fame or genuinely unique letterforms. Letter marks in SVG and PNG live in the <a href="/en/logos/" target="_blank" rel="noopener">catalog</a> — from the <a href="/en/logos/search/google/" target="_blank" rel="noopener">Google &quot;G&quot;</a> to <a href="/en/logos/social/vk/" target="_blank" rel="noopener">VK</a> and the <a href="/en/logos/media/netflix/" target="_blank" rel="noopener">Netflix &quot;N&quot;</a>. Torn between a letter, a word and a symbol? Start with types of logos.</p>
+      <p>A monogram is not a &quot;small logo&quot; but a genre of its own: it compresses a name into a shape and demands either accumulated fame or genuinely unique letterforms. Letter marks in SVG and PNG live in the <a href="/en/logos/" target="_blank" rel="noopener">catalog</a> — from the <a href="/en/logos/search/google/" target="_blank" rel="noopener">Google &quot;G&quot;<img class="blog-mention-icon" src="/assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> to <a href="/en/logos/social/vk/" target="_blank" rel="noopener">VK<img class="blog-mention-icon" src="/assets/logos/svgs/vk.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> and the <a href="/en/logos/media/netflix/" target="_blank" rel="noopener">Netflix &quot;N&quot;<img class="blog-mention-icon" src="/assets/logos/svgs/netflix.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Torn between a letter, a word and a symbol? Start with types of logos.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/vidy-logotipov/" data-date="2026-08-31" data-views="0">
+          <a class="blog-card" href="/en/blog/chto-takoe-maskot/" data-date="2026-07-23" data-views="27">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Types of Logos — 7 Kinds With Famous Brand Examples</div>
-          
-          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="/en/blog/oshibki-v-dizajne-logotipa/" data-date="2026-08-28" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Design</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">10 Logo Design Mistakes — Check Your Own Mark</div>
-          
-          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="/en/blog/chto-takoe-maskot/" data-date="2026-07-23" data-views="8">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 11h.01" /><path d="M14 6h.01" /><path d="M18 6h.01" /><path d="M6.5 13.1h.01" /><path d="M22 5c0 9-4 12-6 12s-6-3-6-12c0-2 2-3 6-3s6 1 6 3" /><path d="M17.4 9.9c-.8.8-2 .8-2.8 0" /><path d="M10.1 7.1C9 7.2 7.7 7.7 6 8.6c-3.5 2-4.7 3.9-3.7 5.6 4.5 7.8 9.5 8.4 11.2 7.4.9-.5 1.9-2.1 1.9-4.7" /><path d="M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 11h.01" /><path d="M14 6h.01" /><path d="M18 6h.01" /><path d="M6.5 13.1h.01" /><path d="M22 5c0 9-4 12-6 12s-6-3-6-12c0-2 2-3 6-3s6 1 6 3" /><path d="M17.4 9.9c-.8.8-2 .8-2.8 0" /><path d="M10.1 7.1C9 7.2 7.7 7.7 6 8.6c-3.5 2-4.7 3.9-3.7 5.6 4.5 7.8 9.5 8.4 11.2 7.4.9-.5 1.9-2.1 1.9-4.7" /><path d="M9.1 16.5c.3-1.1 1.4-1.7 2.4-1.4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            8
+            27
           </div>
           </div>
           <div class="blog-card-title">What Is a Mascot — Why Brands Need a Character</div>
@@ -328,20 +291,20 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/chto-takoe-firmennyj-stil/" data-date="2026-07-21" data-views="9">
+      <a class="blog-card" href="/en/blog/chto-takoe-firmennyj-stil/" data-date="2026-07-21" data-views="14">
         <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 17a4 4 0 0 1-8 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2Z" /><path d="M16.7 13H19a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7" /><path d="M 7 17h.01" /><path d="m11 8 2.3-2.3a2.4 2.4 0 0 1 3.404.004L18.6 7.6a2.4 2.4 0 0 1 .026 3.434L9.9 19.8" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 17a4 4 0 0 1-8 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2Z" /><path d="M16.7 13H19a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7" /><path d="M 7 17h.01" /><path d="m11 8 2.3-2.3a2.4 2.4 0 0 1 3.404.004L18.6 7.6a2.4 2.4 0 0 1 .026 3.434L9.9 19.8" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>21.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            9
+            14
           </div>
           </div>
           <div class="blog-card-title">What Is a Visual Identity — The Elements of Brand Design</div>
@@ -349,44 +312,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/pochemu-brendy-uproshchayut-logotipy/" data-date="2026-07-05" data-views="3">
+      <a class="blog-card" href="/en/blog/logotip-i-tovarnyj-znak-raznica/" data-date="2026-08-17" data-views="4">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Legal</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13" /><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z" /><path d="M5 22h14" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            4
+          </div>
+          </div>
+          <div class="blog-card-title">Logo vs Trademark — the Difference and Why It Matters</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-pridumat-nazvanie-brenda/" data-date="2026-08-08" data-views="2">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Basics</span><span class="blog-card-tag">Business</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z" /><circle cx="7.5" cy="7.5" r=".5" fill="currentColor" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            2
+          </div>
+          </div>
+          <div class="blog-card-title">How to Name a Brand — Naming Methods and Checks</div>
+          
+          <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="/en/blog/kak-zaregistrirovat-logotip/" data-date="2026-06-26" data-views="3">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Redesign</span><span class="blog-card-tag">Trends</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 10 7-7" /><path d="M20 10h-6V4" /><path d="m3 21 7-7" /><path d="M4 14h6v6" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Legal</span><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Trademark</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /><path d="m9 12 2 2 4-4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>05.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             3
           </div>
           </div>
-          <div class="blog-card-title">Why Every Brand Is Simplifying Its Logo — The Big Trend Explained</div>
+          <div class="blog-card-title">How to Register a Logo as a Trademark — Step by Step, No Illusions</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/istoriya-smajlika/" data-date="2026-08-06" data-views="1">
+      <a class="blog-card" href="/en/blog/pikselnyj-logotip/" data-date="2026-07-28" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Histories</span><span class="blog-card-tag">Basics</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M18 13a6 6 0 0 1-6 5 6 6 0 0 1-6-5h12Z" /><line x1="9" x2="9.01" y1="9" y2="9" /><line x1="15" x2="15.01" y1="9" y2="9" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">2026 Trends</span><span class="blog-card-tag">Retro</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" /><rect x="14" y="2" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>06.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
-          <div class="blog-card-title">The History of the Smiley — From the 1963 Yellow Badge to Emoji</div>
+          <div class="blog-card-title">A Pixel and Retro Logo — Y2K Returns in 2026</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -404,25 +409,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -499,6 +496,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -544,10 +542,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

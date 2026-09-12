@@ -153,6 +153,20 @@ main {
 }
 .stat .v .unit { font-size: 13px; font-weight: 500; color: var(--text-5); }
 .stat.lead .v { color: var(--accent); }
+.stat .top-row { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.stat .top-row span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stat .top-thumb {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: 8px;
+  display: grid; place-items: center; overflow: hidden;
+}
+.stat .top-thumb img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+.stat .top-thumb .ph {
+  width: 100%; height: 100%;
+  display: grid; place-items: center;
+  background: var(--bg-raised); color: var(--text-3);
+  font-weight: 700; font-size: 13px;
+}
 
 /* ── Toolbar ── */
 .toolbar {
@@ -230,9 +244,8 @@ thead th {
 thead th:hover { color: var(--text-3); }
 thead th.sorted { color: var(--text-1); }
 thead th .arr { font-size: 9px; margin-left: 5px; opacity: .8; }
-thead th.col-views, thead th.col-bar { text-align: right; }
-thead th.col-bar { text-align: left; }
-thead th.col-actions { cursor: default; width: 40px; }
+thead th.col-views { text-align: right; }
+thead th.col-actions { cursor: default; width: 64px; }
 
 .row-del-btn {
   display: flex; align-items: center; justify-content: center;
@@ -243,6 +256,17 @@ thead th.col-actions { cursor: default; width: 40px; }
 }
 .row-del-btn:hover { background: rgba(255,107,107,.14); color: #ff6b6b; }
 .row-del-btn svg { width: 15px; height: 15px; }
+
+.row-actions { display: flex; align-items: center; justify-content: flex-end; gap: 2px; }
+.row-merge-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: 8px; border: none; background: transparent;
+  color: var(--text-6); cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.row-merge-btn:hover { background: rgba(107,160,255,.14); color: var(--accent); }
+.row-merge-btn svg { width: 15px; height: 15px; }
 
 tbody tr { border-bottom: 1px solid var(--line); transition: background .1s; }
 tbody tr:last-child { border-bottom: 0; }
@@ -274,22 +298,16 @@ tbody tr:nth-child(1) td.rank { color: var(--accent); font-weight: 700; }
 }
 .logo-meta { min-width: 0; }
 .logo-meta .nm { color: var(--text-0); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.demand-brand-link { color: inherit; text-decoration: none; }
-.demand-brand-link:hover { color: var(--accent); text-decoration: underline; }
 .logo-meta .fg { color: var(--text-6); font-size: 11.5px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 td.views { text-align: right; width: 90px; }
 td.views b { color: var(--text-0); font-weight: 700; font-variant-numeric: tabular-nums; font-size: 15px; }
 
-td.bar { width: 220px; }
-.bar-track { background: var(--bg-raised); border-radius: 5px; height: 7px; overflow: hidden; }
-.bar-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); transition: width .4s cubic-bezier(.22,.61,.36,1); }
-
-/* Fixed column width (matches td.bar's pattern) so table-layout:auto has a
-   real number to work with, instead of the name column grabbing whatever the
-   exports column doesn't explicitly claim. The pills wrap inside via
-   .ex-pills, not by fighting the table's own layout algorithm. */
-td.exports, thead th.col-exports { width: 260px; }
+/* Fixed column width so table-layout:auto has a real number to work with,
+   instead of the name column grabbing whatever the exports column doesn't
+   explicitly claim. The pills wrap inside via .ex-pills, not by fighting
+   the table's own layout algorithm. */
+td.exports, thead th.col-exports { width: 560px; }
 .ex-pills { display: flex; flex-wrap: wrap; gap: 4px; }
 .ex-pill {
   display: inline-flex; align-items: center; gap: 0;
@@ -350,39 +368,6 @@ td.exports, thead th.col-exports { width: 260px; }
   margin-top: 1px;
 }
 .variant-pills { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
-
-/* ── Спрос (Wordstat) ── */
-.demand-form {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 22px;
-}
-.demand-form label { display: block; font-size: 12.5px; color: var(--text-3); margin-bottom: 8px; font-weight: 500; }
-.demand-textarea {
-  width: 100%; min-height: 110px; resize: vertical;
-  background: var(--bg-raised); border: 1px solid var(--border-muted);
-  color: var(--text-1); border-radius: 11px; padding: 12px 14px;
-  font-size: 13.5px; font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-  outline: none; line-height: 1.6;
-}
-.demand-textarea:focus { border-color: var(--border-hover); }
-.demand-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
-.demand-row .hint { font-size: 12px; color: var(--text-5); flex: 1; min-width: 200px; }
-.btn-primary {
-  background: var(--accent); color: #fff; border: 0;
-  height: 38px; padding: 0 18px; border-radius: 10px;
-  font-size: 13.5px; font-weight: 600; cursor: pointer;
-  font-family: inherit; transition: opacity .15s;
-}
-.btn-primary:hover { opacity: .9; }
-.btn-primary:disabled { opacity: .5; cursor: default; }
-.demand-progress { font-size: 12.5px; color: var(--text-3); margin-top: 10px; display: none; }
-.demand-progress.show { display: block; }
-.demand-error { font-size: 12.5px; color: #ff6b6b; margin-top: 10px; display: none; }
-.demand-error.show { display: block; }
-td.assoc { color: var(--text-3); font-size: 12.5px; }
-td.total b.err { color: #ff6b6b; font-size: 12px; font-weight: 500; }
 
 .empty, .loading-row { text-align: center; padding: 56px 20px; color: var(--text-3); font-size: 14px; }
 .spinner {
@@ -465,7 +450,7 @@ footer .dot { margin: 0 8px; opacity: .5; }
 
 @media (max-width: 680px) {
   main { padding: 24px 16px 36px; }
-  td.bar, thead th.col-bar, td.exports, thead th.col-exports { display: none; }
+  td.exports, thead th.col-exports { display: none; }
   td.fg-hide .fg { display: none; }
   .page-head h1 { font-size: 22px; }
 }
@@ -518,10 +503,11 @@ footer .dot { margin: 0 8px; opacity: .5; }
   <main>
     <div class="tabs" id="tabs">
       <button class="tab active" data-tab="logos" type="button">Логотипы</button>
+      <button class="tab" data-tab="emoji" type="button">Эмодзи</button>
       <button class="tab" data-tab="posts" type="button">Статьи</button>
       <button class="tab" data-tab="search" type="button">Поиск</button>
-      <button class="tab" data-tab="banners" type="button">Баннеры</button>
-      <button class="tab" data-tab="demand" type="button">Спрос</button>
+      <button class="tab" data-tab="banners" type="button">Баннеры и UI</button>
+      <button class="tab" data-tab="products" type="button">Продукты</button>
     </div>
 
     <!-- ── Логотипы ── -->
@@ -554,11 +540,49 @@ footer .dot { margin: 0 8px; opacity: .5; }
               <th class="col-name" data-sort="name">Логотип</th>
               <th class="col-views sorted" data-sort="views">Просмотры <span class="arr">▼</span></th>
               <th class="col-exports" data-sort="exports">Экспорт</th>
-              <th class="col-bar"></th>
             </tr>
           </thead>
           <tbody id="tbody">
-            <tr><td colspan="5"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+            <tr><td colspan="4"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── Эмодзи ── -->
+    <div class="tab-panel" id="panel-emoji">
+      <div class="page-head">
+        <h1>Популярность эмодзи</h1>
+        <p>Открытие detail-панели в каталоге эмодзи и заход на SEO-страницу эмодзи суммируются в один счётчик. Экспорты детализированы по вариантам.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat lead"><div class="k">Всего просмотров</div><div class="v" id="e-total">—</div></div>
+        <div class="stat"><div class="k">Эмодзи в счёте</div><div class="v" id="e-count">—</div></div>
+        <div class="stat"><div class="k">Самый популярный</div><div class="v" id="e-top" style="font-size:18px">—</div></div>
+        <div class="stat"><div class="k">Всего экспортов</div><div class="v" id="e-exports">—</div></div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="filter-emoji" placeholder="Поиск по имени или figma…" autocomplete="off">
+        </div>
+        <span class="count-pill" id="count-pill-emoji"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-rank" data-sort-emoji="rank">#</th>
+              <th class="col-name" data-sort-emoji="name">Эмодзи</th>
+              <th class="col-views sorted" data-sort-emoji="views">Просмотры <span class="arr">▼</span></th>
+              <th class="col-exports" data-sort-emoji="exports">Экспорт</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-emoji">
+            <tr><td colspan="4"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
           </tbody>
         </table>
       </div>
@@ -592,11 +616,10 @@ footer .dot { margin: 0 8px; opacity: .5; }
               <th class="col-rank" data-sort-posts="rank">#</th>
               <th class="col-name" data-sort-posts="title">Статья</th>
               <th class="col-views sorted" data-sort-posts="views">Просмотры <span class="arr">▼</span></th>
-              <th class="col-bar"></th>
             </tr>
           </thead>
           <tbody id="tbody-posts">
-            <tr><td colspan="4"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+            <tr><td colspan="3"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
           </tbody>
         </table>
       </div>
@@ -647,16 +670,19 @@ footer .dot { margin: 0 8px; opacity: .5; }
       </div>
     </div>
 
-    <!-- ── Клики по промо-баннерам ── -->
+    <!-- ── Клики по промо-баннерам и UI ── -->
     <div class="tab-panel" id="panel-banners">
       <div class="page-head">
-        <h1>Клики по промо-баннерам</h1>
-        <p>Клик по ссылке в баннере в сайдбаре (SEO-страницы логотипов и статьи блога). Один баннер — один счётчик, растёт при каждом переходе.</p>
+        <h1>Клики по баннерам и UI</h1>
+        <p>Клики по ссылкам в промо-баннерах и отдельным элементам интерфейса. Один источник — один счётчик, растёт при каждом осознанном действии пользователя.</p>
       </div>
 
       <div class="stats">
         <div class="stat lead"><div class="k">Всего кликов</div><div class="v" id="bn-total">—</div></div>
-        <div class="stat"><div class="k">Баннеров в счёте</div><div class="v" id="bn-count">—</div></div>
+        <div class="stat"><div class="k">Источников в счёте</div><div class="v" id="bn-count">—</div></div>
+        <div class="stat"><div class="k">Формат: Все</div><div class="v" id="bn-format-all">—</div></div>
+        <div class="stat"><div class="k">Формат: SVG</div><div class="v" id="bn-format-svg">—</div></div>
+        <div class="stat"><div class="k">Формат: PNG</div><div class="v" id="bn-format-png">—</div></div>
       </div>
 
       <div class="table-wrap">
@@ -664,7 +690,7 @@ footer .dot { margin: 0 8px; opacity: .5; }
           <thead>
             <tr>
               <th class="col-rank">#</th>
-              <th class="col-name">Баннер</th>
+              <th class="col-name">Источник</th>
               <th class="col-views sorted">Клики</th>
               <th class="col-name">Последний клик</th>
             </tr>
@@ -676,53 +702,59 @@ footer .dot { margin: 0 8px; opacity: .5; }
       </div>
     </div>
 
-    <!-- ── Спрос на отсутствующие лого (Wordstat) ── -->
-    <div class="tab-panel" id="panel-demand">
+    <!-- ── Продукты: скачивания и поддержка ── -->
+    <div class="tab-panel" id="panel-products">
       <div class="page-head">
-        <h1>Спрос на бренды, которых нет в каталоге</h1>
-        <p>Список брендов прогоняется через официальный Yandex Wordstat API (запрос «логотип &lt;бренд&gt;», регион — Россия). Ключ хранится на сервере (Supabase secret), сюда не попадает. Цена — 0.02 ₽/запрос по прайсу AI Studio.</p>
+        <h1>Продукты</h1>
+        <p>Скачивания расширений и плагинов через checkout «плати сколько хочешь». Один заказ — одно нажатие «Скачать», включая бесплатные. Данные берутся из Supabase (функция checkout), а не из download-stats.json.</p>
       </div>
 
       <div class="stats">
-        <div class="stat lead"><div class="k">Остаток в этом часе</div><div class="v" id="d-remaining-hour" style="font-size:22px">—</div></div>
-        <div class="stat"><div class="k">Остаток на сегодня</div><div class="v" id="d-remaining-day" style="font-size:22px">—</div></div>
-        <div class="stat"><div class="k">Потрачено сегодня</div><div class="v" id="d-spent" style="font-size:22px">—</div></div>
+        <div class="stat lead"><div class="k">Скачиваний</div><div class="v" id="pr-downloads">—</div></div>
+        <div class="stat"><div class="k">Заплатили</div><div class="v" id="pr-paid">—</div></div>
+        <div class="stat"><div class="k">Собрано ₽</div><div class="v" id="pr-sum-rub">—</div></div>
+        <div class="stat"><div class="k">Собрано $</div><div class="v" id="pr-sum-usd">—</div></div>
       </div>
 
-      <div class="demand-form">
-        <label for="demand-input">Бренды-кандидаты (по одному на строку или через запятую)</label>
-        <textarea class="demand-textarea" id="demand-input" placeholder="макдоналдс&#10;samsung&#10;xiaomi&#10;adidas"></textarea>
-        <div class="demand-row">
-          <button class="btn-primary" id="demand-run">Проверить спрос</button>
-          <span class="hint">Лимит Wordstat API — ~5-10 запросов/сек, скрипт держит паузу между запросами. Разумный дневной объём — до нескольких тысяч фраз, если не гонять их пачками одновременно с других мест.</span>
-        </div>
-        <div class="demand-progress" id="demand-progress"></div>
-        <div class="demand-error" id="demand-error"></div>
-      </div>
-
-      <div class="toolbar" id="demand-toolbar" style="display:none">
-        <span class="count-pill" id="demand-count-pill"></span>
-        <div class="spacer" style="flex:1"></div>
-        <button class="icon-btn" id="btn-export-demand-csv">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-          Экспорт CSV
-        </button>
-      </div>
-
-      <div class="table-wrap" id="demand-table-wrap" style="display:none">
+      <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th class="col-rank">#</th>
-              <th class="col-name">Бренд</th>
-              <th class="col-views" style="text-align:right">Спрос</th>
-              <th>Топ-ассоциация</th>
+              <th class="col-name">Продукт</th>
+              <th class="col-views sorted">Скачиваний</th>
+              <th class="col-views">Платных</th>
+              <th class="col-name">Собрано</th>
+              <th class="col-name">Оплата</th>
             </tr>
           </thead>
-          <tbody id="demand-tbody"></tbody>
+          <tbody id="tbody-products">
+            <tr><td colspan="6"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="page-head" style="margin-top:28px">
+        <h1 style="font-size:17px">Последние заказы</h1>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-name">Дата</th>
+              <th class="col-name">Продукт</th>
+              <th class="col-views">Сумма</th>
+              <th class="col-name">Статус</th>
+              <th class="col-name">Почта</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-orders">
+            <tr><td colspan="5"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          </tbody>
         </table>
       </div>
     </div>
+
   </main>
 
   <footer>
@@ -734,17 +766,18 @@ footer .dot { margin: 0 8px; opacity: .5; }
 
 <script>
 const ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/track';
-const WORDSTAT_ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/wordstat';
-const WORDSTAT_CHUNK = 150; // должно совпадать с MAX_PHRASES на сервере
 const KEY_STORE = 'tl_admin_key';
 
 const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', webp: 'WebP', pdf: 'PDF', ai: 'AI', eps: 'EPS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG', embed: 'Embed-код' };
 
 let adminKey = sessionStorage.getItem(KEY_STORE) || '';
 let data = [];
+let emojiData = [];
 let exportMap = {};
 let sortKey = 'views';
 let sortDir = -1;
+let emojiSortKey = 'views';
+let emojiSortDir = -1;
 let expandedRows = new Set();
 
 let activeTab = 'logos';
@@ -783,148 +816,14 @@ document.querySelectorAll('.tab').forEach(btn => {
     activeTab = btn.dataset.tab;
     document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b === btn));
     $('panel-logos').classList.toggle('active', activeTab === 'logos');
+    $('panel-emoji').classList.toggle('active', activeTab === 'emoji');
     $('panel-posts').classList.toggle('active', activeTab === 'posts');
     $('panel-search').classList.toggle('active', activeTab === 'search');
     $('panel-banners').classList.toggle('active', activeTab === 'banners');
-    $('panel-demand').classList.toggle('active', activeTab === 'demand');
-    if (activeTab === 'demand' && !demandUsageLoaded) loadDemandUsage();
+    $('panel-products').classList.toggle('active', activeTab === 'products');
+    if (activeTab === 'products') loadProducts();
   });
 });
-
-// ── Спрос на отсутствующие лого (Wordstat) ──────────────────────────────
-let demandRows = [];
-let demandUsageLoaded = false;
-let demandUsage = null; // { usedToday, dailyLimit, remainingToday, spentTodayRub }
-
-function renderDemandUsage() {
-  if (!demandUsage) return;
-  $('d-remaining-hour').innerHTML = `${demandUsage.remainingThisHour.toLocaleString('ru-RU')}<span class="unit">/ ${demandUsage.hourlyLimit.toLocaleString('ru-RU')}</span>`;
-  $('d-remaining-day').innerHTML = `${demandUsage.remainingToday.toLocaleString('ru-RU')}<span class="unit">/ ${demandUsage.dailyLimit.toLocaleString('ru-RU')}</span>`;
-  $('d-spent').innerHTML = demandUsage.spentTodayRub.toFixed(2).replace('.', ',') + '<span class="unit">₽</span>';
-  const btn = $('demand-run');
-  const blocked = demandUsage.remainingThisHour <= 0 || demandUsage.remainingToday <= 0;
-  if (blocked) {
-    btn.disabled = true;
-    btn.textContent = demandUsage.remainingThisHour <= 0 ? 'Часовой лимит исчерпан' : 'Дневной лимит исчерпан';
-  } else if (btn.textContent !== 'Проверяю…') {
-    btn.disabled = false;
-    btn.textContent = 'Проверить спрос';
-  }
-}
-
-async function loadDemandUsage() {
-  demandUsageLoaded = true;
-  try {
-    const res = await fetch(WORDSTAT_ENDPOINT, { headers: { 'x-admin-key': adminKey } });
-    if (res.status === 401) { sessionStorage.removeItem(KEY_STORE); location.reload(); return; }
-    if (!res.ok) return;
-    demandUsage = await res.json();
-    renderDemandUsage();
-  } catch (_) { /* тихо — карточки останутся с «—» */ }
-}
-
-function parseDemandInput(raw) {
-  const list = raw.split(/[\n,]/).map(s => s.trim()).filter(Boolean);
-  return [...new Set(list.map(s => s.toLowerCase()))];
-}
-
-function errBoxNote(msg) {
-  const errBox = $('demand-error');
-  errBox.textContent = msg;
-  errBox.classList.add('show');
-}
-
-async function runDemandCheck(phrases) {
-  const chunks = [];
-  for (let i = 0; i < phrases.length; i += WORDSTAT_CHUNK) chunks.push(phrases.slice(i, i + WORDSTAT_CHUNK));
-
-  const progress = $('demand-progress');
-  const errBox = $('demand-error');
-  progress.classList.add('show');
-  errBox.classList.remove('show');
-  let all = [];
-
-  for (let i = 0; i < chunks.length; i++) {
-    if (demandUsage && (demandUsage.remainingToday <= 0 || demandUsage.remainingThisHour <= 0)) {
-      errBoxNote(demandUsage.remainingThisHour <= 0
-        ? 'Часовой лимит исчерпан — дальше не проверяю. Остаток обнулится в начале следующего часа.'
-        : 'Дневной лимит исчерпан — дальше не проверяю. Остаток обнулится в полночь.');
-      break;
-    }
-    progress.textContent = `Проверяю ${i * WORDSTAT_CHUNK + 1}–${Math.min((i + 1) * WORDSTAT_CHUNK, phrases.length)} из ${phrases.length}…`;
-    const res = await fetch(WORDSTAT_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-admin-key': adminKey },
-      body: JSON.stringify({ phrases: chunks[i] }),
-    });
-    if (res.status === 401) { sessionStorage.removeItem(KEY_STORE); location.reload(); return; }
-    if (res.status === 429) {
-      const body = await res.json().catch(() => ({}));
-      if (body.usage) { demandUsage = body.usage; renderDemandUsage(); }
-      errBoxNote(body.error || 'Дневной лимит исчерпан');
-      break;
-    }
-    if (!res.ok) {
-      const body = await res.json().catch(() => ({}));
-      throw new Error(body.error || `Сервер ответил ${res.status}`);
-    }
-    const data = await res.json();
-    all = all.concat(data.results || []);
-    if (data.usage) { demandUsage = data.usage; renderDemandUsage(); }
-    if (data.skipped) errBoxNote(`Часть списка (${data.skipped}) пропущена — не хватило дневного лимита.`);
-  }
-
-  progress.classList.remove('show');
-  all.sort((a, b) => b.total - a.total);
-  return all;
-}
-
-$('demand-run').addEventListener('click', async () => {
-  if (!demandUsageLoaded) await loadDemandUsage();
-  if (demandUsage && (demandUsage.remainingToday <= 0 || demandUsage.remainingThisHour <= 0)) return; // кнопка и так задизейблена, но на всякий случай
-
-  const phrases = parseDemandInput($('demand-input').value);
-  const btn = $('demand-run');
-  const errBox = $('demand-error');
-  errBox.classList.remove('show');
-  if (!phrases.length) { errBoxNote('Список пуст'); return; }
-
-  btn.disabled = true; btn.textContent = 'Проверяю…';
-  let failed = false;
-  try {
-    demandRows = await runDemandCheck(phrases);
-    renderDemand();
-  } catch (e) {
-    failed = true;
-    errBoxNote('Ошибка: ' + (e.message || 'сеть недоступна'));
-  } finally {
-    $('demand-progress').classList.remove('show');
-    renderDemandUsage(); // сам решит, дизейблить ли кнопку по остатку лимита
-    if (failed && demandUsage && demandUsage.remainingToday > 0) { btn.disabled = false; btn.textContent = 'Проверить спрос'; }
-  }
-});
-
-function renderDemand() {
-  $('demand-toolbar').style.display = demandRows.length ? 'flex' : 'none';
-  $('demand-table-wrap').style.display = demandRows.length ? '' : 'none';
-  $('demand-count-pill').textContent = demandRows.length ? `${demandRows.length} брендов` : '';
-
-  let html = '';
-  demandRows.forEach((r, i) => {
-    const totalHtml = r.error
-      ? `<b class="err" title="${esc(r.error)}">ошибка</b>`
-      : `<b>${r.total.toLocaleString('ru-RU')}</b>`;
-    html += `<tr>
-      <td class="rank">${i + 1}</td>
-      <td class="fg-hide"><div class="logo-meta"><div class="nm"><a class="demand-brand-link" href="https://yandex.ru/search/?text=${encodeURIComponent('logo ' + r.brand + ' svg')}" target="_blank" rel="noopener">${esc(r.brand)}</a></div><div class="fg">${esc(r.phrase)}</div></div></td>
-      <td class="views">${totalHtml}</td>
-      <td class="assoc">${esc(r.topAssociation || '—')}</td>
-    </tr>`;
-  });
-  $('demand-tbody').innerHTML = html;
-}
-
-$('btn-export-demand-csv').addEventListener('click', () => downloadCsv('demand', buildDemandCsvRows()));
 
 // ── Blog post titles (via public RSS feed) ────────────────────────────
 async function loadPostTitles() {
@@ -986,7 +885,7 @@ async function refresh() {
     if (rows === null) { sessionStorage.removeItem(KEY_STORE); location.reload(); return; }
     ingest(rows);
   } catch (e) {
-    $('tbody').innerHTML = `<tr><td colspan="5"><div class="empty">Ошибка: ${esc(e.message)}</div></td></tr>`;
+    $('tbody').innerHTML = `<tr><td colspan="4"><div class="empty">Ошибка: ${esc(e.message)}</div></td></tr>`;
   }
 }
 
@@ -995,10 +894,10 @@ $('btn-export-csv').addEventListener('click', exportCsv);
 function exportCsv() {
   const byTab = {
     logos: { rows: buildLogosCsvRows, name: 'stats' },
+    emoji: { rows: buildEmojiCsvRows, name: 'emoji' },
     posts: { rows: buildPostsCsvRows, name: 'posts' },
     search: { rows: buildSearchCsvRows, name: 'search' },
     banners: { rows: buildBannersCsvRows, name: 'banners' },
-    demand: { rows: buildDemandCsvRows, name: 'demand' },
   };
   const cfg = byTab[activeTab] || byTab.logos;
   downloadCsv(cfg.name, cfg.rows());
@@ -1033,6 +932,21 @@ function buildLogosCsvRows() {
   return rows;
 }
 
+function buildEmojiCsvRows() {
+  const rows = [['Эмодзи', 'Figma', 'Вариант', 'Формат', 'Количество']];
+  for (const d of emojiData) {
+    rows.push([d.name, d.figma, '—', 'Просмотры', d.views]);
+    for (const [fmt, variants] of Object.entries(d.exportDetail || {})) {
+      if (typeof variants !== 'object') continue;
+      for (const [variant, count] of Object.entries(variants)) {
+        const isOrig = variant === '_original' || variant === '';
+        rows.push([d.name, d.figma, isOrig ? 'Основной' : variant, FMT_LABELS[fmt] || fmt, count]);
+      }
+    }
+  }
+  return rows;
+}
+
 function buildPostsCsvRows() {
   const rows = [['Статья', 'Slug', 'Просмотры']];
   for (const d of postData) rows.push([d.title, d.slug, d.views]);
@@ -1046,14 +960,8 @@ function buildSearchCsvRows() {
 }
 
 function buildBannersCsvRows() {
-  const rows = [['Баннер', 'Клики', 'Последний клик']];
-  for (const d of bannerData) rows.push([d.bannerId, d.count, d.updated || '']);
-  return rows;
-}
-
-function buildDemandCsvRows() {
-  const rows = [['Бренд', 'Фраза', 'Спрос', 'Топ-ассоциация', 'Ошибка']];
-  for (const r of demandRows) rows.push([r.brand, r.phrase, r.error ? '' : r.total, r.topAssociation || '', r.error || '']);
+  const rows = [['Тип', 'Название', 'ID', 'Клики', 'Последний клик']];
+  for (const d of bannerData) rows.push([bannerKind(d.bannerId), bannerTitle(d.bannerId), d.bannerId, d.count, d.updated || '']);
   return rows;
 }
 
@@ -1071,8 +979,10 @@ $('btn-reset').addEventListener('click', async () => {
     });
     if (!res.ok) throw new Error('Ошибка сброса');
     data = [];
+    emojiData = [];
     exportMap = {};
     render();
+    renderEmoji();
   } catch (e) {
     alert('Не удалось сбросить: ' + (e.message || 'ошибка сети'));
   }
@@ -1103,7 +1013,7 @@ function ingest(raw) {
     const variant = e.variant || '_original';
     exportMap[e.figma][e.format][variant] = Number(e.count) || 0;
   }
-  data = (Array.isArray(views) ? views : []).map(r => {
+  const allData = (Array.isArray(views) ? views : []).map(r => {
     const ex = exportMap[r.figma] || {};
     const totalExports = Object.values(ex).reduce((s, formats) => {
       if (typeof formats === 'object') return s + Object.values(formats).reduce((a, b) => a + b, 0);
@@ -1119,7 +1029,16 @@ function ingest(raw) {
       updated: r.updated_at || null,
     };
   });
+  // Один общий счётчик views/exports (logo_stats) обслуживает три каталога —
+  // логотипы и эмодзи делят один и тот же список, различить их можно только
+  // по префиксу figma-пути ("Emoji/..." — единственная зарезервированная
+  // приставка, см. CLAUDE.md). Раньше оба типа рендерились в одну таблицу
+  // «Логотипы», из-за чего эмодзи вперемешку с логотипами всплывали в общем
+  // рейтинге просмотров.
+  data = allData.filter(d => !d.figma.startsWith('Emoji/'));
+  emojiData = allData.filter(d => d.figma.startsWith('Emoji/'));
   render();
+  renderEmoji();
   renderPosts();
 }
 
@@ -1142,18 +1061,17 @@ function render() {
   const lastUpd = data.reduce((m, d) => d.updated && d.updated > m ? d.updated : m, '');
   $('s-total').innerHTML = total.toLocaleString('ru-RU') + '<span class="unit">просм.</span>';
   $('s-count').textContent = data.length.toLocaleString('ru-RU');
-  $('s-top').textContent = top ? top.name : '—';
+  $('s-top').innerHTML = top ? topStatHtml(top) : '—';
   const totalExports = data.reduce((s, d) => s + d.exports, 0);
   $('s-exports').innerHTML = totalExports.toLocaleString('ru-RU') + '<span class="unit">скач.</span>';
 
   $('count-pill').textContent = q ? `${rows.length} из ${data.length}` : '';
 
   if (!rows.length) {
-    $('tbody').innerHTML = `<tr><td colspan="5"><div class="empty">${data.length ? 'Ничего не найдено' : 'Пока нет данных. Логотипы появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
+    $('tbody').innerHTML = `<tr><td colspan="4"><div class="empty">${data.length ? 'Ничего не найдено' : 'Пока нет данных. Логотипы появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
     return;
   }
 
-  const max = rows.reduce((m, d) => Math.max(m, d.views), 1);
   let html = '';
   rows.forEach((d, i) => {
     const rowId = `row-${d.figma}`;
@@ -1164,7 +1082,7 @@ function render() {
     <tr id="${rowId}" class="${isExpanded ? 'expanded' : ''}">
       <td class="rank">${i + 1}</td>
       <td class="fg-hide">
-        <div class="logo-cell" onclick="toggleRow('${rowId}')">
+        <div class="logo-cell" onclick="toggleRow('${rowId}','logos')">
           ${hasVariants ? '<div class="expand-icon ' + (isExpanded ? 'open' : '') + '">›</div>' : '<div style="width:20px"></div>'}
           <div class="thumb">${d.img
             ? `<img src="${esc(d.img)}" alt="" loading="lazy" onerror="this.replaceWith(ph('${esc(d.name)}'))">`
@@ -1177,14 +1095,74 @@ function render() {
       </td>
       <td class="views"><b>${d.views.toLocaleString('ru-RU')}</b></td>
       <td class="exports">${fmtExports(d.exportDetail)}</td>
-      <td class="bar"><div class="bar-track"><div class="bar-fill" style="width:${(d.views / max * 100).toFixed(1)}%"></div></div></td>
     </tr>`;
-    
+
     if (hasVariants) {
-      html += `<tr class="details-row ${isExpanded ? 'show' : ''}"><td colspan="5" class="details-cell"><div class="details-content">${buildVariantDetails(d.exportDetail, d.img)}</div></td></tr>`;
+      html += `<tr class="details-row ${isExpanded ? 'show' : ''}"><td colspan="4" class="details-cell"><div class="details-content">${buildVariantDetails(d.exportDetail, d.img, 'logos')}</div></td></tr>`;
     }
   });
   $('tbody').innerHTML = html;
+}
+
+// ── Эмодзи (тот же рендер, что у логотипов, но своя таблица и данные) ──
+function renderEmoji() {
+  const q = $('filter-emoji').value.toLowerCase().trim();
+  let rows = q ? emojiData.filter(d => d.name.toLowerCase().includes(q) || d.figma.toLowerCase().includes(q)) : [...emojiData];
+
+  rows.sort((a, b) => {
+    let va = a[emojiSortKey], vb = b[emojiSortKey];
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (va < vb) return -emojiSortDir;
+    if (va > vb) return emojiSortDir;
+    return 0;
+  });
+
+  const total = emojiData.reduce((s, d) => s + d.views, 0);
+  const top = emojiData.reduce((m, d) => d.views > (m?.views ?? -1) ? d : m, null);
+  $('e-total').innerHTML = total.toLocaleString('ru-RU') + '<span class="unit">просм.</span>';
+  $('e-count').textContent = emojiData.length.toLocaleString('ru-RU');
+  $('e-top').innerHTML = top ? topStatHtml(top) : '—';
+  const totalExports = emojiData.reduce((s, d) => s + d.exports, 0);
+  $('e-exports').innerHTML = totalExports.toLocaleString('ru-RU') + '<span class="unit">скач.</span>';
+
+  $('count-pill-emoji').textContent = q ? `${rows.length} из ${emojiData.length}` : '';
+
+  if (!rows.length) {
+    $('tbody-emoji').innerHTML = `<tr><td colspan="4"><div class="empty">${emojiData.length ? 'Ничего не найдено' : 'Пока нет данных. Эмодзи появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
+    return;
+  }
+
+  let html = '';
+  rows.forEach((d, i) => {
+    const rowId = `row-${d.figma}`;
+    const isExpanded = expandedRows.has(rowId);
+    const hasVariants = Object.keys(d.exportDetail).length > 0;
+
+    html += `
+    <tr id="${rowId}" class="${isExpanded ? 'expanded' : ''}">
+      <td class="rank">${i + 1}</td>
+      <td class="fg-hide">
+        <div class="logo-cell" onclick="toggleRow('${rowId}','emoji')">
+          ${hasVariants ? '<div class="expand-icon ' + (isExpanded ? 'open' : '') + '">›</div>' : '<div style="width:20px"></div>'}
+          <div class="thumb">${d.img
+            ? `<img src="${esc(d.img)}" alt="" loading="lazy" onerror="this.replaceWith(ph('${esc(d.name)}'))">`
+            : phHtml(d.name)}</div>
+          <div class="logo-meta">
+            <div class="nm">${esc(d.name)}</div>
+            <div class="fg">${esc(d.figma)}</div>
+          </div>
+        </div>
+      </td>
+      <td class="views"><b>${d.views.toLocaleString('ru-RU')}</b></td>
+      <td class="exports">${fmtExports(d.exportDetail)}</td>
+    </tr>`;
+
+    if (hasVariants) {
+      html += `<tr class="details-row ${isExpanded ? 'show' : ''}"><td colspan="4" class="details-cell"><div class="details-content">${buildVariantDetails(d.exportDetail, d.img, 'emoji')}</div></td></tr>`;
+    }
+  });
+  $('tbody-emoji').innerHTML = html;
 }
 
 // ── Blog post views ───────────────────────────────────────────────────
@@ -1218,11 +1196,10 @@ function renderPosts() {
   $('count-pill-posts').textContent = q ? `${rows.length} из ${postData.length}` : '';
 
   if (!rows.length) {
-    $('tbody-posts').innerHTML = `<tr><td colspan="4"><div class="empty">${postData.length ? 'Ничего не найдено' : 'Пока нет данных. Статьи появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
+    $('tbody-posts').innerHTML = `<tr><td colspan="3"><div class="empty">${postData.length ? 'Ничего не найдено' : 'Пока нет данных. Статьи появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
     return;
   }
 
-  const max = rows.reduce((m, d) => Math.max(m, d.views), 1);
   let html = '';
   rows.forEach((d, i) => {
     html += `
@@ -1237,7 +1214,6 @@ function renderPosts() {
         </a>
       </td>
       <td class="views"><b>${d.views.toLocaleString('ru-RU')}</b></td>
-      <td class="bar"><div class="bar-track"><div class="bar-fill" style="width:${(d.views / max * 100).toFixed(1)}%"></div></div></td>
     </tr>`;
   });
   $('tbody-posts').innerHTML = html;
@@ -1283,9 +1259,14 @@ function renderSearch() {
       <td class="views"><b${zero ? ' style="color:#ff6b6b"' : ''}>${d.results_count.toLocaleString('ru-RU')}</b></td>
       <td class="fg-hide"><span class="fg">${d.last_seen ? fmtDate(d.last_seen) : '—'}</span></td>
       <td class="col-actions">
-        <button type="button" class="row-del-btn" data-del-query="${escAttr(d.query)}" title="Удалить эту запись">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
-        </button>
+        <div class="row-actions">
+          <button type="button" class="row-merge-btn" data-merge-query="${escAttr(d.query)}" title="Объединить с другим запросом">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3v12a4 4 0 0 0 4 4h8"/><path d="M16 3l4 4-4 4"/><path d="M8 21V9"/></svg>
+          </button>
+          <button type="button" class="row-del-btn" data-del-query="${escAttr(d.query)}" title="Удалить эту запись">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+          </button>
+        </div>
       </td>
     </tr>`;
   });
@@ -1293,6 +1274,11 @@ function renderSearch() {
 }
 
 $('tbody-search').addEventListener('click', async (e) => {
+  const mergeBtn = e.target.closest('.row-merge-btn');
+  if (mergeBtn) {
+    await mergeSearchQuery(mergeBtn);
+    return;
+  }
   const btn = e.target.closest('.row-del-btn');
   if (!btn) {
     const row = e.target.closest('tr[data-search-url]');
@@ -1317,14 +1303,160 @@ $('tbody-search').addEventListener('click', async (e) => {
   }
 });
 
+async function mergeSearchQuery(btn) {
+  const from = btn.dataset.mergeQuery;
+  const others = searchData.map(d => d.query).filter(q => q !== from);
+  const into = prompt(
+    `Объединить «${from}» с каким запросом?\nЗапись «${from}» удалится, её счётчик прибавится к введённому.\n\nПохожие: ${others.filter(q => q.startsWith(from.slice(0, 3))).slice(0, 8).join(', ') || '—'}`,
+    ''
+  );
+  if (!into) return;
+  const target = into.trim();
+  if (!target) return;
+  if (!others.includes(target)) {
+    if (!confirm(`Запроса «${target}» нет в статистике. Всё равно перенести «${from}» в «${target}» (будет создана новая запись)?`)) return;
+  }
+  if (target === from) return;
+  btn.disabled = true;
+  try {
+    const res = await fetch(ENDPOINT, {
+      method: 'DELETE',
+      headers: { 'x-admin-key': adminKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mergeFrom: from, mergeInto: target }),
+    });
+    if (!res.ok) throw new Error('Ошибка объединения');
+    await refresh();
+  } catch (err) {
+    alert('Не удалось объединить: ' + (err.message || 'ошибка сети'));
+    btn.disabled = false;
+  }
+}
+
 // ── Клики по промо-баннерам ────────────────────────────────────────────
+// ── Продукты: checkout «плати сколько хочешь» ──────────────────────────
+// Отдельная Edge Function и отдельный запрос: остальные вкладки живут на
+// /track, продукты — на /checkout. Грузится лениво, при первом открытии вкладки.
+const PRODUCTS_ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/checkout';
+let productsLoaded = false;
+
+const ORDER_STATUS = {
+  free:    { label: 'бесплатно', cls: 'fg' },
+  paid:    { label: 'оплачен',   cls: '' },
+  pending: { label: 'ждёт оплаты', cls: 'fg' },
+  failed:  { label: 'не прошёл', cls: 'fg' },
+};
+
+function fmtMoney(sum, currency) {
+  if (!sum) return '—';
+  const n = sum.toLocaleString('ru-RU', { maximumFractionDigits: 2 });
+  return currency === 'RUB' ? n + ' ₽' : '$' + n;
+}
+
+async function loadProducts(force) {
+  if (productsLoaded && !force) return;
+  if (!adminKey) {
+    showProductsError('Нет admin key. Перезайди в админку.');
+    return;
+  }
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+  try {
+    const res = await fetch(PRODUCTS_ENDPOINT, {
+      headers: { 'x-admin-key': adminKey },
+      signal: controller.signal,
+    });
+    if (!res.ok) {
+      const details = await res.json().catch(() => null);
+      throw new Error(details?.error ? `Сервер вернул ${res.status}: ${details.error}` : 'Сервер вернул ' + res.status);
+    }
+    const payload = await res.json();
+    productsLoaded = true;
+    renderProducts(payload.products || [], payload.orders || []);
+  } catch (e) {
+    const message = e.name === 'AbortError' ? 'checkout не ответил за 15 секунд' : (e.message || 'ошибка сети');
+    showProductsError(message);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function showProductsError(message) {
+  $('tbody-products').innerHTML = `<tr><td colspan="6"><div class="empty">Ошибка: ${esc(message)}</div></td></tr>`;
+  $('tbody-orders').innerHTML = '<tr><td colspan="5"><div class="empty">—</div></td></tr>';
+}
+
+function renderProducts(products, orders) {
+  // Скачиванием считаем заказ, по которому файл реально выдавали (download_count > 0),
+  // а не всякое нажатие кнопки: незавершённая оплата файла не открывает.
+  const done = orders.filter(o => Number(o.download_count) > 0);
+  const paid = orders.filter(o => o.status === 'paid');
+
+  const sum = cur => paid.filter(o => o.currency === cur)
+    .reduce((s, o) => s + Number(o.amount || 0), 0);
+
+  $('pr-downloads').textContent = done.length.toLocaleString('ru-RU');
+  $('pr-paid').textContent      = paid.length.toLocaleString('ru-RU');
+  $('pr-sum-rub').textContent   = fmtMoney(sum('RUB'), 'RUB');
+  $('pr-sum-usd').textContent   = fmtMoney(sum('USD'), 'USD');
+
+  if (!products.length) {
+    $('tbody-products').innerHTML = '<tr><td colspan="6"><div class="empty">В таблице products пусто. Залей реестр: node scripts/sync-products.js</div></td></tr>';
+  } else {
+    const rows = products.map(p => {
+      const mine     = orders.filter(o => o.product_id === p.id);
+      const minePaid = mine.filter(o => o.status === 'paid');
+      const rub = minePaid.filter(o => o.currency === 'RUB').reduce((s, o) => s + Number(o.amount || 0), 0);
+      const usd = minePaid.filter(o => o.currency === 'USD').reduce((s, o) => s + Number(o.amount || 0), 0);
+      return {
+        id: p.id,
+        title: p.title || p.id,
+        offer: Boolean(p.lava_offer_id),
+        downloads: mine.filter(o => Number(o.download_count) > 0).length,
+        paidCount: minePaid.length,
+        money: [rub ? fmtMoney(rub, 'RUB') : null, usd ? fmtMoney(usd, 'USD') : null].filter(Boolean).join(' · ') || '—',
+      };
+    }).sort((a, b) => b.downloads - a.downloads);
+
+    $('tbody-products').innerHTML = rows.map((r, i) => `
+      <tr>
+        <td class="rank">${i + 1}</td>
+        <td class="fg-hide"><div class="logo-meta"><div class="nm">${esc(r.title)}</div></div></td>
+        <td class="views"><b>${r.downloads.toLocaleString('ru-RU')}</b></td>
+        <td class="views"><b>${r.paidCount.toLocaleString('ru-RU')}</b></td>
+        <td class="fg-hide"><span class="fg">${esc(r.money)}</span></td>
+        <td class="fg-hide"><span class="fg">${r.offer ? 'подключена' : 'не подключена'}</span></td>
+      </tr>`).join('');
+  }
+
+  if (!orders.length) {
+    $('tbody-orders').innerHTML = '<tr><td colspan="5"><div class="empty">Заказов пока нет.</div></td></tr>';
+    return;
+  }
+
+  $('tbody-orders').innerHTML = orders.slice(0, 50).map(o => {
+    const st = ORDER_STATUS[o.status] || { label: o.status, cls: 'fg' };
+    return `
+      <tr>
+        <td class="fg-hide"><span class="fg">${o.created_at ? fmtDate(o.created_at) : '—'}</span></td>
+        <td class="fg-hide"><div class="logo-meta"><div class="nm">${esc(o.product_id)}</div></div></td>
+        <td class="views"><b>${Number(o.amount) ? esc(fmtMoney(Number(o.amount), o.currency)) : '—'}</b></td>
+        <td class="fg-hide"><span class="${st.cls}">${esc(st.label)}</span></td>
+        <td class="fg-hide"><span class="fg">${esc(o.email || '—')}</span></td>
+      </tr>`;
+  }).join('');
+}
+
 function renderBanners() {
   const total = bannerData.reduce((s, d) => s + d.count, 0);
+  const formatClicks = bannerFormatClicks();
   $('bn-total').textContent = total.toLocaleString('ru-RU');
   $('bn-count').textContent = bannerData.length.toLocaleString('ru-RU');
+  $('bn-format-all').textContent = formatClicks.all.toLocaleString('ru-RU');
+  $('bn-format-svg').textContent = formatClicks.svg.toLocaleString('ru-RU');
+  $('bn-format-png').textContent = formatClicks.png.toLocaleString('ru-RU');
 
   if (!bannerData.length) {
-    $('tbody-banners').innerHTML = `<tr><td colspan="4"><div class="empty">Пока нет данных. Счётчик появится после первого клика по баннеру.</div></td></tr>`;
+    $('tbody-banners').innerHTML = `<tr><td colspan="4"><div class="empty">Пока нет данных. Счётчик появится после первого клика по баннеру или отслеживаемому элементу интерфейса.</div></td></tr>`;
     return;
   }
 
@@ -1334,12 +1466,35 @@ function renderBanners() {
     html += `
     <tr>
       <td class="rank">${i + 1}</td>
-      <td class="fg-hide"><div class="logo-meta"><div class="nm">${esc(d.bannerId)}</div></div></td>
+      <td class="fg-hide"><div class="logo-meta"><div class="nm">${esc(bannerTitle(d.bannerId))}</div><div class="fg">${esc(bannerKind(d.bannerId))} · ${esc(d.bannerId)}</div></div></td>
       <td class="views"><b>${d.count.toLocaleString('ru-RU')}</b></td>
       <td class="fg-hide"><span class="fg">${d.updated ? fmtDate(d.updated) : '—'}</span></td>
     </tr>`;
   });
   $('tbody-banners').innerHTML = html;
+}
+
+function bannerKind(id) {
+  return String(id || '').startsWith('ui:') ? 'UI' : 'Баннер';
+}
+
+function bannerTitle(id) {
+  const value = String(id || '');
+  const format = value.match(/^ui:format-filter:(all|svg|png)$/)?.[1];
+  if (!format) return value;
+  const labels = { all: 'Фильтр формата: Все', svg: 'Фильтр формата: SVG', png: 'Фильтр формата: PNG' };
+  return labels[format];
+}
+
+function bannerFormatClicks() {
+  const result = { all: 0, svg: 0, png: 0, total: 0 };
+  for (const d of bannerData) {
+    const format = String(d.bannerId || '').match(/^ui:format-filter:(all|svg|png)$/)?.[1];
+    if (!format) continue;
+    result[format] += d.count;
+    result.total += d.count;
+  }
+  return result;
 }
 
 document.querySelectorAll('thead th[data-sort-search]').forEach(th => {
@@ -1393,7 +1548,7 @@ document.querySelectorAll('thead th[data-sort-posts]').forEach(th => {
 
 $('filter-posts').addEventListener('input', renderPosts);
 
-function buildVariantDetails(exportDetail, logoImg) {
+function buildVariantDetails(exportDetail, logoImg, section) {
   const byVariant = {};
   for (const [fmt, variants] of Object.entries(exportDetail)) {
     if (typeof variants !== 'object') continue;
@@ -1409,7 +1564,7 @@ function buildVariantDetails(exportDetail, logoImg) {
     const isOrig = variant === '_original' || variant === '';
     const fileName = isOrig ? '' : variant.replace(/^.*\//, '');
     const label = isOrig ? 'Основной' : fileName.replace(/\.[^.]+$/, '').replace(/-/g, ' ');
-    const thumbSrc = isOrig ? logoImg : variantImgUrl(variant);
+    const thumbSrc = isOrig ? logoImg : variantImgUrl(variant, section);
     const isFull = !isOrig && /-full\b/.test(variant);
     const thumbHtml = thumbSrc
       ? `<img src="${esc(thumbSrc)}" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'ph\\'>${esc(label.charAt(0).toUpperCase())}</div>'">`
@@ -1431,21 +1586,33 @@ function buildVariantDetails(exportDetail, logoImg) {
   return html;
 }
 
-function variantImgUrl(file) {
+function variantImgUrl(file, section) {
   if (!file) return '';
-  const base = 'https://trace-logos.ru/assets/logos/';
+  // Тот же баг, что был в js/utils.js:assetAbsUrl — раздел варианта нельзя
+  // угадать по имени файла, его знает только вызывающая сторона (см. правку
+  // "почему в админку попадают эмодзи, но не отображаются").
+  const base = `https://trace-logos.ru/assets/${section === 'emoji' ? 'emoji' : 'logos'}/`;
   if (file.endsWith('.svg')) return base + 'svgs/' + file;
   if (file.endsWith('.png')) return base + 'pngs/' + file;
   return base + 'svgs/' + file;
 }
 
-function toggleRow(rowId) {
+function toggleRow(rowId, section) {
   if (expandedRows.has(rowId)) {
     expandedRows.delete(rowId);
   } else {
     expandedRows.add(rowId);
   }
-  render();
+  if (section === 'emoji') renderEmoji(); else render();
+}
+
+// Карточка «Самый популярный» в статистике — превью + имя, тот же приём,
+// что в строке таблицы (.thumb/ph), только компактнее (.top-thumb).
+function topStatHtml(d) {
+  const thumb = d.img
+    ? `<img src="${esc(d.img)}" alt="" loading="lazy" onerror="this.replaceWith(ph('${esc(d.name)}'))">`
+    : phHtml(d.name);
+  return `<div class="top-row"><div class="top-thumb">${thumb}</div><span>${esc(d.name)}</span></div>`;
 }
 
 function phHtml(name) {
@@ -1507,6 +1674,31 @@ document.querySelectorAll('thead th[data-sort]').forEach(th => {
 });
 
 $('filter').addEventListener('input', render);
+
+document.querySelectorAll('thead th[data-sort-emoji]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.sortEmoji;
+    if (key === 'rank') { emojiSortKey = 'views'; emojiSortDir = -1; }
+    else if (emojiSortKey === key) { emojiSortDir *= -1; }
+    else { emojiSortKey = key; emojiSortDir = key === 'views' ? -1 : 1; }
+    const theadEmoji = th.closest('thead');
+    theadEmoji.querySelectorAll('th').forEach(h => {
+      h.classList.remove('sorted');
+      h.querySelector('.arr')?.remove();
+    });
+    const active = theadEmoji.querySelector(`th[data-sort-emoji="${emojiSortKey === 'rank' ? 'views' : emojiSortKey}"]`);
+    if (active) {
+      active.classList.add('sorted');
+      const arr = document.createElement('span');
+      arr.className = 'arr';
+      arr.textContent = emojiSortDir > 0 ? '▲' : '▼';
+      active.appendChild(arr);
+    }
+    renderEmoji();
+  });
+});
+
+$('filter-emoji').addEventListener('input', renderEmoji);
 
 // ── Boot ──
 (async function init() {

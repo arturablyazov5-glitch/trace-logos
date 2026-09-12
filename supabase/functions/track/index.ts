@@ -7,6 +7,9 @@ import { checkRateLimit } from '../_shared/rate-limit.ts';
 //                           Отдаёт всю статистику для админки.
 // DELETE /track            → только с заголовком x-admin-key == ADMIN_KEY (секрет).
 //                           body: { searchQuery } → удаляет одну строку из search_queries.
+//                           body: { mergeFrom, mergeInto } → объединяет две строки search_queries
+//                           (суммирует count, сохраняет более свежий last_seen/results_count),
+//                           удаляет mergeFrom.
 //                           без тела → полный сброс logo_stats/export_stats.
 
 // Лимит намеренно щедрый: обычный сеанс листания каталога (virtual scroll) легко
@@ -215,13 +218,36 @@ serve(async (req: Request) => {
     }
 
     // Точечное удаление одной поисковой фразы — тело { searchQuery: "..." }.
-    // Полный сброс (без тела / без searchQuery) идёт дальше по коду и статистику поиска не трогает.
-    let payload: { searchQuery?: string } = {};
+    // Объединение двух фраз — тело { mergeFrom: "...", mergeInto: "..." }.
+    // Полный сброс (без тела / без searchQuery/merge*) идёт дальше по коду и статистику поиска не трогает.
+    let payload: { searchQuery?: string; mergeFrom?: string; mergeInto?: string } = {};
     try {
       payload = await req.clone().json();
     } catch (_) {
       // тела нет — это полный сброс, ниже по коду
     }
+
+    const mergeFrom = clean(payload.mergeFrom, 200);
+    const mergeInto = clean(payload.mergeInto, 200);
+    if (mergeFrom && mergeInto) {
+      if (mergeFrom === mergeInto) {
+        return json(origin, { error: 'mergeFrom и mergeInto совпадают' }, 400);
+      }
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/merge_search_queries`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SERVICE_KEY,
+          Authorization: `Bearer ${SERVICE_KEY}`,
+        },
+        body: JSON.stringify({ p_from: mergeFrom, p_into: mergeInto }),
+      });
+      if (!res.ok) {
+        return json(origin, { error: 'DB error', detail: await res.text() }, 500);
+      }
+      return json(origin, { ok: true });
+    }
+
     const searchQuery = clean(payload.searchQuery, 200);
     if (searchQuery) {
       const res = await fetch(

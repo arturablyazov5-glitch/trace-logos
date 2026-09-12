@@ -1,11 +1,16 @@
-// Встраивает кнопку «Собрать отзывы» прямо в интерфейс Яндекс.Карт,
-// рядом с заголовком блока отзывов на странице организации.
+// Встраивает кнопку «Собрать отзывы» прямо в интерфейс Яндекс.Карт, Avito
+// и Ozon, рядом с блоком отзывов на странице организации/продавца/товара.
 //
 // Карты — SPA: DOM меняется асинхронно, переход между организациями
 // не перезагружает страницу. Поэтому:
 //  - ищем контейнер через MutationObserver (document.body),
 //  - следим за location.href, чтобы пересоздать кнопку при смене организации,
 //  - селекторы Яндекса могут поменяться — есть текстовый фолбэк по слову «отзыв».
+//
+// Ozon — тоже SPA-навигация между товарами и та же MutationObserver-схема;
+// якорь для кнопки там не заголовок с текстом «отзыв» (Ozon достаточно
+// перегенерирует хэш-классы, чтобы текстовый фолбэк был ненадёжен), а
+// `data-widget="webReviewTabs"` — см. findHeaderContainerOzon() ниже.
 //
 // На web.telegram.org встраивает отдельную кнопку «Собрать комментарии» —
 // логика полностью самостоятельная (см. rvwInitTelegram/rvwInitTelegramA
@@ -28,7 +33,12 @@
   const BTN_ID = 'rvw-collector-btn';
   const STYLE_ID = 'rvw-ext-style';
   const IS_AVITO = location.hostname === 'www.avito.ru';
-  const COLLECT_FN = IS_AVITO ? '__rvwCollectAvitoReviews' : '__rvwCollectReviews';
+  const IS_OZON = location.hostname === 'www.ozon.ru';
+  const COLLECT_FN = IS_AVITO
+    ? '__rvwCollectAvitoReviews'
+    : IS_OZON
+      ? '__rvwCollectOzonReviews'
+      : '__rvwCollectReviews';
 
   function findHeaderContainerYandex() {
     // Основной селектор.
@@ -73,6 +83,20 @@
     return null;
   }
 
+  // Страницы отзывов о доме/ЖК (avito.ru/catalog/houses/.../reviews) устроены
+  // иначе, чем карточка объявления/продавца: нет стопки «Показать номер» /
+  // «Написать» / «Подписаться» — вместо неё блок `rating-summary` с гистограммой
+  // оценок и кнопкой «Написать отзыв о доме» (data-marker
+  // "rating-summary/addReviewButton", стабильный, как и остальные data-marker
+  // на Avito). Без этой проверки findContactStackAvito ниже возвращает null
+  // (стопки контактов на такой странице просто нет), и код проваливался в
+  // текстовый h1/h2/h3-фолбэк — тот подхватывал первый попавшийся заголовок
+  // со словом «отзыв», которым на этой вёрстке случайно оказывался текст
+  // самого отзыва (h3 внутри карточки), а не заголовок секции.
+  function findAddReviewButtonAvito() {
+    return document.querySelector('[data-marker="rating-summary/addReviewButton"]');
+  }
+
   // Стопка кнопок контакта с продавцом слева («Показать номер» / «Написать» /
   // «Подписаться»). data-marker — единственный стабильный селектор на Avito,
   // хэшированные CSS-модули (ContactBar-module-*, SubscribeInfo-module-*)
@@ -89,12 +113,26 @@
     return common;
   }
 
+  // На Ozon классы почти всех узлов — «атомарный» CSS, перегенерируется при
+  // каждом деплое (см. подробный комментарий у rvwParseOzonReview в
+  // collector.js). Единственная стабильная зацепка — атрибут `data-widget`,
+  // это реестр типов виджетов страницы, а не хэш вёрстки: переключатель
+  // вкладок «Отзывы о товаре» / «Вопросы о товаре» размечен как
+  // `data-widget="webReviewTabs"`. Он служит только ПРИЗНАКОМ того, что на
+  // странице вообще есть отзывы, — сама кнопка вставляется не сюда (см.
+  // ensureButton ниже и комментарий про content-visibility там же).
+  function findHeaderContainerOzon() {
+    return document.querySelector('[data-widget="webReviewTabs"]');
+  }
+
   function findHeaderContainer() {
-    return IS_AVITO ? findHeaderContainerAvito() : findHeaderContainerYandex();
+    if (IS_AVITO) return findHeaderContainerAvito();
+    if (IS_OZON) return findHeaderContainerOzon();
+    return findHeaderContainerYandex();
   }
 
   function findRightContent(header) {
-    if (IS_AVITO) return null; // у Avito нет отдельного правого блока в заголовке — кнопка добавляется в конец
+    if (IS_AVITO || IS_OZON) return null; // нет отдельного правого блока в заголовке — кнопка добавляется в конец
     return (
       header.querySelector('.card-section-header__right-content') ||
       header.querySelector('[class*="right-content"]')
@@ -134,7 +172,8 @@
       .rvw-ext-btn-avito {
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
+        gap: 6px;
         width: 100%;
         height: 44px;
         padding: 0 16px;
@@ -158,9 +197,45 @@
         opacity: .6;
         cursor: default;
       }
+      .rvw-ext-btn-avito-rating {
+        /* align-self/margin-top заданы явно, а не унаследованы от ряда
+           Avito: у него flex-direction: column + align-items: stretch (по
+           умолчанию), чёрная кнопка избегает растяжения через свой
+           собственный «слот»-класс дизайн-системы — у нашей кнопки такой
+           обёртки нет, поэтому без align-self она растягивалась на всю
+           ширину ряда. Отступ сверху по той же причине: gap ряда завязан на
+           CSS-класс, а не на голый inline-style, который тут не читается. */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-start;
+        margin-top: 8px;
+        gap: 6px;
+        height: 36px;
+        padding: 0 15px 0 14px;
+        font-family: Manrope, Arial, "Helvetica Neue", Helvetica, "Arial Rub", sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        line-height: normal;
+        color: #fff;
+        background: #5229cd;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background-color .15s ease;
+      }
+      .rvw-ext-btn-avito-rating:hover:not(:disabled) {
+        background: #4520ad;
+      }
+      .rvw-ext-btn-avito-rating:disabled {
+        opacity: .6;
+        cursor: default;
+      }
       .rvw-ext-btn-avito-inline {
         display: inline-flex;
         align-items: center;
+        gap: 6px;
         margin-left: 12px;
         padding: 4px 10px;
         font-family: inherit;
@@ -182,15 +257,59 @@
         opacity: .6;
         cursor: default;
       }
+      /* Плавающая кнопка: Ozon оборачивает блок отзывов в контейнер с
+         content-visibility: auto — браузер не отрисовывает его содержимое,
+         пока оно за пределами экрана, и считает высоту приблизительно.
+         Кнопка, вставленная ВНУТРЬ этого поддерева, то не рисуется вовсе,
+         то уезжает при пересчёте вёрстки (проверено вживую 2026-08-16:
+         elementFromPoint в её координатах возвращал null). Поэтому на Ozon
+         она живёт прямо в body с position: fixed — вне всех контейнеров
+         площадки, и видна независимо от прокрутки и виртуализации. */
+      .rvw-ext-btn-ozon {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 2147483646; /* на 1 ниже оверлея прогресса — он должен перекрывать кнопку */
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 13px 22px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: normal;
+        color: #fff;
+        background: #5229cd;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        white-space: nowrap;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+        transition: background-color .15s ease, transform .15s ease;
+      }
+      .rvw-ext-btn-ozon:hover:not(:disabled) {
+        background: #4520ad;
+        transform: translateY(-1px);
+      }
+      .rvw-ext-btn-ozon:disabled {
+        opacity: .6;
+        cursor: default;
+      }
     `;
     document.head.appendChild(style);
+  }
+
+  function setLabel(btn, text) {
+    const label = btn.querySelector('.rvw-ext-btn-label');
+    if (label) label.textContent = text;
+    else btn.textContent = text;
   }
 
   function makeButton(className) {
     const btn = document.createElement('button');
     btn.id = BTN_ID;
     btn.type = 'button';
-    btn.className = className || (IS_AVITO ? 'rvw-ext-btn-avito' : 'rvw-ext-btn');
+    btn.className = className || (IS_AVITO ? 'rvw-ext-btn-avito' : IS_OZON ? 'rvw-ext-btn-ozon' : 'rvw-ext-btn');
     btn.textContent = 'Собрать отзывы';
     btn.addEventListener('click', onClick);
     return btn;
@@ -203,33 +322,39 @@
     const btn = document.getElementById(BTN_ID);
     if (!btn) return;
 
-    if (typeof window[COLLECT_FN] !== 'function') {
-      console.error(`[rvw] window.${COLLECT_FN} не найдена — collector.js не подключился.`);
-      btn.textContent = 'Ошибка';
-      setTimeout(() => { if (btn.isConnected) btn.textContent = 'Собрать отзывы'; }, 2000);
+    // Страницы отзывов о доме/ЖК (rvw-ext-btn-avito-rating, см. ensureButton
+    // выше) размечены через data-marker="model-review" — совсем другая
+    // структура, чем у продавца/объявления, и собирается отдельной функцией
+    // (DOM+пагинация, а не JSON-API по sellerId).
+    const fnName = btn.dataset.rvwSource === 'model-review' ? '__rvwCollectAvitoModelReviews' : COLLECT_FN;
+
+    if (typeof window[fnName] !== 'function') {
+      console.error(`[rvw] window.${fnName} не найдена — collector.js не подключился.`);
+      setLabel(btn, 'Ошибка');
+      setTimeout(() => { if (btn.isConnected) setLabel(btn, 'Собрать отзывы'); }, 2000);
       return;
     }
 
     const original = 'Собрать отзывы';
     btn.disabled = true;
-    btn.textContent = 'Собираю…';
+    setLabel(btn, 'Собираю…');
 
     try {
-      const result = await window[COLLECT_FN]();
+      const result = await window[fnName]();
       if (result && result.ok) {
-        btn.textContent = `Готово: ${result.total}`;
+        setLabel(btn, `Готово: ${result.total}`);
       } else {
-        btn.textContent = 'Ошибка';
+        setLabel(btn, 'Ошибка');
         console.error('[rvw] ошибка сбора отзывов:', result && result.error);
       }
     } catch (err) {
-      btn.textContent = 'Ошибка';
+      setLabel(btn, 'Ошибка');
       console.error('[rvw] исключение при сборе отзывов:', err);
     } finally {
       setTimeout(() => {
         if (btn.isConnected) {
           btn.disabled = false;
-          btn.textContent = original;
+          setLabel(btn, original);
         }
       }, 2500);
     }
@@ -239,6 +364,32 @@
     if (document.getElementById(BTN_ID)) return; // уже вставлена
 
     if (IS_AVITO) {
+      const addReviewBtn = findAddReviewButtonAvito();
+      if (addReviewBtn) {
+        // Вставляем как ещё один «слот» в тот же flex-ряд, где лежит
+        // «Написать отзыв о доме» (ряд размечен через
+        // --module-spacer-column-gap — это устойчивое соглашение
+        // дизайн-системы Avito на инлайн-style, а не хэшированный класс).
+        // Если ряд не нашёлся — падаем в родителя самой кнопки, чтобы вставка
+        // не сорвалась совсем.
+        const row = addReviewBtn.closest('[style*="--module-spacer-column-gap"]') || addReviewBtn.parentElement;
+        if (row) {
+          injectStyles();
+          // Отдельный вариант размера: rvw-ext-btn-avito (width:100%) растянул
+          // бы кнопку на всю ширину ряда, rvw-ext-btn-avito-inline рассчитан
+          // на узкую вставку строкой внутри заголовка — ни один не даёт того,
+          // что нужно здесь: кнопку той же высоты/паддингов/скругления, что и
+          // соседняя «Написать отзыв о доме», но по ширине содержимого.
+          const btn = makeButton('rvw-ext-btn-avito-rating');
+          // Метка для onClick: эта кнопка стоит на странице отзывов о доме/ЖК
+          // (data-marker="model-review"), а не на карточке продавца/объявления —
+          // собирать нужно другой функцией (DOM+пагинация, см. collector.js).
+          btn.dataset.rvwSource = 'model-review';
+          row.appendChild(btn);
+          return;
+        }
+      }
+
       const stack = findContactStackAvito();
       if (stack) {
         injectStyles();
@@ -262,6 +413,19 @@
       if (!header) return;
       injectStyles();
       header.appendChild(makeButton('rvw-ext-btn-avito-inline'));
+      return;
+    }
+
+    if (IS_OZON) {
+      // Наличие переключателя вкладок — признак того, что на странице есть
+      // блок отзывов (на страницах без отзывов кнопка не нужна). Саму кнопку
+      // кладём в body, а не рядом с вкладками: любой узел внутри блока
+      // отзывов попадает под ozon-овский content-visibility: auto и
+      // перестаёт отрисовываться — подробности в CSS-комментарии
+      // к .rvw-ext-btn-ozon выше.
+      if (!findHeaderContainerOzon()) return;
+      injectStyles();
+      document.body.appendChild(makeButton());
       return;
     }
 
@@ -330,6 +494,7 @@ function rvwInitTelegram() {
       .rvw-tg-btn {
         display: inline-flex;
         align-items: center;
+        gap: 6px;
         height: 32px;
         padding: 0 14px;
         margin-right: 6px;
@@ -348,6 +513,12 @@ function rvwInitTelegram() {
       .rvw-tg-btn:disabled { opacity: .6; cursor: default; }
     `;
     document.head.appendChild(style);
+  }
+
+  function setLabel(btn, text) {
+    const label = btn.querySelector('.rvw-tg-btn-label');
+    if (label) label.textContent = text;
+    else btn.textContent = text;
   }
 
   function makeButton() {
@@ -369,31 +540,31 @@ function rvwInitTelegram() {
 
     if (typeof window.__rvwCollectTelegramComments !== 'function') {
       console.error('[rvw] window.__rvwCollectTelegramComments не найдена — collector.js не подключился.');
-      btn.textContent = 'Ошибка';
-      setTimeout(() => { if (btn.isConnected) btn.textContent = 'Собрать комментарии'; }, 2000);
+      setLabel(btn, 'Ошибка');
+      setTimeout(() => { if (btn.isConnected) setLabel(btn, 'Собрать комментарии'); }, 2000);
       return;
     }
 
     const original = 'Собрать комментарии';
     btn.disabled = true;
-    btn.textContent = 'Собираю…';
+    setLabel(btn, 'Собираю…');
 
     try {
       const result = await window.__rvwCollectTelegramComments();
       if (result && result.ok) {
-        btn.textContent = `Готово: ${result.total}`;
+        setLabel(btn, `Готово: ${result.total}`);
       } else {
-        btn.textContent = 'Ошибка';
+        setLabel(btn, 'Ошибка');
         console.error('[rvw] ошибка сбора комментариев:', result && result.error);
       }
     } catch (err) {
-      btn.textContent = 'Ошибка';
+      setLabel(btn, 'Ошибка');
       console.error('[rvw] исключение при сборе комментариев:', err);
     } finally {
       setTimeout(() => {
         if (btn.isConnected) {
           btn.disabled = false;
-          btn.textContent = original;
+          setLabel(btn, original);
         }
       }, 2500);
     }
@@ -438,6 +609,7 @@ function rvwInitTelegramA() {
       .rvw-tg-a-btn {
         display: inline-flex;
         align-items: center;
+        gap: 6px;
         height: 32px;
         padding: 0 14px;
         margin-right: 6px;
@@ -456,6 +628,12 @@ function rvwInitTelegramA() {
       .rvw-tg-a-btn:disabled { opacity: .6; cursor: default; }
     `;
     document.head.appendChild(style);
+  }
+
+  function setLabel(btn, text) {
+    const label = btn.querySelector('.rvw-tg-a-btn-label');
+    if (label) label.textContent = text;
+    else btn.textContent = text;
   }
 
   function makeButton() {
@@ -477,31 +655,31 @@ function rvwInitTelegramA() {
 
     if (typeof window.__rvwCollectTelegramCommentsA !== 'function') {
       console.error('[rvw] window.__rvwCollectTelegramCommentsA не найдена — collector.js не подключился.');
-      btn.textContent = 'Ошибка';
-      setTimeout(() => { if (btn.isConnected) btn.textContent = 'Собрать комментарии'; }, 2000);
+      setLabel(btn, 'Ошибка');
+      setTimeout(() => { if (btn.isConnected) setLabel(btn, 'Собрать комментарии'); }, 2000);
       return;
     }
 
     const original = 'Собрать комментарии';
     btn.disabled = true;
-    btn.textContent = 'Собираю…';
+    setLabel(btn, 'Собираю…');
 
     try {
       const result = await window.__rvwCollectTelegramCommentsA();
       if (result && result.ok) {
-        btn.textContent = `Готово: ${result.total}`;
+        setLabel(btn, `Готово: ${result.total}`);
       } else {
-        btn.textContent = 'Ошибка';
+        setLabel(btn, 'Ошибка');
         console.error('[rvw] ошибка сбора комментариев (A):', result && result.error);
       }
     } catch (err) {
-      btn.textContent = 'Ошибка';
+      setLabel(btn, 'Ошибка');
       console.error('[rvw] исключение при сборе комментариев (A):', err);
     } finally {
       setTimeout(() => {
         if (btn.isConnected) {
           btn.disabled = false;
-          btn.textContent = original;
+          setLabel(btn, original);
         }
       }, 2500);
     }

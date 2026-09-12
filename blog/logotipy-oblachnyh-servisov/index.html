@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотипы облачных сервисов — почему все рисуют облако и кто нет · Trace Logo's</title>
@@ -38,7 +40,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ru_RU">
-  <meta property="article:published_time" content="2026-08-23">
+  <meta property="article:published_time" content="2026-09-10">
 
   <script type="application/ld+json">
   {
@@ -71,8 +73,8 @@
       "@type": "BlogPosting",
       "headline": "Логотипы облачных сервисов — почему все рисуют облако и кто нет",
       "description": "Разбираем логотипы облачных хранилищ: Dropbox, Google Диск, iCloud, OneDrive. Буквальные облака против абстракций и что означает коробка Dropbox.",
-      "datePublished": "2026-08-23",
-      "dateModified": "2026-08-23",
+      "datePublished": "2026-09-10",
+      "dateModified": "2026-09-10",
       "url": "https://trace-logos.ru/blog/logotipy-oblachnyh-servisov/",
       "inLanguage": "ru",
       "image": "https://trace-logos.ru/assets/og/blog/social/logotipy-oblachnyh-servisov.png",
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,14 +193,14 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(35 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(75 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(125 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(185 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(35 70% 38%) 0%, hsl(185 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
-          <time class="blog-date" datetime="2026-08-23">23 августа 2026</time>
+          <time class="blog-date" datetime="2026-09-10">10 сентября 2026</time>
           <span class="blog-meta-sep" aria-hidden="true">·</span>
           <span class="blog-read">4 мин чтения</span>
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
@@ -208,10 +212,10 @@
         <h1>Логотипы облачных сервисов — почему все рисуют облако и кто нет</h1>
       </header>
       <div class="blog-body">
-        <p>«Облако» — редкий случай, когда у целой категории продуктов есть готовый визуальный символ прямо в названии. Казалось бы, рисуй облако — и готово. Но самый известный бренд категории рисует коробку, второй — треугольник, и только Apple с Microsoft пошли буквальным путём. Разбираем логотипы облачных хранилищ и выясняем, когда стоит брать очевидную метафору, а когда — бежать от неё.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Категория разделилась пополам: <strong>буквальные облака</strong> — <a href="../../logos/cloud/icloud/" target="_blank" rel="noopener">iCloud</a> и <a href="../../logos/cloud/onedrive/" target="_blank" rel="noopener">OneDrive</a>; <strong>абстракции</strong> — коробка <a href="../../logos/cloud/dropbox/" target="_blank" rel="noopener">Dropbox</a> и трёхцветный треугольник <a href="../../logos/cloud/googledrive/" target="_blank" rel="noopener">Google Диска</a>. Закономерность: сервисы‑продукты берут облако, сервисы‑платформы — уникальный знак, который не спутать с системной иконкой. Все логотипы — в <a href="../../logos/cloud/" target="_blank" rel="noopener">категории «Облака и хранилища»</a>.</p></div></div>
+        <p>«Облако» — редкий случай, когда у целой категории продуктов есть готовый визуальный символ прямо в названии. Казалось бы, рисуй облако — и готово. Но самый известный бренд категории рисует коробку, второй — треугольник, и только Apple с Microsoft пошли буквальным путём. Разбираем логотипы облачных хранилищ и выясняем, когда стоит брать очевидную метафору, а когда — бежать от неё.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Категория разделилась пополам: <strong>буквальные облака</strong> — <a href="../../logos/cloud/icloud/" target="_blank" rel="noopener">iCloud<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/icloud.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/cloud/onedrive/" target="_blank" rel="noopener">OneDrive<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/microsoft-onedrive.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>; <strong>абстракции</strong> — коробка <a href="../../logos/cloud/dropbox/" target="_blank" rel="noopener">Dropbox<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/dropbox.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и трёхцветный треугольник <a href="../../logos/cloud/googledrive/" target="_blank" rel="noopener">Google Диска<img class="blog-mention-icon" src="../../assets/logos/svgs/google-drive.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Закономерность: сервисы‑продукты берут облако, сервисы‑платформы — уникальный знак, который не спутать с системной иконкой. Все логотипы — в <a href="../../logos/cloud/" target="_blank" rel="noopener">категории «Облака и хранилища»</a>.</p></div></div>
       <h2 id="dropbox-коробка-вместо-облака">Dropbox: коробка вместо облака</h2>
-      <p><a href="../../logos/cloud/dropbox/" target="_blank" rel="noopener">Dropbox</a> — пионер категории — с самого начала отказался от облака в пользу раскрытой коробки из пяти ромбов. Метафора точнее, чем кажется: облако — про «где‑то там», коробка — про «моё место, куда я складываю». Знак пережил редизайн 2017 года (упрощение граней, отказ от объёма — стандартный путь эпохи, <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">описанный здесь</a>) и остался самым узнаваемым в категории. Бонус решения: облако рисуют все — коробка одна.</p>
+      <p><a href="../../logos/cloud/dropbox/" target="_blank" rel="noopener">Dropbox<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/dropbox.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — пионер категории — с самого начала отказался от облака в пользу раскрытой коробки из пяти ромбов. Метафора точнее, чем кажется: облако — про «где‑то там», коробка — про «моё место, куда я складываю». Знак пережил редизайн 2017 года (упрощение граней, отказ от объёма — стандартный путь эпохи, <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">описанный здесь</a>) и остался самым узнаваемым в категории. Бонус решения: облако рисуют все — коробка одна.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -223,17 +227,17 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="google-диск-треугольник-трилистник">Google Диск: треугольник‑трилистник</h2>
-      <p>Знак <a href="../../logos/cloud/googledrive/" target="_blank" rel="noopener">Google Диска</a> — треугольник с тремя цветными гранями (жёлтая, зелёная, синяя — из <a href="../istoriya-logotipa-google/" target="_blank" rel="noopener">палитры Google</a>). Форма читается двояко: и как «дельта»-хранилище, и как сложенный лист бумаги. Треугольник выбран не от хорошей жизни: облако в семье Google уже занято другими продуктами, а знаку Диска нужно отличаться от соседей по экрану — <a href="../../logos/cloud/googlephotos/" target="_blank" rel="noopener">Google Фото</a> (вертушка) и почты. Экосистемная логика тут важнее категорийной — <a href="../ekosistema-yandeksa-logotipy/" target="_blank" rel="noopener">так же ту же задачу решает Яндекс</a> в своих продуктах.</p>
+      <p>Знак <a href="../../logos/cloud/googledrive/" target="_blank" rel="noopener">Google Диска<img class="blog-mention-icon" src="../../assets/logos/svgs/google-drive.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> — треугольник с тремя цветными гранями (жёлтая, зелёная, синяя — из <a href="../istoriya-logotipa-google/" target="_blank" rel="noopener">палитры Google</a>). Форма читается двояко: и как «дельта»-хранилище, и как сложенный лист бумаги. Треугольник выбран не от хорошей жизни: облако в семье Google уже занято другими продуктами, а знаку Диска нужно отличаться от соседей по экрану — <a href="../../logos/cloud/googlephotos/" target="_blank" rel="noopener">Google Фото<img class="blog-mention-icon" src="../../assets/logos/svgs/google-photos.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> (вертушка) и почты. Экосистемная логика тут важнее категорийной — <a href="../ekosistema-yandeksa-logotipy/" target="_blank" rel="noopener">так же ту же задачу решает Яндекс</a> в своих продуктах.</p>
       <h2 id="icloud-и-onedrive-буквальная-школа">iCloud и OneDrive: буквальная школа</h2>
       <ul>
-      <li><strong><a href="../../logos/cloud/icloud/" target="_blank" rel="noopener">iCloud</a></strong> — голубое облако с фирменными скруглениями Apple. Сервис глубоко встроен в систему, ему не нужно бороться за узнаваемость в сторах — облако здесь работает как системная пиктограмма «всё синхронизировано» — узнаваемый почерк <a href="../istoriya-logotipa-apple/" target="_blank" rel="noopener">минимализма Apple</a>.</li>
-      <li><strong><a href="../../logos/cloud/onedrive/" target="_blank" rel="noopener">OneDrive</a></strong> — синее облако Microsoft: двухтоновые волны в фирменном синем. Та же логика: продукт живёт внутри Windows и Office, знак — навигационная иконка, а не боевой бренд.</li>
+      <li><strong><a href="../../logos/cloud/icloud/" target="_blank" rel="noopener">iCloud<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/icloud.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — голубое облако с фирменными скруглениями Apple. Сервис глубоко встроен в систему, ему не нужно бороться за узнаваемость в сторах — облако здесь работает как системная пиктограмма «всё синхронизировано» — узнаваемый почерк <a href="../istoriya-logotipa-apple/" target="_blank" rel="noopener">минимализма Apple</a>.</li>
+      <li><strong><a href="../../logos/cloud/onedrive/" target="_blank" rel="noopener">OneDrive<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/microsoft-onedrive.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — синее облако Microsoft: двухтоновые волны в фирменном синем. Та же логика: продукт живёт внутри Windows и Office, знак — навигационная иконка, а не боевой бренд.</li>
       </ul>
-      <p>Закономерность видна: буквальное облако выбирают сервисы, которым <strong>не нужно продаваться отдельно</strong> — они часть большой платформы. Самостоятельным продуктам (Dropbox) буквальность опасна: их знак сольётся с системными иконками и конкурентами.</p>
+      <p>Закономерность видна: буквальное облако выбирают сервисы, которым <strong>не нужно продаваться отдельно</strong> — они часть большой платформы. Самостоятельным продуктам (Dropbox) буквальность опасна: их знак сольётся с системными иконками и конкурентами.</p>
       <h2 id="папка-которая-стала-брендом">Папка, которая стала брендом</h2>
-      <p>У категории есть и второй «невидимый» носитель — <strong>папка в файловом менеджере</strong>. Dropbox первым понял, что синяя папочка со своим знаком в боковой панели Finder и Проводника — это ежедневный рекламный контакт, который не купишь ни за какие деньги: пользователь видит её десятки раз в день, годами. Поэтому облачные сервисы так тщательно прорисовывают крошечные значки‑оверлеи на папках и файлах (галочка «синхронизировано», стрелки «в процессе»): это микроскопическая, но самая частотная точка контакта бренда с человеком. Урок шире категории: составьте карту всех точек, где ваш знак встречается с пользователем, и отсортируйте по частоте — окажется, что самые важные носители далеко не самые парадные — <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">как проводится такой аудит</a>, мы объясняли отдельно.</p>
+      <p>У категории есть и второй «невидимый» носитель — <strong>папка в файловом менеджере</strong>. Dropbox первым понял, что синяя папочка со своим знаком в боковой панели Finder и Проводника — это ежедневный рекламный контакт, который не купишь ни за какие деньги: пользователь видит её десятки раз в день, годами. Поэтому облачные сервисы так тщательно прорисовывают крошечные значки‑оверлеи на папках и файлах (галочка «синхронизировано», стрелки «в процессе»): это микроскопическая, но самая частотная точка контакта бренда с человеком. Урок шире категории: составьте карту всех точек, где ваш знак встречается с пользователем, и отсортируйте по частоте — окажется, что самые важные носители далеко не самые парадные — <a href="../chto-takoe-firmennyj-stil/" target="_blank" rel="noopener">как проводится такой аудит</a>, мы объясняли отдельно.</p>
       <h2 id="иконка-в-системном-трее-самый-жёсткий-носитель">Иконка в системном трее: самый жёсткий носитель</h2>
-      <p>У облачных сервисов есть носитель‑мучитель, о котором забывают все категории‑соседи: <strong>иконка синхронизации в системном трее и строке меню</strong>. Там знак живёт в 16‑22 пикселях, зачастую в принудительном монохроме (macOS красит иконки меню‑бара в один цвет) и обязан показывать состояния: синхронизируется, готово, ошибка, пауза. Ромбы <a href="../../logos/cloud/dropbox/" target="_blank" rel="noopener">Dropbox</a> выдерживают это издевательство именно потому, что силуэт коробки читается контуром без цвета; облакам <a href="../../logos/cloud/onedrive/" target="_blank" rel="noopener">OneDrive</a> и <a href="../../logos/cloud/icloud/" target="_blank" rel="noopener">iCloud</a> проще всех — их форма и была рождена пиктограммой. Если ваш продукт живёт в трее — проектируйте монохромный контур знака первым, а не последним: <a href="../logotip-dlya-pechati/" target="_blank" rel="noopener">зачем вообще нужен монохром</a> и как с той же задачей справляется <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавиконка</a>, мы разбирали отдельно.</p>
+      <p>У облачных сервисов есть носитель‑мучитель, о котором забывают все категории‑соседи: <strong>иконка синхронизации в системном трее и строке меню</strong>. Там знак живёт в 16‑22 пикселях, зачастую в принудительном монохроме (macOS красит иконки меню‑бара в один цвет) и обязан показывать состояния: синхронизируется, готово, ошибка, пауза. Ромбы <a href="../../logos/cloud/dropbox/" target="_blank" rel="noopener">Dropbox<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/dropbox.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> выдерживают это издевательство именно потому, что силуэт коробки читается контуром без цвета; облакам <a href="../../logos/cloud/onedrive/" target="_blank" rel="noopener">OneDrive<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/microsoft-onedrive.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> и <a href="../../logos/cloud/icloud/" target="_blank" rel="noopener">iCloud<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/icloud.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> проще всех — их форма и была рождена пиктограммой. Если ваш продукт живёт в трее — проектируйте монохромный контур знака первым, а не последним: <a href="../logotip-dlya-pechati/" target="_blank" rel="noopener">зачем вообще нужен монохром</a> и как с той же задачей справляется <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавиконка</a>, мы разбирали отдельно.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -245,136 +249,137 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="сводная-таблица">Сводная таблица</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Сервис</th><th>Знак</th><th>Стратегия</th></tr></thead><tbody><tr><td><a href="../../logos/cloud/dropbox/" target="_blank" rel="noopener">Dropbox</a></td><td>коробка из ромбов</td><td>уникальная метафора</td></tr><tr><td><a href="../../logos/cloud/googledrive/" target="_blank" rel="noopener">Google Диск</a></td><td>цветной треугольник</td><td>отличие внутри экосистемы</td></tr><tr><td><a href="../../logos/cloud/icloud/" target="_blank" rel="noopener">iCloud</a></td><td>облако</td><td>системная пиктограмма</td></tr><tr><td><a href="../../logos/cloud/onedrive/" target="_blank" rel="noopener">OneDrive</a></td><td>облако</td><td>системная пиктограмма</td></tr><tr><td><a href="../../logos/cloud/googlephotos/" target="_blank" rel="noopener">Google Фото</a></td><td>четырёхцветная вертушка</td><td>отличие внутри экосистемы</td></tr></tbody></table></div>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Правило очевидной метафоры</span></div><div class="callout-body"><p>Если символ лежит на поверхности (облако для облака, зуб для стоматологии, дом для недвижимости) — его уже взяли все конкуренты. Очевидная метафора допустима, только когда вам не нужно выделяться; в конкурентной нише ищите вторую метафору — как коробка Dropbox; <a href="../vidy-logotipov/" target="_blank" rel="noopener">как искать идею знака</a>, мы разбирали отдельно.</p></div></div>
-      <p>Все логотипы облачных сервисов — в <a href="../../logos/cloud/" target="_blank" rel="noopener">каталоге</a>: SVG и PNG с прозрачным фоном. Похожие разборы категорий: <a href="../logotipy-brauzerov/" target="_blank" rel="noopener">браузеры</a>, <a href="../logotipy-messendzherov/" target="_blank" rel="noopener">мессенджеры</a>, <a href="../logotipy-platezhnyh-sistem/" target="_blank" rel="noopener">платёжные системы</a>.</p>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Сервис</th><th>Знак</th><th>Стратегия</th></tr></thead><tbody><tr><td><a href="../../logos/cloud/dropbox/" target="_blank" rel="noopener">Dropbox<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/dropbox.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>коробка из ромбов</td><td>уникальная метафора</td></tr><tr><td><a href="../../logos/cloud/googledrive/" target="_blank" rel="noopener">Google Диск<img class="blog-mention-icon" src="../../assets/logos/svgs/google-drive.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>цветной треугольник</td><td>отличие внутри экосистемы</td></tr><tr><td><a href="../../logos/cloud/icloud/" target="_blank" rel="noopener">iCloud<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/icloud.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>облако</td><td>системная пиктограмма</td></tr><tr><td><a href="../../logos/cloud/onedrive/" target="_blank" rel="noopener">OneDrive<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/microsoft-onedrive.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>облако</td><td>системная пиктограмма</td></tr><tr><td><a href="../../logos/cloud/googlephotos/" target="_blank" rel="noopener">Google Фото<img class="blog-mention-icon" src="../../assets/logos/svgs/google-photos.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>четырёхцветная вертушка</td><td>отличие внутри экосистемы</td></tr></tbody></table></div>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Правило очевидной метафоры</span></div><div class="callout-body"><p>Если символ лежит на поверхности (облако для облака, зуб для стоматологии, дом для недвижимости) — его уже взяли все конкуренты. Очевидная метафора допустима, только когда вам не нужно выделяться; в конкурентной нише ищите вторую метафору — как коробка Dropbox; как искать идею знака, мы разбирали отдельно.</p></div></div>
+      <p>Все логотипы облачных сервисов — в <a href="../../logos/cloud/" target="_blank" rel="noopener">каталоге</a>: SVG и PNG с прозрачным фоном. Похожие разборы категорий: <a href="../logotipy-brauzerov/" target="_blank" rel="noopener">браузеры</a>, <a href="../logotipy-messendzherov/" target="_blank" rel="noopener">мессенджеры</a>, платёжные системы.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+          <a class="blog-card" href="../logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Медиа</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Нейросети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Логотипы стриминговых сервисов — Netflix, Кинопоиск, YouTube и другие</div>
+          <div class="blog-card-title">Логотипы нейросетей — как выглядит айдентика ИИ‑сервисов</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-socsetej/" data-date="2026-08-27" data-views="0">
+      <a class="blog-card" href="../logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Игры</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Логотипы социальных сетей — от градиента Instagram до буквы X</div>
+          <div class="blog-card-title">Логотипы мобильных игр — почему у всех объёмные буквы</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-servisov-puteshestvij/" data-date="2026-08-26" data-views="1">
+      <a class="blog-card" href="../logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Путешествия</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            17
           </div>
           </div>
-          <div class="blog-card-title">Логотипы сервисов путешествий — Aviasales, Skyscanner, Kayak и другие</div>
+          <div class="blog-card-title">Логотипы мессенджеров — почему все выбирают пузырь и самолётик</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-servisov-videozvonkov/" data-date="2026-08-26" data-views="0">
+      <a class="blog-card" href="../logotipy-kriptoservisov/" data-date="2026-08-20" data-views="10">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Технологии</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /><rect x="2" y="6" width="14" height="12" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Финансы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>20.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            10
           </div>
           </div>
-          <div class="blog-card-title">Логотипы сервисов видеозвонков — Zoom, Teams, Meet, Discord</div>
+          <div class="blog-card-title">Логотипы криптосервисов — Binance, Coinbase, MetaMask и другие</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-optimizirovat-svg/" data-date="2026-06-16" data-views="12">
+      <a class="blog-card" href="../istoriya-logotipa-apple/" data-date="2026-06-12" data-views="14">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Оптимизация</span><span class="blog-card-tag">Сайты</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4" /><path d="M3.34 19a10 10 0 1 1 17.32 0" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Apple</span><span class="blog-card-tag">История</span><span class="blog-card-tag">Логотипы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M12 7v5l4 2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.06.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.06.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            12
+            14
           </div>
           </div>
-          <div class="blog-card-title">Как оптимизировать SVG — уменьшаем вес файла в 2‑10 раз без потери качества</div>
+          <div class="blog-card-title">История логотипа Apple — почему яблоко надкушено и куда делась радуга</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../chto-takoe-rebrending/" data-date="2026-07-24" data-views="3">
+      <a class="blog-card" href="../vektor-i-rastr-raznica/" data-date="2026-07-17" data-views="13">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Бизнес</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4" /><path d="M3 11v-1a4 4 0 0 1 4-4h14" /><path d="m7 22-4-4 4-4" /><path d="M21 13v1a4 4 0 0 1-4 4H3" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Графика</span><span class="blog-card-tag">SVG</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2" /><path d="M3 9h18" /><path d="M3 15h18" /><path d="M9 3v18" /><path d="M15 3v18" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>24.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            3
+            13
           </div>
           </div>
-          <div class="blog-card-title">Что такое ребрендинг — зачем компании меняют логотип и имя</div>
+          <div class="blog-card-title">Векторная и растровая графика — разница простыми словами</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -392,25 +397,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -487,6 +484,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -532,10 +530,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

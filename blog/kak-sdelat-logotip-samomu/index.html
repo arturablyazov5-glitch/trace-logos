@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Как сделать логотип самому бесплатно — честная пошаговая инструкция · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(231 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(271 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(321 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(21 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(231 70% 38%) 0%, hsl(21 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" /><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" /><path d="m2.3 2.3 7.286 7.286" /><circle cx="11" cy="11" r="2" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(111 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(151 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(201 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(261 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(111 70% 38%) 0%, hsl(261 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z" /><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18" /><path d="m2.3 2.3 7.286 7.286" /><circle cx="11" cy="11" r="2" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-06-19">19 июня 2026</time>
@@ -202,16 +206,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            4
+	            31
 	          </span>
         </div>
         <h1>Как сделать логотип самому бесплатно — честная пошаговая инструкция</h1>
       </header>
       <div class="blog-body">
-        <p>Бюджета на дизайнера нет, генераторы выдают шаблонное, а логотип нужен. Хорошая новость: приличный логотип для старта реально сделать самому, бесплатно, за один‑два вечера, если идти по процессу. Рисование «чего‑то красивого» наугад заканчивается предсказуемо. Плохая новость: у самодельных логотипов есть типовые провалы, по которым их узнают с первого взгляда. Пройдём процесс так, чтобы в них не наступить.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Формула стартового логотипа: <strong>простой знак или аккуратная надпись + один цвет + один шрифт</strong>. Инструменты: <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> (бесплатно) или Inkscape. Процесс: смысл → насмотренность → эскизы → отрисовка в векторе → проверка в малом размере → комплект файлов. Не пытайтесь сделать «дорого и сложно» — сложность как раз и выдаёт самоделку.</p></div></div>
+        <p>Бюджета на дизайнера нет, генераторы выдают шаблонное, а логотип нужен. Хорошая новость: приличный логотип для старта реально сделать самому, бесплатно, за один‑два вечера, если идти по процессу. Рисование «чего‑то красивого» наугад заканчивается предсказуемо. Плохая новость: у самодельных логотипов есть типовые провалы, по которым их узнают с первого взгляда. Пройдём процесс так, чтобы в них не наступить.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>Формула стартового логотипа: <strong>простой знак или аккуратная надпись + один цвет + один шрифт</strong>. Инструменты: <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> (бесплатно) или Inkscape. Процесс: смысл → насмотренность → эскизы → отрисовка в векторе → проверка в малом размере → комплект файлов. Не пытайтесь сделать «дорого и сложно» — сложность как раз и выдаёт самоделку.</p></div></div>
       <h2 id="шаг-0-поймите-что-логотип-не-главное" class="step-heading"><span class="step-badge">Шаг&nbsp;0</span><span class="step-title">Поймите, что логотип — не главное</span></h2>
-      <p>Освобождающая правда: на старте бизнеса логотип решает меньше, чем кажется. От него требуется аккуратность и умение не мешать. Узнаваемость приносит продукт, знак только сопровождает его на визитке и в шапке сайта. Поэтому цель формулируется как «чисто и профессионально», а гениально закажете к первому миллиону.</p>
+      <p>Освобождающая правда: на старте бизнеса логотип решает меньше, чем кажется. От него требуется аккуратность и умение не мешать. Узнаваемость приносит продукт, знак только сопровождает его на визитке и в шапке сайта. Поэтому цель формулируется как «чисто и профессионально», а гениально закажете к первому миллиону.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -223,7 +227,7 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="шаг-1-сформулируйте-смысл-одним-предложением" class="step-heading"><span class="step-badge">Шаг&nbsp;1</span><span class="step-title">Сформулируйте смысл одним предложением</span></h2>
-      <p>До открытия редактора ответьте письменно: что делает компания, для кого, и какое одно ощущение должен оставлять знак (надёжность? скорость? забота? дерзость?). Одно, не пять. Каждое решение дальше — форма, цвет, шрифт — сверяйте с этим предложением. Это и есть та работа, за которую платят студиям: у вас она займёт полчаса и сэкономит десять кругов переделок.</p>
+      <p>До открытия редактора ответьте письменно: что делает компания, для кого, и какое одно ощущение должен оставлять знак (надёжность? скорость? забота? дерзость?). Одно, не пять. Каждое решение дальше — форма, цвет, шрифт — сверяйте с этим предложением. Это и есть та работа, за которую платят студиям: у вас она займёт полчаса и сэкономит десять кругов переделок.</p>
       <h2 id="шаг-2-наберите-насмотренность-30-минут" class="step-heading"><span class="step-badge">Шаг&nbsp;2</span><span class="step-title">Наберите насмотренность <span class="heading-dim">(30 минут)</span></span></h2>
       <p>Посмотрите 30‑50 логотипов вашей отрасли: что общего, сколько цветов, знак или текст, какие формы. Замечайте закономерности вместо оценок «нравится/не нравится»: банки любят геометрию и синий/зелёный, доставка — динамику, косметика — леттеринг. Удобно листать по категориям в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> — банки, IT, авто, доставка, все в одном месте.</p>
       <p>Записывайте увиденное в три столбца: форма, цвет, шрифт. Через тридцать логотипов таблица сама покажет норму категории и свободные места в ней — например, что в вашей нише никто не использует зелёный или что все поголовно взяли круг. Эта таблица потом отвечает на вопрос «почему такой цвет» вместо ссылки на вкус.</p>
@@ -235,19 +239,19 @@ window.yaContextCb.push(() => {
       <li><strong>Монограмма:</strong> 1‑2 буквы в простой форме (круг, квадрат, щит). Хорош, когда название длинное.</li>
       <li><strong>Простой знак + текст:</strong> геометрический символ рядом с названием. Рискованнее: нужен «тот самый» символ.</li>
       </ul>
-      <p>Маскоты, сложные иллюстрации, градиентные 3D‑эмблемы — не ваш уровень сложности сегодня. И, как мы разбирали в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">про упрощение логотипов</a>, даже гиганты ушли от сложности — она больше не признак статуса.</p>
+      <p>Маскоты, сложные иллюстрации, градиентные 3D‑эмблемы — не ваш уровень сложности сегодня. И, как мы разбирали в статье <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">про упрощение логотипов</a>, даже гиганты ушли от сложности — она больше не признак статуса.</p>
       <h2 id="шаг-4-эскизы-на-бумаге-важно-до-компьютера" class="step-heading"><span class="step-badge">Шаг&nbsp;4</span><span class="step-title">Эскизы на бумаге <span class="heading-dim">(важно: до компьютера)</span></span></h2>
       <p>10‑20 быстрых карандашных набросков по 30 секунд. На бумаге варианты генерируются в разы быстрее, и рука не цепляется за возможности редактора. Отберите 2‑3 живых направления.</p>
       <h2 id="шаг-5-отрисовка-в-векторе" class="step-heading"><span class="step-badge">Шаг&nbsp;5</span><span class="step-title">Отрисовка в векторе</span></h2>
-      <p><strong>Инструменты:</strong> <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> (браузер, бесплатно) или Inkscape (оффлайн, бесплатно). <a href="../../logos/design/canva/" target="_blank" rel="noopener">Canva</a> для финала не подойдёт: вектор она отдаёт только в платной версии. <a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop</a> тоже мимо, он растровый (чем это плохо — в <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">статье про вектор и растр</a>).</p>
+      <p><strong>Инструменты:</strong> <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> (браузер, бесплатно) или Inkscape (оффлайн, бесплатно). <a href="../../logos/design/canva/" target="_blank" rel="noopener">Canva<img class="blog-mention-icon" src="../../assets/logos/svgs/canva.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> для финала не подойдёт: вектор она отдаёт только в платной версии. <a href="../../logos/design/photoshop/" target="_blank" rel="noopener">Photoshop<img class="blog-mention-icon" src="../../assets/logos/pngs/apple/26/color/photoshop.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> тоже мимо, он растровый (чем это плохо — в <a href="../vektor-i-rastr-raznica/" target="_blank" rel="noopener">статье про вектор и растр</a>).</p>
       <p>Правила отрисовки, которые отделяют «сделал сам» от «сделал сам, но не видно»:</p>
       <ol>
       <li><strong>Стройте из геометрии.</strong> Круги, прямоугольники, булевы операции (объединение, вычитание). Перо оставьте для того, что из геометрии не собирается. Геометрия даёт ровность, которую глаз считывает как профессионализм.</li>
-      <li><strong>Один шрифт.</strong> Хороший гротеск с бесплатной лицензией (Inter, Manrope, Golos, Onest). Никаких «красивых» декоративных шрифтов из подборок — это маркер самоделки №1.</li>
+      <li><strong>Один шрифт.</strong> Хороший гротеск с бесплатной лицензией (Inter, Manrope, Golos, Onest). Никаких «красивых» декоративных шрифтов из подборок — это маркер самоделки № 1.</li>
       <li><strong>Один цвет + чёрный/белый.</strong> Выберите цвет по смыслу из шага 1 и категорийным нормам. Два цвета — максимум. Радужные градиенты — нет.</li>
-      <li><strong>Выравнивание и отступы.</strong> Включите сетку и поставьте элементы по направляющим: глазомер ошибается на пару пикселей, и этого хватает. Кривые отступы — маркер самоделки №2.</li>
+      <li><strong>Выравнивание и отступы.</strong> Включите сетку и поставьте элементы по направляющим: глазомер ошибается на пару пикселей, и этого хватает. Кривые отступы — маркер самоделки № 2.</li>
       </ol>
-      <h2 id="что-делать-если-ничего-не-придумывается">Что делать, если ничего не придумывается</h2>
+      <h2 id="что-делать-если-ничего-не-придумывается">Что делать, если ничего не придумывается</h2>
       <p>Ступор на эскизах — обычная часть процесса, и выходят из него механически. Первый приём: возьмите первую букву названия и вставьте её в простую форму, круг или скруглённый квадрат. Дальше меняйте по одной переменной за раз — наклон буквы, толщину штриха, вырез в форме, смещение от центра. Двадцать вариантов набираются за полчаса, и один рабочий среди них обычно находится.</p>
       <p>Второй приём: выпишите десять предметов, связанных с ключевым словом из шага 1, напрямую. Восход даёт полукруг, горизонт, дугу; доставка — стрелку, коробку, маршрут. Рисуйте самый простой предмет из списка: интересный отнимет вечер и всё равно не прочитается в 16 пикселях.</p>
       <h2 id="шаг-6-проверка-на-прочность" class="step-heading"><span class="step-badge">Шаг&nbsp;6</span><span class="step-title">Проверка на прочность</span></h2>
@@ -255,20 +259,20 @@ window.yaContextCb.push(() => {
       <li><strong>Тест 16 пикселей:</strong> уменьшите логотип до размера фавикона. Узнаётся? Текст мельче знака имеет право пропасть, но знак должен выжить.</li>
       <li><strong>Тест монохрома:</strong> переведите в один цвет. Работает без цвета — значит, форма сильная.</li>
       <li><strong>Тест фонов:</strong> посмотрите на белом, чёрном и фирменном цвете.</li>
-      <li><strong>Тест чужих глаз:</strong> покажите трём людям на 3 секунды и спросите, что они запомнили.</li>
+      <li><strong>Тест чужих глаз:</strong> покажите трём людям на 3 секунды и спросите, что они запомнили.</li>
       <li><strong>Тест памяти:</strong> через день нарисуйте свой знак по памяти карандашом. Получилось за пять линий — форма простая настолько, насколько нужно. Пришлось вспоминать детали — их и надо убрать.</li>
-      <li><strong>Тест уникальности:</strong> поиск по картинке (<a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс</a>/<a href="../../logos/search/google/" target="_blank" rel="noopener">Google</a>) — не совпадаете ли вы с существующим брендом. Совпадение обойдётся дорого: оно и неловко, и юридически опасно.</li>
+      <li><strong>Тест уникальности:</strong> поиск по картинке (<a href="../../logos/search/yandex/" target="_blank" rel="noopener">Яндекс<img class="blog-mention-icon" src="../../assets/logos/svgs/yandex.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>/<a href="../../logos/search/google/" target="_blank" rel="noopener">Google<img class="blog-mention-icon" src="../../assets/logos/svgs/google.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>) — не совпадаете ли вы с существующим брендом. Совпадение обойдётся дорого: оно и неловко, и юридически опасно.</li>
       </ul>
       <h2 id="шаг-7-комплект-файлов" class="step-heading"><span class="step-badge">Шаг&nbsp;7</span><span class="step-title">Комплект файлов</span></h2>
-      <p>Соберите стандартный набор: SVG (основной), PNG с прозрачным фоном 1000+ px, монохромные версии, версия для тёмного фона. Что для чего нужно — в <a href="../v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">гиде по форматам</a>. Исходник <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>/Inkscape храните бережно — это ваш «AI‑файл».</p>
-      <p>Имена файлам дайте сразу и по одной схеме: <code>brand-logo-full.svg</code>, <code>brand-logo-mark.svg</code>, <code>brand-logo-white.png</code>. Через полгода вы будете отправлять их подрядчику по почте, и «логотип итог финал2.png» вернётся к вам растянутым в чужой презентации. Всю папку положите в облако с общей ссылкой, чтобы файл не пришлось искать в переписке.</p>
+      <p>Соберите стандартный набор: SVG (основной), PNG с прозрачным фоном 1000+ px, монохромные версии, версия для тёмного фона. Что для чего нужно — в <a href="../v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">гиде по форматам</a>. Исходник <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>/Inkscape храните бережно — это ваш «AI‑файл».</p>
+      <p>Имена файлам дайте сразу и по одной схеме: <code>brand-logo-full.svg</code>, <code>brand-logo-mark.svg</code>, <code>brand-logo-white.png</code>. Через полгода вы будете отправлять их подрядчику по почте, и «логотип итог финал2.png» вернётся к вам растянутым в чужой презентации. Всю папку положите в облако с общей ссылкой, чтобы файл не пришлось искать в переписке.</p>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>Когда самодельный путь — плохая идея</span></div><div class="callout-body"><p>Франшиза, инвестиционный раунд, выход в ритейл, регистрация товарного знака — ситуации, где знак попадёт под профессиональную и юридическую экспертизу. Здесь экономия на дизайне обходится дороже её самой: см. разбор <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">сколько стоит логотип и за что платят</a>.</p></div></div>
       <h2 id="разбор-на-сквозном-примере-логотип-кофейни-восход">Разбор на сквозном примере: логотип кофейни «Восход»</h2>
       <p>Пройдём процесс на конкретном кейсе, чтобы шаги перестали быть абстракцией.</p>
       <p><strong>Шаг 1, смысл:</strong> «Утренняя кофейня у офисного квартала; одно ощущение — бодрое тёплое начало дня».</p>
       <p><strong>Шаг 2, насмотренность:</strong> полчаса в каталоге по категории «еда/кофе» — видим паттерны: зерно, чашка, пар; тёплые коричневые и терракота; много леттеринга. Вывод: чашку и зерно не берём (заезжены), берём метафору восхода.</p>
       <p><strong>Шаг 3, тип:</strong> знак + текст: полукруг солнца, встающий из «блюдца»-линии, рядом название геометрическим гротеском.</p>
-      <p><strong>Шаги 4‑5, эскизы и отрисовка:</strong> на бумаге выясняется, что солнце с лучами в 16 пикселях превращается в ежа — лучи убираем, оставляем чистый полукруг с одной дугой‑паром. В <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>: полукруг = круг минус прямоугольник (булева операция), дуга — сегмент окружности со скруглёнными концами. Цвет — терракота #C8552D (тёплый, свободный в категории по нашей карте), шрифт — Manrope SemiBold.</p>
+      <p><strong>Шаги 4‑5, эскизы и отрисовка:</strong> на бумаге выясняется, что солнце с лучами в 16 пикселях превращается в ежа — лучи убираем, оставляем чистый полукруг с одной дугой‑паром. В <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>: полукруг = круг минус прямоугольник (булева операция), дуга — сегмент окружности со скруглёнными концами. Цвет — терракота #C8552D (тёплый, свободный в категории по нашей карте), шрифт — Manrope SemiBold.</p>
       <p><strong>Шаг 6, тесты:</strong> в 16 px полукруг читается; в монохроме работает; на тёмном фоне заменяем терракоту на светлый беж. Поиск по картинке двойников не нашёл.</p>
       <p><strong>Шаг 7, комплект:</strong> SVG, PNG 1024, белая версия, знак отдельно для аватарок. Итого — два вечера и ноль бюджета.</p>
       <p>Заметьте главный приём кейса: каждое решение (отказ от лучей, выбор цвета, шрифт) вытекает из теста или карты категории. «Мне так нравится» в этом списке не встречается ни разу, и это тот самый процесс, который отличает осмысленную самоделку от случайной.</p>
@@ -278,16 +282,16 @@ window.yaContextCb.push(() => {
       <li><strong>Клипарт‑иконка из библиотеки + название.</strong> Иконки из бесплатных наборов узнаваемы профессионалам с одного взгляда и не уникальны юридически. Даже простую форму стройте сами из геометрии.</li>
       <li><strong>Обводка (стровка) вместо заливки везде.</strong> Тонкие контурные знаки — мода, которая плохо живёт в малых размерах и на печати. Начинающим — заливки.</li>
       <li><strong>Эффекты: тень, градиент из трёх цветов, свечение.</strong> Убирайте всё. Плоская форма читается профессионально, а <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">почему упростились даже гиганты</a>, разбирали отдельно.</li>
-      <li><strong>Текст «на глазок» рядом со знаком.</strong> Расстояние между знаком и текстом должно быть системным: обычно равно высоте буквы или половине знака. Меряйте, не прикидывайте.</li>
+      <li><strong>Текст «на глазок» рядом со знаком.</strong> Расстояние между знаком и текстом должно быть системным: обычно равно высоте буквы или половине знака. Меряйте, не прикидывайте.</li>
       <li><strong>Два шрифта и три цвета.</strong> Формула стартового логотипа железная: один шрифт, один цвет + чёрный/белый.</li>
       </ol>
       <h2 id="что-делать-после-логотипа-минимальный-запуск-айдентики">Что делать после логотипа: минимальный запуск айдентики</h2>
-      <p>Логотип готов — потратьте ещё один вечер, чтобы он заработал системно:</p>
+      <p>Логотип готов — потратьте ещё один вечер, чтобы он заработал системно:</p>
       <ul>
       <li>Соберите <a href="../v-kakom-formate-nuzhen-logotip/" target="_blank" rel="noopener">комплект файлов</a> и одну папку в облаке.</li>
       <li>Сделайте <a href="../kak-sdelat-favicon/" target="_blank" rel="noopener">фавикон</a> и <a href="../razmery-logotipa-dlya-sajta-i-socsetej/" target="_blank" rel="noopener">аватарки</a> из знака.</li>
-      <li>Запишите на одной странице: коды цветов, имя шрифта, «нельзя растягивать и перекрашивать». Это ваш микро‑гайдлайн, и <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">зачем он нужен</a>, объясняли отдельно.</li>
-      <li>Проверьте название и знак по реестрам товарных знаков — до того, как печатать вывеску: <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">как проверять</a>, мы разбирали отдельно.</li>
+      <li>Запишите на одной странице: коды цветов, имя шрифта, «нельзя растягивать и перекрашивать». Это ваш микро‑гайдлайн, и <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">зачем он нужен</a>, объясняли отдельно.</li>
+      <li>Проверьте название и знак по реестрам товарных знаков — до того, как печатать вывеску: <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">как проверять</a>, мы разбирали отдельно.</li>
       </ul>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
@@ -300,14 +304,15 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="коротко">Коротко</h2>
-      <p>Смысл → насмотренность → бумажные эскизы → геометричная отрисовка в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a> → тесты (16 px, монохром, фоны) → комплект файлов. Держитесь простоты: один шрифт, один цвет, ровная геометрия. Такой логотип не выиграет конкурс, но будет честно и аккуратно работать, пока бизнес не дорастёт до студийного.</p>
-      <p>Насмотренность — половина результата: полистайте решения вашей отрасли в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> перед тем, как открыть <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma</a>.</p>
+      <p>Смысл → насмотренность → бумажные эскизы → геометричная отрисовка в <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> → тесты (16 px, монохром, фоны) → комплект файлов. Держитесь простоты: один шрифт, один цвет, ровная геометрия. Такой логотип не выиграет конкурс, но будет честно и аккуратно работать, пока бизнес не дорастёт до студийного.</p>
+      <p>Насмотренность — половина результата: полистайте решения вашей отрасли в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> перед тем, как открыть <a href="../../logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="../../assets/logos/svgs/figma.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="17">
+          <a class="blog-card" href="../cherno-belyj-logotip/" data-date="2026-07-21" data-views="35">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -320,7 +325,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            17
+            35
           </div>
           </div>
           <div class="blog-card-title">Чёрно‑белая версия логотипа — зачем нужна и как сделать правильно</div>
@@ -328,7 +333,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="0">
+      <a class="blog-card" href="../kak-sdelat-logotip-v-canva/" data-date="2026-08-10" data-views="15">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -341,7 +346,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            15
           </div>
           </div>
           <div class="blog-card-title">Как сделать логотип в Canva — и какие у неё ограничения</div>
@@ -349,7 +354,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-logotip-v-illustrator/" data-date="2026-08-10" data-views="1">
+      <a class="blog-card" href="../kak-sdelat-logotip-v-illustrator/" data-date="2026-08-10" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -362,7 +367,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            12
           </div>
           </div>
           <div class="blog-card-title">Как сделать логотип в Illustrator — пошаговый гайд</div>
@@ -370,7 +375,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-sdelat-krugluyu-avatarku/" data-date="2026-08-09" data-views="0">
+      <a class="blog-card" href="../kak-sdelat-krugluyu-avatarku/" data-date="2026-08-09" data-views="21">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -383,7 +388,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            21
           </div>
           </div>
           <div class="blog-card-title">Как сделать круглую аватарку — чтобы ничего не обрезалось</div>
@@ -391,44 +396,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../maksimalizm-v-brendinge/" data-date="2026-07-31" data-views="6">
+      <a class="blog-card" href="../chto-takoe-monogramma/" data-date="2026-07-23" data-views="60">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.8 11.3 2 22l10.7-3.79" /><path d="M4 3h.01" /><path d="M22 8h.01" /><path d="M15 2h.01" /><path d="M22 20h.01" /><path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10" /><path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17" /><path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7" /><path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 17-2.156-1.868A.5.5 0 0 0 18 15.5v.5a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1c0-2.545-3.991-3.97-8.5-4a1 1 0 0 0 0 5c4.153 0 4.745-11.295 5.708-13.5a2.5 2.5 0 1 1 3.31 3.284" /><path d="M3 21h18" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>31.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>23.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            6
+            60
           </div>
           </div>
-          <div class="blog-card-title">Максимализм в брендинге — почему «больше» снова в моде</div>
+          <div class="blog-card-title">Что такое монограмма — логотипы из букв и как их делают</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-i-tovarnyj-znak-raznica/" data-date="2026-08-17" data-views="0">
+      <a class="blog-card" href="../logotip-ot-ii-avtorstvo/" data-date="2026-08-04" data-views="5">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Право</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Основы</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-6 0c0 2 1 2 1 3.5V13" /><path d="M20 15.5a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1z" /><path d="M5 22h14" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Нейросети</span><span class="blog-card-tag">Право</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M14.83 14.83a4 4 0 1 1 0-5.66" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>17.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            5
           </div>
           </div>
-          <div class="blog-card-title">Логотип и товарный знак — в чём разница и что это значит для бизнеса</div>
+          <div class="blog-card-title">Логотип от нейросети — кому он принадлежит и как его защитить</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -438,7 +443,7 @@ window.yaContextCb.push(() => {
     </article>
 
     <aside class="blog-sidebar">
-      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#шаг-0-поймите-что-логотип-не-главное">Шаг 0. Поймите, что логотип — не главное</a></li><li><a href="#шаг-1-сформулируйте-смысл-одним-предложением">Шаг 1. Сформулируйте смысл одним предложением</a></li><li><a href="#шаг-2-наберите-насмотренность-30-минут">Шаг 2. Наберите насмотренность (30 минут)</a></li><li><a href="#шаг-3-выберите-тип-логотипа">Шаг 3. Выберите тип логотипа</a></li><li><a href="#шаг-4-эскизы-на-бумаге-важно-до-компьютера">Шаг 4. Эскизы на бумаге (важно: до компьютера)</a></li><li><a href="#шаг-5-отрисовка-в-векторе">Шаг 5. Отрисовка в векторе</a></li><li><a href="#что-делать-если-ничего-не-придумывается">Что делать, если ничего не придумывается</a></li><li><a href="#шаг-6-проверка-на-прочность">Шаг 6. Проверка на прочность</a></li><li><a href="#шаг-7-комплект-файлов">Шаг 7. Комплект файлов</a></li><li><a href="#разбор-на-сквозном-примере-логотип-кофейни-восход">Разбор на сквозном примере: логотип кофейни «Восход»</a></li><li><a href="#пять-маркеров-самоделки-и-как-их-избежать">Пять маркеров самоделки и как их избежать</a></li><li><a href="#что-делать-после-логотипа-минимальный-запуск-айдентики">Что делать после логотипа: минимальный запуск айдентики</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
+      <nav class="blog-sidebar-nav" aria-label="В этой статье"><span class="blog-sidebar-label">В этой статье</span><ol><li><a href="#шаг-0-поймите-что-логотип-не-главное">Шаг 0. Поймите, что логотип — не главное</a></li><li><a href="#шаг-1-сформулируйте-смысл-одним-предложением">Шаг 1. Сформулируйте смысл одним предложением</a></li><li><a href="#шаг-2-наберите-насмотренность-30-минут">Шаг 2. Наберите насмотренность (30 минут)</a></li><li><a href="#шаг-3-выберите-тип-логотипа">Шаг 3. Выберите тип логотипа</a></li><li><a href="#шаг-4-эскизы-на-бумаге-важно-до-компьютера">Шаг 4. Эскизы на бумаге (важно: до компьютера)</a></li><li><a href="#шаг-5-отрисовка-в-векторе">Шаг 5. Отрисовка в векторе</a></li><li><a href="#что-делать-если-ничего-не-придумывается">Что делать, если ничего не придумывается</a></li><li><a href="#шаг-6-проверка-на-прочность">Шаг 6. Проверка на прочность</a></li><li><a href="#шаг-7-комплект-файлов">Шаг 7. Комплект файлов</a></li><li><a href="#разбор-на-сквозном-примере-логотип-кофейни-восход">Разбор на сквозном примере: логотип кофейни «Восход»</a></li><li><a href="#пять-маркеров-самоделки-и-как-их-избежать">Пять маркеров самоделки и как их избежать</a></li><li><a href="#что-делать-после-логотипа-минимальный-запуск-айдентики">Что делать после логотипа: минимальный запуск айдентики</a></li><li><a href="#коротко">Коротко</a></li></ol></nav>
       <div class="blog-progress-wrap">
       <span class="blog-progress-label">Прогресс чтения</span>
       <div class="blog-progress-row">
@@ -446,25 +451,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -541,6 +538,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -586,10 +584,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

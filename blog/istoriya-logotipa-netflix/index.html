@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>История логотипа Netflix — от DVD‑почты до «та‑дам» · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(176 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(216 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(266 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(326 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(176 70% 38%) 0%, hsl(326 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.296 3.464 3.02 3.956" /><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z" /><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="m6.18 5.276 3.1 3.899" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(55 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(95 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(145 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(205 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(55 70% 38%) 0%, hsl(205 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.296 3.464 3.02 3.956" /><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z" /><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="m6.18 5.276 3.1 3.899" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-31">31 июля 2026</time>
@@ -202,14 +206,14 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            25
 	          </span>
         </div>
         <h1>История логотипа Netflix — от DVD‑почты до «та‑дам»</h1>
       </header>
       <div class="blog-body">
-        <p><a href="../../logos/media/netflix/" target="_blank" rel="noopener">Netflix</a> начинался как сервис проката DVD по почте — и его первый логотип честно показывал киноленту. Сегодня от неё осталась только «генетическая память» в изгибе буквы N, а самым узнаваемым элементом бренда стал… звук. Разбираем эволюцию знака, который научил индустрию двум вещам: как делать логотип для тёмного экрана и зачем бренду аудио‑версия.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p><strong>1997</strong> — фиолетово‑белый знак с кинолентой для DVD‑проката; <strong>2000‑е</strong> — красный текстовый логотип в «кинотеатральном» стиле; <strong>2014</strong> — плоское слово с фирменной аркой; <strong>2016</strong> — компактная <strong>«N» из сложенной ленты</strong> для иконок; <strong>2015+</strong> — звуковой логотип «та‑дам» и анимированная заставка. Файлы — на <a href="../../logos/media/netflix/" target="_blank" rel="noopener">странице бренда</a>.</p></div></div>
+        <p><a href="../../logos/media/netflix/" target="_blank" rel="noopener">Netflix<img class="blog-mention-icon" src="../../assets/logos/svgs/netflix.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> начинался как сервис проката DVD по почте — и его первый логотип честно показывал киноленту. Сегодня от неё осталась только «генетическая память» в изгибе буквы N, а самым узнаваемым элементом бренда стал… звук. Разбираем эволюцию знака, который научил индустрию двум вещам: как делать логотип для тёмного экрана и зачем бренду аудио‑версия.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p><strong>1997</strong> — фиолетово‑белый знак с кинолентой для DVD‑проката; <strong>2000‑е</strong> — красный текстовый логотип в «кинотеатральном» стиле; <strong>2014</strong> — плоское слово с фирменной аркой; <strong>2016</strong> — компактная <strong>«N» из сложенной ленты</strong> для иконок; <strong>2015+</strong> — звуковой логотип «та‑дам» и анимированная заставка. Файлы — на <a href="../../logos/media/netflix/" target="_blank" rel="noopener">странице бренда<img class="blog-mention-icon" src="../../assets/logos/svgs/netflix.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>.</p></div></div>
       <h2 id="1997-2000-кинолента-эпохи-dvd" class="step-heading"><span class="step-badge">1997‑2000</span><span class="step-title">Кинолента эпохи DVD</span></h2>
       <p>Первый знак Netflix — название с кинолентой в фиолетовой гамме: буквальная иллюстрация бизнеса «фильмы по почте». Как у большинства стартапов 90‑х, логотип был утилитарным и не претендовал на вечность — и правильно: бизнес‑модель сменилась дважды, прежде чем знак устоялся — <a href="../kak-sdelat-logotip-samomu/" target="_blank" rel="noopener">ранним брендам «вечный» логотип и не нужен</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
@@ -223,15 +227,15 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="2000-е-красный-кинотеатральный" class="step-heading"><span class="step-badge">2000‑е</span><span class="step-title">Красный кинотеатральный</span></h2>
-      <p>С ростом сервиса появился знак, который помнят подписчики DVD‑эпохи: объёмные белые буквы с тенью на красной плашке‑дуге, стилизованные под вывеску кинотеатра. Красный закрепился как цвет бренда — и это оказалось стратегическим активом: на чёрном фоне интерфейса стриминга красный горит ярче всего — та же логика, что и в том, <a href="../logotipy-strimingovyh-servisov/" target="_blank" rel="noopener">как стриминги делят между собой цвета</a>.</p>
+      <p>С ростом сервиса появился знак, который помнят подписчики DVD‑эпохи: объёмные белые буквы с тенью на красной плашке‑дуге, стилизованные под вывеску кинотеатра. Красный закрепился как цвет бренда — и это оказалось стратегическим активом: на чёрном фоне интерфейса стриминга красный горит ярче всего — та же логика, что и в том, как стриминги делят между собой цвета.</p>
       <h2 id="2014-плоское-слово-и-арка" class="step-heading"><span class="step-badge">2014</span><span class="step-title">Плоское слово и арка</span></h2>
-      <p>Переход к стримингу потребовал знак для экранов, а не вывесок: в 2014‑м логотип уплостили до красного слова с характерной <strong>аркой</strong> — буквы стоят на невидимой дуге, как титры на экране кинотеатра, слегка «обнимая» зрителя. Тень и объём ушли по общим законам эпохи — <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">почему все тогда уплощались</a>, мы разбирали отдельно.</p>
+      <p>Переход к стримингу потребовал знак для экранов, а не вывесок: в 2014‑м логотип уплостили до красного слова с характерной <strong>аркой</strong> — буквы стоят на невидимой дуге, как титры на экране кинотеатра, слегка «обнимая» зрителя. Тень и объём ушли по общим законам эпохи — <a href="../pochemu-brendy-uproshchayut-logotipy/" target="_blank" rel="noopener">почему все тогда уплощались</a>, мы разбирали отдельно.</p>
       <h2 id="2016-буква-n-из-ленты" class="step-heading"><span class="step-badge">2016</span><span class="step-title">Буква N из ленты</span></h2>
-      <p>Иконка приложения потребовала компактной версии — и Netflix собрал «N» из красной ленты, уходящей в тень: диагональ ленты намекает и на киноплёнку, и на луч проектора. Знак живёт на чёрном квадрате — смелое решение для эпохи белых иконок, которое сделало приложение мгновенно находимым на экране вопреки всем <a href="../ikonka-prilozheniya/" target="_blank" rel="noopener">законам иконок приложений</a>. Пара «полное слово + N» — классическая система версий, и <a href="../vidy-logotipov/" target="_blank" rel="noopener">зачем вообще нужны такие версии</a>, мы объясняли отдельно.</p>
+      <p>Иконка приложения потребовала компактной версии — и Netflix собрал «N» из красной ленты, уходящей в тень: диагональ ленты намекает и на киноплёнку, и на луч проектора. Знак живёт на чёрном квадрате — смелое решение для эпохи белых иконок, которое сделало приложение мгновенно находимым на экране вопреки всем <a href="../ikonka-prilozheniya/" target="_blank" rel="noopener">законам иконок приложений</a>. Пара «полное слово + N» — классическая система версий, и зачем вообще нужны такие версии, мы объясняли отдельно.</p>
       <h2 id="та-дам-логотип-который-слышно">«Та‑дам»: логотип, который слышно</h2>
       <p>Главная инновация Netflix в брендинге — <strong>звуковой логотип</strong>: двойной удар «та‑дам» перед каждым фильмом (звук собран из удара по шкафу с обручальным кольцом и виолончели). В 2019‑м к нему добавилась анимация: «N» рассыпается веером цветных лучей — отсылка к спектру контента. Итог: бренд узнаётся с закрытыми глазами — уровень, к которому только подбираются остальные, экспериментируя с тем, <a href="../animirovannyj-logotip/" target="_blank" rel="noopener">зачем логотипу анимация</a>.</p>
       <h2 id="система-версий-где-какая-живёт">Система версий: где какая живёт</h2>
-      <p>У Netflix три носителя знака с жёсткими ролями. <strong>Полное слово</strong> — маркетинг, сайты, титры лицензионных шоу («A Netflix Original»). <strong>Буква N</strong> — иконка приложения, фавиконка, профили в соцсетях, водяной знак в углу превью. <strong>Анимированный веер</strong> — только заставки контента. Гайдлайны компании известны строгостью: слово нельзя ставить на пёстрые фоны, N не используется рядом с полным словом, красный не заменяется ни на что. Такая дисциплина — причина, по которой знак не «расползается» при миллиардных тиражах: правил мало, но исключений ноль — так же <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">фиксируются правила в брендбуке</a> и собирается <a href="../vidy-logotipov/" target="_blank" rel="noopener">комплект версий знака</a> у любого продуманного бренда.</p>
+      <p>У Netflix три носителя знака с жёсткими ролями. <strong>Полное слово</strong> — маркетинг, сайты, титры лицензионных шоу («A Netflix Original»). <strong>Буква N</strong> — иконка приложения, фавиконка, профили в соцсетях, водяной знак в углу превью. <strong>Анимированный веер</strong> — только заставки контента. Гайдлайны компании известны строгостью: слово нельзя ставить на пёстрые фоны, N не используется рядом с полным словом, красный не заменяется ни на что. Такая дисциплина — причина, по которой знак не «расползается» при миллиардных тиражах: правил мало, но исключений ноль — так же <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">фиксируются правила в брендбуке</a> и собирается комплект версий знака у любого продуманного бренда.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -244,14 +248,15 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="хронология">Хронология</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Годы</th><th>Знак</th><th>Событие</th></tr></thead><tbody><tr><td>1997‑2000</td><td>фиолетовый с кинолентой</td><td>DVD по почте</td></tr><tr><td>2000‑2014</td><td>красная объёмная вывеска</td><td>рост проката, старт стриминга</td></tr><tr><td>2014 – н. в.</td><td>плоское слово с аркой</td><td>глобальный стриминг</td></tr><tr><td>2016 – н. в.</td><td>«N» из ленты</td><td>иконка, компактный знак</td></tr><tr><td>2015 – н. в.</td><td>«та‑дам» + веер лучей</td><td>звуковой и анимированный слой</td></tr></tbody></table></div>
-      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Урок кейса</span></div><div class="callout-body"><p>Netflix первым понял, что у цифрового бренда есть носители, которых нет в брендбуках прошлого: сплеш‑скрин, звук запуска, анимация загрузки. Если ваш продукт живёт на экране — проектируйте звуковую и анимированную версию знака сразу, а не «когда‑нибудь потом» — и сразу фиксируйте их в <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">брендбуке</a>.</p></div></div>
-      <p>Логотип Netflix в SVG и PNG — на <a href="../../logos/media/netflix/" target="_blank" rel="noopener">странице бренда</a>. Другие истории серии: <a href="../istoriya-logotipa-youtube/" target="_blank" rel="noopener">YouTube</a>, <a href="../istoriya-logotipa-spotify/" target="_blank" rel="noopener">Spotify</a>, <a href="../istoriya-logotipa-starbucks/" target="_blank" rel="noopener">Starbucks</a>, <a href="../istoriya-logotipa-instagram/" target="_blank" rel="noopener">Instagram</a>.</p>
+      <div class="callout callout-tip"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.2 1 2.5h6c0-1.3.3-1.8 1-2.5A6 6 0 0 0 12 3Z"/></svg><span>Урок кейса</span></div><div class="callout-body"><p>Netflix первым понял, что у цифрового бренда есть носители, которых нет в брендбуках прошлого: сплеш‑скрин, звук запуска, анимация загрузки. Если ваш продукт живёт на экране — проектируйте звуковую и анимированную версию знака сразу, а не «когда‑нибудь потом» — и сразу фиксируйте их в <a href="../chto-takoe-brendbuk/" target="_blank" rel="noopener">брендбуке</a>.</p></div></div>
+      <p>Логотип Netflix в SVG и PNG — на <a href="../../logos/media/netflix/" target="_blank" rel="noopener">странице бренда<img class="blog-mention-icon" src="../../assets/logos/svgs/netflix.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Другие истории серии: <a href="../istoriya-logotipa-youtube/" target="_blank" rel="noopener">YouTube</a>, <a href="../istoriya-logotipa-spotify/" target="_blank" rel="noopener">Spotify</a>, <a href="../istoriya-logotipa-starbucks/" target="_blank" rel="noopener">Starbucks</a>, <a href="../istoriya-logotipa-instagram/" target="_blank" rel="noopener">Instagram</a>.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../istoriya-logotipa-youtube/" data-date="2026-08-05" data-views="0">
+          <a class="blog-card" href="../istoriya-logotipa-youtube/" data-date="2026-08-05" data-views="8">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -264,7 +269,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            8
           </div>
           </div>
           <div class="blog-card-title">История логотипа YouTube — как кнопка «плей» стала брендом</div>
@@ -272,7 +277,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../istoriya-logotipa-spotify/" data-date="2026-07-31" data-views="4">
+      <a class="blog-card" href="../istoriya-logotipa-spotify/" data-date="2026-07-31" data-views="10">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -285,7 +290,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            10
           </div>
           </div>
           <div class="blog-card-title">История логотипа Spotify — зелёный круг и три волны</div>
@@ -293,86 +298,86 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+      <a class="blog-card" href="../istoriya-logotipa-vk/" data-date="2026-08-04" data-views="668">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Подборки</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Медиа</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
-        <div class="blog-card-body">
-          <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
-            
-          <div class="blog-card-views">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
-          </div>
-          </div>
-          <div class="blog-card-title">Логотипы стриминговых сервисов — Netflix, Кинопоиск, YouTube и другие</div>
-          
-          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
-        </div>
-      </a>
-      <a class="blog-card" href="../istoriya-logotipa-vk/" data-date="2026-08-04" data-views="0">
-        <div class="blog-card-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            668
           </div>
           </div>
-          <div class="blog-card-title">История логотипа ВКонтакте — от синей плашки 2006 года до VK</div>
+          <div class="blog-card-title">История логотипа ВКонтакте — от синей плашки 2006 года до экосистемы VK</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../znachenie-populyarnyh-emodzi/" data-date="2026-07-19" data-views="21">
+      <a class="blog-card" href="../istoriya-logotipa-whatsapp/" data-date="2026-08-04" data-views="24">
+        <div class="blog-card-cover" style="--cover-gradient:
+    radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Истории логотипов</span><span class="blog-card-tag">Брендинг</span><span class="blog-card-tag">Соцсети</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384" /></svg></div>
+        <div class="blog-card-body">
+          <div class="blog-card-meta">
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>04.08.2026</div>
+            
+          <div class="blog-card-views">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            24
+          </div>
+          </div>
+          <div class="blog-card-title">История логотипа WhatsApp — телефонная трубка, пережившая всё</div>
+          
+          <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
+        </div>
+      </a>
+      <a class="blog-card" href="../pochemu-logotip-razmytyj/" data-date="2026-07-07" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Эмодзи</span><span class="blog-card-tag">Значения</span><span class="blog-card-tag">Общение</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">Качество</span><span class="blog-card-tag">SVG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>19.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>07.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            21
+            6
           </div>
           </div>
-          <div class="blog-card-title">Значение популярных эмодзи — что они означают на самом деле</div>
+          <div class="blog-card-title">Почему логотип размытый и как сделать его чётким — разбор всех причин</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../cvetovye-trendy-2026/" data-date="2026-07-24" data-views="22">
+      <a class="blog-card" href="../v-kakom-formate-nuzhen-logotip/" data-date="2026-07-16" data-views="52">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Цвет</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Брендинг</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 7 6 2" /><path d="M18.992 12H2.041" /><path d="M21.145 18.38A3.34 3.34 0 0 1 20 16.5a3.3 3.3 0 0 1-1.145 1.88c-.575.46-.855 1.02-.855 1.595A2 2 0 0 0 20 22a2 2 0 0 0 2-2.025c0-.58-.285-1.13-.855-1.595" /><path d="m8.5 4.5 2.148-2.148a1.205 1.205 0 0 1 1.704 0l7.296 7.296a1.205 1.205 0 0 1 0 1.704l-7.592 7.592a3.615 3.615 0 0 1-5.112 0l-3.888-3.888a3.615 3.615 0 0 1 0-5.112L5.67 7.33" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Форматы</span><span class="blog-card-tag">Логотипы</span><span class="blog-card-tag">SVG</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /><path d="M14 2v5a1 1 0 0 0 1 1h5" /><path d="M11 18h2" /><path d="M12 12v6" /><path d="M9 13v-.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 .5.5v.5" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>24.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>16.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            22
+            52
           </div>
           </div>
-          <div class="blog-card-title">Цветовые тренды 2026 — палитры года для брендов</div>
+          <div class="blog-card-title">В каком формате должен быть логотип — SVG, PNG, AI, EPS или PDF</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -390,25 +395,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -485,6 +482,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -530,10 +528,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

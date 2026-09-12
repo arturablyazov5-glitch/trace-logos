@@ -1,0 +1,13 @@
+{
+  "name": "tilda-helper",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome-расширение — помощник редактора Tilda (бейджи ID/класса + Z-index).",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --format=iife --target=chrome110 --outfile=content.js",
+    "watch": "esbuild src/index.js --bundle --format=iife --target=chrome110 --outfile=content.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.1"
+  }
+}

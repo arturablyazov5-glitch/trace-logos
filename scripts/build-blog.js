@@ -355,7 +355,7 @@ function buildLogoTimelineWidget(lines, lang, rel) {
     return { key, file, caption: capEsc, alt };
   });
   const cards = nodes.map(({ key, file, caption, alt }) => `<a class="blog-timeline-node" href="${rel}logos/${key}/">
-            <span class="blog-timeline-logo"><img src="${assetUrl(file, rel)}" alt="${alt}" loading="lazy" decoding="async"></span>
+            <span class="blog-timeline-logo${/-full(?:\.|-)/i.test(file) ? ' blog-timeline-logo--full' : ''}"><img src="${assetUrl(file, rel)}" alt="${alt}" loading="lazy" decoding="async"></span>
             <span class="blog-timeline-track"><span class="blog-timeline-dot"></span></span>
             <span class="blog-timeline-year">${caption}</span>
           </a>`).join('\n          ');
@@ -409,6 +409,24 @@ function parseFrontmatter(raw) {
   return { meta, body: parts[0], body_en: parts[1] || null };
 }
 
+// A link's href, when it's an author-relative path into the catalog
+// ("../../logos/cat/slug/"), points at a real item in loadLogoIndex() — reuse
+// that lookup (same one `icon-row` etc. use) to render a tiny brand icon right
+// after the link text, inside the same <a> so it's part of the click target
+// too, not just decoration next to it. Absolute/EN-mirror hrefs aren't
+// produced yet at this render stage (transformToEn runs on the finished
+// HTML), so a plain relative-path match is enough. Returns '' for anything
+// that isn't a catalog logo link.
+function catalogMentionIcon(href) {
+  const m = href.match(/^(?:\.\.\/)*logos\/([a-z0-9-]+\/[a-z0-9-]+)\/?$/i);
+  if (!m) return '';
+  const item = loadLogoIndex().get(m[1]);
+  if (!item) return '';
+  const relPrefix = href.slice(0, href.indexOf('logos/'));
+  const file = item.thumb || item.file;
+  return `<img class="blog-mention-icon" src="${assetUrl(file, relPrefix)}" alt="" width="20" height="20" loading="lazy" decoding="async">`;
+}
+
 // Inline: bold, inline code, links. Input is already-escaped text.
 function inline(text) {
   return text
@@ -417,7 +435,8 @@ function inline(text) {
     .replace(/\*([^*]+)\*/g, '<em>$1</em>')   // italic — after bold so ** isn't eaten
     // Negative lookbehind excludes `![...]` (block image syntax, handled separately in
     // renderBlocks) so a stray inline image reference doesn't turn into a broken `!<a>`.
-    .replace(/(?<!!)\[([^\]]+)\]\(([^)]+)\)/g, (_, t, href) => `<a href="${href}" target="_blank" rel="noopener">${t}</a>`);
+    .replace(/(?<!!)\[([^\]]+)\]\(([^)]+)\)/g, (_, t, href) =>
+      `<a href="${href}" target="_blank" rel="noopener">${t}${catalogMentionIcon(href)}</a>`);
 }
 
 // Non-breaking spaces for Russian typography — keeps short prepositions/conjunctions,
@@ -502,6 +521,15 @@ const WIDGETS = {
     css:     'css/blog-widget-svg.css',
     js:      'js/blog-svg-viewer.min.js',
   },
+  'ad-rtb-12': {
+    partial: 'blog-ad-rtb-12',
+  },
+  'ad-rtb-13': {
+    partial: 'blog-ad-rtb-13',
+  },
+  'ad-rtb-14': {
+    partial: 'blog-ad-rtb-14',
+  },
   // Body-driven, без своих css/js: разметка запекается из каталога на сборке
   // (build*Widget выше), гидрировать нечего, а стили опираются на компоненты
   // css/seo-page.css + css/blog.css, уже подключённые в blog-post.html.
@@ -580,10 +608,10 @@ function renderBlocks(lines, lang, headings, widgets, totalH2 = 0) {
     // иначе `:::widget` был бы разобран как коллаут неизвестного типа. Тело
     // обычно пустое (svg-viewer), но body-driven виджеты вроде icon-row
     // читают его как данные — по одной строке на пункт.
-    const wg = t.match(/^:::widget\s+([\w-]+)\s*$/);
+    const wg = t.match(/^:::widget\s+([\w\-\u2010-\u2015]+)\s*$/);
     if (wg) {
       closeList();
-      const name = wg[1];
+      const name = wg[1].replace(/[\u2010-\u2015]/g, '-');
       const bodyLines = [];
       i++;
       while (i < lines.length && lines[i].trim() !== ':::') { bodyLines.push(lines[i]); i++; }
@@ -793,6 +821,22 @@ function shortDate(iso) {
   return `${d}.${m}.${y}`;
 }
 
+// "Изменено <дата>" под текстом статьи. Пост, уже стоящий в индексе, живёт
+// дальше: факты в нём стареют и правятся. Дата публикации остаётся датой
+// публикации (её знают ссылающиеся и агрегаторы), а правку показывает
+// отдельная строка — и она же уходит в JSON-LD dateModified как сигнал
+// свежести для поиска.
+//
+// Источник — поле `updated:` во фронтматтере, а НЕ mtime файла и не git log:
+// массовые проходы (apply-typography.js, билд-коммиты вроде «массовый
+// билд-апдейт») трогают все 180 постов разом и проставили бы всем одну дату,
+// хотя текст в них никто не менял. Дату ставит автор правки, руками.
+function updatedNoteHtml(p, lang) {
+  if (!p.updated) return '';
+  const label = lang === 'en' ? 'Updated' : 'Изменено';
+  return `<p class="blog-updated"><time datetime="${p.updated}">${label} ${humanDate(p.updated, lang)}</time></p>`;
+}
+
 // Related posts widget (bottom of article) — RELATED_TAG_COUNT ranked by
 // shared tags (ties broken by recency), plus RELATED_RANDOM_COUNT picked at
 // random from the rest. Pure tag-ranking clusters posts into "islands" —
@@ -897,6 +941,26 @@ function stripMd(text) {
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
 }
 
+// Фронтматтер `updated:` — дата правки уже опубликованного поста (см.
+// updatedNoteHtml). Молча отбрасываем то, что показывать нельзя: кривой
+// формат и дату, которая не позже публикации (там правка ничего не значит —
+// пост в этот день и вышел). Оба случая печатаем предупреждением, чтобы
+// опечатка в дате не растворилась в выводе сборки.
+function parseUpdated(meta, slug) {
+  const raw = (meta.updated || '').trim();
+  if (!raw) return '';
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) {
+    console.warn(`⚠ ${slug}: updated: "${raw}" — ожидается YYYY-MM-DD, поле пропущено`);
+    return '';
+  }
+  const date = meta.date || '';
+  if (date && raw <= date) {
+    console.warn(`⚠ ${slug}: updated: ${raw} не позже date: ${date} — поле пропущено`);
+    return '';
+  }
+  return raw;
+}
+
 function firstParagraph(md) {
   for (const block of md.split(/\n\s*\n/)) {
     const t = block.trim();
@@ -923,6 +987,7 @@ async function main() {
       description: meta.description || firstParagraph(body).slice(0, 160),
       description_en: meta.description_en || meta.description || firstParagraph(body).slice(0, 160),
       date: meta.date || '1970-01-01',
+      updated: parseUpdated(meta, slug),
       excerpt: firstParagraph(body).slice(0, 180),
       tags,
       tags_en,
@@ -962,7 +1027,7 @@ async function main() {
           "headline": p.title,
           "description": p.description,
           "datePublished": p.date,
-          "dateModified": p.date,
+          "dateModified": p.updated || p.date,
           "url": fullUrl,
           "inLanguage": "ru",
           "image": ogImageFor(p.slug),
@@ -995,6 +1060,10 @@ async function main() {
       OG_IMAGE_HEIGHT: ogDims.height,
       DATE_ISO: p.date,
       DATE_HUMAN: humanDate(p.date),
+      MODIFIED_META: p.updated
+        ? `\n  <meta property="article:modified_time" content="${p.updated}">`
+        : '',
+      UPDATED_NOTE: updatedNoteHtml(p, 'ru'),
       READ_TIME: readTime(p.body, 'ru'),
       VIEWS: views[p.slug] || 0,
       JSON_LD: jsonLd,
@@ -1033,7 +1102,7 @@ async function main() {
           "headline": p.title_en,
           "description": p.description_en,
           "datePublished": p.date,
-          "dateModified": p.date,
+          "dateModified": p.updated || p.date,
           "url": enFullUrl,
           "inLanguage": "en",
           "image": ogImageFor(p.slug),
@@ -1052,6 +1121,7 @@ async function main() {
       OG_TITLE: esc(p.title_en),
       H1: esc(typo(p.title_en)),
       DATE_HUMAN: humanDate(p.date, 'en'),
+      UPDATED_NOTE: updatedNoteHtml(p, 'en'),
       READ_TIME: readTime(p.body_en || p.body, 'en'),
       VIEWS: views[p.slug] || 0,
       JSON_LD: enJsonLd,

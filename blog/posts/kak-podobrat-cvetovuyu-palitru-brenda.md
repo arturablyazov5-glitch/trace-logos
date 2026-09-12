@@ -9,7 +9,7 @@ tags: Инструкции, Дизайн, Брендинг
 tags_en: How-To, Design, Branding
 ---
 
-«Психологию цвета» знают все: синий — доверие, красный — энергия. Но между «знать про синий» и «собрать рабочую палитру из пяти конкретных HEX‑кодов» лежит пропасть, в которую проваливается большинство самодельных брендов: цвета красивы по отдельности и разваливаются вместе, текст не читается на плашках, а в каждом макете оттенок чуть другой. Разбираем пошаговую методику: от выбора основного цвета до зафиксированного файла с кодами.
+«Психологию цвета» знают все: синий — доверие, красный — энергия. Но между «знать про синий» и «собрать рабочую палитру из пяти конкретных HEX‑кодов» лежит пропасть, в которую проваливается большинство самодельных брендов: цвета красивы по отдельности и разваливаются вместе, текст не читается на плашках, а в каждом макете оттенок чуть другой. Разбираем пошаговую методику: от выбора основного цвета до зафиксированного файла с кодами.
 
 :::note Коротко
 Рабочая палитра бренда — это **1 основной цвет + 1‑2 акцентных + 2‑3 нейтральных** (фон, текст), у каждого — точный HEX‑код, записанный в один файл. Порядок сборки: карта цветов конкурентов → выбор свободной зоны спектра → основной цвет → акценты по цветовому кругу → нейтральные → проверка контраста и «боевой» тест в реальных макетах. Инструменты: цветовой круг, генераторы палитр, [проверка цветов чужих брендов](../kak-uznat-cvet-logotipa/).
@@ -17,17 +17,17 @@ tags_en: How-To, Design, Branding
 
 ## Шаг 0. Сначала карта конкурентов, потом вкус
 
-Самая частая ошибка — начинать с «мне нравится синий». Цвет бренда — это территория на рынке, а не украшение ([как её делят банки](../logotipy-rossijskih-bankov/), [мессенджеры](../logotipy-messendzherov/) и [маркетплейсы](../logotipy-marketplejsov/)). Поэтому первый шаг — карта: выпишите 5‑10 конкурентов и их основные цвета (точные коды удобно смотреть в нашем [каталоге](../../logos/) — блок «Цвета бренда» есть на каждой странице — или через [инструменты‑пипетки](../kak-uznat-cvet-logotipa/)). На карте станет видно: какие зоны спектра заняты намертво, какие свободны. Свободная зона — ваш шорт‑лист. Именно так [Т‑Банк](../istoriya-logotipa-t-banka/) взял жёлтый, а [Spotify](../istoriya-logotipa-spotify/) — зелёный.
+Самая частая ошибка — начинать с «мне нравится синий». Цвет бренда — это территория на рынке, а не украшение (как её делят банки, [мессенджеры](../logotipy-messendzherov/) и [маркетплейсы](../logotipy-marketplejsov/)). Поэтому первый шаг — карта: выпишите 5‑10 конкурентов и их основные цвета (точные коды удобно смотреть в нашем [каталоге](../../logos/) — блок «Цвета бренда» есть на каждой странице — или через [инструменты‑пипетки](../kak-uznat-cvet-logotipa/)). На карте станет видно: какие зоны спектра заняты намертво, какие свободны. Свободная зона — ваш шорт‑лист. Именно так [Т‑Банк](../istoriya-logotipa-t-banka/) взял жёлтый, а [Spotify](../istoriya-logotipa-spotify/) — зелёный.
 
 ## Шаг 1. Основной цвет: три фильтра
 
 Кандидатов из свободной зоны прогоняем через три фильтра:
 
 1. **Смысловой.** Что цвет должен говорить о бренде? Ориентиры — в статье [психология цвета в логотипе](../psihologiya-cveta-v-logotipe/), но без фанатизма: контекст бьёт «психологию» (зелёный Сбера не про экологию, а про полтора века истории).
-2. **Средовой.** Где цвет будет жить? Для приложения с тёмной темой нужен оттенок, горящий на чёрном — [именно поэтому Spotify сменил зелёный](../istoriya-logotipa-spotify/); для печатной упаковки — воспроизводимый в CMYK, [подробности про печать](../logotip-dlya-pechati/) мы разбирали отдельно.
-3. **Практический.** Хватает ли контраста для текста? Белая надпись на вашем цвете должна проходить проверку читаемости (см. шаг 4).
+2. **Средовой.** Где цвет будет жить? Для приложения с тёмной темой нужен оттенок, горящий на чёрном — [именно поэтому Spotify сменил зелёный](../istoriya-logotipa-spotify/); для печатной упаковки — воспроизводимый в CMYK, [подробности про печать](../logotip-dlya-pechati/) мы разбирали отдельно.
+3. **Практический.** Хватает ли контраста для текста? Белая надпись на вашем цвете должна проходить проверку читаемости (см. шаг 4).
 
-Выбирайте не «цвет вообще», а конкретный оттенок: «синий» — это тысячи вариантов от кобальта до бирюзы, и работают они по‑разному.
+Выбирайте не «цвет вообще», а конкретный оттенок: «синий» — это тысячи вариантов от кобальта до бирюзы, и работают они по‑разному.
 
 ## Шаг 2. Акцентные цвета: цветовой круг вместо интуиции
 
@@ -41,21 +41,21 @@ tags_en: How-To, Design, Branding
 
 ## Шаг 3. Нейтральные: цвета, о которых забывают
 
-В реальных макетах 80% площади занимают не фирменные цвета, а фон и текст — и их тоже надо зафиксировать: белый или чуть тонированный фон, тёмно‑серый (не чисто чёрный — он «звенит» на белом) для текста, светло‑серый для рамок и разделителей. Если нейтральные не заданы, каждый макет будет чуть разным — и [фирменный стиль](../chto-takoe-firmennyj-stil/) рассыплется на мелочах.
+В реальных макетах 80% площади занимают не фирменные цвета, а фон и текст — и их тоже надо зафиксировать: белый или чуть тонированный фон, тёмно‑серый (не чисто чёрный — он «звенит» на белом) для текста, светло‑серый для рамок и разделителей. Если нейтральные не заданы, каждый макет будет чуть разным — и [фирменный стиль](../chto-takoe-firmennyj-stil/) рассыплется на мелочах.
 
 ## Шаг 4. Проверки перед фиксацией
 
 - **Контраст.** Пары «текст + фон» проверьте по стандарту WCAG (любой онлайн‑чекер контраста): минимум 4,5:1 для обычного текста. Это не только про доступность — нечитаемые плашки убивают конверсию кнопок.
 - **Дальтонизм.** Прогоните палитру через симулятор цветовой слепоты (встроен в Figma‑плагины): 8% мужчин видят красный и зелёный иначе.
 - **Боевой тест.** Соберите на палитре три реальных макета: пост, кнопку, визитку. Палитры, прекрасные в кружочках на презентации, часто разваливаются в вёрстке.
-- **Тёмная тема.** Если бренд живёт в приложениях — проверьте всё на тёмном фоне: [почему это критично](../logotipy-strimingovyh-servisov/), хорошо видно на примере стриминговых сервисов.
+- **Тёмная тема.** Если бренд живёт в приложениях — проверьте всё на тёмном фоне: почему это критично, хорошо видно на примере стриминговых сервисов.
 
 ## Шаг 5. Зафиксировать и не отпускать
 
 Финал — один файл (страница в [Figma](../../logos/design/figma/), PDF или даже заметка) со всеми цветами: название роли («основной», «акцент», «текст»), HEX для экрана, CMYK для печати. Этот файл — зародыш [брендбука](../chto-takoe-brendbuk/); без него через месяц в макетах будет пять «почти фирменных» оттенков синего. В Figma дополнительно сохраните цвета как Color Styles — тогда правка оттенка обновит все макеты разом.
 
 :::tip Быстрый путь: палитра из одного решения
-Если времени нет совсем, минимально жизнеспособная палитра собирается за 15 минут: основной цвет из свободной зоны спектра → акцент по комплементарной схеме → серый #333 для текста, #F7F7F7 для фона. Это скучно — и это работает лучше, чем восемь «интересных» цветов без системы, одна из [типичных ошибок](../oshibki-v-dizajne-logotipa/) в дизайне логотипа.
+Если времени нет совсем, минимально жизнеспособная палитра собирается за 15 минут: основной цвет из свободной зоны спектра → акцент по комплементарной схеме → серый #333 для текста, #F7F7F7 для фона. Это скучно — и это работает лучше, чем восемь «интересных» цветов без системы, одна из типичных ошибок в дизайне логотипа.
 :::
 
 ## Частые ошибки
@@ -66,7 +66,7 @@ tags_en: How-To, Design, Branding
 4. **Игнорирование среды.** Палитра, собранная на белом листе, для продукта, живущего в тёмном приложении.
 5. **Смена палитры под настроение.** Цвет копит узнаваемость годами — [WhatsApp](../logotipy-messendzherov/) не менял зелёный с 2009‑го. Терпение — часть методики.
 
-Дальше по конвейеру: [шрифт для логотипа](../shrift-dlya-logotipa/), [фирменный стиль целиком](../chto-takoe-firmennyj-stil/) и [как заказать логотип](../kak-zakazat-logotip-u-dizajnera/), если делаете бренд с дизайнером. А подсматривать удачные палитры удобно в [каталоге](../../logos/) — у каждого бренда там видны точные фирменные цвета.
+Дальше по конвейеру: [шрифт для логотипа](../shrift-dlya-logotipa/), [фирменный стиль целиком](../chto-takoe-firmennyj-stil/) и [как заказать логотип](../kak-zakazat-logotip-u-dizajnera/), если делаете бренд с дизайнером. А подсматривать удачные палитры удобно в [каталоге](../../logos/) — у каждого бренда там видны точные фирменные цвета.
 
 ---EN---
 
@@ -78,7 +78,7 @@ A working brand palette is **1 primary + 1-2 accents + 2-3 neutrals** (backgroun
 
 ## Step 0. The competitor map before taste
 
-The most common mistake is starting with "I like blue". A brand color is market territory, not decoration ([how banks divide it](../logotipy-rossijskih-bankov/), [messengers](../logotipy-messendzherov/), [marketplaces](../logotipy-marketplejsov/)). So the first step is a map: list 5-10 competitors and their primary colors (exact codes are easy to check in our [catalog](../../logos/) — every page has a "Brand colors" block — or with [eyedropper tools](../kak-uznat-cvet-logotipa/)). The map reveals which spectrum zones are locked and which are free. The free zone is your shortlist. That's exactly how [T-Bank](../istoriya-logotipa-t-banka/) took yellow and [Spotify](../istoriya-logotipa-spotify/) took green.
+The most common mistake is starting with "I like blue". A brand color is market territory, not decoration (how banks divide it, [messengers](../logotipy-messendzherov/), [marketplaces](../logotipy-marketplejsov/)). So the first step is a map: list 5-10 competitors and their primary colors (exact codes are easy to check in our [catalog](../../logos/) — every page has a "Brand colors" block — or with [eyedropper tools](../kak-uznat-cvet-logotipa/)). The map reveals which spectrum zones are locked and which are free. The free zone is your shortlist. That's exactly how [T-Bank](../istoriya-logotipa-t-banka/) took yellow and [Spotify](../istoriya-logotipa-spotify/) took green.
 
 ## Step 1. The primary: three filters
 
@@ -109,14 +109,14 @@ In real layouts 80% of the area is not brand colors but background and text — 
 - **Contrast.** Test text-background pairs against WCAG (any online contrast checker): at least 4.5:1 for body text. It's not just accessibility — unreadable badges kill button conversion.
 - **Color blindness.** Run the palette through a simulator (built into Figma plugins): 8% of men see red and green differently.
 - **The combat test.** Build three real layouts on the palette: a post, a button, a business card. Palettes gorgeous as swatch circles often collapse in actual composition.
-- **Dark theme.** If the brand lives in apps, check everything on dark — [why it's critical](../logotipy-strimingovyh-servisov/) is easy to see in streaming service logos.
+- **Dark theme.** If the brand lives in apps, check everything on dark — why it's critical is easy to see in streaming service logos.
 
 ## Step 5. Fix it and hold on
 
 The finale is one file (a [Figma](../../logos/design/figma/) page, a PDF, even a note) with every color: role name ("primary", "accent", "text"), HEX for screens, CMYK for print. This file is the embryo of a [brand book](../chto-takoe-brendbuk/); without it, a month from now your layouts will hold five "almost brand" blues. In Figma also save the colors as Color Styles — then editing a shade updates every layout at once.
 
 :::tip The fast lane: a palette from one decision
-If there's truly no time, a minimum viable palette takes 15 minutes: a primary from a free spectrum zone → a complementary accent → #333 gray for text, #F7F7F7 for background. It's boring — and it works better than eight "interesting" colors with no system, one of the [typical mistakes](../oshibki-v-dizajne-logotipa/) in logo design.
+If there's truly no time, a minimum viable palette takes 15 minutes: a primary from a free spectrum zone → a complementary accent → #333 gray for text, #F7F7F7 for background. It's boring — and it works better than eight "interesting" colors with no system, one of the typical mistakes in logo design.
 :::
 
 ## Common mistakes

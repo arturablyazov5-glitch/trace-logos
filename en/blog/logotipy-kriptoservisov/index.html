@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <script>window.__LANG__='en';</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="/css/blog.css?v=20260808">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="/css/blog.css?v=20260910">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -169,15 +171,17 @@
     </div>
   </div>
 </nav>
-<script src="/components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="/components/search-box.min.js?v=20260808" defer></script>
-<script src="/components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="/components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="/components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="/js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260910">
+<script type="module" src="/components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="/js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -190,11 +194,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(278 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(318 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(8 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(68 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(278 70% 38%) 0%, hsl(68 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(20 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(60 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(110 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(170 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(20 70% 38%) 0%, hsl(170 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97M7.48 20.364l3.126-17.727" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-08-20">August 20, 2026</time>
@@ -203,16 +207,16 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            0
+	            10
 	          </span>
         </div>
         <h1>Crypto Service Logos — Binance, Coinbase, MetaMask and More</h1>
       </header>
       <div class="blog-body">
-        <p>The crypto industry started with a single visual cliché — a gold coin with a letter — and in ten years covered a road that took banks a century: from garage aesthetics to strict fintech minimalism. Today crypto marks are more interesting than bank ones: the industry must look trustworthy (money!) and rebellious (decentralization!) at the same time. Here is how <a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance</a>, <a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase</a>, <a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask</a>, <a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com</a> and <a href="/en/logos/pay/exodus/" target="_blank" rel="noopener">Exodus</a> resolve that conflict.</p>
-      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The category stretches between two poles: <strong>fintech rigor</strong> — the blue <a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase</a> circle, the <a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com</a> geometry — and <strong>crypto idiosyncrasy</strong> — the yellow diamond maze of <a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance</a>, the 3D fox of <a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask</a>. The closer a service sits to mainstream users and regulators, the calmer the mark; the deeper into web3, the stranger and brighter. Files are in the <a href="/en/logos/pay/" target="_blank" rel="noopener">Payments &amp; Cards category</a>.</p></div></div>
+        <p>The crypto industry started with a single visual cliché — a gold coin with a letter — and in ten years covered a road that took banks a century: from garage aesthetics to strict fintech minimalism. Today crypto marks are more interesting than bank ones: the industry must look trustworthy (money!) and rebellious (decentralization!) at the same time. Here is how <a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance<img class="blog-mention-icon" src="/assets/logos/svgs/binance.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/coinbase.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask<img class="blog-mention-icon" src="/assets/logos/svgs/metamask.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/crypto-com.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> and <a href="/en/logos/pay/exodus/" target="_blank" rel="noopener">Exodus<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/exodus.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> resolve that conflict.</p>
+      <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>The category stretches between two poles: <strong>fintech rigor</strong> — the blue <a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/coinbase.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> circle, the <a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/crypto-com.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> geometry — and <strong>crypto idiosyncrasy</strong> — the yellow diamond maze of <a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance<img class="blog-mention-icon" src="/assets/logos/svgs/binance.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, the 3D fox of <a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask<img class="blog-mention-icon" src="/assets/logos/svgs/metamask.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. The closer a service sits to mainstream users and regulators, the calmer the mark; the deeper into web3, the stranger and brighter. Files are in the <a href="/en/logos/pay/" target="_blank" rel="noopener">Payments &amp; Cards category</a>.</p></div></div>
       <h2 id="coinbase-a-bank-that-happens-to-do-crypto">Coinbase: a bank that happens to do crypto</h2>
-      <p><strong><a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase</a></strong> bet on the opposite of crypto chaos: a calm blue wordmark and a round &quot;C&quot;-coin icon. No lightning bolts, no diamonds, no cyberpunk — the palette and shapes come from classic fintech, and the blue is the same trust code as banks and <a href="/en/blog/logotipy-platezhnyh-sistem/" target="_blank" rel="noopener">payment systems</a> — we cover <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">color psychology</a> separately. The logic is transparent: the exchange that went public on Nasdaq in April 2021 — the first major crypto service to do so — and works with regulators must look like a financial institution, not an enthusiast forum.</p>
+      <p><strong><a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/coinbase.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> bet on the opposite of crypto chaos: a calm blue wordmark and a round &quot;C&quot;-coin icon. No lightning bolts, no diamonds, no cyberpunk — the palette and shapes come from classic fintech, and the blue is the same trust code as banks and payment systems — we cover <a href="/en/blog/psihologiya-cveta-v-logotipe/" target="_blank" rel="noopener">color psychology</a> separately. The logic is transparent: the exchange that went public on Nasdaq in April 2021 — the first major crypto service to do so — and works with regulators must look like a financial institution, not an enthusiast forum.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -224,12 +228,12 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="binance-a-diamond-as-a-private-alphabet">Binance: a diamond as a private alphabet</h2>
-      <p><strong><a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance</a></strong> went the other way: a golden‑yellow mark of diamonds arranged into a maze‑like &quot;B&quot;. The shape nods to two layers at once — the gold of coins (the old cliché, abstracted) and the pixel‑block aesthetics of the blockchain. Yellow on black is the category's highest‑contrast pair and effectively the exchange's whole brand code, down to its BNB token inheriting the mark's shape. A rare case of a brand growing an entire alphabet out of its logo: the Binance diamond works as a <a href="/en/blog/chto-takoe-monogramma/" target="_blank" rel="noopener">monogram</a>, a pattern and an icon at once.</p>
+      <p><strong><a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance<img class="blog-mention-icon" src="/assets/logos/svgs/binance.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> went the other way: a golden‑yellow mark of diamonds arranged into a maze‑like &quot;B&quot;. The shape nods to two layers at once — the gold of coins (the old cliché, abstracted) and the pixel‑block aesthetics of the blockchain. Yellow on black is the category's highest‑contrast pair and effectively the exchange's whole brand code, down to its BNB token inheriting the mark's shape. A rare case of a brand growing an entire alphabet out of its logo: the Binance diamond works as a <a href="/en/blog/chto-takoe-monogramma/" target="_blank" rel="noopener">monogram</a>, a pattern and an icon at once.</p>
       <h2 id="metamask-the-fox-versus-the-suits">MetaMask: the fox versus the suits</h2>
-      <p><strong><a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask</a></strong> — a polygonal 3D fox, the most unconventional mark in finance, period. The web3 wallet deliberately looks like a game character rather than a vault: its audience treats decentralization as ideology, and corporate minimalism would read as betrayal. The fox is a full <a href="/en/blog/chto-takoe-maskot/" target="_blank" rel="noopener">mascot</a>: it is animated, its eyes follow your cursor at login, and it became the badge of a whole generation of crypto apps. The parallel with the <a href="/en/blog/logotipy-brauzerov/" target="_blank" rel="noopener">Firefox fox</a> is no accident — both brands sell &quot;the free internet&quot;, and both picked a fox.</p>
+      <p><strong><a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask<img class="blog-mention-icon" src="/assets/logos/svgs/metamask.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — a polygonal 3D fox, the most unconventional mark in finance, period. The web3 wallet deliberately looks like a game character rather than a vault: its audience treats decentralization as ideology, and corporate minimalism would read as betrayal. The fox is a full <a href="/en/blog/chto-takoe-maskot/" target="_blank" rel="noopener">mascot</a>: it is animated, its eyes follow your cursor at login, and it became the badge of a whole generation of crypto apps. The parallel with the <a href="/en/blog/logotipy-brauzerov/" target="_blank" rel="noopener">Firefox fox</a> is no accident — both brands sell &quot;the free internet&quot;, and both picked a fox.</p>
       <h2 id="crypto-com-and-exodus-the-middle-of-the-spectrum">Crypto.com and Exodus: the middle of the spectrum</h2>
-      <p><strong><a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com</a></strong> — a blue‑and‑white heraldic lion shield: a claim to status and permanence, amplified by the brand's main asset — the domain‑as‑name. Stadium and Formula 1 sponsorships demand a mark that stands next to sports club crests — and it is engineered exactly for that.</p>
-      <p><strong><a href="/en/logos/pay/exodus/" target="_blank" rel="noopener">Exodus</a></strong> — gradient geometry in purples: the language of neither bank nor game but of a &quot;beautiful product&quot; — the wallet always competed on interface design. The gradient is the same &quot;new tech&quot; code as in <a href="/en/blog/logotipy-nejrosetej/" target="_blank" rel="noopener">AI logos</a>, one of the main <a href="/en/blog/trendy-logotipov-2026/" target="_blank" rel="noopener">logo trends</a> overall.</p>
+      <p><strong><a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/crypto-com.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — a blue‑and‑white heraldic lion shield: a claim to status and permanence, amplified by the brand's main asset — the domain‑as‑name. Stadium and Formula 1 sponsorships demand a mark that stands next to sports club crests — and it is engineered exactly for that.</p>
+      <p><strong><a href="/en/logos/pay/exodus/" target="_blank" rel="noopener">Exodus<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/exodus.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></strong> — gradient geometry in purples: the language of neither bank nor game but of a &quot;beautiful product&quot; — the wallet always competed on interface design. The gradient is the same &quot;new tech&quot; code as in <a href="/en/blog/logotipy-nejrosetej/" target="_blank" rel="noopener">AI logos</a>, one of the main logo trends overall.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
 <div id="yandex_rtb_R-A-19679616-4"></div>
 <script>
@@ -241,137 +245,138 @@ window.yaContextCb.push(() => {
 })
 </script></div>
       <h2 id="the-summary-table">The summary table</h2>
-      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Service</th><th>Mark</th><th>Pole</th><th>Signals to</th></tr></thead><tbody><tr><td><a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase</a></td><td>word + &quot;C&quot; circle</td><td>fintech</td><td>regulators, newcomers</td></tr><tr><td><a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance</a></td><td>yellow diamond &quot;B&quot;</td><td>crypto</td><td>traders</td></tr><tr><td><a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask</a></td><td>3D fox</td><td>web3</td><td>enthusiasts</td></tr><tr><td><a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com</a></td><td>lion shield</td><td>status</td><td>the mainstream</td></tr><tr><td><a href="/en/logos/pay/exodus/" target="_blank" rel="noopener">Exodus</a></td><td>gradient geometry</td><td>product</td><td>design lovers</td></tr></tbody></table></div>
+      <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th>Service</th><th>Mark</th><th>Pole</th><th>Signals to</th></tr></thead><tbody><tr><td><a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/coinbase.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>word + &quot;C&quot; circle</td><td>fintech</td><td>regulators, newcomers</td></tr><tr><td><a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance<img class="blog-mention-icon" src="/assets/logos/svgs/binance.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>yellow diamond &quot;B&quot;</td><td>crypto</td><td>traders</td></tr><tr><td><a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask<img class="blog-mention-icon" src="/assets/logos/svgs/metamask.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>3D fox</td><td>web3</td><td>enthusiasts</td></tr><tr><td><a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/crypto-com.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>lion shield</td><td>status</td><td>the mainstream</td></tr><tr><td><a href="/en/logos/pay/exodus/" target="_blank" rel="noopener">Exodus<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/exodus.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a></td><td>gradient geometry</td><td>product</td><td>design lovers</td></tr></tbody></table></div>
       <p>The takeaway: <strong>a crypto mark is a statement on the industry's core conflict.</strong> The blue circle says &quot;we are the new bank&quot;, the yellow diamond says &quot;our territory, our rules&quot;, the fox says &quot;we're not about banks at all&quot;. The choice of mark here is more honest than the press releases.</p>
       <div class="callout callout-warning"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg><span>On usage</span></div><div class="callout-body"><p>Exchange and wallet logos are registered trademarks, and finance is policed especially hard: another exchange's mark on your landing page easily reads as a partnership claim. Before placing one, read <a href="/en/blog/mozhno-li-ispolzovat-chuzhoy-logotip/" target="_blank" rel="noopener">the rules on using others' logos</a>.</p></div></div>
-      <p>All marks from this roundup in SVG and PNG are in the <a href="/en/logos/pay/" target="_blank" rel="noopener">Payments &amp; Cards category</a> and the catalog: <a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase</a>, <a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance</a>, <a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask</a>, <a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com</a>, <a href="/en/logos/pay/exodus/" target="_blank" rel="noopener">Exodus</a>. Nearby — the classic <a href="/en/blog/logotipy-platezhnyh-sistem/" target="_blank" rel="noopener">payment systems</a> for an era‑to‑era comparison.</p>
+      <p>All marks from this roundup in SVG and PNG are in the <a href="/en/logos/pay/" target="_blank" rel="noopener">Payments &amp; Cards category</a> and the catalog: <a href="/en/logos/pay/coinbase/" target="_blank" rel="noopener">Coinbase<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/coinbase.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/finance/binance/" target="_blank" rel="noopener">Binance<img class="blog-mention-icon" src="/assets/logos/svgs/binance.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/pay/metamask/" target="_blank" rel="noopener">MetaMask<img class="blog-mention-icon" src="/assets/logos/svgs/metamask.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/pay/cryptocom/" target="_blank" rel="noopener">Crypto.com<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/crypto-com.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, <a href="/en/logos/pay/exodus/" target="_blank" rel="noopener">Exodus<img class="blog-mention-icon" src="/assets/logos/pngs/apple/26/color/exodus.png?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>. Nearby — the classic payment systems for an era‑to‑era comparison.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/logotipy-platezhnyh-sistem/" data-date="2026-08-24" data-views="0">
+          <a class="blog-card" href="/en/blog/logotipy-oblachnyh-servisov/" data-date="2026-09-10" data-views="0">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(90 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(150 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Finance</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3.75a2 2 0 0 1 1.6.8l.45.6a4 4 0 0 0 6.4 0l.45-.6a2 2 0 0 1 1.6-.8H21" /><path d="M3 7h18" /><rect x="3" y="3" width="18" height="18" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(0 70% 38%) 0%, hsl(150 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>24.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>10.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
             0
           </div>
           </div>
-          <div class="blog-card-title">Payment System Logos — Mir, Visa, Mastercard, SBP</div>
+          <div class="blog-card-title">Cloud Storage Logos — Why Everyone Draws a Cloud (and Who Doesn't)</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-strimingovyh-servisov/" data-date="2026-08-28" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-nejrosetej/" data-date="2026-09-01" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(228 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(288 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2-5 5-5-5" /><rect width="20" height="15" x="2" y="7" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(138 70% 38%) 0%, hsl(288 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">AI</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20v2" /><path d="M12 2v2" /><path d="M17 20v2" /><path d="M17 2v2" /><path d="M2 12h2" /><path d="M2 17h2" /><path d="M2 7h2" /><path d="M20 12h2" /><path d="M20 17h2" /><path d="M20 7h2" /><path d="M7 20v2" /><path d="M7 2v2" /><rect x="4" y="4" width="16" height="16" rx="2" /><rect x="8" y="8" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>01.09.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Streaming Service Logos — Netflix, YouTube, Twitch and More</div>
+          <div class="blog-card-title">AI Company Logos — How Neural Network Services Brand Themselves</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-socsetej/" data-date="2026-08-27" data-views="0">
+      <a class="blog-card" href="/en/blog/logotipy-mobilnyh-igr/" data-date="2026-08-29" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(5 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(65 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" x2="15.42" y1="13.51" y2="17.49" /><line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></svg></div>
+    linear-gradient(135deg, hsl(275 70% 38%) 0%, hsl(65 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Games</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>27.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>29.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">Social Network Logos — From the Instagram Gradient to the X</div>
+          <div class="blog-card-title">Mobile Game Logos — Why They All Use Chunky 3D Letters</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotipy-servisov-puteshestvij/" data-date="2026-08-26" data-views="1">
+      <a class="blog-card" href="/en/blog/logotipy-messendzherov/" data-date="2026-08-26" data-views="17">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(143 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(203 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Travel</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></svg></div>
+    linear-gradient(135deg, hsl(53 70% 38%) 0%, hsl(203 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Collections</span><span class="blog-card-tag">Branding</span><span class="blog-card-tag">Social Media</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>26.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            17
           </div>
           </div>
-          <div class="blog-card-title">Travel Service Logos — Aviasales, Skyscanner, Kayak and More</div>
+          <div class="blog-card-title">Messenger Logos — Why Everyone Picks Bubbles and Planes</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/proverit-logotip-na-unikalnost/" data-date="2026-08-14" data-views="0">
+      <a class="blog-card" href="/en/blog/logotip-dlya-podkasta/" data-date="2026-08-02" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">Law</span><span class="blog-card-tag">Trademark</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 11 2 2 4-4" /><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Logo</span><span class="blog-card-tag">Podcast</span><span class="blog-card-tag">Cover</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 17a1 1 0 1 0-2 0l.5 4.5a0.5 0.5 0 0 0 1 0z" fill="currentColor" /><path d="M16.85 18.58a9 9 0 1 0-9.7 0" /><path d="M8 14a5 5 0 1 1 8 0" /><circle cx="12" cy="11" r="1" fill="currentColor" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>14.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>02.08.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            0
+            6
           </div>
           </div>
-          <div class="blog-card-title">How to Check a Logo for Uniqueness</div>
+          <div class="blog-card-title">A Podcast Logo — How to Make Cover Art That Gets Noticed</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/chto-takoe-genmodzi/" data-date="2026-07-22" data-views="1">
+      <a class="blog-card" href="/en/blog/shrift-dlya-logotipa/" data-date="2026-07-12" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Emoji</span><span class="blog-card-tag">Apple</span><span class="blog-card-tag">AI</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72" /><path d="m14 7 3 3" /><path d="M5 6v4" /><path d="M19 14v4" /><path d="M10 2v2" /><path d="M7 8H3" /><path d="M21 16h-4" /><path d="M11 3H9" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Fonts</span><span class="blog-card-tag">Logos</span><span class="blog-card-tag">Design</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16" /><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2" /><path d="M9 20h6" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>22.07.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>12.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            12
           </div>
           </div>
-          <div class="blog-card-title">What Are Genmoji — the AI‑Generated Emoji Explained</div>
+          <div class="blog-card-title">Choosing a Logo Typeface — And Not Getting Fined over the License</div>
           
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -389,25 +394,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -484,6 +481,7 @@ window.yaContextCb.push(() => {
           <li><a href="/en/collections/design-tools/"><span data-i18n="footerColl_design-tools">Design tools</span></a></li>
           <li><a href="/en/collections/education/"><span data-i18n="footerColl_education">Education platforms</span></a></li>
           <li><a href="/en/collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Health &amp; fitness</span></a></li>
+          <li><a href="/en/collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">TV channel logos</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -529,10 +527,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260808"></script>
-<script src="/js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260910"></script>
+<script src="/js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

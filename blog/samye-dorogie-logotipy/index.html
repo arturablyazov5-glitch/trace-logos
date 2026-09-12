@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Самые дорогие логотипы мира — и почему цена почти не связана с картинкой · Trace Logo's</title>
@@ -97,11 +99,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../css/seo-page.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20260808">
-  <link rel="stylesheet" href="../../css/blog.css?v=20260808">
-  <link rel="stylesheet" href="../../css/site-footer.css?v=20260808" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260808"></noscript>
+  <link rel="stylesheet" href="../../css/seo-page.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20260910">
+  <link rel="stylesheet" href="../../css/blog.css?v=20260910">
+  <link rel="stylesheet" href="../../css/site-footer.css?v=20260910" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="../../css/site-footer.css?v=20260910"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -168,15 +170,17 @@
     </div>
   </div>
 </nav>
-<script src="../../components/lang-switcher.min.js?v=20260808" defer></script>
-<script src="../../components/search-box.min.js?v=20260808" defer></script>
-<script src="../../components/mobile-nav.min.js?v=20260808" defer></script>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../components/site-chrome.min.js?v=20260910" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260808">
-<script type="module" src="../../components/donate-ticker.min.js?v=20260808"></script>
-<script type="module" src="../../js/header-search.min.js?v=20260808"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20260910">
+<script type="module" src="../../components/donate-ticker.min.js?v=20260910"></script>
+<script type="module" src="../../js/header-search.min.js?v=20260910"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
@@ -189,11 +193,11 @@
   <div class="blog-layout">
     <article class="blog-article">
       <div class="blog-article-cover" style="--cover-gradient:
-    radial-gradient(circle at 12% 20%, hsl(1 88% 52%) 0%, transparent 62%),
-    radial-gradient(circle at 88% 12%, hsl(41 85% 48%) 0%, transparent 62%),
-    radial-gradient(circle at 20% 90%, hsl(91 82% 42%) 0%, transparent 62%),
-    radial-gradient(circle at 85% 85%, hsl(151 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(1 70% 38%) 0%, hsl(151 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></svg></div>
+    radial-gradient(circle at 12% 20%, hsl(241 88% 52%) 0%, transparent 62%),
+    radial-gradient(circle at 88% 12%, hsl(281 85% 48%) 0%, transparent 62%),
+    radial-gradient(circle at 20% 90%, hsl(331 82% 42%) 0%, transparent 62%),
+    radial-gradient(circle at 85% 85%, hsl(31 85% 46%) 0%, transparent 62%),
+    linear-gradient(135deg, hsl(241 70% 38%) 0%, hsl(31 65% 28%) 100%);" aria-hidden="true"><svg class="blog-article-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.5 3 8 9l4 13 4-13-2.5-6" /><path d="M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z" /><path d="M2 9h20" /></svg></div>
       <header class="blog-article-head">
         <div class="blog-meta">
           <time class="blog-date" datetime="2026-07-11">11 июля 2026</time>
@@ -202,7 +206,7 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            5
+	            31
 	          </span>
         </div>
         <h1>Самые дорогие логотипы мира — и почему цена почти не связана с картинкой</h1>
@@ -212,15 +216,15 @@
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>Коротко</span></div><div class="callout-body"><p>В гигантских суммах сам знак — доли процента. Остальное: <strong>стратегия и исследования</strong>, <strong>юридика</strong> (права, регистрации по всему миру), а главное — <strong>внедрение</strong>: замена вывесок, транспорта, упаковки, интерфейсов в тысячах точек. А контрпримеры (Nike за $35, Coca‑Cola и Google — силами сотрудников) показывают: ценность знака создаёт не бюджет, а десятилетия последовательного использования.</p></div></div>
       <h2 id="рекордсмены">Рекордсмены</h2>
       <h3>Symantec — $1,28 млрд</h3>
-      <p>Формально это не гонорар за дизайн: в 2010 году Symantec <a href="https://investor.verisign.com/news-releases/news-release-details/verisign-sell-authentication-services-business-symantec-128" target="_blank" rel="noopener">купила у Verisign бизнес аутентификации</a> вместе с брендовым активом — знаменитой «галочкой в круге» (чекмарк доверия, который видели миллионы сайтов). Сумма сделки включала бренд, репутацию и клиентскую базу — и именно поэтому случай Symantec так показателен: <strong>логотип может стоить миллиард, только если за ним миллиардная репутация</strong>.</p>
+      <p>Формально это не гонорар за дизайн: в 2010 году Symantec <a href="https://investor.verisign.com/news-releases/news-release-details/verisign-sell-authentication-services-business-symantec-128" target="_blank" rel="noopener">купила у Verisign бизнес аутентификации</a> вместе с брендовым активом — знаменитой «галочкой в круге» (чекмарк доверия, который видели миллионы сайтов). Сумма сделки включала бренд, репутацию и клиентскую базу — и именно поэтому случай Symantec так показателен: <strong>логотип может стоить миллиард, только если за ним миллиардная репутация</strong>.</p>
       <h3>BP — ~$210 млн</h3>
-      <p>Ребрендинг 2000 года: солнечно‑зелёный «гелиос» вместо щита. Собственно дизайн — малая часть; остальное — глобальное внедрение на тысячах АЗС по всему миру плюс масштабнейшая рекламная кампания о «новой зелёной BP». Кейс вошёл в учебники ещё и как урок рисков: после аварии в Мексиканском заливе «зелёный» образ стал мишенью для критики — айдентика обещала то, чему бизнес не соответствовал.</p>
+      <p>Ребрендинг 2000 года: солнечно‑зелёный «гелиос» вместо щита. Собственно дизайн — малая часть; остальное — глобальное внедрение на тысячах АЗС по всему миру плюс масштабнейшая рекламная кампания о «новой зелёной BP». Кейс вошёл в учебники ещё и как урок рисков: после аварии в Мексиканском заливе «зелёный» образ стал мишенью для критики — айдентика обещала то, чему бизнес не соответствовал.</p>
       <h3>Accenture — ~$100 млн</h3>
       <p>Консалтинг Andersen Consulting в 2001 году сменил имя и знак (то самое «accent на будущее» — Accenture с символом «больше»). Почему так дорого: смена имени глобальной корпорации — это нейминг, юридическая расчистка в десятках юрисдикций, перерегистрации, тотальная замена носителей и кампания, объясняющая рынку, кто все эти люди.</p>
       <h3>Posten Norge — ~$55 млн</h3>
       <p>Норвежская почта — хрестоматийный пример «дорогого простого»: скромный по форме знак, а бюджет съело внедрение в масштабах национальной инфраструктуры: тысячи отделений, транспорт, форма, автоматизация.</p>
       <h3>Сбер — миллиарды рублей</h3>
-      <p>Российский рекорд — ребрендинг <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера</a> 2020 года: оценки полной стоимости перехода (включая многолетнюю замену вывесок тысяч отделений, банкоматов, оформления) шли на миллиарды рублей. Историю и логику этого знака мы подробно разбирали в статье <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">про эволюцию логотипа Сбера</a>.</p>
+      <p>Российский рекорд — ребрендинг <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a> 2020 года: оценки полной стоимости перехода (включая многолетнюю замену вывесок тысяч отделений, банкоматов, оформления) шли на миллиарды рублей. Историю и логику этого знака мы подробно разбирали в статье <a href="../istoriya-logotipa-sbera/" target="_blank" rel="noopener">про эволюцию логотипа Сбера</a>.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-3 -->
 <div id="yandex_rtb_R-A-19679616-3"></div>
 <script>
@@ -238,11 +242,11 @@ window.yaContextCb.push(() => {
       <ol>
       <li><strong>Исследования и стратегия</strong> — аудитории, рынки, тестирование восприятия в разных культурах: у глобального бренда знак обязан работать от Бразилии до Японии.</li>
       <li><strong>Дизайн</strong> — та самая картинка. Даже у топ‑агентств это единицы процентов от бюджета ребрендинга.</li>
-      <li><strong>Юридика</strong> — проверка и регистрация товарного знака в десятках стран, выкуп прав и доменов, конфликты с похожими знаками. Как это устроено на уровне одной страны — мы разбирали в статье <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">про регистрацию логотипа</a>.</li>
+      <li><strong>Юридика</strong> — проверка и регистрация товарного знака в десятках стран, выкуп прав и доменов, конфликты с похожими знаками. Как это устроено на уровне одной страны — мы разбирали в статье <a href="../kak-zaregistrirovat-logotip/" target="_blank" rel="noopener">про регистрацию логотипа</a>.</li>
       <li><strong>Внедрение</strong> — главный пожиратель бюджета: вывески, транспорт, упаковка, форма, интерфейсы, документы. Тысячи точек контакта × стоимость замены каждой.</li>
       <li><strong>Коммуникация</strong> — рекламная кампания, объясняющая перемену, чтобы клиенты не решили, что банк подменили.</li>
       </ol>
-      <p>Понимание этой структуры полезно и малому бизнесу: когда студия называет цену, вы платите за нижние слои этой пирамиды в миниатюре — стратегию, уникальность, комплект носителей. Полный разбор ценовых уровней — в статье <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">сколько стоит логотип</a>.</p>
+      <p>Понимание этой структуры полезно и малому бизнесу: когда студия называет цену, вы платите за нижние слои этой пирамиды в миниатюре — стратегию, уникальность, комплект носителей. Полный разбор ценовых уровней — в статье <a href="../skolko-stoit-logotip/" target="_blank" rel="noopener">сколько стоит логотип</a>.</p>
       <h2 id="дорого-не-значит-хорошо-и-наоборот">Дорого — не значит хорошо <span class="heading-dim">(и наоборот)</span></h2>
       <p>Самая дорогая картинка не гарантирует любви: ребрендинг Gap 2010 года (по оценкам, около $100 млн со всей кампанией) публика растоптала за шесть дней — компания вернула старый логотип. А знак за $35 стал одним из самых узнаваемых символов планеты. Бюджет покупает процесс и охват — смысл и последовательность за деньги не продаются.</p>
       <div class="blog-ad-slot"><!-- Yandex.RTB R-A-19679616-4 -->
@@ -257,13 +261,14 @@ window.yaContextCb.push(() => {
 </script></div>
       <h2 id="коротко">Коротко</h2>
       <p>Миллионные «цены логотипов» — это цены трансформаций: стратегия, юридика по всему миру и физическая замена тысяч носителей, где сама картинка — округление. А истории Nike и Coca‑Cola напоминают: знак наполняется ценностью через годы последовательного использования. Хотите «дорогой» логотип — сначала обеспечьте ему годы одинакового, аккуратного применения.</p>
-      <p>Изучать великие знаки удобно вблизи: в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> — сотни брендов в векторе, от Nike до <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера</a>, с фирменными цветами и историческими версиями.</p>
+      <p>Изучать великие знаки удобно вблизи: в нашем <a href="../../logos/" target="_blank" rel="noopener">каталоге логотипов</a> — сотни брендов в векторе, от Nike до <a href="../../logos/bank/sber/" target="_blank" rel="noopener">Сбера<img class="blog-mention-icon" src="../../assets/logos/svgs/sber.svg?v=20260910" alt="" width="20" height="20" loading="lazy" decoding="async"></a>, с фирменными цветами и историческими версиями.</p>
       </div>
+      
 
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">Может быть еще интересно</h2>
         <div class="blog-list">
-          <a class="blog-card" href="../skolko-stoit-logotip/" data-date="2026-07-15" data-views="9">
+          <a class="blog-card" href="../skolko-stoit-logotip/" data-date="2026-07-15" data-views="19">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -276,7 +281,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            9
+            19
           </div>
           </div>
           <div class="blog-card-title">Сколько стоит логотип в 2026 году — от нуля до миллиона, и за что платят</div>
@@ -284,7 +289,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotipy-so-skrytym-smyslom/" data-date="2026-07-02" data-views="4">
+      <a class="blog-card" href="../logotipy-so-skrytym-smyslom/" data-date="2026-07-02" data-views="12">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -297,15 +302,15 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            4
+            12
           </div>
           </div>
-          <div class="blog-card-title">Логотипы со скрытым смыслом — стрелка FedEx, улыбка Amazon и ещё 10 секретов</div>
+          <div class="blog-card-title">Логотипы со скрытым смыслом — стрелка FedEx, улыбка Amazon и ещё 10 секретов</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../logotip-nejrosetyu/" data-date="2026-06-29" data-views="2">
+      <a class="blog-card" href="../logotip-nejrosetyu/" data-date="2026-06-29" data-views="11">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -318,7 +323,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            2
+            11
           </div>
           </div>
           <div class="blog-card-title">Логотип нейросетью — честный разбор: когда это работает, а когда нет</div>
@@ -326,7 +331,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../chto-takoe-brendbuk/" data-date="2026-06-07" data-views="6">
+      <a class="blog-card" href="../chto-takoe-brendbuk/" data-date="2026-06-07" data-views="10">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(53 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(93 85% 48%) 0%, transparent 62%),
@@ -339,7 +344,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            6
+            10
           </div>
           </div>
           <div class="blog-card-title">Что такое брендбук и гайдлайн — и почему нельзя растягивать логотип</div>
@@ -347,44 +352,44 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../kak-narisovat-logotip-v-figma/" data-date="2026-08-06" data-views="1">
+      <a class="blog-card" href="../pikselnyj-logotip/" data-date="2026-07-28" data-views="6">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(190 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(230 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(280 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(340 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Инструкции</span><span class="blog-card-tag">Figma</span><span class="blog-card-tag">Дизайн</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5.5A3.5 3.5 0 0 1 8.5 2H12v7H8.5A3.5 3.5 0 0 1 5 5.5z" /><path d="M12 2h3.5a3.5 3.5 0 1 1 0 7H12V2z" /><path d="M12 12.5a3.5 3.5 0 1 1 7 0 3.5 3.5 0 1 1-7 0z" /><path d="M5 19.5A3.5 3.5 0 0 1 8.5 16H12v3.5a3.5 3.5 0 1 1-7 0z" /><path d="M5 12.5A3.5 3.5 0 0 1 8.5 9H12v7H8.5A3.5 3.5 0 0 1 5 12.5z" /></svg></div>
+    linear-gradient(135deg, hsl(190 70% 38%) 0%, hsl(340 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Логотип</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Ретро</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2" /><rect x="14" y="2" width="8" height="8" rx="1" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>06.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>28.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            6
           </div>
           </div>
-          <div class="blog-card-title">Как нарисовать логотип в Figma — пошаговая инструкция для новичка</div>
+          <div class="blog-card-title">Пиксельный и ретро‑логотип — Y2K возвращается в 2026</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="../bento-setka/" data-date="2026-08-08" data-views="1">
+      <a class="blog-card" href="../variativnye-shrifty/" data-date="2026-07-30" data-views="7">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(328 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(8 85% 48%) 0%, transparent 62%),
     radial-gradient(circle at 20% 90%, hsl(58 82% 42%) 0%, transparent 62%),
     radial-gradient(circle at 85% 85%, hsl(118 85% 46%) 0%, transparent 62%),
-    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Дизайн</span><span class="blog-card-tag">Вёрстка</span><span class="blog-card-tag">Тренды 2026</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18" /><path d="M3 12h18" /><rect x="3" y="3" width="18" height="18" rx="2" /></svg></div>
+    linear-gradient(135deg, hsl(328 70% 38%) 0%, hsl(118 65% 28%) 100%);" aria-hidden="true"><div class="blog-card-tags"><span class="blog-card-tag">Шрифт</span><span class="blog-card-tag">Тренды 2026</span><span class="blog-card-tag">Веб</span></div><svg class="blog-card-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 5H3" /><path d="M12 19H3" /><path d="M14 3v4" /><path d="M16 17v4" /><path d="M21 12h-9" /><path d="M21 19h-5" /><path d="M21 5h-7" /><path d="M8 10v4" /><path d="M8 12H3" /></svg></div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
-            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>08.08.2026</div>
+            <div class="blog-card-date"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 3px; opacity: 0.7;"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>30.07.2026</div>
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            1
+            7
           </div>
           </div>
-          <div class="blog-card-title">Bento‑сетка — модульная раскладка, покорившая дизайн 2026</div>
+          <div class="blog-card-title">Вариативные шрифты — что это и зачем в 2026</div>
           
           <div class="blog-card-cta">Читать статью<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
@@ -402,25 +407,17 @@ window.yaContextCb.push(() => {
         <span class="blog-progress-pct">0%</span>
       </div>
     </div>
-      <!-- Sidebar promo banner — house ad for landologovo.ru.
-     (SEO logo pages: .logo-side · blog posts: .blog-sidebar). Same slot,
-     same width. Previously an RSYA ad unit, before that the Threads banner
-     (see templates/partials/_archived/threads-banner.html).
-     Styles: css/seo-page.css → «Sidebar promo banner».
-     Текст русский на обоих языках — предложение для рынка РФ, EN-версии нет. -->
-<div class="ad-sidebar-slot">
-  <a class="promo-banner-link" data-banner-id="landologovo-sidebar" href="https://landologovo.ru/?utm_source=trace-logos" target="_blank" rel="noopener sponsored nofollow">
-    <span class="promo-banner-src">
-      <span class="promo-banner-dot" aria-hidden="true"></span>landologovo.ru
-    </span>
-    <span class="promo-banner-title">Как&nbsp;продавать сайты <span class="promo-banner-hl">в&nbsp;4,5&nbsp;раза дороже</span>, чем&nbsp;конкуренты</span>
-    <span class="promo-banner-desc">Статья для&nbsp;тех, кто&nbsp;создает сайты</span>
-    <span class="promo-banner-cta">
-      Читать статью
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h9"/><path d="M8.5 4.5 12 8l-3.5 3.5"/></svg>
-    </span>
-    <span class="promo-banner-emoji" aria-hidden="true">🤯</span>
-  </a>
+      <div class="ad-sidebar-slot">
+  <!-- Yandex.RTB R-A-19679616-2 -->
+  <div id="yandex_rtb_R-A-19679616-2"></div>
+  <script>
+  window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+          "blockId": "R-A-19679616-2",
+          "renderTo": "yandex_rtb_R-A-19679616-2"
+      })
+  })
+  </script>
 </div>
 
     </aside>
@@ -497,6 +494,7 @@ window.yaContextCb.push(() => {
           <li><a href="../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
           <li><a href="../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
           <li><a href="../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
           <!-- COLLECTIONS:END -->
         </ul>
       </div>
@@ -542,10 +540,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="../../js/blog-toc.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-code.min.js?v=20260808"></script>
-<script type="module" src="../../js/blog-ads.min.js?v=20260808"></script>
-<script type="module" src="../../js/promo-banner-track.min.js?v=20260808"></script>
-<script src="../../js/blog-track.min.js?v=20260808" async></script>
+<script type="module" src="../../js/blog-toc.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-code.min.js?v=20260910"></script>
+<script type="module" src="../../js/blog-ads.min.js?v=20260910"></script>
+<script type="module" src="../../js/promo-banner-track.min.js?v=20260910"></script>
+<script src="../../js/blog-track.min.js?v=20260910" async></script>
 </body>
 </html>

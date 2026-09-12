@@ -1,5 +1,6 @@
 @import './tokens.css';
 @import './catalog-grid.css';
+@import './faq.css';
 
 body {
   font-family: var(--font);
@@ -508,6 +509,43 @@ h1 {
 .logo-desc { font-size: 13px; color: var(--text-4); line-height: 1.55; margin-top: -10px; }
 .logo-desc a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .logo-desc a:hover { color: var(--text-1); }
+/* Клэмп до 2 строк — полный текст остаётся в DOM, скрыт только визуально
+   (безопасно для SEO: краулеры читают DOM, а не computed-высоту блока).
+   .expanded (JS-класс на клик) снимает клэмп. Раньше жило только в мобильном
+   @media — расширено на десктоп 2026-08-19 по просьбе пользователя. */
+.logo-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.logo-desc.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+.logo-desc-toggle {
+  display: inline-flex;
+  align-self: flex-start;
+  /* .logo-info — flex-колонка с gap:20px между всеми детьми; без этого
+     кнопка отъезжает от клэмпленного текста на тот же отступ, что и между
+     обычными секциями страницы. */
+  margin-top: -16px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-3);
+  font-size: 13px;
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+/* Тот же баг, что чинили у #notrack-slot (detail.css): авторский display
+   всегда бьёт UA-стиль [hidden]{display:none} независимо от специфичности —
+   без этой строки кнопка была бы видна даже когда JS решил её не показывать. */
+.logo-desc-toggle[hidden] { display: none; }
 
 /* "No official square icon" explainer — twin of .detail-noicon in css/detail.css.
    Informational, not a warning: the square tile in the grid is ours, the brand
@@ -1052,7 +1090,7 @@ h1 {
 .howto-step {
   display: flex; flex-direction: column; gap: 8px;
   padding: 16px;
-  background: var(--bg-card); border: 1px solid var(--border-base);
+  background: var(--bg-card);
   border-radius: 12px;
 }
 .howto-step-badge {
@@ -1072,31 +1110,9 @@ h1 {
 .howto-cta:hover { color: var(--text-1); }
 
 /* ── FAQ ── */
-.faq-section { width: 100%; margin-top: 48px; }
-.faq-title {
-  font-size: 18px; font-weight: 600; color: var(--text-1);
-  margin-bottom: 14px; letter-spacing: -0.01em;
-}
-.faq-list { display: flex; flex-direction: column; gap: 8px; }
-.faq-item {
-  background: var(--bg-card); border: 1px solid var(--border-base);
-  border-radius: 12px; overflow: hidden;
-}
-.faq-q {
-  list-style: none; cursor: pointer; padding: 14px 16px;
-  font-size: 14px; font-weight: 500; color: var(--text-1);
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-}
-.faq-q::-webkit-details-marker { display: none; }
-.faq-q::after {
-  content: '+'; font-size: 18px; line-height: 1; color: var(--text-5);
-  flex-shrink: 0; transition: transform .15s;
-}
-.faq-item[open] .faq-q::after { transform: rotate(45deg); }
-.faq-a { padding: 0 16px 14px; font-size: 13px; line-height: 1.65; color: var(--text-4); }
-.faq-a a { color: var(--accent, #2563eb); text-decoration: none; }
-.faq-a a:hover { text-decoration: underline; }
-.faq-action-btn { margin: 0 16px 14px; }
+/* Компонент переехал в css/faq.css (его переиспользует лендинг /tools/).
+   Подключён через @import в шапке этого файла; в бандле — отдельной строкой
+   в scripts/build-css-bundles.js. */
 
 /* ── Footer ── */
 footer:not(.site-footer) {
@@ -1129,42 +1145,6 @@ footer:not(.site-footer) {
   .ad-sidebar-slot { order: 3; }
   .logo-side > support-btn { display: none; }
   .logo-desc-support { display: block; }
-  /* Клэмп до 2 строк — полный текст остаётся в DOM, скрыт только визуально
-     (безопасно для SEO: краулеры читают DOM, а не computed-высоту блока).
-     .expanded (JS-класс на клик) снимает клэмп. */
-  .logo-desc {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    overflow: hidden;
-  }
-  .logo-desc.expanded {
-    display: block;
-    -webkit-line-clamp: unset;
-    overflow: visible;
-  }
-  .logo-desc-toggle {
-    display: inline-flex;
-    align-self: flex-start;
-    /* .logo-info — flex-колонка с gap:20px между всеми детьми; без этого
-       кнопка отъезжает от клэмпленного текста на тот же отступ, что и между
-       обычными секциями страницы. */
-    margin-top: -12px;
-    background: none;
-    border: none;
-    padding: 0;
-    color: var(--text-3);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  /* Тот же баг, что чинили у #notrack-slot (detail.css): авторский display
-     всегда бьёт UA-стиль [hidden]{display:none} независимо от специфичности —
-     без этой строки кнопка была бы видна даже когда JS решил её не показывать. */
-  .logo-desc-toggle[hidden] { display: none; }
   .seo-ad-related-wrap { display: flex; flex-direction: column; }
   .seo-ad-related-wrap > .seo-ad-block { order: 2; }
   .seo-ad-related-wrap > .catalog-section { order: 1; }

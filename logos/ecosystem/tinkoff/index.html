@@ -13,7 +13,9 @@
   </script>
   <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
   <!-- /Yandex.Metrika counter -->
-  <script src="/components/cookie-consent.min.js?v=20260808" defer></script>
+  <!-- cookie-consent.js loads bundled with nav-header partial's site-chrome.min.js
+       (see scripts/build-js-bundles.js CLASSIC_BUNDLES) — every template using
+       this partial also pulls in the nav-header one, which carries the bundle. -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Логотипы экосистемы Т-Банк · Trace Logo's</title>
@@ -114,50 +116,50 @@
           {
             "@type": "ListItem",
             "position": 6,
-            "name": "T-ID",
-            "url": "https://trace-logos.ru/logos/store/tid/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 7,
-            "name": "Т-Премиум",
-            "url": "https://trace-logos.ru/logos/store/tpremium/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 8,
-            "name": "Т-Про",
-            "url": "https://trace-logos.ru/logos/store/tpro/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 9,
             "name": "Т-Пэй",
             "url": "https://trace-logos.ru/logos/pay/tpay/"
           },
           {
             "@type": "ListItem",
-            "position": 10,
-            "name": "Долями",
-            "url": "https://trace-logos.ru/logos/bnpl/dolyami/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 11,
+            "position": 7,
             "name": "Т-Бизнес Секреты",
             "url": "https://trace-logos.ru/logos/media/tbusinesssecrets/"
           },
           {
             "@type": "ListItem",
+            "position": 8,
+            "name": "T-ID",
+            "url": "https://trace-logos.ru/logos/store/tid/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 9,
+            "name": "Т-Премиум",
+            "url": "https://trace-logos.ru/logos/store/tpremium/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 10,
+            "name": "Т-Про",
+            "url": "https://trace-logos.ru/logos/store/tpro/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 11,
+            "name": "Т-Образование",
+            "url": "https://trace-logos.ru/logos/education/teducation/"
+          },
+          {
+            "@type": "ListItem",
             "position": 12,
-            "name": "T-Data",
-            "url": "https://trace-logos.ru/logos/ads/tdata/"
+            "name": "Долями",
+            "url": "https://trace-logos.ru/logos/bnpl/dolyami/"
           },
           {
             "@type": "ListItem",
             "position": 13,
-            "name": "Т-Образование",
-            "url": "https://trace-logos.ru/logos/education/teducation/"
+            "name": "T-Data",
+            "url": "https://trace-logos.ru/logos/ads/tdata/"
           },
           {
             "@type": "ListItem",
@@ -172,35 +174,23 @@
 }
   </script>
 
-  <link rel="stylesheet" href="../../../css/base.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/sidebar.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/search.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/cards.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/detail.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/support-btn.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/color.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/picker.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/modals.css?v=20260808">  <link rel="stylesheet" href="../../../css/filters.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/mobile.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/confetti.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-amongus.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-doodlejump.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-google.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/easter-minicrewmate.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/microanim.css?v=20260808">
-  <link rel="stylesheet" href="../../../css/category-seo.css?v=20260808">
+  <link rel="stylesheet" href="../../../css/catalog.bundle.css?v=20260910">
   <!-- Flags JS availability before first paint so the pre-rendered .ssr-grid never flashes (see category-seo.css) -->
   <script>document.documentElement.classList.add('js');</script>
-  <script src="../../../components/support-btn.min.js?v=20260808" defer></script>
-  <script src="../../../components/lang-switcher.min.js?v=20260808" defer></script>
-  <script src="../../../components/site-header.min.js?v=20260808" defer></script>
-  <script src="../../../components/section-nav.min.js?v=20260808" defer></script>
-  <script src="../../../components/copy-emoji-btn.min.js?v=20260808" defer></script>
-  <script src="../../../components/sidebar-contact.min.js?v=20260808" defer></script>
-  <script src="../../../components/help-modal.min.js?v=20260808" defer></script>
+  <script src="../../../components/support-btn.min.js?v=20260910" defer></script>
+  <!-- cookie-consent.js + lang-switcher.js (+ search-box.js/mobile-nav.js, unused
+       here — no matching markup, both self-guard and no-op) bundled together.
+       This page has no nav-header partial include, so unlike templates that do,
+       it's the ONLY source of cookie-consent for logos/<cat>/ and logos/ecosystem/<key>/. -->
+  <script src="../../../components/site-chrome.min.js?v=20260910" defer></script>
+  <script src="../../../components/site-header.min.js?v=20260910" defer></script>
+  <script src="../../../components/section-nav.min.js?v=20260910" defer></script>
+  <script src="../../../components/copy-emoji-btn.min.js?v=20260910" defer></script>
+  <script src="../../../components/sidebar-contact.min.js?v=20260910" defer></script>
+  <script src="../../../components/help-modal.min.js?v=20260910" defer></script>
   <!-- см. комментарий в templates/partials/nav-header.html -->
-  <link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260808">
-  <script type="module" src="../../../components/donate-ticker.min.js?v=20260808"></script>
+  <link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js?v=20260910">
+  <script type="module" src="../../../components/donate-ticker.min.js?v=20260910"></script>
   <script>
     window.__MANIFEST_BASE__ = '../../';
     window.__ASSET_SECTION__ = 'logos';
@@ -208,8 +198,8 @@
     window.__CAT_SLUG__ = '';
     window.__ECO_SLUG__ = 'tinkoff';
   </script>
-  <script type="module" src="../../../js/main.min.js?v=20260808"></script>
-  <script type="module" src="../../../js/search-placeholder.min.js?v=20260808"></script>
+  <script type="module" src="../../../js/main.min.js?v=20260910"></script>
+  <script type="module" src="../../../js/search-placeholder.min.js?v=20260910"></script>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -276,7 +266,7 @@
   <div class="center-body">
     <main>
 
-      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Логотипы экосистемы Т-Банк</h1><div class="grid"><a class="card" href="/logos/market/tshop/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-shop.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Шоп" title="Icon/Market/TShop"></div><div class="label">Т-Шоп</div><div class="card-path">Icon/Market/TShop</div></a><a class="card" href="/logos/bank/tbank/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Банк" title="Icon/Bank/TBank"></div><div class="label">Т-Банк</div><div class="card-path">Icon/Bank/TBank</div></a><a class="card" href="/logos/bank/tinvestments/"><div class="icon-wrap"><img src="/assets/logos/previews/t-investments.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Инвестиции" title="Icon/Bank/TInvestments"></div><div class="label">Т-Инвестиции</div><div class="card-path">Icon/Bank/TInvestments</div></a><a class="card" href="/logos/bank/tbusiness/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-business.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Бизнес" title="Icon/Bank/TBusiness"></div><div class="label">Т-Бизнес</div><div class="card-path">Icon/Bank/TBusiness</div></a><a class="card" href="/logos/bank/tmobile/"><div class="icon-wrap"><img src="/assets/logos/previews/t-mobile.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Мобайл" title="Icon/Bank/TMobile"></div><div class="label">Т-Мобайл</div><div class="card-path">Icon/Bank/TMobile</div></a><a class="card" href="/logos/store/tid/"><div class="icon-wrap"><img src="/assets/logos/previews/t-id.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип T-ID" title="Icon/Store/TID"></div><div class="label">T-ID</div><div class="card-path">Icon/Store/TID</div></a><a class="card" href="/logos/store/tpremium/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-premium.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Премиум" title="Icon/Store/TPremium"></div><div class="label">Т-Премиум</div><div class="card-path">Icon/Store/TPremium</div></a><a class="card" href="/logos/store/tpro/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-pro.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Про" title="Icon/Store/TPro"></div><div class="label">Т-Про</div><div class="card-path">Icon/Store/TPro</div></a><a class="card" href="/logos/pay/tpay/"><div class="icon-wrap"><img src="/assets/logos/previews/t-pay.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Пэй" title="Icon/Pay/TPay"></div><div class="label">Т-Пэй</div><div class="card-path">Icon/Pay/TPay</div></a><a class="card" href="/logos/bnpl/dolyami/"><div class="icon-wrap"><img src="/assets/logos/previews/dolyami.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Долями" title="Icon/BNPL/Dolyami"></div><div class="label">Долями</div><div class="card-path">Icon/BNPL/Dolyami</div></a><a class="card" href="/logos/media/tbusinesssecrets/"><div class="icon-wrap"><img src="/assets/logos/previews/t-business-secrets.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Бизнес Секреты" title="Icon/Media/TBusinessSecrets"></div><div class="label">Т-Бизнес Секреты</div><div class="card-path">Icon/Media/TBusinessSecrets</div></a><a class="card" href="/logos/ads/tdata/"><div class="icon-wrap"><img src="/assets/logos/previews/t-data.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип T-Data" title="Icon/Ads/TData"></div><div class="label">T-Data</div><div class="card-path">Icon/Ads/TData</div></a><a class="card" href="/logos/education/teducation/"><div class="icon-wrap"><img src="/assets/logos/previews/t-education.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Т-Образование" title="Icon/Education/TEducation"></div><div class="label">Т-Образование</div><div class="card-path">Icon/Education/TEducation</div></a><a class="card" href="/logos/insurance/tinsurance/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-insurance.webp?v=20260808" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Страхование" title="Icon/Insurance/TInsurance"></div><div class="label">Т-Страхование</div><div class="card-path">Icon/Insurance/TInsurance</div></a></div></div></div></div>
+      <div class="content" id="content"><div class="ssr-grid"><div class="section"><h1 class="section-title">Логотипы экосистемы Т-Банк</h1><div class="grid"><a class="card" href="/logos/market/tshop/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-shop.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Шоп" title="Icon/Market/TShop"></div><div class="label">Т-Шоп</div><div class="card-path">Icon/Market/TShop</div></a><a class="card" href="/logos/bank/tbank/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Банк" title="Icon/Bank/TBank"></div><div class="label">Т-Банк</div><div class="card-path">Icon/Bank/TBank</div></a><a class="card" href="/logos/bank/tinvestments/"><div class="icon-wrap"><img src="/assets/logos/previews/t-investments.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Инвестиции" title="Icon/Bank/TInvestments"></div><div class="label">Т-Инвестиции</div><div class="card-path">Icon/Bank/TInvestments</div></a><a class="card" href="/logos/bank/tbusiness/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-business.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Бизнес" title="Icon/Bank/TBusiness"></div><div class="label">Т-Бизнес</div><div class="card-path">Icon/Bank/TBusiness</div></a><a class="card" href="/logos/bank/tmobile/"><div class="icon-wrap"><img src="/assets/logos/previews/t-mobile.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Мобайл" title="Icon/Bank/TMobile"></div><div class="label">Т-Мобайл</div><div class="card-path">Icon/Bank/TMobile</div></a><a class="card" href="/logos/pay/tpay/"><div class="icon-wrap"><img src="/assets/logos/previews/t-pay.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Пэй" title="Icon/Pay/TPay"></div><div class="label">Т-Пэй</div><div class="card-path">Icon/Pay/TPay</div></a><a class="card" href="/logos/media/tbusinesssecrets/"><div class="icon-wrap"><img src="/assets/logos/previews/t-business-secrets.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Бизнес Секреты" title="Icon/Media/TBusinessSecrets"></div><div class="label">Т-Бизнес Секреты</div><div class="card-path">Icon/Media/TBusinessSecrets</div></a><a class="card" href="/logos/store/tid/"><div class="icon-wrap"><img src="/assets/logos/previews/t-id.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип T-ID" title="Icon/Store/TID"></div><div class="label">T-ID</div><div class="card-path">Icon/Store/TID</div></a><a class="card" href="/logos/store/tpremium/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-premium.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Премиум" title="Icon/Store/TPremium"></div><div class="label">Т-Премиум</div><div class="card-path">Icon/Store/TPremium</div></a><a class="card" href="/logos/store/tpro/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-pro.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Про" title="Icon/Store/TPro"></div><div class="label">Т-Про</div><div class="card-path">Icon/Store/TPro</div></a><a class="card" href="/logos/education/teducation/"><div class="icon-wrap"><img src="/assets/logos/previews/t-education.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип Т-Образование" title="Icon/Education/TEducation"></div><div class="label">Т-Образование</div><div class="card-path">Icon/Education/TEducation</div></a><a class="card" href="/logos/bnpl/dolyami/"><div class="icon-wrap"><img src="/assets/logos/previews/dolyami.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Долями" title="Icon/BNPL/Dolyami"></div><div class="label">Долями</div><div class="card-path">Icon/BNPL/Dolyami</div></a><a class="card" href="/logos/ads/tdata/"><div class="icon-wrap"><img src="/assets/logos/previews/t-data.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" class="prerendered" alt="Логотип T-Data" title="Icon/Ads/TData"></div><div class="label">T-Data</div><div class="card-path">Icon/Ads/TData</div></a><a class="card" href="/logos/insurance/tinsurance/"><div class="icon-wrap"><img src="/assets/logos/previews/t-bank-insurance.webp?v=20260910" width="48" height="48" loading="lazy" decoding="async" alt="Логотип Т-Страхование" title="Icon/Insurance/TInsurance"></div><div class="label">Т-Страхование</div><div class="card-path">Icon/Insurance/TInsurance</div></a></div></div></div></div>
       <div id="empty-section" data-i18n="emptySectionText">Пока ничего нет — раздел в разработке</div>
       <div id="empty">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
