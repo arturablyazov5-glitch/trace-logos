@@ -49,7 +49,7 @@ http.createServer((req, res) => {
     }
     const ext = path.extname(file);
     const headers = { 'Content-Type': mime[ext] || 'application/octet-stream' };
-    if (ext === '.js' || ext === '.css') headers['Cache-Control'] = 'no-store';
+    if (ext === '.js' || ext === '.css' || ext === '.html') headers['Cache-Control'] = 'no-store';
     // Админка не должна индексироваться (и в прод она не деплоится — см. .gitignore).
     if (pathname.startsWith('/admin')) headers['X-Robots-Tag'] = 'noindex, nofollow';
     res.writeHead(200, headers);

@@ -16,7 +16,7 @@ import {
   updateVirtualizedSections, scheduleVirtualizedSections,
   resetContentScroll,
 } from './virtual.js';
-import { initSearch, filterCards, moveSearchSelection, openSearchSelection } from './search.js';
+import { initSearch, filterCards, moveSearchSelection, openSearchSelection, stripSearchPunctuation } from './search.js';
 import { initFilters, matchesFormat, formatState, setFormat } from './filters.js';
 import { animateSectionReflow } from './reflow.js';
 import { openReportModal } from './suggest.js';
@@ -205,7 +205,7 @@ function buildCard(item, sectionState) {
 
   const figmaLow = item.figma.toLowerCase();
   const raw = (item.name + ' ' + (item.name_en || '') + ' ' + (item.tags || '') + ' ' + figmaLow).toLowerCase();
-  const extra = raw.split(/\s+/).map(w => w.replace(/-/g, '')).join(' ');
+  const extra = raw.split(/\s+/).map(w => stripSearchPunctuation(w)).join(' ');
   card.dataset.search = raw + ' ' + extra;
 
   const wrap = document.createElement('div');
@@ -475,6 +475,7 @@ async function selectVariant(vDef, vcEl, item, allVariants, colorEditingDisabled
           clearTimeout(copyEmojiBtnResetTimer);
           copyEmojiBtnResetTimer = setTimeout(() => { textSpan.textContent = LABELS.copyEmoji; btnCopyEmoji.disabled = false; copyEmojiBtnResetTimer = null; }, 2000);
           showToast(TOASTS.copiedEmoji(emojiChar));
+          trackExport(item.figma, 'copy-emoji', vDef.file);
         });
       };
     }

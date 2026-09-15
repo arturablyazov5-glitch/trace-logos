@@ -6,7 +6,7 @@
 // поведение поиска не расходилось между страницами.
 // ─────────────────────────────────────────────────────────────────────────────
 import { highlight, escapeHtml, trackSearchQuery, flushSearchQuery } from './utils.js';
-import { tokenizeQuery, scoreQuery } from './search.js';
+import { tokenizeQuery, scoreQuery, stripSearchPunctuation } from './search.js';
 import './search-shortcut.js';
 
 const MAX_PER_GROUP = 6;
@@ -52,7 +52,7 @@ async function loadData() {
 function rank(items, words) {
   const out = [];
   for (const it of items) {
-    const nameLow = it.name.toLowerCase().replace(/-/g, '');
+    const nameLow = stripSearchPunctuation(it.name.toLowerCase());
     const score = scoreQuery(words, it.search, nameLow);
     if (score > 0) out.push([score, it]);
   }

@@ -59,36 +59,62 @@ export function openSearchSelection() {
 // чтобы стоп-слова и правила совпадения не расходились по трём копиям.
 export const STOP_WORDS = new Set(['логотип', 'лого', 'logo', 'logotype', 'логотипы']);
 
-// q → { words, rawWords }. words — для подсчёта релевантности (без дефисов,
-// без стоп-слов); rawWords — для highlight() на исходном написании запроса.
+// Единая точка правки для символов-разделителей, которые не должны мешать
+// совпадению («т-банк»/«тбанк», «1c/»/«1c»). Один источник — используется и
+// для запроса (tokenizeQuery), и для строящихся haystack/nameLow в этом
+// модуле, home-search.js, header-search.js и main.js — не дублировать regex.
+export function stripSearchPunctuation(s) {
+  return s.replace(/[-/]/g, '');
+}
+
+// q → { words, rawWords }. words — для подсчёта релевантности (без дефисов
+// и слэшей, без стоп-слов); rawWords — для highlight() на исходном написании запроса.
 export function tokenizeQuery(q) {
   const trimmed = q.trim();
-  const words = trimmed.toLowerCase().replace(/-/g, '').split(/\s+/).filter(w => w && !STOP_WORDS.has(w));
+  const words = stripSearchPunctuation(trimmed.toLowerCase()).split(/\s+/).filter(w => w && !STOP_WORDS.has(w));
   const rawWords = trimmed.split(/\s+/).filter(Boolean);
   return { words, rawWords };
 }
 
+// Схлопывает подряд идущие одинаковые буквы («оззо» → «озо») — типичный
+// эффект залипания/двойного клика клавиши при быстром наборе.
+function dedupeChars(s) {
+  return s.replace(/(.)\1+/g, '$1');
+}
+
+// Варианты одного слова запроса, которые ищутся наравне друг с другом: само
+// слово, его раскладка-двойник (switchLayout — тот же физический набор
+// клавиш в другой раскладке) и версия каждого из них со схлопнутыми
+// повторами букв (dedupeChars). Порог 3+ символа — та же граница, что и у
+// fuzzyMatchToken ниже, чтобы схлопывание не выродилось в 1-2-буквенный
+// огрызок, совпадающий почти со всем.
+function searchCandidates(word) {
+  const set = new Set([word, switchLayout(word)]);
+  for (const w of [...set]) {
+    const dedup = dedupeChars(w);
+    if (dedup.length >= 3) set.add(dedup);
+  }
+  return [...set];
+}
+
 export function scoreWord(word, haystack) {
-  if (haystack.includes(word)) return 100;
-  const alt = switchLayout(word);
-  if (alt !== word && haystack.includes(alt)) return 100;
+  const candidates = searchCandidates(word);
+  for (const c of candidates) if (haystack.includes(c)) return 100;
   const tokens = haystack.split(/\s+/);
   let best = 0;
   for (const t of tokens) {
     if (!t) continue;
-    if (t === word || (alt !== word && t === alt)) { best = Math.max(best, 90); continue; }
-    if (t.startsWith(word) || (alt !== word && t.startsWith(alt))) { best = Math.max(best, 70); continue; }
+    if (candidates.includes(t)) { best = Math.max(best, 90); continue; }
+    if (candidates.some(c => t.startsWith(c))) { best = Math.max(best, 70); continue; }
     // Require 3+ chars to prevent single-letter tokens ("т", "в") from matching everything
-    if (t.length >= 3 && (word.startsWith(t) || (alt !== word && alt.startsWith(t)))) { best = Math.max(best, 30); }
+    if (t.length >= 3 && candidates.some(c => c.startsWith(t))) { best = Math.max(best, 30); }
   }
   if (best === 0) {
     for (const t of tokens) {
       if (!t) continue;
-      const dist = fuzzyMatchToken(word, t);
-      if (dist > 0) best = Math.max(best, dist === 1 ? 20 : 10);
-      if (alt !== word) {
-        const distAlt = fuzzyMatchToken(alt, t);
-        if (distAlt > 0) best = Math.max(best, distAlt === 1 ? 20 : 10);
+      for (const c of candidates) {
+        const dist = fuzzyMatchToken(c, t);
+        if (dist > 0) best = Math.max(best, dist === 1 ? 20 : 10);
       }
     }
   }
@@ -128,7 +154,7 @@ export function scoreQuery(words, haystack, nameLow) {
 }
 
 function scoreCard(words, card) {
-  return scoreQuery(words, card.dataset.search, card._item.name.toLowerCase().replace(/-/g, ''));
+  return scoreQuery(words, card.dataset.search, stripSearchPunctuation(card._item.name.toLowerCase()));
 }
 
 function updateSearchCount(visible, hasQuery) {

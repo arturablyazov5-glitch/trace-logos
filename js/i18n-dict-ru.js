@@ -278,16 +278,16 @@ export const DICT = {
   'footerColl_neural-networks':     'Логотипы нейросетей',
   'footerColl_marketplaces':        'Логотипы маркетплейсов',
   'footerColl_payment-systems':     'Платёжные системы',
-  'footerColl_messengers-social':   'Соцсети и мессенджеры',
+  'footerColl_messengers-social':   'Соцсети и мессенджеры',
   'footerColl_google-2026':         'Иконки Google 2026',
-  'footerColl_delivery-taxi':       'Доставка и такси',
+  'footerColl_delivery-taxi':       'Доставка и такси',
   'footerColl_browsers':            'Браузеры',
   'footerColl_cloud-storage':       'Облачные хранилища',
   'footerColl_music-streaming':     'Музыкальные сервисы',
   'footerColl_video-streaming':     'Видеостриминг',
-  'footerColl_design-tools':        'Дизайн‑инструменты',
+  'footerColl_design-tools':        'Дизайн-инструменты',
   'footerColl_education':           'Образовательные платформы',
-  'footerColl_health-fitness':      'Здоровье и фитнес',
+  'footerColl_health-fitness':      'Здоровье и фитнес',
   'footerColl_russian-tv-channels': 'Логотипы телеканалов',
   // COLLECTIONS:END
   // Per-tool footer link labels — auto-synced from tools.json's
@@ -297,7 +297,7 @@ export const DICT = {
   'footerTool_compress-webp':   'Сжать изображение',
   'footerTool_watermark':       'Убрать водяной знак',
   'footerTool_merge-pdf':       'Объединить PDF',
-  'footerTool_edit-image':      'Обрезать и повернуть фото',
+  'footerTool_edit-image':      'Обрезать и повернуть фото',
   'footerTool_ios-call-screen': 'Экран вызова iOS',
   // TOOLS:END
 

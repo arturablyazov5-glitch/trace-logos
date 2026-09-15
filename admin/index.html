@@ -490,10 +490,6 @@ footer .dot { margin: 0 8px; opacity: .5; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
       Экспорт CSV
     </button>
-    <button class="icon-btn danger" id="btn-reset">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-      Сбросить
-    </button>
     <a class="icon-btn" href="/" title="Вернуться в каталог">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
       Каталог
@@ -768,7 +764,7 @@ footer .dot { margin: 0 8px; opacity: .5; }
 const ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/track';
 const KEY_STORE = 'tl_admin_key';
 
-const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', webp: 'WebP', pdf: 'PDF', ai: 'AI', eps: 'EPS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG', embed: 'Embed-код' };
+const FMT_LABELS = { svg: 'SVG', png: 'PNG', ico: 'ICO', icns: 'ICNS', webp: 'WebP', pdf: 'PDF', ai: 'AI', eps: 'EPS', zip: 'ZIP', 'copy-svg': 'Copy SVG', 'copy-png': 'Copy PNG', 'copy-emoji': 'Copy символ', embed: 'Embed-код' };
 
 let adminKey = sessionStorage.getItem(KEY_STORE) || '';
 let data = [];
@@ -969,24 +965,6 @@ function csvCell(v) {
   const s = String(v ?? '');
   return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
 }
-
-$('btn-reset').addEventListener('click', async () => {
-  if (!confirm('Сбросить всю статистику просмотров? Это действие необратимо.')) return;
-  try {
-    const res = await fetch(ENDPOINT, {
-      method: 'DELETE',
-      headers: { 'x-admin-key': adminKey },
-    });
-    if (!res.ok) throw new Error('Ошибка сброса');
-    data = [];
-    emojiData = [];
-    exportMap = {};
-    render();
-    renderEmoji();
-  } catch (e) {
-    alert('Не удалось сбросить: ' + (e.message || 'ошибка сети'));
-  }
-});
 
 function ingest(raw) {
   const views = raw.views || raw || [];

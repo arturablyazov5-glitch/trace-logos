@@ -9,7 +9,7 @@
 // же движок из search.js, что фильтрует сетку каталога.
 // ─────────────────────────────────────────────────────────────────────────────
 import { highlight, escapeHtml, trackSearchQuery, flushSearchQuery } from './utils.js';
-import { tokenizeQuery, scoreQuery } from './search.js';
+import { tokenizeQuery, scoreQuery, stripSearchPunctuation } from './search.js';
 import { initPlaceholderTypewriter } from './placeholder-typewriter.js';
 import './search-shortcut.js';
 
@@ -71,7 +71,7 @@ if (form && input && dropdown) {
   function rank(items, words) {
     const out = [];
     for (const it of items) {
-      const nameLow = it.name.toLowerCase().replace(/-/g, '');
+      const nameLow = stripSearchPunctuation(it.name.toLowerCase());
       const score = scoreQuery(words, it.search, nameLow);
       if (score > 0) out.push([score, it]);
     }
