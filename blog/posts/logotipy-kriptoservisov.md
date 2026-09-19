@@ -17,7 +17,7 @@ tags_en: Collections, Branding, Finance
 
 ## Coinbase: банк, который просто про крипту
 
-**[Coinbase](../../logos/pay/coinbase/)** сделал ставку на противоположность крипто‑хаосу: синее слово в спокойном гротеске и круглая «C»-монета в иконке. Ни молний, ни ромбов, ни киберпанка — палитра и пластика взяты у классического финтеха, а синий — тот же код доверия, что у банков и платёжных систем, о [психологии цвета](../psihologiya-cveta-v-logotipe/) мы писали отдельно. Логика прозрачна: биржа, которая в апреле 2021 года первой из крупных криптосервисов вышла на Nasdaq и работает с регуляторами, обязана выглядеть как финансовый институт, а не как форум энтузиастов.
+**[Coinbase](../../logos/pay/coinbase/)** сделал ставку на противоположность крипто‑хаосу: синее слово в спокойном гротеске и круглая «C»-монета в иконке. Ни молний, ни ромбов, ни киберпанка — палитра и пластика взяты у классического финтеха, а синий — тот же код доверия, что у банков и [платёжных систем](../logotipy-platezhnyh-sistem/), о [психологии цвета](../psihologiya-cveta-v-logotipe/) мы писали отдельно. Логика прозрачна: биржа, которая в апреле 2021 года первой из крупных криптосервисов вышла на Nasdaq и работает с регуляторами, обязана выглядеть как финансовый институт, а не как форум энтузиастов.
 
 ## Binance: ромб как собственный алфавит
 
@@ -49,7 +49,7 @@ tags_en: Collections, Branding, Finance
 Логотипы бирж и кошельков — зарегистрированные товарные знаки, и в финансовой тематике к ним относятся особенно строго: знак чужой биржи на вашем лендинге легко читается как заявление о партнёрстве. Прежде чем ставить — прочитайте [правила использования чужих логотипов](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 :::
 
-Все знаки подборки в SVG и PNG — в [категории «Платежи и карты»](../../logos/pay/) и каталоге: [Coinbase](../../logos/pay/coinbase/), [Binance](../../logos/finance/binance/), [MetaMask](../../logos/pay/metamask/), [Crypto.com](../../logos/pay/cryptocom/), [Exodus](../../logos/pay/exodus/). Рядом — классические платёжные системы для сравнения эпох.
+Все знаки подборки в SVG и PNG — в [категории «Платежи и карты»](../../logos/pay/) и каталоге: [Coinbase](../../logos/pay/coinbase/), [Binance](../../logos/finance/binance/), [MetaMask](../../logos/pay/metamask/), [Crypto.com](../../logos/pay/cryptocom/), [Exodus](../../logos/pay/exodus/). Рядом — классические [платёжные системы](../logotipy-platezhnyh-sistem/) для сравнения эпох.
 
 ---EN---
 
@@ -61,7 +61,7 @@ The category stretches between two poles: **fintech rigor** — the blue [Coinba
 
 ## Coinbase: a bank that happens to do crypto
 
-**[Coinbase](../../logos/pay/coinbase/)** bet on the opposite of crypto chaos: a calm blue wordmark and a round "C"-coin icon. No lightning bolts, no diamonds, no cyberpunk — the palette and shapes come from classic fintech, and the blue is the same trust code as banks and payment systems — we cover [color psychology](../psihologiya-cveta-v-logotipe/) separately. The logic is transparent: the exchange that went public on Nasdaq in April 2021 — the first major crypto service to do so — and works with regulators must look like a financial institution, not an enthusiast forum.
+**[Coinbase](../../logos/pay/coinbase/)** bet on the opposite of crypto chaos: a calm blue wordmark and a round "C"-coin icon. No lightning bolts, no diamonds, no cyberpunk — the palette and shapes come from classic fintech, and the blue is the same trust code as banks and [payment systems](../logotipy-platezhnyh-sistem/) — we cover [color psychology](../psihologiya-cveta-v-logotipe/) separately. The logic is transparent: the exchange that went public on Nasdaq in April 2021 — the first major crypto service to do so — and works with regulators must look like a financial institution, not an enthusiast forum.
 
 ## Binance: a diamond as a private alphabet
 
@@ -93,4 +93,4 @@ The takeaway: **a crypto mark is a statement on the industry's core conflict.** 
 Exchange and wallet logos are registered trademarks, and finance is policed especially hard: another exchange's mark on your landing page easily reads as a partnership claim. Before placing one, read [the rules on using others' logos](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 :::
 
-All marks from this roundup in SVG and PNG are in the [Payments & Cards category](../../logos/pay/) and the catalog: [Coinbase](../../logos/pay/coinbase/), [Binance](../../logos/finance/binance/), [MetaMask](../../logos/pay/metamask/), [Crypto.com](../../logos/pay/cryptocom/), [Exodus](../../logos/pay/exodus/). Nearby — the classic payment systems for an era-to-era comparison.
+All marks from this roundup in SVG and PNG are in the [Payments & Cards category](../../logos/pay/) and the catalog: [Coinbase](../../logos/pay/coinbase/), [Binance](../../logos/finance/binance/), [MetaMask](../../logos/pay/metamask/), [Crypto.com](../../logos/pay/cryptocom/), [Exodus](../../logos/pay/exodus/). Nearby — the classic [payment systems](../logotipy-platezhnyh-sistem/) for an era-to-era comparison.

@@ -52,7 +52,7 @@ tags_en: Collections, Branding
 Если символ лежит на поверхности (облако для облака, зуб для стоматологии, дом для недвижимости) — его уже взяли все конкуренты. Очевидная метафора допустима, только когда вам не нужно выделяться; в конкурентной нише ищите вторую метафору — как коробка Dropbox; как искать идею знака, мы разбирали отдельно.
 :::
 
-Все логотипы облачных сервисов — в [каталоге](../../logos/cloud/): SVG и PNG с прозрачным фоном. Похожие разборы категорий: [браузеры](../logotipy-brauzerov/), [мессенджеры](../logotipy-messendzherov/), платёжные системы.
+Все логотипы облачных сервисов — в [каталоге](../../logos/cloud/): SVG и PNG с прозрачным фоном. Похожие разборы категорий: [браузеры](../logotipy-brauzerov/), [мессенджеры](../logotipy-messendzherov/), [платёжные системы](../logotipy-platezhnyh-sistem/).
 
 ---EN---
 
@@ -99,4 +99,4 @@ Cloud services own a torture-chamber medium their neighbor categories forget: th
 If the symbol lies on the surface (a cloud for cloud storage, a tooth for dentistry, a house for real estate) — every competitor already took it. The obvious metaphor is acceptable only when you don't need to stand out; in a competitive niche hunt for the second metaphor, like Dropbox's box; we cover finding the mark's idea separately.
 :::
 
-All cloud service logos are in the [catalog](../../logos/cloud/): SVG and PNG with transparency. More category breakdowns: [browsers](../logotipy-brauzerov/), [messengers](../logotipy-messendzherov/), payment systems.
+All cloud service logos are in the [catalog](../../logos/cloud/): SVG and PNG with transparency. More category breakdowns: [browsers](../logotipy-brauzerov/), [messengers](../logotipy-messendzherov/), [payment systems](../logotipy-platezhnyh-sistem/).

@@ -33,7 +33,7 @@ tags_en: Logo Histories, Branding
 
 К 40‑летию Starbucks сделал шаг, который тогда казался безумием: **убрал из логотипа название и слово «Coffee»**. Осталась сирена в зелёном круге — без единой буквы. Расчёт был двойным:
 
-1. **Узнаваемость позволяла.** Сирену опознавали без подписи — Starbucks вошёл в клуб «безымянных» знаков вместе с [Apple](../istoriya-logotipa-apple/) и Mastercard.
+1. **Узнаваемость позволяла.** Сирену опознавали без подписи — Starbucks вошёл в клуб «безымянных» знаков вместе с [Apple](../istoriya-logotipa-apple/) и [Mastercard](../logotipy-platezhnyh-sistem/).
 2. **Слово «Coffee» мешало.** Компания расширялась за пределы кофе — чай, еда, бутилированные напитки: продуктовое слово в знаке стало клеткой, как «банк» у [Сбера](../istoriya-logotipa-sbera/).
 
 Критики предрекали катастрофу; вышло наоборот — чистый знак стал глобальнее: сирена не требует латиницы и одинаково работает в Сиэтле, Дубае и Шанхае.
@@ -87,7 +87,7 @@ Three years earlier, for its 2008 anniversary, the company had already tried bri
 
 For its 40th anniversary Starbucks did what then looked insane: **removed the name and the word "Coffee" from the logo**. What remained was the siren in a green circle — not a single letter. The calculation was twofold:
 
-1. **Recognition allowed it.** The siren was identified without a caption — Starbucks joined the "nameless" club alongside [Apple](../istoriya-logotipa-apple/) and Mastercard.
+1. **Recognition allowed it.** The siren was identified without a caption — Starbucks joined the "nameless" club alongside [Apple](../istoriya-logotipa-apple/) and [Mastercard](../logotipy-platezhnyh-sistem/).
 2. **The word "Coffee" was in the way.** The company was expanding beyond coffee — tea, food, bottled drinks: a product word in the mark had become a cage, like "bank" for [Sber](../istoriya-logotipa-sbera/).
 
 Critics predicted disaster; the opposite happened — the clean mark became more global: the siren needs no Latin script and works identically in Seattle, Dubai and Shanghai.
