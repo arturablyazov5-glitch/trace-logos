@@ -31,7 +31,7 @@ tags_en: Branding, Business, How-To
 
 1. **Что за бизнес:** продукт, цены, чем отличаетесь от конкурентов.
 2. **Кто клиент:** возраст, контекст покупки, что для него «дорого» и «свои».
-3. **Конкуренты:** 3‑5 ссылок. Дизайнер должен увидеть, от кого отстраиваться — и какие цвета в нише уже заняты: это хорошо видно на примере логотипов российских банков или [мессенджеров](../logotipy-messendzherov/), где палитра давно поделена.
+3. **Конкуренты:** 3‑5 ссылок. Дизайнер должен увидеть, от кого отстраиваться — и какие цвета в нише уже заняты: это хорошо видно на примере [логотипов российских банков](../logotipy-rossijskih-bankov/) или [мессенджеров](../logotipy-messendzherov/), где палитра давно поделена.
 4. **Референсы с объяснениями:** 3‑5 логотипов «нравится» и «не нравится» — обязательно с «почему». Удобно набрать примеры в [каталоге логотипов](../../logos/): показывайте тип знака, а не красоту.
 5. **Носители:** где знак будет жить — сайт, упаковка, вывеска, приложение. От этого зависят версии и форматы — сверьтесь с [размерами логотипа для разных площадок](../razmery-logotipa-dlya-sajta-i-socsetej/).
 6. **Технические требования:** читаемость в 16 px, монохромная версия, кириллица+латиница, если нужны обе.
@@ -111,7 +111,7 @@ The brief is half the result. Designers need facts, not adjectives:
 
 1. **The business:** product, pricing, how you differ from competitors.
 2. **The customer:** age, buying context, what reads as "expensive" and "one of us" to them.
-3. **Competitors:** 3-5 links. The designer must see whom to differ from — and which niche colors are taken, a pattern that shows clearly in Russian banks or [messengers](../logotipy-messendzherov/), where the palette is long spoken for.
+3. **Competitors:** 3-5 links. The designer must see whom to differ from — and which niche colors are taken, a pattern that shows clearly in [Russian banks](../logotipy-rossijskih-bankov/) or [messengers](../logotipy-messendzherov/), where the palette is long spoken for.
 4. **Annotated references:** 3-5 logos you like and dislike — always with "why". The [logo catalog](../../logos/) is a handy source: point at logo types, not prettiness.
 5. **Media:** where the mark will live — site, packaging, signage, app. This determines versions and formats — check [platform-specific logo sizes](../razmery-logotipa-dlya-sajta-i-socsetej/).
 6. **Technical requirements:** readable at 16 px, monochrome version, both scripts if you need Cyrillic and Latin.

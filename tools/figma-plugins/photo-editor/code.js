@@ -56,6 +56,31 @@ function analyzeNode(node) {
   };
 }
 
+// Человекочитаемая причина, ПОЧЕМУ analyzeNode(node) вернул null — только
+// для UI (см. sendSelectionInfo). Без неё пользователь с реально выделенным,
+// но неоднозначным слоем (например, два видимых image-fill'а в одной
+// заливке) видел общий пустой экран "Нет выбранного изображения" и решал,
+// что плагин не видит выделение вообще, хотя оно есть — просто не подходит
+// под правило "ровно один видимый источник фото на слой".
+function explainIneligible(node) {
+  if (!('fills' in node)) return 'У этого слоя нет заливки изображением';
+  var fills = node.fills;
+  if (!Array.isArray(fills)) return 'У слоя смешанные заливки — выдели слой с одной картинкой';
+  if (fills.length === 0) return 'У этого слоя нет ни одной заливки';
+
+  var imageIdx = [];
+  for (var i = 0; i < fills.length; i++) {
+    if (fills[i].type === 'IMAGE' && fills[i].imageHash) imageIdx.push(i);
+  }
+  if (imageIdx.length === 0) return 'В этом слое нет заливки изображением';
+
+  var visibleImageIdx = imageIdx.filter(function (i) { return fills[i].visible !== false; });
+  if (visibleImageIdx.length === 0) return 'Изображение в этом слое скрыто — включи видимость заливки';
+  if (visibleImageIdx.length > 1) return 'В слое несколько видимых изображений — непонятно, какое из них редактировать. Оставь видимым только одно';
+
+  return 'Это изображение сейчас не поддерживается';
+}
+
 // ─── Собственная история операций плагина ───
 // Родной Cmd+Z в Figma отменяет ВСЮ историю документа, не только действия
 // плагина — если пользователь между операциями подвигал что-то ещё,
@@ -152,9 +177,23 @@ function collectEligibleImageNodes() {
     var info = analyzeNode(node);
     if (!info) continue;
 
-    if (info.hasHiddenLayers) {
-      var keepFill = Object.assign({}, node.fills[info.visibleIndex], { visible: true });
-      node.fills = [keepFill];
+    // Заливку всегда нормализуем: видимость включена, прозрачность сброшена
+    // на 100%, родные фильтры Figma (Exposure/Contrast/Saturation/
+    // Temperature/Tint/Highlights/Shadows в панели Fill) обнулены.
+    // Обрезанное/повёрнутое/отражённое фото с полупрозрачной заливкой или
+    // недокрученными фильтрами (черновая правка в Figma) выглядело бы
+    // "битым" после операции — редактор всегда работает с чистым, ничем
+    // не тронутым результатом.
+    var keepFill = node.fills[info.visibleIndex];
+    var hasFilters = keepFill.filters && Object.keys(keepFill.filters).some(function (k) {
+      return keepFill.filters[k] !== 0;
+    });
+    if (info.hasHiddenLayers || keepFill.visible === false || keepFill.opacity !== 1 || hasFilters) {
+      node.fills = [Object.assign({}, keepFill, {
+        visible: true,
+        opacity: 1,
+        filters: { exposure: 0, contrast: 0, saturation: 0, temperature: 0, tint: 0, highlights: 0, shadows: 0 },
+      })];
     }
 
     out.push({ node: node, fillIndex: 0, imageHash: info.imageHash, name: node.name });
@@ -212,11 +251,22 @@ function sendSelectionInfo() {
     };
   }
 
+  // Что-то выделено, но НИ ОДИН слой не подошёл — пустой экран в UI должен
+  // объяснить причину, а не молчать так, будто выделения вообще нет
+  // (см. explainIneligible() и renderSelection() в ui.html).
+  var ineligibleReason = null;
+  if (eligible.length === 0 && nodes.length > 0) {
+    ineligibleReason = nodes.length === 1
+      ? explainIneligible(nodes[0])
+      : 'Ни один из выделенных слоёв не подходит — нужна заливка одним изображением';
+  }
+
   figma.ui.postMessage({
     type: 'selection-count',
     count: eligible.length,
     total: nodes.length, // всего выделено — чтобы UI мог честно сказать "подходят не все слои"
     detail: detail,
+    ineligibleReason: ineligibleReason,
   });
 }
 
@@ -297,6 +347,77 @@ async function handleMessage(msg) {
         bytes: xBytes,
       });
     }
+    return;
+  }
+
+  // "Оригинал в PNG": экспортирует ИСХОДНЫЕ пиксели фото (натуральный
+  // размер картинки — до любой обрезки/поворота/сжатия/фильтров/прозрачности,
+  // применённых узлу в макете) отдельным PNG @1x, не трогая сам узел
+  // выделения вообще — ни фактически, ни в истории плагина (нечего
+  // отменять). В отличие от "Восстановить оригинал" (см. 'restore-size'
+  // ниже), которая необратимо (за вычетом своего undo) переписывает
+  // fills/размер/поворот реального слоя, здесь вместо этого создаётся
+  // временный прямоугольник ДАЛЕКО в стороне на той же странице —
+  // координаты в сотнях тысяч px от 0,0, заведомо за пределами любого
+  // реального макета, — переносит туда оригинальное изображение, рендерит
+  // его через exportAsync (тот же движок, что у нативного "Export" в
+  // Figma) и сразу удаляется. Байты уходят в UI НЕобрезанными — авто-обрезку
+  // прозрачных полей делает ui.html тем же cropToContent(), которым
+  // пользуется "Обрезать прозрачность" (см. 'process-export-original' там),
+  // здесь на main thread нет canvas для этого. Доступна только на ровно
+  // одном выделенном изображении — см. canExportOriginal в ui.html.
+  if (msg.type === 'start-export-original') {
+    // Читаем выделение напрямую (не через collectExportableImageNodes),
+    // чтобы при отказе дать точную причину — та же логика, что у
+    // sendSelectionInfo()/explainIneligible(), а не общее "выдели фото",
+    // которое выглядит так, будто плагин не видит выделение вообще.
+    var oSelNodes = figma.currentPage.selection;
+    if (oSelNodes.length === 0) {
+      figma.ui.postMessage({ type: 'error', message: 'Выдели изображение' });
+      return;
+    }
+    if (oSelNodes.length > 1) {
+      figma.ui.postMessage({ type: 'error', message: 'Выдели только один слой — оригинал экспортируется по одному' });
+      return;
+    }
+    var oe = { node: oSelNodes[0], name: oSelNodes[0].name };
+    var oInfo = analyzeNode(oe.node);
+    if (!oInfo) {
+      figma.ui.postMessage({ type: 'error', message: explainIneligible(oe.node) });
+      return;
+    }
+    var oImage = figma.getImageByHash(oInfo.imageHash);
+    if (!oImage) {
+      figma.ui.postMessage({ type: 'error', message: 'Не удалось найти исходное изображение' });
+      return;
+    }
+
+    var oSize;
+    try {
+      oSize = await oImage.getSizeAsync(); // натуральные пиксели исходника, {width, height}
+    } catch (e) {
+      figma.ui.postMessage({ type: 'error', message: 'Не удалось прочитать размер изображения' });
+      return;
+    }
+
+    var tempRect = figma.createRectangle();
+    figma.currentPage.appendChild(tempRect);
+    tempRect.x = 200000;
+    tempRect.y = 200000;
+    tempRect.resize(oSize.width, oSize.height);
+    tempRect.fills = [{ type: 'IMAGE', scaleMode: 'FILL', imageHash: oImage.hash }];
+
+    var oBytes;
+    try {
+      oBytes = await tempRect.exportAsync({ format: 'PNG' });
+    } catch (e) {
+      tempRect.remove();
+      figma.ui.postMessage({ type: 'error', message: 'Не удалось экспортировать оригинал' });
+      return;
+    }
+    tempRect.remove();
+
+    figma.ui.postMessage({ type: 'process-export-original', name: oe.name, bytes: oBytes });
     return;
   }
 

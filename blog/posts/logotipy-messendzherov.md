@@ -23,7 +23,7 @@ tags_en: Collections, Branding, Social Media
 - **Телефонная трубка** — наследие эпохи звонков; сегодня почти всегда внутри пузыря ([WhatsApp](../../logos/social/whatsapp/), [Viber](../../logos/social/viber/)).
 - **Метафора доставки** — бумажный самолётик, молния, стрелка: не «разговор», а «отправка сообщения».
 
-Когда символов на всех не хватает, главным различителем становится **цвет**. Мессенджеры поделили спектр почти без пересечений — это редкий пример стихийно сложившейся «цветовой картели», похожий на то, что происходит и с логотипами российских банков.
+Когда символов на всех не хватает, главным различителем становится **цвет**. Мессенджеры поделили спектр почти без пересечений — это редкий пример стихийно сложившейся «цветовой картели», похожий на то, что происходит и с [логотипами российских банков](../logotipy-rossijskih-bankov/).
 
 ## Telegram: самолётик, нарисованный за вечер
 
@@ -102,7 +102,7 @@ A messenger icon must solve its task in a fraction of a second: the user is hunt
 - **The phone handset** — a legacy of the calling era; today almost always inside a bubble ([WhatsApp](../../logos/social/whatsapp/), [Viber](../../logos/social/viber/)).
 - **The delivery metaphor** — a paper plane, a lightning bolt, an arrow: not "conversation" but "message sent".
 
-When symbols run out, **color** becomes the differentiator. Messengers carved up the spectrum almost without overlap — a rare spontaneously formed "color cartel", not unlike what happened with Russian bank logos.
+When symbols run out, **color** becomes the differentiator. Messengers carved up the spectrum almost without overlap — a rare spontaneously formed "color cartel", not unlike what happened with [Russian bank logos](../logotipy-rossijskih-bankov/).
 
 ## Telegram: the plane drawn in an evening
 

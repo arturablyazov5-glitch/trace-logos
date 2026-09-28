@@ -29,7 +29,7 @@ tags_en: Collections, Branding, Finance
 
 ## СБП: молния быстрых платежей
 
-[СБП](../../logos/pay/sbp/) — Система быстрых платежей — самый молодой знак подборки и единственный с «энергичной» метафорой: разноцветная молния‑зигзаг. Логика прямая: главное обещание системы — скорость, молния — её универсальный символ. Многоцветность отражает межбанковскую природу: СБП принадлежит не одному банку, а соединяет все — той же логике подчинены знаки российских банков.
+[СБП](../../logos/pay/sbp/) — Система быстрых платежей — самый молодой знак подборки и единственный с «энергичной» метафорой: разноцветная молния‑зигзаг. Логика прямая: главное обещание системы — скорость, молния — её универсальный символ. Многоцветность отражает межбанковскую природу: СБП принадлежит не одному банку, а соединяет все — той же логике подчинены [знаки российских банков](../logotipy-rossijskih-bankov/).
 
 ## Кошельки и пэй‑сервисы
 
@@ -82,7 +82,7 @@ Russia's [Mir](../../logos/pay/mir/) system (2015) chose a name with a double me
 
 ## SBP: the fast-payment lightning
 
-[SBP](../../logos/pay/sbp/) — the Faster Payments System — is the youngest mark here and the only one with an "energetic" metaphor: a multicolor zigzag bolt. The logic is direct: the system's core promise is speed, and lightning is its universal symbol. The multicolor reflects the interbank nature: SBP belongs to no single bank but connects them all — the same logic behind how Russian bank marks work.
+[SBP](../../logos/pay/sbp/) — the Faster Payments System — is the youngest mark here and the only one with an "energetic" metaphor: a multicolor zigzag bolt. The logic is direct: the system's core promise is speed, and lightning is its universal symbol. The multicolor reflects the interbank nature: SBP belongs to no single bank but connects them all — the same logic behind [how Russian bank marks work](../logotipy-rossijskih-bankov/).
 
 ## Wallets and pay services
 

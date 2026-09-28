@@ -17,7 +17,7 @@ tags_en: How-To, Design, Branding
 
 ## Шаг 0. Сначала карта конкурентов, потом вкус
 
-Самая частая ошибка — начинать с «мне нравится синий». Цвет бренда — это территория на рынке, а не украшение (как её делят банки, [мессенджеры](../logotipy-messendzherov/) и [маркетплейсы](../logotipy-marketplejsov/)). Поэтому первый шаг — карта: выпишите 5‑10 конкурентов и их основные цвета (точные коды удобно смотреть в нашем [каталоге](../../logos/) — блок «Цвета бренда» есть на каждой странице — или через [инструменты‑пипетки](../kak-uznat-cvet-logotipa/)). На карте станет видно: какие зоны спектра заняты намертво, какие свободны. Свободная зона — ваш шорт‑лист. Именно так [Т‑Банк](../istoriya-logotipa-t-banka/) взял жёлтый, а [Spotify](../istoriya-logotipa-spotify/) — зелёный.
+Самая частая ошибка — начинать с «мне нравится синий». Цвет бренда — это территория на рынке, а не украшение ([как её делят банки](../logotipy-rossijskih-bankov/), [мессенджеры](../logotipy-messendzherov/) и [маркетплейсы](../logotipy-marketplejsov/)). Поэтому первый шаг — карта: выпишите 5‑10 конкурентов и их основные цвета (точные коды удобно смотреть в нашем [каталоге](../../logos/) — блок «Цвета бренда» есть на каждой странице — или через [инструменты‑пипетки](../kak-uznat-cvet-logotipa/)). На карте станет видно: какие зоны спектра заняты намертво, какие свободны. Свободная зона — ваш шорт‑лист. Именно так [Т‑Банк](../istoriya-logotipa-t-banka/) взял жёлтый, а [Spotify](../istoriya-logotipa-spotify/) — зелёный.
 
 ## Шаг 1. Основной цвет: три фильтра
 
@@ -78,7 +78,7 @@ A working brand palette is **1 primary + 1-2 accents + 2-3 neutrals** (backgroun
 
 ## Step 0. The competitor map before taste
 
-The most common mistake is starting with "I like blue". A brand color is market territory, not decoration (how banks divide it, [messengers](../logotipy-messendzherov/), [marketplaces](../logotipy-marketplejsov/)). So the first step is a map: list 5-10 competitors and their primary colors (exact codes are easy to check in our [catalog](../../logos/) — every page has a "Brand colors" block — or with [eyedropper tools](../kak-uznat-cvet-logotipa/)). The map reveals which spectrum zones are locked and which are free. The free zone is your shortlist. That's exactly how [T-Bank](../istoriya-logotipa-t-banka/) took yellow and [Spotify](../istoriya-logotipa-spotify/) took green.
+The most common mistake is starting with "I like blue". A brand color is market territory, not decoration ([how banks divide it](../logotipy-rossijskih-bankov/), [messengers](../logotipy-messendzherov/), [marketplaces](../logotipy-marketplejsov/)). So the first step is a map: list 5-10 competitors and their primary colors (exact codes are easy to check in our [catalog](../../logos/) — every page has a "Brand colors" block — or with [eyedropper tools](../kak-uznat-cvet-logotipa/)). The map reveals which spectrum zones are locked and which are free. The free zone is your shortlist. That's exactly how [T-Bank](../istoriya-logotipa-t-banka/) took yellow and [Spotify](../istoriya-logotipa-spotify/) took green.
 
 ## Step 1. The primary: three filters
 

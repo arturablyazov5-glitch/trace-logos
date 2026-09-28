@@ -9,7 +9,7 @@ tags: Подборки, Брендинг, Игры
 tags_en: Collections, Branding, Games
 ---
 
-Откройте [категорию игр](../../logos/games/) в нашем каталоге после банков — и увидите другой мир: объёмные золотые буквы, обводки, персонажи, никакого минимализма. Игровые логотипы демонстративно нарушают всё, чему учат статьи о «правильном» брендинге, — и делают это осознанно. Разбираем, почему у игр свои законы и чему у них можно научиться.
+Откройте [категорию игр](../../logos/games/) в нашем каталоге после [банков](../logotipy-rossijskih-bankov/) — и увидите другой мир: объёмные золотые буквы, обводки, персонажи, никакого минимализма. Игровые логотипы демонстративно нарушают всё, чему учат статьи о «правильном» брендинге, — и делают это осознанно. Разбираем, почему у игр свои законы и чему у них можно научиться.
 
 :::note Коротко
 Игровой логотип — это **обложка товара на полке магазина приложений**, а не корпоративный знак: он обязан продавать жанр и эмоцию за секунду скролла. Отсюда каноны категории: объёмные буквы с обводкой ([Brawl Stars](../../logos/game/brawlstars/), [Clash of Clans](../../logos/game/clashofclans/)), персонаж в иконке, «дорогая» фактура металла и золота. Минимализм здесь не работает — он не продаёт веселье.
@@ -59,7 +59,7 @@ tags_en: Collections, Branding, Games
 
 ---EN---
 
-Open the [games category](../../logos/games/) of our catalog right after banks and you enter another world: chunky golden letters, outlines, characters, zero minimalism. Game logos defiantly break everything the "proper branding" articles teach — and do it on purpose. Here's why games have their own laws and what they can teach everyone else.
+Open the [games category](../../logos/games/) of our catalog right after [banks](../logotipy-rossijskih-bankov/) and you enter another world: chunky golden letters, outlines, characters, zero minimalism. Game logos defiantly break everything the "proper branding" articles teach — and do it on purpose. Here's why games have their own laws and what they can teach everyone else.
 
 :::note TL;DR
 A game logo is **product packaging on the app-store shelf**, not a corporate mark: it must sell a genre and an emotion within one second of scrolling. Hence the category canon: chunky outlined 3D letters ([Brawl Stars](../../logos/game/brawlstars/), [Clash of Clans](../../logos/game/clashofclans/)), a character in the icon, "expensive" metal-and-gold textures. Minimalism doesn't work here — it doesn't sell fun.

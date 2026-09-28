@@ -29,7 +29,7 @@ tags_en: Logo Histories, Branding, Banks
 
 Рынок оценил: в октябре 2013 года TCS Group провела IPO на Лондонской бирже, привлекла около $1,1 млрд и получила оценку в $3,2 млрд — одно из самых громких размещений российских компаний того десятилетия. Онлайн‑банк без отделений, над которым посмеивались конкуренты, оказался дороже многих «классических» банков с тысячами офисов.
 
-Логотип эволюционировал вместе с бизнесом: вензеля ушли, щит стал плоским, а главным различителем стал **жёлтый** — цвет, который в банковской палитре не занимал никто. Ставка на «пустой» участок спектра сработала идеально: жёлтая карта в кошельке и жёлтая иконка на экране опознавались без чтения. Дерзкий цвет поддерживал позиционирование «банк не как все» — хрестоматийный пример того, как работает [психология цвета в логотипе](../psihologiya-cveta-v-logotipe/).
+Логотип эволюционировал вместе с бизнесом: вензеля ушли, щит стал плоским, а главным различителем стал **жёлтый** — цвет, который в [банковской палитре](../logotipy-rossijskih-bankov/) не занимал никто. Ставка на «пустой» участок спектра сработала идеально: жёлтая карта в кошельке и жёлтая иконка на экране опознавались без чтения. Дерзкий цвет поддерживал позиционирование «банк не как все» — хрестоматийный пример того, как работает [психология цвета в логотипе](../psihologiya-cveta-v-logotipe/).
 
 ## Жёлтый в пелотоне: логотип на «Тур де Франс»
 
@@ -113,7 +113,7 @@ Some inventions were invisible to the client but years ahead of the industry. In
 
 The market took notice: in October 2013 TCS Group went public on the London Stock Exchange, raising about $1.1bn at a $3.2bn valuation — one of the loudest Russian listings of the decade. The branchless online bank the competitors had been chuckling at turned out to be worth more than many "classic" banks with thousands of offices.
 
-The logo evolved with the business: the flourishes left, the shield went flat, and **yellow** became the main differentiator — a color nobody in the banking palette had claimed. The bet on the empty patch of spectrum worked perfectly: the yellow card in a wallet and the yellow icon on a screen were identified without reading. The bold color backed the "not like other banks" positioning — a textbook case of [color psychology in logo design](../psihologiya-cveta-v-logotipe/).
+The logo evolved with the business: the flourishes left, the shield went flat, and **yellow** became the main differentiator — a color nobody in the [banking palette](../logotipy-rossijskih-bankov/) had claimed. The bet on the empty patch of spectrum worked perfectly: the yellow card in a wallet and the yellow icon on a screen were identified without reading. The bold color backed the "not like other banks" positioning — a textbook case of [color psychology in logo design](../psihologiya-cveta-v-logotipe/).
 
 ## Yellow in the peloton: the logo at the Tour de France
 

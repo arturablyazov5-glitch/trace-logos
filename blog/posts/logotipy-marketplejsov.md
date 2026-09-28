@@ -52,7 +52,7 @@ tags_en: Collections, Branding, Marketplaces
 | Жёлтый | [Яндекс Маркет](../../logos/market/yandexmarket/) | экосистема Яндекса |
 | Мультицвет | [Авито](../../logos/market/avito/) | многообразие категорий |
 
-Как и в банках и [мессенджерах](../logotipy-messendzherov/), цвет здесь — территория: пересечений почти нет, и новому игроку приходится искать свободный участок спектра.
+Как и в [банках](../logotipy-rossijskih-bankov/) и [мессенджерах](../logotipy-messendzherov/), цвет здесь — территория: пересечений почти нет, и новому игроку приходится искать свободный участок спектра.
 
 :::tip Проверка на коробке
 У маркетплейсов есть носитель, которого нет больше ни у кого: картонная коробка и пакет. Знак обязан работать в одноцветной печати на буром картоне — это самый жёсткий тест на простоту формы. Открой [категорию маркетплейсов](../../logos/market/) и мысленно напечатай каждый знак одним цветом: все выживут, и это не совпадение — зачем нужны монохромные версии, мы объясняли отдельно.
@@ -112,7 +112,7 @@ In a category with infinite assortment, no symbol fits: any picture (a cart, a b
 | Yellow | [Yandex Market](../../logos/market/yandexmarket/) | the Yandex ecosystem |
 | Multicolor | [Avito](../../logos/market/avito/) | category variety |
 
-As in banking and [messengers](../logotipy-messendzherov/), color is territory: overlaps are rare, and a newcomer must hunt for free spectrum.
+As in [banking](../logotipy-rossijskih-bankov/) and [messengers](../logotipy-messendzherov/), color is territory: overlaps are rare, and a newcomer must hunt for free spectrum.
 
 :::tip The cardboard test
 Marketplaces own a medium nobody else has: the cardboard box and the bag. The mark must survive single-color print on brown board — the harshest simplicity test there is. Open the [marketplace category](../../logos/market/) and mentally print each mark in one color: they all survive, and that's no coincidence — we explain why monochrome versions exist separately.
