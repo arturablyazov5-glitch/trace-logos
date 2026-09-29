@@ -100,11 +100,11 @@
 }
   </script>
 
-  <link rel="stylesheet" href="/css/seo-page.css?v=20260928">
-  <link rel="stylesheet" href="/css/site-header.css?v=20260928">
-  <link rel="stylesheet" href="/css/blog.css?v=20260928">
-  <link rel="stylesheet" href="/css/site-footer.css?v=20260928" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260928"></noscript>
+  <link rel="stylesheet" href="/css/seo-page.css?v=20260929">
+  <link rel="stylesheet" href="/css/site-header.css?v=20260929">
+  <link rel="stylesheet" href="/css/blog.css?v=20260929">
+  <link rel="stylesheet" href="/css/site-footer.css?v=20260929" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="/css/site-footer.css?v=20260929"></noscript>
   <!-- Yandex.RTB -->
   <script>window.yaContextCb=window.yaContextCb||[]</script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
@@ -175,13 +175,13 @@
      by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
      source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
      the bundle list there, not this tag. -->
-<script src="/components/site-chrome.min.js?v=20260928" defer></script>
+<script src="/components/site-chrome.min.js?v=20260929" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260928">
-<script type="module" src="/components/donate-ticker.min.js?v=20260928"></script>
-<script type="module" src="/js/header-search.min.js?v=20260928"></script>
+<link rel="modulepreload" href="/js/i18n-dict-en.min.js?v=20260929">
+<script type="module" src="/components/donate-ticker.min.js?v=20260929"></script>
+<script type="module" src="/js/header-search.min.js?v=20260929"></script>
 
 
 <nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Breadcrumb navigation">
@@ -207,13 +207,13 @@
 	          <span class="blog-meta-sep" aria-hidden="true">·</span>
 	          <span class="blog-views">
 	            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px; margin-right: 2px; opacity: 0.8;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-	            480
+	            509
 	          </span>
         </div>
         <h1>How to Make Custom Emoji and Stickers in Telegram — Full Guide</h1>
       </header>
       <div class="blog-body">
-        <p>In <a href="/en/logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="/assets/logos/svgs/telegram.svg?v=20260920" alt="" width="20" height="20" loading="lazy" decoding="async"></a> you can upload not just stickers but your own emoji — small images inserted right into message text that also work as reactions. For brands it's free merch inside the messenger: your logo as an emoji, branded reactions in a channel, a sticker pack spreading through chats. Here's the whole process: file specs, artwork prep and uploading via the bot.</p>
+        <p>In <a href="/en/logos/social/telegram/" target="_blank" rel="noopener">Telegram<img class="blog-mention-icon" src="/assets/logos/svgs/telegram.svg?v=20260928" alt="" width="20" height="20" loading="lazy" decoding="async"></a> you can upload not just stickers but your own emoji — small images inserted right into message text that also work as reactions. For brands it's free merch inside the messenger: your logo as an emoji, branded reactions in a channel, a sticker pack spreading through chats. Here's the whole process: file specs, artwork prep and uploading via the bot.</p>
       <div class="callout callout-note"><div class="callout-head"><svg class="callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg><span>TL;DR</span></div><div class="callout-body"><p>Both stickers and custom emoji are uploaded through the official <strong>@Stickers</strong> bot. Stickers: PNG/WebP <strong>512×512</strong> (static) or TGS/WebM (animated). Custom emoji: same formats, <strong>100×100</strong>. Anyone can create packs for free; <strong>using</strong> custom emoji in messages requires Telegram Premium — but in channel posts everyone sees them.</p></div></div>
       <h2 id="stickers-vs-custom-emoji">Stickers vs custom emoji</h2>
       <div class="blog-table-wrap"><table class="blog-table"><thead><tr><th></th><th>Stickers</th><th>Custom emoji</th></tr></thead><tbody><tr><td>File size</td><td>512×512</td><td>100×100</td></tr><tr><td>Where they live</td><td>as a separate message</td><td>inside text, reactions, status</td></tr><tr><td>Who can send</td><td>everyone, free</td><td>Premium subscribers only</td></tr><tr><td>In channel posts</td><td>—</td><td>visible to all; admins with Premium can insert</td></tr><tr><td>Formats</td><td>PNG, WebP, TGS, WebM</td><td>the same</td></tr></tbody></table></div>
@@ -234,7 +234,7 @@ window.yaContextCb.push(() => {
       <p><strong>Custom emoji:</strong> all the same, but on a 100×100 canvas. The key consequence of the small size: <strong>no fine detail</strong> — an emoji renders at lowercase‑letter height in text. Exactly the favicon logic: <a href="/en/blog/kak-sdelat-favicon/" target="_blank" rel="noopener">why only simple shapes survive at 16 pixels</a>.</p>
       <h2 id="step-1-prepare-the-artwork" class="step-heading"><span class="step-badge">Step&nbsp;1</span><span class="step-title">Prepare the artwork</span></h2>
       <ol>
-      <li><strong>Draw or reuse.</strong> <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260920" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is convenient (basics in <a href="/en/blog/kak-narisovat-logotip-v-figma/" target="_blank" rel="noopener">how to design a logo in Figma</a>), as is Procreate. Build the emoji version of a logo from the compact mark, not the full wordmark.</li>
+      <li><strong>Draw or reuse.</strong> <a href="/en/logos/design/figma/" target="_blank" rel="noopener">Figma<img class="blog-mention-icon" src="/assets/logos/svgs/figma.svg?v=20260928" alt="" width="20" height="20" loading="lazy" decoding="async"></a> is convenient (basics in <a href="/en/blog/kak-narisovat-logotip-v-figma/" target="_blank" rel="noopener">how to design a logo in Figma</a>), as is Procreate. Build the emoji version of a logo from the compact mark, not the full wordmark.</li>
       <li><strong>Test the scale.</strong> Shrink the design to lowercase‑letter size on a phone: if the object stops reading — simplify. The emoji rule: one object, one meaning.</li>
       <li><strong>Transparent background is mandatory.</strong> A sticker with a white box around it is the hallmark of a sloppy pack; we cover <a href="/en/blog/kak-ubrat-fon-s-kartinki/" target="_blank" rel="noopener">how to remove a background</a> separately.</li>
       <li><strong>Export</strong>: stickers — 512×512 PNG/WebP, emoji — 100×100. From Figma: a frame of the right size → Export PNG.</li>
@@ -283,7 +283,7 @@ window.yaContextCb.push(() => {
       <section class="blog-related">
         <h2 class="blog-related-title" data-i18n="blogRelatedTitle">You might also like</h2>
         <div class="blog-list">
-          <a class="blog-card" href="/en/blog/kak-vstavit-emodzi-s-klaviatury/" data-date="2026-06-23" data-views="50">
+          <a class="blog-card" href="/en/blog/kak-vstavit-emodzi-s-klaviatury/" data-date="2026-06-23" data-views="51">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(0 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(40 85% 48%) 0%, transparent 62%),
@@ -296,7 +296,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            50
+            51
           </div>
           </div>
           <div class="blog-card-title">How to Type Emoji from the Keyboard — Windows, Mac, iPhone and Android</div>
@@ -304,7 +304,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="45">
+      <a class="blog-card" href="/en/blog/logotip-dlya-vk-soobshchestva/" data-date="2026-08-16" data-views="52">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(138 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(178 85% 48%) 0%, transparent 62%),
@@ -317,7 +317,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            45
+            52
           </div>
           </div>
           <div class="blog-card-title">Logo and Cover for a VK Community — Sizes and Setup</div>
@@ -325,7 +325,7 @@ window.yaContextCb.push(() => {
           <div class="blog-card-cta">Read article<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>
         </div>
       </a>
-      <a class="blog-card" href="/en/blog/logotip-dlya-youtube-kanala/" data-date="2026-08-16" data-views="213">
+      <a class="blog-card" href="/en/blog/logotip-dlya-youtube-kanala/" data-date="2026-08-16" data-views="228">
         <div class="blog-card-cover" style="--cover-gradient:
     radial-gradient(circle at 12% 20%, hsl(275 88% 52%) 0%, transparent 62%),
     radial-gradient(circle at 88% 12%, hsl(315 85% 48%) 0%, transparent 62%),
@@ -338,7 +338,7 @@ window.yaContextCb.push(() => {
             
           <div class="blog-card-views">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -1px; margin-right: 2px; opacity: 0.7;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-            213
+            228
           </div>
           </div>
           <div class="blog-card-title">YouTube Channel Logo and Art — Sizes and Requirements for 2026</div>
@@ -555,10 +555,10 @@ window.yaContextCb.push(() => {
 </footer>
 
 
-<script type="module" src="/js/blog-toc.min.js?v=20260928"></script>
-<script type="module" src="/js/blog-code.min.js?v=20260928"></script>
-<script type="module" src="/js/blog-ads.min.js?v=20260928"></script>
-<script type="module" src="/js/promo-banner-track.min.js?v=20260928"></script>
-<script src="/js/blog-track.min.js?v=20260928" async></script>
+<script type="module" src="/js/blog-toc.min.js?v=20260929"></script>
+<script type="module" src="/js/blog-code.min.js?v=20260929"></script>
+<script type="module" src="/js/blog-ads.min.js?v=20260929"></script>
+<script type="module" src="/js/promo-banner-track.min.js?v=20260929"></script>
+<script src="/js/blog-track.min.js?v=20260929" async></script>
 </body>
 </html>
