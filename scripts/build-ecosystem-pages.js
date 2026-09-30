@@ -73,7 +73,7 @@ function buildJsonLd(label, ecoKey, fullUrl, items) {
       {
         '@type': 'CollectionPage',
         name: `Логотипы экосистемы ${label}`,
-        description: `Все SVG и PNG логотипы экосистемы ${label}. Скачать бесплатно.`,
+        description: `Все логотипы экосистемы ${label} в векторе: SVG и PNG. Скачать бесплатно.`,
         url: fullUrl,
         ...(listItems.length > 0 ? {
           mainEntity: {
@@ -113,7 +113,7 @@ function buildJsonLdEn(labelEn, ecoKey, fullUrl, items) {
       {
         '@type': 'CollectionPage',
         name: `${labelEn} Ecosystem Logos`,
-        description: `All SVG and PNG logos from the ${labelEn} ecosystem. Download free.`,
+        description: `All vector logos from the ${labelEn} ecosystem: SVG and PNG. Download free.`,
         url: fullUrl,
         ...(listItems.length > 0 ? {
           mainEntity: { '@type': 'ItemList', numberOfItems: listItems.length, itemListElement: listItems },
@@ -179,8 +179,9 @@ function main() {
     if (count === 0) continue;
 
     const fullUrl  = `${BASE_URL}/logos/ecosystem/${ecoKey}/`;
-    const title    = `Логотипы экосистемы ${label} · Trace Logo's`;
-    const metaDesc = `${count} SVG и PNG логотипов экосистемы ${label}. Скачивайте бесплатно, редактируйте цвета, экспортируйте в Figma.`;
+    // «в векторе» — отдельный запрос, «SVG» человек в поиск не вводит.
+    const title    = `Логотипы экосистемы ${label} в векторе — SVG и PNG · Trace Logo's`;
+    const metaDesc = `${count} логотипов экосистемы ${label} в векторе: SVG и PNG. Скачивайте бесплатно, редактируйте цвета, экспортируйте в Figma.`;
 
     const outPath = path.join(ROOT, 'logos', 'ecosystem', ecoKey, 'index.html');
 
@@ -195,7 +196,7 @@ function main() {
       META_DESC:     esc(metaDesc),
       CANONICAL_URL: fullUrl,
       HREFLANG_TAGS: hreflangBlock(fullUrl, `${BASE_URL}/en/logos/ecosystem/${ecoKey}/`),
-      OG_TITLE:      esc(`Логотипы экосистемы ${label}`),
+      OG_TITLE:      esc(`Логотипы экосистемы ${label} в векторе`),
       OG_DESC:       esc(metaDesc),
       OG_IMAGE:      `${BASE_URL}/favicon-512.png`,
       JSON_LD:       buildJsonLd(label, ecoKey, fullUrl, items),
@@ -218,8 +219,8 @@ function main() {
 
     // ── EN page ──
     const fullUrlEn  = `${BASE_URL}/en/logos/ecosystem/${ecoKey}/`;
-    const titleEn    = `${labelEn} Ecosystem Logos · Trace Logo's`;
-    const metaDescEn = `${count} SVG and PNG logos from the ${labelEn} ecosystem. Download free, edit colors, export to Figma.`;
+    const titleEn    = `${labelEn} Ecosystem Vector Logos — SVG & PNG · Trace Logo's`;
+    const metaDescEn = `${count} vector logos from the ${labelEn} ecosystem: SVG and PNG. Download free, edit colors, export to Figma.`;
     const enVars = {
       REL:           '../../../',
       HOME_REL:      '/en/',
@@ -228,7 +229,7 @@ function main() {
       META_DESC:     esc(metaDescEn),
       CANONICAL_URL: fullUrlEn,
       HREFLANG_TAGS: hreflangBlock(fullUrl, fullUrlEn),
-      OG_TITLE:      esc(`${labelEn} Ecosystem Logos`),
+      OG_TITLE:      esc(`${labelEn} Ecosystem Vector Logos`),
       OG_DESC:       esc(metaDescEn),
       OG_IMAGE:      `${BASE_URL}/favicon-512.png`,
       JSON_LD:       buildJsonLdEn(labelEn, ecoKey, fullUrlEn, items),

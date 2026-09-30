@@ -1160,8 +1160,30 @@ function macosStylesOf(item) {
   return item.macos_styles || (item.variants || []).find(v => v.macos_styles)?.macos_styles || null;
 }
 
+// «Векторный логотип в SVG.» дописывается к рукописному desc/desc_en, когда в нём
+// ещё нет слова «вектор»: запрос «логотип X в векторе» иначе не находит страницу,
+// хотя всё, что мы отдаём, — SVG. Правим на выходе, а не в ~800 JSON: тексты
+// авторские, а формулировка одна на все. Длина сниппета ограничена — если хвост
+// не влезает, desc остаётся как есть (лучше без слова, чем обрезанный текст).
+const VECTOR_DESC_MAX = 200;
+function withVectorTail(desc, en) {
+  if (!desc) return desc;
+  if ((en ? /vector/i : /вектор/i).test(desc)) return desc;
+  const base = desc.trim();
+  const tail = en ? 'Vector logo in SVG.' : 'Векторный логотип в\u00a0SVG.';
+  const out  = base + (/[.!?…]$/.test(base) ? ' ' : '. ') + tail;
+  return out.length <= VECTOR_DESC_MAX ? out : desc;
+}
+
+// Статья, на которую ведёт вопрос «Есть ли логотип X в векторе?». Битый слаг
+// роняет test-links, так что ссылка не разъедется молча; заголовок — копия из
+// frontmatter поста и при переименовании поста обновляется вручную.
+const VECTOR_POST_SLUG     = 'vektor-i-rastr-raznica';
+const VECTOR_POST_TITLE    = 'Векторная и растровая графика — разница простыми словами';
+const VECTOR_POST_TITLE_EN = 'Vector vs Raster Graphics — The Difference in Plain Words';
+
 function buildFaqItems(item, colors, ecosystemLookup, siblings, section, section_en) {
-  const { fmtStr, fmtStrEn, square } = logoFormats(item);
+  const { fmtStr, fmtStrEn, square, hasSvg } = logoFormats(item);
 
   const nm = item.name;                       // RU name
   const ne = item.name_en || item.name;       // EN name (falls back to RU)
@@ -1169,10 +1191,24 @@ function buildFaqItems(item, colors, ecosystemLookup, siblings, section, section
   const faq = [];
   faq.push({
     q:  `В каком формате можно скачать логотип ${nm}?`,
-    a:  `Логотип ${nm} доступен в ${fmtStr}.`,
+    a:  `Логотип ${nm} доступен в ${fmtStr}.${hasSvg ? ' Основной векторный формат — SVG.' : ''}`,
     qe: `What formats is the ${ne} logo available in?`,
-    ae: `The ${ne} logo is available in ${fmtStrEn}.`,
+    ae: `The ${ne} logo is available in ${fmtStrEn}.${hasSvg ? ' The main vector format is SVG.' : ''}`,
   });
+  // Прямой ответ на запрос «логотип X в векторе». Только для логотипов, у которых
+  // SVG есть на самом деле — PNG-only «в векторе» не бывает.
+  if (hasSvg) {
+    const aRu = `Да, логотип ${nm} есть в векторе: скачайте SVG и откройте его в Figma, Illustrator или Inkscape. Векторный файл масштабируется без потери качества, в отличие от PNG. Подробнее — в статье «${VECTOR_POST_TITLE}».`;
+    const aEn = `Yes, the ${ne} logo is available as a vector: download the SVG and open it in Figma, Illustrator or Inkscape. A vector file scales without losing quality, unlike PNG. More in the article "${VECTOR_POST_TITLE_EN}".`;
+    faq.push({
+      q:  `Есть ли логотип ${nm} в векторе?`,
+      a:  aRu,
+      qe: `Is there a vector version of the ${ne} logo?`,
+      ae: aEn,
+      aHtml:   esc(aRu).replace(esc(VECTOR_POST_TITLE),    `<a href="/blog/${VECTOR_POST_SLUG}/">${esc(VECTOR_POST_TITLE)}</a>`),
+      aHtmlEn: esc(aEn).replace(esc(VECTOR_POST_TITLE_EN), `<a href="/en/blog/${VECTOR_POST_SLUG}/">${esc(VECTOR_POST_TITLE_EN)}</a>`),
+    });
+  }
   // ICO is the format people most often search for by name ("скачать X ico") —
   // surface a direct download action inside the FAQ answer itself (see
   // buildFaqSection) instead of only the "other formats" modal, without touching
@@ -1303,7 +1339,9 @@ function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'r
     "@type": "ImageObject",
     "@id": `${fullUrl}#logo`,
     "name": en ? `${nm} Logo` : `Логотип ${item.name}`,
-    "description": en ? `Official ${nm} logo in SVG` : `Официальный логотип ${item.name} в SVG`,
+    "description": primaryExt === 'png'
+      ? (en ? `Official ${nm} logo in PNG` : `Официальный логотип ${item.name} в PNG`)
+      : (en ? `Official vector ${nm} logo in SVG` : `Официальный векторный логотип ${item.name} в SVG`),
     "contentUrl": searchRel
       ? `${BASE_URL}/${searchRel}`
       : `${BASE_URL}/assets/logos/${primaryExt === 'png' ? 'pngs' : 'svgs'}/${item.file}`,
@@ -1444,12 +1482,30 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   // claimed an SVG that didn't exist. ICNS is dropped here (near-zero search
   // volume of its own, title space is tight) — it still shows in the
   // on-page "Формат" row via the same logoFormats() call.
-  const titleFmt = logoFormats(item).list.filter(f => !['ICNS', 'WebP', 'PDF', 'AI', 'EPS'].includes(f)).join(', ');
+  const formats  = logoFormats(item);
+  const titleFmt = formats.list.filter(f => !['ICNS', 'WebP', 'PDF', 'AI', 'EPS'].includes(f)).join(', ');
 
-  const metaDescRu = item.desc || `Скачайте логотип ${item.name} в ${fmtStr} бесплатно. Официальные цвета, готово для Figma.`;
-  const metaDescEn = item.desc_en || `Download the ${nm} logo in ${fmtStrEn} for free. Official colors, ready for Figma.`;
-  const ogDescRu   = item.desc || `Векторный логотип ${item.name} в ${fmtStr}. Официальные цвета.`;
-  const ogDescEn   = item.desc_en || `Vector ${nm} logo in ${fmtStrEn}. Official colors.`;
+  // «В векторе» говорим только о логотипах, у которых SVG есть на самом деле
+  // (в том числе как вариант у PNG-primary) — PNG-only векторным не называем,
+  // ровно тот же принцип, что у titleFmt выше.
+  const isVector = formats.hasSvg;
+  const fmtVecRu = 'SVG и PNG';
+  const fmtVecEn = 'SVG and PNG';
+
+  const descRu = isVector ? withVectorTail(item.desc, false) : item.desc;
+  const descEn = isVector ? withVectorTail(item.desc_en, true) : item.desc_en;
+  const metaDescRu = descRu || (isVector
+    ? `Скачайте векторный логотип ${item.name} в ${fmtVecRu} бесплатно. Официальные цвета, готово для Figma.`
+    : `Скачайте логотип ${item.name} в ${fmtStr} бесплатно. Официальные цвета, готово для Figma.`);
+  const metaDescEn = descEn || (isVector
+    ? `Download the vector ${nm} logo in ${fmtVecEn} for free. Official colors, ready for Figma.`
+    : `Download the ${nm} logo in ${fmtStrEn} for free. Official colors, ready for Figma.`);
+  const ogDescRu   = descRu || (isVector
+    ? `Векторный логотип ${item.name} в ${fmtVecRu}. Официальные цвета.`
+    : `Логотип ${item.name} в ${fmtStr}. Официальные цвета.`);
+  const ogDescEn   = descEn || (isVector
+    ? `Vector ${nm} logo in ${fmtVecEn}. Official colors.`
+    : `${nm} logo in ${fmtStrEn}. Official colors.`);
 
   const metaDesc = en ? metaDescEn : metaDescRu;
   const ogDesc   = en ? ogDescEn   : ogDescRu;
@@ -1465,12 +1521,14 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   // No leading "Логотип {nm}" — the H1 right above already says exactly
   // that, and echoing it verbatim as the paragraph's first words read as
   // a stutter/duplicate to a human reader (caught 2026-07-30 on Ozon).
-  const factLineRu = factColors.length
-    ? `${nm} — ${fmtStr}, ${factColors.length === 1 ? 'цвет' : 'цвета'} ${factColors.join(' и ')}. `
-    : '';
-  const factLineEn = factColors.length
-    ? `${nm} — ${fmtStrEn}, ${factColors.length === 1 ? 'color' : 'colors'} ${factColors.join(' and ')}. `
-    : '';
+  const colorsRu = factColors.length ? `, ${factColors.length === 1 ? 'цвет' : 'цвета'} ${factColors.join(' и ')}` : '';
+  const colorsEn = factColors.length ? `, ${factColors.length === 1 ? 'color' : 'colors'} ${factColors.join(' and ')}` : '';
+  // Векторному логотипу строка нужна и без цветов (монохром): слово «векторный»
+  // в первом же предложении — то, что цитируют ответные движки.
+  const factLineRu = isVector ? `${nm} — векторный логотип: ${fmtVecRu}${colorsRu}. `
+    : factColors.length ? `${nm} — ${fmtStr}${colorsRu}. ` : '';
+  const factLineEn = isVector ? `${nm} — vector logo: ${fmtVecEn}${colorsEn}. `
+    : factColors.length ? `${nm} — ${fmtStrEn}${colorsEn}. ` : '';
   const logoDesc = en
     ? factLineEn + (item.about_en || metaDescEn)
     : factLineRu + (item.about || metaDescRu);
@@ -1480,16 +1538,20 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   const alt      = altName(item, lang);
   const nmFull   = alt ? `${nm} (${alt})` : nm;
 
-  const title    = en ? `${nmFull} Logo — download ${titleFmt} free · Trace Logo's` : `Логотип ${nmFull} — скачать ${titleFmt} бесплатно · Trace Logo's`;
-  const ogTitle  = en ? `${nmFull} Logo — download ${titleFmt} free`                : `Логотип ${nmFull} — скачать ${titleFmt} бесплатно`;
+  // «в векторе» стоит до «— скачать»: хвост title с брендом Яндекс режет первым.
+  const vecRu    = isVector ? ' в векторе' : '';
+  const vecEn    = isVector ? 'vector ' : '';
+  const title    = en ? `${nmFull} Logo — download ${vecEn}${titleFmt} free · Trace Logo's` : `Логотип ${nmFull}${vecRu} — скачать ${titleFmt} бесплатно · Trace Logo's`;
+  const ogTitle  = en ? `${nmFull} Logo — download ${vecEn}${titleFmt} free`                : `Логотип ${nmFull}${vecRu} — скачать ${titleFmt} бесплатно`;
   const twTitle  = en ? `${nmFull} Logo ${titleFmt} — Trace Logo's`                 : `Логотип ${nmFull} ${titleFmt} — Trace Logo's`;
   const h1       = en ? `${nmFull} Logo` : `Логотип ${nmFull}`;
   // factColors (up to 2 hex, computed above for factLineRu/En) folded into the
   // hero image's alt — image search / AI image citation reads alt text, not
   // the on-page color swatches, so the same data needs to reach both places.
+  const altColors = factColors.length ? `, ${factColors.join('/')}` : '';
   const prevAlt  = en
-    ? `${nmFull} Logo ${primaryType.toUpperCase()}${factColors.length ? `, ${factColors.join('/')}` : ''}`
-    : `Логотип ${nmFull} ${primaryType.toUpperCase()}${factColors.length ? `, ${factColors.join('/')}` : ''}`;
+    ? (primaryType === 'svg' ? `${nmFull} vector logo (SVG)` : `${nmFull} Logo PNG`) + altColors
+    : (primaryType === 'svg' ? `Векторный логотип ${nmFull} (SVG)` : `Логотип ${nmFull} PNG`) + altColors;
   const secLabel = en ? (section_en || section) : section;
   const ctaTitle = en ? `${readyTotal}+ logos in the catalog` : `${readyTotal}+ логотипов в каталоге`;
 

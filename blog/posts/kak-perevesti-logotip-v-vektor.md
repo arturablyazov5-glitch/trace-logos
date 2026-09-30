@@ -4,6 +4,7 @@ title_en: How to Vectorize a Logo — Tracing, Redrawing and When to Use Which
 description: Есть только PNG или JPG логотипа, а нужен вектор? Разбираем автотрассировку в Inkscape и онлайн, ручную отрисовку в Figma и честные критерии выбора способа.
 description_en: Only have a PNG or JPG of your logo but need a vector? Auto-tracing in Inkscape and online, manual redrawing in Figma, and honest criteria for choosing.
 date: 2026-06-17
+updated: 2026-09-30
 slug: kak-perevesti-logotip-v-vektor
 tags: Вектор, Логотипы, Инструкции
 tags_en: Vector, Logos, How-to
@@ -22,7 +23,7 @@ tags_en: Vector, Logos, How-to
 - **Почта и архивы.** Письма от дизайнера или студии, старые облака, папки «Логотип final». Ищите файлы.ai,.eps,.svg,.pdf.
 - **Подрядчики.** Типография, которая печатала визитки, или агентство, делавшее сайт. У них в архивах часто лежит вектор.
 - **Сайт компании.** Логотип в шапке может быть SVG, как проверить и вытащить, мы показывали в статье: [«Как скачать логотип с сайта»](../kak-skachat-logotip-s-sajta/).
-- **Известный бренд?** Тогда вектор точно есть в каталогах. В нашем [каталоге логотипов](../../logos/) сотни брендов в SVG.
+- **Известный бренд?** Тогда вектор точно есть в каталогах. В нашем [каталоге векторных логотипов](../../logos/) сотни брендов в SVG.
 
 Отдельно проверьте печатные макеты. Визитка, буклет или коммерческое предложение в PDF почти всегда хранят логотип вектором внутри: откройте такой PDF в [Illustrator](../../logos/design/illustrator/) или Inkscape и вытащите знак обычной группой кривых. Тот же приём работает с презентациями — PPTX распаковывается как zip, а вставленные картинки лежат внутри папки `media` в исходном формате.
 
@@ -141,7 +142,7 @@ Before reconstructing from raster, spend ten minutes hunting the original — it
 - **Email and archives.** Messages from the designer or studio, old cloud folders. Look for .ai, .eps, .svg, .pdf.
 - **Vendors.** The print shop that made your business cards or the agency that built the site often keeps the vector.
 - **Your own website.** The header logo may be an SVG — how to check and extract it: [how to download a logo from a site](../kak-skachat-logotip-s-sajta/).
-- **A known brand?** Then the vector definitely exists in catalogs — our [logo catalog](../../logos/) holds hundreds of brands in SVG.
+- **A known brand?** Then the vector definitely exists in catalogs — our [vector logo catalog](../../logos/) holds hundreds of brands in SVG.
 
 Check print artwork separately. A business card, brochure or proposal saved as PDF almost always keeps the logo as vector inside: open that PDF in [Illustrator](../../logos/design/illustrator/) or Inkscape and pull the mark out as an ordinary group of curves. The same trick works on decks — a PPTX unpacks as a zip, and the embedded images sit in the `media` folder in their original format.
 

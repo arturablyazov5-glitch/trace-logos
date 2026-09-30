@@ -12,23 +12,27 @@
 
 const PAIRS = [
   // ── <head>: meta / OG / Twitter ─────────────────────────────────────────
-  [`Trace Logo's — SVG-логотипы брендов и эмодзи: скачать бесплатно`,
-   `Trace Logo's — brand SVG logos and emoji: free download`],
-  [`Открытая библиотека: 288 SVG/PNG логотипов российских и международных брендов и 1918 эмодзи Apple, Google и Microsoft. Поиск, редактор цвета, экспорт в Figma — бесплатно и без регистрации.`,
-   `Open library: 288 SVG/PNG logos of Russian and international brands plus 1918 Apple, Google and Microsoft emoji. Search, color editor, Figma export — free and no signup.`],
-  [`Trace Logo's — SVG-логотипы брендов и эмодзи`, `Trace Logo's — brand SVG logos and emoji`],
-  [`288 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google и Microsoft. Скачивайте, редактируйте цвета, экспортируйте в Figma.`,
-   `288 brand SVG/PNG logos and 1918 Apple, Google and Microsoft emoji. Download, recolor and export to Figma.`],
-  [`288 SVG/PNG логотипов брендов и 1918 эмодзи Apple, Google и Microsoft. Бесплатно, без регистрации.`,
-   `288 brand SVG/PNG logos and 1918 Apple, Google and Microsoft emoji. Free, no signup.`],
+  // {N} в ключе — «любое число»: счётчики логотипов и эмодзи в index.html правит билд
+  // (build-home-sitemap.js → patchHomepageCounts), и ключ с вписанным числом перестаёт находить
+  // строку при первом же росте каталога. Так три EN-описания главной и уехали на русском:
+  // в ключах стояло 288, а в разметке уже 804. См. translateHome().
+  [`Trace Logo's — логотипы брендов в векторе (SVG) и эмодзи: скачать бесплатно`,
+   `Trace Logo's — brand logos in vector (SVG) and emoji: free download`],
+  [`{N}+ логотипов брендов в векторе (SVG и PNG) и {N} эмодзи Apple, Google, Microsoft. Поиск, редактор цвета, экспорт в Figma — бесплатно.`,
+   `{N}+ brand logos in vector (SVG and PNG) and {N} Apple, Google and Microsoft emoji. Search, color editor, Figma export — free.`],
+  [`Trace Logo's — логотипы брендов в векторе (SVG) и эмодзи`, `Trace Logo's — brand logos in vector (SVG) and emoji`],
+  [`{N}+ логотипов брендов в векторе (SVG и PNG) и {N} эмодзи Apple, Google и Microsoft. Скачивайте, редактируйте цвета, экспортируйте в Figma.`,
+   `{N}+ brand logos in vector (SVG and PNG) and {N} Apple, Google and Microsoft emoji. Download, recolor and export to Figma.`],
+  [`{N}+ логотипов брендов в векторе (SVG и PNG) и {N} эмодзи Apple, Google и Microsoft. Бесплатно, без регистрации.`,
+   `{N}+ brand logos in vector (SVG and PNG) and {N} Apple, Google and Microsoft emoji. Free, no signup.`],
   [`content="ru_RU"`, `content="en_US"`],
 
   // ── JSON-LD ─────────────────────────────────────────────────────────────
   [`"inLanguage": "ru"`, `"inLanguage": "en"`],
-  [`Открытая библиотека SVG-логотипов, эмодзи и иконок`, `Open library of SVG logos, emoji and icons`],
+  [`Открытая библиотека векторных логотипов (SVG), эмодзи и иконок`, `Open library of vector logos (SVG), emoji and icons`],
   [`"name": "Логотипы"`, `"name": "Logos"`],
-  [`SVG и PNG логотипы российских и международных брендов — скачать бесплатно`,
-   `SVG and PNG logos of Russian and international brands — free download`],
+  [`Логотипы российских и международных брендов в векторе: SVG и PNG — скачать бесплатно`,
+   `Vector logos of Russian and international brands: SVG and PNG — free download`],
   [`"name": "Эмодзи"`, `"name": "Emoji"`],
   [`Apple, Google и Microsoft эмодзи в PNG — скачать бесплатно`, `Apple, Google and Microsoft emoji in PNG — free download`],
   [`"name": "Блог"`, `"name": "Blog"`],
@@ -59,8 +63,8 @@ const PAIRS = [
   [`эмодзи</span><span class="accent">`, `emoji</span><span class="accent">`],
   [`"accent">для дизайна и разработки`, `"accent">for design and development`],
   [`Широко улыбается`, `Grinning face`],
-  [`SVG и PNG логотипов российских и международных брендов, эмодзи Apple, Google и Microsoft.`,
-   `SVG and PNG logos of Russian and international brands, plus Apple, Google and Microsoft emoji.`],
+  [`Логотипы российских и международных брендов в векторе (SVG) и PNG, эмодзи Apple, Google и Microsoft.`,
+   `Logos of Russian and international brands in vector (SVG) and PNG, plus Apple, Google and Microsoft emoji.`],
   [`Скачивайте, меняйте цвета и экспортируйте в Figma — `, `Download, recolor and export to Figma — `],
   [`<strong>без регистрации</strong>`, `<strong>no signup</strong>`],
   [`placeholder="Найдите логотип или эмодзи…"`, `placeholder="Find a logo or emoji…"`],
@@ -85,7 +89,7 @@ const PAIRS = [
 
   // ── Section: Emoji ──────────────────────────────────────────────────────
   [`>Эмодзи Apple, Google и Microsoft</h2>`, `>Apple, Google and Microsoft emoji</h2>`],
-  [`>1918 эмодзи в PNG и SVG — поиск на русском и английском</div>`, `>1918 emoji in PNG and SVG — search in Russian and English</div>`],
+  [`>{N} эмодзи в PNG и SVG — поиск на русском и английском</div>`, `>{N} emoji in PNG and SVG — search in Russian and English</div>`],
   [`>Все эмодзи →</a>`, `>All emoji →</a>`],
 
   // ── Section: Figma plugin ───────────────────────────────────────────────
@@ -94,7 +98,7 @@ const PAIRS = [
    `No need to download files and drag them onto the canvas. Find a brand or emoji`],
   [`в плагине и вставьте на макет одним кликом — векторными слоями, готовыми к редактированию.`,
    `in the plugin and insert it into your design in one click — as vector layers ready to edit.`],
-  [`Поиск по 288 логотипам и 1918 эмодзи на русском и английском`, `Search 288 logos and 1918 emoji in Russian and English`],
+  [`Поиск по {N} логотипам и {N} эмодзи на русском и английском`, `Search {N} logos and {N} emoji in Russian and English`],
   [`Вставка как векторных слоёв — без растра и лишнего кода`, `Insert as vector layers — no raster or extra code`],
   [`Редактор цвета и выбор вариантов внутри плагина`, `Color editor and variant picker inside the plugin`],
   [`Установить в Figma`, `Install in Figma`],
@@ -212,7 +216,16 @@ function translateHome(html) {
   for (const [ru, en] of [...PAIRS, ...loadCategoryPairs(), ...loadCollectionPairs(), ...popular.pairs]) {
     // Source text uses typographic non-breaking spaces (U+00A0) in places, so a
     // plain substring match misses them. Match each space against ' ' OR NBSP.
-    const pattern = ru.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]');
+    let pattern = ru.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/ /g, '[ \\u00A0]');
+    // {N} → любое число; в английском тексте k-й {N} получает k-ю найденную цифру.
+    if (ru.includes('{N}')) {
+      pattern = pattern.split('\\{N\\}').join('(\\d+)');
+      html = html.replace(new RegExp(pattern, 'g'), (...m) => {
+        let k = 0;
+        return en.replace(/\{N\}/g, () => m[++k]);
+      });
+      continue;
+    }
     html = html.replace(new RegExp(pattern, 'g'), () => en);
   }
   // alt="Логотип <name>" → "<name-en> logo" (Latin brands fall back to name).

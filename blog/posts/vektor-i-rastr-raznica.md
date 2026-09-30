@@ -4,6 +4,7 @@ title_en: Vector vs Raster Graphics — The Difference in Plain Words
 description: Чем вектор отличается от растра на пальцах: как устроены, когда какой использовать, почему логотип должен быть векторным, а фотография — растровой
 description_en: Vector vs raster explained simply — how each works, when to use which, why logos must be vector and photos raster.
 date: 2026-07-17
+updated: 2026-09-30
 slug: vektor-i-rastr-raznica
 tags: Графика, SVG, Основы
 tags_en: Graphics, SVG, Basics
@@ -110,7 +111,7 @@ tags_en: Graphics, SVG, Basics
 
 Растр — точки, вектор — инструкции. Фотографии — растр, логотипы — вектор, и конвертация между ними легко работает только в одну сторону: из вектора в растр. Держите исходники в векторе, а растр генерируйте по мере надобности.
 
-В нашем [каталоге логотипов](../../logos/) всё устроено ровно по этому принципу: каждый бренд хранится в оригинальном SVG, а PNG нужного размера генерируется при скачивании.
+В нашем [каталоге векторных логотипов](../../logos/) всё устроено ровно по этому принципу: каждый бренд хранится в оригинальном SVG, а PNG нужного размера генерируется при скачивании.
 
 ---EN---
 
@@ -215,4 +216,4 @@ Ten minutes with this glossary and conversations with designers and print shops 
 
 Raster is dots, vector is instructions. Photos are raster, logos are vector, and conversion only flows easily one way: vector to raster. Keep masters in vector, generate raster as needed.
 
-Our [logo catalog](../../logos/) is built on exactly this principle: every brand is stored as an original SVG, and a PNG of any size is generated at download time.
+Our [vector logo catalog](../../logos/) is built on exactly this principle: every brand is stored as an original SVG, and a PNG of any size is generated at download time.

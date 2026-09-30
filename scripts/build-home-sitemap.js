@@ -37,7 +37,7 @@ function patchHomepageCounts() {
   const logoCount = getLogoReadyCount();
   const categoryCount = getLogoCategoryCount();
 
-  html = html.replace(/\d+(?=\s+(?:SVG\/PNG\s+)?логотип)/g, String(logoCount));
+  html = html.replace(/\d+(?=\+?\s+(?:SVG\/PNG\s+)?логотип)/g, String(logoCount));
   html = html.replace(/\d+(?=\s+раздел)/g, String(categoryCount));
 
   if (html !== before) {

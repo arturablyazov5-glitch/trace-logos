@@ -16,7 +16,7 @@ const body = src
   .replace(/const postSelection[\s\S]*$/, '');
 
 const api = new Function('figma', `${body}
-  return { typografize, stripListMarkers, capitalizeListParagraphs, getListParagraphFlags,
+  return { typografize, yoficate, stripListMarkers, capitalizeListParagraphs, getListParagraphFlags,
            applyListMarkers, applyTypography, diffHunks };`)({
   loadFontAsync: async () => {},
   currentPage: { selection: [] },
@@ -172,6 +172,22 @@ const PHONE_CASES = CASES.filter(([, label]) => label.startsWith('телефон
     if (got !== PHONE_EXPECTED) {
       fails++;
       console.log(`  ❌ ${label}: получено ${JSON.stringify(got)}, ожидалось ${JSON.stringify(PHONE_EXPECTED)}`);
+    } else {
+      console.log(`  ✓ ${label}`);
+    }
+  }
+
+  console.log('\n── Ёфикатор: неоднозначные и однозначные слова ──');
+  const YO_CASES = [
+    ['сегодня мы будем в отеле', 'сегодня мы будем в отеле', 'омограф «отёле» не подменяет «отеле»'],
+    ['совершенный дизайн', 'совершенный дизайн', 'омограф «совершённый» не подменяет «совершенный»'],
+    ['Все еще впереди', 'Все ещё впереди', 'однозначные слова по-прежнему получают «ё»'],
+  ];
+  for (const [text, expected, label] of YO_CASES) {
+    const got = api.yoficate(text);
+    if (got !== expected) {
+      fails++;
+      console.log(`  ❌ ${label}: получено ${JSON.stringify(got)}, ожидалось ${JSON.stringify(expected)}`);
     } else {
       console.log(`  ✓ ${label}`);
     }

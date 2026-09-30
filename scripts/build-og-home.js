@@ -47,7 +47,7 @@ const HTML = `<!DOCTYPE html><html><head><meta charset="utf-8"><style>
   .brand-name { font-size:28px; font-weight:600; }
 </style></head><body>
   <div class="badge"><span class="dot"></span>${LOGO_COUNT} логотипов · ${EMOJI_COUNT} эмодзи · бесплатно</div>
-  <h1>SVG-логотипы брендов<br>и <span class="accent">эмодзи</span> для дизайна</h1>
+  <h1>Логотипы брендов<br>в векторе и <span class="accent">эмодзи</span></h1>
   <p>Скачивайте, меняйте цвета и экспортируйте в Figma — без регистрации.</p>
   <div class="brand">
     <span class="brand-logo">

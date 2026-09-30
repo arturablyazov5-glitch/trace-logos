@@ -136,17 +136,26 @@ function applyEnChrome(html, slug) {
   return html;
 }
 
+// «Вектор» в title/description категории — только если в ней есть хоть один SVG.
+function categoryHasVector(items) {
+  return items.some(i => !i.comingSoon && /\.svg$/i.test(i.file || ''));
+}
+
 function buildPage({ section, sectionEn, slug, count, items }) {
   const fullUrl  = `${BASE_URL}/logos/${slug}/`;
   const seo      = CAT_SEO[slug] || {};
 
   // «Логотипы банков России — скачать SVG и PNG бесплатно» beats the old
   // «Логотипы — Банки»: the genitive phrase is what people actually type.
-  const titleBase = seo.title || (seo.gen ? `Логотипы ${seo.gen} — скачать SVG и PNG бесплатно` : `Логотипы — ${section}`);
+  // «в векторе» — отдельный запрос («логотипы банков в векторе»), а «SVG» человек
+  // в поиск не вводит. Только если в категории есть хоть один SVG.
+  const hasVector = categoryHasVector(items);
+  const vecRu     = hasVector ? ' в векторе' : '';
+  const titleBase = seo.title || (seo.gen ? `Логотипы ${seo.gen}${vecRu} — скачать SVG и PNG бесплатно` : `Логотипы — ${section}`);
   const title     = `${titleBase} · Trace Logo's`;
   const topNames  = items.filter(i => !i.comingSoon && i.file && i.file !== 'placeholder.svg').slice(0, 3).map(i => i.name).join(', ');
   const metaDesc  = seo.gen
-    ? `${count}+ логотипов ${seo.gen}: ${topNames} и другие. SVG и PNG бесплатно, фирменные цвета, редактор и экспорт в Figma.`
+    ? `${count}+ логотипов ${seo.gen}${vecRu}: ${topNames} и другие. SVG и PNG бесплатно, фирменные цвета, редактор и экспорт в Figma.`
     : `${count}+ SVG и PNG логотипов: ${section}. Скачивайте бесплатно, редактируйте цвета, экспортируйте в Figma.`;
 
   const vars = {
@@ -179,6 +188,26 @@ function buildPage({ section, sectionEn, slug, count, items }) {
   });
 }
 
+// «N+ SVG-логотипов» живёт в двух местах: в logos/index.html (его правит patchIndex ниже)
+// и в словарях i18n (ключи logosMetaDesc / logosOgDesc). Из EN-словаря bakeI18n запекает
+// <meta description>, og:description и twitter:description в en/logos/index.html — рантайм
+// эти ключи не читает. Число в словарях вписывали руками, и оно стояло на 310 при 804 в
+// RU-разметке (а регэксп patchIndex ищет «SVG-» с ASCII-дефисом, в RU-словаре после
+// apply-typography стоит U+2011). Правим тем же readyTotal, что и HTML: одно число, два места.
+// Как и build-home-collections.js, пишем в исходные словари; их .min.js пересоберёт
+// build-js-minify.js на следующем прогоне.
+function patchDictCounts(readyTotal) {
+  for (const file of ['i18n-dict-ru.js', 'i18n-dict-en.js']) {
+    const p = path.join(ROOT, 'js', file);
+    const src = fs.readFileSync(p, 'utf8');
+    const out = src.replace(/^(\s*logos(?:Meta|Og)Desc:\s*')\d+\+/gm, `$1${readyTotal}+`);
+    if (out !== src) {
+      fs.writeFileSync(p, out, 'utf8');
+      console.log(`  ✓ js/${file} — logosMetaDesc/logosOgDesc: ${readyTotal}+`);
+    }
+  }
+}
+
 // logos/index.html is hand-maintained, so it can't use {{> }} — instead we keep the
 // shared download dropdown between markers and re-inject it here (same pattern as the
 // home-sitemap block). Single source: templates/partials/download-dropdown.html.
@@ -187,7 +216,9 @@ function patchIndex(readyTotal, cats) {
   let html = fs.readFileSync(indexPath, 'utf8');
   const before = html;
 
-  html = html.replace(/\d+\+ SVG-логотип/g, `${readyTotal}+ SVG-логотип`);
+  // Привязка к «N+ … логотип», а не к конкретной формулировке: текст описания меняют
+  // (был «N+ SVG-логотипов», стал «N+ логотипов … в векторе»), счётчик должен идти за ним.
+  html = html.replace(/\d+(?=\+ (?:SVG-)?логотип)/g, String(readyTotal));
 
   // Pre-rendered full grid inside #content: the live grid is JS-built (Yandex
   // renders JS poorly), so this static copy — identical markup, cards as real
@@ -208,7 +239,7 @@ function patchIndex(readyTotal, cats) {
   // страница каталога уезжала в индекс вообще без заголовка первого уровня.
   const gridWithH1 = grid.replace(
     '<div class="ssr-grid">',
-    '<div class="ssr-grid"><h1 class="section-title" data-i18n="logosIndexH1">Логотипы брендов в SVG и PNG</h1>'
+    '<div class="ssr-grid"><h1 class="section-title" data-i18n="logosIndexH1">Логотипы брендов в векторе: SVG и PNG</h1>'
   );
   html = html.replace(
     /(<!-- CATLINKS:START[^>]*-->)[\s\S]*?(<!-- CATLINKS:END -->)/,
@@ -258,12 +289,13 @@ function main() {
     // ── EN page ──
     const fullUrlEn  = `${BASE_URL}/en/logos/${slug}/`;
     const seo        = CAT_SEO[slug] || {};
+    const hasVector  = categoryHasVector(items);
     const titleBaseEn = seo.title_en
-      || (seo.gen_en ? `${seo.gen_en.charAt(0).toUpperCase()}${seo.gen_en.slice(1)} logos — download SVG & PNG free` : `Logos — ${sectionEn}`);
+      || (seo.gen_en ? `${hasVector ? 'Vector ' : ''}${hasVector ? seo.gen_en : seo.gen_en.charAt(0).toUpperCase() + seo.gen_en.slice(1)} logos — download SVG & PNG free` : `Logos — ${sectionEn}`);
     const titleEn    = `${titleBaseEn} · Trace Logo's`;
     const topNamesEn = items.filter(i => !i.comingSoon && i.file && i.file !== 'placeholder.svg').slice(0, 3).map(i => i.name_en || i.name).join(', ');
     const metaDescEn = seo.gen_en
-      ? `${count}+ ${seo.gen_en} logos: ${topNamesEn} and more. Free SVG and PNG, brand colors, color editor, Figma export.`
+      ? `${count}+ ${hasVector ? 'vector ' : ''}${seo.gen_en} logos: ${topNamesEn} and more. Free SVG and PNG, brand colors, color editor, Figma export.`
       : `${count}+ SVG and PNG logos: ${sectionEn}. Download free, edit colors, export to Figma.`;
     const enVars = {
       REL:           '../../',
@@ -297,6 +329,7 @@ function main() {
 
   if (!DRY_RUN) {
     patchIndex(readyTotal, catCounts);
+    patchDictCounts(readyTotal);
     console.log(`\n✓ Written:   ${written}`);
     console.log(`  Unchanged: ${unchanged}`);
   }
