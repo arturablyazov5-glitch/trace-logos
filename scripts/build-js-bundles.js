@@ -241,11 +241,13 @@ async function main() {
       logLevel: 'warning',
     });
 
-    // The external specifiers survive verbatim; point them at the minified
-    // dictionaries, the same rewrite build-js-minify.js applies to specifiers
-    // it emits. Without this the bundle would request the unminified dict.
+    // External imports retain the source module's relative paths. Resolve the
+    // dictionaries relative to the output entry, which may live outside js/.
+    let dictionaryDir = path.posix.relative(path.posix.dirname(rel), 'js');
+    dictionaryDir = dictionaryDir ? `${dictionaryDir}/` : './';
     const code = result.outputFiles[0].text
-      .replace(/(["'])(\.\/i18n-dict-(?:ru|en))\.js\1/g, '$1$2.min.js$1');
+      .replace(/(["'])\.\/(i18n-dict-(?:ru|en))\.js\1/g,
+        (_, quote, name) => `${quote}${dictionaryDir}${name}.min.js${quote}`);
 
     assertParses(code, rel);
 

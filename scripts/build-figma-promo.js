@@ -39,6 +39,7 @@ const PLUGINS = [
   { dir: 'typograf', utm: 'figma-typograf' },
   { dir: 'style-scanner', utm: 'figma-style-scanner' },
   { dir: 'pdf-to-svg', utm: 'figma-pdf-to-svg' },
+  { dir: 'plates-to-component', utm: 'figma-plates-to-component' },
 ];
 
 // Те же шесть брендов, что в промо-блоке расширений (reviews-exporter,

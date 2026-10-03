@@ -308,8 +308,8 @@ export const DICT = {
 
   // ── SPA page titles / meta (data-i18n-content) ──────────
   logosTitle:      "Vector Brand Logos — download SVG & PNG free · Trace Logo's",
-  logosMetaDesc:   '804+ vector logos of Russian and international brands (SVG and PNG): banks, marketplaces, messengers, Yandex, Sber, VK ecosystems. Download, edit colors, export to Figma.',
-  logosOgDesc:     '804+ vector brand logos (SVG and PNG): Yandex, Sber, VK, Ozon, Telegram and others. Edit colors and export to Figma.',
+  logosMetaDesc:   '806+ vector logos of Russian and international brands (SVG and PNG): banks, marketplaces, messengers, Yandex, Sber, VK ecosystems. Download, edit colors, export to Figma.',
+  logosOgDesc:     '806+ vector brand logos (SVG and PNG): Yandex, Sber, VK, Ozon, Telegram and others. Edit colors and export to Figma.',
   emojiTitle:      "Apple, Google and Microsoft Emoji PNG — download free · Trace Logo's",
   emojiMetaDesc:   '1918+ emoji from Apple, Google and Microsoft in PNG and SVG. Smileys, gestures, animals, flags and symbols. 1525 Microsoft Fluent Emoji variants. Download free.',
   emojiOgDesc:     '1918+ emoji from Apple, Google and Microsoft in PNG and SVG. 1525 Microsoft Fluent Emoji variants. Smileys, gestures, animals, flags. Search in Russian and English.',

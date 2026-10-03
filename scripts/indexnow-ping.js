@@ -12,30 +12,32 @@
  * generate and host their own), so committing both the key and its key
  * file to the repo is the intended setup, not a leak.
  *
- * Run after every deploy. Never fails the deploy — a ping failure just
- * means engines fall back to their normal crawl schedule.
+ * Runs as the last step of `.github/workflows/deploy.yml`, right after the
+ * GitHub Pages publish (a push to `main` is the deploy). Never fails the
+ * deploy — a ping failure just means engines fall back to their normal
+ * crawl schedule.
  *
- * SELECTIVE BY DEFAULT, baselined on the LAST PING, not on git (since
- * 2026-08-14): deploys go straight to Vercel via `vercel --archive=tgz`
- * from the working tree — a git commit is never required to ship, so
- * "diff against git HEAD" silently breaks the moment a deploy happens
- * without a commit either side of it (stale HEAD makes an old, unrelated
- * backlog of edits look "new"; a HEAD made right after a deploy makes real
- * changes disappear because they're already committed). The only baseline
- * that actually matches "what search engines have already been told about"
- * is this script's own last successful run, tracked in `.indexnow-state.json`
+ * SELECTIVE BY DEFAULT, baselined on the LAST PING, not on git: a git diff
+ * can't answer "what have search engines already been told about". In CI the
+ * checkout's HEAD is the commit being deployed, so "diff against HEAD" would
+ * always be empty; locally a stale HEAD makes an old, unrelated backlog of
+ * edits look "new". The only baseline that matches the question is this
+ * script's own last successful run, tracked in `.indexnow-state.json`
  * (committed — a build artifact, like `js/version.js` or `sitemap.xml`, not
  * a secret or a cache) as a content hash per URL, with the `?v=\d{8}`
- * cache-buster and other known build-time noise stripped before hashing.
- * `--all` bypasses the diff and pings the full sitemap (still updates the
- * baseline), for a first run or whenever the state file looks suspect.
+ * cache-buster stripped before hashing (see NOISE_RE). `--all` bypasses the
+ * diff and pings the full sitemap (still updates the baseline), for a first
+ * run or whenever the state file looks suspect.
+ *
+ * Caveat: the workflow does not commit `.indexnow-state.json` back, so a CI
+ * run compares against the baseline as last committed, not against the
+ * previous CI run.
  *
  * Usage: node scripts/indexnow-ping.js [--all] [--dry-run] [--seed-only]
  *
  * --seed-only writes the current hashes to `.indexnow-state.json` WITHOUT
  * pinging anything — for bootstrapping the baseline right after a deploy
- * whose content was already submitted some other way (e.g. the one-time
- * switch away from the git-HEAD-based diff, 2026-08-14).
+ * whose content was already submitted some other way.
  */
 
 const fs   = require('fs');

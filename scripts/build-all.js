@@ -46,6 +46,7 @@ const DRY_RUN   = argv.includes('--dry-run');
 //   all HTML builders → en-pages (mirrors whatever HTML exists at the time it runs)
 //   everything → sitemap.js (sole owner of sitemap.xml, must run last)
 const STEPS = [
+  { file: 'build-plates-to-component.js',   label: 'Figma-плагин «Плашки в компонент»: модульный vanilla JS → code.js' },
   { file: 'build-figma-typograf.js',       label: 'Запекание правил типографики из _shared/typograf-rules.js в code.js Figma-плагина — до apply-typography.js, который читает тот же источник' },
   { file: 'test-typograf-sync.js',         label: 'Тест: правила типографики в плагине и на сайте — из одного источника' },
   { file: 'build-figma-yo.js',             label: 'Запекание словаря ёфикатора из resources/yo.js в code.js плагина Typograf (только плагин, не сайт)' },

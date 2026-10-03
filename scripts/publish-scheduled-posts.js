@@ -18,10 +18,12 @@
  *   --force      прятать future даже если на сегодня нет новой пачки
  *   --no-build   не запускать npm run build (для отладки самого скрипта)
  *
- * Типовой цикл:
- *   1) node scripts/publish-scheduled-posts.js
- *   2) vercel --prod --yes --archive=tgz      (руками)
- *   3) node scripts/publish-scheduled-posts.js restore
+ * Типовой цикл (хостинг — GitHub Pages: деплоем служит сам push в main,
+ * .github/workflows/deploy.yml публикует сайт по пушу):
+ *   1) node scripts/publish-scheduled-posts.js [--force]
+ *   2) git add -A && git commit -m "…"       (руками, ДО restore — в коммит не должны попасть будущие посты)
+ *   3) git push arturablyazov5 main          (руками — это и есть деплой)
+ *   4) node scripts/publish-scheduled-posts.js restore
  */
 
 const fs = require('fs');
@@ -232,7 +234,7 @@ function cmdHold() {
   if (active) {
     die(
       `уже активен hold от ${active.date}: спрятано ${active.held.length} постов. ` +
-        `Задеплой то, что собрано, и верни всё обратно: node scripts/publish-scheduled-posts.js restore`
+        `Закоммить и запушь то, что собрано, и верни всё обратно: node scripts/publish-scheduled-posts.js restore`
     );
   }
 
@@ -253,7 +255,7 @@ function cmdHold() {
     console.log(c.g('\n✓ будущих постов нет — прятать нечего, собираю полный набор'));
     runBuild('полный набор');
     console.log(c.g('\n✓ готово. Это последняя пачка: контент-план исчерпан.'));
-    console.log(c.dim('  деплой: vercel --prod --yes --archive=tgz'));
+    console.log(c.dim('  деплой: git add -A && git commit && git push arturablyazov5 main'));
     console.log(c.dim('  restore не нужен — ничего не пряталось\n'));
     return;
   }
@@ -311,8 +313,9 @@ function cmdHold() {
     for (const p of todays) console.log(`  • ${p.slug}  ${c.dim(p.title)}`);
   }
   console.log(`\n${c.b('Дальше:')}`);
-  console.log(`  1) vercel --prod --yes --archive=tgz`);
-  console.log(`  2) node scripts/publish-scheduled-posts.js restore`);
+  console.log(`  1) git add -A && git commit -m "…"      ${c.dim('(до restore: будущих постов в коммите быть не должно)')}`);
+  console.log(`  2) git push arturablyazov5 main         ${c.dim('(это и есть деплой: GitHub Pages публикует по пушу)')}`);
+  console.log(`  3) node scripts/publish-scheduled-posts.js restore`);
   console.log(c.y(`\n  ⚠ пока не сделан restore, в рабочей копии нет ${held.length} будущих постов\n`));
 }
 
