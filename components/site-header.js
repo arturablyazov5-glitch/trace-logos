@@ -79,7 +79,6 @@ class SiteHeader extends HTMLElement {
         <span class="sidebar-header-text">
           <span class="sidebar-header-row">
             <span class="sidebar-header-name">Trace Logo's</span>
-            <span class="sidebar-header-badge">Beta</span>
           </span>
           <span class="sidebar-header-sub">${subtitle}</span>
         </span>
@@ -153,16 +152,6 @@ class SiteHeader extends HTMLElement {
           font-size: 13px;
           font-weight: 600;
           color: #fff;
-          white-space: nowrap;
-        }
-
-        .sidebar-header-badge {
-          font-size: 10px;
-          font-weight: 600;
-          color: #888;
-          background: #222;
-          border-radius: 16px;
-          padding: 3px 6px;
           white-space: nowrap;
         }
 

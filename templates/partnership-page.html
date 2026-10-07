@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+{{> metrika}}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{partnershipTitle}} · Trace Logos</title>
+  <meta name="description" content="{{partnershipDescription}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  {{HREFLANG_TAGS}}
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="apple-touch-icon" href="{{REL}}apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trace Logos">
+  <meta property="og:title" content="{{partnershipTitle}} · Trace Logos">
+  <meta property="og:description" content="{{partnershipDescription}}">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/home.png">
+  <meta property="og:locale" content="ru_RU">
+  <script type="application/ld+json">{{JSON_LD}}</script>
+  <link rel="stylesheet" href="{{REL}}css/seo-page.css">
+  <link rel="stylesheet" href="{{REL}}css/site-header.css">
+  <link rel="stylesheet" href="{{REL}}css/site-footer.css">
+  <link rel="stylesheet" href="{{REL}}css/partnership.css">
+</head>
+<body>
+{{> nav-header}}
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
+  <a href="{{HOME_REL}}">Trace Logo's</a><span class="sep">/</span>
+  <span class="current" aria-current="page">{{partnershipTitle}}</span>
+</nav>
+<main class="partnership-main">
+  <header class="partnership-hero">
+    <div class="partnership-hero-copy">
+    <h1>{{partnershipTitle}}</h1>
+    <p class="partnership-lead">{{partnershipLead}}</p>
+    <p class="partnership-intro">{{partnershipIntro}}</p>
+    <div class="partnership-hero-actions">
+      <a class="partnership-primary" href="#partnership-embed-title">{{partnershipGetBadge}} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a>
+      <a class="partnership-secondary" href="#partnership-conditions">{{partnershipReadConditions}}</a>
+    </div>
+    </div>
+    <figure class="partnership-showcase">
+      <div class="partnership-demo-browser">
+        <div class="partnership-demo-toolbar" aria-hidden="true"><span></span><span></span><span></span><i>your-service</i></div>
+        <div class="partnership-demo-content">
+          <span class="partnership-demo-brand" data-partner-name>{{partnershipYourService}}</span>
+          <p class="partnership-demo-heading">{{partnershipMockHeading}}</p>
+          <p class="partnership-demo-sub">{{partnershipMockText}}</p>
+          <div class="partnership-demo-logos" aria-hidden="true">
+            <span><img src="{{REL}}assets/logos/svgs/figma.svg" alt="" width="28" height="28"></span>
+            <span><img src="{{REL}}assets/logos/svgs/telegram.svg" alt="" width="28" height="28"></span>
+            <span><img src="{{REL}}assets/logos/svgs/google.svg" alt="" width="28" height="28"></span>
+          </div>
+        </div>
+        <div class="partnership-demo-footer">
+          <span data-partner-name>{{partnershipYourService}}</span>
+          <a data-partner-link href="https://trace-logos.ru/?utm_source=your-service"><img src="{{REL}}assets/partnership/badge-dark.svg" alt="{{partnershipBadgeAlt}}" width="199" height="63"></a>
+        </div>
+      </div>
+      <figcaption>{{partnershipExample}}</figcaption>
+    </figure>
+  </header>
+  <div class="partnership-conditions" id="partnership-conditions">
+    <section>
+      <h2>{{partnershipUseTitle}}</h2>
+      <p>{{partnershipUseText}}</p>
+    </section>
+    <section>
+      <h2>{{partnershipConditionTitle}}</h2>
+      <p>{{partnershipConditionText}}</p>
+    </section>
+  </div>
+  <section class="partnership-embed" aria-labelledby="partnership-embed-title">
+    <div class="partnership-embed-heading">
+      <h2 id="partnership-embed-title">{{partnershipEmbedTitle}}</h2>
+      <p>{{partnershipEmbedIntro}}</p>
+    </div>
+    <div class="partnership-builder">
+      <div class="partnership-settings">
+        <label for="partner-service">{{partnershipServiceLabel}}</label>
+        <input id="partner-service" type="text" value="your-service" placeholder="my-service" maxlength="120" autocomplete="off" spellcheck="false" aria-describedby="partner-service-hint">
+        <p class="partnership-hint" id="partner-service-hint">{{partnershipServiceHint}}</p>
+        <span class="partnership-preview-label" id="partner-preview-label">{{partnershipPreviewLabel}}</span>
+        <div class="partnership-preview" aria-labelledby="partner-preview-label">
+          <span class="partnership-preview-service" data-partner-name>{{partnershipYourService}}</span>
+          <a id="partner-badge" data-partner-link href="https://trace-logos.ru/?utm_source=your-service">
+            <img src="{{REL}}assets/partnership/badge-dark.svg" alt="{{partnershipBadgeAlt}}" width="199" height="63">
+          </a>
+        </div>
+        <p class="partnership-hint">{{partnershipPreviewNote}}</p>
+        <a class="partnership-download" href="/assets/partnership/badge-dark.svg" download="trace-logos-badge.svg">{{partnershipDownload}}</a>
+      </div>
+      <div class="partnership-code-panel">
+        <label for="partner-code">{{partnershipCodeLabel}}</label>
+        <textarea id="partner-code" rows="7" readonly spellcheck="false">{{EMBED_CODE}}</textarea>
+        <button class="partnership-copy" id="partner-copy" type="button">{{partnershipCopy}}</button>
+        <p class="partnership-copy-status" id="partner-copy-status" role="status" aria-live="polite"></p>
+        <p class="partnership-hint">{{partnershipLinkLabel}}</p>
+        <a class="partnership-url" id="partner-url" href="https://trace-logos.ru/?utm_source=your-service">https://trace-logos.ru/?utm_source=your-service</a>
+      </div>
+    </div>
+  </section>
+  <aside class="partnership-rights">
+    <p>{{partnershipRights}}</p>
+    <a href="{{REL}}terms/">{{partnershipTerms}}</a>
+  </aside>
+</main>
+{{> site-footer}}
+<script type="module" src="{{REL}}js/partnership.min.js"></script>
+</body>
+</html>

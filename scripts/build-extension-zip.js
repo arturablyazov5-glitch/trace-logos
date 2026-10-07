@@ -86,6 +86,11 @@ function patchLandingPage(dirPath, slug, version, changelog) {
 
 async function buildExtension(slug) {
   const dirPath = path.join(EXT_ROOT, slug);
+  // Пересобрать content script из исходников до упаковки расширения.
+  const builder = path.join(dirPath, 'build', 'build.js');
+  if (fs.existsSync(builder)) {
+    require('child_process').execFileSync(process.execPath, [builder, ...(DRY_RUN ? ['--dry-run'] : [])], { stdio: 'inherit' });
+  }
   const manifest = JSON.parse(fs.readFileSync(path.join(dirPath, 'manifest.json'), 'utf8'));
   const version = manifest.version;
 

@@ -14,7 +14,10 @@ class SidebarContact extends HTMLElement {
 
     this.innerHTML = `
       <div class="sidebar-label">${supportLabel}</div>
-      <a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">@mansurov_rafael</a>
+      <a class="sidebar-contact-social" href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">
+        <span>@mansurov_rafael</span>
+        <img src="/assets/logos/svgs/telegram.svg" alt="" aria-hidden="true" width="14" height="14" loading="lazy">
+      </a>
       <div class="sidebar-label" style="margin-top:14px">${lang === 'ru' ? 'Для AI' : 'For AI'}</div>
       <a href="${_BASE}/llms.txt" target="_blank" rel="noopener">llms.txt</a>
       <a href="${dataUrl}" target="_blank" rel="noopener">${dataLabel}</a>

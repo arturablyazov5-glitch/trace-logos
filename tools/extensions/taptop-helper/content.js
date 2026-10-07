@@ -417,7 +417,7 @@
   // перехватывает клики (pointer-events: auto), колесо/тачпад/свайп
   // глушатся отдельно, иначе скролл проходит сквозь непрозрачный для
   // кликов элемент прямо в документ под ним.
-  function createTtProgress({ initialText = "Начинаю публикацию", statusText = "Публикую страницы…" } = {}) {
+  function createTtProgress({ initialText = "Начинаю публикацию", statusText = "Публикую страницы…", blockInteraction = false } = {}) {
     const overlay = document.createElement("div")
     overlay.id = "tth-progress-overlay"
 
@@ -586,6 +586,18 @@
       overlay.classList.add("tth-shown")
     }, 30)
 
+    // Пропускаем синтетические события автоматизации Taptop, блокируем
+    // только действия пользователя, включая клавиатуру и ссылки баннера.
+    const blockedEvents = ["pointerdown", "pointerup", "mousedown", "mouseup", "click", "dblclick", "contextmenu", "keydown", "keyup", "wheel", "touchstart", "touchmove", "touchend"]
+    const blockUserInteraction = (e) => {
+      if (!e.isTrusted) return
+      e.preventDefault()
+      e.stopImmediatePropagation()
+    }
+    if (blockInteraction) {
+      blockedEvents.forEach((type) => window.addEventListener(type, blockUserInteraction, { capture: true, passive: false }))
+    }
+
     const blockScroll = (e) => e.preventDefault()
     overlay.addEventListener("wheel", blockScroll, { passive: false })
     overlay.addEventListener("touchmove", blockScroll, { passive: false })
@@ -594,6 +606,7 @@
     function cleanup() {
       if (closed) return
       closed = true
+      blockedEvents.forEach((type) => window.removeEventListener(type, blockUserInteraction, true))
       overlay.removeEventListener("wheel", blockScroll)
       overlay.removeEventListener("touchmove", blockScroll)
       overlay.style.opacity = "0"
@@ -604,6 +617,7 @@
     }
 
     return {
+      stage(text) { countEl.textContent = text },
       // total — сколько страниц опубликовано (счётчик), expected —
       // total + сколько ещё осталось в списке модалки на этой итерации.
       progress({ total, expected }) {
@@ -1068,7 +1082,10 @@
     })
   }
 
+  let isCompressing = false
+
   async function compressCurrentImage(picker, btn) {
+    if (isCompressing || isPublishing) return
     const srcLink = picker.querySelector(".image-source-picker__info-desc__body--source a")
     const replaceBtn = picker.querySelector(".image-source-picker__control button")
     if (!srcLink || !replaceBtn) {
@@ -1083,6 +1100,12 @@
     const origBtnText = textEl.textContent
     btn.disabled = true
     textEl.textContent = "Сжимаю…"
+    isCompressing = true
+    const progress = createTtProgress({
+      initialText: "Подготавливаю изображение…",
+      statusText: "Сжимаю фото…",
+      blockInteraction: true,
+    })
 
     try {
       // Открываем панель «Ресурсы» — до сжатия, а не после. Первое
@@ -1102,7 +1125,7 @@
       // штатно добавляет файл в список.
       let dropZone = document.querySelector(".tt-assets-primary-list")
       if (!dropZone) {
-        showNotif("Открываю панель «Ресурсы»…", "blue")
+        progress.stage("Открываю панель «Ресурсы»…")
         // Голый replaceBtn.click() ненадёжен — тот же баг, что у тумблера
         // «Дизайнер» (см. simulateClick выше): их React-обработчики
         // подписаны на настоящую pointer-последовательность, а не на
@@ -1115,14 +1138,14 @@
       // что она никуда не делась (см. жалобу на порчу оригинала в списке).
       const topItemTextBefore = document.querySelector(".tt-assets-primary-item__text")?.textContent?.trim() || null
 
-      showNotif("Скачиваю оригинал…", "blue")
+      progress.stage("Скачиваю оригинал…")
       const origRes = await fetch(srcUrl)
       if (!origRes.ok) throw new Error("Не удалось скачать оригинал")
       const origBlob = await origRes.blob()
       const filename = decodeURIComponent(srcUrl.split("/").pop() || "image")
       const origFile = new File([origBlob], filename, { type: origBlob.type })
 
-      showNotif("Подбираю качество WebP…", "blue")
+      progress.stage("Подбираю качество WebP…")
       const { blob: webpBlob, quality } = await findAutoQualityWebp(origFile)
 
       if (webpBlob.size >= origFile.size) {
@@ -1135,7 +1158,7 @@
       const baseName = `${filename.replace(/\.[^.]+$/, "")}_${Date.now()}`
       const webpFile = new File([webpBlob], `${baseName}.webp`, { type: "image/webp" })
 
-      showNotif("Загружаю сжатую версию…", "blue")
+      progress.stage("Загружаю сжатую версию…")
       await dispatchFileDrop(dropZone, webpFile)
 
       const newItem = await waitForAssetItem(baseName)
@@ -1150,7 +1173,7 @@
         }
       }
 
-      showNotif("Применяю…", "blue")
+      progress.stage("Применяю…")
       newItem.click()
 
       showNotif(
@@ -1161,6 +1184,8 @@
       console.warn("[Taptop Helper] Ошибка сжатия фото:", e)
       showNotif("Ошибка: " + e.message, "red")
     } finally {
+      progress.remove()
+      isCompressing = false
       btn.disabled = false
       textEl.textContent = origBtnText
     }

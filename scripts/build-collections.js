@@ -39,12 +39,15 @@ function esc(str) {
 const relPath = u => (u || '').replace(BASE_URL + '/', '');
 const norm = s => (s || '').toLowerCase().replace(/ё/g, 'е');
 
-function pickLogos(logos, matches) {
+function pickLogos(logos, matches, excludedSlugs = []) {
   const wants = matches.map(norm);
+  const excluded = new Set(excludedSlugs);
   const seen = new Set();
   const picked = [];
   for (const w of wants) {
     for (const l of logos) {
+      const slug = String(l.url || '').replace(/^.*\/logos\//, '').replace(/\/+$/, '');
+      if (excluded.has(slug)) continue;
       if (seen.has(l.url)) continue;
       if (!norm(l.name).includes(w)) continue;
       const asset = l.svgUrl || l.pngUrl || '';
@@ -208,7 +211,7 @@ function main() {
   let written = 0;
 
   for (const col of collections) {
-    const items = pickLogos(logos, col.match);
+    const items = pickLogos(logos, col.match, col.exclude);
     const fullUrlRu = `${BASE_URL}/collections/${col.slug}/`;
     const fullUrlEn = `${BASE_URL}/en/collections/${col.slug}/`;
 

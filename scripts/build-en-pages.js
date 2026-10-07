@@ -79,6 +79,7 @@ function findHtmlFiles(dir, rel = '') {
     if (COLLECTION.test(relPath)) { skipped++; continue; }
     if (LOGOS_CATEGORY.test(relPath)) { skipped++; continue; }
     if (BLOG_POST.test(relPath)) { skipped++; continue; }
+    if (relPath === 'partnership/index.html') { skipped++; continue; } // owned by build-partnership.js
     if (CREDITS.test(relPath)) { skipped++; continue; }
 
     const src       = path.join(ROOT, relPath);

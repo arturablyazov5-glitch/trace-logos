@@ -4,7 +4,8 @@
  * collections.json.
  *
  * collections.json — источник истины. Каждая запись обязана нести:
- *   - `lucide`         — имя иконки lucide для плитки на главной
+ *   - `match`          — строки для выбора логотипов в той же очередности,
+ *                        что и на странице подборки
  *   - `home_label` / `home_label_en` — короткая RU/EN подпись для футера
  *     (в отличие от h1/h1_en, которые длиннее и предназначены для <title>/<h1>
  *     страницы подборки)
@@ -35,6 +36,7 @@ const path = require('path');
 
 const ROOT             = path.resolve(__dirname, '..');
 const COLLECTIONS_JSON = path.join(ROOT, 'collections.json');
+const LOGOS_JSON       = path.join(ROOT, 'logos.json');
 const INDEX_HTML       = path.join(ROOT, 'index.html');
 const FOOTER_PARTIAL   = path.join(ROOT, 'templates', 'partials', 'site-footer.html');
 // Словарь разделён по языкам (js/i18n-dict-ru.js / -en.js) — в каждом файле ровно
@@ -68,20 +70,62 @@ function jsStr(s) {
   return `'${String(s).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
 }
 
+const BASE_URL = 'https://trace-logos.ru/';
+const norm = s => String(s || '').toLowerCase().replace(/ё/g, 'е');
+
+function pickLogos(logos, matches, excludedSlugs = []) {
+  const excluded = new Set(excludedSlugs);
+  const seen = new Set();
+  const picked = [];
+  for (const match of matches.map(norm)) {
+    for (const logo of logos) {
+      if (!norm(logo.name).includes(match)) continue;
+      const slug = String(logo.url || '').replace(/^.*\/logos\//, '').replace(/\/+$/, '');
+      if (excluded.has(slug)) continue;
+      if (seen.has(logo.url)) continue;
+      const asset = logo.svgUrl || logo.pngUrl || '';
+      if (!asset || asset.includes('placeholder')) continue;
+      seen.add(logo.url);
+      picked.push(logo);
+    }
+  }
+  return picked;
+}
+
+function thumbnailPath(logo) {
+  const asset = (logo.svgUrl || logo.pngUrl || '').replace(BASE_URL, '');
+  if (logo.svgUrl || !logo.pngUrl) return asset;
+  const preview = asset.replace('/pngs/', '/previews/').replace(/\.png$/i, '.webp');
+  return fs.existsSync(path.join(ROOT, preview)) ? preview : asset;
+}
+
 function main() {
   const { collections } = JSON.parse(fs.readFileSync(COLLECTIONS_JSON, 'utf8'));
+  const { logos } = JSON.parse(fs.readFileSync(LOGOS_JSON, 'utf8'));
 
-  const missing = collections.filter(c => !c.lucide || !c.home_label || !c.home_label_en);
+  const missing = collections.filter(c => !Array.isArray(c.match) || !c.home_label || !c.home_label_en);
   if (missing.length) {
     throw new Error(
-      `collections.json: у следующих подборок нет lucide/home_label/home_label_en — ${missing.map(c => c.slug).join(', ')}`
+      `collections.json: у следующих подборок нет match/home_label/home_label_en — ${missing.map(c => c.slug).join(', ')}`
     );
   }
 
-  const tiles = collections.map(c => `        <a class="cat-tile" href="collections/${c.slug}/">
-          <i data-lucide="${c.lucide}" class="cat-ico" aria-hidden="true"></i>
-          <span class="cat-name">${c.h1 || c.title}</span>
-        </a>`).join('\n');
+  const tiles = collections.map(c => {
+    const picked = pickLogos(logos, c.match, c.exclude);
+    const preview = picked.slice(0, 4).map(logo =>
+      `<img src="${thumbnailPath(logo)}" alt="" width="20" height="20" loading="lazy">`
+    ).join('');
+    const more = picked.length > 4
+      ? `<span class="catalog-cat-more" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="8" y1="3" x2="8" y2="13"/><line x1="3" y1="8" x2="13" y2="8"/></svg></span>`
+      : '';
+    return `        <a class="catalog-cat" href="collections/${c.slug}/">
+          <span class="catalog-cat-thumbs" aria-hidden="true">${preview}${more}</span>
+          <span class="catalog-cat-bottom">
+            <span class="catalog-cat-name">${c.h1 || c.title}</span>
+            <span class="catalog-cat-count">${picked.length}</span>
+          </span>
+        </a>`;
+  }).join('\n');
 
   const items = collections.map(c =>
     `          <li><a href="{{REL}}collections/${c.slug}/"><span data-i18n="footerColl_${c.slug}">${c.home_label}</span></a></li>`
@@ -97,7 +141,7 @@ function main() {
 
   if (DRY_RUN) {
     console.log(`collections: ${collections.length}`);
-    console.log(collections.map(c => `  ${c.slug} → ${c.lucide} / "${c.home_label}" / "${c.home_label_en}"`).join('\n'));
+    console.log(collections.map(c => `  ${c.slug} → ${pickLogos(logos, c.match).map(logo => logo.name).join(', ')} / "${c.home_label}" / "${c.home_label_en}"`).join('\n'));
     return;
   }
 

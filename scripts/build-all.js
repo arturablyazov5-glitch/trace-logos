@@ -94,6 +94,7 @@ const STEPS = [
   { file: 'build-home-tools.js',           label: 'Список «Инструменты» в футере (из tools.json)' },
   { file: 'build-tools-hub.js',            label: 'SEO каталога инструментов из карточек и FAQ' },
   { file: 'build-og-tools.js',             label: 'OG-превью каталога инструментов' },
+  { file: 'build-partnership.js',          label: 'Страница партнерства (RU + EN) с плашкой и кодом вставки' },
   { file: 'build-home-sitemap.js',         label: 'Блок «Карта сайта» на главной' },
   { file: 'build-tools-headers.js',        label: 'Единый хедер на страницах tools/*' },
   { file: 'build-extension-zip.js',        label: 'Zip + version.json + чейнджлог для tools/extensions/*/ — после хедера, до EN-зеркала' },

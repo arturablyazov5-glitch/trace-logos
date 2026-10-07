@@ -28,7 +28,14 @@ function fixNumbers(text) {
   const unitsAlt = UNITS.slice().sort((a, b) => b.length - a.length).join('|');
   out = out.replace(new RegExp(`(\\d)[^\\S\\n]?(${unitsAlt})(?![${LETTER_CLASS}])`, 'g'), `$1${NBSP}$2`);
   out = out.replace(new RegExp(`(\\d)[^\\S\\n](?=[${LETTER_CLASS}])`, 'g'), `$1${NBSP}`);
-  out = out.replace(new RegExp(`([\\d${CURRENCY_CLASS}])[^\\S\\n]*\\+[^\\S\\n]*(?=[\\d${CURRENCY_CLASS}])`, 'g'), `$1${NBSP}+${NBSP}`);
+  out = out.replace(new RegExp(`([\\d${CURRENCY_CLASS}])[^\\S\\n]*\\+[^\\S\\n]*(?=[\\d${CURRENCY_CLASS}])`, 'g'), (match, prev, offset, str) => {
+    // Устойчивое «1+1» пишется слитно; границы исключают «11+1» и «1+11».
+    const before = str[offset - 1] || '';
+    const after = str.slice(offset + match.length);
+    const tokenChar = new RegExp(`[\\d${LETTER_CLASS}]`);
+    if (prev === '1' && !tokenChar.test(before) && !/[\d][.,]$/.test(str.slice(0, offset)) && /^1(?![\dA-Za-zА-ЯЁа-яё]|[.,]\d)/.test(after)) return '1+';
+    return `${prev}${NBSP}+${NBSP}`;
+  });
   out = out.replace(/(\S)[^\S\n]*=[^\S\n]*(?=\S)/g, (m, prev, offset, str) => {
     if (/[<>=!]/.test(prev)) return m;
     if (str[offset + m.length] === '=') return m;

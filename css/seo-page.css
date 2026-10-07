@@ -274,7 +274,7 @@ main {
 /* ── Preview card ── */
 .preview-card {
   position: relative;
-  border: 1px solid var(--border);
+  border: 0;
   border-radius: 16px;
   aspect-ratio: 1;
   display: flex;
@@ -608,6 +608,9 @@ h1 {
 .btn-zip:hover:not(:disabled) { background: var(--bg-active); border-color: var(--border-focus); }
 .btn-zip:disabled { opacity: .55; }
 
+.btn-row > .btn-secondary,
+.btn-row .btn-zip { border: 0; }
+
 .btn-size { font-size: 11px; color: var(--text-6); margin-left: 2px; }
 .btn-primary .btn-size { color: var(--text-hint); }
 
@@ -629,13 +632,13 @@ h1 {
   display: flex; flex-direction: column;
   align-items: center; gap: 6px;
   padding: 10px;
-  background: var(--bg-card); border: 1px solid var(--border);
+  background: var(--bg-card); border: 0;
   border-radius: 10px;
   cursor: pointer; user-select: none;
-  transition: border-color .12s, background .12s;
+  transition: background .12s;
 }
-.variant-card:hover { border-color: var(--border-hover); background: var(--bg-hover); }
-.variant-card.active { border-color: var(--border-bold); background: var(--bg-raised); }
+.variant-card:hover { background: var(--bg-hover); }
+.variant-card.active { background: var(--bg-raised); }
 
 .variant-preview-icon {
   width: 48px; height: 48px;
@@ -683,17 +686,16 @@ h1 {
   display: flex; flex-direction: column;
   align-items: center; gap: 6px;
   padding: 10px 8px;
-  background: var(--bg-card); border: 1px solid var(--border);
+  background: var(--bg-card); border: 0;
   border-radius: 10px;
   text-decoration: none;
   width: 72px;
-  transition: border-color .12s, background .12s;
+  transition: background .12s;
 }
-.ecosystem-card:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.ecosystem-card:hover { background: var(--bg-hover); }
 
 /* Current page — highlighted, not dimmed */
 .ecosystem-card.current {
-  border-color: var(--border-bold);
   background: var(--bg-raised);
   pointer-events: none;
   position: relative;
@@ -731,7 +733,10 @@ h1 {
 /* ── Catalog CTA ── */
 .catalog-cta {
   margin-top: 48px; padding: 22px 24px;
-  background: linear-gradient(135deg, #1a1f3a 0%, #0f1729 100%);
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(138,107,255,.12), transparent 48%),
+    radial-gradient(ellipse at 100% 100%, rgba(78,201,245,.07), transparent 48%),
+    linear-gradient(135deg, #1b1b1d 0%, #151516 100%);
   border-radius: 14px;
   display: flex; align-items: center; justify-content: space-between;
   gap: 20px; flex-wrap: wrap;
@@ -742,13 +747,13 @@ h1 {
 .catalog-cta-link {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 9px 18px;
-  background: #4f6ef7; border: none;
+  background: var(--accent); border: none;
   border-radius: 9px; color: #fff;
   font-size: 13px; font-weight: 600;
   text-decoration: none; white-space: nowrap; flex-shrink: 0;
-  transition: background .15s, transform .1s;
+  transition: filter .15s, transform .1s;
 }
-.catalog-cta-link:hover { background: #6b85ff; transform: translateY(-1px); }
+.catalog-cta-link:hover { filter: brightness(1.06); transform: translateY(-1px); }
 
 /* ── RSYA feed ad, full width of main, before "Другие логотипы этой категории" ──
    Height capped the same hard way as .ad-sidebar-slot (the ex-Threads-banner
@@ -963,11 +968,11 @@ h1 {
   display: flex; flex-direction: column;
   align-items: center; gap: 6px;
   padding: 10px 8px; width: 72px;
-  background: var(--bg-card); border: 1px solid var(--border);
+  background: var(--bg-card); border: 0;
   border-radius: 10px; text-decoration: none;
-  transition: border-color .12s, background .12s;
+  transition: background .12s;
 }
-.related-card:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.related-card:hover { background: var(--bg-hover); }
 .related-card img {
   width: 48px; height: 48px;
   display: block; border-radius: 11px; object-fit: contain;
@@ -991,11 +996,11 @@ h1 {
 .color-swatch {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 7px 12px 7px 7px;
-  background: var(--bg-card); border: 1px solid var(--border);
+  background: var(--bg-card); border: 0;
   border-radius: 10px; cursor: pointer;
-  transition: border-color .12s, background .12s;
+  transition: background .12s;
 }
-.color-swatch:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.color-swatch:hover { background: var(--bg-hover); }
 .color-swatch-dot {
   width: 22px; height: 22px; border-radius: 6px;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12); flex-shrink: 0;
@@ -1016,7 +1021,7 @@ h1 {
 /* ── Embed widget ── */
 /* One panel: toolbar (width + copy) sitting on top of the code it produces. */
 .embed-box {
-  border: 1px solid var(--border);
+  border: 0;
   border-radius: 12px;
   background: var(--bg-card);
   overflow: hidden;
@@ -1024,7 +1029,7 @@ h1 {
 .embed-toolbar {
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
   padding: 7px 7px 7px 12px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 0;
 }
 .embed-width-field { display: inline-flex; align-items: center; gap: 8px; cursor: text; }
 .embed-width-label { font-size: 12px; color: var(--text-5); white-space: nowrap; }

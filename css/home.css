@@ -85,10 +85,10 @@ a { color: inherit; }
 .search-form { display: flex; gap: 8px; }
 .search-field {
   position: relative; flex: 1; display: flex; align-items: center;
-  background: rgba(255,255,255,0.05); border: 1px solid var(--border-hover); border-radius: 14px;
-  transition: border-color .15s, background .15s;
+  background: #161616; border: 0; border-radius: 14px;
+  transition: box-shadow .15s;
 }
-.search-field:focus-within { border-color: var(--accent); background: rgba(255,255,255,0.07); }
+.search-field:focus-within { background: #161616; box-shadow: 0 0 0 2px var(--accent); }
 .search-field svg { position: absolute; left: 16px; opacity: 0.5; pointer-events: none; }
 .search-input {
   flex: 1; background: transparent; border: 0; outline: 0; color: var(--text);
@@ -162,7 +162,11 @@ a { color: inherit; }
   transition: background .15s;
 }
 .cat-tile:hover { background: #202020; }
-.cat-ico { width: 17px; height: 17px; flex-shrink: 0; stroke: var(--text-2); stroke-width: 1.75; }
+.cat-logos-preview { display: inline-flex; align-items: center; gap: 2px; flex-shrink: 0; }
+.cat-logos-preview img {
+  display: block; width: 20px; height: 20px; object-fit: contain;
+  border-radius: 5px; background: #222;
+}
 .cat-name { font-size: 13.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cat-count { margin-left: auto; font-size: 12px; color: var(--text-dim); flex-shrink: 0; }
 
@@ -198,10 +202,10 @@ a { color: inherit; }
   gap: 44px;
   padding: 40px 44px;
   border-radius: 20px;
-  border: 1px solid var(--border);
+  border: 0;
   background:
-    radial-gradient(120% 120% at 0% 0%, rgba(138, 107, 255,0.10) 0%, transparent 45%),
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    radial-gradient(120% 120% at 0% 0%, rgba(138, 107, 255, 0.10) 0%, transparent 45%),
+    #161616;
   overflow: hidden;
 }
 .ff-glow {
@@ -213,8 +217,8 @@ a { color: inherit; }
 .ff-badge {
   display: inline-flex; align-items: center; gap: 7px;
   font-size: 12px; font-weight: 600; letter-spacing: 0.01em;
-  color: var(--text); background: var(--card-bg);
-  border: 1px solid var(--border-hover); border-radius: 999px;
+  color: #0a0a0a; background: #fff;
+  border: 0; border-radius: 999px;
   padding: 5px 12px 5px 10px; margin-bottom: 18px;
 }
 .figma-feature h2 { font-size: 36px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
@@ -241,7 +245,7 @@ a { color: inherit; }
 .ff-preview { position: relative; z-index: 1; display: flex; justify-content: center; }
 .ff-window {
   width: 100%; max-width: 320px; border-radius: 14px; overflow: hidden;
-  background: #111; border: 1px solid var(--border-hover);
+  background: #181818; border: 0;
   box-shadow: 0 24px 60px rgba(0,0,0,0.5);
   transform: rotate(-1.2deg);
   transition: transform .25s ease;
@@ -264,13 +268,13 @@ a { color: inherit; }
 .ff-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 0 13px; }
 .ff-pcard {
   aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
-  background: #161616; border: 1px solid #222; border-radius: 14px;
+  background: #161616; border: 0; border-radius: 14px;
 }
 .ff-pcard img { width: 38px; height: 38px; object-fit: contain; border-radius: 8px; }
-.ff-pcard.sel { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.ff-pcard.sel { background: var(--accent-dim); }
 .ff-insert {
   margin: 13px; padding: 10px; border-radius: 9px; text-align: center;
-  font-size: 12.5px; font-weight: 600; color: #fff; background: var(--accent);
+  font-size: 12.5px; font-weight: 600; color: #000; background: #fff;
 }
 
 @media (max-width: 760px) {

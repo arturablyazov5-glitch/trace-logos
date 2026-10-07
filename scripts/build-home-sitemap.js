@@ -119,7 +119,7 @@ function esc(s) {
 
 function group(title, titleHref, links) {
   const head = titleHref ? `<a href="${titleHref}">${esc(title)}</a>` : esc(title);
-  const items = links.map(l => `<a href="${l.href}">${esc(l.name)}</a>`).join('\n          ');
+  const items = links.map(l => `<a href="${l.href}"${l.i18n ? ` data-i18n="${l.i18n}"` : ''}>${esc(l.name)}</a>`).join('\n          ');
   return `      <div class="sitemap-group">
         <h2 class="sitemap-group-title">${head}</h2>
         <div class="sitemap-links">
@@ -155,6 +155,7 @@ function main() {
     { name: 'Все эмодзи', href: `${REL}emoji/` },
     { name: 'Блог', href: `${REL}blog/` },
     { name: 'Люди, благодаря которым каталог жив', href: `${REL}credits/` },
+    { name: 'Партнерство', href: `${REL}partnership/`, i18n: 'footerPartnership' },
     { name: 'Правила использования', href: `${REL}terms/` },
     { name: 'Согласие на обработку данных', href: `${REL}consent/` },
   ];
