@@ -491,6 +491,18 @@ export const DICT = {
   donateVisualPct:     '94%',
   donateVisualCaption: 'of the hosting limit used',
 
+  // Partnership modal
+  partnerTitle: 'Embedding logos? Let’s partner up',
+  partnerText: 'The catalog is free.',
+  partnerRequest: 'Please add a badge linking to us in your service’s footer.',
+  partnerBadgeAlt: 'Logos from Trace Logos',
+  partnerCopy: 'Copy badge code',
+  partnerCopied: 'Copied',
+  partnerCopyError: 'Could not copy',
+  partnerTerms: 'Partnership terms →',
+  partnerLater: 'Not now',
+  partnerCloseAria: 'Close',
+
   // ── Pay what you want: pre-download modal + /thanks/ page ──
   pwywEyebrow:      'Pay what you want',
   pwywText:         'Take it for free — put 0 in and download. If the tool saves you time, put in any amount: it goes to development and hosting.',

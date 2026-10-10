@@ -1,0 +1,12 @@
+.pt-art { display: block; width: 100%; max-width: 168px; height: auto; }
+.pt-badge-halo { transform-origin: 75px 155px; animation: pt-halo 2.8s ease-in-out infinite; }
+.pt-badge-wrap { transform-origin: 75px 155px; animation: pt-badge 2.8s ease-in-out infinite; }
+.pt-link-icon { transform-origin: 130px 155px; animation: pt-link 2.8s ease-in-out infinite; }
+.pt-tile { transform-box: fill-box; transform-origin: center; animation: pt-tile 4.8s ease-in-out infinite; }
+.pt-tile-two { animation-delay: -.7s; }
+.pt-tile-three { animation-delay: -1.4s; }
+@keyframes pt-halo { 0%, 100% { opacity: .42; transform: scale(.88); } 50% { opacity: .9; transform: scale(1.12); } }
+@keyframes pt-badge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1px); } }
+@keyframes pt-link { 0%, 58%, 100% { opacity: .7; transform: scale(1); } 72% { opacity: 1; transform: scale(1.1); } }
+@keyframes pt-tile { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+@media (prefers-reduced-motion: reduce) { .pt-badge-halo, .pt-badge-wrap, .pt-link-icon, .pt-tile { animation: none; } }

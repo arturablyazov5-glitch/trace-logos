@@ -497,6 +497,18 @@ export const DICT = {
   donateVisualPct:     '94%',
   donateVisualCaption: 'лимита хостинга исчерпано',
 
+  // Partnership modal
+  partnerTitle: 'Встраиваете логотипы — давайте дружить',
+  partnerText: 'Каталог бесплатный.',
+  partnerRequest: 'Просим плашку‑ссылку в подвале вашего сервиса.',
+  partnerBadgeAlt: 'Логотипы из Trace Logos',
+  partnerCopy: 'Скопировать код плашки',
+  partnerCopied: 'Скопировано',
+  partnerCopyError: 'Не удалось скопировать',
+  partnerTerms: 'Условия партнёрства →',
+  partnerLater: 'Не сейчас',
+  partnerCloseAria: 'Закрыть',
+
   // ── Плати сколько хочешь: модалка перед скачиванием + страница /thanks/ ──
   pwywEyebrow:      'Плати сколько хочешь',
   pwywText:         'Забирай бесплатно — впиши 0 и скачивай. Если инструмент сэкономит тебе время, впиши любую сумму: она пойдёт на разработку и хостинг.',

@@ -9,7 +9,7 @@ tags: Истории логотипов, Брендинг, Соцсети
 tags_en: Logo Histories, Branding, Social Media
 ---
 
-Логотип [TikTok](../../logos/social/tiktok/) — нота с неоновым сине‑красным «раздвоением» на чёрном фоне — узнаётся мгновенно и не похож ни на один знак соцсетей. Что интересно, придуман он не для TikTok: знак родился в Китае, у приложения Douyin, и его легенда — одна из самых красивых в современном брендинге. Разбираем историю.
+Логотип [TikTok](../../logos/social/tiktok/) — нота с неоновым сине‑красным «раздвоением» на чёрном фоне — узнаётся мгновенно и не похож ни на один знак [соцсетей](../logotipy-socsetej/). Что интересно, придуман он не для TikTok: знак родился в Китае, у приложения Douyin, и его легенда — одна из самых красивых в современном брендинге. Разбираем историю.
 
 :::note Коротко
 Знак создан в 2016 году для китайского **Douyin** (материнская компания ByteDance): нота, вдохновлённая атмосферой тёмного концертного зала, где светится только сцена. Сине‑красное «раздвоение» имитирует хроматическую аберрацию — эффект расслоения света. **2018** — после покупки Musical.ly знак становится глобальным лицом TikTok; дальше — только полировка деталей. Файлы — на [странице бренда](../../logos/social/tiktok/).
@@ -29,7 +29,7 @@ tags_en: Logo Histories, Branding, Social Media
 
 ## Почему нота, а не буква
 
-В категории, где победили буквы, TikTok удержал предметный символ — и выиграл: нота отличает его в ряду однобуквенных соседей. Риск «слишком узкой» метафоры (нота = музыка, а TikTok давно шире) компенсирован абстрактностью исполнения: глитч‑нота читается скорее как «звук и движение», чем как «песни» — та же страховка, что у [волн Spotify](../istoriya-logotipa-spotify/).
+В категории, где [победили буквы](../logotipy-socsetej/), TikTok удержал предметный символ — и выиграл: нота отличает его в ряду однобуквенных соседей. Риск «слишком узкой» метафоры (нота = музыка, а TikTok давно шире) компенсирован абстрактностью исполнения: глитч‑нота читается скорее как «звук и движение», чем как «песни» — та же страховка, что у [волн Spotify](../istoriya-logotipa-spotify/).
 
 ## Как глитч воспроизводится технически
 
@@ -56,7 +56,7 @@ TikTok показывает силу «атмосферной» идеи: зна
 
 ---EN---
 
-The [TikTok](../../logos/social/tiktok/) logo — a note with a neon blue-red "split" on black — is recognized instantly and resembles no other social network mark. Curiously, it wasn't invented for TikTok: the mark was born in China for the Douyin app, and its legend is one of modern branding's most beautiful. Here's the story.
+The [TikTok](../../logos/social/tiktok/) logo — a note with a neon blue-red "split" on black — is recognized instantly and resembles no other [social network mark](../logotipy-socsetej/). Curiously, it wasn't invented for TikTok: the mark was born in China for the Douyin app, and its legend is one of modern branding's most beautiful. Here's the story.
 
 :::note TL;DR
 The mark was created in 2016 for China's **Douyin** (parent company ByteDance): a note inspired by a dark concert hall where only the stage glows. The blue-red "split" imitates chromatic aberration — light separating at the edges. **2018** — after the Musical.ly acquisition the mark becomes TikTok's global face; everything since is polish. Files are on the [brand page](../../logos/social/tiktok/).
@@ -76,7 +76,7 @@ The mark's global story began when ByteDance bought Musical.ly — the teen-favo
 
 ## Why a note and not a letter
 
-In a category won by letters, TikTok kept an object symbol — and won: the note sets it apart in a row of single-letter neighbors. The risk of a too-narrow metaphor (note = music, while TikTok is long past that) is hedged by abstraction: the glitch note reads as "sound and motion" rather than "songs" — the same insurance as [Spotify's waves](../istoriya-logotipa-spotify/).
+In a category [won by letters](../logotipy-socsetej/), TikTok kept an object symbol — and won: the note sets it apart in a row of single-letter neighbors. The risk of a too-narrow metaphor (note = music, while TikTok is long past that) is hedged by abstraction: the glitch note reads as "sound and motion" rather than "songs" — the same insurance as [Spotify's waves](../istoriya-logotipa-spotify/).
 
 ## How the glitch actually works
 

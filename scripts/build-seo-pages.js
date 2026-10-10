@@ -19,6 +19,7 @@ const fs             = require('fs');
 const path           = require('path');
 const sharp          = require('sharp');
 const { loadTemplate } = require('./lib/render');
+const { encodeUrlPath } = require('./lib/url-path');
 const { loadDict, enChrome, bakeI18n, hreflangBlock } = require('./lib/en-transform');
 const { itemDate, itemPublishedDate }  = require('./lib/item-date');
 const { extractBrandColors, hexToRgb } = require('./lib/brand-colors');
@@ -903,7 +904,7 @@ function buildColorsSection(colors, lang = 'ru', nm = '') {
 // The <a href> in the generated snippet points at this logo's own canonical
 // page — every site that embeds the snippet is a natural backlink to it.
 function assetUrl(file, ext) {
-  return `${BASE_URL}/assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${file}`;
+  return `${BASE_URL}/assets/logos/${ext === 'png' ? 'pngs' : 'svgs'}/${encodeUrlPath(file)}`;
 }
 
 // No format/variant picker here — one variant is one file, one embed. The
@@ -1343,8 +1344,8 @@ function buildJsonLd(item, section, section_en, catSlug, fullUrl, faq, lang = 'r
       ? (en ? `Official ${nm} logo in PNG` : `Официальный логотип ${item.name} в PNG`)
       : (en ? `Official vector ${nm} logo in SVG` : `Официальный векторный логотип ${item.name} в SVG`),
     "contentUrl": searchRel
-      ? `${BASE_URL}/${searchRel}`
-      : `${BASE_URL}/assets/logos/${primaryExt === 'png' ? 'pngs' : 'svgs'}/${item.file}`,
+      ? `${BASE_URL}/${encodeUrlPath(searchRel)}`
+      : `${BASE_URL}/assets/logos/${primaryExt === 'png' ? 'pngs' : 'svgs'}/${encodeUrlPath(item.file)}`,
     "encodingFormat": (searchRel || primaryExt === 'png') ? 'image/png' : 'image/svg+xml',
     "dateModified": dateModified,
     "publisher": { "@id": ORGANIZATION["@id"] },
@@ -1541,8 +1542,10 @@ function buildPage({ item, section, section_en, catSlug, ecosystemLookup, readyT
   // «в векторе» стоит до «— скачать»: хвост title с брендом Яндекс режет первым.
   const vecRu    = isVector ? ' в векторе' : '';
   const vecEn    = isVector ? 'vector ' : '';
-  const title    = en ? `${nmFull} Logo — download ${vecEn}${titleFmt} free · Trace Logo's` : `Логотип ${nmFull}${vecRu} — скачать ${titleFmt} бесплатно · Trace Logo's`;
-  const ogTitle  = en ? `${nmFull} Logo — download ${vecEn}${titleFmt} free`                : `Логотип ${nmFull}${vecRu} — скачать ${titleFmt} бесплатно`;
+  // item.title_head — ручной RU-зачин title/OG («Логотип и значок ВК (ВКонтакте)») вместо «Логотип {имя}».
+  const titleHeadRu = item.title_head || `Логотип ${nmFull}`;
+  const title    = en ? `${nmFull} Logo — download ${vecEn}${titleFmt} free · Trace Logo's` : `${titleHeadRu}${vecRu} — скачать ${titleFmt} бесплатно · Trace Logo's`;
+  const ogTitle  = en ? `${nmFull} Logo — download ${vecEn}${titleFmt} free`                : `${titleHeadRu}${vecRu} — скачать ${titleFmt} бесплатно`;
   const twTitle  = en ? `${nmFull} Logo ${titleFmt} — Trace Logo's`                 : `Логотип ${nmFull} ${titleFmt} — Trace Logo's`;
   const h1       = en ? `${nmFull} Logo` : `Логотип ${nmFull}`;
   // factColors (up to 2 hex, computed above for factLineRu/En) folded into the

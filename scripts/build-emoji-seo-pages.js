@@ -22,6 +22,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { loadTemplate } = require('./lib/render');
+const { encodeUrlPath } = require('./lib/url-path');
 const { loadDict, bakeI18n, hreflangBlock } = require('./lib/en-transform');
 
 const BASE_URL = 'https://trace-logos.ru';
@@ -102,7 +103,7 @@ function assetUrlRel(file, rel) {
 }
 function assetUrlAbs(file) {
   const ext = assetExt(file);
-  return `${BASE_URL}/assets/emoji/${ext === 'svg' ? 'svgs' : 'pngs'}/${file}`;
+  return `${BASE_URL}/assets/emoji/${ext === 'svg' ? 'svgs' : 'pngs'}/${encodeUrlPath(file)}`;
 }
 
 function buildVariantCards(item, rel, lang = 'ru') {

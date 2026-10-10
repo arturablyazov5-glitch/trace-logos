@@ -27,6 +27,8 @@ export function supportUrl() {
 // visitor, then the same every-3rd cadence for regulars.
 const EVERY_NTH = 3;
 const KEY_COUNT  = 'tl_donate_count';
+const KEY_PARTNER_COUNT = 'tl_partner_embed_count';
+const KEY_PARTNER_DONE = 'tl_partner_done';
 const KEY_THANKS = 'tl_donate_thanks';   // epoch ms; set only when someone actually
                                          // went to the payment page. Closing/"not now"
                                          // does NOT set this — the modal keeps showing
@@ -278,7 +280,28 @@ function close() {
   lastFocused = null;
 }
 
-document.addEventListener('tl:export', () => {
+document.addEventListener('tl:export', event => {
+  // esbuild inlines this module into every entry bundle that imports it
+  // (seo-page, donate-ticker), so the listener can be registered twice. Both
+  // copies receive the same event object — the first one claims it.
+  if (event.__tlFundraiserHandled) return;
+  event.__tlFundraiserHandled = true;
+  if (event.detail?.format === 'embed') {
+    const nextEmbed = (Number(read(KEY_PARTNER_COUNT)) || 0) + 1;
+    write(KEY_PARTNER_COUNT, String(nextEmbed));
+    if (nextEmbed % 2 === 1) {
+      // Odd embed copies belong only to the partnership prompt, including
+      // after a donation. Closing does not silence it; accepting does.
+      if (!sessionRead(KEY_PARTNER_DONE)) {
+        setTimeout(async () => {
+          if (sessionRead(KEY_PARTNER_DONE)) return;
+          const { openPartnerModal } = await import('./partner-modal.js');
+          if (!sessionRead(KEY_PARTNER_DONE)) openPartnerModal();
+        }, 700);
+      }
+      return;
+    }
+  }
   if (hasDonated()) return;
   const next = (Number(read(KEY_COUNT)) || 0) + 1;
   write(KEY_COUNT, String(next));

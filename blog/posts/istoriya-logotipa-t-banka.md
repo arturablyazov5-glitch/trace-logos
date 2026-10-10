@@ -64,7 +64,7 @@ tags_en: Logo Histories, Branding, Banks
 3. **Жёлтый остался.** Главный актив — цвет — сохранён полностью.
 4. **Экосистема переехала автоматически:** приставка «Т-» в названиях сервисов работала и до того.
 
-Сравните с историей X: там владелец сжёг узнаваемость добровольно, здесь — сохранили всё, что можно было сохранить, меняя только необходимое. Образцовый ответ на вопрос, [каким вообще должен быть ребрендинг](../chto-takoe-rebrending/).
+Сравните с [историей X](../logotipy-socsetej/): там владелец сжёг узнаваемость добровольно, здесь — сохранили всё, что можно было сохранить, меняя только необходимое. Образцовый ответ на вопрос, [каким вообще должен быть ребрендинг](../chto-takoe-rebrending/).
 
 ## 2025: щит поглощает Росбанк
 
@@ -148,7 +148,7 @@ Then the rarest scenario played out: a **forced rebrand of a strong brand** — 
 3. **The yellow stayed.** The main asset — the color — was preserved whole.
 4. **The ecosystem migrated automatically:** the "T-" prefix in service names had been in use already.
 
-Compare with the X story: there the owner burned recognition voluntarily; here everything salvageable was saved, changing only the necessary. A model answer to the question of [what a rebrand should be](../chto-takoe-rebrending/).
+Compare with [the X story](../logotipy-socsetej/): there the owner burned recognition voluntarily; here everything salvageable was saved, changing only the necessary. A model answer to the question of [what a rebrand should be](../chto-takoe-rebrending/).
 
 ## 2025: the shield absorbs Rosbank
 

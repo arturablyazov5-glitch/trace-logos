@@ -23,6 +23,7 @@
 const fs   = require('fs');
 const path = require('path');
 const { itemDate, assetExt } = require('./lib/item-date');
+const { encodeUrlPath } = require('./lib/url-path');
 
 const BASE_URL = 'https://trace-logos.ru';
 const ROOT     = path.resolve(__dirname, '..');
@@ -80,10 +81,10 @@ function logoUrlEntry(item, loc, freq, priority, lastmod) {
   const urls = [];
   if (ext === 'svg') {
     const searchRel = `assets/logos/search/${item.file.replace(/\.svg$/i, '.png')}`;
-    if (fs.existsSync(path.join(ROOT, searchRel))) urls.push(`${BASE_URL}/${searchRel}`);
-    urls.push(`${BASE_URL}/assets/logos/svgs/${item.file}`);
+    if (fs.existsSync(path.join(ROOT, searchRel))) urls.push(`${BASE_URL}/${encodeUrlPath(searchRel)}`);
+    urls.push(`${BASE_URL}/assets/logos/svgs/${encodeUrlPath(item.file)}`);
   } else {
-    urls.push(`${BASE_URL}/assets/logos/pngs/${item.file}`);
+    urls.push(`${BASE_URL}/assets/logos/pngs/${encodeUrlPath(item.file)}`);
   }
 
   return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>${freq}</changefreq>\n    <priority>${priority}</priority>\n${urls.map(imgBlock).join('\n')}\n  </url>`;

@@ -1,0 +1,68 @@
+/* Partnership dialog: shared split layout comes from donate.css. */
+.pt-overlay,
+.pt-overlay * { box-sizing: border-box; }
+.pt-modal.dn-modal--split {
+  max-width: 680px;
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  overflow-y: auto;
+}
+.pt-modal.dn-modal--split .pt-body {
+  flex: 1;
+  min-width: 0;
+  gap: 16px;
+  padding: 30px 28px 24px;
+  justify-content: flex-start;
+}
+.pt-body .dn-head { gap: 8px; }
+.pt-body .dn-title,
+.pt-body .dn-text { margin: 0; }
+.pt-body .dn-title { padding-right: 32px; }
+.pt-body .dn-text { color: var(--text-3, #aaa); }
+.pt-body .dn-text span { display: block; }
+.pt-visual > svg { display: block; width: 168px; max-width: 100%; height: auto; }
+.pt-preview {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+.pt-preview img { display: block; width: 180px; max-width: 100%; height: auto; }
+.pt-actions { display: flex; flex-direction: column; gap: 10px; }
+.pt-copy:disabled { cursor: default; opacity: .75; }
+.pt-copy {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: var(--accent, #8a6bff);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+.pt-copy:hover { background: #7a58ff; }
+.pt-secondary { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pt-terms,
+.pt-later {
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+.pt-terms { color: #b6a3ff; text-decoration: none; }
+.pt-terms:hover { color: #d2c5ff; text-decoration: underline; }
+.pt-later {
+  flex: none;
+  padding: 6px 0 6px 6px;
+  border: 0;
+  background: transparent;
+  color: var(--text-3, #aaa);
+  cursor: pointer;
+}
+.pt-later:hover { color: #fff; }
+.pt-terms:focus-visible,
+.pt-later:focus-visible { outline: 2px solid var(--accent, #8a6bff); outline-offset: 3px; }
+@media (max-width: 640px) {
+  .pt-modal.dn-modal--split { max-width: 440px; }
+  .pt-visual { display: none; }
+  .pt-modal.dn-modal--split .pt-body { padding: 30px 20px 20px; gap: 14px; }
+}

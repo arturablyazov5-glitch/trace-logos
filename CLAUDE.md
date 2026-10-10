@@ -6,7 +6,7 @@
 
 **Data flow:** `logos/manifest.json` → `logos/categories/*.json` → элементы логотипов → `assets/logos/svgs|pngs/`.
 
-Item: `name`, `tags`, `figma` (путь компонента Figma), `file`, `variants[]`, `ecosystem`. Опционально `alt_name` / `alt_name_en` — второе искомое имя бренда («Сбербанк» для Сбер): `build-seo-pages.js` рендерит «Имя (Алиас)» в title/H1/OG и `alternateName` в JSON-LD. Добавляй, когда бренд широко ищут под другим именем.
+Item: `name`, `tags`, `figma` (путь компонента Figma), `file`, `variants[]`, `ecosystem`. Опционально `alt_name` / `alt_name_en` — второе искомое имя бренда («Сбербанк» для Сбер): `build-seo-pages.js` рендерит «Имя (Алиас)» в title/H1/OG и `alternateName` в JSON-LD. Добавляй, когда бренд широко ищут под другим именем. Опционально `title_head` — ручной RU-зачин title и OG-title вместо «Логотип {имя}» (пример: ВКонтакте → «Логотип и значок ВК (ВКонтакте)»); `build-seo-pages.js` подставляет его перед « в векторе — скачать…», H1 и EN не меняются.
 
 **Возможности:** каталог по категориям и экосистемам (Yandex, Sber, VK, Google…); поиск с авто-переключением раскладки RU↔EN (`search.js`); редактор цветов — HSV-пикер, undo/redo, история (`color.js`, `picker.js`, `color-math.js`); экспорт SVG/PNG/буфер/ZIP/Figma-ready SVG (`export.js`); виртуальный скролл (`virtual.js`); форма предложения логотипа → Supabase Edge Function (`suggest.js`).
 
