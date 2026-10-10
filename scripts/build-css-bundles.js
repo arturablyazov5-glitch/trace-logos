@@ -33,6 +33,7 @@ const CSS_DIR = path.join(ROOT, 'css');
 const DRY_RUN = process.argv.includes('--dry-run');
 
 const BUNDLES = {
+  'developers-ui.bundle.css': ['code-block.css', 'developer-demos.css'],
   // tokens.css, catalog-grid.css and faq.css go first — seo-page.css pulls all
   // three in via `@import`, which stays render-blocking even inside a bundled
   // file (the browser still fetches it as a separate request, just later).

@@ -558,10 +558,14 @@ function widgetHtml(name, bodyLines, lang) {
 // остаётся байт в байт прежней. Ключи css/js необязательны: виджет может не
 // иметь ни того, ни другого (icon-row — чистая разметка на общих стилях),
 // тогда его тег просто не выводится.
-function widgetAssets(used, rel) {
+// hasCode: в теле есть fenced code (.blog-code) — его стили живут в общем
+// css/code-block.css (им же пользуется /developers/) и подключаются только туда,
+// где блок кода реально есть, как css виджетов.
+function widgetAssets(used, rel, hasCode = false) {
   const names = [...used];
+  const codeCss = hasCode ? `\n  <link rel="stylesheet" href="${rel}css/code-block.css">` : '';
   return {
-    head: names.filter(n => WIDGETS[n].css).map(n => `\n  <link rel="stylesheet" href="${rel}${WIDGETS[n].css}">`).join(''),
+    head: codeCss + names.filter(n => WIDGETS[n].css).map(n => `\n  <link rel="stylesheet" href="${rel}${WIDGETS[n].css}">`).join(''),
     scripts: names.filter(n => WIDGETS[n].js).map(n => `\n<script type="module" src="${rel}${WIDGETS[n].js}"></script>`).join(''),
   };
 }
@@ -1043,7 +1047,8 @@ async function main() {
       p.body_en ? mdToHtml(p.body_en, 'en') : mdToHtml(p.body, 'en');
     // Один набор css/js на обе версии: RU и EN тела пишутся отдельно и виджет
     // может стоять только в одном из них.
-    const assets  = widgetAssets(new Set([...ruWidgets, ...enWidgets]), rel);
+    const assets  = widgetAssets(new Set([...ruWidgets, ...enWidgets]), rel,
+      /class="blog-code"/.test(ruBody + enBody));
     const related = pickRelated(p, posts);
     const ogDims  = ogImageDims(p.slug);
     const vars = {

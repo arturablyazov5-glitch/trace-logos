@@ -123,6 +123,7 @@ function main() {
   // /credits/ намеренно не в sitemap.xml — страница noindex, пока данные заглушки
   // (см. templates/credits-page.html). Вернуть строку, когда снимем noindex.
   pushPage(`${BASE_URL}/partnership/`, 'yearly', '0.4');
+  pushPage(`${BASE_URL}/developers/`, 'monthly', '0.5');
   pushPage(`${BASE_URL}/terms/`,  'yearly',  '0.3');
   pushPage(`${BASE_URL}/consent/`, 'yearly', '0.3');
   pushPage(`${BASE_URL}/icons/`,  'monthly', '0.5');

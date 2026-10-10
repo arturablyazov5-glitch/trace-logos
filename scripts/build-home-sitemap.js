@@ -156,6 +156,7 @@ function main() {
     { name: 'Блог', href: `${REL}blog/` },
     { name: 'Люди, благодаря которым каталог жив', href: `${REL}credits/` },
     { name: 'Партнерство', href: `${REL}partnership/`, i18n: 'footerPartnership' },
+    { name: 'Для разработчиков', href: `${REL}developers/`, i18n: 'footerDevelopersPage' },
     { name: 'Правила использования', href: `${REL}terms/` },
     { name: 'Согласие на обработку данных', href: `${REL}consent/` },
   ];

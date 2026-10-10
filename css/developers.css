@@ -1,0 +1,92 @@
+/* /developers/ only. Shared demos and code-copy behavior stay in their own components. */
+.dev-main { width: min(100%, 1168px); margin: 0 auto; padding: 30px 32px 0; --accent-dim: var(--bg-active); }
+.dev-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; padding: 8px 0 32px; }
+.dev-hero-copy, .dev-section-copy, .dev-section-demo { min-width: 0; }
+.dev-eyebrow { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 500; color: var(--text-2); margin-bottom: 16px; }
+.dev-eyebrow::before { content: ''; width: 18px; height: 18px; background: url('../assets/brand/logo.svg') center / contain no-repeat; }
+.dev-hero h1 { font-size: clamp(32px, 3.6vw, 46px); line-height: 1.08; letter-spacing: -.04em; font-weight: 650; color: var(--text-0); text-wrap: balance; }
+.dev-lead { margin-top: 18px; font-size: 15px; line-height: 1.7; color: var(--text-2); max-width: 490px; }
+.dev-hero-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 22px; }
+.dev-main .dev-primary { display: inline-flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 44px; padding: 11px 16px; border-radius: 10px; background: var(--dev-button-bg, var(--accent)); color: var(--dev-button-ink, #fff); font-size: 19px; font-weight: 700; text-decoration: none; }
+.dev-main .dev-primary:hover { color: var(--dev-button-ink, #fff); background: var(--dev-button-bg, var(--accent)); filter: brightness(var(--dev-button-hover, .9)); }
+.dev-showcase { margin: 0; padding: 20px; border-radius: 20px; background: var(--dev-surface, var(--bg-card)); border: var(--dev-card-border, none); }
+.dev-main .dev-showcase .dev-demo, .dev-main .dev-section-demo .dev-demo { width: 100%; max-width: none; margin: 0; }
+.dev-showcase figcaption { padding-top: 16px; font-size: 12px; line-height: 1.65; text-align: center; color: var(--text-2); }
+.dev-showcase .dev-pick { padding: 14px; }
+.dev-showcase .dev-pick-row { padding: 14px 10px; font-size: 14px; }
+.dev-showcase .dev-pick-row img { width: 36px; height: 36px; }
+.dev-showcase .dev-pick-query { padding: 12px; font-size: 13px; }
+.dev-hero .dev-badges { margin: 18px 0 0; }
+.dev-nav { display: flex; gap: 32px; padding: 0 2px; border-bottom: 1px solid var(--border-base); margin-bottom: 24px; }
+.dev-main .dev-nav a { display: inline-flex; align-items: center; gap: 14px; color: var(--text-2); padding: 13px 0; font-size: 13px; font-weight: 500; text-decoration: none; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.dev-main .dev-nav a:hover, .dev-main .dev-nav a:focus-visible { color: var(--text-0); border-bottom-color: var(--accent); }
+.dev-nav a span { color: var(--text-3); }
+.dev-card { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 36px; margin-top: 16px; padding: 30px; border: var(--dev-card-border, none); background: var(--dev-surface, var(--bg-card)); border-radius: var(--dev-card-radius, 16px); scroll-margin-top: 125px; }
+.dev-section-label { display: block; color: var(--text-2); font: 11px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; margin-bottom: 12px; }
+.dev-main h2 { color: var(--text-0); font-size: 28px; line-height: 1.15; font-weight: 600; letter-spacing: -.03em; text-wrap: balance; }
+.dev-main h3 { margin: 18px 0 10px; color: var(--text-1); font-size: 12px; font-weight: 500; }
+.dev-text { margin-top: 14px; color: var(--text-2); font-size: 14px; line-height: 1.7; }
+.dev-list { list-style: none; padding: 0; margin: 20px 0; color: var(--text-1); font-size: 13px; line-height: 1.7; }
+.dev-list li { position: relative; padding-left: 18px; }
+.dev-list li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--accent); }
+.dev-list li + li { margin-top: 10px; }
+.dev-note { margin: 10px 0 0; color: var(--text-2); font-size: 12px; line-height: 1.7; }
+.dev-main :is(.dev-text, .dev-note, .dev-list, .dev-license, .faq-q, .faq-a) code { padding: 1px 4px; border-radius: 4px; background: var(--bg-muted); color: var(--text-1); font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.dev-main .blog-code { margin: 0; }
+.dev-main .blog-code-head { background: var(--bg-muted); }
+.dev-main .blog-code-lang, .dev-main .blog-code-copy { color: var(--text-2); }
+.dev-main .blog-code-copy:hover { background: var(--dev-button-bg); }
+.dev-main .blog-code-copy.is-copied { color: var(--dev-button-ink); }
+.dev-main .blog-code pre { padding: 16px; }
+.dev-main .blog-code pre code { font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+/* Same dark command + purple copy action as the shared homepage component. */
+.dev-main .dev-command { display: flex; align-items: center; gap: 12px; width: 100%; padding: 10px; border-radius: 12px; border: 1px solid var(--dev-line); background: var(--dev-demo-surface); margin: 14px 0 0; overflow: visible; }
+.dev-command > code { min-width: 0; flex: 1; text-align: left; padding: 0 4px; font: 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; color: var(--text-1); }
+.dev-main .dev-command > button { display: flex; flex-shrink: 0; align-items: center; gap: 8px; min-height: 44px; font-family: inherit; }
+.dev-hero-actions .dev-command { margin-top: 0; }
+.dev-main a { color: var(--text-1); text-underline-offset: 4px; }
+.dev-main a:hover { color: var(--text-0); }
+.dev-links { display: flex; flex-wrap: wrap; gap: 10px 20px; margin-top: 20px; font-size: 12px; line-height: 1.6; }
+.dev-result { margin-top: 14px; padding: 16px; border: 1px solid var(--border-base); border-radius: 12px; background: var(--bg); }
+.dev-result > code { display: block; color: var(--text-1); font: 12px/1.8 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+.dev-extra { margin-top: 16px; border-top: 1px solid var(--border-base); }
+.dev-extra summary { padding: 14px 0 0; color: var(--text-2); cursor: pointer; font-size: 12px; line-height: 1.6; }
+.dev-extra-body { padding-top: 8px; }
+.dev-license { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 22px 26px; margin-top: 24px; border: 1px solid var(--border-base); border-radius: 16px; background: var(--dev-surface, var(--bg-card)); }
+.dev-main .dev-license h2 { font-size: 17px; margin-bottom: 8px; }
+.dev-license p { color: var(--text-2); font-size: 12px; line-height: 1.7; }
+.dev-license .dev-links { margin: 0; flex-direction: column; gap: 8px; }
+.dev-main .faq-section { margin-top: 36px; }
+.dev-main :is(a, button, summary):focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+@media (max-width: 900px) {
+  .dev-main { padding: 24px 24px 0; }
+  .dev-hero, .dev-card { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .dev-hero h1 { max-width: 650px; }
+  .dev-lead { max-width: 600px; }
+  .dev-hero-actions { flex-direction: row; flex-wrap: wrap; align-items: stretch; }
+  .dev-hero-actions .dev-command { width: auto; flex: 1; min-width: 300px; }
+  .dev-license { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .dev-license .dev-links { flex-direction: row; }
+}
+@media (max-width: 540px) {
+  .dev-main { padding: 20px 16px 0; }
+  .dev-hero { gap: 22px; padding: 0 0 24px; }
+  .dev-hero h1 { font-size: 34px; }
+  .dev-lead { font-size: 14px; }
+  .dev-hero-actions { flex-direction: column; }
+  .dev-main .dev-hero-actions .dev-primary { width: 100%; }
+  .dev-hero-actions .dev-command { min-width: 0; width: 100%; }
+  .dev-main .dev-command { flex-wrap: wrap; }
+  .dev-command > code { flex-basis: 100%; padding: 4px; }
+  .dev-main .dev-command > button { width: 100%; justify-content: center; }
+  .dev-showcase { padding: 12px; border-radius: 16px; }
+  .dev-showcase .dev-pick { padding: 10px; }
+  .dev-showcase .dev-pick-row { padding: 10px 8px; font-size: 12px; }
+  .dev-showcase .dev-pick-row img { width: 28px; height: 28px; }
+  .dev-showcase .dev-pick-query { font-size: 12px; }
+  .dev-nav { gap: 24px; }
+  .dev-main .dev-nav a { gap: 8px; font-size: 12px; }
+  .dev-card { padding: 22px 16px; gap: 22px; border-radius: 16px; }
+  .dev-main h2 { font-size: 25px; }
+  .dev-license { padding: 20px 16px; }
+}

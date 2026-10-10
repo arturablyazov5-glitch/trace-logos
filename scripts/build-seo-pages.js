@@ -30,7 +30,7 @@ const BASE_URL   = 'https://trace-logos.ru';
 // copy so an AI crawler/LLM landing directly on a deep page (90% of traffic)
 // still sees a publisher entity, not just an anonymous ImageObject/FAQPage.
 const FIGMA_PLUGIN_URL  = "https://www.figma.com/community/plugin/1643124536537861799/trace-logos";
-const GITHUB_URL        = "https://github.com/rafael-mansurov/trace-logos";
+const GITHUB_URL        = "https://github.com/arturablyazov5-glitch/trace-logos";
 const GITHUB_PROFILE_URL = "https://github.com/rafael-mansurov";
 const TELEGRAM_URL      = "https://t.me/mansurov_rafael";
 // Shared @id with AUTHOR/AUTHOR_EN in build-blog.js — same real person, same

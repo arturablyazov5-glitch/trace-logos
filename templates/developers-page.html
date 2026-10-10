@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+{{> metrika}}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{developersMetaTitle}} · Trace Logos</title>
+  <meta name="description" content="{{developersDescription}}">
+  <link rel="canonical" href="{{CANONICAL_URL}}">
+  {{HREFLANG_TAGS}}
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="apple-touch-icon" href="{{REL}}apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trace Logos">
+  <meta property="og:title" content="{{developersMetaTitle}} · Trace Logos">
+  <meta property="og:description" content="{{developersDescription}}">
+  <meta property="og:url" content="{{CANONICAL_URL}}">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/home.png">
+  <meta property="og:locale" content="ru_RU">
+  <script type="application/ld+json">{{JSON_LD}}</script>
+  <link rel="stylesheet" href="{{REL}}css/seo-page.bundle.css">
+  <link rel="stylesheet" href="{{REL}}css/developers-ui.bundle.css">
+  <link rel="stylesheet" href="{{REL}}css/developers.css">
+</head>
+<body>
+{{> nav-header}}
+<nav class="breadcrumbs" data-i18n-aria="breadcrumbNavAria" aria-label="Навигация">
+  <a href="{{HOME_REL}}">Trace Logo's</a><span class="sep">/</span>
+  <span class="current" aria-current="page">{{developersTitle}}</span>
+</nav>
+<main class="dev-main">
+  <header class="dev-hero">
+    <div class="dev-hero-copy">
+      <p class="dev-eyebrow">{{developersTitle}}</p>
+      <h1>{{developersH1}}</h1>
+      <p class="dev-lead">{{developersLead}}</p>
+      <div class="dev-hero-actions">
+        <a class="dev-primary" href="https://marketplace.visualstudio.com/items?itemName=trace-logos.trace-logos" target="_blank" rel="noopener">{{developersInstallAction}} <span aria-hidden="true">↗</span></a>
+        {{COMMAND_HERO}}
+      </div>
+      {{DEV_BADGES}}
+    </div>
+    <figure class="dev-showcase">
+      {{DEMO_VSCODE}}
+      <figcaption>{{developersHeroCaption}}</figcaption>
+    </figure>
+  </header>
+
+  <nav class="dev-nav" aria-label="{{developersNavAria}}">
+    <a href="#npm">npm / CLI <span aria-hidden="true">↓</span></a>
+    <a href="#vscode">VS Code <span aria-hidden="true">↓</span></a>
+    <a href="#api">JSON API <span aria-hidden="true">↓</span></a>
+  </nav>
+
+  <section class="dev-card" id="npm" aria-labelledby="dev-npm-title">
+    <div class="dev-section-copy">
+      <p class="dev-section-label">01 / npm</p>
+      <h2 id="dev-npm-title">{{developersNpmTitle}}</h2>
+      <p class="dev-text">{{developersNpmText}}</p>
+      <ul class="dev-list">
+        <li>{{developersNpmPoint1}}</li>
+        <li>{{developersNpmPoint2}}</li>
+        <li>{{developersNpmPoint3}}</li>
+      </ul>
+      {{COMMAND_NPM}}
+      <p class="dev-links">
+        <a href="https://www.npmjs.com/package/trace-logos" target="_blank" rel="noopener">{{developersNpmLink}} ↗</a>
+        <a href="https://github.com/arturablyazov5-glitch/trace-logos-integrations" target="_blank" rel="noopener">{{developersSourceLink}} ↗</a>
+      </p>
+    </div>
+    <div class="dev-section-demo">
+      {{DEMO_NPM}}
+      <h3>{{developersNpmDownloadLabel}}</h3>
+      {{CODE_NPM_CLI}}
+      <details class="dev-extra">
+        <summary>{{developersNpmDetails}}</summary>
+        <div class="dev-extra-body">
+          <p class="dev-note">{{developersNpmSlugNote}}</p>
+          <p class="dev-note">{{developersNpmFlagsNote}}</p>
+          <h3>{{developersNpmLibLabel}}</h3>
+          {{CODE_NPM_LIB}}
+          <p class="dev-note">{{developersNpmLibNote}}</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="dev-card" id="vscode" aria-labelledby="dev-vscode-title">
+    <div class="dev-section-copy">
+      <p class="dev-section-label">02 / VS Code</p>
+      <h2 id="dev-vscode-title">{{developersVscodeTitle}}</h2>
+      <p class="dev-text">{{developersVscodeText}}</p>
+      <ul class="dev-list">
+        <li>{{developersVscodePoint1}}</li>
+        <li>{{developersVscodePoint2}}</li>
+        <li>{{developersVscodePoint3}}</li>
+      </ul>
+      <a class="dev-primary" href="https://marketplace.visualstudio.com/items?itemName=trace-logos.trace-logos" target="_blank" rel="noopener">{{developersInstallAction}} <span aria-hidden="true">↗</span></a>
+      {{COMMAND_VSCODE}}
+      <p class="dev-note">{{developersVscodeInstallNote}}</p>
+      <p class="dev-links">
+        <a href="https://open-vsx.org/extension/trace-logos/trace-logos" target="_blank" rel="noopener">{{developersVscodeOpenVsx}} ↗</a>
+        <a href="https://github.com/arturablyazov5-glitch/trace-logos-integrations" target="_blank" rel="noopener">{{developersSourceLink}} ↗</a>
+      </p>
+    </div>
+    <div class="dev-section-demo">
+      {{DEMO_VSCODE}}
+      <div class="dev-result">
+        <span class="dev-section-label">{{developersVscodeResult}}</span>
+        <code>&lt;img src="https://trace-logos.ru/assets/logos/svgs/telegram.svg" alt="Telegram"&gt;</code>
+      </div>
+    </div>
+  </section>
+
+  <section class="dev-card" id="api" aria-labelledby="dev-api-title">
+    <div class="dev-section-copy">
+      <p class="dev-section-label">03 / JSON API</p>
+      <h2 id="dev-api-title">{{developersApiTitle}}</h2>
+      <p class="dev-text">{{developersApiText}}</p>
+      <ul class="dev-list">
+        <li>{{developersApiPoint1}}</li>
+        <li>{{developersApiPoint2}}</li>
+        <li>{{developersApiPoint3}}</li>
+      </ul>
+      <a class="dev-primary" href="https://trace-logos.ru/logos.json" target="_blank" rel="noopener">{{developersApiAction}} <span aria-hidden="true">↗</span></a>
+      {{COMMAND_API}}
+      <p class="dev-links">
+        <a href="https://trace-logos.ru/emoji.json"><code>emoji.json</code> ↗</a>
+        <a href="https://trace-logos.ru/llms.txt"><code>llms.txt</code> ↗</a>
+      </p>
+    </div>
+    <div class="dev-section-demo">
+      {{DEMO_API}}
+      <h3>{{developersApiJsLabel}}</h3>
+      {{CODE_API_JS}}
+      <p class="dev-note">{{developersApiFormatNote}}</p>
+    </div>
+  </section>
+
+  <section class="dev-license" aria-labelledby="dev-license-title">
+    <div>
+      <h2 id="dev-license-title">{{developersLicenseTitle}}</h2>
+      <p>{{developersLicenseSummary}}</p>
+    </div>
+    <p class="dev-links">
+      <a href="{{REL}}partnership/">{{developersPartnershipLink}} →</a>
+      <a href="{{REL}}terms/">{{partnershipTerms}} →</a>
+    </p>
+  </section>
+
+  <section class="faq-section" aria-labelledby="dev-faq-title">
+    <h2 class="faq-title" id="dev-faq-title">{{developersFaqTitle}}</h2>
+    <div class="faq-list">
+{{FAQ_ITEMS}}
+    </div>
+  </section>
+</main>
+{{> site-footer}}
+<script type="module" src="{{REL}}js/blog-code.min.js"></script>
+</body>
+</html>
