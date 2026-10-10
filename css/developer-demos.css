@@ -9,7 +9,7 @@
   --dev-line: #2e2e2e;
   --dev-ink: var(--text-0);
   --dev-muted: #aaa;
-  --dev-button-bg: var(--accent);
+  --dev-button-bg: #7352ec; /* brand purple, deepened so white 15px text passes WCAG AA (5.06:1; #8a6bff is 3.73:1) */
   --dev-button-hover: .9;
   --dev-button-ink: #fff;
 }
@@ -42,13 +42,12 @@
 .dev-code-key { color: #bdaaff; }
 .dev-code-value { color: #a5dfc7; }
 .dev-product-action { margin-top: auto; padding: 18px 20px 20px; }
-/* 19px bold qualifies as large text: brand purple + white passes WCAG AA.
-   Darker hover follows the site's brightness treatment and improves contrast. */
+/* Buttons: 15px/600; background #7352ec keeps white text at AA contrast. Hover follows the site's brightness treatment. */
 .dev-action, .dev-main a.dev-action, .dev-main a.dev-primary,
 .home-developers .blog-code-copy, .dev-main .blog-code .blog-code-copy {
   background: var(--dev-button-bg); color: var(--dev-button-ink);
   border: none; border-radius: 8px; padding: 10px 12px;
-  font-size: 19px; font-weight: 700; line-height: 1.3;
+  font-size: 15px; font-weight: 600; line-height: 1.3;
   transition: filter .15s;
 }
 .dev-action { display: flex; align-items: center; justify-content: space-between; gap: 8px; text-decoration: none; }
@@ -58,7 +57,7 @@
   filter: brightness(var(--dev-button-hover));
 }
 .home-developers .blog-code-copy.is-copied, .dev-main .blog-code .blog-code-copy.is-copied { color: var(--dev-button-ink); }
-.dev-main .blog-code .blog-code-copy > span { font-size: 19px; font-weight: 700; }
+.dev-main .blog-code .blog-code-copy > span { font-size: 15px; font-weight: 600; }
 .dev-main .dev-command code { background: var(--dev-demo-surface); color: var(--dev-button-ink); border-radius: 6px; padding: 4px 6px; }
 .dev-main .blog-code, .dev-main .blog-code-head { background: var(--dev-demo-surface); }
 .home-developers .dev-install { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 0; background: var(--dev-demo-surface); margin: 0; border-color: var(--dev-line); border-radius: 8px; min-height: 40px; }
