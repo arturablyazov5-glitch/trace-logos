@@ -31,6 +31,7 @@
 
 const fs   = require('fs');
 const path = require('path');
+const { PAIR_DIR_NAME } = require('./lib/en-landings');
 
 const ROOT     = path.resolve(__dirname, '..');
 const DRY_RUN  = process.argv.includes('--dry-run');
@@ -48,6 +49,7 @@ const VERSION = versionMatch[1];
 const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
   'figma-plugins', 'supabase', 'sanitizer', 'upptime',
+  PAIR_DIR_NAME, // tools/landing-en/ — EN-пары лендингов, не страницы (scripts/lib/en-landings.js)
 ]);
 
 function walkHtml(dir, out = []) {

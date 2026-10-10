@@ -36,6 +36,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { PAIR_DIR_NAME } = require('./lib/en-landings');
 
 const ROOT = path.resolve(__dirname, '..');
 const argv = process.argv.slice(2);
@@ -47,6 +48,7 @@ const SITE_ORIGIN = 'trace-logos.ru'; // внутренний прод-доме�
 const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
   'figma-plugins', 'supabase', 'sanitizer', 'upptime', 'trace-typograf',
+  PAIR_DIR_NAME, // tools/landing-en/ — EN-пары лендингов, не страницы (scripts/lib/en-landings.js)
 ]);
 
 // По явному запросу пользователя отсутствие тёмного бейджа партнёрства
@@ -69,19 +71,29 @@ function targetExists(absPath) {
   return ok;
 }
 
+// Папки Figma-плагинов и расширения trace-typograf — исходники продукта
+// (ui.html, popup.html…), их не проверяем. Но внутри лежит лендинг
+// <slug>/index.html: он обычная страница сайта и обязан проходить проверки.
+const LANDING_DIR = /^(?:en\/)?tools\/(?:figma-plugins(?:\/(?!_)[^/]+)?|extensions\/trace-typograf)$/;
+const isLandingTree = (abs) => LANDING_DIR.test(path.relative(ROOT, abs).split(path.sep).join('/'));
+
 function walkHtml(dir, out = []) {
+  const inLandingDir = isLandingTree(dir) && !/figma-plugins$/.test(dir);
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (entry.name.startsWith('.')) continue;
     const abs = path.join(dir, entry.name);
     if (entry.isDirectory()) {
-      if (PRUNE_DIRS.has(entry.name)) continue;
+      if (PRUNE_DIRS.has(entry.name) && !isLandingTree(abs)) continue;
       walkHtml(abs, out);
     } else if (entry.name.endsWith('.html')) {
+      if (PRUNE_DIRS_SOURCE.test(path.relative(ROOT, dir).split(path.sep).join('/')) && !inLandingDir) continue;
+      if (inLandingDir && entry.name !== 'index.html') continue;
       out.push(abs);
     }
   }
   return out;
 }
+const PRUNE_DIRS_SOURCE = /^(?:en\/)?tools\/(?:figma-plugins|extensions\/trace-typograf)(?:\/|$)/;
 
 // Из значения атрибута получить абсолютный путь на диске, который должен
 // существовать, плюс сайт-абсолютный путь (для SOFT_WARN_RE / отчёта).

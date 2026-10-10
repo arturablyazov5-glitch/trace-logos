@@ -15,6 +15,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const DRY_RUN = process.argv.includes('--dry-run');
+const { LANDINGS } = require('./lib/en-landings');
 
 // --- Helpers ---
 
@@ -153,7 +154,10 @@ function cleanupOgImages(expectedSlugs) {
 
   // build-og-home.js / build-collection-og-images.js output — not logo items
   // (blog OG images live under assets/og/blog/ — see cleanupBlogOgImages)
-  const KEEP = new Set(['home', ...getExpectedCollectionOgSlugs()]);
+  // tools.png (build-og-tools.js) и tools-<slug>.png (build-og-extensions.js) —
+  // карточки каталога инструментов и лендингов; EN-версии лежат в assets/og/en/,
+  // этот обход подкаталоги не трогает.
+  const KEEP = new Set(['home', 'tools', ...LANDINGS.map(l => `tools-${l.slug}`), ...getExpectedCollectionOgSlugs()]);
   let deletedCount = 0;
 
   for (const file of fs.readdirSync(ogDir)) {

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Style Scanner — Find External Styles in Figma | Trace Logo's</title>
+  <meta name="description" content="Figma plugin that finds external library styles and variables in your selection and jumps to the layer. Check a file before handoff. Free, pay what you want.">
+  <meta name="keywords" content="find external styles figma, figma library styles in file, figma variables from library, figma plugin external variables, check library dependencies figma, unlink library styles figma, find missing library styles figma, figma design tokens audit plugin">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <link rel="canonical" href="https://trace-logos.ru/en/tools/figma-plugins/style-scanner/">
+  <link rel="alternate" hreflang="ru" href="https://trace-logos.ru/tools/figma-plugins/style-scanner/">
+  <link rel="alternate" hreflang="en" href="https://trace-logos.ru/en/tools/figma-plugins/style-scanner/">
+  <link rel="alternate" hreflang="x-default" href="https://trace-logos.ru/tools/figma-plugins/style-scanner/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:url" content="https://trace-logos.ru/en/tools/figma-plugins/style-scanner/">
+  <meta property="og:title" content="Style Scanner — Find External Styles in Figma | Trace Logo's">
+  <meta property="og:description" content="Figma plugin that finds external library styles and variables in your selection and jumps to the layer. Check a file before handoff. Free, pay what you want.">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/en/tools-style-scanner.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Style Scanner Figma plugin: external styles and variables found in a layout">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Style Scanner — Find External Styles in Figma | Trace Logo's">
+  <meta name="twitter:description" content="Figma plugin that finds external library styles and variables in your selection and jumps to the layer. Check a file before handoff. Free, pay what you want.">
+  <meta name="twitter:image" content="https://trace-logos.ru/assets/og/en/tools-style-scanner.png">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/site-header.css?v=20261010">
+  <link rel="stylesheet" href="../../assets/tools.css?v=20260731">
+  <link rel="stylesheet" href="../../assets/extensions.css?v=20260905">
+  <link rel="stylesheet" href="../../../css/faq.css">
+  <link rel="stylesheet" href="../../../css/site-footer.css?v=20261010">
+
+  <link rel="stylesheet" href="../../assets/lp-style-scanner.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Style Scanner | Trace Logo's", "applicationCategory": "DesignApplication", "operatingSystem": "Figma Desktop", "description": "Figma plugin that finds external library styles and variables in your selection and jumps to the layer. Check a file before handoff. Free, pay what you want.", "url": "https://trace-logos.ru/en/tools/figma-plugins/style-scanner/", "installUrl": "https://trace-logos.ru/en/tools/figma-plugins/style-scanner/#install", "downloadUrl": "https://trace-logos.ru/en/tools/figma-plugins/style-scanner/", "image": "https://trace-logos.ru/assets/og/en/tools-style-scanner.png", "inLanguage": "en", "featureList": ["Checking the selection and nested layers", "Finding external fill, stroke, text, effect and grid styles", "Finding bound variables from external libraries", "Filters by category", "Jump to the found layer"], "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free, pay what you want"}, "author": {"@type": "Organization", "name": "Trace Logo's", "url": "https://trace-logos.ru/en/"}, "publisher": {"@type": "Organization", "name": "Trace Logo's", "url": "https://trace-logos.ru/en/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I find external library styles and variables in Figma?", "acceptedAnswer": {"@type": "Answer", "text": "Select a frame or group and click “Find external styles and tokens”. The plugin checks the selected layers and their descendants: fills, strokes, text, effects, grids and bound variables from external libraries."}}, {"@type": "Question", "name": "Does it change my design?", "acceptedAnswer": {"@type": "Answer", "text": "No. The plugin only finds links. Jumping to a result changes the selection and the camera position."}}, {"@type": "Question", "name": "How do I jump to a found layer?", "acceptedAnswer": {"@type": "Answer", "text": "Click a result in the list: the plugin selects the layer and moves the camera to it. Use ↑↓ and Enter to walk the list, and filter results by category."}}, {"@type": "Question", "name": "Does an empty result mean the file is independent?", "acceptedAnswer": {"@type": "Answer", "text": "No. Mixed styles and inaccessible links are skipped. The check does not cover every dependency of the file."}}, {"@type": "Question", "name": "Where does my design go?", "acceptedAnswer": {"@type": "Answer", "text": "The plugin has no network access: allowedDomains is none. Yandex Metrica analytics runs on this page."}}, {"@type": "Question", "name": "How do I install the plugin?", "acceptedAnswer": {"@type": "Answer", "text": "In Figma Desktop: Plugins → Development → Import plugin from manifest… → pick manifest.json in the unzipped folder. The plugin works in Figma Design; FigJam is not supported."}}, {"@type": "Question", "name": "What should I do with the styles it finds before handing the file off?", "acceptedAnswer": {"@type": "Answer", "text": "Replace or detach them with Figma’s own tools. While you are at it, clear out hidden drafts with Clean Layers: it deletes hidden layers and leftover styling."}}, {"@type": "Question", "name": "How much does the Style Scanner plugin cost?", "acceptedAnswer": {"@type": "Answer", "text": "Free to download: pay what you want, even $0. No sign-up needed."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://trace-logos.ru/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://trace-logos.ru/en/tools/"}, {"@type": "ListItem", "position": 3, "name": "Style Scanner", "item": "https://trace-logos.ru/en/tools/figma-plugins/style-scanner/"}]}</script>
+</head>
+<body class="ext-page"><!-- HEADER:START -->
+<header class="site-header">
+  <a class="brand" href="../../../" aria-label="Trace Logo's — на главную" data-i18n-aria="navHomeAria">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="../../../assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../../logos/" method="get" data-base="../../../" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+
+  <nav class="header-nav" aria-label="Разделы" data-i18n-aria="navSectionsAria">
+    <a href="../../../logos/" data-i18n="breadcrumbLogos">Логотипы</a>
+    <a href="../../../emoji/" data-i18n="breadcrumbEmoji">Эмодзи</a>
+    <a href="../../../blog/" data-i18n="blogSection">Блог</a>
+    <a class="nav-figma" href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><svg width="11" height="16" viewBox="0 0 38 57" fill="none" aria-hidden="true"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/></svg><span data-i18n="navFigmaPlugin">Figma плагин</span></a>
+  </nav>
+
+  <a class="btn-github" href="https://github.com/arturablyazov5-glitch/trace-logos" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+    <span>GitHub</span>
+  </a>
+
+  <button type="button" class="mobile-nav-burger" id="mobile-nav-burger" data-i18n-aria="burgerAriaLabel" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav-drawer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <lang-switcher></lang-switcher>
+</header>
+
+<donate-ticker></donate-ticker>
+
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" hidden></div>
+<nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Мобильное меню" data-i18n-aria="burgerAriaLabel" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-brand">Trace Logo's</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" data-i18n-aria="detailCloseAriaLabel" aria-label="Закрыть">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-section" id="mobile-nav-toc" hidden>
+    <div class="mobile-nav-label" data-i18n="mobileNavToc">В этой статье</div>
+    <div class="mobile-nav-list" id="mobile-nav-toc-list"></div>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label" data-i18n="mobileNavPages">Разделы сайта</div>
+    <div class="mobile-nav-list">
+      <a href="../../../"><span data-i18n="navHome">Главная</span></a>
+      <a href="../../../logos/"><span data-i18n="breadcrumbLogos">Логотипы</span></a>
+      <a href="../../../emoji/"><span data-i18n="breadcrumbEmoji">Эмодзи</span></a>
+      <a href="../../../#h-collections"><span data-i18n="navCollections">Подборки</span></a>
+      <a href="../../../blog/"><span data-i18n="blogSection">Блог</span></a>
+    </div>
+  </div>
+</nav>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../../components/site-chrome.min.js" defer></script>
+<!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
+     запрос уйдёт только после того, как разрешится весь статический граф модулей
+     (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
+<link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js">
+<script type="module" src="../../../components/donate-ticker.min.js"></script>
+<script type="module" src="../../../js/header-search.min.js"></script>
+<!-- HEADER:END -->
+<a class="ss-skip" href="#main">Skip to content</a>
+<main class="ss" id="main">
+<section class="ss-hero ss-container">
+<div class="ss-hero-line"><a href="../../">← Trace Logo’s Tools</a><span>STYLE SCANNER / FIGMA PLUGIN</span></div>
+<h1>Your layout.<br>But whose <span>styles?</span></h1>
+<div class="ss-hero-bottom"><p>A Figma plugin that finds external styles and variables before you hand a file off.</p><a class="btn-cta" href="#install" data-pwyw="style-scanner">Download plugin <span aria-hidden="true">↗</span></a></div>
+<div class="ss-product" id="ss-scan-demo">
+<div class="ss-editor-bar"><span>⌗ Project / Checkout</span><span>Style Scanner · demo layout</span></div>
+<div class="ss-editor"><div class="ss-layer-tree" aria-hidden="true"><span>LAYERS</span><b>⌗ Checkout</b><small>↳ Hero</small><small>  T Title</small><small>↳ Content</small><small>  ▣ Card</small><small>↳ Actions</small><small>  ◇ Button</small></div><div class="ss-artboard"><span class="ss-selection-label">Checkout</span><div class="ss-artboard-content"><small>A SPACE FOR IDEAS</small><div class="ss-art-title" data-node="title">Room<br>for the new.</div><div class="ss-art-surface" data-node="surface"><span>WORKSPACE</span><div class="ss-art-glyph" aria-hidden="true">✳</div><b>It all starts with an idea</b></div><div class="ss-art-button" data-node="button">Start a project <span>↗</span></div></div><div class="ss-scan-beam" aria-hidden="true"></div><span class="ss-pin ss-pin-title">Heading / Large ↗</span><span class="ss-pin ss-pin-surface">Surface / Primary ↗</span><span class="ss-pin ss-pin-button">color / accent ↗</span></div><div class="ss-plugin"><div class="ss-plugin-head"><span>◎ Style Scanner</span><span aria-hidden="true">×</span></div><div class="ss-plugin-content"><small>SCAN SCOPE</small><b class="ss-scope-name">⌗ Checkout</b><p>Selection and nested layers</p><button class="ss-scan-action" type="button">⌕ Find external links</button><div class="ss-plugin-status" aria-live="polite">Run a scan of the demo layout.</div><div class="ss-plugin-results"><div class="ss-demo-filters" aria-label="Demo categories"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="text" aria-pressed="false">Text</button><button type="button" data-filter="fill" aria-pressed="false">Color</button><button type="button" data-filter="token" aria-pressed="false">Token</button></div><button type="button" class="ss-result" data-cat="text" data-target="title"><span>T</span><span><b>Title</b><small>Checkout / Hero</small><em>Heading / Large</em></span><span>↗</span></button><button type="button" class="ss-result" data-cat="fill" data-target="surface"><span>◐</span><span><b>Card</b><small>Checkout / Content</small><em>Surface / Primary</em></span><span>↗</span></button><button type="button" class="ss-result" data-cat="token" data-target="button"><span>◇</span><span><b>Button</b><small>Checkout / Actions</small><em>color / accent</em></span><span>↗</span></button></div><small class="ss-demo-note">An example, not your file’s data</small></div></div></div>
+</div><div class="ss-under-product"><span>Inside Figma · no network access</span><span>↓ Run the demo, then click a result</span></div>
+</section>
+<section class="ss-compare-section ss-container" id="compare"><div class="ss-section-caption">01 / INVISIBLE LINKS</div><div class="ss-asymmetric"><div><h2>Same on the outside.<br>Inside — <span>dependencies.</span></h2><p>Move the divider: the scanner shows external links that are invisible in a finished layout.</p></div><div class="ss-drag-demo"><div class="ss-compare-art"><span class="ss-compare-small">CHECKOUT / COMPONENT</span><div class="ss-compare-symbol" aria-hidden="true">✳</div><b>Ready to hand off?</b><span class="ss-compare-line"></span><span class="ss-compare-line ss-short"></span><div class="ss-compare-action">Continue ↗</div></div><div class="ss-compare-overlay"><div class="ss-wire ss-wire-one">T → Heading / Large <small>from library</small></div><div class="ss-wire ss-wire-two">◐ → Surface / Primary <small>from library</small></div><div class="ss-wire ss-wire-three">◇ → color / accent <small>from library</small></div></div><div class="ss-drag-line" aria-hidden="true"><span>↔</span></div><input type="range" min="0" max="100" value="55" aria-label="Show external links in the example"><div class="ss-compare-labels"><span>Layout</span><span>After scan</span></div></div></div></section>
+<section class="ss-scroll-section ss-container" id="layers"><div class="ss-section-caption">02 / FROM RESULT TO LAYER</div><div class="ss-sticky-layout"><div class="ss-sticky-visual"><div class="ss-orbit" aria-hidden="true">⌖</div><div class="ss-layer-stage"><span>Checkout / <span id="ss-stage-path">Hero</span></span><div class="ss-stage-title ss-stage-object is-active" data-stage="title">Room<br>for the new.</div><div class="ss-stage-surface ss-stage-object" data-stage="surface"><span>WORKSPACE</span><b>✳</b></div><div class="ss-stage-button ss-stage-object" data-stage="button">Start a project ↗</div><div class="ss-stage-annotation" aria-live="polite">Text → Heading / Large</div></div><small>Illustration of jumping to a result</small></div><div class="ss-scroll-copy"><article data-scene="title"><span class="ss-section-caption">TEXT</span><h2>Found the style.<br><span>Saw the layer.</span></h2><p>Click a result row — the plugin selects the layer and moves the camera to it.</p></article><article data-scene="surface"><span class="ss-section-caption">STYLING</span><h2>Not only<br><span>fill color.</span></h2><p>Stroke, text, effect and grid styles are checked along with fills.</p></article><article data-scene="button"><span class="ss-section-caption">VARIABLES</span><h2>Tokens leave<br><span>a trail too.</span></h2><p>The scanner checks bound variables: color, radius and spacing between elements, for example.</p></article></div></div></section>
+<section class="ss-manifesto"><div class="ss-container"><span class="ss-section-caption">03 / YOUR FILE — YOUR CALL</span><div class="ss-manifesto-orbit" aria-hidden="true">◎</div><h2>Reads the links.<br><span>Keeps the layout.</span></h2><p>The plugin runs inside Figma with no network access; you replace the styles and variables yourself.</p></div></section>
+<section class="ss-install ss-container" id="install"><div class="ss-section-caption">04 / INSTALL FROM ARCHIVE</div><div class="ss-install-layout"><div><h2>One folder.<br><span>And you’re in Figma.</span></h2><p>Download the archive with the button above and unzip it.</p><div class="ss-install-path"><span>Figma Desktop → Plugins</span><span>↳ Development</span><span>  ↳ Import plugin from manifest…</span><span>  ↳ pick manifest.json in the unzipped folder</span></div></div><div class="ss-folder-scene"><svg viewBox="0 0 500 410" preserveAspectRatio="none" aria-hidden="true"><path d="M35 95V70Q35 50 55 50H205L245 90H450Q470 90 470 110V340Q470 360 450 360H55Q35 360 35 340Z"/><path d="M35 135H470"/></svg><span class="ss-folder-name">Style Scanner</span><div class="ss-source-files"><span class="ss-file">manifest.json</span><span class="ss-file">code.js</span><span class="ss-file">ui.html</span></div><small>Contents of the unzipped archive</small></div></div></section>
+<section class="ss-final ss-container"><span class="ss-section-caption">STYLE SCANNER / TRACE LOGO’S</span><h2>Hand off the <span>layout.</span><br>Sort out the links.</h2><p>Start with the frame you’re preparing for handoff.</p><a class="btn-cta" href="#install" data-pwyw="style-scanner">Download plugin <span aria-hidden="true">↗</span></a></section>
+<section class="faq-section ss-faq-wrap ss-container" aria-labelledby="faq-title"><h2 id="faq-title" class="faq-title">Got questions?</h2><div class="faq-list"><details class="faq-item"><summary class="faq-q">How do I find external library styles and variables in Figma?</summary><p class="faq-a">Select a frame or group and click “Find external styles and tokens”. The plugin checks the selected layers and their descendants: fills, strokes, text, effects, grids and bound variables from external libraries.</p></details><details class="faq-item"><summary class="faq-q">Does it change my design?</summary><p class="faq-a">No. The plugin only finds links. Jumping to a result changes the selection and the camera position.</p></details><details class="faq-item"><summary class="faq-q">How do I jump to a found layer?</summary><p class="faq-a">Click a result in the list: the plugin selects the layer and moves the camera to it. Use ↑↓ and Enter to walk the list, and filter results by category.</p></details><details class="faq-item"><summary class="faq-q">Does an empty result mean the file is independent?</summary><p class="faq-a">No. Mixed styles and inaccessible links are skipped. The check does not cover every dependency of the file.</p></details><details class="faq-item"><summary class="faq-q">Where does my design go?</summary><p class="faq-a">The plugin has no network access: allowedDomains is none. Yandex Metrica analytics runs on this page.</p></details><details class="faq-item"><summary class="faq-q">How do I install the plugin?</summary><p class="faq-a">In Figma Desktop: Plugins → Development → Import plugin from manifest… → pick manifest.json in the unzipped folder. The plugin works in Figma Design; FigJam is not supported.</p></details><details class="faq-item"><summary class="faq-q">What should I do with the styles it finds before handing the file off?</summary><p class="faq-a">Replace or detach them with Figma’s own tools. While you are at it, clear out hidden drafts with <a href="../clean-layers/">Clean Layers</a>: it deletes hidden layers and leftover styling.</p></details><details class="faq-item"><summary class="faq-q">How much does the Style Scanner plugin cost?</summary><p class="faq-a">Free to download: pay what you want, even $0. No sign-up needed.</p></details></div></section></main><!-- FOOTER:START -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col footer-about">
+        <a class="brand" href="../../../" aria-label="Trace Logo's" style="margin-bottom:14px">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="../../../assets/brand/logo.svg" alt="" width="30" height="30">
+          </span>
+          <span class="brand-name">Trace Logo's</span>
+        </a>
+        <p data-i18n="footerAbout">Открытая библиотека логотипов и эмодзи. Бесплатно, без регистрации, с открытым исходным кодом.</p>
+        <a class="footer-yandex-counter" href="https://webmaster.yandex.ru/siteinfo/?site=https://trace-logos.ru" aria-label="Яндекс ИКС" data-i18n-aria="footerYandexCounterAria">
+          <img width="88" height="31" alt="" src="https://yandex.ru/cycounter?https://trace-logos.ru&amp;theme=light&amp;lang=ru">
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCatalog">Каталог</h3>
+        <ul>
+          <li><a href="../../../logos/"><span data-i18n="footerAllLogos">Все логотипы</span></a></li>
+          <li><a href="../../../emoji/"><span data-i18n="footerEmoji">Эмодзи</span></a></li>
+          <li><a href="../../../blog/"><span data-i18n="footerBlog">Блог</span></a></li>
+          <li><a href="../../../logos/ai/"><span data-i18n="footerAI">Нейросети</span></a></li>
+          <li><a href="../../../logos/bank/"><span data-i18n="footerBanks">Банки</span></a></li>
+          <li><a href="../../../logos/market/"><span data-i18n="footerMarketplaces">Маркетплейсы</span></a></li>
+          <li><a href="../../../logos/social/"><span data-i18n="footerSocial">Соцсети</span></a></li>
+          <li><a href="../../../logos/flag/"><span data-i18n="footerFlags">Флаги</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCollections">Подборки</h3>
+        <ul>
+          <!-- COLLECTIONS:START -->
+          <li><a href="../../../collections/russian-banks/"><span data-i18n="footerColl_russian-banks">Логотипы банков</span></a></li>
+          <li><a href="../../../collections/neural-networks/"><span data-i18n="footerColl_neural-networks">Логотипы нейросетей</span></a></li>
+          <li><a href="../../../collections/marketplaces/"><span data-i18n="footerColl_marketplaces">Логотипы маркетплейсов</span></a></li>
+          <li><a href="../../../collections/payment-systems/"><span data-i18n="footerColl_payment-systems">Платёжные системы</span></a></li>
+          <li><a href="../../../collections/messengers-social/"><span data-i18n="footerColl_messengers-social">Соцсети и мессенджеры</span></a></li>
+          <li><a href="../../../collections/google-2026/"><span data-i18n="footerColl_google-2026">Иконки Google 2026</span></a></li>
+          <li><a href="../../../collections/delivery-taxi/"><span data-i18n="footerColl_delivery-taxi">Доставка и такси</span></a></li>
+          <li><a href="../../../collections/browsers/"><span data-i18n="footerColl_browsers">Браузеры</span></a></li>
+          <li><a href="../../../collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Облачные хранилища</span></a></li>
+          <li><a href="../../../collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Музыкальные сервисы</span></a></li>
+          <li><a href="../../../collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Видеостриминг</span></a></li>
+          <li><a href="../../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
+          <li><a href="../../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
+          <li><a href="../../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
+          <!-- COLLECTIONS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColTools">Инструменты</h3>
+        <ul>
+          <li><a href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerFigmaPlugin">Плагин для Figma</span></a></li>
+          <!-- TOOLS:START -->
+          <li><a href="../../../tools/compress-webp/"><span data-i18n="footerTool_compress-webp">Сжать изображение</span></a></li>
+          <li><a href="../../../tools/watermark/"><span data-i18n="footerTool_watermark">Убрать водяной знак</span></a></li>
+          <li><a href="../../../tools/merge-pdf/"><span data-i18n="footerTool_merge-pdf">Объединить PDF</span></a></li>
+          <li><a href="../../../tools/edit-image/"><span data-i18n="footerTool_edit-image">Обрезать и повернуть фото</span></a></li>
+          <li><a href="../../../tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">Экран вызова iOS</span></a></li>
+          <!-- TOOLS:END -->
+          <li><a href="../../../tools/extensions/reviews-exporter/"><span data-i18n="footerToolReviewsExporter">Reviews Exporter</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColDevelopers">Разработчикам</h3>
+        <ul>
+          <li><a href="../../../developers/"><span data-i18n="footerDevelopersPage">Для разработчиков</span></a></li>
+          <li><a href="../../../logos.json">API · logos.json</a></li>
+          <li><a href="../../../emoji.json">API · emoji.json</a></li>
+          <li><a href="../../../llms.txt">llms.txt</a></li>
+          <li><a href="https://github.com/arturablyazov5-glitch/trace-logos" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://status.trace-logos.ru" target="_blank" rel="noopener"><span data-i18n="footerServiceStatus">Статус сервисов</span></a></li>
+          <li><a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">@mansurov_rafael</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Trace Logo's Beta · <span data-i18n="footerCopyrightShort">Изображения могут быть защищены авторским правом их владельцев.</span></span>
+      <span class="footer-bottom-links">
+        <a href="../../../sitemap/"><span data-i18n="footerSitemap">Карта сайта</span></a>
+        <a href="../../../partnership/"><span data-i18n="footerPartnership">Партнерство</span></a>
+        <a href="../../../terms/"><span data-i18n="footerTerms">Правила использования</span></a>
+        <a href="../../../consent/"><span data-i18n="footerConsent">Обработка данных</span></a>
+        <a href="https://github.com/arturablyazov5-glitch/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerOpenSource">Открытый исходный код</span></a>
+      </span>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END --><script src="../../assets/lp-style-scanner.js" defer></script><script type="module" src="../../../js/pwyw.min.js"></script>
+</body></html>

@@ -20,6 +20,7 @@
 const fs   = require('fs');
 const path = require('path');
 const JSZip = require('jszip');
+const { pairFileFor } = require('./lib/en-landings');
 
 const ROOT      = path.resolve(__dirname, '..');
 const EXT_ROOT  = path.join(ROOT, 'tools', 'extensions');
@@ -27,7 +28,13 @@ const DIST_ROOT = path.join(ROOT, 'dist', 'products');
 const DRY_RUN   = process.argv.includes('--dry-run');
 
 // Files that live alongside the extension but aren't part of its payload.
-const EXCLUDE = new Set(['index.html', 'version.json', 'changelog.json', '.DS_Store']);
+// Dev-мусор (node_modules у Tilda Helper весил 30+ МБ), сборщики и заметки в архив
+// пользователя не попадают: только то, что нужно расширению в браузере.
+const EXCLUDE = new Set([
+  'index.html', 'version.json', 'changelog.json', '.DS_Store',
+  'node_modules', '.claude', 'build', 'tests', '.gitignore',
+  'package.json', 'package-lock.json', 'IDEAS.md',
+]);
 
 function listExtensionDirs() {
   if (!fs.existsSync(EXT_ROOT)) return [];
@@ -39,7 +46,7 @@ function listExtensionDirs() {
 
 function addDirToZip(zip, dirPath, baseDir) {
   for (const entry of fs.readdirSync(dirPath, { withFileTypes: true })) {
-    if (EXCLUDE.has(entry.name) || entry.name.endsWith('.zip')) continue;
+    if (EXCLUDE.has(entry.name) || entry.name.endsWith('.zip') || entry.name.endsWith('.bak')) continue;
     const full = path.join(dirPath, entry.name);
     const rel  = path.relative(baseDir, full);
     if (entry.isDirectory()) {
@@ -59,12 +66,9 @@ ${entry.items.map(item => `          <li>${item}</li>`).join('\n')}
       </div>`).join('\n');
 }
 
-function patchLandingPage(dirPath, slug, version, changelog) {
-  const indexPath = path.join(dirPath, 'index.html');
-  if (!fs.existsSync(indexPath)) return false;
-  let html = fs.readFileSync(indexPath, 'utf8');
-  const before = html;
-
+// html → html с обновлёнными VERSION/CHANGELOG. changelog === null — блок
+// CHANGELOG не трогать (у EN-пары нет перевода записей).
+function patchMarkers(html, version, changelog) {
   if (/<!-- VERSION:START -->[\s\S]*?<!-- VERSION:END -->/.test(html)) {
     html = html.replace(
       /(<!-- VERSION:START -->)[\s\S]*?(<!-- VERSION:END -->)/,
@@ -72,16 +76,42 @@ function patchLandingPage(dirPath, slug, version, changelog) {
     );
   }
 
-  if (/<!-- CHANGELOG:START -->[\s\S]*?<!-- CHANGELOG:END -->/.test(html)) {
+  if (changelog && /<!-- CHANGELOG:START -->[\s\S]*?<!-- CHANGELOG:END -->/.test(html)) {
     html = html.replace(
       /(<!-- CHANGELOG:START -->)[\s\S]*?(<!-- CHANGELOG:END -->)/,
       `$1\n${renderChangelogHtml(changelog)}\n      $2`
     );
   }
+  return html;
+}
 
-  if (html === before) return false;
-  if (!DRY_RUN) fs.writeFileSync(indexPath, html, 'utf8');
+function writeIfChanged(file, html) {
+  if (html === fs.readFileSync(file, 'utf8')) return false;
+  if (!DRY_RUN) fs.writeFileSync(file, html, 'utf8');
   return true;
+}
+
+function patchLandingPage(dirPath, slug, version, changelog) {
+  const indexPath = path.join(dirPath, 'index.html');
+  if (!fs.existsSync(indexPath)) return false;
+  let changed = writeIfChanged(indexPath, patchMarkers(fs.readFileSync(indexPath, 'utf8'), version, changelog));
+
+  // EN-пара лендинга (scripts/lib/en-landings.js): та же версия; чейнджлог —
+  // из items_en записей changelog.json. Нет items_en хоть у одной записи —
+  // блок пары не трогаем (иначе русские пункты затёрли бы перевод) и предупреждаем.
+  const pairFile = pairFileFor(`tools/extensions/${slug}/index.html`);
+  if (pairFile) {
+    const pairHtml = fs.readFileSync(pairFile, 'utf8');
+    let enLog = changelog.map(e => (Array.isArray(e.items_en) ? { ...e, items: e.items_en } : null));
+    if (enLog.includes(null)) {
+      if (/<!-- CHANGELOG:START -->/.test(pairHtml)) {
+        console.warn(`  ⚠ ${slug}: в changelog.json нет items_en у части записей — CHANGELOG в EN-паре не обновлён`);
+      }
+      enLog = null;
+    }
+    if (writeIfChanged(pairFile, patchMarkers(pairHtml, version, enLog))) changed = true;
+  }
+  return changed;
 }
 
 async function buildExtension(slug) {
@@ -130,6 +160,37 @@ async function buildExtension(slug) {
   return { slug, version, zipChanged, versionChanged, pageChanged };
 }
 
+// Figma-плагины: в архив только то, что Figma читает из manifest.json
+// (main, ui) — исходники, тесты и README остаются в репозитории. Список плагинов
+// ведёт products.json (kind: "plugin", source: "tools/figma-plugins/<dir>").
+const PLUGIN_FILES = ['manifest.json', 'code.js', 'ui.html', 'README.md'];
+
+async function buildPlugin(product) {
+  const dirPath = path.join(ROOT, product.source);
+  const zip = new JSZip();
+  for (const name of PLUGIN_FILES) {
+    const file = path.join(dirPath, name);
+    if (!fs.existsSync(file)) throw new Error(`${product.id}: нет ${product.source}/${name}`);
+    zip.file(name, fs.readFileSync(file));
+  }
+  const buf = await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE', compressionOptions: { level: 9 } });
+  const zipPath = path.join(DIST_ROOT, `${product.id}.zip`);
+  if (!DRY_RUN) fs.mkdirSync(DIST_ROOT, { recursive: true });
+  const changed = !fs.existsSync(zipPath) || !buf.equals(fs.readFileSync(zipPath));
+  if (changed && !DRY_RUN) fs.writeFileSync(zipPath, buf);
+  return changed;
+}
+
+async function buildPlugins() {
+  const registry = JSON.parse(fs.readFileSync(path.join(ROOT, 'products.json'), 'utf8'));
+  const plugins = (registry.products || []).filter((p) => p.kind === 'plugin');
+  for (const product of plugins) {
+    const changed = await buildPlugin(product);
+    console.log(`  ${changed ? (DRY_RUN ? '[dry-run] would update' : '✓') : '='} ${product.id} (плагин) [zip]`);
+  }
+  console.log(`✓ Figma-плагины собраны (${plugins.length})`);
+}
+
 async function main() {
   const slugs = listExtensionDirs();
   if (!slugs.length) {
@@ -147,6 +208,7 @@ async function main() {
       + (res.pageChanged ? ' [landing]' : ''));
   }
   console.log(`✓ tools/extensions — расширения собраны (${changedCount}/${slugs.length} изменено)`);
+  await buildPlugins();
 }
 
 main().catch(err => { console.error(err); process.exit(1); });

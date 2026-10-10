@@ -1,11 +1,17 @@
 {
   "_comment": "Реестр скачиваемых продуктов для checkout'а «плати сколько хочешь». Единственный источник правды: фронт читает его напрямую (js/pwyw.js), бэкенд получает копию через scripts/sync-products.js → таблица public.products. Пояснительный текст модалки здесь НЕ живёт — он общий для всех продуктов и лежит в js/i18n-dict-{ru,en}.js (ключи pwyw*). Версия продукта здесь тоже не дублируется: для расширений источник — tools/extensions/<id>/manifest.json (см. build-extension-zip.js).",
-
   "presets": {
-    "RUB": [100, 300, 500],
-    "USD": [2, 5, 10]
+    "RUB": [
+      100,
+      300,
+      500
+    ],
+    "USD": [
+      2,
+      5,
+      10
+    ]
   },
-
   "products": [
     {
       "id": "reviews-exporter",
@@ -16,6 +22,91 @@
       "storageObject": "reviews-exporter/reviews-exporter.zip",
       "downloadName": "reviews-exporter.zip",
       "lavaOfferId": "f77c3cd2-3483-4c14-bf11-ee00bf668ad2"
+    },
+    {
+      "id": "tilda-helper",
+      "kind": "extension",
+      "title": "Tilda Helper",
+      "title_en": "Tilda Helper",
+      "page": "/tools/extensions/tilda-helper/",
+      "storageObject": "tilda-helper/tilda-helper.zip",
+      "downloadName": "tilda-helper.zip",
+      "lavaOfferId": ""
+    },
+    {
+      "id": "taptop-helper",
+      "kind": "extension",
+      "title": "Taptop Helper",
+      "title_en": "Taptop Helper",
+      "page": "/tools/extensions/taptop-helper/",
+      "storageObject": "taptop-helper/taptop-helper.zip",
+      "downloadName": "taptop-helper.zip",
+      "lavaOfferId": ""
+    },
+    {
+      "id": "trace-typograf",
+      "kind": "extension",
+      "title": "Trace Typograf",
+      "title_en": "Trace Typograf",
+      "page": "/tools/extensions/trace-typograf/",
+      "storageObject": "trace-typograf/trace-typograf.zip",
+      "downloadName": "trace-typograf.zip",
+      "lavaOfferId": ""
+    },
+    {
+      "id": "typograf",
+      "kind": "plugin",
+      "title": "Typograf",
+      "title_en": "Typograf",
+      "page": "/tools/figma-plugins/typograf/",
+      "storageObject": "typograf/typograf.zip",
+      "downloadName": "typograf.zip",
+      "lavaOfferId": "",
+      "source": "tools/figma-plugins/typograf"
+    },
+    {
+      "id": "photo-editor",
+      "kind": "plugin",
+      "title": "Photo Editor",
+      "title_en": "Photo Editor",
+      "page": "/tools/figma-plugins/photo-editor/",
+      "storageObject": "photo-editor/photo-editor.zip",
+      "downloadName": "photo-editor.zip",
+      "lavaOfferId": "",
+      "source": "tools/figma-plugins/photo-editor"
+    },
+    {
+      "id": "clean-layers",
+      "kind": "plugin",
+      "title": "Clean Layers",
+      "title_en": "Clean Layers",
+      "page": "/tools/figma-plugins/clean-layers/",
+      "storageObject": "clean-layers/clean-layers.zip",
+      "downloadName": "clean-layers.zip",
+      "lavaOfferId": "",
+      "source": "tools/figma-plugins/clean-layers"
+    },
+    {
+      "id": "style-scanner",
+      "kind": "plugin",
+      "title": "Style Scanner",
+      "title_en": "Style Scanner",
+      "page": "/tools/figma-plugins/style-scanner/",
+      "storageObject": "style-scanner/style-scanner.zip",
+      "downloadName": "style-scanner.zip",
+      "lavaOfferId": "",
+      "source": "tools/figma-plugins/style-scanner"
+    },
+    {
+      "id": "pdf-to-figma",
+      "kind": "plugin",
+      "title": "PDF → Figma",
+      "title_en": "PDF → Figma",
+      "page": "/tools/figma-plugins/pdf-to-svg/",
+      "storageObject": "pdf-to-figma/pdf-to-figma.zip",
+      "downloadName": "pdf-to-figma.zip",
+      "lavaOfferId": "",
+      "source": "tools/figma-plugins/pdf-to-svg"
     }
   ]
 }

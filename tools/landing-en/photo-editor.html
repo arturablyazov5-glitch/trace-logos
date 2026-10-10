@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+      m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+      m[i].l=1*new Date();
+      for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+      k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window,document,'script','https://mc.yandex.ru/metrika/tag.js?id=109799147','ym');
+    ym(109799147,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/109799147" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo Editor: Figma Plugin to Trim, Flip &amp; Export WebP</title>
+  <meta name="description" content="Free Figma plugin: trim transparent edges, restore image proportions, flip images and export WebP or PNG without leaving your canvas. Runs locally, no network.">
+  <meta name="keywords" content="figma plugin trim transparent pixels, crop image to content figma, remove transparent padding figma, flip image figma, export webp from figma, restore image aspect ratio figma, export original png figma, photo editor figma plugin">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+  <link rel="canonical" href="https://trace-logos.ru/tools/figma-plugins/photo-editor/">
+  <link rel="alternate" hreflang="ru" href="https://trace-logos.ru/tools/figma-plugins/photo-editor/">
+  <link rel="alternate" hreflang="en" href="https://trace-logos.ru/en/tools/figma-plugins/photo-editor/">
+  <link rel="alternate" hreflang="x-default" href="https://trace-logos.ru/tools/figma-plugins/photo-editor/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Trace Logo's">
+  <meta property="og:url" content="https://trace-logos.ru/tools/figma-plugins/photo-editor/">
+  <meta property="og:title" content="Photo Editor: Figma plugin to trim, flip and export images">
+  <meta property="og:description" content="Free Figma plugin: trim transparent edges, restore image proportions, flip images and export WebP or PNG without leaving your canvas. Runs locally, no network.">
+  <meta property="og:image" content="https://trace-logos.ru/assets/og/en/tools-photo-editor.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Photo Editor: a Figma plugin panel for trimming, flipping and exporting images">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Photo Editor: trim transparent edges and export WebP in Figma">
+  <meta name="twitter:description" content="Free Figma plugin: trim transparent edges, restore image proportions, flip images and export WebP or PNG without leaving your canvas. Runs locally, no network.">
+  <meta name="twitter:image" content="https://trace-logos.ru/assets/og/en/tools-photo-editor.png">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32 16x16">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../css/site-header.css?v=20261010">
+  <link rel="stylesheet" href="../../assets/tools.css?v=20260731">
+  <link rel="stylesheet" href="../../../css/site-footer.css?v=20261010">
+  <link rel="stylesheet" href="../../../css/faq.css">
+
+  <link rel="stylesheet" href="../../assets/lp-photo-editor.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Photo Editor | Trace Logo's", "description": "Free Figma plugin: trim transparent edges, restore image proportions, flip images and export WebP or PNG without leaving your canvas. Runs locally, no network.", "applicationCategory": "DesignApplication", "applicationSubCategory": "Figma Plugin", "operatingSystem": "Figma Desktop", "url": "https://trace-logos.ru/en/tools/figma-plugins/photo-editor/", "downloadUrl": "https://trace-logos.ru/en/tools/figma-plugins/photo-editor/", "installUrl": "https://trace-logos.ru/en/tools/figma-plugins/photo-editor/#install", "image": "https://trace-logos.ru/assets/og/en/tools-photo-editor.png", "inLanguage": "en", "isAccessibleForFree": true, "featureList": ["Trim transparent margins", "Restore original size and proportions", "Horizontal and vertical flip", "WebP export", "Original PNG export", "50-step undo history", "No network access"], "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free, pay what you want"}, "publisher": {"@type": "Organization", "name": "Trace Logo's", "url": "https://trace-logos.ru/en/"}, "author": {"@type": "Organization", "name": "Trace Logo's", "url": "https://trace-logos.ru/en/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I trim transparent margins from an image in Figma?", "acceptedAnswer": {"@type": "Answer", "text": "Select a layer with an image, run the plugin and click “Trim transparency”: empty pixels at the edges are removed and the layer resizes to fit the content. The plugin does not remove white backgrounds. Before editing, it keeps a single image fill and resets filters and opacity."}}, {"@type": "Question", "name": "How do I restore an image’s original proportions in Figma?", "acceptedAnswer": {"@type": "Answer", "text": "“Restore original” takes the size and proportions from the fill itself and resets rotation and corner radius. It’s handy when an image has been stretched by accident."}}, {"@type": "Question", "name": "How do I flip an image horizontally or vertically in Figma?", "acceptedAnswer": {"@type": "Answer", "text": "Each direction has its own button. The plugin mirrors the image pixels, while the layer’s size, position and rotation stay the same."}}, {"@type": "Question", "name": "How do I export an image from Figma as WebP?", "acceptedAnswer": {"@type": "Answer", "text": "Click “Export WebP”: the file matches the layer as it looks on the canvas, including crop, size, rotation and corner radius. Quality is fixed at 0.8. Several layers download as one ZIP archive. To learn why the format suits websites, read “What is WebP”."}}, {"@type": "Question", "name": "Can I export the original image as PNG?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. “Original as PNG” saves the fill’s original pixels without the layer’s transformations and trims transparent margins. It works when a single image is selected."}}, {"@type": "Question", "name": "Can I undo the plugin’s changes?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The plugin keeps its own 50-step history with Undo and Redo buttons. Selecting something else resets it."}}, {"@type": "Question", "name": "Are my images sent to a server?", "acceptedAnswer": {"@type": "Answer", "text": "No. Images are processed inside Figma and the plugin window, and network access is disabled in the manifest. To compress images without Figma, try the online tool “Compress image”."}}, {"@type": "Question", "name": "How do I install Photo Editor and how much does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "The plugin is free; pay what you want. Download and unzip the archive, then in Figma Desktop choose Plugins → Development → Import plugin from manifest… and select manifest.json. More plugins and tools live in the “Tools”."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://trace-logos.ru/en/"}, {"@type": "ListItem", "position": 2, "name": "Tools", "item": "https://trace-logos.ru/en/tools/"}, {"@type": "ListItem", "position": 3, "name": "Photo Editor", "item": "https://trace-logos.ru/en/tools/figma-plugins/photo-editor/"}]}</script>
+</head>
+<body class="pe-page">
+<a class="pe-skip" href="#main">Skip to content</a>
+<!-- HEADER:START -->
+<header class="site-header">
+  <a class="brand" href="../../../" aria-label="Trace Logo's — на главную" data-i18n-aria="navHomeAria">
+    <span class="brand-logo" aria-hidden="true">
+      <img src="../../../assets/brand/logo.svg" alt="" width="28" height="28">
+    </span>
+    <span class="brand-name">Trace Logo's</span>
+  </a>
+
+  <form class="seo-search-form" id="seo-search-form" role="search" action="../../../logos/" method="get" data-base="../../../" data-scope="all">
+    <search-box class="seo-search-wrap">
+      <input id="seo-search" name="q" type="text" placeholder="Поиск логотипов и эмодзи..." data-i18n-placeholder="searchPlaceholder" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="seo-search-dropdown">
+    </search-box>
+    <div class="seo-search-dropdown" id="seo-search-dropdown"></div>
+  </form>
+
+  <nav class="header-nav" aria-label="Разделы" data-i18n-aria="navSectionsAria">
+    <a href="../../../logos/" data-i18n="breadcrumbLogos">Логотипы</a>
+    <a href="../../../emoji/" data-i18n="breadcrumbEmoji">Эмодзи</a>
+    <a href="../../../blog/" data-i18n="blogSection">Блог</a>
+    <a class="nav-figma" href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><svg width="11" height="16" viewBox="0 0 38 57" fill="none" aria-hidden="true"><path d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z" fill="#1ABCFE"/><path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z" fill="#0ACF83"/><path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z" fill="#FF7262"/><path d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/><path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/></svg><span data-i18n="navFigmaPlugin">Figma плагин</span></a>
+  </nav>
+
+  <a class="btn-github" href="https://github.com/arturablyazov5-glitch/trace-logos" target="_blank" rel="noopener" aria-label="GitHub">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+    </svg>
+    <span>GitHub</span>
+  </a>
+
+  <button type="button" class="mobile-nav-burger" id="mobile-nav-burger" data-i18n-aria="burgerAriaLabel" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav-drawer">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+  <lang-switcher></lang-switcher>
+</header>
+
+<donate-ticker></donate-ticker>
+
+<div class="mobile-nav-backdrop" id="mobile-nav-backdrop" hidden></div>
+<nav class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Мобильное меню" data-i18n-aria="burgerAriaLabel" hidden>
+  <div class="mobile-nav-head">
+    <span class="mobile-nav-brand">Trace Logo's</span>
+    <button type="button" class="mobile-nav-close" id="mobile-nav-close" data-i18n-aria="detailCloseAriaLabel" aria-label="Закрыть">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="mobile-nav-section" id="mobile-nav-toc" hidden>
+    <div class="mobile-nav-label" data-i18n="mobileNavToc">В этой статье</div>
+    <div class="mobile-nav-list" id="mobile-nav-toc-list"></div>
+  </div>
+  <div class="mobile-nav-section">
+    <div class="mobile-nav-label" data-i18n="mobileNavPages">Разделы сайта</div>
+    <div class="mobile-nav-list">
+      <a href="../../../"><span data-i18n="navHome">Главная</span></a>
+      <a href="../../../logos/"><span data-i18n="breadcrumbLogos">Логотипы</span></a>
+      <a href="../../../emoji/"><span data-i18n="breadcrumbEmoji">Эмодзи</span></a>
+      <a href="../../../#h-collections"><span data-i18n="navCollections">Подборки</span></a>
+      <a href="../../../blog/"><span data-i18n="blogSection">Блог</span></a>
+    </div>
+  </div>
+</nav>
+<!-- lang-switcher.js + search-box.js + mobile-nav.js, bundled into one request
+     by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
+     source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
+     the bundle list there, not this tag. -->
+<script src="../../../components/site-chrome.min.js" defer></script>
+<!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
+     запрос уйдёт только после того, как разрешится весь статический граф модулей
+     (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
+<link rel="modulepreload" href="../../../js/i18n-dict-ru.min.js">
+<script type="module" src="../../../components/donate-ticker.min.js"></script>
+<script type="module" src="../../../js/header-search.min.js"></script>
+<!-- HEADER:END -->
+<main id="main" class="pe-main">
+<section class="pe-hero" aria-labelledby="pe-hero-title"><div class="pe-container"><div class="pe-overline"><a href="../../">Tools</a><span>PHOTO EDITOR / FIGMA PLUGIN</span></div><div class="pe-hero-heading"><h1 id="pe-hero-title">Photo’s ready.<br>You’re still in <span>Figma.</span></h1><div class="pe-hero-aside"><p>A Figma plugin that trims transparent edges, restores proportions and saves WebP straight from your canvas.</p><a class="btn-cta" href="#install" data-pwyw="photo-editor">Download plugin <span>↗</span></a></div></div><div class="pe-hero-product"><div class="pe-app" aria-label="Illustration of Figma and the Photo Editor interface">
+<div class="pe-app-bar"><span class="pe-mark">⌑</span><span>Still life / Figma</span><span class="pe-app-bar-right">Interface illustration</span></div>
+<div class="pe-app-body"><div class="pe-layer-rail"><span>Layers</span><div>⌑ Still life</div><small>IMAGE</small><div class="pe-layer-line"></div><div class="pe-layer-line"></div></div>
+<div class="pe-app-canvas"><span class="pe-canvas-caption">STILL LIFE / SELECTED</span><div class="pe-app-photo"><img class="" src="../../../assets/lp/photo-editor/still-life.svg" width="600" height="600" alt="Original illustration of a bottle and a sphere" draggable="false"><span class="pe-selection-corner pe-tl"></span><span class="pe-selection-corner pe-tr"></span><span class="pe-selection-corner pe-bl"></span><span class="pe-selection-corner pe-br"></span></div><div class="pe-cursor" aria-hidden="true">↖<span>Photo Editor</span></div></div>
+<div class="pe-plugin"><div class="pe-plugin-title"><span>⌑</span><strong>Photo Editor</strong><span>•••</span></div><div class="pe-selection-info">▧ <span>Still life<small>Image selected</small></span></div><div class="pe-ui-label">Image tools</div><div class="pe-ui-row pe-ui-highlight"><span>⌑</span><span>Trim transparency<small>Remove empty pixels</small></span><span>›</span></div><div class="pe-ui-row"><span>↶</span><span>Restore original<small>Size, rotation and corner radius</small></span><span>›</span></div><div class="pe-ui-pair"><span>↔<small>Horizontal</small></span><span>↕<small>Vertical</small></span></div><div class="pe-ui-label">Export</div><div class="pe-ui-pair"><span>↓<small>WebP</small></span><span>↓<small>Original as PNG</small></span></div><div class="pe-ui-history"><span>↶ Undo</span><span>↷ Redo</span></div></div></div>
+<div class="pe-app-status"><span class="pe-signal"></span>Processed on your device<span>No network access</span></div></div></div></div></section>
+<section id="crop" class="pe-crop pe-reveal" aria-labelledby="pe-crop-title"><div class="pe-container"><div class="pe-crop-heading"><span class="pe-giant-crop" aria-hidden="true">⌑</span><div><h2 id="pe-crop-title">Keep only the<br><span>content.</span></h2><p>Drag the divider: transparent margins disappear and the object fills the frame.</p></div></div><div class="pe-compare" style="--split:50%"><div class="pe-compare-before"><span class="pe-compare-tag">BEFORE / TRANSPARENT MARGINS</span><div class="pe-compare-object pe-before-object"><img class="" src="../../../assets/lp/photo-editor/still-life.svg" width="600" height="600" alt="Before trimming: an object with transparent margins" draggable="false"></div></div><div class="pe-compare-after"><span class="pe-compare-tag">AFTER / FIT TO CONTENT</span><div class="pe-compare-object pe-after-object"><img class="" src="../../../assets/lp/photo-editor/still-life.svg" width="600" height="600" alt="After trimming: frame fits the content" draggable="false"></div></div><div class="pe-compare-divider" aria-hidden="true"><span>↔</span></div><input id="pe-compare-range" type="range" min="0" max="100" value="50" aria-label="Compare the image before and after trimming" aria-valuetext="Half before, half after"><span class="pe-compare-help">DRAG THE DIVIDER ↔</span></div></div></section>
+<section id="edit" class="pe-story pe-reveal" aria-labelledby="pe-story-title"><div class="pe-container"><div class="pe-story-heading"><h2 id="pe-story-title">Still<br><span>your layer.</span></h2><p>Scroll: restore proportions or flip pixels without leaving the editor.</p></div><div class="pe-story-layout"><div class="pe-sticky-scene"><div class="pe-story-stage" data-scene="restore"><span class="pe-scene-label">PHOTO EDITOR / DEMO</span><div class="pe-story-object"><img class="" src="../../../assets/lp/photo-editor/still-life.svg" width="600" height="600" alt="Image used to demonstrate the plugin" draggable="false"></div><span class="pe-scene-glyph" aria-hidden="true">↶</span><div class="pe-scene-state" role="status">Original proportions restored</div><div class="pe-scene-controls" role="group" aria-label="Choose a demo action"><button type="button" data-scene-select="restore" aria-pressed="true" aria-label="Restore proportions">↶</button><button type="button" data-scene-select="horizontal" aria-pressed="false" aria-label="Flip horizontally">↔</button><button type="button" data-scene-select="vertical" aria-pressed="false" aria-label="Flip vertically">↕</button></div></div></div><div class="pe-story-scroll"><article class="pe-story-beat" data-scene-step="restore"><div class="pe-mobile-scene pe-mobile-restore"><img class="" src="../../../assets/lp/photo-editor/still-life.svg" width="600" height="600" alt="Image used to demonstrate the plugin" draggable="false"><span>↶</span></div><div><span class="pe-action-caption">RESTORE ORIGINAL</span><h3>Proportions. <br>Right again.</h3><p>Original size, no rotation, no rounded corners.</p></div></article><article class="pe-story-beat" data-scene-step="horizontal"><div class="pe-mobile-scene pe-mobile-horizontal"><img class="" src="../../../assets/lp/photo-editor/still-life.svg" width="600" height="600" alt="Image used to demonstrate the plugin" draggable="false"><span>↔</span></div><div><span class="pe-action-caption">FLIP HORIZONTALLY</span><h3>The other<br>way.</h3><p>Pixels are mirrored; the layer keeps its position and size.</p></div></article><article class="pe-story-beat" data-scene-step="vertical"><div class="pe-mobile-scene pe-mobile-vertical"><img class="" src="../../../assets/lp/photo-editor/still-life.svg" width="600" height="600" alt="Image used to demonstrate the plugin" draggable="false"><span>↕</span></div><div><span class="pe-action-caption">FLIP VERTICALLY</span><h3>A new angle. <br>Same object.</h3><p>Vertical flip has its own button.</p></div></article></div></div></div></section>
+<section id="export" class="pe-export pe-reveal" aria-labelledby="pe-export-title"><div class="pe-container pe-export-layout"><div class="pe-export-sculpture" aria-label="Illustration of exporting one image as WebP and several as a ZIP"><div class="pe-file pe-file-back"><span>STILL LIFE</span><img class="" src="../../../assets/lp/photo-editor/still-life.svg" width="600" height="600" alt="Image used to demonstrate the plugin" draggable="false"><small>IMAGE</small></div><div class="pe-file pe-file-front"><span>↓</span><strong>.webp</strong><small>AS ON THE CANVAS</small></div><div class="pe-export-zip"><span>▤</span><strong>.zip</strong><small>MULTIPLE IMAGES</small></div><span class="pe-file-path" aria-hidden="true">→</span></div><div class="pe-export-copy"><span class="pe-action-caption">FROM LAYER TO FILE</span><h2 id="pe-export-title">On canvas.<br><span>On disk.</span></h2><p>WebP keeps the layer as it looks; PNG gives you the original pixels of one image, without transparent margins.</p><div class="pe-export-switch" role="group" aria-label="Show export option"><button type="button" data-export-view="webp" aria-pressed="true">WebP</button><button type="button" data-export-view="png" aria-pressed="false">Original PNG</button></div></div></div></section>
+<section class="pe-manifest pe-reveal" aria-labelledby="pe-manifest-title"><div class="pe-container"><span class="pe-orbit" aria-hidden="true"></span><h2 id="pe-manifest-title">Your photos.<br><span>No server needed.</span></h2><p>Everything happens inside Figma: the plugin has network access turned off.</p><div class="pe-network-proof"><span class="pe-signal"></span><code>allowedDomains: ["none"]</code></div></div></section>
+<section id="install" class="pe-install pe-reveal" aria-labelledby="pe-install-title"><div class="pe-container pe-install-layout"><div><h2 id="pe-install-title">Add it<br><span>to your Figma.</span></h2><p>Download the archive with the button above and unzip it.</p></div><div class="pe-install-visual"><div class="pe-menu-title">Figma Desktop</div><div class="pe-menu-path"><span>Plugins</span><span>›</span><span>Development</span></div><div class="pe-import-command">Import plugin from manifest…<span>↗</span></div><div class="pe-manifest-file"><div class="pe-file-glyph" aria-hidden="true">{ }</div><div><strong>manifest.json</strong><small>from the unzipped folder</small></div><span>↵</span></div><div class="pe-file-neighbors"><span>code.js</span><span>ui.html</span><small>archive contents</small></div></div></div></section>
+<section class="pe-finale pe-reveal" aria-labelledby="pe-finale-title"><div class="pe-container"><h2 id="pe-finale-title">Stay<br><span>in Figma.</span></h2><p>Fewer app switches, more focus on your design.</p><a class="btn-cta" href="#install">Go to installation <span>↗</span></a><span class="pe-finale-glyph" aria-hidden="true">⌑</span></div></section>
+<div class="pe-faq-shell pe-reveal"><section class="faq-section" aria-labelledby="faq-title"><h2 id="faq-title" class="faq-title">Photo Editor FAQ</h2><div class="faq-list"><details class="faq-item"><summary class="faq-q">How do I trim transparent margins from an image in Figma?</summary><p class="faq-a">Select a layer with an image, run the plugin and click “Trim transparency”: empty pixels at the edges are removed and the layer resizes to fit the content. The plugin does not remove white backgrounds. Before editing, it keeps a single image fill and resets filters and opacity.</p></details><details class="faq-item"><summary class="faq-q">How do I restore an image’s original proportions in Figma?</summary><p class="faq-a">“Restore original” takes the size and proportions from the fill itself and resets rotation and corner radius. It’s handy when an image has been stretched by accident.</p></details><details class="faq-item"><summary class="faq-q">How do I flip an image horizontally or vertically in Figma?</summary><p class="faq-a">Each direction has its own button. The plugin mirrors the image pixels, while the layer’s size, position and rotation stay the same.</p></details><details class="faq-item"><summary class="faq-q">How do I export an image from Figma as WebP?</summary><p class="faq-a">Click “Export WebP”: the file matches the layer as it looks on the canvas, including crop, size, rotation and corner radius. Quality is fixed at 0.8. Several layers download as one ZIP archive. To learn why the format suits websites, read <a href="../../../blog/chto-takoe-webp/">“What is WebP”</a>.</p></details><details class="faq-item"><summary class="faq-q">Can I export the original image as PNG?</summary><p class="faq-a">Yes. “Original as PNG” saves the fill’s original pixels without the layer’s transformations and trims transparent margins. It works when a single image is selected.</p></details><details class="faq-item"><summary class="faq-q">Can I undo the plugin’s changes?</summary><p class="faq-a">Yes. The plugin keeps its own 50-step history with Undo and Redo buttons. Selecting something else resets it.</p></details><details class="faq-item"><summary class="faq-q">Are my images sent to a server?</summary><p class="faq-a">No. Images are processed inside Figma and the plugin window, and network access is disabled in the manifest. To compress images without Figma, try the online tool <a href="../../compress-webp/">“Compress image”</a>.</p></details><details class="faq-item"><summary class="faq-q">How do I install Photo Editor and how much does it cost?</summary><p class="faq-a">The plugin is free; pay what you want. Download and unzip the archive, then in Figma Desktop choose Plugins → Development → Import plugin from manifest… and select manifest.json. More plugins and tools live in the <a href="../../">“Tools”</a>.</p></details></div></section></div>
+</main>
+<!-- FOOTER:START -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-cols">
+      <div class="footer-col footer-about">
+        <a class="brand" href="../../../" aria-label="Trace Logo's" style="margin-bottom:14px">
+          <span class="brand-logo" aria-hidden="true">
+            <img src="../../../assets/brand/logo.svg" alt="" width="30" height="30">
+          </span>
+          <span class="brand-name">Trace Logo's</span>
+        </a>
+        <p data-i18n="footerAbout">Открытая библиотека логотипов и эмодзи. Бесплатно, без регистрации, с открытым исходным кодом.</p>
+        <a class="footer-yandex-counter" href="https://webmaster.yandex.ru/siteinfo/?site=https://trace-logos.ru" aria-label="Яндекс ИКС" data-i18n-aria="footerYandexCounterAria">
+          <img width="88" height="31" alt="" src="https://yandex.ru/cycounter?https://trace-logos.ru&amp;theme=light&amp;lang=ru">
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCatalog">Каталог</h3>
+        <ul>
+          <li><a href="../../../logos/"><span data-i18n="footerAllLogos">Все логотипы</span></a></li>
+          <li><a href="../../../emoji/"><span data-i18n="footerEmoji">Эмодзи</span></a></li>
+          <li><a href="../../../blog/"><span data-i18n="footerBlog">Блог</span></a></li>
+          <li><a href="../../../logos/ai/"><span data-i18n="footerAI">Нейросети</span></a></li>
+          <li><a href="../../../logos/bank/"><span data-i18n="footerBanks">Банки</span></a></li>
+          <li><a href="../../../logos/market/"><span data-i18n="footerMarketplaces">Маркетплейсы</span></a></li>
+          <li><a href="../../../logos/social/"><span data-i18n="footerSocial">Соцсети</span></a></li>
+          <li><a href="../../../logos/flag/"><span data-i18n="footerFlags">Флаги</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColCollections">Подборки</h3>
+        <ul>
+          <!-- COLLECTIONS:START -->
+          <li><a href="../../../collections/russian-banks/"><span data-i18n="footerColl_russian-banks">Логотипы банков</span></a></li>
+          <li><a href="../../../collections/neural-networks/"><span data-i18n="footerColl_neural-networks">Логотипы нейросетей</span></a></li>
+          <li><a href="../../../collections/marketplaces/"><span data-i18n="footerColl_marketplaces">Логотипы маркетплейсов</span></a></li>
+          <li><a href="../../../collections/payment-systems/"><span data-i18n="footerColl_payment-systems">Платёжные системы</span></a></li>
+          <li><a href="../../../collections/messengers-social/"><span data-i18n="footerColl_messengers-social">Соцсети и мессенджеры</span></a></li>
+          <li><a href="../../../collections/google-2026/"><span data-i18n="footerColl_google-2026">Иконки Google 2026</span></a></li>
+          <li><a href="../../../collections/delivery-taxi/"><span data-i18n="footerColl_delivery-taxi">Доставка и такси</span></a></li>
+          <li><a href="../../../collections/browsers/"><span data-i18n="footerColl_browsers">Браузеры</span></a></li>
+          <li><a href="../../../collections/cloud-storage/"><span data-i18n="footerColl_cloud-storage">Облачные хранилища</span></a></li>
+          <li><a href="../../../collections/music-streaming/"><span data-i18n="footerColl_music-streaming">Музыкальные сервисы</span></a></li>
+          <li><a href="../../../collections/video-streaming/"><span data-i18n="footerColl_video-streaming">Видеостриминг</span></a></li>
+          <li><a href="../../../collections/design-tools/"><span data-i18n="footerColl_design-tools">Дизайн-инструменты</span></a></li>
+          <li><a href="../../../collections/education/"><span data-i18n="footerColl_education">Образовательные платформы</span></a></li>
+          <li><a href="../../../collections/health-fitness/"><span data-i18n="footerColl_health-fitness">Здоровье и фитнес</span></a></li>
+          <li><a href="../../../collections/russian-tv-channels/"><span data-i18n="footerColl_russian-tv-channels">Логотипы телеканалов</span></a></li>
+          <!-- COLLECTIONS:END -->
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColTools">Инструменты</h3>
+        <ul>
+          <li><a href="https://www.figma.com/community/plugin/1643124536537861799/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerFigmaPlugin">Плагин для Figma</span></a></li>
+          <!-- TOOLS:START -->
+          <li><a href="../../../tools/compress-webp/"><span data-i18n="footerTool_compress-webp">Сжать изображение</span></a></li>
+          <li><a href="../../../tools/watermark/"><span data-i18n="footerTool_watermark">Убрать водяной знак</span></a></li>
+          <li><a href="../../../tools/merge-pdf/"><span data-i18n="footerTool_merge-pdf">Объединить PDF</span></a></li>
+          <li><a href="../../../tools/edit-image/"><span data-i18n="footerTool_edit-image">Обрезать и повернуть фото</span></a></li>
+          <li><a href="../../../tools/ios-call-screen/"><span data-i18n="footerTool_ios-call-screen">Экран вызова iOS</span></a></li>
+          <!-- TOOLS:END -->
+          <li><a href="../../../tools/extensions/reviews-exporter/"><span data-i18n="footerToolReviewsExporter">Reviews Exporter</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 data-i18n="footerColDevelopers">Разработчикам</h3>
+        <ul>
+          <li><a href="../../../developers/"><span data-i18n="footerDevelopersPage">Для разработчиков</span></a></li>
+          <li><a href="../../../logos.json">API · logos.json</a></li>
+          <li><a href="../../../emoji.json">API · emoji.json</a></li>
+          <li><a href="../../../llms.txt">llms.txt</a></li>
+          <li><a href="https://github.com/arturablyazov5-glitch/trace-logos" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://status.trace-logos.ru" target="_blank" rel="noopener"><span data-i18n="footerServiceStatus">Статус сервисов</span></a></li>
+          <li><a href="https://t.me/mansurov_rafael" target="_blank" rel="noopener">@mansurov_rafael</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>Trace Logo's Beta · <span data-i18n="footerCopyrightShort">Изображения могут быть защищены авторским правом их владельцев.</span></span>
+      <span class="footer-bottom-links">
+        <a href="../../../sitemap/"><span data-i18n="footerSitemap">Карта сайта</span></a>
+        <a href="../../../partnership/"><span data-i18n="footerPartnership">Партнерство</span></a>
+        <a href="../../../terms/"><span data-i18n="footerTerms">Правила использования</span></a>
+        <a href="../../../consent/"><span data-i18n="footerConsent">Обработка данных</span></a>
+        <a href="https://github.com/arturablyazov5-glitch/trace-logos" target="_blank" rel="noopener"><span data-i18n="footerOpenSource">Открытый исходный код</span></a>
+      </span>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+<script src="../../assets/lp-photo-editor.js" defer></script>
+<script type="module" src="../../../js/pwyw.min.js"></script>
+</body>
+</html>

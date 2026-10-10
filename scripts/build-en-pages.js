@@ -12,6 +12,10 @@
  * build-seo-pages.js, which bakes their English meta/H1/FAQ/JSON-LD directly into
  * en/. This script SKIPS them to avoid clobbering with a meta-less version.
  *
+ * Product landings (tools/extensions|figma-plugins/<slug>/) with an EN pair
+ * tools/landing-en/<slug>.html are built from the pair instead of the RU HTML —
+ * see scripts/lib/en-landings.js.
+ *
  * Source HTML files are the SINGLE SOURCE OF TRUTH — never edit /en/ manually.
  * Run AFTER any other build script that changes HTML pages.
  */
@@ -22,6 +26,7 @@ const { loadDict, transformToEn } = require('./lib/en-transform');
 const { translateHome } = require('./lib/home-i18n');
 const { translateToolsHub } = require('./lib/tools-hub-i18n');
 const { build: buildToolsHub } = require('./build-tools-hub');
+const { PAIR_DIR_NAME, pairFileFor } = require('./lib/en-landings');
 
 const ROOT    = path.join(__dirname, '..');
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -29,7 +34,14 @@ const DRY_RUN = process.argv.includes('--dry-run');
 const EXCLUDE_DIRS = new Set([
   'en', 'node_modules', 'scripts', '.git', '.claude', 'sanitizer',
   'assets', 'css', 'js', 'components', 'templates', 'upptime', 'figma-plugins',
+  PAIR_DIR_NAME, // tools/landing-en/<slug>.html — EN-пары лендингов, не страницы (см. ниже)
 ]);
+
+// Папка плагина — исходник (ui.html и т.п.), зеркалить его нельзя; зеркалим
+// только лендинг tools/figma-plugins/<slug>/index.html.
+const PLUGIN_LANDING = /^tools\/figma-plugins\/[^/]+\/index\.html$/;
+const isPluginsParent = (rel) => rel === 'tools';
+const isPluginsTree = (rel) => rel === 'tools/figma-plugins' || rel.startsWith('tools/figma-plugins/');
 
 // Skip non-content HTML files at root level (search-engine verification stubs)
 const { isVerificationStub } = require('./lib/verification-stubs');
@@ -54,10 +66,11 @@ function findHtmlFiles(dir, rel = '') {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     const name = entry.name;
     if (entry.isDirectory()) {
-      if (EXCLUDE_DIRS.has(name)) continue;
+      if (EXCLUDE_DIRS.has(name) && !(name === 'figma-plugins' && isPluginsParent(rel))) continue;
       results.push(...findHtmlFiles(path.join(dir, name), rel ? `${rel}/${name}` : name));
     } else if (name.endsWith('.html')) {
       if (!rel && isVerificationStub(name)) continue;
+      if (isPluginsTree(rel) && !PLUGIN_LANDING.test(`${rel}/${name}`)) continue;
       results.push(rel ? `${rel}/${name}` : name);
     }
   }
@@ -83,8 +96,12 @@ function findHtmlFiles(dir, rel = '') {
     if (relPath === 'developers/index.html') { skipped++; continue; } // owned by build-developers.js
     if (CREDITS.test(relPath)) { skipped++; continue; }
 
-    const src       = path.join(ROOT, relPath);
-    const dest       = path.join(ROOT, 'en', relPath);
+    // Продуктовый лендинг с EN-парой (scripts/lib/en-landings.js): основа —
+    // переведённая пара, а не RU-HTML. Пара написана «по пути RU-страницы»,
+    // поэтому дальше тот же transformToEn с relPath RU-страницы.
+    const pair      = pairFileFor(relPath);
+    const src       = pair || path.join(ROOT, relPath);
+    const dest      = path.join(ROOT, 'en', relPath);
     const html      = fs.readFileSync(src, 'utf8');
     // The hand-written homepage has no data-i18n — translate it via a dedicated
     // RU→EN string map before the generic chrome/bake pass.
@@ -93,9 +110,8 @@ function findHtmlFiles(dir, rel = '') {
     let processed = transformToEn(base, relPath, EN);
     if (relPath === 'tools/index.html') processed = buildToolsHub(processed, 'en');
 
-    if (DRY_RUN) {
-      console.log(`→ en/${relPath}`);
-    } else {
+    if (DRY_RUN || pair) console.log(`→ en/${relPath}${pair ? ' (EN-пара)' : ''}`);
+    if (!DRY_RUN) {
       fs.mkdirSync(path.dirname(dest), { recursive: true });
       fs.writeFileSync(dest, processed, 'utf8');
     }

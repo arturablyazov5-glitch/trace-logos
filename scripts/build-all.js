@@ -101,6 +101,7 @@ const STEPS = [
   { file: 'build-tools-headers.js',        label: 'Единый хедер на страницах tools/*' },
   { file: 'build-extension-zip.js',        label: 'Zip + version.json + чейнджлог для tools/extensions/*/ — после хедера, до EN-зеркала' },
   { file: 'build-en-pages.js',             label: 'EN-зеркало (/en/) — обязательно после всех HTML-билдеров выше' },
+  { file: 'test-en-landings.js',           label: 'Тест EN-лендингов: EN-пары tools/landing-en/, без кириллицы, hreflang, canonical, FAQ — сразу после EN-зеркала' },
   { file: 'test-html.js',                  label: 'Тесты разметки: плейсхолдеры, JSON-LD, title/description/canonical/h1, hreflang — после всех страниц' },
   { file: 'test-links.js',                 label: 'Тесты ссылок: битые href/src/content (страницы и ассеты) в готовом HTML — после всех страниц' },
   { file: 'test-component-wiring.js',      label: 'Custom-element теги без подключённого скрипта, задвоенные script/link, буквальный {{> partial}} в комментарии шаблона — после всех страниц' },

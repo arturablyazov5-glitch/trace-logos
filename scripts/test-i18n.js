@@ -29,6 +29,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 const fs   = require('fs');
 const path = require('path');
+const { PAIR_DIR_NAME } = require('./lib/en-landings');
 const { loadDict, LANGS, DEFAULT } = require('./lib/en-transform');
 
 const ROOT   = path.join(__dirname, '..');
@@ -140,6 +141,7 @@ function checkDicts() {
 const SKIP_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'figma-plugins',
   'supabase', 'sanitizer', 'upptime', 'assets',
+  PAIR_DIR_NAME, // tools/landing-en/ — EN-пары лендингов, не страницы (scripts/lib/en-landings.js)
 ]);
 
 function walk(dir, exts, out = []) {

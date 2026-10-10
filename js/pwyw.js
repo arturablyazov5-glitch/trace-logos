@@ -9,6 +9,11 @@
 // одним кликом, почту у него не спрашиваем. Email нужен только платящим,
 // потому что его требует invoice в lava.top.
 //
+// Продукт без своего оффера в lava.top (lavaOfferId пуст в products.json) не
+// принимает платежи через checkout: любая сумма больше нуля тогда означает «хочу
+// поддержать» — страница поддержки открывается в новой вкладке, а файл человек
+// получает сразу, как при нуле. Платёж по-прежнему добровольный.
+//
 // Файла на странице нет и быть не может: продукт лежит в приватном бакете
 // Supabase Storage, ссылку выдаёт функция checkout по токену заказа. Поэтому
 // оба сценария заканчиваются одинаково — переходом на /thanks/?t=<token>,
@@ -18,6 +23,8 @@
 // не добавлять в статические лендинги.
 // ─────────────────────────────────────────────────────────────────────────────
 import { t, getLang } from './i18n.js';
+// Единая ссылка на страницу поддержки (lava.top) — та же, что у «Поддержать» по сайту.
+import { supportUrl } from './donate.js';
 
 const ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/checkout';
 const REGISTRY = '/products.json';
@@ -28,7 +35,7 @@ const CURRENCY_SIGN = { RUB: '₽', USD: '$', EUR: '€' };
 let overlay = null;
 let lastFocused = null;
 let registry = null;      // products.json, загружается один раз
-let current = null;       // { id, title } — продукт открытой модалки
+let current = null;       // { id, title, donation } — продукт открытой модалки
 
 function currency() {
   return getLang() === 'ru' ? 'RUB' : 'USD';
@@ -82,7 +89,7 @@ function buildDom() {
             <span class="pw-currency"></span>
             <input class="pw-amount" type="text" inputmode="decimal" autocomplete="off" value="0">
           </span>
-          <span class="pw-hint">${t('pwywZeroHint')}</span>
+          <span class="pw-hint pw-amount-hint">${t('pwywZeroHint')}</span>
         </label>
 
         <label class="pw-field pw-field-email" hidden>
@@ -139,10 +146,14 @@ function syncAmountUi() {
   const amount = readAmount();
   const paying = amount > 0;
 
-  overlay.querySelector('.pw-field-email').hidden = !paying;
-  overlay.querySelector('.pw-submit').textContent = paying
-    ? `${t('pwywPayCta')} ${formatAmount(amount)}`
-    : t('pwywFreeCta');
+  const donation = paying && current?.donation;
+  overlay.querySelector('.pw-field-email').hidden = !paying || donation;
+  overlay.querySelector('.pw-amount-hint').textContent = donation ? t('pwywDonateHint') : t('pwywZeroHint');
+  overlay.querySelector('.pw-submit').textContent = donation
+    ? t('pwywDonateCta')
+    : paying
+      ? `${t('pwywPayCta')} ${formatAmount(amount)}`
+      : t('pwywFreeCta');
 
   const value = String(overlay.querySelector('.pw-amount').value).replace(',', '.').trim();
   overlay.querySelectorAll('.pw-preset').forEach((btn) => {
@@ -165,11 +176,17 @@ async function onSubmit(e) {
   const amount = readAmount();
   const email = overlay.querySelector('.pw-email').value.trim();
 
-  if (amount > 0 && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+  const donation = amount > 0 && current.donation;
+
+  if (amount > 0 && !donation && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
     showError(t('pwywErrorEmail'));
     overlay.querySelector('.pw-email').focus();
     return;
   }
+
+  // Вкладку открываем синхронно, пока жив клик: после await браузер счёл бы
+  // это всплывающим окном и заблокировал.
+  if (donation) window.open(supportUrl(), '_blank', 'noopener');
 
   submit.disabled = true;
   const label = submit.textContent;
@@ -181,9 +198,9 @@ async function onSubmit(e) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         product: current.id,
-        amount,
+        amount: donation ? 0 : amount,
         currency: currency(),
-        email: amount > 0 ? email : undefined,
+        email: amount > 0 && !donation ? email : undefined,
         lang: getLang(),
       }),
     });
@@ -239,6 +256,7 @@ export async function openPwyw(productId) {
   current = {
     id: product.id,
     title: getLang() === 'en' ? (product.title_en || product.title) : product.title,
+    donation: !product.lavaOfferId,
   };
 
   if (!overlay) buildDom();

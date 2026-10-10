@@ -24,6 +24,7 @@ const fs   = require('fs');
 const path = require('path');
 const { itemDate, assetExt } = require('./lib/item-date');
 const { encodeUrlPath } = require('./lib/url-path');
+const { LANDINGS } = require('./lib/en-landings');
 
 const BASE_URL = 'https://trace-logos.ru';
 const ROOT     = path.resolve(__dirname, '..');
@@ -107,11 +108,12 @@ function main() {
   pushPage(`${BASE_URL}/emoji/`,  'weekly',  '0.8');
   pushPage(`${BASE_URL}/blog/`,   'weekly',  '0.6');
   pushPage(`${BASE_URL}/tools/`,  'weekly',  '0.8');
-  // Public browser utilities are owned by tools.json. Source-only plugin and
-  // extension folders are not landing pages and must not enter the sitemap.
+  // Public browser utilities are owned by tools.json. Extension and Figma-plugin
+  // landings come from scripts/lib/en-landings.js (one list with their EN pairs);
+  // a folder without index.html is source-only.
   const toolPages = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools.json'), 'utf8')).tools
     .map(tool => `tools/${tool.slug}/`);
-  toolPages.push('tools/extensions/reviews-exporter/');
+  for (const { relPath } of LANDINGS) toolPages.push(relPath.replace(/index\.html$/, ''));
   for (const rel of toolPages) {
     const file = path.join(ROOT, rel, 'index.html');
     if (!fs.existsSync(file)) throw new Error(`Missing tool landing page: ${rel}`);

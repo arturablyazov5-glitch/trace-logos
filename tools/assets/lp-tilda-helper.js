@@ -1,6 +1,10 @@
 (function () {
   'use strict';
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var EN = document.documentElement.lang === 'en';
+  var T = EN
+    ? { code: 'T123 code copied', copied: 'Copied: ', manual: 'Copy manually: ' }
+    : { code: 'Код T123 скопирован', copied: 'Скопировано: ', manual: 'Скопируйте вручную: ' };
   var status = document.getElementById('th-copy-status');
   var timer;
   document.querySelectorAll('[data-th-copy]').forEach(function (button) {
@@ -8,8 +12,8 @@
       var value = button.getAttribute('data-th-copy');
       try {
         await navigator.clipboard.writeText(value);
-        status.textContent = value.length > 40 ? 'Код T123 скопирован' : 'Скопировано: ' + value;
-      } catch (error) { status.textContent = 'Скопируйте вручную: ' + value; }
+        status.textContent = value.length > 40 ? T.code : T.copied + value;
+      } catch (error) { status.textContent = T.manual + value; }
       status.classList.add('is-visible');
       clearTimeout(timer);
       timer = setTimeout(function () { status.classList.remove('is-visible'); }, 2500);
@@ -56,9 +60,6 @@
       screens.forEach(function (other) { if (other !== screen) other.scrollTop = fraction * (other.scrollHeight - other.clientHeight); });
       requestAnimationFrame(function () { syncing = false; });
     }, { passive: true });
-  });
-  document.querySelectorAll('a[href="#install"]').forEach(function (link) {
-    link.addEventListener('click', function () { document.getElementById('install').open = true; });
   });
   if ('IntersectionObserver' in window && !reduced) {
     document.querySelector('.th-landing').classList.add('th-motion');

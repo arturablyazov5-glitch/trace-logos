@@ -24,6 +24,7 @@ function build(html, lang = 'ru') {
       const description = card.match(/<(?:p|div) class="(?:ext-desc|ff-desc|tool-desc)">([\s\S]*?)<\/(?:p|div)>/)?.[1];
       if (!name || !description || !card.includes(`id="${id}"`)) throw new Error(`Incomplete tool card: ${id}`);
       const href = card.match(/^\s*<a\b[^>]*href="([^"]+)"/)?.[1]
+        || card.match(/<a class="ext-btn" href="((?:extensions|figma-plugins)\/[^"]+)"/)?.[1]
         || card.match(/href="(https:\/\/www\.figma\.com\/community\/plugin\/[^\"]+)"/)?.[1]
         || `#${id}`;
       const item = {

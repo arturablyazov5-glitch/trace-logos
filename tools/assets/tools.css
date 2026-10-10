@@ -2418,3 +2418,9 @@ details[open] .details-body {
 .tools-footer a { color: var(--text-mid); text-decoration: none; }
 .tools-footer a:hover { color: #fff; }
 .tools-footer-links { display: inline-flex; gap: 18px; flex-wrap: wrap; }
+
+/* Единая CTA-кнопка лендингов; визуальный первоисточник — .ff-btn в css/home.css, держать в синхроне */
+.btn-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-size:14px;font-weight:600;line-height:1.2;color:#fff;text-decoration:none;background:var(--accent,#8a6bff);border:0;border-radius:10px;padding:11px 18px;cursor:pointer;box-shadow:0 6px 22px rgba(138,107,255,.28);transition:transform .15s,box-shadow .15s,filter .15s}
+.btn-cta:hover{transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 10px 28px rgba(138,107,255,.36);color:#fff}
+.btn-cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.btn-cta{transition:none}.btn-cta:hover{transform:none}}

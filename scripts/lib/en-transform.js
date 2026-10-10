@@ -72,6 +72,14 @@ const isAssetPath = (rel) => /^\/assets\//.test(rel);
 // pointing at the RU page even inside the /en/ mirror.
 const isSiteAbsolutePath = (rel) => /^\/(?!\/|en\/)/.test(rel) && !isDataFeed(rel) && !isAssetPath(rel);
 
+// Исходники плагинов и расширений (code.js, ui.html, README.md… рядом с лендингом
+// tools/figma-plugins/<slug>/) — файлы для ручной установки, в /en/ их не
+// зеркалим (ни ui.html, ни code.js): ссылка на них остаётся корневой, иначе 404.
+// index.html лендинга сюда не попадает — он как раз зеркалится.
+const isProductSourceFile = (abs) =>
+  /^\/tools\/(?:figma-plugins|extensions)\/[^/]+\/[^/]+\.(?:js|html|md|zip|css)$/i.test(abs.split(/[?#]/)[0]) &&
+  !/\/index\.html$/i.test(abs.split(/[?#]/)[0]);
+
 function makePathsAbsolute(html, sourceRelPath) {
   const baseUrl   = `${BASE_ORIGIN}/${sourceRelPath}`;
   // <a> tags are page navigation. This function only ever runs while building the
@@ -95,7 +103,8 @@ function makePathsAbsolute(html, sourceRelPath) {
     /(<a\b[^>]*?\shref)="([^"]*)"/gi,
     (m, pre, rel) => {
       if (isSiteAbsolutePath(rel)) return `${pre}="/en${rel}"`;
-      const abs = resolve(rel, isDataFeed(rel) ? baseUrl : enBaseUrl);
+      let abs = resolve(rel, isDataFeed(rel) ? baseUrl : enBaseUrl);
+      if (abs && isProductSourceFile(resolve(rel, baseUrl) || '')) abs = resolve(rel, baseUrl);
       return abs ? `${pre}="${abs}"` : m;
     }
   );
@@ -113,16 +122,20 @@ function enChrome(html, sourceRelPath) {
   html = html.replace(/<html(\s+lang="[^"]*")?(\s*)>/,
     (m, _lang, sp) => `<html lang="en"${sp || ' '}>`);
   html = makePathsAbsolute(html, sourceRelPath);
+  // (?!en\/) — EN-пара лендинга (scripts/lib/en-landings.js) может уже нести
+  // /en/ canonical; без защиты получился бы /en/en/. То же с __LANG__.
   html = html.replace(
-    /(<link\s+rel="canonical"\s+href=")https:\/\/trace-logos\.ru\//,
+    /(<link\s+rel="canonical"\s+href=")https:\/\/trace-logos\.ru\/(?!en\/)/,
     `$1${BASE_ORIGIN}/en/`
   );
   html = html.replace(
-    /(<meta\s+property="og:url"\s+content=")https:\/\/trace-logos\.ru\//,
+    /(<meta\s+property="og:url"\s+content=")https:\/\/trace-logos\.ru\/(?!en\/)/,
     `$1${BASE_ORIGIN}/en/`
   );
-  html = html.replace('<meta charset="UTF-8">',
-    '<meta charset="UTF-8">\n  <script>window.__LANG__=\'en\';</script>');
+  if (!html.includes("<script>window.__LANG__='en';</script>")) {
+    html = html.replace('<meta charset="UTF-8">',
+      '<meta charset="UTF-8">\n  <script>window.__LANG__=\'en\';</script>');
+  }
   html = html.replace(/\bcontent="ru_RU"/g, 'content="en_US"');
   // Подсказка <link rel="modulepreload"> в исходнике всегда указывает на русский
   // словарь (RU — язык по умолчанию). На /en/ странице js/i18n.js импортирует
