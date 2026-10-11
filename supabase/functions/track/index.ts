@@ -2,7 +2,7 @@ import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { checkRateLimit } from '../_shared/rate-limit.ts';
 
 // POST  /track            → публично. Инкремент счётчика просмотров логотипа или статьи.
-//                           body: { figma, name?, img? } OR { slug } OR { banner }
+//                           body: { figma, name?, img? } OR { slug } OR { banner } OR { page, title? }
 // GET    /track           → только с заголовком x-admin-key == ADMIN_KEY (секрет).
 //                           Отдаёт всю статистику для админки.
 // DELETE /track            → только с заголовком x-admin-key == ADMIN_KEY (секрет).
@@ -69,6 +69,7 @@ serve(async (req: Request) => {
       slug?: string; // New field for blog posts
       searchQuery?: string; resultsCount?: number; // Поиск в шапке каталога
       banner?: string; // Клик по промо-баннеру (напр. sidebar landologovo)
+      page?: string; title?: string; // Просмотр страницы (components/page-view.js)
     };
     try {
       payload = await req.json();
@@ -88,6 +89,24 @@ serve(async (req: Request) => {
           Authorization: `Bearer ${SERVICE_KEY}`,
         },
         body: JSON.stringify({ p_query: searchQuery, p_results_count: resultsCount }),
+      });
+      if (!res.ok) return json(origin, { error: 'DB error', detail: await res.text() }, 500);
+      return json(origin, { ok: true });
+    }
+
+    // --- Page View Tracking ---
+    // Только путь сайта: с ведущего «/», без query/hash, без пробелов.
+    const page = clean(payload.page, 300);
+    if (page) {
+      if (!/^\/[^\s?#]*$/.test(page)) return json(origin, { error: 'Invalid page' }, 400);
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/increment_page_view`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SERVICE_KEY,
+          Authorization: `Bearer ${SERVICE_KEY}`,
+        },
+        body: JSON.stringify({ p_path: page, p_title: clean(payload.title, 200) }),
       });
       if (!res.ok) return json(origin, { error: 'DB error', detail: await res.text() }, 500);
       return json(origin, { ok: true });
@@ -202,8 +221,23 @@ serve(async (req: Request) => {
       { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` } }
     );
 
+    // Страниц тысячи, а PostgREST отдаёт не больше max_rows (1000) за запрос —
+    // добираем постранично через Range.
+    const pageViews: unknown[] = [];
+    for (let from = 0; ; from += 1000) {
+      const r = await fetch(
+        `${SUPABASE_URL}/rest/v1/page_views?select=path,title,count,updated_at&order=count.desc,path.asc`,
+        { headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}`, Range: `${from}-${from + 999}` } },
+      );
+      if (!r.ok) break;
+      const chunk = await r.json();
+      pageViews.push(...chunk);
+      if (chunk.length < 1000) break;
+    }
+
     return json(origin, {
       views: await res.json(),
+      page_views: pageViews,
       exports: exports.ok ? await exports.json() : [],
       post_views: postViews.ok ? await postViews.json() : [],
       search_queries: searchQueries.ok ? await searchQueries.json() : [],

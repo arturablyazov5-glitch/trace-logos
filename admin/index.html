@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Админка — Популярность логотипов · Trace Logo's</title>
+<link rel="stylesheet" href="pin-generator.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -500,10 +501,12 @@ footer .dot { margin: 0 8px; opacity: .5; }
     <div class="tabs" id="tabs">
       <button class="tab active" data-tab="logos" type="button">Логотипы</button>
       <button class="tab" data-tab="emoji" type="button">Эмодзи</button>
+      <button class="tab" data-tab="pages" type="button">Страницы</button>
       <button class="tab" data-tab="posts" type="button">Статьи</button>
       <button class="tab" data-tab="search" type="button">Поиск</button>
       <button class="tab" data-tab="banners" type="button">Баннеры и UI</button>
       <button class="tab" data-tab="products" type="button">Продукты</button>
+      <button class="tab" data-tab="pinterest" type="button">Pinterest</button>
     </div>
 
     <!-- ── Логотипы ── -->
@@ -585,6 +588,43 @@ footer .dot { margin: 0 8px; opacity: .5; }
     </div>
 
     <!-- ── Статьи блога ── -->
+    <div class="tab-panel" id="panel-pages">
+      <div class="page-head">
+        <h1>Просмотры страниц</h1>
+        <p>Заход на страницу — один просмотр, не чаще раза в 30 минут с одного устройства. Не считаются: страницы логотипов и эмодзи, категории и экосистемы (кроме самих /logos/ и /emoji/), блог, /consent/, /terms/, /sitemap/, админка, noindex-страницы (404, /thanks/), боты, режим разработчика (<code>?notrack</code>) и localhost.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat lead"><div class="k">Всего просмотров</div><div class="v" id="pg-total">—</div></div>
+        <div class="stat"><div class="k">Страниц в счёте</div><div class="v" id="pg-count">—</div></div>
+        <div class="stat"><div class="k">Самая популярная</div><div class="v" id="pg-top" style="font-size:18px">—</div></div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="filter-pages" placeholder="Поиск по названию или адресу…" autocomplete="off">
+        </div>
+        <span class="count-pill" id="count-pill-pages"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-rank" data-sort-pages="rank">#</th>
+              <th class="col-name" data-sort-pages="title">Страница</th>
+              <th class="col-views sorted" data-sort-pages="views">Просмотры <span class="arr">▼</span></th>
+              <th data-sort-pages="updated">Последний</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-pages">
+            <tr><td colspan="4"><div class="loading-row"><div class="spinner"></div>Загрузка…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="tab-panel" id="panel-posts">
       <div class="page-head">
         <h1>Просмотры статей</h1>
@@ -698,6 +738,75 @@ footer .dot { margin: 0 8px; opacity: .5; }
       </div>
     </div>
 
+    <!-- ── Pinterest: генератор пинов ── -->
+    <div class="tab-panel" id="panel-pinterest">
+      <div class="page-head">
+        <h1>Pinterest-пины</h1>
+        <p>Пин 1000 × 1500: 12 оригинальных логотипов из каталога в сетке 3 × 4. Выберите тему — подборку, экосистему или категорию, и заголовок, логотипы, ссылка и тексты заполнятся сами. Публикация вручную.</p>
+      </div>
+      <div class="pg-wrap">
+        <div>
+          <div class="pg-card">
+            <h2><span class="pg-step">1</span>Тема и заголовок</h2>
+            <label class="pg-field"><span>Тема пина</span><select id="pg-collection"></select></label>
+            <p class="pg-hint pg-hint-top" id="pg-pool-info"></p>
+            <div class="pg-row">
+              <label class="pg-field"><span>Заголовок, строка 1</span><input id="pg-line1" autocomplete="off"></label>
+              <label class="pg-field"><span>Строка 2 (акцент)</span><input id="pg-line2" autocomplete="off"></label>
+            </div>
+            <div class="pg-row pg-row-footer">
+              <label class="pg-field"><span>Подпись внизу</span><input id="pg-footer" autocomplete="off"></label>
+              <label class="pg-field"><span>Акцент</span><input id="pg-accent" type="color" value="#a58cff"></label>
+            </div>
+          </div>
+
+          <div class="pg-card">
+            <h2><span class="pg-step">2</span>Сетка <span class="pg-count" id="pg-sel-count">0 / 12</span>
+              <span class="pg-h2-actions">
+                <button class="pg-btn ghost sm" id="pg-fill" type="button" title="Заполнить пустые места из списка каталога ниже, SVG в первую очередь">Добрать до 12</button>
+                <button class="pg-btn ghost sm" id="pg-clear" type="button">Очистить</button>
+              </span>
+            </h2>
+            <div class="pg-grid" id="pg-grid"></div>
+            <p class="pg-hint">Перетаскивайте плитки, чтобы поменять порядок. Подпись под плиткой редактируется — она же идёт на пин.</p>
+            <p class="pg-warn" id="pg-warn" hidden></p>
+          </div>
+
+          <div class="pg-card">
+            <h2><span class="pg-step">3</span>Каталог <span class="pg-count" id="pg-pick-count"></span></h2>
+            <div class="pg-pick-bar">
+              <select id="pg-cat" aria-label="Источник"></select>
+              <input id="pg-q" placeholder="Поиск по всему каталогу · Enter — добавить" autocomplete="off">
+            </div>
+            <div class="pg-pick" id="pg-pick"></div>
+          </div>
+
+          <div class="pg-card">
+            <h2><span class="pg-step">4</span>Публикация в Pinterest</h2>
+            <label class="pg-field"><span>Название <button class="pg-link-btn" id="pg-title-auto" type="button" hidden>↻ вернуть авто</button></span>
+              <span class="pg-copy"><input id="pg-title" autocomplete="off"><button class="pg-btn ghost sm" id="pg-copy-title" type="button" title="Копировать">Копировать</button></span></label>
+            <label class="pg-field"><span>Описание <button class="pg-link-btn" id="pg-desc-auto" type="button" hidden>↻ вернуть авто</button></span>
+              <span class="pg-copy"><textarea id="pg-desc"></textarea><button class="pg-btn ghost sm" id="pg-copy-desc" type="button" title="Копировать">Копировать</button></span></label>
+            <div class="pg-row">
+              <label class="pg-field"><span>Страница подборки</span><input id="pg-link" autocomplete="off"></label>
+              <label class="pg-field"><span>utm_campaign</span><input id="pg-campaign" autocomplete="off"></label>
+            </div>
+            <label class="pg-field"><span>Ссылка для пина</span>
+              <span class="pg-copy"><input id="pg-full-link" readonly><button class="pg-btn ghost sm" id="pg-copy-link" type="button" title="Копировать">Копировать</button></span></label>
+          </div>
+        </div>
+
+        <div class="pg-preview">
+          <div class="pg-actions">
+            <button class="pg-btn" id="pg-download" type="button" disabled>Скачать PNG</button>
+            <button class="pg-btn ghost" id="pg-reset" type="button" title="Вернуть подборку к исходному состоянию">Сбросить</button>
+          </div>
+          <canvas id="pg-canvas" width="1000" height="1500"></canvas>
+          <p class="pg-hint">1000 × 1500 · ⌘S — скачать. Черновик сохраняется в этом браузере.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- ── Продукты: скачивания и поддержка ── -->
     <div class="tab-panel" id="panel-products">
       <div class="page-head">
@@ -760,6 +869,7 @@ footer .dot { margin: 0 8px; opacity: .5; }
   </footer>
 </div>
 
+<script src="pin-generator.js"></script>
 <script>
 const ENDPOINT = 'https://wezryybxxwicysnbmhkz.supabase.co/functions/v1/track';
 const KEY_STORE = 'tl_admin_key';
@@ -789,6 +899,10 @@ let searchSortDir = -1;
 
 let bannerData = [];
 
+let pageData = [];
+let pageSortKey = 'views';
+let pageSortDir = -1;
+
 const $ = id => document.getElementById(id);
 
 // ── Auth gate ──────────────────────────────────────────────────────────
@@ -813,11 +927,14 @@ document.querySelectorAll('.tab').forEach(btn => {
     document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b === btn));
     $('panel-logos').classList.toggle('active', activeTab === 'logos');
     $('panel-emoji').classList.toggle('active', activeTab === 'emoji');
+    $('panel-pages').classList.toggle('active', activeTab === 'pages');
     $('panel-posts').classList.toggle('active', activeTab === 'posts');
     $('panel-search').classList.toggle('active', activeTab === 'search');
     $('panel-banners').classList.toggle('active', activeTab === 'banners');
     $('panel-products').classList.toggle('active', activeTab === 'products');
+    $('panel-pinterest').classList.toggle('active', activeTab === 'pinterest');
     if (activeTab === 'products') loadProducts();
+    if (activeTab === 'pinterest') PinGen.init();
   });
 });
 
@@ -891,6 +1008,7 @@ function exportCsv() {
   const byTab = {
     logos: { rows: buildLogosCsvRows, name: 'stats' },
     emoji: { rows: buildEmojiCsvRows, name: 'emoji' },
+    pages: { rows: buildPagesCsvRows, name: 'pages' },
     posts: { rows: buildPostsCsvRows, name: 'posts' },
     search: { rows: buildSearchCsvRows, name: 'search' },
     banners: { rows: buildBannersCsvRows, name: 'banners' },
@@ -949,6 +1067,12 @@ function buildPostsCsvRows() {
   return rows;
 }
 
+function buildPagesCsvRows() {
+  const rows = [['Страница', 'Адрес', 'Просмотры', 'Последний просмотр']];
+  for (const d of pageData) rows.push([d.title, d.path, d.views, d.updated || '']);
+  return rows;
+}
+
 function buildSearchCsvRows() {
   const rows = [['Запрос', 'Раз', 'Найдено', 'Последний раз']];
   for (const d of searchData) rows.push([d.query, d.count, d.results_count, d.last_seen || '']);
@@ -984,6 +1108,13 @@ function ingest(raw) {
     updated: r.updated_at || null,
   }));
   renderBanners();
+  pageData = (raw.page_views || []).map(r => ({
+    path: r.path,
+    title: pageTitle(r.path, r.title),
+    views: Number(r.count) || 0,
+    updated: r.updated_at || null,
+  }));
+  renderPages();
   exportMap = {};
   for (const e of exports) {
     if (!exportMap[e.figma]) exportMap[e.figma] = {};
@@ -1424,6 +1555,68 @@ function renderProducts(products, orders) {
   }).join('');
 }
 
+// ── Просмотры страниц ──────────────────────────────────────────────────
+// title — document.title на момент последнего хита; хвост с названием сайта
+// в таблице только шумит, срезаем его. Главные — подписываем явно.
+function pageTitle(path, title) {
+  if (path === '/') return 'Главная';
+  if (path === '/en/') return 'Главная (EN)';
+  const t = String(title || '').replace(/\s*[·|—–-]\s*Trace Logo['’]?s\s*$/i, '').trim();
+  return t || path;
+}
+
+function pagePathLabel(path) {
+  try { return decodeURIComponent(path); } catch (_) { return path; }
+}
+
+function renderPages() {
+  const q = $('filter-pages').value.toLowerCase().trim();
+  let rows = q
+    ? pageData.filter(d => d.title.toLowerCase().includes(q) || pagePathLabel(d.path).toLowerCase().includes(q))
+    : [...pageData];
+
+  rows.sort((a, b) => {
+    let va = a[pageSortKey] ?? '', vb = b[pageSortKey] ?? '';
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (va < vb) return -pageSortDir;
+    if (va > vb) return pageSortDir;
+    return 0;
+  });
+
+  const total = pageData.reduce((s, d) => s + d.views, 0);
+  const top = pageData.reduce((m, d) => d.views > (m?.views ?? -1) ? d : m, null);
+  $('pg-total').innerHTML = total.toLocaleString('ru-RU') + '<span class="unit">просм.</span>';
+  $('pg-count').textContent = pageData.length.toLocaleString('ru-RU');
+  $('pg-top').textContent = top ? top.title : '—';
+
+  $('count-pill-pages').textContent = q ? `${rows.length} из ${pageData.length}` : '';
+
+  if (!rows.length) {
+    $('tbody-pages').innerHTML = `<tr><td colspan="4"><div class="empty">${pageData.length ? 'Ничего не найдено' : 'Пока нет данных. Страницы появятся, когда их начнут открывать на сайте.'}</div></td></tr>`;
+    return;
+  }
+
+  let html = '';
+  rows.forEach((d, i) => {
+    html += `
+    <tr>
+      <td class="rank">${i + 1}</td>
+      <td class="fg-hide">
+        <a class="post-cell" href="${escAttr(d.path)}" target="_blank" rel="noopener">
+          <div class="logo-meta">
+            <div class="nm">${esc(d.title)}</div>
+            <div class="fg">${esc(pagePathLabel(d.path))}</div>
+          </div>
+        </a>
+      </td>
+      <td class="views"><b>${d.views.toLocaleString('ru-RU')}</b></td>
+      <td class="fg-hide"><span class="fg">${d.updated ? fmtDate(d.updated) : '—'}</span></td>
+    </tr>`;
+  });
+  $('tbody-pages').innerHTML = html;
+}
+
 function renderBanners() {
   const total = bannerData.reduce((s, d) => s + d.count, 0);
   const formatClicks = bannerFormatClicks();
@@ -1677,6 +1870,31 @@ document.querySelectorAll('thead th[data-sort-emoji]').forEach(th => {
 });
 
 $('filter-emoji').addEventListener('input', renderEmoji);
+
+document.querySelectorAll('thead th[data-sort-pages]').forEach(th => {
+  th.addEventListener('click', () => {
+    const key = th.dataset.sortPages;
+    if (key === 'rank') { pageSortKey = 'views'; pageSortDir = -1; }
+    else if (pageSortKey === key) { pageSortDir *= -1; }
+    else { pageSortKey = key; pageSortDir = (key === 'views' || key === 'updated') ? -1 : 1; }
+    const thead = th.closest('thead');
+    thead.querySelectorAll('th').forEach(h => {
+      h.classList.remove('sorted');
+      h.querySelector('.arr')?.remove();
+    });
+    const active = thead.querySelector(`th[data-sort-pages="${pageSortKey}"]`);
+    if (active) {
+      active.classList.add('sorted');
+      const arr = document.createElement('span');
+      arr.className = 'arr';
+      arr.textContent = pageSortDir > 0 ? '▲' : '▼';
+      active.appendChild(arr);
+    }
+    renderPages();
+  });
+});
+
+$('filter-pages').addEventListener('input', renderPages);
 
 // ── Boot ──
 (async function init() {

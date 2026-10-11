@@ -186,6 +186,7 @@ const CLASSIC_BUNDLES = {
     'components/lang-switcher.js',
     'components/search-box.js',
     'components/mobile-nav.js',
+    'components/page-view.js',
   ],
 };
 
