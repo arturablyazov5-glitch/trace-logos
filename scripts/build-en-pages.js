@@ -100,7 +100,9 @@ function findHtmlFiles(dir, rel = '') {
     // переведённая пара, а не RU-HTML. Пара написана «по пути RU-страницы»,
     // поэтому дальше тот же transformToEn с relPath RU-страницы.
     const pair      = pairFileFor(relPath);
-    const src       = pair || path.join(ROOT, relPath);
+    const src       = relPath === 'terms/index.html'
+      ? path.join(ROOT, 'templates', 'terms-en.html')
+      : pair || path.join(ROOT, relPath);
     const dest      = path.join(ROOT, 'en', relPath);
     const html      = fs.readFileSync(src, 'utf8');
     // The hand-written homepage has no data-i18n — translate it via a dedicated

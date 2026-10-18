@@ -12,7 +12,7 @@
 - [Структура проекта](#структура-проекта)
 - [API](#api)
 - [Добавление логотипа](#добавление-логотипа)
-- [Лицензия](#лицензия)
+- [Авторские права и использование материалов](#авторские-права-и-использование-материалов)
 
 ---
 
@@ -99,9 +99,30 @@ console.log(logos.length);
 
 ---
 
-## 📄 Лицензия
+## Авторские права и использование материалов
 
-Логотипы и товарные знаки принадлежат их владельцам. Каталог — независимый, не связан с брендами и не одобрен ими. Перед коммерческим использованием проверьте бренд-гайд правообладателя.
+Trace Logo's предоставляет бесплатный доступ к каталогу логотипов брендов.
+Товарные знаки и логотипы принадлежат соответствующим правообладателям;
+используйте их в своих проектах с соблюдением прав владельцев.
+
+Оригинальные тексты, дизайн, творческий подбор и расположение материалов,
+а также иные охраняемые результаты интеллектуальной деятельности проекта
+защищаются законодательством в пределах принадлежащих правообладателям прав.
+Бесплатный доступ не означает разрешения копировать защищаемые материалы
+и создавать на их основе клоны сервиса. При этом права по ISC для кода,
+MIT для публичных интеграций и ранее предоставленные разрешения сохраняются.
+
+Подробнее: [разграничение прав](COPYRIGHT.md), [лицензирование кода](LICENSE),
+[правила использования сайта](https://trace-logos.ru/terms/).
+
+**Copyright and use of materials.** Trace Logo's provides free access to brand
+logos, which remain the property of their respective rights holders. Original
+text, design and creative selection or arrangement are protected to the extent
+that the project’s rights holders hold those rights. Free access does not
+license copying protected materials to build clones. ISC code permissions,
+MIT integration licenses and earlier permissions remain effective.
+See [copyright details (RU/EN)](COPYRIGHT.md) and
+[website terms (EN)](https://trace-logos.ru/en/terms/).
 
 ---
 
