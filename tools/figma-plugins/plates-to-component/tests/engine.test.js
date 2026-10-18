@@ -37,6 +37,59 @@ const {analyze}=require('../src/plan');const {commit}=require('../src/transactio
 let passed=0;async function test(name,fn){reset();try{await fn();passed++;console.log('✓ '+name)}catch(e){console.error('✗ '+name);throw e}}
 async function convert(nodes,base=0){const plan=await analyze(nodes,base);assert.deepEqual(plan.conflicts.filter(c=>c.severity==='error'),[]);return {plan,result:await commit(nodes,plan)}}
 (async()=>{
+ await test('Реальные 5 плашек услуг: роли, тексты, размеры и примечания',async()=>{
+   const fixture=require('./fixtures/service-cards.json');
+   const schema=buildSchema(copy(fixture),0);
+   assert.deepEqual(schema.conflicts.filter(c=>c.severity==='error'),[]);
+   // Every existing slot keeps the same role across all cards.
+   for(const section of [0,1])for(const slot of [0,1]){
+     const role=schema.flat.find(r=>r.sample.id===fixture[0].children[section].children[slot].id);
+     fixture.forEach((root,i)=>assert.equal(role.members[i].id,root.children[section].children[slot].id));
+   }
+   assert.equal(schema.flat.length,10);
+   // This API model has no Auto Layout reflow: use free placement for the
+   // conversion check; the untouched capture above tests actual layout matching.
+   function hydrate(t){const n=new Node(t.type,t.name,{...t.props,layoutMode:'NONE'});if(t.text){n.characters=t.text.characters;n.styles=[];for(const segment of t.text.segments){const style=copy(segment);delete style.characters;delete style.start;delete style.end;for(let i=segment.start;i<segment.end;i++)n.styles[i]=copy(style);}}t.children.forEach(c=>n.appendChild(hydrate(c)));return n;}
+   const nodes=mount(...fixture.map(hydrate));const {result}=await convert(nodes);
+   function check(source,output){assert.equal(output.name,source.name);assert.equal(output.width,source.props.width);assert.equal(output.height,source.props.height);if(source.text){assert.equal(output.characters,source.text.characters);assert.deepEqual(output.getStyledTextSegments(),source.text.segments);}source.children.forEach((child,i)=>check(child,output.children[i]));}
+   fixture.forEach((root,i)=>check(root,result.outputs[i]));
+   result.outputs.forEach((root,i)=>assert.equal(root.children[1].children[2].visible,i===2||i===3));
+ });
+ await test('Анализ: смена handle после conversion и временное выделение',async()=>{
+   const nodes=mount(card(),card('B',true));figma.currentPage.selection=nodes;
+   figma.createComponentFromNode=node=>{
+     const converted=duplicate(node);converted.type='COMPONENT';
+     converted.children=node.children;converted.children.forEach(child=>child.parent=converted);node.children=[];
+     const parent=node.parent,index=parent.children.indexOf(node);parent.children[index]=converted;converted.parent=parent;node.parent=null;
+     node.remove=()=>{throw Error('Removing this node is not allowed');};
+     figma.currentPage.selection=[converted];return converted;
+   };
+   const plan=await analyze(nodes,0);
+   assert.equal(plan.summary.errors,0);assert.deepEqual(figma.currentPage.selection,nodes);
+   assert.deepEqual(figma.currentPage.children,nodes);assert(nodes.every(n=>!n.removed));
+ });
+ await test('Очистка удаляет владельца один раз и не вызывает remove потомка',async()=>{
+   const child=new Node('RECTANGLE','Extra'),owner=frame('Temporary',[child]);mount(owner);
+   let childRemoveCalls=0;const originalRemove=child.remove;
+   // Figma removes descendants internally; external deletion of an invalid child
+   // handle must not be attempted separately after its owner is gone.
+   child.remove=function(){childRemoveCalls++;return originalRemove.call(this);};
+   require('../src/snapshot').clean([child,owner,owner]);
+   assert.equal(childRemoveCalls,1);assert(owner.removed&&child.removed);
+ });
+ await test('TG/MA/WA: inherited axis on snug single-child wrappers',async()=>{
+   const fixture=require('./fixtures/contact-buttons.json');
+   function hydrate(t){const n=new Node(t.type,t.name,t.props);if(t.text){n.characters=t.text.characters;n.styles=[];for(const segment of t.text.segments){const style=copy(segment);delete style.characters;delete style.start;delete style.end;for(let i=segment.start;i<segment.end;i++)n.styles[i]=copy(style);}}t.children.forEach(c=>n.appendChild(hydrate(c)));return n;}
+   const original=Node.prototype.createInstance;
+   Node.prototype.createInstance=function(){const instance=original.call(this),mode=instance.layoutMode;Object.defineProperty(instance,'layoutMode',{enumerable:true,configurable:true,get(){return mode},set(){}});return instance;};
+   try{const nodes=mount(...fixture.map(hydrate));const {result}=await convert(nodes);result.outputs.forEach((n,i)=>{assert.equal(n.width,50);assert.equal(n.height,50);assert.equal(n.x,i*60);const visibleText=[];function visit(x){if(x.visible===false)return;if(x.type==='TEXT')visibleText.push(x.characters);x.children.forEach(visit);}visit(n);assert.deepEqual(visibleText,[['TG','МA','WA'][i]]);});}finally{Node.prototype.createInstance=original;}
+ });
+ await test('Разная ось с несколькими дочерними слоями остаётся ошибкой',async()=>{
+   const source=await capture(frame('Row',[new Node('RECTANGLE','A'),new Node('RECTANGLE','B')],{layoutMode:'HORIZONTAL'}));
+   const target=frame('Row',[new Node('RECTANGLE','A'),new Node('RECTANGLE','B')],{layoutMode:'VERTICAL'});
+   const role=t=>({sample:t,members:[t],children:t.children.map(role)});
+   assert(require('../src/overrides').auditTree(role(source),target,0,true).some(x=>x.includes('layoutMode')));
+ });
  await test('01 FRAME + FRAME: текст и позиции',async()=>{const [a,b]=mount(card(),card('Тайные задания'));b.x=300;const {result}=await convert([a,b]);assert.equal(result.outputs[0].type,'COMPONENT');assert.equal(result.outputs[1].type,'INSTANCE');assert.equal(result.outputs[1].children[0].characters,'Тайные задания');assert.equal(result.outputs[1].x,300);assert(a.removed&&b.removed)});
  await test('02 Badge во второй карточке: hidden / visible',async()=>{const [a,b]=mount(card(),card('B',true));const {result}=await convert([a,b]);assert.equal(result.outputs[0].children[1].name,'Badge');assert.equal(result.outputs[0].children[1].visible,false);assert.equal(result.outputs[1].children[1].visible,true)});
  await test('03 Badge только в первой карточке',async()=>{const [a,b]=mount(card('A',true),card('B'));const {result}=await convert([a,b]);assert.equal(result.outputs[0].children[1].visible,true);assert.equal(result.outputs[1].children[1].visible,false)});

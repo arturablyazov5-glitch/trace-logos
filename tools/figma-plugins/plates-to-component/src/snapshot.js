@@ -35,7 +35,16 @@ async function snapshots(roots,cancelled) {
   try { for(let i=0;i<roots.length;i++) { const temp=stage(roots[i],i); staged.push(temp); const tree=await capture(temp,{count:0,cancelled}); PROPS.forEach(k=>{const v=read(roots[i],k);if(v!==undefined)tree.props[k]=v;}); tree.props.width=roots[i].width;tree.props.height=roots[i].height; trees.push(tree); } return {staged,trees}; }
   catch(err) { staged.forEach(n=>{if(!n.removed)n.remove();}); throw err; }
 }
-function clean(staged) { staged.forEach(n=>{if(n && !n.removed)n.remove();}); }
+function clean(staged) {
+  // Establish ownership before deleting anything: descendant handles may become
+  // invalid after removing their ancestor in the real editor.
+  const live=staged.filter(n=>n&&!n.removed),ids=new Set(live.map(n=>n.id));
+  const roots=live.filter(n=>{for(let p=n.parent;p;p=p.parent)if(ids.has(p.id))return false;return true;});
+  const seen=new Set();
+  for(const node of roots){if(seen.has(node.id))continue;seen.add(node.id);
+    try{node.remove();}catch(cause){throw new Error('Очистка временного узла «'+node.name+'» ['+node.type+' '+node.id+']: '+(cause.message||cause));}
+  }
+}
 function signature(tree) {
   return JSON.stringify({type:tree.type,name:tree.name,props:tree.props,text:tree.text,main:tree.main&&tree.main.id,origin:tree.origin,componentProperties:tree.componentProperties,componentPropertyDefinitions:tree.componentPropertyDefinitions,children:tree.children.map(signature)});
 }

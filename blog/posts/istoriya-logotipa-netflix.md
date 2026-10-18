@@ -21,7 +21,7 @@ tags_en: Logo Histories, Branding, Media
 
 ## 2000‑е: красный кинотеатральный
 
-С ростом сервиса появился знак, который помнят подписчики DVD‑эпохи: объёмные белые буквы с тенью на красной плашке‑дуге, стилизованные под вывеску кинотеатра. Красный закрепился как цвет бренда — и это оказалось стратегическим активом: на чёрном фоне интерфейса стриминга красный горит ярче всего — та же логика, что и в том, как стриминги делят между собой цвета.
+С ростом сервиса появился знак, который помнят подписчики DVD‑эпохи: объёмные белые буквы с тенью на красной плашке‑дуге, стилизованные под вывеску кинотеатра. Красный закрепился как цвет бренда — и это оказалось стратегическим активом: на чёрном фоне интерфейса стриминга красный горит ярче всего — та же логика, что и в том, [как стриминги делят между собой цвета](../logotipy-strimingovyh-servisov/).
 
 ## 2014: плоское слово и арка
 
@@ -69,7 +69,7 @@ Netflix's first mark was the name with a film strip in purple: a literal illustr
 
 ## The 2000s: theater red
 
-With growth came the mark DVD-era subscribers remember: dimensional white letters with a shadow on a red arced badge, styled like a cinema marquee. Red locked in as the brand color — a strategic asset, as it turned out: on a streaming interface's black background red burns brightest — the same logic behind how streaming services divide up colors.
+With growth came the mark DVD-era subscribers remember: dimensional white letters with a shadow on a red arced badge, styled like a cinema marquee. Red locked in as the brand color — a strategic asset, as it turned out: on a streaming interface's black background red burns brightest — the same logic behind [how streaming services divide up colors](../logotipy-strimingovyh-servisov/).
 
 ## 2014: the flat word and the arc
 

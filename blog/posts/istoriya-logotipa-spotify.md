@@ -52,7 +52,7 @@ tags_en: Logo Histories, Branding, Media
 Spotify показывает, как выбирать между «красивым» и «работающим» цветом: оттенок 2015 года многим не нравился в вакууме, но побеждал в реальной среде — на чёрном экране плеера. Проверяйте цвет знака не на белом листе, а в боевом контексте: интерфейс, вывеска, лента соцсети — [как вообще собирать палитру](../kak-podobrat-cvetovuyu-palitru-brenda/), мы разбирали отдельно.
 :::
 
-Логотип Spotify в SVG и PNG — на [странице бренда](../../logos/media/spotify/); соседи по категории — в подборке логотипы стриминговых сервисов. Другие истории: [Netflix](../istoriya-logotipa-netflix/), [YouTube](../istoriya-logotipa-youtube/), [Telegram](../istoriya-logotipa-telegram/).
+Логотип Spotify в SVG и PNG — на [странице бренда](../../logos/media/spotify/); соседи по категории — в подборке [логотипы стриминговых сервисов](../logotipy-strimingovyh-servisov/). Другие истории: [Netflix](../istoriya-logotipa-netflix/), [YouTube](../istoriya-logotipa-youtube/), [Telegram](../istoriya-logotipa-telegram/).
 
 ---EN---
 
@@ -99,4 +99,4 @@ Spotify owns a medium most brands lack — other people's content: "Listen on Sp
 Spotify shows how to choose between a "pretty" color and a "working" one: many disliked the 2015 shade in a vacuum, but it won in the real environment — the player's black screen. Test a mark's color not on white paper but in combat context: the interface, the signage, the social feed — we cover [how to build a palette](../kak-podobrat-cvetovuyu-palitru-brenda/) separately.
 :::
 
-The Spotify logo in SVG and PNG is on the [brand page](../../logos/media/spotify/); its category neighbors are in streaming service logos. More stories: [Netflix](../istoriya-logotipa-netflix/), [YouTube](../istoriya-logotipa-youtube/), [Telegram](../istoriya-logotipa-telegram/).
+The Spotify logo in SVG and PNG is on the [brand page](../../logos/media/spotify/); its category neighbors are in [streaming service logos](../logotipy-strimingovyh-servisov/). More stories: [Netflix](../istoriya-logotipa-netflix/), [YouTube](../istoriya-logotipa-youtube/), [Telegram](../istoriya-logotipa-telegram/).

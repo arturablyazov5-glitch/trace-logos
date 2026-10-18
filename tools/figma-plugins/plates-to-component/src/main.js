@@ -1,26 +1,35 @@
 const {selection}=require('./selection');
 const {analyze}=require('./plan');
 const {commit}=require('./transaction');
+const {diagnosticReport}=require('./diagnostics');
 figma.skipInvisibleInstanceChildren=false;
 figma.showUI(__html__,{width:360,height:260});
-let generation=0,working=false;
+let generation=0,working=false,lastFailure=null;
 function send(type,data={}){figma.ui.postMessage(Object.assign({type},data));}
 function selectionHint(state) {
   if(state.roots.length<2)return 'Выдели две или больше похожих плашек.';
   if(state.roots.some(n=>!['FRAME','COMPONENT','INSTANCE'].includes(n.type)))return 'Выдели плашки целиком, без отдельных слоёв.';
   return 'Выдели отдельные плашки одного уровня.';
 }
-function update(){generation++;const state=selection();if(!working)send('selection',{ready:state.errors.length===0,message:state.errors.length?selectionHint(state):''});}
-figma.on('selectionchange',update);figma.on('currentpagechange',update);
+function update(){if(working)return;generation++;const state=selection();if(!working)send('selection',{ready:state.errors.length===0,message:state.errors.length?selectionHint(state):'',errorMessage:lastFailure&&(lastFailure.userMessage||lastFailure.message)});}
+figma.on('selectionchange',update);figma.on('currentpagechange',()=>{if(working){generation++;return;}update();});
 figma.ui.onmessage=async msg=>{
   if(!msg||typeof msg.type!=='string')return;
   if(msg.type==='open-url'){if(typeof msg.url==='string'&&/^https:\/\/(trace-logos\.ru|app\.lava\.top)\//.test(msg.url))figma.openExternal(msg.url);return;}
   if(msg.type==='ready'){if(!working)update();return;}
   if(msg.type==='resize'){if(Number.isFinite(msg.height))figma.ui.resize(360,Math.max(180,Math.min(850,msg.height)));return;}
   if(msg.type==='close'){if(!working)figma.closePlugin();return;}
-  if(working||msg.type!=='convert')return;
+  if(working)return;
+  if(msg.type==='diagnose'){
+    working=true;const token=generation;
+    try{const report=await diagnosticReport(()=>token!==generation);report.lastFailure=lastFailure;send('report',{report});}
+    catch(e){send('report-error',{message:e.message||String(e)});}
+    finally{working=false;}
+    return;
+  }
+  if(msg.type!=='convert')return;
   const state=selection();if(state.errors.length){send('error',{message:selectionHint(state)});return;}
-  const base=0;
+  const base=0;lastFailure=null;
   working=true;const token=generation;send('working');
   try {
     const plan=await analyze(state.roots,base,()=>{},()=>token!==generation);
@@ -28,15 +37,18 @@ figma.ui.onmessage=async msg=>{
     const conflicts=plan.conflicts.filter(c=>c.severity==='error');
     if(conflicts.length) {
       const error=new Error(conflicts.map(c=>c.message+(c.path?'\n'+c.path:'')).join('\n\n'));
-      error.userMessage=conflicts.some(c=>c.kind==='font')?'Не удалось загрузить шрифт. Установи используемые шрифты и попробуй снова.':'Не удалось объединить эти плашки. Выбери плашки с похожим содержимым.';
+      error.conflicts=conflicts;
+      error.userMessage=conflicts.some(c=>c.kind==='font')?'Не удалось загрузить шрифт. Установи используемые шрифты и попробуй снова.':'Не удалось объединить: '+conflicts[0].message+'. Скопируй отчёт для диагностики.';
       throw error;
     }
     await commit(state.roots,plan);
     send('success');figma.notify('Плашки собраны.');
   }catch(e){
+    lastFailure={message:e.message,stack:e.stack,conflicts:e.conflicts||[],rollbackComplete:e.rollbackComplete};
     console.error('plates-to-component:',e);
-    working=false;update();
+    working=false;
     const message=e.rollbackComplete===false?'Не удалось завершить сборку. Отмени действие через ⌘Z.':e.rollbackComplete===true?'Не удалось собрать плашки. Исходные плашки восстановлены.':e.userMessage||'Не удалось собрать выбранные плашки. Попробуй другое выделение.';
+    lastFailure.userMessage=message;update();
     send('error',{message});
   }
   finally{working=false;}

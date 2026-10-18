@@ -205,9 +205,21 @@
         }
       }
       function clean(staged) {
-        staged.forEach((n) => {
-          if (n && !n.removed) n.remove();
+        const live = staged.filter((n) => n && !n.removed), ids = new Set(live.map((n) => n.id));
+        const roots = live.filter((n) => {
+          for (let p = n.parent; p; p = p.parent) if (ids.has(p.id)) return false;
+          return true;
         });
+        const seen = /* @__PURE__ */ new Set();
+        for (const node of roots) {
+          if (seen.has(node.id)) continue;
+          seen.add(node.id);
+          try {
+            node.remove();
+          } catch (cause) {
+            throw new Error("\u041E\u0447\u0438\u0441\u0442\u043A\u0430 \u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0433\u043E \u0443\u0437\u043B\u0430 \xAB" + node.name + "\xBB [" + node.type + " " + node.id + "]: " + (cause.message || cause));
+          }
+        }
       }
       function signature(tree) {
         return JSON.stringify({ type: tree.type, name: tree.name, props: tree.props, text: tree.text, main: tree.main && tree.main.id, origin: tree.origin, componentProperties: tree.componentProperties, componentPropertyDefinitions: tree.componentPropertyDefinitions, children: tree.children.map(signature) });
@@ -219,7 +231,7 @@
   // tools/figma-plugins/plates-to-component/src/matching.js
   var require_matching = __commonJS({
     "tools/figma-plugins/plates-to-component/src/matching.js"(exports, module) {
-      var { normalize } = require_util();
+      var { normalize, equal } = require_util();
       function ratio(a, b) {
         a = Math.abs(a || 0);
         b = Math.abs(b || 0);
@@ -227,6 +239,14 @@
       }
       function childTypes(n) {
         return n.children.map((c) => c.type).sort().join("|");
+      }
+      function textStyleScore(a, b) {
+        if (!a.text || !b.text) return 0;
+        const fields = ["fontName", "fontSize", "fills", "lineHeight", "letterSpacing", "textCase", "textDecoration"];
+        const styles = (n) => Array.from(new Set((n.text.segments || []).map((segment) => JSON.stringify(fields.map((k) => segment[k]))))).sort();
+        const left = styles(a), right = styles(b);
+        if (!left.length || !right.length) return 0;
+        return equal(left, right) ? 32 : -20;
       }
       function score(a, b, ai = 0, bi = 0, count = 1) {
         if (a.type !== b.type) return -1e4;
@@ -237,7 +257,7 @@
         if (a.roleId && b.roleId) return a.roleId === b.roleId ? 1e3 : -1e4;
         const ap = a.props || {}, bp = b.props || {};
         const an = normalize(a.name), bn = normalize(b.name);
-        let s = 18;
+        let s = 18 + textStyleScore(a, b);
         if (an === bn && an) s += 32;
         else {
           const at = an.split(" "), bt = bn.split(" ");
@@ -630,6 +650,16 @@
           await applyTree(role.children[i], child, owner, false, step);
         }
       }
+      function equivalentWrapperAxis(source, target) {
+        const p = source.props;
+        if (!["HORIZONTAL", "VERTICAL"].includes(p.layoutMode) || !["HORIZONTAL", "VERTICAL"].includes(target.layoutMode)) return false;
+        if (["paddingLeft", "paddingRight", "paddingTop", "paddingBottom"].some((k) => (p[k] || 0) !== 0 || (target[k] || 0) !== 0)) return false;
+        if (p.layoutSizingHorizontal !== "HUG" || p.layoutSizingVertical !== "HUG") return false;
+        const before = source.children.filter((n) => n.props.visible !== false && n.props.layoutPositioning !== "ABSOLUTE");
+        const after = children(target).filter((n) => n.visible !== false && n.layoutPositioning !== "ABSOLUTE");
+        if (before.length !== 1 || after.length !== 1) return false;
+        return ["width", "height"].every((k) => equal(before[0].props[k], p[k]) && equal(after[0][k], target[k]) && equal(target[k], p[k]));
+      }
       function auditTree(role, target, owner, root = false, issues = []) {
         var _a;
         const source = role.members[owner];
@@ -639,6 +669,7 @@
         }
         for (const key of Object.keys(source.props)) {
           if (GRID_FIELDS.has(key) && ((_a = target.parent) == null ? void 0 : _a.layoutMode) !== "GRID" || key === "name" || key === "exportSettings" || key === "reactions" || key === "explicitVariableModes" || root && OUTER.has(key)) continue;
+          if (key === "layoutMode" && equivalentWrapperAxis(source, target)) continue;
           const actual = read(target, key);
           if (!equal(actual, source.props[key])) issues.push("\xAB" + source.name + "\xBB: \u043D\u0435 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u043B\u043E\u0441\u044C " + key);
         }
@@ -758,6 +789,7 @@
         template.visible = schema.root.members[base].props.visible;
         const main = schema.commonSource ? template : figma.createComponentFromNode(template);
         created.push(main);
+        staged[base] = null;
         main.name = schema.root.members[base].name;
         main.setPluginData(ROLE_KEY, schema.root.id);
         const outputs = [];
@@ -802,7 +834,7 @@
       var { collect, schemaFor } = require_input();
       var { externalInstances } = require_selection();
       var { prepare } = require_component();
-      var { copy, equal } = require_util();
+      var { copy, equal, inside } = require_util();
       var { match } = require_matching();
       function visual(tree) {
         const props = copy(tree.props);
@@ -858,8 +890,14 @@
           }
           return { base, signatures, commonSignature: ((_a = snap.common) == null ? void 0 : _a.signature) || null, external, conflicts: problems, summary: { selected: roots.length, instances: roots.length - 1, components: 1 + schema.nested, added: schema.added, matched: schema.matched, replacedComponents: roots.filter((n) => n.type === "COMPONENT").length, replacedInstances: roots.filter((n) => n.type === "INSTANCE").length, external: external.length, ambiguous: problems.filter((c) => c.kind === "ambiguous").length, errors: problems.filter((c) => c.severity === "error").length }, schema };
         } finally {
-          clean(created.reverse());
-          clean(staged);
+          const selected = figma.currentPage.selection || [];
+          const temporary = created.concat(staged).filter(Boolean);
+          const restoreSelection = selected.length === 0 || selected.every((n) => inside(n, temporary));
+          try {
+            clean(created.concat(staged));
+          } finally {
+            if (restoreSelection) figma.currentPage.selection = roots.filter((n) => !n.removed);
+          }
         }
       }
       module.exports = { analyze: analyze2, visual, verifyExternal };
@@ -1033,14 +1071,77 @@
     }
   });
 
+  // tools/figma-plugins/plates-to-component/src/diagnostics.js
+  var require_diagnostics = __commonJS({
+    "tools/figma-plugins/plates-to-component/src/diagnostics.js"(exports, module) {
+      var { capture } = require_snapshot();
+      var { selection: selection2 } = require_selection();
+      var { buildSchema } = require_schema();
+      var { identify } = require_input();
+      var { score } = require_matching();
+      function plain(tree) {
+        const { node, main, children, ...rest } = tree;
+        return { ...rest, main: main ? { id: main.id, key: main.key, name: main.name, remote: main.remote } : null, children: children.map(plain) };
+      }
+      function candidates(schema) {
+        const result = [];
+        for (const parent of schema.flat) for (let owner = 1; owner < parent.members.length; owner++) {
+          const member = parent.members[owner];
+          if (!member) continue;
+          member.children.forEach((child, i) => {
+            const ranked = parent.children.map((role, j) => ({ id: role.sample.id, name: role.sample.name, type: role.sample.type, score: score(child, role.sample, i, j, Math.max(member.children.length, parent.children.length)) })).sort((a, b) => b.score - a.score).slice(0, 3);
+            result.push({ owner, nodeId: child.id, path: child.path + "/" + child.name, candidates: ranked });
+          });
+        }
+        return result;
+      }
+      async function diagnosticReport2(cancelled = () => false) {
+        const state = selection2(), trees = [];
+        if (!state.roots.length) throw new Error("\u0412\u044B\u0434\u0435\u043B\u0438 \u043F\u043B\u0430\u0448\u043A\u0438 \u0432 \u043C\u0430\u043A\u0435\u0442\u0435 \u0438 \u043D\u0430\u0436\u043C\u0438 \xAB\u0418\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u0442\u044C \u0432\u044B\u0434\u0435\u043B\u0435\u043D\u0438\u0435\xBB.");
+        for (const root of state.roots) trees.push(await capture(root, { count: 0, cancelled }));
+        let common = null;
+        if (state.roots.every((n) => n.type === "INSTANCE")) {
+          const mains = await Promise.all(state.roots.map((n) => n.getMainComponentAsync()));
+          if (mains[0] && !mains[0].remote && mains.every((n) => n && n.id === mains[0].id)) {
+            trees.forEach((tree, i) => identify(tree, state.roots[i].id, mains[0].id, true));
+            common = await capture(mains[0], { count: 0, cancelled });
+            identify(common, mains[0].id, mains[0].id, false);
+          }
+        }
+        const schema = buildSchema(common ? trees.concat(common) : trees, common ? trees.length : 0);
+        if (cancelled() || selection2().key !== state.key) throw new Error("\u0412\u044B\u0434\u0435\u043B\u0435\u043D\u0438\u0435 \u0438\u0437\u043C\u0435\u043D\u0438\u043B\u043E\u0441\u044C \u0432\u043E \u0432\u0440\u0435\u043C\u044F \u0430\u043D\u0430\u043B\u0438\u0437\u0430. \u041F\u043E\u0432\u0442\u043E\u0440\u0438 \u0437\u0430\u043F\u0443\u0441\u043A.");
+        const report = {
+          version: 1,
+          createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+          page: { id: figma.currentPage.id, name: figma.currentPage.name },
+          selectionErrors: state.errors,
+          scope: "\u0422\u043E\u043B\u044C\u043A\u043E \u0447\u0442\u0435\u043D\u0438\u0435. \u041F\u0440\u043E\u0432\u0435\u0440\u0435\u043D\u044B \u0441\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430 \u0438 \u0441\u043E\u043F\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435; \u0441\u043E\u0437\u0434\u0430\u043D\u0438\u0435 \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u0430, \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430 \u0448\u0440\u0438\u0444\u0442\u043E\u0432 \u0438 \u043F\u0435\u0440\u0435\u043D\u043E\u0441 overrides \u043D\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u044F\u043B\u0438\u0441\u044C. \u0411\u0430\u043B\u043B\u044B \u043A\u0430\u043D\u0434\u0438\u0434\u0430\u0442\u043E\u0432 \u0441\u043F\u0440\u0430\u0432\u043E\u0447\u043D\u044B\u0435: \u0438\u0442\u043E\u0433\u043E\u0432\u043E\u0435 \u0441\u043E\u043F\u043E\u0441\u0442\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0432\u044B\u043F\u043E\u043B\u043D\u044F\u0435\u0442 buildSchema.",
+          conflicts: schema.conflicts,
+          summary: { selected: trees.length, layers: trees.reduce((n, t) => {
+            const count = (x) => 1 + x.children.reduce((s, c) => s + count(c), 0);
+            return n + count(t);
+          }, 0), roles: schema.flat.length, commonComponent: common && common.id },
+          roots: trees.map(plain),
+          commonSource: common && plain(common),
+          roles: schema.flat.map((r) => ({ id: r.id, sampleId: r.sample.id, members: r.members.map((m) => m && m.id), structureChanged: r.structureChanged })),
+          candidates: candidates(schema)
+        };
+        return report;
+      }
+      module.exports = { diagnosticReport: diagnosticReport2 };
+    }
+  });
+
   // tools/figma-plugins/plates-to-component/src/main.js
   var { selection } = require_selection();
   var { analyze } = require_plan();
   var { commit } = require_transaction();
+  var { diagnosticReport } = require_diagnostics();
   figma.skipInvisibleInstanceChildren = false;
   figma.showUI(__html__, { width: 360, height: 260 });
   var generation = 0;
   var working = false;
+  var lastFailure = null;
   function send(type, data = {}) {
     figma.ui.postMessage(Object.assign({ type }, data));
   }
@@ -1050,12 +1151,19 @@
     return "\u0412\u044B\u0434\u0435\u043B\u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u0435 \u043F\u043B\u0430\u0448\u043A\u0438 \u043E\u0434\u043D\u043E\u0433\u043E \u0443\u0440\u043E\u0432\u043D\u044F.";
   }
   function update() {
+    if (working) return;
     generation++;
     const state = selection();
-    if (!working) send("selection", { ready: state.errors.length === 0, message: state.errors.length ? selectionHint(state) : "" });
+    if (!working) send("selection", { ready: state.errors.length === 0, message: state.errors.length ? selectionHint(state) : "", errorMessage: lastFailure && (lastFailure.userMessage || lastFailure.message) });
   }
   figma.on("selectionchange", update);
-  figma.on("currentpagechange", update);
+  figma.on("currentpagechange", () => {
+    if (working) {
+      generation++;
+      return;
+    }
+    update();
+  });
   figma.ui.onmessage = async (msg) => {
     if (!msg || typeof msg.type !== "string") return;
     if (msg.type === "open-url") {
@@ -1074,13 +1182,29 @@
       if (!working) figma.closePlugin();
       return;
     }
-    if (working || msg.type !== "convert") return;
+    if (working) return;
+    if (msg.type === "diagnose") {
+      working = true;
+      const token2 = generation;
+      try {
+        const report = await diagnosticReport(() => token2 !== generation);
+        report.lastFailure = lastFailure;
+        send("report", { report });
+      } catch (e) {
+        send("report-error", { message: e.message || String(e) });
+      } finally {
+        working = false;
+      }
+      return;
+    }
+    if (msg.type !== "convert") return;
     const state = selection();
     if (state.errors.length) {
       send("error", { message: selectionHint(state) });
       return;
     }
     const base = 0;
+    lastFailure = null;
     working = true;
     const token = generation;
     send("working");
@@ -1091,17 +1215,20 @@
       const conflicts = plan.conflicts.filter((c) => c.severity === "error");
       if (conflicts.length) {
         const error = new Error(conflicts.map((c) => c.message + (c.path ? "\n" + c.path : "")).join("\n\n"));
-        error.userMessage = conflicts.some((c) => c.kind === "font") ? "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0448\u0440\u0438\u0444\u0442. \u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C\u044B\u0435 \u0448\u0440\u0438\u0444\u0442\u044B \u0438 \u043F\u043E\u043F\u0440\u043E\u0431\u0443\u0439 \u0441\u043D\u043E\u0432\u0430." : "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0438\u0442\u044C \u044D\u0442\u0438 \u043F\u043B\u0430\u0448\u043A\u0438. \u0412\u044B\u0431\u0435\u0440\u0438 \u043F\u043B\u0430\u0448\u043A\u0438 \u0441 \u043F\u043E\u0445\u043E\u0436\u0438\u043C \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u044B\u043C.";
+        error.conflicts = conflicts;
+        error.userMessage = conflicts.some((c) => c.kind === "font") ? "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u0448\u0440\u0438\u0444\u0442. \u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u0435\u043C\u044B\u0435 \u0448\u0440\u0438\u0444\u0442\u044B \u0438 \u043F\u043E\u043F\u0440\u043E\u0431\u0443\u0439 \u0441\u043D\u043E\u0432\u0430." : "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u043E\u0431\u044A\u0435\u0434\u0438\u043D\u0438\u0442\u044C: " + conflicts[0].message + ". \u0421\u043A\u043E\u043F\u0438\u0440\u0443\u0439 \u043E\u0442\u0447\u0451\u0442 \u0434\u043B\u044F \u0434\u0438\u0430\u0433\u043D\u043E\u0441\u0442\u0438\u043A\u0438.";
         throw error;
       }
       await commit(state.roots, plan);
       send("success");
       figma.notify("\u041F\u043B\u0430\u0448\u043A\u0438 \u0441\u043E\u0431\u0440\u0430\u043D\u044B.");
     } catch (e) {
+      lastFailure = { message: e.message, stack: e.stack, conflicts: e.conflicts || [], rollbackComplete: e.rollbackComplete };
       console.error("plates-to-component:", e);
       working = false;
-      update();
       const message = e.rollbackComplete === false ? "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u044C \u0441\u0431\u043E\u0440\u043A\u0443. \u041E\u0442\u043C\u0435\u043D\u0438 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0435 \u0447\u0435\u0440\u0435\u0437 \u2318Z." : e.rollbackComplete === true ? "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0441\u043E\u0431\u0440\u0430\u0442\u044C \u043F\u043B\u0430\u0448\u043A\u0438. \u0418\u0441\u0445\u043E\u0434\u043D\u044B\u0435 \u043F\u043B\u0430\u0448\u043A\u0438 \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u044B." : e.userMessage || "\u041D\u0435 \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0441\u043E\u0431\u0440\u0430\u0442\u044C \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u044B\u0435 \u043F\u043B\u0430\u0448\u043A\u0438. \u041F\u043E\u043F\u0440\u043E\u0431\u0443\u0439 \u0434\u0440\u0443\u0433\u043E\u0435 \u0432\u044B\u0434\u0435\u043B\u0435\u043D\u0438\u0435.";
+      lastFailure.userMessage = message;
+      update();
       send("error", { message });
     } finally {
       working = false;

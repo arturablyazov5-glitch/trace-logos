@@ -45,7 +45,11 @@ async function materialize(role,target,owner,created,helpers,inheritedLock=false
 async function prepare(schema,staged,base,created=[],options={}) {
   const helpers=[];let template=staged[base];
   template=await materialize(schema.root,template,schema.templateOwner??base,created,helpers);template.visible=schema.root.members[base].props.visible;
-  const main=schema.commonSource?template:figma.createComponentFromNode(template);created.push(main);main.name=schema.root.members[base].name;main.setPluginData(ROLE_KEY,schema.root.id);
+  const main=schema.commonSource?template:figma.createComponentFromNode(template);created.push(main);
+  // Conversion transfers ownership to the returned component handle. The old
+  // Frame handle must not be removed again by the staged-frame cleanup.
+  staged[base]=null;
+  main.name=schema.root.members[base].name;main.setPluginData(ROLE_KEY,schema.root.id);
   const outputs=[];const failures=[];
   if(schema.commonSource) {
     await applyTree(schema.root,main,base,true);

@@ -108,11 +108,17 @@ function snapshotNode(node) {
       snap.bottomRightRadius = node.bottomRightRadius;
     }
   }
+  if ('strokes' in node) {
+    snap.strokes = node.strokes.map(function (s) { return Object.assign({}, s); });
+  }
   return snap;
 }
 
 function applySnapshot(node, snap) {
   if ('fills' in node) node.fills = snap.fills.map(function (f) { return Object.assign({}, f); });
+  if ('strokes' in node && 'strokes' in snap) {
+    node.strokes = snap.strokes.map(function (s) { return Object.assign({}, s); });
+  }
   if (typeof node.resize === 'function') node.resize(snap.width, snap.height);
   if ('x' in node) { node.x = snap.x; node.y = snap.y; }
   if ('rotation' in node) node.rotation = snap.rotation;
@@ -496,6 +502,7 @@ async function handleMessage(msg) {
       // даже если до этого он был figma.mixed (разные уголки), так и
       // снимается mixed-состояние, отдельно по углам обнулять не нужно.
       if ('cornerRadius' in rNode) rNode.cornerRadius = 0;
+      if ('strokes' in rNode) rNode.strokes = [];
       restored++;
       changes.push({ nodeId: rNode.id, before: rBefore, after: snapshotNode(rNode) });
     }

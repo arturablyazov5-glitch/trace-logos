@@ -90,10 +90,24 @@ async function applyTree(role,target,owner,root=false,step=workSteps()) {
   await step(source);
   for(let i=0;i<role.children.length;i++) {const child=roleChild(target,role.children[i],i,swapped,owner);if(!child)throw new Error('Пропал слой «'+role.children[i].sample.name+'» после переноса');await applyTree(role.children[i],child,owner,false,step);}
 }
+// Axis is visually equivalent only for a snug, unpadded single-child wrapper.
+// Instances inherit layoutMode; validate actual geometry below instead of
+// demanding an unsupported axis override on such wrappers.
+function equivalentWrapperAxis(source,target) {
+  const p=source.props;
+  if(!['HORIZONTAL','VERTICAL'].includes(p.layoutMode)||!['HORIZONTAL','VERTICAL'].includes(target.layoutMode))return false;
+  if(['paddingLeft','paddingRight','paddingTop','paddingBottom'].some(k=>(p[k]||0)!==0||(target[k]||0)!==0))return false;
+  if(p.layoutSizingHorizontal!=='HUG'||p.layoutSizingVertical!=='HUG')return false;
+  const before=source.children.filter(n=>n.props.visible!==false&&n.props.layoutPositioning!=='ABSOLUTE');
+  const after=children(target).filter(n=>n.visible!==false&&n.layoutPositioning!=='ABSOLUTE');
+  if(before.length!==1||after.length!==1)return false;
+  return ['width','height'].every(k=>equal(before[0].props[k],p[k])&&equal(after[0][k],target[k])&&equal(target[k],p[k]));
+}
 function auditTree(role,target,owner,root=false,issues=[]) {
   const source=role.members[owner];if(!source){if(target.visible!==false)issues.push('Отсутствующий слой «'+role.sample.name+'» не скрыт');return issues;}
   for(const key of Object.keys(source.props)) {
     if((GRID_FIELDS.has(key)&&target.parent?.layoutMode!=='GRID')||key==='name'||key==='exportSettings'||key==='reactions'||key==='explicitVariableModes'||(root&&OUTER.has(key)))continue;
+    if(key==='layoutMode'&&equivalentWrapperAxis(source,target))continue;
     const actual=read(target,key);if(!equal(actual,source.props[key]))issues.push('«'+source.name+'»: не сохранилось '+key);
   }
   if(source.componentProperties) {

@@ -48,7 +48,7 @@ tags_en: How-To, Design, Branding
 - **Контраст.** Пары «текст + фон» проверьте по стандарту WCAG (любой онлайн‑чекер контраста): минимум 4,5:1 для обычного текста. Это не только про доступность — нечитаемые плашки убивают конверсию кнопок.
 - **Дальтонизм.** Прогоните палитру через симулятор цветовой слепоты (встроен в Figma‑плагины): 8% мужчин видят красный и зелёный иначе.
 - **Боевой тест.** Соберите на палитре три реальных макета: пост, кнопку, визитку. Палитры, прекрасные в кружочках на презентации, часто разваливаются в вёрстке.
-- **Тёмная тема.** Если бренд живёт в приложениях — проверьте всё на тёмном фоне: почему это критично, хорошо видно на примере стриминговых сервисов.
+- **Тёмная тема.** Если бренд живёт в приложениях — проверьте всё на тёмном фоне: [почему это критично](../logotipy-strimingovyh-servisov/), хорошо видно на примере стриминговых сервисов.
 
 ## Шаг 5. Зафиксировать и не отпускать
 
@@ -109,7 +109,7 @@ In real layouts 80% of the area is not brand colors but background and text — 
 - **Contrast.** Test text-background pairs against WCAG (any online contrast checker): at least 4.5:1 for body text. It's not just accessibility — unreadable badges kill button conversion.
 - **Color blindness.** Run the palette through a simulator (built into Figma plugins): 8% of men see red and green differently.
 - **The combat test.** Build three real layouts on the palette: a post, a button, a business card. Palettes gorgeous as swatch circles often collapse in actual composition.
-- **Dark theme.** If the brand lives in apps, check everything on dark — why it's critical is easy to see in streaming service logos.
+- **Dark theme.** If the brand lives in apps, check everything on dark — [why it's critical](../logotipy-strimingovyh-servisov/) is easy to see in streaming service logos.
 
 ## Step 5. Fix it and hold on
 

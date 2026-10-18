@@ -1,6 +1,16 @@
-const {normalize} = require('./util');
+const {normalize,equal} = require('./util');
 function ratio(a,b) { a=Math.abs(a||0); b=Math.abs(b||0); return Math.max(a,b)<0.01 ? 1 : Math.min(a,b)/Math.max(a,b); }
 function childTypes(n) { return n.children.map(c=>c.type).sort().join('|'); }
+// Compare formatting independently of content and text wrapping. Repeated text
+// with identical formatting stays ambiguous; sibling order alone cannot decide.
+function textStyleScore(a,b) {
+  if(!a.text||!b.text)return 0;
+  const fields=['fontName','fontSize','fills','lineHeight','letterSpacing','textCase','textDecoration'];
+  const styles=n=>Array.from(new Set((n.text.segments||[]).map(segment=>JSON.stringify(fields.map(k=>segment[k]))))).sort();
+  const left=styles(a),right=styles(b);
+  if(!left.length||!right.length)return 0;
+  return equal(left,right)?32:-20;
+}
 function score(a,b,ai=0,bi=0,count=1) {
   if(a.type!==b.type) return -10000;
   if(a.origin&&b.origin&&a.origin.mainId===b.origin.mainId) {
@@ -9,7 +19,7 @@ function score(a,b,ai=0,bi=0,count=1) {
   }
   if(a.roleId && b.roleId) return a.roleId===b.roleId ? 1000 : -10000;
   const ap=a.props||{},bp=b.props||{}; const an=normalize(a.name),bn=normalize(b.name);
-  let s=18;
+  let s=18+textStyleScore(a,b);
   if(an===bn && an) s+=32;
   else { const at=an.split(' '),bt=bn.split(' '); s+=12*at.filter(t=>t && bt.includes(t)).length/Math.max(at.length,bt.length,1); }
   s+=7*ratio(ap.width,bp.width)+7*ratio(ap.height,bp.height);

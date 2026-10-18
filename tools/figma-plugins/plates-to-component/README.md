@@ -103,3 +103,9 @@ UI отдельно проверен в Chrome при ширине 360 px: selec
 - [InstanceNode: clone, detachInstance, swapComponent](https://developers.figma.com/docs/plugins/api/InstanceNode/)
 - [ComponentNode: createInstance, getInstancesAsync](https://developers.figma.com/docs/plugins/api/ComponentNode/)
 - [Working with text](https://developers.figma.com/docs/plugins/working-with-text/)
+
+## Отчёт об ошибке
+
+Кнопка «Скопировать отчёт» в основном окне читает текущие выбранные слои, включая скрытые, и копирует JSON: дерево, свойства, конфликты сопоставления и последнюю ошибку сборки. Макет не меняет, сеть не использует. При недоступном автоматическом копировании показывает выделенный текст для ⌘C / Ctrl+C.
+
+Точечная сборка плагина: `node scripts/build-plates-to-component.js`. Она не запускает генераторы сайта.

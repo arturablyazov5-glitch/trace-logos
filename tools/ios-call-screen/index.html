@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/site-header.css?v=20261011">
+  <link rel="stylesheet" href="../../css/site-header.css?v=20261018">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -619,6 +619,34 @@
       font-weight: 400;
     }
 
+
+    #f-mode {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+      border-radius: 8px; background: var(--bg); color: var(--text); font: inherit;
+    }
+    [hidden] { display: none !important; }
+    .ios-active-actions {
+      position: absolute; left: 7%; right: 7%; bottom: 3.9%;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px 10px;
+    }
+    .ios-active-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .ios-active-circle {
+      width: 64px; height: 64px; border-radius: 50%; display: flex;
+      align-items: center; justify-content: center; background: rgba(255,255,255,.18);
+      border: none;
+    }
+    .ios-active-circle svg { width: 28px; height: 28px; }
+    .ios-active-circle.end { background: #d92b20; }
+    .ios-active-circle.facetime { color: rgba(255,255,255,.5); }
+    .ios-active-label { font-size: 12px; line-height: 1.2; text-align: center; min-height: 29px; }
+    .ios.active-call .ios-actions, .ios.active-call #p-sub { display: none; }
+    .ios-duration { display: none; font-size: 18px; color: rgba(255,255,255,.55); margin-bottom: 6px; }
+    .ios.active-call .ios-duration { display: block; }
+    .ios.active-call .ios-caller { padding-top: 32px; }
+    .ios.active-call #p-time { visibility: hidden; }
+    .ios-call-pill { display: none; }
+    .ios.active-call .ios-call-pill { display: block; }
+
     /* ── Mobile: stack controls above preview ── */
     @media (max-width: 760px) {
       .layout { grid-template-columns: 1fr; height: auto; }
@@ -695,13 +723,13 @@
      by scripts/build-js-bundles.js (CLASSIC_BUNDLES). This file is their single
      source of truth (see build-tools-headers.js / build-home-sitemap.js) — edit
      the bundle list there, not this tag. -->
-<script src="../../components/site-chrome.min.js?v=20261011" defer></script>
+<script src="../../components/site-chrome.min.js?v=20261018" defer></script>
 <!-- js/i18n.js подгружает словарь языка динамическим import() — без этой подсказки
      запрос уйдёт только после того, как разрешится весь статический граф модулей
      (лишний round-trip). На /en/ ссылку переписывает enChrome в scripts/lib/en-transform.js. -->
-<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20261011">
-<script type="module" src="../../components/donate-ticker.min.js?v=20261011"></script>
-<script type="module" src="../../js/header-search.min.js?v=20261011"></script>
+<link rel="modulepreload" href="../../js/i18n-dict-ru.min.js?v=20261018">
+<script type="module" src="../../components/donate-ticker.min.js?v=20261018"></script>
+<script type="module" src="../../js/header-search.min.js?v=20261018"></script>
 <!-- HEADER:END -->
 
 <div class="layout">
@@ -714,10 +742,21 @@
         Все инструменты
       </a>
       <h1>Экран вызова iOS</h1>
-      <p>Генератор скриншота входящего звонка</p>
+      <p>Генератор скриншота звонка</p>
     </div>
 
     <div class="ctrl-body">
+      <div class="field">
+        <label for="f-mode">Режим экрана</label>
+        <select id="f-mode">
+          <option value="incoming">Входящий вызов</option>
+          <option value="active">Активный разговор</option>
+        </select>
+      </div>
+      <div class="field" id="duration-field" hidden>
+        <label for="f-duration">Длительность разговора</label>
+        <input type="text" id="f-duration" value="00:00" placeholder="00:00" maxlength="8">
+      </div>
 
       <div class="field">
         <label>Имя</label>
@@ -804,6 +843,10 @@
           <svg class="ios-statusbar-svg" viewBox="0 0 430 59" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <!-- Время (редактируется через поле «Время», #p-time) -->
             <text id="p-time" class="ios-sb-time" x="81" y="36" text-anchor="middle">13:43</text>
+            <g class="ios-call-pill" transform="translate(5 5.5)">
+              <rect x="24" y="12" width="64" height="23" rx="11.5" fill="#67CE67"/>
+              <svg x="48" y="15.5" width="16" height="16" viewBox="246 119.4 32.8 32.7"><path d="M255.117 143.078C260.004 147.965 266.104 151.814 271.131 151.814C273.434 151.814 275.402 151.023 277.02 149.283C277.916 148.334 278.584 147.104 278.584 145.926C278.584 145.082 278.268 144.273 277.406 143.676L272.045 139.896C271.307 139.387 270.656 139.105 270.041 139.105C269.25 139.105 268.512 139.527 267.703 140.318L266.42 141.566C266.227 141.76 265.998 141.83 265.752 141.83C265.506 141.83 265.277 141.742 265.084 141.654C264.047 141.109 262.148 139.615 260.373 137.822C258.58 136.029 257.051 134.166 256.541 133.094C256.453 132.9 256.365 132.672 256.365 132.461C256.365 132.232 256.436 132.021 256.629 131.828L257.877 130.51C258.65 129.666 259.072 128.928 259.072 128.154C259.072 127.521 258.809 126.871 258.281 126.133L254.59 120.912C253.975 120.051 253.113 119.664 252.164 119.664C251.057 119.664 249.861 120.209 248.842 121.211C247.154 122.846 246.416 124.867 246.416 127.1C246.416 132.127 250.213 138.174 255.117 143.078Z" fill="white"/></svg>
+            </g>
             <!-- Dynamic Island -->
             <rect id="ios-dynamic-island" x="152" y="11" width="126" height="37" rx="18.5" fill="black"/>
             <!-- Сотовый сигнал -->
@@ -836,9 +879,12 @@
 
         <!-- Caller info -->
         <div class="ios-caller">
+          <div class="ios-duration" id="p-duration">00:00</div>
           <div class="ios-caller-sub" id="p-sub">СОТОВЫЙ</div>
           <div class="ios-caller-name" id="p-name">МУСП</div>
         </div>
+
+        <div class="ios-active-actions" id="active-actions" hidden></div>
 
         <!-- Action buttons -->
         <div class="ios-actions">
@@ -903,6 +949,45 @@
 
 <script defer src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
 <script>
+
+  /* Active call uses the same caller, background and export target. */
+  const ACTIVE_ICONS = {
+    speaker: '<path d="M3 12h5l7-6v24l-7-6H3z" fill="currentColor"/><path d="M20 12q5 6 0 12m5-17q9 11 0 22m4-26q12 15 0 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>',
+    facetime: '<rect x="2" y="8" width="23" height="22" rx="5" fill="currentColor"/><path d="m27 14 7-5v20l-7-5z" fill="currentColor"/>',
+    mute: '<path d="M14 8a5 5 0 0 1 10 0v12l-10-10z" fill="currentColor"/><path d="M10 17v3a9 9 0 0 0 16 6m2-9v3M19 29v5m-5 0h10M5 5l28 28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>',
+    more: '<g fill="currentColor"><circle cx="8" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><circle cx="30" cy="19" r="2.5"/></g>',
+    end: '<path d="M4 20c0-12 30-12 30 0v4c0 2-2 2-4 2l-5-1v-6a22 22 0 0 0-12 0v6l-5 1c-2 0-4 0-4-2z" fill="currentColor"/>',
+    keypad: '<g fill="currentColor">'+[9,19,29].flatMap(y => [9,19,29].map(x => `<circle cx="${x}" cy="${y}" r="4"/>`)).join('')+'</g>',
+  };
+  const ACTIVE_LABELS = {
+    ru: ['Динамик', 'FaceTime', 'Выключить звук', 'Еще', 'Завершить', 'Клавиатура'],
+    en: ['Speaker', 'FaceTime', 'Mute', 'More', 'End', 'Keypad'],
+  };
+  function renderActiveActions(lang) {
+    const container = document.getElementById('active-actions');
+    container.replaceChildren();
+    Object.entries(ACTIVE_ICONS).forEach(([key, icon], i) => {
+      const item = document.createElement('div');
+      item.className = 'ios-active-item';
+      item.innerHTML = `<div class="ios-active-circle ${key}"><svg viewBox="0 0 38 38" aria-hidden="true">${icon}</svg></div>`;
+      const label = document.createElement('span');
+      label.className = 'ios-active-label';
+      label.textContent = ACTIVE_LABELS[lang][i];
+      item.appendChild(label);
+      container.appendChild(item);
+    });
+  }
+  renderActiveActions('ru');
+  document.getElementById('f-mode').addEventListener('change', e => {
+    const active = e.target.value === 'active';
+    document.getElementById('ios').classList.toggle('active-call', active);
+    document.getElementById('active-actions').hidden = !active;
+    document.getElementById('duration-field').hidden = !active;
+  });
+  document.getElementById('f-duration').addEventListener('input', e => {
+    document.getElementById('p-duration').textContent = e.target.value || '00:00';
+  });
+
   /* ── Presets ── */
   const PRESETS = [
     { name: 'Серый',     top: '#6b7280', bot: '#4b5563' },
@@ -913,18 +998,86 @@
     { name: 'Розовый',  top: '#be185d', bot: '#831843' },
     { name: 'Закат',    top: '#ea580c', bot: '#7c2d12' },
     { name: 'Аквa',     top: '#0891b2', bot: '#164e63' },
+    { name: 'Сумерки', top: '#182443', bot: '#211b38', layers: [
+      'radial-gradient(ellipse 85% 42% at 2% 48%, #689edb 0%, #4b73bb99 42%, #4b73bb00 100%)',
+      'radial-gradient(ellipse 75% 48% at 100% 68%, #bd7e9a 0%, #925e9199 36%, #925e9100 100%)',
+      'radial-gradient(ellipse 75% 35% at 75% 5%, #61568eaa 0%, #61568e00 100%)',
+    ] },
+    { name: 'Лаванда', top: '#342a52', bot: '#252340', layers: [
+      'radial-gradient(ellipse 100% 36% at 20% 58%, #b4a0dc 0%, #967ec2aa 38%, #967ec200 100%)',
+      'radial-gradient(ellipse 65% 45% at 100% 25%, #bf879fa6 0%, #bf879f00 100%)',
+      'radial-gradient(ellipse 80% 35% at 95% 90%, #536da5bb 0%, #536da500 100%)',
+    ] },
+    { name: 'Ирис', top: '#161d4c', bot: '#26204b', layers: [
+      'radial-gradient(ellipse 65% 65% at 100% 52%, #6579e7 0%, #5155c8aa 45%, #5155c800 100%)',
+      'radial-gradient(ellipse 85% 28% at 5% 44%, #529cce 0%, #397eb799 40%, #397eb700 100%)',
+      'radial-gradient(ellipse 85% 32% at 30% 95%, #9a61bb99 0%, #9a61bb00 100%)',
+    ] },
+    { name: 'Орхидея', top: '#39213f', bot: '#221e40', layers: [
+      'radial-gradient(ellipse 75% 48% at 90% 42%, #d47fa8 0%, #b2599899 42%, #b2599800 100%)',
+      'radial-gradient(ellipse 85% 40% at 0% 73%, #826bd4 0%, #6953b6aa 38%, #6953b600 100%)',
+      'radial-gradient(ellipse 70% 32% at 5% 0%, #8b476d99 0%, #8b476d00 100%)',
+    ] },
+    { name: 'Пыльная роза', top: '#493343', bot: '#32283e', layers: [
+      'radial-gradient(ellipse 90% 42% at 5% 62%, #dba195 0%, #ba7d85bb 38%, #ba7d8500 100%)',
+      'radial-gradient(ellipse 80% 50% at 100% 25%, #8a92b5bb 0%, #8a92b500 100%)',
+      'radial-gradient(ellipse 70% 32% at 85% 88%, #875b8199 0%, #875b8100 100%)',
+    ] },
+    { name: 'Персиковый вечер', top: '#41324f', bot: '#46253e', layers: [
+      'radial-gradient(ellipse 100% 35% at 15% 52%, #efb18c 0%, #db8d7cbb 40%, #db8d7c00 100%)',
+      'radial-gradient(ellipse 70% 50% at 100% 12%, #948cc6cc 0%, #948cc600 100%)',
+      'radial-gradient(ellipse 85% 45% at 90% 95%, #b85a7199 0%, #b85a7100 100%)',
+    ] },
+    { name: 'Терракота', top: '#452c35', bot: '#352733', layers: [
+      'radial-gradient(ellipse 75% 55% at 100% 43%, #cd8467 0%, #ad624ebb 42%, #ad624e00 100%)',
+      'radial-gradient(ellipse 90% 30% at 5% 72%, #cfab7a 0%, #ad805a99 40%, #ad805a00 100%)',
+      'radial-gradient(ellipse 80% 35% at 0% 8%, #7b739aaa 0%, #7b739a00 100%)',
+    ] },
+    { name: 'Какао', top: '#34343f', bot: '#30292f', layers: [
+      'radial-gradient(ellipse 110% 30% at 35% 60%, #bba087 0%, #99816cbb 40%, #99816c00 100%)',
+      'radial-gradient(ellipse 60% 55% at 100% 20%, #7c91a9bb 0%, #7c91a900 100%)',
+      'radial-gradient(ellipse 65% 40% at 0% 100%, #865c60aa 0%, #865c6000 100%)',
+    ] },
+    { name: 'Шалфей', top: '#303f3e', bot: '#243a3b', layers: [
+      'radial-gradient(ellipse 85% 42% at 10% 45%, #acbd97 0%, #8fa584aa 42%, #8fa58400 100%)',
+      'radial-gradient(ellipse 70% 48% at 95% 78%, #67a49c 0%, #51877f99 38%, #51877f00 100%)',
+      'radial-gradient(ellipse 70% 35% at 100% 0%, #a3937399 0%, #a3937300 100%)',
+    ] },
+    { name: 'Хвоя', top: '#143936', bot: '#162c3b', layers: [
+      'radial-gradient(ellipse 65% 65% at 0% 72%, #489e7a 0%, #287b62aa 42%, #287b6200 100%)',
+      'radial-gradient(ellipse 80% 28% at 95% 43%, #91bbae 0%, #62a69d99 38%, #62a69d00 100%)',
+      'radial-gradient(ellipse 75% 40% at 85% 100%, #40698fbb 0%, #40698f00 100%)',
+    ] },
+    { name: 'Лагуна', top: '#14304b', bot: '#162c4d', layers: [
+      'radial-gradient(ellipse 80% 42% at 95% 60%, #6dccc0 0%, #33a7b1aa 42%, #33a7b100 100%)',
+      'radial-gradient(ellipse 70% 50% at 0% 30%, #537bc9 0%, #345caaaa 38%, #345caa00 100%)',
+      'radial-gradient(ellipse 80% 28% at 10% 95%, #596aa9aa 0%, #596aa900 100%)',
+    ] },
+    { name: 'Фьорд', top: '#293b50', bot: '#253044', layers: [
+      'radial-gradient(ellipse 100% 30% at 0% 50%, #a5bbcf 0%, #809db9bb 38%, #809db900 100%)',
+      'radial-gradient(ellipse 65% 60% at 100% 80%, #4f929baa 0%, #4f929b00 100%)',
+      'radial-gradient(ellipse 70% 38% at 95% 5%, #75769daa 0%, #75769d00 100%)',
+    ] },
   ];
 
   const presetsEl = document.getElementById('presets');
+  let selectedPreset = PRESETS[0];
+
+  // One composition for the swatch, preview and DOM-based PNG export.
+  // Explicit ellipse sizes keep the color fields in the same relative positions.
+  function backgroundFor(top, bot, layers = []) {
+    return [...layers, `linear-gradient(180deg, ${top} 0%, ${bot} 100%)`].join(', ');
+  }
 
   PRESETS.forEach((p, i) => {
     const btn = document.createElement('button');
     btn.className = 'preset' + (i === 0 ? ' active' : '');
-    btn.style.background = `linear-gradient(160deg, ${p.top}, ${p.bot})`;
+    btn.style.background = backgroundFor(p.top, p.bot, p.layers);
     btn.title = p.name;
     btn.addEventListener('click', () => {
       document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      selectedPreset = p;
       document.getElementById('c-top').value = p.top;
       document.getElementById('c-bot').value = p.bot;
       applyBg();
@@ -941,15 +1094,17 @@
     document.getElementById('hex-top').textContent = t;
     document.getElementById('hex-bot').textContent = b;
     document.getElementById('ios-bg').style.background =
-      `linear-gradient(180deg, ${t} 0%, ${b} 100%)`;
+      backgroundFor(t, b, selectedPreset?.layers);
   }
   applyBg();
 
   document.getElementById('c-top').addEventListener('input', () => {
+    selectedPreset = null;
     document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
     applyBg();
   });
   document.getElementById('c-bot').addEventListener('input', () => {
+    selectedPreset = null;
     document.querySelectorAll('.preset').forEach(b => b.classList.remove('active'));
     applyBg();
   });
@@ -1024,6 +1179,7 @@
       btn.classList.add('active');
       moveToggleThumb(btn);
       const l = LANGS[btn.dataset.lang];
+      renderActiveActions(btn.dataset.lang);
       animateLabelChange(document.getElementById('l-msg'), l.msg);
       animateLabelChange(document.getElementById('l-rmnd'), l.rmnd);
     });

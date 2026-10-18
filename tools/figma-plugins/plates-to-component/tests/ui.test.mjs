@@ -18,5 +18,15 @@ try {
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   await send({type:'success'});await page.waitForSelector('#result.success:not([hidden])');
   assert.equal(await page.$eval('#resultText',n=>n.textContent),'Готово. Плашки собраны.');await send({type:'error',message:'Не удалось собрать плашки. Исходные плашки восстановлены.'});await page.waitForSelector('#error:not([hidden])');
+  await send({type:'selection',ready:true,errorMessage:'Layout failure'});await page.waitForSelector('#error:not([hidden])');assert.equal(await page.$eval('#errorText',n=>n.textContent),'Layout failure');
+  await page.click('#copyReport');assert.equal(await page.$eval('#copyReport',n=>n.disabled),true);
+  await page.evaluate(()=>{window.copiedReport=null;document.execCommand=command=>{if(command!=='copy')return false;window.copiedReport=document.getElementById('reportFallback').value;return true;};});
+  const report={version:1,roots:[{name:'Service'}],conflicts:[]};await send({type:'report',report});
+  await page.waitForFunction(()=>document.getElementById('copyTitle').textContent==='Отчёт скопирован');
+  assert.deepEqual(JSON.parse(await page.evaluate(()=>window.copiedReport)),report);
+  await page.evaluate(()=>{document.execCommand=()=>false;});await page.click('#copyReport');await send({type:'report',report});
+  await page.waitForSelector('#reportFallback:not([hidden])');assert.equal(await page.$eval('#reportFallback',n=>n.selectionEnd-n.selectionStart),JSON.stringify(report,null,2).length);
+  await send({type:'selection',ready:true});await page.click('#copyReport');await send({type:'report-error',message:'Selection changed'});
+  await page.waitForFunction(()=>!document.getElementById('copyReport').disabled);assert.equal(await page.$eval('#errorText',n=>n.textContent),'Selection changed');
   assert.deepEqual(errors,[]);console.log('UI: selection, one-click convert, busy, success, error, width 360 — OK (browser, synthetic messages).');
 }finally {await browser.close();}

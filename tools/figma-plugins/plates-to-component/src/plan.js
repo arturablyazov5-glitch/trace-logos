@@ -2,7 +2,7 @@ const {clean,signature,capture}=require('./snapshot');
 const {collect,schemaFor}=require('./input');
 const {externalInstances}=require('./selection');
 const {prepare}=require('./component');
-const {copy,equal}=require('./util');
+const {copy,equal,inside}=require('./util');
 const {match}=require('./matching');
 function visual(tree) {
   const props=copy(tree.props);delete props.name;delete props.exportSettings;
@@ -38,6 +38,13 @@ async function analyze(roots,base,onProgress=()=>{},cancelled) {
       if(external.length&&!problems.some(c=>c.kind==='external'))problems.push({kind:'external',severity:'warning',message:'Связанные инстансы: '+external.length+'. Figma swapComponent проверен на копиях; перед удалением старых компонентов будут перенесены связи.'});
     }
     return {base,signatures,commonSignature:snap.common?.signature||null,external,conflicts:problems,summary:{selected:roots.length,instances:roots.length-1,components:1+schema.nested,added:schema.added,matched:schema.matched,replacedComponents:roots.filter(n=>n.type==='COMPONENT').length,replacedInstances:roots.filter(n=>n.type==='INSTANCE').length,external:external.length,ambiguous:problems.filter(c=>c.kind==='ambiguous').length,errors:problems.filter(c=>c.severity==='error').length},schema};
-  }finally {clean(created.reverse());clean(staged);}
+  }finally {
+    const selected=figma.currentPage.selection||[];
+    const temporary=created.concat(staged).filter(Boolean);
+    const restoreSelection=selected.length===0||selected.every(n=>inside(n,temporary));
+    try{clean(created.concat(staged));}finally{
+      if(restoreSelection)figma.currentPage.selection=roots.filter(n=>!n.removed);
+    }
+  }
 }
 module.exports={analyze,visual,verifyExternal};
