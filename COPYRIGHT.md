@@ -13,7 +13,7 @@ Trace Logo’s предоставляет бесплатный доступ к �
 
 | Материалы | Правовой режим |
 |---|---|
-| Исходный код проекта | Сохраняется обозначение ISC в `package.json`; см. [LICENSE](LICENSE). Разрешенные лицензией копирование, изменение, распространение и коммерческое использование не запрещаются. |
+| Исходный код проекта | Ранее предоставленные ISC и иные разрешения сохраняются. Для нового оригинального кода, не охваченного действующим разрешением, новая общая лицензия не предоставляется. Корневые `UNLICENSED` и `private: true` не отзывают прежние права; см. [LICENSE](LICENSE). |
 | Оригинальный дизайн, графика, авторские тексты, включая описания брендов | Охраняются в той мере, в какой являются результатами творческого труда и права принадлежат правообладателям проекта. Факты и общедоступные сведения сами по себе не охраняются авторским правом. |
 | Подбор и расположение материалов, структура каталога | Охрана составительства возможна только для оригинального результата творческого труда, а не для любой структуры или перечня категорий. |
 | База данных | Авторское право на творческий подбор или расположение материалов и отдельное право изготовителя имеют разные основания. Право изготовителя применяется при наличии предусмотренных законом условий, в частности существенных затрат на создание, обработку или представление материалов, и в пределах срока и территории его действия. Сам факт публикации каталога не доказывает эти условия. |
@@ -55,6 +55,15 @@ MIT или иной применимой лицензии либо разреш�
 материалов из законных источников сами по себе не запрещаются.
 
 ### Ранее предоставленные права и API
+
+Историческое обозначение `license: "ISC"` относилось к пакету без явных
+исключений для контента. Оно не доказывает, что прежняя лицензия охватывала
+только код. Текущие `UNLICENSED` и `private: true` обозначают отсутствие новой общей
+лицензии для пакета сайта и предотвращают его публикацию в npm,
+но не аннулируют прежние разрешения и не закрывают GitHub-репозиторий. Изменением метаданных нельзя закрыть
+ранее лицензированные тексты, дизайн или данные. Новые условия резервирования
+прав относятся лишь к материалам и правам, не охваченным действующим разрешением.
+
 
 Эта редакция не отменяет задним числом и не ограничивает действующие ISC,
 MIT и другие лицензии, ранее выданные разрешения и права, предоставленные
@@ -100,7 +109,7 @@ is not an open license covering every material. Website terms are available
 
 | Materials | Applicable rights |
 |---|---|
-| Project source code | The ISC designation in `package.json` is retained; see [LICENSE](LICENSE). Licensed copying, modification, distribution and commercial use remain permitted. |
+| Project source code | Earlier ISC and other permissions remain effective. No new blanket license is granted for new original code not covered by an effective permission. Root `UNLICENSED` and `private: true` do not revoke earlier rights; see [LICENSE](LICENSE). |
 | Original design, graphics and authored text, including brand descriptions | Protected insofar as they are creative works and the relevant rights belong to the project’s rights holders. Facts and public information alone are not protected by copyright. |
 | Selection, arrangement and catalog structure | Compilation copyright applies only to creative selection or arrangement, not to every structure or list of categories. |
 | Database | Copyright in creative selection or arrangement and the database maker’s separate right have different grounds. The maker’s right applies only where statutory requirements, including substantial investment in creation, processing or presentation, are met, within its applicable term and territory. Publication alone does not establish those requirements. |
@@ -139,6 +148,15 @@ Independently creating a catalog or collecting materials from lawful sources
 is not prohibited in itself.
 
 ### Earlier permissions and API
+
+Historically, `license: "ISC"` designated the package without express content
+exclusions. It does not establish that only code was licensed. The current
+`UNLICENSED` and `private: true` metadata mean no new blanket license for the
+website package and prevent its npm publication; they neither cancel earlier
+permissions nor make the GitHub repository private. Metadata changes cannot close previously licensed text,
+design or data. New reservations concern only materials and rights not covered
+by an effective permission.
+
 
 This version does not retroactively revoke or restrict ISC, MIT or other
 applicable licenses, earlier permissions or statutory rights. If a restriction

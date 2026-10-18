@@ -20,7 +20,7 @@ license and required notices for each particular file.
 | `assets/emoji/` | Apple, Google and Microsoft artwork: rights remain with the respective holders. Unicode characters and vendor artwork are distinct. No blanket project license is asserted; permissions must be checked per source and asset. |
 | `assets/logos/` | Brand assets: the relevant rights holders' permissions and law apply. Public availability alone is not a license. |
 | `assets/easter-egg/doodlejump/` | Includes Phaser 2.6.2 (local header), FULLTILT 0.7 (local header) and game artwork/code. Asset provenance and redistribution permissions require a separate file-level audit; these are not declared project-owned. |
-| Public npm / VS Code integrations | Separate [trace-logos-integrations repository](https://github.com/arturablyazov5-glitch/trace-logos-integrations): use the MIT notices shipped with the relevant release. |
+| Public npm / VS Code integrations | MIT verified in root, CLI and VS Code LICENSE files (local commit `93202bb`); the license expressly excludes brand assets. Separate [trace-logos-integrations repository](https://github.com/arturablyazov5-glitch/trace-logos-integrations): use the MIT notices shipped with the relevant release. |
 
 ## npm: package-lock.json
 

@@ -112,6 +112,11 @@ Trace Logo's предоставляет бесплатный доступ к к�
 и создавать на их основе клоны сервиса. При этом права по ISC для кода,
 MIT для публичных интеграций и ранее предоставленные разрешения сохраняются.
 
+Основной сайт: `UNLICENSED`, `private: true` — новая общая лицензия на пакет
+не предоставляется, случайная публикация в npm предотвращается. Это не делает
+GitHub-репозиторий закрытым и не отменяет прежнюю ISC. Публичные инструменты
+из отдельного проекта `trace-logos-integrations` сохраняют MIT.
+
 Подробнее: [разграничение прав](COPYRIGHT.md), [лицензирование кода](LICENSE),
 [правила использования сайта](https://trace-logos.ru/terms/).
 
@@ -121,6 +126,10 @@ text, design and creative selection or arrangement are protected to the extent
 that the project’s rights holders hold those rights. Free access does not
 license copying protected materials to build clones. ISC code permissions,
 MIT integration licenses and earlier permissions remain effective.
+The main website uses `UNLICENSED` and `private: true`: no new blanket package
+license is granted and npm publication is prevented. The GitHub repository
+remains public; earlier ISC rights and the separate tools’ MIT licenses remain
+effective.
 See [copyright details (RU/EN)](COPYRIGHT.md) and
 [website terms (EN)](https://trace-logos.ru/en/terms/).
 
