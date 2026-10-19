@@ -44,7 +44,7 @@ tags_en: Design, UI, 2026 Trends
 А вот банкам, медицине, госуслугам и e‑commerce брутализм чаще вредит: там нужны доверие, ясность и предсказуемость. Выбор всегда идёт от аудитории — что делает дизайн уместным, разбираем в статье [что такое логотип](../chto-takoe-logotip/).
 
 :::warning Брутализм ≠ неряшливость
-Ключевая ловушка — оправдывать бруталом лень и ошибки: «это не криво, это брутализм». Настоящий брутализм — осознанный приём, где грубость выбрана намеренно, а не получилась случайно. И даже он обязан оставаться читаемым и удобным: сломанная навигация и нечитаемый текст — это не стиль, а ошибка.
+Ключевая ловушка — оправдывать бруталом лень и ошибки: «это не криво, это брутализм». Настоящий брутализм — осознанный приём, где грубость выбрана намеренно, а не получилась случайно. И даже он обязан оставаться читаемым и удобным: сломанная навигация и нечитаемый текст — это не стиль, а [ошибка](../oshibki-v-dizajne-logotipa/).
 :::
 
 ## Брутальный логотип
@@ -106,7 +106,7 @@ The style is organic where character, boldness, and creative reputation matter:
 Banks, medicine, government services, and e-commerce, on the other hand, are more often harmed by brutalism: they need trust, clarity, and predictability. The choice always follows from the audience — what makes design fitting is covered in [what a logo is](../chto-takoe-logotip/).
 
 :::warning Brutalism ≠ sloppiness
-The key trap is excusing laziness and mistakes with brutalism: "it's not crooked, it's brutalism" Real brutalism is a deliberate technique where roughness is chosen on purpose, not achieved by accident. And even it must stay readable and usable: broken navigation and unreadable text aren't a style but a mistake.
+The key trap is excusing laziness and mistakes with brutalism: "it's not crooked, it's brutalism" Real brutalism is a deliberate technique where roughness is chosen on purpose, not achieved by accident. And even it must stay readable and usable: broken navigation and unreadable text aren't a style but a [mistake](../oshibki-v-dizajne-logotipa/).
 :::
 
 ## A brutalist logo

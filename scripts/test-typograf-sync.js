@@ -82,6 +82,16 @@ if (current === null) {
   }
 }
 
+// 4. Расширение Trace Typograf: собранный dist/content.js содержит источник
+//    дословно (build.js подключает его целиком). Устаревший dist — это то же
+//    молчаливое расхождение копий, только в Chrome-расширении.
+const EXT_DIST = path.join(ROOT, 'tools/extensions/trace-typograf/dist/content.js');
+if (!fs.existsSync(EXT_DIST)) {
+  fail(`${rel(EXT_DIST)} не найден — node tools/extensions/trace-typograf/build/build.js`);
+} else if (!fs.readFileSync(EXT_DIST, 'utf8').includes(srcText.trimEnd())) {
+  fail(`${rel(EXT_DIST)} не содержит актуальный ${rel(SRC)} — пересобрать: node tools/extensions/trace-typograf/build/build.js`);
+}
+
 if (failed && !warnOnly) {
   console.error(`\n${failed} проблем(ы) синхронизации типографики`);
   process.exit(1);
@@ -89,5 +99,5 @@ if (failed && !warnOnly) {
 if (failed) {
   console.log(`\n${failed} проблем(ы), но --warn-only`);
 } else {
-  console.log('✓ Правила типографики: плагин и сайт из одного источника');
+  console.log('✓ Правила типографики: плагин, расширение и сайт из одного источника');
 }

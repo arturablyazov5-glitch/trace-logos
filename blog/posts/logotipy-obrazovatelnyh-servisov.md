@@ -52,7 +52,7 @@ EdTech‑знаки делятся на два лагеря: **игровой**
 Закономерность: **чем короче цикл продукта, тем игривее знак.** Пятиминутный урок в день — сова и стрик; четырёхмесячный курс с сертификатом — спокойная типографика; смена профессии — родительский бренд как гарантия.
 
 :::tip Что забрать себе
-Выбирая язык для образовательного бренда, начните с вопроса «что мы продаём — привычку или результат?». Привычка требует эмоции: персонаж, яркий цвет, живой тон. Результат требует доверия: типографика, спокойная палитра, знаки статуса. Пытаться усидеть на двух стульях опасно — сова с дипломом не убеждает ни детей, ни работодателей — классический пример из статьи про ошибки в дизайне логотипа.
+Выбирая язык для образовательного бренда, начните с вопроса «что мы продаём — привычку или результат?». Привычка требует эмоции: персонаж, яркий цвет, живой тон. Результат требует доверия: типографика, спокойная палитра, знаки статуса. Пытаться усидеть на двух стульях опасно — сова с дипломом не убеждает ни детей, ни работодателей — классический пример из статьи про [ошибки в дизайне логотипа](../oshibki-v-dizajne-logotipa/).
 :::
 
 Все знаки — в [категории «Образование»](../../logos/education/) в SVG и PNG: скачивайте и сравнивайте. Правила использования чужих логотипов — [в отдельной статье](../mozhno-li-ispolzovat-chuzhoy-logotip/).
@@ -102,7 +102,7 @@ EdTech marks fall into two camps: **playful** — the [Duolingo](../../logos/edu
 The pattern: **the shorter the product cycle, the more playful the mark.** A five-minute daily lesson — an owl and a streak; a four-month certificate course — calm typography; a career change — the parent brand as the guarantee.
 
 :::tip What to take away
-Choosing a language for an education brand, start with "are we selling a habit or an outcome?". A habit demands emotion: a character, a bright color, a lively voice. An outcome demands trust: typography, a calm palette, status signals. Sitting on both chairs is risky — an owl with a diploma convinces neither kids nor employers — a textbook case from our piece on logo design mistakes.
+Choosing a language for an education brand, start with "are we selling a habit or an outcome?". A habit demands emotion: a character, a bright color, a lively voice. An outcome demands trust: typography, a calm palette, status signals. Sitting on both chairs is risky — an owl with a diploma convinces neither kids nor employers — a textbook case from our piece on [logo design mistakes](../oshibki-v-dizajne-logotipa/).
 :::
 
 All marks are in the [Education category](../../logos/education/) in SVG and PNG: download and compare. The rules on using others' logos are [covered separately](../mozhno-li-ispolzovat-chuzhoy-logotip/).

@@ -52,7 +52,7 @@ Bento‑сетка отлично подходит, чтобы показать
 5. **Проверьте на мобильном.** Плитки должны красиво перестраиваться в узкую колонку, а не ломаться.
 
 :::warning Bento ≠ просто плитки
-Ошибка — нарезать контент на случайные прямоугольники и назвать это «бенто». Без единой сетки, иерархии и логики группировки получается визуальный шум — типичная ошибка дизайна. Сила bento именно в порядке: каждая ячейка на своём месте и своего размера не случайно.
+Ошибка — нарезать контент на случайные прямоугольники и назвать это «бенто». Без единой сетки, иерархии и логики группировки получается визуальный шум — типичная [ошибка дизайна](../oshibki-v-dizajne-logotipa/). Сила bento именно в порядке: каждая ячейка на своём месте и своего размера не случайно.
 :::
 
 ## Bento среди трендов 2026
@@ -110,7 +110,7 @@ A bento grid is great for showing a set of logos or versions of one mark: each c
 5. **Check on mobile.** Tiles must rearrange nicely into a narrow column, not break.
 
 :::warning Bento ≠ just tiles
-The mistake is cutting content into random rectangles and calling it "bento" Without a unified grid, hierarchy, and grouping logic, you get visual noise — a typical design mistake. Bento's power is precisely in order: each cell is in its place and of its size for a reason.
+The mistake is cutting content into random rectangles and calling it "bento" Without a unified grid, hierarchy, and grouping logic, you get visual noise — a typical [design mistake](../oshibki-v-dizajne-logotipa/). Bento's power is precisely in order: each cell is in its place and of its size for a reason.
 :::
 
 ## Bento among 2026 trends

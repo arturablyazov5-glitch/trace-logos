@@ -46,7 +46,7 @@ tags_en: Branding, Design System, 2026 Trends
 Из слова «система» легко сделать неверный вывод, будто это только для корпораций с сотнями экранов. На деле масштаб системы должен соответствовать масштабу бренда, а не наоборот.
 
 :::warning Не путайте систему со сложностью
-Дизайн‑система не обязана быть огромной. Маленькому бренду не нужны сотни компонентов — достаточно зафиксировать фирменные цвета, один‑два шрифта и набор версий логотипа. Это уже мини‑система, и её хватает, чтобы держать единство. А раздувать её «на вырост» — такая же ошибка, как и вовсе обходиться без правил: в первом случае вы тратите силы на то, чем не пользуетесь, во втором — теряете единство. Размер системы всегда следует за размером бренда.
+Дизайн‑система не обязана быть огромной. Маленькому бренду не нужны сотни компонентов — достаточно зафиксировать фирменные цвета, один‑два шрифта и набор версий логотипа. Это уже мини‑система, и её хватает, чтобы держать единство. А раздувать её «на вырост» — такая же [ошибка](../oshibki-v-dizajne-logotipa/), как и вовсе обходиться без правил: в первом случае вы тратите силы на то, чем не пользуетесь, во втором — теряете единство. Размер системы всегда следует за размером бренда.
 :::
 
 ## Как начать
@@ -98,7 +98,7 @@ The main idea is still the same: define an element once and use it many times. C
 From the word "system" it's easy to draw the wrong conclusion, as if it's only for corporations with hundreds of screens. In fact the system's scale should match the brand's scale, not the other way around.
 
 :::warning Don't confuse a system with complexity
-A design system doesn't have to be huge. A small brand doesn't need hundreds of components — it's enough to fix brand colors, one or two fonts, and a set of logo versions. That's already a mini-system, and it's enough to keep unity. And inflating it "for growth" is as much a mistake as going without rules at all: in the first case you spend effort on what you don't use, in the second you lose unity. The system's size always follows the brand's size.
+A design system doesn't have to be huge. A small brand doesn't need hundreds of components — it's enough to fix brand colors, one or two fonts, and a set of logo versions. That's already a mini-system, and it's enough to keep unity. And inflating it "for growth" is as much a [mistake](../oshibki-v-dizajne-logotipa/) as going without rules at all: in the first case you spend effort on what you don't use, in the second you lose unity. The system's size always follows the brand's size.
 :::
 
 ## How to start

@@ -26,6 +26,7 @@
 // content/ — последним.
 
 const fs = require('fs');
+const { execFileSync } = require('child_process');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
@@ -35,31 +36,17 @@ const OUT = path.join(ROOT, 'dist', 'content.js');
 // который НЕ входит в dist/content.js: у него отдельный content_scripts
 // блок в manifest.json с "world": "MAIN" (chrome.runtime недоступен там,
 // а ISOLATED-мир, где живёт dist/content.js, не видит их внутренний API —
-// см. комментарий в самом файле). Копируется как есть, конкатенировать не
-// с чем — он один.
+// см. комментарий в самом файле). Включает taptopTextModel.js в общей области.
 const MAIN_BRIDGE_SRC = path.join(SRC, 'platformMain', 'taptopMainBridge.js');
 const MAIN_BRIDGE_OUT = path.join(ROOT, 'dist', 'taptop-main-bridge.js');
 
+// Единый источник правил типографики (сайт, Figma-плагин, это расширение).
+// Подключается целиком, как запекается в code.js плагина: расхождения копий
+// быть не может, а test-typograf-sync.js сверяет dist/content.js с источником.
+const SHARED_RULES_SRC = path.join(ROOT, '..', '..', 'figma-plugins', '_shared', 'typograf-rules.js');
+
 const CORE_RULES_ORDER = [
-  'constants.js',
-  'fixEllipsis.js',
-  'fixSpaces.js',
-  'fixEmojiSpacing.js',
-  'fixEmoticons.js',
-  'fixDashes.js',
-  'fixQuotes.js',
-  'fixAbbreviations.js',
-  'fixAddressAbbreviations.js',
-  'fixPhone.js',
-  'fixNumbers.js',
-  'fixIdCodes.js',
-  'fixInitials.js',
-  'fixShortWords.js',
-  'fixCompoundConjunctions.js',
-  'abbreviationHelpers.js',
-  'stripQuoteTrailingPeriod.js',
-  'typografize.js',
-  'typografizeProtected.js',
+  'protectedPatterns.js',
 ];
 
 const UI_ORDER = [
@@ -76,7 +63,6 @@ const PLATFORM_ORDER = [
   'applyTaptopNoBreakRuns.js',
   'enterTaptopEditModeIfNeeded.js',
   'exitTaptopEditing.js',
-  'collectTaptopTextRows.js',
   'applyTypografToTaptopSelection.js',
 ];
 
@@ -115,6 +101,7 @@ function build() {
   const dryRun = process.argv.includes('--dry-run');
 
   const parts = [
+    `// ---- tools/figma-plugins/_shared/typograf-rules.js ----\n${fs.readFileSync(SHARED_RULES_SRC, 'utf8').trimEnd()}`,
     ...readGroup('core/rules', CORE_RULES_ORDER),
     ...readGroup('ui', UI_ORDER),
     ...readGroup('platform', PLATFORM_ORDER),
@@ -149,6 +136,8 @@ function build() {
     return;
   }
 
+  execFileSync(process.execPath, ['--test', path.join(ROOT, 'tests', 'taptop-model.cjs')], { stdio: 'inherit' });
+  execFileSync(process.execPath, [path.join(ROOT, 'tests', 'taptop-html.cjs')], { stdio: 'inherit' });
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, bundle);
   console.log(`✓ dist/content.js собран из ${parts.length} файлов (${bundle.length} байт), штамп ${stamp}`);
@@ -156,8 +145,8 @@ function build() {
   if (!fs.existsSync(MAIN_BRIDGE_SRC)) {
     throw new Error(`Ожидаемый файл сборки отсутствует: ${path.relative(ROOT, MAIN_BRIDGE_SRC)}`);
   }
-  fs.copyFileSync(MAIN_BRIDGE_SRC, MAIN_BRIDGE_OUT);
-  console.log(`✓ dist/taptop-main-bridge.js скопирован`);
+  fs.writeFileSync(MAIN_BRIDGE_OUT, '(function () {\n' + fs.readFileSync(path.join(SRC, 'platformMain', 'taptopTextModel.js'), 'utf8') + '\n' + fs.readFileSync(MAIN_BRIDGE_SRC, 'utf8') + '\n})();\n');
+  console.log(`✓ dist/taptop-main-bridge.js собран`);
 }
 
 build();

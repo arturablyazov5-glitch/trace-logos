@@ -26,6 +26,7 @@ window.__traceTypografLoaded = true;
 // (страница + окно расширения) ради пяти строк — лишняя связность.
 const OVERLAY_REASON_TEXT = {
   'no-change': 'Типограф уже расставлен',
+  'external-binding': 'Текст связан с внешней CMS или магазином. Эта привязка пока не поддерживается.',
   'empty': 'Поле пустое.',
   'not-editable': 'Не нашли текстовое поле.',
   'nobreak-failed': 'Нашли, где нужен неразрывный пробел, но не смогли нажать «Прерывание».',
@@ -44,6 +45,7 @@ function overlayStatsText(s) {
   // предложения, каждое с явным существительным.
   let t = `Проверено слоёв с текстом: ${s.visited}.`;
   if (s.entered < s.visited) t += ` Открыто для правки: ${s.entered}.`;
+  if (s.unsupported) t += ` Внешних привязок пропущено: ${s.unsupported}.`;
   if (s.count) t += ` Изменено слоёв: ${s.count}.`;
   if (s.already) t += ` Неразрывных пробелов уже было на месте: ${s.already}.`;
   if (s.failed) t += ` Не удалось расставить пробелов: ${s.failed}.`;
@@ -52,6 +54,9 @@ function overlayStatsText(s) {
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (!message || message.type !== 'APPLY_TYPOGRAF') return false;
+  try {
+    if (window !== window.top && window.top.location.pathname.includes('/-/cms/v1/mosaic/')) return false;
+  } catch (_) { /* Cross-origin Tilda frame keeps its existing focused-field path. */ }
 
   // Элемент годится только если он ЖИВ — есть в текущем документе и всё
   // ещё редактируемый.
@@ -61,41 +66,16 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   const lastFocused = getLastFocusedEditable();
   const focusedTarget = isLiveTarget(active) ? active : (isLiveTarget(lastFocused) ? lastFocused : null);
 
-  // На Taptop ветка "войти в редактирование самому" — ОСНОВНАЯ, а не
-  // запасная (переставлено 2026-08-19). Раньше она включалась только при
-  // пустом focusedTarget, и любой живой contenteditable в документе
-  // перехватывал управление раньше неё. Это и есть причина, по которой
-  // расширение писало "уже без замечаний", ничего не сделав: узел
-  // редактора Draft.js остаётся в DOM и остаётся contentEditable даже
-  // после того, как Taptop вышел из режима редактирования текста (правая
-  // панель переключилась на "Настройки"). Проверка "жив ли узел" такое не
-  // ловит — узел жив, просто их панель "Прерывание" на нём уже никогда не
-  // поднимется, и цикл неразрывных пробелов молча выходит в ноль.
-  //
-  // Надёжного признака "Taptop сейчас в режиме редактирования текста" в
-  // DOM нет (.tt-editor-panel появляется только при НЕПУСТОМ выделении
-  // внутри редактора, то есть уже после того, как мы туда вошли), поэтому
-  // вместо угадывания состояния просто входим сами через их API — это
-  // идемпотентно: setTextEditorMode(true) на уже открытом редакторе
-  // ничего не ломает. Пользовательская модель та же: кликнул по любому
-  // слою — расширение само нашло тексты внутри и само вошло в правку.
-  const canTryTaptop = window === window.top && detectPlatform() === 'taptop'
-    && !!document.querySelector('.tt-layers__item.is-selected');
+  // Taptop resolves selection in MAIN world; Layers can be collapsed or
+  // virtualized. It must never fall back to an unrelated last-focused field.
+  const isTaptop = detectPlatform() === 'taptop';
+  if (isTaptop && window !== window.top) return false;
+  const canTryTaptop = window === window.top && isTaptop;
   if (!focusedTarget && !canTryTaptop) return false;
 
   (async () => {
     try {
       if (canTryTaptop) {
-        // Панель прогресса живёт на странице, а не в попапе — см.
-        // ui/progressOverlay.js: попап отбирает у документа фокус окна,
-        // и на несфокусированном Draft.js Taptop не поднимает панель
-        // «Прерывание». Перед стартом ждём, пока фокус вернётся во
-        // вкладку после закрытия попапа.
-        showProgressOverlay('Жду фокус вкладки…');
-        const focused = await waitForDocumentFocus(2000);
-        if (!focused) {
-          console.warn('[Trace Typograf] документ не получил фокус — выделение будет «серым», Taptop может не поднять панель «Прерывание».');
-        }
         showProgressOverlay('Ищу текстовые слои…');
         const result = await applyTypografToTaptopSelection(setProgressOverlay);
         console.info('[Trace Typograf] итог обхода выделения:', result);
@@ -105,6 +85,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
         // несколько итераций отладки 2026-08-19.
         const stats = {
           visited: result.visited,
+          unsupported: result.unsupported,
           entered: result.entered,
           count: result.count,
           already: result.already,
@@ -138,8 +119,8 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
         // но уже не в режиме редактирования — работа по нему и есть тот
         // самый молчаливый no-op, который отвечает "уже без замечаний".
         // Обмен честного отказа на ложный успех недопустим (2026-08-19).
-        console.warn('[Trace Typograf] в выбранном слое не нашли ни одного текстового слоя — обход панели слоёв вернул 0 строк.');
-        finishProgressOverlay(OVERLAY_REASON_TEXT['no-text-rows'], '', 'err');
+        console.warn('[Trace Typograf] в выделенной области нет доступных текстов.');
+        finishProgressOverlay(OVERLAY_REASON_TEXT[result.unsupported ? 'external-binding' : 'no-text-rows'], overlayStatsText(stats), 'err');
         sendResponse({ ok: true, changed: false, reason: 'no-text-rows', stats });
         return;
       }

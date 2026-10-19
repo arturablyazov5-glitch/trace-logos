@@ -41,7 +41,7 @@ tags_en: Logo Histories, Branding, AI
 
 ## Розетка и волна подражателей
 
-Успех знака породил целый жанр: после 2023 года «переплетённые розетки» стали появляться у ИИ‑стартапов десятками — маркетплейсы шаблонов продают «логотипы в стиле OpenAI» пачками. Это создало парадоксальную проблему для самой OpenAI: чем больше подражателей, тем сильнее размывается уникальность формы, и тем важнее становятся вторичные признаки — точные пропорции, фирменный шрифт, монохромная дисциплина. Для остальных урок прямой: строить знак «в стиле лидера» — значит повторять ошибку похожести и работать на чужую узнаваемость, а не искать, [как выделиться в ИИ‑категории](../logotipy-nejrosetej/), самому.
+Успех знака породил целый жанр: после 2023 года «переплетённые розетки» стали появляться у ИИ‑стартапов десятками — маркетплейсы шаблонов продают «логотипы в стиле OpenAI» пачками. Это создало парадоксальную проблему для самой OpenAI: чем больше подражателей, тем сильнее размывается уникальность формы, и тем важнее становятся вторичные признаки — точные пропорции, фирменный шрифт, монохромная дисциплина. Для остальных урок прямой: строить знак «в стиле лидера» — значит повторять [ошибку похожести](../oshibki-v-dizajne-logotipa/) и работать на чужую узнаваемость, а не искать, [как выделиться в ИИ‑категории](../logotipy-nejrosetej/), самому.
 
 ## Хронология
 
@@ -93,7 +93,7 @@ A verbal drama runs parallel to the mark: the abbreviation GPT (Generative Pre-t
 
 ## The rosette and the imitator wave
 
-The mark's success spawned a genre: after 2023 "interwoven rosettes" appeared at AI startups by the dozen — template marketplaces sell "OpenAI-style logos" in bulk. That created a paradoxical problem for OpenAI itself: the more imitators, the more the form's uniqueness dilutes, and the more the secondary signals matter — exact proportions, the corporate typeface, the monochrome discipline. For everyone else the lesson is direct: building a mark "in the leader's style" means repeating the look-alike mistake and working for their recognition, not asking, [how do you stand out in the AI category](../logotipy-nejrosetej/), on your own.
+The mark's success spawned a genre: after 2023 "interwoven rosettes" appeared at AI startups by the dozen — template marketplaces sell "OpenAI-style logos" in bulk. That created a paradoxical problem for OpenAI itself: the more imitators, the more the form's uniqueness dilutes, and the more the secondary signals matter — exact proportions, the corporate typeface, the monochrome discipline. For everyone else the lesson is direct: building a mark "in the leader's style" means repeating [the look-alike mistake](../oshibki-v-dizajne-logotipa/) and working for their recognition, not asking, [how do you stand out in the AI category](../logotipy-nejrosetej/), on your own.
 
 ## The timeline
 

@@ -8,14 +8,14 @@ function diffToHunks(ops) {
   let i = 0;
   while (i < ops.length) {
     if (ops[i].type === 'equal') {
-      oldPos++;
+      oldPos += ops[i].ch.length;
       i++;
       continue;
     }
     const oldStart = oldPos;
     let newText = '';
     while (i < ops.length && ops[i].type !== 'equal') {
-      if (ops[i].type === 'delete') { oldPos++; }
+      if (ops[i].type === 'delete') { oldPos += ops[i].ch.length; }
       else { newText += ops[i].ch; }
       i++;
     }

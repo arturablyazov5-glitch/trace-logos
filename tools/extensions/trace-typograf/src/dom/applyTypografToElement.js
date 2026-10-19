@@ -76,7 +76,7 @@ async function applyTypografToElement(focusedEl) {
   const oldText = getElementText(root);
   if (!oldText || !oldText.trim()) return { changed: false, reason: 'empty' };
 
-  const rawNewText = typografizeProtected(oldText, {}, [URL_RE, RATIO_TIME_RE]);
+  const rawNewText = typografizeProtected(oldText, CONTENT_OPTS, [URL_RE, RATIO_TIME_RE]);
 
   let noBreakApplied = 0;
   let noBreakAlready = 0;

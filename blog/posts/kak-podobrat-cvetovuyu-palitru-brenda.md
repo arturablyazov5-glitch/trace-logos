@@ -55,7 +55,7 @@ tags_en: How-To, Design, Branding
 Финал — один файл (страница в [Figma](../../logos/design/figma/), PDF или даже заметка) со всеми цветами: название роли («основной», «акцент», «текст»), HEX для экрана, CMYK для печати. Этот файл — зародыш [брендбука](../chto-takoe-brendbuk/); без него через месяц в макетах будет пять «почти фирменных» оттенков синего. В Figma дополнительно сохраните цвета как Color Styles — тогда правка оттенка обновит все макеты разом.
 
 :::tip Быстрый путь: палитра из одного решения
-Если времени нет совсем, минимально жизнеспособная палитра собирается за 15 минут: основной цвет из свободной зоны спектра → акцент по комплементарной схеме → серый #333 для текста, #F7F7F7 для фона. Это скучно — и это работает лучше, чем восемь «интересных» цветов без системы, одна из типичных ошибок в дизайне логотипа.
+Если времени нет совсем, минимально жизнеспособная палитра собирается за 15 минут: основной цвет из свободной зоны спектра → акцент по комплементарной схеме → серый #333 для текста, #F7F7F7 для фона. Это скучно — и это работает лучше, чем восемь «интересных» цветов без системы, одна из [типичных ошибок](../oshibki-v-dizajne-logotipa/) в дизайне логотипа.
 :::
 
 ## Частые ошибки
@@ -116,7 +116,7 @@ In real layouts 80% of the area is not brand colors but background and text — 
 The finale is one file (a [Figma](../../logos/design/figma/) page, a PDF, even a note) with every color: role name ("primary", "accent", "text"), HEX for screens, CMYK for print. This file is the embryo of a [brand book](../chto-takoe-brendbuk/); without it, a month from now your layouts will hold five "almost brand" blues. In Figma also save the colors as Color Styles — then editing a shade updates every layout at once.
 
 :::tip The fast lane: a palette from one decision
-If there's truly no time, a minimum viable palette takes 15 minutes: a primary from a free spectrum zone → a complementary accent → #333 gray for text, #F7F7F7 for background. It's boring — and it works better than eight "interesting" colors with no system, one of the typical mistakes in logo design.
+If there's truly no time, a minimum viable palette takes 15 minutes: a primary from a free spectrum zone → a complementary accent → #333 gray for text, #F7F7F7 for background. It's boring — and it works better than eight "interesting" colors with no system, one of the [typical mistakes](../oshibki-v-dizajne-logotipa/) in logo design.
 :::
 
 ## Common mistakes

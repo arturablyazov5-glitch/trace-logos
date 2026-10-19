@@ -33,7 +33,7 @@ tags_en: Logo Histories, Branding, Media
 
 ## Наклон, из‑за которого спорят дизайнеры
 
-У знака Spotify есть деталь-«пасхалка» для профессионалов: три дуги наклонены, а не лежат горизонтально, и их толщина неодинакова — верхняя дуга самая длинная и толстая. Наклон создаёт ощущение движения (горизонтальные дуги выглядели бы как значок Wi‑Fi, положенный набок, — с этим сходством знак путают до сих пор), а разная толщина компенсирует оптическую иллюзию: одинаковые по толщине дуги разного радиуса кажутся неравными. Такие оптические компенсации — признак профессиональной отрисовки, отличающий её от «геометрически правильной» любительской: о том, [как рисуются такие знаки](../kak-narisovat-logotip-v-figma/), и о типичных ошибках самодельных логотипов мы писали отдельно.
+У знака Spotify есть деталь-«пасхалка» для профессионалов: три дуги наклонены, а не лежат горизонтально, и их толщина неодинакова — верхняя дуга самая длинная и толстая. Наклон создаёт ощущение движения (горизонтальные дуги выглядели бы как значок Wi‑Fi, положенный набок, — с этим сходством знак путают до сих пор), а разная толщина компенсирует оптическую иллюзию: одинаковые по толщине дуги разного радиуса кажутся неравными. Такие оптические компенсации — признак профессиональной отрисовки, отличающий её от «геометрически правильной» любительской: о том, [как рисуются такие знаки](../kak-narisovat-logotip-v-figma/), и о типичных [ошибках самодельных логотипов](../oshibki-v-dizajne-logotipa/) мы писали отдельно.
 
 ## Знак на обложках: кнопка «слушать» как носитель
 
@@ -80,7 +80,7 @@ Officially — sound waves radiating from a source: the universal "sound here" s
 
 ## The tilt designers argue about
 
-The Spotify mark hides a detail for professionals: the three arcs are tilted, not horizontal, and their thickness varies — the top arc is the longest and fattest. The tilt creates motion (horizontal arcs would look like a Wi-Fi icon lying on its side — a resemblance the mark still gets teased about), and the varied thickness compensates an optical illusion: equal-thickness arcs of different radii look unequal. Such optical compensations are the tell of professional drawing versus the "geometrically correct" amateur kind — we cover [how such marks are drawn](../kak-narisovat-logotip-v-figma/) and typical DIY logo mistakes separately.
+The Spotify mark hides a detail for professionals: the three arcs are tilted, not horizontal, and their thickness varies — the top arc is the longest and fattest. The tilt creates motion (horizontal arcs would look like a Wi-Fi icon lying on its side — a resemblance the mark still gets teased about), and the varied thickness compensates an optical illusion: equal-thickness arcs of different radii look unequal. Such optical compensations are the tell of professional drawing versus the "geometrically correct" amateur kind — we cover [how such marks are drawn](../kak-narisovat-logotip-v-figma/) and typical [DIY logo mistakes](../oshibki-v-dizajne-logotipa/) separately.
 
 ## The mark on covers: the "listen" button as a medium
 

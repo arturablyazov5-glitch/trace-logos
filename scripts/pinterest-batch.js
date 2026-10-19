@@ -4,6 +4,7 @@
  *
  *   node scripts/pinterest-batch.js                      # логотипы: все категории и экосистемы → dist/pinterest/batch/
  *   node scripts/pinterest-batch.js --kinds emoji        # эмодзи Apple (admin/pin-emoji-themes.json) → dist/pinterest/emoji/
+ *   node scripts/pinterest-batch.js --refresh            # безопасное пополнение существующей очереди
  *   node scripts/pinterest-batch.js --plan-only          # только план и счётчики, без рендера
  *
  * Покрытие полное: каждая категория и каждая экосистема каталога попадает хотя бы в один пин, все логотипы
@@ -23,6 +24,7 @@ const SITE = 'https://trace-logos.ru';
 const PORT = process.env.PIN_PORT || 3011;
 const args = process.argv.slice(2);
 const PLAN_ONLY = args.includes('--plan-only');
+const REFRESH = args.includes('--refresh');
 const KINDS = args.includes('--kinds') ? args[args.indexOf('--kinds') + 1].split(',') : ['cat', 'eco'];
 const OUT = path.join(ROOT, 'dist', 'pinterest', KINDS.length === 1 && KINDS[0] === 'emoji' ? 'emoji' : 'batch');
 
@@ -50,7 +52,7 @@ function packChunks(list) {
   return out;
 }
 
-function buildPlan() {
+function buildPlan(existing = []) {
   const all = readJson('logos.json').logos.filter((l) => (l.svgUrl || l.pngUrl) && !(l.svgUrl || l.pngUrl).includes('placeholder'));
   const dl = new Map(Object.entries(readJson('logos/download-stats.json').downloads)
     .map(([k, v]) => [k.split('/').slice(1).join('/').toLowerCase(), v]));
@@ -63,7 +65,14 @@ function buildPlan() {
   const picked = [];
 
   const addGroup = (kind, id, pool, { gen, line2, link, skipFirst, tag }) => {
-    packChunks(uniq(pool).sort(rank)).forEach((items, i) => {
+    const previous = existing.filter(p => p.campaign.replace(/-\d+$/, '') === `${kind}-${id}`.toLowerCase());
+    const covered = new Set(previous.flatMap(p => p.items.map(x => x.url)));
+    const fresh = uniq(pool).sort(rank).filter(p => !covered.has(p.url));
+    const offset = Math.max(0, ...previous.map(p => Number(p.campaign.split('-').pop())));
+    // Refresh never repacks old cards or fills new cards with previously used logos.
+    const chunks = REFRESH ? Array.from({ length: Math.ceil(fresh.length / 12) }, (_, i) => fresh.slice(i * 12, i * 12 + 12)) : packChunks(fresh);
+    chunks.forEach((items, index) => {
+      const i = offset + index;
       if (i === 0 && skipFirst) return;
       const part = i ? ` · ч. ${i + 1}` : '';
       picked.push({ kind, id: `${kind}-${id}-${i + 1}`, line1: i ? 'Ещё логотипы' : 'Логотипы', line2: line2 + part,
@@ -133,7 +142,8 @@ function startServer() {
   });
 }
 
-async function renderAll(plan) {
+async function renderAll(plan, skip = () => false) {
+  if (plan.every((p, i) => skip(p, i))) return;
   const puppeteer = require('puppeteer');
   const server = await startServer();
   const browser = await puppeteer.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: 'new' });
@@ -147,9 +157,12 @@ async function renderAll(plan) {
     fs.mkdirSync(OUT, { recursive: true });
     let i = 0;
     for (const p of plan) {
+      const filename = path.join(OUT, `${String(++i).padStart(3, '0')}-${p.campaign}.png`);
+      if (skip(p, i - 1)) continue;
       const r = await page.evaluate((x) => PinGen.renderPlan(x), p);
-      if (r.missing.length) console.warn(`  ⚠ ${p.id}: не найдено в каталоге — ${r.missing.join(', ')}`);
-      fs.writeFileSync(path.join(OUT, `${String(++i).padStart(3, '0')}-${p.campaign}.png`), Buffer.from(r.png.split(',')[1], 'base64'));
+      if (r.missing.length) throw new Error(`${p.id}: missing logos: ${r.missing.join(', ')}`);
+      fs.writeFileSync(filename + '.tmp', Buffer.from(r.png.split(',')[1], 'base64'));
+      fs.renameSync(filename + '.tmp', filename);
       if (i % 20 === 0) console.log(`  ${i}/${plan.length}`);
     }
   } finally { await browser.close(); server.kill(); }
@@ -164,15 +177,42 @@ function writeTexts(plan) {
   fs.writeFileSync(path.join(OUT, 'texts.md'), out.join('\n'));
 }
 
-(async () => {
-  const { plan, covered, totalLogos } = buildPlan();
+async function run() {
+  const stateDir = path.join(ROOT, 'dist/pinterest/.publisher');
+  fs.mkdirSync(stateDir, { recursive: true });
+  const lock = path.join(stateDir, 'lock');
+  const fd = fs.openSync(lock, 'wx', 0o600);
+  fs.writeSync(fd, String(process.pid));
+  try { await generate(); }
+  finally { fs.closeSync(fd); fs.unlinkSync(lock); }
+}
+
+async function generate() {
+  const planFile = path.join(OUT, 'plan.json');
+  if (REFRESH && KINDS.join(',') !== 'cat,eco') throw new Error('--refresh supports logo batch only');
+  if (REFRESH && !fs.existsSync(planFile)) throw new Error('Existing plan required for safe refresh');
+  if (!REFRESH && fs.existsSync(planFile)) throw new Error('Plan already exists; use --refresh to preserve publication identities');
+  const existing = REFRESH ? JSON.parse(fs.readFileSync(planFile, 'utf8')) : [];
+  const { plan: additions, covered, totalLogos } = buildPlan(existing);
+  const plan = [...existing, ...additions];
   const bykind = {}; plan.forEach((p) => { const k = p.id.split('-')[0]; bykind[k] = (bykind[k] || 0) + 1; });
   console.log(`в плане: ${plan.length} пинов ${JSON.stringify(bykind)}; PNG в составе у ${plan.filter((p) => p.hasPng).length}`);
   if (!KINDS.includes('emoji')) console.log(`покрыто логотипов: ${covered} из ${totalLogos}`);
   fs.mkdirSync(OUT, { recursive: true });
-  fs.writeFileSync(path.join(OUT, 'plan.json'), JSON.stringify(plan, null, 2));
+  if (!PLAN_ONLY || !REFRESH) {
+    fs.writeFileSync(planFile + '.tmp', JSON.stringify(plan, null, 2));
+    fs.renameSync(planFile + '.tmp', planFile);
+  }
+  console.log(`new cards: ${additions.length}; preserved: ${existing.length}`);
   if (PLAN_ONLY) return;
-  await renderAll(plan);
+  const stateDir = path.join(ROOT, 'dist/pinterest/.publisher');
+  const recorded = new Set(REFRESH && fs.existsSync(stateDir) ? fs.readdirSync(stateDir)
+    .filter(n => /^[a-f0-9]{64}\.json$/.test(n))
+    .map(n => JSON.parse(fs.readFileSync(path.join(stateDir, n), 'utf8')).campaign) : []);
+  await renderAll(plan, (p, i) => REFRESH && (recorded.has(p.campaign) ||
+    fs.existsSync(path.join(OUT, `${String(i + 1).padStart(3, '0')}-${p.campaign}.png`))));
   writeTexts(plan);
   console.log(`готово: ${OUT}`);
-})().catch((e) => { console.error(e); process.exit(1); });
+}
+module.exports = { buildPlan, renderAll, run };
+if (require.main === module) run().catch((e) => { console.error(e); process.exitCode = 1; });

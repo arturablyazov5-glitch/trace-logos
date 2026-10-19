@@ -110,16 +110,16 @@
   .search {
     flex: 1;
     padding: 7px 10px;
-    border: 1px solid var(--border-muted);
+    border: none;
     border-radius: 8px;
     font-size: 13px;
     outline: none;
-    background: var(--bg-card);
+    background: var(--bg-raised);
     color: var(--text-1);
     font-family: var(--font);
   }
-  .search::placeholder { color: var(--text-6); }
-  .search:focus { border-color: var(--border-focus); }
+  .search::placeholder { color: var(--text-3); }
+  .search:focus { background: var(--bg-active); }
 
   /* ── Search clear button ── */
   .search-wrap {
@@ -156,17 +156,17 @@
     align-items: center;
     gap: 5px;
     padding: 7px 9px;
-    border: 1px solid var(--border-muted);
+    border: none;
     border-radius: 8px;
-    background: var(--bg-card);
-    color: var(--text-2);
+    background: var(--bg-raised);
+    color: var(--text-1);
     font-family: var(--font);
     font-size: 12px;
     cursor: pointer;
-    transition: border-color .12s, color .12s, background .12s;
+    transition: color .12s, background .12s;
   }
-  .cat-btn:hover { border-color: var(--border-hover); color: var(--text-1); }
-  .cat-btn.open { border-color: var(--border-focus); color: var(--text-0); }
+  .cat-btn:hover { background: var(--bg-active); color: var(--text-0); }
+  .cat-btn.open { background: var(--bg-active); color: var(--text-0); }
   .cat-btn-label {
     flex: 1;
     min-width: 0;
@@ -274,7 +274,7 @@
     transition: background .12s, border-color .12s;
     user-select: none;
   }
-  .card:hover { background: var(--bg-raised); border-color: var(--border); }
+  .card:hover { background: #303030; }
   .card:active { background: var(--bg-active); cursor: grabbing; }
 
   .icon-wrap {
@@ -646,7 +646,7 @@
   }
   .variant-card {
     background: var(--bg-raised);
-    border: 1.5px solid transparent;
+    border: none;
     border-radius: 10px;
     display: grid;
     grid-template-rows: 1fr auto;
@@ -657,10 +657,10 @@
     min-width: 80px;
     min-height: 100px;
     flex: 1;
-    transition: background .12s, border-color .12s;
+    transition: background .12s;
   }
-  .variant-card:hover { border-color: var(--border-eco); }
-  .variant-card.active { border-color: var(--border-bold); background: var(--bg-active); }
+  .variant-card:hover { background: #303030; }
+  .variant-card.active { background: #383838; }
   .variant-card img {
     align-self: center;
     max-width: 100%;
@@ -691,10 +691,31 @@
     text-overflow: ellipsis;
     max-width: 100%;
   }
-  .variant-card.active .variant-card-label { color: var(--text-2); }
+  .variant-card.active .variant-card-label { color: var(--text-0); font-weight: 600; }
 
   /* Ecosystem section */
   .ecosystem-section { padding: 0 12px 16px; }
+  .detail-site-banner {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 0 12px 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background: radial-gradient(ellipse at 100% 0%, rgb(147 51 234 / 38%) 0%, rgb(147 51 234 / 12%) 35%, transparent 70%), var(--bg-raised);
+    color: var(--text-0);
+    text-decoration: none;
+    transition: filter .15s;
+  }
+  .detail-site-banner:hover { filter: brightness(1.12); }
+  .detail-site-banner:focus-visible { outline: 2px solid var(--text-0); outline-offset: 2px; }
+  .detail-site-banner img { width: 40px; height: 40px; flex-shrink: 0; border-radius: 10px; }
+  .detail-site-banner > div { flex: 1; min-width: 0; }
+  .detail-site-banner strong { display: block; font-size: 14px; font-weight: 600; line-height: 1.4; }
+  .detail-site-banner span { display: block; margin-top: 4px; font-size: 12px; color: rgb(255 255 255 / 80%); }
+  .detail-site-banner svg { flex-shrink: 0; }
   .ecosystem-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
@@ -712,8 +733,8 @@
     cursor: pointer;
     transition: background .12s, border-color .12s;
   }
-  .eco-card:hover { border-color: var(--border-eco); background: var(--border); }
-  .eco-card.active { border-color: var(--border-bold); background: var(--bg-active); }
+  .eco-card:hover { background: #303030; }
+  .eco-card.active { background: #383838; }
   .eco-card.active .eco-card-label { color: var(--text-1); }
   .eco-card img { width: 36px; height: 36px; object-fit: contain; border-radius: 8px; }
   .eco-card-label {
@@ -878,6 +899,14 @@
       <div class="section-label">Другие логотипы этой категории</div>
       <div class="ecosystem-grid" id="relatedGrid"></div>
     </div>
+    <a class="detail-site-banner" id="detailSiteBanner" href="https://trace-logos.ru/logos/?utm_source=figma&amp;utm_medium=plugin&amp;utm_campaign=trace_logos&amp;utm_content=detail_banner" target="_blank" rel="noopener noreferrer">
+      <img src="https://trace-logos.ru/assets/logos/svgs/trace-logos.svg" alt="" width="40" height="40">
+      <div>
+        <strong>Ещё больше логотипов на сайте</strong>
+        <span>trace-logos.ru</span>
+      </div>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
   </div>
   <div class="detail-footer">
     <button class="copy-symbol-btn" id="copySymbolBtn" style="display:none">Копировать символ</button>
@@ -1453,6 +1482,7 @@ let currentMacosStyles = null; // { dark?: url, light?: url } for active variant
 let activeMacosStyle = 'color'; // 'color' | 'dark' | 'light'
 
 function openDetail(logo) {
+  document.getElementById('detailSiteBanner').style.display = activeTab === 'logos' ? '' : 'none';
   currentLogo = logo;
 
   document.getElementById('detailName').textContent = logo.name;

@@ -27,7 +27,7 @@ tags_en: Branding, 2026 Trends, Design
 
 ## Но это не хаос
 
-И здесь скрыта главная ловушка: принять «много элементов» за максимализм. Без структуры богатая композиция превращается в визуальный мусор — типичную ошибку дизайна логотипа. За хорошим максимализмом всегда стоит жёсткая иерархия: что‑то одно главное, остальное подчинено, — то есть богатство управляемое, а не случайное. Именно это и отличает максимализм от хаоса.
+И здесь скрыта главная ловушка: принять «много элементов» за максимализм. Без структуры богатая композиция превращается в визуальный мусор — типичную [ошибку дизайна логотипа](../oshibki-v-dizajne-logotipa/). За хорошим максимализмом всегда стоит жёсткая иерархия: что‑то одно главное, остальное подчинено, — то есть богатство управляемое, а не случайное. Именно это и отличает максимализм от хаоса.
 
 Разница видна на простом сравнении. Возьмите две одинаково «плотные» обложки. На первой есть явный центр — крупный образ или слово, к которому притянуто всё остальное; глаз мгновенно находит, с чего начать, и дальше считывает детали как поддержку. На второй пять элементов одинаковой силы борются за внимание, и глазу не за что зацепиться — та же насыщенность читается как шум. Элементов в обоих случаях может быть поровну; отличается не количество, а наличие вершины, которой подчинено остальное. Поэтому максималист сначала решает, что в композиции главное, и только потом наращивает вокруг богатство — а не наоборот.
 
@@ -71,7 +71,7 @@ But this power has a flip side, and it must be stated honestly. Minimalism forga
 
 ## But it isn't chaos
 
-And here the main trap is hidden: taking "many elements" for maximalism. Without structure a rich composition turns into visual clutter — a typical logo design mistake. Good maximalism always has a rigid hierarchy: one thing is primary, the rest subordinate — that is, richness that's managed, not random. This is exactly what separates maximalism from chaos.
+And here the main trap is hidden: taking "many elements" for maximalism. Without structure a rich composition turns into visual clutter — a typical [logo design mistake](../oshibki-v-dizajne-logotipa/). Good maximalism always has a rigid hierarchy: one thing is primary, the rest subordinate — that is, richness that's managed, not random. This is exactly what separates maximalism from chaos.
 
 The difference shows in a simple comparison. Take two equally "dense" covers. The first has a clear center — a large image or word everything else is pulled toward; the eye instantly finds where to start and then reads the details as support. On the second, five elements of equal strength fight for attention, and the eye has nothing to latch onto — the same density reads as noise. The number of elements can be identical in both cases; what differs isn't the amount but the presence of an apex the rest is subordinate to. So a maximalist first decides what's primary in the composition, and only then builds richness around it — not the other way around.
 

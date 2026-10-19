@@ -39,7 +39,7 @@ tags_en: Logo, Design, Techniques
 
 Но он же превращается в проблему, когда:
 
-- **Образ притянут за уши.** Если спрятать в знаке что попало «чтобы было умно», зритель это почувствует. Это одна из типичных ошибок дизайна логотипа.
+- **Образ притянут за уши.** Если спрятать в знаке что попало «чтобы было умно», зритель это почувствует. Это одна из типичных [ошибок дизайна логотипа](../oshibki-v-dizajne-logotipa/).
 - **Ребус важнее читаемости.** Если ради спрятанного образа основная форма стала непонятной, приём вредит. Знак сначала должен работать как обычный [логотип](../chto-takoe-logotip/), а уже потом удивлять.
 - **Второй смысл виден только в огромном размере.** Тонкая игра пустот исчезает на [фавиконе](../favicon-v-poiske-i-nejrosetyah/) — проверяйте знак маленьким, как в [адаптивном подходе](../adaptivnyj-logotip/).
 
@@ -94,7 +94,7 @@ Negative space is a beautiful but finicky tool. It's magnificent when the hidden
 
 But it also becomes a problem when:
 
-- **The image is a stretch.** If you hide just anything in the mark "to look clever," the viewer will feel it. This is one of the typical logo design mistakes.
+- **The image is a stretch.** If you hide just anything in the mark "to look clever," the viewer will feel it. This is one of the typical [logo design mistakes](../oshibki-v-dizajne-logotipa/).
 - **The puzzle beats readability.** If the main form became unclear for the sake of the hidden image, the technique harms. The mark must first work as an ordinary [logo](../chto-takoe-logotip/), and only then surprise.
 - **The second meaning is visible only at huge size.** A subtle play of voids vanishes on a [favicon](../favicon-v-poiske-i-nejrosetyah/) — check the mark small, as in the [adaptive approach](../adaptivnyj-logotip/).
 

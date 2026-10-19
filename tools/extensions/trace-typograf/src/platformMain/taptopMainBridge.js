@@ -6,7 +6,7 @@
 // "world": "MAIN" — а window.rspackChunktaptop_design_editor, наоборот,
 // недоступен из ISOLATED-мира, где эти content-script'ы обычно работают.
 // Этот файл — единственная часть расширения, которая живёт в MAIN-мире, и
-// умеет только одно: слушать запрос на document и дёргать их API. Общий
+// слушает запросы на document и обращается к модели редактора. Общий
 // канал между мирами — CustomEvent на document (единственное, что видно из
 // обоих миров одновременно).
 //
@@ -15,15 +15,9 @@
 // (~/Documents/Расширения/taptop-helper/content.js) для операций со слоями;
 // A.setTextEditorMode найдена и проверена вживую 2026-08-10.
 //
-// Раньше здесь же был обход E.tree ("collect-text-tag-ids") для поиска
-// текстовых виджетов под выделением — убран 2026-08-10: у повторяющихся
-// списков/каруселей (List/Block List) дерево хранит только ОДНО
-// определение шаблона повтора, без понятия о том, сколько раз он реально
-// отрисован (Item 1, Item 2, ...) — обход по дереву находил только первое
-// повторение. Замена — collectTaptopTextRows.js, обход РЕАЛЬНОГО DOM
-// панели слоёв (там видно все повторения как есть), клик по найденной
-// строке уже и выбирает её — отдельный "select по id" через этот мост
-// тоже больше не нужен.
+// Text collection and writes use taptopTextModel.js, bundled into this MAIN
+// bridge. Its composed tree contains actual List instances; the origin tag
+// tree and the visible Layers DOM cannot represent the selected scope reliably.
 (function () {
   'use strict';
 
@@ -35,6 +29,7 @@
   window.__traceTypografBridgeLoaded = true;
 
   function getUiState() {
+    if (window.store && window.store.runtime && typeof window.store.runtime.setTextEditorMode === 'function') return window.store.runtime;
     try {
       let req = null;
       const chunk = window.rspackChunktaptop_design_editor;
@@ -195,19 +190,35 @@
     }
   }
 
+  const textModel = createTaptopTextModel(
+    () => window.store,
+    (store) => {
+      const multi = document.querySelectorAll('.tt-layer-multi-selected[data-tt-layer-multi-id]');
+      if (multi.length) return Array.from(multi, (row) => row.getAttribute('data-tt-layer-multi-id'));
+      return [store.runtime.selected];
+    }
+  );
+
   document.addEventListener('trace-typograf:taptop-api', (e) => {
     const detail = e.detail || {};
     const requestId = detail.requestId;
     const action = detail.action;
     let result = { ok: false };
     try {
-      if (action === 'join-newlines') {
+      if (action === 'collect-texts') {
+        result = textModel.collect();
+      } else if (action === 'apply-texts') {
+        result = textModel.apply(detail.payload || {});
+      } else if (action === 'join-newlines') {
         result = joinNewlinesViaDraftModel();
       } else {
         const A = getUiState();
         if (A) {
           if (action === 'enter-edit') { A.setTextEditorMode(true); result = { ok: true }; }
-          else if (action === 'exit-edit') { A.setTextEditorMode(false); result = { ok: true }; }
+          else if (action === 'exit-edit') {
+            if (!window.store || window.store.runtime.isTextEditorMode) A.setTextEditorMode(false);
+            result = { ok: true };
+          }
         }
       }
     } catch (err) {

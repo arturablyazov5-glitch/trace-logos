@@ -39,7 +39,7 @@ tags_en: Logo, Psychology, Design
 
 Главное правило простое: геометрия логотипа должна поддерживать то, чем бренд является на самом деле.
 
-Детский бренд с острыми агрессивными углами будет отталкивать. Служба безопасности с мягким «облачным» знаком покажется несерьёзной. Форма, которая спорит с сутью, создаёт то самое смутное «что‑то не так», даже если человек не может объяснить, что именно. Это одна из скрытых ошибок дизайна логотипа.
+Детский бренд с острыми агрессивными углами будет отталкивать. Служба безопасности с мягким «облачным» знаком покажется несерьёзной. Форма, которая спорит с сутью, создаёт то самое смутное «что‑то не так», даже если человек не может объяснить, что именно. Это одна из скрытых [ошибок дизайна логотипа](../oshibki-v-dizajne-logotipa/).
 
 Поэтому выбор формы идёт не от вкуса дизайнера, а от вопроса: какое чувство должен вызывать бренд? Ответ — в аудитории и характере продукта, ровно как при выборе [цвета](../psihologiya-cveta-v-logotipe/), [шрифта](../shrift-dlya-logotipa/) и [голоса](../golos-brenda/).
 
@@ -88,7 +88,7 @@ Shape sets the "character," [color](../psihologiya-cveta-v-logotipe/) the "emoti
 
 The main rule is simple: a logo's geometry must support what the brand actually is.
 
-A children's brand with sharp aggressive angles will repel. A security service with a soft "cloud" mark will seem unserious. A shape that argues with the essence creates that vague "something's off," even if a person can't explain what. This is one of the hidden logo design mistakes.
+A children's brand with sharp aggressive angles will repel. A security service with a soft "cloud" mark will seem unserious. A shape that argues with the essence creates that vague "something's off," even if a person can't explain what. This is one of the hidden [logo design mistakes](../oshibki-v-dizajne-logotipa/).
 
 So the choice of shape follows not from the designer's taste but from the question: what feeling should the brand evoke? The answer is in the audience and the product's character, exactly as when choosing a [color](../psihologiya-cveta-v-logotipe/), a [font](../shrift-dlya-logotipa/), and a [voice](../golos-brenda/).
 

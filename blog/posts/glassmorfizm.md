@@ -56,7 +56,7 @@ tags_en: Design, UI, 2026 Trends
 
 - **Доступность.** Низкий контраст на «стекле» — барьер для людей со слабым зрением. Читаемость важнее моды.
 - **Производительность.** Размытие в реальном времени нагружает устройство; перебор с эффектом бьёт по скорости — про вес и скорость в статье [экологичный веб‑дизайн](../ekologichnyj-veb-dizajn/).
-- **Перебор.** «Стекло» повсюду превращается в мутную кашу. Один‑два элемента — эффект; десять — ошибка.
+- **Перебор.** «Стекло» повсюду превращается в мутную кашу. Один‑два элемента — эффект; десять — [ошибка](../oshibki-v-dizajne-logotipa/).
 
 :::tip Глассморфизм — акцент, а не фон
 Как и [объём](../obemnyj-logotip/) или [градиент](../gradient-v-logotipe/), стекло работает как акцент на сильной структуре, а не как замена ей. Сначала — понятная иерархия и читаемый контент, потом — стеклянный эффект как украшение отдельных элементов.
@@ -117,7 +117,7 @@ A separate task is how a logo behaves over a glass panel or on a "glass" button:
 
 - **Accessibility.** Low contrast on "glass" is a barrier for people with low vision. Readability beats fashion.
 - **Performance.** Real-time blur loads the device; overdoing the effect hurts speed — on weight and speed, in [sustainable web design](../ekologichnyj-veb-dizajn/).
-- **Overkill.** "Glass" everywhere turns into a murky mess. One or two elements — an effect; ten — a mistake.
+- **Overkill.** "Glass" everywhere turns into a murky mess. One or two elements — an effect; ten — a [mistake](../oshibki-v-dizajne-logotipa/).
 
 :::tip Glassmorphism is an accent, not a background
 Like [volume](../obemnyj-logotip/) or a [gradient](../gradient-v-logotipe/), glass works as an accent on a strong structure, not a replacement for it. First — a clear hierarchy and readable content, then — the glass effect as decoration on individual elements.

@@ -44,7 +44,7 @@ tags_en: Typography, 2026 Trends, Web
 
 ## Ограничения
 
-Из этого разделения вытекают и границы применимости. Файл с полным диапазоном весит больше одного Regular, поэтому экономия появляется, только если вы реально используете несколько начертаний. Очень старые программы и часть редакторов вариативные шрифты не понимают, хотя все современные браузеры — да. И, наконец, доступ ко всему диапазону соблазняет использовать десять начертаний там, где хватит двух, — а это уже типографический шум и ошибка.
+Из этого разделения вытекают и границы применимости. Файл с полным диапазоном весит больше одного Regular, поэтому экономия появляется, только если вы реально используете несколько начертаний. Очень старые программы и часть редакторов вариативные шрифты не понимают, хотя все современные браузеры — да. И, наконец, доступ ко всему диапазону соблазняет использовать десять начертаний там, где хватит двух, — а это уже типографический шум и [ошибка](../oshibki-v-dizajne-logotipa/).
 
 ## Как применить осмысленно
 
@@ -93,7 +93,7 @@ In practice this means that for a logo made from a variable font you pick one sp
 
 ## Limits
 
-From this split follow the limits of applicability too. A file with the full range weighs more than one Regular, so the saving appears only if you actually use several styles. Very old software and some editors don't understand variable fonts, though all modern browsers do. And finally, access to the whole range tempts you to use ten styles where two would do — and that's typographic noise and a mistake.
+From this split follow the limits of applicability too. A file with the full range weighs more than one Regular, so the saving appears only if you actually use several styles. Very old software and some editors don't understand variable fonts, though all modern browsers do. And finally, access to the whole range tempts you to use ten styles where two would do — and that's typographic noise and a [mistake](../oshibki-v-dizajne-logotipa/).
 
 ## How to apply it meaningfully
 

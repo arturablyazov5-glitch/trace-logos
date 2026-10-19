@@ -72,7 +72,7 @@ Illustrator идеально точен математически — но г
 4. **Один artboard на все версии.** Каждой версии — своя монтажная область: экспорт пакетом, ничего не потеряется.
 5. **CMYK‑документ для экранного знака.** Цвета «тускнеют» ещё на этапе дизайна. Порядок обратный: RGB для проектирования, CMYK — конвертацией для печати.
 
-Дальше: проверьте знак по чек‑листу ошибок, соберите [палитру](../kak-podobrat-cvetovuyu-palitru-brenda/) и мини‑гайдлайн — [что такое брендбук](../chto-takoe-brendbuk/) и зачем он нужен, мы объясняли отдельно. Бесплатные альтернативы всему описанному — Inkscape (полноценный векторный редактор) и [Figma](../kak-narisovat-logotip-v-figma/); генеративный путь — [логотип нейросетью](../logotip-nejrosetyu/) с доводкой в том же Illustrator.
+Дальше: проверьте знак по [чек‑листу ошибок](../oshibki-v-dizajne-logotipa/), соберите [палитру](../kak-podobrat-cvetovuyu-palitru-brenda/) и мини‑гайдлайн — [что такое брендбук](../chto-takoe-brendbuk/) и зачем он нужен, мы объясняли отдельно. Бесплатные альтернативы всему описанному — Inkscape (полноценный векторный редактор) и [Figma](../kak-narisovat-logotip-v-figma/); генеративный путь — [логотип нейросетью](../logotip-nejrosetyu/) с доводкой в том же Illustrator.
 
 ---EN---
 
@@ -139,4 +139,4 @@ Run the exported SVG through an optimizer — Illustrator writes redundant metad
 4. **One artboard for all versions.** Each version gets its own artboard: batch export, nothing gets lost.
 5. **A CMYK document for a screen mark.** Colors go dull at the design stage. The order is the reverse: RGB for design, CMYK by conversion for print.
 
-Next: run the mark through the mistake checklist, assemble the [palette](../kak-podobrat-cvetovuyu-palitru-brenda/) and a mini guideline — we explain [what a brand book actually is](../chto-takoe-brendbuk/) separately. Free alternatives to everything above — Inkscape and [Figma](../kak-narisovat-logotip-v-figma/); the generative route — [an AI logo](../logotip-nejrosetyu/) polished in the same Illustrator.
+Next: run the mark through the [mistake checklist](../oshibki-v-dizajne-logotipa/), assemble the [palette](../kak-podobrat-cvetovuyu-palitru-brenda/) and a mini guideline — we explain [what a brand book actually is](../chto-takoe-brendbuk/) separately. Free alternatives to everything above — Inkscape and [Figma](../kak-narisovat-logotip-v-figma/); the generative route — [an AI logo](../logotip-nejrosetyu/) polished in the same Illustrator.

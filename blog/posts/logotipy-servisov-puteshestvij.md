@@ -52,7 +52,7 @@ tags_en: Collections, Branding, Travel
 | [Яндекс Путешествия](../../logos/travel/yandextravel/) | родительская система | суббренд |
 
 :::tip Что забрать себе
-Штамп категории — не запрет, а точка отсчёта. Работать с ним можно тремя способами: взять честно и добавить уникальность в другом месте (голос [Aviasales](../../logos/travel/aviasales/)), абстрагировать до собственной формы ([Skyscanner](../../logos/travel/skyscanner/)) или демонстративно сбежать ([Hopper](../../logos/travel/hopper/)). Единственный проигрышный вариант — взять штамп и не добавить ничего: двадцать первый самолётик в выдаче не запомнит никто — классическая из ошибок в дизайне логотипа.
+Штамп категории — не запрет, а точка отсчёта. Работать с ним можно тремя способами: взять честно и добавить уникальность в другом месте (голос [Aviasales](../../logos/travel/aviasales/)), абстрагировать до собственной формы ([Skyscanner](../../logos/travel/skyscanner/)) или демонстративно сбежать ([Hopper](../../logos/travel/hopper/)). Единственный проигрышный вариант — взять штамп и не добавить ничего: двадцать первый самолётик в выдаче не запомнит никто — классическая из [ошибок в дизайне логотипа](../oshibki-v-dizajne-logotipa/).
 :::
 
 Все знаки подборки — в [категории «Путешествия»](../../logos/travel/) в SVG и PNG. Скачивайте, [перекрашивайте](../kak-izmenit-cvet-logotipa/) и сравнивайте; о правилах использования чужих знаков — [отдельная статья](../mozhno-li-ispolzovat-chuzhoy-logotip/).
@@ -102,7 +102,7 @@ Next to the aggregators live the traveler's utilities: [Apple Weather](../../log
 | [Yandex Travel](../../logos/travel/yandextravel/) | parent system | sub-brand |
 
 :::tip What to take away
-A category cliché is not a ban but a reference point. You can work with it three ways: take it honestly and add uniqueness elsewhere (the [Aviasales](../../logos/travel/aviasales/) voice), abstract it into a shape of your own ([Skyscanner](../../logos/travel/skyscanner/)), or defiantly escape ([Hopper](../../logos/travel/hopper/)). The only losing move is taking the cliché and adding nothing: nobody remembers the twenty-first little plane in the search results — a classic entry on the logo design mistakes list.
+A category cliché is not a ban but a reference point. You can work with it three ways: take it honestly and add uniqueness elsewhere (the [Aviasales](../../logos/travel/aviasales/) voice), abstract it into a shape of your own ([Skyscanner](../../logos/travel/skyscanner/)), or defiantly escape ([Hopper](../../logos/travel/hopper/)). The only losing move is taking the cliché and adding nothing: nobody remembers the twenty-first little plane in the search results — a classic entry on the [logo design mistakes](../oshibki-v-dizajne-logotipa/) list.
 :::
 
 All marks from this roundup are in the [Travel category](../../logos/travel/) in SVG and PNG. Download, [recolor](../kak-izmenit-cvet-logotipa/) and compare; the rules on using others' marks are [covered separately](../mozhno-li-ispolzovat-chuzhoy-logotip/).

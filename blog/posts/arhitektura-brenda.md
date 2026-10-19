@@ -42,7 +42,7 @@ tags_en: Branding, Strategy, Logo
 - **Та же аудитория и обещание?** Если новый продукт для тех же людей и о том же — обычно хватит материнского знака с припиской. Разные аудитории и ценности — повод для отдельного лица.
 - **Не потянет ли один продукт другой?** Если провал или скандал в новом направлении может ударить по основному бренду, разумнее их развести.
 - **Есть ли ресурс?** Отдельный бренд — это отдельный маркетинг с нуля. Нет бюджета продвигать второе имя — оставайтесь под материнским.
-- **Не запутает ли это клиента?** Главный критерий: аудитория должна с ходу понимать, что перед ней. Если новое имя добавляет путаницы, а не ясности, — это ошибка архитектуры, а не только дизайна.
+- **Не запутает ли это клиента?** Главный критерий: аудитория должна с ходу понимать, что перед ней. Если новое имя добавляет путаницы, а не ясности, — это [ошибка](../oshibki-v-dizajne-logotipa/) архитектуры, а не только дизайна.
 
 :::tip Экосистемы — частый случай суб‑брендов
 Крупные технологические экосистемы обычно строят именно семью суб‑брендов: единый материнский знак-«зонтик» плюс узнаваемые логотипы сервисов, связанные общим стилем. Так каждый сервис имеет своё лицо, но с первого взгляда понятно, чьей он «семьи». Это гибрид: индивидуальность продукта на фундаменте общей [дизайн‑системы](../dizajn-sistema-brenda/).
@@ -100,7 +100,7 @@ Decide not by taste but by questions:
 - **Same audience and promise?** If the new product is for the same people and about the same thing — usually the parent mark with a suffix suffices. Different audiences and values are a reason for a separate face.
 - **Won't one product drag down the other?** If a failure or scandal in the new direction could hit the main brand, it's wiser to separate them.
 - **Is there resource?** A separate brand means separate marketing from scratch. No budget to promote a second name — stay under the parent.
-- **Won't it confuse the customer?** The main criterion: the audience must instantly understand what they're looking at. If a new name adds confusion rather than clarity — that's an architecture mistake, not just a design one.
+- **Won't it confuse the customer?** The main criterion: the audience must instantly understand what they're looking at. If a new name adds confusion rather than clarity — that's an architecture [mistake](../oshibki-v-dizajne-logotipa/), not just a design one.
 
 :::tip Ecosystems are a common sub-brand case
 Large tech ecosystems usually build exactly a family of sub-brands: a single parent "umbrella" mark plus recognizable service logos tied by a common style. This way each service has its own face, but at a glance it's clear whose "family" it belongs to. It's a hybrid: product individuality on the foundation of a shared [design system](../dizajn-sistema-brenda/).
