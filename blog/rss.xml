@@ -7,8 +7,164 @@
     <link>https://trace-logos.ru/blog/</link>
     <description>Статьи о логотипах, форматах SVG и PNG, эмодзи и брендах</description>
     <language>ru</language>
-    <lastBuildDate>Mon, 19 Oct 2026 09:00:00 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 09:00:00 +0300</lastBuildDate>
 
+  <item>
+    <title>Как сделать QR‑код с логотипом — и чтобы он сканировался</title>
+    <link>https://trace-logos.ru/blog/qr-kod-s-logotipom/</link>
+    <pubDate>Sun, 25 Oct 2026 09:00:00 +0300</pubDate>
+    <description>Почему QR‑код продолжает работать с логотипом в центре, какой уровень коррекции ошибок выбрать, где сделать такой код бесплатно и как его проверить</description>
+    <yandex:full-text><![CDATA[<p>QR‑код на визитке, меню или упаковке — почти всегда безликий чёрно‑белый квадрат. При этом вставить в центр логотип и покрасить код в фирменный цвет можно бесплатно за пять минут — и он продолжит сканироваться. Главное — понимать, за счёт чего это работает, чтобы не перейти грань, после которой камера перестанет читать код.</p>
+<p>:::note Коротко
+QR‑код выдерживает логотип в центре благодаря <strong>избыточности</strong>: при уровне коррекции ошибок <strong>H</strong> код читается, даже если испорчено до <strong>30%</strong> поверхности. Правила безопасности: логотип — не больше 20‑25% площади, уровень коррекции — H, тёмный код на светлом фоне (не наоборот), обязательная «тихая зона» по краям и тест на нескольких телефонах перед печатью.
+:::</p>
+<h2>Почему код работает даже с «дыркой» в центре</h2>
+<p>QR‑код изначально спроектирован для суровых условий — заводов Toyota, грязи и повреждённых этикеток. Поэтому в него встроена коррекция ошибок по алгоритму Рида — Соломона: данные записываются с избыточностью, и часть модулей (чёрно‑белых квадратиков) можно потерять без потери содержимого.</p>
+<p>Уровней коррекции четыре:</p>
+<p>| Уровень | Восстанавливает | Когда использовать |
+| --- | --- | --- |
+| L | до 7% | максимум данных, никакого логотипа |
+| M | до 15% | стандарт по умолчанию |
+| Q | до 25% | небольшой логотип |
+| <strong>H</strong> | <strong>до 30%</strong> | <strong>логотип в центре — ваш выбор</strong> |</p>
+<p>Логотип в центре кода — это, с точки зрения сканера, просто «повреждение». Пока оно меньше запаса прочности, код читается как ни в чём не бывало.</p>
+<p>:::warning Важный нюанс
+30% — это запас на <strong>все</strong> повреждения сразу: логотип, блики, изгиб упаковки, потёртости печати. Если логотип съел 25%, на реальную жизнь остаётся всего 5%. Поэтому практический потолок для логотипа — 20‑25% площади, а не все 30%.
+:::</p>
+<h2>Пошаговая инструкция</h2>
+<h3>Шаг 1. Подготовьте логотип</h3>
+<p>Лучше всего работает компактный знак — иконка, а не полная версия с текстом (чем они отличаются, мы разбирали в статье виды логотипов). Скачайте SVG или PNG нужного бренда — например, из нашего <a href="../../logos/">каталога логотипов</a>: у каждого бренда там лежит отдельная иконка. Логотип на подложке‑плашке (белый квадрат или круг) сканируется надёжнее, чем «голый» знак поверх модулей.</p>
+<h3>Шаг 2. Сгенерируйте код</h3>
+<p>Бесплатных генераторов с поддержкой логотипа много: QRCode Monkey, QR.io, Flowcode и другие; свои генераторы есть в <a href="../../logos/design/canva/">Canva</a> и <a href="../../logos/design/adobeexpress/">Adobe Express</a>. Что важно выставить в настройках:</p>
+<ol><li>**Уровень коррекции — H.** Иногда прячется в «расширенных настройках».</li><li>**Логотип — по центру,** размером не более четверти кода.</li><li>**Формат экспорта — SVG,** если код пойдёт в печать: вектор останется чётким в любом размере (почему это важно — в статье [векторная и растровая графика](../vektor-i-rastr-raznica/)). Для веба хватит PNG.</li></ol>
+<h3>Шаг 3. Цвет — по правилам контраста</h3>
+<p>Код можно покрасить в фирменный цвет, но с ограничениями:</p>
+<ul><li>**Тёмный код на светлом фоне.** Инверсия (белый код на тёмном) читается не всеми сканерами.</li><li>**Контраст — максимальный.** Светло‑жёлтый код на белом не считается. Проверить контрастность пары цветов можно на глаз по правилу: сфотографируйте макет в чёрно‑белом режиме — код должен остаться очевидно темнее фона.</li><li>**Градиенты допустимы,** если оба конца градиента достаточно тёмные.</li></ul>
+<p>Точный фирменный цвет бренда удобно взять прямо со страницы логотипа в нашем каталоге — как это сделать, показывали в статье <a href="../kak-uznat-cvet-logotipa/">как узнать цвет логотипа</a>.</p>
+<h3>Шаг 4. Не трогайте служебные зоны</h3>
+<p>У QR‑кода есть неприкосновенные элементы:</p>
+<ul><li>**Три больших квадрата по углам** — метки позиционирования: по ним камера находит и ориентирует код.</li><li>**Тихая зона** — пустое поле шириной минимум в 4 модуля по периметру. Не придвигайте к коду текст и рамки вплотную.</li><li>**Маленький квадрат ближе к правому нижнему углу** — метка выравнивания.</li></ul>
+<p>Логотип должен лежать строго в центре и не задевать ни одну из меток.</p>
+<h3>Шаг 5. Протестируйте до печати</h3>
+<p>:::danger Обязательный шаг
+Проверьте код минимум на двух телефонах (<a href="../../logos/tech/apple/">iPhone</a> и Android), со штатной камеры, при плохом освещении и под углом. Если тираж печатный — сначала распечатайте один экземпляр в реальном размере. Минимальный физический размер кода для сканирования «с руки» — примерно 2×2 см; для плаката действует правило: размер кода ≈ расстояние сканирования ÷ 10.
+:::</p>
+<h2>Чем короче ссылка, тем надёжнее код</h2>
+<p>Ещё один рычаг надёжности, о котором почти никто не думает, — <strong>объём данных</strong>. QR‑код существует в 40 «версиях»: версия 1 — сетка 21×21 модуль, версия 40‑177×177. Чем больше символов вы зашиваете, тем выше версия, мельче модули и капризнее сканирование — особенно с логотипом, который съедает часть и без того мелкой сетки.</p>
+<p>Практические следствия:</p>
+<ul><li>**Сокращайте ссылку.** `example.ru/qr` вместо длинного URL с UTM‑парамет­рами опускает код на несколько версий вниз — модули становятся крупнее, код читается с большего расстояния и хуже боится повреждений.</li><li>**UTM‑метки — через редирект.** Пусть короткая ссылка на вашем домене отдаёт 301‑редирект на длинную с метками: аналитика сохраняется, код остаётся простым.</li><li>**Не шейте в код текст «про запас».** Визитка с vCard на 500 символов — это версия 20+ с микроскопическими модулями; ссылка на страницу контактов работает лучше.</li></ul>
+<p>Правило: если в макете код выглядит как мелкая шахматная крупа — данных слишком много. Уменьшайте полезную нагрузку, а не логотип.</p>
+<h2>Стилизация модулей: где проходит граница</h2>
+<p>Генераторы наперебой предлагают «красивые» коды: скруглённые точки, кружочки вместо квадратов, фигурные глазки‑метки. Что из этого безопасно:</p>
+<ul><li>✅ **Лёгкое скругление углов модулей** — читается без проблем.</li><li>✅ **Фирменный цвет** при соблюдении контраста из предыдущего раздела.</li><li>⚠️ **Точки‑кружки вместо квадратов** — работают, но уменьшают эффективную площадь каждого модуля; не сочетайте с крупным логотипом.</li><li>⚠️ **Фигурные глазки** (скруглённые, в форме листа) — допустимы, если сохранён общий силуэт «квадрат в квадрате».</li><li>⛔ **Градиент между светлым и тёмным**, узоры внутри модулей, фото‑фон под кодом — главные убийцы сканируемости.</li></ul>
+<p>Хорошее правило: стилизация должна быть незаметна сканеру. Если после украшения код перестал читаться в тени или под углом — откатывайте по одному эффекту, начиная с самого агрессивного.</p>
+<h2>Частые ошибки</h2>
+<ul><li>**Логотип больше трети кода.** Красиво на макете — мертво в жизни.</li><li>**Уровень коррекции L «для компактности»** плюс логотип — код не читается вовсе.</li><li>**Белый код на тёмном фоне.** Часть сканеров не понимает инверсию.</li><li>**Код сжат в JPG.** Артефакты сжатия размывают границы модулей; используйте PNG или SVG (разницу форматов разбирали в статье [PNG или JPG](../png-ili-jpg-chto-luchshe/)).</li><li>**Динамическая ссылка через сомнительный сервис‑посредник.** Если сервис закроется, все напечатанные коды умрут. Для важных тиражей шейте в код прямую ссылку на свой домен.</li></ul>
+<h2>Чек‑лист перед отправкой в печать</h2>
+<ol><li>Уровень коррекции — **H**.</li><li>Логотип ≤ 25% площади, по центру, не задевает угловые метки.</li><li>Ссылка сокращена, UTM — через редирект на своём домене.</li><li>Тёмный код на светлом фоне, контраст проверен.</li><li>Тихая зона — минимум 4 модуля пустоты по периметру.</li><li>Экспорт в SVG (печать) или PNG (экран), никакого JPG.</li><li>Тест: два телефона, штатная камера, плохой свет, угол 45°.</li><li>Для печатных тиражей — пробный отпечаток в реальном размере.</li><li>Ссылка ведёт на мобильную версию страницы: сканируют с телефона.</li><li>Код подписан действием — «Наведи камеру — открой меню»: конверсия у подписанных кодов заметно выше.</li></ol>
+<h2>Коротко</h2>
+<p>QR‑код с логотипом — это не хак, а штатная возможность формата: избыточность уровня H честно оплачивает «дырку» в центре. Держите логотип в пределах четверти площади, ставьте коррекцию H, следите за контрастом и тихой зоной, тестируйте до печати — и брендированный код будет сканироваться так же надёжно, как чёрно‑белый. Иконки брендов для вставки в код — в нашем <a href="../../logos/">каталоге логотипов</a>, в SVG и PNG.</p>
+<p>---EN---</p>
+<p>A QR code on a business card, menu or package is almost always a faceless black-and-white square. Yet dropping a logo in the middle and painting the code in brand colors takes five minutes and zero budget — and it will still scan. The key is understanding why it works, so you don't cross the line where cameras stop reading it.</p>
+<p>:::note TL;DR
+A QR code survives a logo in the middle thanks to <strong>redundancy</strong>: at error-correction level <strong>H</strong> the code stays readable with up to <strong>30%</strong> of its surface damaged. Safety rules: logo no larger than 20-25% of the area, correction level H, dark code on a light background (never inverted), a mandatory quiet zone around the edges, and a test on several phones before printing.
+:::</p>
+<h2>Why the code works with a "hole" in the middle</h2>
+<p>The QR code was engineered for harsh environments — Toyota factories, dirt, damaged labels. So it ships with Reed–Solomon error correction: data is written redundantly, and a share of modules (the little black-and-white squares) can be lost without losing the content.</p>
+<p>There are four correction levels:</p>
+<p>| Level | Recovers | When to use |
+| --- | --- | --- |
+| L | up to 7% | maximum data, no logo |
+| M | up to 15% | the everyday default |
+| Q | up to 25% | a small logo |
+| <strong>H</strong> | <strong>up to 30%</strong> | <strong>a centered logo — your pick</strong> |</p>
+<p>To the scanner, a logo in the middle is just "damage". As long as it stays within the safety margin, the code reads as if nothing happened.</p>
+<p>:::warning The catch
+30% is the budget for <strong>all</strong> damage combined: the logo, glare, package curvature, print wear. If the logo eats 25%, only 5% is left for real life. So the practical ceiling for a logo is 20-25% of the area, not the full 30%.
+:::</p>
+<h2>Step by step</h2>
+<h3>Step 1. Prepare the logo</h3>
+<p>A compact mark works best — the icon, not the full lockup with text (see types of logos for the difference). Download the SVG or PNG of the brand you need — for example from our <a href="../../logos/">logo catalog</a>, where every brand ships a standalone icon. A logo on a backing plate (white square or circle) scans more reliably than a "bare" mark over the modules.</p>
+<h3>Step 2. Generate the code</h3>
+<p>Plenty of free generators support logos: QRCode Monkey, QR.io, Flowcode and others; <a href="../../logos/design/canva/">Canva</a> and <a href="../../logos/design/adobeexpress/">Adobe Express</a> have built-in ones. What to set:</p>
+<ol><li>**Correction level — H.** Sometimes hidden under "advanced settings".</li><li>**Logo — centered,** no more than a quarter of the code.</li><li>**Export as SVG** if the code goes to print: vector stays crisp at any size (why that matters — [vector vs raster](../vektor-i-rastr-raznica/)). PNG is fine for the web.</li></ol>
+<h3>Step 3. Color by the contrast rules</h3>
+<p>You can paint the code in brand colors, with limits:</p>
+<ul><li>**Dark code on a light background.** Inverted codes (light on dark) aren't read by all scanners.</li><li>**Maximize contrast.** Pale yellow on white doesn't count. Quick check: photograph the layout in black-and-white mode — the code must remain obviously darker than the background.</li><li>**Gradients are fine** if both ends of the gradient are dark enough.</li></ul>
+<p>The exact brand color is easy to grab right from the logo's page in our catalog — see <a href="../kak-uznat-cvet-logotipa/">how to find out a logo's color</a>.</p>
+<h3>Step 4. Don't touch the functional zones</h3>
+<p>A QR code has untouchable parts:</p>
+<ul><li>**Three big corner squares** — finder patterns: the camera uses them to locate and orient the code.</li><li>**The quiet zone** — an empty margin at least 4 modules wide around the perimeter. Don't crowd the code with text or borders.</li><li>**The small square near the bottom-right** — the alignment pattern.</li></ul>
+<p>The logo must sit strictly in the center and clear all of these marks.</p>
+<h3>Step 5. Test before printing</h3>
+<p>:::danger Non-negotiable
+Test the code on at least two phones (<a href="../../logos/tech/apple/">iPhone</a> and Android), with the stock camera, in poor light and at an angle. For print runs, print one copy at real size first. The minimum physical size for handheld scanning is about 2×2 cm; for posters use the rule: code size ≈ scanning distance ÷ 10.
+:::</p>
+<h2>The shorter the link, the tougher the code</h2>
+<p>Another reliability lever almost nobody thinks about — <strong>payload size</strong>. QR codes come in 40 "versions": version 1 is a 21×21 module grid, version 40 is 177×177. The more characters you encode, the higher the version, the smaller the modules and the fussier the scanning — especially with a logo eating part of an already fine grid.</p>
+<p>Practical consequences:</p>
+<ul><li>**Shorten the link.** `example.com/qr` instead of a long UTM-laden URL drops the code several versions down — modules get bigger, the code scans from farther away and shrugs off damage better.</li><li>**UTM tags via redirect.** Let a short link on your own domain 301-redirect to the long tagged one: analytics survive, the code stays simple.</li><li>**Don't encode text "just in case".** A business card with a 500-character vCard is version 20+ with microscopic modules; a link to a contact page works better.</li></ul>
+<p>Rule of thumb: if the code looks like fine checkered grit in the layout, the payload is too big. Shrink the data, not the logo.</p>
+<h2>Styling the modules: where the line is</h2>
+<p>Generators race to offer "pretty" codes: rounded dots, circles instead of squares, decorative finder eyes. What's actually safe:</p>
+<ul><li>✅ **Slightly rounded module corners** — scans fine.</li><li>✅ **Brand color** within the contrast rules from the earlier section.</li><li>⚠️ **Circle dots instead of squares** — work, but shrink each module's effective area; don't combine with a large logo.</li><li>⚠️ **Shaped finder eyes** (rounded, leaf-shaped) — acceptable while the overall "square in a square" silhouette survives.</li><li>⛔ **Light-to-dark gradients**, patterns inside modules, a photo background under the code — the top scannability killers.</li></ul>
+<p>A good rule: styling should be invisible to the scanner. If a decorated code stops reading in shade or at an angle, roll back one effect at a time, starting with the most aggressive.</p>
+<h2>Common mistakes</h2>
+<ul><li>**Logo bigger than a third of the code.** Pretty in the mockup — dead in the field.</li><li>**Correction level L "to keep it compact"** plus a logo — the code won't read at all.</li><li>**Light code on a dark background.** Some scanners don't handle inversion.</li><li>**Code saved as JPG.** Compression artifacts blur module edges; use PNG or SVG (formats compared in [PNG vs JPG](../png-ili-jpg-chto-luchshe/)).</li><li>**A dynamic link through a questionable middleman service.** If the service dies, every printed code dies with it. For important runs, encode a direct link to your own domain.</li></ul>
+<h2>Pre-print checklist</h2>
+<ol><li>Correction level — **H**.</li><li>Logo ≤ 25% of the area, centered, clear of the corner finder patterns.</li><li>Link shortened; UTM handled by a redirect on your own domain.</li><li>Dark code on a light background, contrast verified.</li><li>Quiet zone — at least 4 modules of emptiness around the perimeter.</li><li>Export as SVG (print) or PNG (screen), never JPG.</li><li>Test: two phones, stock camera, poor light, 45° angle.</li><li>For print runs — a proof print at real size.</li><li>The link opens a mobile-friendly page: people scan with phones.</li><li>The code is captioned with an action — "Point your camera — open the menu": captioned codes convert noticeably better.</li></ol>
+<h2>In short</h2>
+<p>A QR code with a logo isn't a hack — it's a built-in feature of the format: level-H redundancy honestly pays for the "hole" in the middle. Keep the logo within a quarter of the area, set correction to H, watch contrast and the quiet zone, test before printing — and a branded code will scan as reliably as a black-and-white one. Brand icons to drop into your code are in our <a href="../../logos/">logo catalog</a>, in SVG and PNG.</p>]]></yandex:full-text>
+  </item>
+  <item>
+    <title>Персональный бренд — нужен ли эксперту логотип</title>
+    <link>https://trace-logos.ru/blog/personalnyj-brend/</link>
+    <pubDate>Thu, 22 Oct 2026 09:00:00 +0300</pubDate>
+    <description>Что такое персональный бренд, чем он отличается от бренда компании, нужен ли эксперту, блогеру или основателю собственный логотип и как собрать визуальную айдентику вокруг человека. Разбор с практикой.</description>
+    <yandex:full-text><![CDATA[<p>У вас уже есть персональный бренд. Даже если вы никогда о нём не думали — то, как вас воспринимают коллеги, клиенты и подписчики, уже сложилось само собой. Вопрос не в том, есть он или нет, а в том, управляете вы им или пускаете на самотёк. И как только речь заходит об управлении, всплывает практический вопрос: а нужен ли эксперту, блогеру или основателю <strong>логотип</strong> — или человеку достаточно быть собой?</p>
+<p>В 2026 году, когда доверие всё чаще идёт к людям, а не к безликим компаниям, персональный бренд стал сильным активом. Разберём, что это такое, чем он отличается от бренда компании и какая визуальная айдентика нужна человеку.</p>
+<h2>Чем персональный бренд отличается от бренда компании</h2>
+<p>Бренд компании строится вокруг продукта и может жить без конкретного лица. Персональный бренд построен вокруг <strong>человека</strong> — его знаний, взглядов, манеры, истории. Продукт может меняться, а личность остаётся тем самым «ядром», ради которого к вам приходят.</p>
+<p>Отсюда ключевое отличие для дизайна: в персональном бренде главный «логотип» — это часто сам человек, его лицо и имя. Визуальная айдентика здесь не заменяет личность, а обрамляет её, помогает быть узнаваемым и цельным на всех площадках.</p>
+<h2>Нужен ли эксперту логотип</h2>
+<p>Короткий ответ: не всегда — но айдентика нужна почти всегда. Разберём варианты.</p>
+<p><strong>Часто хватает имени.</strong> Для многих экспертов и блогеров «логотип» — это стильно оформленное собственное имя, то есть логотайп. Хорошо подобранный <a href="../shrift-dlya-logotipa/">шрифт</a>, фирменный <a href="../psihologiya-cveta-v-logotipe/">цвет</a> и единый стиль оформления делают человека узнаваемым без отдельного значка.</p>
+<p><strong>Иногда полезен знак.</strong> Символ или <a href="../chto-takoe-monogramma/">монограмма</a> из инициалов пригодится там, где имя целиком не влезает: <a href="../kak-sdelat-krugluyu-avatarku/">аватарка</a>, <a href="../favicon-v-poiske-i-nejrosetyah/">фавикон</a>, watermark на фото, иконка канала. Это тот же принцип, что в <a href="../adaptivnyj-logotip/">адаптивном логотипе</a>: под мелкий размер нужна компактная версия.</p>
+<p><strong>Реже — полноценная система.</strong> Если персональный бренд перерастает в бизнес (курсы, продукты, команда), айдентика дорастает до полной <a href="../dizajn-sistema-brenda/">дизайн‑системы</a> — и тут возникает вопрос <a href="../arhitektura-brenda/">архитектуры бренда</a>: где заканчивается человек и начинается компания.</p>
+<p>:::tip Айдентика человека — это больше, чем значок
+Персональный бренд узнают не по логотипу, а по совокупности: <a href="../psihologiya-cveta-v-logotipe/">цвет</a>, <a href="../shrift-dlya-logotipa/">шрифт</a>, манера съёмки, оформление постов и — очень важно — <a href="../golos-brenda/">голос</a>, то, как вы говорите. Часто фирменный цвет и узнаваемая манеры речи работают на узнаваемость сильнее, чем любой значок. Логотип тут — лишь один из элементов, а не главный.
+:::</p>
+<h2>Как собрать визуальную айдентику вокруг человека</h2>
+<ol><li>**Определите суть.** Чем вы отличаетесь, какие ценности несёте, каким должны казаться. Это тот же вопрос, что в [брифе на логотип](../brief-na-logotip/), только про личность.</li><li>**Оформите имя.** Подберите [шрифт](../shrift-dlya-logotipa/) и стиль для собственного имени — это ваш основной знак.</li><li>**Выберите фирменный цвет.** Один‑два узнаваемых [цвета](../psihologiya-cveta-v-logotipe/), которые вы используете везде. Цвет опознаётся раньше формы.</li><li>**Сделайте компактный знак.** [Монограмму](../chto-takoe-monogramma/) или символ для [аватарок](../kak-sdelat-krugluyu-avatarku/) и [фавикона](../favicon-v-poiske-i-nejrosetyah/).</li><li>**Держите всё единым.** Одинаковый вид на всех площадках — это [согласованность](../soglasovannost-brenda/), и для человека она работает так же, как для компании.</li><li>**Всё в [векторе](../svg-ili-png-dlya-logotipa/).** Чтобы имя и знак чётко смотрелись и на [визитке](../logotip-dlya-vizitki/), и на баннере.</li></ol>
+<p>:::warning Не прячьте личность за корпоративностью
+Частая ошибка — сделать персональному бренду слишком «фирменный», холодный логотип, за которым теряется человек. Но сила личного бренда именно в человеке: люди идут за живой личностью, а не за корпоративным значком. Айдентика должна подчёркивать вашу индивидуальность, а не маскировать её под безликую компанию. Это то же движение к человечности, что двигает <a href="../rukopisnyj-logotip/">рукописные логотипы</a> в 2026 году.
+:::</p>
+<h2>Если коротко</h2>
+<p>Персональный бренд есть у каждого, кто взаимодействует с аудиторией, — вопрос лишь в том, управляете вы им или нет. В отличие от бренда компании, он построен вокруг человека, поэтому главный «знак» здесь — часто само имя и лицо, а не отдельный значок. Логотип эксперту нужен не всегда: чаще хватает стильно оформленного имени (логотайпа), фирменного <a href="../psihologiya-cveta-v-logotipe/">цвета</a> и узнаваемого <a href="../golos-brenda/">голоса</a>, плюс компактной <a href="../chto-takoe-monogramma/">монограммы</a> для <a href="../kak-sdelat-krugluyu-avatarku/">аватарок</a>. Собирайте айдентику от сути личности, держите её <a href="../soglasovannost-brenda/">единой</a> на всех площадках и в <a href="../svg-ili-png-dlya-logotipa/">векторе</a> — но не прячьте за корпоративностью то, ради чего к вам и приходят: живого человека.</p>
+<p>Оформить имя, подобрать цвет и скачать элементы айдентики в SVG можно в <a href="../../logos/">каталоге Trace Logo's</a>.</p>
+<p>---EN---</p>
+<p>You already have a personal brand. Even if you've never thought about it — how colleagues, clients, and followers perceive you has already formed on its own. The question isn't whether it exists but whether you manage it or leave it to chance. And as soon as management comes up, a practical question surfaces: does an expert, blogger, or founder need a <strong>logo</strong> — or is it enough for a person to be themselves?</p>
+<p>In 2026, when trust increasingly goes to people rather than faceless companies, a personal brand became a strong asset. Let's break down what it is, how it differs from a company brand, and what visual identity a person needs.</p>
+<h2>How a personal brand differs from a company brand</h2>
+<p>A company brand is built around a product and can live without a specific face. A personal brand is built around a <strong>person</strong> — their knowledge, views, manner, story. The product can change, but the personality remains the "core" people come to you for.</p>
+<p>Hence the key difference for design: in a personal brand the main "logo" is often the person themselves, their face and name. Visual identity here doesn't replace the personality but frames it, helps you be recognizable and coherent across all platforms.</p>
+<h2>Does an expert need a logo</h2>
+<p>The short answer: not always — but identity is needed almost always. Let's break down the options.</p>
+<p><strong>A name often suffices.</strong> For many experts and bloggers a "logo" is a stylishly set version of their own name, i.e. a wordmark. A well-chosen <a href="../shrift-dlya-logotipa/">font</a>, a brand <a href="../psihologiya-cveta-v-logotipe/">color</a>, and a unified design style make a person recognizable without a separate mark.</p>
+<p><strong>Sometimes a mark helps.</strong> A symbol or a <a href="../chto-takoe-monogramma/">monogram</a> of initials helps where the full name doesn't fit: an <a href="../kak-sdelat-krugluyu-avatarku/">avatar</a>, a <a href="../favicon-v-poiske-i-nejrosetyah/">favicon</a>, a photo watermark, a channel icon. It's the same principle as in an <a href="../adaptivnyj-logotip/">adaptive logo</a>: a compact version is needed for small size.</p>
+<p><strong>Rarely — a full system.</strong> If a personal brand grows into a business (courses, products, a team), the identity grows into a full <a href="../dizajn-sistema-brenda/">design system</a> — and here the question of <a href="../arhitektura-brenda/">brand architecture</a> arises: where the person ends and the company begins.</p>
+<p>:::tip A person's identity is more than a mark
+A personal brand is recognized not by a logo but by the whole: <a href="../psihologiya-cveta-v-logotipe/">color</a>, <a href="../shrift-dlya-logotipa/">font</a>, a shooting style, post design, and — very importantly — the <a href="../golos-brenda/">voice</a>, how you speak. Often a brand color and a recognizable manner of speech work for recognizability more than any mark. A logo here is just one element, not the main one.
+:::</p>
+<h2>How to build a visual identity around a person</h2>
+<ol><li>**Define the essence.** How you differ, what values you carry, how you should seem. It's the same question as in a [logo brief](../brief-na-logotip/), only about a personality.</li><li>**Set the name.** Choose a [font](../shrift-dlya-logotipa/) and style for your own name — that's your primary mark.</li><li>**Choose a brand color.** One or two recognizable [colors](../psihologiya-cveta-v-logotipe/) you use everywhere. Color is recognized before shape.</li><li>**Make a compact mark.** A [monogram](../chto-takoe-monogramma/) or symbol for [avatars](../kak-sdelat-krugluyu-avatarku/) and a [favicon](../favicon-v-poiske-i-nejrosetyah/).</li><li>**Keep it all unified.** The same look across all platforms is [consistency](../soglasovannost-brenda/), and for a person it works just as for a company.</li><li>**Everything in [vector](../svg-ili-png-dlya-logotipa/).** So the name and mark look crisp on a [business card](../logotip-dlya-vizitki/) and a banner alike.</li></ol>
+<p>:::warning Don't hide the personality behind corporateness
+A common mistake is giving a personal brand a too "corporate," cold logo that hides the person. But a personal brand's power is precisely in the person: people follow a living personality, not a corporate mark. Identity should emphasize your individuality, not disguise it as a faceless company. It's the same move toward humanness driving <a href="../rukopisnyj-logotip/">hand-drawn logos</a> in 2026.
+:::</p>
+<h2>In short</h2>
+<p>Everyone who interacts with an audience has a personal brand — the only question is whether you manage it. Unlike a company brand, it's built around a person, so the main "mark" here is often the name and face itself, not a separate mark. An expert doesn't always need a logo: usually a stylishly set name (a wordmark), a brand <a href="../psihologiya-cveta-v-logotipe/">color</a>, and a recognizable <a href="../golos-brenda/">voice</a> suffice, plus a compact <a href="../chto-takoe-monogramma/">monogram</a> for <a href="../kak-sdelat-krugluyu-avatarku/">avatars</a>. Build the identity from the personality's essence, keep it <a href="../soglasovannost-brenda/">unified</a> across all platforms and in <a href="../svg-ili-png-dlya-logotipa/">vector</a> — but don't hide behind corporateness the very thing people come to you for: a living person.</p>
+<p>You can set a name, pick a color, and download identity elements in SVG in the <a href="../../logos/">Trace Logo's catalog</a>.</p>]]></yandex:full-text>
+  </item>
   <item>
     <title>10 ошибок в дизайне логотипа — проверьте свой знак</title>
     <link>https://trace-logos.ru/blog/oshibki-v-dizajne-logotipa/</link>
@@ -323,7 +479,7 @@ Symbols (birds, cameras, ghosts) belong to the era when social networks were pro
 <ol><li>**Только [вектор](../vektor-i-rastr-raznica/).** Для печати нужен [SVG](../svg-ili-png-dlya-logotipa/), AI или EPS — растр даст рваные края. Если есть только [PNG](../png-ili-jpg-chto-luchshe/), знак придётся [перевести в вектор](../kak-perevesti-logotip-v-vektor/).</li><li>**Цвет в печатной модели.** Экранный RGB на упаковке смещается; переводите в CMYK или задавайте плашечные цвета заранее — детали в статье [логотип для печати](../logotip-dlya-pechati/).</li><li>**Охранное поле.** Вокруг знака должно быть пустое пространство, куда не залезают швы, текст и край упаковки.</li><li>**Версия под форму.** Для изогнутых поверхностей знак не должен быть слишком широким, иначе искажение края «сломает» его.</li><li>**Прозрачность.** Для наложения на цветную упаковку нужен [прозрачный фон](../logotip-s-prozrachnym-fonom/), а не белый прямоугольник.</li></ol>
 <h2>Упаковка‑2026: тактильность и QR</h2>
 <p>Пара трендов, которые стоит иметь в виду. Первый — <strong>тактильность</strong>: матовые, шершавые, «трогательные» поверхности, тиснение, где логотип ощущается пальцами, а не только виден. Это премиальный сигнал, который экран передать не может.</p>
-<p>Второй — <strong>интерактивность</strong>: QR‑коды на упаковке как мост в цифровое, часто оформленные под стиль бренда, а не безликим квадратом. Как встроить фирменную графику в такой код, разбираем в статье QR‑код с логотипом, а про кастомный дизайн кода как часть айдентики — в статье QR‑код в дизайне бренда.</p>
+<p>Второй — <strong>интерактивность</strong>: QR‑коды на упаковке как мост в цифровое, часто оформленные под стиль бренда, а не безликим квадратом. Как встроить фирменную графику в такой код, разбираем в статье <a href="../qr-kod-s-logotipom/">QR‑код с логотипом</a>, а про кастомный дизайн кода как часть айдентики — в статье QR‑код в дизайне бренда.</p>
 <h2>Если коротко</h2>
 <p>Упаковка — самая честная среда для логотипа: здесь он за полсекунды проходит или проваливает «тест полки», причём не на идеальном фоне <a href="../mokap-logotipa/">макета</a>, а на реальном материале, изогнутой форме и под неудобным светом. Выигрывают знаки простые, контрастные, с узнаваемой <a href="../psihologiya-formy-v-logotipe/">формой</a> и <a href="../psihologiya-cveta-v-logotipe/">цветом</a>, обязательно имеющие <a href="../cherno-belyj-logotip/">одноцветную версию</a> на случай ограниченной печати. Технически нужен <a href="../svg-ili-png-dlya-logotipa/">вектор</a>, правильная цветовая модель, охранное поле и <a href="../logotip-s-prozrachnym-fonom/">прозрачный фон</a>. А тренды 2026 — тактильные поверхности и брендированные QR‑коды — добавляют упаковке того, чего нет у экрана: осязаемости и моста в цифровое.</p>
 <p>Скачать логотип в SVG, сделать одноцветную версию и подготовить его для упаковки можно в <a href="../../logos/">каталоге Trace Logo's</a>.</p>
@@ -345,7 +501,7 @@ Packaging printing can be limited — one or two colors, embossing, kraft withou
 <ol><li>**Vector only.** Print needs [SVG](../svg-ili-png-dlya-logotipa/), AI, or EPS — raster gives ragged edges. If you only have a [PNG](../png-ili-jpg-chto-luchshe/), the mark has to be [converted to vector](../kak-perevesti-logotip-v-vektor/).</li><li>**Color in a print model.** On-screen RGB shifts on packaging; convert to CMYK or set spot colors in advance — details in [a logo for print](../logotip-dlya-pechati/).</li><li>**Clear space.** Around the mark there should be empty space that seams, text, and the packaging edge don't intrude into.</li><li>**A version for the shape.** For curved surfaces the mark shouldn't be too wide, or edge distortion will "break" it.</li><li>**Transparency.** For overlaying on colored packaging you need a [transparent background](../logotip-s-prozrachnym-fonom/), not a white rectangle.</li></ol>
 <h2>Packaging 2026: tactility and QR</h2>
 <p>A couple of trends worth keeping in mind. The first is <strong>tactility</strong>: matte, rough, "touchable" surfaces, embossing where the logo is felt with fingers, not just seen. It's a premium signal a screen can't convey.</p>
-<p>The second is <strong>interactivity</strong>: QR codes on packaging as a bridge to the digital, often styled to the brand rather than a faceless square. How to embed brand graphics into such a code — in a QR code with a logo, and on custom code design as part of the identity — in a QR code in brand design.</p>
+<p>The second is <strong>interactivity</strong>: QR codes on packaging as a bridge to the digital, often styled to the brand rather than a faceless square. How to embed brand graphics into such a code — in <a href="../qr-kod-s-logotipom/">a QR code with a logo</a>, and on custom code design as part of the identity — in a QR code in brand design.</p>
 <h2>In short</h2>
 <p>Packaging is the most honest environment for a logo: here it passes or fails the "shelf test" in half a second, and not on a mockup's perfect background but on real material, a curved shape, and under inconvenient light. The winners are marks that are simple, contrasty, with a recognizable <a href="../psihologiya-formy-v-logotipe/">shape</a> and <a href="../psihologiya-cveta-v-logotipe/">color</a>, and that always have a <a href="../cherno-belyj-logotip/">single-color version</a> for limited printing. Technically you need <a href="../svg-ili-png-dlya-logotipa/">vector</a>, the right color model, clear space, and a <a href="../logotip-s-prozrachnym-fonom/">transparent background</a>. And the 2026 trends — tactile surfaces and branded QR codes — add to packaging what a screen lacks: tangibility and a bridge to the digital.</p>
 <p>You can download a logo in SVG, make a single-color version, and prepare it for packaging in the <a href="../../logos/">Trace Logo's catalog</a>.</p>]]></yandex:full-text>
@@ -2939,7 +3095,7 @@ The logo, colors, and font in the signature must match the rest of the brand —
 <p>:::warning Бот не принимает файл
 Сверьте файл с требованиями: одна сторона ровно 512 пикселей (у эмодзи 100×100); формат PNG или WebP, JPG не подходит; файл отправлен документом, а не фото; у WebM нет звуковой дорожки и длина не больше 3 секунд. Исправьте файл и отправьте его снова.
 :::</p>
-<p>Ссылку можно закрепить в канале, вшить в пост или QR‑код с логотипом. Управление паком — тоже через бота: /addsticker, /delsticker, /ordersticker, статистика установок — /packstats.</p>
+<p>Ссылку можно закрепить в канале, вшить в пост или <a href="../qr-kod-s-logotipom/">QR‑код с логотипом</a>. Управление паком — тоже через бота: /addsticker, /delsticker, /ordersticker, статистика установок — /packstats.</p>
 <h2>Шаг 3. Подключаем эмодзи в канале</h2>
 <p>Кастомные эмодзи раскрываются в каналах и группах:</p>
 <ul><li>**В постах** фирменные эмодзи видят все подписчики, даже без Premium (вставлять их может админ с Premium).</li><li>**Реакции.** В настройках канала можно разрешить реакции кастомными эмодзи — свой логотип вместо сердечка (для каналов с уровнем/бустами).</li><li>**Эмодзи‑статус** — Premium‑пользователи могут поставить ваш эмодзи рядом со своим именем: механика «носить мерч бренда».</li><li>**Эмодзи‑пак группы.** Группа, набравшая 4‑й уровень бустов, может выбрать один пак кастомных эмодзи, которым пользуются все участники, даже без Premium.</li></ul>
@@ -2997,7 +3153,7 @@ Telegram has light and dark themes and your sticker must read on both. The class
 <p>:::warning The bot rejects a file
 Check the file against the requirements: one side exactly 512 pixels (100×100 for emoji); PNG or WebP format, JPG won't do; sent as a document rather than a photo; a WebM has no audio track and runs no longer than 3 seconds. Fix the file and send it again.
 :::</p>
-<p>Pin the link in your channel, embed it in a post or a QR code with a logo. Pack management also lives in the bot: /addsticker, /delsticker, /ordersticker, install stats via /packstats.</p>
+<p>Pin the link in your channel, embed it in a post or a <a href="../qr-kod-s-logotipom/">QR code with a logo</a>. Pack management also lives in the bot: /addsticker, /delsticker, /ordersticker, install stats via /packstats.</p>
 <h2>Step 3. Wire the emoji into your channel</h2>
 <p>Custom emoji shine in channels and groups:</p>
 <ul><li>**In posts** branded emoji are visible to all subscribers, Premium or not (a Premium admin inserts them).</li><li>**Reactions.** Channel settings can allow custom-emoji reactions — your logo instead of a heart (for boosted channels).</li><li>**Emoji status** — Premium users can set your emoji next to their name: the "wear the brand's merch" mechanic.</li><li>**Group emoji pack.** A group that reaches boost level 4 can pick one custom emoji pack that all members use, Premium or not.</li></ul>

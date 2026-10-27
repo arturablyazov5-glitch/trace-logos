@@ -102,7 +102,7 @@ tags_en: How-To, Emoji, Telegram
 Сверьте файл с требованиями: одна сторона ровно 512 пикселей (у эмодзи 100×100); формат PNG или WebP, JPG не подходит; файл отправлен документом, а не фото; у WebM нет звуковой дорожки и длина не больше 3 секунд. Исправьте файл и отправьте его снова.
 :::
 
-Ссылку можно закрепить в канале, вшить в пост или QR‑код с логотипом. Управление паком — тоже через бота: /addsticker, /delsticker, /ordersticker, статистика установок — /packstats.
+Ссылку можно закрепить в канале, вшить в пост или [QR‑код с логотипом](../qr-kod-s-logotipom/). Управление паком — тоже через бота: /addsticker, /delsticker, /ordersticker, статистика установок — /packstats.
 
 ## Шаг 3. Подключаем эмодзи в канале
 
@@ -223,7 +223,7 @@ Single-color emoji, such as a monochrome brand mark, are worth making adaptive: 
 Check the file against the requirements: one side exactly 512 pixels (100×100 for emoji); PNG or WebP format, JPG won't do; sent as a document rather than a photo; a WebM has no audio track and runs no longer than 3 seconds. Fix the file and send it again.
 :::
 
-Pin the link in your channel, embed it in a post or a QR code with a logo. Pack management also lives in the bot: /addsticker, /delsticker, /ordersticker, install stats via /packstats.
+Pin the link in your channel, embed it in a post or a [QR code with a logo](../qr-kod-s-logotipom/). Pack management also lives in the bot: /addsticker, /delsticker, /ordersticker, install stats via /packstats.
 
 ## Step 3. Wire the emoji into your channel
 

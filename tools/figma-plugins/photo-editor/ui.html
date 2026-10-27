@@ -228,6 +228,16 @@
   .banner.warn { background: var(--warn-soft); color: var(--warn); }
   .banner.error { background: var(--danger-soft); color: var(--danger); }
 
+  /* Прогресс пакетного экспорта в WebP — строка под рядом кнопок. */
+  .export-progress {
+    margin: 0;
+    padding: 0 2px;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--text-faint);
+  }
+
   /* ── Секции инструментов ──
      Между обрезкой/отражением/восстановлением нет причинно-следственной
      связи (обрезка меняет пиксели, восстановление — только геометрию
@@ -615,9 +625,8 @@
       <!-- Экспорт оригинала: PNG @1x с ИСХОДНЫМИ пикселями фото (до любой
            обрезки/сжатия/поворота, применённых в макете), при этом сам
            узел на холсте НЕ трогается — в отличие от "Восстановить
-           оригинал", которая меняет реальный слой. Доступна только на
-           одиночном выделении (см. renderSelection/canExportOriginal) —
-           у нескольких узлов нет общего "оригинала" в один клик. -->
+           оригинал", которая меняет реальный слой. Несколько выделенных
+           слоёв сохраняются одним ZIP-архивом. -->
       <button class="flip-card" id="exportOriginalBtn" type="button">
         <span class="flip-card-icon icon-swap">
           <svg class="icon icon-swap-a"><use href="#icon-download"/></svg>
@@ -806,7 +815,7 @@
     <img class="tlp-icon" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDQwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMF8xNjg5XzQ1MSkiPgo8cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgZmlsbD0iIzE2MTUxQSIvPgo8cGF0aCBkPSJNMjA4LjMgMTAxLjgwNEMyMDUuNjk0IDEwMC42MTUgMjAyLjg2NCAxMDAgMjAwIDEwMEMxOTcuMTM2IDEwMCAxOTQuMzA2IDEwMC42MTUgMTkxLjcgMTAxLjgwNEwxMDYgMTQwLjgwNEMxMDQuMjI2IDE0MS41ODYgMTAyLjcxNyAxNDIuODY4IDEwMS42NTggMTQ0LjQ5MkMxMDAuNTk5IDE0Ni4xMTcgMTAwLjAzNSAxNDguMDE0IDEwMC4wMzUgMTQ5Ljk1NEMxMDAuMDM1IDE1MS44OTMgMTAwLjU5OSAxNTMuNzkgMTAxLjY1OCAxNTUuNDE1QzEwMi43MTcgMTU3LjA0IDEwNC4yMjYgMTU4LjMyMSAxMDYgMTU5LjEwNEwxOTEuOCAxOTguMjA0QzE5NC40MDYgMTk5LjM5MiAxOTcuMjM2IDIwMC4wMDcgMjAwLjEgMjAwLjAwN0MyMDIuOTY0IDIwMC4wMDcgMjA1Ljc5NSAxOTkuMzkyIDIwOC40IDE5OC4yMDRMMjk0LjIgMTU5LjIwNEMyOTUuOTc1IDE1OC40MjEgMjk3LjQ4MyAxNTcuMTQgMjk4LjU0MyAxNTUuNTE1QzI5OS42MDIgMTUzLjg5IDMwMC4xNjYgMTUxLjk5MyAzMDAuMTY2IDE1MC4wNTRDMzAwLjE2NiAxNDguMTE0IDI5OS42MDIgMTQ2LjIxNyAyOTguNTQzIDE0NC41OTJDMjk3LjQ4MyAxNDIuOTY4IDI5NS45NzUgMTQxLjY4NiAyOTQuMiAxNDAuOTA0TDIwOC4zIDEwMS44MDRaIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjE1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTEwMCAyMDBDOTkuOTk1MyAyMDEuOTEzIDEwMC41MzkgMjAzLjc4NyAxMDEuNTY3IDIwNS4zOTlDMTAyLjU5NSAyMDcuMDEyIDEwNC4wNjQgMjA4LjI5NyAxMDUuOCAyMDkuMUwxOTEuOCAyNDguMkMxOTQuMzkyIDI0OS4zNzQgMTk3LjIwNSAyNDkuOTgxIDIwMC4wNSAyNDkuOTgxQzIwMi44OTUgMjQ5Ljk4MSAyMDUuNzA4IDI0OS4zNzQgMjA4LjMgMjQ4LjJMMjk0LjEgMjA5LjJDMjk1Ljg3IDIwOC40MDQgMjk3LjM3IDIwNy4xMTEgMjk4LjQxOCAyMDUuNDc3QzI5OS40NjYgMjAzLjg0NCAzMDAuMDE1IDIwMS45NDEgMzAwIDIwMCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0xMDAgMjUwQzk5Ljk5NTMgMjUxLjkxMyAxMDAuNTM5IDI1My43ODcgMTAxLjU2NyAyNTUuMzk5QzEwMi41OTUgMjU3LjAxMiAxMDQuMDY0IDI1OC4yOTcgMTA1LjggMjU5LjFMMTkxLjggMjk4LjJDMTk0LjM5MiAyOTkuMzc0IDE5Ny4yMDUgMjk5Ljk4MSAyMDAuMDUgMjk5Ljk4MUMyMDIuODk1IDI5OS45ODEgMjA1LjcwOCAyOTkuMzc0IDIwOC4zIDI5OC4yTDI5NC4xIDI1OS4yQzI5NS44NyAyNTguNDA0IDI5Ny4zNyAyNTcuMTExIDI5OC40MTggMjU1LjQ3N0MyOTkuNDY2IDI1My44NDQgMzAwLjAxNSAyNTEuOTQxIDMwMCAyNTAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMTUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8ZyBmaWx0ZXI9InVybCgjZmlsdGVyMF9mXzE2ODlfNDUxKSI+CjxwYXRoIGQ9Ik0zOTMgMTg2LjI5NEMxOTguMiAxMTEuMDk0IDEwMiAxODYuMjk0IC0zIDI1NS43OTRMLTI1NCA1NDkuMjk0TDE1Ni41IDU3Ni4yOTRMNTM4IDYyMi4yOTRDNTgwLjMzMyA1NzUuNjI3IDU4Ny44IDI2MS40OTQgMzkzIDE4Ni4yOTRaIiBmaWxsPSIjNTIyOUNEIi8+CjwvZz4KPGcgb3BhY2l0eT0iMC44IiBmaWx0ZXI9InVybCgjZmlsdGVyMV9mXzE2ODlfNDUxKSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOnBsdXMtbGlnaHRlciI+CjxwYXRoIGQ9Ik0zOTMgMzI2LjI5NEMyMTUuNSAzNjUuNzk0IDEwOCAyNjcuNzk0IC0yLjUgMzE5LjI5NEMtNy45MTc1NyAzMjEuODE5IC0yMTguNSA0NzIuNzk0IC0yMTguNSA0NzIuNzk0TC0zNjkgNTg1LjI5NEw1MjggNTk3Ljc5NFY0NTMuNzk0QzUyOCA0NTMuNzk0IDQxMC4zNjIgMzIyLjQzIDM5MyAzMjYuMjk0WiIgZmlsbD0id2hpdGUiLz4KPC9nPgo8L2c+CjxkZWZzPgo8ZmlsdGVyIGlkPSJmaWx0ZXIwX2ZfMTY4OV80NTEiIHg9Ii00NTQiIHk9Ii00NSIgd2lkdGg9IjEyMTYuNTEiIGhlaWdodD0iODY3LjI5NCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBjb2xvci1pbnRlcnBvbGF0aW9uLWZpbHRlcnM9InNSR0IiPgo8ZmVGbG9vZCBmbG9vZC1vcGFjaXR5PSIwIiByZXN1bHQ9IkJhY2tncm91bmRJbWFnZUZpeCIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluPSJTb3VyY2VHcmFwaGljIiBpbjI9IkJhY2tncm91bmRJbWFnZUZpeCIgcmVzdWx0PSJzaGFwZSIvPgo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxMDAiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl8xNjg5XzQ1MSIvPgo8L2ZpbHRlcj4KPGZpbHRlciBpZD0iZmlsdGVyMV9mXzE2ODlfNDUxIiB4PSItNDk5IiB5PSIxNzMuOTU0IiB3aWR0aD0iMTE1NyIgaGVpZ2h0PSI1NTMuODQiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbj0iU291cmNlR3JhcGhpYyIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0ic2hhcGUiLz4KPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNjUiIHJlc3VsdD0iZWZmZWN0MV9mb3JlZ3JvdW5kQmx1cl8xNjg5XzQ1MSIvPgo8L2ZpbHRlcj4KPGNsaXBQYXRoIGlkPSJjbGlwMF8xNjg5XzQ1MSI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBmaWxsPSJ3aGl0ZSIvPgo8L2NsaXBQYXRoPgo8L2RlZnM+Cjwvc3ZnPg==" alt="" />
     <span class="tlp-body">
       <span class="tlp-title">Trace Logo's</span>
-      <span class="tlp-sub">816 логотипов и 1918 эмодзи<br>в SVG и PNG</span>
+      <span class="tlp-sub">817 логотипов и 1918 эмодзи<br>в SVG и PNG</span>
     </span>
     <span class="tlp-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
   </button>
@@ -818,7 +827,7 @@
     <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTggMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE4IiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjRkMzRjFEIiBkPSJNMCAwaDE4djE4SDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTExLjgyMyAxNGgtMS43NDhWNS4zNTRoLS43NzhjLTEuNDI4IDAtMi4xNzYuNzEzLTIuMTc2IDEuNzc5IDAgMS4yMDkuNTE2IDEuNzY5IDEuNTgzIDIuNDgybC44NzkuNTkzLTIuNTI3IDMuNzloLTEuODhsMi4yNzUtMy4zODRDNi4xNDMgOS42OCA1LjQwNyA4Ljc2OSA1LjQwNyA3LjIzIDUuNDA3IDUuMzA4IDYuNzQ3IDQgOS4yODQgNGgyLjUyN3Y5Ljk5N2guMDEyeiIvPjwvc3ZnPg==" alt="Яндекс" title="Яндекс" />
     <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjI4IiBoZWlnaHQ9IjI4IiBmaWxsPSJ1cmwoI3BhaW50MF9saW5lYXJfMTEzMF81Nzg4KSIvPgo8cGF0aCBkPSJNMTMuOTkxMiA1QzE2LjA1MDYgNS4wMDExNCAxOC4wNDc2IDUuNzA4MzkgMTkuNjQ4NCA3LjAwMzkxTDE3Ljg5MjYgOC4yOTg4M0MxNi44NDE2IDcuNTc3MjkgMTUuNjE0OSA3LjE1OTYzIDE0LjM0NjcgNy4wODY5MUwxNC4zNDU3IDcuMTA4NEMxNC4yMjA5IDcuMDkwNDUgMTQuMTE1IDcuMDkwODIgMTMuOTkxMiA3LjA5MDgyQzEzLjA4MzcgNy4wOTA4NCAxMi4xODQ5IDcuMjY5OTEgMTEuMzQ3NyA3LjYyMDEyQzEwLjUxMDUgNy45NzAzMiA5Ljc1MTQ5IDguNDgzNzYgOS4xMTQyNiA5LjEyOTg4TDkuMTA4NCA5LjEyNDAyQzguNTA3NDUgOS43MjE5NSA4LjAyMTI1IDEwLjQyNjIgNy42NzQ4MSAxMS4yMDIxQzcuMzI5MzIgMTEuOTc2IDcuMTI4NjggMTIuODA2MSA3LjA4Mzk5IDEzLjY1MDRMNy4wOTI3NyAxMy42NTE0QzcuMDg2MyAxMy42OTYgNy4wODM3MSAxMy43Mzg2IDcuMDgxMDYgMTMuNzgwM0M3LjA3ODQ3IDEzLjg1NjEgNy4wNzUyOCAxMy45MzE5IDcuMDc1MiAxNC4wMDc4QzcuMDczODQgMTQuOTE0OCA3LjI1MjU4IDE1LjgxMjcgNy42MDI1NCAxNi42NDk0QzcuOTUyODQgMTcuNDg2OSA4LjQ2Njc2IDE4LjI0NjYgOS4xMTQyNiAxOC44ODI4TDkuMTA1NDcgMTguODkwNkM5LjcwMjkxIDE5LjQ5MzUgMTAuNDA3NyAxOS45ODEzIDExLjE4NDYgMjAuMzI4MUMxMS45NTkgMjAuNjczOCAxMi43ODk4IDIwLjg3MjkgMTMuNjM0OCAyMC45MTZMMTMuNjM1NyAyMC45MDYyQzEzLjY5IDIwLjkxNDEgMTMuNzQwOSAyMC45MTc0IDEzLjc5MSAyMC45MTk5QzEzLjg1NzYgMjAuOTIxOCAxMy45MjQ1IDIwLjkyNDkgMTMuOTkxMiAyMC45MjQ4QzE0Ljg5OTUgMjAuOTMwNCAxNS43OTk3IDIwLjc1MjggMTYuNjM3NyAyMC40MDIzQzE3LjQ3NTcgMjAuMDUxOCAxOC4yMzQzIDE5LjUzNTUgMTguODY4MiAxOC44ODQ4TDE4Ljg4MjggMTguODk5NEMxOS40ODkxIDE4LjMwMDQgMTkuOTc5OSAxNy41OTM1IDIwLjMyODEgMTYuODEzNUMyMC43MjIzIDE1LjkzMDQgMjAuOTI1NyAxNC45NzM5IDIwLjkyNDggMTQuMDA2OFYxMy44MjkxTDIyLjg1ODQgMTIuMzkyNkMyMi45NDY0IDEyLjkyNDUgMjMgMTMuNDU2OSAyMyAxNC4wMDY4QzIzLjAwMDQgMTUuMjYzNyAyMi43MzY4IDE2LjUwNjcgMjIuMjI2NiAxNy42NTUzQzIxLjcxNjQgMTguODAzOCAyMC45NzA5IDE5LjgzMjUgMjAuMDM4MSAyMC42NzQ4TDIwLjAyMzQgMjAuNjU4MkMxOS4yNTgyIDIxLjM1NDkgMTguMzc3OCAyMS45MTUgMTcuNDE5OSAyMi4zMTI1QzE2LjMzMjkgMjIuNzYzNiAxNS4xNjggMjIuOTk2NCAxMy45OTEyIDIyLjk5OFYyM0MxMi43MzQyIDIzLjAwMjMgMTEuNDkwNiAyMi43Mzk3IDEwLjM0MTggMjIuMjI5NUM5LjE5Mjk4IDIxLjcxOTIgOC4xNjQzIDIwLjk3MjMgNy4zMjMyNCAyMC4wMzgxTDcuMzMyMDMgMjAuMDI5M0M2LjYzOTI3IDE5LjI2NjMgNi4wODE0NSAxOC4zODk0IDUuNjg1NTUgMTcuNDM1NUM1LjIzMjE1IDE2LjM0MzEgNC45OTk0MiAxNS4xNzExIDUgMTMuOTg4M0M1IDEzLjk3NzMgNS4wMDA3OCAxMy45NjYyIDUuMDAwOTggMTMuOTU1MUM1LjAwNjA2IDEyLjcxNiA1LjI2NzMzIDExLjQ5MTIgNS43NzA1MSAxMC4zNTg0QzYuMjgwODYgOS4yMDk1MSA3LjAyNzU5IDguMTgwOTMgNy45NjE5MiA3LjMzOTg0TDcuOTY3NzcgNy4zNDY2OEM4LjczMDU1IDYuNjU0MzQgOS42MDggNi4wOTc4NSAxMC41NjE1IDUuNzAyMTVDMTEuNjQ4NyA1LjI1MTAyIDEyLjgxNDMgNS4wMTgyMyAxMy45OTEyIDUuMDE2NlY1WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTIxLjEyMDEgOC41MDk3N0MyMS41NDYxIDkuMDU5NzIgMjEuOTAwMiA5LjY2Mjg0IDIyLjIwMjIgMTAuMzAwOEwxNC4wMDg4IDE2LjM0ODZMMTAuNTY5MyAxNC4xODQ2VjExLjU5NTdMMTMuOTkxMiAxMy43NDEyTDIxLjEyMDEgOC41MDk3N1oiIGZpbGw9IndoaXRlIi8+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9InBhaW50MF9saW5lYXJfMTEzMF81Nzg4IiB4MT0iLTMuNjEwNDFlLTA3IiB5MT0iMjguNDc5IiB4Mj0iMzIuNDA0IiB5Mj0iNy4xOCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBvZmZzZXQ9IjAuMDciIHN0b3AtY29sb3I9IiNBM0NEMzkiLz4KPHN0b3Agb2Zmc2V0PSIwLjI2IiBzdG9wLWNvbG9yPSIjODFDNTVGIi8+CjxzdG9wIG9mZnNldD0iMC45MjIiIHN0b3AtY29sb3I9IiMwRkE4RTAiLz4KPC9saW5lYXJHcmFkaWVudD4KPC9kZWZzPgo8L3N2Zz4=" alt="Сбер" title="Сбер" />
     <img class="tlp-logo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzIgMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjMDdGIiBkPSJNMCAwaDMydjMySDB6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE2LjggMjEuNjE1Yy02LjE1IDAtOS42NTYtNC4yMDgtOS44LTExLjIyaDMuMDkzYy4wOTkgNS4xNDIgMi4zNjQgNy4zMTggNC4xNjMgNy43Njd2LTcuNzY4aDIuOTA0djQuNDMzYzEuNzcxLS4xOSAzLjY0MS0yLjIxMiA0LjI3LTQuNDQyaDIuODk2YTguNTcgOC41NyAwIDAgMS0zLjkzOCA1LjYwMkE4Ljg3IDguODcgMCAwIDEgMjUgMjEuNjE1aC0zLjE5MmMtLjY4My0yLjEzMS0yLjM5MS0zLjc4NS00LjY0OC00LjAxdjQuMDFoLS4zNiIvPjwvc3ZnPg==" alt="ВКонтакте" title="ВКонтакте" />
-    <span class="tlp-more">и ещё<br>810 брендов</span>
+    <span class="tlp-more">и ещё<br>811 брендов</span>
   </div>
 
   <button class="tlp-donate" type="button" data-tlp-url="https://app.lava.top/products/6f3c8efd-27c3-41a8-acb1-559b83ea3b46/d9261f0e-d716-418c-b91d-764e83f1c01c?currency=RUB">
@@ -906,8 +915,8 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
   var rows = [cropBtn, restoreBtn, flipHBtn, flipVBtn, exportWebpBtn, exportOriginalBtn];
   // "Оригинал в PNG" дополнительно завязана на количество выделенных
-  // изображений (см. renderSelection) — на нескольких узлах общего
-  // "оригинала" нет, кнопка неактивна независимо от busy.
+  // изображений (см. renderSelection): без подходящих изображений
+  // кнопка неактивна независимо от busy.
   var canExportOriginal = false;
 
   var busy = false;      // идёт операция — блокируем все кнопки
@@ -989,7 +998,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     busy = value;
     rows.forEach(function (btn) { btn.disabled = value; });
     // "Оригинал в PNG" не просто разблокируется — она остаётся выключенной,
-    // если выделено не ровно одно изображение, даже когда busy снят.
+    // если нет подходящих изображений, даже когда busy снят.
     if (!value) exportOriginalBtn.disabled = !canExportOriginal;
     refreshHistoryButtons();
   }
@@ -1036,7 +1045,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
     // Пересчитываем независимо от busy — setBusy(false) в конце операции
     // читает именно это значение, чтобы не разблокировать кнопку вслепую.
-    canExportOriginal = count === 1;
+    canExportOriginal = count >= 1;
     if (!busy) exportOriginalBtn.disabled = !canExportOriginal;
 
     if (!hasSelection) {
@@ -1130,26 +1139,27 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   flipHBtn.addEventListener('click', function () { startFlip(flipHBtn, 'h'); });
   flipVBtn.addEventListener('click', function () { startFlip(flipVBtn, 'v'); });
 
-  exportWebpBtn.addEventListener('click', function () {
-    if (busy) return;
-    activeBtn = exportWebpBtn;
+  function startExport(btn, mode) {
+    if (busy || btn.disabled) return;
+    activeBtn = btn;
     setBusy(true);
-    setLoading(exportWebpBtn, true);
+    setLoading(btn, true);
     doneCount = 0;
     skipCount = 0;
     opLabel = 'экспортировано';
-    exportResults = [];  // новый прогон — результаты прошлого не в счёт
-    isExportRun = true;  // checkAllDone() должен уйти в finalizeExport()
-    parent.postMessage({ pluginMessage: { type: 'start-export-webp' } }, '*');
-  });
-
-  exportOriginalBtn.addEventListener('click', function () {
-    if (busy || exportOriginalBtn.disabled) return;
-    activeBtn = exportOriginalBtn;
-    setBusy(true);
-    setLoading(exportOriginalBtn, true);
-    parent.postMessage({ pluginMessage: { type: 'start-export-original' } }, '*');
-  });
+    exportResults = [];
+    isExportRun = true;
+    exportMode = mode;
+    exportBatch = null;
+    exportTotal = 0;
+    exportProgress.textContent = 'Подготовка экспорта…';
+    setHidden(exportProgress, false);
+    parent.postMessage({ pluginMessage: {
+      type: mode === 'webp' ? 'start-export-webp' : 'start-export-original',
+    } }, '*');
+  }
+  exportWebpBtn.addEventListener('click', function () { startExport(exportWebpBtn, 'webp'); });
+  exportOriginalBtn.addEventListener('click', function () { startExport(exportOriginalBtn, 'original-png'); });
 
   undoBtn.addEventListener('click', function () {
     if (undoBtn.disabled) return;
@@ -1318,29 +1328,34 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   }
 
-  // Кодирует байты картинки в WebP-Blob. Без скачивания — при нескольких
-  // выделенных фото результаты сначала копятся в exportResults и уходят
-  // на диск ОДНИМ архивом (см. finalizeExport ниже), поэтому кодирование
-  // можно гнать параллельно, не по одному — гонка была именно в скачивании
-  // файлов, не в canvas.toBlob().
+  // Слот конвейера освобождается только после toBlob и очистки ресурсов.
   function encodeWebp(bytes) {
     return new Promise(function (resolve, reject) {
-      var blob = new Blob([bytes]);
-      var url = URL.createObjectURL(blob);
+      var url = URL.createObjectURL(new Blob([bytes], { type: 'image/png' }));
       var img = new Image();
-      img.onload = function () {
+      var canvas = document.createElement('canvas');
+      function cleanup() {
+        canvas.width = canvas.height = 0;
+        img.onload = img.onerror = null;
+        img.src = '';
         URL.revokeObjectURL(url);
-        var canvas = document.createElement('canvas');
-        canvas.width = img.naturalWidth;
-        canvas.height = img.naturalHeight;
-        canvas.getContext('2d').drawImage(img, 0, 0);
-        canvas.toBlob(function (webpBlob) {
-          if (!webpBlob) { reject(new Error('toBlob failed')); return; }
-          resolve(webpBlob);
-        }, 'image/webp', WEBP_EXPORT_QUALITY);
+      }
+      img.onload = function () {
+        try {
+          canvas.width = img.naturalWidth;
+          canvas.height = img.naturalHeight;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          canvas.toBlob(function (webpBlob) {
+            cleanup();
+            if (!webpBlob || webpBlob.type !== 'image/webp') {
+              reject(new Error('WebP encoding failed')); return;
+            }
+            resolve(webpBlob);
+          }, 'image/webp', WEBP_EXPORT_QUALITY);
+        } catch (err) { cleanup(); reject(err); }
       };
       img.onerror = function () {
-        URL.revokeObjectURL(url);
+        cleanup();
         reject(new Error('image decode failed'));
       };
       img.src = url;
@@ -1364,32 +1379,73 @@ https://github.com/nodeca/pako/blob/main/LICENSE
   //    поэтому счётчик показывал "экспортировано 12" при 5 сохранённых.
   // 2. N файлов = N системных диалогов сохранения — на 1000 фото это
   //    1000 подтверждений вручную.
-  // Один архив решает обе: одно скачивание, один диалог, один сигнал
-  // успеха/провала, никаких гонок. Так же устроены все плагины массового
+  // Один архив решает обе: одно скачивание, один диалог. Браузер
+  // не сообщает, сохранил ли пользователь файл на диск. Так же устроены все плагины массового
   // экспорта в Figma — ровно из-за этого ограничения платформы.
   //
-  // Одиночное фото уходит обычным .webp — архивировать один файл незачем,
+  // Одиночное фото уходит обычным .webp или .png — архивировать один файл незачем,
   // а частый сценарий "экспортнуть одну картинку" и так работает надёжно
   // (одна загрузка, один диалог). Выбор варианта — пользовательский,
   // 2026-08-20.
   var exportResults = []; // {name, blob} — копится, пока не пришли все process-export-image
   var isExportRun = false; // true между кликом по кнопке и полным финалом экспорта
 
+  var exportMode = 'webp';
+  var exportTotal = 0;
+  var exportBatch = null;
+  var exportProgress = document.createElement('p');
+  exportProgress.setAttribute('role', 'status');
+  exportProgress.className = 'export-progress';
+  exportProgress.hidden = true;
+  exportWebpBtn.parentNode.insertAdjacentElement('afterend', exportProgress);
+
+  // Постобработка и расширение принадлежат UI, где доступны canvas и Blob.
+  var exportFormats = {
+    webp: { extension: '.webp', label: 'WebP', process: encodeWebp },
+    'original-png': { extension: '.png', label: 'PNG', process: async function (bytes) {
+      try {
+        var result = await cropToContent(bytes);
+        return new Blob([result.changed ? result.bytes : bytes], { type: 'image/png' });
+      } catch (err) {
+        return new Blob([bytes], { type: 'image/png' });
+      } finally {
+        bytes = null;
+      }
+    } },
+  };
+
+  function updateExportProgress() {
+    exportProgress.textContent = 'Обработано ' + (doneCount + skipCount) + ' из ' + exportTotal +
+      (skipCount ? ', пропущено ' + skipCount : '');
+    fitWindow();
+  }
+
   function finalizeExport() {
     isExportRun = false;
-    var results = exportResults;
+    var format = exportFormats[exportMode];
+    var results = exportResults.sort(function (a, b) { return a.index - b.index; });
     exportResults = [];
 
     function finish() {
+      results = [];
+      zip = null;
       var msg = 'Готово: ' + opLabel + ' ' + doneCount + (skipCount ? ', пропущено ' + skipCount : '');
       parent.postMessage({ pluginMessage: { type: 'all-done', message: msg } }, '*');
+      setHidden(exportProgress, true);
       finishActiveBtn();
     }
 
     if (results.length === 0) { finish(); return; }
 
-    if (results.length === 1) {
-      downloadBlob(results[0].blob, results[0].name + '.webp');
+    if (exportTotal === 1) {
+      try {
+        downloadBlob(results[0].blob, results[0].name + format.extension);
+      } catch (err) {
+        console.error('Export download failed:', err);
+        doneCount--;
+        skipCount++;
+        showError('Не удалось скачать ' + format.label);
+      }
       finish();
       return;
     }
@@ -1401,15 +1457,19 @@ https://github.com/nodeca/pako/blob/main/LICENSE
     var usedNames = Object.create(null);
     for (var i = 0; i < results.length; i++) {
       var base = results[i].name;
-      var fname = base + '.webp';
+      var fname = base + format.extension;
       var n = 2;
-      while (usedNames[fname]) { fname = base + ' (' + n + ').webp'; n++; }
+      while (usedNames[fname]) { fname = base + ' (' + n + ')' + format.extension; n++; }
       usedNames[fname] = true;
       zip.file(fname, results[i].blob);
     }
-    zip.generateAsync({ type: 'blob' }).then(function (zipBlob) {
+    zip.generateAsync({ type: 'blob', compression: 'STORE' }, function (meta) {
+      exportProgress.textContent = 'Сборка ZIP: ' + Math.floor(meta.percent) + '%';
+    }).then(function (zipBlob) {
       downloadBlob(zipBlob, 'trace-logos-export.zip');
-    }).catch(function () {
+    }).catch(function (err) {
+      console.error('Export ZIP failed:', err);
+      showError('Не удалось собрать или скачать ZIP');
       // Архив не собрался — ни один файл фактически не сохранился,
       // счётчик обязан это отражать, а не врать "готово N".
       skipCount += results.length;
@@ -1419,7 +1479,7 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 
   function checkAllDone() {
     if (pending > 0) return;
-    if (isExportRun) { finalizeExport(); return; }
+    if (isExportRun) return; // Экспорт завершается только по export-complete.
     var msg = 'Готово: ' + opLabel + ' ' + doneCount + (skipCount ? ', пропущено ' + skipCount : '');
     parent.postMessage({ pluginMessage: { type: 'all-done', message: msg } }, '*');
     finishActiveBtn();
@@ -1505,46 +1565,40 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       return;
     }
 
-    if (msg.type === 'process-export-image') {
-      // Только кодируем и копим — скачивание одно на весь прогон, его
-      // делает finalizeExport() когда pending дойдёт до нуля.
-      pending++;
-      encodeWebp(msg.bytes).then(function (webpBlob) {
-        doneCount++;
-        exportResults.push({ name: sanitizeFileName(msg.name), blob: webpBlob });
-      }).catch(function () {
-        skipCount++;
-      }).finally(function () {
-        pending--;
-        checkAllDone();
-      });
+    // Сообщения пакета, брошенного после обрыва, к текущему прогону не относятся.
+    if (msg.type === 'export-started') {
+      if (!isExportRun || exportBatch !== null || msg.mode !== exportMode) return;
+      exportBatch = msg.batch;
+      exportTotal = msg.total;
+      updateExportProgress();
       return;
     }
-
-    // "Оригинал в PNG" — одиночная операция (кнопка недоступна при
-    // count !== 1), поэтому без очереди pending/exportResults, как у
-    // "Экспорт в WebP": один ответ code.js — одно скачивание. Байты от
-    // code.js — это НЕобрезанный оригинал (натуральный размер картинки,
-    // без учёта того, что узел на холсте мог быть обрезан по прозрачности);
-    // прогоняем через тот же cropToContent(), которым пользуется "Обрезать
-    // прозрачность", чтобы пустые прозрачные поля срезались и здесь —
-    // тот же canvas-алгоритм, чтобы не завести вторую копию логики обрезки.
-    if (msg.type === 'process-export-original') {
-      cropToContent(msg.bytes).then(function (result) {
-        var finalBytes = result.changed ? result.bytes : msg.bytes;
-        var originalBlob = new Blob([finalBytes], { type: 'image/png' });
-        downloadBlob(originalBlob, sanitizeFileName(msg.name) + '.png');
-      }).catch(function () {
-        // Обрезка не удалась (например, decode-ошибка) — не терять результат
-        // целиком, скачиваем то, что реально отдал Figma-рендер.
-        var originalBlob = new Blob([msg.bytes], { type: 'image/png' });
-        downloadBlob(originalBlob, sanitizeFileName(msg.name) + '.png');
+    if (msg.type === 'export-skipped') {
+      if (!isExportRun || msg.batch !== exportBatch) return;
+      skipCount++;
+      updateExportProgress();
+      return;
+    }
+    if (msg.type === 'export-complete') {
+      if (!isExportRun || msg.batch !== exportBatch) return;
+      finalizeExport();
+      return;
+    }
+    if (msg.type === 'process-export-image') {
+      if (!isExportRun || msg.batch !== exportBatch) return;
+      var encoding = exportFormats[exportMode].process(msg.bytes);
+      msg.bytes = null;
+      encoding.then(function (blob) {
+        if (msg.batch !== exportBatch || !isExportRun) return;
+        doneCount++;
+        exportResults.push({ index: msg.index, name: sanitizeFileName(msg.name), blob: blob });
+      }).catch(function (err) {
+        if (msg.batch !== exportBatch || !isExportRun) return;
+        console.error('Export processing failed:', msg.name, err);
+        skipCount++;
       }).finally(function () {
-        parent.postMessage({ pluginMessage: {
-          type: 'all-done',
-          message: 'Готово: экспортирован оригинал в PNG',
-        } }, '*');
-        finishActiveBtn();
+        updateExportProgress();
+        parent.postMessage({ pluginMessage: { type: 'export-image-done', batch: msg.batch, index: msg.index } }, '*');
       });
       return;
     }
@@ -1554,7 +1608,9 @@ https://github.com/nodeca/pako/blob/main/LICENSE
       // хотя бы одно изображение") — флаг нельзя оставлять поднятым, иначе
       // следующий НЕ-экспортный прогон уйдёт в finalizeExport().
       isExportRun = false;
+      exportBatch = null;
       exportResults = [];
+      setHidden(exportProgress, true);
       showError(msg.message);
       finishActiveBtn();
       return;

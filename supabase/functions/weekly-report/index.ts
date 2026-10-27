@@ -29,7 +29,7 @@ Deno.serve(async (req) => {
     }
     const telegram = await fetch(`https://api.telegram.org/bot${env('BOT_TOKEN')}/sendMessage`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: env('CHAT_ID'), text: formatReport(report, test) }),
+      body: JSON.stringify({ chat_id: env('CHAT_ID'), text: formatReport(report, test), parse_mode: 'HTML' }),
     });
     const result = await telegram.json();
     if (!telegram.ok || !result.ok) throw new Error(`Telegram rejected message: ${result.error_code || telegram.status}`);

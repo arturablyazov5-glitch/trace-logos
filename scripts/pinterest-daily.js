@@ -21,19 +21,27 @@ async function browserReady() {
   } catch { return false; }
 }
 
+// Возвращает child, если браузер подняли мы (его же и закрываем); null — уже был открыт пользователем.
 async function startYandex() {
-  if (await browserReady()) return;
+  if (await browserReady()) return null;
   const log = fs.openSync(path.join(STATE, 'yandex.log'), 'a', 0o600);
+  let child;
   try {
-    const child = spawn('/Applications/Yandex.app/Contents/MacOS/Yandex', [
+    child = spawn('/Applications/Yandex.app/Contents/MacOS/Yandex', [
       '--remote-debugging-address=127.0.0.1', '--remote-debugging-port=9223',
       `--user-data-dir=${PROFILE}`, '--no-first-run', 'https://ru.pinterest.com/pin-creation-tool/'
     ], { detached: true, stdio: ['ignore', log, log] });
     await new Promise((resolve, reject) => { child.once('spawn', resolve); child.once('error', reject); });
     child.unref();
   } finally { fs.closeSync(log); }
-  for (let i = 0; i < 60; i++) { if (await browserReady()) return; await sleep(1000); }
+  for (let i = 0; i < 60; i++) { if (await browserReady()) return child; await sleep(1000); }
+  stopYandex(child);
   throw new Error('Yandex debugging profile did not become ready on 9223');
+}
+
+function stopYandex(child) {
+  if (!child) return;
+  try { process.kill(child.pid, 'SIGTERM'); } catch (error) { if (error.code !== 'ESRCH') throw error; }
 }
 
 function records() {
@@ -54,6 +62,7 @@ async function daily(argv = []) {
   }
   const fd = fs.openSync(lock, 'wx', 0o600); fs.writeSync(fd, String(process.pid));
   const today = day(Date.now());
+  let launched = null;
   const logFile = path.join(STATE, `${today}.jsonl`);
   const log = entry => { const line = JSON.stringify({ time: new Date().toISOString(), ...entry }); console.log(line); fs.appendFileSync(logFile, line + '\n', { mode: 0o600 }); };
   try {
@@ -68,7 +77,8 @@ async function daily(argv = []) {
         child.once('exit', code => code === 0 ? resolve() : reject(new Error(`Pinterest refresh failed: ${code}`)));
       });
     }
-    await startYandex();
+    launched = await startYandex();
+    if (launched) log({ status: 'browser-started', pid: launched.pid });
     if (check) {
       const result = await main(['--next', '--allow-empty', ...ACCOUNT]);
       log({ status: 'check-complete', next: result?.campaign, dailyLimit: DAY_LIMIT, timezone: 'Europe/Moscow' }); return;
@@ -103,7 +113,10 @@ async function daily(argv = []) {
     }
     log({ status: 'daily-complete', added, publishedToday, limit: DAY_LIMIT });
   } catch (error) { log({ status: 'daily-failed', message: error.message }); throw error; }
-  finally { fs.closeSync(fd); fs.unlinkSync(lock); }
+  finally {
+    if (launched) { stopYandex(launched); log({ status: 'browser-stopped', pid: launched.pid }); }
+    fs.closeSync(fd); fs.unlinkSync(lock);
+  }
 }
 
 module.exports = { daily, day, startYandex };

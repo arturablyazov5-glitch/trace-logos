@@ -48,7 +48,7 @@ tags_en: Logo, Packaging, Print
 
 Пара трендов, которые стоит иметь в виду. Первый — **тактильность**: матовые, шершавые, «трогательные» поверхности, тиснение, где логотип ощущается пальцами, а не только виден. Это премиальный сигнал, который экран передать не может.
 
-Второй — **интерактивность**: QR‑коды на упаковке как мост в цифровое, часто оформленные под стиль бренда, а не безликим квадратом. Как встроить фирменную графику в такой код, разбираем в статье QR‑код с логотипом, а про кастомный дизайн кода как часть айдентики — в статье QR‑код в дизайне бренда.
+Второй — **интерактивность**: QR‑коды на упаковке как мост в цифровое, часто оформленные под стиль бренда, а не безликим квадратом. Как встроить фирменную графику в такой код, разбираем в статье [QR‑код с логотипом](../qr-kod-s-logotipom/), а про кастомный дизайн кода как часть айдентики — в статье QR‑код в дизайне бренда.
 
 ## Если коротко
 
@@ -97,7 +97,7 @@ Packaging printing can be limited — one or two colors, embossing, kraft withou
 
 A couple of trends worth keeping in mind. The first is **tactility**: matte, rough, "touchable" surfaces, embossing where the logo is felt with fingers, not just seen. It's a premium signal a screen can't convey.
 
-The second is **interactivity**: QR codes on packaging as a bridge to the digital, often styled to the brand rather than a faceless square. How to embed brand graphics into such a code — in a QR code with a logo, and on custom code design as part of the identity — in a QR code in brand design.
+The second is **interactivity**: QR codes on packaging as a bridge to the digital, often styled to the brand rather than a faceless square. How to embed brand graphics into such a code — in [a QR code with a logo](../qr-kod-s-logotipom/), and on custom code design as part of the identity — in a QR code in brand design.
 
 ## In short
 

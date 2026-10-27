@@ -286,6 +286,73 @@ figma.on('selectionchange', sendSelectionInfo);
 sendSelectionInfo();
 sendHistoryState();
 
+// Режим владеет получением PNG-байтов; очередь одинакова для обоих экспортов.
+// 'webp' — PNG-рендер узла как есть (обрезка/поворот/размер из макета).
+// 'original-png' — ИСХОДНЫЕ пиксели фото в натуральном размере, без трансформаций
+// узла: узел не трогаем (ни в документе, ни в истории плагина), картинка
+// переносится во временный Rectangle далеко от макета (x/y=200000), рендерится
+// и Rectangle сразу удаляется. Авто-обрезку прозрачных полей делает UI
+// (cropToContent) — на main thread нет canvas.
+async function getExportBytes(entry, mode) {
+  if (mode === 'webp') return entry.node.exportAsync({ format: 'PNG' });
+  var info = analyzeNode(entry.node);
+  if (!info) throw new Error(explainIneligible(entry.node));
+  var image = figma.getImageByHash(info.imageHash);
+  if (!image) throw new Error('Не удалось найти исходное изображение');
+  var size = await image.getSizeAsync();
+  var tempRect = figma.createRectangle();
+  try {
+    figma.currentPage.appendChild(tempRect);
+    tempRect.x = 200000;
+    tempRect.y = 200000;
+    tempRect.resize(size.width, size.height);
+    tempRect.fills = [{ type: 'IMAGE', scaleMode: 'FILL', imageHash: image.hash }];
+    return await tempRect.exportAsync({ format: 'PNG' });
+  } finally {
+    tempRect.remove();
+  }
+}
+
+// Два задания на весь конвейер, включая PNG-рендер и передачу в UI.
+// Следующий PNG создаём только после освобождения одного из слотов.
+var exportBatch = null;
+var exportBatchSeq = 0;
+async function pumpExportBatch() {
+  var batch = exportBatch;
+  if (!batch || batch.pumping) return;
+  batch.pumping = true;
+  try {
+    while (exportBatch === batch && batch.next < batch.entries.length && batch.active.size < 2) {
+      var index = batch.next++;
+      var entry = batch.entries[index];
+      batch.active.add(index);
+      try {
+        var bytes = await getExportBytes(entry, batch.mode);
+        figma.ui.postMessage({ type: 'process-export-image', batch: batch.id, index: index,
+          name: entry.name, bytes: bytes });
+        bytes = null;
+      } catch (err) {
+        batch.active.delete(index);
+        console.error('PNG export failed:', batch.mode, entry.name, err);
+        figma.ui.postMessage({ type: 'export-skipped', batch: batch.id });
+      } finally {
+        bytes = null;
+        batch.entries[index] = null;
+        entry = null;
+      }
+    }
+    if (batch.next === batch.entries.length && batch.active.size === 0) {
+      // Новый пакет мог уже заменить этот — чужое состояние не сбрасываем.
+      if (exportBatch === batch) {
+        exportBatch = null;
+        figma.ui.postMessage({ type: 'export-complete', batch: batch.id });
+      }
+    }
+  } finally {
+    batch.pumping = false;
+  }
+}
+
 figma.ui.onmessage = function (msg) {
   return handleMessage(msg).catch(function (err) {
     figma.ui.postMessage({ type: 'error', message: (err && err.message) || String(err) });
@@ -326,104 +393,27 @@ async function handleMessage(msg) {
   // "Export" в Figma, он рендерит узел со всеми применёнными
   // трансформациями; дальше это просто перекодируется в webp тем же
   // encodeWebp(), которым и раньше обрабатывались PNG-байты кропа/отражения.
-  if (msg.type === 'start-export-webp') {
-    var exportEntries = collectExportableImageNodes();
+  if (msg.type === 'start-export-webp' || msg.type === 'start-export-original') {
+    var mode = msg.type === 'start-export-webp' ? 'webp' : 'original-png';
+    var exportEntries = mode === 'webp' ? collectExportableImageNodes() :
+      figma.currentPage.selection.map(function (node) { return { node: node, name: node.name }; });
     if (exportEntries.length === 0) {
       figma.ui.postMessage({ type: 'error', message: 'Выдели хотя бы одно изображение' });
       return;
     }
-    pendingBatchChanges = []; // новый пакет — старый уже закрыт предыдущим 'all-done'
-    for (var x = 0; x < exportEntries.length; x++) {
-      var xe = exportEntries[x];
-      if (typeof xe.node.exportAsync !== 'function') {
-        figma.ui.postMessage({ type: 'node-skipped', nodeId: xe.node.id, name: xe.name });
-        continue;
-      }
-      var xBytes;
-      try {
-        xBytes = await xe.node.exportAsync({ format: 'PNG' });
-      } catch (e) {
-        figma.ui.postMessage({ type: 'node-skipped', nodeId: xe.node.id, name: xe.name });
-        continue;
-      }
-      figma.ui.postMessage({
-        type: 'process-export-image',
-        nodeId: xe.node.id,
-        name: xe.name,
-        bytes: xBytes,
-      });
-    }
+    // UI не даёт запустить второй экспорт, пока идёт первый (busy), поэтому
+    // сюда с живым пакетом попадаем только после обрыва: UI получил error
+    // или был перезапущен. Брошенный пакет заменяем новым, а не игнорируем
+    // клик: у каждого пакета свой id, запоздалые ответы старого его не тронут.
+    var batch = { id: ++exportBatchSeq, mode: mode, entries: exportEntries, next: 0, active: new Set(), pumping: false };
+    exportBatch = batch;
+    figma.ui.postMessage({ type: 'export-started', mode: mode, total: exportEntries.length, batch: batch.id });
+    await pumpExportBatch();
     return;
   }
 
-  // "Оригинал в PNG": экспортирует ИСХОДНЫЕ пиксели фото (натуральный
-  // размер картинки — до любой обрезки/поворота/сжатия/фильтров/прозрачности,
-  // применённых узлу в макете) отдельным PNG @1x, не трогая сам узел
-  // выделения вообще — ни фактически, ни в истории плагина (нечего
-  // отменять). В отличие от "Восстановить оригинал" (см. 'restore-size'
-  // ниже), которая необратимо (за вычетом своего undo) переписывает
-  // fills/размер/поворот реального слоя, здесь вместо этого создаётся
-  // временный прямоугольник ДАЛЕКО в стороне на той же странице —
-  // координаты в сотнях тысяч px от 0,0, заведомо за пределами любого
-  // реального макета, — переносит туда оригинальное изображение, рендерит
-  // его через exportAsync (тот же движок, что у нативного "Export" в
-  // Figma) и сразу удаляется. Байты уходят в UI НЕобрезанными — авто-обрезку
-  // прозрачных полей делает ui.html тем же cropToContent(), которым
-  // пользуется "Обрезать прозрачность" (см. 'process-export-original' там),
-  // здесь на main thread нет canvas для этого. Доступна только на ровно
-  // одном выделенном изображении — см. canExportOriginal в ui.html.
-  if (msg.type === 'start-export-original') {
-    // Читаем выделение напрямую (не через collectExportableImageNodes),
-    // чтобы при отказе дать точную причину — та же логика, что у
-    // sendSelectionInfo()/explainIneligible(), а не общее "выдели фото",
-    // которое выглядит так, будто плагин не видит выделение вообще.
-    var oSelNodes = figma.currentPage.selection;
-    if (oSelNodes.length === 0) {
-      figma.ui.postMessage({ type: 'error', message: 'Выдели изображение' });
-      return;
-    }
-    if (oSelNodes.length > 1) {
-      figma.ui.postMessage({ type: 'error', message: 'Выдели только один слой — оригинал экспортируется по одному' });
-      return;
-    }
-    var oe = { node: oSelNodes[0], name: oSelNodes[0].name };
-    var oInfo = analyzeNode(oe.node);
-    if (!oInfo) {
-      figma.ui.postMessage({ type: 'error', message: explainIneligible(oe.node) });
-      return;
-    }
-    var oImage = figma.getImageByHash(oInfo.imageHash);
-    if (!oImage) {
-      figma.ui.postMessage({ type: 'error', message: 'Не удалось найти исходное изображение' });
-      return;
-    }
-
-    var oSize;
-    try {
-      oSize = await oImage.getSizeAsync(); // натуральные пиксели исходника, {width, height}
-    } catch (e) {
-      figma.ui.postMessage({ type: 'error', message: 'Не удалось прочитать размер изображения' });
-      return;
-    }
-
-    var tempRect = figma.createRectangle();
-    figma.currentPage.appendChild(tempRect);
-    tempRect.x = 200000;
-    tempRect.y = 200000;
-    tempRect.resize(oSize.width, oSize.height);
-    tempRect.fills = [{ type: 'IMAGE', scaleMode: 'FILL', imageHash: oImage.hash }];
-
-    var oBytes;
-    try {
-      oBytes = await tempRect.exportAsync({ format: 'PNG' });
-    } catch (e) {
-      tempRect.remove();
-      figma.ui.postMessage({ type: 'error', message: 'Не удалось экспортировать оригинал' });
-      return;
-    }
-    tempRect.remove();
-
-    figma.ui.postMessage({ type: 'process-export-original', name: oe.name, bytes: oBytes });
+  if (msg.type === 'export-image-done') {
+    if (exportBatch && exportBatch.id === msg.batch && exportBatch.active.delete(msg.index)) await pumpExportBatch();
     return;
   }
 

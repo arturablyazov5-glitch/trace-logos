@@ -98,9 +98,13 @@ async function connect(browserUrl) {
   let page;
   try {
     // Reuse the live session without navigating/focusing/resizing the user's tab.
-    page = (await browser.pages()).find(p => p.url().startsWith('https://ru.pinterest.com/'));
+    // На холодном старте вкладка есть в /json/list, но puppeteer её ещё не видит — ждём, а не падаем.
+    for (let i = 0; i < 30 && !page; i++) {
+      page = (await browser.pages()).find(p => p.url().startsWith('https://ru.pinterest.com/'));
+      if (!page) await new Promise(r => setTimeout(r, 1000));
+    }
     if (!page) throw new Error('Open Pinterest in the debugging Yandex profile first');
-    await page.waitForFunction(() => document.querySelector('#__PWS_INITIAL_PROPS__'), { timeout: 20000 });
+    await page.waitForFunction(() => document.querySelector('#__PWS_INITIAL_PROPS__'), { timeout: 45000 });
     const user = await page.evaluate(() => {
       const s = JSON.parse(document.querySelector('#__PWS_INITIAL_PROPS__').textContent).initialReduxState;
       const id = s.session?.userId;
