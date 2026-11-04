@@ -38,10 +38,10 @@ if (form && input && dropdown) {
     loadPromise = (async () => {
       const reqs = [
         WITH_LOGOS
-          ? fetch(BASE + 'logos.json').then(r => r.json()).catch(() => ({ logos: [] }))
+          ? fetch('/logos.json').then(r => r.json()).catch(() => ({ logos: [] }))
           : Promise.resolve({ logos: [] }),
         WITH_EMOJI
-          ? fetch(BASE + 'emoji.json').then(r => r.json()).catch(() => ({ emoji: [] }))
+          ? fetch('/emoji.json').then(r => r.json()).catch(() => ({ emoji: [] }))
           : Promise.resolve({ emoji: [] }),
       ];
       const [lr, er] = await Promise.all(reqs);
@@ -93,7 +93,7 @@ if (form && input && dropdown) {
     current = [...logos, ...emoji];
     activeIdx = -1;
     if (!current.length) {
-      dropdown.innerHTML = '<div class="sd-empty">Ничего не найдено</div>';
+      dropdown.innerHTML = IS_EN ? '<div class="sd-empty">No results found</div>' : '<div class="sd-empty">Ничего не найдено</div>';
       dropdown.classList.add('open');
       input.setAttribute('aria-expanded', 'true');
       return;
@@ -101,10 +101,10 @@ if (form && input && dropdown) {
     const grouped = WITH_EMOJI && logos.length && emoji.length;
     let html = '';
     let idx = 0;
-    if (grouped) html += '<div class="sd-group-label">Логотипы</div>';
+    if (grouped) html += IS_EN ? '<div class="sd-group-label">Logos</div>' : '<div class="sd-group-label">Логотипы</div>';
     for (const it of logos) html += itemHtml(it, idx++, rawWords);
     if (emoji.length) {
-      if (grouped) html += '<div class="sd-group-label">Эмодзи</div>';
+      if (grouped) html += IS_EN ? '<div class="sd-group-label">Emoji</div>' : '<div class="sd-group-label">Эмодзи</div>';
       for (const it of emoji) html += itemHtml(it, idx++, rawWords);
     }
     dropdown.innerHTML = html;

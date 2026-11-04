@@ -7,6 +7,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { highlight, escapeHtml, trackSearchQuery, flushSearchQuery } from './utils.js';
 import { tokenizeQuery, scoreQuery, stripSearchPunctuation } from './search.js';
+import { getLang, t } from './i18n.js';
 import './search-shortcut.js';
 
 const MAX_PER_GROUP = 6;
@@ -18,29 +19,38 @@ let current = [];           // плоский список отображаем�
 let activeIdx = -1;
 let debTimer = 0;
 
+function sitePath(url) {
+  return url.replace(/^https:\/\/trace-logos\.ru(?=\/)/, '');
+}
+
+function resultUrl(url) {
+  return (getLang() === 'en' ? '/en' : '') + sitePath(url);
+}
+
 async function loadData() {
   if (data) return data;
   if (loadingPromise) return loadingPromise;
   loadingPromise = (async () => {
     const [lr, er] = await Promise.all([
-      fetch('logos.json').then(r => r.json()).catch(() => ({ logos: [] })),
-      fetch('emoji.json').then(r => r.json()).catch(() => ({ emoji: [] })),
+      fetch('/logos.json').then(r => r.json()).catch(() => ({ logos: [] })),
+      fetch('/emoji.json').then(r => r.json()).catch(() => ({ emoji: [] })),
     ]);
+    const isEn = getLang() === 'en';
     const logos = (lr.logos || []).filter(l => !l.comingSoon).map(l => ({
       type: 'logo',
-      name: l.name,
-      url: l.url,
-      img: l.svgUrl || l.pngUrl || '',
-      search: (l.name + ' ' + (l.tags || '')).toLowerCase(),
+      name: isEn ? (l.name_en || l.name) : l.name,
+      url: resultUrl(l.url),
+      img: sitePath(l.svgUrl || l.pngUrl || ''),
+      search: (l.name + ' ' + (l.name_en || '') + ' ' + (l.tags || '')).toLowerCase(),
     }));
     const emoji = (er.emoji || []).map(e => {
       const ch = (e.tags || '').trim().split(/\s+/)[0] || '';
       return {
         type: 'emoji',
-        name: e.name,
+        name: isEn ? (e.name_en || e.name) : e.name,
         char: ch,
-        url: e.url || ('emoji/?q=' + encodeURIComponent(e.name)),
-        search: (e.name + ' ' + (e.tags || '')).toLowerCase(),
+        url: resultUrl(e.url || ('/emoji/?q=' + encodeURIComponent(e.name))),
+        search: (e.name + ' ' + (e.name_en || '') + ' ' + (e.tags || '')).toLowerCase(),
       };
     });
     data = { logos, emoji };
@@ -64,7 +74,7 @@ function itemHtml(it, idx, rawWords) {
   const thumb = it.type === 'logo'
     ? `<span class="sd-thumb"><img src="${it.img}" alt="${escapeHtml(it.name)}" loading="lazy"></span>`
     : `<span class="sd-thumb emoji">${escapeHtml(it.char)}</span>`;
-  const label = it.type === 'logo' ? 'Логотип' : 'Эмодзи';
+  const label = it.type === 'logo' ? (getLang() === 'en' ? 'Logo' : 'Логотип') : t('breadcrumbEmoji');
   return `<a class="sd-item" role="option" data-idx="${idx}" href="${it.url}">
     ${thumb}
     <span class="sd-name">${highlight(it.name, rawWords)}</span>
@@ -76,7 +86,7 @@ function renderResults(logos, emoji, rawWords) {
   current = [...logos, ...emoji];
   activeIdx = -1;
   if (!current.length) {
-    dropdown.innerHTML = '<div class="sd-empty">Ничего не найдено</div>';
+    dropdown.innerHTML = `<div class="sd-empty">${t('emptySearchText')}</div>`;
     dropdown.classList.add('open');
     combobox.setAttribute('aria-expanded', 'true');
     return;
@@ -84,11 +94,11 @@ function renderResults(logos, emoji, rawWords) {
   let html = '';
   let idx = 0;
   if (logos.length) {
-    html += '<div class="sd-group-label">Логотипы</div>';
+    html += `<div class="sd-group-label">${t('breadcrumbLogos')}</div>`;
     for (const it of logos) html += itemHtml(it, idx++, rawWords);
   }
   if (emoji.length) {
-    html += '<div class="sd-group-label">Эмодзи</div>';
+    html += `<div class="sd-group-label">${t('breadcrumbEmoji')}</div>`;
     for (const it of emoji) html += itemHtml(it, idx++, rawWords);
   }
   dropdown.innerHTML = html;

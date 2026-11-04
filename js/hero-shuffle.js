@@ -107,8 +107,8 @@ export async function initHeroShuffle() {
   let logos, emoji;
   try {
     const [lr, er] = await Promise.all([
-      fetch('logos.json').then((r) => r.json()),
-      fetch('emoji.json').then((r) => r.json()),
+      fetch('/logos.json').then((r) => r.json()),
+      fetch('/emoji.json').then((r) => r.json()),
     ]);
     logos = (lr.logos || [])
       .filter((l) => !l.comingSoon && l.pngUrl && l.url)
