@@ -24,12 +24,22 @@ const ICON_SERVER = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none"
 const TICKER_HEIGHT = '34px';   // must match .dn-ticker's height in css/donate.css
 
 class DonateTicker extends HTMLElement {
-  connectedCallback() {
+  async connectedCallback() {
     // Only the visitor having gone to the payment page hides this bar; a
     // dismissal via the × button does not persist (see note above).
     if (hasDonated()) { this.remove(); return; }
 
-    ensureStyles();
+    // Build and measure the track only after its layout rules are available.
+    const stylesheet = ensureStyles();
+    if (!stylesheet.sheet) {
+      const loaded = await new Promise(resolve => {
+        stylesheet.addEventListener('load', () => resolve(true), { once: true });
+        stylesheet.addEventListener('error', () => resolve(false), { once: true });
+      });
+      if (!loaded || !this.isConnected) return;
+    }
+    if (hasDonated()) { this.remove(); return; }
+    if (this.firstElementChild) return;
 
     // The message repeats N times back-to-back; the track scrolls by exactly
     // one copy's width (-100/N%), so the next copy is already in place when

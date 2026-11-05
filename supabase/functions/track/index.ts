@@ -68,6 +68,7 @@ serve(async (req: Request) => {
       figma?: string; name?: string; img?: string; format?: string; variant?: string;
       slug?: string; // New field for blog posts
       searchQuery?: string; resultsCount?: number; // Поиск в шапке каталога
+      adsSupport?: { browserId?: string; clicked?: boolean };
       banner?: string; // Клик по промо-баннеру (напр. sidebar landologovo)
       page?: string; title?: string; // Просмотр страницы (components/page-view.js)
     };
@@ -75,6 +76,25 @@ serve(async (req: Request) => {
       payload = await req.json();
     } catch (_) {
       return json(origin, { error: 'Invalid JSON' }, 400);
+    }
+
+    if (payload?.adsSupport !== undefined) {
+      const { browserId, clicked } = payload.adsSupport ?? {};
+      if (typeof browserId !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(browserId)
+          || typeof clicked !== 'boolean') {
+        return json(origin, { error: 'Invalid experiment event' }, 400);
+      }
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/record_ads_support_v1`, {
+        method: 'POST',
+        headers: {
+          apikey: SERVICE_KEY,
+          Authorization: `Bearer ${SERVICE_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ p_browser_id: browserId, p_clicked: clicked }),
+      });
+      if (!res.ok) return json(origin, { error: 'Experiment write failed' }, 500);
+      return json(origin, { ok: true });
     }
 
     // --- Search Query Tracking ---
@@ -185,6 +205,14 @@ serve(async (req: Request) => {
   if (req.method === 'GET') {
     if (!ADMIN_KEY || req.headers.get('x-admin-key') !== ADMIN_KEY) {
       return json(origin, { error: 'Unauthorized' }, 401);
+    }
+
+    if (new URL(req.url).searchParams.get('report') === 'ads-support-v1') {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_ads_support_v1`, {
+        headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` },
+      });
+      if (!res.ok) return json(origin, { error: 'Experiment report unavailable' }, 500);
+      return json(origin, { groups: await res.json() });
     }
 
     const res = await fetch(

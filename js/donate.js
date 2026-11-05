@@ -74,12 +74,14 @@ export function ensureStyles() {
     supportLink.dataset.supportBtnCss = '1';
     document.head.appendChild(supportLink);
   }
-  if (document.querySelector('link[data-donate-css]')) return;
+  const existing = document.querySelector('link[data-donate-css]');
+  if (existing) return existing;
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.href = new URL('../css/donate.css', import.meta.url).href;
   link.dataset.donateCss = '1';
   document.head.appendChild(link);
+  return link;
 }
 
 // Illustrates "hosting limits about to run out": a server rack piping into a
