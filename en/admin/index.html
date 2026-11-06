@@ -737,6 +737,26 @@ footer .dot { margin: 0 8px; opacity: .5; }
           </tbody>
         </table>
       </div>
+      <div class="page-head">
+        <h2>A/B-тест рекламы</h2>
+        <p>Доля браузеров, которые хотя бы раз нажали «Поддержать» на страницах эксперимента.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-name">Группа</th>
+              <th class="col-views">Браузеры</th>
+              <th class="col-views">Нажали</th>
+              <th class="col-views">Доля</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-ads-support">
+            <tr><td colspan="4"><div class="loading-row">Загрузка…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
 
     <!-- ── Pinterest: генератор пинов ── -->
@@ -934,6 +954,7 @@ document.querySelectorAll('.tab').forEach(btn => {
     $('panel-banners').classList.toggle('active', activeTab === 'banners');
     $('panel-products').classList.toggle('active', activeTab === 'products');
     $('panel-pinterest').classList.toggle('active', activeTab === 'pinterest');
+    if (activeTab === 'banners') loadAdsSupport();
     if (activeTab === 'products') loadProducts();
     if (activeTab === 'pinterest') PinGen.init();
   });
@@ -1442,7 +1463,34 @@ async function mergeSearchQuery(btn) {
   }
 }
 
-// ── Клики по промо-баннерам ────────────────────────────────────────────
+async function loadAdsSupport() {
+  const tbody = $('tbody-ads-support');
+  tbody.innerHTML = '<tr><td colspan="4"><div class="loading-row">Загрузка…</div></td></tr>';
+  try {
+    const res = await fetch(ENDPOINT + '?report=ads-support-v1', {
+      headers: { 'x-admin-key': adminKey },
+      cache: 'no-store',
+    });
+    if (!res.ok) throw new Error('Report unavailable');
+    const { groups } = await res.json();
+    const percent = new Intl.NumberFormat('ru-RU', { style: 'percent', maximumFractionDigits: 2 });
+    tbody.innerHTML = [true, false].map(withAds => {
+      const group = groups.find(row => row.with_ads === withAds);
+      const browsers = Number(group?.browsers ?? 0);
+      const clicked = Number(group?.clicked ?? 0);
+      return `<tr>
+        <td>${withAds ? 'С рекламой' : 'Без рекламы'}</td>
+        <td>${browsers.toLocaleString('ru-RU')}</td>
+        <td>${clicked.toLocaleString('ru-RU')}</td>
+        <td>${browsers ? percent.format(clicked / browsers) : '—'}</td>
+      </tr>`;
+    }).join('');
+  } catch {
+    tbody.innerHTML = '<tr><td colspan="4"><div class="empty">Не удалось загрузить результаты теста.</div></td></tr>';
+  }
+}
+
+
 // ── Продукты: checkout «плати сколько хочешь» ──────────────────────────
 // Отдельная Edge Function и отдельный запрос: остальные вкладки живут на
 // /track, продукты — на /checkout. Грузится лениво, при первом открытии вкладки.

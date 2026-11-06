@@ -62,7 +62,7 @@ tags_en: Branding, Basics, Business
 
 - **Влюбиться в первый вариант** и подгонять проверки под него.
 - **Слишком узкое имя:** «ЧехлыОптТомск» умрёт при выходе за пределы чехлов, опта или Томска — сравните с траекторией [Сбера](../istoriya-logotipa-sbera/).
-- **Мода на суффиксы:** имена вида «-ly», «-ify» и «Neuro-» датируют бренд годом создания так же надёжно, как трендовые приёмы в логотипах.
+- **Мода на суффиксы:** имена вида «-ly», «-ify» и «Neuro-» датируют бренд годом создания так же надёжно, как [трендовые приёмы в логотипах](../trendy-logotipov-2026/).
 - **Выбор голосованием родственников** вместо теста на целевой аудитории.
 - **Пропуск проверки товарного знака** — самая дорогая ошибка списка.
 
@@ -123,7 +123,7 @@ A checked name plus a understood type is already half the designer's brief; we c
 
 - **Falling for the first option** and bending the checks to fit it.
 - **Too narrow a name:** "TomskWholesaleCases" dies the day you outgrow cases, wholesale or Tomsk — compare with [Sber](../istoriya-logotipa-sbera/)'s trajectory.
-- **Suffix fashion:** "-ly", "-ify" and "Neuro-" names date the brand to its founding year as reliably as trendy logo devices.
+- **Suffix fashion:** "-ly", "-ify" and "Neuro-" names date the brand to its founding year as reliably as [trendy logo devices](../trendy-logotipov-2026/).
 - **Choosing by family vote** instead of testing on the target audience.
 - **Skipping the trademark check** — the most expensive mistake on this list.
 

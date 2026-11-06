@@ -51,7 +51,7 @@ tags_en: Branding, Redesign, Business
 
 **«Новый директор по маркетингу».** Редизайн ради демонстрации активности — трата капитала узнаваемости на внутренний KPI. Знак принадлежит аудитории, а не оргструктуре.
 
-**«Все обновляются, и нам надо».** Тренды логотипов проходят, а знак остаётся. Гнаться за трендом имеет смысл, только если пункты 1‑7 выше тоже про вас.
+**«Все обновляются, и нам надо».** [Тренды логотипов](../trendy-logotipov-2026/) проходят, а знак остаётся. Гнаться за трендом имеет смысл, только если пункты 1‑7 выше тоже про вас.
 :::
 
 Показателен контрпример [Safari](../../logos/search/safari/): компас не меняется по сути с 2003 года — потому что метафора работает, знак масштабируется и ни один из семи признаков к нему не применим. Не менять — тоже стратегия, и часто лучшая.
@@ -117,7 +117,7 @@ The further right, the more expensive and risky — past this point you're no lo
 
 **"New CMO"** A redesign as a show of activity spends recognition capital on an internal KPI. The mark belongs to the audience, not the org chart.
 
-**"Everyone's updating, so should we"** Logo trends pass; the mark stays. Chasing a trend only makes sense if signs 1-7 above also apply.
+**"Everyone's updating, so should we"** [Logo trends](../trendy-logotipov-2026/) pass; the mark stays. Chasing a trend only makes sense if signs 1-7 above also apply.
 :::
 
 The counter-example is [Safari](../../logos/search/safari/): the compass has remained essentially unchanged since 2003 — because the metaphor works, the mark scales, and none of the seven signs apply. Not changing is a strategy too, and often the best one.

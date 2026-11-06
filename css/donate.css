@@ -33,7 +33,6 @@ donate-ticker:not(:defined) { display: none; }
   border-bottom: 0;
   overflow: hidden;
 }
-.dn-ticker.hidden { display: none; }
 
 /* Fade the text out at both edges so it slides in/out instead of getting clipped */
 .dn-ticker-viewport {
@@ -80,22 +79,6 @@ donate-ticker:not(:defined) { display: none; }
 }
 .dn-ticker-cta:hover { color: #a893ff; border-bottom-color: #a893ff; }
 
-.dn-ticker-close {
-  flex: none;
-  width: 26px;
-  height: 26px;
-  margin-right: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 7px;
-  background: transparent;
-  color: var(--text-5, #666);
-  cursor: pointer;
-  transition: background .12s, color .12s;
-}
-.dn-ticker-close:hover { background: rgba(255, 255, 255, .07); color: #fff; }
 
 /* Catalog layout: align the bar with .topbar, which reserves the detail panel. */
 .center > donate-ticker .dn-ticker { margin-right: 280px; }
@@ -319,7 +302,6 @@ donate-ticker:not(:defined) { display: none; }
 .dn-modal:focus { outline: none; }
 .dn-btn:focus-visible,
 .dn-close:focus-visible,
-.dn-ticker-close:focus-visible,
 .dn-ticker-cta:focus-visible,
 .dn-actions .btn-support:focus-visible {
   outline: 2px solid var(--accent, #8a6bff);

@@ -52,7 +52,7 @@ tags_en: Collections, Branding, Finance
 | Печать на карте (микроразмер, тиснение) | простые формы, [обязательный монохром](../logotip-dlya-pechati/) |
 | Наклейка у кассы среди других систем | различие цветом, не деталями |
 | Кнопка оплаты на любом сайте | знак должен «не спорить» с чужим дизайном |
-| Доверие к деньгам | никаких экспериментов и трендов (почему) |
+| Доверие к деньгам | никаких экспериментов и трендов ([почему](../trendy-logotipov-2026/)) |
 
 Платёжный знак — это фактически дорожный знак: он не выражает индивидуальность, а подаёт стандартизированный сигнал «здесь можно платить». Поэтому категория десятилетиями хранит формы и меняет только полировку.
 
@@ -105,7 +105,7 @@ A quiet revolution of media awaits the category: the physical card — the payme
 | Card printing (micro size, embossing) | simple forms, [mandatory monochrome](../logotip-dlya-pechati/) |
 | A checkout sticker among other systems | differ by color, not detail |
 | A pay button on anyone's site | the mark must not "argue" with foreign design |
-| Trust in money | no experiments, no trends (why) |
+| Trust in money | no experiments, no trends ([why](../trendy-logotipov-2026/)) |
 
 A payment mark is effectively a road sign: it expresses no individuality, it transmits the standardized signal "you can pay here". That's why the category preserves its forms for decades and changes only the polish.
 

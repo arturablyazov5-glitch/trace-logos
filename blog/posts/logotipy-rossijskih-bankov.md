@@ -56,7 +56,7 @@ tags_en: Collections, Branding, Banks
 
 ## Общие тренды банковской айдентики
 
-1. **От банка к экосистеме.** Слово «банк» исчезает из названий (Сбер), знаки становятся абстрактнее — чтобы вмещать небанковские сервисы, это один из главных трендов логотипов 2026.
+1. **От банка к экосистеме.** Слово «банк» исчезает из названий (Сбер), знаки становятся абстрактнее — чтобы вмещать небанковские сервисы, это один из главных [трендов логотипов 2026](../trendy-logotipov-2026/).
 2. **Градиенты вместо плоских заливок.** Сбер задал моду на «технологичный» градиент, и небанковские финтехи её подхватили.
 3. **Иконка приложения — главный носитель.** Банк живёт в телефоне, поэтому знак проектируется от квадратной иконки, а не от вывески — [как и устроены иконки приложений](../ikonka-prilozheniya/) в принципе.
 4. **Утилитарная типографика.** Кастомные, но нарочито простые гротески: банк должен читаться быстро, а не красиво — та же логика, что мы разбирали в статье [шрифт для логотипа](../shrift-dlya-logotipa/).
@@ -112,7 +112,7 @@ Open the [Banks category](../../logos/bank/) and scan all the marks in a row. It
 
 ## Shared trends in banking identity
 
-1. **From bank to ecosystem.** The word "bank" leaves the names (Sber), marks get more abstract — to hold non-banking services, one of the main 2026 logo trends.
+1. **From bank to ecosystem.** The word "bank" leaves the names (Sber), marks get more abstract — to hold non-banking services, one of the main [2026 logo trends](../trendy-logotipov-2026/).
 2. **Gradients over flat fills.** Sber set the fashion for the "technological" gradient and fintechs picked it up.
 3. **The app icon is the primary medium.** A bank lives in the phone, so the mark is designed from the square icon out, not from the signage — [that's how app icons work](../ikonka-prilozheniya/) in general.
 4. **Utilitarian typography.** Custom yet deliberately plain sans-serifs: a bank must read fast, not pretty — the same logic covered in [choosing a logo font](../shrift-dlya-logotipa/).

@@ -17,7 +17,7 @@ Adobe [Illustrator](../../logos/design/illustrator/) — профессиона
 
 ## Чем Illustrator отличается от Figma для этой задачи
 
-Оба — векторные редакторы, и для простого знака хватит любого, о чём мы писали в [нашем гайде по Figma](../kak-narisovat-logotip-v-figma/). Illustrator выигрывает там, где нужна точность и печать: полноценный CMYK и Pantone — [подробно зачем](../logotip-dlya-pechati/) — тонкие булевы операции Pathfinder, инструменты для сложной пластики (Width Tool, скругления отдельных углов), экспорт в EPS для консервативных подрядчиков, которым нужен свой формат под свою задачу. Плата — цена подписки и порог входа.
+Оба — векторные редакторы, и для простого знака хватит любого, о чём мы писали в [нашем гайде по Figma](../kak-narisovat-logotip-v-figma/). Illustrator выигрывает там, где нужна точность и печать: полноценный CMYK и Pantone — [подробно зачем](../logotip-dlya-pechati/) — тонкие булевы операции Pathfinder, инструменты для сложной пластики (Width Tool, скругления отдельных углов), экспорт в EPS для консервативных подрядчиков, которым нужен [свой формат под свою задачу](../vektornye-formaty-eps-ai-pdf-svg/). Плата — цена подписки и порог входа.
 
 ## Шаг 1. Документ
 
@@ -84,7 +84,7 @@ The route: an RGB document for screen (the CMYK version comes later) → the mar
 
 ## How Illustrator differs from Figma for this job
 
-Both are vector editors, and a simple mark can be built in either — see [our Figma guide](../kak-narisovat-logotip-v-figma/). Illustrator wins where precision and print matter: full CMYK and Pantone (and [here's why that matters](../logotip-dlya-pechati/)), fine-grained Pathfinder booleans, tools for complex curves (Width Tool, per-corner rounding), EPS export for conservative vendors who need the right format for the right job. The price — the subscription and the learning curve.
+Both are vector editors, and a simple mark can be built in either — see [our Figma guide](../kak-narisovat-logotip-v-figma/). Illustrator wins where precision and print matter: full CMYK and Pantone (and [here's why that matters](../logotip-dlya-pechati/)), fine-grained Pathfinder booleans, tools for complex curves (Width Tool, per-corner rounding), EPS export for conservative vendors who need [the right format for the right job](../vektornye-formaty-eps-ai-pdf-svg/). The price — the subscription and the learning curve.
 
 ## Step 1. The document
 

@@ -29,7 +29,7 @@ tags_en: Design, Branding, Basics
 
 ## 4. Погоня за трендом
 
-Градиентное свечение «как у ИИ‑сервисов» — мы разбирали этот эффект в подборке [логотипов нейросетей](../logotipy-nejrosetej/) — или модный шрифт сезона датируют знак годом создания. Логотип живёт 10‑20 лет; тренд — 2‑3 года. **Правило:** база знака — вне моды, трендовое — только в сменяемом слое (градиент, анимация).
+Градиентное свечение «как у ИИ‑сервисов» — мы разбирали этот эффект в подборке [логотипов нейросетей](../logotipy-nejrosetej/) — или модный шрифт сезона датируют знак годом создания. Логотип живёт 10‑20 лет; [тренд — 2‑3 года](../trendy-logotipov-2026/). **Правило:** база знака — вне моды, трендовое — только в сменяемом слое (градиент, анимация).
 
 ## 5. Шрифт без лицензии
 
@@ -45,7 +45,7 @@ tags_en: Design, Branding, Basics
 
 ## 8. Растровый исходник
 
-Логотип существует только в PNG/JPG: на вывеске он превратится в [мыло](../pochemu-logotip-razmytyj/), а каждое масштабирование будет портить качество. Исходник обязан быть вектором — [вот почему разница так важна](../vektor-i-rastr-raznica/); растровый знак нужно [перевести в вектор](../kak-perevesti-logotip-v-vektor/) один раз — и хранить как мастер в одном из векторных форматов.
+Логотип существует только в PNG/JPG: на вывеске он превратится в [мыло](../pochemu-logotip-razmytyj/), а каждое масштабирование будет портить качество. Исходник обязан быть вектором — [вот почему разница так важна](../vektor-i-rastr-raznica/); растровый знак нужно [перевести в вектор](../kak-perevesti-logotip-v-vektor/) один раз — и хранить как мастер в одном из [векторных форматов](../vektornye-formaty-eps-ai-pdf-svg/).
 
 ## 9. Похожесть на соседей по нише
 
@@ -98,7 +98,7 @@ If the mark is distinguishable only in brand colors, it breaks on engraving, rec
 
 ## 4. Trend-chasing
 
-The "AI-service" gradient glow — an effect we dissected in the [neural-network logos](../logotipy-nejrosetej/) roundup — or the season's fashionable font dates the mark to its birth year. A logo lives 10-20 years; a trend lasts 2-3. **Rule:** the mark's core stays timeless; the trendy bits live only in the replaceable layer (gradient, animation).
+The "AI-service" gradient glow — an effect we dissected in the [neural-network logos](../logotipy-nejrosetej/) roundup — or the season's fashionable font dates the mark to its birth year. A logo lives 10-20 years; a [trend lasts 2-3](../trendy-logotipov-2026/). **Rule:** the mark's core stays timeless; the trendy bits live only in the replaceable layer (gradient, animation).
 
 ## 5. An unlicensed font
 
@@ -114,7 +114,7 @@ One "logo_final.jpg" for every occasion is not a kit. You need: the full version
 
 ## 8. A raster-only source
 
-The logo exists only as PNG/JPG: on signage it turns to [mush](../pochemu-logotip-razmytyj/), and every scaling pass degrades it further. The master has to be vector — [here's why that difference matters so much](../vektor-i-rastr-raznica/); a raster mark needs [tracing into vector](../kak-perevesti-logotip-v-vektor/) once, then stored as the master in one of the vector formats.
+The logo exists only as PNG/JPG: on signage it turns to [mush](../pochemu-logotip-razmytyj/), and every scaling pass degrades it further. The master has to be vector — [here's why that difference matters so much](../vektor-i-rastr-raznica/); a raster mark needs [tracing into vector](../kak-perevesti-logotip-v-vektor/) once, then stored as the master in one of the [vector formats](../vektornye-formaty-eps-ai-pdf-svg/).
 
 ## 9. Looking like the niche neighbors
 

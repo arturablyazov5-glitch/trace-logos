@@ -23,7 +23,7 @@ tags_en: Collections, Branding, Social Media
 
 [Instagram](../../logos/social/instagram/) — главный нарушитель буквенного правила: глиф камеры на градиенте. [Его историю](../istoriya-logotipa-instagram/) — отдельную драму с самым скандальным редизайном десятилетия — мы разбирали подробно.
 
-[TikTok](../../logos/social/tiktok/) выбрал ноту — символ музыкальных корней сервиса — и добавил фирменный приём: сине‑красное «раздвоение» контура, имитирующее хроматическую аберрацию и глитч экрана. Знак передаёт движение и «цифровой шум» даже в статике — редкий случай в трендах логотипов, когда эффект несёт смысл, а не украшает. Подробный разбор приёма и эволюции знака — в статье [история логотипа TikTok](../istoriya-logotipa-tiktok/).
+[TikTok](../../logos/social/tiktok/) выбрал ноту — символ музыкальных корней сервиса — и добавил фирменный приём: сине‑красное «раздвоение» контура, имитирующее хроматическую аберрацию и глитч экрана. Знак передаёт движение и «цифровой шум» даже в статике — редкий случай в [трендах логотипов](../trendy-logotipov-2026/), когда эффект несёт смысл, а не украшает. Подробный разбор приёма и эволюции знака — в статье [история логотипа TikTok](../istoriya-logotipa-tiktok/).
 
 ## X: самый дорогой отказ от знака
 
@@ -83,7 +83,7 @@ The logic mirrors [messengers](../logotipy-messendzherov/) and their bubbles, on
 
 [Instagram](../../logos/social/instagram/) is the letter rule's chief violator: a camera glyph on a gradient. [Its story](../istoriya-logotipa-instagram/) is a drama of its own, featuring the decade's most scandalous redesign, which we've covered in detail.
 
-[TikTok](../../logos/social/tiktok/) chose a musical note — its musical roots — plus a signature device: the blue-red "split" contour imitating chromatic aberration and screen glitch. The mark conveys motion and digital noise even when static — a rare case among current logo trends where an effect carries meaning rather than decorating. For a full breakdown of the device and the mark's evolution, see [the history of the TikTok logo](../istoriya-logotipa-tiktok/).
+[TikTok](../../logos/social/tiktok/) chose a musical note — its musical roots — plus a signature device: the blue-red "split" contour imitating chromatic aberration and screen glitch. The mark conveys motion and digital noise even when static — a rare case among current [logo trends](../trendy-logotipov-2026/) where an effect carries meaning rather than decorating. For a full breakdown of the device and the mark's evolution, see [the history of the TikTok logo](../istoriya-logotipa-tiktok/).
 
 ## X: the most expensive mark abandonment
 

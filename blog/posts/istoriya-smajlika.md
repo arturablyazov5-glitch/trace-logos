@@ -54,7 +54,7 @@ tags_en: Emoji, Histories, Basics
 
 История рожицы — концентрат уроков, которые мы разбираем в статьях о логотипах:
 
-1. **Простота побеждает всё.** Три элемента — круг, глаза, улыбка — пережили шесть десятилетий без редизайна. Ни один тренд не смог его устареть.
+1. **Простота побеждает всё.** Три элемента — круг, глаза, улыбка — пережили шесть десятилетий без редизайна. Ни один [тренд](../trendy-logotipov-2026/) не смог его устареть.
 2. **Права важнее авторства.** Болл получил 45 долларов, Лоуфрани — империю: [регистрация](../kak-zaregistrirovat-logotip/) решила всё.
 3. **Символ сильнее слова.** Рожица работает в любой культуре без перевода — свойство, за которое бьются все глобальные бренды ([сирена Starbucks](../istoriya-logotipa-starbucks/) из той же лиги).
 4. **Живая неправильность.** Кривоватая улыбка Болла человечнее идеальной дуги — приём, который сегодня сознательно закладывают в знаки.
@@ -108,7 +108,7 @@ Today "smileys" are the largest emoji category: the [Smileys & Emotion section](
 
 The face's history concentrates the lessons we unpack across our logo articles:
 
-1. **Simplicity beats everything.** Three elements — circle, eyes, smile — survived six decades without a redesign. No trend managed to age it.
+1. **Simplicity beats everything.** Three elements — circle, eyes, smile — survived six decades without a redesign. No [trend](../trendy-logotipov-2026/) managed to age it.
 2. **Rights matter more than authorship.** Ball got $45, Loufrani an empire: [registration](../kak-zaregistrirovat-logotip/) decided everything.
 3. **A symbol is stronger than a word.** The face works in every culture without translation — the property every global brand fights for ([the Starbucks siren](../istoriya-logotipa-starbucks/) plays in the same league).
 4. **Living imperfection.** Ball's crooked smile is more human than a perfect arc — a device designers now build in deliberately.

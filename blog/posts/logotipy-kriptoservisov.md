@@ -31,7 +31,7 @@ tags_en: Collections, Branding, Finance
 
 **[Crypto.com](../../logos/pay/cryptocom/)** — сине‑белый геральдический знак‑щит со львом: заявка на статус и вечность, усиленная главным активом бренда — доменом‑именем. Спонсорства стадионов и «Формулы‑1» требуют знака, который смотрится рядом с гербами спортивных клубов, — и он спроектирован именно под это.
 
-**[Exodus](../../logos/pay/exodus/)** — градиентная геометрия в фиолетовых тонах: язык не банка и не игры, а «красивого продукта» — кошелёк всегда конкурировал дизайном интерфейса. Градиент здесь — тот же код «новой технологичности», что у [знаков нейросетей](../logotipy-nejrosetej/) и один из главных трендов логотипов вообще.
+**[Exodus](../../logos/pay/exodus/)** — градиентная геометрия в фиолетовых тонах: язык не банка и не игры, а «красивого продукта» — кошелёк всегда конкурировал дизайном интерфейса. Градиент здесь — тот же код «новой технологичности», что у [знаков нейросетей](../logotipy-nejrosetej/) и один из главных [трендов логотипов](../trendy-logotipov-2026/) вообще.
 
 ## Сводная таблица
 
@@ -75,7 +75,7 @@ The category stretches between two poles: **fintech rigor** — the blue [Coinba
 
 **[Crypto.com](../../logos/pay/cryptocom/)** — a blue-and-white heraldic lion shield: a claim to status and permanence, amplified by the brand's main asset — the domain-as-name. Stadium and Formula 1 sponsorships demand a mark that stands next to sports club crests — and it is engineered exactly for that.
 
-**[Exodus](../../logos/pay/exodus/)** — gradient geometry in purples: the language of neither bank nor game but of a "beautiful product" — the wallet always competed on interface design. The gradient is the same "new tech" code as in [AI logos](../logotipy-nejrosetej/), one of the main logo trends overall.
+**[Exodus](../../logos/pay/exodus/)** — gradient geometry in purples: the language of neither bank nor game but of a "beautiful product" — the wallet always competed on interface design. The gradient is the same "new tech" code as in [AI logos](../logotipy-nejrosetej/), one of the main [logo trends](../trendy-logotipov-2026/) overall.
 
 ## The summary table
 

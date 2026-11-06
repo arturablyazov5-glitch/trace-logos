@@ -47,7 +47,7 @@ tags_en: Collections, Branding, Social Media
 
 ## MAX: новый игрок на синем поле
 
-Российский [MAX](../../logos/social/max/) вышел на рынок в 2025 году и решал типовую задачу новичка: занять свободный угол в переполненной категории. Знак построен на букве и градиентных переходах в сине‑голубой гамме — ставка на «технологичность» в духе трендов, которые мы разбирали в статье тренды логотипов 2026. Показательно, что и здесь не обошлось без пузыря: буква вписана в форму, отсылающую к диалоговому облачку.
+Российский [MAX](../../logos/social/max/) вышел на рынок в 2025 году и решал типовую задачу новичка: занять свободный угол в переполненной категории. Знак построен на букве и градиентных переходах в сине‑голубой гамме — ставка на «технологичность» в духе трендов, которые мы разбирали в статье [тренды логотипов 2026](../trendy-logotipov-2026/). Показательно, что и здесь не обошлось без пузыря: буква вписана в форму, отсылающую к диалоговому облачку.
 
 ## Messenger: градиент поверх пузыря
 
@@ -126,7 +126,7 @@ The [Signal](../../logos/social/signal/) mark — a blue bubble — is interesti
 
 ## MAX: a new player on the blue field
 
-Russia's [MAX](../../logos/social/max/) entered the market in 2025 facing the classic newcomer's problem: claim a free corner in an overcrowded category. Its mark builds on a letter and blue gradient transitions — a "tech" bet in the spirit of the trends we covered in logo trends 2026. Tellingly, the bubble sneaks in even here: the letter sits in a shape echoing a chat cloud.
+Russia's [MAX](../../logos/social/max/) entered the market in 2025 facing the classic newcomer's problem: claim a free corner in an overcrowded category. Its mark builds on a letter and blue gradient transitions — a "tech" bet in the spirit of the trends we covered in [logo trends 2026](../trendy-logotipov-2026/). Tellingly, the bubble sneaks in even here: the letter sits in a shape echoing a chat cloud.
 
 ## Messenger: a gradient over the bubble
 

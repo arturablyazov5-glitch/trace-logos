@@ -1,4 +1,4 @@
-import { formatReport, type Report } from './report.ts';
+import { formatReport, type AdsSupportGroup, type Report } from './report.ts';
 const env = (key: string) => Deno.env.get(key) || '';
 Deno.serve(async (req) => {
   const service = env('SUPABASE_SERVICE_ROLE_KEY');
@@ -16,7 +16,17 @@ Deno.serve(async (req) => {
   };
   try {
     const test = new URL(req.url).searchParams.get('test') === '1';
-    const report: Report = await (await db('rpc/get_weekly_logo_report', { method: 'POST', body: '{}' })).json();
+    const [weekly, adsSupport] = await Promise.all([
+      db('rpc/get_weekly_logo_report_with_totals', { method: 'POST', body: '{}' })
+        .then(r => r.json() as Promise<Omit<Report, 'ads_support'>>),
+      db('rpc/get_ads_support_v1')
+        .then(r => r.json() as Promise<AdsSupportGroup[]>)
+        .catch(error => {
+          console.error('Ads support report unavailable:', error);
+          return null;
+        }),
+    ]);
+    const report: Report = { ...weekly, ads_support: adsSupport };
     if (!env('BOT_TOKEN') || !env('CHAT_ID')) throw new Error('Telegram is not configured');
     if (!test) {
       // Unique week claim prevents duplicates, including concurrent invocations.

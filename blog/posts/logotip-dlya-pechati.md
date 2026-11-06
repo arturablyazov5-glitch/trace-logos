@@ -35,7 +35,7 @@ Pantone нужен не всегда: для визиток и листово
 
 - **PDF** — стандарт де‑факто для типографий: вектор + управление цветом в одном файле.
 - **EPS** — «старый мировой стандарт», его до сих пор просят типографии со стажем.
-- **SVG** — родной формат веба; для печати его обычно пересохраняют в PDF/EPS — разбор всех векторных форматов мы делали отдельно.
+- **SVG** — родной формат веба; для печати его обычно пересохраняют в PDF/EPS — [разбор всех векторных форматов](../vektornye-formaty-eps-ai-pdf-svg/) мы делали отдельно.
 - **Текст — только в кривых:** если в логотипе есть шрифт, переведите его в контуры перед отправкой, иначе на компьютере типографии он заменится системным — [почему так происходит](../shrift-dlya-logotipa/), объясняли в статье про шрифт для логотипа.
 
 Если вектора нет — сначала [переведите логотип в вектор](../kak-perevesti-logotip-v-vektor/), это разовая работа, которая закрывает вопрос навсегда. Растровый файл допустим только для фотографий: 300 dpi в физическом размере печати, в CMYK, без сжатия JPG.
@@ -94,7 +94,7 @@ What to send:
 
 - **PDF** — the de facto print standard: vector plus color management in one file.
 - **EPS** — the "old world standard", still requested by veteran shops.
-- **SVG** — the web's native format; for print it's usually re-saved as PDF/EPS — we cover all vector formats compared separately.
+- **SVG** — the web's native format; for print it's usually re-saved as PDF/EPS — we cover [all vector formats compared](../vektornye-formaty-eps-ai-pdf-svg/) separately.
 - **Text outlined:** if the logo contains type, convert it to curves before sending, or the shop's computer will substitute a system font — [why that happens](../shrift-dlya-logotipa/) is covered in our piece on logo fonts.
 
 No vector? [Vectorize the logo](../kak-perevesti-logotip-v-vektor/) first — a one-time job that closes the question forever. Raster is acceptable only for photos: 300 dpi at physical print size, CMYK, no JPG compression.

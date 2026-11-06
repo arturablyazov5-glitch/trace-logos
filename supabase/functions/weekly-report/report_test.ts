@@ -1,15 +1,16 @@
 import { formatReport, type Report } from './report.ts';
 const base: Report = { week: '2026-10-12', end: '2026-10-19', started_at: '2026-10-01T00:00:00Z', complete: true,
-  views: 1234, downloads: 42, top: { name: 'Сбер', count: 10 }, misses: [{ query: 'бренд', count: 3 }] };
+  views: 1234, downloads: 42, total_views: 48000, total_downloads: 6500, top: { name: 'Сбер', count: 10 }, misses: [{ query: 'бренд', count: 3 }], ads_support: [] };
 Deno.test('calendar week, weekly totals, leader and empty searches', () => {
   const text = formatReport(base);
-  for (const part of ['12–18 октября 2026', '<b>42</b>', 'Сбер — <b>10 раз</b>', '1. бренд — <b>3 раза</b>']) {
+  for (const part of ['12–18 октября 2026', '<b>42</b>', 'Сбер — <b>10 раз</b>', '1. бренд — <b>3 раза</b>', '<b>За всё время</b>\nПросмотры логотипов: <b>48\u00a0000</b>\nСкачивания логотипов: <b>6\u00a0500</b>']) {
     if (!text.includes(part)) throw Error(`Missing ${part}`);
   }
 });
 Deno.test('unavailable historical week does not look like zero activity', () => {
   const text = formatReport({ ...base, complete: false, started_at: '2026-10-19T01:00:00Z' }, true);
-  if (!text.includes('За эту неделю данных ещё нет') || text.includes('Просмотры логотипов:')) throw Error(text);
+  const [weekly, lifetime] = text.split('<b>За всё время</b>');
+  if (!weekly.includes('За эту неделю данных ещё нет') || weekly.includes('Просмотры логотипов:') || !lifetime?.includes('6\u00a0500')) throw Error(text);
 });
 Deno.test('partial first week and genuinely empty full week', () => {
   const partial = formatReport({ ...base, complete: false, started_at: '2026-10-13T01:00:00Z' });
@@ -28,4 +29,13 @@ Deno.test('date ranges across months and years, safe HTML and Russian counts', (
   }
   const text = formatReport({ ...base, top: { name: '<Max & Co>', count: 398 }, misses: [{ query: '<b>brand</b>', count: 2 }] });
   if (!text.includes('&lt;Max &amp; Co&gt;') || !text.includes('&lt;b&gt;brand&lt;/b&gt;') || !text.includes('2 раза')) throw Error(text);
+});
+
+Deno.test('A/B totals show both groups and distinguish no data from zero conversion', () => {
+  const text = formatReport({ ...base, ads_support: [
+    { with_ads: true, browsers: 800, clicked: 10 },
+  ] });
+  if (!text.includes('С рекламой: <b>10 из 800</b> нажали «Поддержать» (1,25\u00a0%)') ||
+      !text.includes('Без рекламы: <b>0 из 0</b> нажали «Поддержать» (—)')) throw Error(text);
+  if (!formatReport({ ...base, ads_support: null }).includes('Данные недоступны.')) throw Error('Missing unavailable state');
 });

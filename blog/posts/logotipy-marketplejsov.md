@@ -25,7 +25,7 @@ tags_en: Collections, Branding, Marketplaces
 
 ## Wildberries: градиент против всех
 
-[Wildberries](../../logos/market/wildberries/) долго жил со строгим текстовым знаком, а в 2020‑х перешёл на фиолетово‑малиновый градиент — самый смелый цветовой ход категории. Логика различима: рынок уже занял синий (Ozon), красный (AliExpress) и жёлтый (маркетплейс‑направление Яндекса), а градиент застолбил сразу целую зону спектра. Длинное название при этом требует сокращённой версии — «WB» живёт в иконке и в дочернем [Вайлдберриз Банке](../../logos/bank/wbbank/). Про моду на градиенты — в статье тренды логотипов 2026.
+[Wildberries](../../logos/market/wildberries/) долго жил со строгим текстовым знаком, а в 2020‑х перешёл на фиолетово‑малиновый градиент — самый смелый цветовой ход категории. Логика различима: рынок уже занял синий (Ozon), красный (AliExpress) и жёлтый (маркетплейс‑направление Яндекса), а градиент застолбил сразу целую зону спектра. Длинное название при этом требует сокращённой версии — «WB» живёт в иконке и в дочернем [Вайлдберриз Банке](../../logos/bank/wbbank/). Про моду на градиенты — в статье [тренды логотипов 2026](../trendy-logotipov-2026/).
 
 ## Авито: разноцветные точки против машин с пробегом
 
@@ -85,7 +85,7 @@ In a category with infinite assortment, no symbol fits: any picture (a cart, a b
 
 ## Wildberries: a gradient against the field
 
-[Wildberries](../../logos/market/wildberries/) long lived with an austere wordmark, then in the 2020s switched to a violet-magenta gradient — the category's boldest color move. The logic is visible: blue (Ozon), red (AliExpress) and yellow (Yandex's marketplace arm) were taken, and a gradient claims a whole zone of spectrum at once. The long name still demands a short version — "WB" lives in the icon and in the subsidiary [Wildberries Bank](../../logos/bank/wbbank/). On the gradient fashion: logo trends 2026.
+[Wildberries](../../logos/market/wildberries/) long lived with an austere wordmark, then in the 2020s switched to a violet-magenta gradient — the category's boldest color move. The logic is visible: blue (Ozon), red (AliExpress) and yellow (Yandex's marketplace arm) were taken, and a gradient claims a whole zone of spectrum at once. The long name still demands a short version — "WB" lives in the icon and in the subsidiary [Wildberries Bank](../../logos/bank/wbbank/). On the gradient fashion: [logo trends 2026](../trendy-logotipov-2026/).
 
 ## Avito: multicolor dots
 

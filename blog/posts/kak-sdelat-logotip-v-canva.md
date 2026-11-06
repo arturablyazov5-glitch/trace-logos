@@ -40,7 +40,7 @@ Canva подходит для **быстрого старта**: логотип
 
 ### Экспортированный SVG не всегда чистый
 
-Даже в Pro экспортированный SVG может содержать текст, не переведённый в кривые, и растровые вставки (если в шаблоне были PNG‑элементы). Перед передачей разработчику или в типографию проверьте файл — знайте, [чем открыть SVG](../chem-otkryt-svg-fajl/) и что вообще должно быть внутри такого файла.
+Даже в Pro экспортированный SVG может содержать текст, не переведённый в кривые, и растровые вставки (если в шаблоне были PNG‑элементы). Перед передачей разработчику или в типографию проверьте файл — знайте, [чем открыть SVG](../chem-otkryt-svg-fajl/) и [что вообще должно быть внутри такого файла](../vektornye-formaty-eps-ai-pdf-svg/).
 
 :::warning Главный тест шаблонного логотипа
 Прежде чем влюбиться в шаблон, скопируйте его название из Canva и посмотрите выдачу картинок в поиске. Увидите десяток чужих брендов с этим же знаком — примерно так ваш логотип будет выглядеть для клиентов, которые тоже пользуются Canva.
@@ -95,7 +95,7 @@ Free export is PNG/JPG on white. Avatars and print need transparency ([why](../l
 
 ### Exported SVG isn't always clean
 
-Even in Pro, an exported SVG may contain non-outlined text and embedded raster (if the template used PNG elements). Before handing it to a developer or printer, inspect the file — know [what opens an SVG](../chem-otkryt-svg-fajl/) and what should actually be inside one.
+Even in Pro, an exported SVG may contain non-outlined text and embedded raster (if the template used PNG elements). Before handing it to a developer or printer, inspect the file — know [what opens an SVG](../chem-otkryt-svg-fajl/) and [what should actually be inside one](../vektornye-formaty-eps-ai-pdf-svg/).
 
 :::warning The template logo's acid test
 Before falling for a template, run its imagery through an image search. The dozen other brands you'll see wearing the same mark is roughly how your logo will look to clients who also use Canva.

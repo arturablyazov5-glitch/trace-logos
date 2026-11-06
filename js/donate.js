@@ -29,11 +29,6 @@ const EVERY_NTH = 3;
 const KEY_COUNT  = 'tl_donate_count';
 const KEY_PARTNER_COUNT = 'tl_partner_embed_count';
 const KEY_PARTNER_DONE = 'tl_partner_done';
-const KEY_THANKS = 'tl_donate_thanks';   // epoch ms; set only when someone actually
-                                         // went to the payment page. Closing/"not now"
-                                         // does NOT set this — the modal keeps showing
-                                         // on the normal cadence until someone donates.
-const SNOOZE_AFTER_DONATE = 3 * 24 * 60 * 60 * 1000;  // clicked "support" → 3 days
 
 // Private-mode Safari throws on localStorage; degrade to "just never nag".
 function read(key) {
@@ -43,27 +38,9 @@ function write(key, val) {
   try { localStorage.setItem(key, val); } catch { /* storage unavailable */ }
 }
 
-// The 3-day quiet period lives in sessionStorage, not localStorage, so it
-// clears when the tab/window closes instead of following the visitor forever.
+// Partner prompt dismissal is scoped to the current session.
 function sessionRead(key) {
   try { return sessionStorage.getItem(key); } catch { return null; }
-}
-function sessionWrite(key, val) {
-  try { sessionStorage.setItem(key, val); } catch { /* storage unavailable */ }
-}
-
-function activeUntil(key, readFn = read) {
-  const until = Number(readFn(key));
-  return Number.isFinite(until) && until > Date.now();
-}
-
-// True once the visitor has opened the payment page — the whole fundraiser
-// (modal AND ticker) goes quiet for them. Don't keep asking someone who paid.
-export function hasDonated() { return activeUntil(KEY_THANKS, sessionRead); }
-
-// Single writer for the flag — called from both CTAs (this modal and the ticker).
-export function markDonated() {
-  sessionWrite(KEY_THANKS, String(Date.now() + SNOOZE_AFTER_DONATE));
 }
 
 export function ensureStyles() {
@@ -244,14 +221,8 @@ function buildDom() {
 
   overlay.querySelector('.dn-close').addEventListener('click', close);
   overlay.querySelector('.dn-btn-ghost').addEventListener('click', close);
-  // Donated (or at least went to the payment page) — back off for a few days.
-  // <support-btn> renders its own inner .btn-support link synchronously on
-  // connect (it's already `customElements.define`d by the time we appendChild
-  // below), so it exists to query right after.
-  overlay.querySelector('support-btn').addEventListener('click', () => {
-    markDonated();
-    close();
-  });
+  // Following the payment link closes the modal without changing future prompts.
+  overlay.querySelector('support-btn').addEventListener('click', close);
   overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
 
   document.body.appendChild(overlay);
@@ -272,8 +243,7 @@ export function openDonateModal() {
   overlay.querySelector('.dn-modal')?.focus();
 }
 
-// Closing (crest, "not now", backdrop, Esc) does NOT snooze anything — the
-// modal keeps showing on the normal cadence. Only markDonated() goes quiet.
+// Closing (cross, "not now", backdrop, Esc) does not affect future prompts.
 function close() {
   if (!overlay) return;
   overlay.classList.remove('open');
@@ -304,7 +274,6 @@ document.addEventListener('tl:export', event => {
       return;
     }
   }
-  if (hasDonated()) return;
   const next = (Number(read(KEY_COUNT)) || 0) + 1;
   write(KEY_COUNT, String(next));
   if ((next - 1) % EVERY_NTH !== 0) return;

@@ -66,7 +66,7 @@ tags_en: Branding, Business, How-To
 | Что | Формат | Зачем |
 | --- | --- | --- |
 | Исходник с живым текстом | AI / мастер‑SVG | будущие правки |
-| Знак в кривых | SVG, PDF | сайт, печать — какой векторный формат кому нужен |
+| Знак в кривых | SVG, PDF | сайт, печать — какой [векторный формат кому нужен](../vektornye-formaty-eps-ai-pdf-svg/) |
 | Все версии: полная, компактная, моно, инверсная | SVG + PNG | зачем нужны разные виды логотипа |
 | PNG с прозрачным фоном, 2‑3 размера | PNG | площадки без вектора, [почему важна прозрачность фона](../logotip-s-prozrachnym-fonom/) |
 | Мини‑гайдлайн | PDF | цвета HEX/CMYK, шрифты, охранное поле — это уже зачатки [брендбука](../chto-takoe-brendbuk/) |
@@ -146,7 +146,7 @@ Don't sign off until the full kit arrives:
 | What | Format | Why |
 | --- | --- | --- |
 | Source with live text | AI / master SVG | future edits |
-| Outlined mark | SVG, PDF | web, print — see which vector format fits which use |
+| Outlined mark | SVG, PDF | web, print — see [which vector format fits which use](../vektornye-formaty-eps-ai-pdf-svg/) |
 | All versions: full, compact, mono, inverse | SVG + PNG | why different logo types exist |
 | Transparent PNGs, 2-3 sizes | PNG | platforms without vector, and [why transparency matters](../logotip-s-prozrachnym-fonom/) |
 | Mini guideline | PDF | HEX/CMYK colors, fonts, clear space — the seed of a proper [brand book](../chto-takoe-brendbuk/) |

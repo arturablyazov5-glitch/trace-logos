@@ -21,7 +21,7 @@ tags_en: Logo Histories, Branding, Social Media
 
 ## Глитч как фирменный приём
 
-«Раздвоение» контура — имитация **хроматической аберрации**: расслоения цветов на границах, знакомого по старым экранам и 3D‑очкам. Приём попал в нерв эпохи: глитч ассоциируется с видео, цифровой культурой и «сломанной» эстетикой интернета. Важно, что эффект несёт смысл — движение и вибрацию звука, — а не просто украшает: статичный знак выглядит «дрожащим», как кадр клипа — наглядный пример того, когда эффект оправдан в логотипе.
+«Раздвоение» контура — имитация **хроматической аберрации**: расслоения цветов на границах, знакомого по старым экранам и 3D‑очкам. Приём попал в нерв эпохи: глитч ассоциируется с видео, цифровой культурой и «сломанной» эстетикой интернета. Важно, что эффект несёт смысл — движение и вибрацию звука, — а не просто украшает: статичный знак выглядит «дрожащим», как кадр клипа — наглядный пример того, [когда эффект оправдан](../trendy-logotipov-2026/) в логотипе.
 
 ## 2018: слияние с Musical.ly
 
@@ -68,7 +68,7 @@ By the official legend, Douyin's designer hunted for an image conveying music in
 
 ## Glitch as the signature device
 
-The split contour imitates **chromatic aberration** — the color fringing familiar from old screens and 3D glasses. The device hit the era's nerve: glitch reads as video, digital culture, the internet's "broken" aesthetic. Crucially, the effect carries meaning — motion and the vibration of sound — rather than decorating: the static mark looks like a "trembling" video frame — a clear case of when an effect is justified in a logo.
+The split contour imitates **chromatic aberration** — the color fringing familiar from old screens and 3D glasses. The device hit the era's nerve: glitch reads as video, digital culture, the internet's "broken" aesthetic. Crucially, the effect carries meaning — motion and the vibration of sound — rather than decorating: the static mark looks like a "trembling" video frame — a clear case of [when an effect is justified](../trendy-logotipov-2026/) in a logo.
 
 ## 2018: the Musical.ly merger
 
