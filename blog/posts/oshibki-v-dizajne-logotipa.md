@@ -41,7 +41,7 @@ tags_en: Design, Branding, Basics
 
 ## 7. Нет версий
 
-Один файл «logo_final.jpg» на все случаи — не комплект. Нужны: полная версия, компактный знак, монохром, инверсия для тёмного фона — это и есть полный набор видов логотипа. **Тест:** положите знак на тёмный фон и в круглую аватарку. Если что‑то «чинится на месте» — версий не хватает.
+Один файл «logo_final.jpg» на все случаи — не комплект. Нужны: полная версия, компактный знак, монохром, инверсия для тёмного фона — это и есть [полный набор видов логотипа](../vidy-logotipov/). **Тест:** положите знак на тёмный фон и в круглую аватарку. Если что‑то «чинится на месте» — версий не хватает.
 
 ## 8. Растровый исходник
 
@@ -74,7 +74,7 @@ tags_en: Design, Branding, Basics
 Не всё требует редизайна. Ошибки 5, 7, 8, 10 — «инфраструктурные»: лицензия, версии, вектор и регистрация добавляются к существующему знаку без изменения формы. Ошибки 1‑4, 6, 9 — про сам знак: тут поможет аккуратная [эволюция вместо ребрендинга](../chto-takoe-rebrending/) — упростить и почистить форму, сохранив узнаваемое ядро, как это регулярно делают [Google](../istoriya-logotipa-google/) и [Instagram](../istoriya-logotipa-instagram/).
 :::
 
-Насмотренность — лучшая профилактика: полистайте [каталог логотипов](../../logos/) и обратите внимание, как знаки больших брендов проходят каждый пункт этого списка. А если строите логотип с нуля — начните со статей [как сделать логотип самому](../kak-sdelat-logotip-samomu/) и какие вообще бывают виды логотипов.
+Насмотренность — лучшая профилактика: полистайте [каталог логотипов](../../logos/) и обратите внимание, как знаки больших брендов проходят каждый пункт этого списка. А если строите логотип с нуля — начните со статей [как сделать логотип самому](../kak-sdelat-logotip-samomu/) и [какие вообще бывают виды логотипов](../vidy-logotipov/).
 
 ---EN---
 
@@ -110,7 +110,7 @@ The stock "idea" lightbulb, a [Canva](../kak-sdelat-logotip-v-canva/) template, 
 
 ## 7. Missing versions
 
-One "logo_final.jpg" for every occasion is not a kit. You need: the full version, the compact mark, monochrome, and an inverse for dark backgrounds — that's the full set of logo types. **Test:** place the mark on a dark background and in a round avatar. If anything needs "fixing on the spot", versions are missing.
+One "logo_final.jpg" for every occasion is not a kit. You need: the full version, the compact mark, monochrome, and an inverse for dark backgrounds — that's [the full set of logo types](../vidy-logotipov/). **Test:** place the mark on a dark background and in a round avatar. If anything needs "fixing on the spot", versions are missing.
 
 ## 8. A raster-only source
 
@@ -143,4 +143,4 @@ A mark can look unique and still infringe an existing trademark — risking a fo
 Not everything demands a redesign. Mistakes 5, 7, 8 and 10 are "infrastructure": license, versions, vector and registration bolt onto the existing mark without changing its form. Mistakes 1-4, 6 and 9 concern the mark itself: the cure is careful [evolution instead of a full rebrand](../chto-takoe-rebrending/) — simplify and clean the form while keeping the recognizable core, the way [Google](../istoriya-logotipa-google/) and [Instagram](../istoriya-logotipa-instagram/) regularly do.
 :::
 
-Visual literacy is the best prevention: browse the [logo catalog](../../logos/) and notice how big brands' marks pass every item on this list. Building from scratch? Start with [how to make a logo yourself](../kak-sdelat-logotip-samomu/) and what types of logos even exist.
+Visual literacy is the best prevention: browse the [logo catalog](../../logos/) and notice how big brands' marks pass every item on this list. Building from scratch? Start with [how to make a logo yourself](../kak-sdelat-logotip-samomu/) and [what types of logos even exist](../vidy-logotipov/).

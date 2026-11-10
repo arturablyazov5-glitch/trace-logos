@@ -25,7 +25,7 @@ tags_en: Logo, Startup, Brand
 
 Что на самом деле нужно стартапу в первый год:
 
-- **Читаемое название понятным шрифтом.** Часто на старте достаточно аккуратного текстового знака — логотайпа. Символ можно добавить позже. Как выбрать [шрифт](../shrift-dlya-logotipa/) — отдельная тема.
+- **Читаемое название понятным шрифтом.** Часто на старте достаточно аккуратного текстового знака — [логотайпа](../vidy-logotipov/). Символ можно добавить позже. Как выбрать [шрифт](../shrift-dlya-logotipa/) — отдельная тема.
 - **Один‑два фирменных цвета.** Не палитра из пятнадцати оттенков, а базовый цвет и нейтральный. Как его выбрать осмысленно — в статьях [психология цвета](../psihologiya-cveta-v-logotipe/) и [как подобрать палитру](../kak-podobrat-cvetovuyu-palitru-brenda/).
 - **Знак в [векторе](../svg-ili-png-dlya-logotipa/).** Чтобы из него можно было сделать всё: [фавикон](../favicon-v-poiske-i-nejrosetyah/), [аватарку](../kak-sdelat-krugluyu-avatarku/), картинку для презентации инвесторам.
 - **Несколько версий под размеры.** Хотя бы полная и компактная — зачатки [адаптивной системы](../adaptivnyj-logotip/).
@@ -80,7 +80,7 @@ This doesn't mean "do it badly" It means not spending weeks on what doesn't move
 
 What a startup actually needs in the first year:
 
-- **A readable name in a clear font.** Often at the start a neat textual mark — a wordmark — is enough. A symbol can be added later. How to choose a [font](../shrift-dlya-logotipa/) — a separate topic.
+- **A readable name in a clear font.** Often at the start a neat textual mark — a [wordmark](../vidy-logotipov/) — is enough. A symbol can be added later. How to choose a [font](../shrift-dlya-logotipa/) — a separate topic.
 - **One or two brand colors.** Not a palette of fifteen shades, but a base color and a neutral. How to choose it meaningfully — in [color psychology](../psihologiya-cveta-v-logotipe/) and [how to pick a palette](../kak-podobrat-cvetovuyu-palitru-brenda/).
 - **The mark in [vector](../svg-ili-png-dlya-logotipa/).** So you can make everything from it: a [favicon](../favicon-v-poiske-i-nejrosetyah/), an [avatar](../kak-sdelat-krugluyu-avatarku/), an image for an investor pitch.
 - **A few versions for sizes.** At least full and compact — the beginnings of an [adaptive system](../adaptivnyj-logotip/).

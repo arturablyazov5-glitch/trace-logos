@@ -17,7 +17,7 @@ tags_en: Collections, Branding, Marketplaces
 
 ## Почему у маркетплейсов текстовые логотипы
 
-В категории, где ассортимент бесконечен, символ подобрать невозможно: любая картинка (тележка, коробка, сумка) сужает образ до одной ассоциации. Поэтому рынок почти единогласно выбрал текстовый знак — название фирменным шрифтом (тип разбираем в статье виды логотипов). А проблему «текст не влезает в иконку» каждый решает по‑своему: [Ozon](../../logos/market/ozon/) выкрутился короткими четырьмя буквами, [Wildberries](../../logos/market/wildberries/) сокращается до «WB», [Яндекс Маркет](../../logos/market/yandexmarket/) — до буквы «М» в фирменной плашке.
+В категории, где ассортимент бесконечен, символ подобрать невозможно: любая картинка (тележка, коробка, сумка) сужает образ до одной ассоциации. Поэтому рынок почти единогласно выбрал текстовый знак — название фирменным шрифтом (тип разбираем в статье [виды логотипов](../vidy-logotipov/)). А проблему «текст не влезает в иконку» каждый решает по‑своему: [Ozon](../../logos/market/ozon/) выкрутился короткими четырьмя буквами, [Wildberries](../../logos/market/wildberries/) сокращается до «WB», [Яндекс Маркет](../../logos/market/yandexmarket/) — до буквы «М» в фирменной плашке.
 
 ## Ozon: короткое имя как суперсила
 
@@ -55,7 +55,7 @@ tags_en: Collections, Branding, Marketplaces
 Как и в [банках](../logotipy-rossijskih-bankov/) и [мессенджерах](../logotipy-messendzherov/), цвет здесь — территория: пересечений почти нет, и новому игроку приходится искать свободный участок спектра.
 
 :::tip Проверка на коробке
-У маркетплейсов есть носитель, которого нет больше ни у кого: картонная коробка и пакет. Знак обязан работать в одноцветной печати на буром картоне — это самый жёсткий тест на простоту формы. Открой [категорию маркетплейсов](../../logos/market/) и мысленно напечатай каждый знак одним цветом: все выживут, и это не совпадение — зачем нужны монохромные версии, мы объясняли отдельно.
+У маркетплейсов есть носитель, которого нет больше ни у кого: картонная коробка и пакет. Знак обязан работать в одноцветной печати на буром картоне — это самый жёсткий тест на простоту формы. Открой [категорию маркетплейсов](../../logos/market/) и мысленно напечатай каждый знак одним цветом: все выживут, и это не совпадение — [зачем нужны монохромные версии](../vidy-logotipov/), мы объясняли отдельно.
 :::
 
 ## Выводы
@@ -77,7 +77,7 @@ Nearly all marketplaces use **wordmarks**: the name matters more than a symbol w
 
 ## Why marketplaces use wordmarks
 
-In a category with infinite assortment, no symbol fits: any picture (a cart, a box, a bag) narrows the image to one association. So the market almost unanimously chose the wordmark — the name in a custom face (the type is covered in types of logos). The "text doesn't fit the icon" problem gets solved individually: [Ozon](../../logos/market/ozon/) wins with four letters, [Wildberries](../../logos/market/wildberries/) shortens to "WB", [Yandex Market](../../logos/market/yandexmarket/) to an "M" in the signature badge.
+In a category with infinite assortment, no symbol fits: any picture (a cart, a box, a bag) narrows the image to one association. So the market almost unanimously chose the wordmark — the name in a custom face (the type is covered in [types of logos](../vidy-logotipov/)). The "text doesn't fit the icon" problem gets solved individually: [Ozon](../../logos/market/ozon/) wins with four letters, [Wildberries](../../logos/market/wildberries/) shortens to "WB", [Yandex Market](../../logos/market/yandexmarket/) to an "M" in the signature badge.
 
 ## Ozon: a short name as a superpower
 
@@ -115,7 +115,7 @@ In a category with infinite assortment, no symbol fits: any picture (a cart, a b
 As in [banking](../logotipy-rossijskih-bankov/) and [messengers](../logotipy-messendzherov/), color is territory: overlaps are rare, and a newcomer must hunt for free spectrum.
 
 :::tip The cardboard test
-Marketplaces own a medium nobody else has: the cardboard box and the bag. The mark must survive single-color print on brown board — the harshest simplicity test there is. Open the [marketplace category](../../logos/market/) and mentally print each mark in one color: they all survive, and that's no coincidence — we explain why monochrome versions exist separately.
+Marketplaces own a medium nobody else has: the cardboard box and the bag. The mark must survive single-color print on brown board — the harshest simplicity test there is. Open the [marketplace category](../../logos/market/) and mentally print each mark in one color: they all survive, and that's no coincidence — we explain [why monochrome versions exist](../vidy-logotipov/) separately.
 :::
 
 ## Takeaways

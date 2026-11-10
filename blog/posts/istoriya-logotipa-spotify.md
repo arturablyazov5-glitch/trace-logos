@@ -21,7 +21,7 @@ tags_en: Logo Histories, Branding, Media
 
 ## 2013: волны получают собственный дом
 
-С мобильной эрой волнам стало тесно над буквой: иконке приложения нужен был самостоятельный знак. Три дуги переехали в зелёный круг — и быстро начали жить отдельной жизнью: в иконке, фавиконке, кнопках «слушать в Spotify» на сайтах артистов. Слово и круг образовали классическую пару «полная версия + компактный знак» — ровно то, зачем логотипу вообще нужны версии.
+С мобильной эрой волнам стало тесно над буквой: иконке приложения нужен был самостоятельный знак. Три дуги переехали в зелёный круг — и быстро начали жить отдельной жизнью: в иконке, фавиконке, кнопках «слушать в Spotify» на сайтах артистов. Слово и круг образовали классическую пару «полная версия + компактный знак» — ровно то, [зачем логотипу вообще нужны версии](../vidy-logotipov/).
 
 ## 2015: тот самый зелёный
 
@@ -68,7 +68,7 @@ The Swedish startup launched with a modest wordmark: a green word with three arc
 
 ## 2013: the waves get their own home
 
-With the mobile era the waves grew cramped above the letter: the app icon needed a standalone mark. The three arcs moved into a green circle — and quickly took on a life of their own: in the icon, the favicon, the "listen on Spotify" buttons on artists' sites. The word and the circle formed the classic "full version + compact mark" pair — exactly why logos need versions in the first place.
+With the mobile era the waves grew cramped above the letter: the app icon needed a standalone mark. The three arcs moved into a green circle — and quickly took on a life of their own: in the icon, the favicon, the "listen on Spotify" buttons on artists' sites. The word and the circle formed the classic "full version + compact mark" pair — exactly [why logos need versions](../vidy-logotipov/) in the first place.
 
 ## 2015: that green
 

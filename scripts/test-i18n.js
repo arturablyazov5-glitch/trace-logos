@@ -140,7 +140,7 @@ function checkDicts() {
 // текстом на ОБОИХ языках. Ловится только сверкой с потребителями ключей.
 const SKIP_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'figma-plugins',
-  'supabase', 'sanitizer', 'upptime', 'assets',
+  'supabase', 'sanitizer', 'upptime', 'assets', 'contact-collector',
   PAIR_DIR_NAME, // tools/landing-en/ — EN-пары лендингов, не страницы (scripts/lib/en-landings.js)
 ]);
 

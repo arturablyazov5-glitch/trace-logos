@@ -45,7 +45,7 @@ Illustrator идеально точен математически — но г
 
 ## Шаг 4. Цвет и версии
 
-Задайте цвета и сохраните их в Swatches как глобальные (галочка Global) — тогда смена оттенка обновит все объекты разом. Палитру собирайте по методике из статьи [как подобрать цветовую палитру бренда](../kak-podobrat-cvetovuyu-palitru-brenda/). Сразу постройте обязательный комплект — почему он именно такой: цветная версия, чёрная, белая (проверьте на тёмной монтажной области), компактный знак без текста.
+Задайте цвета и сохраните их в Swatches как глобальные (галочка Global) — тогда смена оттенка обновит все объекты разом. Палитру собирайте по методике из статьи [как подобрать цветовую палитру бренда](../kak-podobrat-cvetovuyu-palitru-brenda/). Сразу постройте обязательный комплект — [почему он именно такой](../vidy-logotipov/): цветная версия, чёрная, белая (проверьте на тёмной монтажной области), компактный знак без текста.
 
 ## Шаг 5. Проверки
 
@@ -112,7 +112,7 @@ Set the name with the Type tool (`T`). Choosing the face is its own discipline w
 
 ## Step 4. Color and versions
 
-Assign colors and save them as global Swatches (the Global checkbox) — changing a shade then updates every object at once. Build the palette by the method in [how to build a brand color palette](../kak-podobrat-cvetovuyu-palitru-brenda/). Produce the mandatory kit immediately — here's why it looks the way it does: color version, black, white (check it on a dark artboard), the compact mark without text.
+Assign colors and save them as global Swatches (the Global checkbox) — changing a shade then updates every object at once. Build the palette by the method in [how to build a brand color palette](../kak-podobrat-cvetovuyu-palitru-brenda/). Produce the mandatory kit immediately — [here's why it looks the way it does](../vidy-logotipov/): color version, black, white (check it on a dark artboard), the compact mark without text.
 
 ## Step 5. Checks
 

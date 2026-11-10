@@ -52,7 +52,7 @@ tags_en: Collections, Branding, Games
 Единственное общее правило — читаемость в малом размере: иконка в сторе такая же маленькая, как [фавиконка](../kak-sdelat-favicon/), и Supercell тестирует свои знаки в ней так же жёстко, как банки.
 
 :::tip Чему поучиться неигровым брендам
-Игры лучше всех умеют **продавать эмоцию за секунду** и **строить бренд вокруг персонажа**. Если ваш продукт про радость (детские товары, еда, развлечения) — посмотрите в сторону игровой выразительности, прежде чем заказывать очередной минималистичный гротеск из стандартных видов логотипов.
+Игры лучше всех умеют **продавать эмоцию за секунду** и **строить бренд вокруг персонажа**. Если ваш продукт про радость (детские товары, еда, развлечения) — посмотрите в сторону игровой выразительности, прежде чем заказывать очередной минималистичный гротеск из стандартных [видов логотипов](../vidy-logotipov/).
 :::
 
 В [каталоге игр](../../logos/games/) — десятки знаков мобильных хитов в SVG и PNG: от [Candy Crush](../../logos/game/candycrush/) до [Genshin Impact](../../logos/game/genshinimpact/). Про использование в обзорах и стримах — [можно ли использовать чужой логотип](../mozhno-li-ispolzovat-chuzhoy-logotip/).
@@ -102,7 +102,7 @@ A game's mark lives two parallel lives ruled by different laws. **The logo** (th
 The one shared rule is small-size readability: a store icon is as tiny as a [favicon](../kak-sdelat-favicon/), and Supercell tests its marks there as ruthlessly as banks do.
 
 :::tip What non-game brands can learn
-Games are the best at **selling an emotion in a second** and **building a brand around a character**. If your product is about joy (kids' goods, food, entertainment), look at game-grade expressiveness before ordering another minimalist grotesque off the standard list of logo types.
+Games are the best at **selling an emotion in a second** and **building a brand around a character**. If your product is about joy (kids' goods, food, entertainment), look at game-grade expressiveness before ordering another minimalist grotesque off the standard list of [logo types](../vidy-logotipov/).
 :::
 
 The [games catalog](../../logos/games/) holds dozens of mobile-hit marks in SVG and PNG — from [Candy Crush](../../logos/game/candycrush/) to [Genshin Impact](../../logos/game/genshinimpact/). On using them in reviews and streams: [can you use someone else's logo](../mozhno-li-ispolzovat-chuzhoy-logotip/).

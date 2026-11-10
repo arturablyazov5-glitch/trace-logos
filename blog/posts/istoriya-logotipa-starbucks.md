@@ -17,7 +17,7 @@ tags_en: Logo Histories, Branding
 
 ## 1971: гравюра из бестиария
 
-Первая кофейня Starbucks открылась в Сиэтле как магазин зёрен. Основатели искали морскую тему (город‑порт, кофе привозят по морю) и нашли в старой книге гравюру двухвостой сирены — та манила моряков, как кофе должен манить прохожих. Первый знак — коричневая гравюра в кольце «Starbucks Coffee Tea Spices»: подробная, с обнажённой грудью и раздвоенным хвостом, — по сегодняшним меркам немыслимая для массового бренда, по меркам лавки 70‑х — просто «винтажная картинка», ровно такая, что называют эмблемой в классификации логотипов.
+Первая кофейня Starbucks открылась в Сиэтле как магазин зёрен. Основатели искали морскую тему (город‑порт, кофе привозят по морю) и нашли в старой книге гравюру двухвостой сирены — та манила моряков, как кофе должен манить прохожих. Первый знак — коричневая гравюра в кольце «Starbucks Coffee Tea Spices»: подробная, с обнажённой грудью и раздвоенным хвостом, — по сегодняшним меркам немыслимая для массового бренда, по меркам лавки 70‑х — просто «винтажная картинка», ровно такая, [что называют эмблемой](../vidy-logotipov/) в классификации логотипов.
 
 ## 1987: зелёный и первая цензура
 
@@ -56,7 +56,7 @@ Starbucks сделал для зелёного то, что [Netflix](../istor
 | 2011 – н. в. | сирена без имени | бренд шире кофе |
 
 :::tip Урок кейса
-Starbucks показывает, когда можно убирать имя из знака: только после десятилетий последовательности, когда символ узнают без подписи, — и когда продуктовое слово начинает ограничивать бизнес. Молодому бренду «сделать как Starbucks» нельзя: сначала имя строит символ, лишь потом символ отпускает имя — какие версии логотипа нужны на каждом этапе, мы разбирали отдельно.
+Starbucks показывает, когда можно убирать имя из знака: только после десятилетий последовательности, когда символ узнают без подписи, — и когда продуктовое слово начинает ограничивать бизнес. Молодому бренду «сделать как Starbucks» нельзя: сначала имя строит символ, лишь потом символ отпускает имя — [какие версии логотипа нужны на каждом этапе](../vidy-logotipov/), мы разбирали отдельно.
 :::
 
 Логотип Starbucks в SVG и PNG — на [странице бренда](../../logos/food/starbucks/); правила использования чужих знаков — [здесь](../mozhno-li-ispolzovat-chuzhoy-logotip/). Другие истории серии: [Apple](../istoriya-logotipa-apple/), [Google](../istoriya-logotipa-google/), [Instagram](../istoriya-logotipa-instagram/), [Netflix](../istoriya-logotipa-netflix/).
@@ -71,7 +71,7 @@ On every [Starbucks](../../logos/food/starbucks/) cup sits a twin-tailed siren f
 
 ## 1971: an engraving from a bestiary
 
-The first Starbucks opened in Seattle as a coffee-bean shop. The founders wanted a maritime theme (a port city; coffee arrives by sea) and found an old engraving of a twin-tailed siren — she lured sailors the way coffee should lure passers-by. The first mark was a brown engraving in a "Starbucks Coffee Tea Spices" ring: detailed, bare-chested, split-tailed — unthinkable for a mass brand today, just a "vintage picture" for a 1970s shop — exactly what an emblem is in logo classification.
+The first Starbucks opened in Seattle as a coffee-bean shop. The founders wanted a maritime theme (a port city; coffee arrives by sea) and found an old engraving of a twin-tailed siren — she lured sailors the way coffee should lure passers-by. The first mark was a brown engraving in a "Starbucks Coffee Tea Spices" ring: detailed, bare-chested, split-tailed — unthinkable for a mass brand today, just a "vintage picture" for a 1970s shop — exactly [what an emblem is](../vidy-logotipov/) in logo classification.
 
 ## 1987: green and the first censorship
 
@@ -110,7 +110,7 @@ Starbucks did for green what [Netflix](../istoriya-logotipa-netflix/) did for re
 | 2011 – now | the nameless siren | a brand wider than coffee |
 
 :::tip The case's lesson
-Starbucks shows when a name may leave the mark: only after decades of consistency, when the symbol is recognized unsigned — and when the product word starts limiting the business. A young brand cannot "do a Starbucks": first the name builds the symbol; only then can the symbol release the name — we cover which logo versions each stage needs separately.
+Starbucks shows when a name may leave the mark: only after decades of consistency, when the symbol is recognized unsigned — and when the product word starts limiting the business. A young brand cannot "do a Starbucks": first the name builds the symbol; only then can the symbol release the name — we cover [which logo versions each stage needs](../vidy-logotipov/) separately.
 :::
 
 The Starbucks logo in SVG and PNG is on the [brand page](../../logos/food/starbucks/); the rules on others' marks are [here](../mozhno-li-ispolzovat-chuzhoy-logotip/). More stories: [Apple](../istoriya-logotipa-apple/), [Google](../istoriya-logotipa-google/), [Instagram](../istoriya-logotipa-instagram/), [Netflix](../istoriya-logotipa-netflix/).

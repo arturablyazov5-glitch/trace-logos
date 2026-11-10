@@ -38,7 +38,7 @@ tags_en: How-To, Social Media, Design
 
 ## Готовим аватарку из логотипа
 
-1. **Возьмите компактный знак, не полный логотип.** Текстовая часть в круге диаметром 40 пикселей нечитаема — нужна иконочная версия — о том, [чем иконка отличается от логотипа](../ikonka-i-logotip-raznica/) и зачем вообще нужны разные версии знака, мы рассказывали отдельно.
+1. **Возьмите компактный знак, не полный логотип.** Текстовая часть в круге диаметром 40 пикселей нечитаема — нужна иконочная версия — о том, [чем иконка отличается от логотипа](../ikonka-i-logotip-raznica/) и [зачем вообще нужны разные версии знака](../vidy-logotipov/), мы рассказывали отдельно.
 2. **Холст‑квадрат, знак по центру.** В [Figma](../../logos/design/figma/): фрейм 800×800, знак — 55‑65% ширины, строго по центру. Для проверки наложите сверху окружность‑шаблон и убедитесь, что ничего не выпирает.
 3. **Задайте фон.** Прозрачный фон платформы зальют своим цветом (в тёмной теме — тёмным, и чёрный знак исчезнет). Надёжно: фирменный цвет фона + контрастный знак — о том, [как подобрать такую пару](../kak-podobrat-cvetovuyu-palitru-brenda/), мы писали отдельно.
 4. **Не рисуйте круг сами.** Частая ошибка — вписать знак в белый круг на квадрате «для надёжности»: платформа обрежет своим кругом чуть иначе, и получится кольцо‑артефакт по краю.
@@ -106,7 +106,7 @@ One **800×800** master covers everything: platforms downscale on their own, whi
 
 ## Making an avatar from a logo
 
-1. **Use the compact mark, not the full logo.** Text inside a 40-pixel circle is unreadable — you need the icon version — see [icon vs logo](../ikonka-i-logotip-raznica/) and why different versions exist for more.
+1. **Use the compact mark, not the full logo.** Text inside a 40-pixel circle is unreadable — you need the icon version — see [icon vs logo](../ikonka-i-logotip-raznica/) and [why different versions exist](../vidy-logotipov/) for more.
 2. **A square canvas, the mark centered.** In [Figma](../../logos/design/figma/): an 800×800 frame, the mark at 55-65% of the width, dead center. Overlay a circle template to confirm nothing pokes out.
 3. **Set a background.** Platforms flood transparent backgrounds with their own color (dark in dark theme — and a black mark vanishes). Reliable: a brand background color + a contrasting mark — see [picking that pair](../kak-podobrat-cvetovuyu-palitru-brenda/) for how.
 4. **Don't draw the circle yourself.** A common error is placing the mark in a white circle on the square "to be safe": the platform's crop lands slightly differently, producing an artifact ring at the edge.

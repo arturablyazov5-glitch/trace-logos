@@ -38,7 +38,7 @@ QR‑код изначально спроектирован для суровы
 
 ### Шаг 1. Подготовьте логотип
 
-Лучше всего работает компактный знак — иконка, а не полная версия с текстом (чем они отличаются, мы разбирали в статье виды логотипов). Скачайте SVG или PNG нужного бренда — например, из нашего [каталога логотипов](../../logos/): у каждого бренда там лежит отдельная иконка. Логотип на подложке‑плашке (белый квадрат или круг) сканируется надёжнее, чем «голый» знак поверх модулей.
+Лучше всего работает компактный знак — иконка, а не полная версия с текстом (чем они отличаются, мы разбирали в статье [виды логотипов](../vidy-logotipov/)). Скачайте SVG или PNG нужного бренда — например, из нашего [каталога логотипов](../../logos/): у каждого бренда там лежит отдельная иконка. Логотип на подложке‑плашке (белый квадрат или круг) сканируется надёжнее, чем «голый» знак поверх модулей.
 
 ### Шаг 2. Сгенерируйте код
 
@@ -154,7 +154,7 @@ To the scanner, a logo in the middle is just "damage". As long as it stays withi
 
 ### Step 1. Prepare the logo
 
-A compact mark works best — the icon, not the full lockup with text (see types of logos for the difference). Download the SVG or PNG of the brand you need — for example from our [logo catalog](../../logos/), where every brand ships a standalone icon. A logo on a backing plate (white square or circle) scans more reliably than a "bare" mark over the modules.
+A compact mark works best — the icon, not the full lockup with text (see [types of logos](../vidy-logotipov/) for the difference). Download the SVG or PNG of the brand you need — for example from our [logo catalog](../../logos/), where every brand ships a standalone icon. A logo on a backing plate (white square or circle) scans more reliably than a "bare" mark over the modules.
 
 ### Step 2. Generate the code
 

@@ -48,7 +48,7 @@ tags_en: Design, Branding, Trends
 ## Что устарело
 
 - **Стерильный флэт «как у всех».** Однотонный геометрический знак + нейтральный гротеск без единой особенности — в 2026‑м это не «чисто», а невидимо.
-- **Генераторные абстракции.** Случайная геометрическая фигура из конструктора логотипов, не связанная с брендом ничем. Как отличить осмысленный знак от случайного — в статье виды логотипов.
+- **Генераторные абстракции.** Случайная геометрическая фигура из конструктора логотипов, не связанная с брендом ничем. Как отличить осмысленный знак от случайного — в статье [виды логотипов](../vidy-logotipov/).
 - **Перегруженная детализация.** Градиенты вернулись, но гербы с 40 элементами — нет: любой тренд 2026 года по‑прежнему проверяется иконкой приложения — те же [требования площадок](../razmery-logotipa-dlya-sajta-i-socsetej/), что мы разбирали отдельно.
 - **Слепое копирование ИИ‑эстетики.** Когда градиентное свечение ставят себе кофейня, стоматология и юрфирма — приём перестаёт различать и начинает усреднять.
 
@@ -102,7 +102,7 @@ Minimalism didn't leave; it grew up. The 2026 formula: an extremely simple mark 
 ## What's out
 
 - **Sterile look-alike flat.** A single-color geometric mark + a neutral grotesque with zero distinguishing features — in 2026 that's not "clean", it's invisible.
-- **Generator abstractions.** A random geometric shape from a logo builder, connected to the brand by nothing. Telling a meaningful mark from a random one: types of logos.
+- **Generator abstractions.** A random geometric shape from a logo builder, connected to the brand by nothing. Telling a meaningful mark from a random one: [types of logos](../vidy-logotipov/).
 - **Overloaded detail.** Gradients are back; forty-element crests are not: every 2026 trend is still tested by the app icon — the same [platform requirements](../razmery-logotipa-dlya-sajta-i-socsetej/) we cover elsewhere.
 - **Blind AI-aesthetic copying.** When a coffee shop, a dental clinic and a law firm all wear gradient glow, the device stops differentiating and starts averaging.
 

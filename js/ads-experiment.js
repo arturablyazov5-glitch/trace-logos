@@ -13,8 +13,11 @@
     browserId = null;
   }
 
+  // Experiment is off: every visitor gets ads. Flip to true to restore the 50/50 split.
+  const ADS_EXPERIMENT_ENABLED = false;
+
   // Same UUID split as the generated with_ads column in Supabase.
-  if (browserId && !/^[0-7]/.test(browserId)) {
+  if (ADS_EXPERIMENT_ENABLED && browserId && !/^[0-7]/.test(browserId)) {
     const style = document.createElement('style');
     style.textContent = `
       .blog-ad-card, .blog-ad-slot, .seo-ad-block, .ad-sidebar-slot,

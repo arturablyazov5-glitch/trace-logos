@@ -23,7 +23,7 @@ tags_en: Branding, Personal Brand, Logo
 
 Короткий ответ: не всегда — но айдентика нужна почти всегда. Разберём варианты.
 
-**Часто хватает имени.** Для многих экспертов и блогеров «логотип» — это стильно оформленное собственное имя, то есть логотайп. Хорошо подобранный [шрифт](../shrift-dlya-logotipa/), фирменный [цвет](../psihologiya-cveta-v-logotipe/) и единый стиль оформления делают человека узнаваемым без отдельного значка.
+**Часто хватает имени.** Для многих экспертов и блогеров «логотип» — это стильно оформленное собственное имя, то есть [логотайп](../vidy-logotipov/). Хорошо подобранный [шрифт](../shrift-dlya-logotipa/), фирменный [цвет](../psihologiya-cveta-v-logotipe/) и единый стиль оформления делают человека узнаваемым без отдельного значка.
 
 **Иногда полезен знак.** Символ или [монограмма](../chto-takoe-monogramma/) из инициалов пригодится там, где имя целиком не влезает: [аватарка](../kak-sdelat-krugluyu-avatarku/), [фавикон](../favicon-v-poiske-i-nejrosetyah/), watermark на фото, иконка канала. Это тот же принцип, что в [адаптивном логотипе](../adaptivnyj-logotip/): под мелкий размер нужна компактная версия.
 
@@ -48,7 +48,7 @@ tags_en: Branding, Personal Brand, Logo
 
 ## Если коротко
 
-Персональный бренд есть у каждого, кто взаимодействует с аудиторией, — вопрос лишь в том, управляете вы им или нет. В отличие от бренда компании, он построен вокруг человека, поэтому главный «знак» здесь — часто само имя и лицо, а не отдельный значок. Логотип эксперту нужен не всегда: чаще хватает стильно оформленного имени (логотайпа), фирменного [цвета](../psihologiya-cveta-v-logotipe/) и узнаваемого [голоса](../golos-brenda/), плюс компактной [монограммы](../chto-takoe-monogramma/) для [аватарок](../kak-sdelat-krugluyu-avatarku/). Собирайте айдентику от сути личности, держите её [единой](../soglasovannost-brenda/) на всех площадках и в [векторе](../svg-ili-png-dlya-logotipa/) — но не прячьте за корпоративностью то, ради чего к вам и приходят: живого человека.
+Персональный бренд есть у каждого, кто взаимодействует с аудиторией, — вопрос лишь в том, управляете вы им или нет. В отличие от бренда компании, он построен вокруг человека, поэтому главный «знак» здесь — часто само имя и лицо, а не отдельный значок. Логотип эксперту нужен не всегда: чаще хватает стильно оформленного имени ([логотайпа](../vidy-logotipov/)), фирменного [цвета](../psihologiya-cveta-v-logotipe/) и узнаваемого [голоса](../golos-brenda/), плюс компактной [монограммы](../chto-takoe-monogramma/) для [аватарок](../kak-sdelat-krugluyu-avatarku/). Собирайте айдентику от сути личности, держите её [единой](../soglasovannost-brenda/) на всех площадках и в [векторе](../svg-ili-png-dlya-logotipa/) — но не прячьте за корпоративностью то, ради чего к вам и приходят: живого человека.
 
 Оформить имя, подобрать цвет и скачать элементы айдентики в SVG можно в [каталоге Trace Logo's](../../logos/).
 
@@ -68,7 +68,7 @@ Hence the key difference for design: in a personal brand the main "logo" is ofte
 
 The short answer: not always — but identity is needed almost always. Let's break down the options.
 
-**A name often suffices.** For many experts and bloggers a "logo" is a stylishly set version of their own name, i.e. a wordmark. A well-chosen [font](../shrift-dlya-logotipa/), a brand [color](../psihologiya-cveta-v-logotipe/), and a unified design style make a person recognizable without a separate mark.
+**A name often suffices.** For many experts and bloggers a "logo" is a stylishly set version of their own name, i.e. a [wordmark](../vidy-logotipov/). A well-chosen [font](../shrift-dlya-logotipa/), a brand [color](../psihologiya-cveta-v-logotipe/), and a unified design style make a person recognizable without a separate mark.
 
 **Sometimes a mark helps.** A symbol or a [monogram](../chto-takoe-monogramma/) of initials helps where the full name doesn't fit: an [avatar](../kak-sdelat-krugluyu-avatarku/), a [favicon](../favicon-v-poiske-i-nejrosetyah/), a photo watermark, a channel icon. It's the same principle as in an [adaptive logo](../adaptivnyj-logotip/): a compact version is needed for small size.
 
@@ -93,6 +93,6 @@ A common mistake is giving a personal brand a too "corporate," cold logo that hi
 
 ## In short
 
-Everyone who interacts with an audience has a personal brand — the only question is whether you manage it. Unlike a company brand, it's built around a person, so the main "mark" here is often the name and face itself, not a separate mark. An expert doesn't always need a logo: usually a stylishly set name (a wordmark), a brand [color](../psihologiya-cveta-v-logotipe/), and a recognizable [voice](../golos-brenda/) suffice, plus a compact [monogram](../chto-takoe-monogramma/) for [avatars](../kak-sdelat-krugluyu-avatarku/). Build the identity from the personality's essence, keep it [unified](../soglasovannost-brenda/) across all platforms and in [vector](../svg-ili-png-dlya-logotipa/) — but don't hide behind corporateness the very thing people come to you for: a living person.
+Everyone who interacts with an audience has a personal brand — the only question is whether you manage it. Unlike a company brand, it's built around a person, so the main "mark" here is often the name and face itself, not a separate mark. An expert doesn't always need a logo: usually a stylishly set name (a [wordmark](../vidy-logotipov/)), a brand [color](../psihologiya-cveta-v-logotipe/), and a recognizable [voice](../golos-brenda/) suffice, plus a compact [monogram](../chto-takoe-monogramma/) for [avatars](../kak-sdelat-krugluyu-avatarku/). Build the identity from the personality's essence, keep it [unified](../soglasovannost-brenda/) across all platforms and in [vector](../svg-ili-png-dlya-logotipa/) — but don't hide behind corporateness the very thing people come to you for: a living person.
 
 You can set a name, pick a color, and download identity elements in SVG in the [Trace Logo's catalog](../../logos/).

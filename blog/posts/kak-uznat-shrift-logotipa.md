@@ -51,7 +51,7 @@ tags_en: How-To, Fonts, Tools
 
 1. **Кастомная гарнитура.** Крупные бренды заказывают собственные шрифты: [YouTube Sans](../istoriya-logotipa-youtube/), Product Sans у [Google](../istoriya-logotipa-google/), YS Text у [Яндекса](../ekosistema-yandeksa-logotipy/). Купить их нельзя в принципе — они и созданы, чтобы не повторяться.
 2. **Леттеринг.** Многие логотипы — не набор шрифтом, а ручная отрисовка: рукописное слово [Instagram](../istoriya-logotipa-instagram/) не существует как шрифт со всеми буквами алфавита.
-3. **Модификация.** Знак набран существующим шрифтом, но буквы доработаны: срезы, лигатуры, изменённые пропорции — именно так делаются текстовые логотипы в большинстве случаев.
+3. **Модификация.** Знак набран существующим шрифтом, но буквы доработаны: срезы, лигатуры, изменённые пропорции — именно так [делаются текстовые логотипы](../vidy-logotipov/) в большинстве случаев.
 
 Что делать: искать **похожий по духу** шрифт из доступных. Запрос «шрифты, похожие на X» — легальный и продуктивный путь: у большинства знаменитых гарнитур есть открытые аналоги (условные Roboto→«похож на Helvetica»-класс, Montserrat→геометрические гротески).
 
@@ -115,7 +115,7 @@ Three reasons the identifier shrugs:
 
 1. **A custom face.** Big brands commission their own: [YouTube Sans](../istoriya-logotipa-youtube/), Product Sans at [Google](../istoriya-logotipa-google/), Yandex's [YS Text](../ekosistema-yandeksa-logotipy/). You can't buy them at all — they exist precisely to be unrepeatable.
 2. **Lettering.** Many logos aren't typeset but hand-drawn: the [Instagram](../istoriya-logotipa-instagram/) script doesn't exist as a font with a full alphabet.
-3. **Modification.** The mark uses an existing face with reworked letters: cuts, ligatures, altered proportions — that's how wordmarks are made more often than not.
+3. **Modification.** The mark uses an existing face with reworked letters: cuts, ligatures, altered proportions — [that's how wordmarks are made](../vidy-logotipov/) more often than not.
 
 What to do: hunt for a **kindred** available face. "Fonts similar to X" is a legal and productive route: most famous faces have open analogues.
 

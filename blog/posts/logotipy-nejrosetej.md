@@ -45,7 +45,7 @@ tags_en: Collections, Branding, AI
 Причина монотонности проста: категория новая, все объясняют одно и то же («у нас умный ИИ»), и все смотрят на пионеров. Получается то, что дизайнеры зовут «морем одинаковости»: градиент + искра + округлый гротеск. Для пользователя это уже неразличимо — а значит, приём перестал работать; [об этом эффекте мы писали](../trendy-logotipov-2026/) отдельно.
 
 :::tip Урок для своих проектов
-Если делаете ИИ‑продукт, дефолтный набор «градиент + звёздочка» сегодня сообщает не «мы инновационные», а «мы как все». Сильные бренды категории — ChatGPT, Claude, Midjourney — выделяются именно отказом от части клише. Как искать собственный ход — в статьях виды логотипов и [психология цвета](../psihologiya-cveta-v-logotipe/).
+Если делаете ИИ‑продукт, дефолтный набор «градиент + звёздочка» сегодня сообщает не «мы инновационные», а «мы как все». Сильные бренды категории — ChatGPT, Claude, Midjourney — выделяются именно отказом от части клише. Как искать собственный ход — в статьях [виды логотипов](../vidy-logotipov/) и [психология цвета](../psihologiya-cveta-v-logotipe/).
 :::
 
 ## Сводная таблица
@@ -103,7 +103,7 @@ An organic figure of interwoven petals or threads — a hint at a neural network
 The monotony has a simple cause: the category is new, everyone is explaining the same thing ("our AI is smart"), and everyone watches the pioneers. The result is what designers call a "sea of sameness": gradient + sparkle + rounded sans. To users it's already indistinguishable — meaning the device stopped working; [we wrote about this effect](../trendy-logotipov-2026/) separately.
 
 :::tip A lesson for your own projects
-If you're building an AI product, the default "gradient + sparkle" kit today says not "we're innovative" but "we're like everyone". The category's strong brands — ChatGPT, Claude, Midjourney — stand out precisely by dropping part of the cliché. How to find your own move: types of logos and [color psychology](../psihologiya-cveta-v-logotipe/).
+If you're building an AI product, the default "gradient + sparkle" kit today says not "we're innovative" but "we're like everyone". The category's strong brands — ChatGPT, Claude, Midjourney — stand out precisely by dropping part of the cliché. How to find your own move: [types of logos](../vidy-logotipov/) and [color psychology](../psihologiya-cveta-v-logotipe/).
 :::
 
 ## Summary table

@@ -33,7 +33,7 @@ tags_en: Logo Histories, Branding, Social Media
 
 ## Как глитч воспроизводится технически
 
-Сине‑красное раздвоение — не два контура, наложенных на глаз, а точная конструкция: бирюзовый и красный силуэты сдвинуты от белого ядра на равные расстояния по диагонали, имитируя разложение белого света на компоненты. Из‑за этого у знака жёсткие требования к фону: на белом «свечение» пропадает, поэтому основная версия живёт на чёрном, а для светлых носителей существует упрощённая одноцветная нота. Урок для практиков: эффектный приём всегда тянет за собой пакет дополнительных версий — закладывайте сразу и состав комплекта, и то, [что требует печать](../logotip-dlya-pechati/).
+Сине‑красное раздвоение — не два контура, наложенных на глаз, а точная конструкция: бирюзовый и красный силуэты сдвинуты от белого ядра на равные расстояния по диагонали, имитируя разложение белого света на компоненты. Из‑за этого у знака жёсткие требования к фону: на белом «свечение» пропадает, поэтому основная версия живёт на чёрном, а для светлых носителей существует упрощённая одноцветная нота. Урок для практиков: эффектный приём всегда тянет за собой пакет дополнительных версий — закладывайте сразу и [состав комплекта](../vidy-logotipov/), и то, [что требует печать](../logotip-dlya-pechati/).
 
 ## Шрифт и текстовая часть
 
@@ -80,7 +80,7 @@ In a category [won by letters](../logotipy-socsetej/), TikTok kept an object sym
 
 ## How the glitch actually works
 
-The blue-red split is not two contours eyeballed together but a precise construction: the teal and red silhouettes are offset from the white core by equal diagonal distances, imitating white light decomposing into components. That gives the mark strict background demands: on white the "glow" dies, so the primary version lives on black, with a simplified single-color note for light media. The practitioner's lesson: a spectacular device always drags along a package of extra versions — plan both the version kit and [what print demands](../logotip-dlya-pechati/) from the start.
+The blue-red split is not two contours eyeballed together but a precise construction: the teal and red silhouettes are offset from the white core by equal diagonal distances, imitating white light decomposing into components. That gives the mark strict background demands: on white the "glow" dies, so the primary version lives on black, with a simplified single-color note for light media. The practitioner's lesson: a spectacular device always drags along a package of extra versions — plan both [the version kit](../vidy-logotipov/) and [what print demands](../logotip-dlya-pechati/) from the start.
 
 ## The type and the wordmark
 

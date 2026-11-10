@@ -29,7 +29,7 @@ tags_en: Collections, Branding, Social Media
 
 Знак [Telegram](../../logos/social/telegram/) — бумажный самолётик в голубом круге — единственный в категории, кто полностью отказался от пузыря. Метафора точнее, чем кажется: телеграмма — это доставка сообщения, а не беседа; самолётик продолжает и название, и идею скорости. Полную историю знака — включая конкурс ВКонтакте, на котором его выбрали, и геометрическую выверку углов — мы рассказывали в статье [история логотипа Telegram](../istoriya-logotipa-telegram/).
 
-С точки зрения классификации видов логотипов это изобразительный знак в чистом виде: предмет, который можно пересказать словами. «У них самолётик» — фраза, которая продала мессенджер миллионам людей без единого рекламного щита.
+С точки зрения [классификации видов логотипов](../vidy-logotipov/) это изобразительный знак в чистом виде: предмет, который можно пересказать словами. «У них самолётик» — фраза, которая продала мессенджер миллионам людей без единого рекламного щита.
 
 ## WhatsApp: пузырь плюс трубка
 
@@ -108,7 +108,7 @@ When symbols run out, **color** becomes the differentiator. Messengers carved up
 
 The [Telegram](../../logos/social/telegram/) mark — a paper plane in a light-blue circle — is the only one in the category that fully rejected the bubble. The metaphor is sharper than it looks: a telegram is message delivery, not a chat; the plane extends both the name and the idea of speed. The full story — including the VKontakte contest where it was chosen and the geometric tuning of its angles — is in [the Telegram logo history](../istoriya-logotipa-telegram/).
 
-By the standard classification of logo types it's a pure pictorial mark: an object you can retell in words. "The one with the paper plane" is the phrase that sold the messenger to millions without a single billboard.
+By the standard [classification of logo types](../vidy-logotipov/) it's a pure pictorial mark: an object you can retell in words. "The one with the paper plane" is the phrase that sold the messenger to millions without a single billboard.
 
 ## WhatsApp: bubble plus handset
 

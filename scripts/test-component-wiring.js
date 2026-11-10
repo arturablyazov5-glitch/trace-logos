@@ -52,6 +52,7 @@ const { CLASSIC_BUNDLES } = require('./build-js-bundles.js');
 const PRUNE_DIRS = new Set([
   'node_modules', '.git', '.claude', 'cdn-dist', 'templates',
   'figma-plugins', 'supabase', 'sanitizer', 'upptime', 'trace-typograf',
+  'contact-collector', // отдельное приложение вне сайта (в .gitignore)
   PAIR_DIR_NAME, // tools/landing-en/ — EN-пары лендингов, не страницы (scripts/lib/en-landings.js)
 ]);
 

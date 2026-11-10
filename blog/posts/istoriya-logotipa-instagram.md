@@ -44,7 +44,7 @@ Instagram начинался как приложение Burbn — чекин�
 
 За скандалом потерялась логика решения, а она была стройной:
 
-1. **Иконка перестала описывать продукт.** Instagram 2016 года вырос в видео, прямые эфиры и сообщения. Абстрактный глиф вместил всё; детальная камера — только фото. Это переход от изобразительного знака к почти абстрактному — по классификации из статьи виды логотипов.
+1. **Иконка перестала описывать продукт.** Instagram 2016 года вырос в видео, прямые эфиры и сообщения. Абстрактный глиф вместил всё; детальная камера — только фото. Это переход от изобразительного знака к почти абстрактному — по классификации из статьи [виды логотипов](../vidy-logotipov/).
 2. **Радуга — наследник радужной полоски.** Градиент не взялся из ниоткуда: это та самая полоска с камер 2010 и 2011 годов, растянутая на весь знак. Преемственность, которую мало кто заметил в пылу скандала.
 3. **Семейство продуктов.** Вместе с основной иконкой перерисовали Layout, Boomerang и Hyperlapse — единым контурным стилем. Абстрактная система масштабируется на любое число продуктов; камера Райза — нет.
 4. **Техника.** Плоский глиф безупречно работает в любом размере и легко анимируется ([анимированный логотип](../animirovannyj-logotip/) — стандарт для сплеш‑скринов).
@@ -146,7 +146,7 @@ Then came what happens to nearly every loud redesign: within six months everyone
 
 The scandal drowned the logic, which was sound:
 
-1. **The icon no longer described the product.** By 2016 Instagram had grown into video, live streams and messaging. The abstract glyph holds it all; a detailed camera holds only photos. It's the shift from pictorial mark to near-abstract — per the classification in types of logos.
+1. **The icon no longer described the product.** By 2016 Instagram had grown into video, live streams and messaging. The abstract glyph holds it all; a detailed camera holds only photos. It's the shift from pictorial mark to near-abstract — per the classification in [types of logos](../vidy-logotipov/).
 2. **The rainbow descends from the stripe.** The gradient wasn't invented from nothing: it's the stripe from the 2010 and 2011 cameras, stretched over the whole mark. Continuity almost nobody noticed amid the outrage.
 3. **A product family.** Layout, Boomerang and Hyperlapse were redrawn alongside the main icon in one outlined style. An abstract system scales to any number of products; Rise's camera doesn't.
 4. **Engineering.** A flat glyph works flawlessly at any size and animates easily ([animated logos](../animirovannyj-logotip/) are the splash-screen standard).

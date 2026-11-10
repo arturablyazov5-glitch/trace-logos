@@ -42,7 +42,7 @@ Pantone нужен не всегда: для визиток и листово
 
 ## Монохром и инверсия: версии, о которых забывают
 
-Печать регулярно бывает одноцветной: гравировка на ручке, тиснение на блокноте, шелкография одним прогоном, факсовые бланки, печати и штампы. Для этого нужна **монохромная версия** знака — не «обесцвеченный» основной логотип, а специально подготовленный: градиенты заменены сплошными заливками, мелкие детали укрупнены, полутона убраны. Плюс **инверсная версия** для тёмных поверхностей. Состав полного комплекта версий мы разбирали в статье виды логотипов.
+Печать регулярно бывает одноцветной: гравировка на ручке, тиснение на блокноте, шелкография одним прогоном, факсовые бланки, печати и штампы. Для этого нужна **монохромная версия** знака — не «обесцвеченный» основной логотип, а специально подготовленный: градиенты заменены сплошными заливками, мелкие детали укрупнены, полутона убраны. Плюс **инверсная версия** для тёмных поверхностей. Состав полного комплекта версий мы разбирали в статье [виды логотипов](../vidy-logotipov/).
 
 :::warning Градиент — главный враг печати
 Градиентные знаки (как у [Instagram](../istoriya-logotipa-instagram/) или Wildberries) в одноцветной печати не воспроизводимы в принципе — им нужна отдельная плоская версия. Если ваш логотип градиентный, монохромная версия — не опция, а обязательная часть комплекта.
@@ -101,7 +101,7 @@ No vector? [Vectorize the logo](../kak-perevesti-logotip-v-vektor/) first — a 
 
 ## Monochrome and inverse: the forgotten versions
 
-Print is regularly single-color: engraving on a pen, embossing on a notebook, one-pass screen printing, stamps. That requires a **monochrome version** — not a desaturated primary logo but a purpose-built one: gradients replaced with solid fills, small details enlarged, halftones removed. Plus an **inverse version** for dark surfaces. The full version kit is described in types of logos.
+Print is regularly single-color: engraving on a pen, embossing on a notebook, one-pass screen printing, stamps. That requires a **monochrome version** — not a desaturated primary logo but a purpose-built one: gradients replaced with solid fills, small details enlarged, halftones removed. Plus an **inverse version** for dark surfaces. The full version kit is described in [types of logos](../vidy-logotipov/).
 
 :::warning Gradients are print's worst enemy
 Gradient marks (like [Instagram](../istoriya-logotipa-instagram/)'s or Wildberries') are fundamentally unreproducible in single-color print — they need a dedicated flat version. If your logo is gradient, the monochrome version isn't optional; it's a required part of the kit.

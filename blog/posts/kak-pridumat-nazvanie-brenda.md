@@ -49,7 +49,7 @@ tags_en: Branding, Basics, Business
 
 ## Имя и будущий логотип
 
-Нейминг напрямую определяет, каким будет знак — виды логотипов мы разбирали отдельно:
+Нейминг напрямую определяет, каким будет знак — [виды логотипов](../vidy-logotipov/) мы разбирали отдельно:
 
 - **Короткое имя (3‑6 букв)** — может целиком жить в иконке, как [Ozon](../../logos/market/ozon/): экономит отдельную монограмму.
 - **Длинное имя** — потребует сокращённой версии для аватарок: закладывайте её сразу, как «ВК» у [ВКонтакте](../istoriya-logotipa-vk/).
@@ -110,7 +110,7 @@ A pretty name unchecked is a landmine. Run the finalists through four filters:
 
 ## The name and the future logo
 
-Naming directly shapes the mark — we cover types of logos separately:
+Naming directly shapes the mark — we cover [types of logos](../vidy-logotipov/) separately:
 
 - **A short name (3-6 letters)** can live whole in an icon, like [Ozon](../../logos/market/ozon/): it saves you a separate monogram.
 - **A long name** demands a shortened avatar version: plan it from day one, like [VKontakte](../istoriya-logotipa-vk/)'s "VK".

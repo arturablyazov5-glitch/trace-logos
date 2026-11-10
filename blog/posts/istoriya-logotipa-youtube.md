@@ -17,7 +17,7 @@ tags_en: Logo Histories, Branding, Media
 
 ## 2005: «трубка», которой скоро не стало
 
-Имя YouTube строится на «you» (контент делаешь ты) и «tube» — сленговом названии телевизора эпохи кинескопов. Первый логотип честно это иллюстрировал: слог «Tube» сидел на красной скруглённой плашке-«экране». Ирония истории: уже через несколько лет кинескопы исчезли, и метафора умерла — молодые пользователи видели просто красный прямоугольник, не считывая отсылку. Классический риск «слишком современной» метафоры — о том, как вообще выбирают идею знака, мы писали отдельно.
+Имя YouTube строится на «you» (контент делаешь ты) и «tube» — сленговом названии телевизора эпохи кинескопов. Первый логотип честно это иллюстрировал: слог «Tube» сидел на красной скруглённой плашке-«экране». Ирония истории: уже через несколько лет кинескопы исчезли, и метафора умерла — молодые пользователи видели просто красный прямоугольник, не считывая отсылку. Классический риск «слишком современной» метафоры — о том, [как вообще выбирают идею знака](../vidy-logotipov/), мы писали отдельно.
 
 ## 2013‑2016: кнопка рвётся наружу
 
@@ -27,7 +27,7 @@ tags_en: Logo Histories, Branding, Media
 
 29 августа 2017 года YouTube показал первый большой редизайн: кнопка плей вынесена **перед** словом и стала главным знаком; слово очищено от плашки и набрано собственным шрифтом **YouTube Sans**. Официальная логика редизайна — хрестоматия:
 
-1. **Кнопка масштабируется, слово — нет.** В [фавиконке](../kak-sdelat-favicon/) и иконке остаётся только кнопка; в шапке — кнопка + слово. Одна система вместо двух знаков — ровно то, зачем вообще нужны версии логотипа.
+1. **Кнопка масштабируется, слово — нет.** В [фавиконке](../kak-sdelat-favicon/) и иконке остаётся только кнопка; в шапке — кнопка + слово. Одна система вместо двух знаков — ровно то, [зачем вообще нужны версии](../vidy-logotipov/) логотипа.
 2. **Красный сместился со слога на символ.** Плашка вокруг «Tube» тянула взгляд к мёртвой метафоре; теперь красный работает на живую — «нажми и смотри».
 3. **Тёмные экраны.** Новый знак спроектирован сразу для светлого и тёмного интерфейсов — к 2017‑му тёмная тема стала стандартом видеоплееров — [та же логика видна и у Netflix](../istoriya-logotipa-netflix/).
 
@@ -63,7 +63,7 @@ The [YouTube](../../logos/media/youtube/) logo lived for twelve years with a fla
 
 ## 2005: the "tube" that soon vanished
 
-The name YouTube is built from "you" (you make the content) and "tube" — the slang word for a CRT television. The first logo illustrated it literally: the "Tube" syllable sat on a rounded red "screen" badge. History's irony: within a few years CRTs disappeared and the metaphor died — younger users saw just a red rectangle, reading no reference at all. The classic risk of a too-contemporary metaphor — we cover how mark ideas are chosen separately.
+The name YouTube is built from "you" (you make the content) and "tube" — the slang word for a CRT television. The first logo illustrated it literally: the "Tube" syllable sat on a rounded red "screen" badge. History's irony: within a few years CRTs disappeared and the metaphor died — younger users saw just a red rectangle, reading no reference at all. The classic risk of a too-contemporary metaphor — we cover [how mark ideas are chosen](../vidy-logotipov/) separately.
 
 ## 2013-2016: the button breaks out
 
@@ -73,7 +73,7 @@ While the full logo lived in the site header, the service was racing into apps �
 
 On August 29, 2017 YouTube unveiled its first major redesign: the play button moved **in front of** the word and became the primary mark; the word lost its badge and was set in the custom **YouTube Sans**. The official logic reads like a textbook:
 
-1. **The button scales; the word doesn't.** The [favicon](../kak-sdelat-favicon/) and app icon keep only the button; the header gets button + word. One system instead of two marks — exactly why logo versions exist in the first place.
+1. **The button scales; the word doesn't.** The [favicon](../kak-sdelat-favicon/) and app icon keep only the button; the header gets button + word. One system instead of two marks — exactly [why logo versions exist](../vidy-logotipov/) in the first place.
 2. **The red moved from a syllable to a symbol.** The badge around "Tube" drew the eye to a dead metaphor; now the red powers a living one — "press and watch".
 3. **Dark screens.** The new mark was designed for light and dark interfaces at once — by 2017 dark themes were the video-player standard — [the same logic shows up at Netflix](../istoriya-logotipa-netflix/).
 

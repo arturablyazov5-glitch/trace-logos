@@ -25,7 +25,7 @@ tags_en: Logo Histories, Branding
 
 В 1999 году за логотип взялась профессионал — художница и дизайнер Рут Кедар. Она перебрала десятки вариантов и остановилась на засечковом шрифте **Catull**: он соединял «академичность» (поиск = знания, библиотека) с достаточно живой пластикой. Логотип получил лёгкую тень и объём — по моде тех лет — и в этом виде прожил одиннадцать лет, став фоном целой эпохи интернета.
 
-Именно на эту версию наложился феномен **дудлов**: с 1998 года Google по праздникам заменяет логотип на тематическую иллюстрацию или игру. Дудлы превратили самый консервативный элемент сайта в самый живой — классический пример динамического логотипа, о котором мы писали в статье виды логотипов.
+Именно на эту версию наложился феномен **дудлов**: с 1998 года Google по праздникам заменяет логотип на тематическую иллюстрацию или игру. Дудлы превратили самый консервативный элемент сайта в самый живой — классический пример динамического логотипа, о котором мы писали в статье [виды логотипов](../vidy-logotipov/).
 
 ## 2010: генеральная уборка
 
@@ -86,7 +86,7 @@ The very first color version already contained the idea that would outlive every
 
 In 1999 a professional took over: artist and designer Ruth Kedar. After dozens of explorations she settled on the serif typeface **Catull**: it combined an academic feel (search = knowledge, a library) with lively enough forms. The logo got a light shadow and volume — the fashion of the day — and lived in that form for eleven years, becoming the backdrop of an entire internet era.
 
-This is also the version the **doodle** phenomenon grew on: since 1998 Google has replaced its logo with themed illustrations or games on holidays. Doodles turned the most conservative element of the site into the most alive one — a classic dynamic logo, as described in types of logos.
+This is also the version the **doodle** phenomenon grew on: since 1998 Google has replaced its logo with themed illustrations or games on holidays. Doodles turned the most conservative element of the site into the most alive one — a classic dynamic logo, as described in [types of logos](../vidy-logotipov/).
 
 ## 2010: the big cleanup
 

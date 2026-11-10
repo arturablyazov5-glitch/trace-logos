@@ -17,7 +17,7 @@ tags_en: Legal, Branding, Basics
 
 ## Два мира: дизайн и право
 
-**Логотип** — категория дизайна. Это знак, который [рисуют в Figma](../kak-narisovat-logotip-v-figma/) или [Illustrator](../kak-sdelat-logotip-v-illustrator/), он бывает семи типов, у него есть цвет и шрифт. Логотип существует с момента создания — независимо от какой‑либо бюрократии.
+**Логотип** — категория дизайна. Это знак, который [рисуют в Figma](../kak-narisovat-logotip-v-figma/) или [Illustrator](../kak-sdelat-logotip-v-illustrator/), он бывает [семи типов](../vidy-logotipov/), у него есть цвет и шрифт. Логотип существует с момента создания — независимо от какой‑либо бюрократии.
 
 **Товарный знак** — категория права. Это **зарегистрированное** обозначение, отличающее ваши товары и услуги от чужих. В России его регистрирует Роспатент, действует регистрация 10 лет с продлением, охрана распространяется на классы МКТУ, указанные в заявке. Обиходное «торговая марка» — калька с английского trademark — юридически означает то же самое; в законе термин один: товарный знак.
 
@@ -74,7 +74,7 @@ A **logo** is an image: a designer's work product, an object of copyright. A **t
 
 ## Two worlds: design and law
 
-A **logo** is a design category. It's the mark you [draw in Figma](../kak-narisovat-logotip-v-figma/) or [Illustrator](../kak-sdelat-logotip-v-illustrator/), it comes in seven types, it has color and type. A logo exists from the moment of creation — no bureaucracy involved.
+A **logo** is a design category. It's the mark you [draw in Figma](../kak-narisovat-logotip-v-figma/) or [Illustrator](../kak-sdelat-logotip-v-illustrator/), it comes in [seven types](../vidy-logotipov/), it has color and type. A logo exists from the moment of creation — no bureaucracy involved.
 
 A **trademark** is a legal category: a **registered** designation distinguishing your goods and services from others'. Registration typically lasts 10 years with renewals, and protection covers the Nice classes listed in the application. Colloquial "brand mark" or "trade mark" spellings all point to the same legal concept.
 

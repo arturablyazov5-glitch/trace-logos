@@ -73,7 +73,7 @@ tags_en: How-To, Figma, Design
 1. **Обводки вместо заливок.** Знак, построенный на strokes, при экспорте и масштабировании ведёт себя непредсказуемо. Финальную версию — Outline Stroke (`⌘E` → Flatten), превратив обводки в заливки.
 2. **Слишком много деталей.** Проверка фреймом 16×16 отсекает лишнее лучше любого ментора.
 3. **Не переведённый в кривые текст.** SVG с «живым» шрифтом сломается на чужом компьютере.
-4. **Один файл вместо комплекта.** На выходе должно быть несколько версий: полная, компактная, монохромные — состав комплекта описан в статье про виды логотипов.
+4. **Один файл вместо комплекта.** На выходе должно быть несколько версий: полная, компактная, монохромные — состав комплекта описан в статье про [виды логотипов](../vidy-logotipov/).
 5. **Копирование референсов один в один.** Вдохновляться каталогом можно и нужно, повторять чужой знак — [нельзя](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 
 ## Что дальше
@@ -146,7 +146,7 @@ Run the exported SVG through an optimizer — Figma is generous with redundant a
 1. **Strokes instead of fills.** A stroke-built mark behaves unpredictably on export and scaling. Flatten the final version (`⌘E`), turning strokes into fills.
 2. **Too much detail.** The 16×16 frame trims excess better than any mentor.
 3. **Non-outlined text.** An SVG with live type breaks on someone else's computer.
-4. **One file instead of a kit.** The output should be several versions: full, compact, monochrome — the kit contents are listed in our piece on types of logos.
+4. **One file instead of a kit.** The output should be several versions: full, compact, monochrome — the kit contents are listed in our piece on [types of logos](../vidy-logotipov/).
 5. **Copying references verbatim.** Being inspired by the catalog is fine and encouraged; replicating someone's mark [is not](../mozhno-li-ispolzovat-chuzhoy-logotip/).
 
 ## What's next

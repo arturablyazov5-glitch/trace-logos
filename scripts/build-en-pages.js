@@ -34,6 +34,7 @@ const DRY_RUN = process.argv.includes('--dry-run');
 const EXCLUDE_DIRS = new Set([
   'en', 'node_modules', 'scripts', '.git', '.claude', 'sanitizer',
   'assets', 'css', 'js', 'components', 'templates', 'upptime', 'figma-plugins',
+  'contact-collector', // отдельное приложение вне сайта (в .gitignore)
   PAIR_DIR_NAME, // tools/landing-en/<slug>.html — EN-пары лендингов, не страницы (см. ниже)
 ]);
 

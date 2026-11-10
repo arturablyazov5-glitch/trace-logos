@@ -20,7 +20,7 @@ tags_en: YouTube, How-To, Branding
 Требуемый размер — **800×800 пикселей**, показывается всегда **кружком** диаметром от 32 px (в комментариях) до 176 px (шапка канала).
 
 - **Проектируйте под круг.** Квадратный логотип с деталями в углах потеряет их при обрезке. Знак должен вписываться в окружность с запасом ~10% от края.
-- **Никакого мелкого текста.** В комментариях аватарка — 32 пикселя; выживает только простой знак. Почему так — мы подробно разбирали в статье виды логотипов: монограммы и знаки масштабируются, полные надписи — нет.
+- **Никакого мелкого текста.** В комментариях аватарка — 32 пикселя; выживает только простой знак. Почему так — мы подробно разбирали в статье [виды логотипов](../vidy-logotipov/): монограммы и знаки масштабируются, полные надписи — нет.
 - **Формат — PNG.** JPG на плоских заливках даёт артефакты у краёв (сравнение форматов — в статье [PNG или JPG](../png-ili-jpg-chto-luchshe/)). Прозрачность не нужна: [YouTube](../../logos/media/youtube/) всё равно подложит фон, лучше задать свой.
 - **Исходник в векторе.** Держите логотип в SVG и экспортируйте 800×800 без потерь. Как это устроено, читайте в статье: [«Векторная и растровая графика»](../vektor-i-rastr-raznica/).
 
@@ -110,7 +110,7 @@ Channel art on [YouTube](../../logos/media/youtube/) is just three images — av
 Required size — **800×800 pixels**, always displayed as a **circle** from 32 px (comments) to 176 px (channel header).
 
 - **Design for the circle.** A square logo with corner details loses them to the crop. The mark should fit the circle with ~10% margin.
-- **No small text.** In comments the avatar is 32 pixels; only a simple mark survives. Why — see types of logos: monograms and marks scale, full lockups don't.
+- **No small text.** In comments the avatar is 32 pixels; only a simple mark survives. Why — see [types of logos](../vidy-logotipov/): monograms and marks scale, full lockups don't.
 - **Format — PNG.** JPG produces edge artifacts on flat fills (formats compared in [PNG vs JPG](../png-ili-jpg-chto-luchshe/)). Transparency isn't needed: [YouTube](../../logos/media/youtube/) adds a background anyway — better set your own.
 - **Master in vector.** Keep the logo as SVG and export a lossless 800×800 — how that works is in [vector vs raster](../vektor-i-rastr-raznica/).
 

@@ -40,7 +40,7 @@ tags_en: Collections, Branding, Media
 
 ## Тёмный режим как закон категории
 
-Стриминги — единственная категория, где тёмная тема не опция, а среда обитания: интерфейсы видеосервисов чёрные по умолчанию, потому что вокруг видео любой светлый элемент слепит. Отсюда нестандартное требование к знакам: они проектируются **сначала для тёмного фона**, и только потом адаптируются к светлому — в обратном порядке относительно всех остальных отраслей. Красный [Netflix](../istoriya-logotipa-netflix/), неоновый зелёный [Spotify](../istoriya-logotipa-spotify/) и глитч [TikTok](../istoriya-logotipa-tiktok/) выбраны именно за «свечение» на чёрном. Проверяйте и свой знак в обеих темах: если бренд живёт в приложениях, тёмная версия — не приложение к основной, а равноправная — про то, какие версии вообще нужны знаку, мы писали отдельно.
+Стриминги — единственная категория, где тёмная тема не опция, а среда обитания: интерфейсы видеосервисов чёрные по умолчанию, потому что вокруг видео любой светлый элемент слепит. Отсюда нестандартное требование к знакам: они проектируются **сначала для тёмного фона**, и только потом адаптируются к светлому — в обратном порядке относительно всех остальных отраслей. Красный [Netflix](../istoriya-logotipa-netflix/), неоновый зелёный [Spotify](../istoriya-logotipa-spotify/) и глитч [TikTok](../istoriya-logotipa-tiktok/) выбраны именно за «свечение» на чёрном. Проверяйте и свой знак в обеих темах: если бренд живёт в приложениях, тёмная версия — не приложение к основной, а равноправная — про то, [какие версии вообще нужны](../vidy-logotipov/) знаку, мы писали отдельно.
 
 ## Цветовая карта категории
 
@@ -93,7 +93,7 @@ The [Netflix](../../logos/media/netflix/) mark is a wordmark with its signature 
 
 ## Dark mode as the category's law
 
-Streaming is the only category where dark theme isn't an option but the natural habitat: video interfaces are black by default, because next to video any light element blinds. Hence a nonstandard demand on the marks: they are designed **for the dark background first** and adapted to light second — the reverse order of every other industry. [Netflix](../istoriya-logotipa-netflix/)'s red, [Spotify](../istoriya-logotipa-spotify/)'s neon green and [TikTok](../istoriya-logotipa-tiktok/)'s glitch were chosen precisely for their glow on black. Test your own mark in both themes too: if the brand lives in apps, the dark version is not an appendix to the primary one — it's an equal, we cover which versions a mark needs separately.
+Streaming is the only category where dark theme isn't an option but the natural habitat: video interfaces are black by default, because next to video any light element blinds. Hence a nonstandard demand on the marks: they are designed **for the dark background first** and adapted to light second — the reverse order of every other industry. [Netflix](../istoriya-logotipa-netflix/)'s red, [Spotify](../istoriya-logotipa-spotify/)'s neon green and [TikTok](../istoriya-logotipa-tiktok/)'s glitch were chosen precisely for their glow on black. Test your own mark in both themes too: if the brand lives in apps, the dark version is not an appendix to the primary one — it's an equal, we cover [which versions a mark needs](../vidy-logotipov/) separately.
 
 ## The category color map
 

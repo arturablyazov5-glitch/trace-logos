@@ -21,7 +21,7 @@ tags_en: Logo Histories, Branding, AI
 
 ## Геометрия: шесть дуг и вихрь
 
-Розетка построена из **шести одинаковых дуг**, переплетённых с поворотной симметрией — как лепестки, сложенные в кольцо. Форма собрана по строгой окружной сетке: дуги перекрывают друг друга «над‑под», создавая эффект плетения — принцип, который можно повторить, если [рисовать такие формы в Figma](../kak-narisovat-logotip-v-figma/). Считываний несколько, и все работают на бренд: цветок (рост, жизнь), узел (связь), вихрь (движение мысли), молекула (наука). Такая многослойность прочтения — признак сильного абстрактного знака.
+Розетка построена из **шести одинаковых дуг**, переплетённых с поворотной симметрией — как лепестки, сложенные в кольцо. Форма собрана по строгой окружной сетке: дуги перекрывают друг друга «над‑под», создавая эффект плетения — принцип, который можно повторить, если [рисовать такие формы в Figma](../kak-narisovat-logotip-v-figma/). Считываний несколько, и все работают на бренд: цветок (рост, жизнь), узел (связь), вихрь (движение мысли), молекула (наука). Такая многослойность прочтения — признак сильного [абстрактного знака](../vidy-logotipov/).
 
 ## Почему монохром
 
@@ -73,7 +73,7 @@ The OpenAI rosette was drawn in the mid-2010s — when the company was a researc
 
 ## The geometry: six arcs and a whirl
 
-The rosette is built from **six identical arcs** interwoven with rotational symmetry — petals folded into a ring. The form follows a strict circular grid: the arcs overlap over-under, creating a weave effect — a principle you can reuse if you [build such forms in Figma](../kak-narisovat-logotip-v-figma/) yourself. It reads several ways, all serving the brand: a flower (growth, life), a knot (connection), a whirl (moving thought), a molecule (science). That multi-layered reading is the signature of a strong abstract mark.
+The rosette is built from **six identical arcs** interwoven with rotational symmetry — petals folded into a ring. The form follows a strict circular grid: the arcs overlap over-under, creating a weave effect — a principle you can reuse if you [build such forms in Figma](../kak-narisovat-logotip-v-figma/) yourself. It reads several ways, all serving the brand: a flower (growth, life), a knot (connection), a whirl (moving thought), a molecule (science). That multi-layered reading is the signature of a strong [abstract mark](../vidy-logotipov/).
 
 ## Why monochrome
 

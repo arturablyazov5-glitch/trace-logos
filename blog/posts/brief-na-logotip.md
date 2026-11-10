@@ -46,7 +46,7 @@ tags_en: Logo, Brief, Commission
 3. Какими 3‑4 словами должен восприниматься бренд?
 4. Кто конкуренты и как вы хотите от них отличаться?
 5. Где логотип будет использоваться (перечислить все места)?
-6. Нужен ли только знак, только название или комбинация?
+6. Нужен ли только знак, только название или [комбинация](../vidy-logotipov/)?
 7. Есть ли обязательные элементы или цвета (например, [фирменный цвет](../psihologiya-cveta-v-logotipe/))?
 8. Чего точно быть не должно?
 9. Примеры знаков, которые нравятся и не нравятся — с объяснением почему.
@@ -103,7 +103,7 @@ To avoid building a brief from scratch, go through these questions — the answe
 3. In which 3-4 words should the brand be perceived?
 4. Who are the competitors and how do you want to differ from them?
 5. Where will the logo be used (list all places)?
-6. Do you need just a mark, just a name, or a combination?
+6. Do you need just a mark, just a name, or a [combination](../vidy-logotipov/)?
 7. Are there mandatory elements or colors (e.g., a [brand color](../psihologiya-cveta-v-logotipe/))?
 8. What definitely shouldn't be there?
 9. Examples of marks you like and dislike — with an explanation of why.

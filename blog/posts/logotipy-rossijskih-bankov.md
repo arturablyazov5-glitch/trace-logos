@@ -21,7 +21,7 @@ tags_en: Collections, Branding, Banks
 
 ## Т‑Банк: щит, который пережил смену имени
 
-История [Т‑Банка](../../logos/bank/tbank/) — редкий случай, когда банк сменил имя, но сохранил знак. Тинькофф Банк с 2006 года строил бренд на жёлтом цвете и гербовом щите; после расставания с основателем в 2024‑м «Тинькофф» стал «Т‑Банком», но щит и жёлтый остались — вместе с накопленной узнаваемостью. Ход по учебнику: меняй то, что должен, сохраняй то, что узнают. Форма щита — классическая эмблема (тип знака разбираем в статье виды логотипов) — сообщает «защиту», а жёлтый выделяет банк в море зелёного и синего.
+История [Т‑Банка](../../logos/bank/tbank/) — редкий случай, когда банк сменил имя, но сохранил знак. Тинькофф Банк с 2006 года строил бренд на жёлтом цвете и гербовом щите; после расставания с основателем в 2024‑м «Тинькофф» стал «Т‑Банком», но щит и жёлтый остались — вместе с накопленной узнаваемостью. Ход по учебнику: меняй то, что должен, сохраняй то, что узнают. Форма щита — классическая эмблема (тип знака разбираем в статье [виды логотипов](../vidy-logotipov/)) — сообщает «защиту», а жёлтый выделяет банк в море зелёного и синего.
 
 ## Альфа‑Банк: сила консерватизма
 
@@ -77,7 +77,7 @@ The [Sber](../../logos/bank/sber/) mark is the country's most expensive identity
 
 ## T-Bank: the shield that survived a name change
 
-The [T-Bank](../../logos/bank/tbank/) story is the rare case of a bank changing its name but keeping its mark. From 2006 Tinkoff Bank built its brand on yellow and a heraldic shield; after parting with its founder in 2024, "Tinkoff" became "T-Bank" — but the shield and the yellow stayed, along with the accumulated recognition. A textbook move: change what you must, keep what people recognize. The shield form is a classic emblem (mark types are covered in types of logos) signaling "protection", and the yellow sets the bank apart in a sea of green and blue.
+The [T-Bank](../../logos/bank/tbank/) story is the rare case of a bank changing its name but keeping its mark. From 2006 Tinkoff Bank built its brand on yellow and a heraldic shield; after parting with its founder in 2024, "Tinkoff" became "T-Bank" — but the shield and the yellow stayed, along with the accumulated recognition. A textbook move: change what you must, keep what people recognize. The shield form is a classic emblem (mark types are covered in [types of logos](../vidy-logotipov/)) signaling "protection", and the yellow sets the bank apart in a sea of green and blue.
 
 ## Alfa-Bank: the power of conservatism
 

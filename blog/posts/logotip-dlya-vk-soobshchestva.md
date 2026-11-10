@@ -12,7 +12,7 @@ tags_en: How-To, Social Media, Branding
 Сообщество [ВКонтакте](../../logos/social/vk/) для многих малых бизнесов — полноценная замена сайта: сюда ведёт реклама, здесь читают отзывы и пишут в сообщения. И встречают посетителя два элемента: круглая аватарка и обложка. Разбираем, какие размеры нужны, как адаптировать логотип под круг, что показывать на обложке и как удержать единый стиль в ленте.
 
 :::note Коротко
-**Аватарка**: загружайте квадрат от 400×400 px — показываться будет круг, поэтому знак должен вписываться в окружность с запасом. **Обложка**: 1594×400 px для десктопа, но безопасная зона — центр (мобильные приложения обрезают края). Логотип — компактным знаком, не полной надписью, и о том, почему это так важно, стоит помнить заранее. Дальше — шаблоны постов в едином [фирменном стиле](../chto-takoe-firmennyj-stil/).
+**Аватарка**: загружайте квадрат от 400×400 px — показываться будет круг, поэтому знак должен вписываться в окружность с запасом. **Обложка**: 1594×400 px для десктопа, но безопасная зона — центр (мобильные приложения обрезают края). Логотип — компактным знаком, не полной надписью, и о том, [почему это так важно](../vidy-logotipov/), стоит помнить заранее. Дальше — шаблоны постов в едином [фирменном стиле](../chto-takoe-firmennyj-stil/).
 :::
 
 ## Аватарка: круг, который всё решает
@@ -64,7 +64,7 @@ tags_en: How-To, Social Media, Branding
 For many small businesses a [VK](../../logos/social/vk/) community is a full website replacement: ads lead here, reviews are read here, messages arrive here. And visitors are greeted by two elements: the round avatar and the cover. Here are the sizes you need, how to adapt a logo to a circle, what belongs on the cover, and how to keep the feed on-brand.
 
 :::note TL;DR
-**Avatar**: upload a square of 400×400 px or larger — it displays as a circle, so the mark must fit inside the circle with margin. **Cover**: 1594×400 px for desktop, but the safe zone is the center (mobile apps crop the sides). Use the compact mark, not the full wordmark — here's why that matters. Then: post templates in one consistent [visual identity](../chto-takoe-firmennyj-stil/).
+**Avatar**: upload a square of 400×400 px or larger — it displays as a circle, so the mark must fit inside the circle with margin. **Cover**: 1594×400 px for desktop, but the safe zone is the center (mobile apps crop the sides). Use the compact mark, not the full wordmark — [here's why](../vidy-logotipov/) that matters. Then: post templates in one consistent [visual identity](../chto-takoe-firmennyj-stil/).
 :::
 
 ## The avatar: the circle that decides everything

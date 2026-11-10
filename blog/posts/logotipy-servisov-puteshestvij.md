@@ -29,7 +29,7 @@ tags_en: Collections, Branding, Travel
 
 ## Побег из жанра: Kayak, Hopper, Ozon Travel
 
-**[Kayak](../../logos/travel/kayak/)** — просто слово в жирном гротеске, никакой картинки. Отказ от знака — тоже позиция: агрегатор продаёт скорость и охват, и лаконичный wordmark — один из видов логотипов — сообщает «мы инфраструктура, а не открытка».
+**[Kayak](../../logos/travel/kayak/)** — просто слово в жирном гротеске, никакой картинки. Отказ от знака — тоже позиция: агрегатор продаёт скорость и охват, и лаконичный wordmark — один из [видов логотипов](../vidy-logotipov/) — сообщает «мы инфраструктура, а не открытка».
 
 **[Hopper](../../logos/travel/hopper/)** — кролик. Ни самолёта, ни глобуса: [маскот](../chto-takoe-maskot/) в категории, где никто не ждёт персонажа. Расчёт точный: приложение, предсказывающее цены на билеты, продаёт не полёт, а азарт удачной покупки — и игривый кролик передаёт это лучше любого фюзеляжа. На полке магазина приложений среди двадцати самолётиков кролик выигрывает мгновенно.
 
@@ -79,7 +79,7 @@ The category runs three strategies: **the honest plane** ([Aviasales](../../logo
 
 ## The genre escape: Kayak, Hopper, Ozon Travel
 
-**[Kayak](../../logos/travel/kayak/)** — just a word in a heavy sans, no picture at all. Refusing a symbol is a stance too: the aggregator sells speed and coverage, and the terse wordmark — one of the classic types of logos — says "we are infrastructure, not a postcard".
+**[Kayak](../../logos/travel/kayak/)** — just a word in a heavy sans, no picture at all. Refusing a symbol is a stance too: the aggregator sells speed and coverage, and the terse wordmark — one of the classic [types of logos](../vidy-logotipov/) — says "we are infrastructure, not a postcard".
 
 **[Hopper](../../logos/travel/hopper/)** — a rabbit. No plane, no globe: [a mascot](../chto-takoe-maskot/) in a category where nobody expects one. The calculation is precise: an app that predicts ticket prices sells not the flight but the thrill of a good deal — and a playful rabbit carries that better than any fuselage. On an app-store shelf among twenty little planes, the rabbit wins instantly.
 
