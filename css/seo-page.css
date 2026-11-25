@@ -659,7 +659,13 @@ h1 {
 .variant-preview-wide img,
 .variant-preview-wide svg { width: 100%; height: 100%; display: block; object-fit: contain; }
 
-.variant-label { font-size: 11px; color: var(--text-5); white-space: nowrap; }
+.variant-label {
+  max-width: 100%;
+  font-size: 11px;
+  color: var(--text-5);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
 .variant-card.active .variant-label { color: var(--text-2); }
 
 /* ── Divider ── */

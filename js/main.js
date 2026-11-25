@@ -834,7 +834,7 @@ openDetailFn = function (item, card) {
       if (vendor && vendor !== item.file) return vendor.charAt(0).toUpperCase() + vendor.slice(1);
       return 'App Icon';
     }
-    return 'SVG Icon';
+    return isFullFile(item.file) ? TYPE_LABELS.full : 'SVG Icon';
   })();
   const rawVariants = Array.isArray(item.variants) ? item.variants : [];
   const allVariants = rawVariants.length > 0

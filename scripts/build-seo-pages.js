@@ -372,7 +372,7 @@ function buildVariantCard(v, isActive, rel, itemName) {
   const darkBgAttr = v.darkBg ? ` data-dark-bg="true"` : '';
 
   if (wide) {
-    return `<div class="variant-card variant-wide${activeClass}" data-variant="${key}" data-src="${src}" data-preview="${thumbSrc}" data-type="${type}" data-wide="true"${darkBgAttr}>
+    return `<div class="variant-card variant-wide${activeClass}" data-variant="${key}" data-src="${src}" data-preview="${thumbSrc}" data-type="${type}" data-wide="true"${pngAttr}${darkBgAttr}>
             <span class="variant-preview-wide" aria-hidden="true">
               <img src="${thumbSrc}" alt="${altText}" width="100" height="48" loading="lazy">
             </span>
@@ -412,16 +412,16 @@ function buildVariantsSection(item, rel, lang = 'ru') {
   if (rawVariants.length === 0) return '';
 
   const primaryExt  = assetExt(item.file);
-  const primaryType = primaryExt === 'png' ? 'png' : 'svg';
+  const primaryType = primaryExt === 'png' ? 'png' : isFullFile(item.file) ? 'full' : 'svg';
 
-  const pngVariant = primaryType === 'svg'
+  const pngVariant = primaryExt === 'svg'
     ? rawVariants.find(v => assetExt(v.file) === 'png')
     : null;
 
   const primary = {
     file:        item.file,
     type:        primaryType,
-    label:       primaryType === 'png' ? 'PNG Icon' : 'SVG',
+    darkBg:      item.darkBg,
     pngFile:     pngVariant?.file ?? null,
     macos_styles: item.macos_styles || null,
   };
