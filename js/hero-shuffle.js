@@ -34,6 +34,13 @@ const preload = (src) => new Promise((res) => {
   img.src = src;
 });
 
+async function resolveImage(item) {
+  const src = toRelSrc(item.src);
+  if (await preload(src)) return src;
+  const fallback = toRelSrc(item.fallback);
+  return fallback !== src && await preload(fallback) ? fallback : null;
+}
+
 // The hero flips a new random logo/emoji every couple seconds — using the
 // full-res PNG (some catalog logos are 500KB–2MB) would mean a steady drip
 // of megabytes for a 24–52px icon. Guess the WebP grid preview path (mirrors
@@ -81,9 +88,8 @@ function cycle(el, linkEl, catalog, delay, isActive) {
       const source = pool.length < POOL_LIMIT ? catalog : pool;
       const next = pickDifferent(source, current);
       if (!next || next === current) return;
-      let src = toRelSrc(next.src);
-      const ok = await preload(src);
-      if (!ok) src = toRelSrc(next.fallback);
+      const src = await resolveImage(next);
+      if (!src) return;
       flipTo(el, src);
       linkEl.setAttribute('href', next.url);
       current = next;
@@ -122,14 +128,16 @@ export async function initHeroShuffle() {
   if (!logos.length || !emoji.length) return;
 
   if (reduced) {
-    const nextLogo = pickDifferent(logos, { src: logoEl.getAttribute('src') });
-    logoEl.onerror = () => { logoEl.onerror = null; logoEl.src = nextLogo.fallback; };
-    logoEl.src = nextLogo.src;
-    if (logoLinkEl) logoLinkEl.setAttribute('href', nextLogo.url);
-    const nextEmoji = pickDifferent(emoji, { src: emojiEl.getAttribute('src') });
-    emojiEl.onerror = () => { emojiEl.onerror = null; emojiEl.src = nextEmoji.fallback; };
-    emojiEl.src = nextEmoji.src;
-    if (emojiLinkEl) emojiLinkEl.setAttribute('href', nextEmoji.url);
+    await Promise.all([
+      [logoEl, logoLinkEl, logos],
+      [emojiEl, emojiLinkEl, emoji],
+    ].map(async ([el, link, catalog]) => {
+      const next = pickDifferent(catalog, null);
+      const src = await resolveImage(next);
+      if (!src) return;
+      el.src = src;
+      if (link) link.setAttribute('href', next.url);
+    }));
     return;
   }
 
